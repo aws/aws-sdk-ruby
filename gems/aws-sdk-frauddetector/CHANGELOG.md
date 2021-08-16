@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2021-07-09)
+------------------
+
+* Feature - This release adds support for ML Explainability to display model variable importance value in Amazon Fraud Detector.
+
 1.18.0 (2021-03-30)
 ------------------
 

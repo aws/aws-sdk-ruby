@@ -248,7 +248,8 @@ module Aws::S3
     #     The value must be URL encoded.
     #
     #     <note markdown="1"> Amazon S3 supports copy operations using access points only when the
-    #     source and destination buckets are in the same AWS Region.
+    #     source and destination buckets are in the same Amazon Web Services
+    #     Region.
     #
     #      </note>
     #
@@ -317,7 +318,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -384,7 +385,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #

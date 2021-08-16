@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2021-06-30)
+------------------
+
+* Feature - AWS Cloud Map now allows configuring the TTL of the SOA record for a hosted zone to control the negative caching for new services.
+
+1.36.0 (2021-06-01)
+------------------
+
+* Feature - Bugfixes - The DiscoverInstances API operation now provides an option to return all instances for health-checked services when there are no healthy instances available.
+
+1.35.0 (2021-05-06)
+------------------
+
+* Feature - Bugfix: Improved input validation for RegisterInstance action, InstanceId field
+
 1.34.0 (2021-03-10)
 ------------------
 

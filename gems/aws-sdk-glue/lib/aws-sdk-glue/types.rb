@@ -43,7 +43,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of a job to be executed.
+    #   The name of a job to be run.
     #   @return [String]
     #
     # @!attribute [rw] arguments
@@ -51,15 +51,15 @@ module Aws::Glue
     #   they replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set
+    #   up your job, see the [Special Parameters Used by Glue][2] topic in
+    #   the developer guide.
     #
     #
     #
@@ -225,7 +225,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the catalog in which the partition is to be created.
-    #   Currently, this should be the AWS account ID.
+    #   Currently, this should be the Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -277,7 +277,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] connection_name_list
@@ -328,7 +328,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partition to be deleted
-    #   resides. If none is provided, the AWS account ID is used by default.
+    #   resides. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -380,7 +381,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -427,7 +428,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -597,7 +598,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -906,7 +908,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the catalog in which the partition is to be updated.
-    #   Currently, this should be the AWS account ID.
+    #   Currently, this should be the Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -1147,7 +1149,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies a table definition in the AWS Glue Data Catalog.
+    # Specifies a table definition in the Glue Data Catalog.
     #
     # @note When making an API call, you may pass CatalogEntry
     #   data as a hash:
@@ -1198,7 +1200,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies an AWS Glue Data Catalog target.
+    # Specifies an Glue Data Catalog target.
     #
     # @note When making an API call, you may pass CatalogTarget
     #   data as a hash:
@@ -1229,13 +1231,13 @@ module Aws::Glue
     #   data as a hash:
     #
     #       {
-    #         data_format: "AVRO", # required, accepts AVRO
+    #         data_format: "AVRO", # required, accepts AVRO, JSON
     #         schema_definition: "SchemaDefinitionString", # required
     #       }
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently only `AVRO` is
-    #   supported.
+    #   The data format of the schema definition. Currently `AVRO` and
+    #   `JSON` are supported.
     #   @return [String]
     #
     # @!attribute [rw] schema_definition
@@ -1273,10 +1275,10 @@ module Aws::Glue
     # classifier creates a schema in the form of a `StructType` object that
     # matches that data format.
     #
-    # You can use the standard classifiers that AWS Glue provides, or you
-    # can write your own classifiers to best categorize your data sources
-    # and specify the appropriate schemas to use for them. A classifier can
-    # be a `grok` classifier, an `XML` classifier, a `JSON` classifier, or a
+    # You can use the standard classifiers that Glue provides, or you can
+    # write your own classifiers to best categorize your data sources and
+    # specify the appropriate schemas to use for them. A classifier can be a
+    # `grok` classifier, an `XML` classifier, a `JSON` classifier, or a
     # custom `CSV` classifier, as specified in one of the fields in the
     # `Classifier` object.
     #
@@ -1948,20 +1950,20 @@ module Aws::Glue
     #     false.
     #
     #   * `CUSTOM_JDBC_CERT` - An Amazon S3 location specifying the
-    #     customer's root certificate. AWS Glue uses this root certificate
-    #     to validate the customer’s certificate when connecting to the
-    #     customer database. AWS Glue only handles X.509 certificates. The
+    #     customer's root certificate. Glue uses this root certificate to
+    #     validate the customer’s certificate when connecting to the
+    #     customer database. Glue only handles X.509 certificates. The
     #     certificate provided must be DER-encoded and supplied in Base64
     #     encoding PEM format.
     #
     #   * `SKIP_CUSTOM_JDBC_CERT_VALIDATION` - By default, this is `false`.
-    #     AWS Glue validates the Signature algorithm and Subject Public Key
+    #     Glue validates the Signature algorithm and Subject Public Key
     #     Algorithm for the customer certificate. The only permitted
     #     algorithms for the Signature algorithm are SHA256withRSA,
     #     SHA384withRSA or SHA512withRSA. For the Subject Public Key
     #     Algorithm, the key length must be at least 2048. You can set the
-    #     value of this property to `true` to skip AWS Glue’s validation of
-    #     the customer certificate.
+    #     value of this property to `true` to skip Glue’s validation of the
+    #     customer certificate.
     #
     #   * `CUSTOM_JDBC_CERT_STRING` - A custom JDBC certificate string which
     #     is used for domain match or distinguished name match to prevent a
@@ -1984,8 +1986,8 @@ module Aws::Glue
     #     file (.pem format). The default is an empty string.
     #
     #   * `KAFKA_SKIP_CUSTOM_CERT_VALIDATION` - Whether to skip the
-    #     validation of the CA cert file or not. AWS Glue validates for
-    #     three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
+    #     validation of the CA cert file or not. Glue validates for three
+    #     algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
     #     Default value is "false".
     #
     #   * `SECRET_ID` - The secret ID used for the secret manager of
@@ -2011,12 +2013,12 @@ module Aws::Glue
     #     with the Kafka server side key (Optional).
     #
     #   * `ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD` - The encrypted version
-    #     of the Kafka client keystore password (if the user has the AWS
-    #     Glue encrypt passwords setting selected).
+    #     of the Kafka client keystore password (if the user has the Glue
+    #     encrypt passwords setting selected).
     #
     #   * `ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD` - The encrypted version of
-    #     the Kafka client key password (if the user has the AWS Glue
-    #     encrypt passwords setting selected).
+    #     the Kafka client key password (if the user has the Glue encrypt
+    #     passwords setting selected).
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -2098,12 +2100,13 @@ module Aws::Glue
     #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
     #   * `MARKETPLACE` - Uses configuration settings contained in a
-    #     connector purchased from AWS Marketplace to read from and write to
-    #     data stores that are not natively supported by AWS Glue.
+    #     connector purchased from Amazon Web Services Marketplace to read
+    #     from and write to data stores that are not natively supported by
+    #     Glue.
     #
     #   * `CUSTOM` - Uses configuration settings contained in a custom
     #     connector to read from and write to data stores that are not
-    #     natively supported by AWS Glue.
+    #     natively supported by Glue.
     #
     #   SFTP is not supported.
     #   @return [String]
@@ -2141,14 +2144,14 @@ module Aws::Glue
     # enable catalog encryption or only password encryption.
     #
     # When a `CreationConnection` request arrives containing a password, the
-    # Data Catalog first encrypts the password using your AWS KMS key. It
-    # then encrypts the whole connection object again if catalog encryption
-    # is also enabled.
+    # Data Catalog first encrypts the password using your KMS key. It then
+    # encrypts the whole connection object again if catalog encryption is
+    # also enabled.
     #
-    # This encryption requires that you set AWS KMS key permissions to
-    # enable or restrict access on the password key according to your
-    # security requirements. For example, you might want only administrators
-    # to have decrypt permission on the password key.
+    # This encryption requires that you set KMS key permissions to enable or
+    # restrict access on the password key according to your security
+    # requirements. For example, you might want only administrators to have
+    # decrypt permission on the password key.
     #
     # @note When making an API call, you may pass ConnectionPasswordEncryption
     #   data as a hash:
@@ -2166,11 +2169,11 @@ module Aws::Glue
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_kms_key_id
-    #   An AWS KMS key that is used to encrypt the connection password.
+    #   An KMS key that is used to encrypt the connection password.
     #
     #   If connection password protection is enabled, the caller of
     #   `CreateConnection` and `UpdateConnection` needs at least
-    #   `kms:Encrypt` permission on the specified AWS KMS key, to encrypt
+    #   `kms:Encrypt` permission on the specified KMS key, to encrypt
     #   passwords before storing them in the Data Catalog.
     #
     #   You can set the decrypt permission to enable or restrict access on
@@ -2248,8 +2251,7 @@ module Aws::Glue
 
     # Specifies a crawler program that examines a data source and uses
     # classifiers to try to determine its schema. If successful, the crawler
-    # records metadata concerning the data source in the AWS Glue Data
-    # Catalog.
+    # records metadata concerning the data source in the Glue Data Catalog.
     #
     # @!attribute [rw] name
     #   The name of the crawler.
@@ -2331,11 +2333,11 @@ module Aws::Glue
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Configuring a Crawler][1].
+    #   information, see [Include and Exclude Patterns][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -2487,6 +2489,7 @@ module Aws::Glue
     #             path: "Path",
     #             exclusions: ["Path"],
     #             connection_name: "ConnectionName",
+    #             sample_size: 1,
     #           },
     #         ],
     #         jdbc_targets: [
@@ -2535,7 +2538,7 @@ module Aws::Glue
     #   @return [Array<Types::DynamoDBTarget>]
     #
     # @!attribute [rw] catalog_targets
-    #   Specifies AWS Glue Data Catalog targets.
+    #   Specifies Glue Data Catalog targets.
     #   @return [Array<Types::CatalogTarget>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets AWS API Documentation
@@ -2634,7 +2637,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the connection. If
-    #   none is provided, the AWS account ID is used by default.
+    #   none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] connection_input
@@ -2668,6 +2672,7 @@ module Aws::Glue
     #               path: "Path",
     #               exclusions: ["Path"],
     #               connection_name: "ConnectionName",
+    #               sample_size: 1,
     #             },
     #           ],
     #           jdbc_targets: [
@@ -2728,7 +2733,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The AWS Glue database where results are written, such as:
+    #   The Glue database where results are written, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #   @return [String]
     #
@@ -2791,8 +2796,8 @@ module Aws::Glue
     #
     # @!attribute [rw] tags
     #   The tags to use with this crawler request. You may use tags to limit
-    #   access to the crawler. For more information about tags in AWS Glue,
-    #   see [AWS Tags in AWS Glue][1] in the developer guide.
+    #   access to the crawler. For more information about tags in Glue, see
+    #   [Amazon Web Services Tags in Glue][1] in the developer guide.
     #
     #
     #
@@ -2913,7 +2918,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the database. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_input
@@ -2997,8 +3002,8 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] number_of_nodes
-    #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
-    #   this `DevEndpoint`.
+    #   The number of Glue Data Processing Units (DPUs) to allocate to this
+    #   `DevEndpoint`.
     #   @return [Integer]
     #
     # @!attribute [rw] worker_type
@@ -3023,10 +3028,10 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version
-    #   supported for running your ETL scripts on development endpoints.
+    #   Glue supports. The Python version indicates the version supported
+    #   for running your ETL scripts on development endpoints.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
     #
@@ -3079,8 +3084,8 @@ module Aws::Glue
     #
     # @!attribute [rw] tags
     #   The tags to use with this DevEndpoint. You may use tags to limit
-    #   access to the DevEndpoint. For more information about tags in AWS
-    #   Glue, see [AWS Tags in AWS Glue][1] in the developer guide.
+    #   access to the DevEndpoint. For more information about tags in Glue,
+    #   see [Amazon Web Services Tags in Glue][1] in the developer guide.
     #
     #
     #
@@ -3143,8 +3148,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_nodes
-    #   The number of AWS Glue Data Processing Units (DPUs) allocated to
-    #   this DevEndpoint.
+    #   The number of Glue Data Processing Units (DPUs) allocated to this
+    #   DevEndpoint.
     #   @return [Integer]
     #
     # @!attribute [rw] worker_type
@@ -3154,8 +3159,16 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version
-    #   supported for running your ETL scripts on development endpoints.
+    #   Glue supports. The Python version indicates the version supported
+    #   for running your ETL scripts on development endpoints.
+    #
+    #   For more information about the available Glue versions and
+    #   corresponding Spark and Python versions, see [Glue version][1] in
+    #   the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -3202,9 +3215,7 @@ module Aws::Glue
     #
     #   * `"--enable-glue-datacatalog": ""`
     #
-    #   * `"GLUE_PYTHON_VERSION": "3"`
-    #
-    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #   ^
     #
     #   You can specify a version of Python support for development
     #   endpoints by using the `Arguments` parameter in the
@@ -3343,22 +3354,22 @@ module Aws::Glue
     #   @return [Types::ExecutionProperty]
     #
     # @!attribute [rw] command
-    #   The `JobCommand` that executes this job.
+    #   The `JobCommand` that runs this job.
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
     #   The default arguments for this job.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set
+    #   up your job, see the [Special Parameters Used by Glue][2] topic in
+    #   the developer guide.
     #
     #
     #
@@ -3382,11 +3393,11 @@ module Aws::Glue
     # @!attribute [rw] allocated_capacity
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this Job. You can allocate from 2 to 100 DPUs; the default is 10. A
-    #   DPU is a relative measure of processing power that consists of 4
-    #   vCPUs of compute capacity and 16 GB of memory. For more information,
-    #   see the [AWS Glue pricing page][1].
+    #   The number of Glue data processing units (DPUs) to allocate to this
+    #   Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU
+    #   is a relative measure of processing power that consists of 4 vCPUs
+    #   of compute capacity and 16 GB of memory. For more information, see
+    #   the [Glue pricing page][1].
     #
     #
     #
@@ -3400,11 +3411,11 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   For Glue version 1.0 or earlier jobs, using the standard worker
+    #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   GB of memory. For more information, see the [Glue pricing page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
@@ -3422,6 +3433,10 @@ module Aws::Glue
     #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
+    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
+    #   capacity`. Instead, you should specify a `Worker type` and the
+    #   `Number of workers`.
+    #
     #
     #
     #   [1]: https://aws.amazon.com/glue/pricing/
@@ -3434,8 +3449,8 @@ module Aws::Glue
     #
     # @!attribute [rw] tags
     #   The tags to use with this job. You may use tags to limit access to
-    #   the job. For more information about tags in AWS Glue, see [AWS Tags
-    #   in AWS Glue][1] in the developer guide.
+    #   the job. For more information about tags in Glue, see [Amazon Web
+    #   Services Tags in Glue][1] in the developer guide.
     #
     #
     #
@@ -3448,10 +3463,10 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version
-    #   supported for jobs of type Spark.
+    #   Glue supports. The Python version indicates the version supported
+    #   for jobs of type Spark.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
     #
@@ -3541,7 +3556,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   classify. Glue supports a subset of JsonPath, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -3610,7 +3625,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] input_record_tables
-    #   A list of AWS Glue table definitions used by the transform.
+    #   A list of Glue table definitions used by the transform.
     #   @return [Array<Types::GlueTable>]
     #
     # @!attribute [rw] parameters
@@ -3620,13 +3635,13 @@ module Aws::Glue
     #
     # @!attribute [rw] role
     #   The name or Amazon Resource Name (ARN) of the IAM role with the
-    #   required permissions. The required permissions include both AWS Glue
-    #   service role permissions to AWS Glue resources, and Amazon S3
+    #   required permissions. The required permissions include both Glue
+    #   service role permissions to Glue resources, and Amazon S3
     #   permissions required by the transform.
     #
-    #   * This role needs AWS Glue service role permissions to allow access
-    #     to resources in AWS Glue. See [Attach a Policy to IAM Users That
-    #     Access AWS Glue][1].
+    #   * This role needs Glue service role permissions to allow access to
+    #     resources in Glue. See [Attach a Policy to IAM Users That Access
+    #     Glue][1].
     #
     #   * This role needs permission to your Amazon Simple Storage Service
     #     (Amazon S3) sources, targets, temporary directory, scripts, and
@@ -3638,11 +3653,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] glue_version
-    #   This value determines which version of AWS Glue this machine
-    #   learning transform is compatible with. Glue 1.0 is recommended for
-    #   most customers. If the value is not set, the Glue compatibility
-    #   defaults to Glue 0.9. For more information, see [AWS Glue
-    #   Versions][1] in the developer guide.
+    #   This value determines which version of Glue this machine learning
+    #   transform is compatible with. Glue 1.0 is recommended for most
+    #   customers. If the value is not set, the Glue compatibility defaults
+    #   to Glue 0.9. For more information, see [Glue Versions][1] in the
+    #   developer guide.
     #
     #
     #
@@ -3650,12 +3665,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that are
-    #   allocated to task runs for this transform. You can allocate from 2
-    #   to 100 DPUs; the default is 10. A DPU is a relative measure of
-    #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   The number of Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100
+    #   DPUs; the default is 10. A DPU is a relative measure of processing
+    #   power that consists of 4 vCPUs of compute capacity and 16 GB of
+    #   memory. For more information, see the [Glue pricing page][1].
     #
     #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
     #   and `WorkerType`.
@@ -3733,8 +3747,8 @@ module Aws::Glue
     # @!attribute [rw] tags
     #   The tags to use with this machine learning transform. You may use
     #   tags to limit access to the machine learning transform. For more
-    #   information about tags in AWS Glue, see [AWS Tags in AWS Glue][1] in
-    #   the developer guide.
+    #   information about tags in Glue, see [Amazon Web Services Tags in
+    #   Glue][1] in the developer guide.
     #
     #
     #
@@ -3895,8 +3909,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] catalog_id
-    #   The AWS account ID of the catalog in which the partition is to be
-    #   created.
+    #   The Amazon Web Services account ID of the catalog in which the
+    #   partition is to be created.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -3951,8 +3965,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   AWS tags that contain a key value pair and may be searched by
-    #   console, command line, or API.
+    #   Amazon Web Services tags that contain a key value pair and may be
+    #   searched by console, command line, or API.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateRegistryInput AWS API Documentation
@@ -4001,7 +4015,7 @@ module Aws::Glue
     #           registry_arn: "GlueResourceArn",
     #         },
     #         schema_name: "SchemaRegistryNameString", # required
-    #         data_format: "AVRO", # required, accepts AVRO
+    #         data_format: "AVRO", # required, accepts AVRO, JSON
     #         compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
     #         description: "DescriptionString",
     #         tags: {
@@ -4024,8 +4038,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently only `AVRO` is
-    #   supported.
+    #   The data format of the schema definition. Currently `AVRO` and
+    #   `JSON` are supported.
     #   @return [String]
     #
     # @!attribute [rw] compatibility
@@ -4083,9 +4097,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   AWS tags that contain a key value pair and may be searched by
-    #   console, command line, or API. If specified, follows the AWS
-    #   tags-on-create pattern.
+    #   Amazon Web Services tags that contain a key value pair and may be
+    #   searched by console, command line, or API. If specified, follows the
+    #   Amazon Web Services tags-on-create pattern.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] schema_definition
@@ -4128,8 +4142,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently only `AVRO` is
-    #   supported.
+    #   The data format of the schema definition. Currently `AVRO` and
+    #   `JSON` are supported.
     #   @return [String]
     #
     # @!attribute [rw] compatibility
@@ -4408,7 +4422,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the `Table`. If none
-    #   is supplied, the AWS account ID is used by default.
+    #   is supplied, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -4447,7 +4461,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         workflow_name: "NameString",
-    #         type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
+    #         type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND, EVENT
     #         schedule: "GenericString",
     #         predicate: {
     #           logical: "AND", # accepts AND, ANY
@@ -4479,6 +4493,10 @@ module Aws::Glue
     #         start_on_creation: false,
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         event_batching_condition: {
+    #           batch_size: 1, # required
+    #           batch_window: 1,
     #         },
     #       }
     #
@@ -4527,13 +4545,19 @@ module Aws::Glue
     #
     # @!attribute [rw] tags
     #   The tags to use with this trigger. You may use tags to limit access
-    #   to the trigger. For more information about tags in AWS Glue, see
-    #   [AWS Tags in AWS Glue][1] in the developer guide.
+    #   to the trigger. For more information about tags in Glue, see [Amazon
+    #   Web Services Tags in Glue][1] in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] event_batching_condition
+    #   Batch condition that must be met (specified number of events
+    #   received or batch time window expired) before EventBridge event
+    #   trigger fires.
+    #   @return [Types::EventBatchingCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerRequest AWS API Documentation
     #
@@ -4546,7 +4570,8 @@ module Aws::Glue
       :actions,
       :description,
       :start_on_creation,
-      :tags)
+      :tags,
+      :event_batching_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4585,7 +4610,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the function. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -4814,7 +4839,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # The AWS Lake Formation principal.
+    # The Lake Formation principal.
     #
     # @note When making an API call, you may pass DataLakePrincipal
     #   data as a hash:
@@ -4824,7 +4849,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] data_lake_principal_identifier
-    #   An identifier for the AWS Lake Formation principal.
+    #   An identifier for the Lake Formation principal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataLakePrincipal AWS API Documentation
@@ -5133,7 +5158,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -5180,7 +5206,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -5220,7 +5247,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] connection_name
@@ -5273,7 +5300,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5434,7 +5461,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partition to be deleted
-    #   resides. If none is provided, the AWS account ID is used by default.
+    #   resides. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -5524,8 +5552,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS Glue resource for the resource policy to be
-    #   deleted.
+    #   The ARN of the Glue resource for the resource policy to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicyRequest AWS API Documentation
@@ -5668,7 +5695,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -5707,7 +5734,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -5782,7 +5809,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the function to be deleted is
-    #   located. If none is supplied, the AWS account ID is used by default.
+    #   located. If none is supplied, the Amazon Web Services account ID is
+    #   used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -5904,10 +5932,10 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version
-    #   supported for running your ETL scripts on development endpoints.
+    #   Glue supports. The Python version indicates the version supported
+    #   for running your ETL scripts on development endpoints.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
     #
@@ -5933,8 +5961,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_nodes
-    #   The number of AWS Glue Data Processing Units (DPUs) allocated to
-    #   this `DevEndpoint`.
+    #   The number of Glue Data Processing Units (DPUs) allocated to this
+    #   `DevEndpoint`.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -6020,9 +6048,7 @@ module Aws::Glue
     #
     #   * `"--enable-glue-datacatalog": ""`
     #
-    #   * `"GLUE_PYTHON_VERSION": "3"`
-    #
-    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #   ^
     #
     #   You can specify a version of Python support for development
     #   endpoints by using the `Arguments` parameter in the
@@ -6174,9 +6200,9 @@ module Aws::Glue
     #
     # @!attribute [rw] scan_rate
     #   The percentage of the configured read capacity units to use by the
-    #   AWS Glue crawler. Read capacity units is a term defined by DynamoDB,
-    #   and is a numeric value that acts as rate limiter for the number of
-    #   reads that can be performed on that table per second.
+    #   Glue crawler. Read capacity units is a term defined by DynamoDB, and
+    #   is a numeric value that acts as rate limiter for the number of reads
+    #   that can be performed on that table per second.
     #
     #   The valid values are null or a value between 0.1 to 1.5. A null
     #   value is used when user does not provide a value, and defaults to
@@ -6195,8 +6221,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # An edge represents a directed connection between two AWS Glue
-    # components that are part of the workflow the edge belongs to.
+    # An edge represents a directed connection between two components on a
+    # workflow graph.
     #
     # @!attribute [rw] source_id
     #   The unique of the node within the workflow where the edge starts.
@@ -6230,7 +6256,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] sse_aws_kms_key_id
-    #   The ID of the AWS KMS key to use for encryption at rest.
+    #   The ID of the KMS key to use for encryption at rest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionAtRest AWS API Documentation
@@ -6355,6 +6381,36 @@ module Aws::Glue
     class EvaluationMetrics < Struct.new(
       :transform_type,
       :find_matches_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch condition that must be met (specified number of events received
+    # or batch time window expired) before EventBridge event trigger fires.
+    #
+    # @note When making an API call, you may pass EventBatchingCondition
+    #   data as a hash:
+    #
+    #       {
+    #         batch_size: 1, # required
+    #         batch_window: 1,
+    #       }
+    #
+    # @!attribute [rw] batch_size
+    #   Number of events that must be received from Amazon EventBridge
+    #   before EventBridge event trigger fires.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_window
+    #   Window of time in seconds after which EventBridge event trigger
+    #   fires. Window starts when first event is received.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EventBatchingCondition AWS API Documentation
+    #
+    class EventBatchingCondition < Struct.new(
+      :batch_size,
+      :batch_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6586,8 +6642,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] catalog_id
-    #   The ID of the catalog to migrate. Currently, this should be the AWS
-    #   account ID.
+    #   The ID of the catalog to migrate. Currently, this should be the
+    #   Amazon Web Services account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCatalogImportStatusRequest AWS API Documentation
@@ -6696,7 +6752,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -6756,7 +6813,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -6810,7 +6868,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6821,9 +6879,9 @@ module Aws::Glue
     #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the AWS
-    #   KMS key to decrypt the password, but it does have permission to
-    #   access the rest of the connection properties.
+    #   parameter when the caller might not have permission to use the KMS
+    #   key to decrypt the password, but it does have permission to access
+    #   the rest of the connection properties.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnectionRequest AWS API Documentation
@@ -6893,7 +6951,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -6904,9 +6962,9 @@ module Aws::Glue
     #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the AWS
-    #   KMS key to decrypt the password, but it does have permission to
-    #   access the rest of the connection properties.
+    #   parameter when the caller might not have permission to use the KMS
+    #   key to decrypt the password, but it does have permission to access
+    #   the rest of the connection properties.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
@@ -7079,7 +7137,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog to retrieve the security configuration
-    #   for. If none is provided, the AWS account ID is used by default.
+    #   for. If none is provided, the Amazon Web Services account ID is used
+    #   by default.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettingsRequest AWS API Documentation
@@ -7112,7 +7171,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -7153,7 +7212,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog from which to retrieve `Databases`. If
-    #   none is provided, the AWS account ID is used by default.
+    #   none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7717,7 +7777,7 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] input_record_tables
-    #   A list of AWS Glue table definitions used by the transform.
+    #   A list of Glue table definitions used by the transform.
     #   @return [Array<Types::GlueTable>]
     #
     # @!attribute [rw] parameters
@@ -7744,11 +7804,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] glue_version
-    #   This value determines which version of AWS Glue this machine
-    #   learning transform is compatible with. Glue 1.0 is recommended for
-    #   most customers. If the value is not set, the Glue compatibility
-    #   defaults to Glue 0.9. For more information, see [AWS Glue
-    #   Versions][1] in the developer guide.
+    #   This value determines which version of Glue this machine learning
+    #   transform is compatible with. Glue 1.0 is recommended for most
+    #   customers. If the value is not set, the Glue compatibility defaults
+    #   to Glue 0.9. For more information, see [Glue Versions][1] in the
+    #   developer guide.
     #
     #
     #
@@ -7756,12 +7816,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that are
-    #   allocated to task runs for this transform. You can allocate from 2
-    #   to 100 DPUs; the default is 10. A DPU is a relative measure of
-    #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   The number of Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100
+    #   DPUs; the default is 10. A DPU is a relative measure of processing
+    #   power that consists of 4 vCPUs of compute capacity and 16 GB of
+    #   memory. For more information, see the [Glue pricing page][1].
     #
     #   When the `WorkerType` field is set to a value other than `Standard`,
     #   the `MaxCapacity` field is set automatically and becomes read-only.
@@ -8048,7 +8107,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partition in question resides.
-    #   If none is provided, the AWS account ID is used by default.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -8105,7 +8165,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is provided, the AWS account ID is used by default.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -8200,7 +8261,7 @@ module Aws::Glue
     #
     #   * `decimal`
     #
-    #   If an invalid type is encountered, an exception is thrown.
+    #   If an type is encountered that is not valid, an exception is thrown.
     #
     #   The following list shows the valid operators on each type. When you
     #   define a crawler, the `partitionKey` type is created as a `STRING`,
@@ -8341,7 +8402,7 @@ module Aws::Glue
     #   Currently, these key-value pairs are supported:
     #
     #   * `inferSchema`  —  Specifies whether to set `inferSchema` to true
-    #     or false for the default script generated by an AWS Glue job. For
+    #     or false for the default script generated by an Glue job. For
     #     example, to set `inferSchema` to true, pass the following key
     #     value pair:
     #
@@ -8490,10 +8551,10 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS Glue resource for which to retrieve the resource
+    #   The ARN of the Glue resource for which to retrieve the resource
     #   policy. If not supplied, the Data Catalog resource policy is
     #   returned. Use `GetResourcePolicies` to view all existing resource
-    #   policies. For more information see [Specifying AWS Glue Resource
+    #   policies. For more information see [Specifying Glue Resource
     #   ARNs][1].
     #
     #
@@ -8581,8 +8642,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently only `AVRO` is
-    #   supported.
+    #   The data format of the schema definition. Currently only `AVRO` and
+    #   `JSON` are supported.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8657,8 +8718,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently only `AVRO` is
-    #   supported.
+    #   The data format of the schema definition. Currently `AVRO` and
+    #   `JSON` are supported.
     #   @return [String]
     #
     # @!attribute [rw] compatibility
@@ -8769,8 +8830,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently only `AVRO` is
-    #   supported.
+    #   The data format of the schema definition. Currently `AVRO` and
+    #   `JSON` are supported.
     #   @return [String]
     #
     # @!attribute [rw] schema_arn
@@ -8954,7 +9015,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -9001,7 +9062,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -9056,7 +9117,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -9121,7 +9182,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -9297,7 +9358,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the function to be retrieved is
-    #   located. If none is provided, the AWS account ID is used by default.
+    #   located. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -9343,7 +9405,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the functions to be retrieved are
-    #   located. If none is provided, the AWS account ID is used by default.
+    #   located. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -9611,8 +9674,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # The database and table in the AWS Glue Data Catalog that is used for
-    # input or output data.
+    # The database and table in the Glue Data Catalog that is used for input
+    # or output data.
     #
     # @note When making an API call, you may pass GlueTable
     #   data as a hash:
@@ -9625,19 +9688,19 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] database_name
-    #   A database name in the AWS Glue Data Catalog.
+    #   A database name in the Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   A table name in the AWS Glue Data Catalog.
+    #   A table name in the Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] catalog_id
-    #   A unique identifier for the AWS Glue Data Catalog.
+    #   A unique identifier for the Glue Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] connection_name
-    #   The name of the connection to the AWS Glue Data Catalog.
+    #   The name of the connection to the Glue Data Catalog.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueTable AWS API Documentation
@@ -9743,8 +9806,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] catalog_id
-    #   The ID of the catalog to import. Currently, this should be the AWS
-    #   account ID.
+    #   The ID of the catalog to import. Currently, this should be the
+    #   Amazon Web Services account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportCatalogToGlueRequest AWS API Documentation
@@ -9878,22 +9941,22 @@ module Aws::Glue
     #   @return [Types::ExecutionProperty]
     #
     # @!attribute [rw] command
-    #   The `JobCommand` that executes this job.
+    #   The `JobCommand` that runs this job.
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
     #   The default arguments for this job, specified as name-value pairs.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set
+    #   up your job, see the [Special Parameters Used by Glue][2] topic in
+    #   the developer guide.
     #
     #
     #
@@ -9917,11 +9980,11 @@ module Aws::Glue
     # @!attribute [rw] allocated_capacity
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of AWS Glue data processing units (DPUs) allocated to
-    #   runs of this job. You can allocate from 2 to 100 DPUs; the default
-    #   is 10. A DPU is a relative measure of processing power that consists
-    #   of 4 vCPUs of compute capacity and 16 GB of memory. For more
-    #   information, see the [AWS Glue pricing page][1].
+    #   The number of Glue data processing units (DPUs) allocated to runs of
+    #   this job. You can allocate from 2 to 100 DPUs; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4
+    #   vCPUs of compute capacity and 16 GB of memory. For more information,
+    #   see the [Glue pricing page][1].
     #
     #
     #
@@ -9937,11 +10000,11 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   For Glue version 1.0 or earlier jobs, using the standard worker
+    #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   GB of memory. For more information, see the [Glue pricing page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
@@ -9959,6 +10022,10 @@ module Aws::Glue
     #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
     #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
+    #
+    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
+    #   capacity`. Instead, you should specify a `Worker type` and the
+    #   `Number of workers`.
     #
     #
     #
@@ -10000,10 +10067,10 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version
-    #   supported for jobs of type Spark.
+    #   Glue supports. The Python version indicates the version supported
+    #   for jobs of type Spark.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
     #
@@ -10114,7 +10181,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies code executed when a job is run.
+    # Specifies code that runs when a job is run.
     #
     # @note When making an API call, you may pass JobCommand
     #   data as a hash:
@@ -10133,11 +10200,11 @@ module Aws::Glue
     #
     # @!attribute [rw] script_location
     #   Specifies the Amazon Simple Storage Service (Amazon S3) path to a
-    #   script that executes a job.
+    #   script that runs a job.
     #   @return [String]
     #
     # @!attribute [rw] python_version
-    #   The Python version being used to execute a Python shell job. Allowed
+    #   The Python version being used to run a Python shell job. Allowed
     #   values are 2 or 3.
     #   @return [String]
     #
@@ -10202,8 +10269,8 @@ module Aws::Glue
     #
     # @!attribute [rw] job_run_state
     #   The current state of the job run. For more information about the
-    #   statuses of jobs that have terminated abnormally, see [AWS Glue Job
-    #   Run Statuses][1].
+    #   statuses of jobs that have terminated abnormally, see [Glue Job Run
+    #   Statuses][1].
     #
     #
     #
@@ -10215,15 +10282,15 @@ module Aws::Glue
     #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set
+    #   up your job, see the [Special Parameters Used by Glue][2] topic in
+    #   the developer guide.
     #
     #
     #
@@ -10242,11 +10309,11 @@ module Aws::Glue
     # @!attribute [rw] allocated_capacity
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of AWS Glue data processing units (DPUs) allocated to
-    #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
-    #   A DPU is a relative measure of processing power that consists of 4
+    #   The number of Glue data processing units (DPUs) allocated to this
+    #   JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4
     #   vCPUs of compute capacity and 16 GB of memory. For more information,
-    #   see the [AWS Glue pricing page][1].
+    #   see the [Glue pricing page][1].
     #
     #
     #
@@ -10265,11 +10332,10 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   The number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   GB of memory. For more information, see the [Glue pricing page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
@@ -10288,7 +10354,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] worker_type
@@ -10320,7 +10386,7 @@ module Aws::Glue
     #
     # @!attribute [rw] log_group_name
     #   The name of the log group for secure logging that can be server-side
-    #   encrypted in Amazon CloudWatch using AWS KMS. This name can be
+    #   encrypted in Amazon CloudWatch using KMS. This name can be
     #   `/aws-glue/jobs/`, in which case the default encryption is `NONE`.
     #   If you add a role name and `SecurityConfiguration` name (in other
     #   words,
@@ -10334,10 +10400,10 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version
-    #   supported for jobs of type Spark.
+    #   Glue supports. The Python version indicates the version supported
+    #   for jobs of type Spark.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
     #
@@ -10437,22 +10503,22 @@ module Aws::Glue
     #   @return [Types::ExecutionProperty]
     #
     # @!attribute [rw] command
-    #   The `JobCommand` that executes this job (required).
+    #   The `JobCommand` that runs this job (required).
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
     #   The default arguments for this job.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set
+    #   up your job, see the [Special Parameters Used by Glue][2] topic in
+    #   the developer guide.
     #
     #
     #
@@ -10476,11 +10542,11 @@ module Aws::Glue
     # @!attribute [rw] allocated_capacity
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this job. You can allocate from 2 to 100 DPUs; the default is 10. A
-    #   DPU is a relative measure of processing power that consists of 4
-    #   vCPUs of compute capacity and 16 GB of memory. For more information,
-    #   see the [AWS Glue pricing page][1].
+    #   The number of Glue data processing units (DPUs) to allocate to this
+    #   job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU
+    #   is a relative measure of processing power that consists of 4 vCPUs
+    #   of compute capacity and 16 GB of memory. For more information, see
+    #   the [Glue pricing page][1].
     #
     #
     #
@@ -10494,11 +10560,11 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   For Glue version 1.0 or earlier jobs, using the standard worker
+    #   type, the number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   GB of memory. For more information, see the [Glue pricing page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
@@ -10515,6 +10581,10 @@ module Aws::Glue
     #     (`JobCommand.Name`="gluestreaming"), you can allocate from 2 to
     #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
+    #
+    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
+    #   capacity`. Instead, you should specify a `Worker type` and the
+    #   `Number of workers`.
     #
     #
     #
@@ -10556,10 +10626,10 @@ module Aws::Glue
     #
     # @!attribute [rw] glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   AWS Glue supports. The Python version indicates the version
-    #   supported for jobs of type Spark.
+    #   Glue supports. The Python version indicates the version supported
+    #   for jobs of type Spark.
     #
-    #   For more information about the available AWS Glue versions and
+    #   For more information about the available Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in
     #   the developer guide.
     #
@@ -10612,7 +10682,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   classify. Glue supports a subset of JsonPath, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -11360,7 +11430,7 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] input_record_tables
-    #   A list of AWS Glue table definitions used by the transform.
+    #   A list of Glue table definitions used by the transform.
     #   @return [Array<Types::GlueTable>]
     #
     # @!attribute [rw] parameters
@@ -11376,9 +11446,9 @@ module Aws::Glue
     #   @return [Types::EvaluationMetrics]
     #
     # @!attribute [rw] label_count
-    #   A count identifier for the labeling files generated by AWS Glue for
-    #   this transform. As you create a better transform, you can
-    #   iteratively download, label, and upload the labeling file.
+    #   A count identifier for the labeling files generated by Glue for this
+    #   transform. As you create a better transform, you can iteratively
+    #   download, label, and upload the labeling file.
     #   @return [Integer]
     #
     # @!attribute [rw] schema
@@ -11389,13 +11459,13 @@ module Aws::Glue
     #
     # @!attribute [rw] role
     #   The name or Amazon Resource Name (ARN) of the IAM role with the
-    #   required permissions. The required permissions include both AWS Glue
-    #   service role permissions to AWS Glue resources, and Amazon S3
+    #   required permissions. The required permissions include both Glue
+    #   service role permissions to Glue resources, and Amazon S3
     #   permissions required by the transform.
     #
-    #   * This role needs AWS Glue service role permissions to allow access
-    #     to resources in AWS Glue. See [Attach a Policy to IAM Users That
-    #     Access AWS Glue][1].
+    #   * This role needs Glue service role permissions to allow access to
+    #     resources in Glue. See [Attach a Policy to IAM Users That Access
+    #     Glue][1].
     #
     #   * This role needs permission to your Amazon Simple Storage Service
     #     (Amazon S3) sources, targets, temporary directory, scripts, and
@@ -11407,11 +11477,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] glue_version
-    #   This value determines which version of AWS Glue this machine
-    #   learning transform is compatible with. Glue 1.0 is recommended for
-    #   most customers. If the value is not set, the Glue compatibility
-    #   defaults to Glue 0.9. For more information, see [AWS Glue
-    #   Versions][1] in the developer guide.
+    #   This value determines which version of Glue this machine learning
+    #   transform is compatible with. Glue 1.0 is recommended for most
+    #   customers. If the value is not set, the Glue compatibility defaults
+    #   to Glue 0.9. For more information, see [Glue Versions][1] in the
+    #   developer guide.
     #
     #
     #
@@ -11419,12 +11489,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that are
-    #   allocated to task runs for this transform. You can allocate from 2
-    #   to 100 DPUs; the default is 10. A DPU is a relative measure of
-    #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   The number of Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100
+    #   DPUs; the default is 10. A DPU is a relative measure of processing
+    #   power that consists of 4 vCPUs of compute capacity and 16 GB of
+    #   memory. For more information, see the [Glue pricing page][1].
     #
     #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
     #   and `WorkerType`.
@@ -11555,8 +11624,8 @@ module Aws::Glue
     #
     #   * DISABLED: encryption is disabled
     #
-    #   * SSEKMS: use of server-side encryption with AWS Key Management
-    #     Service (SSE-KMS) for user data stored in Amazon S3.
+    #   * SSEKMS: use of server-side encryption with Key Management Service
+    #     (SSE-KMS) for user data stored in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -11729,15 +11798,15 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A node represents an AWS Glue component such as a trigger, or job,
-    # etc., that is part of a workflow.
+    # A node represents an Glue component (trigger, crawler, or job) on a
+    # workflow graph.
     #
     # @!attribute [rw] type
-    #   The type of AWS Glue component represented by the node.
+    #   The type of Glue component represented by the node.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the AWS Glue component represented by the node.
+    #   The name of the Glue component represented by the node.
     #   @return [String]
     #
     # @!attribute [rw] unique_id
@@ -12069,8 +12138,8 @@ module Aws::Glue
     #
     #   The values for the keys for the new partition must be passed as an
     #   array of String objects that must be ordered in the same order as
-    #   the partition keys appearing in the Amazon S3 prefix. Otherwise AWS
-    #   Glue will add the values to the wrong keys.
+    #   the partition keys appearing in the Amazon S3 prefix. Otherwise Glue
+    #   will add the values to the wrong keys.
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_access_time
@@ -12297,7 +12366,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog to set the security configuration for. If
-    #   none is provided, the AWS account ID is used by default.
+    #   none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] data_catalog_encryption_settings
@@ -12356,8 +12426,8 @@ module Aws::Glue
     #
     #   * By directly updating the resource policy with `PutResourePolicy`
     #
-    #   * By using the **Grant permissions** command on the AWS Management
-    #     Console.
+    #   * By using the **Grant permissions** command on the Amazon Web
+    #     Services Management Console.
     #
     #   Must be set to `'TRUE'` if you have already used the Management
     #   Console to grant cross-account access, otherwise the call fails.
@@ -12611,8 +12681,8 @@ module Aws::Glue
     # When crawling an Amazon S3 data source after the first crawl is
     # complete, specifies whether to crawl the entire dataset again or to
     # crawl only folders that were added since the last crawler run. For
-    # more information, see [Incremental Crawls in AWS Glue][1] in the
-    # developer guide.
+    # more information, see [Incremental Crawls in Glue][1] in the developer
+    # guide.
     #
     #
     #
@@ -13036,6 +13106,7 @@ module Aws::Glue
     #         path: "Path",
     #         exclusions: ["Path"],
     #         connection_name: "ConnectionName",
+    #         sample_size: 1,
     #       }
     #
     # @!attribute [rw] path
@@ -13057,12 +13128,19 @@ module Aws::Glue
     #   (Amazon VPC).
     #   @return [String]
     #
+    # @!attribute [rw] sample_size
+    #   Sets the number of files in each leaf folder to be crawled when
+    #   crawling sample files in a dataset. If not set, all the files are
+    #   crawled. A valid value is an integer between 1 and 249.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target AWS API Documentation
     #
     class S3Target < Struct.new(
       :path,
       :exclusions,
-      :connection_name)
+      :connection_name,
+      :sample_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13190,7 +13268,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # The unique ID of the schema in the AWS Glue schema registry.
+    # The unique ID of the schema in the Glue schema registry.
     #
     # @note When making an API call, you may pass SchemaId
     #   data as a hash:
@@ -13269,8 +13347,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # An object that references a schema stored in the AWS Glue Schema
-    # Registry.
+    # An object that references a schema stored in the Glue Schema Registry.
     #
     # @note When making an API call, you may pass SchemaReference
     #   data as a hash:
@@ -13524,7 +13601,7 @@ module Aws::Glue
     end
 
     # Defines a non-overlapping region of a table's partitions, allowing
-    # multiple requests to be executed in parallel.
+    # multiple requests to be run in parallel.
     #
     # @note When making an API call, you may pass Segment
     #   data as a hash:
@@ -13815,15 +13892,15 @@ module Aws::Glue
     #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #   consumes, as well as arguments that Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that AWS Glue consumes to
-    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
-    #   topic in the developer guide.
+    #   For information about the key-value pairs that Glue consumes to set
+    #   up your job, see the [Special Parameters Used by Glue][2] topic in
+    #   the developer guide.
     #
     #
     #
@@ -13834,15 +13911,15 @@ module Aws::Glue
     # @!attribute [rw] allocated_capacity
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of AWS Glue data processing units (DPUs) to allocate to
-    #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
-    #   A DPU is a relative measure of processing power that consists of 4
+    #   The number of Glue data processing units (DPUs) to allocate to this
+    #   JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4
     #   vCPUs of compute capacity and 16 GB of memory. For more information,
-    #   see the [AWS Glue pricing page][1].
+    #   see the [Glue pricing page][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
     # @!attribute [rw] timeout
@@ -13853,11 +13930,10 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   The number of Glue data processing units (DPUs) that can be
     #   allocated when this job runs. A DPU is a relative measure of
     #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   GB of memory. For more information, see the [Glue pricing page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and
     #   `NumberOfWorkers`.
@@ -13876,7 +13952,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Float]
     #
     # @!attribute [rw] security_configuration
@@ -14066,6 +14142,28 @@ module Aws::Glue
     #
     class StartWorkflowRunResponse < Struct.new(
       :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The batch condition that started the workflow run. Either the number
+    # of events in the batch size arrived, in which case the BatchSize
+    # member is non-zero, or the batch window expired, in which case the
+    # BatchWindow member is non-zero.
+    #
+    # @!attribute [rw] batch_size
+    #   Number of events in the batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] batch_window
+    #   Duration of the batch window in seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartingEventBatchCondition AWS API Documentation
+    #
+    class StartingEventBatchCondition < Struct.new(
+      :batch_size,
+      :batch_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14289,7 +14387,7 @@ module Aws::Glue
     #   @return [Boolean]
     #
     # @!attribute [rw] schema_reference
-    #   An object that references a schema stored in the AWS Glue Schema
+    #   An object that references a schema stored in the Glue Schema
     #   Registry.
     #
     #   When creating a table, you can pass an empty list of columns for the
@@ -14436,8 +14534,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] is_registered_with_lake_formation
-    #   Indicates whether the table has been registered with AWS Lake
-    #   Formation.
+    #   Indicates whether the table has been registered with Lake Formation.
     #   @return [Boolean]
     #
     # @!attribute [rw] target_table
@@ -14755,9 +14852,9 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS Glue resource to which to add the tags. For more
-    #   information about AWS Glue resource ARNs, see the [AWS Glue ARN
-    #   string pattern][1].
+    #   The ARN of the Glue resource to which to add the tags. For more
+    #   information about Glue resource ARNs, see the [Glue ARN string
+    #   pattern][1].
     #
     #
     #
@@ -15022,11 +15119,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] glue_version
-    #   This value determines which version of AWS Glue this machine
-    #   learning transform is compatible with. Glue 1.0 is recommended for
-    #   most customers. If the value is not set, the Glue compatibility
-    #   defaults to Glue 0.9. For more information, see [AWS Glue
-    #   Versions][1] in the developer guide.
+    #   This value determines which version of Glue this machine learning
+    #   transform is compatible with. Glue 1.0 is recommended for most
+    #   customers. If the value is not set, the Glue compatibility defaults
+    #   to Glue 0.9. For more information, see [Glue Versions][1] in the
+    #   developer guide.
     #
     #
     #
@@ -15187,6 +15284,12 @@ module Aws::Glue
     #   The predicate of this trigger, which defines when it will fire.
     #   @return [Types::Predicate]
     #
+    # @!attribute [rw] event_batching_condition
+    #   Batch condition that must be met (specified number of events
+    #   received or batch time window expired) before EventBridge event
+    #   trigger fires.
+    #   @return [Types::EventBatchingCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Trigger AWS API Documentation
     #
     class Trigger < Struct.new(
@@ -15198,7 +15301,8 @@ module Aws::Glue
       :description,
       :schedule,
       :actions,
-      :predicate)
+      :predicate,
+      :event_batching_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15254,6 +15358,10 @@ module Aws::Glue
     #             },
     #           ],
     #         },
+    #         event_batching_condition: {
+    #           batch_size: 1, # required
+    #           batch_window: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -15282,6 +15390,12 @@ module Aws::Glue
     #   The predicate of this trigger, which defines when it will fire.
     #   @return [Types::Predicate]
     #
+    # @!attribute [rw] event_batching_condition
+    #   Batch condition that must be met (specified number of events
+    #   received or batch time window expired) before EventBridge event
+    #   trigger fires.
+    #   @return [Types::EventBatchingCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerUpdate AWS API Documentation
     #
     class TriggerUpdate < Struct.new(
@@ -15289,7 +15403,8 @@ module Aws::Glue
       :description,
       :schedule,
       :actions,
-      :predicate)
+      :predicate,
+      :event_batching_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15453,7 +15568,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -15563,7 +15679,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partitions in question reside.
-    #   If none is supplied, the AWS account ID is used by default.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -15625,7 +15742,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none
-    #   is provided, the AWS account ID is used by default.
+    #   is provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -15665,6 +15782,7 @@ module Aws::Glue
     #               path: "Path",
     #               exclusions: ["Path"],
     #               connection_name: "ConnectionName",
+    #               sample_size: 1,
     #             },
     #           ],
     #           jdbc_targets: [
@@ -15722,7 +15840,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The AWS Glue database where results are stored, such as:
+    #   The Glue database where results are stored, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #   @return [String]
     #
@@ -15933,7 +16051,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the metadata database resides.
-    #   If none is provided, the AWS account ID is used by default.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -16017,9 +16136,7 @@ module Aws::Glue
     #
     #   * `"--enable-glue-datacatalog": ""`
     #
-    #   * `"GLUE_PYTHON_VERSION": "3"`
-    #
-    #   * `"GLUE_PYTHON_VERSION": "2"`
+    #   ^
     #
     #   You can specify a version of Python support for development
     #   endpoints by using the `Arguments` parameter in the
@@ -16172,7 +16289,7 @@ module Aws::Glue
     #
     # @!attribute [rw] json_path
     #   A `JsonPath` string defining the JSON data for the classifier to
-    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   classify. Glue supports a subset of JsonPath, as described in
     #   [Writing JsonPath Custom Classifiers][1].
     #
     #
@@ -16238,11 +16355,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] glue_version
-    #   This value determines which version of AWS Glue this machine
-    #   learning transform is compatible with. Glue 1.0 is recommended for
-    #   most customers. If the value is not set, the Glue compatibility
-    #   defaults to Glue 0.9. For more information, see [AWS Glue
-    #   Versions][1] in the developer guide.
+    #   This value determines which version of Glue this machine learning
+    #   transform is compatible with. Glue 1.0 is recommended for most
+    #   customers. If the value is not set, the Glue compatibility defaults
+    #   to Glue 0.9. For more information, see [Glue Versions][1] in the
+    #   developer guide.
     #
     #
     #
@@ -16250,12 +16367,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
-    #   The number of AWS Glue data processing units (DPUs) that are
-    #   allocated to task runs for this transform. You can allocate from 2
-    #   to 100 DPUs; the default is 10. A DPU is a relative measure of
-    #   processing power that consists of 4 vCPUs of compute capacity and 16
-    #   GB of memory. For more information, see the [AWS Glue pricing
-    #   page][1].
+    #   The number of Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100
+    #   DPUs; the default is 10. A DPU is a relative measure of processing
+    #   power that consists of 4 vCPUs of compute capacity and 16 GB of
+    #   memory. For more information, see the [Glue pricing page][1].
     #
     #   When the `WorkerType` field is set to a value other than `Standard`,
     #   the `MaxCapacity` field is set automatically and becomes read-only.
@@ -16397,7 +16513,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the partition to be updated
-    #   resides. If none is provided, the AWS account ID is used by default.
+    #   resides. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -16650,7 +16767,7 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the AWS account ID is used by default.
+    #   provided, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -16719,6 +16836,10 @@ module Aws::Glue
     #               },
     #             ],
     #           },
+    #           event_batching_condition: {
+    #             batch_size: 1, # required
+    #             batch_window: 1,
+    #           },
     #         },
     #       }
     #
@@ -16774,7 +16895,8 @@ module Aws::Glue
     #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the function to be updated is
-    #   located. If none is provided, the AWS account ID is used by default.
+    #   located. If none is provided, the Amazon Web Services account ID is
+    #   used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -17028,11 +17150,12 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A workflow represents a flow in which AWS Glue components should be
-    # executed to complete a logical task.
+    # A workflow is a collection of multiple dependent Glue jobs and
+    # crawlers that are run to complete a complex ETL task. A workflow
+    # manages the execution and monitoring of all its jobs and crawlers.
     #
     # @!attribute [rw] name
-    #   The name of the workflow representing the flow.
+    #   The name of the workflow.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -17041,7 +17164,9 @@ module Aws::Glue
     #
     # @!attribute [rw] default_run_properties
     #   A collection of properties to be used as part of each execution of
-    #   the workflow.
+    #   the workflow. The run properties are made available to each job in
+    #   the workflow. A job can modify the properties for the next jobs in
+    #   the flow.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] created_on
@@ -17057,9 +17182,8 @@ module Aws::Glue
     #   @return [Types::WorkflowRun]
     #
     # @!attribute [rw] graph
-    #   The graph representing all the AWS Glue components that belong to
-    #   the workflow as nodes and directed connections between them as
-    #   edges.
+    #   The graph representing all the Glue components that belong to the
+    #   workflow as nodes and directed connections between them as edges.
     #   @return [Types::WorkflowGraph]
     #
     # @!attribute [rw] max_concurrent_runs
@@ -17086,12 +17210,12 @@ module Aws::Glue
     end
 
     # A workflow graph represents the complete workflow containing all the
-    # AWS Glue components present in the workflow and all the directed
+    # Glue components present in the workflow and all the directed
     # connections between them.
     #
     # @!attribute [rw] nodes
-    #   A list of the the AWS Glue components belong to the workflow
-    #   represented as nodes.
+    #   A list of the the Glue components belong to the workflow represented
+    #   as nodes.
     #   @return [Array<Types::Node>]
     #
     # @!attribute [rw] edges
@@ -17112,7 +17236,7 @@ module Aws::Glue
     # information.
     #
     # @!attribute [rw] name
-    #   Name of the workflow that was executed.
+    #   Name of the workflow that was run.
     #   @return [String]
     #
     # @!attribute [rw] workflow_run_id
@@ -17150,10 +17274,13 @@ module Aws::Glue
     #   @return [Types::WorkflowRunStatistics]
     #
     # @!attribute [rw] graph
-    #   The graph representing all the AWS Glue components that belong to
-    #   the workflow as nodes and directed connections between them as
-    #   edges.
+    #   The graph representing all the Glue components that belong to the
+    #   workflow as nodes and directed connections between them as edges.
     #   @return [Types::WorkflowGraph]
+    #
+    # @!attribute [rw] starting_event_batch_condition
+    #   The batch condition that started the workflow run.
+    #   @return [Types::StartingEventBatchCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRun AWS API Documentation
     #
@@ -17167,7 +17294,8 @@ module Aws::Glue
       :status,
       :error_message,
       :statistics,
-      :graph)
+      :graph,
+      :starting_event_batch_condition)
       SENSITIVE = []
       include Aws::Structure
     end

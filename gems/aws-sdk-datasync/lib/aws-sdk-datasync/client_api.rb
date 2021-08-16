@@ -138,6 +138,7 @@ module Aws::DataSync
     SmbDomain = Shapes::StringShape.new(name: 'SmbDomain')
     SmbMountOptions = Shapes::StructureShape.new(name: 'SmbMountOptions')
     SmbPassword = Shapes::StringShape.new(name: 'SmbPassword')
+    SmbSecurityDescriptorCopyFlags = Shapes::StringShape.new(name: 'SmbSecurityDescriptorCopyFlags')
     SmbSubdirectory = Shapes::StringShape.new(name: 'SmbSubdirectory')
     SmbUser = Shapes::StringShape.new(name: 'SmbUser')
     SmbVersion = Shapes::StringShape.new(name: 'SmbVersion')
@@ -525,6 +526,7 @@ module Aws::DataSync
     Options.add_member(:task_queueing, Shapes::ShapeRef.new(shape: TaskQueueing, location_name: "TaskQueueing"))
     Options.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
     Options.add_member(:transfer_mode, Shapes::ShapeRef.new(shape: TransferMode, location_name: "TransferMode"))
+    Options.add_member(:security_descriptor_copy_flags, Shapes::ShapeRef.new(shape: SmbSecurityDescriptorCopyFlags, location_name: "SecurityDescriptorCopyFlags"))
     Options.struct_class = Types::Options
 
     OutputTagList.member = Shapes::ShapeRef.new(shape: TagListEntry)

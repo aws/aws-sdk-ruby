@@ -28,7 +28,7 @@ require_relative 'aws-sdk-transcribeservice/customizations'
 # structure.
 #
 #     transcribe_service = Aws::TranscribeService::Client.new
-#     resp = transcribe_service.create_language_model(params)
+#     resp = transcribe_service.create_call_analytics_category(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-transcribeservice/customizations'
 # @!group service
 module Aws::TranscribeService
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.58.0'
 
 end

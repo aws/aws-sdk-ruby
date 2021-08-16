@@ -36,8 +36,7 @@ module Aws::S3
 
     # Describes where logs are stored and the prefix that Amazon S3 assigns
     # to all log object keys for a bucket. For more information, see [PUT
-    # Bucket logging][1] in the *Amazon Simple Storage Service API
-    # Reference*.
+    # Bucket logging][1] in the *Amazon S3 API Reference*.
     #
     #
     #
@@ -211,8 +210,9 @@ module Aws::S3
     # @option options [String] :content_md5
     #   The MD5 hash of the `PutBucketLogging` request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line Interface
+    #   (CLI) or Amazon Web Services SDKs, this field is calculated
+    #   automatically.
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access

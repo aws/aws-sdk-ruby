@@ -777,6 +777,7 @@ module Aws::RoboMaker
     DescribeWorldResponse.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
     DescribeWorldResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     DescribeWorldResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldResponse.add_member(:world_description_body, Shapes::ShapeRef.new(shape: Json, location_name: "worldDescriptionBody"))
     DescribeWorldResponse.struct_class = Types::DescribeWorldResponse
 
     DescribeWorldTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
@@ -788,6 +789,7 @@ module Aws::RoboMaker
     DescribeWorldTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     DescribeWorldTemplateResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
     DescribeWorldTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldTemplateResponse.add_member(:version, Shapes::ShapeRef.new(shape: GenericString, location_name: "version"))
     DescribeWorldTemplateResponse.struct_class = Types::DescribeWorldTemplateResponse
 
     EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
@@ -1239,6 +1241,7 @@ module Aws::RoboMaker
     TemplateSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     TemplateSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
     TemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
+    TemplateSummary.add_member(:version, Shapes::ShapeRef.new(shape: GenericString, location_name: "version"))
     TemplateSummary.struct_class = Types::TemplateSummary
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))

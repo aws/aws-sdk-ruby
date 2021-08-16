@@ -268,7 +268,7 @@ module Aws::LicenseManager
     #
     #       {
     #         product_sku: "String", # required
-    #         checkout_type: "PROVISIONAL", # required, accepts PROVISIONAL
+    #         checkout_type: "PROVISIONAL", # required, accepts PROVISIONAL, PERPETUAL
     #         key_fingerprint: "String", # required
     #         entitlements: [ # required
     #           {
@@ -441,7 +441,7 @@ module Aws::LicenseManager
     #   data as a hash:
     #
     #       {
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #         grant_name: "String", # required
     #         license_arn: "Arn", # required
     #         principals: ["Arn"], # required
@@ -513,11 +513,12 @@ module Aws::LicenseManager
     #   data as a hash:
     #
     #       {
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #         grant_arn: "Arn", # required
     #         grant_name: "String",
     #         allowed_operations: ["CreateGrant"], # accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
-    #         status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED
+    #         status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
+    #         status_reason: "StatusReasonMessage",
     #         source_version: "String",
     #       }
     #
@@ -542,6 +543,9 @@ module Aws::LicenseManager
     #   Grant status.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   @return [String]
+    #
     # @!attribute [rw] source_version
     #   Current version of the grant.
     #   @return [String]
@@ -554,6 +558,7 @@ module Aws::LicenseManager
       :grant_name,
       :allowed_operations,
       :status,
+      :status_reason,
       :source_version)
       SENSITIVE = []
       include Aws::Structure
@@ -697,6 +702,93 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLicenseManagerReportGeneratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         report_generator_name: "ReportGeneratorName", # required
+    #         type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
+    #         report_context: { # required
+    #           license_configuration_arns: ["Arn"], # required
+    #         },
+    #         report_frequency: { # required
+    #           value: 1,
+    #           period: "DAY", # accepts DAY, WEEK, MONTH
+    #         },
+    #         client_token: "ClientRequestToken", # required
+    #         description: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] report_generator_name
+    #   Name of the report generator.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of reports to generate. The following report types an be
+    #   generated:
+    #
+    #   * License configuration report - Reports on the number and details
+    #     of consumed licenses for a license configuration.
+    #
+    #   * Resource report - Reports on the tracked licenses and resource
+    #     consumption for a license configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] report_context
+    #   Defines the type of license configuration the report generator
+    #   tracks.
+    #   @return [Types::ReportContext]
+    #
+    # @!attribute [rw] report_frequency
+    #   Frequency by which reports are generated. Reports can be generated
+    #   daily, monthly, or weekly.
+    #   @return [Types::ReportFrequency]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the report generator.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to add to the report generator.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseManagerReportGeneratorRequest AWS API Documentation
+    #
+    class CreateLicenseManagerReportGeneratorRequest < Struct.new(
+      :report_generator_name,
+      :type,
+      :report_context,
+      :report_frequency,
+      :client_token,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] license_manager_report_generator_arn
+    #   The Amazon Resource Number (ARN) of the new report generator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseManagerReportGeneratorResponse AWS API Documentation
+    #
+    class CreateLicenseManagerReportGeneratorResponse < Struct.new(
+      :license_manager_report_generator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateLicenseRequest
     #   data as a hash:
     #
@@ -740,7 +832,7 @@ module Aws::LicenseManager
     #             value: "String",
     #           },
     #         ],
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #       }
     #
     # @!attribute [rw] license_name
@@ -874,7 +966,7 @@ module Aws::LicenseManager
     #           },
     #         },
     #         status: "AVAILABLE", # required, accepts AVAILABLE, PENDING_AVAILABLE, DEACTIVATED, SUSPENDED, EXPIRED, PENDING_DELETE, DELETED
-    #         client_token: "String", # required
+    #         client_token: "ClientToken", # required
     #         source_version: "String",
     #       }
     #
@@ -979,7 +1071,7 @@ module Aws::LicenseManager
     #         role_arns: ["Arn"],
     #         expiration_in_days: 1,
     #         token_properties: ["String"],
-    #         client_token: "IdempotencyToken", # required
+    #         client_token: "ClientToken", # required
     #       }
     #
     # @!attribute [rw] license_arn
@@ -1072,11 +1164,15 @@ module Aws::LicenseManager
     #
     #       {
     #         grant_arn: "Arn", # required
+    #         status_reason: "StatusReasonMessage",
     #         version: "String", # required
     #       }
     #
     # @!attribute [rw] grant_arn
     #   Amazon Resource Name (ARN) of the grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1087,6 +1183,7 @@ module Aws::LicenseManager
     #
     class DeleteGrantRequest < Struct.new(
       :grant_arn,
+      :status_reason,
       :version)
       SENSITIVE = []
       include Aws::Structure
@@ -1136,6 +1233,30 @@ module Aws::LicenseManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseConfigurationResponse AWS API Documentation
     #
     class DeleteLicenseConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteLicenseManagerReportGeneratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_manager_report_generator_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] license_manager_report_generator_arn
+    #   Amazon Resource Number (ARN) of the report generator that will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseManagerReportGeneratorRequest AWS API Documentation
+    #
+    class DeleteLicenseManagerReportGeneratorRequest < Struct.new(
+      :license_manager_report_generator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseManagerReportGeneratorResponse AWS API Documentation
+    #
+    class DeleteLicenseManagerReportGeneratorResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteLicenseRequest
     #   data as a hash:
@@ -1616,6 +1737,39 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLicenseManagerReportGeneratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_manager_report_generator_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] license_manager_report_generator_arn
+    #   mazon Resource Number (ARN) of the report generator to retrieve
+    #   information on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseManagerReportGeneratorRequest AWS API Documentation
+    #
+    class GetLicenseManagerReportGeneratorRequest < Struct.new(
+      :license_manager_report_generator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_generator
+    #   A report generator that creates periodic reports on your license
+    #   configurations.
+    #   @return [Types::ReportGenerator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseManagerReportGeneratorResponse AWS API Documentation
+    #
+    class GetLicenseManagerReportGeneratorResponse < Struct.new(
+      :report_generator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetLicenseRequest
     #   data as a hash:
     #
@@ -1710,7 +1864,7 @@ module Aws::LicenseManager
     #
     # @!attribute [rw] license_manager_resource_share_arn
     #   Amazon Resource Name (ARN) of the AWS resource share. The License
-    #   Manager master account will provide member accounts with access to
+    #   Manager management account provides member accounts with access to
     #   this share.
     #   @return [String]
     #
@@ -2413,13 +2567,15 @@ module Aws::LicenseManager
     # @!attribute [rw] filters
     #   Filters to scope the results. The following filters are supported:
     #
-    #   * `LicenseARN`
+    #   * `LicenseArn`
     #
-    #   * `Status`
+    #   * `GrantStatus`
     #
-    #   * `PrincipalARN`
+    #   * `GranteePrincipalARN`
     #
-    #   * `ParentARN`
+    #   * `ProductSKU`
+    #
+    #   * `LicenseIssuerName`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -2578,6 +2734,64 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLicenseManagerReportGeneratorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "FilterName",
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters to scope the results. The following filters are supported:
+    #
+    #   * `LicenseConfigurationArn`
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseManagerReportGeneratorsRequest AWS API Documentation
+    #
+    class ListLicenseManagerReportGeneratorsRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_generators
+    #   A report generator that creates periodic reports on your license
+    #   configurations.
+    #   @return [Array<Types::ReportGenerator>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseManagerReportGeneratorsResponse AWS API Documentation
+    #
+    class ListLicenseManagerReportGeneratorsResponse < Struct.new(
+      :report_generators,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListLicenseSpecificationsForResourceRequest
     #   data as a hash:
     #
@@ -2701,7 +2915,7 @@ module Aws::LicenseManager
     #
     #   * `ProductSKU`
     #
-    #   * `KeyFingerprint`
+    #   * `Fingerprint`
     #
     #   * `Status`
     #   @return [Array<Types::Filter>]
@@ -2764,9 +2978,15 @@ module Aws::LicenseManager
     # @!attribute [rw] filters
     #   Filters to scope the results. The following filters are supported:
     #
-    #   * `LicenseARN`
+    #   * `ProductSKU`
     #
-    #   * `Status`
+    #   * `LicenseIssuerName`
+    #
+    #   * `LicenseArn`
+    #
+    #   * `GrantStatus`
+    #
+    #   * `GranterAccountId`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -2831,9 +3051,11 @@ module Aws::LicenseManager
     #
     #   * `Status`
     #
-    #   * `KeyFingerprint`
+    #   * `Fingerprint`
     #
-    #   * `Issuer`
+    #   * `IssuerName`
+    #
+    #   * `Beneficiary`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -3001,7 +3223,7 @@ module Aws::LicenseManager
     # @!attribute [rw] filters
     #   Filters to scope the results. The following filter is supported:
     #
-    #   * `licenseArns`
+    #   * `LicenseArns`
     #
     #   ^
     #   @return [Array<Types::Filter>]
@@ -3214,10 +3436,18 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] product_information_filter_list
-    #   Product information filters.
+    #   A Product information filter consists of a
+    #   `ProductInformationFilterComparator` which is a logical operator, a
+    #   `ProductInformationFilterName` which specifies the type of filter
+    #   being declared, and a `ProductInformationFilterValue` that specifies
+    #   the value to filter on.
     #
-    #   The following filters and logical operators are supported when the
-    #   resource type is `SSM_MANAGED`\:
+    #   Accepted values for `ProductInformationFilterName` are listed here
+    #   along with descriptions and valid options for
+    #   `ProductInformationFilterComparator`.
+    #
+    #   The following filters and are supported when the resource type is
+    #   `SSM_MANAGED`\:
     #
     #   * `Application Name` - The name of the application. Logical operator
     #     is `EQUALS`.
@@ -3232,6 +3462,17 @@ module Aws::LicenseManager
     #     `EQUALS`.
     #
     #   * `Platform Type` - The platform type. Logical operator is `EQUALS`.
+    #
+    #   * `Tag:key` - The key of a tag attached to an AWS resource you wish
+    #     to exclude from automated discovery. Logical operator is
+    #     `NOT_EQUALS`. The key for your tag must be appended to `Tag:`
+    #     following the example: `Tag:name-of-your-key`.
+    #     `ProductInformationFilterValue` is optional if you are not using
+    #     values for the key.
+    #
+    #   * `AccountId` - The 12-digit ID of an AWS account you wish to
+    #     exclude from automated discovery. Logical operator is
+    #     `NOT_EQUALS`.
     #
     #   * `License Included` - The type of license included. Logical
     #     operators are `EQUALS` and `NOT_EQUALS`. Possible values are:
@@ -3332,6 +3573,9 @@ module Aws::LicenseManager
     #   Received status.
     #   @return [String]
     #
+    # @!attribute [rw] received_status_reason
+    #   @return [String]
+    #
     # @!attribute [rw] allowed_operations
     #   Allowed operations.
     #   @return [Array<String>]
@@ -3340,6 +3584,7 @@ module Aws::LicenseManager
     #
     class ReceivedMetadata < Struct.new(
       :received_status,
+      :received_status_reason,
       :allowed_operations)
       SENSITIVE = []
       include Aws::Structure
@@ -3399,6 +3644,132 @@ module Aws::LicenseManager
       :grant_arn,
       :status,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the license configuration that this generator reports on.
+    #
+    # @note When making an API call, you may pass ReportContext
+    #   data as a hash:
+    #
+    #       {
+    #         license_configuration_arns: ["Arn"], # required
+    #       }
+    #
+    # @!attribute [rw] license_configuration_arns
+    #   Amazon Resource Number (ARN) of the license configuration that this
+    #   generator reports on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ReportContext AWS API Documentation
+    #
+    class ReportContext < Struct.new(
+      :license_configuration_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details on how frequently reports are generated.
+    #
+    # @note When making an API call, you may pass ReportFrequency
+    #   data as a hash:
+    #
+    #       {
+    #         value: 1,
+    #         period: "DAY", # accepts DAY, WEEK, MONTH
+    #       }
+    #
+    # @!attribute [rw] value
+    #   Number of times within the frequency period that a report will be
+    #   generated. Currently only `1` is supported.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] period
+    #   Time period between each report. The period can be daily, weekly, or
+    #   monthly.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ReportFrequency AWS API Documentation
+    #
+    class ReportFrequency < Struct.new(
+      :value,
+      :period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describe the details of a report generator.
+    #
+    # @!attribute [rw] report_generator_name
+    #   Name of the report generator.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_type
+    #   Type of reports that are generated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] report_context
+    #   License configuration type this generator reports on.
+    #   @return [Types::ReportContext]
+    #
+    # @!attribute [rw] report_frequency
+    #   Details on how frequently reports are generated.
+    #   @return [Types::ReportFrequency]
+    #
+    # @!attribute [rw] license_manager_report_generator_arn
+    #   Amazon Resource Number (ARN) of the report generator.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_run_status
+    #   Status of the last report generation attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_run_failure_reason
+    #   Failure message for the last report generation attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_report_generation_time
+    #   Time the last report was generated at.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_creator_account
+    #   The AWS account ID used to create the report generator.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the report generator.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_location
+    #   Details of the S3 bucket that report generator reports are published
+    #   to.
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] create_time
+    #   Time the report was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the report generator.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ReportGenerator AWS API Documentation
+    #
+    class ReportGenerator < Struct.new(
+      :report_generator_name,
+      :report_type,
+      :report_context,
+      :report_frequency,
+      :license_manager_report_generator_arn,
+      :last_run_status,
+      :last_run_failure_reason,
+      :last_report_generation_time,
+      :report_creator_account,
+      :description,
+      :s3_location,
+      :create_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3464,6 +3835,26 @@ module Aws::LicenseManager
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the S3 bucket that report generator reports are published
+    # to.
+    #
+    # @!attribute [rw] bucket
+    #   Name of the S3 bucket reports are published to.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   Prefix of the S3 bucket reports are published to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :key_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,6 +4101,81 @@ module Aws::LicenseManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseConfigurationResponse AWS API Documentation
     #
     class UpdateLicenseConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateLicenseManagerReportGeneratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_manager_report_generator_arn: "String", # required
+    #         report_generator_name: "ReportGeneratorName", # required
+    #         type: ["LicenseConfigurationSummaryReport"], # required, accepts LicenseConfigurationSummaryReport, LicenseConfigurationUsageReport
+    #         report_context: { # required
+    #           license_configuration_arns: ["Arn"], # required
+    #         },
+    #         report_frequency: { # required
+    #           value: 1,
+    #           period: "DAY", # accepts DAY, WEEK, MONTH
+    #         },
+    #         client_token: "ClientRequestToken", # required
+    #         description: "String",
+    #       }
+    #
+    # @!attribute [rw] license_manager_report_generator_arn
+    #   Amazon Resource Number (ARN) of the report generator to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_generator_name
+    #   Name of the report generator.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of reports to generate. The following report types an be
+    #   generated:
+    #
+    #   * License configuration report - Reports on the number and details
+    #     of consumed licenses for a license configuration.
+    #
+    #   * Resource report - Reports on the tracked licenses and resource
+    #     consumption for a license configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] report_context
+    #   ?
+    #   @return [Types::ReportContext]
+    #
+    # @!attribute [rw] report_frequency
+    #   Frequency by which reports are generated. The following options are
+    #   avaiable:
+    #
+    #   ??? What are the APi value options?
+    #   @return [Types::ReportFrequency]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the report generator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseManagerReportGeneratorRequest AWS API Documentation
+    #
+    class UpdateLicenseManagerReportGeneratorRequest < Struct.new(
+      :license_manager_report_generator_arn,
+      :report_generator_name,
+      :type,
+      :report_context,
+      :report_frequency,
+      :client_token,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseManagerReportGeneratorResponse AWS API Documentation
+    #
+    class UpdateLicenseManagerReportGeneratorResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateLicenseSpecificationsForResourceRequest
     #   data as a hash:

@@ -14,8 +14,6 @@ module Aws::IoTDeviceAdvisor
     include Seahorse::Model
 
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
-    CategoryName = Shapes::StringShape.new(name: 'CategoryName')
-    ConfigString = Shapes::StringShape.new(name: 'ConfigString')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateSuiteDefinitionRequest = Shapes::StructureShape.new(name: 'CreateSuiteDefinitionRequest')
     CreateSuiteDefinitionResponse = Shapes::StructureShape.new(name: 'CreateSuiteDefinitionResponse')
@@ -42,8 +40,6 @@ module Aws::IoTDeviceAdvisor
     ListSuiteRunsResponse = Shapes::StructureShape.new(name: 'ListSuiteRunsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
-    ListTestCasesRequest = Shapes::StructureShape.new(name: 'ListTestCasesRequest')
-    ListTestCasesResponse = Shapes::StructureShape.new(name: 'ListTestCasesResponse')
     LogUrl = Shapes::StringShape.new(name: 'LogUrl')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -54,6 +50,8 @@ module Aws::IoTDeviceAdvisor
     StartSuiteRunRequest = Shapes::StructureShape.new(name: 'StartSuiteRunRequest')
     StartSuiteRunResponse = Shapes::StructureShape.new(name: 'StartSuiteRunResponse')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopSuiteRunRequest = Shapes::StructureShape.new(name: 'StopSuiteRunRequest')
+    StopSuiteRunResponse = Shapes::StructureShape.new(name: 'StopSuiteRunResponse')
     String128 = Shapes::StringShape.new(name: 'String128')
     String256 = Shapes::StringShape.new(name: 'String256')
     SuiteDefinitionConfiguration = Shapes::StructureShape.new(name: 'SuiteDefinitionConfiguration')
@@ -70,17 +68,9 @@ module Aws::IoTDeviceAdvisor
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
-    TestCase = Shapes::StructureShape.new(name: 'TestCase')
-    TestCaseCategory = Shapes::StructureShape.new(name: 'TestCaseCategory')
-    TestCaseDefinition = Shapes::StructureShape.new(name: 'TestCaseDefinition')
     TestCaseDefinitionName = Shapes::StringShape.new(name: 'TestCaseDefinitionName')
-    TestCaseList = Shapes::ListShape.new(name: 'TestCaseList')
-    TestCaseName = Shapes::StringShape.new(name: 'TestCaseName')
     TestCaseRun = Shapes::StructureShape.new(name: 'TestCaseRun')
     TestCaseRuns = Shapes::ListShape.new(name: 'TestCaseRuns')
-    TestCaseVersion = Shapes::StringShape.new(name: 'TestCaseVersion')
-    TestCategory = Shapes::ListShape.new(name: 'TestCategory')
-    TestConfiguration = Shapes::MapShape.new(name: 'TestConfiguration')
     TestResult = Shapes::StructureShape.new(name: 'TestResult')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
@@ -188,17 +178,6 @@ module Aws::IoTDeviceAdvisor
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    ListTestCasesRequest.add_member(:intended_for_qualification, Shapes::ShapeRef.new(shape: IntendedForQualificationBoolean, location: "querystring", location_name: "intendedForQualification"))
-    ListTestCasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListTestCasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
-    ListTestCasesRequest.struct_class = Types::ListTestCasesRequest
-
-    ListTestCasesResponse.add_member(:categories, Shapes::ShapeRef.new(shape: TestCategory, location_name: "categories"))
-    ListTestCasesResponse.add_member(:root_group_configuration, Shapes::ShapeRef.new(shape: TestConfiguration, location_name: "rootGroupConfiguration"))
-    ListTestCasesResponse.add_member(:group_configuration, Shapes::ShapeRef.new(shape: TestConfiguration, location_name: "groupConfiguration"))
-    ListTestCasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
-    ListTestCasesResponse.struct_class = Types::ListTestCasesResponse
-
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -214,6 +193,12 @@ module Aws::IoTDeviceAdvisor
     StartSuiteRunResponse.add_member(:suite_run_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "suiteRunArn"))
     StartSuiteRunResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     StartSuiteRunResponse.struct_class = Types::StartSuiteRunResponse
+
+    StopSuiteRunRequest.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "suiteDefinitionId"))
+    StopSuiteRunRequest.add_member(:suite_run_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "suiteRunId"))
+    StopSuiteRunRequest.struct_class = Types::StopSuiteRunRequest
+
+    StopSuiteRunResponse.struct_class = Types::StopSuiteRunResponse
 
     SuiteDefinitionConfiguration.add_member(:suite_definition_name, Shapes::ShapeRef.new(shape: SuiteDefinitionName, location_name: "suiteDefinitionName"))
     SuiteDefinitionConfiguration.add_member(:devices, Shapes::ShapeRef.new(shape: DeviceUnderTestList, location_name: "devices"))
@@ -232,7 +217,6 @@ module Aws::IoTDeviceAdvisor
     SuiteDefinitionInformationList.member = Shapes::ShapeRef.new(shape: SuiteDefinitionInformation)
 
     SuiteRunConfiguration.add_member(:primary_device, Shapes::ShapeRef.new(shape: DeviceUnderTest, location_name: "primaryDevice"))
-    SuiteRunConfiguration.add_member(:secondary_device, Shapes::ShapeRef.new(shape: DeviceUnderTest, location_name: "secondaryDevice"))
     SuiteRunConfiguration.add_member(:selected_test_list, Shapes::ShapeRef.new(shape: SelectedTestList, location_name: "selectedTestList"))
     SuiteRunConfiguration.struct_class = Types::SuiteRunConfiguration
 
@@ -261,21 +245,6 @@ module Aws::IoTDeviceAdvisor
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    TestCase.add_member(:name, Shapes::ShapeRef.new(shape: TestCaseName, location_name: "name"))
-    TestCase.add_member(:configuration, Shapes::ShapeRef.new(shape: TestConfiguration, location_name: "configuration"))
-    TestCase.add_member(:test, Shapes::ShapeRef.new(shape: TestCaseDefinition, location_name: "test"))
-    TestCase.struct_class = Types::TestCase
-
-    TestCaseCategory.add_member(:name, Shapes::ShapeRef.new(shape: CategoryName, location_name: "name"))
-    TestCaseCategory.add_member(:tests, Shapes::ShapeRef.new(shape: TestCaseList, location_name: "tests"))
-    TestCaseCategory.struct_class = Types::TestCaseCategory
-
-    TestCaseDefinition.add_member(:id, Shapes::ShapeRef.new(shape: TestCaseName, location_name: "id"))
-    TestCaseDefinition.add_member(:test_case_version, Shapes::ShapeRef.new(shape: TestCaseVersion, location_name: "testCaseVersion"))
-    TestCaseDefinition.struct_class = Types::TestCaseDefinition
-
-    TestCaseList.member = Shapes::ShapeRef.new(shape: TestCase)
-
     TestCaseRun.add_member(:test_case_run_id, Shapes::ShapeRef.new(shape: UUID, location_name: "testCaseRunId"))
     TestCaseRun.add_member(:test_case_definition_id, Shapes::ShapeRef.new(shape: UUID, location_name: "testCaseDefinitionId"))
     TestCaseRun.add_member(:test_case_definition_name, Shapes::ShapeRef.new(shape: TestCaseDefinitionName, location_name: "testCaseDefinitionName"))
@@ -288,11 +257,6 @@ module Aws::IoTDeviceAdvisor
     TestCaseRun.struct_class = Types::TestCaseRun
 
     TestCaseRuns.member = Shapes::ShapeRef.new(shape: TestCaseRun)
-
-    TestCategory.member = Shapes::ShapeRef.new(shape: TestCaseCategory)
-
-    TestConfiguration.key = Shapes::ShapeRef.new(shape: ConfigString)
-    TestConfiguration.value = Shapes::ShapeRef.new(shape: ConfigString)
 
     TestResult.add_member(:groups, Shapes::ShapeRef.new(shape: GroupResultList, location_name: "groups"))
     TestResult.struct_class = Types::TestResult
@@ -433,21 +397,6 @@ module Aws::IoTDeviceAdvisor
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
-      api.add_operation(:list_test_cases, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListTestCases"
-        o.http_method = "GET"
-        o.http_request_uri = "/testCases"
-        o.input = Shapes::ShapeRef.new(shape: ListTestCasesRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListTestCasesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
       api.add_operation(:start_suite_run, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartSuiteRun"
         o.http_method = "POST"
@@ -457,6 +406,17 @@ module Aws::IoTDeviceAdvisor
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:stop_suite_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSuiteRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopSuiteRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopSuiteRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

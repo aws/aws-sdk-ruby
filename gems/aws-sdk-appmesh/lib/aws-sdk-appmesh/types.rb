@@ -13,14 +13,9 @@ module Aws::AppMesh
     # An object that represents the access logging information for a virtual
     # node.
     #
-    # @note When making an API call, you may pass AccessLog
-    #   data as a hash:
+    # @note AccessLog is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           path: "FilePath", # required
-    #         },
-    #       }
+    # @note AccessLog is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AccessLog corresponding to the set member.
     #
     # @!attribute [rw] file
     #   The file object to send virtual node access logs to.
@@ -29,13 +24,18 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AccessLog AWS API Documentation
     #
     class AccessLog < Struct.new(
-      :file)
+      :file,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < AccessLog; end
+      class Unknown < AccessLog; end
     end
 
-    # An object that represents the AWS Cloud Map attribute information for
-    # your virtual node.
+    # An object that represents the Cloud Map attribute information for your
+    # virtual node.
     #
     # <note markdown="1"> AWS Cloud Map is not available in the eu-south-1 Region.
     #
@@ -50,15 +50,15 @@ module Aws::AppMesh
     #       }
     #
     # @!attribute [rw] key
-    #   The name of an AWS Cloud Map service instance attribute key. Any AWS
-    #   Cloud Map service instance that contains the specified key and value
-    #   is returned.
+    #   The name of an Cloud Map service instance attribute key. Any Cloud
+    #   Map service instance that contains the specified key and value is
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of an AWS Cloud Map service instance attribute key. Any
-    #   AWS Cloud Map service instance that contains the specified key and
-    #   value is returned.
+    #   The value of an Cloud Map service instance attribute key. Any Cloud
+    #   Map service instance that contains the specified key and value is
+    #   returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapInstanceAttribute AWS API Documentation
@@ -70,10 +70,10 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object that represents the AWS Cloud Map service discovery
-    # information for your virtual node.
+    # An object that represents the Cloud Map service discovery information
+    # for your virtual node.
     #
-    # <note markdown="1"> AWS Cloud Map is not available in the eu-south-1 Region.
+    # <note markdown="1"> Cloud Map is not available in the eu-south-1 Region.
     #
     #  </note>
     #
@@ -99,11 +99,11 @@ module Aws::AppMesh
     #   @return [Array<Types::AwsCloudMapInstanceAttribute>]
     #
     # @!attribute [rw] namespace_name
-    #   The name of the AWS Cloud Map namespace to use.
+    #   The name of the Cloud Map namespace to use.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS Cloud Map service to use.
+    #   The name of the Cloud Map service to use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapServiceDiscovery AWS API Documentation
@@ -119,47 +119,9 @@ module Aws::AppMesh
     # An object that represents the backends that a virtual node is expected
     # to send outbound traffic to.
     #
-    # @note When making an API call, you may pass Backend
-    #   data as a hash:
+    # @note Backend is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         virtual_service: {
-    #           client_policy: {
-    #             tls: {
-    #               certificate: {
-    #                 file: {
-    #                   certificate_chain: "FilePath", # required
-    #                   private_key: "FilePath", # required
-    #                 },
-    #                 sds: {
-    #                   secret_name: "SdsSecretName", # required
-    #                 },
-    #               },
-    #               enforce: false,
-    #               ports: [1],
-    #               validation: { # required
-    #                 subject_alternative_names: {
-    #                   match: { # required
-    #                     exact: ["SubjectAlternativeName"], # required
-    #                   },
-    #                 },
-    #                 trust: { # required
-    #                   acm: {
-    #                     certificate_authority_arns: ["Arn"], # required
-    #                   },
-    #                   file: {
-    #                     certificate_chain: "FilePath", # required
-    #                   },
-    #                   sds: {
-    #                     secret_name: "SdsSecretName", # required
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           virtual_service_name: "ServiceName", # required
-    #         },
-    #       }
+    # @note Backend is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Backend corresponding to the set member.
     #
     # @!attribute [rw] virtual_service
     #   Specifies a virtual service to use as a backend.
@@ -168,9 +130,14 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Backend AWS API Documentation
     #
     class Backend < Struct.new(
-      :virtual_service)
+      :virtual_service,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class VirtualService < Backend; end
+      class Unknown < Backend; end
     end
 
     # An object that represents the default properties for a backend.
@@ -361,18 +328,9 @@ module Aws::AppMesh
 
     # An object that represents the client's certificate.
     #
-    # @note When making an API call, you may pass ClientTlsCertificate
-    #   data as a hash:
+    # @note ClientTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note ClientTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ClientTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a local file certificate. The certificate
@@ -382,7 +340,7 @@ module Aws::AppMesh
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html
     #   @return [Types::ListenerTlsFileCertificate]
     #
     # @!attribute [rw] sds
@@ -394,9 +352,15 @@ module Aws::AppMesh
     #
     class ClientTlsCertificate < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < ClientTlsCertificate; end
+      class Sds < ClientTlsCertificate; end
+      class Unknown < ClientTlsCertificate; end
     end
 
     # The request contains a client token that was used for a previous
@@ -425,6 +389,11 @@ module Aws::AppMesh
     #         spec: { # required
     #           grpc_route: {
     #             action: { # required
+    #               rewrite: {
+    #                 hostname: {
+    #                   default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #               },
     #               target: { # required
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
@@ -432,11 +401,43 @@ module Aws::AppMesh
     #               },
     #             },
     #             match: { # required
+    #               hostname: {
+    #                 exact: "ExactHostName",
+    #                 suffix: "SuffixHostname",
+    #               },
+    #               metadata: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
     #               service_name: "ServiceName",
     #             },
     #           },
     #           http2_route: {
     #             action: { # required
+    #               rewrite: {
+    #                 hostname: {
+    #                   default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #                 path: {
+    #                   exact: "HttpPathExact",
+    #                 },
+    #                 prefix: {
+    #                   default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #                   value: "HttpGatewayRoutePrefix",
+    #                 },
+    #               },
     #               target: { # required
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
@@ -444,11 +445,56 @@ module Aws::AppMesh
     #               },
     #             },
     #             match: { # required
-    #               prefix: "String", # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               hostname: {
+    #                 exact: "ExactHostName",
+    #                 suffix: "SuffixHostname",
+    #               },
+    #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #           http_route: {
     #             action: { # required
+    #               rewrite: {
+    #                 hostname: {
+    #                   default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #                 path: {
+    #                   exact: "HttpPathExact",
+    #                 },
+    #                 prefix: {
+    #                   default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #                   value: "HttpGatewayRoutePrefix",
+    #                 },
+    #               },
     #               target: { # required
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
@@ -456,9 +502,43 @@ module Aws::AppMesh
     #               },
     #             },
     #             match: { # required
-    #               prefix: "String", # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               hostname: {
+    #                 exact: "ExactHostName",
+    #                 suffix: "SuffixHostname",
+    #               },
+    #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #             },
     #           },
+    #           priority: 1,
     #         },
     #         tags: [
     #           {
@@ -708,7 +788,19 @@ module Aws::AppMesh
     #                 },
     #               ],
     #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #               prefix: "String", # required
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #               scheme: "http", # accepts http, https
     #             },
     #             retry_policy: {
@@ -758,7 +850,19 @@ module Aws::AppMesh
     #                 },
     #               ],
     #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #               prefix: "String", # required
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #               scheme: "http", # accepts http, https
     #             },
     #             retry_policy: {
@@ -1290,6 +1394,7 @@ module Aws::AppMesh
     #             },
     #             dns: {
     #               hostname: "Hostname", # required
+    #               response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #             },
     #           },
     #         },
@@ -1783,9 +1888,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
+    # Deletes a virtual node input.
     #
     # @note When making an API call, you may pass DeleteVirtualNodeInput
     #   data as a hash:
@@ -2362,16 +2465,22 @@ module Aws::AppMesh
     #
     #       {
     #         hostname: "Hostname", # required
+    #         response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #       }
     #
     # @!attribute [rw] hostname
     #   Specifies the DNS service discovery hostname for the virtual node.
     #   @return [String]
     #
+    # @!attribute [rw] response_type
+    #   Specifies the DNS response type for the virtual node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DnsServiceDiscovery AWS API Documentation
     #
     class DnsServiceDiscovery < Struct.new(
-      :hostname)
+      :hostname,
+      :response_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2415,9 +2524,10 @@ module Aws::AppMesh
     # @!attribute [rw] type
     #   The egress filter type. By default, the type is `DROP_ALL`, which
     #   allows egress only from virtual nodes to other defined resources in
-    #   the service mesh (and any traffic to `*.amazonaws.com` for AWS API
-    #   calls). You can set the egress filter type to `ALLOW_ALL` to allow
-    #   egress to any endpoint inside or outside of the service mesh.
+    #   the service mesh (and any traffic to `*.amazonaws.com` for Amazon
+    #   Web Services API calls). You can set the egress filter type to
+    #   `ALLOW_ALL` to allow egress to any endpoint inside or outside of the
+    #   service mesh.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/EgressFilter AWS API Documentation
@@ -2512,6 +2622,54 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the gateway route host name to match.
+    #
+    # @note When making an API call, you may pass GatewayRouteHostnameMatch
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "ExactHostName",
+    #         suffix: "SuffixHostname",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The exact host name to match on.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The specified ending characters of the host name to match on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteHostnameMatch AWS API Documentation
+    #
+    class GatewayRouteHostnameMatch < Struct.new(
+      :exact,
+      :suffix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the gateway route host name to rewrite.
+    #
+    # @note When making an API call, you may pass GatewayRouteHostnameRewrite
+    #   data as a hash:
+    #
+    #       {
+    #         default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] default_target_hostname
+    #   The default target host name to write to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteHostnameRewrite AWS API Documentation
+    #
+    class GatewayRouteHostnameRewrite < Struct.new(
+      :default_target_hostname)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents a gateway route returned by a list
     # operation.
     #
@@ -2593,6 +2751,11 @@ module Aws::AppMesh
     #       {
     #         grpc_route: {
     #           action: { # required
+    #             rewrite: {
+    #               hostname: {
+    #                 default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #             },
     #             target: { # required
     #               virtual_service: { # required
     #                 virtual_service_name: "ResourceName", # required
@@ -2600,11 +2763,43 @@ module Aws::AppMesh
     #             },
     #           },
     #           match: { # required
+    #             hostname: {
+    #               exact: "ExactHostName",
+    #               suffix: "SuffixHostname",
+    #             },
+    #             metadata: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
     #             service_name: "ServiceName",
     #           },
     #         },
     #         http2_route: {
     #           action: { # required
+    #             rewrite: {
+    #               hostname: {
+    #                 default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #               },
+    #               prefix: {
+    #                 default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #                 value: "HttpGatewayRoutePrefix",
+    #               },
+    #             },
     #             target: { # required
     #               virtual_service: { # required
     #                 virtual_service_name: "ResourceName", # required
@@ -2612,11 +2807,56 @@ module Aws::AppMesh
     #             },
     #           },
     #           match: { # required
-    #             prefix: "String", # required
+    #             headers: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
+    #             hostname: {
+    #               exact: "ExactHostName",
+    #               suffix: "SuffixHostname",
+    #             },
+    #             method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #             path: {
+    #               exact: "HttpPathExact",
+    #               regex: "HttpPathRegex",
+    #             },
+    #             prefix: "String",
+    #             query_parameters: [
+    #               {
+    #                 match: {
+    #                   exact: "String",
+    #                 },
+    #                 name: "QueryParameterName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         http_route: {
     #           action: { # required
+    #             rewrite: {
+    #               hostname: {
+    #                 default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #               },
+    #               prefix: {
+    #                 default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #                 value: "HttpGatewayRoutePrefix",
+    #               },
+    #             },
     #             target: { # required
     #               virtual_service: { # required
     #                 virtual_service_name: "ResourceName", # required
@@ -2624,9 +2864,43 @@ module Aws::AppMesh
     #             },
     #           },
     #           match: { # required
-    #             prefix: "String", # required
+    #             headers: [
+    #               {
+    #                 invert: false,
+    #                 match: {
+    #                   exact: "HeaderMatch",
+    #                   prefix: "HeaderMatch",
+    #                   range: {
+    #                     end: 1, # required
+    #                     start: 1, # required
+    #                   },
+    #                   regex: "HeaderMatch",
+    #                   suffix: "HeaderMatch",
+    #                 },
+    #                 name: "HeaderName", # required
+    #               },
+    #             ],
+    #             hostname: {
+    #               exact: "ExactHostName",
+    #               suffix: "SuffixHostname",
+    #             },
+    #             method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #             path: {
+    #               exact: "HttpPathExact",
+    #               regex: "HttpPathRegex",
+    #             },
+    #             prefix: "String",
+    #             query_parameters: [
+    #               {
+    #                 match: {
+    #                   exact: "String",
+    #                 },
+    #                 name: "QueryParameterName", # required
+    #               },
+    #             ],
     #           },
     #         },
+    #         priority: 1,
     #       }
     #
     # @!attribute [rw] grpc_route
@@ -2643,12 +2917,17 @@ module Aws::AppMesh
     #   route.
     #   @return [Types::HttpGatewayRoute]
     #
+    # @!attribute [rw] priority
+    #   The ordering of the gateway routes spec.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GatewayRouteSpec AWS API Documentation
     #
     class GatewayRouteSpec < Struct.new(
       :grpc_route,
       :http2_route,
-      :http_route)
+      :http_route,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2719,6 +2998,11 @@ module Aws::AppMesh
     #
     #       {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -2726,6 +3010,26 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           metadata: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
     #           service_name: "ServiceName",
     #         },
     #       }
@@ -2755,12 +3059,21 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         rewrite: {
+    #           hostname: {
+    #             default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
     #         target: { # required
     #           virtual_service: { # required
     #             virtual_service_name: "ResourceName", # required
     #           },
     #         },
     #       }
+    #
+    # @!attribute [rw] rewrite
+    #   The gateway route action to rewrite.
+    #   @return [Types::GrpcGatewayRouteRewrite]
     #
     # @!attribute [rw] target
     #   An object that represents the target that traffic is routed to when
@@ -2770,6 +3083,7 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcGatewayRouteAction AWS API Documentation
     #
     class GrpcGatewayRouteAction < Struct.new(
+      :rewrite,
       :target)
       SENSITIVE = []
       include Aws::Structure
@@ -2782,8 +3096,36 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         hostname: {
+    #           exact: "ExactHostName",
+    #           suffix: "SuffixHostname",
+    #         },
+    #         metadata: [
+    #           {
+    #             invert: false,
+    #             match: {
+    #               exact: "HeaderMatch",
+    #               prefix: "HeaderMatch",
+    #               range: {
+    #                 end: 1, # required
+    #                 start: 1, # required
+    #               },
+    #               regex: "HeaderMatch",
+    #               suffix: "HeaderMatch",
+    #             },
+    #             name: "HeaderName", # required
+    #           },
+    #         ],
     #         service_name: "ServiceName",
     #       }
+    #
+    # @!attribute [rw] hostname
+    #   The gateway route host name to be matched on.
+    #   @return [Types::GatewayRouteHostnameMatch]
+    #
+    # @!attribute [rw] metadata
+    #   The gateway route metadata to be matched on.
+    #   @return [Array<Types::GrpcGatewayRouteMetadata>]
     #
     # @!attribute [rw] service_name
     #   The fully qualified domain name for the service to match from the
@@ -2793,14 +3135,140 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcGatewayRouteMatch AWS API Documentation
     #
     class GrpcGatewayRouteMatch < Struct.new(
+      :hostname,
+      :metadata,
       :service_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # An object representing the metadata of the gateway route.
+    #
+    # @note When making an API call, you may pass GrpcGatewayRouteMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         invert: false,
+    #         match: {
+    #           exact: "HeaderMatch",
+    #           prefix: "HeaderMatch",
+    #           range: {
+    #             end: 1, # required
+    #             start: 1, # required
+    #           },
+    #           regex: "HeaderMatch",
+    #           suffix: "HeaderMatch",
+    #         },
+    #         name: "HeaderName", # required
+    #       }
+    #
+    # @!attribute [rw] invert
+    #   Specify `True` to match anything except the match criteria. The
+    #   default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] match
+    #   The criteria for determining a metadata match.
+    #   @return [Types::GrpcMetadataMatchMethod]
+    #
+    # @!attribute [rw] name
+    #   A name for the gateway route metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcGatewayRouteMetadata AWS API Documentation
+    #
+    class GrpcGatewayRouteMetadata < Struct.new(
+      :invert,
+      :match,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the gateway route to rewrite.
+    #
+    # @note When making an API call, you may pass GrpcGatewayRouteRewrite
+    #   data as a hash:
+    #
+    #       {
+    #         hostname: {
+    #           default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hostname
+    #   The host name of the gateway route to rewrite.
+    #   @return [Types::GatewayRouteHostnameRewrite]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcGatewayRouteRewrite AWS API Documentation
+    #
+    class GrpcGatewayRouteRewrite < Struct.new(
+      :hostname)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the method header to be matched.
+    #
+    # @note GrpcMetadataMatchMethod is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GrpcMetadataMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GrpcMetadataMatchMethod corresponding to the set member.
+    #
+    # @!attribute [rw] exact
+    #   The exact method header to be matched on.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The specified beginning characters of the method header to be
+    #   matched on.
+    #   @return [String]
+    #
+    # @!attribute [rw] range
+    #   An object that represents the range of values to match on. The first
+    #   character of the range is included in the range, though the last
+    #   character is not. For example, if the range specified were 1-100,
+    #   only values 1-99 would be matched.
+    #   @return [Types::MatchRange]
+    #
+    # @!attribute [rw] regex
+    #   The regex used to match the method header.
+    #   @return [String]
+    #
+    # @!attribute [rw] suffix
+    #   The specified ending characters of the method header to match on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/GrpcMetadataMatchMethod AWS API Documentation
+    #
+    class GrpcMetadataMatchMethod < Struct.new(
+      :exact,
+      :prefix,
+      :range,
+      :regex,
+      :suffix,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Exact < GrpcMetadataMatchMethod; end
+      class Prefix < GrpcMetadataMatchMethod; end
+      class Range < GrpcMetadataMatchMethod; end
+      class Regex < GrpcMetadataMatchMethod; end
+      class Suffix < GrpcMetadataMatchMethod; end
+      class Unknown < GrpcMetadataMatchMethod; end
+    end
+
     # An object that represents a retry policy. Specify at least one value
     # for at least one of the types of `RetryEvents`, a value for
-    # `maxRetries`, and a value for `perRetryTimeout`.
+    # `maxRetries`, and a value for `perRetryTimeout`. Both `server-error`
+    # and `gateway-error` under `httpRetryEvents` include the Envoy `reset`
+    # policy. For more information on the `reset` policy, see the [Envoy
+    # documentation][1].
+    #
+    #
+    #
+    # [1]: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on
     #
     # @note When making an API call, you may pass GrpcRetryPolicy
     #   data as a hash:
@@ -3068,19 +3536,9 @@ module Aws::AppMesh
     # An object that represents the match method. Specify one of the match
     # values.
     #
-    # @note When making an API call, you may pass GrpcRouteMetadataMatchMethod
-    #   data as a hash:
+    # @note GrpcRouteMetadataMatchMethod is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         exact: "HeaderMatch",
-    #         prefix: "HeaderMatch",
-    #         range: {
-    #           end: 1, # required
-    #           start: 1, # required
-    #         },
-    #         regex: "HeaderMatch",
-    #         suffix: "HeaderMatch",
-    #       }
+    # @note GrpcRouteMetadataMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GrpcRouteMetadataMatchMethod corresponding to the set member.
     #
     # @!attribute [rw] exact
     #   The value sent by the client must match the specified value exactly.
@@ -3110,9 +3568,18 @@ module Aws::AppMesh
       :prefix,
       :range,
       :regex,
-      :suffix)
+      :suffix,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Exact < GrpcRouteMetadataMatchMethod; end
+      class Prefix < GrpcRouteMetadataMatchMethod; end
+      class Range < GrpcRouteMetadataMatchMethod; end
+      class Regex < GrpcRouteMetadataMatchMethod; end
+      class Suffix < GrpcRouteMetadataMatchMethod; end
+      class Unknown < GrpcRouteMetadataMatchMethod; end
     end
 
     # An object that represents types of timeouts.
@@ -3159,19 +3626,9 @@ module Aws::AppMesh
     # An object that represents the method and value to match with the
     # header value sent in a request. Specify one match method.
     #
-    # @note When making an API call, you may pass HeaderMatchMethod
-    #   data as a hash:
+    # @note HeaderMatchMethod is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         exact: "HeaderMatch",
-    #         prefix: "HeaderMatch",
-    #         range: {
-    #           end: 1, # required
-    #           start: 1, # required
-    #         },
-    #         regex: "HeaderMatch",
-    #         suffix: "HeaderMatch",
-    #       }
+    # @note HeaderMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HeaderMatchMethod corresponding to the set member.
     #
     # @!attribute [rw] exact
     #   The value sent by the client must match the specified value exactly.
@@ -3201,9 +3658,18 @@ module Aws::AppMesh
       :prefix,
       :range,
       :regex,
-      :suffix)
+      :suffix,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Exact < HeaderMatchMethod; end
+      class Prefix < HeaderMatchMethod; end
+      class Range < HeaderMatchMethod; end
+      class Regex < HeaderMatchMethod; end
+      class Suffix < HeaderMatchMethod; end
+      class Unknown < HeaderMatchMethod; end
     end
 
     # An object that represents the health check policy for a virtual
@@ -3283,6 +3749,18 @@ module Aws::AppMesh
     #
     #       {
     #         action: { # required
+    #           rewrite: {
+    #             hostname: {
+    #               default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #             path: {
+    #               exact: "HttpPathExact",
+    #             },
+    #             prefix: {
+    #               default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #               value: "HttpGatewayRoutePrefix",
+    #             },
+    #           },
     #           target: { # required
     #             virtual_service: { # required
     #               virtual_service_name: "ResourceName", # required
@@ -3290,7 +3768,40 @@ module Aws::AppMesh
     #           },
     #         },
     #         match: { # required
-    #           prefix: "String", # required
+    #           headers: [
+    #             {
+    #               invert: false,
+    #               match: {
+    #                 exact: "HeaderMatch",
+    #                 prefix: "HeaderMatch",
+    #                 range: {
+    #                   end: 1, # required
+    #                   start: 1, # required
+    #                 },
+    #                 regex: "HeaderMatch",
+    #                 suffix: "HeaderMatch",
+    #               },
+    #               name: "HeaderName", # required
+    #             },
+    #           ],
+    #           hostname: {
+    #             exact: "ExactHostName",
+    #             suffix: "SuffixHostname",
+    #           },
+    #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -3319,12 +3830,28 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         rewrite: {
+    #           hostname: {
+    #             default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #           path: {
+    #             exact: "HttpPathExact",
+    #           },
+    #           prefix: {
+    #             default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #             value: "HttpGatewayRoutePrefix",
+    #           },
+    #         },
     #         target: { # required
     #           virtual_service: { # required
     #             virtual_service_name: "ResourceName", # required
     #           },
     #         },
     #       }
+    #
+    # @!attribute [rw] rewrite
+    #   The gateway route action to rewrite.
+    #   @return [Types::HttpGatewayRouteRewrite]
     #
     # @!attribute [rw] target
     #   An object that represents the target that traffic is routed to when
@@ -3334,7 +3861,53 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRouteAction AWS API Documentation
     #
     class HttpGatewayRouteAction < Struct.new(
+      :rewrite,
       :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the HTTP header in the gateway route.
+    #
+    # @note When making an API call, you may pass HttpGatewayRouteHeader
+    #   data as a hash:
+    #
+    #       {
+    #         invert: false,
+    #         match: {
+    #           exact: "HeaderMatch",
+    #           prefix: "HeaderMatch",
+    #           range: {
+    #             end: 1, # required
+    #             start: 1, # required
+    #           },
+    #           regex: "HeaderMatch",
+    #           suffix: "HeaderMatch",
+    #         },
+    #         name: "HeaderName", # required
+    #       }
+    #
+    # @!attribute [rw] invert
+    #   Specify `True` to match anything except the match criteria. The
+    #   default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] match
+    #   An object that represents the method and value to match with the
+    #   header value sent in a request. Specify one match method.
+    #   @return [Types::HeaderMatchMethod]
+    #
+    # @!attribute [rw] name
+    #   A name for the HTTP header in the gateway route that will be matched
+    #   on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRouteHeader AWS API Documentation
+    #
+    class HttpGatewayRouteHeader < Struct.new(
+      :invert,
+      :match,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3346,8 +3919,57 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
-    #         prefix: "String", # required
+    #         headers: [
+    #           {
+    #             invert: false,
+    #             match: {
+    #               exact: "HeaderMatch",
+    #               prefix: "HeaderMatch",
+    #               range: {
+    #                 end: 1, # required
+    #                 start: 1, # required
+    #               },
+    #               regex: "HeaderMatch",
+    #               suffix: "HeaderMatch",
+    #             },
+    #             name: "HeaderName", # required
+    #           },
+    #         ],
+    #         hostname: {
+    #           exact: "ExactHostName",
+    #           suffix: "SuffixHostname",
+    #         },
+    #         method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #         path: {
+    #           exact: "HttpPathExact",
+    #           regex: "HttpPathRegex",
+    #         },
+    #         prefix: "String",
+    #         query_parameters: [
+    #           {
+    #             match: {
+    #               exact: "String",
+    #             },
+    #             name: "QueryParameterName", # required
+    #           },
+    #         ],
     #       }
+    #
+    # @!attribute [rw] headers
+    #   The client request headers to match on.
+    #   @return [Array<Types::HttpGatewayRouteHeader>]
+    #
+    # @!attribute [rw] hostname
+    #   The host name to match on.
+    #   @return [Types::GatewayRouteHostnameMatch]
+    #
+    # @!attribute [rw] method
+    #   The method to match on.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path to match on.
+    #   @return [Types::HttpPathMatch]
     #
     # @!attribute [rw] prefix
     #   Specifies the path to match requests with. This parameter must
@@ -3358,17 +3980,179 @@ module Aws::AppMesh
     #   `my-service.local/metrics`, your prefix should be `/metrics`.
     #   @return [String]
     #
+    # @!attribute [rw] query_parameters
+    #   The query parameter to match on.
+    #   @return [Array<Types::HttpQueryParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRouteMatch AWS API Documentation
     #
     class HttpGatewayRouteMatch < Struct.new(
+      :headers,
+      :hostname,
+      :method,
+      :path,
+      :prefix,
+      :query_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the path to rewrite.
+    #
+    # @note When making an API call, you may pass HttpGatewayRoutePathRewrite
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "HttpPathExact",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The exact path to rewrite.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRoutePathRewrite AWS API Documentation
+    #
+    class HttpGatewayRoutePathRewrite < Struct.new(
+      :exact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the beginning characters of the route to
+    # rewrite.
+    #
+    # @note When making an API call, you may pass HttpGatewayRoutePrefixRewrite
+    #   data as a hash:
+    #
+    #       {
+    #         default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #         value: "HttpGatewayRoutePrefix",
+    #       }
+    #
+    # @!attribute [rw] default_prefix
+    #   The default prefix used to replace the incoming route prefix when
+    #   rewritten.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value used to replace the incoming route prefix when rewritten.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRoutePrefixRewrite AWS API Documentation
+    #
+    class HttpGatewayRoutePrefixRewrite < Struct.new(
+      :default_prefix,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the gateway route to rewrite.
+    #
+    # @note When making an API call, you may pass HttpGatewayRouteRewrite
+    #   data as a hash:
+    #
+    #       {
+    #         hostname: {
+    #           default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         path: {
+    #           exact: "HttpPathExact",
+    #         },
+    #         prefix: {
+    #           default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #           value: "HttpGatewayRoutePrefix",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] hostname
+    #   The host name to rewrite.
+    #   @return [Types::GatewayRouteHostnameRewrite]
+    #
+    # @!attribute [rw] path
+    #   The path to rewrite.
+    #   @return [Types::HttpGatewayRoutePathRewrite]
+    #
+    # @!attribute [rw] prefix
+    #   The specified beginning characters to rewrite.
+    #   @return [Types::HttpGatewayRoutePrefixRewrite]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpGatewayRouteRewrite AWS API Documentation
+    #
+    class HttpGatewayRouteRewrite < Struct.new(
+      :hostname,
+      :path,
       :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the path to match in the request.
+    #
+    # @note When making an API call, you may pass HttpPathMatch
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "HttpPathExact",
+    #         regex: "HttpPathRegex",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The exact path to match on.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex
+    #   The regex used to match the path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpPathMatch AWS API Documentation
+    #
+    class HttpPathMatch < Struct.new(
+      :exact,
+      :regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the query parameter in the request.
+    #
+    # @note When making an API call, you may pass HttpQueryParameter
+    #   data as a hash:
+    #
+    #       {
+    #         match: {
+    #           exact: "String",
+    #         },
+    #         name: "QueryParameterName", # required
+    #       }
+    #
+    # @!attribute [rw] match
+    #   The query parameter to match on.
+    #   @return [Types::QueryParameterMatch]
+    #
+    # @!attribute [rw] name
+    #   A name for the query parameter that will be matched on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpQueryParameter AWS API Documentation
+    #
+    class HttpQueryParameter < Struct.new(
+      :match,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # An object that represents a retry policy. Specify at least one value
     # for at least one of the types of `RetryEvents`, a value for
-    # `maxRetries`, and a value for `perRetryTimeout`.
+    # `maxRetries`, and a value for `perRetryTimeout`. Both `server-error`
+    # and `gateway-error` under `httpRetryEvents` include the Envoy `reset`
+    # policy. For more information on the `reset` policy, see the [Envoy
+    # documentation][1].
+    #
+    #
+    #
+    # [1]: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on
     #
     # @note When making an API call, you may pass HttpRetryPolicy
     #   data as a hash:
@@ -3453,7 +4237,19 @@ module Aws::AppMesh
     #             },
     #           ],
     #           method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #           prefix: "String", # required
+    #           path: {
+    #             exact: "HttpPathExact",
+    #             regex: "HttpPathRegex",
+    #           },
+    #           prefix: "String",
+    #           query_parameters: [
+    #             {
+    #               match: {
+    #                 exact: "String",
+    #               },
+    #               name: "QueryParameterName", # required
+    #             },
+    #           ],
     #           scheme: "http", # accepts http, https
     #         },
     #         retry_policy: {
@@ -3601,17 +4397,33 @@ module Aws::AppMesh
     #           },
     #         ],
     #         method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #         prefix: "String", # required
+    #         path: {
+    #           exact: "HttpPathExact",
+    #           regex: "HttpPathRegex",
+    #         },
+    #         prefix: "String",
+    #         query_parameters: [
+    #           {
+    #             match: {
+    #               exact: "String",
+    #             },
+    #             name: "QueryParameterName", # required
+    #           },
+    #         ],
     #         scheme: "http", # accepts http, https
     #       }
     #
     # @!attribute [rw] headers
-    #   An object that represents the client request headers to match on.
+    #   The client request headers to match on.
     #   @return [Array<Types::HttpRouteHeader>]
     #
     # @!attribute [rw] method
     #   The client request method to match on. Specify only one.
     #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The client request path to match on.
+    #   @return [Types::HttpPathMatch]
     #
     # @!attribute [rw] prefix
     #   Specifies the path to match requests with. This parameter must
@@ -3622,8 +4434,13 @@ module Aws::AppMesh
     #   `my-service.local/metrics`, your prefix should be `/metrics`.
     #   @return [String]
     #
+    # @!attribute [rw] query_parameters
+    #   The client request query parameters to match on.
+    #   @return [Array<Types::HttpQueryParameter>]
+    #
     # @!attribute [rw] scheme
-    #   The client request scheme to match on. Specify only one.
+    #   The client request scheme to match on. Specify only one. Applicable
+    #   only for HTTP2 routes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch AWS API Documentation
@@ -3631,7 +4448,9 @@ module Aws::AppMesh
     class HttpRouteMatch < Struct.new(
       :headers,
       :method,
+      :path,
       :prefix,
+      :query_parameters,
       :scheme)
       SENSITIVE = []
       include Aws::Structure
@@ -4504,47 +5323,9 @@ module Aws::AppMesh
 
     # An object that represents timeouts for different protocols.
     #
-    # @note When making an API call, you may pass ListenerTimeout
-    #   data as a hash:
+    # @note ListenerTimeout is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         grpc: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #           per_request: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #         http: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #           per_request: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #         http2: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #           per_request: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #         tcp: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #       }
+    # @note ListenerTimeout is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTimeout corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents types of timeouts.
@@ -4568,9 +5349,17 @@ module Aws::AppMesh
       :grpc,
       :http,
       :http2,
-      :tcp)
+      :tcp,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Grpc < ListenerTimeout; end
+      class Http < ListenerTimeout; end
+      class Http2 < ListenerTimeout; end
+      class Tcp < ListenerTimeout; end
+      class Unknown < ListenerTimeout; end
     end
 
     # An object that represents the Transport Layer Security (TLS)
@@ -4672,21 +5461,9 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # certificate.
     #
-    # @note When making an API call, you may pass ListenerTlsCertificate
-    #   data as a hash:
+    # @note ListenerTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_arn: "Arn", # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note ListenerTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents an AWS Certicate Manager
@@ -4707,9 +5484,16 @@ module Aws::AppMesh
     class ListenerTlsCertificate < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < ListenerTlsCertificate; end
+      class File < ListenerTlsCertificate; end
+      class Sds < ListenerTlsCertificate; end
+      class Unknown < ListenerTlsCertificate; end
     end
 
     # An object that represents a local file certificate. The certificate
@@ -4822,17 +5606,9 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # validation context trust.
     #
-    # @note When making an API call, you may pass ListenerTlsValidationContextTrust
-    #   data as a hash:
+    # @note ListenerTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note ListenerTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a Transport Layer Security (TLS)
@@ -4849,9 +5625,15 @@ module Aws::AppMesh
     #
     class ListenerTlsValidationContextTrust < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < ListenerTlsValidationContextTrust; end
+      class Sds < ListenerTlsValidationContextTrust; end
+      class Unknown < ListenerTlsValidationContextTrust; end
     end
 
     # An object that represents the logging information for a virtual node.
@@ -5126,6 +5908,27 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object representing the query parameter to match.
+    #
+    # @note When making an API call, you may pass QueryParameterMatch
+    #   data as a hash:
+    #
+    #       {
+    #         exact: "String",
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The exact query parameter to match on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/QueryParameterMatch AWS API Documentation
+    #
+    class QueryParameterMatch < Struct.new(
+      :exact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You can't delete the specified resource because it's in use or
     # required by another resource.
     #
@@ -5395,7 +6198,19 @@ module Aws::AppMesh
     #               },
     #             ],
     #             method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #             prefix: "String", # required
+    #             path: {
+    #               exact: "HttpPathExact",
+    #               regex: "HttpPathRegex",
+    #             },
+    #             prefix: "String",
+    #             query_parameters: [
+    #               {
+    #                 match: {
+    #                   exact: "String",
+    #                 },
+    #                 name: "QueryParameterName", # required
+    #               },
+    #             ],
     #             scheme: "http", # accepts http, https
     #           },
     #           retry_policy: {
@@ -5445,7 +6260,19 @@ module Aws::AppMesh
     #               },
     #             ],
     #             method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #             prefix: "String", # required
+    #             path: {
+    #               exact: "HttpPathExact",
+    #               regex: "HttpPathRegex",
+    #             },
+    #             prefix: "String",
+    #             query_parameters: [
+    #               {
+    #                 match: {
+    #                   exact: "String",
+    #                 },
+    #                 name: "QueryParameterName", # required
+    #               },
+    #             ],
     #             scheme: "http", # accepts http, https
     #           },
     #           retry_policy: {
@@ -5537,27 +6364,12 @@ module Aws::AppMesh
     # An object that represents the service discovery information for a
     # virtual node.
     #
-    # @note When making an API call, you may pass ServiceDiscovery
-    #   data as a hash:
+    # @note ServiceDiscovery is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         aws_cloud_map: {
-    #           attributes: [
-    #             {
-    #               key: "AwsCloudMapInstanceAttributeKey", # required
-    #               value: "AwsCloudMapInstanceAttributeValue", # required
-    #             },
-    #           ],
-    #           namespace_name: "AwsCloudMapName", # required
-    #           service_name: "AwsCloudMapName", # required
-    #         },
-    #         dns: {
-    #           hostname: "Hostname", # required
-    #         },
-    #       }
+    # @note ServiceDiscovery is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ServiceDiscovery corresponding to the set member.
     #
     # @!attribute [rw] aws_cloud_map
-    #   Specifies any AWS Cloud Map information for the virtual node.
+    #   Specifies any Cloud Map information for the virtual node.
     #   @return [Types::AwsCloudMapServiceDiscovery]
     #
     # @!attribute [rw] dns
@@ -5568,9 +6380,15 @@ module Aws::AppMesh
     #
     class ServiceDiscovery < Struct.new(
       :aws_cloud_map,
-      :dns)
+      :dns,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsCloudMap < ServiceDiscovery; end
+      class Dns < ServiceDiscovery; end
+      class Unknown < ServiceDiscovery; end
     end
 
     # The request has failed due to a temporary failure of the service.
@@ -5849,7 +6667,7 @@ module Aws::AppMesh
     end
 
     # An object that represents a Transport Layer Security (TLS) validation
-    # context trust for an AWS Certicate Manager (ACM) certificate.
+    # context trust for an Certificate Manager certificate.
     #
     # @note When making an API call, you may pass TlsValidationContextAcmTrust
     #   data as a hash:
@@ -5926,24 +6744,13 @@ module Aws::AppMesh
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
     #
-    # @note When making an API call, you may pass TlsValidationContextTrust
-    #   data as a hash:
+    # @note TlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_authority_arns: ["Arn"], # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note TlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents a Transport Layer Security
-    #   (TLS) validation context trust for an AWS Certicate Manager (ACM)
+    #   (TLS) validation context trust for an Certificate Manager
     #   certificate.
     #   @return [Types::TlsValidationContextAcmTrust]
     #
@@ -5962,9 +6769,16 @@ module Aws::AppMesh
     class TlsValidationContextTrust < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < TlsValidationContextTrust; end
+      class File < TlsValidationContextTrust; end
+      class Sds < TlsValidationContextTrust; end
+      class Unknown < TlsValidationContextTrust; end
     end
 
     # The maximum request rate permitted by the App Mesh APIs has been
@@ -6046,6 +6860,11 @@ module Aws::AppMesh
     #         spec: { # required
     #           grpc_route: {
     #             action: { # required
+    #               rewrite: {
+    #                 hostname: {
+    #                   default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #               },
     #               target: { # required
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
@@ -6053,11 +6872,43 @@ module Aws::AppMesh
     #               },
     #             },
     #             match: { # required
+    #               hostname: {
+    #                 exact: "ExactHostName",
+    #                 suffix: "SuffixHostname",
+    #               },
+    #               metadata: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
     #               service_name: "ServiceName",
     #             },
     #           },
     #           http2_route: {
     #             action: { # required
+    #               rewrite: {
+    #                 hostname: {
+    #                   default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #                 path: {
+    #                   exact: "HttpPathExact",
+    #                 },
+    #                 prefix: {
+    #                   default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #                   value: "HttpGatewayRoutePrefix",
+    #                 },
+    #               },
     #               target: { # required
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
@@ -6065,11 +6916,56 @@ module Aws::AppMesh
     #               },
     #             },
     #             match: { # required
-    #               prefix: "String", # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               hostname: {
+    #                 exact: "ExactHostName",
+    #                 suffix: "SuffixHostname",
+    #               },
+    #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #           http_route: {
     #             action: { # required
+    #               rewrite: {
+    #                 hostname: {
+    #                   default_target_hostname: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #                 path: {
+    #                   exact: "HttpPathExact",
+    #                 },
+    #                 prefix: {
+    #                   default_prefix: "ENABLED", # accepts ENABLED, DISABLED
+    #                   value: "HttpGatewayRoutePrefix",
+    #                 },
+    #               },
     #               target: { # required
     #                 virtual_service: { # required
     #                   virtual_service_name: "ResourceName", # required
@@ -6077,9 +6973,43 @@ module Aws::AppMesh
     #               },
     #             },
     #             match: { # required
-    #               prefix: "String", # required
+    #               headers: [
+    #                 {
+    #                   invert: false,
+    #                   match: {
+    #                     exact: "HeaderMatch",
+    #                     prefix: "HeaderMatch",
+    #                     range: {
+    #                       end: 1, # required
+    #                       start: 1, # required
+    #                     },
+    #                     regex: "HeaderMatch",
+    #                     suffix: "HeaderMatch",
+    #                   },
+    #                   name: "HeaderName", # required
+    #                 },
+    #               ],
+    #               hostname: {
+    #                 exact: "ExactHostName",
+    #                 suffix: "SuffixHostname",
+    #               },
+    #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #             },
     #           },
+    #           priority: 1,
     #         },
     #         virtual_gateway_name: "ResourceName", # required
     #       }
@@ -6298,7 +7228,19 @@ module Aws::AppMesh
     #                 },
     #               ],
     #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #               prefix: "String", # required
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #               scheme: "http", # accepts http, https
     #             },
     #             retry_policy: {
@@ -6348,7 +7290,19 @@ module Aws::AppMesh
     #                 },
     #               ],
     #               method: "GET", # accepts GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH
-    #               prefix: "String", # required
+    #               path: {
+    #                 exact: "HttpPathExact",
+    #                 regex: "HttpPathRegex",
+    #               },
+    #               prefix: "String",
+    #               query_parameters: [
+    #                 {
+    #                   match: {
+    #                     exact: "String",
+    #                   },
+    #                   name: "QueryParameterName", # required
+    #                 },
+    #               ],
     #               scheme: "http", # accepts http, https
     #             },
     #             retry_policy: {
@@ -6847,6 +7801,7 @@ module Aws::AppMesh
     #             },
     #             dns: {
     #               hostname: "Hostname", # required
+    #               response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #             },
     #           },
     #         },
@@ -7086,14 +8041,9 @@ module Aws::AppMesh
 
     # The access log configuration for a virtual gateway.
     #
-    # @note When making an API call, you may pass VirtualGatewayAccessLog
-    #   data as a hash:
+    # @note VirtualGatewayAccessLog is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           path: "FilePath", # required
-    #         },
-    #       }
+    # @note VirtualGatewayAccessLog is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayAccessLog corresponding to the set member.
     #
     # @!attribute [rw] file
     #   The file object to send virtual gateway access logs to.
@@ -7102,9 +8052,14 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayAccessLog AWS API Documentation
     #
     class VirtualGatewayAccessLog < Struct.new(
-      :file)
+      :file,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < VirtualGatewayAccessLog; end
+      class Unknown < VirtualGatewayAccessLog; end
     end
 
     # An object that represents the default properties for a backend.
@@ -7283,28 +8238,19 @@ module Aws::AppMesh
     # An object that represents the virtual gateway's client's Transport
     # Layer Security (TLS) certificate.
     #
-    # @note When making an API call, you may pass VirtualGatewayClientTlsCertificate
-    #   data as a hash:
+    # @note VirtualGatewayClientTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayClientTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayClientTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a local file certificate. The certificate
     #   must meet specific requirements and you must have proxy
-    #   authorization enabled. For more information, see [Transport Layer
-    #   Security (TLS)][1].
+    #   authorization enabled. For more information, see [ Transport Layer
+    #   Security (TLS) ][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html
     #   @return [Types::VirtualGatewayListenerTlsFileCertificate]
     #
     # @!attribute [rw] sds
@@ -7316,9 +8262,15 @@ module Aws::AppMesh
     #
     class VirtualGatewayClientTlsCertificate < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < VirtualGatewayClientTlsCertificate; end
+      class Sds < VirtualGatewayClientTlsCertificate; end
+      class Unknown < VirtualGatewayClientTlsCertificate; end
     end
 
     # An object that represents the type of virtual gateway connection pool.
@@ -7329,21 +8281,9 @@ module Aws::AppMesh
     # If not present the default value for `maxPendingRequests` is
     # `2147483647`.
     #
-    # @note When making an API call, you may pass VirtualGatewayConnectionPool
-    #   data as a hash:
+    # @note VirtualGatewayConnectionPool is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         grpc: {
-    #           max_requests: 1, # required
-    #         },
-    #         http: {
-    #           max_connections: 1, # required
-    #           max_pending_requests: 1,
-    #         },
-    #         http2: {
-    #           max_requests: 1, # required
-    #         },
-    #       }
+    # @note VirtualGatewayConnectionPool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayConnectionPool corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents a type of connection pool.
@@ -7362,9 +8302,16 @@ module Aws::AppMesh
     class VirtualGatewayConnectionPool < Struct.new(
       :grpc,
       :http,
-      :http2)
+      :http2,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Grpc < VirtualGatewayConnectionPool; end
+      class Http < VirtualGatewayConnectionPool; end
+      class Http2 < VirtualGatewayConnectionPool; end
+      class Unknown < VirtualGatewayConnectionPool; end
     end
 
     # An object that represents a virtual gateway returned by a describe
@@ -7730,7 +8677,7 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object that represents an AWS Certicate Manager (ACM) certificate.
+    # An object that represents an Certificate Manager certificate.
     #
     # @note When making an API call, you may pass VirtualGatewayListenerTlsAcmCertificate
     #   data as a hash:
@@ -7761,25 +8708,13 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # certificate.
     #
-    # @note When making an API call, you may pass VirtualGatewayListenerTlsCertificate
-    #   data as a hash:
+    # @note VirtualGatewayListenerTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_arn: "Arn", # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayListenerTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayListenerTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] acm
-    #   A reference to an object that represents an AWS Certicate Manager
-    #   (ACM) certificate.
+    #   A reference to an object that represents an Certificate Manager
+    #   certificate.
     #   @return [Types::VirtualGatewayListenerTlsAcmCertificate]
     #
     # @!attribute [rw] file
@@ -7796,9 +8731,16 @@ module Aws::AppMesh
     class VirtualGatewayListenerTlsCertificate < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < VirtualGatewayListenerTlsCertificate; end
+      class File < VirtualGatewayListenerTlsCertificate; end
+      class Sds < VirtualGatewayListenerTlsCertificate; end
+      class Unknown < VirtualGatewayListenerTlsCertificate; end
     end
 
     # An object that represents a local file certificate. The certificate
@@ -7838,7 +8780,7 @@ module Aws::AppMesh
 
     # An object that represents the virtual gateway's listener's Secret
     # Discovery Service certificate.The proxy must be configured with a
-    # local SDS provider via a Unix Domain Socket. See App Mesh [TLS
+    # local SDS provider via a Unix Domain Socket. See App Mesh[TLS
     # documentation][1] for more info.
     #
     #
@@ -7912,17 +8854,9 @@ module Aws::AppMesh
     # An object that represents a virtual gateway's listener's Transport
     # Layer Security (TLS) validation context trust.
     #
-    # @note When making an API call, you may pass VirtualGatewayListenerTlsValidationContextTrust
-    #   data as a hash:
+    # @note VirtualGatewayListenerTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayListenerTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayListenerTlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a Transport Layer Security (TLS)
@@ -7939,9 +8873,15 @@ module Aws::AppMesh
     #
     class VirtualGatewayListenerTlsValidationContextTrust < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < VirtualGatewayListenerTlsValidationContextTrust; end
+      class Sds < VirtualGatewayListenerTlsValidationContextTrust; end
+      class Unknown < VirtualGatewayListenerTlsValidationContextTrust; end
     end
 
     # An object that represents logging information.
@@ -8256,7 +9196,7 @@ module Aws::AppMesh
     end
 
     # An object that represents a Transport Layer Security (TLS) validation
-    # context trust for an AWS Certicate Manager (ACM) certificate.
+    # context trust for an Certificate Manager certificate.
     #
     # @note When making an API call, you may pass VirtualGatewayTlsValidationContextAcmTrust
     #   data as a hash:
@@ -8333,24 +9273,13 @@ module Aws::AppMesh
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
     #
-    # @note When making an API call, you may pass VirtualGatewayTlsValidationContextTrust
-    #   data as a hash:
+    # @note VirtualGatewayTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_authority_arns: ["Arn"], # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayTlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents a Transport Layer Security
-    #   (TLS) validation context trust for an AWS Certicate Manager (ACM)
+    #   (TLS) validation context trust for an Certificate Manager
     #   certificate.
     #   @return [Types::VirtualGatewayTlsValidationContextAcmTrust]
     #
@@ -8370,9 +9299,16 @@ module Aws::AppMesh
     class VirtualGatewayTlsValidationContextTrust < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < VirtualGatewayTlsValidationContextTrust; end
+      class File < VirtualGatewayTlsValidationContextTrust; end
+      class Sds < VirtualGatewayTlsValidationContextTrust; end
+      class Unknown < VirtualGatewayTlsValidationContextTrust; end
     end
 
     # An object that represents the type of virtual node connection pool.
@@ -8383,24 +9319,9 @@ module Aws::AppMesh
     # If not present the default value for `maxPendingRequests` is
     # `2147483647`.
     #
-    # @note When making an API call, you may pass VirtualNodeConnectionPool
-    #   data as a hash:
+    # @note VirtualNodeConnectionPool is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         grpc: {
-    #           max_requests: 1, # required
-    #         },
-    #         http: {
-    #           max_connections: 1, # required
-    #           max_pending_requests: 1,
-    #         },
-    #         http2: {
-    #           max_requests: 1, # required
-    #         },
-    #         tcp: {
-    #           max_connections: 1, # required
-    #         },
-    #       }
+    # @note VirtualNodeConnectionPool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualNodeConnectionPool corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents a type of connection pool.
@@ -8424,9 +9345,17 @@ module Aws::AppMesh
       :grpc,
       :http,
       :http2,
-      :tcp)
+      :tcp,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Grpc < VirtualNodeConnectionPool; end
+      class Http < VirtualNodeConnectionPool; end
+      class Http2 < VirtualNodeConnectionPool; end
+      class Tcp < VirtualNodeConnectionPool; end
+      class Unknown < VirtualNodeConnectionPool; end
     end
 
     # An object that represents a virtual node returned by a describe
@@ -8837,6 +9766,7 @@ module Aws::AppMesh
     #           },
     #           dns: {
     #             hostname: "Hostname", # required
+    #             response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
     #           },
     #         },
     #       }
@@ -9204,17 +10134,9 @@ module Aws::AppMesh
 
     # An object that represents the provider for a virtual service.
     #
-    # @note When making an API call, you may pass VirtualServiceProvider
-    #   data as a hash:
+    # @note VirtualServiceProvider is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         virtual_node: {
-    #           virtual_node_name: "ResourceName", # required
-    #         },
-    #         virtual_router: {
-    #           virtual_router_name: "ResourceName", # required
-    #         },
-    #       }
+    # @note VirtualServiceProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualServiceProvider corresponding to the set member.
     #
     # @!attribute [rw] virtual_node
     #   The virtual node associated with a virtual service.
@@ -9228,9 +10150,15 @@ module Aws::AppMesh
     #
     class VirtualServiceProvider < Struct.new(
       :virtual_node,
-      :virtual_router)
+      :virtual_router,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class VirtualNode < VirtualServiceProvider; end
+      class VirtualRouter < VirtualServiceProvider; end
+      class Unknown < VirtualServiceProvider; end
     end
 
     # An object that represents a virtual service returned by a list

@@ -3457,6 +3457,13 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: ListUserTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|

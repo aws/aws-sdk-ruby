@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2021-08-04)
+------------------
+
+* Feature - This release adds AutomaticRestartTime to the DescribeDBInstances and DescribeDBClusters operations. AutomaticRestartTime indicates the time when a stopped DB instance or DB cluster is restarted automatically.
+
+1.124.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.123.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2021-07-21)
+------------------
+
+* Feature - Adds the OriginalSnapshotCreateTime field to the DBSnapshot response object. This field timestamps the underlying data of a snapshot and doesn't change when the snapshot is copied.
+
+1.121.0 (2021-06-17)
+------------------
+
+* Feature - This release enables Database Activity Streams for RDS Oracle
+
+1.120.0 (2021-06-16)
+------------------
+
+* Feature - This release enables fast cloning in Aurora Serverless. You can now clone between Aurora Serverless clusters and Aurora Provisioned clusters.
+
+1.119.0 (2021-06-04)
+------------------
+
+* Feature - Documentation updates for RDS: fixing an outdated link to the RDS documentation in DBInstance$DBInstanceStatus
+
 1.118.0 (2021-04-13)
 ------------------
 

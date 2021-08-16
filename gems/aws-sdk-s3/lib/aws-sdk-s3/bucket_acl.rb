@@ -221,8 +221,9 @@ module Aws::S3
     #   used as a message integrity check to verify that the request body was
     #   not corrupted in transit. For more information, go to [RFC 1864.][1]
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line Interface
+    #   (CLI) or Amazon Web Services SDKs, this field is calculated
+    #   automatically.
     #
     #
     #
@@ -235,8 +236,10 @@ module Aws::S3
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the bucket ACL.
     # @option options [String] :grant_write
-    #   Allows grantee to create, overwrite, and delete any object in the
-    #   bucket.
+    #   Allows grantee to create new objects in the bucket.
+    #
+    #   For the bucket and object owners of existing objects, also allows
+    #   deletions and overwrites of those objects.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     # @option options [String] :expected_bucket_owner

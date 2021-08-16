@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2021-06-10)
+------------------
+
+* Feature - Adding MAP_ALL task type support.
+
 1.10.0 (2021-04-05)
 ------------------
 
@@ -14,7 +29,7 @@ Unreleased Changes
 1.8.0 (2021-03-05)
 ------------------
 
-* Feature - Documentation updates for arn:aws:trebuchet:::service:v1:decb008d-e0d8-44a4-b93c-092f0355d523
+* Feature - Documentation updates for AppFlow.
 
 1.7.0 (2021-02-24)
 ------------------

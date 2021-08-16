@@ -250,6 +250,11 @@ fixtures.each do |directory, files|
             end
           else
             expect(data).to eq(expected_data)
+            if test_case['resultClass']
+              test_case['resultClass'].each_pair do |member_name, expected_class|
+                expect(resp.data[underscore(member_name).to_sym].class.to_s).to include(expected_class)
+              end
+            end
           end
         end
 

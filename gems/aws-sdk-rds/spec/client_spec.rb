@@ -16,11 +16,7 @@ module Aws
       let(:kms_key_id) { '238f8ec9-420a-0690-8ec9-009f34fc3ef5' }
       let(:source_region) { 'us-east-1' }
 
-      let(:time) { Time.utc(2020, 8, 27) }
-
-      before do
-        allow(Time).to receive(:now).and_return(time)
-      end
+      before { allow(Time).to receive(:now).and_return(Time.utc(2020, 8, 27)) }
 
       context '#copy_db_snapshot' do
         let(:copy_db_snapshot_params) do

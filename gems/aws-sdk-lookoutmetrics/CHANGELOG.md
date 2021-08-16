@@ -3,6 +3,31 @@ Unreleased Changes
 
 * Issue - Remove a plugin that sets the `Content-Type` header and instead depend on a new version of `aws-sdk-core` that does.
 
+1.6.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.5.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.4.0 (2021-06-14)
+------------------
+
+* Feature - Added "LEARNING" status for anomaly detector and updated description for "Offset" parameter in MetricSet APIs.
+
+1.3.0 (2021-05-28)
+------------------
+
+* Feature - Allowing dot(.) character in table name for RDS and Redshift as source connector.
+
+1.2.0 (2021-05-07)
+------------------
+
+* Feature - Enforcing UUID style for parameters that are already in UUID format today. Documentation specifying eventual consistency of lookoutmetrics resources.
+
 1.1.0 (2021-03-26)
 ------------------
 

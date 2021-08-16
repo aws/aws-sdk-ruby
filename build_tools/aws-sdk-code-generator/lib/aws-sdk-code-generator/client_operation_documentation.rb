@@ -3,6 +3,10 @@
 module AwsSdkCodeGenerator
   class ClientOperationDocumentation
 
+    # get all of the enumerable methods that may conflict with members
+    # count has special handling in UnsafeEnumerableMethods
+    ENUMERABLE_METHODS = Class.new.new.extend(Enumerable).methods - [:count]
+
     # @option options [required, String] :method_name
     # @option options [required, Hash] :operation
     # @option options [required, Hash] :api
@@ -100,6 +104,12 @@ module AwsSdkCodeGenerator
           if member_ref['jsonvalue']
             docstring = docstring.to_s + "<p><b>SDK automatically handles json encoding and base64 encoding for you when the required value (Hash, Array, etc.) is provided according to the description.</b></p>"
           end
+          if member_shape['document']
+            docstring = docstring.to_s + "<p>Document type used to carry open content (Hash,Array,String,Numeric,Boolean). A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.</p>"
+          end
+          if member_ref['union']
+            docstring = docstring.to_s + "<p>This is a union type and you must set exactly one of the members.</p>"
+          end
           YardOptionTag.new(
             name: Underscore.underscore(member_name),
             ruby_type: Api.ruby_input_type(member_ref, api, operation),
@@ -130,7 +140,11 @@ module AwsSdkCodeGenerator
         methods = shape['members'].map do |member_name, member_ref|
           member_type = Docstring.escape_html(Api.ruby_type(member_ref, api))
           method_name = Underscore.underscore(member_name)
-          "#   * {#{type}##{method_name} ##{method_name}} => #{member_type}"
+          if ENUMERABLE_METHODS.include?(method_name.to_sym)
+            "#   * {#{type}##{method_name} #data.#{method_name}} => #{member_type} (This method conflicts with a method on Response, call it through the data member)"
+          else
+            "#   * {#{type}##{method_name} ##{method_name}} => #{member_type}"
+          end
         end
         "# @return [#{type}] Returns a {Seahorse::Client::Response response} object which responds to the following methods:\n#\n" + methods.join("\n")
       else

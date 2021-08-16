@@ -84,6 +84,7 @@ module Aws::LexRuntimeV2
     SentimentType = Shapes::StringShape.new(name: 'SentimentType')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionState = Shapes::StructureShape.new(name: 'SessionState')
+    Shape = Shapes::StringShape.new(name: 'Shape')
     Slot = Shapes::StructureShape.new(name: 'Slot')
     Slots = Shapes::MapShape.new(name: 'Slots')
     StartConversationRequest = Shapes::StructureShape.new(name: 'StartConversationRequest')
@@ -100,13 +101,14 @@ module Aws::LexRuntimeV2
     TranscriptEvent = Shapes::StructureShape.new(name: 'TranscriptEvent')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StructureShape.new(name: 'Value')
+    Values = Shapes::ListShape.new(name: 'Values')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     ActiveContext.add_member(:name, Shapes::ShapeRef.new(shape: ActiveContextName, required: true, location_name: "name"))
     ActiveContext.add_member(:time_to_live, Shapes::ShapeRef.new(shape: ActiveContextTimeToLive, required: true, location_name: "timeToLive"))
-    ActiveContext.add_member(:context_attributes, Shapes::ShapeRef.new(shape: ActiveContextParametersMap, location_name: "contextAttributes"))
+    ActiveContext.add_member(:context_attributes, Shapes::ShapeRef.new(shape: ActiveContextParametersMap, required: true, location_name: "contextAttributes"))
     ActiveContext.struct_class = Types::ActiveContext
 
     ActiveContextParametersMap.key = Shapes::ShapeRef.new(shape: ParameterName)
@@ -227,7 +229,7 @@ module Aws::LexRuntimeV2
     Interpretations.member = Shapes::ShapeRef.new(shape: Interpretation)
 
     Message.add_member(:content, Shapes::ShapeRef.new(shape: Text, location_name: "content"))
-    Message.add_member(:content_type, Shapes::ShapeRef.new(shape: MessageContentType, location_name: "contentType"))
+    Message.add_member(:content_type, Shapes::ShapeRef.new(shape: MessageContentType, required: true, location_name: "contentType"))
     Message.add_member(:image_response_card, Shapes::ShapeRef.new(shape: ImageResponseCard, location_name: "imageResponseCard"))
     Message.struct_class = Types::Message
 
@@ -325,6 +327,8 @@ module Aws::LexRuntimeV2
     SessionState.struct_class = Types::SessionState
 
     Slot.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    Slot.add_member(:shape, Shapes::ShapeRef.new(shape: Shape, location_name: "shape"))
+    Slot.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "values"))
     Slot.struct_class = Types::Slot
 
     Slots.key = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -397,6 +401,8 @@ module Aws::LexRuntimeV2
     Value.add_member(:interpreted_value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "interpretedValue"))
     Value.add_member(:resolved_values, Shapes::ShapeRef.new(shape: StringList, location_name: "resolvedValues"))
     Value.struct_class = Types::Value
+
+    Values.member = Shapes::ShapeRef.new(shape: Slot)
 
 
     # @api private

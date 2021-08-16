@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-08-09)
+------------------
+
+* Feature - This release adds APIs to support versioning feature of AWS WAF Managed rule groups
+
+1.23.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2021-06-24)
+------------------
+
+* Feature - Added support for 15 new text transformation.
+
 1.20.0 (2021-04-01)
 ------------------
 

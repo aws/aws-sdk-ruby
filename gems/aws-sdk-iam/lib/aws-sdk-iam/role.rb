@@ -94,7 +94,7 @@ module Aws::IAM
     end
 
     # The maximum session duration (in seconds) for the specified role.
-    # Anyone who uses the AWS CLI, or API to assume the role can specify the
+    # Anyone who uses the CLI, or API to assume the role can specify the
     # duration using the optional `DurationSeconds` API parameter or
     # `duration-seconds` CLI parameter.
     # @return [Integer]
@@ -287,7 +287,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -320,7 +320,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
-    #   in the *AWS General Reference*.
+    #   in the *Amazon Web Services General Reference*.
     #
     #
     #

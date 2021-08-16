@@ -23,6 +23,7 @@ module Aws::AmplifyBackend
     BackendAPIReqObj = Shapes::StructureShape.new(name: 'BackendAPIReqObj')
     BackendAPIResourceConfig = Shapes::StructureShape.new(name: 'BackendAPIResourceConfig')
     BackendAPIRespObj = Shapes::StructureShape.new(name: 'BackendAPIRespObj')
+    BackendAuthAppleProviderConfig = Shapes::StructureShape.new(name: 'BackendAuthAppleProviderConfig')
     BackendAuthRespObj = Shapes::StructureShape.new(name: 'BackendAuthRespObj')
     BackendAuthSocialProviderConfig = Shapes::StructureShape.new(name: 'BackendAuthSocialProviderConfig')
     BackendConfigRespObj = Shapes::StructureShape.new(name: 'BackendConfigRespObj')
@@ -91,6 +92,9 @@ module Aws::AmplifyBackend
     GetTokenRequest = Shapes::StructureShape.new(name: 'GetTokenRequest')
     GetTokenRespObj = Shapes::StructureShape.new(name: 'GetTokenRespObj')
     GetTokenResponse = Shapes::StructureShape.new(name: 'GetTokenResponse')
+    ImportBackendAuthReqObj = Shapes::StructureShape.new(name: 'ImportBackendAuthReqObj')
+    ImportBackendAuthRequest = Shapes::StructureShape.new(name: 'ImportBackendAuthRequest')
+    ImportBackendAuthResponse = Shapes::StructureShape.new(name: 'ImportBackendAuthResponse')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBackendJobReqObj = Shapes::StructureShape.new(name: 'ListBackendJobReqObj')
@@ -202,6 +206,12 @@ module Aws::AmplifyBackend
     BackendAPIRespObj.add_member(:operation, Shapes::ShapeRef.new(shape: __string, location_name: "operation"))
     BackendAPIRespObj.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     BackendAPIRespObj.struct_class = Types::BackendAPIRespObj
+
+    BackendAuthAppleProviderConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: __string, location_name: "client_id"))
+    BackendAuthAppleProviderConfig.add_member(:key_id, Shapes::ShapeRef.new(shape: __string, location_name: "key_id"))
+    BackendAuthAppleProviderConfig.add_member(:private_key, Shapes::ShapeRef.new(shape: __string, location_name: "private_key"))
+    BackendAuthAppleProviderConfig.add_member(:team_id, Shapes::ShapeRef.new(shape: __string, location_name: "team_id"))
+    BackendAuthAppleProviderConfig.struct_class = Types::BackendAuthAppleProviderConfig
 
     BackendAuthRespObj.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "appId"))
     BackendAuthRespObj.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "backendEnvironmentName"))
@@ -590,6 +600,28 @@ module Aws::AmplifyBackend
     GetTokenResponse.add_member(:ttl, Shapes::ShapeRef.new(shape: __string, location_name: "ttl"))
     GetTokenResponse.struct_class = Types::GetTokenResponse
 
+    ImportBackendAuthReqObj.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: __string, location_name: "identityPoolId"))
+    ImportBackendAuthReqObj.add_member(:native_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "nativeClientId"))
+    ImportBackendAuthReqObj.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "userPoolId"))
+    ImportBackendAuthReqObj.add_member(:web_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "webClientId"))
+    ImportBackendAuthReqObj.struct_class = Types::ImportBackendAuthReqObj
+
+    ImportBackendAuthRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
+    ImportBackendAuthRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "backendEnvironmentName"))
+    ImportBackendAuthRequest.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: __string, location_name: "identityPoolId"))
+    ImportBackendAuthRequest.add_member(:native_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "nativeClientId"))
+    ImportBackendAuthRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "userPoolId"))
+    ImportBackendAuthRequest.add_member(:web_client_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "webClientId"))
+    ImportBackendAuthRequest.struct_class = Types::ImportBackendAuthRequest
+
+    ImportBackendAuthResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
+    ImportBackendAuthResponse.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
+    ImportBackendAuthResponse.add_member(:error, Shapes::ShapeRef.new(shape: __string, location_name: "error"))
+    ImportBackendAuthResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    ImportBackendAuthResponse.add_member(:operation, Shapes::ShapeRef.new(shape: __string, location_name: "operation"))
+    ImportBackendAuthResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
+    ImportBackendAuthResponse.struct_class = Types::ImportBackendAuthResponse
+
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServiceException.struct_class = Types::InternalServiceException
 
@@ -690,6 +722,7 @@ module Aws::AmplifyBackend
     SocialProviderSettings.add_member(:facebook, Shapes::ShapeRef.new(shape: BackendAuthSocialProviderConfig, location_name: "Facebook"))
     SocialProviderSettings.add_member(:google, Shapes::ShapeRef.new(shape: BackendAuthSocialProviderConfig, location_name: "Google"))
     SocialProviderSettings.add_member(:login_with_amazon, Shapes::ShapeRef.new(shape: BackendAuthSocialProviderConfig, location_name: "LoginWithAmazon"))
+    SocialProviderSettings.add_member(:sign_in_with_apple, Shapes::ShapeRef.new(shape: BackendAuthAppleProviderConfig, location_name: "SignInWithApple"))
     SocialProviderSettings.struct_class = Types::SocialProviderSettings
 
     TooManyRequestsException.add_member(:limit_type, Shapes::ShapeRef.new(shape: __string, location_name: "limitType"))
@@ -1010,6 +1043,18 @@ module Aws::AmplifyBackend
         o.http_request_uri = "/backend/{appId}/challenge/{sessionId}"
         o.input = Shapes::ShapeRef.new(shape: GetTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:import_backend_auth, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportBackendAuth"
+        o.http_method = "POST"
+        o.http_request_uri = "/backend/{appId}/auth/{backendEnvironmentName}/import"
+        o.input = Shapes::ShapeRef.new(shape: ImportBackendAuthRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportBackendAuthResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)

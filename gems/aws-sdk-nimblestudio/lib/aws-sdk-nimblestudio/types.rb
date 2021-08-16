@@ -447,6 +447,9 @@ module Aws::NimbleStudio
     # @!attribute [rw] launch_profile_id
     #   @return [String]
     #
+    # @!attribute [rw] owned_by
+    #   @return [String]
+    #
     # @!attribute [rw] streaming_image_id
     #   @return [String]
     #
@@ -458,6 +461,7 @@ module Aws::NimbleStudio
     class CreateStreamingSessionInput < Struct.new(
       :ec2_instance_type,
       :launch_profile_id,
+      :owned_by,
       :streaming_image_id,
       :tags)
       SENSITIVE = []
@@ -482,6 +486,7 @@ module Aws::NimbleStudio
     #         client_token: "ClientToken",
     #         ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
     #         launch_profile_id: "__string",
+    #         owned_by: "__string",
     #         streaming_image_id: "StreamingImageId",
     #         studio_id: "__string", # required
     #         tags: {
@@ -500,6 +505,9 @@ module Aws::NimbleStudio
     # @!attribute [rw] launch_profile_id
     #   @return [String]
     #
+    # @!attribute [rw] owned_by
+    #   @return [String]
+    #
     # @!attribute [rw] streaming_image_id
     #   @return [String]
     #
@@ -515,6 +523,7 @@ module Aws::NimbleStudio
       :client_token,
       :ec2_instance_type,
       :launch_profile_id,
+      :owned_by,
       :streaming_image_id,
       :studio_id,
       :tags)
@@ -2417,6 +2426,7 @@ module Aws::NimbleStudio
     #       {
     #         created_by: "__string",
     #         next_token: "__string",
+    #         owned_by: "__string",
     #         session_ids: "__string",
     #         studio_id: "__string", # required
     #       }
@@ -2425,6 +2435,9 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] owned_by
     #   @return [String]
     #
     # @!attribute [rw] session_ids
@@ -2438,6 +2451,7 @@ module Aws::NimbleStudio
     class ListStreamingSessionsRequest < Struct.new(
       :created_by,
       :next_token,
+      :owned_by,
       :session_ids,
       :studio_id)
       SENSITIVE = []
@@ -3179,8 +3193,10 @@ module Aws::NimbleStudio
     # @!attribute [rw] launch_profile_id
     #   @return [String]
     #
+    # @!attribute [rw] owned_by
+    #   @return [String]
+    #
     # @!attribute [rw] session_id
-    #   The streaming image session ID.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -3216,6 +3232,7 @@ module Aws::NimbleStudio
       :created_by,
       :ec2_instance_type,
       :launch_profile_id,
+      :owned_by,
       :session_id,
       :state,
       :status_code,
@@ -3238,6 +3255,9 @@ module Aws::NimbleStudio
     # @!attribute [rw] expires_at
     #   @return [Time]
     #
+    # @!attribute [rw] owned_by
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   @return [String]
     #
@@ -3256,6 +3276,7 @@ module Aws::NimbleStudio
       :created_at,
       :created_by,
       :expires_at,
+      :owned_by,
       :state,
       :status_code,
       :stream_id,
@@ -3461,35 +3482,9 @@ module Aws::NimbleStudio
 
     # The configuration of the studio component, based on component type.
     #
-    # @note When making an API call, you may pass StudioComponentConfiguration
-    #   data as a hash:
+    # @note StudioComponentConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         active_directory_configuration: {
-    #           computer_attributes: [
-    #             {
-    #               name: "ActiveDirectoryComputerAttributeName",
-    #               value: "ActiveDirectoryComputerAttributeValue",
-    #             },
-    #           ],
-    #           directory_id: "DirectoryId",
-    #           organizational_unit_distinguished_name: "ActiveDirectoryOrganizationalUnitDistinguishedName",
-    #         },
-    #         compute_farm_configuration: {
-    #           active_directory_user: "__string",
-    #           endpoint: "__string",
-    #         },
-    #         license_service_configuration: {
-    #           endpoint: "__string",
-    #         },
-    #         shared_file_system_configuration: {
-    #           endpoint: "__string",
-    #           file_system_id: "__string",
-    #           linux_mount_point: "LinuxMountPoint",
-    #           share_name: "__string",
-    #           windows_mount_drive: "WindowsMountDrive",
-    #         },
-    #       }
+    # @note StudioComponentConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StudioComponentConfiguration corresponding to the set member.
     #
     # @!attribute [rw] active_directory_configuration
     #   The configuration for a Microsoft Active Directory (Microsoft AD)
@@ -3517,9 +3512,17 @@ module Aws::NimbleStudio
       :active_directory_configuration,
       :compute_farm_configuration,
       :license_service_configuration,
-      :shared_file_system_configuration)
+      :shared_file_system_configuration,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class ActiveDirectoryConfiguration < StudioComponentConfiguration; end
+      class ComputeFarmConfiguration < StudioComponentConfiguration; end
+      class LicenseServiceConfiguration < StudioComponentConfiguration; end
+      class SharedFileSystemConfiguration < StudioComponentConfiguration; end
+      class Unknown < StudioComponentConfiguration; end
     end
 
     # Initialization scripts for studio components.

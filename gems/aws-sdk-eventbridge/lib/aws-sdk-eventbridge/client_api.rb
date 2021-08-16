@@ -41,6 +41,11 @@ module Aws::EventBridge
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelReplayRequest = Shapes::StructureShape.new(name: 'CancelReplayRequest')
     CancelReplayResponse = Shapes::StructureShape.new(name: 'CancelReplayResponse')
+    CapacityProvider = Shapes::StringShape.new(name: 'CapacityProvider')
+    CapacityProviderStrategy = Shapes::ListShape.new(name: 'CapacityProviderStrategy')
+    CapacityProviderStrategyItem = Shapes::StructureShape.new(name: 'CapacityProviderStrategyItem')
+    CapacityProviderStrategyItemBase = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemBase')
+    CapacityProviderStrategyItemWeight = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemWeight')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     Connection = Shapes::StructureShape.new(name: 'Connection')
@@ -189,8 +194,17 @@ module Aws::EventBridge
     PartnerEventSourceNamePrefix = Shapes::StringShape.new(name: 'PartnerEventSourceNamePrefix')
     PathParameter = Shapes::StringShape.new(name: 'PathParameter')
     PathParameterList = Shapes::ListShape.new(name: 'PathParameterList')
+    PlacementConstraint = Shapes::StructureShape.new(name: 'PlacementConstraint')
+    PlacementConstraintExpression = Shapes::StringShape.new(name: 'PlacementConstraintExpression')
+    PlacementConstraintType = Shapes::StringShape.new(name: 'PlacementConstraintType')
+    PlacementConstraints = Shapes::ListShape.new(name: 'PlacementConstraints')
+    PlacementStrategies = Shapes::ListShape.new(name: 'PlacementStrategies')
+    PlacementStrategy = Shapes::StructureShape.new(name: 'PlacementStrategy')
+    PlacementStrategyField = Shapes::StringShape.new(name: 'PlacementStrategyField')
+    PlacementStrategyType = Shapes::StringShape.new(name: 'PlacementStrategyType')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     Principal = Shapes::StringShape.new(name: 'Principal')
+    PropagateTags = Shapes::StringShape.new(name: 'PropagateTags')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
     PutEventsRequestEntry = Shapes::StructureShape.new(name: 'PutEventsRequestEntry')
     PutEventsRequestEntryList = Shapes::ListShape.new(name: 'PutEventsRequestEntryList')
@@ -215,6 +229,7 @@ module Aws::EventBridge
     QueryStringValue = Shapes::StringShape.new(name: 'QueryStringValue')
     RedshiftDataParameters = Shapes::StructureShape.new(name: 'RedshiftDataParameters')
     RedshiftSecretManagerArn = Shapes::StringShape.new(name: 'RedshiftSecretManagerArn')
+    ReferenceId = Shapes::StringShape.new(name: 'ReferenceId')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RemoveTargetsRequest = Shapes::StructureShape.new(name: 'RemoveTargetsRequest')
     RemoveTargetsResponse = Shapes::StructureShape.new(name: 'RemoveTargetsResponse')
@@ -350,6 +365,13 @@ module Aws::EventBridge
     CancelReplayResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReplayState, location_name: "State"))
     CancelReplayResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: ReplayStateReason, location_name: "StateReason"))
     CancelReplayResponse.struct_class = Types::CancelReplayResponse
+
+    CapacityProviderStrategy.member = Shapes::ShapeRef.new(shape: CapacityProviderStrategyItem)
+
+    CapacityProviderStrategyItem.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, required: true, location_name: "capacityProvider"))
+    CapacityProviderStrategyItem.add_member(:weight, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemWeight, location_name: "weight"))
+    CapacityProviderStrategyItem.add_member(:base, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemBase, location_name: "base"))
+    CapacityProviderStrategyItem.struct_class = Types::CapacityProviderStrategyItem
 
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
@@ -659,6 +681,14 @@ module Aws::EventBridge
     EcsParameters.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
     EcsParameters.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "PlatformVersion"))
     EcsParameters.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "Group"))
+    EcsParameters.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "CapacityProviderStrategy"))
+    EcsParameters.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableECSManagedTags"))
+    EcsParameters.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableExecuteCommand"))
+    EcsParameters.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: PlacementConstraints, location_name: "PlacementConstraints"))
+    EcsParameters.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "PlacementStrategy"))
+    EcsParameters.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "PropagateTags"))
+    EcsParameters.add_member(:reference_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "ReferenceId"))
+    EcsParameters.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     EcsParameters.struct_class = Types::EcsParameters
 
     EnableRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
@@ -845,6 +875,18 @@ module Aws::EventBridge
     PartnerEventSourceList.member = Shapes::ShapeRef.new(shape: PartnerEventSource)
 
     PathParameterList.member = Shapes::ShapeRef.new(shape: PathParameter)
+
+    PlacementConstraint.add_member(:type, Shapes::ShapeRef.new(shape: PlacementConstraintType, location_name: "type"))
+    PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: PlacementConstraintExpression, location_name: "expression"))
+    PlacementConstraint.struct_class = Types::PlacementConstraint
+
+    PlacementConstraints.member = Shapes::ShapeRef.new(shape: PlacementConstraint)
+
+    PlacementStrategies.member = Shapes::ShapeRef.new(shape: PlacementStrategy)
+
+    PlacementStrategy.add_member(:type, Shapes::ShapeRef.new(shape: PlacementStrategyType, location_name: "type"))
+    PlacementStrategy.add_member(:field, Shapes::ShapeRef.new(shape: PlacementStrategyField, location_name: "field"))
+    PlacementStrategy.struct_class = Types::PlacementStrategy
 
     PolicyLengthExceededException.struct_class = Types::PolicyLengthExceededException
 

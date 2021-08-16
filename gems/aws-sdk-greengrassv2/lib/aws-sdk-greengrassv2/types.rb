@@ -23,6 +23,172 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
+    # Contains a request to associate a client device with a core device.
+    # The [BatchAssociateClientDeviceWithCoreDevice][1] operation consumes a
+    # list of these requests.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html
+    #
+    # @note When making an API call, you may pass AssociateClientDeviceWithCoreDeviceEntry
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the IoT thing that represents the client device to
+    #   associate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateClientDeviceWithCoreDeviceEntry AWS API Documentation
+    #
+    class AssociateClientDeviceWithCoreDeviceEntry < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an error that occurs from a request to associate a client
+    # device with a core device. The
+    # [BatchAssociateClientDeviceWithCoreDevice][1] operation returns a list
+    # of these errors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the IoT thing whose associate request failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides additional information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateClientDeviceWithCoreDeviceErrorEntry AWS API Documentation
+    #
+    class AssociateClientDeviceWithCoreDeviceErrorEntry < Struct.new(
+      :thing_name,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a client device that is associated to a
+    # core device for cloud discovery.
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the IoT thing that represents the associated client
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_timestamp
+    #   The time that the client device was associated, expressed in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociatedClientDevice AWS API Documentation
+    #
+    class AssociatedClientDevice < Struct.new(
+      :thing_name,
+      :association_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchAssociateClientDeviceWithCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [
+    #           {
+    #             thing_name: "IoTThingName", # required
+    #           },
+    #         ],
+    #         core_device_thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of client devices to associate.
+    #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceEntry>]
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the IoT thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDeviceRequest AWS API Documentation
+    #
+    class BatchAssociateClientDeviceWithCoreDeviceRequest < Struct.new(
+      :entries,
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   The list of any errors for the entries in the request. Each error
+    #   entry contains the name of the IoT thing that failed to associate.
+    #   @return [Array<Types::AssociateClientDeviceWithCoreDeviceErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDeviceResponse AWS API Documentation
+    #
+    class BatchAssociateClientDeviceWithCoreDeviceResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisassociateClientDeviceFromCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [
+    #           {
+    #             thing_name: "IoTThingName", # required
+    #           },
+    #         ],
+    #         core_device_thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of client devices to disassociate.
+    #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceEntry>]
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the IoT thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDeviceRequest AWS API Documentation
+    #
+    class BatchDisassociateClientDeviceFromCoreDeviceRequest < Struct.new(
+      :entries,
+      :core_device_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   The list of errors (if any) for the entries in the request. Each
+    #   error entry contains the name of the IoT thing that failed to
+    #   disassociate.
+    #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDeviceResponse AWS API Documentation
+    #
+    class BatchDisassociateClientDeviceFromCoreDeviceResponse < Struct.new(
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelDeploymentRequest
     #   data as a hash:
     #
@@ -54,7 +220,7 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains the status of a component in the AWS IoT Greengrass service.
+    # Contains the status of a component in the IoT Greengrass service.
     #
     # @!attribute [rw] component_state
     #   The state of the component.
@@ -67,7 +233,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] errors
     #   A dictionary of errors that communicate why the component is in an
-    #   error state. For example, if AWS IoT Greengrass can't access an
+    #   error state. For example, if IoT Greengrass can't access an
     #   artifact for the component, then `errors` contains the artifact's
     #   URI as a key, and the error message as the value for that key.
     #   @return [Hash<String,String>]
@@ -111,7 +277,7 @@ module Aws::GreengrassV2
     end
 
     # Contains information about a component that is a candidate to deploy
-    # to a AWS IoT Greengrass core device.
+    # to a Greengrass core device.
     #
     # @note When making an API call, you may pass ComponentCandidate
     #   data as a hash:
@@ -133,11 +299,11 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] version_requirements
-    #   The version requirements for the component's dependencies. AWS IoT
+    #   The version requirements for the component's dependencies.
     #   Greengrass core devices get the version requirements from component
     #   recipes.
     #
-    #   AWS IoT Greengrass V2 uses semantic version constraints. For more
+    #   IoT Greengrass V2 uses semantic version constraints. For more
     #   information, see [Semantic Versioning][1].
     #
     #
@@ -157,7 +323,7 @@ module Aws::GreengrassV2
 
     # Contains information about a deployment's update to a component's
     # configuration on Greengrass core devices. For more information, see
-    # [Update component configurations][1] in the *AWS IoT Greengrass V2
+    # [Update component configurations][1] in the *IoT Greengrass V2
     # Developer Guide*.
     #
     #
@@ -180,7 +346,7 @@ module Aws::GreengrassV2
     #   configuration with the component's default configuration. This
     #   means that the core device keeps it's existing configuration for
     #   keys and values that you don't specify in this object. For more
-    #   information, see [Merge configuration updates][1] in the *AWS IoT
+    #   information, see [Merge configuration updates][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
@@ -194,7 +360,7 @@ module Aws::GreengrassV2
     #   pointers start with a forward slash (`/`) and use forward slashes to
     #   separate the key for each level in the object. For more information,
     #   see the [JSON pointer specification][1] and [Reset configuration
-    #   updates][2] in the *AWS IoT Greengrass V2 Developer Guide*.
+    #   updates][2] in the *IoT Greengrass V2 Developer Guide*.
     #
     #
     #
@@ -225,7 +391,7 @@ module Aws::GreengrassV2
     # @!attribute [rw] version_requirement
     #   The component version requirement for the component dependency.
     #
-    #   AWS IoT Greengrass V2 uses semantic version constraints. For more
+    #   IoT Greengrass V2 uses semantic version constraints. For more
     #   information, see [Semantic Versioning][1].
     #
     #
@@ -266,6 +432,10 @@ module Aws::GreengrassV2
     #         },
     #         run_with: {
     #           posix_user: "NonEmptyString",
+    #           system_resource_limits: {
+    #             memory: 1,
+    #             cpus: 1.0,
+    #           },
     #         },
     #       }
     #
@@ -278,10 +448,10 @@ module Aws::GreengrassV2
     #   define *reset* updates and *merge* updates. A reset updates the keys
     #   that you specify to the default configuration for the component. A
     #   merge updates the core device's component configuration with the
-    #   keys and values that you specify. The AWS IoT Greengrass Core
-    #   software applies reset updates before it applies merge updates. For
-    #   more information, see [Update component configurations][1] in the
-    #   *AWS IoT Greengrass V2 Developer Guide*.
+    #   keys and values that you specify. The IoT Greengrass Core software
+    #   applies reset updates before it applies merge updates. For more
+    #   information, see [Update component configurations][1] in the *IoT
+    #   Greengrass V2 Developer Guide*.
     #
     #
     #
@@ -289,12 +459,12 @@ module Aws::GreengrassV2
     #   @return [Types::ComponentConfigurationUpdate]
     #
     # @!attribute [rw] run_with
-    #   The system user and group that the AWS IoT Greengrass Core software
-    #   uses to run component processes on the core device. If you omit this
-    #   parameter, the AWS IoT Greengrass Core software uses the system user
-    #   and group that you configure for the core device. For more
-    #   information, see [Configure the user and group that run
-    #   components][1] in the *AWS IoT Greengrass V2 Developer Guide*.
+    #   The system user and group that the IoT Greengrass Core software uses
+    #   to run component processes on the core device. If you omit this
+    #   parameter, the IoT Greengrass Core software uses the system user and
+    #   group that you configure for the core device. For more information,
+    #   see [Configure the user and group that run components][1] in the
+    #   *IoT Greengrass V2 Developer Guide*.
     #
     #
     #
@@ -371,17 +541,17 @@ module Aws::GreengrassV2
     #   The friendly name of the platform. This name helps you identify the
     #   platform.
     #
-    #   If you omit this parameter, AWS IoT Greengrass creates a friendly
-    #   name from the `os` and `architecture` of the platform.
+    #   If you omit this parameter, IoT Greengrass creates a friendly name
+    #   from the `os` and `architecture` of the platform.
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   A dictionary of attributes for the platform. The AWS IoT Greengrass
-    #   Core software defines the `os` and `platform` by default. You can
-    #   specify additional platform attributes for a core device when you
-    #   deploy the AWS IoT Greengrass nucleus component. For more
-    #   information, see the [AWS IoT Greengrass nucleus component][1] in
-    #   the *AWS IoT Greengrass V2 Developer Guide*.
+    #   A dictionary of attributes for the platform. The IoT Greengrass Core
+    #   software defines the `os` and `platform` by default. You can specify
+    #   additional platform attributes for a core device when you deploy the
+    #   Greengrass nucleus component. For more information, see the
+    #   [Greengrass nucleus component][1] in the *IoT Greengrass V2
+    #   Developer Guide*.
     #
     #
     #
@@ -397,10 +567,10 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information system user and group that the AWS IoT Greengrass
+    # Contains information system user and group that the IoT Greengrass
     # Core software uses to run component processes on the core device. For
     # more information, see [Configure the user and group that run
-    # components][1] in the *AWS IoT Greengrass V2 Developer Guide*.
+    # components][1] in the *IoT Greengrass V2 Developer Guide*.
     #
     #
     #
@@ -411,20 +581,48 @@ module Aws::GreengrassV2
     #
     #       {
     #         posix_user: "NonEmptyString",
+    #         system_resource_limits: {
+    #           memory: 1,
+    #           cpus: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] posix_user
     #   The POSIX system user and (optional) group to use to run this
     #   component. Specify the user and group separated by a colon (`:`) in
     #   the following format: `user:group`. The group is optional. If you
-    #   don't specify a group, the AWS IoT Greengrass Core software uses
-    #   the primary user for the group.
+    #   don't specify a group, the IoT Greengrass Core software uses the
+    #   primary user for the group.
+    #
+    #   If you omit this parameter, the IoT Greengrass Core software uses
+    #   the default system user and group that you configure on the
+    #   Greengrass nucleus component. For more information, see [Configure
+    #   the user and group that run components][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user
     #   @return [String]
+    #
+    # @!attribute [rw] system_resource_limits
+    #   The system resource limits to apply to this component's process on
+    #   the core device.
+    #
+    #   If you omit this parameter, the IoT Greengrass Core software uses
+    #   the default system resource limits that you configure on the
+    #   Greengrass nucleus component. For more information, see [Configure
+    #   system resource limits for components][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits
+    #   @return [Types::SystemResourceLimits]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ComponentRunWith AWS API Documentation
     #
     class ComponentRunWith < Struct.new(
-      :posix_user)
+      :posix_user,
+      :system_resource_limits)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -482,23 +680,22 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information about a AWS IoT Greengrass core device, which is
-    # an AWS IoT thing that runs the AWS IoT Greengrass Core software.
+    # Contains information about a Greengrass core device, which is an IoT
+    # thing that runs the IoT Greengrass Core software.
     #
     # @!attribute [rw] core_device_thing_name
-    #   The name of the core device. This is also the name of the AWS IoT
-    #   thing.
+    #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The status of the core device. Core devices can have the following
     #   statuses:
     #
-    #   * `HEALTHY` – The AWS IoT Greengrass Core software and all
-    #     components run on the core device without issue.
+    #   * `HEALTHY` – The IoT Greengrass Core software and all components
+    #     run on the core device without issue.
     #
-    #   * `UNHEALTHY` – The AWS IoT Greengrass Core software or a component
-    #     is in a failed state on the core device.
+    #   * `UNHEALTHY` – The IoT Greengrass Core software or a component is
+    #     in a failed state on the core device.
     #   @return [String]
     #
     # @!attribute [rw] last_status_update_timestamp
@@ -584,6 +781,7 @@ module Aws::GreengrassV2
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         client_token: "ClientTokenString",
     #       }
     #
     # @!attribute [rw] inline_recipe
@@ -602,7 +800,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
@@ -610,12 +808,27 @@ module Aws::GreengrassV2
     #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you can provide to ensure
+    #   that the request is idempotent. Idempotency means that the request
+    #   is successfully processed only once, even if you send the request
+    #   multiple times. When a request succeeds, and you specify the same
+    #   client token for subsequent successful requests, the IoT Greengrass
+    #   V2 service returns the successful response that it caches from the
+    #   previous request. IoT Greengrass V2 caches successful responses for
+    #   idempotent requests for up to 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateComponentVersionRequest AWS API Documentation
     #
     class CreateComponentVersionRequest < Struct.new(
       :inline_recipe,
       :lambda_function,
-      :tags)
+      :tags,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -642,7 +855,7 @@ module Aws::GreengrassV2
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the component version in AWS IoT Greengrass V2. This
+    #   The status of the component version in IoT Greengrass V2. This
     #   status is different from the status of the component on a core
     #   device.
     #   @return [Types::CloudComponentStatus]
@@ -674,6 +887,10 @@ module Aws::GreengrassV2
     #             },
     #             run_with: {
     #               posix_user: "NonEmptyString",
+    #               system_resource_limits: {
+    #                 memory: 1,
+    #                 cpus: 1.0,
+    #               },
     #             },
     #           },
     #         },
@@ -716,10 +933,11 @@ module Aws::GreengrassV2
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         client_token: "ClientTokenString",
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group.
     #
     #
     #
@@ -728,11 +946,6 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] deployment_name
     #   The name of the deployment.
-    #
-    #   You can create deployments without names. If you create a deployment
-    #   without a name, the AWS IoT Greengrass V2 console shows the
-    #   deployment name as `<targetType>:<targetName>`, where `targetType`
-    #   and `targetName` are the type and name of the deployment target.
     #   @return [String]
     #
     # @!attribute [rw] components
@@ -754,13 +967,27 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you can provide to ensure
+    #   that the request is idempotent. Idempotency means that the request
+    #   is successfully processed only once, even if you send the request
+    #   multiple times. When a request succeeds, and you specify the same
+    #   client token for subsequent successful requests, the IoT Greengrass
+    #   V2 service returns the successful response that it caches from the
+    #   previous request. IoT Greengrass V2 caches successful responses for
+    #   idempotent requests for up to 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateDeploymentRequest AWS API Documentation
     #
@@ -770,7 +997,8 @@ module Aws::GreengrassV2
       :components,
       :iot_job_configuration,
       :deployment_policies,
-      :tags)
+      :tags,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -780,13 +1008,12 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] iot_job_id
-    #   The ID of the AWS IoT job that applies the deployment to target
-    #   devices.
+    #   The ID of the IoT job that applies the deployment to target devices.
     #   @return [String]
     #
     # @!attribute [rw] iot_job_arn
-    #   The [ARN][1] of the AWS IoT job that applies the deployment to
-    #   target devices.
+    #   The [ARN][1] of the IoT job that applies the deployment to target
+    #   devices.
     #
     #
     #
@@ -834,8 +1061,7 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] core_device_thing_name
-    #   The name of the core device. This is also the name of the AWS IoT
-    #   thing.
+    #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeleteCoreDeviceRequest AWS API Documentation
@@ -849,7 +1075,7 @@ module Aws::GreengrassV2
     # Contains information about a deployment.
     #
     # @!attribute [rw] target_arn
-    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group.
     #
     #
     #
@@ -866,11 +1092,6 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] deployment_name
     #   The name of the deployment.
-    #
-    #   You can create deployments without names. If you create a deployment
-    #   without a name, the AWS IoT Greengrass V2 console shows the
-    #   deployment name as `<targetType>:<targetName>`, where `targetType`
-    #   and `targetName` are the type and name of the deployment target.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
@@ -935,7 +1156,7 @@ module Aws::GreengrassV2
     #     [SubscribeToComponentUpdates][1] IPC operation to receive these
     #     notifications. Then, components can respond with the
     #     [DeferComponentUpdate][2] IPC operation. For more information, see
-    #     [Create deployments][3] in the *AWS IoT Greengrass V2 Developer
+    #     [Create deployments][3] in the *IoT Greengrass V2 Developer
     #     Guide*.
     #
     #   * `SKIP_NOTIFY_COMPONENTS` – The deployment doesn't notify
@@ -965,7 +1186,7 @@ module Aws::GreengrassV2
     # receive notifications when a deployment specifies a configuration
     # update. Then, components can respond with the
     # [SendConfigurationValidityReport][2] IPC operation. For more
-    # information, see [Create deployments][3] in the *AWS IoT Greengrass V2
+    # information, see [Create deployments][3] in the *IoT Greengrass V2
     # Developer Guide*.
     #
     #
@@ -997,7 +1218,7 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information about an AWS IoT job configuration.
+    # Contains information about an IoT job configuration.
     #
     # @note When making an API call, you may pass DeploymentIoTJobConfiguration
     #   data as a hash:
@@ -1153,7 +1374,7 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the component version in AWS IoT Greengrass V2. This
+    #   The status of the component version in IoT Greengrass V2. This
     #   status is different from the status of the component on a core
     #   device.
     #   @return [Types::CloudComponentStatus]
@@ -1164,7 +1385,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
@@ -1188,8 +1409,67 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information about a deployment job that AWS IoT Greengrass
-    # sends to a AWS IoT Greengrass core device.
+    # Contains a request to disassociate a client device from a core device.
+    # The [BatchDisassociateClientDeviceWithCoreDevice][1] operation
+    # consumes a list of these requests.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html
+    #
+    # @note When making an API call, you may pass DisassociateClientDeviceFromCoreDeviceEntry
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "IoTThingName", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the IoT thing that represents the client device to
+    #   disassociate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateClientDeviceFromCoreDeviceEntry AWS API Documentation
+    #
+    class DisassociateClientDeviceFromCoreDeviceEntry < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an error that occurs from a request to disassociate a client
+    # device from a core device. The
+    # [BatchDisassociateClientDeviceWithCoreDevice][1] operation returns a
+    # list of these errors.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the IoT thing whose disassociate request failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that provides additional information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateClientDeviceFromCoreDeviceErrorEntry AWS API Documentation
+    #
+    class DisassociateClientDeviceFromCoreDeviceErrorEntry < Struct.new(
+      :thing_name,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a deployment job that IoT Greengrass sends
+    # to a Greengrass core device.
     #
     # @!attribute [rw] deployment_id
     #   The ID of the deployment.
@@ -1197,21 +1477,15 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] deployment_name
     #   The name of the deployment.
-    #
-    #   You can create deployments without names. If you create a deployment
-    #   without a name, the AWS IoT Greengrass V2 console shows the
-    #   deployment name as `<targetType>:<targetName>`, where `targetType`
-    #   and `targetName` are the type and name of the deployment target.
     #   @return [String]
     #
     # @!attribute [rw] iot_job_id
-    #   The ID of the AWS IoT job that applies the deployment to target
-    #   devices.
+    #   The ID of the IoT job that applies the deployment to target devices.
     #   @return [String]
     #
     # @!attribute [rw] iot_job_arn
-    #   The [ARN][1] of the AWS IoT job that applies the deployment to
-    #   target devices.
+    #   The [ARN][1] of the IoT job that applies the deployment to target
+    #   devices.
     #
     #
     #
@@ -1223,7 +1497,7 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group.
     #
     #
     #
@@ -1231,8 +1505,7 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] core_device_execution_status
-    #   The status of the deployment job on the AWS IoT Greengrass core
-    #   device.
+    #   The status of the deployment job on the Greengrass core device.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -1305,7 +1578,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
@@ -1383,8 +1656,7 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] core_device_thing_name
-    #   The name of the core device. This is also the name of the AWS IoT
-    #   thing.
+    #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetCoreDeviceRequest AWS API Documentation
@@ -1396,16 +1668,15 @@ module Aws::GreengrassV2
     end
 
     # @!attribute [rw] core_device_thing_name
-    #   The name of the core device. This is also the name of the AWS IoT
-    #   thing.
+    #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
     #
     # @!attribute [rw] core_version
-    #   The version of the AWS IoT Greengrass Core software that the core
-    #   device runs. This version is equivalent to the version of the AWS
-    #   IoT Greengrass nucleus component that runs on the core device. For
-    #   more information, see the [AWS IoT Greengrass nucleus component][1]
-    #   in the *AWS IoT Greengrass V2 Developer Guide*.
+    #   The version of the IoT Greengrass Core software that the core device
+    #   runs. This version is equivalent to the version of the Greengrass
+    #   nucleus component that runs on the core device. For more
+    #   information, see the [Greengrass nucleus component][1] in the *IoT
+    #   Greengrass V2 Developer Guide*.
     #
     #
     #
@@ -1423,11 +1694,11 @@ module Aws::GreengrassV2
     # @!attribute [rw] status
     #   The status of the core device. The core device status can be:
     #
-    #   * `HEALTHY` – The AWS IoT Greengrass Core software and all
-    #     components run on the core device without issue.
+    #   * `HEALTHY` – The IoT Greengrass Core software and all components
+    #     run on the core device without issue.
     #
-    #   * `UNHEALTHY` – The AWS IoT Greengrass Core software or a component
-    #     is in a failed state on the core device.
+    #   * `UNHEALTHY` – The IoT Greengrass Core software or a component is
+    #     in a failed state on the core device.
     #   @return [String]
     #
     # @!attribute [rw] last_status_update_timestamp
@@ -1437,7 +1708,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
@@ -1479,7 +1750,7 @@ module Aws::GreengrassV2
     end
 
     # @!attribute [rw] target_arn
-    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group.
     #
     #
     #
@@ -1496,11 +1767,6 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] deployment_name
     #   The name of the deployment.
-    #
-    #   You can create deployments without names. If you create a deployment
-    #   without a name, the AWS IoT Greengrass V2 console shows the
-    #   deployment name as `<targetType>:<targetName>`, where `targetType`
-    #   and `targetName` are the type and name of the deployment target.
     #   @return [String]
     #
     # @!attribute [rw] deployment_status
@@ -1508,13 +1774,12 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] iot_job_id
-    #   The ID of the AWS IoT job that applies the deployment to target
-    #   devices.
+    #   The ID of the IoT job that applies the deployment to target devices.
     #   @return [String]
     #
     # @!attribute [rw] iot_job_arn
-    #   The [ARN][1] of the AWS IoT job that applies the deployment to
-    #   target devices.
+    #   The [ARN][1] of the IoT job that applies the deployment to target
+    #   devices.
     #
     #
     #
@@ -1549,7 +1814,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
@@ -1577,8 +1842,7 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information about a component on a AWS IoT Greengrass core
-    # device.
+    # Contains information about a component on a Greengrass core device.
     #
     # @!attribute [rw] component_name
     #   The name of the component.
@@ -1612,8 +1876,7 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # AWS IoT Greengrass can't process your request right now. Try again
-    # later.
+    # IoT Greengrass can't process your request right now. Try again later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1850,8 +2113,8 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information about a container in which AWS Lambda functions
-    # run on AWS IoT Greengrass core devices.
+    # Contains information about a container in which Lambda functions run
+    # on Greengrass core devices.
     #
     # @note When making an API call, you may pass LambdaContainerParams
     #   data as a hash:
@@ -1948,8 +2211,8 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information about an event source for an AWS Lambda function.
-    # The event source defines the topics on which this Lambda function
+    # Contains information about an event source for an Lambda function. The
+    # event source defines the topics on which this Lambda function
     # subscribes to receive messages that run the function.
     #
     # @note When making an API call, you may pass LambdaEventSource
@@ -1971,9 +2234,9 @@ module Aws::GreengrassV2
     #     event source type doesn't support MQTT wildcards (`+` and `#`) in
     #     the event source topic.
     #
-    #   * `IOT_CORE` – Subscribe to AWS IoT Core MQTT messages. This event
-    #     source type supports MQTT wildcards (`+` and `#`) in the event
-    #     source topic.
+    #   * `IOT_CORE` – Subscribe to Amazon Web Services IoT Core MQTT
+    #     messages. This event source type supports MQTT wildcards (`+` and
+    #     `#`) in the event source topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaEventSource AWS API Documentation
@@ -1985,8 +2248,7 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains parameters for a Lambda function that runs on AWS IoT
-    # Greengrass.
+    # Contains parameters for a Lambda function that runs on IoT Greengrass.
     #
     # @note When making an API call, you may pass LambdaExecutionParameters
     #   data as a hash:
@@ -2037,12 +2299,13 @@ module Aws::GreengrassV2
     #   The list of event sources to which to subscribe to receive work
     #   messages. The Lambda function runs when it receives a message from
     #   an event source. You can subscribe this function to local
-    #   publish/subscribe messages and AWS IoT Core MQTT messages.
+    #   publish/subscribe messages and Amazon Web Services IoT Core MQTT
+    #   messages.
     #   @return [Array<Types::LambdaEventSource>]
     #
     # @!attribute [rw] max_queue_size
     #   The maximum size of the message queue for the Lambda function
-    #   component. The AWS IoT Greengrass core stores messages in a FIFO
+    #   component. The IoT Greengrass core stores messages in a FIFO
     #   (first-in-first-out) queue until it can run the Lambda function to
     #   consume each message.
     #   @return [Integer]
@@ -2054,8 +2317,8 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] max_idle_time_in_seconds
     #   The maximum amount of time in seconds that a non-pinned Lambda
-    #   function can idle before the AWS IoT Greengrass Core software stops
-    #   its process.
+    #   function can idle before the IoT Greengrass Core software stops its
+    #   process.
     #   @return [Integer]
     #
     # @!attribute [rw] timeout_in_seconds
@@ -2072,13 +2335,13 @@ module Aws::GreengrassV2
     # @!attribute [rw] pinned
     #   Whether or not the Lambda function is pinned, or long-lived.
     #
-    #   * A pinned Lambda function starts when AWS IoT Greengrass starts and
+    #   * A pinned Lambda function starts when IoT Greengrass starts and
     #     keeps running in its own container.
     #
     #   * A non-pinned Lambda function starts only when it receives a work
     #     item and exists after it idles for `maxIdleTimeInSeconds`. If the
-    #     function has multiple work items, the AWS IoT Greengrass Core
-    #     software creates multiple instances of the function.
+    #     function has multiple work items, the IoT Greengrass Core software
+    #     creates multiple instances of the function.
     #
     #   Default: `true`
     #   @return [Boolean]
@@ -2121,8 +2384,8 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains information about an AWS Lambda function to import to create
-    # a component.
+    # Contains information about an Lambda function to import to create a
+    # component.
     #
     # @note When making an API call, you may pass LambdaFunctionRecipeSource
     #   data as a hash:
@@ -2223,7 +2486,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] component_lambda_parameters
     #   The system and runtime parameters for the Lambda function as it runs
-    #   on the AWS IoT Greengrass core device.
+    #   on the Greengrass core device.
     #   @return [Types::LambdaExecutionParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/LambdaFunctionRecipeSource AWS API Documentation
@@ -2239,7 +2502,7 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
-    # Contains parameters for a Linux process that contains an AWS Lambda
+    # Contains parameters for a Linux process that contains an Lambda
     # function.
     #
     # @note When making an API call, you may pass LambdaLinuxProcessParams
@@ -2271,8 +2534,8 @@ module Aws::GreengrassV2
     # @!attribute [rw] isolation_mode
     #   The isolation mode for the process that contains the Lambda
     #   function. The process can run in an isolated runtime environment
-    #   inside the AWS IoT Greengrass container, or as a regular process
-    #   outside any container.
+    #   inside the IoT Greengrass container, or as a regular process outside
+    #   any container.
     #
     #   Default: `GreengrassContainer`
     #   @return [String]
@@ -2291,7 +2554,7 @@ module Aws::GreengrassV2
     end
 
     # Contains information about a volume that Linux processes in a
-    # container can access. When you define a volume, the AWS IoT Greengrass
+    # container can access. When you define a volume, the IoT Greengrass
     # Core software mounts the source files to the destination inside the
     # container.
     #
@@ -2321,8 +2584,8 @@ module Aws::GreengrassV2
     #   @return [String]
     #
     # @!attribute [rw] add_group_owner
-    #   Whether or not to add the AWS IoT Greengrass user group as an owner
-    #   of the volume.
+    #   Whether or not to add the IoT Greengrass user group as an owner of
+    #   the volume.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -2334,6 +2597,56 @@ module Aws::GreengrassV2
       :destination_path,
       :permission,
       :add_group_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListClientDevicesAssociatedWithCoreDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "IoTThingName", # required
+    #         max_results: 1,
+    #         next_token: "NextTokenString",
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the core device. This is also the name of the IoT thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDeviceRequest AWS API Documentation
+    #
+    class ListClientDevicesAssociatedWithCoreDeviceRequest < Struct.new(
+      :core_device_thing_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_client_devices
+    #   A list that describes the client devices that are associated with
+    #   the core device.
+    #   @return [Array<Types::AssociatedClientDevice>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDeviceResponse AWS API Documentation
+    #
+    class ListClientDevicesAssociatedWithCoreDeviceResponse < Struct.new(
+      :associated_client_devices,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2453,7 +2766,7 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] thing_group_arn
-    #   The [ARN][1] of the AWS IoT thing group by which to filter. If you
+    #   The [ARN][1] of the IoT thing group by which to filter. If you
     #   specify this parameter, the list includes only core devices that are
     #   members of this thing group.
     #
@@ -2467,11 +2780,11 @@ module Aws::GreengrassV2
     #   parameter, the list includes only core devices that have this
     #   status. Choose one of the following options:
     #
-    #   * `HEALTHY` – The AWS IoT Greengrass Core software and all
-    #     components run on the core device without issue.
+    #   * `HEALTHY` – The IoT Greengrass Core software and all components
+    #     run on the core device without issue.
     #
-    #   * `UNHEALTHY` – The AWS IoT Greengrass Core software or a component
-    #     is in a failed state on the core device.
+    #   * `UNHEALTHY` – The IoT Greengrass Core software or a component is
+    #     in a failed state on the core device.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2522,7 +2835,7 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The [ARN][1] of the target AWS IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group.
     #
     #
     #
@@ -2588,8 +2901,7 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] core_device_thing_name
-    #   The name of the core device. This is also the name of the AWS IoT
-    #   thing.
+    #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2638,8 +2950,7 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] core_device_thing_name
-    #   The name of the core device. This is also the name of the AWS IoT
-    #   thing.
+    #   The name of the core device. This is also the name of the IoT thing.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2703,7 +3014,7 @@ module Aws::GreengrassV2
 
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #
@@ -2715,6 +3026,21 @@ module Aws::GreengrassV2
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request is already in progress. This exception occurs when you use
+    # a client token for multiple requests while IoT Greengrass is still
+    # processing an earlier request that uses the same client token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/RequestAlreadyInProgressException AWS API Documentation
+    #
+    class RequestAlreadyInProgressException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2772,7 +3098,7 @@ module Aws::GreengrassV2
     end
 
     # Contains information about a component version that is compatible to
-    # run on a AWS IoT Greengrass core device.
+    # run on a Greengrass core device.
     #
     # @!attribute [rw] arn
     #   The [ARN][1] of the component version.
@@ -2870,6 +3196,49 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
+    # Contains information about system resource limits that the IoT
+    # Greengrass Core software applies to a component's processes. For more
+    # information, see [Configure system resource limits for components][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits
+    #
+    # @note When making an API call, you may pass SystemResourceLimits
+    #   data as a hash:
+    #
+    #       {
+    #         memory: 1,
+    #         cpus: 1.0,
+    #       }
+    #
+    # @!attribute [rw] memory
+    #   The maximum amount of RAM, expressed in kilobytes, that a
+    #   component's processes can use on the core device.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cpus
+    #   The maximum amount of CPU time that a component's processes can use
+    #   on the core device. A core device's total CPU time is equivalent to
+    #   the device's number of CPU cores. For example, on a core device
+    #   with 4 CPU cores, you can set this value to `2` to limit the
+    #   component's processes to 50 percent usage of each CPU core. On a
+    #   device with 1 CPU core, you can set this value to `0.25` to limit
+    #   the component's processes to 25 percent usage of the CPU. If you
+    #   set this value to a number greater than the number of CPU cores, the
+    #   IoT Greengrass Core software doesn't limit the component's CPU
+    #   usage.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/SystemResourceLimits AWS API Documentation
+    #
+    class SystemResourceLimits < Struct.new(
+      :memory,
+      :cpus)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
@@ -2890,7 +3259,7 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tag your resources][1] in the *AWS IoT
+    #   For more information, see [Tag your resources][1] in the *IoT
     #   Greengrass V2 Developer Guide*.
     #
     #

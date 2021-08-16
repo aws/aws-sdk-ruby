@@ -376,8 +376,23 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could be
-    #   versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   The description of the component. Describes the contents of the
@@ -401,10 +416,10 @@ module Aws::Imagebuilder
     #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use Amazon
+    #   S3, you can specify component content up to your service quota. Either
+    #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that should be used to encrypt this component.
@@ -470,8 +485,24 @@ module Aws::Imagebuilder
     #   The description of the container recipe.
     #
     # @option params [required, String] :semantic_version
-    #   The semantic version of the container recipe
-    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   The semantic version of the container recipe. This version follows the
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #
     # @option params [required, Array<Types::ComponentConfiguration>] :components
     #   Components for build and test that are included in the container
@@ -486,7 +517,7 @@ module Aws::Imagebuilder
     #   blob.
     #
     # @option params [String] :dockerfile_template_uri
-    #   The S3 URI for the Dockerfile that will be used to build your
+    #   The Amazon S3 URI for the Dockerfile that will be used to build your
     #   container image.
     #
     # @option params [String] :platform_override
@@ -533,6 +564,12 @@ module Aws::Imagebuilder
     #     components: [ # required
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "ComponentParameterName", # required
+    #             value: ["ComponentParameterValue"], # required
+    #           },
+    #         ],
     #       },
     #     ],
     #     instance_configuration: {
@@ -675,7 +712,8 @@ module Aws::Imagebuilder
 
     # Creates a new image. This request will create a new image along with
     # all of the configured output resources defined in the distribution
-    # configuration.
+    # configuration. You must specify exactly one recipe for your image,
+    # using either a ContainerRecipeArn or an ImageRecipeArn.
     #
     # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
@@ -858,7 +896,24 @@ module Aws::Imagebuilder
     #   The description of the image recipe.
     #
     # @option params [required, String] :semantic_version
-    #   The semantic version of the image recipe.
+    #   The semantic version of the image recipe. This version follows the
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number, and that is not open for updates.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
     #
     # @option params [required, Array<Types::ComponentConfiguration>] :components
     #   The components of the image recipe.
@@ -867,7 +922,7 @@ module Aws::Imagebuilder
     #   The parent image of the image recipe. The value of the string can be
     #   the ARN of the parent image or an AMI ID. The format for the ARN
     #   follows this example:
-    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x`.
+    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x`.
     #   You can provide the specific version that you want to use, or you can
     #   use a wildcard in all of the fields. If you enter an AMI ID for the
     #   string value, you must have access to the AMI, and the AMI must be in
@@ -880,7 +935,11 @@ module Aws::Imagebuilder
     #   The tags of the image recipe.
     #
     # @option params [String] :working_directory
-    #   The working directory to be used during build and test workflows.
+    #   The working directory used during build and test workflows.
+    #
+    # @option params [Types::AdditionalInstanceConfiguration] :additional_instance_configuration
+    #   Specify additional settings and launch scripts for your build
+    #   instances.
     #
     # @option params [required, String] :client_token
     #   The idempotency token used to make this request idempotent.
@@ -903,6 +962,12 @@ module Aws::Imagebuilder
     #     components: [ # required
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #         parameters: [
+    #           {
+    #             name: "ComponentParameterName", # required
+    #             value: ["ComponentParameterValue"], # required
+    #           },
+    #         ],
     #       },
     #     ],
     #     parent_image: "NonEmptyString", # required
@@ -926,6 +991,12 @@ module Aws::Imagebuilder
     #       "TagKey" => "TagValue",
     #     },
     #     working_directory: "NonEmptyString",
+    #     additional_instance_configuration: {
+    #       systems_manager_agent: {
+    #         uninstall_after_build: false,
+    #       },
+    #       user_data_override: "UserDataOverride",
+    #     },
     #     client_token: "ClientToken", # required
     #   })
     #
@@ -961,15 +1032,15 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
-    #   your EC2 AMI.
+    #   your Amazon EC2 AMI.
     #
     # @option params [Array<String>] :security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #
     # @option params [String] :subnet_id
     #   The subnet ID in which to place the instance used to customize your
-    #   EC2 AMI.
+    #   Amazon EC2 AMI.
     #
     # @option params [Types::Logging] :logging
     #   The logging configuration of the infrastructure configuration.
@@ -1289,6 +1360,12 @@ module Aws::Imagebuilder
     #   resp.component.platform #=> String, one of "Windows", "Linux"
     #   resp.component.supported_os_versions #=> Array
     #   resp.component.supported_os_versions[0] #=> String
+    #   resp.component.parameters #=> Array
+    #   resp.component.parameters[0].name #=> String
+    #   resp.component.parameters[0].type #=> String
+    #   resp.component.parameters[0].default_value #=> Array
+    #   resp.component.parameters[0].default_value[0] #=> String
+    #   resp.component.parameters[0].description #=> String
     #   resp.component.owner #=> String
     #   resp.component.data #=> String
     #   resp.component.kms_key_id #=> String
@@ -1365,6 +1442,10 @@ module Aws::Imagebuilder
     #   resp.container_recipe.version #=> String
     #   resp.container_recipe.components #=> Array
     #   resp.container_recipe.components[0].component_arn #=> String
+    #   resp.container_recipe.components[0].parameters #=> Array
+    #   resp.container_recipe.components[0].parameters[0].name #=> String
+    #   resp.container_recipe.components[0].parameters[0].value #=> Array
+    #   resp.container_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.container_recipe.instance_configuration.image #=> String
     #   resp.container_recipe.instance_configuration.block_device_mappings #=> Array
     #   resp.container_recipe.instance_configuration.block_device_mappings[0].device_name #=> String
@@ -1527,6 +1608,10 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.version #=> String
     #   resp.image.image_recipe.components #=> Array
     #   resp.image.image_recipe.components[0].component_arn #=> String
+    #   resp.image.image_recipe.components[0].parameters #=> Array
+    #   resp.image.image_recipe.components[0].parameters[0].name #=> String
+    #   resp.image.image_recipe.components[0].parameters[0].value #=> Array
+    #   resp.image.image_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.image.image_recipe.parent_image #=> String
     #   resp.image.image_recipe.block_device_mappings #=> Array
     #   resp.image.image_recipe.block_device_mappings[0].device_name #=> String
@@ -1543,6 +1628,8 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.tags #=> Hash
     #   resp.image.image_recipe.tags["TagKey"] #=> String
     #   resp.image.image_recipe.working_directory #=> String
+    #   resp.image.image_recipe.additional_instance_configuration.systems_manager_agent.uninstall_after_build #=> Boolean
+    #   resp.image.image_recipe.additional_instance_configuration.user_data_override #=> String
     #   resp.image.container_recipe.arn #=> String
     #   resp.image.container_recipe.container_type #=> String, one of "DOCKER"
     #   resp.image.container_recipe.name #=> String
@@ -1552,6 +1639,10 @@ module Aws::Imagebuilder
     #   resp.image.container_recipe.version #=> String
     #   resp.image.container_recipe.components #=> Array
     #   resp.image.container_recipe.components[0].component_arn #=> String
+    #   resp.image.container_recipe.components[0].parameters #=> Array
+    #   resp.image.container_recipe.components[0].parameters[0].name #=> String
+    #   resp.image.container_recipe.components[0].parameters[0].value #=> Array
+    #   resp.image.container_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.image.container_recipe.instance_configuration.image #=> String
     #   resp.image.container_recipe.instance_configuration.block_device_mappings #=> Array
     #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].device_name #=> String
@@ -1766,6 +1857,10 @@ module Aws::Imagebuilder
     #   resp.image_recipe.version #=> String
     #   resp.image_recipe.components #=> Array
     #   resp.image_recipe.components[0].component_arn #=> String
+    #   resp.image_recipe.components[0].parameters #=> Array
+    #   resp.image_recipe.components[0].parameters[0].name #=> String
+    #   resp.image_recipe.components[0].parameters[0].value #=> Array
+    #   resp.image_recipe.components[0].parameters[0].value[0] #=> String
     #   resp.image_recipe.parent_image #=> String
     #   resp.image_recipe.block_device_mappings #=> Array
     #   resp.image_recipe.block_device_mappings[0].device_name #=> String
@@ -1782,6 +1877,8 @@ module Aws::Imagebuilder
     #   resp.image_recipe.tags #=> Hash
     #   resp.image_recipe.tags["TagKey"] #=> String
     #   resp.image_recipe.working_directory #=> String
+    #   resp.image_recipe.additional_instance_configuration.systems_manager_agent.uninstall_after_build #=> Boolean
+    #   resp.image_recipe.additional_instance_configuration.user_data_override #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImageRecipe AWS API Documentation
     #
@@ -1880,8 +1977,22 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :semantic_version
     #   The semantic version of the component. This version follows the
-    #   semantic version syntax. For example, major.minor.patch. This could be
-    #   versioned like software (2.0.1) or like a date (2019.12.01).
+    #   semantic version syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Filtering:** When you retrieve or reference a resource with a
+    #   semantic version, you can use wildcards (x) to filter your results.
+    #   When you use a wildcard in any node, all nodes to the right of the
+    #   first wildcard must also be wildcards. For example, specifying
+    #   "1.2.x", or "1.x.x" works to filter list results, but neither
+    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    #   build - Image Builder automatically uses a wildcard for that, if
+    #   applicable.
+    #
+    #    </note>
     #
     # @option params [String] :description
     #   The description of the component. Describes the contents of the
@@ -1894,7 +2005,7 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :type
     #   The type of the component denotes whether the component is used to
-    #   build the image or only to test it.
+    #   build the image, or only to test it.
     #
     # @option params [required, String] :format
     #   The format of the resource that you want to import as a component.
@@ -1907,10 +2018,10 @@ module Aws::Imagebuilder
     #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :uri
-    #   The uri of the component. Must be an S3 URL and the requester must
-    #   have permission to access the S3 bucket. If you use S3, you can
-    #   specify component content up to your service quota. Either `data` or
-    #   `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and the requester
+    #   must have permission to access the Amazon S3 bucket. If you use Amazon
+    #   S3, you can specify component content up to your service quota. Either
+    #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that should be used to encrypt this component.
@@ -1966,6 +2077,21 @@ module Aws::Imagebuilder
 
     # Returns the list of component build versions for the specified
     # semantic version.
+    #
+    # <note markdown="1"> The semantic version has four nodes:
+    # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    # assign values for the first three, and can filter on all of them.
+    #
+    #  **Filtering:** When you retrieve or reference a resource with a
+    # semantic version, you can use wildcards (x) to filter your results.
+    # When you use a wildcard in any node, all nodes to the right of the
+    # first wildcard must also be wildcards. For example, specifying
+    # "1.2.x", or "1.x.x" works to filter list results, but neither
+    # "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    # build - Image Builder automatically uses a wildcard for that, if
+    # applicable.
+    #
+    #  </note>
     #
     # @option params [required, String] :component_version_arn
     #   The component version Amazon Resource Name (ARN) whose versions you
@@ -2025,6 +2151,21 @@ module Aws::Imagebuilder
     # Returns the list of component build versions for the specified
     # semantic version.
     #
+    # <note markdown="1"> The semantic version has four nodes:
+    # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    # assign values for the first three, and can filter on all of them.
+    #
+    #  **Filtering:** When you retrieve or reference a resource with a
+    # semantic version, you can use wildcards (x) to filter your results.
+    # When you use a wildcard in any node, all nodes to the right of the
+    # first wildcard must also be wildcards. For example, specifying
+    # "1.2.x", or "1.x.x" works to filter list results, but neither
+    # "1.x.2", nor "x.2.x" will work. You do not have to specify the
+    # build - Image Builder automatically uses a wildcard for that, if
+    # applicable.
+    #
+    #  </note>
+    #
     # @option params [String] :owner
     #   The owner defines which components you want to list. By default, this
     #   request will only show components owned by your account. You can use
@@ -2033,11 +2174,22 @@ module Aws::Imagebuilder
     #   you by other customers.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `description`
+    #
+    #   * `name`
+    #
+    #   * `platform`
+    #
+    #   * `supportedOsVersion`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #
     # @option params [Boolean] :by_name
-    #   Returns the list of component build versions for the specified
-    #   semantic version.
+    #   Returns the list of component build versions for the specified name.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2102,8 +2254,15 @@ module Aws::Imagebuilder
     #   recipes belonging to your account.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Request filters that are used to narrow the list of container images
-    #   that are returned.
+    #   Use the following filters to streamline results:
+    #
+    #   * `containerType`
+    #
+    #   * `name`
+    #
+    #   * `parentImage`
+    #
+    #   * `platform`
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the list.
@@ -2162,11 +2321,7 @@ module Aws::Imagebuilder
     # Returns a list of distribution configurations.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
-    #
-    #   * `name` - The name of this distribution configuration.
-    #
-    #   ^
+    #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2227,7 +2382,17 @@ module Aws::Imagebuilder
     #   want to retrieve.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `osVersion`
+    #
+    #   * `platform`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2298,7 +2463,7 @@ module Aws::Imagebuilder
     end
 
     # List the Packages that are associated with an Image Build Version, as
-    # determined by AWS Systems Manager Inventory at build time.
+    # determined by Amazon EC2 Systems Manager Inventory at build time.
     #
     # @option params [required, String] :image_build_version_arn
     #   Filter results for the ListImagePackages request by the Image Build
@@ -2352,7 +2517,11 @@ module Aws::Imagebuilder
     #   want to view.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `version`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2425,7 +2594,19 @@ module Aws::Imagebuilder
     # Returns a list of image pipelines.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `description`
+    #
+    #   * `distributionConfigurationArn`
+    #
+    #   * `imageRecipeArn`
+    #
+    #   * `infrastructureConfigurationArn`
+    #
+    #   * `name`
+    #
+    #   * `status`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2501,7 +2682,13 @@ module Aws::Imagebuilder
     #   with you by other customers.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `parentImage`
+    #
+    #   * `platform`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2565,7 +2752,17 @@ module Aws::Imagebuilder
     #   customers.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `osVersion`
+    #
+    #   * `platform`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #
     # @option params [Boolean] :by_name
     #   Requests a list of images with a specific recipe name.
@@ -2630,7 +2827,7 @@ module Aws::Imagebuilder
     # Returns a list of infrastructure configurations.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -3069,8 +3266,14 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Updates a new image pipeline. Image pipelines enable you to automate
-    # the creation and distribution of images.
+    # Updates an image pipeline. Image pipelines enable you to automate the
+    # creation and distribution of images.
+    #
+    # <note markdown="1"> UpdateImagePipeline does not support selective updates for the
+    # pipeline. You must specify all of the required properties in the
+    # update request, not just the properties that have changed.
+    #
+    #  </note>
     #
     # @option params [required, String] :image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want to
@@ -3178,14 +3381,15 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
-    #   your EC2 AMI.
+    #   your Amazon EC2 AMI.
     #
     # @option params [Array<String>] :security_group_ids
     #   The security group IDs to associate with the instance used to
-    #   customize your EC2 AMI.
+    #   customize your Amazon EC2 AMI.
     #
     # @option params [String] :subnet_id
-    #   The subnet ID to place the instance used to customize your EC2 AMI in.
+    #   The subnet ID to place the instance used to customize your Amazon EC2
+    #   AMI in.
     #
     # @option params [Types::Logging] :logging
     #   The logging configuration of the infrastructure configuration.
@@ -3270,7 +3474,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

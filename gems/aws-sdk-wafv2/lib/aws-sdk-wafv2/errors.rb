@@ -29,6 +29,7 @@ module Aws::WAFV2
   # ## Error Classes
   # * {WAFAssociatedItemException}
   # * {WAFDuplicateItemException}
+  # * {WAFExpiredManagedRuleGroupVersionException}
   # * {WAFInternalErrorException}
   # * {WAFInvalidOperationException}
   # * {WAFInvalidParameterException}
@@ -69,6 +70,21 @@ module Aws::WAFV2
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WAFV2::Types::WAFDuplicateItemException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class WAFExpiredManagedRuleGroupVersionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFV2::Types::WAFExpiredManagedRuleGroupVersionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

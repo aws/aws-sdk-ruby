@@ -740,6 +740,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].label #=> String
     #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
+    #   resp.metric_alarms[0].metrics[0].account_id #=> String
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.next_token #=> String
     #
@@ -859,6 +860,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].label #=> String
     #   resp.metric_alarms[0].metrics[0].return_data #=> Boolean
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
+    #   resp.metric_alarms[0].metrics[0].account_id #=> String
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
@@ -1455,6 +1457,7 @@ module Aws::CloudWatch
     #         label: "MetricLabel",
     #         return_data: false,
     #         period: 1,
+    #         account_id: "AccountId",
     #       },
     #     ],
     #     start_time: Time.now, # required
@@ -1549,8 +1552,8 @@ module Aws::CloudWatch
     # CloudWatch started retaining 5-minute and 1-hour metric data as of
     # July 9, 2016.
     #
-    # For information about metrics and dimensions supported by AWS
-    # services, see the [Amazon CloudWatch Metrics and Dimensions
+    # For information about metrics and dimensions supported by Amazon Web
+    # Services services, see the [Amazon CloudWatch Metrics and Dimensions
     # Reference][1] in the *Amazon CloudWatch User Guide*.
     #
     #
@@ -1819,8 +1822,8 @@ module Aws::CloudWatch
     #   `</GetMetricWidgetImageResponse>`
     #
     #   The `image/png` setting is intended only for custom HTTP requests. For
-    #   most use cases, and all actions using an AWS SDK, you should use
-    #   `png`. If you specify `image/png`, the HTTP response has a
+    #   most use cases, and all actions using an Amazon Web Services SDK, you
+    #   should use `png`. If you specify `image/png`, the HTTP response has a
     #   content-type set to `image/png`, and the body of the response is a PNG
     #   image.
     #
@@ -1911,7 +1914,7 @@ module Aws::CloudWatch
     # @return [Types::ListMetricStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMetricStreamsOutput#next_token #next_token} => String
-    #   * {Types::ListMetricStreamsOutput#entries #entries} => Array&lt;Types::MetricStreamEntry&gt;
+    #   * {Types::ListMetricStreamsOutput#entries #data.entries} => Array&lt;Types::MetricStreamEntry&gt; (This method conflicts with a method on Response, call it through the data member)
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1925,14 +1928,14 @@ module Aws::CloudWatch
     # @example Response structure
     #
     #   resp.next_token #=> String
-    #   resp.entries #=> Array
-    #   resp.entries[0].arn #=> String
-    #   resp.entries[0].creation_date #=> Time
-    #   resp.entries[0].last_update_date #=> Time
-    #   resp.entries[0].name #=> String
-    #   resp.entries[0].firehose_arn #=> String
-    #   resp.entries[0].state #=> String
-    #   resp.entries[0].output_format #=> String, one of "json", "opentelemetry0.7"
+    #   resp.data.entries #=> Array
+    #   resp.data.entries[0].arn #=> String
+    #   resp.data.entries[0].creation_date #=> Time
+    #   resp.data.entries[0].last_update_date #=> Time
+    #   resp.data.entries[0].name #=> String
+    #   resp.data.entries[0].firehose_arn #=> String
+    #   resp.data.entries[0].state #=> String
+    #   resp.data.entries[0].output_format #=> String, one of "json", "opentelemetry0.7"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricStreams AWS API Documentation
     #
@@ -2476,16 +2479,39 @@ module Aws::CloudWatch
     # * The `iam:CreateServiceLinkedRole` to create an alarm with Systems
     #   Manager OpsItem actions.
     #
-    # The first time you create an alarm in the AWS Management Console, the
-    # CLI, or by using the PutMetricAlarm API, CloudWatch creates the
-    # necessary service-linked role for you. The service-linked roles are
-    # called `AWSServiceRoleForCloudWatchEvents` and
+    # The first time you create an alarm in the Management Console, the CLI,
+    # or by using the PutMetricAlarm API, CloudWatch creates the necessary
+    # service-linked role for you. The service-linked roles are called
+    # `AWSServiceRoleForCloudWatchEvents` and
     # `AWSServiceRoleForCloudWatchAlarms_ActionSSM`. For more information,
-    # see [AWS service-linked role][1].
+    # see [Amazon Web Services service-linked role][1].
+    #
+    # **Cross-account alarms**
+    #
+    # You can set an alarm on metrics in the current account, or in another
+    # account. To create a cross-account alarm that watches a metric in a
+    # different account, you must have completed the following
+    # pre-requisites:
+    #
+    # * The account where the metrics are located (the *sharing account*)
+    #   must already have a sharing role named
+    #   **CloudWatch-CrossAccountSharingRole**. If it does not already have
+    #   this role, you must create it using the instructions in **Set up a
+    #   sharing account** in [ Cross-account cross-Region CloudWatch
+    #   console][2]. The policy for that role must grant access to the ID of
+    #   the account where you are creating the alarm.
+    #
+    # * The account where you are creating the alarm (the *monitoring
+    #   account*) must already have a service-linked role named
+    #   **AWSServiceRoleForCloudWatchCrossAccount** to allow CloudWatch to
+    #   assume the sharing role in the sharing account. If it does not, you
+    #   must create it following the directions in **Set up a monitoring
+    #   account** in [ Cross-account cross-Region CloudWatch console][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region
     #
     # @option params [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within the Region.
@@ -2530,7 +2556,8 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity `
+    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity ` \|
+    #   `arn:aws:ssm-incidents::account-id:response-plan:response-plan-name `
     #
     #   Valid Values (for use with IAM roles):
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
@@ -2538,6 +2565,8 @@ module Aws::CloudWatch
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #   \|
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
     #
     # @option params [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
@@ -2801,6 +2830,7 @@ module Aws::CloudWatch
     #         label: "MetricLabel",
     #         return_data: false,
     #         period: 1,
+    #         account_id: "AccountId",
     #       },
     #     ],
     #     tags: [
@@ -2881,8 +2911,8 @@ module Aws::CloudWatch
     # @option params [required, String] :namespace
     #   The namespace for the metric data.
     #
-    #   To avoid conflicts with AWS service namespaces, you should not specify
-    #   a namespace that begins with `AWS/`
+    #   To avoid conflicts with Amazon Web Services service namespaces, you
+    #   should not specify a namespace that begins with `AWS/`
     #
     # @option params [required, Array<Types::MetricDatum>] :metric_data
     #   The data for the metric. The array can include no more than 20 metrics
@@ -2929,8 +2959,8 @@ module Aws::CloudWatch
     end
 
     # Creates or updates a metric stream. Metric streams can automatically
-    # stream CloudWatch metrics to AWS destinations including Amazon S3 and
-    # to many third-party solutions.
+    # stream CloudWatch metrics to Amazon Web Services destinations
+    # including Amazon S3 and to many third-party solutions.
     #
     # For more information, see [ Using Metric Streams][1].
     #
@@ -3013,6 +3043,17 @@ module Aws::CloudWatch
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions by granting a user permission to
     #   access or change only resources with certain tag values.
+    #
+    #   You can use this parameter only when you are creating a new metric
+    #   stream. If you are using this operation to update an existing metric
+    #   stream, any tags you specify in this parameter are ignored. To change
+    #   the tags of an existing metric stream, use [TagResource][1] or
+    #   [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #
     # @return [Types::PutMetricStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3181,8 +3222,8 @@ module Aws::CloudWatch
     # use them to scope user permissions by granting a user permission to
     # access or change only resources with certain tag values.
     #
-    # Tags don't have any semantic meaning to AWS and are interpreted
-    # strictly as strings of characters.
+    # Tags don't have any semantic meaning to Amazon Web Services and are
+    # interpreted strictly as strings of characters.
     #
     # You can use the `TagResource` action with an alarm that already has
     # tags. If you specify a new tag key for the alarm, this tag is appended
@@ -3286,7 +3327,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -44,6 +44,8 @@ module Aws::EFS
     DependencyTimeout = Shapes::StructureShape.new(name: 'DependencyTimeout')
     DescribeAccessPointsRequest = Shapes::StructureShape.new(name: 'DescribeAccessPointsRequest')
     DescribeAccessPointsResponse = Shapes::StructureShape.new(name: 'DescribeAccessPointsResponse')
+    DescribeAccountPreferencesRequest = Shapes::StructureShape.new(name: 'DescribeAccountPreferencesRequest')
+    DescribeAccountPreferencesResponse = Shapes::StructureShape.new(name: 'DescribeAccountPreferencesResponse')
     DescribeBackupPolicyRequest = Shapes::StructureShape.new(name: 'DescribeBackupPolicyRequest')
     DescribeFileSystemPolicyRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemPolicyRequest')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
@@ -108,10 +110,16 @@ module Aws::EFS
     PolicyNotFound = Shapes::StructureShape.new(name: 'PolicyNotFound')
     PosixUser = Shapes::StructureShape.new(name: 'PosixUser')
     ProvisionedThroughputInMibps = Shapes::FloatShape.new(name: 'ProvisionedThroughputInMibps')
+    PutAccountPreferencesRequest = Shapes::StructureShape.new(name: 'PutAccountPreferencesRequest')
+    PutAccountPreferencesResponse = Shapes::StructureShape.new(name: 'PutAccountPreferencesResponse')
     PutBackupPolicyRequest = Shapes::StructureShape.new(name: 'PutBackupPolicyRequest')
     PutFileSystemPolicyRequest = Shapes::StructureShape.new(name: 'PutFileSystemPolicyRequest')
     PutLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutLifecycleConfigurationRequest')
+    Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceIdPreference = Shapes::StructureShape.new(name: 'ResourceIdPreference')
+    ResourceIdType = Shapes::StringShape.new(name: 'ResourceIdType')
+    Resources = Shapes::ListShape.new(name: 'Resources')
     RootDirectory = Shapes::StructureShape.new(name: 'RootDirectory')
     SecondaryGids = Shapes::ListShape.new(name: 'SecondaryGids')
     SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
@@ -243,6 +251,14 @@ module Aws::EFS
     DescribeAccessPointsResponse.add_member(:access_points, Shapes::ShapeRef.new(shape: AccessPointDescriptions, location_name: "AccessPoints"))
     DescribeAccessPointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeAccessPointsResponse.struct_class = Types::DescribeAccessPointsResponse
+
+    DescribeAccountPreferencesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeAccountPreferencesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeAccountPreferencesRequest.struct_class = Types::DescribeAccountPreferencesRequest
+
+    DescribeAccountPreferencesResponse.add_member(:resource_id_preference, Shapes::ShapeRef.new(shape: ResourceIdPreference, location_name: "ResourceIdPreference"))
+    DescribeAccountPreferencesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeAccountPreferencesResponse.struct_class = Types::DescribeAccountPreferencesResponse
 
     DescribeBackupPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     DescribeBackupPolicyRequest.struct_class = Types::DescribeBackupPolicyRequest
@@ -424,6 +440,12 @@ module Aws::EFS
     PosixUser.add_member(:secondary_gids, Shapes::ShapeRef.new(shape: SecondaryGids, location_name: "SecondaryGids"))
     PosixUser.struct_class = Types::PosixUser
 
+    PutAccountPreferencesRequest.add_member(:resource_id_type, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location_name: "ResourceIdType"))
+    PutAccountPreferencesRequest.struct_class = Types::PutAccountPreferencesRequest
+
+    PutAccountPreferencesResponse.add_member(:resource_id_preference, Shapes::ShapeRef.new(shape: ResourceIdPreference, location_name: "ResourceIdPreference"))
+    PutAccountPreferencesResponse.struct_class = Types::PutAccountPreferencesResponse
+
     PutBackupPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     PutBackupPolicyRequest.add_member(:backup_policy, Shapes::ShapeRef.new(shape: BackupPolicy, required: true, location_name: "BackupPolicy"))
     PutBackupPolicyRequest.struct_class = Types::PutBackupPolicyRequest
@@ -436,6 +458,12 @@ module Aws::EFS
     PutLifecycleConfigurationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     PutLifecycleConfigurationRequest.add_member(:lifecycle_policies, Shapes::ShapeRef.new(shape: LifecyclePolicies, required: true, location_name: "LifecyclePolicies"))
     PutLifecycleConfigurationRequest.struct_class = Types::PutLifecycleConfigurationRequest
+
+    ResourceIdPreference.add_member(:resource_id_type, Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "ResourceIdType"))
+    ResourceIdPreference.add_member(:resources, Shapes::ShapeRef.new(shape: Resources, location_name: "Resources"))
+    ResourceIdPreference.struct_class = Types::ResourceIdPreference
+
+    Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
     RootDirectory.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     RootDirectory.add_member(:creation_info, Shapes::ShapeRef.new(shape: CreationInfo, location_name: "CreationInfo"))
@@ -649,6 +677,15 @@ module Aws::EFS
         )
       end)
 
+      api.add_operation(:describe_account_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountPreferences"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-02-01/account-preferences"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountPreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_backup_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBackupPolicy"
         o.http_method = "GET"
@@ -774,6 +811,15 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
+      end)
+
+      api.add_operation(:put_account_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountPreferences"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2015-02-01/account-preferences"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountPreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:put_backup_policy, Seahorse::Model::Operation.new.tap do |o|

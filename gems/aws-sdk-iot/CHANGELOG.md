@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2021-07-29)
+------------------
+
+* Feature - Increase maximum credential duration of role alias to 12 hours.
+
+1.70.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2021-05-25)
+------------------
+
+* Feature - This release includes support for a new feature: Job templates for AWS IoT Device Management Jobs. The release includes job templates as a new resource and APIs for managing job templates.
+
 1.68.0 (2021-03-31)
 ------------------
 

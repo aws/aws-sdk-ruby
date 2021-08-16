@@ -30,6 +30,7 @@ module Aws::GreengrassV2
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {RequestAlreadyInProgressException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
@@ -98,6 +99,21 @@ module Aws::GreengrassV2
       # @return [String]
       def retry_after_seconds
         @data[:retry_after_seconds]
+      end
+    end
+
+    class RequestAlreadyInProgressException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GreengrassV2::Types::RequestAlreadyInProgressException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

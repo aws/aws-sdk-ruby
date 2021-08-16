@@ -29,9 +29,9 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account IDs of the users (principals) who will be given
-    #   access to the specified actions. The users must have AWS accounts,
-    #   but do not need to be signed up for this service.
+    #   The account IDs of the users (principals) who will be given access
+    #   to the specified actions. The users must have account, but do not
+    #   need to be signed up for this service.
     #   @return [Array<String>]
     #
     # @!attribute [rw] action_name
@@ -141,10 +141,10 @@ module Aws::SNS
     #
     # @!attribute [rw] authenticate_on_unsubscribe
     #   Disallows unauthenticated unsubscribes of the subscription. If the
-    #   value of this parameter is `true` and the request has an AWS
-    #   signature, then only the topic owner and the subscription owner can
-    #   unsubscribe the endpoint. The unsubscribe action requires AWS
-    #   authentication.
+    #   value of this parameter is `true` and the request has an Amazon Web
+    #   Services signature, then only the topic owner and the subscription
+    #   owner can unsubscribe the endpoint. The unsubscribe action requires
+    #   Amazon Web Services authentication.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionInput AWS API Documentation
@@ -211,7 +211,7 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1]
+    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
     #
     #
     #
@@ -295,6 +295,38 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSMSSandboxPhoneNumberInput
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number: "PhoneNumberString", # required
+    #         language_code: "en-US", # accepts en-US, en-GB, es-419, es-ES, de-DE, fr-CA, fr-FR, it-IT, ja-JP, pt-BR, kr-KR, zh-CN, zh-TW
+    #       }
+    #
+    # @!attribute [rw] phone_number
+    #   The destination phone number to verify. On verification, Amazon SNS
+    #   adds this phone number to the list of verified phone numbers that
+    #   you can send SMS messages to.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language to use for sending the OTP. The default value is
+    #   `en-US`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateSMSSandboxPhoneNumberInput AWS API Documentation
+    #
+    class CreateSMSSandboxPhoneNumberInput < Struct.new(
+      :phone_number,
+      :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateSMSSandboxPhoneNumberResult AWS API Documentation
+    #
+    class CreateSMSSandboxPhoneNumberResult < Aws::EmptyStructure; end
+
     # Input for CreateTopic action.
     #
     # @note When making an API call, you may pass CreateTopicInput
@@ -342,13 +374,13 @@ module Aws::SNS
     #     default, only the topic owner can publish or subscribe to the
     #     topic.
     #
-    #   The following attribute applies only to
-    #   [server-side-encryption][1]\:
+    #   The following attribute applies only to [server-side
+    #   encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
-    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed
+    #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
@@ -370,7 +402,7 @@ module Aws::SNS
     #       message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the the `MessageDeduplicationId` parameter for the
+    #       value for the `MessageDeduplicationId` parameter for the
     #       `Publish` action.
     #
     #
@@ -457,6 +489,29 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteSMSSandboxPhoneNumberInput
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number: "PhoneNumberString", # required
+    #       }
+    #
+    # @!attribute [rw] phone_number
+    #   The destination phone number to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteSMSSandboxPhoneNumberInput AWS API Documentation
+    #
+    class DeleteSMSSandboxPhoneNumberInput < Struct.new(
+      :phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteSMSSandboxPhoneNumberResult AWS API Documentation
+    #
+    class DeleteSMSSandboxPhoneNumberResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteTopicInput
     #   data as a hash:
     #
@@ -509,9 +564,9 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Indicates that the number of filter polices in your AWS account
-    # exceeds the limit. To add more filter polices, submit an SNS Limit
-    # Increase case in the AWS Support Center.
+    # Indicates that the number of filter polices in your account exceeds
+    # the limit. To add more filter polices, submit an SNS Limit Increase
+    # case in the Amazon Web Services Support Center.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -670,6 +725,24 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSSandboxAccountStatusInput AWS API Documentation
+    #
+    class GetSMSSandboxAccountStatusInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] is_in_sandbox
+    #   Indicates whether the calling account is in the SMS sandbox.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSSandboxAccountStatusResult AWS API Documentation
+    #
+    class GetSMSSandboxAccountStatusResult < Struct.new(
+      :is_in_sandbox)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for GetSubscriptionAttributes.
     #
     # @note When making an API call, you may pass GetSubscriptionAttributesInput
@@ -711,7 +784,7 @@ module Aws::SNS
     #     subscription. For more information, see [Amazon SNS Message
     #     Filtering][1] in the *Amazon SNS Developer Guide*.
     #
-    #   * `Owner` – The AWS account ID of the subscription's owner.
+    #   * `Owner` – The account ID of the subscription's owner.
     #
     #   * `PendingConfirmation` – `true` if the subscription hasn't been
     #     confirmed. To confirm a pending subscription, call the
@@ -796,7 +869,7 @@ module Aws::SNS
     #   * `DisplayName` – The human-readable name used in the `From` field
     #     for notifications to `email` and `email-json` endpoints.
     #
-    #   * `Owner` – The AWS account ID of the topic's owner.
+    #   * `Owner` – The account ID of the topic's owner.
     #
     #   * `Policy` – The JSON serialization of the topic's access control
     #     policy.
@@ -818,10 +891,10 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
-    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` - The ID of an Amazon Web Services managed
+    #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
@@ -843,7 +916,7 @@ module Aws::SNS
     #       message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the the `MessageDeduplicationId` parameter for the
+    #       value for the `MessageDeduplicationId` parameter for the
     #       `Publish` action.
     #
     #
@@ -949,8 +1022,8 @@ module Aws::SNS
 
     # The request was rejected because the state of the specified resource
     # isn't valid for this request. For more information, see [How Key
-    # State Affects Use of a Customer Master Key][1] in the *AWS Key
-    # Management Service Developer Guide*.
+    # State Affects Use of a Customer Master Key][1] in the *Key Management
+    # Service Developer Guide*.
     #
     #
     #
@@ -981,7 +1054,8 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # The AWS access key ID needs a subscription for the service.
+    # The Amazon Web Services access key ID needs a subscription for the
+    # service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -995,7 +1069,7 @@ module Aws::SNS
     end
 
     # The request was denied due to request throttling. For more information
-    # about throttling, see [Limits][1] in the *AWS Key Management Service
+    # about throttling, see [Limits][1] in the *Key Management Service
     # Developer Guide.*
     #
     #
@@ -1060,6 +1134,51 @@ module Aws::SNS
     class ListEndpointsByPlatformApplicationResponse < Struct.new(
       :endpoints,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOriginationNumbersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "nextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Token that the previous `ListOriginationNumbers` request returns.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of origination numbers to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListOriginationNumbersRequest AWS API Documentation
+    #
+    class ListOriginationNumbersRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A `NextToken` string is returned when you call the
+    #   `ListOriginationNumbers` operation if additional pages of records
+    #   are available.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_numbers
+    #   A list of the calling account's verified and pending origination
+    #   numbers.
+    #   @return [Array<Types::PhoneNumberInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListOriginationNumbersResult AWS API Documentation
+    #
+    class ListOriginationNumbersResult < Struct.new(
+      :next_token,
+      :phone_numbers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1150,6 +1269,51 @@ module Aws::SNS
     #
     class ListPlatformApplicationsResponse < Struct.new(
       :platform_applications,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSMSSandboxPhoneNumbersInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "nextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Token that the previous `ListSMSSandboxPhoneNumbersInput` request
+    #   returns.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of phone numbers to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSMSSandboxPhoneNumbersInput AWS API Documentation
+    #
+    class ListSMSSandboxPhoneNumbersInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_numbers
+    #   A list of the calling account's pending and verified phone numbers.
+    #   @return [Array<Types::SMSSandboxPhoneNumber>]
+    #
+    # @!attribute [rw] next_token
+    #   A `NextToken` string is returned when you call the
+    #   `ListSMSSandboxPhoneNumbersInput` operation if additional pages of
+    #   records are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSMSSandboxPhoneNumbersResult AWS API Documentation
+    #
+    class ListSMSSandboxPhoneNumbersResult < Struct.new(
+      :phone_numbers,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1413,6 +1577,61 @@ module Aws::SNS
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberResponse AWS API Documentation
     #
     class OptInPhoneNumberResponse < Aws::EmptyStructure; end
+
+    # Indicates that the specified phone number opted out of receiving SMS
+    # messages from your account. You can't send SMS messages to phone
+    # numbers that opt out.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptedOutException AWS API Documentation
+    #
+    class OptedOutException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of phone numbers and their metadata.
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the phone number was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_2_country_code
+    #   The two-character code for the country or region, in ISO 3166-1
+    #   alpha-2 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_type
+    #   The list of supported routes.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capabilities
+    #   The capabilities of each phone number.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PhoneNumberInformation AWS API Documentation
+    #
+    class PhoneNumberInformation < Struct.new(
+      :created_at,
+      :phone_number,
+      :status,
+      :iso_2_country_code,
+      :route_type,
+      :number_capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Platform application object.
     #
@@ -1682,7 +1901,8 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Can't tag resource. Verify that the topic exists.
+    # Can’t perform the action on the specified resource. Make sure that the
+    # resource exists.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1691,6 +1911,38 @@ module Aws::SNS
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A verified or pending destination phone number in the SMS sandbox.
+    #
+    # When you start using Amazon SNS to send SMS messages, your account is
+    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
+    # you to try Amazon SNS features without risking your reputation as an
+    # SMS sender. While your account is in the SMS sandbox, you can use all
+    # of the features of Amazon SNS. However, you can send SMS messages only
+    # to verified destination phone numbers. For more information, including
+    # how to move out of the sandbox to send messages without restrictions,
+    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+    #
+    # @!attribute [rw] phone_number
+    #   The destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The destination phone number's verification status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SMSSandboxPhoneNumber AWS API Documentation
+    #
+    class SMSSandboxPhoneNumber < Struct.new(
+      :phone_number,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1887,7 +2139,7 @@ module Aws::SNS
     #   * Total number of parts
     #
     #   To receive the report, the bucket must have a policy that allows the
-    #   Amazon SNS service principle to perform the `s3:PutObject` and
+    #   Amazon SNS service principal to perform the `s3:PutObject` and
     #   `s3:GetBucketLocation` actions.
     #
     #   For an example bucket policy and usage report, see [Monitoring SMS
@@ -2023,10 +2275,10 @@ module Aws::SNS
     #   The following attribute applies only to
     #   [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
-    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
-    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
-    #     Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed
+    #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
+    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
+    #     in the *Key Management Service API Reference*.
     #
     #   ^
     #
@@ -2046,7 +2298,7 @@ module Aws::SNS
     #       message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the the `MessageDeduplicationId` parameter for the
+    #       value for the `MessageDeduplicationId` parameter for the
     #       `Publish` action.
     #
     #
@@ -2123,8 +2375,7 @@ module Aws::SNS
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device
     #
-    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
-    #     function
+    #   * `lambda` – delivery of JSON-encoded message to an Lambda function
     #
     #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
     #     Data Firehose delivery stream.
@@ -2153,8 +2404,8 @@ module Aws::SNS
     #   * For the `application` protocol, the endpoint is the EndpointArn of
     #     a mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS
-    #     Lambda function.
+    #   * For the `lambda` protocol, the endpoint is the ARN of an Lambda
+    #     function.
     #
     #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
     #     Kinesis Data Firehose delivery stream.
@@ -2164,8 +2415,7 @@ module Aws::SNS
     #   A map of attributes with their corresponding values.
     #
     #   The following lists the names, descriptions, and values of the
-    #   special request parameters that the `SetTopicAttributes` action
-    #   uses:
+    #   special request parameters that the `Subscribe` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
@@ -2484,6 +2734,84 @@ module Aws::SNS
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Indicates that a request parameter does not comply with the associated
+    # constraints.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UserErrorException AWS API Documentation
+    #
+    class UserErrorException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates that a parameter in the request is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates that the one-time password (OTP) used for verification is
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the verification error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/VerificationException AWS API Documentation
+    #
+    class VerificationException < Struct.new(
+      :message,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass VerifySMSSandboxPhoneNumberInput
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number: "PhoneNumberString", # required
+    #         one_time_password: "OTPCode", # required
+    #       }
+    #
+    # @!attribute [rw] phone_number
+    #   The destination phone number to verify.
+    #   @return [String]
+    #
+    # @!attribute [rw] one_time_password
+    #   The OTP sent to the destination number from the
+    #   `CreateSMSSandBoxPhoneNumber` call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/VerifySMSSandboxPhoneNumberInput AWS API Documentation
+    #
+    class VerifySMSSandboxPhoneNumberInput < Struct.new(
+      :phone_number,
+      :one_time_password)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination phone number's verification status.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/VerifySMSSandboxPhoneNumberResult AWS API Documentation
+    #
+    class VerifySMSSandboxPhoneNumberResult < Aws::EmptyStructure; end
 
   end
 end

@@ -17,23 +17,24 @@ module Aws::LexRuntimeV2
 
       # @option params [Hash&lt;String,String&gt;] :request_attributes
       #   Request-specific information passed between the client application and
-      #   Amazon Lex.
+      #   Amazon Lex V2.
       #
       #   The namespace `x-amz-lex:` is reserved for special attributes. Don&#39;t
       #   create any request attributes for prefix `x-amz-lex:`.
       #
       # @option params [String] :response_content_type
-      #   The message that Amazon Lex returns in the response can be either text
-      #   or speech based on the `responseContentType` value.
+      #   The message that Amazon Lex V2 returns in the response can be either
+      #   text or speech based on the `responseContentType` value.
       #
-      #   * If the value is `text/plain;charset=utf-8`, Amazon Lex returns text
-      #     in the response.
+      #   * If the value is `text/plain;charset=utf-8`, Amazon Lex V2 returns
+      #     text in the response.
       #
-      #   * If the value begins with `audio/`, Amazon Lex returns speech in the
-      #     response. Amazon Lex uses Amazon Polly to generate the speech using
-      #     the configuration that you specified in the `requestContentType`
-      #     parameter. For example, if you specify `audio/mpeg` as the value,
-      #     Amazon Lex returns speech in the MPEG format.
+      #   * If the value begins with `audio/`, Amazon Lex V2 returns speech in
+      #     the response. Amazon Lex V2 uses Amazon Polly to generate the speech
+      #     using the configuration that you specified in the
+      #     `requestContentType` parameter. For example, if you specify
+      #     `audio/mpeg` as the value, Amazon Lex V2 returns speech in the MPEG
+      #     format.
       #
       #   * If the value is `audio/pcm`, the speech returned is audio/pcm in
       #     16-bit, little-endian format.
@@ -51,13 +52,13 @@ module Aws::LexRuntimeV2
       #     * text/plain; charset=utf-8
       #
       # @option params [Types::SessionState] :session_state
-      #   The state of the user&#39;s session with Amazon Lex.
+      #   The state of the user&#39;s session with Amazon Lex V2.
       #
       # @option params [Array&lt;Types::Message&gt;] :welcome_messages
       #   A list of messages to send to the user.
       #
       # @option params [Boolean] :disable_playback
-      #   Determines whether Amazon Lex should send audio responses to the
+      #   Determines whether Amazon Lex V2 should send audio responses to the
       #   client application. When this parameter if `false`, the client
       #   application needs to create responses for the user.
       #
@@ -67,7 +68,7 @@ module Aws::LexRuntimeV2
       #
       # @option params [Integer] :client_timestamp_millis
       #   A timestamp set by the client of the date and time that the event was
-      #   sent to Amazon Lex.
+      #   sent to Amazon Lex V2.
       #
       def signal_configuration_event_event(params = {})
         @event_emitter.emit(:configuration_event, params)
@@ -89,7 +90,7 @@ module Aws::LexRuntimeV2
       #
       # @option params [Integer] :client_timestamp_millis
       #   A timestamp set by the client of the date and time that the event was
-      #   sent to Amazon Lex.
+      #   sent to Amazon Lex V2.
       #
       def signal_audio_input_event_event(params = {})
         @event_emitter.emit(:audio_input_event, params)
@@ -105,14 +106,14 @@ module Aws::LexRuntimeV2
       #
       # @option params [Integer] :client_timestamp_millis
       #   A timestamp set by the client of the date and time that the event was
-      #   sent to Amazon Lex.
+      #   sent to Amazon Lex V2.
       #
       def signal_dtmf_input_event_event(params = {})
         @event_emitter.emit(:dtmf_input_event, params)
       end
 
       # @option params [String] :text
-      #   The text from the user. Amazon Lex processes this as a complete
+      #   The text from the user. Amazon Lex V2 processes this as a complete
       #   statement.
       #
       # @option params [String] :event_id
@@ -121,7 +122,7 @@ module Aws::LexRuntimeV2
       #
       # @option params [Integer] :client_timestamp_millis
       #   A timestamp set by the client of the date and time that the event was
-      #   sent to Amazon Lex.
+      #   sent to Amazon Lex V2.
       #
       def signal_text_input_event_event(params = {})
         @event_emitter.emit(:text_input_event, params)
@@ -133,7 +134,7 @@ module Aws::LexRuntimeV2
       #
       # @option params [Integer] :client_timestamp_millis
       #   A timestamp set by the client of the date and time that the event was
-      #   sent to Amazon Lex.
+      #   sent to Amazon Lex V2.
       #
       def signal_playback_completion_event_event(params = {})
         @event_emitter.emit(:playback_completion_event, params)
@@ -145,7 +146,7 @@ module Aws::LexRuntimeV2
       #
       # @option params [Integer] :client_timestamp_millis
       #   A timestamp set by the client of the date and time that the event was
-      #   sent to Amazon Lex.
+      #   sent to Amazon Lex V2.
       #
       def signal_disconnection_event_event(params = {})
         @event_emitter.emit(:disconnection_event, params)

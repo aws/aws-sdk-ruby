@@ -475,6 +475,8 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomaly.update_time #=> Time
     #   resp.proactive_anomaly.anomaly_time_range.start_time #=> Time
     #   resp.proactive_anomaly.anomaly_time_range.end_time #=> Time
+    #   resp.proactive_anomaly.anomaly_reported_time_range.open_time #=> Time
+    #   resp.proactive_anomaly.anomaly_reported_time_range.close_time #=> Time
     #   resp.proactive_anomaly.prediction_time_range.start_time #=> Time
     #   resp.proactive_anomaly.prediction_time_range.end_time #=> Time
     #   resp.proactive_anomaly.source_details.cloud_watch_metrics #=> Array
@@ -495,6 +497,8 @@ module Aws::DevOpsGuru
     #   resp.reactive_anomaly.status #=> String, one of "ONGOING", "CLOSED"
     #   resp.reactive_anomaly.anomaly_time_range.start_time #=> Time
     #   resp.reactive_anomaly.anomaly_time_range.end_time #=> Time
+    #   resp.reactive_anomaly.anomaly_reported_time_range.open_time #=> Time
+    #   resp.reactive_anomaly.anomaly_reported_time_range.close_time #=> Time
     #   resp.reactive_anomaly.source_details.cloud_watch_metrics #=> Array
     #   resp.reactive_anomaly.source_details.cloud_watch_metrics[0].metric_name #=> String
     #   resp.reactive_anomaly.source_details.cloud_watch_metrics[0].namespace #=> String
@@ -819,6 +823,8 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomalies[0].update_time #=> Time
     #   resp.proactive_anomalies[0].anomaly_time_range.start_time #=> Time
     #   resp.proactive_anomalies[0].anomaly_time_range.end_time #=> Time
+    #   resp.proactive_anomalies[0].anomaly_reported_time_range.open_time #=> Time
+    #   resp.proactive_anomalies[0].anomaly_reported_time_range.close_time #=> Time
     #   resp.proactive_anomalies[0].prediction_time_range.start_time #=> Time
     #   resp.proactive_anomalies[0].prediction_time_range.end_time #=> Time
     #   resp.proactive_anomalies[0].source_details.cloud_watch_metrics #=> Array
@@ -840,6 +846,8 @@ module Aws::DevOpsGuru
     #   resp.reactive_anomalies[0].status #=> String, one of "ONGOING", "CLOSED"
     #   resp.reactive_anomalies[0].anomaly_time_range.start_time #=> Time
     #   resp.reactive_anomalies[0].anomaly_time_range.end_time #=> Time
+    #   resp.reactive_anomalies[0].anomaly_reported_time_range.open_time #=> Time
+    #   resp.reactive_anomalies[0].anomaly_reported_time_range.close_time #=> Time
     #   resp.reactive_anomalies[0].source_details.cloud_watch_metrics #=> Array
     #   resp.reactive_anomalies[0].source_details.cloud_watch_metrics[0].metric_name #=> String
     #   resp.reactive_anomalies[0].source_details.cloud_watch_metrics[0].namespace #=> String
@@ -1385,7 +1393,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

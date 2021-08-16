@@ -691,7 +691,7 @@ module Aws::WorkSpaces
     # @option params [Array<Types::Tag>] :tags
     #   The tags associated with the bundle.
     #
-    #   <note markdown="1"> To add tags at the same time that you're creating the bundle, you
+    #   <note markdown="1"> To add tags at the same time when you're creating the bundle, you
     #   must create an IAM policy that grants your IAM user permissions to use
     #   `workspaces:CreateTags`.
     #
@@ -1428,6 +1428,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_access_properties.device_type_android #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_chrome_os #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_zero_client #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.device_type_linux #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].tenancy #=> String, one of "DEDICATED", "SHARED"
     #   resp.directories[0].selfservice_permissions.restart_workspace #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.increase_volume_size #=> String, one of "ENABLED", "DISABLED"
@@ -2076,6 +2077,7 @@ module Aws::WorkSpaces
     #       device_type_android: "ALLOW", # accepts ALLOW, DENY
     #       device_type_chrome_os: "ALLOW", # accepts ALLOW, DENY
     #       device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
+    #       device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #     },
     #   })
     #
@@ -2769,7 +2771,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

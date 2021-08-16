@@ -39,7 +39,7 @@ module Aws
         it 'computes MD5 of the http body and sends as content-md5 header' do
           resp = client.checksum_operation(string: 'md5 me captain')
           expect(resp.context.http_request.headers['content-md5']).to eq(
-            '9ZS+xZNSM+p0Dt901z+WHg=='
+            'rqd/0N8H2GgZWzmo3oY9tA=='
           )
         end
 

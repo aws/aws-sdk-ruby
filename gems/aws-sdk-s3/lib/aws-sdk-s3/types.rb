@@ -71,19 +71,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -104,7 +104,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -209,8 +209,7 @@ module Aws::S3
     #
     # @!attribute [rw] owner
     #   Specifies the replica ownership. For default and valid values, see
-    #   [PUT bucket replication][1] in the *Amazon Simple Storage Service
-    #   API Reference*.
+    #   [PUT bucket replication][1] in the *Amazon S3 API Reference*.
     #
     #
     #
@@ -451,8 +450,8 @@ module Aws::S3
     end
 
     # In terms of implementation, a Bucket is a resource. An Amazon S3
-    # bucket name is globally unique, and the namespace is shared by all AWS
-    # accounts.
+    # bucket name is globally unique, and the namespace is shared by all
+    # Amazon Web Services accounts.
     #
     # @!attribute [rw] name
     #   The name of the bucket.
@@ -481,10 +480,11 @@ module Aws::S3
     class BucketAlreadyExists < Aws::EmptyStructure; end
 
     # The bucket you tried to create already exists, and you own it. Amazon
-    # S3 returns this error in all AWS Regions except in the North Virginia
-    # Region. For legacy compatibility, if you re-create an existing bucket
-    # that you already own in the North Virginia Region, Amazon S3 returns
-    # 200 OK and resets the bucket access control lists (ACLs).
+    # S3 returns this error in all Amazon Web Services Regions except in the
+    # North Virginia Region. For legacy compatibility, if you re-create an
+    # existing bucket that you already own in the North Virginia Region,
+    # Amazon S3 returns 200 OK and resets the bucket access control lists
+    # (ACLs).
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketAlreadyOwnedByYou AWS API Documentation
     #
@@ -590,8 +590,7 @@ module Aws::S3
     # @!attribute [rw] logging_enabled
     #   Describes where logs are stored and the prefix that Amazon S3
     #   assigns to all log object keys for a bucket. For more information,
-    #   see [PUT Bucket logging][1] in the *Amazon Simple Storage Service
-    #   API Reference*.
+    #   see [PUT Bucket logging][1] in the *Amazon S3 API Reference*.
     #
     #
     #
@@ -845,7 +844,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for specifying the AWS Lambda notification configuration.
+    # Container for specifying the Lambda notification configuration.
     #
     # @note When making an API call, you may pass CloudFunctionConfiguration
     #   data as a hash:
@@ -916,25 +915,26 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The name of the bucket that contains the newly created object.
+    #   The name of the bucket that contains the newly created object. Does
+    #   not return the access point ARN or access point alias if used.
     #
     #   When using this action with an access point, you must direct
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -964,10 +964,10 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   If you specified server-side encryption either with an Amazon
-    #   S3-managed encryption key or an AWS KMS customer master key (CMK) in
-    #   your initiate multipart upload request, the response includes this
-    #   header. It confirms the encryption algorithm that Amazon S3 used to
-    #   encrypt the object.
+    #   S3-managed encryption key or an Amazon Web Services KMS customer
+    #   master key (CMK) in your initiate multipart upload request, the
+    #   response includes this header. It confirms the encryption algorithm
+    #   that Amazon S3 used to encrypt the object.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -976,14 +976,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) that was
-    #   used for the object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -1029,6 +1029,29 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   Name of the bucket to which the multipart upload was initiated.
+    #
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
+    #
+    #   When using this action with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1048,7 +1071,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1223,21 +1246,21 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) that was
-    #   used for the object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
-    #   If present, specifies the AWS KMS Encryption Context to use for
-    #   object encryption. The value of this header is a base64-encoded
-    #   UTF-8 string holding JSON with the encryption context key-value
-    #   pairs.
+    #   If present, specifies the Amazon Web Services KMS Encryption Context
+    #   to use for object encryption. The value of this header is a
+    #   base64-encoded UTF-8 string holding JSON with the encryption context
+    #   key-value pairs.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the copied object uses an S3 Bucket Key for
-    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -1324,19 +1347,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1389,7 +1412,8 @@ module Aws::S3
     #     The value must be URL encoded.
     #
     #     <note markdown="1"> Amazon S3 supports copy operations using access points only when
-    #     the source and destination buckets are in the same AWS Region.
+    #     the source and destination buckets are in the same Amazon Web
+    #     Services Region.
     #
     #      </note>
     #
@@ -1490,7 +1514,7 @@ module Aws::S3
     #   and high availability. Depending on performance needs, you can
     #   specify a different Storage Class. Amazon S3 on Outposts only uses
     #   the OUTPOSTS Storage Class. For more information, see [Storage
-    #   Classes][1] in the *Amazon S3 Service Developer Guide*.
+    #   Classes][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1524,12 +1548,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET
-    #   and PUT requests for an object protected by AWS KMS will fail if not
-    #   made via SSL or using SigV4. For information about configuring using
-    #   any of the officially supported AWS SDKs and AWS CLI, see
+    #   Specifies the Amazon Web Services KMS key ID to use for object
+    #   encryption. All GET and PUT requests for an object protected by
+    #   Amazon Web Services KMS will fail if not made via SSL or using
+    #   SigV4. For information about configuring using any of the officially
+    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
     #   [Specifying the Signature Version in Request Authentication][1] in
-    #   the *Amazon S3 Developer Guide*.
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1537,9 +1562,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
-    #   Specifies the AWS KMS Encryption Context to use for object
-    #   encryption. The value of this header is a base64-encoded UTF-8
-    #   string holding JSON with the encryption context key-value pairs.
+    #   Specifies the Amazon Web Services KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -1574,7 +1600,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1664,9 +1690,7 @@ module Aws::S3
     #
     # @!attribute [rw] etag
     #   Returns the ETag of the new object. The ETag reflects only changes
-    #   to the contents of an object, not its metadata. The source and
-    #   destination ETag is identical for a successfully copied
-    #   non-multipart object.
+    #   to the contents of an object, not its metadata.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
@@ -1781,8 +1805,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] grant_write
-    #   Allows grantee to create, overwrite, and delete any object in the
-    #   bucket.
+    #   Allows grantee to create new objects in the bucket.
+    #
+    #   For the bucket and object owners of existing objects, also allows
+    #   deletions and overwrites of those objects.
     #   @return [String]
     #
     # @!attribute [rw] grant_write_acp
@@ -1836,24 +1862,25 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   The name of the bucket to which the multipart upload was initiated.
+    #   Does not return the access point ARN or access point alias if used.
     #
     #   When using this action with an access point, you must direct
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1888,21 +1915,21 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) that was
-    #   used for the object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
-    #   If present, specifies the AWS KMS Encryption Context to use for
-    #   object encryption. The value of this header is a base64-encoded
-    #   UTF-8 string holding JSON with the encryption context key-value
-    #   pairs.
+    #   If present, specifies the Amazon Web Services KMS Encryption Context
+    #   to use for object encryption. The value of this header is a
+    #   base64-encoded UTF-8 string holding JSON with the encryption context
+    #   key-value pairs.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -1979,19 +2006,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2069,7 +2096,7 @@ module Aws::S3
     #   and high availability. Depending on performance needs, you can
     #   specify a different Storage Class. Amazon S3 on Outposts only uses
     #   the OUTPOSTS Storage Class. For more information, see [Storage
-    #   Classes][1] in the *Amazon S3 Service Developer Guide*.
+    #   Classes][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2103,13 +2130,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the ID of the symmetric customer managed AWS KMS CMK to
-    #   use for object encryption. All GET and PUT requests for an object
-    #   protected by AWS KMS will fail if not made via SSL or using SigV4.
-    #   For information about configuring using any of the officially
-    #   supported AWS SDKs and AWS CLI, see [Specifying the Signature
-    #   Version in Request Authentication][1] in the *Amazon S3 Developer
-    #   Guide*.
+    #   Specifies the ID of the symmetric customer managed Amazon Web
+    #   Services KMS CMK to use for object encryption. All GET and PUT
+    #   requests for an object protected by Amazon Web Services KMS will
+    #   fail if not made via SSL or using SigV4. For information about
+    #   configuring using any of the officially supported Amazon Web
+    #   Services SDKs and Amazon Web Services CLI, see [Specifying the
+    #   Signature Version in Request Authentication][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
@@ -2117,9 +2145,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
-    #   Specifies the AWS KMS Encryption Context to use for object
-    #   encryption. The value of this header is a base64-encoded UTF-8
-    #   string holding JSON with the encryption context key-value pairs.
+    #   Specifies the Amazon Web Services KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -2137,7 +2166,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2783,19 +2812,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2823,7 +2852,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2885,19 +2914,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2983,19 +3012,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3019,7 +3048,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3152,12 +3181,12 @@ module Aws::S3
     #
     # @!attribute [rw] account
     #   Destination bucket owner account ID. In a cross-account scenario, if
-    #   you direct Amazon S3 to change replica ownership to the AWS account
-    #   that owns the destination bucket by specifying the
+    #   you direct Amazon S3 to change replica ownership to the Amazon Web
+    #   Services account that owns the destination bucket by specifying the
     #   `AccessControlTranslation` property, this is the account ID of the
     #   destination bucket owner. For more information, see [Replication
     #   Additional Configuration: Changing the Replica Owner][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -3170,8 +3199,7 @@ module Aws::S3
     #   storage class of the source object to create the object replica.
     #
     #   For valid values, see the `StorageClass` element of the [PUT Bucket
-    #   replication][1] action in the *Amazon Simple Storage Service API
-    #   Reference*.
+    #   replication][1] action in the *Amazon S3 API Reference*.
     #
     #
     #
@@ -3181,10 +3209,10 @@ module Aws::S3
     # @!attribute [rw] access_control_translation
     #   Specify this only in a cross-account scenario (where source and
     #   destination bucket owners are not the same), and you want to change
-    #   replica ownership to the AWS account that owns the destination
-    #   bucket. If this is not specified in the replication configuration,
-    #   the replicas are owned by same AWS account that owns the source
-    #   object.
+    #   replica ownership to the Amazon Web Services account that owns the
+    #   destination bucket. If this is not specified in the replication
+    #   configuration, the replicas are owned by same Amazon Web Services
+    #   account that owns the source object.
     #   @return [Types::AccessControlTranslation]
     #
     # @!attribute [rw] encryption_configuration
@@ -3237,10 +3265,11 @@ module Aws::S3
     #
     # @!attribute [rw] kms_key_id
     #   If the encryption type is `aws:kms`, this optional value specifies
-    #   the ID of the symmetric customer managed AWS KMS CMK to use for
-    #   encryption of job results. Amazon S3 only supports symmetric CMKs.
-    #   For more information, see [Using Symmetric and Asymmetric Keys][1]
-    #   in the *AWS Key Management Service Developer Guide*.
+    #   the ID of the symmetric customer managed Amazon Web Services KMS CMK
+    #   to use for encryption of job results. Amazon S3 only supports
+    #   symmetric CMKs. For more information, see [Using symmetric and
+    #   asymmetric keys][1] in the *Amazon Web Services Key Management
+    #   Service Developer Guide*.
     #
     #
     #
@@ -3274,11 +3303,12 @@ module Aws::S3
     #
     # @!attribute [rw] replica_kms_key_id
     #   Specifies the ID (Key ARN or Alias ARN) of the customer managed
-    #   customer master key (CMK) stored in AWS Key Management Service (KMS)
-    #   for the destination bucket. Amazon S3 uses this key to encrypt
-    #   replica objects. Amazon S3 only supports symmetric customer managed
-    #   CMKs. For more information, see [Using Symmetric and Asymmetric
-    #   Keys][1] in the *AWS Key Management Service Developer Guide*.
+    #   Amazon Web Services KMS key stored in Amazon Web Services Key
+    #   Management Service (KMS) for the destination bucket. Amazon S3 uses
+    #   this key to encrypt replica objects. Amazon S3 only supports
+    #   symmetric, customer managed KMS keys. For more information, see
+    #   [Using symmetric and asymmetric keys][1] in the *Amazon Web Services
+    #   Key Management Service Developer Guide*.
     #
     #
     #
@@ -3332,9 +3362,9 @@ module Aws::S3
     #
     #   * * *Code:* AccountProblem
     #
-    #     * *Description:* There is a problem with your AWS account that
-    #       prevents the action from completing successfully. Contact AWS
-    #       Support for further assistance.
+    #     * *Description:* There is a problem with your Amazon Web Services
+    #       account that prevents the action from completing successfully.
+    #       Contact Amazon Web Services Support for further assistance.
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -3343,7 +3373,8 @@ module Aws::S3
     #   * * *Code:* AllAccessDisabled
     #
     #     * *Description:* All access to this Amazon S3 resource has been
-    #       disabled. Contact AWS Support for further assistance.
+    #       disabled. Contact Amazon Web Services Support for further
+    #       assistance.
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -3388,11 +3419,11 @@ module Aws::S3
     #   * * *Code:* BucketAlreadyOwnedByYou
     #
     #     * *Description:* The bucket you tried to create already exists,
-    #       and you own it. Amazon S3 returns this error in all AWS Regions
-    #       except in the North Virginia Region. For legacy compatibility,
-    #       if you re-create an existing bucket that you already own in the
-    #       North Virginia Region, Amazon S3 returns 200 OK and resets the
-    #       bucket access control lists (ACLs).
+    #       and you own it. Amazon S3 returns this error in all Amazon Web
+    #       Services Regions except in the North Virginia Region. For legacy
+    #       compatibility, if you re-create an existing bucket that you
+    #       already own in the North Virginia Region, Amazon S3 returns 200
+    #       OK and resets the bucket access control lists (ACLs).
     #
     #     * *Code:* 409 Conflict (in all Regions except the North Virginia
     #       Region)
@@ -3497,8 +3528,8 @@ module Aws::S3
     #
     #   * * *Code:* InvalidAccessKeyId
     #
-    #     * *Description:* The AWS access key ID you provided does not exist
-    #       in our records.
+    #     * *Description:* The Amazon Web Services access key ID you
+    #       provided does not exist in our records.
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -3595,7 +3626,8 @@ module Aws::S3
     #   * * *Code:* InvalidPayer
     #
     #     * *Description:* All access to this object has been disabled.
-    #       Please contact AWS Support for further assistance.
+    #       Please contact Amazon Web Services Support for further
+    #       assistance.
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -3620,7 +3652,7 @@ module Aws::S3
     #
     #   * * *Code:* InvalidRequest
     #
-    #     * *Description:* Please use AWS4-HMAC-SHA256.
+    #     * *Description:* Please use `AWS4-HMAC-SHA256`.
     #
     #     * *HTTP Status Code:* 400 Bad Request
     #
@@ -3683,7 +3715,8 @@ module Aws::S3
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Acceleration is not supported
-    #       on this bucket. Contact AWS Support for more information.
+    #       on this bucket. Contact Amazon Web Services Support for more
+    #       information.
     #
     #     * *HTTP Status Code:* 400 Bad Request
     #
@@ -3692,7 +3725,8 @@ module Aws::S3
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Acceleration cannot be enabled
-    #       on this bucket. Contact AWS Support for more information.
+    #       on this bucket. Contact Amazon Web Services Support for more
+    #       information.
     #
     #     * *HTTP Status Code:* 400 Bad Request
     #
@@ -3940,7 +3974,7 @@ module Aws::S3
     #
     #     * *Description:* Your account is not signed up for the Amazon S3
     #       service. You must sign up before you can use Amazon S3. You can
-    #       sign up at the following URL: https://aws.amazon.com/s3
+    #       sign up at the following URL: [Amazon S3][2]
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -4029,9 +4063,10 @@ module Aws::S3
     #   * * *Code:* SignatureDoesNotMatch
     #
     #     * *Description:* The request signature we calculated does not
-    #       match the signature you provided. Check your AWS secret access
-    #       key and signing method. For more information, see [REST
-    #       Authentication][2] and [SOAP Authentication][3] for details.
+    #       match the signature you provided. Check your Amazon Web Services
+    #       secret access key and signing method. For more information, see
+    #       [REST Authentication][3] and [SOAP Authentication][4] for
+    #       details.
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -4110,8 +4145,9 @@ module Aws::S3
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html
+    #   [2]: http://aws.amazon.com/s3
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
+    #   [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -4166,7 +4202,7 @@ module Aws::S3
 
     # Optional configuration to replicate existing source bucket objects.
     # For more information, see [Replicating Existing Objects][1] in the
-    # *Amazon S3 Developer Guide*.
+    # *Amazon S3 User Guide*.
     #
     #
     #
@@ -4647,8 +4683,7 @@ module Aws::S3
     # @!attribute [rw] logging_enabled
     #   Describes where logs are stored and the prefix that Amazon S3
     #   assigns to all log object keys for a bucket. For more information,
-    #   see [PUT Bucket logging][1] in the *Amazon Simple Storage Service
-    #   API Reference*.
+    #   see [PUT Bucket logging][1] in the *Amazon S3 API Reference*.
     #
     #
     #
@@ -5150,10 +5185,10 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5173,7 +5208,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5229,10 +5264,10 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5254,7 +5289,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5306,10 +5341,10 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5445,14 +5480,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) that was
-    #   used for the object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the object uses an S3 Bucket Key for server-side
-    #   encryption with AWS KMS (SSE-KMS).
+    #   encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_class
@@ -5566,19 +5601,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5677,7 +5712,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5755,10 +5790,10 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5780,7 +5815,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5842,19 +5877,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5882,7 +5917,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -5943,7 +5978,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6083,7 +6118,7 @@ module Aws::S3
     #   Email address of the grantee.
     #
     #   <note markdown="1"> Using email addresses to specify a grantee is only supported in the
-    #   following AWS Regions:
+    #   following Amazon Web Services Regions:
     #
     #    * US East (N. Virginia)
     #
@@ -6102,7 +6137,8 @@ module Aws::S3
     #   * South America (São Paulo)
     #
     #    For a list of all the Amazon S3 supported Regions and endpoints, see
-    #   [Regions and Endpoints][1] in the AWS General Reference.
+    #   [Regions and Endpoints][1] in the Amazon Web Services General
+    #   Reference.
     #
     #    </note>
     #
@@ -6150,19 +6186,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6293,10 +6329,10 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   If the object is stored using server-side encryption either with an
-    #   AWS KMS customer master key (CMK) or an Amazon S3-managed encryption
-    #   key, the response includes this header with the value of the
-    #   server-side encryption algorithm used when storing this object in
-    #   Amazon S3 (for example, AES256, aws:kms).
+    #   Amazon Web Services KMS customer master key (CMK) or an Amazon
+    #   S3-managed encryption key, the response includes this header with
+    #   the value of the server-side encryption algorithm used when storing
+    #   this object in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -6317,14 +6353,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) that was
-    #   used for the object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the object uses an S3 Bucket Key for server-side
-    #   encryption with AWS KMS (SSE-KMS).
+    #   encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_class
@@ -6486,19 +6522,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6573,7 +6609,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -6650,8 +6686,9 @@ module Aws::S3
     # Container element that identifies who initiated the multipart upload.
     #
     # @!attribute [rw] id
-    #   If the principal is an AWS account, it provides the Canonical User
-    #   ID. If the principal is an IAM User, it provides a user ARN value.
+    #   If the principal is an Amazon Web Services account, it provides the
+    #   Canonical User ID. If the principal is an IAM User, it provides a
+    #   user ARN value.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -6898,8 +6935,8 @@ module Aws::S3
     end
 
     # Specifies the inventory configuration for an Amazon S3 bucket. For
-    # more information, see [GET Bucket inventory][1] in the *Amazon Simple
-    # Storage Service API Reference*.
+    # more information, see [GET Bucket inventory][1] in the *Amazon S3 API
+    # Reference*.
     #
     #
     #
@@ -6930,7 +6967,7 @@ module Aws::S3
     #         },
     #         id: "InventoryId", # required
     #         included_object_versions: "All", # required, accepts All, Current
-    #         optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier
+    #         optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier, BucketKeyStatus
     #         schedule: { # required
     #           frequency: "Daily", # required, accepts Daily, Weekly
     #         },
@@ -7199,8 +7236,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container for specifying the configuration for AWS Lambda
-    # notifications.
+    # A container for specifying the configuration for Lambda notifications.
     #
     # @note When making an API call, you may pass LambdaFunctionConfiguration
     #   data as a hash:
@@ -7228,14 +7264,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] lambda_function_arn
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function that
-    #   Amazon S3 invokes when the specified event type occurs.
+    #   The Amazon Resource Name (ARN) of the Lambda function that Amazon S3
+    #   invokes when the specified event type occurs.
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   The Amazon S3 bucket event for which to invoke the AWS Lambda
-    #   function. For more information, see [Supported Event Types][1] in
-    #   the *Amazon S3 User Guide*.
+    #   The Amazon S3 bucket event for which to invoke the Lambda function.
+    #   For more information, see [Supported Event Types][1] in the *Amazon
+    #   S3 User Guide*.
     #
     #
     #
@@ -7869,6 +7905,7 @@ module Aws::S3
 
     # @!attribute [rw] bucket
     #   The name of the bucket to which the multipart upload was initiated.
+    #   Does not return the access point ARN or access point alias if used.
     #   @return [String]
     #
     # @!attribute [rw] key_marker
@@ -7978,19 +8015,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8363,19 +8400,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8397,7 +8434,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] marker
-    #   Specifies the key to start with when listing objects in a bucket.
+    #   Marker is where you want Amazon S3 to start listing from. Amazon S3
+    #   starts listing after this specified key. Marker can be any key in
+    #   the bucket.
     #   @return [String]
     #
     # @!attribute [rw] max_keys
@@ -8454,19 +8493,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8589,19 +8628,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8701,6 +8740,7 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   The name of the bucket to which the multipart upload was initiated.
+    #   Does not return the access point ARN or access point alias if used.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -8742,9 +8782,10 @@ module Aws::S3
     #
     # @!attribute [rw] initiator
     #   Container element that identifies who initiated the multipart
-    #   upload. If the initiator is an AWS account, this element provides
-    #   the same information as the `Owner` element. If the initiator is an
-    #   IAM User, this element provides the user ARN and display name.
+    #   upload. If the initiator is an Amazon Web Services account, this
+    #   element provides the same information as the `Owner` element. If the
+    #   initiator is an IAM User, this element provides the user ARN and
+    #   display name.
     #   @return [Types::Initiator]
     #
     # @!attribute [rw] owner
@@ -8804,19 +8845,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8847,7 +8888,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8876,8 +8917,7 @@ module Aws::S3
 
     # Describes where logs are stored and the prefix that Amazon S3 assigns
     # to all log object keys for a bucket. For more information, see [PUT
-    # Bucket logging][1] in the *Amazon Simple Storage Service API
-    # Reference*.
+    # Bucket logging][1] in the *Amazon S3 API Reference*.
     #
     #
     #
@@ -9031,8 +9071,8 @@ module Aws::S3
     # If you're updating an existing metrics configuration, note that this
     # is a full replacement of the existing metrics configuration. If you
     # don't include the elements you want to keep, they are erased. For
-    # more information, see [ PUT Bucket metrics][1] in the *Amazon Simple
-    # Storage Service API Reference*.
+    # more information, see [ PUT Bucket metrics][1] in the *Amazon S3 API
+    # Reference*.
     #
     #
     #
@@ -9204,8 +9244,7 @@ module Aws::S3
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [How Amazon S3 Calculates When an
-    #   Object Became Noncurrent][1] in the *Amazon Simple Storage Service
-    #   Developer Guide*.
+    #   Object Became Noncurrent][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -9333,8 +9372,8 @@ module Aws::S3
     #   @return [Array<Types::QueueConfiguration>]
     #
     # @!attribute [rw] lambda_function_configurations
-    #   Describes the AWS Lambda functions to invoke and the events for
-    #   which to invoke them.
+    #   Describes the Lambda functions to invoke and the events for which to
+    #   invoke them.
     #   @return [Array<Types::LambdaFunctionConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfiguration AWS API Documentation
@@ -9386,7 +9425,7 @@ module Aws::S3
     #   @return [Types::QueueConfigurationDeprecated]
     #
     # @!attribute [rw] cloud_function_configuration
-    #   Container for specifying the AWS Lambda notification configuration.
+    #   Container for specifying the Lambda notification configuration.
     #   @return [Types::CloudFunctionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationDeprecated AWS API Documentation
@@ -9452,14 +9491,14 @@ module Aws::S3
     #   described below:
     #
     #   * Objects created by the PUT Object, POST Object, or Copy operation,
-    #     or through the AWS Management Console, and are encrypted by SSE-S3
-    #     or plaintext, have ETags that are an MD5 digest of their object
-    #     data.
+    #     or through the Amazon Web Services Management Console, and are
+    #     encrypted by SSE-S3 or plaintext, have ETags that are an MD5
+    #     digest of their object data.
     #
     #   * Objects created by the PUT Object, POST Object, or Copy operation,
-    #     or through the AWS Management Console, and are encrypted by SSE-C
-    #     or SSE-KMS, have ETags that are not an MD5 digest of their object
-    #     data.
+    #     or through the Amazon Web Services Management Console, and are
+    #     encrypted by SSE-C or SSE-KMS, have ETags that are not an MD5
+    #     digest of their object data.
     #
     #   * If an object is created by either the Multipart Upload or Part
     #     Copy operation, the ETag is not an MD5 digest, regardless of the
@@ -10029,8 +10068,8 @@ module Aws::S3
     # @!attribute [rw] restrict_public_buckets
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for this bucket. Setting this element to `TRUE` restricts access to
-    #   this bucket to only AWS service principals and authorized users
-    #   within this account if the bucket has a public policy.
+    #   this bucket to only Amazon Web Service principals and authorized
+    #   users within this account if the bucket has a public policy.
     #
     #   Enabling this setting doesn't affect previously stored bucket
     #   policies, except that public and cross-account access within any
@@ -10137,8 +10176,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, go to [RFC
     #   1864.][1]
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -10159,8 +10199,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] grant_write
-    #   Allows grantee to create, overwrite, and delete any object in the
-    #   bucket.
+    #   Allows grantee to create new objects in the bucket.
+    #
+    #   For the bucket and object owners of existing objects, also allows
+    #   deletions and overwrites of those objects.
     #   @return [String]
     #
     # @!attribute [rw] grant_write_acp
@@ -10302,8 +10344,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, go to [RFC
     #   1864.][1]
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -10350,9 +10393,9 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   Specifies default encryption for a bucket using server-side
     #   encryption with Amazon S3-managed keys (SSE-S3) or customer master
-    #   keys stored in AWS KMS (SSE-KMS). For information about the Amazon
-    #   S3 default encryption feature, see [Amazon S3 Default Bucket
-    #   Encryption][1] in the *Amazon S3 User Guide*.
+    #   keys stored in Amazon Web Services KMS (SSE-KMS). For information
+    #   about the Amazon S3 default encryption feature, see [Amazon S3
+    #   Default Bucket Encryption][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10363,8 +10406,9 @@ module Aws::S3
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
     #   configuration.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -10473,7 +10517,7 @@ module Aws::S3
     #           },
     #           id: "InventoryId", # required
     #           included_object_versions: "All", # required, accepts All, Current
-    #           optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier
+    #           optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier, BucketKeyStatus
     #           schedule: { # required
     #             frequency: "Daily", # required, accepts Daily, Weekly
     #           },
@@ -10634,8 +10678,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] content_md5
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_configuration
@@ -10696,8 +10741,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `PutBucketLogging` request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -10898,8 +10944,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] notification_configuration
@@ -10947,8 +10994,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `OwnershipControls` request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -10991,8 +11039,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash of the request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] confirm_remove_self_bucket_access
@@ -11106,8 +11155,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -11163,8 +11213,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -11219,8 +11270,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -11272,8 +11324,9 @@ module Aws::S3
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -11354,8 +11407,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -11454,10 +11508,10 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11470,8 +11524,9 @@ module Aws::S3
     #   was not corrupted in transit. For more information, go to [RFC
     #   1864.&gt;][1]
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #
     #
     #
@@ -11498,8 +11553,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] grant_write
-    #   Allows grantee to create, overwrite, and delete any object in the
-    #   bucket.
+    #   Allows grantee to create new objects in the bucket.
+    #
+    #   For the bucket and object owners of existing objects, also allows
+    #   deletions and overwrites of those objects.
     #   @return [String]
     #
     # @!attribute [rw] grant_write_acp
@@ -11515,19 +11572,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11540,7 +11597,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11613,10 +11670,10 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11637,7 +11694,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11651,8 +11708,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -11724,7 +11782,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -11738,8 +11796,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -11778,10 +11837,11 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   If you specified server-side encryption either with an AWS KMS
-    #   customer master key (CMK) or Amazon S3-managed encryption key in
-    #   your PUT request, the response includes this header. It confirms the
-    #   encryption algorithm that Amazon S3 used to encrypt the object.
+    #   If you specified server-side encryption either with an Amazon Web
+    #   Services KMS customer master key (CMK) or Amazon S3-managed
+    #   encryption key in your PUT request, the response includes this
+    #   header. It confirms the encryption algorithm that Amazon S3 used to
+    #   encrypt the object.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -11803,21 +11863,21 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
-    #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) symmetric customer managed customer master key
-    #   (CMK) that was used for the object.
+    #   `aws:kms`, this header specifies the ID of the Amazon Web Services
+    #   Key Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
-    #   If present, specifies the AWS KMS Encryption Context to use for
-    #   object encryption. The value of this header is a base64-encoded
-    #   UTF-8 string holding JSON with the encryption context key-value
-    #   pairs.
+    #   If present, specifies the Amazon Web Services KMS Encryption Context
+    #   to use for object encryption. The value of this header is a
+    #   base64-encoded UTF-8 string holding JSON with the encryption context
+    #   key-value pairs.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the uploaded object uses an S3 Bucket Key for
-    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -11904,19 +11964,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12049,7 +12109,7 @@ module Aws::S3
     #   and high availability. Depending on performance needs, you can
     #   specify a different Storage Class. Amazon S3 on Outposts only uses
     #   the OUTPOSTS Storage Class. For more information, see [Storage
-    #   Classes][1] in the *Amazon S3 Service Developer Guide*.
+    #   Classes][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12105,22 +12165,22 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
-    #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) symmetrical customer managed customer master key
-    #   (CMK) that was used for the object.
-    #
-    #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
-    #   header specifies the ID of the symmetric customer managed AWS KMS
-    #   CMK that will be used for the object. If you specify
-    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
-    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
-    #   managed CMK in AWS to protect the data.
+    #   `aws:kms`, this header specifies the ID of the Amazon Web Services
+    #   Key Management Service (Amazon Web Services KMS) symmetrical
+    #   customer managed customer master key (CMK) that was used for the
+    #   object. If you specify `x-amz-server-side-encryption:aws:kms`, but
+    #   do not provide` x-amz-server-side-encryption-aws-kms-key-id`, Amazon
+    #   S3 uses the Amazon Web Services managed CMK in Amazon Web Services
+    #   to protect the data. If the KMS key does not exist in the same
+    #   account issuing the command, you must use the full ARN and not just
+    #   the ID.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
-    #   Specifies the AWS KMS Encryption Context to use for object
-    #   encryption. The value of this header is a base64-encoded UTF-8
-    #   string holding JSON with the encryption context key-value pairs.
+    #   Specifies the Amazon Web Services KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded
+    #   UTF-8 string holding JSON with the encryption context key-value
+    #   pairs.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -12138,7 +12198,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12156,7 +12216,7 @@ module Aws::S3
     #
     # @!attribute [rw] object_lock_retain_until_date
     #   The date and time when you want this object's Object Lock to
-    #   expire.
+    #   expire. Must be formatted as a timestamp parameter.
     #   @return [Time]
     #
     # @!attribute [rw] object_lock_legal_hold_status
@@ -12251,10 +12311,10 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12275,7 +12335,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12295,8 +12355,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -12359,19 +12420,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12390,8 +12451,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash for the request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] tagging
@@ -12409,7 +12471,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -12453,8 +12515,9 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
     #   @return [String]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -12816,10 +12879,10 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] role
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that Amazon S3 assumes when replicating
-    #   objects. For more information, see [How to Set Up Replication][1] in
-    #   the *Amazon S3 User Guide*.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that Amazon S3 assumes when replicating objects. For more
+    #   information, see [How to Set Up Replication][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
@@ -12959,7 +13022,7 @@ module Aws::S3
     #   or disable the replication of these objects. Currently, Amazon S3
     #   supports only the filter that you can specify for objects created
     #   with server-side encryption using a customer master key (CMK) stored
-    #   in AWS Key Management Service (SSE-KMS).
+    #   in Amazon Web Services Key Management Service (SSE-KMS).
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] existing_object_replication
@@ -13166,7 +13229,7 @@ module Aws::S3
     # @!attribute [rw] minutes
     #   Contains an integer specifying time in minutes.
     #
-    #   Valid values: 15 minutes.
+    #   Valid value: 15
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationTimeValue AWS API Documentation
@@ -13339,19 +13402,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13376,7 +13439,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -13586,8 +13649,8 @@ module Aws::S3
 
     # Specifies lifecycle rules for an Amazon S3 bucket. For more
     # information, see [Put Bucket Lifecycle Configuration][1] in the
-    # *Amazon Simple Storage Service API Reference*. For examples, see [Put
-    # Bucket Lifecycle Configuration Examples][2].
+    # *Amazon S3 API Reference*. For examples, see [Put Bucket Lifecycle
+    # Configuration Examples][2].
     #
     #
     #
@@ -13837,9 +13900,9 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] key_id
-    #   Specifies the ID of the AWS Key Management Service (AWS KMS)
-    #   symmetric customer managed customer master key (CMK) to use for
-    #   encrypting inventory reports.
+    #   Specifies the ID of the Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) symmetric customer managed customer master
+    #   key (CMK) to use for encrypting inventory reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
@@ -14146,8 +14209,8 @@ module Aws::S3
     # Describes the default server-side encryption to apply to new objects
     # in the bucket. If a PUT Object request doesn't specify any
     # server-side encryption, this default encryption will be applied. For
-    # more information, see [PUT Bucket encryption][1] in the *Amazon Simple
-    # Storage Service API Reference*.
+    # more information, see [PUT Bucket encryption][1] in the *Amazon S3 API
+    # Reference*.
     #
     #
     #
@@ -14166,13 +14229,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   AWS Key Management Service (KMS) customer master key ID to use for
-    #   the default encryption. This parameter is allowed if and only if
-    #   `SSEAlgorithm` is set to `aws:kms`.
+    #   Amazon Web Services Key Management Service (KMS) customer Amazon Web
+    #   Services KMS key ID to use for the default encryption. This
+    #   parameter is allowed if and only if `SSEAlgorithm` is set to
+    #   `aws:kms`.
     #
     #   You can specify the key ID or the Amazon Resource Name (ARN) of the
-    #   CMK. However, if you are using encryption with cross-account
-    #   operations, you must use a fully qualified CMK ARN. For more
+    #   KMS key. However, if you are using encryption with cross-account
+    #   operations, you must use a fully qualified KMS key ARN. For more
     #   information, see [Using encryption for cross-account operations][1].
     #
     #   **For example:**
@@ -14182,9 +14246,10 @@ module Aws::S3
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   Amazon S3 only supports symmetric CMKs and not asymmetric CMKs. For
-    #   more information, see [Using Symmetric and Asymmetric Keys][2] in
-    #   the *AWS Key Management Service Developer Guide*.
+    #   Amazon S3 only supports symmetric KMS keys and not asymmetric KMS
+    #   keys. For more information, see [Using symmetric and asymmetric
+    #   keys][2] in the *Amazon Web Services Key Management Service
+    #   Developer Guide*.
     #
     #
     #
@@ -14278,8 +14343,8 @@ module Aws::S3
     # source objects that you want to replicate. You can choose to enable or
     # disable the replication of these objects. Currently, Amazon S3
     # supports only the filter that you can specify for objects created with
-    # server-side encryption using a customer master key (CMK) stored in AWS
-    # Key Management Service (SSE-KMS).
+    # server-side encryption using a customer master key (CMK) stored in
+    # Amazon Web Services Key Management Service (SSE-KMS).
     #
     # @note When making an API call, you may pass SourceSelectionCriteria
     #   data as a hash:
@@ -14295,7 +14360,7 @@ module Aws::S3
     #
     # @!attribute [rw] sse_kms_encrypted_objects
     #   A container for filter information for the selection of Amazon S3
-    #   objects encrypted with AWS KMS. If you include
+    #   objects encrypted with Amazon Web Services KMS. If you include
     #   `SourceSelectionCriteria` in the replication configuration, this
     #   element is required.
     #   @return [Types::SseKmsEncryptedObjects]
@@ -14324,7 +14389,7 @@ module Aws::S3
     end
 
     # A container for filter information for the selection of S3 objects
-    # encrypted with AWS KMS.
+    # encrypted with Amazon Web Services KMS.
     #
     # @note When making an API call, you may pass SseKmsEncryptedObjects
     #   data as a hash:
@@ -14335,8 +14400,8 @@ module Aws::S3
     #
     # @!attribute [rw] status
     #   Specifies whether Amazon S3 replicates objects created with
-    #   server-side encryption using a customer master key (CMK) stored in
-    #   AWS Key Management Service.
+    #   server-side encryption using an Amazon Web Services KMS key stored
+    #   in Amazon Web Services Key Management Service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SseKmsEncryptedObjects AWS API Documentation
@@ -14769,14 +14834,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) that was
-    #   used for the object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -14831,19 +14896,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -14874,7 +14939,8 @@ module Aws::S3
     #     The value must be URL encoded.
     #
     #     <note markdown="1"> Amazon S3 supports copy operations using access points only when
-    #     the source and destination buckets are in the same AWS Region.
+    #     the source and destination buckets are in the same Amazon Web
+    #     Services Region.
     #
     #      </note>
     #
@@ -14982,7 +15048,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15050,14 +15116,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) was used
-    #   for the object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the multipart upload uses an S3 Bucket Key for
-    #   server-side encryption with AWS KMS (SSE-KMS).
+    #   server-side encryption with Amazon Web Services KMS (SSE-KMS).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_charged
@@ -15108,19 +15174,19 @@ module Aws::S3
     #   requests to the access point hostname. The access point hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this action with an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For
-    #   more information about access point ARNs, see [Using Access
-    #   Points][1] in the *Amazon S3 User Guide*.
+    #   When using this action with an access point through the Amazon Web
+    #   Services SDKs, you provide the access point ARN in place of the
+    #   bucket name. For more information about access point ARNs, see
+    #   [Using access points][1] in the *Amazon S3 User Guide*.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this action using S3 on Outposts through the AWS SDKs,
-    #   you provide the Outposts bucket ARN in place of the bucket name. For
-    #   more information about S3 on Outposts ARNs, see [Using S3 on
-    #   Outposts][2] in the *Amazon S3 User Guide*.
+    #   When using this action using S3 on Outposts through the Amazon Web
+    #   Services SDKs, you provide the Outposts bucket ARN in place of the
+    #   bucket name. For more information about S3 on Outposts ARNs, see
+    #   [Using S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15179,7 +15245,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 Developer Guide*.
+    #   in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -15212,8 +15278,8 @@ module Aws::S3
     end
 
     # Describes the versioning state of an Amazon S3 bucket. For more
-    # information, see [PUT Bucket versioning][1] in the *Amazon Simple
-    # Storage Service API Reference*.
+    # information, see [PUT Bucket versioning][1] in the *Amazon S3 API
+    # Reference*.
     #
     #
     #
@@ -15546,9 +15612,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) symmetric customer managed customer master key (CMK) that was
-    #   used for stored in Amazon S3 object.
+    #   If present, specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetric customer
+    #   managed customer master key (CMK) that was used for stored in Amazon
+    #   S3 object.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
@@ -15576,7 +15643,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_key_enabled
     #   Indicates whether the object stored in Amazon S3 uses an S3 bucket
-    #   key for server-side encryption with AWS KMS (SSE-KMS).
+    #   key for server-side encryption with Amazon Web Services KMS
+    #   (SSE-KMS).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/WriteGetObjectResponseRequest AWS API Documentation

@@ -44,7 +44,7 @@ module Aws::MQ
     # Types of broker engines.
     #
     # @!attribute [rw] engine_type
-    #   The type of broker engine.
+    #   The broker's engine type.
     #   @return [String]
     #
     # @!attribute [rw] engine_versions
@@ -90,7 +90,7 @@ module Aws::MQ
     # Returns information about all brokers.
     #
     # @!attribute [rw] console_url
-    #   The URL of the broker's Web Console.
+    #   The brokers web console URL.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
@@ -99,7 +99,7 @@ module Aws::MQ
     #
     # @!attribute [rw] ip_address
     #   The IP address of the Elastic Network Interface (ENI) attached to
-    #   the broker. Does not apply to RabbitMQ brokers
+    #   the broker. Does not apply to RabbitMQ brokers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstance AWS API Documentation
@@ -119,11 +119,11 @@ module Aws::MQ
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @!attribute [rw] engine_type
-    #   The type of broker engine.
+    #   The broker's engine type.
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
-    #   The type of broker instance.
+    #   The broker's instance type.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
@@ -178,10 +178,10 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # The Amazon Resource Name (ARN) of the broker.
+    # Returns information about all brokers.
     #
     # @!attribute [rw] broker_arn
-    #   The Amazon Resource Name (ARN) of the broker.
+    #   The broker's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] broker_id
@@ -189,14 +189,14 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] broker_name
-    #   The name of the broker. This value must be unique in your AWS
-    #   account, 1-50 characters long, must contain only letters, numbers,
-    #   dashes, and underscores, and must not contain whitespaces, brackets,
-    #   wildcard characters, or special characters.
+    #   The broker's name. This value is unique in your AWS account, 1-50
+    #   characters long, and containing only letters, numbers, dashes, and
+    #   underscores, and must not contain white spaces, brackets, wildcard
+    #   characters, or special characters.
     #   @return [String]
     #
     # @!attribute [rw] broker_state
-    #   The status of the broker.
+    #   The broker's status.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -204,11 +204,11 @@ module Aws::MQ
     #   @return [Time]
     #
     # @!attribute [rw] deployment_mode
-    #   Required. The deployment mode of the broker.
+    #   The broker's deployment mode.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
-    #   Required. The type of broker engine.
+    #   The type of broker engine.
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -237,7 +237,8 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy associated with the configuration.
+    #   Optional. The authentication strategy associated with the
+    #   configuration. The default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -249,14 +250,17 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_type
-    #   Required. The type of broker engine. Note: Currently, Amazon MQ
-    #   supports ACTIVEMQ and RABBITMQ.
+    #   Required. The type of broker engine. Currently, Amazon MQ supports
+    #   ACTIVEMQ and RABBITMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The version of the broker engine. For a list of supported
-    #   engine versions, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #   Required. The broker engine's version. For a list of supported
+    #   engine versions, see, [Supported engines][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -295,13 +299,15 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # A list of information about the configuration. Does not apply to RabbitMQ brokers.
+    # A list of information about the configuration.
+    #
+    # Does not apply to RabbitMQ brokers.
     #
     # @note When making an API call, you may pass ConfigurationId
     #   data as a hash:
     #
     #       {
-    #         id: "__string",
+    #         id: "__string", # required
     #         revision: 1,
     #       }
     #
@@ -350,7 +356,7 @@ module Aws::MQ
     # Broker configuration information
     #
     # @!attribute [rw] current
-    #   The current configuration of the broker.
+    #   The broker's current configuration.
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] history
@@ -358,7 +364,7 @@ module Aws::MQ
     #   @return [Array<Types::ConfigurationId>]
     #
     # @!attribute [rw] pending
-    #   The pending configuration of the broker.
+    #   The broker's pending configuration.
     #   @return [Types::ConfigurationId]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Configurations AWS API Documentation
@@ -388,25 +394,25 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # Required. The version of the broker engine. For a list of supported
-    # engine versions, see
-    # https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    # Creates a broker.
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Required. Enables automatic upgrades to new minor versions for
-    #   brokers, as Apache releases the versions. The automatic upgrades
-    #   occur during the maintenance window of the broker or after a manual
-    #   broker reboot.
+    #   Enables automatic upgrades to new minor versions for brokers, as new
+    #   versions are released and supported by Amazon MQ. Automatic upgrades
+    #   occur during the scheduled maintenance window of the broker or after
+    #   a manual broker reboot. Set to true by default, if no value is
+    #   specified.
     #   @return [Boolean]
     #
     # @!attribute [rw] broker_name
-    #   Required. The name of the broker. This value must be unique in your
-    #   AWS account, 1-50 characters long, must contain only letters,
-    #   numbers, dashes, and underscores, and must not contain whitespaces,
+    #   Required. The broker's name. This value must be unique in your AWS
+    #   account, 1-50 characters long, must contain only letters, numbers,
+    #   dashes, and underscores, and must not contain white spaces,
     #   brackets, wildcard characters, or special characters.
     #   @return [String]
     #
@@ -415,27 +421,37 @@ module Aws::MQ
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] creator_request_id
-    #   The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.**A suitable default value is auto-generated.** You should normally
+    #   The unique ID that the requester receives for the created broker.
+    #   Amazon MQ passes your ID with the API action. Note: We recommend
+    #   using a Universally Unique Identifier (UUID) for the
+    #   creatorRequestId. You may omit the creatorRequestId if your
+    #   application doesn't require idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] deployment_mode
-    #   Required. The deployment mode of the broker.
+    #   Required. The broker's deployment mode.
     #   @return [String]
     #
     # @!attribute [rw] encryption_options
-    #   Encryption options for the broker.
+    #   Encryption options for the broker. Does not apply to RabbitMQ
+    #   brokers.
     #   @return [Types::EncryptionOptions]
     #
     # @!attribute [rw] engine_type
-    #   Required. The type of broker engine. Note: Currently, Amazon MQ
-    #   supports ACTIVEMQ and RABBITMQ.
+    #   Required. The type of broker engine. Currently, Amazon MQ supports
+    #   ACTIVEMQ and RABBITMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The version of the broker engine. For a list of supported
-    #   engine versions, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #   Required. The broker engine's version. For a list of supported
+    #   engine versions, see [Supported engines][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -443,8 +459,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker. Does not apply to RabbitMQ
+    #   brokers.
     #   @return [Types::LdapServerMetadataInput]
     #
     # @!attribute [rw] logs
@@ -456,12 +473,13 @@ module Aws::MQ
     #   @return [Types::WeeklyStartTime]
     #
     # @!attribute [rw] publicly_accessible
-    #   Required. Enables connections from applications outside of the VPC
-    #   that hosts the broker's subnets.
+    #   Enables connections from applications outside of the VPC that hosts
+    #   the broker's subnets. Set to false by default, if no value is
+    #   provided.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   The list of security groups (1 minimum, 5 maximum) that authorizes
+    #   The list of rules (1 minimum, 125 maximum) that authorize
     #   connections to brokers.
     #   @return [Array<String>]
     #
@@ -471,12 +489,25 @@ module Aws::MQ
     #
     # @!attribute [rw] subnet_ids
     #   The list of groups that define which subnets and IP ranges the
-    #   broker can use from different Availability Zones. A SINGLE\_INSTANCE
-    #   deployment requires one subnet (for example, the default subnet). An
-    #   ACTIVE\_STANDBY\_MULTI\_AZ deployment (ACTIVEMQ) requires two
-    #   subnets. A CLUSTER\_MULTI\_AZ deployment (RABBITMQ) has no subnet
-    #   requirements when deployed with public accessibility, deployment
-    #   without public accessibility requires at least one subnet.
+    #   broker can use from different Availability Zones. If you specify
+    #   more than one subnet, the subnets must be in different Availability
+    #   Zones. Amazon MQ will not be able to create VPC endpoints for your
+    #   broker with multiple subnets in the same Availability Zone. A
+    #   SINGLE\_INSTANCE deployment requires one subnet (for example, the
+    #   default subnet). An ACTIVE\_STANDBY\_MULTI\_AZ Amazon MQ for
+    #   ActiveMQ deployment requires two subnets. A CLUSTER\_MULTI\_AZ
+    #   Amazon MQ for RabbitMQ deployment has no subnet requirements when
+    #   deployed with public accessibility. Deployment without public
+    #   accessibility requires at least one subnet.
+    #
+    #   If you specify subnets in a [shared VPC][1] for a RabbitMQ broker,
+    #   the associated VPC to which the specified subnets belong must be
+    #   owned by your AWS account. Amazon MQ will not be able to create VPC
+    #   endpoints in VPCs that are not owned by your AWS account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -485,13 +516,17 @@ module Aws::MQ
     #
     # @!attribute [rw] users
     #   Required. The list of broker users (persons or applications) who can
-    #   access queues and topics. For RabbitMQ brokers, one and only one
+    #   access queues and topics. This value can contain only alphanumeric
+    #   characters, dashes, periods, underscores, and tildes (- . \_ ~).
+    #   This value must be 2-100 characters long.
+    #
+    #   <title>Amazon MQ for RabbitMQ</title>
+    #
+    #    When you create an Amazon MQ for RabbitMQ broker, one and only one
     #   administrative user is accepted and created when a broker is first
     #   provisioned. All subsequent broker users are created by making
-    #   RabbitMQ API calls directly to brokers or via the RabbitMQ Web
-    #   Console. This value can contain only alphanumeric characters,
-    #   dashes, periods, underscores, and tildes (- . \_ ~). This value must
-    #   be 2-100 characters long.
+    #   RabbitMQ API calls directly to brokers or via the RabbitMQ web
+    #   console.
     #   @return [Array<Types::User>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerInput AWS API Documentation
@@ -523,7 +558,7 @@ module Aws::MQ
     # Returns information about the created broker.
     #
     # @!attribute [rw] broker_arn
-    #   The Amazon Resource Name (ARN) of the broker.
+    #   The broker's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] broker_id
@@ -544,32 +579,32 @@ module Aws::MQ
     #
     #       {
     #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #         auto_minor_version_upgrade: false,
-    #         broker_name: "__string",
+    #         auto_minor_version_upgrade: false, # required
+    #         broker_name: "__string", # required
     #         configuration: {
-    #           id: "__string",
+    #           id: "__string", # required
     #           revision: 1,
     #         },
     #         creator_request_id: "__string",
-    #         deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, CLUSTER_MULTI_AZ
+    #         deployment_mode: "SINGLE_INSTANCE", # required, accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, CLUSTER_MULTI_AZ
     #         encryption_options: {
     #           kms_key_id: "__string",
     #           use_aws_owned_key: false, # required
     #         },
-    #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ, RABBITMQ
-    #         engine_version: "__string",
-    #         host_instance_type: "__string",
+    #         engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
+    #         engine_version: "__string", # required
+    #         host_instance_type: "__string", # required
     #         ldap_server_metadata: {
-    #           hosts: ["__string"],
-    #           role_base: "__string",
+    #           hosts: ["__string"], # required
+    #           role_base: "__string", # required
     #           role_name: "__string",
-    #           role_search_matching: "__string",
+    #           role_search_matching: "__string", # required
     #           role_search_subtree: false,
-    #           service_account_password: "__string",
-    #           service_account_username: "__string",
-    #           user_base: "__string",
+    #           service_account_password: "__string", # required
+    #           service_account_username: "__string", # required
+    #           user_base: "__string", # required
     #           user_role_name: "__string",
-    #           user_search_matching: "__string",
+    #           user_search_matching: "__string", # required
     #           user_search_subtree: false,
     #         },
     #         logs: {
@@ -577,29 +612,30 @@ module Aws::MQ
     #           general: false,
     #         },
     #         maintenance_window_start_time: {
-    #           day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #           time_of_day: "__string",
+    #           day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #           time_of_day: "__string", # required
     #           time_zone: "__string",
     #         },
-    #         publicly_accessible: false,
+    #         publicly_accessible: false, # required
     #         security_groups: ["__string"],
     #         storage_type: "EBS", # accepts EBS, EFS
     #         subnet_ids: ["__string"],
     #         tags: {
     #           "__string" => "__string",
     #         },
-    #         users: [
+    #         users: [ # required
     #           {
     #             console_access: false,
     #             groups: ["__string"],
-    #             password: "__string",
-    #             username: "__string",
+    #             password: "__string", # required
+    #             username: "__string", # required
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -609,7 +645,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   A list of information about the configuration. Does not apply to RabbitMQ brokers.
+    #   A list of information about the configuration.
+    #
+    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] creator_request_id
@@ -618,16 +656,17 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] deployment_mode
-    #   The deployment mode of the broker.
+    #   The broker's deployment mode.
     #   @return [String]
     #
     # @!attribute [rw] encryption_options
+    #   Does not apply to RabbitMQ brokers.
+    #
     #   Encryption options for the broker.
     #   @return [Types::EncryptionOptions]
     #
     # @!attribute [rw] engine_type
-    #   The type of broker engine. Note: Currently, Amazon MQ supports
-    #   ActiveMQ and RabbitMQ.
+    #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -637,7 +676,10 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize connections to the broker. Currently not supported for RabbitMQ engine type.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker.
+    #
+    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::LdapServerMetadataInput]
     #
     # @!attribute [rw] logs
@@ -657,7 +699,9 @@ module Aws::MQ
     #   @return [Array<String>]
     #
     # @!attribute [rw] storage_type
-    #   The storage type of the broker. EFS is currently not Supported for RabbitMQ engine type.
+    #   The broker's storage type.
+    #
+    #   EFS is not supported for RabbitMQ engine type.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -715,18 +759,22 @@ module Aws::MQ
     # version).
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy associated with the configuration.
+    #   Optional. The authentication strategy associated with the
+    #   configuration. The default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
-    #   Required. The type of broker engine. Note: Currently, Amazon MQ
-    #   supports ACTIVEMQ and RABBITMQ.
+    #   Required. The type of broker engine. Currently, Amazon MQ supports
+    #   ACTIVEMQ and RABBITMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The version of the broker engine. For a list of supported
-    #   engine versions, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #   Required. The broker engine's version. For a list of supported
+    #   engine versions, see [Supported engines][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -758,7 +806,8 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy associated with the configuration.
+    #   Optional. The authentication strategy associated with the
+    #   configuration. The default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -798,21 +847,21 @@ module Aws::MQ
     #
     #       {
     #         authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #         engine_type: "ACTIVEMQ", # accepts ACTIVEMQ, RABBITMQ
-    #         engine_version: "__string",
-    #         name: "__string",
+    #         engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
+    #         engine_version: "__string", # required
+    #         name: "__string", # required
     #         tags: {
     #           "__string" => "__string",
     #         },
     #       }
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
-    #   The type of broker engine. Note: Currently, Amazon MQ supports
-    #   ActiveMQ and RabbitMQ.
+    #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -840,7 +889,8 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -910,7 +960,7 @@ module Aws::MQ
     # @!attribute [rw] password
     #   Required. The password of the user. This value must be at least 12
     #   characters long, must contain at least 4 unique characters, and must
-    #   not contain commas.
+    #   not contain commas, colons, or equal signs (,:=).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserInput AWS API Documentation
@@ -930,7 +980,7 @@ module Aws::MQ
     #         broker_id: "__string", # required
     #         console_access: false,
     #         groups: ["__string"],
-    #         password: "__string",
+    #         password: "__string", # required
     #         username: "__string", # required
     #       }
     #
@@ -1162,23 +1212,22 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # The version of the broker engine. For a list of supported engine
-    # versions, see
-    # https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    # Returns information about the specified broker.
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   The authentication strategy used to secure the broker. The default
+    #   is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Required. Enables automatic upgrades to new minor versions for
-    #   brokers, as Apache releases the versions. The automatic upgrades
-    #   occur during the maintenance window of the broker or after a manual
-    #   broker reboot.
+    #   Enables automatic upgrades to new minor versions for brokers, as new
+    #   versions are released and supported by Amazon MQ. Automatic upgrades
+    #   occur during the scheduled maintenance window of the broker or after
+    #   a manual broker reboot.
     #   @return [Boolean]
     #
     # @!attribute [rw] broker_arn
-    #   The Amazon Resource Name (ARN) of the broker.
+    #   The broker's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] broker_id
@@ -1190,14 +1239,14 @@ module Aws::MQ
     #   @return [Array<Types::BrokerInstance>]
     #
     # @!attribute [rw] broker_name
-    #   The name of the broker. This value must be unique in your AWS
-    #   account, 1-50 characters long, must contain only letters, numbers,
-    #   dashes, and underscores, and must not contain whitespaces, brackets,
+    #   The broker's name. This value must be unique in your AWS account,
+    #   1-50 characters long, must contain only letters, numbers, dashes,
+    #   and underscores, and must not contain white spaces, brackets,
     #   wildcard characters, or special characters.
     #   @return [String]
     #
     # @!attribute [rw] broker_state
-    #   The status of the broker.
+    #   The broker's status.
     #   @return [String]
     #
     # @!attribute [rw] configurations
@@ -1209,22 +1258,26 @@ module Aws::MQ
     #   @return [Time]
     #
     # @!attribute [rw] deployment_mode
-    #   Required. The deployment mode of the broker.
+    #   The broker's deployment mode.
     #   @return [String]
     #
     # @!attribute [rw] encryption_options
-    #   Encryption options for the broker.
+    #   Encryption options for the broker. Does not apply to RabbitMQ
+    #   brokers.
     #   @return [Types::EncryptionOptions]
     #
     # @!attribute [rw] engine_type
-    #   Required. The type of broker engine. Note: Currently, Amazon MQ
-    #   supports ACTIVEMQ and RABBITMQ.
+    #   The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ
+    #   and RABBITMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version of the broker engine. For a list of supported engine
-    #   versions, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #   The broker engine's version. For a list of supported engine
+    #   versions, see [Supported engines][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -1247,24 +1300,30 @@ module Aws::MQ
     #
     # @!attribute [rw] pending_authentication_strategy
     #   The authentication strategy that will be applied when the broker is
-    #   rebooted.
+    #   rebooted. The default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] pending_engine_version
-    #   The version of the broker engine to upgrade to. For a list of
-    #   supported engine versions, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #   The broker engine version to upgrade to. For a list of supported
+    #   engine versions, see [Supported engines][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] pending_host_instance_type
-    #   The host instance type of the broker to upgrade to. For a list of
-    #   supported instance types, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   The broker's host instance type to upgrade to. For a list of
+    #   supported instance types, see [Broker instance types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
     #   @return [String]
     #
     # @!attribute [rw] pending_ldap_server_metadata
     #   The metadata of the LDAP server that will be used to authenticate
-    #   and authorize connections to the broker once it is rebooted.
+    #   and authorize connections to the broker after it is rebooted.
     #   @return [Types::LdapServerMetadataOutput]
     #
     # @!attribute [rw] pending_security_groups
@@ -1273,12 +1332,12 @@ module Aws::MQ
     #   @return [Array<String>]
     #
     # @!attribute [rw] publicly_accessible
-    #   Required. Enables connections from applications outside of the VPC
-    #   that hosts the broker's subnets.
+    #   Enables connections from applications outside of the VPC that hosts
+    #   the broker's subnets.
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   The list of security groups (1 minimum, 5 maximum) that authorizes
+    #   The list of rules (1 minimum, 125 maximum) that authorize
     #   connections to brokers.
     #   @return [Array<String>]
     #
@@ -1288,12 +1347,7 @@ module Aws::MQ
     #
     # @!attribute [rw] subnet_ids
     #   The list of groups that define which subnets and IP ranges the
-    #   broker can use from different Availability Zones. A SINGLE\_INSTANCE
-    #   deployment requires one subnet (for example, the default subnet). An
-    #   ACTIVE\_STANDBY\_MULTI\_AZ deployment (ACTIVEMQ) requires two
-    #   subnets. A CLUSTER\_MULTI\_AZ deployment (RABBITMQ) has no subnet
-    #   requirements when deployed with public accessibility, deployment
-    #   without public accessibility requires at least one subnet.
+    #   broker can use from different Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1358,7 +1412,8 @@ module Aws::MQ
     end
 
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -1377,7 +1432,7 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] broker_state
-    #   The status of the broker.
+    #   The broker's status.
     #   @return [String]
     #
     # @!attribute [rw] configurations
@@ -1388,16 +1443,17 @@ module Aws::MQ
     #   @return [Time]
     #
     # @!attribute [rw] deployment_mode
-    #   The deployment mode of the broker.
+    #   The broker's deployment mode.
     #   @return [String]
     #
     # @!attribute [rw] encryption_options
+    #   Does not apply to RabbitMQ brokers.
+    #
     #   Encryption options for the broker.
     #   @return [Types::EncryptionOptions]
     #
     # @!attribute [rw] engine_type
-    #   The type of broker engine. Note: Currently, Amazon MQ supports
-    #   ActiveMQ and RabbitMQ.
+    #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -1407,8 +1463,8 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker.
     #   @return [Types::LdapServerMetadataOutput]
     #
     # @!attribute [rw] logs
@@ -1422,7 +1478,8 @@ module Aws::MQ
     #   @return [Types::WeeklyStartTime]
     #
     # @!attribute [rw] pending_authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] pending_engine_version
@@ -1432,8 +1489,8 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] pending_ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker.
     #   @return [Types::LdapServerMetadataOutput]
     #
     # @!attribute [rw] pending_security_groups
@@ -1446,7 +1503,9 @@ module Aws::MQ
     #   @return [Array<String>]
     #
     # @!attribute [rw] storage_type
-    #   The storage type of the broker. EFS is currently not Supported for RabbitMQ engine type.
+    #   The broker's storage type.
+    #
+    #   EFS is not supported for RabbitMQ engine type.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -1515,7 +1574,8 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] created
@@ -1525,8 +1585,7 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_type
-    #   The type of broker engine. Note: Currently, Amazon MQ supports
-    #   ActiveMQ and RabbitMQ.
+    #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -1731,6 +1790,8 @@ module Aws::MQ
       include Aws::Structure
     end
 
+    # Does not apply to RabbitMQ brokers.
+    #
     # Encryption options for the broker.
     #
     # @note When making an API call, you may pass EncryptionOptions
@@ -1742,15 +1803,15 @@ module Aws::MQ
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The symmetric customer master key (CMK) to use for the AWS Key
-    #   Management Service (KMS). This key is used to encrypt your data at
-    #   rest. If not provided, Amazon MQ will use a default CMK to encrypt
-    #   your data.
+    #   The customer master key (CMK) to use for the AWS Key Management
+    #   Service (KMS). This key is used to encrypt your data at rest. If not
+    #   provided, Amazon MQ will use a default CMK to encrypt your data.
     #   @return [String]
     #
     # @!attribute [rw] use_aws_owned_key
     #   Enables the use of an AWS owned CMK using AWS Key Management Service
-    #   (KMS).
+    #   (KMS). Set to true by default, if no value is provided, for example,
+    #   for RabbitMQ brokers.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EncryptionOptions AWS API Documentation
@@ -1829,32 +1890,37 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # The metadata of the LDAP server used to authenticate and authorize connections to the broker. Currently not supported for RabbitMQ engine type.
+    # Optional. The metadata of the LDAP server used to authenticate and
+    # authorize connections to the broker.
+    #
+    # Does not apply to RabbitMQ brokers.
     #
     # @note When making an API call, you may pass LdapServerMetadataInput
     #   data as a hash:
     #
     #       {
-    #         hosts: ["__string"],
-    #         role_base: "__string",
+    #         hosts: ["__string"], # required
+    #         role_base: "__string", # required
     #         role_name: "__string",
-    #         role_search_matching: "__string",
+    #         role_search_matching: "__string", # required
     #         role_search_subtree: false,
-    #         service_account_password: "__string",
-    #         service_account_username: "__string",
-    #         user_base: "__string",
+    #         service_account_password: "__string", # required
+    #         service_account_username: "__string", # required
+    #         user_base: "__string", # required
     #         user_role_name: "__string",
-    #         user_search_matching: "__string",
+    #         user_search_matching: "__string", # required
     #         user_search_subtree: false,
     #       }
     #
     # @!attribute [rw] hosts
-    #   Fully qualified domain name of the LDAP server. Optional failover
-    #   server.
+    #   Specifies the location of the LDAP server such as AWS Directory
+    #   Service for Microsoft Active Directory . Optional failover server.
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_base
-    #   Fully qualified name of the directory to search for a user’s groups.
+    #   The distinguished name of the node in the directory information tree
+    #   (DIT) to search for roles or groups. For example, ou=group, ou=corp,
+    #   dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] role_name
@@ -1863,25 +1929,41 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] role_search_matching
-    #   The search criteria for groups.
+    #   The LDAP search filter used to find roles within the roleBase. The
+    #   distinguished name of the user matched by userSearchMatching is
+    #   substituted into the \\\{0\\} placeholder in the search filter. The
+    #   client's username is substituted into the \\\{1\\} placeholder. For
+    #   example, if you set this option to (member=uid=\\\{1\\})for the user
+    #   janedoe, the search filter becomes (member=uid=janedoe) after string
+    #   substitution. It matches all role entries that have a member
+    #   attribute equal to uid=janedoe under the subtree selected by the
+    #   roleBase.
     #   @return [String]
     #
     # @!attribute [rw] role_search_subtree
     #   The directory search scope for the role. If set to true, scope is to
-    #   search the entire sub-tree.
+    #   search the entire subtree.
     #   @return [Boolean]
     #
     # @!attribute [rw] service_account_password
-    #   Service account password.
+    #   Service account password. A service account is an account in your
+    #   LDAP server that has access to initiate a connection. For example,
+    #   cn=admin,dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] service_account_username
-    #   Service account username.
+    #   Service account username. A service account is an account in your
+    #   LDAP server that has access to initiate a connection. For example,
+    #   cn=admin,dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_base
-    #   Fully qualified name of the directory where you want to search for
-    #   users.
+    #   Select a particular subtree of the directory information tree (DIT)
+    #   to search for user entries. The subtree is specified by a DN, which
+    #   specifies the base node of the subtree. For example, by setting this
+    #   option to ou=Users,ou=corp, dc=corp, dc=example, dc=com, the search
+    #   for user entries is restricted to the subtree beneath ou=Users,
+    #   ou=corp, dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_role_name
@@ -1890,12 +1972,18 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] user_search_matching
-    #   The search criteria for users.
+    #   The LDAP search filter used to find users within the userBase. The
+    #   client's username is substituted into the \\\{0\\} placeholder in
+    #   the search filter. For example, if this option is set to
+    #   (uid=\\\{0\\}) and the received username is janedoe, the search
+    #   filter becomes (uid=janedoe) after string substitution. It will
+    #   result in matching an entry like uid=janedoe, ou=Users,ou=corp,
+    #   dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_search_subtree
     #   The directory search scope for the user. If set to true, scope is to
-    #   search the entire sub-tree.
+    #   search the entire subtree.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/LdapServerMetadataInput AWS API Documentation
@@ -1916,16 +2004,18 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # The metadata of the LDAP server used to authenticate and authorize
-    # connections to the broker.
+    # Optional. The metadata of the LDAP server used to authenticate and
+    # authorize connections to the broker.
     #
     # @!attribute [rw] hosts
-    #   Fully qualified domain name of the LDAP server. Optional failover
-    #   server.
+    #   Specifies the location of the LDAP server such as AWS Directory
+    #   Service for Microsoft Active Directory . Optional failover server.
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_base
-    #   Fully qualified name of the directory to search for a user’s groups.
+    #   The distinguished name of the node in the directory information tree
+    #   (DIT) to search for roles or groups. For example, ou=group, ou=corp,
+    #   dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] role_name
@@ -1934,21 +2024,35 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] role_search_matching
-    #   The search criteria for groups.
+    #   The LDAP search filter used to find roles within the roleBase. The
+    #   distinguished name of the user matched by userSearchMatching is
+    #   substituted into the \\\{0\\} placeholder in the search filter. The
+    #   client's username is substituted into the \\\{1\\} placeholder. For
+    #   example, if you set this option to (member=uid=\\\{1\\})for the user
+    #   janedoe, the search filter becomes (member=uid=janedoe) after string
+    #   substitution. It matches all role entries that have a member
+    #   attribute equal to uid=janedoe under the subtree selected by the
+    #   roleBase.
     #   @return [String]
     #
     # @!attribute [rw] role_search_subtree
     #   The directory search scope for the role. If set to true, scope is to
-    #   search the entire sub-tree.
+    #   search the entire subtree.
     #   @return [Boolean]
     #
     # @!attribute [rw] service_account_username
-    #   Service account username.
+    #   Service account username. A service account is an account in your
+    #   LDAP server that has access to initiate a connection. For example,
+    #   cn=admin,dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_base
-    #   Fully qualified name of the directory where you want to search for
-    #   users.
+    #   Select a particular subtree of the directory information tree (DIT)
+    #   to search for user entries. The subtree is specified by a DN, which
+    #   specifies the base node of the subtree. For example, by setting this
+    #   option to ou=Users,ou=corp, dc=corp, dc=example, dc=com, the search
+    #   for user entries is restricted to the subtree beneath ou=Users,
+    #   ou=corp, dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_role_name
@@ -1957,12 +2061,18 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] user_search_matching
-    #   The search criteria for users.
+    #   The LDAP search filter used to find users within the userBase. The
+    #   client's username is substituted into the \\\{0\\} placeholder in
+    #   the search filter. For example, if this option is set to
+    #   (uid=\\\{0\\}) and the received username is janedoe, the search
+    #   filter becomes (uid=janedoe) after string substitution. It will
+    #   result in matching an entry like uid=janedoe, ou=Users,ou=corp,
+    #   dc=corp, dc=example, dc=com.
     #   @return [String]
     #
     # @!attribute [rw] user_search_subtree
     #   The directory search scope for the user. If set to true, scope is to
-    #   search the entire sub-tree.
+    #   search the entire subtree.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/LdapServerMetadataOutput AWS API Documentation
@@ -1982,8 +2092,6 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # A list of information about all brokers.
-    #
     # @!attribute [rw] broker_summaries
     #   A list of information about all brokers.
     #   @return [Array<Types::BrokerSummary>]
@@ -2239,7 +2347,7 @@ module Aws::MQ
     #
     # @!attribute [rw] users
     #   Required. The list of all ActiveMQ usernames for the specified
-    #   broker.
+    #   broker. Does not apply to RabbitMQ brokers.
     #   @return [Array<Types::UserSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListUsersOutput AWS API Documentation
@@ -2493,14 +2601,15 @@ module Aws::MQ
     # Updates the broker using the specified properties.
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Enables automatic upgrades to new minor versions for brokers, as
-    #   Apache releases the versions. The automatic upgrades occur during
-    #   the maintenance window of the broker or after a manual broker
-    #   reboot.
+    #   Enables automatic upgrades to new minor versions for brokers, as new
+    #   versions are released and supported by Amazon MQ. Automatic upgrades
+    #   occur during the scheduled maintenance window of the broker or after
+    #   a manual broker reboot.
     #   @return [Boolean]
     #
     # @!attribute [rw] configuration
@@ -2508,25 +2617,36 @@ module Aws::MQ
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
-    #   The version of the broker engine. For a list of supported engine
-    #   versions, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #   The broker engine version. For a list of supported engine versions,
+    #   see [Supported engines][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
-    #   The host instance type of the broker to upgrade to. For a list of
-    #   supported instance types, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   The broker's host instance type to upgrade to. For a list of
+    #   supported instance types, see [Broker instance types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
     #   @return [String]
     #
     # @!attribute [rw] ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker. Does not apply to RabbitMQ
+    #   brokers.
     #   @return [Types::LdapServerMetadataInput]
     #
     # @!attribute [rw] logs
     #   Enables Amazon CloudWatch logging for brokers.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] maintenance_window_start_time
+    #   The parameters that determine the WeeklyStartTime.
+    #   @return [Types::WeeklyStartTime]
     #
     # @!attribute [rw] security_groups
     #   The list of security groups (1 minimum, 5 maximum) that authorizes
@@ -2543,6 +2663,7 @@ module Aws::MQ
       :host_instance_type,
       :ldap_server_metadata,
       :logs,
+      :maintenance_window_start_time,
       :security_groups)
       SENSITIVE = []
       include Aws::Structure
@@ -2551,12 +2672,14 @@ module Aws::MQ
     # Returns information about the updated broker.
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   The new value of automatic upgrades to new minor version for
-    #   brokers.
+    #   The new boolean value that specifies whether broker engines
+    #   automatically upgrade to new minor versions as new versions are
+    #   released and supported by Amazon MQ.
     #   @return [Boolean]
     #
     # @!attribute [rw] broker_id
@@ -2568,26 +2691,37 @@ module Aws::MQ
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
-    #   The version of the broker engine to upgrade to. For a list of
-    #   supported engine versions, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+    #   The broker engine version to upgrade to. For a list of supported
+    #   engine versions, see [Supported engines][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
-    #   The host instance type of the broker to upgrade to. For a list of
-    #   supported instance types, see
-    #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+    #   The broker's host instance type to upgrade to. For a list of
+    #   supported instance types, see [Broker instance types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
     #   @return [String]
     #
     # @!attribute [rw] ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker. Does not apply to RabbitMQ
+    #   brokers.
     #   @return [Types::LdapServerMetadataOutput]
     #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] maintenance_window_start_time
+    #   The parameters that determine the WeeklyStartTime.
+    #   @return [Types::WeeklyStartTime]
     #
     # @!attribute [rw] security_groups
     #   The list of security groups (1 minimum, 5 maximum) that authorizes
@@ -2605,6 +2739,7 @@ module Aws::MQ
       :host_instance_type,
       :ldap_server_metadata,
       :logs,
+      :maintenance_window_start_time,
       :security_groups)
       SENSITIVE = []
       include Aws::Structure
@@ -2618,33 +2753,39 @@ module Aws::MQ
     #         auto_minor_version_upgrade: false,
     #         broker_id: "__string", # required
     #         configuration: {
-    #           id: "__string",
+    #           id: "__string", # required
     #           revision: 1,
     #         },
     #         engine_version: "__string",
     #         host_instance_type: "__string",
     #         ldap_server_metadata: {
-    #           hosts: ["__string"],
-    #           role_base: "__string",
+    #           hosts: ["__string"], # required
+    #           role_base: "__string", # required
     #           role_name: "__string",
-    #           role_search_matching: "__string",
+    #           role_search_matching: "__string", # required
     #           role_search_subtree: false,
-    #           service_account_password: "__string",
-    #           service_account_username: "__string",
-    #           user_base: "__string",
+    #           service_account_password: "__string", # required
+    #           service_account_username: "__string", # required
+    #           user_base: "__string", # required
     #           user_role_name: "__string",
-    #           user_search_matching: "__string",
+    #           user_search_matching: "__string", # required
     #           user_search_subtree: false,
     #         },
     #         logs: {
     #           audit: false,
     #           general: false,
     #         },
+    #         maintenance_window_start_time: {
+    #           day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #           time_of_day: "__string", # required
+    #           time_zone: "__string",
+    #         },
     #         security_groups: ["__string"],
     #       }
     #
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -2654,7 +2795,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   A list of information about the configuration. Does not apply to RabbitMQ brokers.
+    #   A list of information about the configuration.
+    #
+    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
@@ -2664,13 +2807,21 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize connections to the broker. Currently not supported for RabbitMQ engine type.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker.
+    #
+    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::LdapServerMetadataInput]
     #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] maintenance_window_start_time
+    #   The scheduled time period relative to UTC during which Amazon MQ
+    #   begins to apply pending updates or patches to the broker.
+    #   @return [Types::WeeklyStartTime]
     #
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
@@ -2686,13 +2837,15 @@ module Aws::MQ
       :host_instance_type,
       :ldap_server_metadata,
       :logs,
+      :maintenance_window_start_time,
       :security_groups)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] authentication_strategy
-    #   The authentication strategy used to secure the broker.
+    #   Optional. The authentication strategy used to secure the broker. The
+    #   default is SIMPLE.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -2702,7 +2855,9 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   A list of information about the configuration. Does not apply to RabbitMQ brokers.
+    #   A list of information about the configuration.
+    #
+    #   Does not apply to RabbitMQ brokers.
     #   @return [Types::ConfigurationId]
     #
     # @!attribute [rw] engine_version
@@ -2712,14 +2867,19 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   Optional. The metadata of the LDAP server used to authenticate and
+    #   authorize connections to the broker.
     #   @return [Types::LdapServerMetadataOutput]
     #
     # @!attribute [rw] logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
     #   @return [Types::Logs]
+    #
+    # @!attribute [rw] maintenance_window_start_time
+    #   The scheduled time period relative to UTC during which Amazon MQ
+    #   begins to apply pending updates or patches to the broker.
+    #   @return [Types::WeeklyStartTime]
     #
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
@@ -2735,6 +2895,7 @@ module Aws::MQ
       :host_instance_type,
       :ldap_server_metadata,
       :logs,
+      :maintenance_window_start_time,
       :security_groups)
       SENSITIVE = []
       include Aws::Structure
@@ -2807,7 +2968,7 @@ module Aws::MQ
     #
     #       {
     #         configuration_id: "__string", # required
-    #         data: "__string",
+    #         data: "__string", # required
     #         description: "__string",
     #       }
     #
@@ -2879,7 +3040,7 @@ module Aws::MQ
     # @!attribute [rw] password
     #   The password of the user. This value must be at least 12 characters
     #   long, must contain at least 4 unique characters, and must not
-    #   contain commas.
+    #   contain commas, colons, or equal signs (,:=).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUserInput AWS API Documentation
@@ -2934,7 +3095,11 @@ module Aws::MQ
     #
     class UpdateUserResponse < Aws::EmptyStructure; end
 
-    # A user associated with the broker.
+    # A user associated with the broker. For RabbitMQ brokers, one and only
+    # one administrative user is accepted and created when a broker is first
+    # provisioned. All subsequent broker users are created by making
+    # RabbitMQ API calls directly to brokers or via the RabbitMQ web
+    # console.
     #
     # @note When making an API call, you may pass User
     #   data as a hash:
@@ -2942,32 +3107,42 @@ module Aws::MQ
     #       {
     #         console_access: false,
     #         groups: ["__string"],
-    #         password: "__string",
-    #         username: "__string",
+    #         password: "__string", # required
+    #         username: "__string", # required
     #       }
     #
     # @!attribute [rw] console_access
-    #   Enables access to the ActiveMQ Web Console for the ActiveMQ user
-    #   (Does not apply to RabbitMQ brokers).
+    #   Enables access to the ActiveMQ Web Console for the ActiveMQ user.
+    #   Does not apply to RabbitMQ brokers.
     #   @return [Boolean]
     #
     # @!attribute [rw] groups
     #   The list of groups (20 maximum) to which the ActiveMQ user belongs.
     #   This value can contain only alphanumeric characters, dashes,
     #   periods, underscores, and tildes (- . \_ ~). This value must be
-    #   2-100 characters long.
+    #   2-100 characters long. Does not apply to RabbitMQ brokers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] password
-    #   Required. The password of the broker user. This value must be at
-    #   least 12 characters long, must contain at least 4 unique characters,
-    #   and must not contain commas.
+    #   Required. The password of the user. This value must be at least 12
+    #   characters long, must contain at least 4 unique characters, and must
+    #   not contain commas, colons, or equal signs (,:=).
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   Required. The username of the broker user. This value can contain
+    #   important><title>Amazon MQ for ActiveMQ</title>
+    #
+    #    <para markdown="1">For ActiveMQ brokers, this value can contain
     #   only alphanumeric characters, dashes, periods, underscores, and
-    #   tildes (- . \_ ~). This value must be 2-100 characters long.
+    #   tildes (- . \_ ~). This value must be 2-100 characters
+    #   long.</p>/important> <title>Amazon MQ for RabbitMQ</title>
+    #
+    #    For RabbitMQ brokers, this value can contain only alphanumeric
+    #   characters, dashes, periods, underscores (- . \_). This value must
+    #   not contain a tilde (~) character. Amazon MQ prohibts using guest as
+    #   a valid usename. This value must be 2-100 characters long.
+    #
+    #   </para>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/User AWS API Documentation
@@ -3010,7 +3185,8 @@ module Aws::MQ
       include Aws::Structure
     end
 
-    # Returns a list of all broker users.
+    # Returns a list of all broker users. Does not apply to RabbitMQ
+    # brokers.
     #
     # @!attribute [rw] pending_change
     #   The type of change pending for the broker user.
@@ -3038,8 +3214,8 @@ module Aws::MQ
     #   data as a hash:
     #
     #       {
-    #         day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #         time_of_day: "__string",
+    #         day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #         time_of_day: "__string", # required
     #         time_zone: "__string",
     #       }
     #

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2021-06-23)
+------------------
+
+* Feature - Added the following parameters to ECS targets: CapacityProviderStrategy, EnableECSManagedTags, EnableExecuteCommand, PlacementConstraints, PlacementStrategy, PropagateTags, ReferenceId, and Tags
+
+1.46.0 (2021-05-14)
+------------------
+
+* Feature - Update InputTransformer variable limit from 10 to 100 variables.
+
 1.45.0 (2021-03-26)
 ------------------
 

@@ -337,21 +337,21 @@ module Aws::DatabaseMigrationService
 
     # @!group API Operations
 
-    # Adds metadata tags to an AWS DMS resource, including replication
-    # instance, endpoint, security group, and migration task. These tags can
-    # also be used with cost allocation reporting to track cost associated
-    # with DMS resources, or used in a Condition statement in an IAM policy
-    # for DMS. For more information, see [ `Tag` ][1] data type description.
+    # Adds metadata tags to an DMS resource, including replication instance,
+    # endpoint, security group, and migration task. These tags can also be
+    # used with cost allocation reporting to track cost associated with DMS
+    # resources, or used in a Condition statement in an IAM policy for DMS.
+    # For more information, see [ `Tag` ][1] data type description.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
     #
     # @option params [required, String] :resource_arn
-    #   Identifies the AWS DMS resource to which tags should be added. The
-    #   value for this parameter is an Amazon Resource Name (ARN).
+    #   Identifies the DMS resource to which tags should be added. The value
+    #   for this parameter is an Amazon Resource Name (ARN).
     #
-    #   For AWS DMS, you can tag a replication instance, an endpoint, or a
+    #   For DMS, you can tag a replication instance, an endpoint, or a
     #   replication task.
     #
     # @option params [required, Array<Types::Tag>] :tags
@@ -405,8 +405,8 @@ module Aws::DatabaseMigrationService
     # replication instance).
     #
     # @option params [required, String] :replication_instance_arn
-    #   The Amazon Resource Name (ARN) of the AWS DMS resource that the
-    #   pending maintenance action applies to.
+    #   The Amazon Resource Name (ARN) of the DMS resource that the pending
+    #   maintenance action applies to.
     #
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
@@ -504,6 +504,15 @@ module Aws::DatabaseMigrationService
 
     # Creates an endpoint using the provided settings.
     #
+    # <note markdown="1"> For a MySQL source or target endpoint, don't explicitly specify the
+    # database using the `DatabaseName` request parameter on the
+    # `CreateEndpoint` API call. Specifying `DatabaseName` when you create a
+    # MySQL endpoint replicates all the task tables to this single database.
+    # For MySQL endpoints, you specify the database only when you specify
+    # the schema in the table-mapping rules of the DMS task.
+    #
+    #  </note>
+    #
     # @option params [required, String] :endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a letter
     #   and must contain only ASCII letters, digits, and hyphens. They can't
@@ -533,30 +542,30 @@ module Aws::DatabaseMigrationService
     #   The port used by the endpoint database.
     #
     # @option params [String] :database_name
-    #   The name of the endpoint database.
+    #   The name of the endpoint database. For a MySQL source or target
+    #   endpoint, do not specify DatabaseName.
     #
     # @option params [String] :extra_connection_attributes
     #   Additional attributes associated with the connection. Each attribute
     #   is specified as a name-value pair associated by an equal sign (=).
     #   Multiple attributes are separated by a semicolon (;) with no
     #   additional white space. For information on the attributes available
-    #   for connecting your source or target endpoint, see [Working with AWS
-    #   DMS Endpoints][1] in the *AWS Database Migration Service User Guide.*
+    #   for connecting your source or target endpoint, see [Working with DMS
+    #   Endpoints][1] in the *Database Migration Service User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html
     #
     # @option params [String] :kms_key_id
-    #   An AWS KMS key identifier that is used to encrypt the connection
+    #   An KMS key identifier that is used to encrypt the connection
     #   parameters for the endpoint.
     #
-    #   If you don't specify a value for the `KmsKeyId` parameter, then AWS
-    #   DMS uses your default encryption key.
+    #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
+    #   uses your default encryption key.
     #
-    #   AWS KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   Region.
+    #   KMS creates the default encryption key for your account. Your account
+    #   has a different default encryption key for each Region.
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the endpoint.
@@ -570,7 +579,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :service_access_role_arn
     #   The Amazon Resource Name (ARN) for the service access role that you
-    #   want to use to create the endpoint.
+    #   want to use to create the endpoint. The role must allow the
+    #   `iam:PassRole` action.
     #
     # @option params [String] :external_table_definition
     #   The external table definition.
@@ -578,18 +588,18 @@ module Aws::DatabaseMigrationService
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
     #   information about other available settings, see [Using Object Mapping
-    #   to Migrate Data to DynamoDB][1] in the *AWS Database Migration Service
+    #   to Migrate Data to DynamoDB][1] in the *Database Migration Service
     #   User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping
     #
     # @option params [Types::S3Settings] :s3_settings
     #   Settings in JSON format for the target Amazon S3 endpoint. For more
     #   information about the available settings, see [Extra Connection
-    #   Attributes When Using Amazon S3 as a Target for AWS DMS][1] in the
-    #   *AWS Database Migration Service User Guide.*
+    #   Attributes When Using Amazon S3 as a Target for DMS][1] in the
+    #   *Database Migration Service User Guide.*
     #
     #
     #
@@ -602,26 +612,21 @@ module Aws::DatabaseMigrationService
     #   Possible settings include the following:
     #
     #   * `ServiceAccessRoleArn` - The IAM role that has permission to access
-    #     the Amazon S3 bucket.
+    #     the Amazon S3 bucket. The role must allow the `iam:PassRole` action.
     #
     #   * `BucketName` - The name of the S3 bucket to use.
     #
-    #   * `CompressionType` - An optional parameter to use GZIP to compress
-    #     the target files. To use GZIP, set this value to `NONE` (the
-    #     default). To keep the files uncompressed, don't use this value.
-    #
     #   Shorthand syntax for these settings is as follows:
-    #   `ServiceAccessRoleArn=string,BucketName=string,CompressionType=string`
+    #   `ServiceAccessRoleArn=string,BucketName=string`
     #
     #   JSON syntax for these settings is as follows: `\{
-    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
-    #   "CompressionType": "none"|"gzip" \} `
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string", \} `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
-    #   information about the available settings, see [Using MongoDB as a
-    #   Target for AWS Database Migration Service][1] in the *AWS Database
-    #   Migration Service User Guide.*
+    #   information about the available settings, see [Endpoint configuration
+    #   settings when using MongoDB as a source for Database Migration
+    #   Service][1] in the *Database Migration Service User Guide.*
     #
     #
     #
@@ -630,29 +635,28 @@ module Aws::DatabaseMigrationService
     # @option params [Types::KinesisSettings] :kinesis_settings
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
     #   Data Streams. For more information about the available settings, see
-    #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   [Using object mapping to migrate data to a Kinesis data stream][1] in
+    #   the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
     #
     # @option params [Types::KafkaSettings] :kafka_settings
     #   Settings in JSON format for the target Apache Kafka endpoint. For more
-    #   information about the available settings, see [Using Apache Kafka as a
-    #   Target for AWS Database Migration Service][1] in the *AWS Database
-    #   Migration Service User Guide.*
+    #   information about the available settings, see [Using object mapping to
+    #   migrate data to a Kafka topic][1] in the *Database Migration Service
+    #   User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
     #   more information about the available settings, see [Extra Connection
-    #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in the
-    #   *AWS Database Migration Service User Guide*.
+    #   Attributes When Using Elasticsearch as a Target for DMS][1] in the
+    #   *Database Migration Service User Guide*.
     #
     #
     #
@@ -661,8 +665,8 @@ module Aws::DatabaseMigrationService
     # @option params [Types::NeptuneSettings] :neptune_settings
     #   Settings in JSON format for the target Amazon Neptune endpoint. For
     #   more information about the available settings, see [Specifying
-    #   Endpoint Settings for Amazon Neptune as a Target][1] in the *AWS
-    #   Database Migration Service User Guide.*
+    #   graph-mapping rules using Gremlin and R2RML for Amazon Neptune as a
+    #   target][1] in the *Database Migration Service User Guide.*
     #
     #
     #
@@ -674,74 +678,72 @@ module Aws::DatabaseMigrationService
     # @option params [Types::PostgreSQLSettings] :postgre_sql_settings
     #   Settings in JSON format for the source and target PostgreSQL endpoint.
     #   For information about other available settings, see [Extra connection
-    #   attributes when using PostgreSQL as a source for AWS DMS][1] and [
-    #   Extra connection attributes when using PostgreSQL as a target for AWS
-    #   DMS][2] in the *AWS Database Migration Service User Guide.*
+    #   attributes when using PostgreSQL as a source for DMS][1] and [ Extra
+    #   connection attributes when using PostgreSQL as a target for DMS][2] in
+    #   the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html#CHAP_Target.PostgreSQL.ConnectionAttrib
     #
     # @option params [Types::MySQLSettings] :my_sql_settings
     #   Settings in JSON format for the source and target MySQL endpoint. For
     #   information about other available settings, see [Extra connection
-    #   attributes when using MySQL as a source for AWS DMS][1] and [Extra
+    #   attributes when using MySQL as a source for DMS][1] and [Extra
     #   connection attributes when using a MySQL-compatible database as a
-    #   target for AWS DMS][2] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   target for DMS][2] in the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html#CHAP_Source.MySQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html#CHAP_Target.MySQL.ConnectionAttrib
     #
     # @option params [Types::OracleSettings] :oracle_settings
     #   Settings in JSON format for the source and target Oracle endpoint. For
     #   information about other available settings, see [Extra connection
-    #   attributes when using Oracle as a source for AWS DMS][1] and [ Extra
-    #   connection attributes when using Oracle as a target for AWS DMS][2] in
-    #   the *AWS Database Migration Service User Guide.*
+    #   attributes when using Oracle as a source for DMS][1] and [ Extra
+    #   connection attributes when using Oracle as a target for DMS][2] in the
+    #   *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html#CHAP_Target.Oracle.ConnectionAttrib
     #
     # @option params [Types::SybaseSettings] :sybase_settings
     #   Settings in JSON format for the source and target SAP ASE endpoint.
     #   For information about other available settings, see [Extra connection
-    #   attributes when using SAP ASE as a source for AWS DMS][1] and [Extra
-    #   connection attributes when using SAP ASE as a target for AWS DMS][2]
-    #   in the *AWS Database Migration Service User Guide.*
+    #   attributes when using SAP ASE as a source for DMS][1] and [Extra
+    #   connection attributes when using SAP ASE as a target for DMS][2] in
+    #   the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html#CHAP_Source.SAP.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html#CHAP_Target.SAP.ConnectionAttrib
     #
     # @option params [Types::MicrosoftSQLServerSettings] :microsoft_sql_server_settings
     #   Settings in JSON format for the source and target Microsoft SQL Server
     #   endpoint. For information about other available settings, see [Extra
-    #   connection attributes when using SQL Server as a source for AWS
-    #   DMS][1] and [ Extra connection attributes when using SQL Server as a
-    #   target for AWS DMS][2] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   connection attributes when using SQL Server as a source for DMS][1]
+    #   and [ Extra connection attributes when using SQL Server as a target
+    #   for DMS][2] in the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html#CHAP_Source.SQLServer.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html#CHAP_Target.SQLServer.ConnectionAttrib
     #
     # @option params [Types::IBMDb2Settings] :ibm_db_2_settings
     #   Settings in JSON format for the source IBM Db2 LUW endpoint. For
     #   information about other available settings, see [Extra connection
-    #   attributes when using Db2 LUW as a source for AWS DMS][1] in the *AWS
-    #   Database Migration Service User Guide.*
+    #   attributes when using Db2 LUW as a source for DMS][1] in the *Database
+    #   Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html#CHAP_Source.DB2.ConnectionAttrib
     #
     # @option params [String] :resource_identifier
     #   A friendly name for the resource identifier at the end of the
@@ -752,8 +754,8 @@ module Aws::DatabaseMigrationService
     #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
     #   For example, this value might result in the `EndpointArn` value
     #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
-    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
-    #   default identifier value for the end of `EndpointArn`.
+    #   don't specify a `ResourceIdentifier` value, DMS generates a default
+    #   identifier value for the end of `EndpointArn`.
     #
     # @option params [Types::DocDbSettings] :doc_db_settings
     #   Provides information that defines a DocumentDB endpoint.
@@ -889,6 +891,7 @@ module Aws::DatabaseMigrationService
     #       include_table_alter_operations: false,
     #       include_control_details: false,
     #       include_null_and_empty: false,
+    #       no_hex_prefix: false,
     #     },
     #     kafka_settings: {
     #       broker: "String",
@@ -908,6 +911,7 @@ module Aws::DatabaseMigrationService
     #       ssl_ca_certificate_arn: "String",
     #       sasl_username: "String",
     #       sasl_password: "SecretString",
+    #       no_hex_prefix: false,
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -964,11 +968,15 @@ module Aws::DatabaseMigrationService
     #       ddl_artifacts_schema: "String",
     #       execute_timeout: 1,
     #       fail_tasks_on_lob_truncation: false,
+    #       heartbeat_enable: false,
+    #       heartbeat_schema: "String",
+    #       heartbeat_frequency: 1,
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
     #       username: "String",
     #       slot_name: "String",
+    #       plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #     },
@@ -1019,7 +1027,11 @@ module Aws::DatabaseMigrationService
     #       security_db_encryption_name: "String",
     #       server_name: "String",
     #       spatial_data_option_to_geo_json_function_name: "String",
+    #       standby_delay_time: 1,
     #       username: "String",
+    #       use_b_file: false,
+    #       use_direct_path_full_load: false,
+    #       use_logminer_reader: false,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       secrets_manager_oracle_asm_access_role_arn: "String",
@@ -1151,6 +1163,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoint.kinesis_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoint.kinesis_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -1168,6 +1181,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.ssl_ca_certificate_arn #=> String
     #   resp.endpoint.kafka_settings.sasl_username #=> String
     #   resp.endpoint.kafka_settings.sasl_password #=> String
+    #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -1216,11 +1230,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.ddl_artifacts_schema #=> String
     #   resp.endpoint.postgre_sql_settings.execute_timeout #=> Integer
     #   resp.endpoint.postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.heartbeat_enable #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.heartbeat_schema #=> String
+    #   resp.endpoint.postgre_sql_settings.heartbeat_frequency #=> Integer
     #   resp.endpoint.postgre_sql_settings.password #=> String
     #   resp.endpoint.postgre_sql_settings.port #=> Integer
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
     #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
@@ -1267,7 +1285,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
     #   resp.endpoint.oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
+    #   resp.endpoint.oracle_settings.standby_delay_time #=> Integer
     #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.oracle_settings.use_b_file #=> Boolean
+    #   resp.endpoint.oracle_settings.use_direct_path_full_load #=> Boolean
+    #   resp.endpoint.oracle_settings.use_logminer_reader #=> Boolean
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
@@ -1324,10 +1346,10 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Creates an AWS DMS event notification subscription.
+    # Creates an DMS event notification subscription.
     #
     # You can specify the type of source (`SourceType`) you want to be
-    # notified of, provide a list of AWS DMS source IDs (`SourceIds`) that
+    # notified of, provide a list of DMS source IDs (`SourceIds`) that
     # triggers the events, and provide a list of event categories
     # (`EventCategories`) for events you want to be notified of. If you
     # specify both the `SourceType` and `SourceIds`, such as `SourceType =
@@ -1335,21 +1357,20 @@ module Aws::DatabaseMigrationService
     # will be notified of all the replication instance events for the
     # specified source. If you specify a `SourceType` but don't specify a
     # `SourceIdentifier`, you receive notice of the events for that source
-    # type for all your AWS DMS sources. If you don't specify either
+    # type for all your DMS sources. If you don't specify either
     # `SourceType` nor `SourceIdentifier`, you will be notified of events
-    # generated from all AWS DMS sources belonging to your customer account.
+    # generated from all DMS sources belonging to your customer account.
     #
-    # For more information about AWS DMS events, see [Working with Events
-    # and Notifications][1] in the *AWS Database Migration Service User
-    # Guide.*
+    # For more information about DMS events, see [Working with Events and
+    # Notifications][1] in the *Database Migration Service User Guide.*
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [required, String] :subscription_name
-    #   The name of the AWS DMS event notification subscription. This name
-    #   must be less than 255 characters.
+    #   The name of the DMS event notification subscription. This name must be
+    #   less than 255 characters.
     #
     # @option params [required, String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic created for
@@ -1357,24 +1378,24 @@ module Aws::DatabaseMigrationService
     #   topic and subscribe to it.
     #
     # @option params [String] :source_type
-    #   The type of AWS DMS resource that generates the events. For example,
-    #   if you want to be notified of events generated by a replication
-    #   instance, you set this parameter to `replication-instance`. If this
-    #   value isn't specified, all events are returned.
+    #   The type of DMS resource that generates the events. For example, if
+    #   you want to be notified of events generated by a replication instance,
+    #   you set this parameter to `replication-instance`. If this value isn't
+    #   specified, all events are returned.
     #
     #   Valid values: `replication-instance` \| `replication-task`
     #
     # @option params [Array<String>] :event_categories
     #   A list of event categories for a source type that you want to
     #   subscribe to. For more information, see [Working with Events and
-    #   Notifications][1] in the *AWS Database Migration Service User Guide.*
+    #   Notifications][1] in the *Database Migration Service User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [Array<String>] :source_ids
-    #   A list of identifiers for which AWS DMS provides notification events.
+    #   A list of identifiers for which DMS provides notification events.
     #
     #   If you don't specify a value, notifications are provided for all
     #   sources.
@@ -1436,11 +1457,11 @@ module Aws::DatabaseMigrationService
 
     # Creates the replication instance using the specified parameters.
     #
-    # AWS DMS requires that your account have certain roles with appropriate
+    # DMS requires that your account have certain roles with appropriate
     # permissions before you can create a replication instance. For
     # information on the required roles, see [Creating the IAM Roles to Use
-    # With the AWS CLI and AWS DMS API][1]. For information on the required
-    # permissions, see [IAM Permissions Needed to Use AWS DMS][2].
+    # With the CLI and DMS API][1]. For information on the required
+    # permissions, see [IAM Permissions Needed to Use DMS][2].
     #
     #
     #
@@ -1472,7 +1493,7 @@ module Aws::DatabaseMigrationService
     #   `"dms.c4.large"`.
     #
     #   For more information on the settings and capacities for the available
-    #   replication instance classes, see [ Selecting the right AWS DMS
+    #   replication instance classes, see [ Selecting the right DMS
     #   replication instance for your migration][1].
     #
     #
@@ -1487,7 +1508,7 @@ module Aws::DatabaseMigrationService
     # @option params [String] :availability_zone
     #   The Availability Zone where the replication instance will be created.
     #   The default value is a random, system-chosen Availability Zone in the
-    #   endpoint's AWS Region, for example: `us-east-1d`
+    #   endpoint's Region, for example: `us-east-1d`
     #
     # @option params [String] :replication_subnet_group_identifier
     #   A subnet group to associate with the replication instance.
@@ -1499,7 +1520,7 @@ module Aws::DatabaseMigrationService
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per AWS Region, occurring on a random day of the week.
+    #   time per Region, occurring on a random day of the week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
@@ -1528,15 +1549,14 @@ module Aws::DatabaseMigrationService
     #   One or more tags to be assigned to the replication instance.
     #
     # @option params [String] :kms_key_id
-    #   An AWS KMS key identifier that is used to encrypt the data on the
+    #   An KMS key identifier that is used to encrypt the data on the
     #   replication instance.
     #
-    #   If you don't specify a value for the `KmsKeyId` parameter, then AWS
-    #   DMS uses your default encryption key.
+    #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
+    #   uses your default encryption key.
     #
-    #   AWS KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   Region.
+    #   KMS creates the default encryption key for your account. Your account
+    #   has a different default encryption key for each Region.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the replication instance. A
@@ -1561,8 +1581,8 @@ module Aws::DatabaseMigrationService
     #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
     #   For example, this value might result in the `EndpointArn` value
     #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
-    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
-    #   default identifier value for the end of `EndpointArn`.
+    #   don't specify a `ResourceIdentifier` value, DMS generates a default
+    #   identifier value for the end of `EndpointArn`.
     #
     # @return [Types::CreateReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1838,8 +1858,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :table_mappings
     #   The table mappings for the task, in JSON format. For more information,
-    #   see [Using Table Mapping to Specify Task Settings][1] in the *AWS
-    #   Database Migration Service User Guide.*
+    #   see [Using Table Mapping to Specify Task Settings][1] in the *Database
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -1847,8 +1867,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :replication_task_settings
     #   Overall settings for the task, in JSON format. For more information,
-    #   see [Specifying Task Settings for AWS Database Migration Service
-    #   Tasks][1] in the *AWS Database Migration User Guide.*
+    #   see [Specifying Task Settings for Database Migration Service Tasks][1]
+    #   in the *Database Migration Service User Guide.*
     #
     #
     #
@@ -1881,7 +1901,7 @@ module Aws::DatabaseMigrationService
     #   the source endpoint. You can verify this by setting the `slotName`
     #   extra connection attribute to the name of this logical replication
     #   slot. For more information, see [Extra Connection Attributes When
-    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #   Using PostgreSQL as a Source for DMS][1].
     #
     #    </note>
     #
@@ -1905,8 +1925,8 @@ module Aws::DatabaseMigrationService
     # @option params [String] :task_data
     #   Supplemental information that the task requires to migrate the data
     #   for certain source and target endpoints. For more information, see
-    #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
-    #   Database Migration Service User Guide.*
+    #   [Specifying Supplemental Data for Task Settings][1] in the *Database
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -1921,8 +1941,8 @@ module Aws::DatabaseMigrationService
     #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
     #   For example, this value might result in the `EndpointArn` value
     #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
-    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
-    #   default identifier value for the end of `EndpointArn`.
+    #   don't specify a `ResourceIdentifier` value, DMS generates a default
+    #   identifier value for the end of `EndpointArn`.
     #
     # @return [Types::CreateReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2255,6 +2275,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoint.kinesis_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoint.kinesis_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -2272,6 +2293,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.ssl_ca_certificate_arn #=> String
     #   resp.endpoint.kafka_settings.sasl_username #=> String
     #   resp.endpoint.kafka_settings.sasl_password #=> String
+    #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -2320,11 +2342,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.ddl_artifacts_schema #=> String
     #   resp.endpoint.postgre_sql_settings.execute_timeout #=> Integer
     #   resp.endpoint.postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.heartbeat_enable #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.heartbeat_schema #=> String
+    #   resp.endpoint.postgre_sql_settings.heartbeat_frequency #=> Integer
     #   resp.endpoint.postgre_sql_settings.password #=> String
     #   resp.endpoint.postgre_sql_settings.port #=> Integer
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
     #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
@@ -2371,7 +2397,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
     #   resp.endpoint.oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
+    #   resp.endpoint.oracle_settings.standby_delay_time #=> Integer
     #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.oracle_settings.use_b_file #=> Boolean
+    #   resp.endpoint.oracle_settings.use_direct_path_full_load #=> Boolean
+    #   resp.endpoint.oracle_settings.use_logminer_reader #=> Boolean
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
@@ -2428,7 +2458,7 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Deletes an AWS DMS event subscription.
+    # Deletes an DMS event subscription.
     #
     # @option params [required, String] :subscription_name
     #   The name of the DMS event notification subscription to be deleted.
@@ -2718,7 +2748,7 @@ module Aws::DatabaseMigrationService
 
     # Deletes the record of a single premigration assessment run.
     #
-    # This operation removes all metadata that AWS DMS maintains about this
+    # This operation removes all metadata that DMS maintains about this
     # assessment run. However, the operation leaves untouched all
     # information about this assessment run that is stored in your Amazon S3
     # bucket.
@@ -2762,8 +2792,8 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Lists all of the AWS DMS attributes for a customer account. These
-    # attributes include AWS DMS quotas for the account and a unique account
+    # Lists all of the DMS attributes for a customer account. These
+    # attributes include DMS quotas for the account and a unique account
     # identifier in a particular DMS region. DMS quotas include a list of
     # resource quotas supported by the account, such as the number of
     # replication instances allowed. The description for each resource
@@ -3151,6 +3181,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint_settings[0].applicability #=> String
     #   resp.endpoint_settings[0].int_value_min #=> Integer
     #   resp.endpoint_settings[0].int_value_max #=> Integer
+    #   resp.endpoint_settings[0].default_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointSettings AWS API Documentation
     #
@@ -3393,6 +3424,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoints[0].kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoints[0].kinesis_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.no_hex_prefix #=> Boolean
     #   resp.endpoints[0].kafka_settings.broker #=> String
     #   resp.endpoints[0].kafka_settings.topic #=> String
     #   resp.endpoints[0].kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -3410,6 +3442,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].kafka_settings.ssl_ca_certificate_arn #=> String
     #   resp.endpoints[0].kafka_settings.sasl_username #=> String
     #   resp.endpoints[0].kafka_settings.sasl_password #=> String
+    #   resp.endpoints[0].kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -3458,11 +3491,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.ddl_artifacts_schema #=> String
     #   resp.endpoints[0].postgre_sql_settings.execute_timeout #=> Integer
     #   resp.endpoints[0].postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.heartbeat_enable #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.heartbeat_schema #=> String
+    #   resp.endpoints[0].postgre_sql_settings.heartbeat_frequency #=> Integer
     #   resp.endpoints[0].postgre_sql_settings.password #=> String
     #   resp.endpoints[0].postgre_sql_settings.port #=> Integer
     #   resp.endpoints[0].postgre_sql_settings.server_name #=> String
     #   resp.endpoints[0].postgre_sql_settings.username #=> String
     #   resp.endpoints[0].postgre_sql_settings.slot_name #=> String
+    #   resp.endpoints[0].postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
@@ -3509,7 +3546,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoints[0].oracle_settings.server_name #=> String
     #   resp.endpoints[0].oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
+    #   resp.endpoints[0].oracle_settings.standby_delay_time #=> Integer
     #   resp.endpoints[0].oracle_settings.username #=> String
+    #   resp.endpoints[0].oracle_settings.use_b_file #=> Boolean
+    #   resp.endpoints[0].oracle_settings.use_direct_path_full_load #=> Boolean
+    #   resp.endpoints[0].oracle_settings.use_logminer_reader #=> Boolean
     #   resp.endpoints[0].oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
@@ -3573,15 +3614,15 @@ module Aws::DatabaseMigrationService
 
     # Lists categories for all event source types, or, if specified, for a
     # specified source type. You can see a list of the event categories and
-    # source types in [Working with Events and Notifications][1] in the *AWS
-    # Database Migration Service User Guide.*
+    # source types in [Working with Events and Notifications][1] in the
+    # *Database Migration Service User Guide.*
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [String] :source_type
-    #   The type of AWS DMS resource that generates events.
+    #   The type of DMS resource that generates events.
     #
     #   Valid values: replication-instance \| replication-task
     #
@@ -3629,7 +3670,7 @@ module Aws::DatabaseMigrationService
     # for that subscription.
     #
     # @option params [String] :subscription_name
-    #   The name of the AWS DMS event subscription to be described.
+    #   The name of the DMS event subscription to be described.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to event subscriptions.
@@ -3696,9 +3737,9 @@ module Aws::DatabaseMigrationService
     end
 
     # Lists events for a given source identifier and source type. You can
-    # also specify a start and end time. For more information on AWS DMS
-    # events, see [Working with Events and Notifications][1] in the *AWS
-    # Database Migration User Guide.*
+    # also specify a start and end time. For more information on DMS events,
+    # see [Working with Events and Notifications][1] in the *Database
+    # Migration Service User Guide.*
     #
     #
     #
@@ -3708,7 +3749,7 @@ module Aws::DatabaseMigrationService
     #   The identifier of an event source.
     #
     # @option params [String] :source_type
-    #   The type of AWS DMS resource that generates events.
+    #   The type of DMS resource that generates events.
     #
     #   Valid values: replication-instance \| replication-task
     #
@@ -4246,8 +4287,18 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Returns the task assessment results from Amazon S3. This action always
-    # returns the latest results.
+    # Returns the task assessment results from the Amazon S3 bucket that DMS
+    # creates in your account. This action always returns the latest
+    # results.
+    #
+    # For more information about DMS task assessments, see [Creating a task
+    # assessment report][1] in the [ Database Migration Service User
+    # Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html
+    # [2]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html
     #
     # @option params [String] :replication_task_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -4649,7 +4700,7 @@ module Aws::DatabaseMigrationService
     # table name, rows inserted, rows updated, and rows deleted.
     #
     # Note that the "last updated" column the DMS console only indicates
-    # the time that AWS DMS last updated the table statistics record for a
+    # the time that DMS last updated the table statistics record for a
     # table. It does not indicate the time of the last update to the table.
     #
     # @option params [required, String] :replication_task_arn
@@ -4767,7 +4818,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String, StringIO, File] :certificate_wallet
     #   The location of an imported Oracle Wallet certificate for use with
-    #   SSL.
+    #   SSL. Provide the name of a `.sso` file using the `fileb://` prefix.
+    #   You can't provide the certificate inline.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags associated with the certificate.
@@ -4828,7 +4880,7 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Lists all metadata tags attached to an AWS DMS resource, including
+    # Lists all metadata tags attached to an DMS resource, including
     # replication instance, endpoint, security group, and migration task.
     # For more information, see [ `Tag` ][1] data type description.
     #
@@ -4837,8 +4889,8 @@ module Aws::DatabaseMigrationService
     # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the AWS
-    #   DMS resource.
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the DMS
+    #   resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4882,6 +4934,15 @@ module Aws::DatabaseMigrationService
 
     # Modifies the specified endpoint.
     #
+    # <note markdown="1"> For a MySQL source or target endpoint, don't explicitly specify the
+    # database using the `DatabaseName` request parameter on the
+    # `ModifyEndpoint` API call. Specifying `DatabaseName` when you modify a
+    # MySQL endpoint replicates all the task tables to this single database.
+    # For MySQL endpoints, you specify the database only when you specify
+    # the schema in the table-mapping rules of the DMS task.
+    #
+    #  </note>
+    #
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -4915,7 +4976,8 @@ module Aws::DatabaseMigrationService
     #   The port used by the endpoint database.
     #
     # @option params [String] :database_name
-    #   The name of the endpoint database.
+    #   The name of the endpoint database. For a MySQL source or target
+    #   endpoint, do not specify DatabaseName.
     #
     # @option params [String] :extra_connection_attributes
     #   Additional attributes associated with the connection. To reset this
@@ -4930,8 +4992,8 @@ module Aws::DatabaseMigrationService
     #   `none`.
     #
     # @option params [String] :service_access_role_arn
-    #   The Amazon Resource Name (ARN) for the service access role you want to
-    #   use to modify the endpoint.
+    #   The Amazon Resource Name (ARN) for the IAM role you want to use to
+    #   modify the endpoint. The role must allow the `iam:PassRole` action.
     #
     # @option params [String] :external_table_definition
     #   The external table definition.
@@ -4939,18 +5001,18 @@ module Aws::DatabaseMigrationService
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
     #   information about other available settings, see [Using Object Mapping
-    #   to Migrate Data to DynamoDB][1] in the *AWS Database Migration Service
+    #   to Migrate Data to DynamoDB][1] in the *Database Migration Service
     #   User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping
     #
     # @option params [Types::S3Settings] :s3_settings
     #   Settings in JSON format for the target Amazon S3 endpoint. For more
     #   information about the available settings, see [Extra Connection
-    #   Attributes When Using Amazon S3 as a Target for AWS DMS][1] in the
-    #   *AWS Database Migration Service User Guide.*
+    #   Attributes When Using Amazon S3 as a Target for DMS][1] in the
+    #   *Database Migration Service User Guide.*
     #
     #
     #
@@ -4962,60 +5024,54 @@ module Aws::DatabaseMigrationService
     #
     #   Attributes include the following:
     #
-    #   * serviceAccessRoleArn - The AWS Identity and Access Management (IAM)
-    #     role that has permission to access the Amazon S3 bucket.
+    #   * serviceAccessRoleArn - The Identity and Access Management (IAM) role
+    #     that has permission to access the Amazon S3 bucket. The role must
+    #     allow the `iam:PassRole` action.
     #
     #   * BucketName - The name of the S3 bucket to use.
     #
-    #   * compressionType - An optional parameter to use GZIP to compress the
-    #     target files. Either set this parameter to NONE (the default) or
-    #     don't use it to leave the files uncompressed.
-    #
     #   Shorthand syntax for these settings is as follows:
-    #   `ServiceAccessRoleArn=string
-    #   ,BucketName=string,CompressionType=string`
+    #   `ServiceAccessRoleArn=string ,BucketName=string`
     #
     #   JSON syntax for these settings is as follows: `\{
-    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
-    #   "CompressionType": "none"|"gzip" \} `
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string"\} `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
     #   information about the available settings, see the configuration
-    #   properties section in [ Using MongoDB as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   properties section in [Endpoint configuration settings when using
+    #   MongoDB as a source for Database Migration Service][1] in the
+    #   *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration
     #
     # @option params [Types::KinesisSettings] :kinesis_settings
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
     #   Data Streams. For more information about the available settings, see
-    #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   [Using object mapping to migrate data to a Kinesis data stream][1] in
+    #   the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
     #
     # @option params [Types::KafkaSettings] :kafka_settings
     #   Settings in JSON format for the target Apache Kafka endpoint. For more
-    #   information about the available settings, see [Using Apache Kafka as a
-    #   Target for AWS Database Migration Service][1] in the *AWS Database
-    #   Migration Service User Guide.*
+    #   information about the available settings, see [Using object mapping to
+    #   migrate data to a Kafka topic][1] in the *Database Migration Service
+    #   User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
     #   more information about the available settings, see [Extra Connection
-    #   Attributes When Using Elasticsearch as a Target for AWS DMS][1] in the
-    #   *AWS Database Migration Service User Guide.*
+    #   Attributes When Using Elasticsearch as a Target for DMS][1] in the
+    #   *Database Migration Service User Guide.*
     #
     #
     #
@@ -5024,8 +5080,8 @@ module Aws::DatabaseMigrationService
     # @option params [Types::NeptuneSettings] :neptune_settings
     #   Settings in JSON format for the target Amazon Neptune endpoint. For
     #   more information about the available settings, see [Specifying
-    #   Endpoint Settings for Amazon Neptune as a Target][1] in the *AWS
-    #   Database Migration Service User Guide.*
+    #   graph-mapping rules using Gremlin and R2RML for Amazon Neptune as a
+    #   target][1] in the *Database Migration Service User Guide.*
     #
     #
     #
@@ -5037,85 +5093,106 @@ module Aws::DatabaseMigrationService
     # @option params [Types::PostgreSQLSettings] :postgre_sql_settings
     #   Settings in JSON format for the source and target PostgreSQL endpoint.
     #   For information about other available settings, see [Extra connection
-    #   attributes when using PostgreSQL as a source for AWS DMS][1] and [
-    #   Extra connection attributes when using PostgreSQL as a target for AWS
-    #   DMS][2] in the *AWS Database Migration Service User Guide.*
+    #   attributes when using PostgreSQL as a source for DMS][1] and [ Extra
+    #   connection attributes when using PostgreSQL as a target for DMS][2] in
+    #   the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html#CHAP_Target.PostgreSQL.ConnectionAttrib
     #
     # @option params [Types::MySQLSettings] :my_sql_settings
     #   Settings in JSON format for the source and target MySQL endpoint. For
     #   information about other available settings, see [Extra connection
-    #   attributes when using MySQL as a source for AWS DMS][1] and [Extra
+    #   attributes when using MySQL as a source for DMS][1] and [Extra
     #   connection attributes when using a MySQL-compatible database as a
-    #   target for AWS DMS][2] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   target for DMS][2] in the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html#CHAP_Source.MySQL.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html#CHAP_Target.MySQL.ConnectionAttrib
     #
     # @option params [Types::OracleSettings] :oracle_settings
     #   Settings in JSON format for the source and target Oracle endpoint. For
     #   information about other available settings, see [Extra connection
-    #   attributes when using Oracle as a source for AWS DMS][1] and [ Extra
-    #   connection attributes when using Oracle as a target for AWS DMS][2] in
-    #   the *AWS Database Migration Service User Guide.*
+    #   attributes when using Oracle as a source for DMS][1] and [ Extra
+    #   connection attributes when using Oracle as a target for DMS][2] in the
+    #   *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html#CHAP_Target.Oracle.ConnectionAttrib
     #
     # @option params [Types::SybaseSettings] :sybase_settings
     #   Settings in JSON format for the source and target SAP ASE endpoint.
     #   For information about other available settings, see [Extra connection
-    #   attributes when using SAP ASE as a source for AWS DMS][1] and [Extra
-    #   connection attributes when using SAP ASE as a target for AWS DMS][2]
-    #   in the *AWS Database Migration Service User Guide.*
+    #   attributes when using SAP ASE as a source for DMS][1] and [Extra
+    #   connection attributes when using SAP ASE as a target for DMS][2] in
+    #   the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html#CHAP_Source.SAP.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html#CHAP_Target.SAP.ConnectionAttrib
     #
     # @option params [Types::MicrosoftSQLServerSettings] :microsoft_sql_server_settings
     #   Settings in JSON format for the source and target Microsoft SQL Server
     #   endpoint. For information about other available settings, see [Extra
-    #   connection attributes when using SQL Server as a source for AWS
-    #   DMS][1] and [ Extra connection attributes when using SQL Server as a
-    #   target for AWS DMS][2] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   connection attributes when using SQL Server as a source for DMS][1]
+    #   and [ Extra connection attributes when using SQL Server as a target
+    #   for DMS][2] in the *Database Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib
-    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html#CHAP_Source.SQLServer.ConnectionAttrib
+    #   [2]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html#CHAP_Target.SQLServer.ConnectionAttrib
     #
     # @option params [Types::IBMDb2Settings] :ibm_db_2_settings
     #   Settings in JSON format for the source IBM Db2 LUW endpoint. For
     #   information about other available settings, see [Extra connection
-    #   attributes when using Db2 LUW as a source for AWS DMS][1] in the *AWS
-    #   Database Migration Service User Guide.*
+    #   attributes when using Db2 LUW as a source for DMS][1] in the *Database
+    #   Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html#CHAP_Source.DB2.ConnectionAttrib
     #
     # @option params [Types::DocDbSettings] :doc_db_settings
     #   Settings in JSON format for the source DocumentDB endpoint. For more
     #   information about the available settings, see the configuration
-    #   properties section in [ Using DocumentDB as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   properties section in [ Using DocumentDB as a Target for Database
+    #   Migration Service ][1] in the *Database Migration Service User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
+    #
+    # @option params [Boolean] :exact_settings
+    #   If this attribute is Y, the current call to `ModifyEndpoint` replaces
+    #   all existing endpoint settings with the exact settings that you
+    #   specify in this call. If this attribute is N, the current call to
+    #   `ModifyEndpoint` does two things:
+    #
+    #   * It replaces any endpoint settings that already exist with new
+    #     values, for settings with the same names.
+    #
+    #   * It creates new endpoint settings that you specify in the call, for
+    #     settings with different names.
+    #
+    #   For example, if you call `create-endpoint ... --endpoint-settings
+    #   '\{"a":1\}' ...`, the endpoint has the following endpoint settings:
+    #   `'\{"a":1\}'`. If you then call `modify-endpoint ...
+    #   --endpoint-settings '\{"b":2\}' ...` for the same endpoint, the
+    #   endpoint has the following settings: `'\{"a":1,"b":2\}'`.
+    #
+    #   However, suppose that you follow this with a call to `modify-endpoint
+    #   ... --endpoint-settings '\{"b":2\}' --exact-settings ...` for that
+    #   same endpoint again. Then the endpoint has the following settings:
+    #   `'\{"b":2\}'`. All existing settings are replaced with the exact
+    #   settings that you specify.
     #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5227,6 +5304,7 @@ module Aws::DatabaseMigrationService
     #       include_table_alter_operations: false,
     #       include_control_details: false,
     #       include_null_and_empty: false,
+    #       no_hex_prefix: false,
     #     },
     #     kafka_settings: {
     #       broker: "String",
@@ -5246,6 +5324,7 @@ module Aws::DatabaseMigrationService
     #       ssl_ca_certificate_arn: "String",
     #       sasl_username: "String",
     #       sasl_password: "SecretString",
+    #       no_hex_prefix: false,
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -5302,11 +5381,15 @@ module Aws::DatabaseMigrationService
     #       ddl_artifacts_schema: "String",
     #       execute_timeout: 1,
     #       fail_tasks_on_lob_truncation: false,
+    #       heartbeat_enable: false,
+    #       heartbeat_schema: "String",
+    #       heartbeat_frequency: 1,
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
     #       username: "String",
     #       slot_name: "String",
+    #       plugin_name: "no-preference", # accepts no-preference, test-decoding, pglogical
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #     },
@@ -5357,7 +5440,11 @@ module Aws::DatabaseMigrationService
     #       security_db_encryption_name: "String",
     #       server_name: "String",
     #       spatial_data_option_to_geo_json_function_name: "String",
+    #       standby_delay_time: 1,
     #       username: "String",
+    #       use_b_file: false,
+    #       use_direct_path_full_load: false,
+    #       use_logminer_reader: false,
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       secrets_manager_oracle_asm_access_role_arn: "String",
@@ -5413,6 +5500,7 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #     },
+    #     exact_settings: false,
     #   })
     #
     # @example Response structure
@@ -5488,6 +5576,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
     #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
     #   resp.endpoint.kinesis_settings.include_null_and_empty #=> Boolean
+    #   resp.endpoint.kinesis_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.kafka_settings.broker #=> String
     #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.kafka_settings.message_format #=> String, one of "json", "json-unformatted"
@@ -5505,6 +5594,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.kafka_settings.ssl_ca_certificate_arn #=> String
     #   resp.endpoint.kafka_settings.sasl_username #=> String
     #   resp.endpoint.kafka_settings.sasl_password #=> String
+    #   resp.endpoint.kafka_settings.no_hex_prefix #=> Boolean
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -5553,11 +5643,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.ddl_artifacts_schema #=> String
     #   resp.endpoint.postgre_sql_settings.execute_timeout #=> Integer
     #   resp.endpoint.postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.heartbeat_enable #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.heartbeat_schema #=> String
+    #   resp.endpoint.postgre_sql_settings.heartbeat_frequency #=> Integer
     #   resp.endpoint.postgre_sql_settings.password #=> String
     #   resp.endpoint.postgre_sql_settings.port #=> Integer
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
     #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.postgre_sql_settings.plugin_name #=> String, one of "no-preference", "test-decoding", "pglogical"
     #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
@@ -5604,7 +5698,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
     #   resp.endpoint.oracle_settings.spatial_data_option_to_geo_json_function_name #=> String
+    #   resp.endpoint.oracle_settings.standby_delay_time #=> Integer
     #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.oracle_settings.use_b_file #=> Boolean
+    #   resp.endpoint.oracle_settings.use_direct_path_full_load #=> Boolean
+    #   resp.endpoint.oracle_settings.use_logminer_reader #=> Boolean
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
@@ -5661,11 +5759,10 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Modifies an existing AWS DMS event notification subscription.
+    # Modifies an existing DMS event notification subscription.
     #
     # @option params [required, String] :subscription_name
-    #   The name of the AWS DMS event notification subscription to be
-    #   modified.
+    #   The name of the DMS event notification subscription to be modified.
     #
     # @option params [String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic created for
@@ -5673,7 +5770,7 @@ module Aws::DatabaseMigrationService
     #   topic and subscribe to it.
     #
     # @option params [String] :source_type
-    #   The type of AWS DMS resource that generates the events you want to
+    #   The type of DMS resource that generates the events you want to
     #   subscribe to.
     #
     #   Valid values: replication-instance \| replication-task
@@ -5747,7 +5844,7 @@ module Aws::DatabaseMigrationService
     #   `"dms.c4.large"`.
     #
     #   For more information on the settings and capacities for the available
-    #   replication instance classes, see [ Selecting the right AWS DMS
+    #   replication instance classes, see [ Selecting the right DMS
     #   replication instance for your migration][1].
     #
     #
@@ -5809,7 +5906,7 @@ module Aws::DatabaseMigrationService
     #
     #   * A newer minor version is available.
     #
-    #   * AWS DMS has enabled automatic patching for the given engine version.
+    #   * DMS has enabled automatic patching for the given engine version.
     #
     # @option params [String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
@@ -6025,8 +6122,8 @@ module Aws::DatabaseMigrationService
     # You can't modify the task endpoints. The task must be stopped before
     # you can modify it.
     #
-    # For more information about AWS DMS tasks, see [Working with Migration
-    # Tasks][1] in the *AWS Database Migration Service User Guide*.
+    # For more information about DMS tasks, see [Working with Migration
+    # Tasks][1] in the *Database Migration Service User Guide*.
     #
     #
     #
@@ -6051,8 +6148,8 @@ module Aws::DatabaseMigrationService
     #   `full-load-and-cdc`
     #
     # @option params [String] :table_mappings
-    #   When using the AWS CLI or boto3, provide the path of the JSON file
-    #   that contains the table mappings. Precede the path with `file://`. For
+    #   When using the CLI or boto3, provide the path of the JSON file that
+    #   contains the table mappings. Precede the path with `file://`. For
     #   example, `--table-mappings file://mappingfile.json`. When working with
     #   the DMS API, provide the JSON as the parameter value.
     #
@@ -6087,7 +6184,7 @@ module Aws::DatabaseMigrationService
     #   the source endpoint. You can verify this by setting the `slotName`
     #   extra connection attribute to the name of this logical replication
     #   slot. For more information, see [Extra Connection Attributes When
-    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #   Using PostgreSQL as a Source for DMS][1].
     #
     #    </note>
     #
@@ -6108,8 +6205,8 @@ module Aws::DatabaseMigrationService
     # @option params [String] :task_data
     #   Supplemental information that the task requires to migrate the data
     #   for certain source and target endpoints. For more information, see
-    #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
-    #   Database Migration Service User Guide.*
+    #   [Specifying Supplemental Data for Task Settings][1] in the *Database
+    #   Migration Service User Guide.*
     #
     #
     #
@@ -6177,7 +6274,7 @@ module Aws::DatabaseMigrationService
     # Moves a replication task from its current replication instance to a
     # different target replication instance using the specified parameters.
     # The target replication instance must be created with the same or later
-    # AWS DMS version as the current replication instance.
+    # DMS version as the current replication instance.
     #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Name (ARN) of the task that you want to move.
@@ -6414,7 +6511,7 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
-    # Removes metadata tags from an AWS DMS resource, including replication
+    # Removes metadata tags from an DMS resource, including replication
     # instance, endpoint, security group, and migration task. For more
     # information, see [ `Tag` ][1] data type description.
     #
@@ -6423,8 +6520,8 @@ module Aws::DatabaseMigrationService
     # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
     #
     # @option params [required, String] :resource_arn
-    #   An AWS DMS resource from which you want to remove tag(s). The value
-    #   for this parameter is an Amazon Resource Name (ARN).
+    #   An DMS resource from which you want to remove tag(s). The value for
+    #   this parameter is an Amazon Resource Name (ARN).
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag key (name) of the tag to be removed.
@@ -6464,8 +6561,8 @@ module Aws::DatabaseMigrationService
 
     # Starts the replication task.
     #
-    # For more information about AWS DMS tasks, see [Working with Migration
-    # Tasks ][1] in the *AWS Database Migration Service User Guide.*
+    # For more information about DMS tasks, see [Working with Migration
+    # Tasks ][1] in the *Database Migration Service User Guide.*
     #
     #
     #
@@ -6504,7 +6601,7 @@ module Aws::DatabaseMigrationService
     #   the source endpoint. You can verify this by setting the `slotName`
     #   extra connection attribute to the name of this logical replication
     #   slot. For more information, see [Extra Connection Attributes When
-    #   Using PostgreSQL as a Source for AWS DMS][1].
+    #   Using PostgreSQL as a Source for DMS][1].
     #
     #    </note>
     #
@@ -6676,26 +6773,27 @@ module Aws::DatabaseMigrationService
     #   premigration assessment run that you want to start.
     #
     # @option params [required, String] :service_access_role_arn
-    #   ARN of a service role needed to start the assessment run.
+    #   ARN of the service role needed to start the assessment run. The role
+    #   must allow the `iam:PassRole` action.
     #
     # @option params [required, String] :result_location_bucket
-    #   Amazon S3 bucket where you want AWS DMS to store the results of this
+    #   Amazon S3 bucket where you want DMS to store the results of this
     #   assessment run.
     #
     # @option params [String] :result_location_folder
-    #   Folder within an Amazon S3 bucket where you want AWS DMS to store the
+    #   Folder within an Amazon S3 bucket where you want DMS to store the
     #   results of this assessment run.
     #
     # @option params [String] :result_encryption_mode
     #   Encryption mode that you can specify to encrypt the results of this
-    #   assessment run. If you don't specify this request parameter, AWS DMS
+    #   assessment run. If you don't specify this request parameter, DMS
     #   stores the assessment run results without encryption. You can specify
     #   one of the options following:
     #
     #   * `"SSE_S3"` – The server-side encryption provided as a default by
     #     Amazon S3.
     #
-    #   * `"SSE_KMS"` – AWS Key Management Service (AWS KMS) encryption. This
+    #   * `"SSE_KMS"` – Key Management Service (KMS) encryption. This
     #     encryption can use either a custom KMS encryption key that you
     #     specify or the default KMS encryption key that DMS provides.
     #
@@ -6709,14 +6807,14 @@ module Aws::DatabaseMigrationService
     # @option params [Array<String>] :include_only
     #   Space-separated list of names for specific individual assessments that
     #   you want to include. These names come from the default list of
-    #   individual assessments that AWS DMS supports for the associated
-    #   migration task. This task is specified by `ReplicationTaskArn`.
+    #   individual assessments that DMS supports for the associated migration
+    #   task. This task is specified by `ReplicationTaskArn`.
     #
     #   <note markdown="1"> You can't set a value for `IncludeOnly` if you also set a value for
     #   `Exclude` in the API operation.
     #
-    #    To identify the names of the default individual assessments that AWS
-    #   DMS supports for the associated migration task, run the
+    #    To identify the names of the default individual assessments that DMS
+    #   supports for the associated migration task, run the
     #   `DescribeApplicableIndividualAssessments` operation using its own
     #   `ReplicationTaskArn` request parameter.
     #
@@ -6725,14 +6823,14 @@ module Aws::DatabaseMigrationService
     # @option params [Array<String>] :exclude
     #   Space-separated list of names for specific individual assessments that
     #   you want to exclude. These names come from the default list of
-    #   individual assessments that AWS DMS supports for the associated
-    #   migration task. This task is specified by `ReplicationTaskArn`.
+    #   individual assessments that DMS supports for the associated migration
+    #   task. This task is specified by `ReplicationTaskArn`.
     #
     #   <note markdown="1"> You can't set a value for `Exclude` if you also set a value for
     #   `IncludeOnly` in the API operation.
     #
-    #    To identify the names of the default individual assessments that AWS
-    #   DMS supports for the associated migration task, run the
+    #    To identify the names of the default individual assessments that DMS
+    #   supports for the associated migration task, run the
     #   `DescribeApplicableIndividualAssessments` operation using its own
     #   `ReplicationTaskArn` request parameter.
     #
@@ -6930,7 +7028,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

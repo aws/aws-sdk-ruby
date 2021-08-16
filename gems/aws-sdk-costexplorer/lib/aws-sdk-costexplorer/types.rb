@@ -1309,6 +1309,36 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The field that contains a list of disk (local storage) metrics
+    # associated with the current instance.
+    #
+    # @!attribute [rw] disk_read_ops_per_second
+    #   The maximum number of read operations per second.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_write_ops_per_second
+    #   The maximum number of write operations per second.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_read_bytes_per_second
+    #   The maximum read throughput operations per second.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_write_bytes_per_second
+    #   The maximum write throughput operations per second.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DiskResourceUtilization AWS API Documentation
+    #
+    class DiskResourceUtilization < Struct.new(
+      :disk_read_ops_per_second,
+      :disk_write_ops_per_second,
+      :disk_read_bytes_per_second,
+      :disk_write_bytes_per_second)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The EBS field that contains a list of EBS metrics associated with the
     # current instance.
     #
@@ -1467,13 +1497,25 @@ module Aws::CostExplorer
     #   the current instance.
     #   @return [Types::EBSResourceUtilization]
     #
+    # @!attribute [rw] disk_resource_utilization
+    #   The field that contains a list of disk (local storage) metrics
+    #   associated with the current instance.
+    #   @return [Types::DiskResourceUtilization]
+    #
+    # @!attribute [rw] network_resource_utilization
+    #   The network field that contains a list of network metrics associated
+    #   with the current instance.
+    #   @return [Types::NetworkResourceUtilization]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceUtilization AWS API Documentation
     #
     class EC2ResourceUtilization < Struct.new(
       :max_cpu_utilization_percentage,
       :max_memory_utilization_percentage,
       :max_storage_utilization_percentage,
-      :ebs_resource_utilization)
+      :ebs_resource_utilization,
+      :disk_resource_utilization,
+      :network_resource_utilization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5108,6 +5150,38 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # The network field that contains a list of network metrics associated
+    # with the current instance.
+    #
+    # @!attribute [rw] network_in_bytes_per_second
+    #   The network ingress throughput utilization measured in Bytes per
+    #   second.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_out_bytes_per_second
+    #   The network outgress throughput utilization measured in Bytes per
+    #   second.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_packets_in_per_second
+    #   The network ingress packets measured in packets per second.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_packets_out_per_second
+    #   The network outgress packets measured in packets per second.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/NetworkResourceUtilization AWS API Documentation
+    #
+    class NetworkResourceUtilization < Struct.new(
+      :network_in_bytes_per_second,
+      :network_out_bytes_per_second,
+      :network_packets_in_per_second,
+      :network_packets_out_per_second)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ProvideAnomalyFeedbackRequest
     #   data as a hash:
     #
@@ -5721,6 +5795,12 @@ module Aws::CostExplorer
     #   Details for termination recommendations.
     #   @return [Types::TerminateRecommendationDetail]
     #
+    # @!attribute [rw] finding_reason_codes
+    #   The list of possible reasons why the recommendation is generated
+    #   such as under or over utilization of specific metrics (for example,
+    #   CPU, Memory, Network).
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendation AWS API Documentation
     #
     class RightsizingRecommendation < Struct.new(
@@ -5728,7 +5808,8 @@ module Aws::CostExplorer
       :current_instance,
       :rightsizing_type,
       :modify_recommendation_detail,
-      :terminate_recommendation_detail)
+      :terminate_recommendation_detail,
+      :finding_reason_codes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6560,6 +6641,12 @@ module Aws::CostExplorer
     #   Expected utilization metrics for target instance type.
     #   @return [Types::ResourceUtilization]
     #
+    # @!attribute [rw] platform_differences
+    #   Explains the actions you might need to take in order to successfully
+    #   migrate your workloads from the current instance type to the
+    #   recommended instance type.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TargetInstance AWS API Documentation
     #
     class TargetInstance < Struct.new(
@@ -6568,7 +6655,8 @@ module Aws::CostExplorer
       :currency_code,
       :default_target_instance,
       :resource_details,
-      :expected_resource_utilization)
+      :expected_resource_utilization,
+      :platform_differences)
       SENSITIVE = []
       include Aws::Structure
     end

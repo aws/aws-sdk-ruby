@@ -23,7 +23,8 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] stream_id
-    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #   The UUID (represented in Base62-encoded text) of the QLDB journal
+    #   stream to be canceled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CancelJournalKinesisStreamRequest AWS API Documentation
@@ -36,7 +37,7 @@ module Aws::QLDB
     end
 
     # @!attribute [rw] stream_id
-    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #   The UUID (Base62-encoded text) of the canceled QLDB journal stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CancelJournalKinesisStreamResponse AWS API Documentation
@@ -55,13 +56,15 @@ module Aws::QLDB
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
-    #         permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL
+    #         permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
     #         deletion_protection: false,
+    #         kms_key: "KmsKey",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the ledger that you want to create. The name must be
-    #   unique among all of your ledgers in the current AWS Region.
+    #   unique among all of the ledgers in your account in the current
+    #   Region.
     #
     #   Naming constraints for ledger names are defined in [Quotas in Amazon
     #   QLDB][1] in the *Amazon QLDB Developer Guide*.
@@ -79,7 +82,37 @@ module Aws::QLDB
     #
     # @!attribute [rw] permissions_mode
     #   The permissions mode to assign to the ledger that you want to
-    #   create.
+    #   create. This parameter can have one of the following values:
+    #
+    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access
+    #     control with API-level granularity for ledgers.
+    #
+    #     This mode allows users who have the `SendCommand` API permission
+    #     for this ledger to run all PartiQL commands (hence, `ALLOW_ALL`)
+    #     on any tables in the specified ledger. This mode disregards any
+    #     table-level or command-level IAM permissions policies that you
+    #     create for the ledger.
+    #
+    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables
+    #     access control with finer granularity for ledgers, tables, and
+    #     PartiQL commands.
+    #
+    #     By default, this mode denies all user requests to run any PartiQL
+    #     commands on any tables in this ledger. To allow PartiQL commands
+    #     to run, you must create IAM permissions policies for specific
+    #     table resources and PartiQL actions, in addition to the
+    #     `SendCommand` API permission for the ledger. For information, see
+    #     [Getting started with the standard permissions mode][1] in the
+    #     *Amazon QLDB Developer Guide*.
+    #
+    #   <note markdown="1"> We strongly recommend using the `STANDARD` permissions mode to
+    #   maximize the security of your ledger data.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
@@ -88,12 +121,55 @@ module Aws::QLDB
     #   default.
     #
     #   If deletion protection is enabled, you must first disable it before
-    #   you can delete the ledger using the QLDB API or the AWS Command Line
-    #   Interface (AWS CLI). You can disable it by calling the
-    #   `UpdateLedger` operation to set the flag to `false`. The QLDB
-    #   console disables deletion protection for you when you use it to
-    #   delete a ledger.
+    #   you can delete the ledger. You can disable it by calling the
+    #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The key in Key Management Service (KMS) to use for encryption of
+    #   data at rest in the ledger. For more information, see [Encryption at
+    #   rest][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #   Use one of the following options to specify this parameter:
+    #
+    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #     Amazon Web Services on your behalf.
+    #
+    #   * **Undefined**\: By default, use an Amazon Web Services owned KMS
+    #     key.
+    #
+    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #     KMS key in your account that you create, own, and manage.
+    #
+    #     Amazon QLDB does not support asymmetric keys. For more
+    #     information, see [Using symmetric and asymmetric keys][2] in the
+    #     *Key Management Service Developer Guide*.
+    #
+    #   To specify a customer managed KMS key, you can use its key ID,
+    #   Amazon Resource Name (ARN), alias name, or alias ARN. When using an
+    #   alias name, prefix it with `"alias/"`. To specify a key in a
+    #   different account, you must use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   For more information, see [Key identifiers (KeyId)][3] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedgerRequest AWS API Documentation
     #
@@ -101,7 +177,8 @@ module Aws::QLDB
       :name,
       :tags,
       :permissions_mode,
-      :deletion_protection)
+      :deletion_protection,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -124,18 +201,25 @@ module Aws::QLDB
     #   12:00:00 AM January 1, 1970 UTC.)
     #   @return [Time]
     #
+    # @!attribute [rw] permissions_mode
+    #   The permissions mode of the ledger that you created.
+    #   @return [String]
+    #
     # @!attribute [rw] deletion_protection
     #   The flag that prevents a ledger from being deleted by any user. If
     #   not provided on ledger creation, this feature is enabled (`true`) by
     #   default.
     #
     #   If deletion protection is enabled, you must first disable it before
-    #   you can delete the ledger using the QLDB API or the AWS Command Line
-    #   Interface (AWS CLI). You can disable it by calling the
-    #   `UpdateLedger` operation to set the flag to `false`. The QLDB
-    #   console disables deletion protection for you when you use it to
-    #   delete a ledger.
+    #   you can delete the ledger. You can disable it by calling the
+    #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the customer managed KMS key that the ledger uses for
+    #   encryption at rest. If this parameter is undefined, the ledger uses
+    #   an Amazon Web Services owned KMS key for encryption.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedgerResponse AWS API Documentation
     #
@@ -144,7 +228,9 @@ module Aws::QLDB
       :arn,
       :state,
       :creation_date_time,
-      :deletion_protection)
+      :permissions_mode,
+      :deletion_protection,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -181,7 +267,8 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] stream_id
-    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #   The UUID (represented in Base62-encoded text) of the QLDB journal
+    #   stream to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeJournalKinesisStreamRequest AWS API Documentation
@@ -219,7 +306,8 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] export_id
-    #   The unique ID of the journal export job that you want to describe.
+    #   The UUID (represented in Base62-encoded text) of the journal export
+    #   job to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeJournalS3ExportRequest AWS API Documentation
@@ -281,18 +369,25 @@ module Aws::QLDB
     #   12:00:00 AM January 1, 1970 UTC.)
     #   @return [Time]
     #
+    # @!attribute [rw] permissions_mode
+    #   The permissions mode of the ledger.
+    #   @return [String]
+    #
     # @!attribute [rw] deletion_protection
     #   The flag that prevents a ledger from being deleted by any user. If
     #   not provided on ledger creation, this feature is enabled (`true`) by
     #   default.
     #
     #   If deletion protection is enabled, you must first disable it before
-    #   you can delete the ledger using the QLDB API or the AWS Command Line
-    #   Interface (AWS CLI). You can disable it by calling the
-    #   `UpdateLedger` operation to set the flag to `false`. The QLDB
-    #   console disables deletion protection for you when you use it to
-    #   delete a ledger.
+    #   you can delete the ledger. You can disable it by calling the
+    #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_description
+    #   Information about the encryption of data at rest in the ledger. This
+    #   includes the current status, the KMS key, and when the key became
+    #   inaccessible (in the case of an error).
+    #   @return [Types::LedgerEncryptionDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedgerResponse AWS API Documentation
     #
@@ -301,7 +396,9 @@ module Aws::QLDB
       :arn,
       :state,
       :creation_date_time,
-      :deletion_protection)
+      :permissions_mode,
+      :deletion_protection,
+      :encryption_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -330,11 +427,11 @@ module Aws::QLDB
     #
     # @!attribute [rw] inclusive_start_time
     #   The inclusive start date and time for the range of journal contents
-    #   that you want to export.
+    #   to export.
     #
     #   The `InclusiveStartTime` must be in `ISO 8601` date and time format
     #   and in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #
     #   The `InclusiveStartTime` must be before `ExclusiveEndTime`.
     #
@@ -344,12 +441,12 @@ module Aws::QLDB
     #   @return [Time]
     #
     # @!attribute [rw] exclusive_end_time
-    #   The exclusive end date and time for the range of journal contents
-    #   that you want to export.
+    #   The exclusive end date and time for the range of journal contents to
+    #   export.
     #
     #   The `ExclusiveEndTime` must be in `ISO 8601` date and time format
     #   and in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #
     #   The `ExclusiveEndTime` must be less than or equal to the current UTC
     #   date and time.
@@ -367,9 +464,8 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in AWS Key
-    #     Management Service (AWS KMS) for server-side encryption of your
-    #     exported data.
+    #   * (Optional) Use your customer master key (CMK) in Key Management
+    #     Service (KMS) for server-side encryption of your exported data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ExportJournalToS3Request AWS API Documentation
@@ -385,7 +481,8 @@ module Aws::QLDB
     end
 
     # @!attribute [rw] export_id
-    #   The unique ID that QLDB assigns to each journal export job.
+    #   The UUID (represented in Base62-encoded text) that QLDB assigns to
+    #   each journal export job.
     #
     #   To describe your export request and check the status of the job, you
     #   can use `ExportId` to call `DescribeJournalS3Export`.
@@ -421,7 +518,7 @@ module Aws::QLDB
     #   Amazon Ion structure that has two fields: `strandId` and
     #   `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
     #   @return [Types::ValueHolder]
     #
     # @!attribute [rw] digest_tip_address
@@ -429,7 +526,7 @@ module Aws::QLDB
     #   a proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
     #   @return [Types::ValueHolder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/GetBlockRequest AWS API Documentation
@@ -524,11 +621,12 @@ module Aws::QLDB
     #   address is an Amazon Ion structure that has two fields: `strandId`
     #   and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14\}`.
     #   @return [Types::ValueHolder]
     #
     # @!attribute [rw] document_id
-    #   The unique ID of the document to be verified.
+    #   The UUID (represented in Base62-encoded text) of the document to be
+    #   verified.
     #   @return [String]
     #
     # @!attribute [rw] digest_tip_address
@@ -536,7 +634,7 @@ module Aws::QLDB
     #   a proof. An address is an Amazon Ion structure that has two fields:
     #   `strandId` and `sequenceNo`.
     #
-    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`
+    #   For example: `\{strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49\}`.
     #   @return [Types::ValueHolder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/GetRevisionRequest AWS API Documentation
@@ -588,9 +686,9 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # The information about an Amazon QLDB journal stream, including the
-    # Amazon Resource Name (ARN), stream name, creation time, current
-    # status, and the parameters of your original stream creation request.
+    # Information about an Amazon QLDB journal stream, including the Amazon
+    # Resource Name (ARN), stream name, creation time, current status, and
+    # the parameters of the original stream creation request.
     #
     # @!attribute [rw] ledger_name
     #   The name of the ledger.
@@ -609,7 +707,7 @@ module Aws::QLDB
     #
     # @!attribute [rw] exclusive_end_time
     #   The exclusive date and time that specifies when the stream ends. If
-    #   this parameter is blank, the stream runs indefinitely until you
+    #   this parameter is undefined, the stream runs indefinitely until you
     #   cancel it.
     #   @return [Time]
     #
@@ -620,7 +718,8 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] stream_id
-    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #   The UUID (represented in Base62-encoded text) of the QLDB journal
+    #   stream.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -633,7 +732,7 @@ module Aws::QLDB
     #
     # @!attribute [rw] kinesis_configuration
     #   The configuration settings of the Amazon Kinesis Data Streams
-    #   destination for your QLDB journal stream.
+    #   destination for a QLDB journal stream.
     #   @return [Types::KinesisConfiguration]
     #
     # @!attribute [rw] error_cause
@@ -664,16 +763,17 @@ module Aws::QLDB
       include Aws::Structure
     end
 
-    # The information about a journal export job, including the ledger name,
-    # export ID, when it was created, current status, and its start and end
-    # time export parameters.
+    # Information about a journal export job, including the ledger name,
+    # export ID, creation time, current status, and the parameters of the
+    # original export creation request.
     #
     # @!attribute [rw] ledger_name
     #   The name of the ledger.
     #   @return [String]
     #
     # @!attribute [rw] export_id
-    #   The unique ID of the journal export job.
+    #   The UUID (represented in Base62-encoded text) of the journal export
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] export_creation_time
@@ -708,9 +808,8 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in AWS Key
-    #     Management Service (AWS KMS) for server-side encryption of your
-    #     exported data.
+    #   * (Optional) Use your customer master key (CMK) in Key Management
+    #     Service (KMS) for server-side encryption of your exported data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/JournalS3ExportDescription AWS API Documentation
@@ -729,7 +828,7 @@ module Aws::QLDB
     end
 
     # The configuration settings of the Amazon Kinesis Data Streams
-    # destination for your Amazon QLDB journal stream.
+    # destination for an Amazon QLDB journal stream.
     #
     # @note When making an API call, you may pass KinesisConfiguration
     #   data as a hash:
@@ -740,17 +839,24 @@ module Aws::QLDB
     #       }
     #
     # @!attribute [rw] stream_arn
-    #   The Amazon Resource Name (ARN) of the Kinesis data stream resource.
+    #   The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_enabled
     #   Enables QLDB to publish multiple data records in a single Kinesis
-    #   Data Streams record. To learn more, see [KPL Key Concepts][1] in the
-    #   *Amazon Kinesis Data Streams Developer Guide*.
+    #   Data Streams record, increasing the number of records sent per API
+    #   call.
+    #
+    #   *This option is enabled by default.* Record aggregation has
+    #   important implications for processing records and requires
+    #   de-aggregation in your stream consumer. To learn more, see [KPL Key
+    #   Concepts][1] and [Consumer De-aggregation][2] in the *Amazon Kinesis
+    #   Data Streams Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html
+    #   [2]: https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/KinesisConfiguration AWS API Documentation
@@ -758,6 +864,72 @@ module Aws::QLDB
     class KinesisConfiguration < Struct.new(
       :stream_arn,
       :aggregation_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the encryption of data at rest in an Amazon QLDB
+    # ledger. This includes the current status, the key in Key Management
+    # Service (KMS), and when the key became inaccessible (in the case of an
+    # error).
+    #
+    # For more information, see [Encryption at rest][1] in the *Amazon QLDB
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key that
+    #   the ledger uses for encryption at rest. If this parameter is
+    #   undefined, the ledger uses an Amazon Web Services owned KMS key for
+    #   encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_status
+    #   The current state of encryption at rest for the ledger. This can be
+    #   one of the following values:
+    #
+    #   * `ENABLED`\: Encryption is fully enabled using the specified key.
+    #
+    #   * `UPDATING`\: The ledger is actively processing the specified key
+    #     change.
+    #
+    #     Key changes in QLDB are asynchronous. The ledger is fully
+    #     accessible without any performance impact while the key change is
+    #     being processed. The amount of time it takes to update a key
+    #     varies depending on the ledger size.
+    #
+    #   * `KMS_KEY_INACCESSIBLE`\: The specified customer managed KMS key is
+    #     not accessible, and the ledger is impaired. Either the key was
+    #     disabled or deleted, or the grants on the key were revoked. When a
+    #     ledger is impaired, it is not accessible and does not accept any
+    #     read or write requests.
+    #
+    #     An impaired ledger automatically returns to an active state after
+    #     you restore the grants on the key, or re-enable the key that was
+    #     disabled. However, deleting a customer managed KMS key is
+    #     irreversible. After a key is deleted, you can no longer access the
+    #     ledgers that are protected with that key, and the data becomes
+    #     unrecoverable permanently.
+    #   @return [String]
+    #
+    # @!attribute [rw] inaccessible_kms_key_date_time
+    #   The date and time, in epoch time format, when the KMS key first
+    #   became inaccessible, in the case of an error. (Epoch time format is
+    #   the number of seconds that have elapsed since 12:00:00 AM January 1,
+    #   1970 UTC.)
+    #
+    #   This parameter is undefined if the KMS key is accessible.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/LedgerEncryptionDescription AWS API Documentation
+    #
+    class LedgerEncryptionDescription < Struct.new(
+      :kms_key_arn,
+      :encryption_status,
+      :inaccessible_kms_key_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -957,7 +1129,7 @@ module Aws::QLDB
 
     # @!attribute [rw] journal_s3_exports
     #   The array of journal export job descriptions for all ledgers that
-    #   are associated with the current AWS account and Region.
+    #   are associated with the current account and Region.
     #   @return [Array<Types::JournalS3ExportDescription>]
     #
     # @!attribute [rw] next_token
@@ -1009,7 +1181,7 @@ module Aws::QLDB
 
     # @!attribute [rw] ledgers
     #   The array of ledger summaries that are associated with the current
-    #   AWS account and Region.
+    #   account and Region.
     #   @return [Array<Types::LedgerSummary>]
     #
     # @!attribute [rw] next_token
@@ -1041,8 +1213,8 @@ module Aws::QLDB
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) for which you want to list the tags.
-    #   For example:
+    #   The Amazon Resource Name (ARN) for which to list the tags. For
+    #   example:
     #
     #   `arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger`
     #   @return [String]
@@ -1184,9 +1356,9 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) for a symmetric customer master key
-    #   (CMK) in AWS Key Management Service (AWS KMS). Amazon QLDB does not
-    #   support asymmetric CMKs.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) in Key Management Service (KMS). Amazon S3 does not support
+    #   asymmetric CMKs.
     #
     #   You must provide a `KmsKeyArn` if you specify `SSE_KMS` as the
     #   `ObjectEncryptionType`.
@@ -1306,7 +1478,7 @@ module Aws::QLDB
     #   The inclusive start date and time from which to start streaming
     #   journal data. This parameter must be in `ISO 8601` date and time
     #   format and in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #
     #   The `InclusiveStartTime` cannot be in the future and must be before
     #   `ExclusiveEndTime`.
@@ -1323,7 +1495,7 @@ module Aws::QLDB
     #
     #   The `ExclusiveEndTime` must be in `ISO 8601` date and time format
     #   and in Universal Coordinated Time (UTC). For example:
-    #   `2019-06-13T21:36:34Z`
+    #   `2019-06-13T21:36:34Z`.
     #   @return [Time]
     #
     # @!attribute [rw] kinesis_configuration
@@ -1361,7 +1533,8 @@ module Aws::QLDB
     end
 
     # @!attribute [rw] stream_id
-    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #   The UUID (represented in Base62-encoded text) that QLDB assigns to
+    #   each QLDB journal stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/StreamJournalToKinesisResponse AWS API Documentation
@@ -1418,14 +1591,14 @@ module Aws::QLDB
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) from which you want to remove the
-    #   tags. For example:
+    #   The Amazon Resource Name (ARN) from which to remove the tags. For
+    #   example:
     #
     #   `arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger`
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The list of tag keys that you want to remove.
+    #   The list of tag keys to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UntagResourceRequest AWS API Documentation
@@ -1441,12 +1614,91 @@ module Aws::QLDB
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateLedgerPermissionsModeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "LedgerName", # required
+    #         permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the ledger.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_mode
+    #   The permissions mode to assign to the ledger. This parameter can
+    #   have one of the following values:
+    #
+    #   * `ALLOW_ALL`\: A legacy permissions mode that enables access
+    #     control with API-level granularity for ledgers.
+    #
+    #     This mode allows users who have the `SendCommand` API permission
+    #     for this ledger to run all PartiQL commands (hence, `ALLOW_ALL`)
+    #     on any tables in the specified ledger. This mode disregards any
+    #     table-level or command-level IAM permissions policies that you
+    #     create for the ledger.
+    #
+    #   * `STANDARD`\: (*Recommended*) A permissions mode that enables
+    #     access control with finer granularity for ledgers, tables, and
+    #     PartiQL commands.
+    #
+    #     By default, this mode denies all user requests to run any PartiQL
+    #     commands on any tables in this ledger. To allow PartiQL commands
+    #     to run, you must create IAM permissions policies for specific
+    #     table resources and PartiQL actions, in addition to the
+    #     `SendCommand` API permission for the ledger. For information, see
+    #     [Getting started with the standard permissions mode][1] in the
+    #     *Amazon QLDB Developer Guide*.
+    #
+    #   <note markdown="1"> We strongly recommend using the `STANDARD` permissions mode to
+    #   maximize the security of your ledger data.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerPermissionsModeRequest AWS API Documentation
+    #
+    class UpdateLedgerPermissionsModeRequest < Struct.new(
+      :name,
+      :permissions_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the ledger.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the ledger.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions_mode
+    #   The current permissions mode of the ledger.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerPermissionsModeResponse AWS API Documentation
+    #
+    class UpdateLedgerPermissionsModeResponse < Struct.new(
+      :name,
+      :arn,
+      :permissions_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateLedgerRequest
     #   data as a hash:
     #
     #       {
     #         name: "LedgerName", # required
     #         deletion_protection: false,
+    #         kms_key: "KmsKey",
     #       }
     #
     # @!attribute [rw] name
@@ -1459,18 +1711,61 @@ module Aws::QLDB
     #   default.
     #
     #   If deletion protection is enabled, you must first disable it before
-    #   you can delete the ledger using the QLDB API or the AWS Command Line
-    #   Interface (AWS CLI). You can disable it by calling the
-    #   `UpdateLedger` operation to set the flag to `false`. The QLDB
-    #   console disables deletion protection for you when you use it to
-    #   delete a ledger.
+    #   you can delete the ledger. You can disable it by calling the
+    #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The key in Key Management Service (KMS) to use for encryption of
+    #   data at rest in the ledger. For more information, see [Encryption at
+    #   rest][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #   Use one of the following options to specify this parameter:
+    #
+    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #     Amazon Web Services on your behalf.
+    #
+    #   * **Undefined**\: Make no changes to the KMS key of the ledger.
+    #
+    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #     KMS key in your account that you create, own, and manage.
+    #
+    #     Amazon QLDB does not support asymmetric keys. For more
+    #     information, see [Using symmetric and asymmetric keys][2] in the
+    #     *Key Management Service Developer Guide*.
+    #
+    #   To specify a customer managed KMS key, you can use its key ID,
+    #   Amazon Resource Name (ARN), alias name, or alias ARN. When using an
+    #   alias name, prefix it with `"alias/"`. To specify a key in a
+    #   different account, you must use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   For more information, see [Key identifiers (KeyId)][3] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerRequest AWS API Documentation
     #
     class UpdateLedgerRequest < Struct.new(
       :name,
-      :deletion_protection)
+      :deletion_protection,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1499,12 +1794,15 @@ module Aws::QLDB
     #   default.
     #
     #   If deletion protection is enabled, you must first disable it before
-    #   you can delete the ledger using the QLDB API or the AWS Command Line
-    #   Interface (AWS CLI). You can disable it by calling the
-    #   `UpdateLedger` operation to set the flag to `false`. The QLDB
-    #   console disables deletion protection for you when you use it to
-    #   delete a ledger.
+    #   you can delete the ledger. You can disable it by calling the
+    #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_description
+    #   Information about the encryption of data at rest in the ledger. This
+    #   includes the current status, the KMS key, and when the key became
+    #   inaccessible (in the case of an error).
+    #   @return [Types::LedgerEncryptionDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerResponse AWS API Documentation
     #
@@ -1513,7 +1811,8 @@ module Aws::QLDB
       :arn,
       :state,
       :creation_date_time,
-      :deletion_protection)
+      :deletion_protection,
+      :encryption_description)
       SENSITIVE = []
       include Aws::Structure
     end

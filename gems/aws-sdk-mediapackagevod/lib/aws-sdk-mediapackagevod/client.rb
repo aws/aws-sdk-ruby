@@ -474,6 +474,7 @@ module Aws::MediaPackageVod
     #   resp = client.create_packaging_configuration({
     #     cmaf_package: {
     #       encryption: {
+    #         constant_initialization_vector: "__string",
     #         speke_key_provider: { # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
@@ -580,6 +581,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.cmaf_package.encryption.constant_initialization_vector #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
@@ -845,6 +847,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.cmaf_package.encryption.constant_initialization_vector #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
@@ -1032,6 +1035,7 @@ module Aws::MediaPackageVod
     #   resp.next_token #=> String
     #   resp.packaging_configurations #=> Array
     #   resp.packaging_configurations[0].arn #=> String
+    #   resp.packaging_configurations[0].cmaf_package.encryption.constant_initialization_vector #=> String
     #   resp.packaging_configurations[0].cmaf_package.encryption.speke_key_provider.role_arn #=> String
     #   resp.packaging_configurations[0].cmaf_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.packaging_configurations[0].cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
@@ -1287,7 +1291,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

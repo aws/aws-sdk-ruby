@@ -327,6 +327,77 @@ module Aws::MediaConnect
 
     # @!group API Operations
 
+    # Adds media streams to an existing flow. After you add a media stream
+    # to a flow, you can associate it with a source and/or an output that
+    # uses the ST 2110 JPEG XS or CDI protocol.
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [required, Array<Types::AddMediaStreamRequest>] :media_streams
+    #   The media streams that you want to add to the flow.
+    #
+    # @return [Types::AddFlowMediaStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddFlowMediaStreamsResponse#flow_arn #flow_arn} => String
+    #   * {Types::AddFlowMediaStreamsResponse#media_streams #media_streams} => Array&lt;Types::MediaStream&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_flow_media_streams({
+    #     flow_arn: "__string", # required
+    #     media_streams: [ # required
+    #       {
+    #         attributes: {
+    #           fmtp: {
+    #             channel_order: "__string",
+    #             colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #             exact_framerate: "__string",
+    #             par: "__string",
+    #             range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #             scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #             tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #           },
+    #           lang: "__string",
+    #         },
+    #         clock_rate: 1,
+    #         description: "__string",
+    #         media_stream_id: 1, # required
+    #         media_stream_name: "__string", # required
+    #         media_stream_type: "video", # required, accepts video, audio, ancillary-data
+    #         video_format: "__string",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.media_streams #=> Array
+    #   resp.media_streams[0].attributes.fmtp.channel_order #=> String
+    #   resp.media_streams[0].attributes.fmtp.colorimetry #=> String, one of "BT601", "BT709", "BT2020", "BT2100", "ST2065-1", "ST2065-3", "XYZ"
+    #   resp.media_streams[0].attributes.fmtp.exact_framerate #=> String
+    #   resp.media_streams[0].attributes.fmtp.par #=> String
+    #   resp.media_streams[0].attributes.fmtp.range #=> String, one of "NARROW", "FULL", "FULLPROTECT"
+    #   resp.media_streams[0].attributes.fmtp.scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.media_streams[0].attributes.fmtp.tcs #=> String, one of "SDR", "PQ", "HLG", "LINEAR", "BT2100LINPQ", "BT2100LINHLG", "ST2065-1", "ST428-1", "DENSITY"
+    #   resp.media_streams[0].attributes.lang #=> String
+    #   resp.media_streams[0].clock_rate #=> Integer
+    #   resp.media_streams[0].description #=> String
+    #   resp.media_streams[0].fmt #=> Integer
+    #   resp.media_streams[0].media_stream_id #=> Integer
+    #   resp.media_streams[0].media_stream_name #=> String
+    #   resp.media_streams[0].media_stream_type #=> String, one of "video", "audio", "ancillary-data"
+    #   resp.media_streams[0].video_format #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowMediaStreams AWS API Documentation
+    #
+    # @overload add_flow_media_streams(params = {})
+    # @param [Hash] params ({})
+    def add_flow_media_streams(params = {}, options = {})
+      req = build_request(:add_flow_media_streams, params)
+      req.send_request(options)
+    end
+
     # Adds outputs to an existing flow. You can create up to 50 outputs per
     # flow.
     #
@@ -361,10 +432,29 @@ module Aws::MediaConnect
     #           url: "__string",
     #         },
     #         max_latency: 1,
+    #         media_stream_output_configurations: [
+    #           {
+    #             destination_configurations: [
+    #               {
+    #                 destination_ip: "__string", # required
+    #                 destination_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             encoding_parameters: {
+    #               compression_factor: 1.0, # required
+    #               encoder_profile: "main", # required, accepts main, high
+    #             },
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -394,6 +484,16 @@ module Aws::MediaConnect
     #   resp.outputs[0].entitlement_arn #=> String
     #   resp.outputs[0].listener_address #=> String
     #   resp.outputs[0].media_live_input_arn #=> String
+    #   resp.outputs[0].media_stream_output_configurations #=> Array
+    #   resp.outputs[0].media_stream_output_configurations[0].destination_configurations #=> Array
+    #   resp.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_ip #=> String
+    #   resp.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_port #=> Integer
+    #   resp.outputs[0].media_stream_output_configurations[0].destination_configurations[0].interface.name #=> String
+    #   resp.outputs[0].media_stream_output_configurations[0].destination_configurations[0].outbound_ip #=> String
+    #   resp.outputs[0].media_stream_output_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.outputs[0].media_stream_output_configurations[0].encoding_parameters.compression_factor #=> Float
+    #   resp.outputs[0].media_stream_output_configurations[0].encoding_parameters.encoder_profile #=> String, one of "main", "high"
+    #   resp.outputs[0].media_stream_output_configurations[0].media_stream_name #=> String
     #   resp.outputs[0].name #=> String
     #   resp.outputs[0].output_arn #=> String
     #   resp.outputs[0].port #=> Integer
@@ -401,8 +501,9 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.outputs[0].transport.max_bitrate #=> Integer
     #   resp.outputs[0].transport.max_latency #=> Integer
+    #   resp.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.outputs[0].transport.min_latency #=> Integer
-    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.outputs[0].transport.stream_id #=> String
@@ -451,9 +552,24 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
+    #         max_sync_buffer: 1,
+    #         media_stream_source_configurations: [
+    #           {
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             input_configurations: [
+    #               {
+    #                 input_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -479,14 +595,22 @@ module Aws::MediaConnect
     #   resp.sources[0].entitlement_arn #=> String
     #   resp.sources[0].ingest_ip #=> String
     #   resp.sources[0].ingest_port #=> Integer
+    #   resp.sources[0].media_stream_source_configurations #=> Array
+    #   resp.sources[0].media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.sources[0].media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.sources[0].media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.sources[0].media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.sources[0].media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.sources[0].media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.sources[0].name #=> String
     #   resp.sources[0].source_arn #=> String
     #   resp.sources[0].transport.cidr_allow_list #=> Array
     #   resp.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.sources[0].transport.max_bitrate #=> Integer
     #   resp.sources[0].transport.max_latency #=> Integer
+    #   resp.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.sources[0].transport.min_latency #=> Integer
-    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.sources[0].transport.remote_id #=> String
     #   resp.sources[0].transport.smoothing_latency #=> Integer
     #   resp.sources[0].transport.stream_id #=> String
@@ -521,6 +645,7 @@ module Aws::MediaConnect
     #     vpc_interfaces: [ # required
     #       {
     #         name: "__string", # required
+    #         network_interface_type: "ena", # accepts ena, efa
     #         role_arn: "__string", # required
     #         security_group_ids: ["__string"], # required
     #         subnet_id: "__string", # required
@@ -535,6 +660,7 @@ module Aws::MediaConnect
     #   resp.vpc_interfaces[0].name #=> String
     #   resp.vpc_interfaces[0].network_interface_ids #=> Array
     #   resp.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.vpc_interfaces[0].network_interface_type #=> String, one of "ena", "efa"
     #   resp.vpc_interfaces[0].role_arn #=> String
     #   resp.vpc_interfaces[0].security_group_ids #=> Array
     #   resp.vpc_interfaces[0].security_group_ids[0] #=> String
@@ -559,6 +685,10 @@ module Aws::MediaConnect
     #
     # @option params [Array<Types::GrantEntitlementRequest>] :entitlements
     #   The entitlements that you want to grant on a flow.
+    #
+    # @option params [Array<Types::AddMediaStreamRequest>] :media_streams
+    #   The media streams that you want to add to the flow. You can associate
+    #   these media streams with sources and outputs on the flow.
     #
     # @option params [required, String] :name
     #   The name of the flow.
@@ -605,6 +735,28 @@ module Aws::MediaConnect
     #         subscribers: ["__string"], # required
     #       },
     #     ],
+    #     media_streams: [
+    #       {
+    #         attributes: {
+    #           fmtp: {
+    #             channel_order: "__string",
+    #             colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #             exact_framerate: "__string",
+    #             par: "__string",
+    #             range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #             scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #             tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #           },
+    #           lang: "__string",
+    #         },
+    #         clock_rate: 1,
+    #         description: "__string",
+    #         media_stream_id: 1, # required
+    #         media_stream_name: "__string", # required
+    #         media_stream_type: "video", # required, accepts video, audio, ancillary-data
+    #         video_format: "__string",
+    #       },
+    #     ],
     #     name: "__string", # required
     #     outputs: [
     #       {
@@ -623,10 +775,29 @@ module Aws::MediaConnect
     #           url: "__string",
     #         },
     #         max_latency: 1,
+    #         media_stream_output_configurations: [
+    #           {
+    #             destination_configurations: [
+    #               {
+    #                 destination_ip: "__string", # required
+    #                 destination_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             encoding_parameters: {
+    #               compression_factor: 1.0, # required
+    #               encoder_profile: "main", # required, accepts main, high
+    #             },
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
@@ -652,15 +823,34 @@ module Aws::MediaConnect
     #       ingest_port: 1,
     #       max_bitrate: 1,
     #       max_latency: 1,
+    #       max_sync_buffer: 1,
+    #       media_stream_source_configurations: [
+    #         {
+    #           encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #           input_configurations: [
+    #             {
+    #               input_port: 1, # required
+    #               interface: { # required
+    #                 name: "__string", # required
+    #               },
+    #             },
+    #           ],
+    #           media_stream_name: "__string", # required
+    #         },
+    #       ],
     #       min_latency: 1,
     #       name: "__string",
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #       stream_id: "__string",
     #       vpc_interface_name: "__string",
     #       whitelist_cidr: "__string",
     #     },
     #     source_failover_config: {
+    #       failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #       recovery_window: 1,
+    #       source_priority: {
+    #         primary_source: "__string",
+    #       },
     #       state: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     sources: [
@@ -681,9 +871,24 @@ module Aws::MediaConnect
     #         ingest_port: 1,
     #         max_bitrate: 1,
     #         max_latency: 1,
+    #         max_sync_buffer: 1,
+    #         media_stream_source_configurations: [
+    #           {
+    #             encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #             input_configurations: [
+    #               {
+    #                 input_port: 1, # required
+    #                 interface: { # required
+    #                   name: "__string", # required
+    #                 },
+    #               },
+    #             ],
+    #             media_stream_name: "__string", # required
+    #           },
+    #         ],
     #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -692,6 +897,7 @@ module Aws::MediaConnect
     #     vpc_interfaces: [
     #       {
     #         name: "__string", # required
+    #         network_interface_type: "ena", # accepts ena, efa
     #         role_arn: "__string", # required
     #         security_group_ids: ["__string"], # required
     #         subnet_id: "__string", # required
@@ -722,6 +928,22 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
     #   resp.flow.flow_arn #=> String
+    #   resp.flow.media_streams #=> Array
+    #   resp.flow.media_streams[0].attributes.fmtp.channel_order #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.colorimetry #=> String, one of "BT601", "BT709", "BT2020", "BT2100", "ST2065-1", "ST2065-3", "XYZ"
+    #   resp.flow.media_streams[0].attributes.fmtp.exact_framerate #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.par #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.range #=> String, one of "NARROW", "FULL", "FULLPROTECT"
+    #   resp.flow.media_streams[0].attributes.fmtp.scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.flow.media_streams[0].attributes.fmtp.tcs #=> String, one of "SDR", "PQ", "HLG", "LINEAR", "BT2100LINPQ", "BT2100LINHLG", "ST2065-1", "ST428-1", "DENSITY"
+    #   resp.flow.media_streams[0].attributes.lang #=> String
+    #   resp.flow.media_streams[0].clock_rate #=> Integer
+    #   resp.flow.media_streams[0].description #=> String
+    #   resp.flow.media_streams[0].fmt #=> Integer
+    #   resp.flow.media_streams[0].media_stream_id #=> Integer
+    #   resp.flow.media_streams[0].media_stream_name #=> String
+    #   resp.flow.media_streams[0].media_stream_type #=> String, one of "video", "audio", "ancillary-data"
+    #   resp.flow.media_streams[0].video_format #=> String
     #   resp.flow.name #=> String
     #   resp.flow.outputs #=> Array
     #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -739,6 +961,16 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].entitlement_arn #=> String
     #   resp.flow.outputs[0].listener_address #=> String
     #   resp.flow.outputs[0].media_live_input_arn #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations #=> Array
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations #=> Array
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_ip #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_port #=> Integer
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].interface.name #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].outbound_ip #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_parameters.compression_factor #=> Float
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_parameters.encoder_profile #=> String, one of "main", "high"
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].media_stream_name #=> String
     #   resp.flow.outputs[0].name #=> String
     #   resp.flow.outputs[0].output_arn #=> String
     #   resp.flow.outputs[0].port #=> Integer
@@ -746,8 +978,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
+    #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -766,20 +999,30 @@ module Aws::MediaConnect
     #   resp.flow.source.entitlement_arn #=> String
     #   resp.flow.source.ingest_ip #=> String
     #   resp.flow.source.ingest_port #=> Integer
+    #   resp.flow.source.media_stream_source_configurations #=> Array
+    #   resp.flow.source.media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.flow.source.media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.flow.source.name #=> String
     #   resp.flow.source.source_arn #=> String
     #   resp.flow.source.transport.cidr_allow_list #=> Array
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
+    #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.source_priority.primary_source #=> String
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.sources #=> Array
     #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -796,14 +1039,22 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].entitlement_arn #=> String
     #   resp.flow.sources[0].ingest_ip #=> String
     #   resp.flow.sources[0].ingest_port #=> Integer
+    #   resp.flow.sources[0].media_stream_source_configurations #=> Array
+    #   resp.flow.sources[0].media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.flow.sources[0].media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.flow.sources[0].name #=> String
     #   resp.flow.sources[0].source_arn #=> String
     #   resp.flow.sources[0].transport.cidr_allow_list #=> Array
     #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.sources[0].transport.max_bitrate #=> Integer
     #   resp.flow.sources[0].transport.max_latency #=> Integer
+    #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
@@ -814,6 +1065,7 @@ module Aws::MediaConnect
     #   resp.flow.vpc_interfaces[0].name #=> String
     #   resp.flow.vpc_interfaces[0].network_interface_ids #=> Array
     #   resp.flow.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].network_interface_type #=> String, one of "ena", "efa"
     #   resp.flow.vpc_interfaces[0].role_arn #=> String
     #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
     #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
@@ -897,6 +1149,22 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
     #   resp.flow.flow_arn #=> String
+    #   resp.flow.media_streams #=> Array
+    #   resp.flow.media_streams[0].attributes.fmtp.channel_order #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.colorimetry #=> String, one of "BT601", "BT709", "BT2020", "BT2100", "ST2065-1", "ST2065-3", "XYZ"
+    #   resp.flow.media_streams[0].attributes.fmtp.exact_framerate #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.par #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.range #=> String, one of "NARROW", "FULL", "FULLPROTECT"
+    #   resp.flow.media_streams[0].attributes.fmtp.scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.flow.media_streams[0].attributes.fmtp.tcs #=> String, one of "SDR", "PQ", "HLG", "LINEAR", "BT2100LINPQ", "BT2100LINHLG", "ST2065-1", "ST428-1", "DENSITY"
+    #   resp.flow.media_streams[0].attributes.lang #=> String
+    #   resp.flow.media_streams[0].clock_rate #=> Integer
+    #   resp.flow.media_streams[0].description #=> String
+    #   resp.flow.media_streams[0].fmt #=> Integer
+    #   resp.flow.media_streams[0].media_stream_id #=> Integer
+    #   resp.flow.media_streams[0].media_stream_name #=> String
+    #   resp.flow.media_streams[0].media_stream_type #=> String, one of "video", "audio", "ancillary-data"
+    #   resp.flow.media_streams[0].video_format #=> String
     #   resp.flow.name #=> String
     #   resp.flow.outputs #=> Array
     #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -914,6 +1182,16 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].entitlement_arn #=> String
     #   resp.flow.outputs[0].listener_address #=> String
     #   resp.flow.outputs[0].media_live_input_arn #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations #=> Array
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations #=> Array
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_ip #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_port #=> Integer
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].interface.name #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].outbound_ip #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_parameters.compression_factor #=> Float
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_parameters.encoder_profile #=> String, one of "main", "high"
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].media_stream_name #=> String
     #   resp.flow.outputs[0].name #=> String
     #   resp.flow.outputs[0].output_arn #=> String
     #   resp.flow.outputs[0].port #=> Integer
@@ -921,8 +1199,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
+    #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -941,20 +1220,30 @@ module Aws::MediaConnect
     #   resp.flow.source.entitlement_arn #=> String
     #   resp.flow.source.ingest_ip #=> String
     #   resp.flow.source.ingest_port #=> Integer
+    #   resp.flow.source.media_stream_source_configurations #=> Array
+    #   resp.flow.source.media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.flow.source.media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.flow.source.name #=> String
     #   resp.flow.source.source_arn #=> String
     #   resp.flow.source.transport.cidr_allow_list #=> Array
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
+    #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.source_priority.primary_source #=> String
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.sources #=> Array
     #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -971,14 +1260,22 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].entitlement_arn #=> String
     #   resp.flow.sources[0].ingest_ip #=> String
     #   resp.flow.sources[0].ingest_port #=> Integer
+    #   resp.flow.sources[0].media_stream_source_configurations #=> Array
+    #   resp.flow.sources[0].media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.flow.sources[0].media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.flow.sources[0].name #=> String
     #   resp.flow.sources[0].source_arn #=> String
     #   resp.flow.sources[0].transport.cidr_allow_list #=> Array
     #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.sources[0].transport.max_bitrate #=> Integer
     #   resp.flow.sources[0].transport.max_latency #=> Integer
+    #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
@@ -989,6 +1286,7 @@ module Aws::MediaConnect
     #   resp.flow.vpc_interfaces[0].name #=> String
     #   resp.flow.vpc_interfaces[0].network_interface_ids #=> Array
     #   resp.flow.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].network_interface_type #=> String, one of "ena", "efa"
     #   resp.flow.vpc_interfaces[0].role_arn #=> String
     #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
     #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
@@ -1418,6 +1716,39 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Removes a media stream from a flow. This action is only available if
+    # the media stream is not associated with a source or output.
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [required, String] :media_stream_name
+    #
+    # @return [Types::RemoveFlowMediaStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveFlowMediaStreamResponse#flow_arn #flow_arn} => String
+    #   * {Types::RemoveFlowMediaStreamResponse#media_stream_name #media_stream_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_flow_media_stream({
+    #     flow_arn: "__string", # required
+    #     media_stream_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.media_stream_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowMediaStream AWS API Documentation
+    #
+    # @overload remove_flow_media_stream(params = {})
+    # @param [Hash] params ({})
+    def remove_flow_media_stream(params = {}, options = {})
+      req = build_request(:remove_flow_media_stream, params)
+      req.send_request(options)
+    end
+
     # Removes an output from an existing flow. This request can be made only
     # on an output that does not have an entitlement associated with it. If
     # the output has an entitlement, you must revoke the entitlement
@@ -1690,7 +2021,11 @@ module Aws::MediaConnect
     #   resp = client.update_flow({
     #     flow_arn: "__string", # required
     #     source_failover_config: {
+    #       failover_mode: "MERGE", # accepts MERGE, FAILOVER
     #       recovery_window: 1,
+    #       source_priority: {
+    #         primary_source: "__string",
+    #       },
     #       state: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
@@ -1718,6 +2053,22 @@ module Aws::MediaConnect
     #   resp.flow.entitlements[0].subscribers #=> Array
     #   resp.flow.entitlements[0].subscribers[0] #=> String
     #   resp.flow.flow_arn #=> String
+    #   resp.flow.media_streams #=> Array
+    #   resp.flow.media_streams[0].attributes.fmtp.channel_order #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.colorimetry #=> String, one of "BT601", "BT709", "BT2020", "BT2100", "ST2065-1", "ST2065-3", "XYZ"
+    #   resp.flow.media_streams[0].attributes.fmtp.exact_framerate #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.par #=> String
+    #   resp.flow.media_streams[0].attributes.fmtp.range #=> String, one of "NARROW", "FULL", "FULLPROTECT"
+    #   resp.flow.media_streams[0].attributes.fmtp.scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.flow.media_streams[0].attributes.fmtp.tcs #=> String, one of "SDR", "PQ", "HLG", "LINEAR", "BT2100LINPQ", "BT2100LINHLG", "ST2065-1", "ST428-1", "DENSITY"
+    #   resp.flow.media_streams[0].attributes.lang #=> String
+    #   resp.flow.media_streams[0].clock_rate #=> Integer
+    #   resp.flow.media_streams[0].description #=> String
+    #   resp.flow.media_streams[0].fmt #=> Integer
+    #   resp.flow.media_streams[0].media_stream_id #=> Integer
+    #   resp.flow.media_streams[0].media_stream_name #=> String
+    #   resp.flow.media_streams[0].media_stream_type #=> String, one of "video", "audio", "ancillary-data"
+    #   resp.flow.media_streams[0].video_format #=> String
     #   resp.flow.name #=> String
     #   resp.flow.outputs #=> Array
     #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -1735,6 +2086,16 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].entitlement_arn #=> String
     #   resp.flow.outputs[0].listener_address #=> String
     #   resp.flow.outputs[0].media_live_input_arn #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations #=> Array
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations #=> Array
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_ip #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].destination_port #=> Integer
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].interface.name #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].destination_configurations[0].outbound_ip #=> String
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_parameters.compression_factor #=> Float
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].encoding_parameters.encoder_profile #=> String, one of "main", "high"
+    #   resp.flow.outputs[0].media_stream_output_configurations[0].media_stream_name #=> String
     #   resp.flow.outputs[0].name #=> String
     #   resp.flow.outputs[0].output_arn #=> String
     #   resp.flow.outputs[0].port #=> Integer
@@ -1742,8 +2103,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
+    #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
@@ -1762,20 +2124,30 @@ module Aws::MediaConnect
     #   resp.flow.source.entitlement_arn #=> String
     #   resp.flow.source.ingest_ip #=> String
     #   resp.flow.source.ingest_port #=> Integer
+    #   resp.flow.source.media_stream_source_configurations #=> Array
+    #   resp.flow.source.media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.flow.source.media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.flow.source.media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.flow.source.name #=> String
     #   resp.flow.source.source_arn #=> String
     #   resp.flow.source.transport.cidr_allow_list #=> Array
     #   resp.flow.source.transport.cidr_allow_list[0] #=> String
     #   resp.flow.source.transport.max_bitrate #=> Integer
     #   resp.flow.source.transport.max_latency #=> Integer
+    #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
     #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.source_priority.primary_source #=> String
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.sources #=> Array
     #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
@@ -1792,14 +2164,22 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].entitlement_arn #=> String
     #   resp.flow.sources[0].ingest_ip #=> String
     #   resp.flow.sources[0].ingest_port #=> Integer
+    #   resp.flow.sources[0].media_stream_source_configurations #=> Array
+    #   resp.flow.sources[0].media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.flow.sources[0].media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.flow.sources[0].media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.flow.sources[0].name #=> String
     #   resp.flow.sources[0].source_arn #=> String
     #   resp.flow.sources[0].transport.cidr_allow_list #=> Array
     #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
     #   resp.flow.sources[0].transport.max_bitrate #=> Integer
     #   resp.flow.sources[0].transport.max_latency #=> Integer
+    #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
@@ -1810,6 +2190,7 @@ module Aws::MediaConnect
     #   resp.flow.vpc_interfaces[0].name #=> String
     #   resp.flow.vpc_interfaces[0].network_interface_ids #=> Array
     #   resp.flow.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].network_interface_type #=> String, one of "ena", "efa"
     #   resp.flow.vpc_interfaces[0].role_arn #=> String
     #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
     #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
@@ -1907,6 +2288,85 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Updates an existing media stream.
+    #
+    # @option params [Types::MediaStreamAttributesRequest] :attributes
+    #   The attributes that you want to assign to the media stream.
+    #
+    # @option params [Integer] :clock_rate
+    #   The sample rate (in Hz) for the stream. If the media stream type is
+    #   video or ancillary data, set this value to 90000. If the media stream
+    #   type is audio, set this value to either 48000 or 96000.
+    #
+    # @option params [String] :description
+    #   Description
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [required, String] :media_stream_name
+    #
+    # @option params [String] :media_stream_type
+    #   The type of media stream.
+    #
+    # @option params [String] :video_format
+    #   The resolution of the video.
+    #
+    # @return [Types::UpdateFlowMediaStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFlowMediaStreamResponse#flow_arn #flow_arn} => String
+    #   * {Types::UpdateFlowMediaStreamResponse#media_stream #media_stream} => Types::MediaStream
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_flow_media_stream({
+    #     attributes: {
+    #       fmtp: {
+    #         channel_order: "__string",
+    #         colorimetry: "BT601", # accepts BT601, BT709, BT2020, BT2100, ST2065-1, ST2065-3, XYZ
+    #         exact_framerate: "__string",
+    #         par: "__string",
+    #         range: "NARROW", # accepts NARROW, FULL, FULLPROTECT
+    #         scan_mode: "progressive", # accepts progressive, interlace, progressive-segmented-frame
+    #         tcs: "SDR", # accepts SDR, PQ, HLG, LINEAR, BT2100LINPQ, BT2100LINHLG, ST2065-1, ST428-1, DENSITY
+    #       },
+    #       lang: "__string",
+    #     },
+    #     clock_rate: 1,
+    #     description: "__string",
+    #     flow_arn: "__string", # required
+    #     media_stream_name: "__string", # required
+    #     media_stream_type: "video", # accepts video, audio, ancillary-data
+    #     video_format: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.media_stream.attributes.fmtp.channel_order #=> String
+    #   resp.media_stream.attributes.fmtp.colorimetry #=> String, one of "BT601", "BT709", "BT2020", "BT2100", "ST2065-1", "ST2065-3", "XYZ"
+    #   resp.media_stream.attributes.fmtp.exact_framerate #=> String
+    #   resp.media_stream.attributes.fmtp.par #=> String
+    #   resp.media_stream.attributes.fmtp.range #=> String, one of "NARROW", "FULL", "FULLPROTECT"
+    #   resp.media_stream.attributes.fmtp.scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.media_stream.attributes.fmtp.tcs #=> String, one of "SDR", "PQ", "HLG", "LINEAR", "BT2100LINPQ", "BT2100LINHLG", "ST2065-1", "ST428-1", "DENSITY"
+    #   resp.media_stream.attributes.lang #=> String
+    #   resp.media_stream.clock_rate #=> Integer
+    #   resp.media_stream.description #=> String
+    #   resp.media_stream.fmt #=> Integer
+    #   resp.media_stream.media_stream_id #=> Integer
+    #   resp.media_stream.media_stream_name #=> String
+    #   resp.media_stream.media_stream_type #=> String, one of "video", "audio", "ancillary-data"
+    #   resp.media_stream.video_format #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowMediaStream AWS API Documentation
+    #
+    # @overload update_flow_media_stream(params = {})
+    # @param [Hash] params ({})
+    def update_flow_media_stream(params = {}, options = {})
+      req = build_request(:update_flow_media_stream, params)
+      req.send_request(options)
+    end
+
     # Updates an existing flow output.
     #
     # @option params [Array<String>] :cidr_allow_list
@@ -1929,6 +2389,10 @@ module Aws::MediaConnect
     #
     # @option params [Integer] :max_latency
     #   The maximum latency in milliseconds for Zixi-based streams.
+    #
+    # @option params [Array<Types::MediaStreamOutputConfigurationRequest>] :media_stream_output_configurations
+    #   The media streams that are associated with the output, and the
+    #   parameters for those associations.
     #
     # @option params [Integer] :min_latency
     #   The minimum latency in milliseconds for SRT-based streams. In streams
@@ -1984,10 +2448,29 @@ module Aws::MediaConnect
     #     },
     #     flow_arn: "__string", # required
     #     max_latency: 1,
+    #     media_stream_output_configurations: [
+    #       {
+    #         destination_configurations: [
+    #           {
+    #             destination_ip: "__string", # required
+    #             destination_port: 1, # required
+    #             interface: { # required
+    #               name: "__string", # required
+    #             },
+    #           },
+    #         ],
+    #         encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #         encoding_parameters: {
+    #           compression_factor: 1.0, # required
+    #           encoder_profile: "main", # required, accepts main, high
+    #         },
+    #         media_stream_name: "__string", # required
+    #       },
+    #     ],
     #     min_latency: 1,
     #     output_arn: "__string", # required
     #     port: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #     remote_id: "__string",
     #     smoothing_latency: 1,
     #     stream_id: "__string",
@@ -2014,6 +2497,16 @@ module Aws::MediaConnect
     #   resp.output.entitlement_arn #=> String
     #   resp.output.listener_address #=> String
     #   resp.output.media_live_input_arn #=> String
+    #   resp.output.media_stream_output_configurations #=> Array
+    #   resp.output.media_stream_output_configurations[0].destination_configurations #=> Array
+    #   resp.output.media_stream_output_configurations[0].destination_configurations[0].destination_ip #=> String
+    #   resp.output.media_stream_output_configurations[0].destination_configurations[0].destination_port #=> Integer
+    #   resp.output.media_stream_output_configurations[0].destination_configurations[0].interface.name #=> String
+    #   resp.output.media_stream_output_configurations[0].destination_configurations[0].outbound_ip #=> String
+    #   resp.output.media_stream_output_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.output.media_stream_output_configurations[0].encoding_parameters.compression_factor #=> Float
+    #   resp.output.media_stream_output_configurations[0].encoding_parameters.encoder_profile #=> String, one of "main", "high"
+    #   resp.output.media_stream_output_configurations[0].media_stream_name #=> String
     #   resp.output.name #=> String
     #   resp.output.output_arn #=> String
     #   resp.output.port #=> Integer
@@ -2021,8 +2514,9 @@ module Aws::MediaConnect
     #   resp.output.transport.cidr_allow_list[0] #=> String
     #   resp.output.transport.max_bitrate #=> Integer
     #   resp.output.transport.max_latency #=> Integer
+    #   resp.output.transport.max_sync_buffer #=> Integer
     #   resp.output.transport.min_latency #=> Integer
-    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.smoothing_latency #=> Integer
     #   resp.output.transport.stream_id #=> String
@@ -2063,6 +2557,14 @@ module Aws::MediaConnect
     #   The maximum latency in milliseconds. This parameter applies only to
     #   RIST-based and Zixi-based streams.
     #
+    # @option params [Integer] :max_sync_buffer
+    #   The size of the buffer (in milliseconds) to use to sync incoming
+    #   source data.
+    #
+    # @option params [Array<Types::MediaStreamSourceConfigurationRequest>] :media_stream_source_configurations
+    #   The media streams that are associated with the source, and the
+    #   parameters for those associations.
+    #
     # @option params [Integer] :min_latency
     #   The minimum latency in milliseconds for SRT-based streams. In streams
     #   that use the SRT protocol, this value that you set on your
@@ -2081,7 +2583,7 @@ module Aws::MediaConnect
     #   applies only to Zixi-based streams.
     #
     # @option params [String] :vpc_interface_name
-    #   The name of the VPC Interface to configure this Source with.
+    #   The name of the VPC interface to use for this source.
     #
     # @option params [String] :whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute content
@@ -2113,8 +2615,23 @@ module Aws::MediaConnect
     #     ingest_port: 1,
     #     max_bitrate: 1,
     #     max_latency: 1,
+    #     max_sync_buffer: 1,
+    #     media_stream_source_configurations: [
+    #       {
+    #         encoding_name: "jxsv", # required, accepts jxsv, raw, smpte291, pcm
+    #         input_configurations: [
+    #           {
+    #             input_port: 1, # required
+    #             interface: { # required
+    #               name: "__string", # required
+    #             },
+    #           },
+    #         ],
+    #         media_stream_name: "__string", # required
+    #       },
+    #     ],
     #     min_latency: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, srt-listener
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
     #     source_arn: "__string", # required
     #     stream_id: "__string",
     #     vpc_interface_name: "__string",
@@ -2138,14 +2655,22 @@ module Aws::MediaConnect
     #   resp.source.entitlement_arn #=> String
     #   resp.source.ingest_ip #=> String
     #   resp.source.ingest_port #=> Integer
+    #   resp.source.media_stream_source_configurations #=> Array
+    #   resp.source.media_stream_source_configurations[0].encoding_name #=> String, one of "jxsv", "raw", "smpte291", "pcm"
+    #   resp.source.media_stream_source_configurations[0].input_configurations #=> Array
+    #   resp.source.media_stream_source_configurations[0].input_configurations[0].input_ip #=> String
+    #   resp.source.media_stream_source_configurations[0].input_configurations[0].input_port #=> Integer
+    #   resp.source.media_stream_source_configurations[0].input_configurations[0].interface.name #=> String
+    #   resp.source.media_stream_source_configurations[0].media_stream_name #=> String
     #   resp.source.name #=> String
     #   resp.source.source_arn #=> String
     #   resp.source.transport.cidr_allow_list #=> Array
     #   resp.source.transport.cidr_allow_list[0] #=> String
     #   resp.source.transport.max_bitrate #=> Integer
     #   resp.source.transport.max_latency #=> Integer
+    #   resp.source.transport.max_sync_buffer #=> Integer
     #   resp.source.transport.min_latency #=> Integer
-    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "srt-listener"
+    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener"
     #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.smoothing_latency #=> Integer
     #   resp.source.transport.stream_id #=> String
@@ -2174,7 +2699,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

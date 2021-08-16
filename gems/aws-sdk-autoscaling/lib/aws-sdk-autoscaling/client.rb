@@ -596,8 +596,9 @@ module Aws::AutoScaling
     # not roll back any replacements that have already been completed, but
     # it prevents new replacements from being started.
     #
-    # For more information, see [Replacing Auto Scaling instances based on
-    # an instance refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # This operation is part of the [instance refresh feature][1] in Amazon
+    # EC2 Auto Scaling, which helps you update instances in your Auto
+    # Scaling group after you make configuration changes.
     #
     #
     #
@@ -986,11 +987,11 @@ module Aws::AutoScaling
     #
     # @option params [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
-    #   Auto Scaling group uses to call other AWS services on your behalf. By
-    #   default, Amazon EC2 Auto Scaling uses a service-linked role named
-    #   AWSServiceRoleForAutoScaling, which it creates if it does not exist.
-    #   For more information, see [Service-linked roles][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   Auto Scaling group uses to call other Amazon Web Services on your
+    #   behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role
+    #   named `AWSServiceRoleForAutoScaling`, which it creates if it does not
+    #   exist. For more information, see [Service-linked roles][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1006,6 +1007,9 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
+    #
+    # @option params [String] :context
+    #   Reserved.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1162,6 +1166,7 @@ module Aws::AutoScaling
     #     ],
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
+    #     context: "Context",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -1475,6 +1480,7 @@ module Aws::AutoScaling
     #           delete_on_termination: false,
     #           iops: 1,
     #           encrypted: false,
+    #           throughput: 1,
     #         },
     #         no_device: false,
     #       },
@@ -1874,12 +1880,19 @@ module Aws::AutoScaling
 
     # Deletes the warm pool for the specified Auto Scaling group.
     #
+    # For more information, see [Warm pools for Amazon EC2 Auto Scaling][1]
+    # in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html
+    #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
     # @option params [Boolean] :force_delete
-    #   Specifies that the warm pool is to be deleted along with all instances
-    #   associated with the warm pool, without waiting for all instances to be
+    #   Specifies that the warm pool is to be deleted along with all of its
+    #   associated instances, without waiting for all instances to be
     #   terminated. This parameter also deletes any outstanding lifecycle
     #   actions associated with the warm pool instances.
     #
@@ -1902,11 +1915,13 @@ module Aws::AutoScaling
     end
 
     # Describes the current Amazon EC2 Auto Scaling resource quotas for your
-    # AWS account.
+    # account.
     #
-    # For information about requesting an increase, see [Amazon EC2 Auto
-    # Scaling service quotas][1] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # When you establish an account, the account has initial quotas on the
+    # maximum number of Auto Scaling groups and launch configurations that
+    # you can create in a given Region. For more information, see [Amazon
+    # EC2 Auto Scaling service quotas][1] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
     #
     #
     #
@@ -1922,7 +1937,7 @@ module Aws::AutoScaling
     #
     # @example Example: To describe your Auto Scaling account limits
     #
-    #   # This example describes the Auto Scaling limits for your AWS account.
+    #   # This example describes the Amazon EC2 Auto Scaling service quotas for your account.
     #
     #   resp = client.describe_account_limits({
     #   })
@@ -1951,18 +1966,16 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the available adjustment types for Amazon EC2 Auto Scaling
-    # scaling policies. These settings apply to step scaling policies and
-    # simple scaling policies; they do not apply to target tracking scaling
-    # policies.
+    # Describes the available adjustment types for step scaling and simple
+    # scaling policies.
     #
     # The following adjustment types are supported:
     #
-    # * ChangeInCapacity
+    # * `ChangeInCapacity`
     #
-    # * ExactCapacity
+    # * `ExactCapacity`
     #
-    # * PercentChangeInCapacity
+    # * `PercentChangeInCapacity`
     #
     # @return [Types::DescribeAdjustmentTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2005,7 +2018,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes one or more Auto Scaling groups.
+    # Gets information about the Auto Scaling groups in the account and
+    # Region.
+    #
+    # This operation returns information about instances in Auto Scaling
+    # groups. To retrieve information about the instances in a warm pool,
+    # you must call the DescribeWarmPool API.
     #
     # @option params [Array<String>] :auto_scaling_group_names
     #   The names of the Auto Scaling groups. By default, you can only specify
@@ -2119,6 +2137,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].min_size #=> Integer
     #   resp.auto_scaling_groups[0].max_size #=> Integer
     #   resp.auto_scaling_groups[0].desired_capacity #=> Integer
+    #   resp.auto_scaling_groups[0].predicted_capacity #=> Integer
     #   resp.auto_scaling_groups[0].default_cooldown #=> Integer
     #   resp.auto_scaling_groups[0].availability_zones #=> Array
     #   resp.auto_scaling_groups[0].availability_zones[0] #=> String
@@ -2167,6 +2186,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running"
     #   resp.auto_scaling_groups[0].warm_pool_configuration.status #=> String, one of "PendingDelete"
     #   resp.auto_scaling_groups[0].warm_pool_size #=> Integer
+    #   resp.auto_scaling_groups[0].context #=> String
     #   resp.next_token #=> String
     #
     #
@@ -2185,12 +2205,15 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes one or more Auto Scaling instances.
+    # Gets information about the Auto Scaling instances in the account and
+    # Region.
     #
     # @option params [Array<String>] :instance_ids
-    #   The IDs of the instances. You can specify up to `MaxRecords` IDs. If
-    #   you omit this parameter, all Auto Scaling instances are described. If
-    #   you specify an ID that does not exist, it is ignored with no error.
+    #   The IDs of the instances. If you omit this parameter, all Auto Scaling
+    #   instances are described. If you specify an ID that does not exist, it
+    #   is ignored with no error.
+    #
+    #   Array Members: Maximum number of 50 items.
     #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
@@ -2307,10 +2330,20 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes one or more instance refreshes.
+    # Gets information about the instance refreshes for the specified Auto
+    # Scaling group.
     #
-    # You can determine the status of a request by looking at the `Status`
-    # parameter. The following are the possible statuses:
+    # This operation is part of the [instance refresh feature][1] in Amazon
+    # EC2 Auto Scaling, which helps you update instances in your Auto
+    # Scaling group after you make configuration changes.
+    #
+    # To help you determine the status of an instance refresh, this
+    # operation returns information about the instance refreshes you
+    # previously initiated, including their status, end time, the percentage
+    # of the instance refresh that is complete, and the number of instances
+    # remaining to update before the instance refresh is complete.
+    #
+    # The following are the possible statuses:
     #
     # * `Pending` - The request was created, but the operation has not
     #   started.
@@ -2327,9 +2360,6 @@ module Aws::AutoScaling
     #   completed, but it prevents new replacements from being started.
     #
     # * `Cancelled` - The operation is cancelled.
-    #
-    # For more information, see [Replacing Auto Scaling instances based on
-    # an instance refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -2410,6 +2440,30 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].progress_details.live_pool_progress.instances_to_update #=> Integer
     #   resp.instance_refreshes[0].progress_details.warm_pool_progress.percentage_complete #=> Integer
     #   resp.instance_refreshes[0].progress_details.warm_pool_progress.instances_to_update #=> Integer
+    #   resp.instance_refreshes[0].preferences.min_healthy_percentage #=> Integer
+    #   resp.instance_refreshes[0].preferences.instance_warmup #=> Integer
+    #   resp.instance_refreshes[0].preferences.checkpoint_percentages #=> Array
+    #   resp.instance_refreshes[0].preferences.checkpoint_percentages[0] #=> Integer
+    #   resp.instance_refreshes[0].preferences.checkpoint_delay #=> Integer
+    #   resp.instance_refreshes[0].preferences.skip_matching #=> Boolean
+    #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_id #=> String
+    #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_name #=> String
+    #   resp.instance_refreshes[0].desired_configuration.launch_template.version #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.launch_template_specification.launch_template_id #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.launch_template_specification.launch_template_name #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.launch_template_specification.version #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides #=> Array
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_type #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].weighted_capacity #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].launch_template_specification.launch_template_id #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].launch_template_specification.launch_template_name #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].launch_template_specification.version #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_allocation_strategy #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_base_capacity #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_percentage_above_base_capacity #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_allocation_strategy #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_instance_pools #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_max_price #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeInstanceRefreshes AWS API Documentation
@@ -2421,11 +2475,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes one or more launch configurations.
+    # Gets information about the launch configurations in the account and
+    # Region.
     #
     # @option params [Array<String>] :launch_configuration_names
     #   The launch configuration names. If you omit this parameter, all launch
     #   configurations are described.
+    #
+    #   Array Members: Maximum number of 50 items.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -2509,6 +2566,7 @@ module Aws::AutoScaling
     #   resp.launch_configurations[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.launch_configurations[0].block_device_mappings[0].ebs.iops #=> Integer
     #   resp.launch_configurations[0].block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.launch_configurations[0].block_device_mappings[0].ebs.throughput #=> Integer
     #   resp.launch_configurations[0].block_device_mappings[0].no_device #=> Boolean
     #   resp.launch_configurations[0].instance_monitoring.enabled #=> Boolean
     #   resp.launch_configurations[0].spot_price #=> String
@@ -2535,9 +2593,9 @@ module Aws::AutoScaling
     #
     # The following hook types are supported:
     #
-    # * autoscaling:EC2\_INSTANCE\_LAUNCHING
+    # * `autoscaling:EC2_INSTANCE_LAUNCHING`
     #
-    # * autoscaling:EC2\_INSTANCE\_TERMINATING
+    # * `autoscaling:EC2_INSTANCE_TERMINATING`
     #
     # @return [Types::DescribeLifecycleHookTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2573,7 +2631,8 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the lifecycle hooks for the specified Auto Scaling group.
+    # Gets information about the lifecycle hooks for the specified Auto
+    # Scaling group.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -2640,7 +2699,36 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the target groups for the specified Auto Scaling group.
+    # Gets information about the load balancer target groups for the
+    # specified Auto Scaling group.
+    #
+    # To determine the availability of registered instances, use the `State`
+    # element in the response. When you attach a target group to an Auto
+    # Scaling group, the initial `State` value is `Adding`. The state
+    # transitions to `Added` after all Auto Scaling instances are registered
+    # with the target group. If Elastic Load Balancing health checks are
+    # enabled for the Auto Scaling group, the state transitions to
+    # `InService` after at least one Auto Scaling instance passes the health
+    # check. When the target group is in the `InService` state, Amazon EC2
+    # Auto Scaling can terminate and replace any instances that are reported
+    # as unhealthy. If no registered instances pass the health checks, the
+    # target group doesn't enter the `InService` state.
+    #
+    # Target groups also have an `InService` state if you attach them in the
+    # CreateAutoScalingGroup API call. If your target group state is
+    # `InService`, but it is not working properly, check the scaling
+    # activities by calling DescribeScalingActivities and take any
+    # corrective actions necessary.
+    #
+    # For help with failed health checks, see [Troubleshooting Amazon EC2
+    # Auto Scaling: Health checks][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*. For more information, see [Elastic Load Balancing and Amazon
+    # EC2 Auto Scaling][2] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -2701,11 +2789,40 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the load balancers for the specified Auto Scaling group.
+    # Gets information about the load balancers for the specified Auto
+    # Scaling group.
     #
     # This operation describes only Classic Load Balancers. If you have
     # Application Load Balancers, Network Load Balancers, or Gateway Load
     # Balancers, use the DescribeLoadBalancerTargetGroups API instead.
+    #
+    # To determine the availability of registered instances, use the `State`
+    # element in the response. When you attach a load balancer to an Auto
+    # Scaling group, the initial `State` value is `Adding`. The state
+    # transitions to `Added` after all Auto Scaling instances are registered
+    # with the load balancer. If Elastic Load Balancing health checks are
+    # enabled for the Auto Scaling group, the state transitions to
+    # `InService` after at least one Auto Scaling instance passes the health
+    # check. When the load balancer is in the `InService` state, Amazon EC2
+    # Auto Scaling can terminate and replace any instances that are reported
+    # as unhealthy. If no registered instances pass the health checks, the
+    # load balancer doesn't enter the `InService` state.
+    #
+    # Load balancers also have an `InService` state if you attach them in
+    # the CreateAutoScalingGroup API call. If your load balancer state is
+    # `InService`, but it is not working properly, check the scaling
+    # activities by calling DescribeScalingActivities and take any
+    # corrective actions necessary.
+    #
+    # For help with failed health checks, see [Troubleshooting Amazon EC2
+    # Auto Scaling: Health checks][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*. For more information, see [Elastic Load Balancing and Amazon
+    # EC2 Auto Scaling][2] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -2837,8 +2954,8 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the notification actions associated with the specified Auto
-    # Scaling group.
+    # Gets information about the Amazon SNS notifications that are
+    # configured for one or more Auto Scaling groups.
     #
     # @option params [Array<String>] :auto_scaling_group_names
     #   The name of the Auto Scaling group.
@@ -2910,7 +3027,7 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the policies for the specified Auto Scaling group.
+    # Gets information about the scaling policies in the account and Region.
     #
     # @option params [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -2918,12 +3035,14 @@ module Aws::AutoScaling
     # @option params [Array<String>] :policy_names
     #   The names of one or more policies. If you omit this parameter, all
     #   policies are described. If a group name is provided, the results are
-    #   limited to that group. This list is limited to 50 items. If you
-    #   specify an unknown policy name, it is ignored with no error.
+    #   limited to that group. If you specify an unknown policy name, it is
+    #   ignored with no error.
+    #
+    #   Array Members: Maximum number of 50 items.
     #
     # @option params [Array<String>] :policy_types
     #   One or more policy types. The valid values are `SimpleScaling`,
-    #   `StepScaling`, and `TargetTrackingScaling`.
+    #   `StepScaling`, `TargetTrackingScaling`, and `PredictiveScaling`.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -3018,6 +3137,18 @@ module Aws::AutoScaling
     #   resp.scaling_policies[0].target_tracking_configuration.target_value #=> Float
     #   resp.scaling_policies[0].target_tracking_configuration.disable_scale_in #=> Boolean
     #   resp.scaling_policies[0].enabled #=> Boolean
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications #=> Array
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].target_value #=> Float
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_metric_pair_specification.predefined_metric_type #=> String, one of "ASGCPUUtilization", "ASGNetworkIn", "ASGNetworkOut", "ALBRequestCount"
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_metric_pair_specification.resource_label #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_scaling_metric_specification.predefined_metric_type #=> String, one of "ASGAverageCPUUtilization", "ASGAverageNetworkIn", "ASGAverageNetworkOut", "ALBRequestCountPerTarget"
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_scaling_metric_specification.resource_label #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_load_metric_specification.predefined_metric_type #=> String, one of "ASGTotalCPUUtilization", "ASGTotalNetworkIn", "ASGTotalNetworkOut", "ALBTargetGroupRequestCount"
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_load_metric_specification.resource_label #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.mode #=> String, one of "ForecastAndScale", "ForecastOnly"
+    #   resp.scaling_policies[0].predictive_scaling_configuration.scheduling_buffer_time #=> Integer
+    #   resp.scaling_policies[0].predictive_scaling_configuration.max_capacity_breach_behavior #=> String, one of "HonorMaxCapacity", "IncreaseMaxCapacity"
+    #   resp.scaling_policies[0].predictive_scaling_configuration.max_capacity_buffer #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies AWS API Documentation
@@ -3029,26 +3160,35 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes one or more scaling activities for the specified Auto
-    # Scaling group.
+    # Gets information about the scaling activities in the account and
+    # Region.
     #
-    # To view the scaling activities from the Amazon EC2 Auto Scaling
-    # console, choose the **Activity** tab of the Auto Scaling group. When
-    # scaling events occur, you see scaling activity messages in the
-    # **Activity history**. For more information, see [Verifying a scaling
+    # When scaling events occur, you see a record of the scaling activity in
+    # the scaling activities. For more information, see [Verifying a scaling
     # activity for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
     # User Guide*.
+    #
+    # If the scaling event succeeds, the value of the `StatusCode` element
+    # in the response is `Successful`. If an attempt to launch instances
+    # failed, the `StatusCode` value is `Failed` or `Cancelled` and the
+    # `StatusMessage` element in the response indicates the cause of the
+    # failure. For help interpreting the `StatusMessage`, see
+    # [Troubleshooting Amazon EC2 Auto Scaling][2] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html
     #
     # @option params [Array<String>] :activity_ids
-    #   The activity IDs of the desired scaling activities. You can specify up
-    #   to 50 IDs. If you omit this parameter, all activities for the past six
-    #   weeks are described. If unknown activities are requested, they are
-    #   ignored with no error. If you specify an Auto Scaling group, the
-    #   results are limited to that group.
+    #   The activity IDs of the desired scaling activities. If you omit this
+    #   parameter, all activities for the past six weeks are described. If
+    #   unknown activities are requested, they are ignored with no error. If
+    #   you specify an Auto Scaling group, the results are limited to that
+    #   group.
+    #
+    #   Array Members: Maximum number of 50 IDs.
     #
     # @option params [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -3193,18 +3333,21 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the actions scheduled for your Auto Scaling group that
-    # haven't run or that have not reached their end time. To describe the
-    # actions that have already run, call the DescribeScalingActivities API.
+    # Gets information about the scheduled actions that haven't run or that
+    # have not reached their end time.
+    #
+    # To describe the scaling activities for scheduled actions that have
+    # already run, call the DescribeScalingActivities API.
     #
     # @option params [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :scheduled_action_names
-    #   The names of one or more scheduled actions. You can specify up to 50
-    #   actions. If you omit this parameter, all scheduled actions are
-    #   described. If you specify an unknown scheduled action, it is ignored
-    #   with no error.
+    #   The names of one or more scheduled actions. If you omit this
+    #   parameter, all scheduled actions are described. If you specify an
+    #   unknown scheduled action, it is ignored with no error.
+    #
+    #   Array Members: Maximum number of 50 actions.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The earliest scheduled start time to return. If scheduled action names
@@ -3444,7 +3587,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes a warm pool and its instances.
+    # Gets information about a warm pool and its instances.
+    #
+    # For more information, see [Warm pools for Amazon EC2 Auto Scaling][1]
+    # in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -4110,6 +4260,89 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
+    # Retrieves the forecast data for a predictive scaling policy.
+    #
+    # Load forecasts are predictions of the hourly load values using
+    # historical load data from CloudWatch and an analysis of historical
+    # trends. Capacity forecasts are represented as predicted values for the
+    # minimum capacity that is needed on an hourly basis, based on the
+    # hourly load forecast.
+    #
+    # A minimum of 24 hours of data is required to create the initial
+    # forecasts. However, having a full 14 days of historical data results
+    # in more accurate forecasts.
+    #
+    # For more information, see [Predictive scaling for Amazon EC2 Auto
+    # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html
+    #
+    # @option params [required, String] :auto_scaling_group_name
+    #   The name of the Auto Scaling group.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The inclusive start time of the time range for the forecast data to
+    #   get. At most, the date and time can be one year before the current
+    #   date and time.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The exclusive end time of the time range for the forecast data to get.
+    #   The maximum time duration between the start and end time is 30 days.
+    #
+    #   Although this parameter can accept a date and time that is more than
+    #   two days in the future, the availability of forecast data has limits.
+    #   Amazon EC2 Auto Scaling only issues forecasts for periods of two days
+    #   in advance.
+    #
+    # @return [Types::GetPredictiveScalingForecastAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPredictiveScalingForecastAnswer#load_forecast #load_forecast} => Array&lt;Types::LoadForecast&gt;
+    #   * {Types::GetPredictiveScalingForecastAnswer#capacity_forecast #capacity_forecast} => Types::CapacityForecast
+    #   * {Types::GetPredictiveScalingForecastAnswer#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_predictive_scaling_forecast({
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #     policy_name: "XmlStringMaxLen255", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.load_forecast #=> Array
+    #   resp.load_forecast[0].timestamps #=> Array
+    #   resp.load_forecast[0].timestamps[0] #=> Time
+    #   resp.load_forecast[0].values #=> Array
+    #   resp.load_forecast[0].values[0] #=> Float
+    #   resp.load_forecast[0].metric_specification.target_value #=> Float
+    #   resp.load_forecast[0].metric_specification.predefined_metric_pair_specification.predefined_metric_type #=> String, one of "ASGCPUUtilization", "ASGNetworkIn", "ASGNetworkOut", "ALBRequestCount"
+    #   resp.load_forecast[0].metric_specification.predefined_metric_pair_specification.resource_label #=> String
+    #   resp.load_forecast[0].metric_specification.predefined_scaling_metric_specification.predefined_metric_type #=> String, one of "ASGAverageCPUUtilization", "ASGAverageNetworkIn", "ASGAverageNetworkOut", "ALBRequestCountPerTarget"
+    #   resp.load_forecast[0].metric_specification.predefined_scaling_metric_specification.resource_label #=> String
+    #   resp.load_forecast[0].metric_specification.predefined_load_metric_specification.predefined_metric_type #=> String, one of "ASGTotalCPUUtilization", "ASGTotalNetworkIn", "ASGTotalNetworkOut", "ALBTargetGroupRequestCount"
+    #   resp.load_forecast[0].metric_specification.predefined_load_metric_specification.resource_label #=> String
+    #   resp.capacity_forecast.timestamps #=> Array
+    #   resp.capacity_forecast.timestamps[0] #=> Time
+    #   resp.capacity_forecast.values #=> Array
+    #   resp.capacity_forecast.values[0] #=> Float
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/GetPredictiveScalingForecast AWS API Documentation
+    #
+    # @overload get_predictive_scaling_forecast(params = {})
+    # @param [Hash] params ({})
+    def get_predictive_scaling_forecast(params = {}, options = {})
+      req = build_request(:get_predictive_scaling_forecast, params)
+      req.send_request(options)
+    end
+
     # Creates or updates a lifecycle hook for the specified Auto Scaling
     # group.
     #
@@ -4314,17 +4547,28 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Creates or updates a scaling policy for an Auto Scaling group.
+    # Creates or updates a scaling policy for an Auto Scaling group. Scaling
+    # policies are used to scale an Auto Scaling group based on configurable
+    # metrics. If no policies are defined, the dynamic scaling and
+    # predictive scaling features are not used.
     #
-    # For more information about using scaling policies to scale your Auto
-    # Scaling group, see [Target tracking scaling policies][1] and [Step and
-    # simple scaling policies][2] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # For more information about using dynamic scaling, see [Target tracking
+    # scaling policies][1] and [Step and simple scaling policies][2] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
+    #
+    # For more information about using predictive scaling, see [Predictive
+    # scaling for Amazon EC2 Auto Scaling][3] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
+    #
+    # You can view the scaling policies for an Auto Scaling group using the
+    # DescribePolicies API call. If you are no longer using a scaling
+    # policy, you can delete it by calling the DeletePolicy API.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html
     # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html
+    # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -4340,6 +4584,8 @@ module Aws::AutoScaling
     #   * `StepScaling`
     #
     #   * `SimpleScaling` (default)
+    #
+    #   * `PredictiveScaling`
     #
     # @option params [String] :adjustment_type
     #   Specifies how the scaling adjustment is interpreted (for example, an
@@ -4427,7 +4673,7 @@ module Aws::AutoScaling
     #   `StepScaling`.
     #
     # @option params [Types::TargetTrackingConfiguration] :target_tracking_configuration
-    #   A target tracking scaling policy. Includes support for predefined or
+    #   A target tracking scaling policy. Provides support for predefined or
     #   customized metrics.
     #
     #   The following predefined metrics are available:
@@ -4462,6 +4708,22 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
+    #
+    # @option params [Types::PredictiveScalingConfiguration] :predictive_scaling_configuration
+    #   A predictive scaling policy. Provides support for only predefined
+    #   metrics.
+    #
+    #   Predictive scaling works with CPU utilization, network in/out, and the
+    #   Application Load Balancer request count.
+    #
+    #   For more information, see [PredictiveScalingConfiguration][1] in the
+    #   *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #   Required if the policy type is `PredictiveScaling`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html
     #
     # @return [Types::PolicyARNType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4542,6 +4804,29 @@ module Aws::AutoScaling
     #       disable_scale_in: false,
     #     },
     #     enabled: false,
+    #     predictive_scaling_configuration: {
+    #       metric_specifications: [ # required
+    #         {
+    #           target_value: 1.0, # required
+    #           predefined_metric_pair_specification: {
+    #             predefined_metric_type: "ASGCPUUtilization", # required, accepts ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, ALBRequestCount
+    #             resource_label: "XmlStringMaxLen1023",
+    #           },
+    #           predefined_scaling_metric_specification: {
+    #             predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
+    #             resource_label: "XmlStringMaxLen1023",
+    #           },
+    #           predefined_load_metric_specification: {
+    #             predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
+    #             resource_label: "XmlStringMaxLen1023",
+    #           },
+    #         },
+    #       ],
+    #       mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
+    #       scheduling_buffer_time: 1,
+    #       max_capacity_breach_behavior: "HonorMaxCapacity", # accepts HonorMaxCapacity, IncreaseMaxCapacity
+    #       max_capacity_buffer: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4565,6 +4850,11 @@ module Aws::AutoScaling
     #
     # For more information, see [Scheduled scaling][1] in the *Amazon EC2
     # Auto Scaling User Guide*.
+    #
+    # You can view the scheduled actions for an Auto Scaling group using the
+    # DescribeScheduledActions API call. If you are no longer using a
+    # scheduled action, you can delete it by calling the
+    # DeleteScheduledAction API.
     #
     #
     #
@@ -4676,12 +4966,13 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Adds a warm pool to the specified Auto Scaling group. A warm pool is a
-    # pool of pre-initialized EC2 instances that sits alongside the Auto
-    # Scaling group. Whenever your application needs to scale out, the Auto
-    # Scaling group can draw on the warm pool to meet its new desired
-    # capacity. For more information, see [Warm pools for Amazon EC2 Auto
-    # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # Creates or updates a warm pool for the specified Auto Scaling group. A
+    # warm pool is a pool of pre-initialized EC2 instances that sits
+    # alongside the Auto Scaling group. Whenever your application needs to
+    # scale out, the Auto Scaling group can draw on the warm pool to meet
+    # its new desired capacity. For more information and example
+    # configurations, see [Warm pools for Amazon EC2 Auto Scaling][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     # This operation must be called from the Region in which the Auto
     # Scaling group was created. This operation cannot be called on an Auto
@@ -4700,26 +4991,27 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [Integer] :max_group_prepared_capacity
-    #   Specifies the total maximum number of instances that are allowed to be
-    #   in the warm pool or in any state except `Terminated` for the Auto
-    #   Scaling group. This is an optional property. Specify it only if the
-    #   warm pool size should not be determined by the difference between the
+    #   Specifies the maximum number of instances that are allowed to be in
+    #   the warm pool or in any state except `Terminated` for the Auto Scaling
+    #   group. This is an optional property. Specify it only if you do not
+    #   want the warm pool size to be determined by the difference between the
     #   group's maximum capacity and its desired capacity.
     #
-    #   Amazon EC2 Auto Scaling will launch and maintain either the difference
-    #   between the group's maximum capacity and its desired capacity, if a
-    #   value for `MaxGroupPreparedCapacity` is not specified, or the
+    #   If a value for `MaxGroupPreparedCapacity` is not specified, Amazon EC2
+    #   Auto Scaling launches and maintains the difference between the
+    #   group's maximum capacity and its desired capacity. If you specify a
+    #   value for `MaxGroupPreparedCapacity`, Amazon EC2 Auto Scaling uses the
     #   difference between the `MaxGroupPreparedCapacity` and the desired
-    #   capacity, if a value for `MaxGroupPreparedCapacity` is specified.
+    #   capacity instead.
     #
     #    The size of the warm pool is dynamic. Only when
     #   `MaxGroupPreparedCapacity` and `MinSize` are set to the same value
     #   does the warm pool have an absolute size.
     #
     #   If the desired capacity of the Auto Scaling group is higher than the
-    #   `MaxGroupPreparedCapacity`, the capacity of the warm pool is 0. To
-    #   remove a value that you previously set, include the property but
-    #   specify -1 for the value.
+    #   `MaxGroupPreparedCapacity`, the capacity of the warm pool is 0, unless
+    #   you specify a value for `MinSize`. To remove a value that you
+    #   previously set, include the property but specify -1 for the value.
     #
     # @option params [Integer] :min_size
     #   Specifies the minimum number of instances to maintain in the warm
@@ -4728,8 +5020,8 @@ module Aws::AutoScaling
     #   if not specified.
     #
     # @option params [String] :pool_state
-    #   Sets the instance state to transition to after the lifecycle hooks
-    #   finish. Valid values are: `Stopped` (default) or `Running`.
+    #   Sets the instance state to transition to after the lifecycle actions
+    #   are complete. Default is `Stopped`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5094,19 +5386,26 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Starts a new instance refresh operation, which triggers a rolling
-    # replacement of previously launched instances in the Auto Scaling group
-    # with a new group of instances.
+    # Starts a new instance refresh operation. An instance refresh performs
+    # a rolling replacement of all or some instances in an Auto Scaling
+    # group. Each instance is terminated first and then replaced, which
+    # temporarily reduces the capacity available within your Auto Scaling
+    # group.
     #
-    # If successful, this call creates a new instance refresh request with a
+    # This operation is part of the [instance refresh feature][1] in Amazon
+    # EC2 Auto Scaling, which helps you update instances in your Auto
+    # Scaling group. This feature is helpful, for example, when you have a
+    # new AMI or a new user data script. You just need to create a new
+    # launch template that specifies the new AMI or user data script. Then
+    # start an instance refresh to immediately begin the process of updating
+    # instances in the group.
+    #
+    # If the call succeeds, it creates a new instance refresh request with a
     # unique ID that you can use to track its progress. To query its status,
     # call the DescribeInstanceRefreshes API. To describe the instance
     # refreshes that have already run, call the DescribeInstanceRefreshes
     # API. To cancel an instance refresh operation in progress, use the
     # CancelInstanceRefresh API.
-    #
-    # For more information, see [Replacing Auto Scaling instances based on
-    # an instance refresh][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -5119,27 +5418,33 @@ module Aws::AutoScaling
     #   The strategy to use for the instance refresh. The only valid value is
     #   `Rolling`.
     #
-    #   A rolling update is an update that is applied to all instances in an
-    #   Auto Scaling group until all instances have been updated. A rolling
+    #   A rolling update helps you update your instances gradually. A rolling
     #   update can fail due to failed health checks or if instances are on
     #   standby or are protected from scale in. If the rolling update process
-    #   fails, any instances that were already replaced are not rolled back to
-    #   their previous configuration.
+    #   fails, any instances that are replaced are not rolled back to their
+    #   previous configuration.
+    #
+    # @option params [Types::DesiredConfiguration] :desired_configuration
+    #   The desired configuration. For example, the desired configuration can
+    #   specify a new launch template or a new version of the current launch
+    #   template.
+    #
+    #   Once the instance refresh succeeds, Amazon EC2 Auto Scaling updates
+    #   the settings of the Auto Scaling group to reflect the new desired
+    #   configuration.
+    #
+    #   <note markdown="1"> When you specify a new launch template or a new version of the current
+    #   launch template for your desired configuration, consider enabling the
+    #   `SkipMatching` property in preferences. If it's enabled, Amazon EC2
+    #   Auto Scaling skips replacing instances that already use the specified
+    #   launch template and version. This can help you reduce the number of
+    #   replacements that are required to apply updates.
+    #
+    #    </note>
     #
     # @option params [Types::RefreshPreferences] :preferences
-    #   Set of preferences associated with the instance refresh request.
-    #
-    #   If not provided, the default values are used. For
-    #   `MinHealthyPercentage`, the default value is `90`. For
-    #   `InstanceWarmup`, the default is to use the value specified for the
-    #   health check grace period for the Auto Scaling group.
-    #
-    #   For more information, see [RefreshPreferences][1] in the *Amazon EC2
-    #   Auto Scaling API Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RefreshPreferences.html
+    #   Set of preferences associated with the instance refresh request. If
+    #   not provided, the default values are used.
     #
     # @return [Types::StartInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5168,11 +5473,47 @@ module Aws::AutoScaling
     #   resp = client.start_instance_refresh({
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #     strategy: "Rolling", # accepts Rolling
+    #     desired_configuration: {
+    #       launch_template: {
+    #         launch_template_id: "XmlStringMaxLen255",
+    #         launch_template_name: "LaunchTemplateName",
+    #         version: "XmlStringMaxLen255",
+    #       },
+    #       mixed_instances_policy: {
+    #         launch_template: {
+    #           launch_template_specification: {
+    #             launch_template_id: "XmlStringMaxLen255",
+    #             launch_template_name: "LaunchTemplateName",
+    #             version: "XmlStringMaxLen255",
+    #           },
+    #           overrides: [
+    #             {
+    #               instance_type: "XmlStringMaxLen255",
+    #               weighted_capacity: "XmlStringMaxLen32",
+    #               launch_template_specification: {
+    #                 launch_template_id: "XmlStringMaxLen255",
+    #                 launch_template_name: "LaunchTemplateName",
+    #                 version: "XmlStringMaxLen255",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         instances_distribution: {
+    #           on_demand_allocation_strategy: "XmlString",
+    #           on_demand_base_capacity: 1,
+    #           on_demand_percentage_above_base_capacity: 1,
+    #           spot_allocation_strategy: "XmlString",
+    #           spot_instance_pools: 1,
+    #           spot_max_price: "MixedInstanceSpotPrice",
+    #         },
+    #       },
+    #     },
     #     preferences: {
     #       min_healthy_percentage: 1,
     #       instance_warmup: 1,
     #       checkpoint_percentages: [1],
     #       checkpoint_delay: 1,
+    #       skip_matching: false,
     #     },
     #   })
     #
@@ -5450,7 +5791,7 @@ module Aws::AutoScaling
     #
     # @option params [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
+    #   and `ELB`. If you configure an Auto Scaling group to use `ELB` health
     #   checks, it considers the instance unhealthy if it fails either the EC2
     #   status checks or the load balancer health checks.
     #
@@ -5509,9 +5850,9 @@ module Aws::AutoScaling
     #
     # @option params [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
-    #   Auto Scaling group uses to call other AWS services on your behalf. For
-    #   more information, see [Service-linked roles][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   Auto Scaling group uses to call other Amazon Web Services on your
+    #   behalf. For more information, see [Service-linked roles][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -5537,6 +5878,9 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #
+    # @option params [String] :context
+    #   Reserved.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5621,6 +5965,7 @@ module Aws::AutoScaling
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
     #     capacity_rebalance: false,
+    #     context: "Context",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -5645,7 +5990,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

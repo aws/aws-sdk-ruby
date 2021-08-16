@@ -23,6 +23,29 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Updating or deleting this resource can cause an inconsistent state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource causing the conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource causing the conflict.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOutpostInput
     #   data as a hash:
     #
@@ -51,14 +74,10 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -258,6 +277,9 @@ module Aws::Outposts
     #       {
     #         next_token: "Token",
     #         max_results: 1,
+    #         life_cycle_status_filter: ["LifeCycleStatus"],
+    #         availability_zone_filter: ["AvailabilityZone"],
+    #         availability_zone_id_filter: ["AvailabilityZoneId"],
     #       }
     #
     # @!attribute [rw] next_token
@@ -268,11 +290,38 @@ module Aws::Outposts
     #   The maximum page size.
     #   @return [Integer]
     #
+    # @!attribute [rw] life_cycle_status_filter
+    #   A filter for the lifecycle status of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_filter
+    #   A filter for the Availibility Zone (`us-east-1a`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_id_filter
+    #   A filter for the AZ IDs (`use1-az1`) of the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutpostsInput AWS API Documentation
     #
     class ListOutpostsInput < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :life_cycle_status_filter,
+      :availability_zone_filter,
+      :availability_zone_id_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -412,19 +461,19 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
-    #
-    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The Outpost tags.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] site_arn
+    #   The Amazon Resource Name (ARN) of the site.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation
     #
@@ -438,7 +487,8 @@ module Aws::Outposts
       :life_cycle_status,
       :availability_zone,
       :availability_zone_id,
-      :tags)
+      :tags,
+      :site_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -478,6 +528,10 @@ module Aws::Outposts
     #   The site tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] site_arn
+    #   The Amazon Resource Name (ARN) of the site.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Site AWS API Documentation
     #
     class Site < Struct.new(
@@ -485,7 +539,8 @@ module Aws::Outposts
       :account_id,
       :name,
       :description,
-      :tags)
+      :tags,
+      :site_arn)
       SENSITIVE = []
       include Aws::Structure
     end

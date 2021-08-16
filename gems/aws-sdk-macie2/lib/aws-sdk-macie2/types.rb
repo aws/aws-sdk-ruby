@@ -11,11 +11,12 @@ module Aws::Macie2
   module Types
 
     # Specifies an Amazon Macie membership invitation to accept. In the
-    # request, you have to specify the ID for the AWS account that sent the
-    # invitation. Otherwise, a validation error occurs. To specify this ID,
-    # we recommend that you use the administratorAccountId property instead
-    # of the masterAccount property. The masterAccount property has been
-    # deprecated and is retained only for backward compatibility.
+    # request, you have to specify the ID for the Amazon Web Services
+    # account that sent the invitation. Otherwise, a validation error
+    # occurs. To specify this ID, we recommend that you use the
+    # administratorAccountId property instead of the masterAccount property.
+    # The masterAccount property has been deprecated and is retained only
+    # for backward compatibility.
     #
     # @note When making an API call, you may pass AcceptInvitationRequest
     #   data as a hash:
@@ -81,7 +82,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies details for an account to associate with an Amazon Macie
+    # Specifies the details of an account to associate with an Amazon Macie
     # administrator account.
     #
     # @note When making an API call, you may pass AccountDetail
@@ -131,14 +132,15 @@ module Aws::Macie2
     end
 
     # Provides information about the delegated Amazon Macie administrator
-    # account for an AWS organization.
+    # account for an Amazon Web Services organization.
     #
     # @!attribute [rw] account_id
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The current status of an account as the delegated Amazon Macie
-    #   administrator account for an AWS organization. Possible values are:
+    #   administrator account for an Amazon Web Services organization.
+    #   Possible values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AdminAccount AWS API Documentation
@@ -178,8 +180,8 @@ module Aws::Macie2
 
     # Provides information about an identity that performed an action on an
     # affected resource by using temporary security credentials. The
-    # credentials were obtained using the AssumeRole operation of the AWS
-    # Security Token Service (AWS STS) API.
+    # credentials were obtained using the AssumeRole operation of the
+    # Security Token Service (STS) API.
     #
     # @!attribute [rw] access_key_id
     #   @return [String]
@@ -210,9 +212,10 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an AWS account and entity that performed an
-    # action on an affected resource. The action was performed using the
-    # credentials for an AWS account other than your own account.
+    # Provides information about an Amazon Web Services account and entity
+    # that performed an action on an affected resource. The action was
+    # performed using the credentials for an Amazon Web Services account
+    # other than your own account.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -229,8 +232,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an AWS service that performed an action on
-    # an affected resource.
+    # Provides information about an Amazon Web Service that performed an
+    # action on an affected resource.
     #
     # @!attribute [rw] invoked_by
     #   @return [String]
@@ -407,8 +410,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the number of S3 buckets that are and
-    # aren't shared with other AWS accounts.
+    # Provides information about the number of S3 buckets that are or
+    # aren't shared with other Amazon Web Services accounts.
     #
     # @!attribute [rw] external
     #   @return [Integer]
@@ -434,7 +437,7 @@ module Aws::Macie2
     end
 
     # Provides information about the number of S3 buckets whose bucket
-    # policies do and don't require server-side encryption of objects when
+    # policies do or don't require server-side encryption of objects when
     # objects are uploaded to the buckets.
     #
     # @!attribute [rw] allows_unencrypted_object_uploads
@@ -594,8 +597,8 @@ module Aws::Macie2
     #
     # @!attribute [rw] replication_details
     #   Provides information about settings that define whether one or more
-    #   objects in an S3 bucket are replicated to S3 buckets for other AWS
-    #   accounts and, if so, which accounts.
+    #   objects in an S3 bucket are replicated to S3 buckets for other
+    #   Amazon Web Services accounts and, if so, which accounts.
     #   @return [Types::ReplicationDetails]
     #
     # @!attribute [rw] server_side_encryption
@@ -625,21 +628,23 @@ module Aws::Macie2
     # @!attribute [rw] unclassifiable_object_count
     #   Provides information about the total storage size (in bytes) or
     #   number of objects that Amazon Macie can't analyze in one or more S3
-    #   buckets. In a BucketMetadata object, this data is for a specific
-    #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results. If versioning
-    #   is enabled for a bucket, total storage size values are based on the
-    #   size of the latest version of each applicable object in the bucket.
+    #   buckets. In a BucketMetadata or MatchingBucket object, this data is
+    #   for a specific bucket. In a GetBucketStatisticsResponse object, this
+    #   data is aggregated for all the buckets in the query results. If
+    #   versioning is enabled for a bucket, total storage size values are
+    #   based on the size of the latest version of each applicable object in
+    #   the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @!attribute [rw] unclassifiable_object_size_in_bytes
     #   Provides information about the total storage size (in bytes) or
     #   number of objects that Amazon Macie can't analyze in one or more S3
-    #   buckets. In a BucketMetadata object, this data is for a specific
-    #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results. If versioning
-    #   is enabled for a bucket, total storage size values are based on the
-    #   size of the latest version of each applicable object in the bucket.
+    #   buckets. In a BucketMetadata or MatchingBucket object, this data is
+    #   for a specific bucket. In a GetBucketStatisticsResponse object, this
+    #   data is aggregated for all the buckets in the query results. If
+    #   versioning is enabled for a bucket, total storage size values are
+    #   based on the size of the latest version of each applicable object in
+    #   the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @!attribute [rw] versioning
@@ -968,7 +973,7 @@ module Aws::Macie2
     #                 {
     #                   simple_scope_term: {
     #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                     key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                     values: ["__string"],
     #                   },
     #                   tag_scope_term: {
@@ -990,7 +995,7 @@ module Aws::Macie2
     #                 {
     #                   simple_scope_term: {
     #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                     key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                     values: ["__string"],
     #                   },
     #                   tag_scope_term: {
@@ -1003,6 +1008,48 @@ module Aws::Macie2
     #                       },
     #                     ],
     #                     target: "S3_OBJECT", # accepts S3_OBJECT
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           bucket_criteria: {
+    #             excludes: {
+    #               and: [
+    #                 {
+    #                   simple_criterion: {
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                     key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                     values: ["__string"],
+    #                   },
+    #                   tag_criterion: {
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                     tag_values: [
+    #                       {
+    #                         key: "__string",
+    #                         value: "__string",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             includes: {
+    #               and: [
+    #                 {
+    #                   simple_criterion: {
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                     key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                     values: ["__string"],
+    #                   },
+    #                   tag_criterion: {
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                     tag_values: [
+    #                       {
+    #                         key: "__string",
+    #                         value: "__string",
+    #                       },
+    #                     ],
     #                   },
     #                 },
     #               ],
@@ -1048,7 +1095,12 @@ module Aws::Macie2
     #
     # @!attribute [rw] s3_job_definition
     #   Specifies which S3 buckets contain the objects that a classification
-    #   job analyzes, and the scope of that analysis.
+    #   job analyzes, and the scope of that analysis. The bucket
+    #   specification can be static (bucketDefinitions) or dynamic
+    #   (bucketCriteria). If it's static, the job analyzes objects in the
+    #   same predefined set of buckets each time the job runs. If it's
+    #   dynamic, the job analyzes objects in any buckets that match the
+    #   specified criteria each time the job starts to run.
     #   @return [Types::S3JobDefinition]
     #
     # @!attribute [rw] sampling_percentage
@@ -1315,8 +1367,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies an AWS account to associate with an Amazon Macie
-    # administrator account.
+    # Specifies an Amazon Web Services account to associate with an Amazon
+    # Macie administrator account.
     #
     # @note When making an API call, you may pass CreateMemberRequest
     #   data as a hash:
@@ -1332,8 +1384,8 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] account
-    #   Specifies details for an account to associate with an Amazon Macie
-    #   administrator account.
+    #   Specifies the details of an account to associate with an Amazon
+    #   Macie administrator account.
     #   @return [Types::AccountDetail]
     #
     # @!attribute [rw] tags
@@ -1389,6 +1441,87 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CreateSampleFindingsResponse AWS API Documentation
     #
     class CreateSampleFindingsResponse < Aws::EmptyStructure; end
+
+    # Specifies one or more property- and tag-based conditions that define
+    # criteria for including or excluding S3 buckets from a classification
+    # job.
+    #
+    # @note When making an API call, you may pass CriteriaBlockForJob
+    #   data as a hash:
+    #
+    #       {
+    #         and: [
+    #           {
+    #             simple_criterion: {
+    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               values: ["__string"],
+    #             },
+    #             tag_criterion: {
+    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #               tag_values: [
+    #                 {
+    #                   key: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] and
+    #   @return [Array<Types::CriteriaForJob>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CriteriaBlockForJob AWS API Documentation
+    #
+    class CriteriaBlockForJob < Struct.new(
+      :and)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a property- or tag-based condition that defines criteria for
+    # including or excluding S3 buckets from a classification job.
+    #
+    # @note When making an API call, you may pass CriteriaForJob
+    #   data as a hash:
+    #
+    #       {
+    #         simple_criterion: {
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #           key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #           values: ["__string"],
+    #         },
+    #         tag_criterion: {
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #           tag_values: [
+    #             {
+    #               key: "__string",
+    #               value: "__string",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] simple_criterion
+    #   Specifies a property-based condition that determines whether an S3
+    #   bucket is included or excluded from a classification job.
+    #   @return [Types::SimpleCriterionForJob]
+    #
+    # @!attribute [rw] tag_criterion
+    #   Specifies a tag-based condition that determines whether an S3 bucket
+    #   is included or excluded from a classification job.
+    #   @return [Types::TagCriterionForJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CriteriaForJob AWS API Documentation
+    #
+    class CriteriaForJob < Struct.new(
+      :simple_criterion,
+      :tag_criterion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies the operator to use in a property-based condition that
     # filters the results of a query for findings. For detailed information
@@ -1512,9 +1645,9 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] occurrences
-    #   Provides the location of 1-15 occurrences of sensitive data that was
-    #   detected by managed data identifiers or a custom data identifier and
-    #   produced a sensitive data finding.
+    #   Specifies the location of 1-15 occurrences of sensitive data that
+    #   was detected by managed data identifiers or a custom data identifier
+    #   and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDetection AWS API Documentation
@@ -1580,9 +1713,9 @@ module Aws::Macie2
     #   @return [Integer]
     #
     # @!attribute [rw] occurrences
-    #   Provides the location of 1-15 occurrences of sensitive data that was
-    #   detected by managed data identifiers or a custom data identifier and
-    #   produced a sensitive data finding.
+    #   Specifies the location of 1-15 occurrences of sensitive data that
+    #   was detected by managed data identifiers or a custom data identifier
+    #   and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @!attribute [rw] type
@@ -1826,10 +1959,13 @@ module Aws::Macie2
     #
     # @!attribute [rw] last_run_error_status
     #   Specifies whether any account- or bucket-level access errors
-    #   occurred when a classification job ran. For example, the job is
-    #   configured to analyze data for a member account that was suspended,
-    #   or the job is configured to analyze an S3 bucket that Amazon Macie
-    #   isn't allowed to access.
+    #   occurred when a classification job ran. For information about using
+    #   logging data to investigate these errors, see [Monitoring sensitive
+    #   data discovery jobs][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-monitor-cw-logs.html
     #   @return [Types::LastRunErrorStatus]
     #
     # @!attribute [rw] last_run_time
@@ -1840,7 +1976,12 @@ module Aws::Macie2
     #
     # @!attribute [rw] s3_job_definition
     #   Specifies which S3 buckets contain the objects that a classification
-    #   job analyzes, and the scope of that analysis.
+    #   job analyzes, and the scope of that analysis. The bucket
+    #   specification can be static (bucketDefinitions) or dynamic
+    #   (bucketCriteria). If it's static, the job analyzes objects in the
+    #   same predefined set of buckets each time the job runs. If it's
+    #   dynamic, the job analyzes objects in any buckets that match the
+    #   specified criteria each time the job starts to run.
     #   @return [Types::S3JobDefinition]
     #
     # @!attribute [rw] sampling_percentage
@@ -1903,7 +2044,7 @@ module Aws::Macie2
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
 
     # Provides information about the Amazon Macie configuration settings for
-    # an AWS organization.
+    # an Amazon Web Services organization.
     #
     # @!attribute [rw] auto_enable
     #   @return [Boolean]
@@ -2034,7 +2175,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
-    #   findings for an account. This includes publishing updates to AWS
+    #   findings for an account. This includes publishing updates to
     #   Security Hub and Amazon EventBridge (formerly called Amazon
     #   CloudWatch Events). For more information, see [Monitoring and
     #   processing findings][1] in the *Amazon Macie User Guide*. Valid
@@ -2064,8 +2205,9 @@ module Aws::Macie2
     class EnableMacieResponse < Aws::EmptyStructure; end
 
     # Specifies an account to designate as a delegated Amazon Macie
-    # administrator account for an AWS organization. To submit this request,
-    # you must be a user of the management account for the AWS organization.
+    # administrator account for an Amazon Web Services organization. To
+    # submit this request, you must be a user of the management account for
+    # the Amazon Web Services organization.
     #
     # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
     #   data as a hash:
@@ -2099,7 +2241,7 @@ module Aws::Macie2
     # Provides information about an identity that performed an action on an
     # affected resource by using temporary security credentials. The
     # credentials were obtained using the GetFederationToken operation of
-    # the AWS Security Token Service (AWS STS) API.
+    # the Security Token Service (STS) API.
     #
     # @!attribute [rw] access_key_id
     #   @return [String]
@@ -2450,13 +2592,13 @@ module Aws::Macie2
     #
     # @!attribute [rw] bucket_count_by_object_encryption_requirement
     #   Provides information about the number of S3 buckets whose bucket
-    #   policies do and don't require server-side encryption of objects
-    #   when objects are uploaded to the buckets.
+    #   policies do or don't require server-side encryption of objects when
+    #   objects are uploaded to the buckets.
     #   @return [Types::BucketCountPolicyAllowsUnencryptedObjectUploads]
     #
     # @!attribute [rw] bucket_count_by_shared_access_type
-    #   Provides information about the number of S3 buckets that are and
-    #   aren't shared with other AWS accounts.
+    #   Provides information about the number of S3 buckets that are or
+    #   aren't shared with other Amazon Web Services accounts.
     #   @return [Types::BucketCountBySharedAccessType]
     #
     # @!attribute [rw] classifiable_object_count
@@ -2480,21 +2622,23 @@ module Aws::Macie2
     # @!attribute [rw] unclassifiable_object_count
     #   Provides information about the total storage size (in bytes) or
     #   number of objects that Amazon Macie can't analyze in one or more S3
-    #   buckets. In a BucketMetadata object, this data is for a specific
-    #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results. If versioning
-    #   is enabled for a bucket, total storage size values are based on the
-    #   size of the latest version of each applicable object in the bucket.
+    #   buckets. In a BucketMetadata or MatchingBucket object, this data is
+    #   for a specific bucket. In a GetBucketStatisticsResponse object, this
+    #   data is aggregated for all the buckets in the query results. If
+    #   versioning is enabled for a bucket, total storage size values are
+    #   based on the size of the latest version of each applicable object in
+    #   the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @!attribute [rw] unclassifiable_object_size_in_bytes
     #   Provides information about the total storage size (in bytes) or
     #   number of objects that Amazon Macie can't analyze in one or more S3
-    #   buckets. In a BucketMetadata object, this data is for a specific
-    #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results. If versioning
-    #   is enabled for a bucket, total storage size values are based on the
-    #   size of the latest version of each applicable object in the bucket.
+    #   buckets. In a BucketMetadata or MatchingBucket object, this data is
+    #   for a specific bucket. In a GetBucketStatisticsResponse object, this
+    #   data is aggregated for all the buckets in the query results. If
+    #   versioning is enabled for a bucket, total storage size values are
+    #   based on the size of the latest version of each applicable object in
+    #   the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetBucketStatisticsResponse AWS API Documentation
@@ -2761,12 +2905,12 @@ module Aws::Macie2
     class GetFindingsPublicationConfigurationRequest < Aws::EmptyStructure; end
 
     # Provides information about the current configuration settings for
-    # publishing findings to AWS Security Hub automatically.
+    # publishing findings to Security Hub automatically.
     #
     # @!attribute [rw] security_hub_configuration
     #   Specifies configuration settings that determine which findings are
-    #   published to AWS Security Hub automatically. For information about
-    #   how Macie publishes findings to Security Hub, see [Amazon Macie
+    #   published to Security Hub automatically. For information about how
+    #   Macie publishes findings to Security Hub, see [Amazon Macie
     #   integration with Security Hub][1] in the *Amazon Macie User Guide*.
     #
     #
@@ -2860,7 +3004,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
-    #   findings for an account. This includes publishing updates to AWS
+    #   findings for an account. This includes publishing updates to
     #   Security Hub and Amazon EventBridge (formerly called Amazon
     #   CloudWatch Events). For more information, see [Monitoring and
     #   processing findings][1] in the *Amazon Macie User Guide*. Valid
@@ -3122,7 +3266,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an AWS Identity and Access Management (IAM)
+    # Provides information about an Identity and Access Management (IAM)
     # user who performed an action on an affected resource.
     #
     # @!attribute [rw] account_id
@@ -3372,7 +3516,9 @@ module Aws::Macie2
     end
 
     # Specifies a property- or tag-based condition that defines criteria for
-    # including or excluding objects from a classification job.
+    # including or excluding S3 objects from a classification job. A
+    # JobScopeTerm object can contain only one simpleScopeTerm object or one
+    # tagScopeTerm object.
     #
     # @note When making an API call, you may pass JobScopeTerm
     #   data as a hash:
@@ -3380,7 +3526,7 @@ module Aws::Macie2
     #       {
     #         simple_scope_term: {
     #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #           key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #           key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #           values: ["__string"],
     #         },
     #         tag_scope_term: {
@@ -3397,13 +3543,13 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] simple_scope_term
-    #   Specifies a property-based condition that determines whether an
+    #   Specifies a property-based condition that determines whether an S3
     #   object is included or excluded from a classification job.
     #   @return [Types::SimpleScopeTerm]
     #
     # @!attribute [rw] tag_scope_term
-    #   Specifies a tag-based condition that determines whether an object is
-    #   included or excluded from a classification job.
+    #   Specifies a tag-based condition that determines whether an S3 object
+    #   is included or excluded from a classification job.
     #   @return [Types::TagScopeTerm]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobScopeTerm AWS API Documentation
@@ -3416,9 +3562,8 @@ module Aws::Macie2
     end
 
     # Specifies one or more property- and tag-based conditions that define
-    # criteria for including or excluding objects from a classification job.
-    # If you specify more than one condition, Amazon Macie uses an AND
-    # operator to join the conditions.
+    # criteria for including or excluding S3 objects from a classification
+    # job.
     #
     # @note When making an API call, you may pass JobScopingBlock
     #   data as a hash:
@@ -3428,7 +3573,7 @@ module Aws::Macie2
     #           {
     #             simple_scope_term: {
     #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #               key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #               key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #               values: ["__string"],
     #             },
     #             tag_scope_term: {
@@ -3479,10 +3624,13 @@ module Aws::Macie2
     #
     # @!attribute [rw] last_run_error_status
     #   Specifies whether any account- or bucket-level access errors
-    #   occurred when a classification job ran. For example, the job is
-    #   configured to analyze data for a member account that was suspended,
-    #   or the job is configured to analyze an S3 bucket that Amazon Macie
-    #   isn't allowed to access.
+    #   occurred when a classification job ran. For information about using
+    #   logging data to investigate these errors, see [Monitoring sensitive
+    #   data discovery jobs][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-monitor-cw-logs.html
     #   @return [Types::LastRunErrorStatus]
     #
     # @!attribute [rw] name
@@ -3499,6 +3647,12 @@ module Aws::Macie2
     #   status of RUNNING.
     #   @return [Types::UserPausedDetails]
     #
+    # @!attribute [rw] bucket_criteria
+    #   Specifies property- and tag-based conditions that define criteria
+    #   for including or excluding S3 buckets from a classification job.
+    #   Exclude conditions take precedence over include conditions.
+    #   @return [Types::S3BucketCriteriaForJob]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobSummary AWS API Documentation
     #
     class JobSummary < Struct.new(
@@ -3509,7 +3663,8 @@ module Aws::Macie2
       :job_type,
       :last_run_error_status,
       :name,
-      :user_paused_details)
+      :user_paused_details,
+      :bucket_criteria)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3534,10 +3689,13 @@ module Aws::Macie2
     end
 
     # Specifies whether any account- or bucket-level access errors occurred
-    # when a classification job ran. For example, the job is configured to
-    # analyze data for a member account that was suspended, or the job is
-    # configured to analyze an S3 bucket that Amazon Macie isn't allowed to
-    # access.
+    # when a classification job ran. For information about using logging
+    # data to investigate these errors, see [Monitoring sensitive data
+    # discovery jobs][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-monitor-cw-logs.html
     #
     # @!attribute [rw] code
     #   Specifies whether any account- or bucket-level access errors
@@ -3996,7 +4154,7 @@ module Aws::Macie2
     end
 
     # Provides information about the delegated Amazon Macie administrator
-    # accounts for an AWS organization.
+    # accounts for an Amazon Web Services organization.
     #
     # @!attribute [rw] admin_accounts
     #   @return [Array<Types::AdminAccount>]
@@ -4045,6 +4203,98 @@ module Aws::Macie2
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides statistical data and other information about an S3 bucket
+    # that Amazon Macie monitors and analyzes.
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   @return [String]
+    #
+    # @!attribute [rw] classifiable_object_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] classifiable_size_in_bytes
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_details
+    #   Specifies whether any one-time or recurring classification jobs are
+    #   configured to analyze data in an S3 bucket, and, if so, the details
+    #   of the job that ran most recently.
+    #   @return [Types::JobDetails]
+    #
+    # @!attribute [rw] object_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_count_by_encryption_type
+    #   Provides information about the number of objects that are in an S3
+    #   bucket and use certain types of server-side encryption, use
+    #   client-side encryption, or aren't encrypted.
+    #   @return [Types::ObjectCountByEncryptionType]
+    #
+    # @!attribute [rw] size_in_bytes
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_in_bytes_compressed
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unclassifiable_object_count
+    #   Provides information about the total storage size (in bytes) or
+    #   number of objects that Amazon Macie can't analyze in one or more S3
+    #   buckets. In a BucketMetadata or MatchingBucket object, this data is
+    #   for a specific bucket. In a GetBucketStatisticsResponse object, this
+    #   data is aggregated for all the buckets in the query results. If
+    #   versioning is enabled for a bucket, total storage size values are
+    #   based on the size of the latest version of each applicable object in
+    #   the bucket.
+    #   @return [Types::ObjectLevelStatistics]
+    #
+    # @!attribute [rw] unclassifiable_object_size_in_bytes
+    #   Provides information about the total storage size (in bytes) or
+    #   number of objects that Amazon Macie can't analyze in one or more S3
+    #   buckets. In a BucketMetadata or MatchingBucket object, this data is
+    #   for a specific bucket. In a GetBucketStatisticsResponse object, this
+    #   data is aggregated for all the buckets in the query results. If
+    #   versioning is enabled for a bucket, total storage size values are
+    #   based on the size of the latest version of each applicable object in
+    #   the bucket.
+    #   @return [Types::ObjectLevelStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/MatchingBucket AWS API Documentation
+    #
+    class MatchingBucket < Struct.new(
+      :account_id,
+      :bucket_name,
+      :classifiable_object_count,
+      :classifiable_size_in_bytes,
+      :job_details,
+      :object_count,
+      :object_count_by_encryption_type,
+      :size_in_bytes,
+      :size_in_bytes_compressed,
+      :unclassifiable_object_count,
+      :unclassifiable_object_size_in_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides statistical data and other information about an Amazon Web
+    # Services resource that Amazon Macie monitors and analyzes.
+    #
+    # @!attribute [rw] matching_bucket
+    #   Provides statistical data and other information about an S3 bucket
+    #   that Amazon Macie monitors and analyzes.
+    #   @return [Types::MatchingBucket]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/MatchingResource AWS API Documentation
+    #
+    class MatchingResource < Struct.new(
+      :matching_bucket)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4155,11 +4405,11 @@ module Aws::Macie2
 
     # Provides information about the total storage size (in bytes) or number
     # of objects that Amazon Macie can't analyze in one or more S3 buckets.
-    # In a BucketMetadata object, this data is for a specific bucket. In a
-    # GetBucketStatisticsResponse object, this data is aggregated for all
-    # the buckets in the query results. If versioning is enabled for a
-    # bucket, total storage size values are based on the size of the latest
-    # version of each applicable object in the bucket.
+    # In a BucketMetadata or MatchingBucket object, this data is for a
+    # specific bucket. In a GetBucketStatisticsResponse object, this data is
+    # aggregated for all the buckets in the query results. If versioning is
+    # enabled for a bucket, total storage size values are based on the size
+    # of the latest version of each applicable object in the bucket.
     #
     # @!attribute [rw] file_type
     #   @return [Integer]
@@ -4180,7 +4430,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides the location of 1-15 occurrences of sensitive data that was
+    # Specifies the location of 1-15 occurrences of sensitive data that was
     # detected by managed data identifiers or a custom data identifier and
     # produced a sensitive data finding.
     #
@@ -4190,15 +4440,9 @@ module Aws::Macie2
     #   @return [Array<Types::Cell>]
     #
     # @!attribute [rw] line_ranges
-    #   Provides details about the location of occurrences of sensitive data
-    #   in an Adobe Portable Document Format file, Microsoft Word document,
-    #   or non-binary text file.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] offset_ranges
-    #   Provides details about the location of occurrences of sensitive data
-    #   in an Adobe Portable Document Format file, Microsoft Word document,
-    #   or non-binary text file.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] pages
@@ -4207,8 +4451,6 @@ module Aws::Macie2
     #   @return [Array<Types::Page>]
     #
     # @!attribute [rw] records
-    #   Specifies the location of occurrences of sensitive data in an Apache
-    #   Parquet file.
     #   @return [Array<Types::Record>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Occurrences AWS API Documentation
@@ -4227,15 +4469,13 @@ module Aws::Macie2
     # Portable Document Format file.
     #
     # @!attribute [rw] line_range
-    #   Provides details about the location of an occurrence of sensitive
-    #   data in an Adobe Portable Document Format file, Microsoft Word
-    #   document, or non-binary text file.
+    #   Specifies the location of an occurrence of sensitive data in a
+    #   non-binary text file, such as an HTML, TXT, or XML file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] offset_range
-    #   Provides details about the location of an occurrence of sensitive
-    #   data in an Adobe Portable Document Format file, Microsoft Word
-    #   document, or non-binary text file.
+    #   Specifies the location of an occurrence of sensitive data in a
+    #   non-binary text file, such as an HTML, TXT, or XML file.
     #   @return [Types::Range]
     #
     # @!attribute [rw] page_number
@@ -4322,8 +4562,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies configuration settings for publishing findings to AWS
-    # Security Hub automatically.
+    # Specifies configuration settings for publishing findings to Security
+    # Hub automatically.
     #
     # @note When making an API call, you may pass PutFindingsPublicationConfigurationRequest
     #   data as a hash:
@@ -4343,8 +4583,8 @@ module Aws::Macie2
     #
     # @!attribute [rw] security_hub_configuration
     #   Specifies configuration settings that determine which findings are
-    #   published to AWS Security Hub automatically. For information about
-    #   how Macie publishes findings to Security Hub, see [Amazon Macie
+    #   published to Security Hub automatically. For information about how
+    #   Macie publishes findings to Security Hub, see [Amazon Macie
     #   integration with Security Hub][1] in the *Amazon Macie User Guide*.
     #
     #
@@ -4365,9 +4605,8 @@ module Aws::Macie2
     #
     class PutFindingsPublicationConfigurationResponse < Aws::EmptyStructure; end
 
-    # Provides details about the location of an occurrence of sensitive data
-    # in an Adobe Portable Document Format file, Microsoft Word document, or
-    # non-binary text file.
+    # Specifies the location of an occurrence of sensitive data in a
+    # non-binary text file, such as an HTML, TXT, or XML file.
     #
     # @!attribute [rw] end
     #   @return [Integer]
@@ -4389,7 +4628,8 @@ module Aws::Macie2
     end
 
     # Specifies the location of an occurrence of sensitive data in an Apache
-    # Avro object container or Apache Parquet file.
+    # Avro object container, Apache Parquet file, JSON file, or JSON Lines
+    # file.
     #
     # @!attribute [rw] json_path
     #   @return [String]
@@ -4407,8 +4647,8 @@ module Aws::Macie2
     end
 
     # Provides information about settings that define whether one or more
-    # objects in an S3 bucket are replicated to S3 buckets for other AWS
-    # accounts and, if so, which accounts.
+    # objects in an S3 bucket are replicated to S3 buckets for other Amazon
+    # Web Services accounts and, if so, which accounts.
     #
     # @!attribute [rw] replicated
     #   @return [Boolean]
@@ -4446,11 +4686,11 @@ module Aws::Macie2
     # Provides information about the resources that a finding applies to.
     #
     # @!attribute [rw] s3_bucket
-    #   Provides information about an S3 bucket that a finding applies to.
+    #   Provides information about the S3 bucket that a finding applies to.
     #   @return [Types::S3Bucket]
     #
     # @!attribute [rw] s3_object
-    #   Provides information about an S3 object that a finding applies to.
+    #   Provides information about the S3 object that a finding applies to.
     #   @return [Types::S3Object]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ResourcesAffected AWS API Documentation
@@ -4462,7 +4702,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an S3 bucket that a finding applies to.
+    # Provides information about the S3 bucket that a finding applies to.
     #
     # @!attribute [rw] allows_unencrypted_object_uploads
     #   @return [String]
@@ -4511,8 +4751,80 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies which AWS account owns the S3 buckets that a classification
-    # job analyzes, and the buckets to analyze for the account.
+    # Specifies property- and tag-based conditions that define criteria for
+    # including or excluding S3 buckets from a classification job. Exclude
+    # conditions take precedence over include conditions.
+    #
+    # @note When making an API call, you may pass S3BucketCriteriaForJob
+    #   data as a hash:
+    #
+    #       {
+    #         excludes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         includes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] excludes
+    #   Specifies one or more property- and tag-based conditions that define
+    #   criteria for including or excluding S3 buckets from a classification
+    #   job.
+    #   @return [Types::CriteriaBlockForJob]
+    #
+    # @!attribute [rw] includes
+    #   Specifies one or more property- and tag-based conditions that define
+    #   criteria for including or excluding S3 buckets from a classification
+    #   job.
+    #   @return [Types::CriteriaBlockForJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3BucketCriteriaForJob AWS API Documentation
+    #
+    class S3BucketCriteriaForJob < Struct.new(
+      :excludes,
+      :includes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Amazon Web Services account that owns S3 buckets for a
+    # classification job to analyze, and one or more specific buckets to
+    # analyze for that account.
     #
     # @note When making an API call, you may pass S3BucketDefinitionForJob
     #   data as a hash:
@@ -4586,7 +4898,12 @@ module Aws::Macie2
     end
 
     # Specifies which S3 buckets contain the objects that a classification
-    # job analyzes, and the scope of that analysis.
+    # job analyzes, and the scope of that analysis. The bucket specification
+    # can be static (bucketDefinitions) or dynamic (bucketCriteria). If
+    # it's static, the job analyzes objects in the same predefined set of
+    # buckets each time the job runs. If it's dynamic, the job analyzes
+    # objects in any buckets that match the specified criteria each time the
+    # job starts to run.
     #
     # @note When making an API call, you may pass S3JobDefinition
     #   data as a hash:
@@ -4604,7 +4921,7 @@ module Aws::Macie2
     #               {
     #                 simple_scope_term: {
     #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                   key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                   values: ["__string"],
     #                 },
     #                 tag_scope_term: {
@@ -4626,7 +4943,7 @@ module Aws::Macie2
     #               {
     #                 simple_scope_term: {
     #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                   key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                   values: ["__string"],
     #                 },
     #                 tag_scope_term: {
@@ -4644,28 +4961,76 @@ module Aws::Macie2
     #             ],
     #           },
     #         },
+    #         bucket_criteria: {
+    #           excludes: {
+    #             and: [
+    #               {
+    #                 simple_criterion: {
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                   values: ["__string"],
+    #                 },
+    #                 tag_criterion: {
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                   tag_values: [
+    #                     {
+    #                       key: "__string",
+    #                       value: "__string",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           includes: {
+    #             and: [
+    #               {
+    #                 simple_criterion: {
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                   values: ["__string"],
+    #                 },
+    #                 tag_criterion: {
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                   tag_values: [
+    #                     {
+    #                       key: "__string",
+    #                       value: "__string",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] bucket_definitions
     #   @return [Array<Types::S3BucketDefinitionForJob>]
     #
     # @!attribute [rw] scoping
-    #   Specifies one or more property- and tag-based conditions that refine
-    #   the scope of a classification job. These conditions define criteria
-    #   that determine which objects a job analyzes. Exclude conditions take
-    #   precedence over include conditions.
+    #   Specifies one or more property- and tag-based conditions that define
+    #   criteria for including or excluding S3 objects from a classification
+    #   job. Exclude conditions take precedence over include conditions.
     #   @return [Types::Scoping]
+    #
+    # @!attribute [rw] bucket_criteria
+    #   Specifies property- and tag-based conditions that define criteria
+    #   for including or excluding S3 buckets from a classification job.
+    #   Exclude conditions take precedence over include conditions.
+    #   @return [Types::S3BucketCriteriaForJob]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3JobDefinition AWS API Documentation
     #
     class S3JobDefinition < Struct.new(
       :bucket_definitions,
-      :scoping)
+      :scoping,
+      :bucket_criteria)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Provides information about an S3 object that a finding applies to.
+    # Provides information about the S3 object that a finding applies to.
     #
     # @!attribute [rw] bucket_arn
     #   @return [String]
@@ -4728,10 +5093,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies one or more property- and tag-based conditions that refine
-    # the scope of a classification job. These conditions define criteria
-    # that determine which objects a job analyzes. Exclude conditions take
-    # precedence over include conditions.
+    # Specifies one or more property- and tag-based conditions that define
+    # criteria for including or excluding S3 objects from a classification
+    # job. Exclude conditions take precedence over include conditions.
     #
     # @note When making an API call, you may pass Scoping
     #   data as a hash:
@@ -4742,7 +5106,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -4764,7 +5128,7 @@ module Aws::Macie2
     #             {
     #               simple_scope_term: {
     #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #                 key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
@@ -4785,16 +5149,14 @@ module Aws::Macie2
     #
     # @!attribute [rw] excludes
     #   Specifies one or more property- and tag-based conditions that define
-    #   criteria for including or excluding objects from a classification
-    #   job. If you specify more than one condition, Amazon Macie uses an
-    #   AND operator to join the conditions.
+    #   criteria for including or excluding S3 objects from a classification
+    #   job.
     #   @return [Types::JobScopingBlock]
     #
     # @!attribute [rw] includes
     #   Specifies one or more property- and tag-based conditions that define
-    #   criteria for including or excluding objects from a classification
-    #   job. If you specify more than one condition, Amazon Macie uses an
-    #   AND operator to join the conditions.
+    #   criteria for including or excluding S3 objects from a classification
+    #   job.
     #   @return [Types::JobScopingBlock]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Scoping AWS API Documentation
@@ -4806,8 +5168,394 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies property- and tag-based conditions that define filter
+    # criteria for including or excluding S3 buckets from the query results.
+    # Exclude conditions take precedence over include conditions.
+    #
+    # @note When making an API call, you may pass SearchResourcesBucketCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         excludes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, NE
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, NE
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         includes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, NE
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, NE
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] excludes
+    #   Specifies property- and tag-based conditions that define filter
+    #   criteria for including or excluding Amazon Web Services resources
+    #   from the query results.
+    #   @return [Types::SearchResourcesCriteriaBlock]
+    #
+    # @!attribute [rw] includes
+    #   Specifies property- and tag-based conditions that define filter
+    #   criteria for including or excluding Amazon Web Services resources
+    #   from the query results.
+    #   @return [Types::SearchResourcesCriteriaBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesBucketCriteria AWS API Documentation
+    #
+    class SearchResourcesBucketCriteria < Struct.new(
+      :excludes,
+      :includes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a property- or tag-based filter condition for including or
+    # excluding Amazon Web Services resources from the query results.
+    #
+    # @note When making an API call, you may pass SearchResourcesCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         simple_criterion: {
+    #           comparator: "EQ", # accepts EQ, NE
+    #           key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #           values: ["__string"],
+    #         },
+    #         tag_criterion: {
+    #           comparator: "EQ", # accepts EQ, NE
+    #           tag_values: [
+    #             {
+    #               key: "__string",
+    #               value: "__string",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] simple_criterion
+    #   Specifies a property-based filter condition that determines which
+    #   Amazon Web Services resources are included or excluded from the
+    #   query results.
+    #   @return [Types::SearchResourcesSimpleCriterion]
+    #
+    # @!attribute [rw] tag_criterion
+    #   Specifies a tag-based filter condition that determines which Amazon
+    #   Web Services resources are included or excluded from the query
+    #   results.
+    #   @return [Types::SearchResourcesTagCriterion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesCriteria AWS API Documentation
+    #
+    class SearchResourcesCriteria < Struct.new(
+      :simple_criterion,
+      :tag_criterion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies property- and tag-based conditions that define filter
+    # criteria for including or excluding Amazon Web Services resources from
+    # the query results.
+    #
+    # @note When making an API call, you may pass SearchResourcesCriteriaBlock
+    #   data as a hash:
+    #
+    #       {
+    #         and: [
+    #           {
+    #             simple_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               values: ["__string"],
+    #             },
+    #             tag_criterion: {
+    #               comparator: "EQ", # accepts EQ, NE
+    #               tag_values: [
+    #                 {
+    #                   key: "__string",
+    #                   value: "__string",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] and
+    #   @return [Array<Types::SearchResourcesCriteria>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesCriteriaBlock AWS API Documentation
+    #
+    class SearchResourcesCriteriaBlock < Struct.new(
+      :and)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies criteria for filtering, sorting, and paginating the results
+    # of a query for statistical data and other information about Amazon Web
+    # Services resources that Amazon Macie monitors and analyzes.
+    #
+    # @note When making an API call, you may pass SearchResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_criteria: {
+    #           excludes: {
+    #             and: [
+    #               {
+    #                 simple_criterion: {
+    #                   comparator: "EQ", # accepts EQ, NE
+    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                   values: ["__string"],
+    #                 },
+    #                 tag_criterion: {
+    #                   comparator: "EQ", # accepts EQ, NE
+    #                   tag_values: [
+    #                     {
+    #                       key: "__string",
+    #                       value: "__string",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           includes: {
+    #             and: [
+    #               {
+    #                 simple_criterion: {
+    #                   comparator: "EQ", # accepts EQ, NE
+    #                   key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                   values: ["__string"],
+    #                 },
+    #                 tag_criterion: {
+    #                   comparator: "EQ", # accepts EQ, NE
+    #                   tag_values: [
+    #                     {
+    #                       key: "__string",
+    #                       value: "__string",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         max_results: 1,
+    #         next_token: "__string",
+    #         sort_criteria: {
+    #           attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, RESOURCE_NAME, S3_CLASSIFIABLE_OBJECT_COUNT, S3_CLASSIFIABLE_SIZE_IN_BYTES
+    #           order_by: "ASC", # accepts ASC, DESC
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket_criteria
+    #   Specifies property- and tag-based conditions that define filter
+    #   criteria for including or excluding S3 buckets from the query
+    #   results. Exclude conditions take precedence over include conditions.
+    #   @return [Types::SearchResourcesBucketCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_criteria
+    #   Specifies criteria for sorting the results of a query for
+    #   information about Amazon Web Services resources that Amazon Macie
+    #   monitors and analyzes.
+    #   @return [Types::SearchResourcesSortCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesRequest AWS API Documentation
+    #
+    class SearchResourcesRequest < Struct.new(
+      :bucket_criteria,
+      :max_results,
+      :next_token,
+      :sort_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the results of a query that retrieved statistical data and
+    # other information about Amazon Web Services resources that Amazon
+    # Macie monitors and analyzes.
+    #
+    # @!attribute [rw] matching_resources
+    #   @return [Array<Types::MatchingResource>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesResponse AWS API Documentation
+    #
+    class SearchResourcesResponse < Struct.new(
+      :matching_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a property-based filter condition that determines which
+    # Amazon Web Services resources are included or excluded from the query
+    # results.
+    #
+    # @note When making an API call, you may pass SearchResourcesSimpleCriterion
+    #   data as a hash:
+    #
+    #       {
+    #         comparator: "EQ", # accepts EQ, NE
+    #         key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #         values: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] comparator
+    #   The operator to use in a condition that filters the results of a
+    #   query. Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The property to use in a condition that filters the query results.
+    #   Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesSimpleCriterion AWS API Documentation
+    #
+    class SearchResourcesSimpleCriterion < Struct.new(
+      :comparator,
+      :key,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies criteria for sorting the results of a query for information
+    # about Amazon Web Services resources that Amazon Macie monitors and
+    # analyzes.
+    #
+    # @note When making an API call, you may pass SearchResourcesSortCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "ACCOUNT_ID", # accepts ACCOUNT_ID, RESOURCE_NAME, S3_CLASSIFIABLE_OBJECT_COUNT, S3_CLASSIFIABLE_SIZE_IN_BYTES
+    #         order_by: "ASC", # accepts ASC, DESC
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The property to sort the query results by. Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] order_by
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesSortCriteria AWS API Documentation
+    #
+    class SearchResourcesSortCriteria < Struct.new(
+      :attribute_name,
+      :order_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a tag-based filter condition that determines which Amazon
+    # Web Services resources are included or excluded from the query
+    # results.
+    #
+    # @note When making an API call, you may pass SearchResourcesTagCriterion
+    #   data as a hash:
+    #
+    #       {
+    #         comparator: "EQ", # accepts EQ, NE
+    #         tag_values: [
+    #           {
+    #             key: "__string",
+    #             value: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] comparator
+    #   The operator to use in a condition that filters the results of a
+    #   query. Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_values
+    #   @return [Array<Types::SearchResourcesTagCriterionPair>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesTagCriterion AWS API Documentation
+    #
+    class SearchResourcesTagCriterion < Struct.new(
+      :comparator,
+      :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a tag key, a tag value, or a tag key and value (as a pair)
+    # to use in a tag-based filter condition for a query. Tag keys and
+    # values are case sensitive. Also, Amazon Macie doesn't support use of
+    # partial values or wildcard characters in tag-based filter conditions.
+    #
+    # @note When making an API call, you may pass SearchResourcesTagCriterionPair
+    #   data as a hash:
+    #
+    #       {
+    #         key: "__string",
+    #         value: "__string",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SearchResourcesTagCriterionPair AWS API Documentation
+    #
+    class SearchResourcesTagCriterionPair < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies configuration settings that determine which findings are
-    # published to AWS Security Hub automatically. For information about how
+    # published to Security Hub automatically. For information about how
     # Macie publishes findings to Security Hub, see [Amazon Macie
     # integration with Security Hub][1] in the *Amazon Macie User Guide*.
     #
@@ -5011,15 +5759,15 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies a property-based condition that determines whether an object
-    # is included or excluded from a classification job.
+    # Specifies a property-based condition that determines whether an S3
+    # bucket is included or excluded from a classification job.
     #
-    # @note When making an API call, you may pass SimpleScopeTerm
+    # @note When making an API call, you may pass SimpleCriterionForJob
     #   data as a hash:
     #
     #       {
     #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #         key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
+    #         key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
     #         values: ["__string"],
     #       }
     #
@@ -5028,8 +5776,44 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The property to use in a condition that determines which objects are
-    #   analyzed by a classification job. Valid values are:
+    #   The property to use in a condition that determines whether an S3
+    #   bucket is included or excluded from a classification job. Valid
+    #   values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SimpleCriterionForJob AWS API Documentation
+    #
+    class SimpleCriterionForJob < Struct.new(
+      :comparator,
+      :key,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a property-based condition that determines whether an S3
+    # object is included or excluded from a classification job.
+    #
+    # @note When making an API call, you may pass SimpleScopeTerm
+    #   data as a hash:
+    #
+    #       {
+    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #         key: "OBJECT_EXTENSION", # accepts OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, OBJECT_KEY
+    #         values: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] comparator
+    #   The operator to use in a condition. Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The property to use in a condition that determines whether an S3
+    #   object is included or excluded from a classification job. Valid
+    #   values are:
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -5087,6 +5871,67 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies a tag-based condition that determines whether an S3 bucket
+    # is included or excluded from a classification job.
+    #
+    # @note When making an API call, you may pass TagCriterionForJob
+    #   data as a hash:
+    #
+    #       {
+    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #         tag_values: [
+    #           {
+    #             key: "__string",
+    #             value: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] comparator
+    #   The operator to use in a condition. Valid values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_values
+    #   @return [Array<Types::TagCriterionPairForJob>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagCriterionForJob AWS API Documentation
+    #
+    class TagCriterionForJob < Struct.new(
+      :comparator,
+      :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a tag key, a tag value, or a tag key and value (as a pair)
+    # to use in a tag-based condition that determines whether an S3 bucket
+    # is included or excluded from a classification job. Tag keys and values
+    # are case sensitive. Also, Amazon Macie doesn't support use of partial
+    # values or wildcard characters in tag-based conditions.
+    #
+    # @note When making an API call, you may pass TagCriterionPairForJob
+    #   data as a hash:
+    #
+    #       {
+    #         key: "__string",
+    #         value: "__string",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/TagCriterionPairForJob AWS API Documentation
+    #
+    class TagCriterionPairForJob < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the tags (keys and values) to associate with a
     # classification job, custom data identifier, findings filter, or member
     # account.
@@ -5125,8 +5970,8 @@ module Aws::Macie2
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # Specifies a tag-based condition that determines whether an object is
-    # included or excluded from a classification job.
+    # Specifies a tag-based condition that determines whether an S3 object
+    # is included or excluded from a classification job.
     #
     # @note When making an API call, you may pass TagScopeTerm
     #   data as a hash:
@@ -5170,7 +6015,10 @@ module Aws::Macie2
     end
 
     # Specifies a tag key or tag key and value pair to use in a tag-based
-    # condition for a classification job.
+    # condition that determines whether an S3 object is included or excluded
+    # from a classification job. Tag keys and values are case sensitive.
+    # Also, Amazon Macie doesn't support use of partial values or wildcard
+    # characters in tag-based conditions.
     #
     # @note When making an API call, you may pass TagValuePair
     #   data as a hash:
@@ -5316,8 +6164,8 @@ module Aws::Macie2
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Changes the status of a classification job. For more information about
-    # pausing, resuming, or cancelling jobs, see [Managing and monitoring
-    # sensitive data discovery jobs][1] in the *Amazon Macie User Guide*.
+    # pausing, resuming, or cancelling jobs, see [Managing sensitive data
+    # discovery jobs][1] in the *Amazon Macie User Guide*.
     #
     #
     #
@@ -5375,6 +6223,7 @@ module Aws::Macie2
     #         id: "__string", # required
     #         name: "__string",
     #         position: 1,
+    #         client_token: "__string",
     #       }
     #
     # @!attribute [rw] action
@@ -5400,6 +6249,11 @@ module Aws::Macie2
     # @!attribute [rw] position
     #   @return [Integer]
     #
+    # @!attribute [rw] client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateFindingsFilterRequest AWS API Documentation
     #
     class UpdateFindingsFilterRequest < Struct.new(
@@ -5408,7 +6262,8 @@ module Aws::Macie2
       :finding_criteria,
       :id,
       :name,
-      :position)
+      :position,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5444,7 +6299,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
-    #   findings for an account. This includes publishing updates to AWS
+    #   findings for an account. This includes publishing updates to
     #   Security Hub and Amazon EventBridge (formerly called Amazon
     #   CloudWatch Events). For more information, see [Monitoring and
     #   processing findings][1] in the *Amazon Macie User Guide*. Valid
@@ -5503,7 +6358,7 @@ module Aws::Macie2
     class UpdateMemberSessionResponse < Aws::EmptyStructure; end
 
     # Specifies whether to enable Amazon Macie automatically for accounts
-    # that are added to an AWS organization.
+    # that are added to an Amazon Web Services organization.
     #
     # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
     #   data as a hash:
@@ -5677,37 +6532,39 @@ module Aws::Macie2
     # @!attribute [rw] assumed_role
     #   Provides information about an identity that performed an action on
     #   an affected resource by using temporary security credentials. The
-    #   credentials were obtained using the AssumeRole operation of the AWS
-    #   Security Token Service (AWS STS) API.
+    #   credentials were obtained using the AssumeRole operation of the
+    #   Security Token Service (STS) API.
     #   @return [Types::AssumedRole]
     #
     # @!attribute [rw] aws_account
-    #   Provides information about an AWS account and entity that performed
-    #   an action on an affected resource. The action was performed using
-    #   the credentials for an AWS account other than your own account.
+    #   Provides information about an Amazon Web Services account and entity
+    #   that performed an action on an affected resource. The action was
+    #   performed using the credentials for an Amazon Web Services account
+    #   other than your own account.
     #   @return [Types::AwsAccount]
     #
     # @!attribute [rw] aws_service
-    #   Provides information about an AWS service that performed an action
-    #   on an affected resource.
+    #   Provides information about an Amazon Web Service that performed an
+    #   action on an affected resource.
     #   @return [Types::AwsService]
     #
     # @!attribute [rw] federated_user
     #   Provides information about an identity that performed an action on
     #   an affected resource by using temporary security credentials. The
     #   credentials were obtained using the GetFederationToken operation of
-    #   the AWS Security Token Service (AWS STS) API.
+    #   the Security Token Service (STS) API.
     #   @return [Types::FederatedUser]
     #
     # @!attribute [rw] iam_user
-    #   Provides information about an AWS Identity and Access Management
-    #   (IAM) user who performed an action on an affected resource.
+    #   Provides information about an Identity and Access Management (IAM)
+    #   user who performed an action on an affected resource.
     #   @return [Types::IamUser]
     #
     # @!attribute [rw] root
-    #   Provides information about an AWS account and entity that performed
-    #   an action on an affected resource. The action was performed using
-    #   the credentials for your AWS account.
+    #   Provides information about an Amazon Web Services account and entity
+    #   that performed an action on an affected resource. The action was
+    #   performed using the credentials for your Amazon Web Services
+    #   account.
     #   @return [Types::UserIdentityRoot]
     #
     # @!attribute [rw] type
@@ -5729,9 +6586,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an AWS account and entity that performed an
-    # action on an affected resource. The action was performed using the
-    # credentials for your AWS account.
+    # Provides information about an Amazon Web Services account and entity
+    # that performed an action on an affected resource. The action was
+    # performed using the credentials for your Amazon Web Services account.
     #
     # @!attribute [rw] account_id
     #   @return [String]

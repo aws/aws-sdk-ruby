@@ -80,13 +80,18 @@ module Seahorse
               _nonblocking_connect(tcp, addr)
               debug_output('opened')
 
-              @socket = OpenSSL::SSL::SSLSocket.new(tcp, _tls_context)
-              @socket.sync_close = true
-              @socket.hostname = endpoint.host
+              if endpoint.scheme == 'https'
+                @socket = OpenSSL::SSL::SSLSocket.new(tcp, _tls_context)
+                @socket.sync_close = true
+                @socket.hostname = endpoint.host
 
-              debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
-              @socket.connect
-              debug_output('TLS established')
+                debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
+                @socket.connect
+                debug_output('TLS established')
+              else
+                @socket = tcp
+              end
+
               _register_h2_callbacks
               @status = :active
             elsif @status == :closed

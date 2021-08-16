@@ -754,6 +754,7 @@ module Aws::ACMPCA
     #             expiration_in_days: 1,
     #             custom_cname: "String253",
     #             s3_bucket_name: "String3To255",
+    #             s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #           },
     #         },
     #         certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
@@ -807,12 +808,13 @@ module Aws::ACMPCA
     #
     #   Default: FIPS\_140\_2\_LEVEL\_3\_OR\_HIGHER
     #
-    #   Note: AWS Region ap-northeast-3 supports only
-    #   FIPS\_140\_2\_LEVEL\_2\_OR\_HIGHER. You must explicitly specify this
-    #   parameter and value when creating a CA in that Region. Specifying a
-    #   different value (or no value) results in an `InvalidArgsException`
-    #   with the message "A certificate authority cannot be created in this
-    #   region with the specified security standard."
+    #   Note: `FIPS_140_2_LEVEL_3_OR_HIGHER` is not supported in Region
+    #   ap-northeast-3. When creating a CA in the ap-northeast-3, you must
+    #   provide `FIPS_140_2_LEVEL_2_OR_HIGHER` as the argument for
+    #   `KeyStorageSecurityStandard`. Failure to do this results in an
+    #   `InvalidArgsException` with the message, "A certificate authority
+    #   cannot be created in this region with the specified security
+    #   standard."
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -984,6 +986,7 @@ module Aws::ACMPCA
     #         expiration_in_days: 1,
     #         custom_cname: "String253",
     #         s3_bucket_name: "String3To255",
+    #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #       }
     #
     # @!attribute [rw] enabled
@@ -1016,12 +1019,39 @@ module Aws::ACMPCA
     #   is placed into the **CRL Distribution Points** extension of the
     #   issued certificate. You can change the name of your bucket by
     #   calling the [UpdateCertificateAuthority][1] action. You must specify
-    #   a bucket policy that allows ACM Private CA to write the CRL to your
-    #   bucket.
+    #   a [bucket policy][2] that allows ACM Private CA to write the CRL to
+    #   your bucket.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_acl
+    #   Determines whether the CRL will be publicly readable or privately
+    #   held in the CRL Amazon S3 bucket. If you choose PUBLIC\_READ, the
+    #   CRL will be accessible over the public internet. If you choose
+    #   BUCKET\_OWNER\_FULL\_CONTROL, only the owner of the CRL S3 bucket
+    #   can access the CRL, and your PKI clients may need an alternative
+    #   method of access.
+    #
+    #   If no value is specified, the default is `PUBLIC_READ`.
+    #
+    #   *Note:* This default can cause CA creation to fail in some
+    #   circumstances. If you have have enabled the Block Public Access
+    #   (BPA) feature in your S3 account, then you must specify the value of
+    #   this parameter as `BUCKET_OWNER_FULL_CONTROL`, and not doing so
+    #   results in an error. If you have disabled BPA in S3, then you can
+    #   specify either `BUCKET_OWNER_FULL_CONTROL` or `PUBLIC_READ` as the
+    #   value.
+    #
+    #   For more information, see [Blocking public access to the S3
+    #   bucket][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CrlConfiguration AWS API Documentation
@@ -1030,7 +1060,8 @@ module Aws::ACMPCA
       :enabled,
       :expiration_in_days,
       :custom_cname,
-      :s3_bucket_name)
+      :s3_bucket_name,
+      :s3_object_acl)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2868,6 +2899,7 @@ module Aws::ACMPCA
     #           expiration_in_days: 1,
     #           custom_cname: "String253",
     #           s3_bucket_name: "String3To255",
+    #           s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #         },
     #       }
     #
@@ -3073,6 +3105,7 @@ module Aws::ACMPCA
     #             expiration_in_days: 1,
     #             custom_cname: "String253",
     #             s3_bucket_name: "String3To255",
+    #             s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #           },
     #         },
     #         status: "CREATING", # accepts CREATING, PENDING_CERTIFICATE, ACTIVE, DELETED, DISABLED, EXPIRED, FAILED

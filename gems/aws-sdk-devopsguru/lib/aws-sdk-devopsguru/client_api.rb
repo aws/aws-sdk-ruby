@@ -18,6 +18,7 @@ module Aws::DevOpsGuru
     AddNotificationChannelResponse = Shapes::StructureShape.new(name: 'AddNotificationChannelResponse')
     AnomalyId = Shapes::StringShape.new(name: 'AnomalyId')
     AnomalyLimit = Shapes::FloatShape.new(name: 'AnomalyLimit')
+    AnomalyReportedTimeRange = Shapes::StructureShape.new(name: 'AnomalyReportedTimeRange')
     AnomalySeverity = Shapes::StringShape.new(name: 'AnomalySeverity')
     AnomalySourceDetails = Shapes::StructureShape.new(name: 'AnomalySourceDetails')
     AnomalyStatus = Shapes::StringShape.new(name: 'AnomalyStatus')
@@ -225,6 +226,10 @@ module Aws::DevOpsGuru
 
     AddNotificationChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: NotificationChannelId, required: true, location_name: "Id"))
     AddNotificationChannelResponse.struct_class = Types::AddNotificationChannelResponse
+
+    AnomalyReportedTimeRange.add_member(:open_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "OpenTime"))
+    AnomalyReportedTimeRange.add_member(:close_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CloseTime"))
+    AnomalyReportedTimeRange.struct_class = Types::AnomalyReportedTimeRange
 
     AnomalySourceDetails.add_member(:cloud_watch_metrics, Shapes::ShapeRef.new(shape: CloudWatchMetricsDetails, location_name: "CloudWatchMetrics"))
     AnomalySourceDetails.struct_class = Types::AnomalySourceDetails
@@ -492,6 +497,7 @@ module Aws::DevOpsGuru
     ProactiveAnomaly.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyStatus, location_name: "Status"))
     ProactiveAnomaly.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
     ProactiveAnomaly.add_member(:anomaly_time_range, Shapes::ShapeRef.new(shape: AnomalyTimeRange, location_name: "AnomalyTimeRange"))
+    ProactiveAnomaly.add_member(:anomaly_reported_time_range, Shapes::ShapeRef.new(shape: AnomalyReportedTimeRange, location_name: "AnomalyReportedTimeRange"))
     ProactiveAnomaly.add_member(:prediction_time_range, Shapes::ShapeRef.new(shape: PredictionTimeRange, location_name: "PredictionTimeRange"))
     ProactiveAnomaly.add_member(:source_details, Shapes::ShapeRef.new(shape: AnomalySourceDetails, location_name: "SourceDetails"))
     ProactiveAnomaly.add_member(:associated_insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "AssociatedInsightId"))
@@ -504,6 +510,7 @@ module Aws::DevOpsGuru
     ProactiveAnomalySummary.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyStatus, location_name: "Status"))
     ProactiveAnomalySummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
     ProactiveAnomalySummary.add_member(:anomaly_time_range, Shapes::ShapeRef.new(shape: AnomalyTimeRange, location_name: "AnomalyTimeRange"))
+    ProactiveAnomalySummary.add_member(:anomaly_reported_time_range, Shapes::ShapeRef.new(shape: AnomalyReportedTimeRange, location_name: "AnomalyReportedTimeRange"))
     ProactiveAnomalySummary.add_member(:prediction_time_range, Shapes::ShapeRef.new(shape: PredictionTimeRange, location_name: "PredictionTimeRange"))
     ProactiveAnomalySummary.add_member(:source_details, Shapes::ShapeRef.new(shape: AnomalySourceDetails, location_name: "SourceDetails"))
     ProactiveAnomalySummary.add_member(:associated_insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "AssociatedInsightId"))
@@ -544,6 +551,7 @@ module Aws::DevOpsGuru
     ReactiveAnomaly.add_member(:severity, Shapes::ShapeRef.new(shape: AnomalySeverity, location_name: "Severity"))
     ReactiveAnomaly.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyStatus, location_name: "Status"))
     ReactiveAnomaly.add_member(:anomaly_time_range, Shapes::ShapeRef.new(shape: AnomalyTimeRange, location_name: "AnomalyTimeRange"))
+    ReactiveAnomaly.add_member(:anomaly_reported_time_range, Shapes::ShapeRef.new(shape: AnomalyReportedTimeRange, location_name: "AnomalyReportedTimeRange"))
     ReactiveAnomaly.add_member(:source_details, Shapes::ShapeRef.new(shape: AnomalySourceDetails, location_name: "SourceDetails"))
     ReactiveAnomaly.add_member(:associated_insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "AssociatedInsightId"))
     ReactiveAnomaly.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
@@ -553,6 +561,7 @@ module Aws::DevOpsGuru
     ReactiveAnomalySummary.add_member(:severity, Shapes::ShapeRef.new(shape: AnomalySeverity, location_name: "Severity"))
     ReactiveAnomalySummary.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyStatus, location_name: "Status"))
     ReactiveAnomalySummary.add_member(:anomaly_time_range, Shapes::ShapeRef.new(shape: AnomalyTimeRange, location_name: "AnomalyTimeRange"))
+    ReactiveAnomalySummary.add_member(:anomaly_reported_time_range, Shapes::ShapeRef.new(shape: AnomalyReportedTimeRange, location_name: "AnomalyReportedTimeRange"))
     ReactiveAnomalySummary.add_member(:source_details, Shapes::ShapeRef.new(shape: AnomalySourceDetails, location_name: "SourceDetails"))
     ReactiveAnomalySummary.add_member(:associated_insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "AssociatedInsightId"))
     ReactiveAnomalySummary.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))

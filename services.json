@@ -41,6 +41,9 @@
   "AppRegistry": {
     "models": "servicecatalog-appregistry/2020-06-24"
   },
+  "AppRunner": {
+    "models": "apprunner/2020-05-15"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01"
   },
@@ -53,6 +56,9 @@
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
     "partitionsKey": "application-autoscaling"
+  },
+  "ApplicationCostProfiler": {
+    "models": "applicationcostprofiler/2020-09-10"
   },
   "ApplicationDiscoveryService": {
     "models": "discovery/2015-11-01"
@@ -89,6 +95,12 @@
   },
   "Chime": {
     "models": "chime/2018-05-01"
+  },
+  "ChimeSDKIdentity": {
+    "models": "chime-sdk-identity/2021-04-20"
+  },
+  "ChimeSDKMessaging": {
+    "models": "chime-sdk-messaging/2021-05-15"
   },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
@@ -646,6 +658,9 @@
   "PrometheusService": {
     "models": "amp/2020-08-01"
   },
+  "Proton": {
+    "models": "proton/2020-07-20"
+  },
   "QLDB": {
     "models": "qldb/2019-01-02"
   },
@@ -696,6 +711,15 @@
   },
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
+  },
+  "Route53RecoveryCluster": {
+    "models": "route53-recovery-cluster/2019-12-02"
+  },
+  "Route53RecoveryControlConfig": {
+    "models": "route53-recovery-control-config/2020-11-02"
+  },
+  "Route53RecoveryReadiness": {
+    "models": "route53-recovery-readiness/2019-12-02"
   },
   "Route53Resolver": {
     "models": "route53resolver/2018-04-01"
@@ -770,6 +794,12 @@
   "SSM": {
     "models": "ssm/2014-11-06"
   },
+  "SSMContacts": {
+    "models": "ssm-contacts/2021-05-03"
+  },
+  "SSMIncidents": {
+    "models": "ssm-incidents/2018-05-10"
+  },
   "SSO": {
     "models": "sso/2019-06-10",
     "gemName": "aws-sdk-core"
@@ -837,6 +867,9 @@
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15"
+  },
+  "SnowDeviceManagement": {
+    "models": "snow-device-management/2021-08-04"
   },
   "Snowball": {
     "models": "snowball/2016-06-30"

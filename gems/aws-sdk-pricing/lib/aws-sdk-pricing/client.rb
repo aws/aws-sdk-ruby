@@ -429,8 +429,8 @@ module Aws::Pricing
 
     # Returns a list of attribute values. Attibutes are similar to the
     # details in a Price List API offer file. For a list of available
-    # attributes, see [Offer File Definitions][1] in the [AWS Billing and
-    # Cost Management User Guide][2].
+    # attributes, see [Offer File Definitions][1] in the [Amazon Web
+    # Services Billing and Cost Management User Guide][2].
     #
     #
     #
@@ -537,37 +537,6 @@ module Aws::Pricing
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
-    #
-    # @example Example: To retrieve a list of products
-    #
-    #   # This operation returns a list of products that match the given criteria.
-    #
-    #   resp = client.get_products({
-    #     filters: [
-    #       {
-    #         field: "ServiceCode", 
-    #         type: "TERM_MATCH", 
-    #         value: "AmazonEC2", 
-    #       }, 
-    #       {
-    #         field: "volumeType", 
-    #         type: "TERM_MATCH", 
-    #         value: "Provisioned IOPS", 
-    #       }, 
-    #     ], 
-    #     format_version: "aws_v1", 
-    #     max_results: 1, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     format_version: "aws_v1", 
-    #     next_token: "57r3EXAMPLEujbzWfHF7Ciw==:ywSmZsD3mtpQmQLQ5XfOsIMkYybSj+vAT+kGmwMFq+K9DGmIoJkz7lunVeamiOPgthdWSO2a7YKojCO+zY4dJmuNl2QvbNhXs+AJ2Ufn7xGmJncNI2TsEuAsVCUfTAvAQNcwwamtk6XuZ4YdNnooV62FjkV3ZAn40d9+wAxV7+FImvhUHi/+f8afgZdGh2zPUlH8jlV9uUtj0oHp8+DhPUuHXh+WBII1E/aoKpPSm3c=", 
-    #     price_list: [
-    #       "{\"product\":{\"productFamily\":\"Storage\",\"attributes\":{\"storageMedia\":\"SSD-backed\",\"maxThroughputvolume\":\"320 MB/sec\",\"volumeType\":\"Provisioned IOPS\",\"maxIopsvolume\":\"20000\",\"servicecode\":\"AmazonEC2\",\"usagetype\":\"CAN1-EBS:VolumeUsage.piops\",\"locationType\":\"AWS Region\",\"location\":\"Canada (Central)\",\"servicename\":\"Amazon Elastic Compute Cloud\",\"maxVolumeSize\":\"16 TiB\",\"operation\":\"\"},\"sku\":\"WQGC34PB2AWS8R4U\"},\"serviceCode\":\"AmazonEC2\",\"terms\":{\"OnDemand\":{\"WQGC34PB2AWS8R4U.JRTCKXETXF\":{\"priceDimensions\":{\"WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7\":{\"unit\":\"GB-Mo\",\"endRange\":\"Inf\",\"description\":\"$0.138 per GB-month of Provisioned IOPS SSD (io1)  provisioned storage - Canada (Central)\",\"appliesTo\":[],\"rateCode\":\"WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7\",\"beginRange\":\"0\",\"pricePerUnit\":{\"USD\":\"0.1380000000\"}}},\"sku\":\"WQGC34PB2AWS8R4U\",\"effectiveDate\":\"2017-08-01T00:00:00Z\",\"offerTermCode\":\"JRTCKXETXF\",\"termAttributes\":{}}}},\"version\":\"20170901182201\",\"publicationDate\":\"2017-09-01T18:22:01Z\"}", 
-    #     ], 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_products({
@@ -613,7 +582,7 @@ module Aws::Pricing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

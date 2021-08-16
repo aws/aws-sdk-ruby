@@ -25,7 +25,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] key_path
-    #   Path to the AWS S3 bucket that contains the ACL files.
+    #   Path to the Amazon Web Services S3 bucket that contains the ACL
+    #   files.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AccessControlListConfiguration AWS API Documentation
@@ -126,6 +127,10 @@ module Aws::Kendra
     # If you use more than 2 layers, you receive a `ValidationException`
     # exception with the message "`AttributeFilter` cannot have a depth of
     # more than 2."
+    #
+    # If you use more than 10 attribute filters, you receive a
+    # `ValidationException` exception with the message "`AttributeFilter`
+    # cannot have a length of more than 10".
     #
     # @note When making an API call, you may pass AttributeFilter
     #   data as a hash:
@@ -492,6 +497,87 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information to connect to websites that
+    # require user authentication.
+    #
+    # @note When making an API call, you may pass AuthenticationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         basic_authentication: [
+    #           {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             credentials: "SecretArn", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] basic_authentication
+    #   The list of configuration information that's required to connect to
+    #   and crawl a website host using basic authentication credentials.
+    #
+    #   The list includes the name and port number of the website host.
+    #   @return [Array<Types::BasicAuthenticationConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AuthenticationConfiguration AWS API Documentation
+    #
+    class AuthenticationConfiguration < Struct.new(
+      :basic_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to websites that
+    # require basic user authentication.
+    #
+    # @note When making an API call, you may pass BasicAuthenticationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         credentials: "SecretArn", # required
+    #       }
+    #
+    # @!attribute [rw] host
+    #   The name of the website host you want to connect to using
+    #   authentication credentials.
+    #
+    #   For example, the host name of https://a.example.com/page1.html is
+    #   "a.example.com".
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number of the website host you want to connect to using
+    #   authentication credentials.
+    #
+    #   For example, the port for https://a.example.com/page1.html is 443,
+    #   the standard port for HTTPS.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] credentials
+    #   Your secret ARN, which you can create in [AWS Secrets Manager][1]
+    #
+    #   You use a secret if basic authentication credentials are required to
+    #   connect to a website. The secret stores your credentials of user
+    #   name and password.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BasicAuthenticationConfiguration AWS API Documentation
+    #
+    class BasicAuthenticationConfiguration < Struct.new(
+      :host,
+      :port,
+      :credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDeleteDocumentRequest
     #   data as a hash:
     #
@@ -500,7 +586,7 @@ module Aws::Kendra
     #         document_id_list: ["DocumentId"], # required
     #         data_source_sync_job_metric_target: {
     #           data_source_id: "DataSourceId", # required
-    #           data_source_sync_job_id: "DataSourceSyncJobId", # required
+    #           data_source_sync_job_id: "DataSourceSyncJobId",
     #         },
     #       }
     #
@@ -568,6 +654,103 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetDocumentStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         document_info_list: [ # required
+    #           {
+    #             document_id: "DocumentId", # required
+    #             attributes: [
+    #               {
+    #                 key: "DocumentAttributeKey", # required
+    #                 value: { # required
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index to add documents to. The index ID is
+    #   returned by the [ CreateIndex ][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html
+    #   @return [String]
+    #
+    # @!attribute [rw] document_info_list
+    #   A list of `DocumentInfo` objects that identify the documents for
+    #   which to get the status. You identify the documents by their
+    #   document ID and optional attributes.
+    #   @return [Array<Types::DocumentInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchGetDocumentStatusRequest AWS API Documentation
+    #
+    class BatchGetDocumentStatusRequest < Struct.new(
+      :index_id,
+      :document_info_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of documents that Amazon Kendra couldn't get the status for.
+    #   The list includes the ID of the document and the reason that the
+    #   status couldn't be found.
+    #   @return [Array<Types::BatchGetDocumentStatusResponseError>]
+    #
+    # @!attribute [rw] document_status_list
+    #   The status of documents. The status indicates if the document is
+    #   waiting to be indexed, is in the process of indexing, has completed
+    #   indexing, or failed indexing. If a document failed indexing, the
+    #   status provides the reason why.
+    #   @return [Array<Types::Status>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchGetDocumentStatusResponse AWS API Documentation
+    #
+    class BatchGetDocumentStatusResponse < Struct.new(
+      :errors,
+      :document_status_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a response when the status of a document could not be
+    # retrieved.
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document whose status could not be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Indicates the source of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   States that the API could not get the status of a document. This
+    #   could be because the request is not valid or there is a system
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchGetDocumentStatusResponseError AWS API Documentation
+    #
+    class BatchGetDocumentStatusResponseError < Struct.new(
+      :document_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchPutDocumentRequest
     #   data as a hash:
     #
@@ -599,6 +782,19 @@ module Aws::Kendra
     #                 name: "PrincipalName", # required
     #                 type: "USER", # required, accepts USER, GROUP
     #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
+    #             hierarchical_access_control_list: [
+    #               {
+    #                 principal_list: [ # required
+    #                   {
+    #                     name: "PrincipalName", # required
+    #                     type: "USER", # required, accepts USER, GROUP
+    #                     access: "ALLOW", # required, accepts ALLOW, DENY
+    #                     data_source_id: "DataSourceId",
+    #                   },
+    #                 ],
     #               },
     #             ],
     #             content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
@@ -623,6 +819,13 @@ module Aws::Kendra
     #
     # @!attribute [rw] documents
     #   One or more documents to add to the index.
+    #
+    #   Documents can include custom attributes. For example,
+    #   'DataSourceId' and 'DataSourceSyncJobId' are custom attributes
+    #   that provide information on the synchronization of documents running
+    #   on a data source. Note, 'DataSourceSyncJobId' could be an optional
+    #   custom attribute as Amazon Kendra will use the ID of a running sync
+    #   job.
     #
     #   Documents have the following file size limits.
     #
@@ -657,8 +860,9 @@ module Aws::Kendra
     #   index.
     #
     #   If there was an error adding a document to an index the error is
-    #   reported in your AWS CloudWatch log. For more information, see
-    #   [Monitoring Amazon Kendra with Amazon CloudWatch Logs][1]
+    #   reported in your Amazon Web Services CloudWatch log. For more
+    #   information, see [Monitoring Amazon Kendra with Amazon CloudWatch
+    #   Logs][1]
     #
     #
     #
@@ -697,8 +901,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies capacity units configured for your index. You can add and
-    # remove capacity units to tune an index to your requirements.
+    # Specifies capacity units configured for your enterprise edition index.
+    # You can add and remove capacity units to tune an index to your
+    # requirements.
     #
     # @note When making an API call, you may pass CapacityUnitsConfiguration
     #   data as a hash:
@@ -709,14 +914,30 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] storage_capacity_units
-    #   The amount of extra storage capacity for an index. Each capacity
-    #   unit provides 150 Gb of storage space or 500,000 documents,
-    #   whichever is reached first.
+    #   The amount of extra storage capacity for an index. A single capacity
+    #   unit provides 30 GB of storage space or 100,000 documents, whichever
+    #   is reached first.
     #   @return [Integer]
     #
     # @!attribute [rw] query_capacity_units
-    #   The amount of extra query capacity for an index. Each capacity unit
-    #   provides 0.5 queries per second and 40,000 queries per day.
+    #   The amount of extra query capacity for an index and
+    #   [GetQuerySuggestions][1] capacity.
+    #
+    #   A single extra capacity unit for an index provides 0.1 queries per
+    #   second or approximately 8,000 queries per day.
+    #
+    #   `GetQuerySuggestions` capacity is five times the provisioned query
+    #   capacity for an index, or the base capacity of 2.5 calls per second,
+    #   whichever is higher. For example, the base capacity for an index is
+    #   0.1 queries per second, and `GetQuerySuggestions` capacity has a
+    #   base of 2.5 calls per second. If you add another 0.1 queries per
+    #   second to total 0.2 queries per second for an index, the
+    #   `GetQuerySuggestions` capacity is 2.5 calls per second (higher than
+    #   five times 0.2 queries per second).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CapacityUnitsConfiguration AWS API Documentation
@@ -724,6 +945,26 @@ module Aws::Kendra
     class CapacityUnitsConfiguration < Struct.new(
       :storage_capacity_units,
       :query_capacity_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ClearQuerySuggestionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to clear query suggestions
+    #   from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ClearQuerySuggestionsRequest AWS API Documentation
+    #
+    class ClearQuerySuggestionsRequest < Struct.new(
+      :index_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1052,7 +1293,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
     #   contains the key/value pairs required to connect to your Confluence
     #   server. The secret must contain a JSON structure with the following
     #   keys:
@@ -1345,11 +1586,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of credentials stored in AWS Secrets
+    #   The Amazon Resource Name (ARN) of credentials stored in Secrets
     #   Manager. The credentials should be a user/password pair. For more
     #   information, see [Using a Database Data Source][1]. For more
-    #   information about AWS Secrets Manager, see [ What Is AWS Secrets
-    #   Manager ][2] in the *AWS Secrets Manager* user guide.
+    #   information about Secrets Manager, see [ What Is Secrets Manager][2]
+    #   in the <i> Secrets Manager </i> user guide.
     #
     #
     #
@@ -1375,7 +1616,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -1390,7 +1631,7 @@ module Aws::Kendra
     #             },
     #           },
     #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,
@@ -1410,6 +1651,10 @@ module Aws::Kendra
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
     #             disable_local_groups: false,
+    #             ssl_certificate_s3_path: {
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1637,6 +1882,51 @@ module Aws::Kendra
     #             exclude_mime_types: ["MimeType"],
     #             exclude_user_accounts: ["UserAccount"],
     #             exclude_shared_drives: ["SharedDriveId"],
+    #           },
+    #           web_crawler_configuration: {
+    #             urls: { # required
+    #               seed_url_configuration: {
+    #                 seed_urls: ["SeedUrl"], # required
+    #                 web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #               },
+    #               site_maps_configuration: {
+    #                 site_maps: ["SiteMap"], # required
+    #               },
+    #             },
+    #             crawl_depth: 1,
+    #             max_links_per_page: 1,
+    #             max_content_size_per_page_in_mega_bytes: 1.0,
+    #             max_urls_per_minute_crawl_rate: 1,
+    #             url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
+    #             authentication_configuration: {
+    #               basic_authentication: [
+    #                 {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   credentials: "SecretArn", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           work_docs_configuration: {
+    #             organization_id: "OrganizationId", # required
+    #             crawl_comments: false,
+    #             use_change_log: false,
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         description: "Description",
@@ -1907,18 +2197,24 @@ module Aws::Kendra
     #
     #   The `Edition` parameter is optional. If you don't supply a value,
     #   the default is `ENTERPRISE_EDITION`.
+    #
+    #   For more information on quota limits for enterprise and developer
+    #   editions, see [Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   An AWS Identity and Access Management (IAM) role that gives Amazon
-    #   Kendra permissions to access your Amazon CloudWatch logs and
-    #   metrics. This is also the role used when you use the
-    #   `BatchPutDocument` operation to index documents from an Amazon S3
-    #   bucket.
+    #   An Identity and Access Management(IAM) role that gives Amazon Kendra
+    #   permissions to access your Amazon CloudWatch logs and metrics. This
+    #   is also the role used when you use the `BatchPutDocument` operation
+    #   to index documents from an Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the AWS KMS customer managed key (CMK) to use to
+    #   The identifier of the KMScustomer managed key (CMK) to use to
     #   encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
     #   support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
@@ -1986,6 +2282,110 @@ module Aws::Kendra
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateIndexResponse AWS API Documentation
     #
     class CreateIndexResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         name: "QuerySuggestionsBlockListName", # required
+    #         description: "Description",
+    #         source_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         client_token: "ClientTokenName",
+    #         role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to create a query suggestions
+    #   block list for.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A user friendly name for the block list.
+    #
+    #   For example, the block list named 'offensive-words' includes all
+    #   offensive words that could appear in user queries and need to be
+    #   blocked from suggestions.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A user-friendly description for the block list.
+    #
+    #   For example, the description "List of all offensive words that can
+    #   appear in user queries and need to be blocked from suggestions."
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_path
+    #   The S3 path to your block list text file in your S3 bucket.
+    #
+    #   Each block word or phrase should be on a separate line in a text
+    #   file.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create a query
+    #   suggestions block list.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM (Identity and Access Management) role used by Amazon Kendra
+    #   to access the block list text file in your S3 bucket.
+    #
+    #   You need permissions to the role ARN (Amazon Resource Name). The
+    #   role needs S3 read permissions to your file in S3 and needs to give
+    #   STS (Security Token Service) assume role permissions to Amazon
+    #   Kendra.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A tag that you can assign to a block list that categorizes the block
+    #   list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class CreateQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
+      :name,
+      :description,
+      :source_s3_path,
+      :client_token,
+      :role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier of the created block list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateQuerySuggestionsBlockListResponse AWS API Documentation
+    #
+    class CreateQuerySuggestionsBlockListResponse < Struct.new(
       :id)
       SENSITIVE = []
       include Aws::Structure
@@ -2094,7 +2494,7 @@ module Aws::Kendra
     #           },
     #         },
     #         share_point_configuration: {
-    #           share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #           share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #           urls: ["Url"], # required
     #           secret_arn: "SecretArn", # required
     #           crawl_attachments: false,
@@ -2114,6 +2514,10 @@ module Aws::Kendra
     #           ],
     #           document_title_field_name: "DataSourceFieldName",
     #           disable_local_groups: false,
+    #           ssl_certificate_s3_path: {
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2342,6 +2746,51 @@ module Aws::Kendra
     #           exclude_user_accounts: ["UserAccount"],
     #           exclude_shared_drives: ["SharedDriveId"],
     #         },
+    #         web_crawler_configuration: {
+    #           urls: { # required
+    #             seed_url_configuration: {
+    #               seed_urls: ["SeedUrl"], # required
+    #               web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #             },
+    #             site_maps_configuration: {
+    #               site_maps: ["SiteMap"], # required
+    #             },
+    #           },
+    #           crawl_depth: 1,
+    #           max_links_per_page: 1,
+    #           max_content_size_per_page_in_mega_bytes: 1.0,
+    #           max_urls_per_minute_crawl_rate: 1,
+    #           url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           proxy_configuration: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             credentials: "SecretArn",
+    #           },
+    #           authentication_configuration: {
+    #             basic_authentication: [
+    #               {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 credentials: "SecretArn", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         work_docs_configuration: {
+    #           organization_id: "OrganizationId", # required
+    #           crawl_comments: false,
+    #           use_change_log: false,
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -2384,6 +2833,16 @@ module Aws::Kendra
     #   Drive.
     #   @return [Types::GoogleDriveConfiguration]
     #
+    # @!attribute [rw] web_crawler_configuration
+    #   Provides the configuration information required for Amazon Kendra
+    #   web crawler.
+    #   @return [Types::WebCrawlerConfiguration]
+    #
+    # @!attribute [rw] work_docs_configuration
+    #   Provides the configuration information to connect to WorkDocs as
+    #   your data source.
+    #   @return [Types::WorkDocsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -2394,7 +2853,40 @@ module Aws::Kendra
       :one_drive_configuration,
       :service_now_configuration,
       :confluence_configuration,
-      :google_drive_configuration)
+      :google_drive_configuration,
+      :web_crawler_configuration,
+      :work_docs_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Data source information for user context filtering.
+    #
+    # @note When making an API call, you may pass DataSourceGroup
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "PrincipalName", # required
+    #         data_source_id: "DataSourceId", # required
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want to add to your list of groups.
+    #   This is for filtering search results based on the groups' access to
+    #   documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source group you want to add to your list
+    #   of data source groups. This is for filtering search results based on
+    #   the groups' access to documents in that data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceGroup AWS API Documentation
+    #
+    class DataSourceGroup < Struct.new(
+      :group_id,
+      :data_source_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2506,7 +2998,7 @@ module Aws::Kendra
     #
     #       {
     #         data_source_id: "DataSourceId", # required
-    #         data_source_sync_job_id: "DataSourceSyncJobId", # required
+    #         data_source_sync_job_id: "DataSourceSyncJobId",
     #       }
     #
     # @!attribute [rw] data_source_id
@@ -2515,6 +3007,15 @@ module Aws::Kendra
     #
     # @!attribute [rw] data_source_sync_job_id
     #   The ID of the sync job that is running on the data source.
+    #
+    #   If the ID of a sync job is not provided and there is a sync job
+    #   running, then the ID of this sync job is used and metrics are
+    #   generated for this sync job.
+    #
+    #   If the ID of a sync job is not provided and there is no sync job
+    #   running, then no metrics are generated and documents are
+    #   indexed/deleted at the index level without sync job metrics
+    #   included.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceSyncJobMetricTarget AWS API Documentation
@@ -2781,6 +3282,93 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePrincipalMappingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         group_id: "GroupId", # required
+    #         ordering_id: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to delete a group from.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source you want to delete a group from.
+    #
+    #   This is useful if a group is tied to multiple data sources and you
+    #   want to delete a group from accessing documents in a certain data
+    #   source. For example, the groups "Research", "Engineering", and
+    #   "Sales and Marketing" are all tied to the company's documents
+    #   stored in the data sources Confluence and Salesforce. You want to
+    #   delete "Research" and "Engineering" groups from Salesforce, so
+    #   that these groups cannot access customer-related documents stored in
+    #   Salesforce. Only "Sales and Marketing" should access documents in
+    #   the Salesforce data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier you specify to ensure Amazon Kendra does
+    #   not override the latest `DELETE` action with previous actions. The
+    #   highest number ID, which is the ordering ID, is the latest action
+    #   you want to process and apply on top of other actions with lower
+    #   number IDs. This prevents previous actions with lower number IDs
+    #   from possibly overriding the latest action.
+    #
+    #   The ordering ID can be the UNIX time of the last update you made to
+    #   a group members list. You would then provide this list when calling
+    #   `PutPrincipalMapping`. This ensures your `DELETE` action for that
+    #   updated group with the latest members list doesn't get overwritten
+    #   by earlier `DELETE` actions for the same group which are yet to be
+    #   processed.
+    #
+    #   The default ordering ID is the current UNIX time in milliseconds
+    #   that the action was received by Amazon Kendra.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeletePrincipalMappingRequest AWS API Documentation
+    #
+    class DeletePrincipalMappingRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id,
+      :ordering_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "QuerySuggestionsBlockListId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the you want to delete a block list from.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the block list that needs to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class DeleteQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteThesaurusRequest
     #   data as a hash:
     #
@@ -3034,8 +3622,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the AWS KMS customer master key (CMK) used to
-    #   encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
+    #   The identifier of the KMScustomer master key (CMK) used to encrypt
+    #   your data. Amazon Kendra doesn't support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -3105,6 +3693,298 @@ module Aws::Kendra
       :capacity_units,
       :user_token_configurations,
       :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePrincipalMappingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         group_id: "GroupId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index required to check the processing of
+    #   `PUT` and `DELETE` actions for mapping users to their groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source to check the processing of `PUT`
+    #   and `DELETE` actions for mapping users to their groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group required to check the processing of
+    #   `PUT` and `DELETE` actions for mapping users to their groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribePrincipalMappingRequest AWS API Documentation
+    #
+    class DescribePrincipalMappingRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_id
+    #   Shows the identifier of the index to see information on the
+    #   processing of `PUT` and `DELETE` actions for mapping users to their
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   Shows the identifier of the data source to see information on the
+    #   processing of `PUT` and `DELETE` actions for mapping users to their
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   Shows the identifier of the group to see information on the
+    #   processing of `PUT` and `DELETE` actions for mapping users to their
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_ordering_id_summaries
+    #   Shows the following information on the processing of `PUT` and
+    #   `DELETE` actions for mapping users to their groups:
+    #
+    #   * Status – the status can be either `PROCESSING`, `SUCCEEDED`,
+    #     `DELETING`, `DELETED`, or `FAILED`.
+    #
+    #   * Last updated – the last date-time an action was updated.
+    #
+    #   * Received – the last date-time an action was received or submitted.
+    #
+    #   * Ordering ID – the latest action that should process and apply
+    #     after other actions.
+    #
+    #   * Failure reason – the reason an action could not be processed.
+    #   @return [Array<Types::GroupOrderingIdSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribePrincipalMappingResponse AWS API Documentation
+    #
+    class DescribePrincipalMappingResponse < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id,
+      :group_ordering_id_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "QuerySuggestionsBlockListId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the block list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class DescribeQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_id
+    #   Shows the identifier of the index for the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Shows the unique identifier of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Shows the name of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Shows the description for the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Shows whether the current status of the block list is `ACTIVE` or
+    #   `INACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Shows the error message with details when there are issues in
+    #   processing the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Shows the date-time a block list for query suggestions was last
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   Shows the date-time a block list for query suggestions was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_s3_path
+    #   Shows the current S3 path to your block list text file in your S3
+    #   bucket.
+    #
+    #   Each block word or phrase should be on a separate line in a text
+    #   file.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] item_count
+    #   Shows the current number of valid, non-empty words or phrases in the
+    #   block list text file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_size_bytes
+    #   Shows the current size of the block list text file in S3.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] role_arn
+    #   Shows the current IAM (Identity and Access Management) role used by
+    #   Amazon Kendra to access the block list text file in S3.
+    #
+    #   The role needs S3 read permissions to your file in S3 and needs to
+    #   give STS (Security Token Service) assume role permissions to Amazon
+    #   Kendra.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockListResponse AWS API Documentation
+    #
+    class DescribeQuerySuggestionsBlockListResponse < Struct.new(
+      :index_id,
+      :id,
+      :name,
+      :description,
+      :status,
+      :error_message,
+      :created_at,
+      :updated_at,
+      :source_s3_path,
+      :item_count,
+      :file_size_bytes,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQuerySuggestionsConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to describe query suggestions
+    #   settings for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfigRequest AWS API Documentation
+    #
+    class DescribeQuerySuggestionsConfigRequest < Struct.new(
+      :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mode
+    #   Shows whether query suggestions are currently in `ENABLED` mode or
+    #   `LEARN_ONLY` mode.
+    #
+    #   By default, Amazon Kendra enables query suggestions.`LEARN_ONLY`
+    #   turns off query suggestions for your users. You can change the mode
+    #   using the [UpdateQuerySuggestionsConfig][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Shows whether the status of query suggestions settings is currently
+    #   Active or Updating.
+    #
+    #   Active means the current settings apply and Updating means your
+    #   changed settings are in the process of applying.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_log_look_back_window_in_days
+    #   Shows how recent your queries are in your query log time window (in
+    #   days).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] include_queries_without_user_information
+    #   Shows whether Amazon Kendra uses all queries or only uses queries
+    #   that include user information to generate query suggestions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_number_of_querying_users
+    #   Shows the minimum number of unique users who must search a query in
+    #   order for the query to be eligible to suggest to your users.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_query_count
+    #   Shows the minimum number of times a query must be searched in order
+    #   for the query to be eligible to suggest to your users.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_suggestions_build_time
+    #   Shows the date-time query suggestions for an index was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_clear_time
+    #   Shows the date-time query suggestions for an index was last cleared.
+    #
+    #   After you clear suggestions, Amazon Kendra learns new suggestions
+    #   based on new queries added to the query log from the time you
+    #   cleared suggestions. Amazon Kendra only considers re-occurences of a
+    #   query from the time you cleared suggestions.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_suggestions_count
+    #   Shows the current total count of query suggestions for an index.
+    #
+    #   This count can change when you update your query suggestions
+    #   settings, if you filter out certain queries from suggestions using a
+    #   block list, and as the query log accumulates more queries for Amazon
+    #   Kendra to learn from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfigResponse AWS API Documentation
+    #
+    class DescribeQuerySuggestionsConfigResponse < Struct.new(
+      :mode,
+      :status,
+      :query_log_look_back_window_in_days,
+      :include_queries_without_user_information,
+      :minimum_number_of_querying_users,
+      :minimum_query_count,
+      :last_suggestions_build_time,
+      :last_clear_time,
+      :total_suggestions_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3247,6 +4127,19 @@ module Aws::Kendra
     #             name: "PrincipalName", # required
     #             type: "USER", # required, accepts USER, GROUP
     #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         hierarchical_access_control_list: [
+    #           {
+    #             principal_list: [ # required
+    #               {
+    #                 name: "PrincipalName", # required
+    #                 type: "USER", # required, accepts USER, GROUP
+    #                 access: "ALLOW", # required, accepts ALLOW, DENY
+    #                 data_source_id: "DataSourceId",
+    #               },
+    #             ],
     #           },
     #         ],
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
@@ -3265,9 +4158,9 @@ module Aws::Kendra
     #
     #   Documents passed to the `Blob` parameter must be base64 encoded.
     #   Your code might not need to encode the document file bytes if
-    #   you're using an AWS SDK to call Amazon Kendra operations. If you
-    #   are calling the Amazon Kendra endpoint directly using REST, you must
-    #   base64 encode the contents before sending.
+    #   you're using an Amazon Web Services SDK to call Amazon Kendra
+    #   operations. If you are calling the Amazon Kendra endpoint directly
+    #   using REST, you must base64 encode the contents before sending.
     #   @return [String]
     #
     # @!attribute [rw] s3_path
@@ -3282,8 +4175,18 @@ module Aws::Kendra
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] access_control_list
-    #   Information to use for user context filtering.
+    #   Information on user and group access rights, which is used for user
+    #   context filtering.
     #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] hierarchical_access_control_list
+    #   The list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::HierarchicalPrincipal>]
     #
     # @!attribute [rw] content_type
     #   The file type of the document in the `Blob` field.
@@ -3298,6 +4201,7 @@ module Aws::Kendra
       :s3_path,
       :attributes,
       :access_control_list,
+      :hierarchical_access_control_list,
       :content_type)
       SENSITIVE = []
       include Aws::Structure
@@ -3362,6 +4266,11 @@ module Aws::Kendra
     #
     # @!attribute [rw] date_value
     #   A date expressed as an ISO 8601 string.
+    #
+    #   It is important for the time zone to be included in the ISO 8601
+    #   date-time format. For example, 20120325T123010+01:00 is the ISO 8601
+    #   date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in
+    #   Central European Time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeValue AWS API Documentation
@@ -3392,6 +4301,61 @@ module Aws::Kendra
     class DocumentAttributeValueCountPair < Struct.new(
       :document_attribute_value,
       :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a document for which to retrieve status information
+    #
+    # @note When making an API call, you may pass DocumentInfo
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "DocumentId", # required
+    #         attributes: [
+    #           {
+    #             key: "DocumentAttributeKey", # required
+    #             value: { # required
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Attributes that identify a specific version of a document to check.
+    #
+    #   The only valid attributes are:
+    #
+    #   * version
+    #
+    #   * datasourceId
+    #
+    #   * jobExecutionId
+    #
+    #   The attributes follow these rules:
+    #
+    #   * `dataSourceId` and `jobExecutionId` must be used together.
+    #
+    #   * `version` is ignored if `dataSourceId` and `jobExecutionId` are
+    #     not provided.
+    #
+    #   * If `dataSourceId` and `jobExecutionId` are provided, but `version`
+    #     is not, the version defaults to "0".
+    #   @return [Array<Types::DocumentAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentInfo AWS API Documentation
+    #
+    class DocumentInfo < Struct.new(
+      :document_id,
+      :attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3501,9 +4465,10 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] s3_prefix
-    #   A prefix used to filter metadata configuration files in the AWS S3
-    #   bucket. The S3 bucket might contain multiple metadata files. Use
-    #   `S3Prefix` to include only the desired metadata files.
+    #   A prefix used to filter metadata configuration files in the Amazon
+    #   Web Services S3 bucket. The S3 bucket might contain multiple
+    #   metadata files. Use `S3Prefix` to include only the desired metadata
+    #   files.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentsMetadataConfiguration AWS API Documentation
@@ -3621,6 +4586,63 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetQuerySuggestionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         query_text: "SuggestionQueryText", # required
+    #         max_suggestions_count: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to get query suggestions from.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_text
+    #   The text of a user's query to generate query suggestions.
+    #
+    #   A query is suggested if the query prefix matches what a user starts
+    #   to type as their query.
+    #
+    #   Amazon Kendra does not show any suggestions if a user types fewer
+    #   than two characters or more than 60 characters. A query must also
+    #   have at least one search result and contain at least one word of
+    #   more than four characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_suggestions_count
+    #   The maximum number of query suggestions you want to show to your
+    #   users.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestionsRequest AWS API Documentation
+    #
+    class GetQuerySuggestionsRequest < Struct.new(
+      :index_id,
+      :query_text,
+      :max_suggestions_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_suggestions_id
+    #   The unique identifier for a list of query suggestions for an index.
+    #   @return [String]
+    #
+    # @!attribute [rw] suggestions
+    #   A list of query suggestions for an index.
+    #   @return [Array<Types::Suggestion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestionsResponse AWS API Documentation
+    #
+    class GetQuerySuggestionsResponse < Struct.new(
+      :query_suggestions_id,
+      :suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration information for data sources that connect to
     # Google Drive.
     #
@@ -3644,7 +4666,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of a Secrets Managersecret that
     #   contains the credentials required to connect to Google Drive. For
     #   more information, see [Using a Google Workspace Drive data
     #   source][1].
@@ -3714,6 +4736,157 @@ module Aws::Kendra
       :exclude_mime_types,
       :exclude_user_accounts,
       :exclude_shared_drives)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of users or sub groups that belong to a group. Users and groups
+    # are useful for filtering search results to different users based on
+    # their group's access to documents.
+    #
+    # @note When making an API call, you may pass GroupMembers
+    #   data as a hash:
+    #
+    #       {
+    #         member_groups: [
+    #           {
+    #             group_id: "GroupId", # required
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #         member_users: [
+    #           {
+    #             user_id: "UserId", # required
+    #           },
+    #         ],
+    #         s3_pathfor_group_members: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] member_groups
+    #   A list of sub groups that belong to a group. For example, the sub
+    #   groups "Research", "Engineering", and "Sales and Marketing"
+    #   all belong to the group "Company".
+    #   @return [Array<Types::MemberGroup>]
+    #
+    # @!attribute [rw] member_users
+    #   A list of users that belong to a group. For example, a list of
+    #   interns all belong to the "Interns" group.
+    #   @return [Array<Types::MemberUser>]
+    #
+    # @!attribute [rw] s3_pathfor_group_members
+    #   If you have more than 1000 users and/or sub groups for a single
+    #   group, you need to provide the path to the S3 file that lists your
+    #   users and sub groups for a group. Your sub groups can contain more
+    #   than 1000 users, but the list of sub groups that belong to a group
+    #   (and/or users) must be no more than 1000.
+    #   @return [Types::S3Path]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GroupMembers AWS API Documentation
+    #
+    class GroupMembers < Struct.new(
+      :member_groups,
+      :member_users,
+      :s3_pathfor_group_members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the processing of `PUT` and `DELETE` actions for
+    # mapping users to their groups.
+    #
+    # @!attribute [rw] status
+    #   The current processing status of actions for mapping users to their
+    #   groups. The status can be either `PROCESSING`, `SUCCEEDED`,
+    #   `DELETING`, `DELETED`, or `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The last date-time an action was updated. An action can be a `PUT`
+    #   or `DELETE` action for mapping users to their groups.
+    #   @return [Time]
+    #
+    # @!attribute [rw] received_at
+    #   The date-time an action was received by Amazon Kendra. An action can
+    #   be a `PUT` or `DELETE` action for mapping users to their groups.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ordering_id
+    #   The order in which actions should complete processing. An action can
+    #   be a `PUT` or `DELETE` action for mapping users to their groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason an action could not be processed. An action can be a
+    #   `PUT` or `DELETE` action for mapping users to their groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GroupOrderingIdSummary AWS API Documentation
+    #
+    class GroupOrderingIdSummary < Struct.new(
+      :status,
+      :last_updated_at,
+      :received_at,
+      :ordering_id,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Group summary information.
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want group summary information on.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier used for the latest `PUT` or `DELETE`
+    #   action.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GroupSummary AWS API Documentation
+    #
+    class GroupSummary < Struct.new(
+      :group_id,
+      :ordering_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information to define the hierarchy for which documents users should
+    # have access to.
+    #
+    # @note When making an API call, you may pass HierarchicalPrincipal
+    #   data as a hash:
+    #
+    #       {
+    #         principal_list: [ # required
+    #           {
+    #             name: "PrincipalName", # required
+    #             type: "USER", # required, accepts USER, GROUP
+    #             access: "ALLOW", # required, accepts ALLOW, DENY
+    #             data_source_id: "DataSourceId",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] principal_list
+    #   A list of [principal][1] lists that define the hierarchy for which
+    #   documents users should have access to. Each hierarchical list
+    #   specifies which user or group has allow or deny access for each
+    #   document.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
+    #   @return [Array<Types::Principal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/HierarchicalPrincipal AWS API Documentation
+    #
+    class HierarchicalPrincipal < Struct.new(
+      :principal_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4098,6 +5271,71 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListGroupsOlderThanOrderingIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         ordering_id: 1, # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for getting a list of groups mapped to
+    #   users before a given ordering or timestamp identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source for getting a list of groups
+    #   mapped to users before a given ordering timestamp identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier used for the latest `PUT` or `DELETE`
+    #   action for mapping users to their groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next items in the list of groups that go beyond the maximum.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum results shown for a list of groups that are mapped to
+    #   users before a given ordering or timestamp identifier.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListGroupsOlderThanOrderingIdRequest AWS API Documentation
+    #
+    class ListGroupsOlderThanOrderingIdRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :ordering_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups_summaries
+    #   Summary information for list of groups that are mapped to users
+    #   before a given ordering or timestamp identifier.
+    #   @return [Array<Types::GroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next items in the list of groups that go beyond the maximum.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListGroupsOlderThanOrderingIdResponse AWS API Documentation
+    #
+    class ListGroupsOlderThanOrderingIdResponse < Struct.new(
+      :groups_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListIndicesRequest
     #   data as a hash:
     #
@@ -4140,6 +5378,78 @@ module Aws::Kendra
     #
     class ListIndicesResponse < Struct.new(
       :index_configuration_summary_items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListQuerySuggestionsBlockListsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for a list of all block lists that exist
+    #   for that index.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of block lists (`BlockListSummaryItems`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of block lists to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListQuerySuggestionsBlockListsRequest AWS API Documentation
+    #
+    class ListQuerySuggestionsBlockListsRequest < Struct.new(
+      :index_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] block_list_summary_items
+    #   Summary items for a block list.
+    #
+    #   This includes summary items on the block list ID, block list name,
+    #   when the block list was created, when the block list was last
+    #   updated, and the count of block words/phrases in the block list.
+    #
+    #   For information on the current quota limits for block lists, see
+    #   [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #   @return [Array<Types::QuerySuggestionsBlockListSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token that
+    #   you can use in the subsequent request to retrieve the next set of
+    #   block lists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListQuerySuggestionsBlockListsResponse AWS API Documentation
+    #
+    class ListQuerySuggestionsBlockListsResponse < Struct.new(
+      :block_list_summary_items,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4230,6 +5540,55 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The sub groups that belong to a group.
+    #
+    # @note When making an API call, you may pass MemberGroup
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "GroupId", # required
+    #         data_source_id: "DataSourceId",
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the sub group you want to map to a group.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source for the sub group you want to map
+    #   to a group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/MemberGroup AWS API Documentation
+    #
+    class MemberGroup < Struct.new(
+      :group_id,
+      :data_source_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The users that belong to a group.
+    #
+    # @note When making an API call, you may pass MemberUser
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user you want to map to a group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/MemberUser AWS API Documentation
+    #
+    class MemberUser < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides configuration information for data sources that connect to
     # OneDrive.
     #
@@ -4263,7 +5622,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
     #   contains the user name and password to connect to OneDrive. The user
     #   namd should be the application ID for the OneDrive application, and
     #   the password is the application key for the OneDrive application.
@@ -4361,6 +5720,7 @@ module Aws::Kendra
     #         name: "PrincipalName", # required
     #         type: "USER", # required, accepts USER, GROUP
     #         access: "ALLOW", # required, accepts ALLOW, DENY
+    #         data_source_id: "DataSourceId",
     #       }
     #
     # @!attribute [rw] name
@@ -4375,12 +5735,177 @@ module Aws::Kendra
     #   Whether to allow or deny access to the principal.
     #   @return [String]
     #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source the principal should access
+    #   documents from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Principal AWS API Documentation
     #
     class Principal < Struct.new(
       :name,
       :type,
-      :access)
+      :access,
+      :data_source_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information for a web proxy to connect to
+    # website hosts.
+    #
+    # @note When making an API call, you may pass ProxyConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         credentials: "SecretArn",
+    #       }
+    #
+    # @!attribute [rw] host
+    #   The name of the website host you want to connect to via a web proxy
+    #   server.
+    #
+    #   For example, the host name of https://a.example.com/page1.html is
+    #   "a.example.com".
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number of the website host you want to connect to via a web
+    #   proxy server.
+    #
+    #   For example, the port for https://a.example.com/page1.html is 443,
+    #   the standard port for HTTPS.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] credentials
+    #   Your secret ARN, which you can create in [AWS Secrets Manager][1]
+    #
+    #   The credentials are optional. You use a secret if web proxy
+    #   credentials are required to connect to a website host. Amazon Kendra
+    #   currently support basic authentication to connect to a web proxy
+    #   server. The secret stores your credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ProxyConfiguration AWS API Documentation
+    #
+    class ProxyConfiguration < Struct.new(
+      :host,
+      :port,
+      :credentials)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutPrincipalMappingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         data_source_id: "DataSourceId",
+    #         group_id: "GroupId", # required
+    #         group_members: { # required
+    #           member_groups: [
+    #             {
+    #               group_id: "GroupId", # required
+    #               data_source_id: "DataSourceId",
+    #             },
+    #           ],
+    #           member_users: [
+    #             {
+    #               user_id: "UserId", # required
+    #             },
+    #           ],
+    #           s3_pathfor_group_members: {
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         ordering_id: 1,
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to map users to their groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The identifier of the data source you want to map users to their
+    #   groups.
+    #
+    #   This is useful if a group is tied to multiple data sources, but you
+    #   only want the group to access documents of a certain data source.
+    #   For example, the groups "Research", "Engineering", and "Sales
+    #   and Marketing" are all tied to the company's documents stored in
+    #   the data sources Confluence and Salesforce. However, "Sales and
+    #   Marketing" team only needs access to customer-related documents
+    #   stored in Salesforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the group you want to map its users to.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_members
+    #   The list that contains your users or sub groups that belong the same
+    #   group.
+    #
+    #   For example, the group "Company" includes the user "CEO" and the
+    #   sub groups "Research", "Engineering", and "Sales and
+    #   Marketing".
+    #
+    #   If you have more than 1000 users and/or sub groups for a single
+    #   group, you need to provide the path to the S3 file that lists your
+    #   users and sub groups for a group. Your sub groups can contain more
+    #   than 1000 users, but the list of sub groups that belong to a group
+    #   (and/or users) must be no more than 1000.
+    #   @return [Types::GroupMembers]
+    #
+    # @!attribute [rw] ordering_id
+    #   The timestamp identifier you specify to ensure Amazon Kendra does
+    #   not override the latest `PUT` action with previous actions. The
+    #   highest number ID, which is the ordering ID, is the latest action
+    #   you want to process and apply on top of other actions with lower
+    #   number IDs. This prevents previous actions with lower number IDs
+    #   from possibly overriding the latest action.
+    #
+    #   The ordering ID can be the UNIX time of the last update you made to
+    #   a group members list. You would then provide this list when calling
+    #   `PutPrincipalMapping`. This ensures your `PUT` action for that
+    #   updated group with the latest members list doesn't get overwritten
+    #   by earlier `PUT` actions for the same group which are yet to be
+    #   processed.
+    #
+    #   The default ordering ID is the current UNIX time in milliseconds
+    #   that the action was received by Amazon Kendra.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of a role that has access to the S3
+    #   file that contains your list of users or sub groups that belong to a
+    #   group.
+    #
+    #   For more information, see [IAM roles for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/PutPrincipalMappingRequest AWS API Documentation
+    #
+    class PutPrincipalMappingRequest < Struct.new(
+      :index_id,
+      :data_source_id,
+      :group_id,
+      :group_members,
+      :ordering_id,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4498,6 +6023,14 @@ module Aws::Kendra
     #         },
     #         user_context: {
     #           token: "Token",
+    #           user_id: "PrincipalName",
+    #           groups: ["PrincipalName"],
+    #           data_source_groups: [
+    #             {
+    #               group_id: "PrincipalName", # required
+    #               data_source_id: "DataSourceId", # required
+    #             },
+    #           ],
     #         },
     #         visitor_id: "VisitorId",
     #       }
@@ -4726,6 +6259,57 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Summary information on a query suggestions block list.
+    #
+    # This includes information on the block list ID, block list name, when
+    # the block list was created, when the block list was last updated, and
+    # the count of block words/phrases in the block list.
+    #
+    # For information on the current quota limits for block lists, see
+    # [Quotas for Amazon Kendra][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+    #
+    # @!attribute [rw] id
+    #   The identifier of a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date-time summary information for a query suggestions block list
+    #   was last created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date-time the block list was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] item_count
+    #   The number of items in the block list file.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QuerySuggestionsBlockListSummary AWS API Documentation
+    #
+    class QuerySuggestionsBlockListSummary < Struct.new(
+      :id,
+      :name,
+      :status,
+      :created_at,
+      :updated_at,
+      :item_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information for manually tuning the relevance of a field in a
     # search. When a query includes terms that match the field, the results
     # are given a boost in the response based on these tuning parameters.
@@ -4916,12 +6500,21 @@ module Aws::Kendra
     #   document that matches an inclusion pattern also matches an exclusion
     #   pattern, the document is not indexed.
     #
-    #   For more information about glob patterns, see [glob
-    #   (programming)][1] in *Wikipedia*.
+    #   Some [examples][1] are:
+    #
+    #   * **.txt* will include all text files in a directory (files with
+    #     the extension .txt).
+    #
+    #   * ***/*.txt* will include all text files in a directory and its
+    #     subdirectories.
+    #
+    #   * **tax** will include all files in a directory that contain
+    #     'tax' in the file name, such as 'tax', 'taxes',
+    #     'income\_tax'.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/Glob_(programming)
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
@@ -4929,12 +6522,21 @@ module Aws::Kendra
     #   a document that matches an inclusion prefix or inclusion pattern
     #   also matches an exclusion pattern, the document is not indexed.
     #
-    #   For more information about glob patterns, see [glob
-    #   (programming)][1] in *Wikipedia*.
+    #   Some [examples][1] are:
+    #
+    #   * **.png , *.jpg* will exclude all PNG and JPEG image files in a
+    #     directory (files with the extensions .png and .jpg).
+    #
+    #   * **internal** will exclude all files in a directory that contain
+    #     'internal' in the file name, such as 'internal',
+    #     'internal\_only', 'company\_internal'.
+    #
+    #   * ***/*internal** will exclude all internal-related files in a
+    #     directory and its subdirectories.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/Glob_(programming)
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters
     #   @return [Array<String>]
     #
     # @!attribute [rw] documents_metadata_configuration
@@ -5021,7 +6623,7 @@ module Aws::Kendra
     # @!attribute [rw] document_title_field_name
     #   The name of the column in the Salesforce FeedItem table that
     #   contains the title of the document. This is typically the `Title`
-    #   collumn.
+    #   column.
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
@@ -5131,7 +6733,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
     #   contains the key/value pairs required to connect to your Salesforce
     #   instance. The secret must contain a JSON structure with the
     #   following keys:
@@ -5521,9 +7123,62 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the identifier of the AWS KMS customer master key (CMK) used
-    # to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
-    # support asymmetric CMKs.
+    # Provides the configuration information of the seed or starting point
+    # URLs to crawl.
+    #
+    # *When selecting websites to index, you must adhere to the [Amazon
+    # Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    # you must only use the Amazon Kendra web crawler to index your own
+    # webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/aup/
+    #
+    # @note When making an API call, you may pass SeedUrlConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         seed_urls: ["SeedUrl"], # required
+    #         web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #       }
+    #
+    # @!attribute [rw] seed_urls
+    #   The list of seed or starting point URLs of the websites you want to
+    #   crawl.
+    #
+    #   The list can include a maximum of 100 seed URLs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] web_crawler_mode
+    #   You can choose one of the following modes:
+    #
+    #   * `HOST_ONLY` – crawl only the website host names. For example, if
+    #     the seed URL is "abc.example.com", then only URLs with host name
+    #     "abc.example.com" are crawled.
+    #
+    #   * `SUBDOMAINS` – crawl the website host names with subdomains. For
+    #     example, if the seed URL is "abc.example.com", then
+    #     "a.abc.example.com" and "b.abc.example.com" are also crawled.
+    #
+    #   * `EVERYTHING` – crawl the website host names with subdomains and
+    #     other domains that the webpages link to.
+    #
+    #   The default mode is set to `HOST_ONLY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SeedUrlConfiguration AWS API Documentation
+    #
+    class SeedUrlConfiguration < Struct.new(
+      :seed_urls,
+      :web_crawler_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the identifier of the KMScustomer master key (CMK) used to
+    # encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support
+    # asymmetric CMKs.
     #
     # @note When making an API call, you may pass ServerSideEncryptionConfiguration
     #   data as a hash:
@@ -5533,8 +7188,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the AWS KMS customer master key (CMK). Amazon
-    #   Kendra doesn't support asymmetric CMKs.
+    #   The identifier of the KMScustomer master key (CMK). Amazon Kendra
+    #   doesn't support asymmetric CMKs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServerSideEncryptionConfiguration AWS API Documentation
@@ -5594,7 +7249,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of the AWS Secret Manager secret that
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
     #   contains the user name and password required to connect to the
     #   ServiceNow instance.
     #   @return [String]
@@ -5820,7 +7475,7 @@ module Aws::Kendra
     #   data as a hash:
     #
     #       {
-    #         share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #         share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
@@ -5840,6 +7495,10 @@ module Aws::Kendra
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
     #         disable_local_groups: false,
+    #         ssl_certificate_s3_path: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
     #       }
     #
     # @!attribute [rw] share_point_version
@@ -5853,11 +7512,13 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of credentials stored in AWS Secrets
-    #   Manager. The credentials should be a user/password pair. For more
-    #   information, see [Using a Microsoft SharePoint Data Source][1]. For
-    #   more information about AWS Secrets Manager, see [ What Is AWS
-    #   Secrets Manager ][2] in the *AWS Secrets Manager* user guide.
+    #   The Amazon Resource Name (ARN) of credentials stored in Secrets
+    #   Manager. The credentials should be a user/password pair. If you use
+    #   SharePoint Server, you also need to provide the sever domain name as
+    #   part of the credentials. For more information, see [Using a
+    #   Microsoft SharePoint Data Source][1]. For more information about
+    #   Secrets Manager, see [ What Is Secrets Manager][2] in the <i>Secrets
+    #   Manager </i> user guide.
     #
     #
     #
@@ -5925,6 +7586,10 @@ module Aws::Kendra
     #   (`True`) or enabled (`False`).
     #   @return [Boolean]
     #
+    # @!attribute [rw] ssl_certificate_s3_path
+    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   @return [Types::S3Path]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
     class SharePointConfiguration < Struct.new(
@@ -5938,7 +7603,40 @@ module Aws::Kendra
       :vpc_configuration,
       :field_mappings,
       :document_title_field_name,
-      :disable_local_groups)
+      :disable_local_groups,
+      :ssl_certificate_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information of the sitemap URLs to crawl.
+    #
+    # *When selecting websites to index, you must adhere to the [Amazon
+    # Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    # you must only use the Amazon Kendra web crawler to index your own
+    # webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/aup/
+    #
+    # @note When making an API call, you may pass SiteMapsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         site_maps: ["SiteMap"], # required
+    #       }
+    #
+    # @!attribute [rw] site_maps
+    #   The list of sitemap URLs of the websites you want to crawl.
+    #
+    #   The list can include a maximum of three sitemap URLs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SiteMapsConfiguration AWS API Documentation
+    #
+    class SiteMapsConfiguration < Struct.new(
+      :site_maps)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6074,6 +7772,41 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides information about the status of documents submitted for
+    # indexing.
+    #
+    # @!attribute [rw] document_id
+    #   The unique identifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_status
+    #   The current status of a document.
+    #
+    #   If the document was submitted for deletion, the status is
+    #   `NOT_FOUND` after the document is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   Indicates the source of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   Provides detailed information about why the document couldn't be
+    #   indexed. Use this information to correct the error before you
+    #   resubmit the document for indexing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Status AWS API Documentation
+    #
+    class Status < Struct.new(
+      :document_id,
+      :document_status,
+      :failure_code,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopDataSourceSyncJobRequest
     #   data as a hash:
     #
@@ -6147,6 +7880,86 @@ module Aws::Kendra
       :query_id,
       :click_feedback_items,
       :relevance_feedback_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single query suggestion.
+    #
+    # @!attribute [rw] id
+    #   The unique UUID (universally unique identifier) of a single query
+    #   suggestion.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the unique UUID (universally unique identifier) of a
+    #   single query suggestion.
+    #
+    #   The value is the text string of a suggestion.
+    #   @return [Types::SuggestionValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Suggestion AWS API Documentation
+    #
+    class Suggestion < Struct.new(
+      :id,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The text highlights for a single query suggestion.
+    #
+    # @!attribute [rw] begin_offset
+    #   The zero-based location in the response string where the highlight
+    #   starts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The zero-based location in the response string where the highlight
+    #   ends.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SuggestionHighlight AWS API Documentation
+    #
+    class SuggestionHighlight < Struct.new(
+      :begin_offset,
+      :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides text and information about where to highlight the query
+    # suggestion text.
+    #
+    # @!attribute [rw] text
+    #   The query suggestion text to display to the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] highlights
+    #   The beginning and end of the query suggestion text that should be
+    #   highlighted.
+    #   @return [Array<Types::SuggestionHighlight>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SuggestionTextWithHighlights AWS API Documentation
+    #
+    class SuggestionTextWithHighlights < Struct.new(
+      :text,
+      :highlights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `SuggestionTextWithHighlights` structure information.
+    #
+    # @!attribute [rw] text
+    #   The `SuggestionTextWithHighlights` structure that contains the query
+    #   suggestion text and highlights.
+    #   @return [Types::SuggestionTextWithHighlights]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SuggestionValue AWS API Documentation
+    #
+    class SuggestionValue < Struct.new(
+      :text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6381,7 +8194,7 @@ module Aws::Kendra
     #             },
     #           },
     #           share_point_configuration: {
-    #             share_point_version: "SHAREPOINT_ONLINE", # required, accepts SHAREPOINT_ONLINE
+    #             share_point_version: "SHAREPOINT_2013", # required, accepts SHAREPOINT_2013, SHAREPOINT_2016, SHAREPOINT_ONLINE
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,
@@ -6401,6 +8214,10 @@ module Aws::Kendra
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
     #             disable_local_groups: false,
+    #             ssl_certificate_s3_path: {
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -6629,6 +8446,51 @@ module Aws::Kendra
     #             exclude_user_accounts: ["UserAccount"],
     #             exclude_shared_drives: ["SharedDriveId"],
     #           },
+    #           web_crawler_configuration: {
+    #             urls: { # required
+    #               seed_url_configuration: {
+    #                 seed_urls: ["SeedUrl"], # required
+    #                 web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #               },
+    #               site_maps_configuration: {
+    #                 site_maps: ["SiteMap"], # required
+    #               },
+    #             },
+    #             crawl_depth: 1,
+    #             max_links_per_page: 1,
+    #             max_content_size_per_page_in_mega_bytes: 1.0,
+    #             max_urls_per_minute_crawl_rate: 1,
+    #             url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             proxy_configuration: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn",
+    #             },
+    #             authentication_configuration: {
+    #               basic_authentication: [
+    #                 {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   credentials: "SecretArn", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           work_docs_configuration: {
+    #             organization_id: "OrganizationId", # required
+    #             crawl_comments: false,
+    #             use_change_log: false,
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -6787,6 +8649,158 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateQuerySuggestionsBlockListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         id: "QuerySuggestionsBlockListId", # required
+    #         name: "QuerySuggestionsBlockListName",
+    #         description: "Description",
+    #         source_s3_path: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for a block list.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_path
+    #   The S3 path where your block list text file sits in S3.
+    #
+    #   If you update your block list and provide the same path to the block
+    #   list text file in S3, then Amazon Kendra reloads the file to refresh
+    #   the block list. Amazon Kendra does not automatically refresh your
+    #   block list. You need to call the `UpdateQuerySuggestionsBlockList`
+    #   API to refresh you block list.
+    #
+    #   If you update your block list, then Amazon Kendra asynchronously
+    #   refreshes all query suggestions with the latest content in the S3
+    #   file. This means changes might not take effect immediately.
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM (Identity and Access Management) role used to access the
+    #   block list text file in S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsBlockListRequest AWS API Documentation
+    #
+    class UpdateQuerySuggestionsBlockListRequest < Struct.new(
+      :index_id,
+      :id,
+      :name,
+      :description,
+      :source_s3_path,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQuerySuggestionsConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         mode: "ENABLED", # accepts ENABLED, LEARN_ONLY
+    #         query_log_look_back_window_in_days: 1,
+    #         include_queries_without_user_information: false,
+    #         minimum_number_of_querying_users: 1,
+    #         minimum_query_count: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index you want to update query suggestions
+    #   settings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Set the mode to `ENABLED` or `LEARN_ONLY`.
+    #
+    #   By default, Amazon Kendra enables query suggestions. `LEARN_ONLY`
+    #   mode allows you to turn off query suggestions. You can to update
+    #   this at any time.
+    #
+    #   In `LEARN_ONLY` mode, Amazon Kendra continues to learn from new
+    #   queries to keep suggestions up to date for when you are ready to
+    #   switch to ENABLED mode again.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_log_look_back_window_in_days
+    #   How recent your queries are in your query log time window.
+    #
+    #   The time window is the number of days from current day to past days.
+    #
+    #   By default, Amazon Kendra sets this to 180.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] include_queries_without_user_information
+    #   `TRUE` to include queries without user information (i.e. all
+    #   queries, irrespective of the user), otherwise `FALSE` to only
+    #   include queries with user information.
+    #
+    #   If you pass user information to Amazon Kendra along with the
+    #   queries, you can set this flag to `FALSE` and instruct Amazon Kendra
+    #   to only consider queries with user information.
+    #
+    #   If you set to `FALSE`, Amazon Kendra only considers queries searched
+    #   at least `MinimumQueryCount` times across
+    #   `MinimumNumberOfQueryingUsers` unique users for suggestions.
+    #
+    #   If you set to `TRUE`, Amazon Kendra ignores all user information and
+    #   learns from all queries.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_number_of_querying_users
+    #   The minimum number of unique users who must search a query in order
+    #   for the query to be eligible to suggest to your users.
+    #
+    #   Increasing this number might decrease the number of suggestions.
+    #   However, this ensures a query is searched by many users and is truly
+    #   popular to suggest to users.
+    #
+    #   How you tune this setting depends on your specific needs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_query_count
+    #   The the minimum number of times a query must be searched in order to
+    #   be eligible to suggest to your users.
+    #
+    #   Decreasing this number increases the number of suggestions. However,
+    #   this affects the quality of suggestions as it sets a low bar for a
+    #   query to be considered popular to suggest to users.
+    #
+    #   How you tune this setting depends on your specific needs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateQuerySuggestionsConfigRequest AWS API Documentation
+    #
+    class UpdateQuerySuggestionsConfigRequest < Struct.new(
+      :index_id,
+      :mode,
+      :query_log_look_back_window_in_days,
+      :include_queries_without_user_information,
+      :minimum_number_of_querying_users,
+      :minimum_query_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateThesaurusRequest
     #   data as a hash:
     #
@@ -6839,23 +8853,114 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information of the URLs to crawl.
+    #
+    # *When selecting websites to index, you must adhere to the [Amazon
+    # Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    # you must only use the Amazon Kendra web crawler to index your own
+    # webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/aup/
+    #
+    # @note When making an API call, you may pass Urls
+    #   data as a hash:
+    #
+    #       {
+    #         seed_url_configuration: {
+    #           seed_urls: ["SeedUrl"], # required
+    #           web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #         },
+    #         site_maps_configuration: {
+    #           site_maps: ["SiteMap"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] seed_url_configuration
+    #   Provides the configuration of the seed or starting point URLs of the
+    #   websites you want to crawl.
+    #
+    #   You can choose to crawl only the website host names, or the website
+    #   host names with subdomains, or the website host names with
+    #   subdomains and other domains that the webpages link to.
+    #
+    #   You can list up to 100 seed URLs.
+    #   @return [Types::SeedUrlConfiguration]
+    #
+    # @!attribute [rw] site_maps_configuration
+    #   Provides the configuration of the sitemap URLs of the websites you
+    #   want to crawl.
+    #
+    #   Only URLs belonging to the same website host names are crawled. You
+    #   can list up to three sitemap URLs.
+    #   @return [Types::SiteMapsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Urls AWS API Documentation
+    #
+    class Urls < Struct.new(
+      :seed_url_configuration,
+      :site_maps_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the user context for a Amazon Kendra index.
+    #
+    # This is used for filtering search results for different users based on
+    # their access to documents.
+    #
+    # You provide one of the following:
+    #
+    # * User token
+    #
+    # * User ID, the groups the user belongs to, and the data sources the
+    #   groups can access
+    #
+    # If you provide both, an exception is thrown.
     #
     # @note When making an API call, you may pass UserContext
     #   data as a hash:
     #
     #       {
     #         token: "Token",
+    #         user_id: "PrincipalName",
+    #         groups: ["PrincipalName"],
+    #         data_source_groups: [
+    #           {
+    #             group_id: "PrincipalName", # required
+    #             data_source_id: "DataSourceId", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] token
-    #   The user context token. It must be a JWT or a JSON token.
+    #   The user context token for filtering search results for a user. It
+    #   must be a JWT or a JSON token.
     #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user you want to filter search results based
+    #   on their access to documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The list of groups you want to filter search results based on the
+    #   groups' access to documents.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_source_groups
+    #   The list of data source groups you want to filter search results
+    #   based on groups' access to documents in that data source.
+    #   @return [Array<Types::DataSourceGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserContext AWS API Documentation
     #
     class UserContext < Struct.new(
-      :token)
+      :token,
+      :user_id,
+      :groups,
+      :data_source_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6905,6 +9010,273 @@ module Aws::Kendra
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information required for Amazon Kendra web
+    # crawler.
+    #
+    # @note When making an API call, you may pass WebCrawlerConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         urls: { # required
+    #           seed_url_configuration: {
+    #             seed_urls: ["SeedUrl"], # required
+    #             web_crawler_mode: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS, EVERYTHING
+    #           },
+    #           site_maps_configuration: {
+    #             site_maps: ["SiteMap"], # required
+    #           },
+    #         },
+    #         crawl_depth: 1,
+    #         max_links_per_page: 1,
+    #         max_content_size_per_page_in_mega_bytes: 1.0,
+    #         max_urls_per_minute_crawl_rate: 1,
+    #         url_inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         url_exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         proxy_configuration: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           credentials: "SecretArn",
+    #         },
+    #         authentication_configuration: {
+    #           basic_authentication: [
+    #             {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               credentials: "SecretArn", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] urls
+    #   Specifies the seed or starting point URLs of the websites or the
+    #   sitemap URLs of the websites you want to crawl.
+    #
+    #   You can include website subdomains. You can list up to 100 seed URLs
+    #   and up to three sitemap URLs.
+    #
+    #   *When selecting websites to index, you must adhere to the [Amazon
+    #   Acceptable Use Policy][1] and all other Amazon terms. Remember that
+    #   you must only use the Amazon Kendra web crawler to index your own
+    #   webpages, or webpages that you have authorization to index.*
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/aup/
+    #   @return [Types::Urls]
+    #
+    # @!attribute [rw] crawl_depth
+    #   Specifies the number of levels in a website that you want to crawl.
+    #
+    #   The first level begins from the website seed or starting point URL.
+    #   For example, if a website has 3 levels – index level (i.e. seed in
+    #   this example), sections level, and subsections level – and you are
+    #   only interested in crawling information up to the sections level
+    #   (i.e. levels 0-1), you can set your depth to 1.
+    #
+    #   The default crawl depth is set to 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_links_per_page
+    #   The maximum number of URLs on a webpage to include when crawling a
+    #   website. This number is per webpage.
+    #
+    #   As a website’s webpages are crawled, any URLs the webpages link to
+    #   are also crawled. URLs on a webpage are crawled in order of
+    #   appearance.
+    #
+    #   The default maximum links per page is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_content_size_per_page_in_mega_bytes
+    #   The maximum size (in MB) of a webpage or attachment to crawl.
+    #
+    #   Files larger than this size (in MB) are skipped/not crawled.
+    #
+    #   The default maximum size of a webpage or attachment is set to 50 MB.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_urls_per_minute_crawl_rate
+    #   The maximum number of URLs crawled per website host per minute.
+    #
+    #   A minimum of one URL is required.
+    #
+    #   The default maximum number of URLs crawled per website host per
+    #   minute is 300.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_inclusion_patterns
+    #   The regular expression pattern to include certain URLs to crawl.
+    #
+    #   If there is a regular expression pattern to exclude certain URLs
+    #   that conflicts with the include pattern, the exclude pattern takes
+    #   precedence.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] url_exclusion_patterns
+    #   The regular expression pattern to exclude certain URLs to crawl.
+    #
+    #   If there is a regular expression pattern to include certain URLs
+    #   that conflicts with the exclude pattern, the exclude pattern takes
+    #   precedence.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] proxy_configuration
+    #   Provides configuration information required to connect to your
+    #   internal websites via a web proxy.
+    #
+    #   You must provide the website host name and port number. For example,
+    #   the host name of https://a.example.com/page1.html is
+    #   "a.example.com" and the port is 443, the standard port for HTTPS.
+    #
+    #   Web proxy credentials are optional and you can use them to connect
+    #   to a web proxy server that requires basic authentication. To store
+    #   web proxy credentials, you use a secret in [AWS Secrets Manager][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Types::ProxyConfiguration]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   Provides configuration information required to connect to websites
+    #   using authentication.
+    #
+    #   You can connect to websites using basic authentication of user name
+    #   and password.
+    #
+    #   You must provide the website host name and port number. For example,
+    #   the host name of https://a.example.com/page1.html is
+    #   "a.example.com" and the port is 443, the standard port for HTTPS.
+    #   You use a secret in [AWS Secrets Manager][1] to store your
+    #   authentication credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Types::AuthenticationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/WebCrawlerConfiguration AWS API Documentation
+    #
+    class WebCrawlerConfiguration < Struct.new(
+      :urls,
+      :crawl_depth,
+      :max_links_per_page,
+      :max_content_size_per_page_in_mega_bytes,
+      :max_urls_per_minute_crawl_rate,
+      :url_inclusion_patterns,
+      :url_exclusion_patterns,
+      :proxy_configuration,
+      :authentication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to Amazon WorkDocs
+    # as your data source.
+    #
+    # Amazon WorkDocs connector is available in Oregon, North Virginia,
+    # Sydney, Singapore and Ireland regions.
+    #
+    # @note When making an API call, you may pass WorkDocsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         crawl_comments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the directory corresponding to your Amazon
+    #   WorkDocs site repository.
+    #
+    #   You can find the organization ID in the [AWS Directory Service][1]
+    #   by going to **Active Directory**, then **Directories**. Your Amazon
+    #   WorkDocs site directory has an ID, which is the organization ID. You
+    #   can also set up a new Amazon WorkDocs directory in the AWS Directory
+    #   Service console and enable a Amazon WorkDocs site for the directory
+    #   in the Amazon WorkDocs console.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/directoryservicev2/
+    #   @return [String]
+    #
+    # @!attribute [rw] crawl_comments
+    #   `TRUE` to include comments on documents in your index. Including
+    #   comments in your index means each comment is a document that can be
+    #   searched on.
+    #
+    #   The default is set to `FALSE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the change logs to update documents in your index
+    #   instead of scanning all documents.
+    #
+    #   If you are syncing your Amazon WorkDocs data source with your index
+    #   for the first time, all documents are scanned. After your first
+    #   sync, you can use the change logs to update your documents in your
+    #   index for future syncs.
+    #
+    #   The default is set to `FALSE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files in
+    #   your Amazon WorkDocs site repository. Files that match the patterns
+    #   are included in the index. Files that don't match the patterns are
+    #   excluded from the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn’t included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files in
+    #   your Amazon WorkDocs site repository. Files that match the patterns
+    #   are excluded from the index. Files that don’t match the patterns are
+    #   included in the index. If a file matches both an inclusion pattern
+    #   and an exclusion pattern, the exclusion pattern takes precedence and
+    #   the file isn’t included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map Amazon
+    #   WorkDocs field names to custom index field names in Amazon Kendra.
+    #   You must first create the custom index fields using the
+    #   `UpdateIndex` operation before you map to Amazon WorkDocs fields.
+    #   For more information, see [Mapping Data Source Fields][1]. The
+    #   Amazon WorkDocs data source field names need to exist in your Amazon
+    #   WorkDocs custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/WorkDocsConfiguration AWS API Documentation
+    #
+    class WorkDocsConfiguration < Struct.new(
+      :organization_id,
+      :crawl_comments,
+      :use_change_log,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :field_mappings)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2021-08-16)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
+1.98.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.2 (2021-07-20)
+------------------
+
+* Issue - Fix file downloading edge case for 1 byte multipart ranges (#2561).
+
+1.96.1 (2021-06-10)
+------------------
+
+* Issue - fix GetBucketLocation location_constraint XML parsing (#2536)
+
+1.96.0 (2021-06-03)
+------------------
+
+* Feature - S3 Inventory now supports Bucket Key Status
+
+1.95.1 (2021-05-24)
+------------------
+
+* Issue - Raise an error when FIPS is in the ARN's region for Access Point and Object Lambda.
+
+1.95.0 (2021-05-21)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
 1.94.1 (2021-05-05)
 ------------------
 

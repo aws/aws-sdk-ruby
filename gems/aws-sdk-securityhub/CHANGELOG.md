@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2021-07-23)
+------------------
+
+* Feature - Added product name, company name, and Region fields for security findings. Added details objects for RDS event subscriptions and AWS ECS services. Added fields to the details for AWS Elasticsearch domains.
+
+1.47.0 (2021-06-24)
+------------------
+
+* Feature - Added new resource details for ECS clusters and ECS task definitions. Added additional information for S3 buckets, Elasticsearch domains, and API Gateway V2 stages.
+
+1.46.0 (2021-05-14)
+------------------
+
+* Feature - Updated descriptions to add notes on array lengths.
+
 1.45.0 (2021-05-03)
 ------------------
 

@@ -482,7 +482,7 @@ module Aws::Personalize
     # @option params [required, String] :solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version to deploy.
     #
-    # @option params [required, Integer] :min_provisioned_tps
+    # @option params [Integer] :min_provisioned_tps
     #   Specifies the requested minimum provisioned transactions
     #   (recommendations) per second that Amazon Personalize will support.
     #
@@ -498,7 +498,7 @@ module Aws::Personalize
     #   resp = client.create_campaign({
     #     name: "Name", # required
     #     solution_version_arn: "Arn", # required
-    #     min_provisioned_tps: 1, # required
+    #     min_provisioned_tps: 1,
     #     campaign_config: {
     #       item_exploration_config: {
     #         "ParameterName" => "ParameterValue",
@@ -603,10 +603,10 @@ module Aws::Personalize
 
     # Creates a job that exports data from your dataset to an Amazon S3
     # bucket. To allow Amazon Personalize to export the training data, you
-    # must specify an service-linked AWS Identity and Access Management
-    # (IAM) role that gives Amazon Personalize `PutObject` permissions for
-    # your Amazon S3 bucket. For information, see [Exporting a dataset][1]
-    # in the Amazon Personalize developer guide.
+    # must specify an service-linked IAM role that gives Amazon Personalize
+    # `PutObject` permissions for your Amazon S3 bucket. For information,
+    # see [Exporting a dataset][1] in the Amazon Personalize developer
+    # guide.
     #
     # **Status**
     #
@@ -642,9 +642,8 @@ module Aws::Personalize
     #   both types. The default value is `PUT`.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management service role that has permissions to add data to your
-    #   output Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the IAM service role that has
+    #   permissions to add data to your output Amazon S3 bucket.
     #
     # @option params [required, Types::DatasetExportJobOutput] :job_output
     #   The path to the Amazon S3 bucket where the job's output is stored.
@@ -711,10 +710,10 @@ module Aws::Personalize
     #
     #  </note>
     #
-    # You can specify an AWS Key Management Service (KMS) key to encrypt the
+    # You can specify an Key Management Service (KMS) key to encrypt the
     # datasets in the group. If you specify a KMS key, you must also include
-    # an AWS Identity and Access Management (IAM) role that has permission
-    # to access the key.
+    # an Identity and Access Management (IAM) role that has permission to
+    # access the key.
     #
     # **APIs that require a dataset group ARN in the request**
     #
@@ -736,12 +735,13 @@ module Aws::Personalize
     #   The name for the new dataset group.
     #
     # @option params [String] :role_arn
-    #   The ARN of the IAM role that has permissions to access the KMS key.
-    #   Supplying an IAM role is only valid when also specifying a KMS key.
+    #   The ARN of the Identity and Access Management (IAM) role that has
+    #   permissions to access the Key Management Service (KMS) key. Supplying
+    #   an IAM role is only valid when also specifying a KMS key.
     #
     # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) of a KMS key used to encrypt the
-    #   datasets.
+    #   The Amazon Resource Name (ARN) of a Key Management Service (KMS) key
+    #   used to encrypt the datasets.
     #
     # @return [Types::CreateDatasetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -770,12 +770,12 @@ module Aws::Personalize
 
     # Creates a job that imports training data from your data source (an
     # Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon
-    # Personalize to import the training data, you must specify an AWS
-    # Identity and Access Management (IAM) service role that has permission
-    # to read from the data source, as Amazon Personalize makes a copy of
-    # your data and processes it in an internal AWS system. For information
-    # on granting access to your Amazon S3 bucket, see [Giving Amazon
-    # Personalize Access to Amazon S3 Resources][1].
+    # Personalize to import the training data, you must specify an IAM
+    # service role that has permission to read from the data source, as
+    # Amazon Personalize makes a copy of your data and processes it
+    # internally. For information on granting access to your Amazon S3
+    # bucket, see [Giving Amazon Personalize Access to Amazon S3
+    # Resources][1].
     #
     # The dataset import job replaces any existing data in the dataset that
     # you imported in bulk.
@@ -1169,6 +1169,10 @@ module Aws::Personalize
     #         metric_name: "MetricName",
     #         recipe_list: ["Arn"],
     #       },
+    #       optimization_objective: {
+    #         item_attribute: "ItemAttribute",
+    #         objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
+    #       },
     #     },
     #   })
     #
@@ -1194,10 +1198,17 @@ module Aws::Personalize
     #
     # A solution version can be in one of the following states:
     #
-    # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
-    #   FAILED
+    # * CREATE PENDING
     #
-    # ^
+    # * CREATE IN\_PROGRESS
+    #
+    # * ACTIVE
+    #
+    # * CREATE FAILED
+    #
+    # * CREATE STOPPING
+    #
+    # * CREATE STOPPED
     #
     # To get the status of the version, call DescribeSolutionVersion. Wait
     # until the status shows as ACTIVE before calling `CreateCampaign`.
@@ -1830,7 +1841,7 @@ module Aws::Personalize
     #
     # @return [Types::DescribeFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeFilterResponse#filter #filter} => Types::Filter
+    #   * {Types::DescribeFilterResponse#filter #data.filter} => Types::Filter (This method conflicts with a method on Response, call it through the data member)
     #
     # @example Request syntax with placeholder values
     #
@@ -1840,14 +1851,14 @@ module Aws::Personalize
     #
     # @example Response structure
     #
-    #   resp.filter.name #=> String
-    #   resp.filter.filter_arn #=> String
-    #   resp.filter.creation_date_time #=> Time
-    #   resp.filter.last_updated_date_time #=> Time
-    #   resp.filter.dataset_group_arn #=> String
-    #   resp.filter.failure_reason #=> String
-    #   resp.filter.filter_expression #=> String
-    #   resp.filter.status #=> String
+    #   resp.data.filter.name #=> String
+    #   resp.data.filter.filter_arn #=> String
+    #   resp.data.filter.creation_date_time #=> Time
+    #   resp.data.filter.last_updated_date_time #=> Time
+    #   resp.data.filter.dataset_group_arn #=> String
+    #   resp.data.filter.failure_reason #=> String
+    #   resp.data.filter.filter_expression #=> String
+    #   resp.data.filter.status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFilter AWS API Documentation
     #
@@ -1996,6 +2007,8 @@ module Aws::Personalize
     #   resp.solution.solution_config.auto_ml_config.metric_name #=> String
     #   resp.solution.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution.solution_config.auto_ml_config.recipe_list[0] #=> String
+    #   resp.solution.solution_config.optimization_objective.item_attribute #=> String
+    #   resp.solution.solution_config.optimization_objective.objective_sensitivity #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
     #   resp.solution.auto_ml_result.best_recipe_arn #=> String
     #   resp.solution.status #=> String
     #   resp.solution.creation_date_time #=> Time
@@ -2065,6 +2078,8 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.auto_ml_config.metric_name #=> String
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list #=> Array
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list[0] #=> String
+    #   resp.solution_version.solution_config.optimization_objective.item_attribute #=> String
+    #   resp.solution_version.solution_config.optimization_objective.objective_sensitivity #=> String, one of "LOW", "MEDIUM", "HIGH", "OFF"
     #   resp.solution_version.training_hours #=> Float
     #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE"
     #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters #=> Hash
@@ -2708,6 +2723,43 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Stops creating a solution version that is in a state of
+    # CREATE\_PENDING or CREATE IN\_PROGRESS.
+    #
+    # Depending on the current state of the solution version, the solution
+    # version state changes as follows:
+    #
+    # * CREATE\_PENDING &gt; CREATE\_STOPPED
+    #
+    #   or
+    #
+    # * CREATE\_IN\_PROGRESS &gt; CREATE\_STOPPING &gt; CREATE\_STOPPED
+    #
+    # You are billed for all of the training completed up until you stop the
+    # solution version creation. You cannot resume creating a solution
+    # version once it has been stopped.
+    #
+    # @option params [required, String] :solution_version_arn
+    #   The Amazon Resource Name (ARN) of the solution version you want to
+    #   stop creating.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_solution_version_creation({
+    #     solution_version_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopSolutionVersionCreation AWS API Documentation
+    #
+    # @overload stop_solution_version_creation(params = {})
+    # @param [Hash] params ({})
+    def stop_solution_version_creation(params = {}, options = {})
+      req = build_request(:stop_solution_version_creation, params)
+      req.send_request(options)
+    end
+
     # Updates a campaign by either deploying a new solution or changing the
     # value of the campaign's `minProvisionedTPS` parameter.
     #
@@ -2777,7 +2829,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

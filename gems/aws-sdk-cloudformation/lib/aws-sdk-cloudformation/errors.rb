@@ -42,10 +42,12 @@ module Aws::CloudFormation
   # * {OperationNotFoundException}
   # * {OperationStatusCheckFailedException}
   # * {StackInstanceNotFoundException}
+  # * {StackNotFoundException}
   # * {StackSetNotEmptyException}
   # * {StackSetNotFoundException}
   # * {StaleRequestException}
   # * {TokenAlreadyExistsException}
+  # * {TypeConfigurationNotFoundException}
   # * {TypeNotFoundException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -209,6 +211,16 @@ module Aws::CloudFormation
       end
     end
 
+    class StackNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFormation::Types::StackNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class StackSetNotEmptyException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -244,6 +256,16 @@ module Aws::CloudFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFormation::Types::TokenAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TypeConfigurationNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFormation::Types::TypeConfigurationNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

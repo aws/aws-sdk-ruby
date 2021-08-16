@@ -893,6 +893,7 @@ module Aws::WorkSpaces
     WorkspaceAccessProperties.add_member(:device_type_android, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeAndroid"))
     WorkspaceAccessProperties.add_member(:device_type_chrome_os, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeChromeOs"))
     WorkspaceAccessProperties.add_member(:device_type_zero_client, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeZeroClient"))
+    WorkspaceAccessProperties.add_member(:device_type_linux, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeLinux"))
     WorkspaceAccessProperties.struct_class = Types::WorkspaceAccessProperties
 
     WorkspaceBundle.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2021-06-16)
+------------------
+
+* Feature - Adds support for multi-Region keys
+
 1.43.0 (2021-03-10)
 ------------------
 
