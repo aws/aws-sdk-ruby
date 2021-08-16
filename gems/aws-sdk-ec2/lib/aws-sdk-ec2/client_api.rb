@@ -373,6 +373,8 @@ module Aws::EC2
     CreateSpotDatafeedSubscriptionResult = Shapes::StructureShape.new(name: 'CreateSpotDatafeedSubscriptionResult')
     CreateStoreImageTaskRequest = Shapes::StructureShape.new(name: 'CreateStoreImageTaskRequest')
     CreateStoreImageTaskResult = Shapes::StructureShape.new(name: 'CreateStoreImageTaskResult')
+    CreateSubnetCidrReservationRequest = Shapes::StructureShape.new(name: 'CreateSubnetCidrReservationRequest')
+    CreateSubnetCidrReservationResult = Shapes::StructureShape.new(name: 'CreateSubnetCidrReservationResult')
     CreateSubnetRequest = Shapes::StructureShape.new(name: 'CreateSubnetRequest')
     CreateSubnetResult = Shapes::StructureShape.new(name: 'CreateSubnetResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
@@ -506,6 +508,8 @@ module Aws::EC2
     DeleteSecurityGroupRequest = Shapes::StructureShape.new(name: 'DeleteSecurityGroupRequest')
     DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
     DeleteSpotDatafeedSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteSpotDatafeedSubscriptionRequest')
+    DeleteSubnetCidrReservationRequest = Shapes::StructureShape.new(name: 'DeleteSubnetCidrReservationRequest')
+    DeleteSubnetCidrReservationResult = Shapes::StructureShape.new(name: 'DeleteSubnetCidrReservationResult')
     DeleteSubnetRequest = Shapes::StructureShape.new(name: 'DeleteSubnetRequest')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DeleteTrafficMirrorFilterRequest = Shapes::StructureShape.new(name: 'DeleteTrafficMirrorFilterRequest')
@@ -1120,6 +1124,9 @@ module Aws::EC2
     GetReservedInstancesExchangeQuoteResult = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteResult')
     GetSerialConsoleAccessStatusRequest = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusRequest')
     GetSerialConsoleAccessStatusResult = Shapes::StructureShape.new(name: 'GetSerialConsoleAccessStatusResult')
+    GetSubnetCidrReservationsMaxResults = Shapes::IntegerShape.new(name: 'GetSubnetCidrReservationsMaxResults')
+    GetSubnetCidrReservationsRequest = Shapes::StructureShape.new(name: 'GetSubnetCidrReservationsRequest')
+    GetSubnetCidrReservationsResult = Shapes::StructureShape.new(name: 'GetSubnetCidrReservationsResult')
     GetTransitGatewayAttachmentPropagationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsRequest')
     GetTransitGatewayAttachmentPropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsResult')
     GetTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayMulticastDomainAssociationsRequest')
@@ -1267,10 +1274,14 @@ module Aws::EC2
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
     InstanceIdsSet = Shapes::ListShape.new(name: 'InstanceIdsSet')
     InstanceInterruptionBehavior = Shapes::StringShape.new(name: 'InstanceInterruptionBehavior')
+    InstanceIpv4Prefix = Shapes::StructureShape.new(name: 'InstanceIpv4Prefix')
+    InstanceIpv4PrefixList = Shapes::ListShape.new(name: 'InstanceIpv4PrefixList')
     InstanceIpv6Address = Shapes::StructureShape.new(name: 'InstanceIpv6Address')
     InstanceIpv6AddressList = Shapes::ListShape.new(name: 'InstanceIpv6AddressList')
     InstanceIpv6AddressListRequest = Shapes::ListShape.new(name: 'InstanceIpv6AddressListRequest')
     InstanceIpv6AddressRequest = Shapes::StructureShape.new(name: 'InstanceIpv6AddressRequest')
+    InstanceIpv6Prefix = Shapes::StructureShape.new(name: 'InstanceIpv6Prefix')
+    InstanceIpv6PrefixList = Shapes::ListShape.new(name: 'InstanceIpv6PrefixList')
     InstanceLifecycle = Shapes::StringShape.new(name: 'InstanceLifecycle')
     InstanceLifecycleType = Shapes::StringShape.new(name: 'InstanceLifecycleType')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
@@ -1329,10 +1340,17 @@ module Aws::EC2
     IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
     IpPermission = Shapes::StructureShape.new(name: 'IpPermission')
     IpPermissionList = Shapes::ListShape.new(name: 'IpPermissionList')
+    IpPrefixList = Shapes::ListShape.new(name: 'IpPrefixList')
     IpRange = Shapes::StructureShape.new(name: 'IpRange')
     IpRangeList = Shapes::ListShape.new(name: 'IpRangeList')
     IpRanges = Shapes::ListShape.new(name: 'IpRanges')
     Ipv4PoolEc2Id = Shapes::StringShape.new(name: 'Ipv4PoolEc2Id')
+    Ipv4PrefixList = Shapes::ListShape.new(name: 'Ipv4PrefixList')
+    Ipv4PrefixListResponse = Shapes::ListShape.new(name: 'Ipv4PrefixListResponse')
+    Ipv4PrefixSpecification = Shapes::StructureShape.new(name: 'Ipv4PrefixSpecification')
+    Ipv4PrefixSpecificationRequest = Shapes::StructureShape.new(name: 'Ipv4PrefixSpecificationRequest')
+    Ipv4PrefixSpecificationResponse = Shapes::StructureShape.new(name: 'Ipv4PrefixSpecificationResponse')
+    Ipv4PrefixesList = Shapes::ListShape.new(name: 'Ipv4PrefixesList')
     Ipv6Address = Shapes::StringShape.new(name: 'Ipv6Address')
     Ipv6AddressList = Shapes::ListShape.new(name: 'Ipv6AddressList')
     Ipv6CidrAssociation = Shapes::StructureShape.new(name: 'Ipv6CidrAssociation')
@@ -1345,6 +1363,12 @@ module Aws::EC2
     Ipv6PoolIdList = Shapes::ListShape.new(name: 'Ipv6PoolIdList')
     Ipv6PoolMaxResults = Shapes::IntegerShape.new(name: 'Ipv6PoolMaxResults')
     Ipv6PoolSet = Shapes::ListShape.new(name: 'Ipv6PoolSet')
+    Ipv6PrefixList = Shapes::ListShape.new(name: 'Ipv6PrefixList')
+    Ipv6PrefixListResponse = Shapes::ListShape.new(name: 'Ipv6PrefixListResponse')
+    Ipv6PrefixSpecification = Shapes::StructureShape.new(name: 'Ipv6PrefixSpecification')
+    Ipv6PrefixSpecificationRequest = Shapes::StructureShape.new(name: 'Ipv6PrefixSpecificationRequest')
+    Ipv6PrefixSpecificationResponse = Shapes::StructureShape.new(name: 'Ipv6PrefixSpecificationResponse')
+    Ipv6PrefixesList = Shapes::ListShape.new(name: 'Ipv6PrefixesList')
     Ipv6Range = Shapes::StructureShape.new(name: 'Ipv6Range')
     Ipv6RangeList = Shapes::ListShape.new(name: 'Ipv6RangeList')
     Ipv6SupportValue = Shapes::StringShape.new(name: 'Ipv6SupportValue')
@@ -2044,6 +2068,10 @@ module Aws::EC2
     SubnetCidrAssociationId = Shapes::StringShape.new(name: 'SubnetCidrAssociationId')
     SubnetCidrBlockState = Shapes::StructureShape.new(name: 'SubnetCidrBlockState')
     SubnetCidrBlockStateCode = Shapes::StringShape.new(name: 'SubnetCidrBlockStateCode')
+    SubnetCidrReservation = Shapes::StructureShape.new(name: 'SubnetCidrReservation')
+    SubnetCidrReservationId = Shapes::StringShape.new(name: 'SubnetCidrReservationId')
+    SubnetCidrReservationList = Shapes::ListShape.new(name: 'SubnetCidrReservationList')
+    SubnetCidrReservationType = Shapes::StringShape.new(name: 'SubnetCidrReservationType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdStringList = Shapes::ListShape.new(name: 'SubnetIdStringList')
     SubnetIpv6CidrBlockAssociation = Shapes::StructureShape.new(name: 'SubnetIpv6CidrBlockAssociation')
@@ -2550,10 +2578,13 @@ module Aws::EC2
 
     AssignIpv6AddressesRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
     AssignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
+    AssignIpv6AddressesRequest.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
+    AssignIpv6AddressesRequest.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: IpPrefixList, location_name: "Ipv6Prefix"))
     AssignIpv6AddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
     AssignIpv6AddressesRequest.struct_class = Types::AssignIpv6AddressesRequest
 
     AssignIpv6AddressesResult.add_member(:assigned_ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "assignedIpv6Addresses"))
+    AssignIpv6AddressesResult.add_member(:assigned_ipv_6_prefixes, Shapes::ShapeRef.new(shape: IpPrefixList, location_name: "assignedIpv6PrefixSet"))
     AssignIpv6AddressesResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     AssignIpv6AddressesResult.struct_class = Types::AssignIpv6AddressesResult
 
@@ -2561,10 +2592,13 @@ module Aws::EC2
     AssignPrivateIpAddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
     AssignPrivateIpAddressesRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressStringList, location_name: "privateIpAddress"))
     AssignPrivateIpAddressesRequest.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "secondaryPrivateIpAddressCount"))
+    AssignPrivateIpAddressesRequest.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: IpPrefixList, location_name: "Ipv4Prefix"))
+    AssignPrivateIpAddressesRequest.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv4PrefixCount"))
     AssignPrivateIpAddressesRequest.struct_class = Types::AssignPrivateIpAddressesRequest
 
     AssignPrivateIpAddressesResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     AssignPrivateIpAddressesResult.add_member(:assigned_private_ip_addresses, Shapes::ShapeRef.new(shape: AssignedPrivateIpAddressList, location_name: "assignedPrivateIpAddressesSet"))
+    AssignPrivateIpAddressesResult.add_member(:assigned_ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixesList, location_name: "assignedIpv4PrefixSet"))
     AssignPrivateIpAddressesResult.struct_class = Types::AssignPrivateIpAddressesResult
 
     AssignedPrivateIpAddress.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
@@ -3633,6 +3667,10 @@ module Aws::EC2
     CreateNetworkInterfaceRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     CreateNetworkInterfaceRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressSpecificationList, location_name: "privateIpAddresses"))
     CreateNetworkInterfaceRequest.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "secondaryPrivateIpAddressCount"))
+    CreateNetworkInterfaceRequest.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixList, location_name: "Ipv4Prefix"))
+    CreateNetworkInterfaceRequest.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv4PrefixCount"))
+    CreateNetworkInterfaceRequest.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixList, location_name: "Ipv6Prefix"))
+    CreateNetworkInterfaceRequest.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
     CreateNetworkInterfaceRequest.add_member(:interface_type, Shapes::ShapeRef.new(shape: NetworkInterfaceCreationType, location_name: "InterfaceType"))
     CreateNetworkInterfaceRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     CreateNetworkInterfaceRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -3756,14 +3794,25 @@ module Aws::EC2
     CreateStoreImageTaskResult.add_member(:object_key, Shapes::ShapeRef.new(shape: String, location_name: "objectKey"))
     CreateStoreImageTaskResult.struct_class = Types::CreateStoreImageTaskResult
 
+    CreateSubnetCidrReservationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateSubnetCidrReservationRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
+    CreateSubnetCidrReservationRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    CreateSubnetCidrReservationRequest.add_member(:reservation_type, Shapes::ShapeRef.new(shape: SubnetCidrReservationType, required: true, location_name: "ReservationType"))
+    CreateSubnetCidrReservationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateSubnetCidrReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateSubnetCidrReservationRequest.struct_class = Types::CreateSubnetCidrReservationRequest
+
+    CreateSubnetCidrReservationResult.add_member(:subnet_cidr_reservation, Shapes::ShapeRef.new(shape: SubnetCidrReservation, location_name: "subnetCidrReservation"))
+    CreateSubnetCidrReservationResult.struct_class = Types::CreateSubnetCidrReservationResult
+
     CreateSubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     CreateSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
-    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
     CreateSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -3954,6 +4003,7 @@ module Aws::EC2
     CreateVolumeRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVolumeRequest.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAttachEnabled"))
     CreateVolumeRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
+    CreateVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
 
     CreateVpcEndpointConnectionNotificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4303,6 +4353,13 @@ module Aws::EC2
 
     DeleteSpotDatafeedSubscriptionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteSpotDatafeedSubscriptionRequest.struct_class = Types::DeleteSpotDatafeedSubscriptionRequest
+
+    DeleteSubnetCidrReservationRequest.add_member(:subnet_cidr_reservation_id, Shapes::ShapeRef.new(shape: SubnetCidrReservationId, required: true, location_name: "SubnetCidrReservationId"))
+    DeleteSubnetCidrReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteSubnetCidrReservationRequest.struct_class = Types::DeleteSubnetCidrReservationRequest
+
+    DeleteSubnetCidrReservationResult.add_member(:deleted_subnet_cidr_reservation, Shapes::ShapeRef.new(shape: SubnetCidrReservation, location_name: "deletedSubnetCidrReservation"))
+    DeleteSubnetCidrReservationResult.struct_class = Types::DeleteSubnetCidrReservationResult
 
     DeleteSubnetRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     DeleteSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -6793,6 +6850,18 @@ module Aws::EC2
     GetSerialConsoleAccessStatusResult.add_member(:serial_console_access_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "serialConsoleAccessEnabled"))
     GetSerialConsoleAccessStatusResult.struct_class = Types::GetSerialConsoleAccessStatusResult
 
+    GetSubnetCidrReservationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    GetSubnetCidrReservationsRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
+    GetSubnetCidrReservationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetSubnetCidrReservationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetSubnetCidrReservationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetSubnetCidrReservationsMaxResults, location_name: "MaxResults"))
+    GetSubnetCidrReservationsRequest.struct_class = Types::GetSubnetCidrReservationsRequest
+
+    GetSubnetCidrReservationsResult.add_member(:subnet_ipv_4_cidr_reservations, Shapes::ShapeRef.new(shape: SubnetCidrReservationList, location_name: "subnetIpv4CidrReservationSet"))
+    GetSubnetCidrReservationsResult.add_member(:subnet_ipv_6_cidr_reservations, Shapes::ShapeRef.new(shape: SubnetCidrReservationList, location_name: "subnetIpv6CidrReservationSet"))
+    GetSubnetCidrReservationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetSubnetCidrReservationsResult.struct_class = Types::GetSubnetCidrReservationsResult
+
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
@@ -7408,6 +7477,11 @@ module Aws::EC2
 
     InstanceIdsSet.member = Shapes::ShapeRef.new(shape: InstanceId, location_name: "item")
 
+    InstanceIpv4Prefix.add_member(:ipv_4_prefix, Shapes::ShapeRef.new(shape: String, location_name: "ipv4Prefix"))
+    InstanceIpv4Prefix.struct_class = Types::InstanceIpv4Prefix
+
+    InstanceIpv4PrefixList.member = Shapes::ShapeRef.new(shape: InstanceIpv4Prefix, location_name: "item")
+
     InstanceIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     InstanceIpv6Address.struct_class = Types::InstanceIpv6Address
 
@@ -7417,6 +7491,11 @@ module Aws::EC2
 
     InstanceIpv6AddressRequest.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Address"))
     InstanceIpv6AddressRequest.struct_class = Types::InstanceIpv6AddressRequest
+
+    InstanceIpv6Prefix.add_member(:ipv_6_prefix, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Prefix"))
+    InstanceIpv6Prefix.struct_class = Types::InstanceIpv6Prefix
+
+    InstanceIpv6PrefixList.member = Shapes::ShapeRef.new(shape: InstanceIpv6Prefix, location_name: "item")
 
     InstanceList.member = Shapes::ShapeRef.new(shape: Instance, location_name: "item")
 
@@ -7457,6 +7536,8 @@ module Aws::EC2
     InstanceNetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     InstanceNetworkInterface.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     InstanceNetworkInterface.add_member(:interface_type, Shapes::ShapeRef.new(shape: String, location_name: "interfaceType"))
+    InstanceNetworkInterface.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: InstanceIpv4PrefixList, location_name: "ipv4PrefixSet"))
+    InstanceNetworkInterface.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: InstanceIpv6PrefixList, location_name: "ipv6PrefixSet"))
     InstanceNetworkInterface.struct_class = Types::InstanceNetworkInterface
 
     InstanceNetworkInterfaceAssociation.add_member(:carrier_ip, Shapes::ShapeRef.new(shape: String, location_name: "carrierIp"))
@@ -7490,6 +7571,10 @@ module Aws::EC2
     InstanceNetworkInterfaceSpecification.add_member(:associate_carrier_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociateCarrierIpAddress"))
     InstanceNetworkInterfaceSpecification.add_member(:interface_type, Shapes::ShapeRef.new(shape: String, location_name: "InterfaceType"))
     InstanceNetworkInterfaceSpecification.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkCardIndex"))
+    InstanceNetworkInterfaceSpecification.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixList, location_name: "Ipv4Prefix"))
+    InstanceNetworkInterfaceSpecification.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv4PrefixCount"))
+    InstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixList, location_name: "Ipv6Prefix"))
+    InstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
     InstanceNetworkInterfaceSpecification.struct_class = Types::InstanceNetworkInterfaceSpecification
 
     InstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecification, location_name: "item")
@@ -7635,6 +7720,8 @@ module Aws::EC2
 
     IpPermissionList.member = Shapes::ShapeRef.new(shape: IpPermission, location_name: "item")
 
+    IpPrefixList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     IpRange.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: String, location_name: "cidrIp"))
     IpRange.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     IpRange.struct_class = Types::IpRange
@@ -7642,6 +7729,21 @@ module Aws::EC2
     IpRangeList.member = Shapes::ShapeRef.new(shape: IpRange, location_name: "item")
 
     IpRanges.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    Ipv4PrefixList.member = Shapes::ShapeRef.new(shape: Ipv4PrefixSpecificationRequest, location_name: "item")
+
+    Ipv4PrefixListResponse.member = Shapes::ShapeRef.new(shape: Ipv4PrefixSpecificationResponse, location_name: "item")
+
+    Ipv4PrefixSpecification.add_member(:ipv_4_prefix, Shapes::ShapeRef.new(shape: String, location_name: "ipv4Prefix"))
+    Ipv4PrefixSpecification.struct_class = Types::Ipv4PrefixSpecification
+
+    Ipv4PrefixSpecificationRequest.add_member(:ipv_4_prefix, Shapes::ShapeRef.new(shape: String, location_name: "Ipv4Prefix"))
+    Ipv4PrefixSpecificationRequest.struct_class = Types::Ipv4PrefixSpecificationRequest
+
+    Ipv4PrefixSpecificationResponse.add_member(:ipv_4_prefix, Shapes::ShapeRef.new(shape: String, location_name: "ipv4Prefix"))
+    Ipv4PrefixSpecificationResponse.struct_class = Types::Ipv4PrefixSpecificationResponse
+
+    Ipv4PrefixesList.member = Shapes::ShapeRef.new(shape: Ipv4PrefixSpecification, location_name: "item")
 
     Ipv6AddressList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -7665,6 +7767,21 @@ module Aws::EC2
     Ipv6PoolIdList.member = Shapes::ShapeRef.new(shape: Ipv6PoolEc2Id, location_name: "item")
 
     Ipv6PoolSet.member = Shapes::ShapeRef.new(shape: Ipv6Pool, location_name: "item")
+
+    Ipv6PrefixList.member = Shapes::ShapeRef.new(shape: Ipv6PrefixSpecificationRequest, location_name: "item")
+
+    Ipv6PrefixListResponse.member = Shapes::ShapeRef.new(shape: Ipv6PrefixSpecificationResponse, location_name: "item")
+
+    Ipv6PrefixSpecification.add_member(:ipv_6_prefix, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Prefix"))
+    Ipv6PrefixSpecification.struct_class = Types::Ipv6PrefixSpecification
+
+    Ipv6PrefixSpecificationRequest.add_member(:ipv_6_prefix, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Prefix"))
+    Ipv6PrefixSpecificationRequest.struct_class = Types::Ipv6PrefixSpecificationRequest
+
+    Ipv6PrefixSpecificationResponse.add_member(:ipv_6_prefix, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Prefix"))
+    Ipv6PrefixSpecificationResponse.struct_class = Types::Ipv6PrefixSpecificationResponse
+
+    Ipv6PrefixesList.member = Shapes::ShapeRef.new(shape: Ipv6PrefixSpecification, location_name: "item")
 
     Ipv6Range.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv6"))
     Ipv6Range.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -7863,6 +7980,10 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "secondaryPrivateIpAddressCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "networkCardIndex"))
+    LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixListResponse, location_name: "ipv4PrefixSet"))
+    LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv4PrefixCount"))
+    LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixListResponse, location_name: "ipv6PrefixSet"))
+    LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecification
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecification, location_name: "item")
@@ -7882,6 +8003,10 @@ module Aws::EC2
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SecondaryPrivateIpAddressCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkCardIndex"))
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixList, location_name: "Ipv4Prefix"))
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_4_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv4PrefixCount"))
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixList, location_name: "Ipv6Prefix"))
+    LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.add_member(:ipv_6_prefix_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6PrefixCount"))
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.struct_class = Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList.member = Shapes::ShapeRef.new(shape: LaunchTemplateInstanceNetworkInterfaceSpecificationRequest, location_name: "InstanceNetworkInterfaceSpecification")
@@ -8763,6 +8888,8 @@ module Aws::EC2
     NetworkInterface.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
     NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: NetworkInterfacePrivateIpAddressList, location_name: "privateIpAddressesSet"))
+    NetworkInterface.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixesList, location_name: "ipv4PrefixSet"))
+    NetworkInterface.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: Ipv6PrefixesList, location_name: "ipv6PrefixSet"))
     NetworkInterface.add_member(:requester_id, Shapes::ShapeRef.new(shape: String, location_name: "requesterId"))
     NetworkInterface.add_member(:requester_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "requesterManaged"))
     NetworkInterface.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: Boolean, location_name: "sourceDestCheck"))
@@ -10477,6 +10604,17 @@ module Aws::EC2
     SubnetCidrBlockState.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     SubnetCidrBlockState.struct_class = Types::SubnetCidrBlockState
 
+    SubnetCidrReservation.add_member(:subnet_cidr_reservation_id, Shapes::ShapeRef.new(shape: SubnetCidrReservationId, location_name: "subnetCidrReservationId"))
+    SubnetCidrReservation.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
+    SubnetCidrReservation.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "cidr"))
+    SubnetCidrReservation.add_member(:reservation_type, Shapes::ShapeRef.new(shape: SubnetCidrReservationType, location_name: "reservationType"))
+    SubnetCidrReservation.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SubnetCidrReservation.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SubnetCidrReservation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SubnetCidrReservation.struct_class = Types::SubnetCidrReservation
+
+    SubnetCidrReservationList.member = Shapes::ShapeRef.new(shape: SubnetCidrReservation, location_name: "item")
+
     SubnetIdStringList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId")
 
     SubnetIpv6CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: SubnetCidrAssociationId, location_name: "associationId"))
@@ -10984,16 +11122,19 @@ module Aws::EC2
 
     TunnelOptionsList.member = Shapes::ShapeRef.new(shape: TunnelOption, location_name: "item")
 
+    UnassignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
+    UnassignIpv6AddressesRequest.add_member(:ipv_6_prefixes, Shapes::ShapeRef.new(shape: IpPrefixList, location_name: "Ipv6Prefix"))
     UnassignIpv6AddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
-    UnassignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, required: true, location_name: "ipv6Addresses"))
     UnassignIpv6AddressesRequest.struct_class = Types::UnassignIpv6AddressesRequest
 
     UnassignIpv6AddressesResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     UnassignIpv6AddressesResult.add_member(:unassigned_ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "unassignedIpv6Addresses"))
+    UnassignIpv6AddressesResult.add_member(:unassigned_ipv_6_prefixes, Shapes::ShapeRef.new(shape: IpPrefixList, location_name: "unassignedIpv6PrefixSet"))
     UnassignIpv6AddressesResult.struct_class = Types::UnassignIpv6AddressesResult
 
     UnassignPrivateIpAddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
-    UnassignPrivateIpAddressesRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressStringList, required: true, location_name: "privateIpAddress"))
+    UnassignPrivateIpAddressesRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressStringList, location_name: "privateIpAddress"))
+    UnassignPrivateIpAddressesRequest.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: IpPrefixList, location_name: "Ipv4Prefix"))
     UnassignPrivateIpAddressesRequest.struct_class = Types::UnassignPrivateIpAddressesRequest
 
     UnmonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
@@ -12118,6 +12259,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateSubnetResult)
       end)
 
+      api.add_operation(:create_subnet_cidr_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSubnetCidrReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSubnetCidrReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSubnetCidrReservationResult)
+      end)
+
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTags"
         o.http_method = "POST"
@@ -12556,6 +12705,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteSubnetRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_subnet_cidr_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSubnetCidrReservation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSubnetCidrReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSubnetCidrReservationResult)
       end)
 
       api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -14777,6 +14934,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetSerialConsoleAccessStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSerialConsoleAccessStatusResult)
+      end)
+
+      api.add_operation(:get_subnet_cidr_reservations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSubnetCidrReservations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSubnetCidrReservationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSubnetCidrReservationsResult)
       end)
 
       api.add_operation(:get_transit_gateway_attachment_propagations, Seahorse::Model::Operation.new.tap do |o|

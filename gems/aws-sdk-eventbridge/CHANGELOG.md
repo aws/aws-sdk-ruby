@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-08-04)
+------------------
+
+* Feature - Documentation updates to add EC2 Image Builder as a target on PutTargets.
+
+1.27.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.25.0 (2021-06-23)
 ------------------
 

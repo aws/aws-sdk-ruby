@@ -489,7 +489,8 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Attaches a policy to the specified target.
+    # Attaches the specified policy to the specified principal (certificate
+    # or other credential).
     #
     # @option params [required, String] :policy_name
     #   The name of the policy to attach.
@@ -11559,7 +11560,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

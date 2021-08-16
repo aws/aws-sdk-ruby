@@ -1250,6 +1250,16 @@ module Aws::IAM
     # You get all of this information from the OIDC IdP that you want to use
     # to access Amazon Web Services.
     #
+    # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
+    # providers (IdPs) through our library of trusted certificate
+    # authorities (CAs) instead of using a certificate thumbprint to verify
+    # your IdP server certificate. These OIDC IdPs include Google, and those
+    # that use an Amazon S3 bucket to host a JSON Web Key Set (JWKS)
+    # endpoint. In these cases, your legacy thumbprint remains in your
+    # configuration, but is no longer used for validation.
+    #
+    #  </note>
+    #
     # <note markdown="1"> The trust for the OIDC provider is derived from the IAM provider that
     # this operation creates. Therefore, it is best to limit access to the
     # CreateOpenIDConnectProvider operation to highly privileged users.
@@ -12167,15 +12177,25 @@ module Aws::IAM
     # existing list of thumbprints. (The lists are not merged.)
     #
     # Typically, you need to update a thumbprint only when the identity
-    # provider's certificate changes, which occurs rarely. However, if the
+    # provider certificate changes, which occurs rarely. However, if the
     # provider's certificate *does* change, any attempt to assume an IAM
     # role that specifies the OIDC provider as a principal fails until the
     # certificate thumbprint is updated.
     #
-    # <note markdown="1"> Trust for the OIDC provider is derived from the provider's
-    # certificate and is validated by the thumbprint. Therefore, it is best
-    # to limit access to the `UpdateOpenIDConnectProviderThumbprint`
-    # operation to highly privileged users.
+    # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
+    # providers (IdPs) through our library of trusted certificate
+    # authorities (CAs) instead of using a certificate thumbprint to verify
+    # your IdP server certificate. These OIDC IdPs include Google, and those
+    # that use an Amazon S3 bucket to host a JSON Web Key Set (JWKS)
+    # endpoint. In these cases, your legacy thumbprint remains in your
+    # configuration, but is no longer used for validation.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> Trust for the OIDC provider is derived from the provider certificate
+    # and is validated by the thumbprint. Therefore, it is best to limit
+    # access to the `UpdateOpenIDConnectProviderThumbprint` operation to
+    # highly privileged users.
     #
     #  </note>
     #
@@ -13140,7 +13160,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

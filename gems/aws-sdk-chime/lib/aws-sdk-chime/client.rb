@@ -3090,7 +3090,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Returns the full details of an `AppInstanceUser` .
+    # Returns the full details of an `AppInstanceUser`.
     #
     # @option params [required, String] :app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
@@ -7193,6 +7193,71 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Start transcription for the specified `meetingId`.
+    #
+    # @option params [required, String] :meeting_id
+    #   The unique ID of the meeting being transcribed.
+    #
+    # @option params [required, Types::TranscriptionConfiguration] :transcription_configuration
+    #   The configuration for the current transcription operation. Must
+    #   contain `EngineTranscribeSettings` or
+    #   `EngineTranscribeMedicalSettings`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_meeting_transcription({
+    #     meeting_id: "GuidString", # required
+    #     transcription_configuration: { # required
+    #       engine_transcribe_settings: {
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #         vocabulary_filter_name: "String",
+    #         vocabulary_name: "String",
+    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #       },
+    #       engine_transcribe_medical_settings: {
+    #         language_code: "en-US", # required, accepts en-US
+    #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
+    #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #         vocabulary_name: "String",
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StartMeetingTranscription AWS API Documentation
+    #
+    # @overload start_meeting_transcription(params = {})
+    # @param [Hash] params ({})
+    def start_meeting_transcription(params = {}, options = {})
+      req = build_request(:start_meeting_transcription, params)
+      req.send_request(options)
+    end
+
+    # Stops transcription for the specified `meetingId`.
+    #
+    # @option params [required, String] :meeting_id
+    #   The unique ID of the meeting for which you stop transcription.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_meeting_transcription({
+    #     meeting_id: "GuidString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StopMeetingTranscription AWS API Documentation
+    #
+    # @overload stop_meeting_transcription(params = {})
+    # @param [Hash] params ({})
+    def stop_meeting_transcription(params = {}, options = {})
+      req = build_request(:stop_meeting_transcription, params)
+      req.send_request(options)
+    end
+
     # Applies the specified tags to the specified Amazon Chime SDK attendee.
     #
     # @option params [required, String] :meeting_id
@@ -8340,7 +8405,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

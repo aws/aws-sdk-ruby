@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.254.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.253.0 (2021-07-29)
+------------------
+
+* Feature - This release adds support for G4ad xlarge and 2xlarge instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
+
+1.252.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.251.0 (2021-07-22)
+------------------
+
+* Feature - This release allows customers to assign prefixes to their elastic network interface and to reserve IP blocks in their subnet CIDRs. These reserved blocks can be used to assign prefixes to elastic network interfaces or be excluded from auto-assignment.
+
+1.250.0 (2021-07-20)
+------------------
+
+* Feature - Added idempotency to the CreateVolume API using the ClientToken request parameter
+
 1.249.0 (2021-07-15)
 ------------------
 

@@ -913,6 +913,7 @@ module Aws::IoTWireless
 
     SidewalkAccountList.member = Shapes::ShapeRef.new(shape: SidewalkAccountInfoWithFingerprint)
 
+    SidewalkDevice.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, location_name: "AmazonId"))
     SidewalkDevice.add_member(:sidewalk_id, Shapes::ShapeRef.new(shape: SidewalkId, location_name: "SidewalkId"))
     SidewalkDevice.add_member(:sidewalk_manufacturing_sn, Shapes::ShapeRef.new(shape: SidewalkManufacturingSn, location_name: "SidewalkManufacturingSn"))
     SidewalkDevice.add_member(:device_certificates, Shapes::ShapeRef.new(shape: DeviceCertificateList, location_name: "DeviceCertificates"))

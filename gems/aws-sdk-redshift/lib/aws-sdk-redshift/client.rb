@@ -384,7 +384,7 @@ module Aws::Redshift
     # website.
     #
     # @option params [required, String] :account_id
-    #   The Region ID that owns the cluster.
+    #   The Amazon Web Services account ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster that receives data from the
@@ -424,6 +424,58 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # From a datashare consumer account, associates a datashare with the
+    # account (AssociateEntireAccount) or the specified namespace
+    # (ConsumerArn). If you make this association, the consumer can consume
+    # the datashare.
+    #
+    # @option params [required, String] :data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare that the consumer is
+    #   to use with the account or the namespace.
+    #
+    # @option params [Boolean] :associate_entire_account
+    #   A value that specifies whether the datashare is associated with the
+    #   entire account.
+    #
+    # @option params [String] :consumer_arn
+    #   The Amazon Resource Name (ARN) of the consumer that is associated with
+    #   the datashare.
+    #
+    # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DataShare#data_share_arn #data_share_arn} => String
+    #   * {Types::DataShare#producer_arn #producer_arn} => String
+    #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
+    #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_data_share_consumer({
+    #     data_share_arn: "String", # required
+    #     associate_entire_account: false,
+    #     consumer_arn: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_share_arn #=> String
+    #   resp.producer_arn #=> String
+    #   resp.allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_share_associations #=> Array
+    #   resp.data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].created_date #=> Time
+    #   resp.data_share_associations[0].status_change_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AssociateDataShareConsumer AWS API Documentation
+    #
+    # @overload associate_data_share_consumer(params = {})
+    # @param [Hash] params ({})
+    def associate_data_share_consumer(params = {}, options = {})
+      req = build_request(:associate_data_share_consumer, params)
+      req.send_request(options)
+    end
+
     # Adds an inbound (ingress) rule to an Amazon Redshift security group.
     # Depending on whether the application accessing your cluster is running
     # on the Internet or an Amazon EC2 instance, you can authorize inbound
@@ -433,7 +485,8 @@ module Aws::Redshift
     #
     # If you authorize access to an Amazon EC2 security group, specify
     # *EC2SecurityGroupName* and *EC2SecurityGroupOwnerId*. The Amazon EC2
-    # security group and Amazon Redshift cluster must be in the same Region.
+    # security group and Amazon Redshift cluster must be in the same Amazon
+    # Web Services Region.
     #
     # If you authorize access to a CIDR/IP address range, specify *CIDRIP*.
     # For an overview of CIDR blocks, see the Wikipedia article on
@@ -460,9 +513,9 @@ module Aws::Redshift
     #   The EC2 security group to be added the Amazon Redshift security group.
     #
     # @option params [String] :ec2_security_group_owner_id
-    #   The account number of the owner of the security group specified by the
-    #   *EC2SecurityGroupName* parameter. The Amazon Web Services Access Key
-    #   ID is not an acceptable value.
+    #   The Amazon Web Services account number of the owner of the security
+    #   group specified by the *EC2SecurityGroupName* parameter. The Amazon
+    #   Web Services Access Key ID is not an acceptable value.
     #
     #   Example: `111122223333`
     #
@@ -509,13 +562,60 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # From a data producer account, authorizes the sharing of a datashare
+    # with one or more consumer accounts. To authorize a datashare for a
+    # data consumer, the producer account must have the correct access
+    # privileges.
+    #
+    # @option params [required, String] :data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare that producers are to
+    #   authorize sharing for.
+    #
+    # @option params [required, String] :consumer_identifier
+    #   The identifier of the data consumer that is authorized to access the
+    #   datashare. This identifier is an AWS account ID.
+    #
+    # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DataShare#data_share_arn #data_share_arn} => String
+    #   * {Types::DataShare#producer_arn #producer_arn} => String
+    #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
+    #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_data_share({
+    #     data_share_arn: "String", # required
+    #     consumer_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_share_arn #=> String
+    #   resp.producer_arn #=> String
+    #   resp.allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_share_associations #=> Array
+    #   resp.data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].created_date #=> Time
+    #   resp.data_share_associations[0].status_change_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeDataShare AWS API Documentation
+    #
+    # @overload authorize_data_share(params = {})
+    # @param [Hash] params ({})
+    def authorize_data_share(params = {}, options = {})
+      req = build_request(:authorize_data_share, params)
+      req.send_request(options)
+    end
+
     # Grants access to a cluster.
     #
     # @option params [String] :cluster_identifier
     #   The cluster identifier of the cluster to grant access to.
     #
     # @option params [required, String] :account
-    #   The account ID to grant access to.
+    #   The Amazon Web Services account ID to grant access to.
     #
     # @option params [Array<String>] :vpc_ids
     #   The virtual private cloud (VPC) identifiers to grant access to.
@@ -562,7 +662,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Authorizes the specified account to restore the specified snapshot.
+    # Authorizes the specified Amazon Web Services account to restore the
+    # specified snapshot.
     #
     # For more information about working with snapshots, go to [Amazon
     # Redshift Snapshots][1] in the *Amazon Redshift Cluster Management
@@ -582,8 +683,8 @@ module Aws::Redshift
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
-    #   The identifier of the account authorized to restore the specified
-    #   snapshot.
+    #   The identifier of the Amazon Web Services account authorized to
+    #   restore the specified snapshot.
     #
     #   To share a snapshot with Amazon Web Services Support, specify
     #   amazon-redshift-support.
@@ -859,7 +960,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for the account that is making the request.
+    #   * Must be unique for the Amazon Web Services account that is making
+    #     the request.
     #
     # @option params [Integer] :manual_snapshot_retention_period
     #   The number of days that a manual snapshot is retained. If the value is
@@ -1023,7 +1125,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #
     #   Example: `myexamplecluster`
     #
@@ -1310,8 +1413,8 @@ module Aws::Redshift
     #   (Advanced Query Accelerator) when it is created. Possible values
     #   include the following.
     #
-    #   * enabled - Use AQUA if it is available for the current Region and
-    #     Amazon Redshift node type.
+    #   * enabled - Use AQUA if it is available for the current Amazon Web
+    #     Services Region and Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
     #
@@ -1511,7 +1614,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique withing your account.
+    #   * Must be unique withing your Amazon Web Services account.
     #
     #   <note markdown="1"> This value is stored as a lower-case string.
     #
@@ -1524,11 +1627,11 @@ module Aws::Redshift
     #
     #   To get a list of valid parameter group family names, you can call
     #   DescribeClusterParameterGroups. By default, Amazon Redshift returns a
-    #   list of all the parameter groups that are owned by your account,
-    #   including the default parameter groups for each Amazon Redshift engine
-    #   version. The parameter group family names associated with the default
-    #   parameter groups provide you the valid values. For example, a valid
-    #   family name is "redshift-1.0".
+    #   list of all the parameter groups that are owned by your Amazon Web
+    #   Services account, including the default parameter groups for each
+    #   Amazon Redshift engine version. The parameter group family names
+    #   associated with the default parameter groups provide you the valid
+    #   values. For example, a valid family name is "redshift-1.0".
     #
     # @option params [required, String] :description
     #   A description of the parameter group.
@@ -1594,7 +1697,7 @@ module Aws::Redshift
     #   * Must not be "Default".
     #
     #   * Must be unique for all security groups that are created by your
-    #     account.
+    #     Amazon Web Services account.
     #
     #   Example: `examplesecuritygroup`
     #
@@ -1664,7 +1767,8 @@ module Aws::Redshift
     #
     # @option params [required, String] :snapshot_identifier
     #   A unique identifier for the snapshot that you are requesting. This
-    #   identifier must be unique for all snapshots within the account.
+    #   identifier must be unique for all snapshots within the Amazon Web
+    #   Services account.
     #
     #   Constraints:
     #
@@ -1782,8 +1886,8 @@ module Aws::Redshift
     #
     #   * Must not be "Default".
     #
-    #   * Must be unique for all subnet groups that are created by your
-    #     account.
+    #   * Must be unique for all subnet groups that are created by your Amazon
+    #     Web Services account.
     #
     #   Example: `examplesubnetgroup`
     #
@@ -1846,8 +1950,9 @@ module Aws::Redshift
     #   The cluster identifier of the cluster to access.
     #
     # @option params [String] :resource_owner
-    #   The account ID of the owner of the cluster. This is only required if
-    #   the cluster is in another account.
+    #   The Amazon Web Services account ID of the owner of the cluster. This
+    #   is only required if the cluster is in another Amazon Web Services
+    #   account.
     #
     # @option params [required, String] :endpoint_name
     #   The Redshift-managed VPC endpoint name.
@@ -1938,10 +2043,11 @@ module Aws::Redshift
     # will be sent for all the cluster events for my-cluster-1. If you
     # specify a source type but do not specify a source identifier, you will
     # receive notice of the events for the objects of that type in your
-    # account. If you do not specify either the SourceType nor the
-    # SourceIdentifier, you will be notified of events generated from all
-    # Amazon Redshift sources belonging to your account. You must specify a
-    # source type if you specify a source ID.
+    # Amazon Web Services account. If you do not specify either the
+    # SourceType nor the SourceIdentifier, you will be notified of events
+    # generated from all Amazon Redshift sources belonging to your Amazon
+    # Web Services account. You must specify a source type if you specify a
+    # source ID.
     #
     # @option params [required, String] :subscription_name
     #   The name of the event subscription to be created.
@@ -1965,8 +2071,9 @@ module Aws::Redshift
     #   The type of source that will be generating the events. For example, if
     #   you want to be notified of events generated by a cluster, you would
     #   set this parameter to cluster. If this value is not specified, events
-    #   are returned for all Amazon Redshift objects in your account. You must
-    #   specify a source type in order to specify source IDs.
+    #   are returned for all Amazon Redshift objects in your Amazon Web
+    #   Services account. You must specify a source type in order to specify
+    #   source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
     #   cluster-security-group, cluster-snapshot, and scheduled-action.
@@ -1986,7 +2093,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by the
     #   event notification subscription.
     #
-    #   Values: configuration, management, monitoring, security
+    #   Values: configuration, management, monitoring, security, pending
     #
     # @option params [String] :severity
     #   Specifies the Amazon Redshift event severity to be published by the
@@ -2306,7 +2413,7 @@ module Aws::Redshift
     #
     # @option params [required, String] :snapshot_copy_grant_name
     #   The name of the snapshot copy grant. This name must be unique in the
-    #   region for the account.
+    #   region for the Amazon Web Services account.
     #
     #   Constraints:
     #
@@ -2318,7 +2425,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #
     # @option params [String] :kms_key_id
     #   The unique identifier of the customer master key (CMK) to which to
@@ -2559,6 +2667,51 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def create_usage_limit(params = {}, options = {})
       req = build_request(:create_usage_limit, params)
+      req.send_request(options)
+    end
+
+    # From the producer account, removes authorization from the specified
+    # datashare.
+    #
+    # @option params [required, String] :data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare to remove
+    #   authorization from.
+    #
+    # @option params [required, String] :consumer_identifier
+    #   The identifier of the data consumer that is to have authorization
+    #   removed from the datashare. This identifier is an AWS account ID.
+    #
+    # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DataShare#data_share_arn #data_share_arn} => String
+    #   * {Types::DataShare#producer_arn #producer_arn} => String
+    #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
+    #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deauthorize_data_share({
+    #     data_share_arn: "String", # required
+    #     consumer_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_share_arn #=> String
+    #   resp.producer_arn #=> String
+    #   resp.allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_share_associations #=> Array
+    #   resp.data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].created_date #=> Time
+    #   resp.data_share_associations[0].status_change_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeauthorizeDataShare AWS API Documentation
+    #
+    # @overload deauthorize_data_share(params = {})
+    # @param [Hash] params ({})
+    def deauthorize_data_share(params = {}, options = {})
+      req = build_request(:deauthorize_data_share, params)
       req.send_request(options)
     end
 
@@ -3096,7 +3249,7 @@ module Aws::Redshift
     # website.
     #
     # @option params [required, String] :account_id
-    #   The Region ID that owns the cluster.
+    #   The Amazon Web Services account ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster that receives data from the
@@ -3699,8 +3852,9 @@ module Aws::Redshift
 
     # Returns one or more snapshot objects, which contain metadata about
     # your cluster snapshots. By default, this operation returns information
-    # about all snapshots of all clusters that are owned by your account. No
-    # information is returned for snapshots owned by inactive accounts.
+    # about all snapshots of all clusters that are owned by your Amazon Web
+    # Services account. No information is returned for snapshots owned by
+    # inactive Amazon Web Services accounts.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all snapshots that match any combination of
@@ -3771,10 +3925,10 @@ module Aws::Redshift
     #   parameter and retrying the request.
     #
     # @option params [String] :owner_account
-    #   The account used to create or copy the snapshot. Use this field to
-    #   filter the results to snapshots owned by a particular account. To
-    #   describe snapshots you own, either specify your account, or do not
-    #   specify the parameter.
+    #   The Amazon Web Services account used to create or copy the snapshot.
+    #   Use this field to filter the results to snapshots owned by a
+    #   particular account. To describe snapshots you own, either specify your
+    #   Amazon Web Services account, or do not specify the parameter.
     #
     # @option params [Array<String>] :tag_keys
     #   A tag key or keys for which you want to return all matching cluster
@@ -3906,7 +4060,7 @@ module Aws::Redshift
     # Returns one or more cluster subnet group objects, which contain
     # metadata about your cluster subnet groups. By default, this operation
     # returns information about all cluster subnet groups that are defined
-    # in your account.
+    # in your Amazon Web Services account.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all subnet groups that match any combination
@@ -4350,6 +4504,190 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Shows the status of any inbound or outbound datashares available in
+    # the specified account.
+    #
+    # @option params [String] :data_share_arn
+    #   The identifier of the datashare to describe details of.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a DescribeDataShares
+    #   request exceed the value specified in `MaxRecords`, AWS returns a
+    #   value in the `Marker` field of the response. You can retrieve the next
+    #   set of response records by providing the returned marker value in the
+    #   `Marker` parameter and retrying the request.
+    #
+    # @return [Types::DescribeDataSharesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataSharesResult#data_shares #data_shares} => Array&lt;Types::DataShare&gt;
+    #   * {Types::DescribeDataSharesResult#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_shares({
+    #     data_share_arn: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_shares #=> Array
+    #   resp.data_shares[0].data_share_arn #=> String
+    #   resp.data_shares[0].producer_arn #=> String
+    #   resp.data_shares[0].allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_shares[0].data_share_associations #=> Array
+    #   resp.data_shares[0].data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
+    #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataShares AWS API Documentation
+    #
+    # @overload describe_data_shares(params = {})
+    # @param [Hash] params ({})
+    def describe_data_shares(params = {}, options = {})
+      req = build_request(:describe_data_shares, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of datashares where the account identifier being called
+    # is a consumer account identifier.
+    #
+    # @option params [String] :consumer_arn
+    #   The Amazon Resource Name (ARN) of the consumer that returns in the
+    #   list of datashares.
+    #
+    # @option params [String] :status
+    #   An identifier giving the status of a datashare in the consumer
+    #   cluster. If this field is specified, Amazon Redshift returns the list
+    #   of datashares that have the specified status.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeDataSharesForConsumer request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #
+    # @return [Types::DescribeDataSharesForConsumerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataSharesForConsumerResult#data_shares #data_shares} => Array&lt;Types::DataShare&gt;
+    #   * {Types::DescribeDataSharesForConsumerResult#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_shares_for_consumer({
+    #     consumer_arn: "String",
+    #     status: "ACTIVE", # accepts ACTIVE, AVAILABLE
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_shares #=> Array
+    #   resp.data_shares[0].data_share_arn #=> String
+    #   resp.data_shares[0].producer_arn #=> String
+    #   resp.data_shares[0].allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_shares[0].data_share_associations #=> Array
+    #   resp.data_shares[0].data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
+    #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForConsumer AWS API Documentation
+    #
+    # @overload describe_data_shares_for_consumer(params = {})
+    # @param [Hash] params ({})
+    def describe_data_shares_for_consumer(params = {}, options = {})
+      req = build_request(:describe_data_shares_for_consumer, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of datashares when the account identifier being called
+    # is a producer account identifier.
+    #
+    # @option params [String] :producer_arn
+    #   The Amazon Resource Name (ARN) of the producer that returns in the
+    #   list of datashares.
+    #
+    # @option params [String] :status
+    #   An identifier giving the status of a datashare in the producer. If
+    #   this field is specified, Amazon Redshift returns the list of
+    #   datashares that have the specified status.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeDataSharesForProducer request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #
+    # @return [Types::DescribeDataSharesForProducerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataSharesForProducerResult#data_shares #data_shares} => Array&lt;Types::DataShare&gt;
+    #   * {Types::DescribeDataSharesForProducerResult#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_shares_for_producer({
+    #     producer_arn: "String",
+    #     status: "ACTIVE", # accepts ACTIVE, AUTHORIZED, PENDING_AUTHORIZATION, DEAUTHORIZED, REJECTED
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_shares #=> Array
+    #   resp.data_shares[0].data_share_arn #=> String
+    #   resp.data_shares[0].producer_arn #=> String
+    #   resp.data_shares[0].allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_shares[0].data_share_associations #=> Array
+    #   resp.data_shares[0].data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
+    #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForProducer AWS API Documentation
+    #
+    # @overload describe_data_shares_for_producer(params = {})
+    # @param [Hash] params ({})
+    def describe_data_shares_for_producer(params = {}, options = {})
+      req = build_request(:describe_data_shares_for_producer, params)
+      req.send_request(options)
+    end
+
     # Returns a list of parameter settings for the specified parameter group
     # family.
     #
@@ -4428,7 +4766,7 @@ module Aws::Redshift
     #   The cluster identifier associated with the described endpoint.
     #
     # @option params [String] :resource_owner
-    #   The account ID of the owner of the cluster.
+    #   The Amazon Web Services account ID of the owner of the cluster.
     #
     # @option params [String] :endpoint_name
     #   The name of the endpoint to be described.
@@ -4504,9 +4842,9 @@ module Aws::Redshift
     #   The cluster identifier of the cluster to access.
     #
     # @option params [String] :account
-    #   The Aaccount ID of either the cluster owner (grantor) or grantee. If
-    #   `Grantee` parameter is true, then the `Account` value is of the
-    #   grantor.
+    #   The AAmazon Web Services account ID of either the cluster owner
+    #   (grantor) or grantee. If `Grantee` parameter is true, then the
+    #   `Account` value is of the grantor.
     #
     # @option params [Boolean] :grantee
     #   Indicates whether to check authorization from a grantor or grantee
@@ -4852,7 +5190,7 @@ module Aws::Redshift
 
     # Returns information about the specified HSM client certificate. If no
     # certificate ID is specified, returns information about all the HSM
-    # certificates owned by your account.
+    # certificates owned by your Amazon Web Services account.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all HSM client certificates that match any
@@ -4868,7 +5206,8 @@ module Aws::Redshift
     # @option params [String] :hsm_client_certificate_identifier
     #   The identifier of a specific HSM client certificate for which you want
     #   information. If no identifier is specified, information is returned
-    #   for all HSM client certificates owned by your account.
+    #   for all HSM client certificates owned by your Amazon Web Services
+    #   account.
     #
     # @option params [Integer] :max_records
     #   The maximum number of response records to return in each call. If the
@@ -4946,7 +5285,8 @@ module Aws::Redshift
 
     # Returns information about the specified Amazon Redshift HSM
     # configuration. If no configuration ID is specified, returns
-    # information about all the HSM configurations owned by your account.
+    # information about all the HSM configurations owned by your Amazon Web
+    # Services account.
     #
     # If you specify both tag keys and tag values in the same request,
     # Amazon Redshift returns all HSM connections that match any combination
@@ -4962,7 +5302,7 @@ module Aws::Redshift
     # @option params [String] :hsm_configuration_identifier
     #   The identifier of a specific Amazon Redshift HSM configuration to be
     #   described. If no identifier is specified, information is returned for
-    #   all HSM configurations owned by your account.
+    #   all HSM configurations owned by your Amazon Web Services account.
     #
     # @option params [Integer] :max_records
     #   The maximum number of response records to return in each call. If the
@@ -5101,8 +5441,9 @@ module Aws::Redshift
     #   configurations.
     #
     # @option params [String] :owner_account
-    #   The account used to create or copy the snapshot. Required if you are
-    #   restoring a snapshot you do not own, optional if you own the snapshot.
+    #   The Amazon Web Services account used to create or copy the snapshot.
+    #   Required if you are restoring a snapshot you do not own, optional if
+    #   you own the snapshot.
     #
     # @option params [Array<Types::NodeConfigurationOptionsFilter>] :filters
     #   A set of name, operator, and value items to filter the results.
@@ -5172,13 +5513,14 @@ module Aws::Redshift
 
     # Returns a list of orderable cluster options. Before you create a new
     # cluster you can use this operation to find what options are available,
-    # such as the EC2 Availability Zones (AZ) in the specific Region that
-    # you can specify, and the node types you can request. The node types
-    # differ by available storage, memory, CPU and price. With the cost
-    # involved you might want to obtain a list of cluster options in the
-    # specific region and specify values when creating a cluster. For more
-    # information about managing clusters, go to [Amazon Redshift
-    # Clusters][1] in the *Amazon Redshift Cluster Management Guide*.
+    # such as the EC2 Availability Zones (AZ) in the specific Amazon Web
+    # Services Region that you can specify, and the node types you can
+    # request. The node types differ by available storage, memory, CPU and
+    # price. With the cost involved you might want to obtain a list of
+    # cluster options in the specific region and specify values when
+    # creating a cluster. For more information about managing clusters, go
+    # to [Amazon Redshift Clusters][1] in the *Amazon Redshift Cluster
+    # Management Guide*.
     #
     #
     #
@@ -5258,7 +5600,7 @@ module Aws::Redshift
     # cluster.
     #
     # @option params [required, String] :account_id
-    #   The Region ID that owns the cluster.
+    #   The Amazon Web Services account ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster whose partner integration is
@@ -5465,8 +5807,8 @@ module Aws::Redshift
     #   The unique identifier of a cluster whose resize progress you are
     #   requesting. This parameter is case-sensitive.
     #
-    #   By default, resize operations for all clusters defined for an account
-    #   are returned.
+    #   By default, resize operations for all clusters defined for an Amazon
+    #   Web Services account are returned.
     #
     # @return [Types::ResizeProgressMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5624,8 +5966,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Returns a list of snapshot copy grants owned by the account in the
-    # destination region.
+    # Returns a list of snapshot copy grants owned by the Amazon Web
+    # Services account in the destination region.
     #
     # For more information about managing snapshot copy grants, go to
     # [Amazon Redshift Database Encryption][1] in the *Amazon Redshift
@@ -6307,6 +6649,56 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # From a consumer account, remove association for the specified
+    # datashare.
+    #
+    # @option params [required, String] :data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare to remove association
+    #   for.
+    #
+    # @option params [Boolean] :disassociate_entire_account
+    #   A value that specifies whether association for the datashare is
+    #   removed from the entire account.
+    #
+    # @option params [String] :consumer_arn
+    #   The Amazon Resource Name (ARN) of the consumer that association for
+    #   the datashare is removed from.
+    #
+    # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DataShare#data_share_arn #data_share_arn} => String
+    #   * {Types::DataShare#producer_arn #producer_arn} => String
+    #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
+    #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_data_share_consumer({
+    #     data_share_arn: "String", # required
+    #     disassociate_entire_account: false,
+    #     consumer_arn: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_share_arn #=> String
+    #   resp.producer_arn #=> String
+    #   resp.allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_share_associations #=> Array
+    #   resp.data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].created_date #=> Time
+    #   resp.data_share_associations[0].status_change_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisassociateDataShareConsumer AWS API Documentation
+    #
+    # @overload disassociate_data_share_consumer(params = {})
+    # @param [Hash] params ({})
+    def disassociate_data_share_consumer(params = {}, options = {})
+      req = build_request(:disassociate_data_share_consumer, params)
+      req.send_request(options)
+    end
+
     # Starts logging information, such as queries and connection attempts,
     # for the specified Amazon Redshift cluster.
     #
@@ -6391,11 +6783,12 @@ module Aws::Redshift
     #   not already have cross-region snapshot copy enabled.
     #
     # @option params [required, String] :destination_region
-    #   The destination Region that you want to copy snapshots to.
+    #   The destination Amazon Web Services Region that you want to copy
+    #   snapshots to.
     #
-    #   Constraints: Must be the name of a valid Region. For more information,
-    #   see [Regions and Endpoints][1] in the Amazon Web Services General
-    #   Reference.
+    #   Constraints: Must be the name of a valid Amazon Web Services Region.
+    #   For more information, see [Regions and Endpoints][1] in the Amazon Web
+    #   Services General Reference.
     #
     #
     #
@@ -6416,8 +6809,9 @@ module Aws::Redshift
     #
     # @option params [Integer] :manual_snapshot_retention_period
     #   The number of days to retain newly copied snapshots in the destination
-    #   Region after they are copied from the source Region. If the value is
-    #   -1, the manual snapshot is retained indefinitely.
+    #   Amazon Web Services Region after they are copied from the source
+    #   Amazon Web Services Region. If the value is -1, the manual snapshot is
+    #   retained indefinitely.
     #
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
@@ -6779,8 +7173,8 @@ module Aws::Redshift
     #   The new value of AQUA configuration status. Possible values include
     #   the following.
     #
-    #   * enabled - Use AQUA if it is available for the current Region and
-    #     Amazon Redshift node type.
+    #   * enabled - Use AQUA if it is available for the current Amazon Web
+    #     Services Region and Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
     #
@@ -7061,7 +7455,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #
     #   Example: `examplecluster`
     #
@@ -7738,7 +8133,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the parameters of a parameter group.
+    # Modifies the parameters of a parameter group. For the parameters
+    # parameter, it can't contain ASCII characters.
     #
     # For more information about parameters and parameter groups, go to
     # [Amazon Redshift Parameter Groups][1] in the *Amazon Redshift Cluster
@@ -8041,8 +8437,9 @@ module Aws::Redshift
     #   The type of source that will be generating the events. For example, if
     #   you want to be notified of events generated by a cluster, you would
     #   set this parameter to cluster. If this value is not specified, events
-    #   are returned for all Amazon Redshift objects in your account. You must
-    #   specify a source type in order to specify source IDs.
+    #   are returned for all Amazon Redshift objects in your Amazon Web
+    #   Services account. You must specify a source type in order to specify
+    #   source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
     #   cluster-security-group, cluster-snapshot, and scheduled-action.
@@ -8062,7 +8459,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by the
     #   event notification subscription.
     #
-    #   Values: configuration, management, monitoring, security
+    #   Values: configuration, management, monitoring, security, pending
     #
     # @option params [String] :severity
     #   Specifies the Amazon Redshift event severity to be published by the
@@ -8217,33 +8614,36 @@ module Aws::Redshift
     end
 
     # Modifies the number of days to retain snapshots in the destination
-    # Region after they are copied from the source Region. By default, this
-    # operation only changes the retention period of copied automated
-    # snapshots. The retention periods for both new and existing copied
-    # automated snapshots are updated with the new retention period. You can
-    # set the manual option to change only the retention periods of copied
-    # manual snapshots. If you set this option, only newly copied manual
-    # snapshots have the new retention period.
+    # Amazon Web Services Region after they are copied from the source
+    # Amazon Web Services Region. By default, this operation only changes
+    # the retention period of copied automated snapshots. The retention
+    # periods for both new and existing copied automated snapshots are
+    # updated with the new retention period. You can set the manual option
+    # to change only the retention periods of copied manual snapshots. If
+    # you set this option, only newly copied manual snapshots have the new
+    # retention period.
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier of the cluster for which you want to change the
     #   retention period for either automated or manual snapshots that are
-    #   copied to a destination Region.
+    #   copied to a destination Amazon Web Services Region.
     #
     #   Constraints: Must be the valid name of an existing cluster that has
     #   cross-region snapshot copy enabled.
     #
     # @option params [required, Integer] :retention_period
     #   The number of days to retain automated snapshots in the destination
-    #   Region after they are copied from the source Region.
+    #   Amazon Web Services Region after they are copied from the source
+    #   Amazon Web Services Region.
     #
     #   By default, this only changes the retention period of copied automated
     #   snapshots.
     #
     #   If you decrease the retention period for automated snapshots that are
-    #   copied to a destination Region, Amazon Redshift deletes any existing
-    #   automated snapshots that were copied to the destination Region and
-    #   that fall outside of the new retention period.
+    #   copied to a destination Amazon Web Services Region, Amazon Redshift
+    #   deletes any existing automated snapshots that were copied to the
+    #   destination Amazon Web Services Region and that fall outside of the
+    #   new retention period.
     #
     #   Constraints: Must be at least 1 and no more than 35 for automated
     #   snapshots.
@@ -8842,6 +9242,44 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # From the consumer account, rejects the specified datashare.
+    #
+    # @option params [required, String] :data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare to reject.
+    #
+    # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DataShare#data_share_arn #data_share_arn} => String
+    #   * {Types::DataShare#producer_arn #producer_arn} => String
+    #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
+    #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_data_share({
+    #     data_share_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_share_arn #=> String
+    #   resp.producer_arn #=> String
+    #   resp.allow_publicly_accessible_consumers #=> Boolean
+    #   resp.data_share_associations #=> Array
+    #   resp.data_share_associations[0].consumer_identifier #=> String
+    #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
+    #   resp.data_share_associations[0].created_date #=> Time
+    #   resp.data_share_associations[0].status_change_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RejectDataShare AWS API Documentation
+    #
+    # @overload reject_data_share(params = {})
+    # @param [Hash] params ({})
+    def reject_data_share(params = {}, options = {})
+      req = build_request(:reject_data_share, params)
+      req.send_request(options)
+    end
+
     # Sets one or more parameters of the specified parameter group to their
     # default values and sets the source values of the parameters to
     # "engine-default". To reset the entire parameter group specify the
@@ -9122,7 +9560,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #
     # @option params [required, String] :snapshot_identifier
     #   The name of the snapshot from which to create the new cluster. This
@@ -9168,8 +9607,9 @@ module Aws::Redshift
     #   If `true`, the cluster can be accessed from a public network.
     #
     # @option params [String] :owner_account
-    #   The account used to create or copy the snapshot. Required if you are
-    #   restoring a snapshot you do not own, optional if you own the snapshot.
+    #   The Amazon Web Services account used to create or copy the snapshot.
+    #   Required if you are restoring a snapshot you do not own, optional if
+    #   you own the snapshot.
     #
     # @option params [String] :hsm_client_certificate_identifier
     #   Specifies the name of the HSM client certificate the Amazon Redshift
@@ -9333,8 +9773,8 @@ module Aws::Redshift
     #   (Advanced Query Accelerator) after the cluster is restored. Possible
     #   values include the following.
     #
-    #   * enabled - Use AQUA if it is available for the current Region and
-    #     Amazon Redshift node type.
+    #   * enabled - Use AQUA if it is available for the current Amazon Web
+    #     Services Region and Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
     #
@@ -9751,11 +10191,11 @@ module Aws::Redshift
     #   also be provided and `CIDRIP` cannot be provided.
     #
     # @option params [String] :ec2_security_group_owner_id
-    #   The account number of the owner of the security group specified in the
-    #   `EC2SecurityGroupName` parameter. The Amazon Web Services access key
-    #   ID is not an acceptable value. If `EC2SecurityGroupOwnerId` is
-    #   specified, `EC2SecurityGroupName` must also be provided. and `CIDRIP`
-    #   cannot be provided.
+    #   The Amazon Web Services account number of the owner of the security
+    #   group specified in the `EC2SecurityGroupName` parameter. The Amazon
+    #   Web Services access key ID is not an acceptable value. If
+    #   `EC2SecurityGroupOwnerId` is specified, `EC2SecurityGroupName` must
+    #   also be provided. and `CIDRIP` cannot be provided.
     #
     #   Example: `111122223333`
     #
@@ -9808,7 +10248,7 @@ module Aws::Redshift
     #   The cluster to revoke access from.
     #
     # @option params [String] :account
-    #   The account ID whose access is to be revoked.
+    #   The Amazon Web Services account ID whose access is to be revoked.
     #
     # @option params [Array<String>] :vpc_ids
     #   The virtual private cloud (VPC) identifiers for which access is to be
@@ -9862,9 +10302,9 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Removes the ability of the specified account to restore the specified
-    # snapshot. If the account is currently restoring the snapshot, the
-    # restore will run to completion.
+    # Removes the ability of the specified Amazon Web Services account to
+    # restore the specified snapshot. If the account is currently restoring
+    # the snapshot, the restore will run to completion.
     #
     # For more information about working with snapshots, go to [Amazon
     # Redshift Snapshots][1] in the *Amazon Redshift Cluster Management
@@ -9884,8 +10324,8 @@ module Aws::Redshift
     #   the cluster name.
     #
     # @option params [required, String] :account_with_restore_access
-    #   The identifier of the account that can no longer restore the specified
-    #   snapshot.
+    #   The identifier of the Amazon Web Services account that can no longer
+    #   restore the specified snapshot.
     #
     # @return [Types::RevokeSnapshotAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10092,7 +10532,7 @@ module Aws::Redshift
     # Updates the status of a partner integration.
     #
     # @option params [required, String] :account_id
-    #   The Region ID that owns the cluster.
+    #   The Amazon Web Services account ID that owns the cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The cluster identifier of the cluster whose partner integration status
@@ -10154,7 +10594,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

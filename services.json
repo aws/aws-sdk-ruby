@@ -96,6 +96,12 @@
   "Chime": {
     "models": "chime/2018-05-01"
   },
+  "ChimeSDKIdentity": {
+    "models": "chime-sdk-identity/2021-04-20"
+  },
+  "ChimeSDKMessaging": {
+    "models": "chime-sdk-messaging/2021-05-15"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },
@@ -721,6 +727,15 @@
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
   },
+  "Route53RecoveryCluster": {
+    "models": "route53-recovery-cluster/2019-12-02"
+  },
+  "Route53RecoveryControlConfig": {
+    "models": "route53-recovery-control-config/2020-11-02"
+  },
+  "Route53RecoveryReadiness": {
+    "models": "route53-recovery-readiness/2019-12-02"
+  },
   "Route53Resolver": {
     "models": "route53resolver/2018-04-01"
   },
@@ -870,6 +885,9 @@
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15"
+  },
+  "SnowDeviceManagement": {
+    "models": "snow-device-management/2021-08-04"
   },
   "Snowball": {
     "models": "snowball/2016-06-30"

@@ -268,7 +268,7 @@ module Aws::LicenseManager
     #
     #       {
     #         product_sku: "String", # required
-    #         checkout_type: "PROVISIONAL", # required, accepts PROVISIONAL
+    #         checkout_type: "PROVISIONAL", # required, accepts PROVISIONAL, PERPETUAL
     #         key_fingerprint: "String", # required
     #         entitlements: [ # required
     #           {

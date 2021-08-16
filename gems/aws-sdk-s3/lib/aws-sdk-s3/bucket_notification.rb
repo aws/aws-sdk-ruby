@@ -48,8 +48,8 @@ module Aws::S3
       data[:queue_configurations]
     end
 
-    # Describes the AWS Lambda functions to invoke and the events for which
-    # to invoke them.
+    # Describes the Lambda functions to invoke and the events for which to
+    # invoke them.
     # @return [Array<Types::LambdaFunctionConfiguration>]
     def lambda_function_configurations
       data[:lambda_function_configurations]

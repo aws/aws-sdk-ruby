@@ -385,7 +385,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID for the owner of the bucket for which you want to
+    #   The account ID for the owner of the bucket for which you want to
     #   create an access point.
     #
     # @option params [required, String] :name
@@ -398,8 +398,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -423,6 +424,7 @@ module Aws::S3Control
     # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAccessPointResult#access_point_arn #access_point_arn} => String
+    #   * {Types::CreateAccessPointResult#alias #alias} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -444,6 +446,7 @@ module Aws::S3Control
     # @example Response structure
     #
     #   resp.access_point_arn #=> String
+    #   resp.alias #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPoint AWS API Documentation
     #
@@ -475,8 +478,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID for owner of the specified Object Lambda Access
-    #   Point.
+    #   The account ID for owner of the specified Object Lambda Access Point.
     #
     # @option params [required, String] :name
     #   The name you want to assign to this Object Lambda Access Point.
@@ -713,7 +715,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID that creates the job.
+    #   The account ID that creates the job.
     #
     # @option params [Boolean] :confirmation_required
     #   Indicates whether confirmation is required before Amazon S3 runs the
@@ -752,9 +754,9 @@ module Aws::S3Control
     #   priority.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) for the AWS Identity and Access
-    #   Management (IAM) role that Batch Operations will use to run this
-    #   job's action on every object in the manifest.
+    #   The Amazon Resource Name (ARN) for the Identity and Access Management
+    #   (IAM) role that Batch Operations will use to run this job's action on
+    #   every object in the manifest.
     #
     # @option params [Array<Types::S3Tag>] :tags
     #   A set of tags to associate with the S3 Batch Operations job. This is
@@ -945,8 +947,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the access point accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the access point
+    #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1047,8 +1050,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the access point accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the access point
+    #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1158,8 +1162,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1239,8 +1244,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1274,8 +1280,8 @@ module Aws::S3Control
     #
     # This implementation of the DELETE action uses the policy subresource
     # to delete the policy of a specified Amazon S3 on Outposts bucket. If
-    # you are using an identity other than the root user of the AWS account
-    # that owns the bucket, the calling identity must have the
+    # you are using an identity other than the root user of the account that
+    # owns the bucket, the calling identity must have the
     # `s3-outposts:DeleteBucketPolicy` permissions on the specified Outposts
     # bucket and belong to the bucket owner's account to use this action.
     # For more information, see [Using Amazon S3 on Outposts][2] in *Amazon
@@ -1286,7 +1292,7 @@ module Aws::S3Control
     # you're not using an identity that belongs to the bucket owner's
     # account, Amazon S3 returns a `405 Method Not Allowed` error.
     #
-    # As a security precaution, the root user of the AWS account that owns a
+    # As a security precaution, the root user of the account that owns a
     # bucket can always use this action, even if the policy explicitly
     # denies the root user the ability to perform this action.
     #
@@ -1325,8 +1331,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1388,7 +1395,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket tag set to be removed.
+    #   The account ID of the Outposts bucket tag set to be removed.
     #
     # @option params [required, String] :bucket
     #   The bucket ARN that has the tag set to be removed.
@@ -1396,8 +1403,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1446,7 +1454,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the S3 Batch Operations job.
+    #   The account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the S3 Batch Operations job whose tags you want to delete.
@@ -1469,8 +1477,8 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Removes the `PublicAccessBlock` configuration for an AWS account. For
-    # more information, see [ Using Amazon S3 block public access][1].
+    # Removes the `PublicAccessBlock` configuration for an account. For more
+    # information, see [ Using Amazon S3 block public access][1].
     #
     # Related actions include:
     #
@@ -1485,8 +1493,8 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the AWS account whose `PublicAccessBlock`
-    #   configuration you want to remove.
+    #   The account ID for the account whose `PublicAccessBlock` configuration
+    #   you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1611,7 +1619,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the S3 Batch Operations job.
+    #   The account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the job whose information you want to retrieve.
@@ -1757,8 +1765,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the access point accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the access point
+    #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -1774,6 +1783,9 @@ module Aws::S3Control
     #   * {Types::GetAccessPointResult#vpc_configuration #vpc_configuration} => Types::VpcConfiguration
     #   * {Types::GetAccessPointResult#public_access_block_configuration #public_access_block_configuration} => Types::PublicAccessBlockConfiguration
     #   * {Types::GetAccessPointResult#creation_date #creation_date} => Time
+    #   * {Types::GetAccessPointResult#alias #alias} => String
+    #   * {Types::GetAccessPointResult#access_point_arn #access_point_arn} => String
+    #   * {Types::GetAccessPointResult#endpoints #endpoints} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1793,6 +1805,10 @@ module Aws::S3Control
     #   resp.public_access_block_configuration.block_public_policy #=> Boolean
     #   resp.public_access_block_configuration.restrict_public_buckets #=> Boolean
     #   resp.creation_date #=> Time
+    #   resp.alias #=> String
+    #   resp.access_point_arn #=> String
+    #   resp.endpoints #=> Hash
+    #   resp.endpoints["NonEmptyMaxLength64String"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPoint AWS API Documentation
     #
@@ -1934,8 +1950,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the access point accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the access point
+    #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2088,12 +2105,12 @@ module Aws::S3Control
     # Gets an Amazon S3 on Outposts bucket. For more information, see [
     # Using Amazon S3 on Outposts][1] in the *Amazon S3 User Guide*.
     #
-    # If you are using an identity other than the root user of the AWS
-    # account that owns the Outposts bucket, the calling identity must have
-    # the `s3-outposts:GetBucket` permissions on the specified Outposts
-    # bucket and belong to the Outposts bucket owner's account in order to
-    # use this action. Only users from Outposts bucket owner account with
-    # the right permissions can perform actions on an Outposts bucket.
+    # If you are using an identity other than the root user of the account
+    # that owns the Outposts bucket, the calling identity must have the
+    # `s3-outposts:GetBucket` permissions on the specified Outposts bucket
+    # and belong to the Outposts bucket owner's account in order to use
+    # this action. Only users from Outposts bucket owner account with the
+    # right permissions can perform actions on an Outposts bucket.
     #
     # If you don't have `s3-outposts:GetBucket` permissions or you're not
     # using an identity that belongs to the bucket owner's account, Amazon
@@ -2125,7 +2142,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -2133,8 +2150,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2225,7 +2243,7 @@ module Aws::S3Control
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   The Amazon Resource Name (ARN) of the bucket.
@@ -2233,8 +2251,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2297,8 +2316,8 @@ module Aws::S3Control
     # information, see [Using Amazon S3 on Outposts][2] in the *Amazon S3
     # User Guide*.
     #
-    # If you are using an identity other than the root user of the AWS
-    # account that owns the bucket, the calling identity must have the
+    # If you are using an identity other than the root user of the account
+    # that owns the bucket, the calling identity must have the
     # `GetBucketPolicy` permissions on the specified bucket and belong to
     # the bucket owner's account in order to use this action.
     #
@@ -2308,7 +2327,7 @@ module Aws::S3Control
     # identity that belongs to the bucket owner's account, Amazon S3
     # returns a `403 Access Denied` error.
     #
-    # As a security precaution, the root user of the AWS account that owns a
+    # As a security precaution, the root user of the account that owns a
     # bucket can always use this action, even if the policy explicitly
     # denies the root user the ability to perform this action.
     #
@@ -2342,7 +2361,7 @@ module Aws::S3Control
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -2350,8 +2369,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2428,7 +2448,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -2436,8 +2456,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2494,7 +2515,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the S3 Batch Operations job.
+    #   The account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the S3 Batch Operations job whose tags you want to
@@ -2526,8 +2547,8 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Retrieves the `PublicAccessBlock` configuration for an AWS account.
-    # For more information, see [ Using Amazon S3 block public access][1].
+    # Retrieves the `PublicAccessBlock` configuration for an account. For
+    # more information, see [ Using Amazon S3 block public access][1].
     #
     # Related actions include:
     #
@@ -2542,8 +2563,8 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the AWS account whose `PublicAccessBlock`
-    #   configuration you want to retrieve.
+    #   The account ID for the account whose `PublicAccessBlock` configuration
+    #   you want to retrieve.
     #
     # @return [Types::GetPublicAccessBlockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2722,8 +2743,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID for owner of the bucket whose access points you
-    #   want to list.
+    #   The account ID for owner of the bucket whose access points you want to
+    #   list.
     #
     # @option params [String] :bucket
     #   The name of the bucket whose associated access points you want to
@@ -2732,8 +2753,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -2777,6 +2799,7 @@ module Aws::S3Control
     #   resp.access_point_list[0].vpc_configuration.vpc_id #=> String
     #   resp.access_point_list[0].bucket #=> String
     #   resp.access_point_list[0].access_point_arn #=> String
+    #   resp.access_point_list[0].alias #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPoints AWS API Documentation
@@ -2858,7 +2881,7 @@ module Aws::S3Control
     end
 
     # Lists current S3 Batch Operations jobs and jobs that have ended within
-    # the last 30 days for the AWS account making the request. For more
+    # the last 30 days for the account making the request. For more
     # information, see [S3 Batch Operations][1] in the *Amazon S3 User
     # Guide*.
     #
@@ -2883,7 +2906,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the S3 Batch Operations job.
+    #   The account ID associated with the S3 Batch Operations job.
     #
     # @option params [Array<String>] :job_statuses
     #   The `List Jobs` request returns jobs that match the statuses listed in
@@ -2954,14 +2977,14 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [String] :next_token
     #
     # @option params [Integer] :max_results
     #
     # @option params [String] :outpost_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the Outposts.
     #
     #   <note markdown="1"> This is required by Amazon S3 on Outposts buckets.
     #
@@ -3142,8 +3165,8 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID for owner of the bucket associated with the
-    #   specified access point.
+    #   The account ID for owner of the bucket associated with the specified
+    #   access point.
     #
     # @option params [required, String] :name
     #   The name of the access point that you want to associate with the
@@ -3152,8 +3175,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the access point accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the access point
+    #   accessed in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
     #   For example, to access the access point `reports-ap` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -3271,7 +3295,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to set the configuration.
@@ -3355,9 +3379,9 @@ module Aws::S3Control
     # information, see [Using Amazon S3 on Outposts][2] in the *Amazon S3
     # User Guide*.
     #
-    # If you are using an identity other than the root user of the AWS
-    # account that owns the Outposts bucket, the calling identity must have
-    # the `PutBucketPolicy` permissions on the specified Outposts bucket and
+    # If you are using an identity other than the root user of the account
+    # that owns the Outposts bucket, the calling identity must have the
+    # `PutBucketPolicy` permissions on the specified Outposts bucket and
     # belong to the bucket owner's account in order to use this action.
     #
     # If you don't have `PutBucketPolicy` permissions, Amazon S3 returns a
@@ -3365,7 +3389,7 @@ module Aws::S3Control
     # you're not using an identity that belongs to the bucket owner's
     # account, Amazon S3 returns a `405 Method Not Allowed` error.
     #
-    # As a security precaution, the root user of the AWS account that owns a
+    # As a security precaution, the root user of the account that owns a
     # bucket can always use this action, even if the policy explicitly
     # denies the root user the ability to perform this action.
     #
@@ -3396,7 +3420,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -3404,8 +3428,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -3453,14 +3478,14 @@ module Aws::S3Control
     # Sets the tags for an S3 on Outposts bucket. For more information, see
     # [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
-    # Use tags to organize your AWS bill to reflect your own cost structure.
-    # To do this, sign up to get your AWS account bill with tag key values
-    # included. Then, to see the cost of combined resources, organize your
-    # billing information according to resources with the same tag key
-    # values. For example, you can tag several resources with a specific
-    # application name, and then organize your billing information to see
-    # the total cost of that application across several services. For more
-    # information, see [Cost allocation and tagging][3].
+    # Use tags to organize your Amazon Web Services bill to reflect your own
+    # cost structure. To do this, sign up to get your account bill with tag
+    # key values included. Then, to see the cost of combined resources,
+    # organize your billing information according to resources with the same
+    # tag key values. For example, you can tag several resources with a
+    # specific application name, and then organize your billing information
+    # to see the total cost of that application across several services. For
+    # more information, see [Cost allocation and tagging][3].
     #
     # <note markdown="1"> Within a bucket, if you add a tag that has the same key as an existing
     # tag, the new value overwrites the old value. For more information, see
@@ -3482,7 +3507,8 @@ module Aws::S3Control
     #   * Description: The tag provided was not a valid tag. This error can
     #     occur if the tag did not pass input validation. For information
     #     about tag restrictions, see [ User-Defined Tag Restrictions][7]
-    #     and [ AWS-Generated Cost Allocation Tag Restrictions][8].
+    #     and [ Amazon Web Services-Generated Cost Allocation Tag
+    #     Restrictions][8].
     #
     #   ^
     #
@@ -3535,7 +3561,7 @@ module Aws::S3Control
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID of the Outposts bucket.
+    #   The account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   The Amazon Resource Name (ARN) of the bucket.
@@ -3543,8 +3569,9 @@ module Aws::S3Control
     #   For using this parameter with Amazon S3 on Outposts with the REST API,
     #   you must specify the name and the x-amz-outpost-id as well.
     #
-    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
-    #   you must specify the ARN of the bucket accessed in the format
+    #   For using this parameter with S3 on Outposts with the Amazon Web
+    #   Services SDK and CLI, you must specify the ARN of the bucket accessed
+    #   in the format
     #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
     #   For example, to access the bucket `reports` through outpost
     #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
@@ -3616,8 +3643,8 @@ module Aws::S3Control
     #   * The key and values are case sensitive.
     #
     #   * For tagging-related restrictions related to characters and
-    #     encodings, see [User-Defined Tag Restrictions][5] in the *AWS
-    #     Billing and Cost Management User Guide*.
+    #     encodings, see [User-Defined Tag Restrictions][5] in the *Billing
+    #     and Cost Management User Guide*.
     #
     #  </note>
     #
@@ -3644,7 +3671,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the S3 Batch Operations job.
+    #   The account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the S3 Batch Operations job whose tags you want to replace.
@@ -3676,7 +3703,7 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Creates or modifies the `PublicAccessBlock` configuration for an AWS
+    # Creates or modifies the `PublicAccessBlock` configuration for an
     # account. For more information, see [ Using Amazon S3 block public
     # access][1].
     #
@@ -3694,11 +3721,11 @@ module Aws::S3Control
     #
     # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to the
-    #   specified AWS account.
+    #   specified account.
     #
     # @option params [required, String] :account_id
-    #   The account ID for the AWS account whose `PublicAccessBlock`
-    #   configuration you want to set.
+    #   The account ID for the account whose `PublicAccessBlock` configuration
+    #   you want to set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3910,7 +3937,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the S3 Batch Operations job.
+    #   The account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the job whose priority you want to update.
@@ -3971,7 +3998,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the S3 Batch Operations job.
+    #   The account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID of the job whose status you want to update.
@@ -4026,7 +4053,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

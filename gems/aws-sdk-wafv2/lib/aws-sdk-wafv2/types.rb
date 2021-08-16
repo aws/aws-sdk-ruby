@@ -339,6 +339,7 @@ module Aws::WAFV2
     #             managed_rule_group_statement: {
     #               vendor_name: "VendorName", # required
     #               name: "EntityName", # required
+    #               version: "VersionKeyString",
     #               excluded_rules: [
     #                 {
     #                   name: "EntityName", # required
@@ -863,6 +864,7 @@ module Aws::WAFV2
     #               managed_rule_group_statement: {
     #                 vendor_name: "VendorName", # required
     #                 name: "EntityName", # required
+    #                 version: "VersionKeyString",
     #                 excluded_rules: [
     #                   {
     #                     name: "EntityName", # required
@@ -1094,7 +1096,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_version
-    #   Specify IPV4 or IPV6.
+    #   The version of the IP addresses, either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] addresses
@@ -1492,6 +1494,7 @@ module Aws::WAFV2
     #               managed_rule_group_statement: {
     #                 vendor_name: "VendorName", # required
     #                 name: "EntityName", # required
+    #                 version: "VersionKeyString",
     #                 excluded_rules: [
     #                   {
     #                     name: "EntityName", # required
@@ -1967,6 +1970,7 @@ module Aws::WAFV2
     #               managed_rule_group_statement: {
     #                 vendor_name: "VendorName", # required
     #                 name: "EntityName", # required
+    #                 version: "VersionKeyString",
     #                 excluded_rules: [
     #                   {
     #                     name: "EntityName", # required
@@ -2415,15 +2419,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] web_acl_lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteFirewallManagerRuleGroupsRequest AWS API Documentation
@@ -2436,15 +2440,15 @@ module Aws::WAFV2
     end
 
     # @!attribute [rw] next_web_acl_lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteFirewallManagerRuleGroupsResponse AWS API Documentation
@@ -2492,15 +2496,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteIPSetRequest AWS API Documentation
@@ -2605,15 +2609,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteRegexPatternSetRequest AWS API Documentation
@@ -2668,15 +2672,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteRuleGroupRequest AWS API Documentation
@@ -2731,15 +2735,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteWebACLRequest AWS API Documentation
@@ -2764,6 +2768,7 @@ module Aws::WAFV2
     #         vendor_name: "VendorName", # required
     #         name: "EntityName", # required
     #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #         version_name: "VersionKeyString",
     #       }
     #
     # @!attribute [rw] vendor_name
@@ -2791,16 +2796,40 @@ module Aws::WAFV2
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The version of the rule group. You can only use a version that is
+    #   not scheduled for expiration. If you don't provide this, WAF uses
+    #   the vendor's default version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedRuleGroupRequest AWS API Documentation
     #
     class DescribeManagedRuleGroupRequest < Struct.new(
       :vendor_name,
       :name,
-      :scope)
+      :scope,
+      :version_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] version_name
+    #   The managed rule group's version.
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The Amazon resource name (ARN) of the Amazon Simple Notification
+    #   Service SNS topic that's used to record changes to the managed rule
+    #   group. You can subscribe to the SNS topic to receive notifications
+    #   when the managed rule group is modified, such as for new versions
+    #   and for version expiration. For more information, see the [Amazon
+    #   Simple Notification Service Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
+    #   @return [String]
+    #
     # @!attribute [rw] capacity
     #   The web ACL capacity units (WCUs) required for this rule group. WAF
     #   uses web ACL capacity units (WCU) to calculate and control the
@@ -2847,6 +2876,8 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DescribeManagedRuleGroupResponse AWS API Documentation
     #
     class DescribeManagedRuleGroupResponse < Struct.new(
+      :version_name,
+      :sns_topic_arn,
       :capacity,
       :rules,
       :label_namespace,
@@ -3330,15 +3361,15 @@ module Aws::WAFV2
     #   @return [Types::IPSet]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetIPSetResponse AWS API Documentation
@@ -3378,6 +3409,79 @@ module Aws::WAFV2
     #
     class GetLoggingConfigurationResponse < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetManagedRuleSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EntityName", # required
+    #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #         id: "EntityId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetManagedRuleSetRequest AWS API Documentation
+    #
+    class GetManagedRuleSetRequest < Struct.new(
+      :name,
+      :scope,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_rule_set
+    #   The managed rule set that you requested.
+    #   @return [Types::ManagedRuleSet]
+    #
+    # @!attribute [rw] lock_token
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetManagedRuleSetResponse AWS API Documentation
+    #
+    class GetManagedRuleSetResponse < Struct.new(
+      :managed_rule_set,
+      :lock_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3531,15 +3635,15 @@ module Aws::WAFV2
     #   @return [Types::RegexPatternSet]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetRegexPatternSetResponse AWS API Documentation
@@ -3606,15 +3710,15 @@ module Aws::WAFV2
     #   @return [Types::RuleGroup]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetRuleGroupResponse AWS API Documentation
@@ -3809,15 +3913,15 @@ module Aws::WAFV2
     #   @return [Types::WebACL]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLResponse AWS API Documentation
@@ -3942,7 +4046,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] ip_address_version
-    #   Specify IPV4 or IPV6.
+    #   The version of the IP addresses, either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] addresses
@@ -4143,15 +4247,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4220,9 +4324,9 @@ module Aws::WAFV2
     #   content only up to the first parsing failure that it encounters.
     #
     #   WAF does its best to parse the entire JSON body, but might be forced
-    #   to stop for reasons such as characters that aren't valid, duplicate
-    #   keys, truncation, and any content whose root node isn't an object
-    #   or an array.
+    #   to stop for reasons such as invalid characters, duplicate keys,
+    #   truncation, and any content whose root node isn't an object or an
+    #   array.
     #
     #   WAF parses the JSON in the following examples as two valid key,
     #   value pairs:
@@ -4414,6 +4518,91 @@ module Aws::WAFV2
     #
     class LabelSummary < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAvailableManagedRuleGroupVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vendor_name: "VendorName", # required
+    #         name: "EntityName", # required
+    #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] vendor_name
+    #   The name of the managed rule group vendor. You use this, along with
+    #   the rule group name, to identify the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the managed rule group. You use this, along with the
+    #   vendor name, to identify the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupVersionsRequest AWS API Documentation
+    #
+    class ListAvailableManagedRuleGroupVersionsRequest < Struct.new(
+      :vendor_name,
+      :name,
+      :scope,
+      :next_marker,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   The versions that are currently available for the specified managed
+    #   rule group.
+    #   @return [Array<Types::ManagedRuleGroupVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupVersionsResponse AWS API Documentation
+    #
+    class ListAvailableManagedRuleGroupVersionsResponse < Struct.new(
+      :next_marker,
+      :versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4623,6 +4812,76 @@ module Aws::WAFV2
     class ListLoggingConfigurationsResponse < Struct.new(
       :logging_configurations,
       :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListManagedRuleSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListManagedRuleSetsRequest AWS API Documentation
+    #
+    class ListManagedRuleSetsRequest < Struct.new(
+      :scope,
+      :next_marker,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_rule_sets
+    #   Your managed rule sets.
+    #   @return [Array<Types::ManagedRuleSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListManagedRuleSetsResponse AWS API Documentation
+    #
+    class ListManagedRuleSetsResponse < Struct.new(
+      :next_marker,
+      :managed_rule_sets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5104,6 +5363,7 @@ module Aws::WAFV2
     #       {
     #         vendor_name: "VendorName", # required
     #         name: "EntityName", # required
+    #         version: "VersionKeyString",
     #         excluded_rules: [
     #           {
     #             name: "EntityName", # required
@@ -5346,6 +5606,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -5372,6 +5633,14 @@ module Aws::WAFV2
     #   vendor name, to identify the rule group.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The version of the managed rule group to use. If you specify this,
+    #   the version setting is fixed until you change it. If you don't
+    #   specify this, WAF uses the vendor's default version, and then keeps
+    #   the version at the vendor's default when the vendor updates the
+    #   managed rule group settings.
+    #   @return [String]
+    #
     # @!attribute [rw] excluded_rules
     #   The rules whose actions are set to `COUNT` by the web ACL,
     #   regardless of the action that is set on the rule. This effectively
@@ -5392,6 +5661,7 @@ module Aws::WAFV2
     class ManagedRuleGroupStatement < Struct.new(
       :vendor_name,
       :name,
+      :version,
       :excluded_rules,
       :scope_down_statement)
       SENSITIVE = []
@@ -5427,6 +5697,254 @@ module Aws::WAFV2
       :vendor_name,
       :name,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a single version of a managed rule group.
+    #
+    # @!attribute [rw] name
+    #   The version name.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_timestamp
+    #   The date and time that the managed rule group owner updated the rule
+    #   group version information.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupVersion AWS API Documentation
+    #
+    class ManagedRuleGroupVersion < Struct.new(
+      :name,
+      :last_update_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of rules that is managed by Amazon Web Services and Marketplace
+    # sellers to provide versioned managed rule groups for customers of WAF.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the set that helps with identification.
+    #   @return [String]
+    #
+    # @!attribute [rw] published_versions
+    #   The versions of this managed rule set that are available for use by
+    #   customers.
+    #   @return [Hash<String,Types::ManagedRuleSetVersion>]
+    #
+    # @!attribute [rw] recommended_version
+    #   The version that you would like your customers to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_namespace
+    #   The label namespace prefix for the managed rule groups that are
+    #   offered to customers from this managed rule set. All labels that are
+    #   added by rules in the managed rule group have this prefix.
+    #
+    #   * The syntax for the label namespace prefix for a managed rule group
+    #     is the following:
+    #
+    #     `awswaf:managed:<vendor>:<rule group name>`\:
+    #
+    #   * When a rule with a label matches a web request, WAF adds the fully
+    #     qualified label to the request. A fully qualified label is made up
+    #     of the label namespace from the rule group or web ACL where the
+    #     rule is defined and the label from the rule, separated by a colon:
+    #
+    #     `<label namespace>:<label from rule>`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleSet AWS API Documentation
+    #
+    class ManagedRuleSet < Struct.new(
+      :name,
+      :id,
+      :arn,
+      :description,
+      :published_versions,
+      :recommended_version,
+      :label_namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information for a managed rule set.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the set that helps with identification.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_token
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_namespace
+    #   The label namespace prefix for the managed rule groups that are
+    #   offered to customers from this managed rule set. All labels that are
+    #   added by rules in the managed rule group have this prefix.
+    #
+    #   * The syntax for the label namespace prefix for a managed rule group
+    #     is the following:
+    #
+    #     `awswaf:managed:<vendor>:<rule group name>`\:
+    #
+    #   * When a rule with a label matches a web request, WAF adds the fully
+    #     qualified label to the request. A fully qualified label is made up
+    #     of the label namespace from the rule group or web ACL where the
+    #     rule is defined and the label from the rule, separated by a colon:
+    #
+    #     `<label namespace>:<label from rule>`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleSetSummary AWS API Documentation
+    #
+    class ManagedRuleSetSummary < Struct.new(
+      :name,
+      :id,
+      :description,
+      :lock_token,
+      :arn,
+      :label_namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information for a single version of a managed rule set.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] associated_rule_group_arn
+    #   The Amazon Resource Name (ARN) of the vendor rule group that's used
+    #   to define the published version of your managed rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The web ACL capacity units (WCUs) required for this rule group.
+    #
+    #   WAF uses WCUs to calculate and control the operating resources that
+    #   are used to run your rules, rule groups, and web ACLs. WAF
+    #   calculates capacity differently for each rule type, to reflect the
+    #   relative cost of each rule. Simple rules that cost little to run use
+    #   fewer WCUs than more complex rules that use more processing power.
+    #   Rule group capacity is fixed at creation, which helps users plan
+    #   their web ACL WCU usage when they use a rule group. The WCU limit
+    #   for web ACLs is 1,500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] forecasted_lifetime
+    #   The amount of time you expect this version of your managed rule
+    #   group to last, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] publish_timestamp
+    #   The time that you first published this version.
+    #
+    #   Times are in Coordinated Universal Time (UTC) format. UTC format
+    #   includes the special designator, Z. For example,
+    #   "2016-09-27T14:50Z".
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_timestamp
+    #   The last time that you updated this version.
+    #
+    #   Times are in Coordinated Universal Time (UTC) format. UTC format
+    #   includes the special designator, Z. For example,
+    #   "2016-09-27T14:50Z".
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_timestamp
+    #   The time that this version is set to expire.
+    #
+    #   Times are in Coordinated Universal Time (UTC) format. UTC format
+    #   includes the special designator, Z. For example,
+    #   "2016-09-27T14:50Z".
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleSetVersion AWS API Documentation
+    #
+    class ManagedRuleSetVersion < Struct.new(
+      :associated_rule_group_arn,
+      :capacity,
+      :forecasted_lifetime,
+      :publish_timestamp,
+      :last_update_timestamp,
+      :expiry_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5700,6 +6218,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -5970,6 +6489,7 @@ module Aws::WAFV2
     #             managed_rule_group_statement: {
     #               vendor_name: "VendorName", # required
     #               name: "EntityName", # required
+    #               version: "VersionKeyString",
     #               excluded_rules: [
     #                 {
     #                   name: "EntityName", # required
@@ -6129,6 +6649,107 @@ module Aws::WAFV2
     #
     class PutLoggingConfigurationResponse < Struct.new(
       :logging_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutManagedRuleSetVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EntityName", # required
+    #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #         id: "EntityId", # required
+    #         lock_token: "LockToken", # required
+    #         recommended_version: "VersionKeyString",
+    #         versions_to_publish: {
+    #           "VersionKeyString" => {
+    #             associated_rule_group_arn: "ResourceArn",
+    #             forecasted_lifetime: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_token
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_version
+    #   The version of the named managed rule group that you'd like your
+    #   customers to choose, from among your version offerings.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions_to_publish
+    #   The versions of the named managed rule group that you want to offer
+    #   to your customers.
+    #   @return [Hash<String,Types::VersionToPublish>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutManagedRuleSetVersionsRequest AWS API Documentation
+    #
+    class PutManagedRuleSetVersionsRequest < Struct.new(
+      :name,
+      :scope,
+      :id,
+      :lock_token,
+      :recommended_version,
+      :versions_to_publish)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_lock_token
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutManagedRuleSetVersionsResponse AWS API Documentation
+    #
+    class PutManagedRuleSetVersionsResponse < Struct.new(
+      :next_lock_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6473,6 +7094,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -6549,6 +7171,7 @@ module Aws::WAFV2
     # statement.
     #
     # @!attribute [rw] ip_address_version
+    #   The version of the IP addresses, either `IPV4` or `IPV6`.
     #   @return [String]
     #
     # @!attribute [rw] addresses
@@ -6729,15 +7352,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -7004,6 +7627,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -7427,15 +8051,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -8199,6 +8823,7 @@ module Aws::WAFV2
     #             managed_rule_group_statement: {
     #               vendor_name: "VendorName", # required
     #               name: "EntityName", # required
+    #               version: "VersionKeyString",
     #               excluded_rules: [
     #                 {
     #                   name: "EntityName", # required
@@ -8451,6 +9076,7 @@ module Aws::WAFV2
     #               managed_rule_group_statement: {
     #                 vendor_name: "VendorName", # required
     #                 name: "EntityName", # required
+    #                 version: "VersionKeyString",
     #                 excluded_rules: [
     #                   {
     #                     name: "EntityName", # required
@@ -8700,6 +9326,7 @@ module Aws::WAFV2
     #               managed_rule_group_statement: {
     #                 vendor_name: "VendorName", # required
     #                 name: "EntityName", # required
+    #                 version: "VersionKeyString",
     #                 excluded_rules: [
     #                   {
     #                     name: "EntityName", # required
@@ -8952,6 +9579,7 @@ module Aws::WAFV2
     #             managed_rule_group_statement: {
     #               vendor_name: "VendorName", # required
     #               name: "EntityName", # required
+    #               version: "VersionKeyString",
     #               excluded_rules: [
     #                 {
     #                   name: "EntityName", # required
@@ -8970,6 +9598,7 @@ module Aws::WAFV2
     #         managed_rule_group_statement: {
     #           vendor_name: "VendorName", # required
     #           name: "EntityName", # required
+    #           version: "VersionKeyString",
     #           excluded_rules: [
     #             {
     #               name: "EntityName", # required
@@ -9649,10 +10278,8 @@ module Aws::WAFV2
     #   **REPLACE\_NULLS** - Replace NULL bytes in the input with space
     #   characters (ASCII `0x20`).
     #
-    #   **SQL\_HEX\_DECODE** - Decode the following ANSI C escape sequences:
-    #   `\a`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`, `\`, `\?`, `'`, `"`,
-    #   `\xHH` (hexadecimal), `\0OOO` (octal). Encodings that aren't valid
-    #   remain in the output.
+    #   **SQL\_HEX\_DECODE** - Decode SQL hex data. Example (`0x414243`)
+    #   will be decoded to (`ABC`).
     #
     #   **URL\_DECODE** - Decode a URL-encoded value.
     #
@@ -9836,15 +10463,15 @@ module Aws::WAFV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateIPSetRequest AWS API Documentation
@@ -9862,13 +10489,126 @@ module Aws::WAFV2
 
     # @!attribute [rw] next_lock_token
     #   A token used for optimistic locking. WAF returns this token to your
-    #   update requests. You use `NextLockToken` in the same manner as you
+    #   `update` requests. You use `NextLockToken` in the same manner as you
     #   use `LockToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateIPSetResponse AWS API Documentation
     #
     class UpdateIPSetResponse < Struct.new(
+      :next_lock_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateManagedRuleSetVersionExpiryDateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EntityName", # required
+    #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #         id: "EntityId", # required
+    #         lock_token: "LockToken", # required
+    #         version_to_expire: "VersionKeyString", # required
+    #         expiry_timestamp: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, or
+    #   an AppSync GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_token
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_to_expire
+    #   The version that you want to remove from your list of offerings for
+    #   the named managed rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_timestamp
+    #   The time that you want the version to expire.
+    #
+    #   Times are in Coordinated Universal Time (UTC) format. UTC format
+    #   includes the special designator, Z. For example,
+    #   "2016-09-27T14:50Z".
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateManagedRuleSetVersionExpiryDateRequest AWS API Documentation
+    #
+    class UpdateManagedRuleSetVersionExpiryDateRequest < Struct.new(
+      :name,
+      :scope,
+      :id,
+      :lock_token,
+      :version_to_expire,
+      :expiry_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] expiring_version
+    #   The version that is set to expire.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_timestamp
+    #   The time that the version will expire.
+    #
+    #   Times are in Coordinated Universal Time (UTC) format. UTC format
+    #   includes the special designator, Z. For example,
+    #   "2016-09-27T14:50Z".
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_lock_token
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateManagedRuleSetVersionExpiryDateResponse AWS API Documentation
+    #
+    class UpdateManagedRuleSetVersionExpiryDateResponse < Struct.new(
+      :expiring_version,
+      :expiry_timestamp,
       :next_lock_token)
       SENSITIVE = []
       include Aws::Structure
@@ -9924,15 +10664,15 @@ module Aws::WAFV2
     #   @return [Array<Types::Regex>]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateRegexPatternSetRequest AWS API Documentation
@@ -9950,7 +10690,7 @@ module Aws::WAFV2
 
     # @!attribute [rw] next_lock_token
     #   A token used for optimistic locking. WAF returns this token to your
-    #   update requests. You use `NextLockToken` in the same manner as you
+    #   `update` requests. You use `NextLockToken` in the same manner as you
     #   use `LockToken`.
     #   @return [String]
     #
@@ -10211,6 +10951,7 @@ module Aws::WAFV2
     #               managed_rule_group_statement: {
     #                 vendor_name: "VendorName", # required
     #                 name: "EntityName", # required
+    #                 version: "VersionKeyString",
     #                 excluded_rules: [
     #                   {
     #                     name: "EntityName", # required
@@ -10342,15 +11083,15 @@ module Aws::WAFV2
     #   @return [Types::VisibilityConfig]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @!attribute [rw] custom_response_bodies
@@ -10391,7 +11132,7 @@ module Aws::WAFV2
 
     # @!attribute [rw] next_lock_token
     #   A token used for optimistic locking. WAF returns this token to your
-    #   update requests. You use `NextLockToken` in the same manner as you
+    #   `update` requests. You use `NextLockToken` in the same manner as you
     #   use `LockToken`.
     #   @return [String]
     #
@@ -10676,6 +11417,7 @@ module Aws::WAFV2
     #               managed_rule_group_statement: {
     #                 vendor_name: "VendorName", # required
     #                 name: "EntityName", # required
+    #                 version: "VersionKeyString",
     #                 excluded_rules: [
     #                   {
     #                     name: "EntityName", # required
@@ -10812,15 +11554,15 @@ module Aws::WAFV2
     #   @return [Types::VisibilityConfig]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @!attribute [rw] custom_response_bodies
@@ -10862,7 +11604,7 @@ module Aws::WAFV2
 
     # @!attribute [rw] next_lock_token
     #   A token used for optimistic locking. WAF returns this token to your
-    #   update requests. You use `NextLockToken` in the same manner as you
+    #   `update` requests. You use `NextLockToken` in the same manner as you
     #   use `LockToken`.
     #   @return [String]
     #
@@ -10886,6 +11628,47 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UriPath AWS API Documentation
     #
     class UriPath < Aws::EmptyStructure; end
+
+    # A version of the named managed rule group, that the rule group's
+    # vendor publishes for use by customers.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass VersionToPublish
+    #   data as a hash:
+    #
+    #       {
+    #         associated_rule_group_arn: "ResourceArn",
+    #         forecasted_lifetime: 1,
+    #       }
+    #
+    # @!attribute [rw] associated_rule_group_arn
+    #   The Amazon Resource Name (ARN) of the vendor's rule group that's
+    #   used in the published managed rule group version.
+    #   @return [String]
+    #
+    # @!attribute [rw] forecasted_lifetime
+    #   The amount of time the vendor expects this version of the managed
+    #   rule group to last, in days.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/VersionToPublish AWS API Documentation
+    #
+    class VersionToPublish < Struct.new(
+      :associated_rule_group_arn,
+      :forecasted_lifetime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Defines and enables Amazon CloudWatch metrics and web request sample
     # collection.
@@ -10961,6 +11744,22 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # The operation failed because the specified version for the managed
+    # rule group has expired. You can retrieve the available versions for
+    # the managed rule group by calling
+    # ListAvailableManagedRuleGroupVersions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFExpiredManagedRuleGroupVersionException AWS API Documentation
+    #
+    class WAFExpiredManagedRuleGroupVersionException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request is valid, but WAF couldn’t perform the operation because
     # of a system problem. Retry your request.
     #
@@ -11006,12 +11805,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] field
+    #   The settings where the invalid parameter was found.
     #   @return [String]
     #
     # @!attribute [rw] parameter
+    #   The invalid parameter that resulted in the exception.
     #   @return [String]
     #
     # @!attribute [rw] reason
+    #   Additional information about the exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFInvalidParameterException AWS API Documentation
@@ -11077,8 +11879,8 @@ module Aws::WAFV2
 
     # WAF couldn’t perform the operation because you exceeded your resource
     # limit. For example, the maximum number of `WebACL` objects that you
-    # can create for an account. For more information, see [Limits][1] in
-    # the *WAF Developer Guide*.
+    # can create for an Amazon Web Services account. For more information,
+    # see [WAF quotas][1] in the *WAF Developer Guide*.
     #
     #
     #
@@ -11374,15 +12176,15 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the
-    #   token, you provide the token to operations like update and delete.
-    #   WAF uses the token to ensure that no changes have been made to the
-    #   entity since you last retrieved it. If a change has been made, the
-    #   update fails with a `WAFOptimisticLockException`. If this happens,
-    #   perform another get, and use the new token returned by that
-    #   operation.
+    #   A token used for optimistic locking. WAF returns a token to your
+    #   `get` and `list` requests, to mark the state of the entity at the
+    #   time of the request. To make changes to the entity associated with
+    #   the token, you provide the token to operations like `update` and
+    #   `delete`. WAF uses the token to ensure that no changes have been
+    #   made to the entity since you last retrieved it. If a change has been
+    #   made, the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another `get`, and use the new token returned by
+    #   that operation.
     #   @return [String]
     #
     # @!attribute [rw] arn

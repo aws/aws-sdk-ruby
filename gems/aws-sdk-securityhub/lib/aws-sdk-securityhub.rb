@@ -48,6 +48,6 @@ require_relative 'aws-sdk-securityhub/customizations'
 # @!group service
 module Aws::SecurityHub
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.50.0'
 
 end

@@ -22,6 +22,7 @@ module Aws::Rekognition
     AudioMetadata = Shapes::StructureShape.new(name: 'AudioMetadata')
     AudioMetadataList = Shapes::ListShape.new(name: 'AudioMetadataList')
     Beard = Shapes::StructureShape.new(name: 'Beard')
+    BlackFrame = Shapes::StructureShape.new(name: 'BlackFrame')
     BodyPart = Shapes::StringShape.new(name: 'BodyPart')
     BodyParts = Shapes::ListShape.new(name: 'BodyParts')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -196,7 +197,9 @@ module Aws::Rekognition
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxFaces = Shapes::IntegerShape.new(name: 'MaxFaces')
     MaxFacesToIndex = Shapes::IntegerShape.new(name: 'MaxFacesToIndex')
+    MaxPixelThreshold = Shapes::FloatShape.new(name: 'MaxPixelThreshold')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MinCoveragePercentage = Shapes::FloatShape.new(name: 'MinCoveragePercentage')
     ModerationLabel = Shapes::StructureShape.new(name: 'ModerationLabel')
     ModerationLabels = Shapes::ListShape.new(name: 'ModerationLabels')
     MouthOpen = Shapes::StructureShape.new(name: 'MouthOpen')
@@ -345,6 +348,7 @@ module Aws::Rekognition
     VersionName = Shapes::StringShape.new(name: 'VersionName')
     VersionNames = Shapes::ListShape.new(name: 'VersionNames')
     Video = Shapes::StructureShape.new(name: 'Video')
+    VideoColorRange = Shapes::StringShape.new(name: 'VideoColorRange')
     VideoJobStatus = Shapes::StringShape.new(name: 'VideoJobStatus')
     VideoMetadata = Shapes::StructureShape.new(name: 'VideoMetadata')
     VideoMetadataList = Shapes::ListShape.new(name: 'VideoMetadataList')
@@ -374,6 +378,10 @@ module Aws::Rekognition
     Beard.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Beard.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Beard.struct_class = Types::Beard
+
+    BlackFrame.add_member(:max_pixel_threshold, Shapes::ShapeRef.new(shape: MaxPixelThreshold, location_name: "MaxPixelThreshold"))
+    BlackFrame.add_member(:min_coverage_percentage, Shapes::ShapeRef.new(shape: MinCoveragePercentage, location_name: "MinCoveragePercentage"))
+    BlackFrame.struct_class = Types::BlackFrame
 
     BodyParts.member = Shapes::ShapeRef.new(shape: ProtectiveEquipmentBodyPart)
 
@@ -1132,6 +1140,9 @@ module Aws::Rekognition
     SegmentDetection.add_member(:duration_smpte, Shapes::ShapeRef.new(shape: Timecode, location_name: "DurationSMPTE"))
     SegmentDetection.add_member(:technical_cue_segment, Shapes::ShapeRef.new(shape: TechnicalCueSegment, location_name: "TechnicalCueSegment"))
     SegmentDetection.add_member(:shot_segment, Shapes::ShapeRef.new(shape: ShotSegment, location_name: "ShotSegment"))
+    SegmentDetection.add_member(:start_frame_number, Shapes::ShapeRef.new(shape: ULong, location_name: "StartFrameNumber"))
+    SegmentDetection.add_member(:end_frame_number, Shapes::ShapeRef.new(shape: ULong, location_name: "EndFrameNumber"))
+    SegmentDetection.add_member(:duration_frames, Shapes::ShapeRef.new(shape: ULong, location_name: "DurationFrames"))
     SegmentDetection.struct_class = Types::SegmentDetection
 
     SegmentDetections.member = Shapes::ShapeRef.new(shape: SegmentDetection)
@@ -1244,6 +1255,7 @@ module Aws::Rekognition
     StartStreamProcessorResponse.struct_class = Types::StartStreamProcessorResponse
 
     StartTechnicalCueDetectionFilter.add_member(:min_segment_confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "MinSegmentConfidence"))
+    StartTechnicalCueDetectionFilter.add_member(:black_frame, Shapes::ShapeRef.new(shape: BlackFrame, location_name: "BlackFrame"))
     StartTechnicalCueDetectionFilter.struct_class = Types::StartTechnicalCueDetectionFilter
 
     StartTextDetectionFilters.add_member(:word_filter, Shapes::ShapeRef.new(shape: DetectionFilter, location_name: "WordFilter"))
@@ -1371,6 +1383,7 @@ module Aws::Rekognition
     VideoMetadata.add_member(:frame_rate, Shapes::ShapeRef.new(shape: Float, location_name: "FrameRate"))
     VideoMetadata.add_member(:frame_height, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameHeight"))
     VideoMetadata.add_member(:frame_width, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameWidth"))
+    VideoMetadata.add_member(:color_range, Shapes::ShapeRef.new(shape: VideoColorRange, location_name: "ColorRange"))
     VideoMetadata.struct_class = Types::VideoMetadata
 
     VideoMetadataList.member = Shapes::ShapeRef.new(shape: VideoMetadata)

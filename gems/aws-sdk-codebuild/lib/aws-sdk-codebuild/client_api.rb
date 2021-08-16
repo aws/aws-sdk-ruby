@@ -30,8 +30,10 @@ module Aws::CodeBuild
     BatchGetReportGroupsOutput = Shapes::StructureShape.new(name: 'BatchGetReportGroupsOutput')
     BatchGetReportsInput = Shapes::StructureShape.new(name: 'BatchGetReportsInput')
     BatchGetReportsOutput = Shapes::StructureShape.new(name: 'BatchGetReportsOutput')
+    BatchReportModeType = Shapes::StringShape.new(name: 'BatchReportModeType')
     BatchRestrictions = Shapes::StructureShape.new(name: 'BatchRestrictions')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketOwnerAccess = Shapes::StringShape.new(name: 'BucketOwnerAccess')
     Build = Shapes::StructureShape.new(name: 'Build')
     BuildArtifacts = Shapes::StructureShape.new(name: 'BuildArtifacts')
     BuildArtifactsList = Shapes::ListShape.new(name: 'BuildArtifactsList')
@@ -175,6 +177,7 @@ module Aws::CodeBuild
     ProjectSource = Shapes::StructureShape.new(name: 'ProjectSource')
     ProjectSourceVersion = Shapes::StructureShape.new(name: 'ProjectSourceVersion')
     ProjectSources = Shapes::ListShape.new(name: 'ProjectSources')
+    ProjectVisibilityType = Shapes::StringShape.new(name: 'ProjectVisibilityType')
     Projects = Shapes::ListShape.new(name: 'Projects')
     PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
     PutResourcePolicyOutput = Shapes::StructureShape.new(name: 'PutResourcePolicyOutput')
@@ -242,6 +245,8 @@ module Aws::CodeBuild
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
+    UpdateProjectVisibilityInput = Shapes::StructureShape.new(name: 'UpdateProjectVisibilityInput')
+    UpdateProjectVisibilityOutput = Shapes::StructureShape.new(name: 'UpdateProjectVisibilityOutput')
     UpdateReportGroupInput = Shapes::StructureShape.new(name: 'UpdateReportGroupInput')
     UpdateReportGroupOutput = Shapes::StructureShape.new(name: 'UpdateReportGroupOutput')
     UpdateWebhookInput = Shapes::StructureShape.new(name: 'UpdateWebhookInput')
@@ -344,6 +349,7 @@ module Aws::CodeBuild
     BuildArtifacts.add_member(:override_artifact_name, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "overrideArtifactName"))
     BuildArtifacts.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     BuildArtifacts.add_member(:artifact_identifier, Shapes::ShapeRef.new(shape: String, location_name: "artifactIdentifier"))
+    BuildArtifacts.add_member(:bucket_owner_access, Shapes::ShapeRef.new(shape: BucketOwnerAccess, location_name: "bucketOwnerAccess"))
     BuildArtifacts.struct_class = Types::BuildArtifacts
 
     BuildArtifactsList.member = Shapes::ShapeRef.new(shape: BuildArtifacts)
@@ -815,6 +821,9 @@ module Aws::CodeBuild
     Project.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     Project.add_member(:build_batch_config, Shapes::ShapeRef.new(shape: ProjectBuildBatchConfig, location_name: "buildBatchConfig"))
     Project.add_member(:concurrent_build_limit, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "concurrentBuildLimit"))
+    Project.add_member(:project_visibility, Shapes::ShapeRef.new(shape: ProjectVisibilityType, location_name: "projectVisibility"))
+    Project.add_member(:public_project_alias, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "publicProjectAlias"))
+    Project.add_member(:resource_access_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resourceAccessRole"))
     Project.struct_class = Types::Project
 
     ProjectArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -828,6 +837,7 @@ module Aws::CodeBuild
     ProjectArtifacts.add_member(:override_artifact_name, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "overrideArtifactName"))
     ProjectArtifacts.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     ProjectArtifacts.add_member(:artifact_identifier, Shapes::ShapeRef.new(shape: String, location_name: "artifactIdentifier"))
+    ProjectArtifacts.add_member(:bucket_owner_access, Shapes::ShapeRef.new(shape: BucketOwnerAccess, location_name: "bucketOwnerAccess"))
     ProjectArtifacts.struct_class = Types::ProjectArtifacts
 
     ProjectArtifactsList.member = Shapes::ShapeRef.new(shape: ProjectArtifacts)
@@ -840,6 +850,7 @@ module Aws::CodeBuild
     ProjectBuildBatchConfig.add_member(:combine_artifacts, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "combineArtifacts"))
     ProjectBuildBatchConfig.add_member(:restrictions, Shapes::ShapeRef.new(shape: BatchRestrictions, location_name: "restrictions"))
     ProjectBuildBatchConfig.add_member(:timeout_in_mins, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "timeoutInMins"))
+    ProjectBuildBatchConfig.add_member(:batch_report_mode, Shapes::ShapeRef.new(shape: BatchReportModeType, location_name: "batchReportMode"))
     ProjectBuildBatchConfig.struct_class = Types::ProjectBuildBatchConfig
 
     ProjectCache.add_member(:type, Shapes::ShapeRef.new(shape: CacheType, required: true, location_name: "type"))
@@ -985,6 +996,7 @@ module Aws::CodeBuild
     S3LogsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LogsConfigStatusType, required: true, location_name: "status"))
     S3LogsConfig.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
     S3LogsConfig.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
+    S3LogsConfig.add_member(:bucket_owner_access, Shapes::ShapeRef.new(shape: BucketOwnerAccess, location_name: "bucketOwnerAccess"))
     S3LogsConfig.struct_class = Types::S3LogsConfig
 
     S3ReportExportConfig.add_member(:bucket, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bucket"))
@@ -1146,6 +1158,16 @@ module Aws::CodeBuild
 
     UpdateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     UpdateProjectOutput.struct_class = Types::UpdateProjectOutput
+
+    UpdateProjectVisibilityInput.add_member(:project_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "projectArn"))
+    UpdateProjectVisibilityInput.add_member(:project_visibility, Shapes::ShapeRef.new(shape: ProjectVisibilityType, required: true, location_name: "projectVisibility"))
+    UpdateProjectVisibilityInput.add_member(:resource_access_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resourceAccessRole"))
+    UpdateProjectVisibilityInput.struct_class = Types::UpdateProjectVisibilityInput
+
+    UpdateProjectVisibilityOutput.add_member(:project_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "projectArn"))
+    UpdateProjectVisibilityOutput.add_member(:public_project_alias, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "publicProjectAlias"))
+    UpdateProjectVisibilityOutput.add_member(:project_visibility, Shapes::ShapeRef.new(shape: ProjectVisibilityType, location_name: "projectVisibility"))
+    UpdateProjectVisibilityOutput.struct_class = Types::UpdateProjectVisibilityOutput
 
     UpdateReportGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
     UpdateReportGroupInput.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, location_name: "exportConfig"))
@@ -1673,6 +1695,16 @@ module Aws::CodeBuild
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateProjectInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateProjectOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_project_visibility, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProjectVisibility"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProjectVisibilityInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProjectVisibilityOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

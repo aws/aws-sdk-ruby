@@ -46,6 +46,7 @@ module Aws::MediaLive
     AudioDescription = Shapes::StructureShape.new(name: 'AudioDescription')
     AudioDescriptionAudioTypeControl = Shapes::StringShape.new(name: 'AudioDescriptionAudioTypeControl')
     AudioDescriptionLanguageCodeControl = Shapes::StringShape.new(name: 'AudioDescriptionLanguageCodeControl')
+    AudioHlsRenditionSelection = Shapes::StructureShape.new(name: 'AudioHlsRenditionSelection')
     AudioLanguageSelection = Shapes::StructureShape.new(name: 'AudioLanguageSelection')
     AudioLanguageSelectionPolicy = Shapes::StringShape.new(name: 'AudioLanguageSelectionPolicy')
     AudioNormalizationAlgorithm = Shapes::StringShape.new(name: 'AudioNormalizationAlgorithm')
@@ -666,6 +667,7 @@ module Aws::MediaLive
     WavCodingMode = Shapes::StringShape.new(name: 'WavCodingMode')
     WavSettings = Shapes::StructureShape.new(name: 'WavSettings')
     WebvttDestinationSettings = Shapes::StructureShape.new(name: 'WebvttDestinationSettings')
+    WebvttDestinationStyleControl = Shapes::StringShape.new(name: 'WebvttDestinationStyleControl')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
@@ -873,6 +875,10 @@ module Aws::MediaLive
     AudioDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     AudioDescription.struct_class = Types::AudioDescription
 
+    AudioHlsRenditionSelection.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "groupId"))
+    AudioHlsRenditionSelection.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "name"))
+    AudioHlsRenditionSelection.struct_class = Types::AudioHlsRenditionSelection
+
     AudioLanguageSelection.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "languageCode"))
     AudioLanguageSelection.add_member(:language_selection_policy, Shapes::ShapeRef.new(shape: AudioLanguageSelectionPolicy, location_name: "languageSelectionPolicy"))
     AudioLanguageSelection.struct_class = Types::AudioLanguageSelection
@@ -895,6 +901,7 @@ module Aws::MediaLive
     AudioSelector.add_member(:selector_settings, Shapes::ShapeRef.new(shape: AudioSelectorSettings, location_name: "selectorSettings"))
     AudioSelector.struct_class = Types::AudioSelector
 
+    AudioSelectorSettings.add_member(:audio_hls_rendition_selection, Shapes::ShapeRef.new(shape: AudioHlsRenditionSelection, location_name: "audioHlsRenditionSelection"))
     AudioSelectorSettings.add_member(:audio_language_selection, Shapes::ShapeRef.new(shape: AudioLanguageSelection, location_name: "audioLanguageSelection"))
     AudioSelectorSettings.add_member(:audio_pid_selection, Shapes::ShapeRef.new(shape: AudioPidSelection, location_name: "audioPidSelection"))
     AudioSelectorSettings.add_member(:audio_track_selection, Shapes::ShapeRef.new(shape: AudioTrackSelection, location_name: "audioTrackSelection"))
@@ -3113,6 +3120,7 @@ module Aws::MediaLive
     WavSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __double, location_name: "sampleRate"))
     WavSettings.struct_class = Types::WavSettings
 
+    WebvttDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: WebvttDestinationStyleControl, location_name: "styleControl"))
     WebvttDestinationSettings.struct_class = Types::WebvttDestinationSettings
 
     __listOfAudioChannelMapping.member = Shapes::ShapeRef.new(shape: AudioChannelMapping)

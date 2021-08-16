@@ -427,8 +427,8 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an Identity and Access Management user started the build, the
-    #     user's name (for example, `MyUserName`).
+    #   * If an IAM user started the build, the user's name (for example,
+    #     `MyUserName`).
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
     #     `CodeBuild-Jenkins-Plugin`.
@@ -579,6 +579,53 @@ module Aws::CodeBuild
     #   An identifier for this artifact definition.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_owner_access
+    #   Specifies the bucket owner's access for objects that another
+    #   account uploads to their Amazon S3 bucket. By default, only the
+    #   account that uploads the objects to the bucket has access to these
+    #   objects. This property allows you to give the bucket owner access to
+    #   these objects.
+    #
+    #   <note markdown="1"> To use this property, your CodeBuild service role must have the
+    #   `s3:PutBucketAcl` permission. This permission allows CodeBuild to
+    #   modify the access control list for the bucket.
+    #
+    #    </note>
+    #
+    #   This property can be one of the following values:
+    #
+    #   NONE
+    #
+    #   : The bucket owner does not have access to the objects. This is the
+    #     default.
+    #
+    #   READ\_ONLY
+    #
+    #   : The bucket owner has read-only access to the objects. The
+    #     uploading account retains ownership of the objects.
+    #
+    #   FULL
+    #
+    #   : The bucket owner has full access to the objects. Object ownership
+    #     is determined by the following criteria:
+    #
+    #     * If the bucket is configured with the **Bucket owner preferred**
+    #       setting, the bucket owner owns the objects. The uploading
+    #       account will have object access as specified by the bucket's
+    #       policy.
+    #
+    #     * Otherwise, the uploading account retains ownership of the
+    #       objects.
+    #
+    #     For more information about Amazon S3 object ownership, see
+    #     [Controlling ownership of uploaded objects using S3 Object
+    #     Ownership][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts AWS API Documentation
     #
     class BuildArtifacts < Struct.new(
@@ -587,7 +634,8 @@ module Aws::CodeBuild
       :md5sum,
       :override_artifact_name,
       :encryption_disabled,
-      :artifact_identifier)
+      :artifact_identifier,
+      :bucket_owner_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -722,8 +770,7 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an Identity and Access Management user started the build, the
-    #     user's name.
+    #   * If an IAM user started the build, the user's name.
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
     #     `CodeBuild-Jenkins-Plugin`.
@@ -1453,6 +1500,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts: [
     #           {
@@ -1465,6 +1513,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         cache: {
@@ -1517,6 +1566,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         file_system_locations: [
@@ -1536,6 +1586,7 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
+    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         concurrent_build_limit: 1,
     #       }
@@ -1616,9 +1667,9 @@ module Aws::CodeBuild
     #   @return [Types::ProjectEnvironment]
     #
     # @!attribute [rw] service_role
-    #   The ARN of the Identity and Access Management role that enables
-    #   CodeBuild to interact with dependent Amazon Web Services services on
-    #   behalf of the Amazon Web Services account.
+    #   The ARN of the IAM role that enables CodeBuild to interact with
+    #   dependent Amazon Web Services services on behalf of the Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
@@ -2347,10 +2398,9 @@ module Aws::CodeBuild
     #   We strongly discourage the use of `PLAINTEXT` environment variables
     #   to store sensitive values, especially Amazon Web Services secret key
     #   IDs and secret access keys. `PLAINTEXT` environment variables can be
-    #   displayed in plain text using the CodeBuild console and the AWS
-    #   Command Line Interface (AWS CLI). For sensitive values, we recommend
-    #   you use an environment variable of type `PARAMETER_STORE` or
-    #   `SECRETS_MANAGER`.
+    #   displayed in plain text using the CodeBuild console and the CLI. For
+    #   sensitive values, we recommend you use an environment variable of
+    #   type `PARAMETER_STORE` or `SECRETS_MANAGER`.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -3458,6 +3508,7 @@ module Aws::CodeBuild
     #           status: "ENABLED", # required, accepts ENABLED, DISABLED
     #           location: "String",
     #           encryption_disabled: false,
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #       }
     #
@@ -3668,9 +3719,9 @@ module Aws::CodeBuild
     #   @return [Types::ProjectEnvironment]
     #
     # @!attribute [rw] service_role
-    #   The ARN of the Identity and Access Management role that enables
-    #   CodeBuild to interact with dependent Amazon Web Services services on
-    #   behalf of the Amazon Web Services account.
+    #   The ARN of the IAM role that enables CodeBuild to interact with
+    #   dependent Amazon Web Services services on behalf of the Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
@@ -3755,6 +3806,28 @@ module Aws::CodeBuild
     #   limit, new builds are throttled and are not run.
     #   @return [Integer]
     #
+    # @!attribute [rw] project_visibility
+    #   Specifies the visibility of the project's builds. Possible values
+    #   are:
+    #
+    #   PUBLIC\_READ
+    #
+    #   : The project builds are visible to the public.
+    #
+    #   PRIVATE
+    #
+    #   : The project builds are not visible to the public.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_project_alias
+    #   Contains the project identifier used with the public build APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_access_role
+    #   The ARN of the IAM role that enables CodeBuild to access the
+    #   CloudWatch Logs and Amazon S3 artifacts for the project's builds.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -3782,7 +3855,10 @@ module Aws::CodeBuild
       :logs_config,
       :file_system_locations,
       :build_batch_config,
-      :concurrent_build_limit)
+      :concurrent_build_limit,
+      :project_visibility,
+      :public_project_alias,
+      :resource_access_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3802,6 +3878,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       }
     #
     # @!attribute [rw] type
@@ -3945,6 +4022,53 @@ module Aws::CodeBuild
     #   An identifier for this artifact definition.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_owner_access
+    #   Specifies the bucket owner's access for objects that another
+    #   account uploads to their Amazon S3 bucket. By default, only the
+    #   account that uploads the objects to the bucket has access to these
+    #   objects. This property allows you to give the bucket owner access to
+    #   these objects.
+    #
+    #   <note markdown="1"> To use this property, your CodeBuild service role must have the
+    #   `s3:PutBucketAcl` permission. This permission allows CodeBuild to
+    #   modify the access control list for the bucket.
+    #
+    #    </note>
+    #
+    #   This property can be one of the following values:
+    #
+    #   NONE
+    #
+    #   : The bucket owner does not have access to the objects. This is the
+    #     default.
+    #
+    #   READ\_ONLY
+    #
+    #   : The bucket owner has read-only access to the objects. The
+    #     uploading account retains ownership of the objects.
+    #
+    #   FULL
+    #
+    #   : The bucket owner has full access to the objects. Object ownership
+    #     is determined by the following criteria:
+    #
+    #     * If the bucket is configured with the **Bucket owner preferred**
+    #       setting, the bucket owner owns the objects. The uploading
+    #       account will have object access as specified by the bucket's
+    #       policy.
+    #
+    #     * Otherwise, the uploading account retains ownership of the
+    #       objects.
+    #
+    #     For more information about Amazon S3 object ownership, see
+    #     [Controlling ownership of uploaded objects using S3 Object
+    #     Ownership][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts AWS API Documentation
     #
     class ProjectArtifacts < Struct.new(
@@ -3956,7 +4080,8 @@ module Aws::CodeBuild
       :packaging,
       :override_artifact_name,
       :encryption_disabled,
-      :artifact_identifier)
+      :artifact_identifier,
+      :bucket_owner_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3995,6 +4120,7 @@ module Aws::CodeBuild
     #           compute_types_allowed: ["NonEmptyString"],
     #         },
     #         timeout_in_mins: 1,
+    #         batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #       }
     #
     # @!attribute [rw] service_role
@@ -4016,13 +4142,31 @@ module Aws::CodeBuild
     #   build must be completed in.
     #   @return [Integer]
     #
+    # @!attribute [rw] batch_report_mode
+    #   Specifies how build status reports are sent to the source provider
+    #   for the batch build. This property is only used when the source
+    #   provider for your project is Bitbucket, GitHub, or GitHub
+    #   Enterprise, and your project is configured to report build statuses
+    #   to the source provider.
+    #
+    #   REPORT\_AGGREGATED\_BATCH
+    #
+    #   : (Default) Aggregate all of the build statuses into a single status
+    #     report.
+    #
+    #   REPORT\_INDIVIDUAL\_BUILDS
+    #
+    #   : Send a separate status report for each individual build.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectBuildBatchConfig AWS API Documentation
     #
     class ProjectBuildBatchConfig < Struct.new(
       :service_role,
       :combine_artifacts,
       :restrictions,
-      :timeout_in_mins)
+      :timeout_in_mins,
+      :batch_report_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4464,17 +4608,17 @@ module Aws::CodeBuild
     #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
     #     repository that contains the source and the buildspec file. You
-    #     must connect your account to your GitHub account. Use the
-    #     CodeBuild console to start creating a build project. When you use
-    #     the console to connect (or reconnect) with GitHub, on the GitHub
-    #     **Authorize application** page, for **Organization access**,
-    #     choose **Request access** next to each repository you want to
-    #     allow CodeBuild to have access to, and then choose **Authorize
-    #     application**. (After you have connected to your GitHub account,
-    #     you do not need to finish creating the build project. You can
-    #     leave the CodeBuild console.) To instruct CodeBuild to use this
-    #     connection, in the `source` object, set the `auth` object's
-    #     `type` value to `OAUTH`.
+    #     must connect your Amazon Web Services account to your GitHub
+    #     account. Use the CodeBuild console to start creating a build
+    #     project. When you use the console to connect (or reconnect) with
+    #     GitHub, on the GitHub **Authorize application** page, for
+    #     **Organization access**, choose **Request access** next to each
+    #     repository you want to allow CodeBuild to have access to, and then
+    #     choose **Authorize application**. (After you have connected to
+    #     your GitHub account, you do not need to finish creating the build
+    #     project. You can leave the CodeBuild console.) To instruct
+    #     CodeBuild to use this connection, in the `source` object, set the
+    #     `auth` object's `type` value to `OAUTH`.
     #
     #   * For source code in a Bitbucket repository, the HTTPS clone URL to
     #     the repository that contains the source and the buildspec file.
@@ -4509,11 +4653,12 @@ module Aws::CodeBuild
     #   If this value is set, it can be either an inline buildspec
     #   definition, the path to an alternate buildspec file relative to the
     #   value of the built-in `CODEBUILD_SRC_DIR` environment variable, or
-    #   the path to an S3 bucket. The bucket must be in the same Region as
-    #   the build project. Specify the buildspec file using its ARN (for
-    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
-    #   value is not provided or is set to an empty string, the source code
-    #   must contain a buildspec file in its root directory. For more
+    #   the path to an S3 bucket. The bucket must be in the same Amazon Web
+    #   Services Region as the build project. Specify the buildspec file
+    #   using its ARN (for example,
+    #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
+    #   not provided or is set to an empty string, the source code must
+    #   contain a buildspec file in its root directory. For more
     #   information, see [Buildspec File Name and Storage Location][1].
     #
     #
@@ -4715,7 +4860,7 @@ module Aws::CodeBuild
     #   Secrets Manager.
     #
     #   <note markdown="1"> The `credential` can use the name of the credentials only if they
-    #   exist in your current Region.
+    #   exist in your current Amazon Web Services Region.
     #
     #    </note>
     #   @return [String]
@@ -5005,7 +5150,7 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Represents a resolved build artifact. A resolve artifact is an
+    # Represents a resolved build artifact. A resolved artifact is an
     # artifact that is built and deployed to the destination, such as Amazon
     # S3.
     #
@@ -5141,6 +5286,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       }
     #
     # @!attribute [rw] status
@@ -5163,12 +5309,60 @@ module Aws::CodeBuild
     #   By default S3 build logs are encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] bucket_owner_access
+    #   Specifies the bucket owner's access for objects that another
+    #   account uploads to their Amazon S3 bucket. By default, only the
+    #   account that uploads the objects to the bucket has access to these
+    #   objects. This property allows you to give the bucket owner access to
+    #   these objects.
+    #
+    #   <note markdown="1"> To use this property, your CodeBuild service role must have the
+    #   `s3:PutBucketAcl` permission. This permission allows CodeBuild to
+    #   modify the access control list for the bucket.
+    #
+    #    </note>
+    #
+    #   This property can be one of the following values:
+    #
+    #   NONE
+    #
+    #   : The bucket owner does not have access to the objects. This is the
+    #     default.
+    #
+    #   READ\_ONLY
+    #
+    #   : The bucket owner has read-only access to the objects. The
+    #     uploading account retains ownership of the objects.
+    #
+    #   FULL
+    #
+    #   : The bucket owner has full access to the objects. Object ownership
+    #     is determined by the following criteria:
+    #
+    #     * If the bucket is configured with the **Bucket owner preferred**
+    #       setting, the bucket owner owns the objects. The uploading
+    #       account will have object access as specified by the bucket's
+    #       policy.
+    #
+    #     * Otherwise, the uploading account retains ownership of the
+    #       objects.
+    #
+    #     For more information about Amazon S3 object ownership, see
+    #     [Controlling ownership of uploaded objects using S3 Object
+    #     Ownership][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig AWS API Documentation
     #
     class S3LogsConfig < Struct.new(
       :status,
       :location,
-      :encryption_disabled)
+      :encryption_disabled,
+      :bucket_owner_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5343,6 +5537,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts_override: [
     #           {
@@ -5355,6 +5550,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         environment_variables_override: [
@@ -5402,6 +5598,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         registry_credential_override: {
@@ -5417,6 +5614,7 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
+    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         debug_session_enabled: false,
     #       }
@@ -5525,11 +5723,12 @@ module Aws::CodeBuild
     #   If this value is set, it can be either an inline buildspec
     #   definition, the path to an alternate buildspec file relative to the
     #   value of the built-in `CODEBUILD_SRC_DIR` environment variable, or
-    #   the path to an S3 bucket. The bucket must be in the same Region as
-    #   the build project. Specify the buildspec file using its ARN (for
-    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
-    #   value is not provided or is set to an empty string, the source code
-    #   must contain a buildspec file in its root directory. For more
+    #   the path to an S3 bucket. The bucket must be in the same Amazon Web
+    #   Services Region as the build project. Specify the buildspec file
+    #   using its ARN (for example,
+    #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
+    #   not provided or is set to an empty string, the source code must
+    #   contain a buildspec file in its root directory. For more
     #   information, see [Buildspec File Name and Storage Location][1].
     #
     #
@@ -5763,6 +5962,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts_override: [
     #           {
@@ -5775,6 +5975,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         environment_variables_override: [
@@ -5826,6 +6027,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         registry_credential_override: {
@@ -5939,11 +6141,12 @@ module Aws::CodeBuild
     #   If this value is set, it can be either an inline buildspec
     #   definition, the path to an alternate buildspec file relative to the
     #   value of the built-in `CODEBUILD_SRC_DIR` environment variable, or
-    #   the path to an S3 bucket. The bucket must be in the same Region as
-    #   the build project. Specify the buildspec file using its ARN (for
-    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
-    #   value is not provided or is set to an empty string, the source code
-    #   must contain a buildspec file in its root directory. For more
+    #   the path to an S3 bucket. The bucket must be in the same Amazon Web
+    #   Services Region as the build project. Specify the buildspec file
+    #   using its ARN (for example,
+    #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
+    #   not provided or is set to an empty string, the source code must
+    #   contain a buildspec file in its root directory. For more
     #   information, see [Buildspec File Name and Storage Location][1].
     #
     #
@@ -6425,6 +6628,7 @@ module Aws::CodeBuild
     #           override_artifact_name: false,
     #           encryption_disabled: false,
     #           artifact_identifier: "String",
+    #           bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #         },
     #         secondary_artifacts: [
     #           {
@@ -6437,6 +6641,7 @@ module Aws::CodeBuild
     #             override_artifact_name: false,
     #             encryption_disabled: false,
     #             artifact_identifier: "String",
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         ],
     #         cache: {
@@ -6489,6 +6694,7 @@ module Aws::CodeBuild
     #             status: "ENABLED", # required, accepts ENABLED, DISABLED
     #             location: "String",
     #             encryption_disabled: false,
+    #             bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #           },
     #         },
     #         file_system_locations: [
@@ -6508,6 +6714,7 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
+    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         concurrent_build_limit: 1,
     #       }
@@ -6594,9 +6801,9 @@ module Aws::CodeBuild
     #   @return [Types::ProjectEnvironment]
     #
     # @!attribute [rw] service_role
-    #   The replacement ARN of the Identity and Access Management role that
-    #   enables CodeBuild to interact with dependent Amazon Web Services
-    #   services on behalf of the Amazon Web Services account.
+    #   The replacement ARN of the IAM role that enables CodeBuild to
+    #   interact with dependent Amazon Web Services services on behalf of
+    #   the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
@@ -6704,6 +6911,78 @@ module Aws::CodeBuild
     #
     class UpdateProjectOutput < Struct.new(
       :project)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateProjectVisibilityInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "NonEmptyString", # required
+    #         project_visibility: "PUBLIC_READ", # required, accepts PUBLIC_READ, PRIVATE
+    #         resource_access_role: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_visibility
+    #   Specifies the visibility of the project's builds. Possible values
+    #   are:
+    #
+    #   PUBLIC\_READ
+    #
+    #   : The project builds are visible to the public.
+    #
+    #   PRIVATE
+    #
+    #   : The project builds are not visible to the public.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_access_role
+    #   The ARN of the IAM role that enables CodeBuild to access the
+    #   CloudWatch Logs and Amazon S3 artifacts for the project's builds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectVisibilityInput AWS API Documentation
+    #
+    class UpdateProjectVisibilityInput < Struct.new(
+      :project_arn,
+      :project_visibility,
+      :resource_access_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_project_alias
+    #   Contains the project identifier used with the public build APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_visibility
+    #   Specifies the visibility of the project's builds. Possible values
+    #   are:
+    #
+    #   PUBLIC\_READ
+    #
+    #   : The project builds are visible to the public.
+    #
+    #   PRIVATE
+    #
+    #   : The project builds are not visible to the public.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectVisibilityOutput AWS API Documentation
+    #
+    class UpdateProjectVisibilityOutput < Struct.new(
+      :project_arn,
+      :public_project_alias,
+      :project_visibility)
       SENSITIVE = []
       include Aws::Structure
     end

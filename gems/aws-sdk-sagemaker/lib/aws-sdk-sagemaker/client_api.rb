@@ -738,6 +738,7 @@ module Aws::SageMaker
     LabelingJobSummary = Shapes::StructureShape.new(name: 'LabelingJobSummary')
     LabelingJobSummaryList = Shapes::ListShape.new(name: 'LabelingJobSummaryList')
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
+    LambdaStepMetadata = Shapes::StructureShape.new(name: 'LambdaStepMetadata')
     LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime')
     LineageEntityParameters = Shapes::MapShape.new(name: 'LineageEntityParameters')
     ListActionsRequest = Shapes::StructureShape.new(name: 'ListActionsRequest')
@@ -878,10 +879,13 @@ module Aws::SageMaker
     MetadataProperties = Shapes::StructureShape.new(name: 'MetadataProperties')
     MetadataPropertyValue = Shapes::StringShape.new(name: 'MetadataPropertyValue')
     MetricData = Shapes::StructureShape.new(name: 'MetricData')
+    MetricDataList = Shapes::ListShape.new(name: 'MetricDataList')
+    MetricDatum = Shapes::StructureShape.new(name: 'MetricDatum')
     MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
     MetricDefinitionList = Shapes::ListShape.new(name: 'MetricDefinitionList')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricRegex = Shapes::StringShape.new(name: 'MetricRegex')
+    MetricSetSource = Shapes::StringShape.new(name: 'MetricSetSource')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
     ModelApprovalStatus = Shapes::StringShape.new(name: 'ModelApprovalStatus')
@@ -1717,6 +1721,7 @@ module Aws::SageMaker
     CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
 
     CandidateProperties.add_member(:candidate_artifact_locations, Shapes::ShapeRef.new(shape: CandidateArtifactLocations, location_name: "CandidateArtifactLocations"))
+    CandidateProperties.add_member(:candidate_metrics, Shapes::ShapeRef.new(shape: MetricDataList, location_name: "CandidateMetrics"))
     CandidateProperties.struct_class = Types::CandidateProperties
 
     CandidateSteps.member = Shapes::ShapeRef.new(shape: AutoMLCandidateStep)
@@ -4017,6 +4022,10 @@ module Aws::SageMaker
 
     LabelingJobSummaryList.member = Shapes::ShapeRef.new(shape: LabelingJobSummary)
 
+    LambdaStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: String256, location_name: "Arn"))
+    LambdaStepMetadata.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
+    LambdaStepMetadata.struct_class = Types::LambdaStepMetadata
+
     LineageEntityParameters.key = Shapes::ShapeRef.new(shape: StringParameterValue)
     LineageEntityParameters.value = Shapes::ShapeRef.new(shape: StringParameterValue)
 
@@ -4776,6 +4785,13 @@ module Aws::SageMaker
     MetricData.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     MetricData.struct_class = Types::MetricData
 
+    MetricDataList.member = Shapes::ShapeRef.new(shape: MetricDatum)
+
+    MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, location_name: "MetricName"))
+    MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: Float, location_name: "Value"))
+    MetricDatum.add_member(:set, Shapes::ShapeRef.new(shape: MetricSetSource, location_name: "Set"))
+    MetricDatum.struct_class = Types::MetricDatum
+
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
     MetricDefinition.add_member(:regex, Shapes::ShapeRef.new(shape: MetricRegex, required: true, location_name: "Regex"))
     MetricDefinition.struct_class = Types::MetricDefinition
@@ -5271,6 +5287,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:register_model, Shapes::ShapeRef.new(shape: RegisterModelStepMetadata, location_name: "RegisterModel"))
     PipelineExecutionStepMetadata.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionStepMetadata, location_name: "Condition"))
     PipelineExecutionStepMetadata.add_member(:callback, Shapes::ShapeRef.new(shape: CallbackStepMetadata, location_name: "Callback"))
+    PipelineExecutionStepMetadata.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaStepMetadata, location_name: "Lambda"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))

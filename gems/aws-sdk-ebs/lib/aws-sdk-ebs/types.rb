@@ -316,7 +316,7 @@ module Aws::EBS
     #   @return [Integer]
     #
     # @!attribute [rw] block_size
-    #   The size of the block.
+    #   The size of the blocks in the snapshot, in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -389,7 +389,7 @@ module Aws::EBS
     #   @return [Integer]
     #
     # @!attribute [rw] block_size
-    #   The size of the block.
+    #   The size of the blocks in the snapshot, in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -456,7 +456,7 @@ module Aws::EBS
     #
     # @!attribute [rw] data_length
     #   The size of the data to write to the block, in bytes. Currently, the
-    #   only supported size is `524288`.
+    #   only supported size is `524288` bytes.
     #
     #   Valid values: `524288`
     #   @return [Integer]
@@ -616,7 +616,7 @@ module Aws::EBS
     #   and they have no additional effect.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   For more information, see [ Idempotency for StartSnapshot API][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
@@ -637,12 +637,12 @@ module Aws::EBS
     #   If you specify a value for **ParentSnapshotId**, omit this
     #   parameter.
     #
-    #   If you specify `true`, the snapshot is encrypted using the CMK
+    #   If you specify `true`, the snapshot is encrypted using the KMS key
     #   specified using the **KmsKeyArn** parameter. If no value is
-    #   specified for **KmsKeyArn**, the default CMK for your account is
-    #   used. If no default CMK has been specified for your account, the AWS
-    #   managed CMK is used. To set a default CMK for your account, use [
-    #   ModifyEbsDefaultKmsKeyId][1].
+    #   specified for **KmsKeyArn**, the default KMS key for your account is
+    #   used. If no default KMS key has been specified for your account, the
+    #   Amazon Web Services managed KMS key is used. To set a default KMS
+    #   key for your account, use [ ModifyEbsDefaultKmsKeyId][1].
     #
     #   If your account is enabled for encryption by default, you cannot set
     #   this parameter to `false`. In this case, you can omit this
@@ -658,16 +658,15 @@ module Aws::EBS
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (AWS KMS) customer master key (CMK) to be used to encrypt the
-    #   snapshot. If you do not specify a CMK, the default AWS managed CMK
-    #   is used.
+    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
+    #   key to be used to encrypt the snapshot. If you do not specify a KMS
+    #   key, the default Amazon Web Services managed KMS key is used.
     #
     #   If you specify a **ParentSnapshotId**, omit this parameter; the
-    #   snapshot will be encrypted using the same CMK that was used to
+    #   snapshot will be encrypted using the same KMS key that was used to
     #   encrypt the parent snapshot.
     #
-    #   If **Encrypted** is set to `true`, you must specify a CMK ARN.
+    #   If **Encrypted** is set to `true`, you must specify a KMS key ARN.
     #   @return [String]
     #
     # @!attribute [rw] timeout
@@ -706,7 +705,7 @@ module Aws::EBS
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the snapshot owner.
+    #   The Amazon Web Services account ID of the snapshot owner.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -740,8 +739,8 @@ module Aws::EBS
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (AWS KMS) customer master key (CMK) used to encrypt the snapshot.
+    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
+    #   key used to encrypt the snapshot.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/StartSnapshotResponse AWS API Documentation

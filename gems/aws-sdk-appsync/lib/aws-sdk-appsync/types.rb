@@ -29,7 +29,7 @@ module Aws::AppSync
     #   data as a hash:
     #
     #       {
-    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #         open_id_connect_config: {
     #           issuer: "String", # required
     #           client_id: "String",
@@ -41,11 +41,16 @@ module Aws::AppSync
     #           aws_region: "String", # required
     #           app_id_client_regex: "String",
     #         },
+    #         lambda_authorizer_config: {
+    #           authorizer_result_ttl_in_seconds: 1,
+    #           authorizer_uri: "String", # required
+    #           identity_validation_expression: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] authentication_type
-    #   The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito
-    #   user pools.
+    #   The authentication type: API key, Identity and Access Management,
+    #   OIDC, or Amazon Cognito user pools.
     #   @return [String]
     #
     # @!attribute [rw] open_id_connect_config
@@ -56,12 +61,17 @@ module Aws::AppSync
     #   The Amazon Cognito user pool configuration.
     #   @return [Types::CognitoUserPoolConfig]
     #
+    # @!attribute [rw] lambda_authorizer_config
+    #   Configuration for AWS Lambda function authorization.
+    #   @return [Types::LambdaAuthorizerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AdditionalAuthenticationProvider AWS API Documentation
     #
     class AdditionalAuthenticationProvider < Struct.new(
       :authentication_type,
       :open_id_connect_config,
-      :user_pool_config)
+      :user_pool_config,
+      :lambda_authorizer_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -163,8 +173,8 @@ module Aws::AppSync
 
     # Describes an API key.
     #
-    # Customers invoke AWS AppSync GraphQL API operations with API keys as
-    # an identity mechanism. There are two key versions:
+    # Customers invoke AppSync GraphQL API operations with API keys as an
+    # identity mechanism. There are two key versions:
     #
     # **da1**\: This version was introduced at launch in November 2017.
     # These keys always expire after 7 days. Key expiration is managed by
@@ -301,7 +311,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_iam_config
-    #   The AWS IAM settings.
+    #   The Identity and Access Management settings.
     #   @return [Types::AwsIamConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AuthorizationConfig AWS API Documentation
@@ -313,7 +323,7 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # The AWS IAM configuration.
+    # The Identity and Access Management configuration.
     #
     # @note When making an API call, you may pass AwsIamConfig
     #   data as a hash:
@@ -324,11 +334,12 @@ module Aws::AppSync
     #       }
     #
     # @!attribute [rw] signing_region
-    #   The signing region for AWS IAM authorization.
+    #   The signing region for Identity and Access Management authorization.
     #   @return [String]
     #
     # @!attribute [rw] signing_service_name
-    #   The signing service name for AWS IAM authorization.
+    #   The signing service name for Identity and Access Management
+    #   authorization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AwsIamConfig AWS API Documentation
@@ -402,7 +413,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The AWS Region in which the user pool was created.
+    #   The Amazon Web Services Region in which the user pool was created.
     #   @return [String]
     #
     # @!attribute [rw] app_id_client_regex
@@ -657,8 +668,8 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The AWS IAM service role ARN for the data source. The system assumes
-    #   this role when accessing the data source.
+    #   The Identity and Access Management service role ARN for the data
+    #   source. The system assumes this role when accessing the data source.
     #   @return [String]
     #
     # @!attribute [rw] dynamodb_config
@@ -666,7 +677,7 @@ module Aws::AppSync
     #   @return [Types::DynamodbDataSourceConfig]
     #
     # @!attribute [rw] lambda_config
-    #   AWS Lambda settings.
+    #   Amazon Web Services Lambda settings.
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
@@ -805,7 +816,7 @@ module Aws::AppSync
     #           cloud_watch_logs_role_arn: "String", # required
     #           exclude_verbose_content: false,
     #         },
-    #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #         user_pool_config: {
     #           user_pool_id: "String", # required
     #           aws_region: "String", # required
@@ -823,7 +834,7 @@ module Aws::AppSync
     #         },
     #         additional_authentication_providers: [
     #           {
-    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #             open_id_connect_config: {
     #               issuer: "String", # required
     #               client_id: "String",
@@ -835,9 +846,19 @@ module Aws::AppSync
     #               aws_region: "String", # required
     #               app_id_client_regex: "String",
     #             },
+    #             lambda_authorizer_config: {
+    #               authorizer_result_ttl_in_seconds: 1,
+    #               authorizer_uri: "String", # required
+    #               identity_validation_expression: "String",
+    #             },
     #           },
     #         ],
     #         xray_enabled: false,
+    #         lambda_authorizer_config: {
+    #           authorizer_result_ttl_in_seconds: 1,
+    #           authorizer_uri: "String", # required
+    #           identity_validation_expression: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -849,8 +870,8 @@ module Aws::AppSync
     #   @return [Types::LogConfig]
     #
     # @!attribute [rw] authentication_type
-    #   The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito
-    #   user pools.
+    #   The authentication type: API key, Identity and Access Management,
+    #   OIDC, or Amazon Cognito user pools.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_config
@@ -875,6 +896,10 @@ module Aws::AppSync
     #   `GraphqlApi`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] lambda_authorizer_config
+    #   Configuration for AWS Lambda function authorization.
+    #   @return [Types::LambdaAuthorizerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
@@ -885,7 +910,8 @@ module Aws::AppSync
       :open_id_connect_config,
       :tags,
       :additional_authentication_providers,
-      :xray_enabled)
+      :xray_enabled,
+      :lambda_authorizer_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1088,7 +1114,8 @@ module Aws::AppSync
     #   * **AMAZON\_ELASTICSEARCH**\: The data source is an Amazon
     #     Elasticsearch Service domain.
     #
-    #   * **AWS\_LAMBDA**\: The data source is an AWS Lambda function.
+    #   * **AWS\_LAMBDA**\: The data source is an Amazon Web Services Lambda
+    #     function.
     #
     #   * **NONE**\: There is no data source. This type is used when you
     #     wish to invoke a GraphQL operation without connecting to a data
@@ -1102,8 +1129,8 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The AWS IAM service role ARN for the data source. The system assumes
-    #   this role when accessing the data source.
+    #   The Identity and Access Management service role ARN for the data
+    #   source. The system assumes this role when accessing the data source.
     #   @return [String]
     #
     # @!attribute [rw] dynamodb_config
@@ -1111,7 +1138,7 @@ module Aws::AppSync
     #   @return [Types::DynamodbDataSourceConfig]
     #
     # @!attribute [rw] lambda_config
-    #   AWS Lambda settings.
+    #   Amazon Web Services Lambda settings.
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
@@ -1400,7 +1427,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The AWS Region.
+    #   The Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] use_caller_credentials
@@ -1443,7 +1470,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The AWS Region.
+    #   The Amazon Web Services Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ElasticsearchDataSourceConfig AWS API Documentation
@@ -1920,9 +1947,13 @@ module Aws::AppSync
     #   @return [Boolean]
     #
     # @!attribute [rw] waf_web_acl_arn
-    #   The ARN of the AWS Web Application Firewall (WAF) ACL associated
-    #   with this `GraphqlApi`, if one exists.
+    #   The ARN of the WAF ACL associated with this `GraphqlApi`, if one
+    #   exists.
     #   @return [String]
+    #
+    # @!attribute [rw] lambda_authorizer_config
+    #   Configuration for AWS Lambda function authorization.
+    #   @return [Types::LambdaAuthorizerConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
@@ -1938,7 +1969,8 @@ module Aws::AppSync
       :tags,
       :additional_authentication_providers,
       :xray_enabled,
-      :waf_web_acl_arn)
+      :waf_web_acl_arn,
+      :lambda_authorizer_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1962,8 +1994,8 @@ module Aws::AppSync
     # @!attribute [rw] endpoint
     #   The HTTP URL endpoint. You can either specify the domain name or IP,
     #   and port combination, and the URL scheme must be HTTP or HTTPS. If
-    #   the port is not specified, AWS AppSync uses the default port 80 for
-    #   the HTTP endpoint and port 443 for HTTPS endpoints.
+    #   the port is not specified, AppSync uses the default port 80 for the
+    #   HTTP endpoint and port 443 for HTTPS endpoints.
     #   @return [String]
     #
     # @!attribute [rw] authorization_config
@@ -1980,7 +2012,7 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # An internal AWS AppSync error occurred. Try your request again.
+    # An internal AppSync error occurred. Try your request again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1989,6 +2021,57 @@ module Aws::AppSync
     #
     class InternalFailureException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `LambdaAuthorizerConfig` holds configuration on how to authorize
+    # AppSync API access when using the `AWS_LAMBDA` authorizer mode. Be
+    # aware that an AppSync API may have only one Lambda authorizer
+    # configured at a time.
+    #
+    # @note When making an API call, you may pass LambdaAuthorizerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         authorizer_result_ttl_in_seconds: 1,
+    #         authorizer_uri: "String", # required
+    #         identity_validation_expression: "String",
+    #       }
+    #
+    # @!attribute [rw] authorizer_result_ttl_in_seconds
+    #   The number of seconds a response should be cached for. The default
+    #   is 5 minutes (300 seconds). The Lambda function can override this by
+    #   returning a `ttlOverride` key in its response. A value of 0 disables
+    #   caching of responses.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] authorizer_uri
+    #   The ARN of the lambda function to be called for authorization. This
+    #   may be a standard Lambda ARN, a version ARN (`.../v3`) or alias ARN.
+    #
+    #   *Note*\: This Lambda function must have the following resource-based
+    #   policy assigned to it. When configuring Lambda authorizers in the
+    #   Console, this is done for you. To do so with the AWS CLI, run the
+    #   following:
+    #
+    #   `aws lambda add-permission --function-name
+    #   "arn:aws:lambda:us-east-2:111122223333:function:my-function"
+    #   --statement-id "appsync" --principal appsync.amazonaws.com --action
+    #   lambda:InvokeFunction`
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_validation_expression
+    #   A regular expression for validation of tokens before the Lambda
+    #   Function is called.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaAuthorizerConfig AWS API Documentation
+    #
+    class LambdaAuthorizerConfig < Struct.new(
+      :authorizer_result_ttl_in_seconds,
+      :authorizer_uri,
+      :identity_validation_expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2015,7 +2098,7 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # Describes an AWS Lambda data source configuration.
+    # Describes an Amazon Web Services Lambda data source configuration.
     #
     # @note When making an API call, you may pass LambdaDataSourceConfig
     #   data as a hash:
@@ -2486,7 +2569,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
-    #   The service role that AWS AppSync will assume to publish to Amazon
+    #   The service role that AppSync will assume to publish to Amazon
     #   CloudWatch logs in your account.
     #   @return [String]
     #
@@ -2541,7 +2624,7 @@ module Aws::AppSync
     #   The client identifier of the Relying party at the OpenID identity
     #   provider. This identifier is typically obtained when the Relying
     #   party is registered with the OpenID identity provider. You can
-    #   specify a regular expression so the AWS AppSync can validate against
+    #   specify a regular expression so the AppSync can validate against
     #   multiple client identifiers at a time.
     #   @return [String]
     #
@@ -2601,7 +2684,7 @@ module Aws::AppSync
     #       }
     #
     # @!attribute [rw] aws_region
-    #   AWS Region for RDS HTTP endpoint.
+    #   Amazon Web Services Region for RDS HTTP endpoint.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_identifier
@@ -2617,7 +2700,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_secret_store_arn
-    #   AWS secret store ARN for database credentials.
+    #   Amazon Web Services secret store ARN for database credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RdsHttpEndpointConfig AWS API Documentation
@@ -3161,7 +3244,7 @@ module Aws::AppSync
     #   @return [Types::DynamodbDataSourceConfig]
     #
     # @!attribute [rw] lambda_config
-    #   The new AWS Lambda configuration.
+    #   The new Amazon Web Services Lambda configuration.
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
@@ -3307,7 +3390,7 @@ module Aws::AppSync
     #           cloud_watch_logs_role_arn: "String", # required
     #           exclude_verbose_content: false,
     #         },
-    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #         user_pool_config: {
     #           user_pool_id: "String", # required
     #           aws_region: "String", # required
@@ -3322,7 +3405,7 @@ module Aws::AppSync
     #         },
     #         additional_authentication_providers: [
     #           {
-    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
+    #             authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #             open_id_connect_config: {
     #               issuer: "String", # required
     #               client_id: "String",
@@ -3334,9 +3417,19 @@ module Aws::AppSync
     #               aws_region: "String", # required
     #               app_id_client_regex: "String",
     #             },
+    #             lambda_authorizer_config: {
+    #               authorizer_result_ttl_in_seconds: 1,
+    #               authorizer_uri: "String", # required
+    #               identity_validation_expression: "String",
+    #             },
     #           },
     #         ],
     #         xray_enabled: false,
+    #         lambda_authorizer_config: {
+    #           authorizer_result_ttl_in_seconds: 1,
+    #           authorizer_uri: "String", # required
+    #           identity_validation_expression: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -3375,6 +3468,10 @@ module Aws::AppSync
     #   `GraphqlApi`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] lambda_authorizer_config
+    #   Configuration for AWS Lambda function authorization.
+    #   @return [Types::LambdaAuthorizerConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
     #
     class UpdateGraphqlApiRequest < Struct.new(
@@ -3385,7 +3482,8 @@ module Aws::AppSync
       :user_pool_config,
       :open_id_connect_config,
       :additional_authentication_providers,
-      :xray_enabled)
+      :xray_enabled,
+      :lambda_authorizer_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3581,7 +3679,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The AWS Region in which the user pool was created.
+    #   The Amazon Web Services Region in which the user pool was created.
     #   @return [String]
     #
     # @!attribute [rw] default_action

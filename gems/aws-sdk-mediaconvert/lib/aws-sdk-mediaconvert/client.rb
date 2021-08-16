@@ -491,6 +491,10 @@ module Aws::MediaConvert
     #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #         },
     #       },
+    #       extended_data_services: {
+    #         copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #       },
     #       inputs: [
     #         {
     #           audio_selector_groups: {
@@ -1714,6 +1718,8 @@ module Aws::MediaConvert
     #   resp.job.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
     #   resp.job.settings.esam.response_signal_preroll #=> Integer
     #   resp.job.settings.esam.signal_processing_notification.scc_xml #=> String
+    #   resp.job.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job.settings.inputs #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -2669,6 +2675,10 @@ module Aws::MediaConvert
     #         signal_processing_notification: {
     #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #         },
+    #       },
+    #       extended_data_services: {
+    #         copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
     #       },
     #       inputs: [
     #         {
@@ -3862,6 +3872,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
     #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
+    #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -6299,6 +6311,8 @@ module Aws::MediaConvert
     #   resp.job.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
     #   resp.job.settings.esam.response_signal_preroll #=> Integer
     #   resp.job.settings.esam.signal_processing_notification.scc_xml #=> String
+    #   resp.job.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job.settings.inputs #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -7202,6 +7216,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
     #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
+    #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -8745,6 +8761,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
     #   resp.job_templates[0].settings.esam.response_signal_preroll #=> Integer
     #   resp.job_templates[0].settings.esam.signal_processing_notification.scc_xml #=> String
+    #   resp.job_templates[0].settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_templates[0].settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_templates[0].settings.inputs #=> Array
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -9684,6 +9702,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
     #   resp.jobs[0].settings.esam.response_signal_preroll #=> Integer
     #   resp.jobs[0].settings.esam.signal_processing_notification.scc_xml #=> String
+    #   resp.jobs[0].settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.jobs[0].settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.jobs[0].settings.inputs #=> Array
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -11401,6 +11421,10 @@ module Aws::MediaConvert
     #           scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #         },
     #       },
+    #       extended_data_services: {
+    #         copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #       },
     #       inputs: [
     #         {
     #           audio_selector_groups: {
@@ -12590,6 +12614,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.esam.manifest_confirm_condition_notification.mcc_xml #=> String
     #   resp.job_template.settings.esam.response_signal_preroll #=> Integer
     #   resp.job_template.settings.esam.signal_processing_notification.scc_xml #=> String
+    #   resp.job_template.settings.extended_data_services.copy_protection_action #=> String, one of "PASSTHROUGH", "STRIP"
+    #   resp.job_template.settings.extended_data_services.vchip_action #=> String, one of "PASSTHROUGH", "STRIP"
     #   resp.job_template.settings.inputs #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups #=> Hash
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
@@ -14826,7 +14852,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

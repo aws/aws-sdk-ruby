@@ -48,6 +48,6 @@ require_relative 'aws-sdk-auditmanager/customizations'
 # @!group service
 module Aws::AuditManager
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.10.0'
 
 end

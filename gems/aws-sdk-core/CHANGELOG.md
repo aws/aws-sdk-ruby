@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.119.0 (2021-07-30)
+------------------
+
+* Feature - Support Document Types. Document types are used to carry open content. A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.(#2523)
+
+3.118.0 (2021-07-28)
+------------------
+
+* Feature - Add support for Tagged Unions using a "sealed" classes like approach where each union member has a corresponding subclass.
+
 3.117.0 (2021-07-12)
 ------------------
 

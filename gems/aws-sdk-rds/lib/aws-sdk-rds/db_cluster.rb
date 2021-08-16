@@ -94,6 +94,12 @@ module Aws::RDS
       data[:status]
     end
 
+    # The time when a stopped DB cluster is restarted automatically.
+    # @return [Time]
+    def automatic_restart_time
+      data[:automatic_restart_time]
+    end
+
     # Specifies the progress of the operation as a percentage.
     # @return [String]
     def percent_progress

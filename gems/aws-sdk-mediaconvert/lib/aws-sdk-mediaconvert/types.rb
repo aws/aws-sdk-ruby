@@ -3413,6 +3413,10 @@ module Aws::MediaConvert
     #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #             },
     #           },
+    #           extended_data_services: {
+    #             copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #             vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           },
     #           inputs: [
     #             {
     #               audio_selector_groups: {
@@ -4759,6 +4763,10 @@ module Aws::MediaConvert
     #             signal_processing_notification: {
     #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #             },
+    #           },
+    #           extended_data_services: {
+    #             copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #             vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
     #           },
     #           inputs: [
     #             {
@@ -8568,6 +8576,38 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Hexadecimal value as per EIA-608 Line 21 Data Services, section
+    # 9.5.1.5 05h Content Advisory.
+    #
+    # @note When making an API call, you may pass ExtendedDataServices
+    #   data as a hash:
+    #
+    #       {
+    #         copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #       }
+    #
+    # @!attribute [rw] copy_protection_action
+    #   The action to take on copy and redistribution control XDS packets.
+    #   If you select PASSTHROUGH, packets will not be changed. If you
+    #   select STRIP, any packets will be removed in output captions.
+    #   @return [String]
+    #
+    # @!attribute [rw] vchip_action
+    #   The action to take on content advisory XDS packets. If you select
+    #   PASSTHROUGH, packets will not be changed. If you select STRIP, any
+    #   packets will be removed in output captions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ExtendedDataServices AWS API Documentation
+    #
+    class ExtendedDataServices < Struct.new(
+      :copy_protection_action,
+      :vchip_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings for F4v container
     #
     # @note When making an API call, you may pass F4vSettings
@@ -12001,6 +12041,10 @@ module Aws::MediaConvert
     #             scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #           },
     #         },
+    #         extended_data_services: {
+    #           copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #         },
     #         inputs: [
     #           {
     #             audio_selector_groups: {
@@ -13191,6 +13235,11 @@ module Aws::MediaConvert
     #   ad insertion, you can ignore these settings.
     #   @return [Types::EsamSettings]
     #
+    # @!attribute [rw] extended_data_services
+    #   Hexadecimal value as per EIA-608 Line 21 Data Services, section
+    #   9.5.1.5 05h Content Advisory.
+    #   @return [Types::ExtendedDataServices]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs (inputs) to define source file used in the transcode job.
     #   There can be multiple inputs add in a job. These inputs will be
@@ -13270,6 +13319,7 @@ module Aws::MediaConvert
       :ad_avail_offset,
       :avail_blanking,
       :esam,
+      :extended_data_services,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -13387,6 +13437,10 @@ module Aws::MediaConvert
     #           signal_processing_notification: {
     #             scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #           },
+    #         },
+    #         extended_data_services: {
+    #           copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #           vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
     #         },
     #         inputs: [
     #           {
@@ -14570,6 +14624,11 @@ module Aws::MediaConvert
     #   ad insertion, you can ignore these settings.
     #   @return [Types::EsamSettings]
     #
+    # @!attribute [rw] extended_data_services
+    #   Hexadecimal value as per EIA-608 Line 21 Data Services, section
+    #   9.5.1.5 05h Content Advisory.
+    #   @return [Types::ExtendedDataServices]
+    #
     # @!attribute [rw] inputs
     #   Use Inputs (inputs) to define the source file used in the transcode
     #   job. There can only be one input in a job template. Using the API,
@@ -14649,6 +14708,7 @@ module Aws::MediaConvert
       :ad_avail_offset,
       :avail_blanking,
       :esam,
+      :extended_data_services,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -21526,6 +21586,10 @@ module Aws::MediaConvert
     #             signal_processing_notification: {
     #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS",
     #             },
+    #           },
+    #           extended_data_services: {
+    #             copy_protection_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
+    #             vchip_action: "PASSTHROUGH", # accepts PASSTHROUGH, STRIP
     #           },
     #           inputs: [
     #             {

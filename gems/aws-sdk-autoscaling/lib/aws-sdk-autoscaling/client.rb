@@ -2440,6 +2440,30 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].progress_details.live_pool_progress.instances_to_update #=> Integer
     #   resp.instance_refreshes[0].progress_details.warm_pool_progress.percentage_complete #=> Integer
     #   resp.instance_refreshes[0].progress_details.warm_pool_progress.instances_to_update #=> Integer
+    #   resp.instance_refreshes[0].preferences.min_healthy_percentage #=> Integer
+    #   resp.instance_refreshes[0].preferences.instance_warmup #=> Integer
+    #   resp.instance_refreshes[0].preferences.checkpoint_percentages #=> Array
+    #   resp.instance_refreshes[0].preferences.checkpoint_percentages[0] #=> Integer
+    #   resp.instance_refreshes[0].preferences.checkpoint_delay #=> Integer
+    #   resp.instance_refreshes[0].preferences.skip_matching #=> Boolean
+    #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_id #=> String
+    #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_name #=> String
+    #   resp.instance_refreshes[0].desired_configuration.launch_template.version #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.launch_template_specification.launch_template_id #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.launch_template_specification.launch_template_name #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.launch_template_specification.version #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides #=> Array
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_type #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].weighted_capacity #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].launch_template_specification.launch_template_id #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].launch_template_specification.launch_template_name #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].launch_template_specification.version #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_allocation_strategy #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_base_capacity #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_percentage_above_base_capacity #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_allocation_strategy #=> String
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_instance_pools #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.spot_max_price #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeInstanceRefreshes AWS API Documentation
@@ -5362,13 +5386,19 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Starts a new instance refresh operation, which triggers a rolling
-    # replacement of previously launched instances in the Auto Scaling group
-    # with a new group of instances.
+    # Starts a new instance refresh operation. An instance refresh performs
+    # a rolling replacement of all or some instances in an Auto Scaling
+    # group. Each instance is terminated first and then replaced, which
+    # temporarily reduces the capacity available within your Auto Scaling
+    # group.
     #
     # This operation is part of the [instance refresh feature][1] in Amazon
     # EC2 Auto Scaling, which helps you update instances in your Auto
-    # Scaling group after you make configuration changes.
+    # Scaling group. This feature is helpful, for example, when you have a
+    # new AMI or a new user data script. You just need to create a new
+    # launch template that specifies the new AMI or user data script. Then
+    # start an instance refresh to immediately begin the process of updating
+    # instances in the group.
     #
     # If the call succeeds, it creates a new instance refresh request with a
     # unique ID that you can use to track its progress. To query its status,
@@ -5388,27 +5418,33 @@ module Aws::AutoScaling
     #   The strategy to use for the instance refresh. The only valid value is
     #   `Rolling`.
     #
-    #   A rolling update is an update that is applied to all instances in an
-    #   Auto Scaling group until all instances have been updated. A rolling
+    #   A rolling update helps you update your instances gradually. A rolling
     #   update can fail due to failed health checks or if instances are on
     #   standby or are protected from scale in. If the rolling update process
-    #   fails, any instances that were already replaced are not rolled back to
-    #   their previous configuration.
+    #   fails, any instances that are replaced are not rolled back to their
+    #   previous configuration.
+    #
+    # @option params [Types::DesiredConfiguration] :desired_configuration
+    #   The desired configuration. For example, the desired configuration can
+    #   specify a new launch template or a new version of the current launch
+    #   template.
+    #
+    #   Once the instance refresh succeeds, Amazon EC2 Auto Scaling updates
+    #   the settings of the Auto Scaling group to reflect the new desired
+    #   configuration.
+    #
+    #   <note markdown="1"> When you specify a new launch template or a new version of the current
+    #   launch template for your desired configuration, consider enabling the
+    #   `SkipMatching` property in preferences. If it's enabled, Amazon EC2
+    #   Auto Scaling skips replacing instances that already use the specified
+    #   launch template and version. This can help you reduce the number of
+    #   replacements that are required to apply updates.
+    #
+    #    </note>
     #
     # @option params [Types::RefreshPreferences] :preferences
-    #   Set of preferences associated with the instance refresh request.
-    #
-    #   If not provided, the default values are used. For
-    #   `MinHealthyPercentage`, the default value is `90`. For
-    #   `InstanceWarmup`, the default is to use the value specified for the
-    #   health check grace period for the Auto Scaling group.
-    #
-    #   For more information, see [RefreshPreferences][1] in the *Amazon EC2
-    #   Auto Scaling API Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RefreshPreferences.html
+    #   Set of preferences associated with the instance refresh request. If
+    #   not provided, the default values are used.
     #
     # @return [Types::StartInstanceRefreshAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5437,11 +5473,47 @@ module Aws::AutoScaling
     #   resp = client.start_instance_refresh({
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #     strategy: "Rolling", # accepts Rolling
+    #     desired_configuration: {
+    #       launch_template: {
+    #         launch_template_id: "XmlStringMaxLen255",
+    #         launch_template_name: "LaunchTemplateName",
+    #         version: "XmlStringMaxLen255",
+    #       },
+    #       mixed_instances_policy: {
+    #         launch_template: {
+    #           launch_template_specification: {
+    #             launch_template_id: "XmlStringMaxLen255",
+    #             launch_template_name: "LaunchTemplateName",
+    #             version: "XmlStringMaxLen255",
+    #           },
+    #           overrides: [
+    #             {
+    #               instance_type: "XmlStringMaxLen255",
+    #               weighted_capacity: "XmlStringMaxLen32",
+    #               launch_template_specification: {
+    #                 launch_template_id: "XmlStringMaxLen255",
+    #                 launch_template_name: "LaunchTemplateName",
+    #                 version: "XmlStringMaxLen255",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         instances_distribution: {
+    #           on_demand_allocation_strategy: "XmlString",
+    #           on_demand_base_capacity: 1,
+    #           on_demand_percentage_above_base_capacity: 1,
+    #           spot_allocation_strategy: "XmlString",
+    #           spot_instance_pools: 1,
+    #           spot_max_price: "MixedInstanceSpotPrice",
+    #         },
+    #       },
+    #     },
     #     preferences: {
     #       min_healthy_percentage: 1,
     #       instance_warmup: 1,
     #       checkpoint_percentages: [1],
     #       checkpoint_delay: 1,
+    #       skip_matching: false,
     #     },
     #   })
     #
@@ -5918,7 +5990,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -25,6 +25,7 @@ module Aws::Redshift
     AquaConfiguration = Shapes::StructureShape.new(name: 'AquaConfiguration')
     AquaConfigurationStatus = Shapes::StringShape.new(name: 'AquaConfigurationStatus')
     AquaStatus = Shapes::StringShape.new(name: 'AquaStatus')
+    AssociateDataShareConsumerMessage = Shapes::StructureShape.new(name: 'AssociateDataShareConsumerMessage')
     AssociatedClusterList = Shapes::ListShape.new(name: 'AssociatedClusterList')
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
     AttributeNameList = Shapes::ListShape.new(name: 'AttributeNameList')
@@ -42,6 +43,7 @@ module Aws::Redshift
     AuthorizationStatus = Shapes::StringShape.new(name: 'AuthorizationStatus')
     AuthorizeClusterSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'AuthorizeClusterSecurityGroupIngressMessage')
     AuthorizeClusterSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'AuthorizeClusterSecurityGroupIngressResult')
+    AuthorizeDataShareMessage = Shapes::StructureShape.new(name: 'AuthorizeDataShareMessage')
     AuthorizeEndpointAccessMessage = Shapes::StructureShape.new(name: 'AuthorizeEndpointAccessMessage')
     AuthorizeSnapshotAccessMessage = Shapes::StructureShape.new(name: 'AuthorizeSnapshotAccessMessage')
     AuthorizeSnapshotAccessResult = Shapes::StructureShape.new(name: 'AuthorizeSnapshotAccessResult')
@@ -138,8 +140,16 @@ module Aws::Redshift
     CreateTagsMessage = Shapes::StructureShape.new(name: 'CreateTagsMessage')
     CreateUsageLimitMessage = Shapes::StructureShape.new(name: 'CreateUsageLimitMessage')
     CustomerStorageMessage = Shapes::StructureShape.new(name: 'CustomerStorageMessage')
+    DataShare = Shapes::StructureShape.new(name: 'DataShare')
+    DataShareAssociation = Shapes::StructureShape.new(name: 'DataShareAssociation')
+    DataShareAssociationList = Shapes::ListShape.new(name: 'DataShareAssociationList')
+    DataShareList = Shapes::ListShape.new(name: 'DataShareList')
+    DataShareStatus = Shapes::StringShape.new(name: 'DataShareStatus')
+    DataShareStatusForConsumer = Shapes::StringShape.new(name: 'DataShareStatusForConsumer')
+    DataShareStatusForProducer = Shapes::StringShape.new(name: 'DataShareStatusForProducer')
     DataTransferProgress = Shapes::StructureShape.new(name: 'DataTransferProgress')
     DbGroupList = Shapes::ListShape.new(name: 'DbGroupList')
+    DeauthorizeDataShareMessage = Shapes::StructureShape.new(name: 'DeauthorizeDataShareMessage')
     DefaultClusterParameters = Shapes::StructureShape.new(name: 'DefaultClusterParameters')
     DeferredMaintenanceWindow = Shapes::StructureShape.new(name: 'DeferredMaintenanceWindow')
     DeferredMaintenanceWindowsList = Shapes::ListShape.new(name: 'DeferredMaintenanceWindowsList')
@@ -176,6 +186,12 @@ module Aws::Redshift
     DescribeClusterTracksMessage = Shapes::StructureShape.new(name: 'DescribeClusterTracksMessage')
     DescribeClusterVersionsMessage = Shapes::StructureShape.new(name: 'DescribeClusterVersionsMessage')
     DescribeClustersMessage = Shapes::StructureShape.new(name: 'DescribeClustersMessage')
+    DescribeDataSharesForConsumerMessage = Shapes::StructureShape.new(name: 'DescribeDataSharesForConsumerMessage')
+    DescribeDataSharesForConsumerResult = Shapes::StructureShape.new(name: 'DescribeDataSharesForConsumerResult')
+    DescribeDataSharesForProducerMessage = Shapes::StructureShape.new(name: 'DescribeDataSharesForProducerMessage')
+    DescribeDataSharesForProducerResult = Shapes::StructureShape.new(name: 'DescribeDataSharesForProducerResult')
+    DescribeDataSharesMessage = Shapes::StructureShape.new(name: 'DescribeDataSharesMessage')
+    DescribeDataSharesResult = Shapes::StructureShape.new(name: 'DescribeDataSharesResult')
     DescribeDefaultClusterParametersMessage = Shapes::StructureShape.new(name: 'DescribeDefaultClusterParametersMessage')
     DescribeDefaultClusterParametersResult = Shapes::StructureShape.new(name: 'DescribeDefaultClusterParametersResult')
     DescribeEndpointAccessMessage = Shapes::StructureShape.new(name: 'DescribeEndpointAccessMessage')
@@ -203,6 +219,7 @@ module Aws::Redshift
     DisableLoggingMessage = Shapes::StructureShape.new(name: 'DisableLoggingMessage')
     DisableSnapshotCopyMessage = Shapes::StructureShape.new(name: 'DisableSnapshotCopyMessage')
     DisableSnapshotCopyResult = Shapes::StructureShape.new(name: 'DisableSnapshotCopyResult')
+    DisassociateDataShareConsumerMessage = Shapes::StructureShape.new(name: 'DisassociateDataShareConsumerMessage')
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleOptional = Shapes::FloatShape.new(name: 'DoubleOptional')
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
@@ -277,10 +294,12 @@ module Aws::Redshift
     InvalidClusterSubnetGroupStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSubnetGroupStateFault')
     InvalidClusterSubnetStateFault = Shapes::StructureShape.new(name: 'InvalidClusterSubnetStateFault')
     InvalidClusterTrackFault = Shapes::StructureShape.new(name: 'InvalidClusterTrackFault')
+    InvalidDataShareFault = Shapes::StructureShape.new(name: 'InvalidDataShareFault')
     InvalidElasticIpFault = Shapes::StructureShape.new(name: 'InvalidElasticIpFault')
     InvalidEndpointStateFault = Shapes::StructureShape.new(name: 'InvalidEndpointStateFault')
     InvalidHsmClientCertificateStateFault = Shapes::StructureShape.new(name: 'InvalidHsmClientCertificateStateFault')
     InvalidHsmConfigurationStateFault = Shapes::StructureShape.new(name: 'InvalidHsmConfigurationStateFault')
+    InvalidNamespaceFault = Shapes::StructureShape.new(name: 'InvalidNamespaceFault')
     InvalidReservedNodeStateFault = Shapes::StructureShape.new(name: 'InvalidReservedNodeStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
     InvalidRetentionPeriodFault = Shapes::StructureShape.new(name: 'InvalidRetentionPeriodFault')
@@ -366,6 +385,7 @@ module Aws::Redshift
     RebootClusterResult = Shapes::StructureShape.new(name: 'RebootClusterResult')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
+    RejectDataShareMessage = Shapes::StructureShape.new(name: 'RejectDataShareMessage')
     ReservedNode = Shapes::StructureShape.new(name: 'ReservedNode')
     ReservedNodeAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReservedNodeAlreadyExistsFault')
     ReservedNodeAlreadyMigratedFault = Shapes::StructureShape.new(name: 'ReservedNodeAlreadyMigratedFault')
@@ -534,6 +554,11 @@ module Aws::Redshift
     AquaConfiguration.add_member(:aqua_configuration_status, Shapes::ShapeRef.new(shape: AquaConfigurationStatus, location_name: "AquaConfigurationStatus"))
     AquaConfiguration.struct_class = Types::AquaConfiguration
 
+    AssociateDataShareConsumerMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
+    AssociateDataShareConsumerMessage.add_member(:associate_entire_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AssociateEntireAccount"))
+    AssociateDataShareConsumerMessage.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerArn"))
+    AssociateDataShareConsumerMessage.struct_class = Types::AssociateDataShareConsumerMessage
+
     AssociatedClusterList.member = Shapes::ShapeRef.new(shape: ClusterAssociatedToSchedule, location_name: "ClusterAssociatedToSchedule")
 
     AttributeList.member = Shapes::ShapeRef.new(shape: AccountAttribute, location_name: "AccountAttribute")
@@ -571,6 +596,10 @@ module Aws::Redshift
 
     AuthorizeClusterSecurityGroupIngressResult.add_member(:cluster_security_group, Shapes::ShapeRef.new(shape: ClusterSecurityGroup, location_name: "ClusterSecurityGroup"))
     AuthorizeClusterSecurityGroupIngressResult.struct_class = Types::AuthorizeClusterSecurityGroupIngressResult
+
+    AuthorizeDataShareMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
+    AuthorizeDataShareMessage.add_member(:consumer_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ConsumerIdentifier"))
+    AuthorizeDataShareMessage.struct_class = Types::AuthorizeDataShareMessage
 
     AuthorizeEndpointAccessMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
     AuthorizeEndpointAccessMessage.add_member(:account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Account"))
@@ -1003,6 +1032,22 @@ module Aws::Redshift
     CustomerStorageMessage.add_member(:total_provisioned_storage_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "TotalProvisionedStorageInMegaBytes"))
     CustomerStorageMessage.struct_class = Types::CustomerStorageMessage
 
+    DataShare.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "DataShareArn"))
+    DataShare.add_member(:producer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ProducerArn"))
+    DataShare.add_member(:allow_publicly_accessible_consumers, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowPubliclyAccessibleConsumers"))
+    DataShare.add_member(:data_share_associations, Shapes::ShapeRef.new(shape: DataShareAssociationList, location_name: "DataShareAssociations"))
+    DataShare.struct_class = Types::DataShare
+
+    DataShareAssociation.add_member(:consumer_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerIdentifier"))
+    DataShareAssociation.add_member(:status, Shapes::ShapeRef.new(shape: DataShareStatus, location_name: "Status"))
+    DataShareAssociation.add_member(:created_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedDate"))
+    DataShareAssociation.add_member(:status_change_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StatusChangeDate"))
+    DataShareAssociation.struct_class = Types::DataShareAssociation
+
+    DataShareAssociationList.member = Shapes::ShapeRef.new(shape: DataShareAssociation)
+
+    DataShareList.member = Shapes::ShapeRef.new(shape: DataShare)
+
     DataTransferProgress.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DataTransferProgress.add_member(:current_rate_in_mega_bytes_per_second, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "CurrentRateInMegaBytesPerSecond"))
     DataTransferProgress.add_member(:total_data_in_mega_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "TotalDataInMegaBytes"))
@@ -1012,6 +1057,10 @@ module Aws::Redshift
     DataTransferProgress.struct_class = Types::DataTransferProgress
 
     DbGroupList.member = Shapes::ShapeRef.new(shape: String, location_name: "DbGroup")
+
+    DeauthorizeDataShareMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
+    DeauthorizeDataShareMessage.add_member(:consumer_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ConsumerIdentifier"))
+    DeauthorizeDataShareMessage.struct_class = Types::DeauthorizeDataShareMessage
 
     DefaultClusterParameters.add_member(:parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupFamily"))
     DefaultClusterParameters.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1162,6 +1211,35 @@ module Aws::Redshift
     DescribeClustersMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
     DescribeClustersMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
     DescribeClustersMessage.struct_class = Types::DescribeClustersMessage
+
+    DescribeDataSharesForConsumerMessage.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerArn"))
+    DescribeDataSharesForConsumerMessage.add_member(:status, Shapes::ShapeRef.new(shape: DataShareStatusForConsumer, location_name: "Status"))
+    DescribeDataSharesForConsumerMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeDataSharesForConsumerMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataSharesForConsumerMessage.struct_class = Types::DescribeDataSharesForConsumerMessage
+
+    DescribeDataSharesForConsumerResult.add_member(:data_shares, Shapes::ShapeRef.new(shape: DataShareList, location_name: "DataShares"))
+    DescribeDataSharesForConsumerResult.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataSharesForConsumerResult.struct_class = Types::DescribeDataSharesForConsumerResult
+
+    DescribeDataSharesForProducerMessage.add_member(:producer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ProducerArn"))
+    DescribeDataSharesForProducerMessage.add_member(:status, Shapes::ShapeRef.new(shape: DataShareStatusForProducer, location_name: "Status"))
+    DescribeDataSharesForProducerMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeDataSharesForProducerMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataSharesForProducerMessage.struct_class = Types::DescribeDataSharesForProducerMessage
+
+    DescribeDataSharesForProducerResult.add_member(:data_shares, Shapes::ShapeRef.new(shape: DataShareList, location_name: "DataShares"))
+    DescribeDataSharesForProducerResult.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataSharesForProducerResult.struct_class = Types::DescribeDataSharesForProducerResult
+
+    DescribeDataSharesMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "DataShareArn"))
+    DescribeDataSharesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeDataSharesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataSharesMessage.struct_class = Types::DescribeDataSharesMessage
+
+    DescribeDataSharesResult.add_member(:data_shares, Shapes::ShapeRef.new(shape: DataShareList, location_name: "DataShares"))
+    DescribeDataSharesResult.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDataSharesResult.struct_class = Types::DescribeDataSharesResult
 
     DescribeDefaultClusterParametersMessage.add_member(:parameter_group_family, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupFamily"))
     DescribeDefaultClusterParametersMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1319,6 +1397,11 @@ module Aws::Redshift
 
     DisableSnapshotCopyResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     DisableSnapshotCopyResult.struct_class = Types::DisableSnapshotCopyResult
+
+    DisassociateDataShareConsumerMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
+    DisassociateDataShareConsumerMessage.add_member(:disassociate_entire_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DisassociateEntireAccount"))
+    DisassociateDataShareConsumerMessage.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerArn"))
+    DisassociateDataShareConsumerMessage.struct_class = Types::DisassociateDataShareConsumerMessage
 
     EC2SecurityGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     EC2SecurityGroup.add_member(:ec2_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "EC2SecurityGroupName"))
@@ -1559,6 +1642,8 @@ module Aws::Redshift
 
     InvalidClusterTrackFault.struct_class = Types::InvalidClusterTrackFault
 
+    InvalidDataShareFault.struct_class = Types::InvalidDataShareFault
+
     InvalidElasticIpFault.struct_class = Types::InvalidElasticIpFault
 
     InvalidEndpointStateFault.struct_class = Types::InvalidEndpointStateFault
@@ -1566,6 +1651,8 @@ module Aws::Redshift
     InvalidHsmClientCertificateStateFault.struct_class = Types::InvalidHsmClientCertificateStateFault
 
     InvalidHsmConfigurationStateFault.struct_class = Types::InvalidHsmConfigurationStateFault
+
+    InvalidNamespaceFault.struct_class = Types::InvalidNamespaceFault
 
     InvalidReservedNodeStateFault.struct_class = Types::InvalidReservedNodeStateFault
 
@@ -1868,6 +1955,9 @@ module Aws::Redshift
     RecurringCharge.struct_class = Types::RecurringCharge
 
     RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge, location_name: "RecurringCharge")
+
+    RejectDataShareMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
+    RejectDataShareMessage.struct_class = Types::RejectDataShareMessage
 
     ReservedNode.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeId"))
     ReservedNode.add_member(:reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeOfferingId"))
@@ -2400,6 +2490,16 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
       end)
 
+      api.add_operation(:associate_data_share_consumer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateDataShareConsumer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateDataShareConsumerMessage)
+        o.output = Shapes::ShapeRef.new(shape: DataShare)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDataShareFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNamespaceFault)
+      end)
+
       api.add_operation(:authorize_cluster_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AuthorizeClusterSecurityGroupIngress"
         o.http_method = "POST"
@@ -2410,6 +2510,15 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSecurityGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationQuotaExceededFault)
+      end)
+
+      api.add_operation(:authorize_data_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AuthorizeDataShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AuthorizeDataShareMessage)
+        o.output = Shapes::ShapeRef.new(shape: DataShare)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDataShareFault)
       end)
 
       api.add_operation(:authorize_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -2708,6 +2817,15 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidUsageLimitFault)
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:deauthorize_data_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeauthorizeDataShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeauthorizeDataShareMessage)
+        o.output = Shapes::ShapeRef.new(shape: DataShare)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDataShareFault)
       end)
 
       api.add_operation(:delete_authentication_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -3036,6 +3154,33 @@ module Aws::Redshift
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:describe_data_shares, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataShares"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataSharesMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataSharesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDataShareFault)
+      end)
+
+      api.add_operation(:describe_data_shares_for_consumer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataSharesForConsumer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataSharesForConsumerMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataSharesForConsumerResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNamespaceFault)
+      end)
+
+      api.add_operation(:describe_data_shares_for_producer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataSharesForProducer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataSharesForProducerMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataSharesForProducerResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNamespaceFault)
       end)
 
       api.add_operation(:describe_default_cluster_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -3373,6 +3518,16 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
       end)
 
+      api.add_operation(:disassociate_data_share_consumer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateDataShareConsumer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateDataShareConsumerMessage)
+        o.output = Shapes::ShapeRef.new(shape: DataShare)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDataShareFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNamespaceFault)
+      end)
+
       api.add_operation(:enable_logging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableLogging"
         o.http_method = "POST"
@@ -3671,6 +3826,15 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: RebootClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+      end)
+
+      api.add_operation(:reject_data_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectDataShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectDataShareMessage)
+        o.output = Shapes::ShapeRef.new(shape: DataShare)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDataShareFault)
       end)
 
       api.add_operation(:reset_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2021-08-09)
+------------------
+
+* Feature - This release adds support for four new types of segments (opening credits, content segments, slates, and studio logos), improved accuracy for credits and shot detection and new filters to control black frame detection.
+
+1.53.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.51.0 (2021-05-19)
 ------------------
 

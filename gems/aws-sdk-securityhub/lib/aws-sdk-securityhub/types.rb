@@ -90,7 +90,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details of an AWS account.
+    # The details of an Amazon Web Services account.
     #
     # @note When making an API call, you may pass AccountDetails
     #   data as a hash:
@@ -101,11 +101,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] account_id
-    #   The ID of an AWS account.
+    #   The ID of an Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   The email of an AWS account.
+    #   The email of an Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AccountDetails AWS API Documentation
@@ -120,7 +120,7 @@ module Aws::SecurityHub
     # Provides details about one of the following actions that affects or
     # that was taken on a resource:
     #
-    # * A remote IP address issued an AWS API call
+    # * A remote IP address issued an Amazon Web Services API call
     #
     # * A DNS request was received
     #
@@ -452,8 +452,8 @@ module Aws::SecurityHub
     # organization management account.
     #
     # @!attribute [rw] account_id
-    #   The AWS account identifier of the Security Hub administrator
-    #   account.
+    #   The Amazon Web Services account identifier of the Security Hub
+    #   administrator account.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -544,7 +544,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service that the API method belongs to.
+    #   The name of the Amazon Web Services service that the API method
+    #   belongs to.
     #   @return [String]
     #
     # @!attribute [rw] caller_type
@@ -1033,7 +1034,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsApiGatewayCanarySettings]
     #
     # @!attribute [rw] tracing_enabled
-    #   Indicates whether active tracing with AWS X-Ray is enabled for the
+    #   Indicates whether active tracing with X-Ray is enabled for the
     #   stage.
     #   @return [Boolean]
     #
@@ -1441,7 +1442,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Provides details about an AWS Certificate Manager certificate.
+    # Provides details about an Certificate Manager certificate.
     #
     # @note When making an API call, you may pass AwsCertificateManagerCertificateDetails
     #   data as a hash:
@@ -1576,7 +1577,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] in_use_by
-    #   The list of ARNs for the AWS resources that use the certificate.
+    #   The list of ARNs for the Amazon Web Services resources that use the
+    #   certificate.
     #   @return [Array<String>]
     #
     # @!attribute [rw] issued_at
@@ -1644,7 +1646,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] renewal_summary
-    #   Information about the status of the AWS Certificate Manager managed
+    #   Information about the status of the Certificate Manager managed
     #   renewal for the certificate. Provided only when the certificate type
     #   is `AMAZON_ISSUED`.
     #   @return [Types::AwsCertificateManagerCertificateRenewalSummary]
@@ -1680,7 +1682,7 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
-    #   The source of the certificate. For certificates that AWS Certificate
+    #   The source of the certificate. For certificates that Certificate
     #   Manager provides, `Type` is `AMAZON_ISSUED`. For certificates that
     #   are imported with `ImportCertificate`, `Type` is `IMPORTED`.
     #
@@ -1723,7 +1725,7 @@ module Aws::SecurityHub
     #   of the `RequestCertificate` request
     #
     # * The validation of each domain name in the certificate, as it
-    #   pertains to AWS Certificate Manager managed renewal
+    #   pertains to Certificate Manager managed renewal
     #
     # @note When making an API call, you may pass AwsCertificateManagerCertificateDomainValidationOption
     #   data as a hash:
@@ -1751,12 +1753,12 @@ module Aws::SecurityHub
     #   @return [Types::AwsCertificateManagerCertificateResourceRecord]
     #
     # @!attribute [rw] validation_domain
-    #   The domain name that AWS Certificate Manager uses to send domain
+    #   The domain name that Certificate Manager uses to send domain
     #   validation emails.
     #   @return [String]
     #
     # @!attribute [rw] validation_emails
-    #   A list of email addresses that AWS Certificate Manager uses to send
+    #   A list of email addresses that Certificate Manager uses to send
     #   domain validation emails.
     #   @return [Array<String>]
     #
@@ -1856,8 +1858,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Contains information about the AWS Certificate Manager managed renewal
-    # for an `AMAZON_ISSUED` certificate.
+    # Contains information about the Certificate Manager managed renewal for
+    # an `AMAZON_ISSUED` certificate.
     #
     # @note When making an API call, you may pass AwsCertificateManagerCertificateRenewalSummary
     #   data as a hash:
@@ -1884,12 +1886,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] domain_validation_options
     #   Information about the validation of each domain name in the
-    #   certificate, as it pertains to AWS Certificate Manager managed
-    #   renewal. Provided only when the certificate type is `AMAZON_ISSUED`.
+    #   certificate, as it pertains to Certificate Manager managed renewal.
+    #   Provided only when the certificate type is `AMAZON_ISSUED`.
     #   @return [Array<Types::AwsCertificateManagerCertificateDomainValidationOption>]
     #
     # @!attribute [rw] renewal_status
-    #   The status of the AWS Certificate Manager managed renewal of the
+    #   The status of the Certificate Manager managed renewal of the
     #   certificate.
     #
     #   Valid values: `PENDING_AUTO_RENEWAL` \| `PENDING_VALIDATION` \|
@@ -2164,7 +2166,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] web_acl_id
-    #   A unique identifier that specifies the AWS WAF web ACL, if any, to
+    #   A unique identifier that specifies the WAF web ACL, if any, to
     #   associate with this distribution.
     #   @return [String]
     #
@@ -2200,7 +2202,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] bucket
-    #   The Amazon S3 bucket to store the access logs in.
+    #   The S3 bucket to store the access logs in.
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -2339,9 +2341,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), Amazon Elemental MediaStore, or other server
-    # from which CloudFront gets your files.
+    # A complex type that describes the S3 bucket, HTTP server (for example,
+    # a web server), AWS Elemental MediaStore, or other server from which
+    # CloudFront gets your files.
     #
     # @note When making an API call, you may pass AwsCloudFrontDistributionOriginItem
     #   data as a hash:
@@ -2356,8 +2358,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] domain_name
-    #   Amazon S3 origins: The DNS name of the Amazon S3 bucket from which
-    #   you want CloudFront to get objects for this origin.
+    #   Amazon S3 origins: The DNS name of the S3 bucket from which you want
+    #   CloudFront to get objects for this origin.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2467,7 +2469,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
-    #   The ARN of the role that the CloudWatch Logs endpoint assumes when
+    #   The ARN of the role that the CloudWatch Events endpoint assumes when
     #   it writes to the log group.
     #   @return [String]
     #
@@ -2491,11 +2493,11 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] is_organization_trail
     #   Whether the trail is created for all accounts in an organization in
-    #   AWS Organizations, or only for the current AWS account.
+    #   Organizations, or only for the current Amazon Web Services account.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS key ID to use to encrypt the logs.
+    #   The KMS key ID to use to encrypt the logs.
     #   @return [String]
     #
     # @!attribute [rw] log_file_validation_enabled
@@ -2551,7 +2553,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Information about an AWS CodeBuild project.
+    # Information about an CodeBuild project.
     #
     # @note When making an API call, you may pass AwsCodeBuildProjectDetails
     #   data as a hash:
@@ -2583,8 +2585,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] encryption_key
-    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
-    #   used to encrypt the build output artifacts.
+    #   The KMS customer master key (CMK) used to encrypt the build output
+    #   artifacts.
     #
     #   You can specify either the ARN of the CMK or, if available, the CMK
     #   alias (using the format alias/alias-name).
@@ -2604,12 +2606,13 @@ module Aws::SecurityHub
     #   @return [Types::AwsCodeBuildProjectSource]
     #
     # @!attribute [rw] service_role
-    #   The ARN of the IAM role that enables AWS CodeBuild to interact with
-    #   dependent AWS services on behalf of the AWS account.
+    #   The ARN of the IAM role that enables CodeBuild to interact with
+    #   dependent Amazon Web Services services on behalf of the Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   Information about the VPC configuration that AWS CodeBuild accesses.
+    #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::AwsCodeBuildProjectVpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCodeBuildProjectDetails AWS API Documentation
@@ -2645,21 +2648,20 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] image_pull_credentials_type
-    #   The type of credentials AWS CodeBuild uses to pull images in your
-    #   build.
+    #   The type of credentials CodeBuild uses to pull images in your build.
     #
     #   Valid values:
     #
-    #   * `CODEBUILD` specifies that AWS CodeBuild uses its own credentials.
+    #   * `CODEBUILD` specifies that CodeBuild uses its own credentials.
     #     This requires that you modify your ECR repository policy to trust
-    #     the AWS CodeBuild service principal.
+    #     the CodeBuild service principal.
     #
-    #   * `SERVICE_ROLE` specifies that AWS CodeBuild uses your build
-    #     project's service role.
+    #   * `SERVICE_ROLE` specifies that CodeBuild uses your build project's
+    #     service role.
     #
     #   When you use a cross-account or private registry image, you must use
-    #   `SERVICE_ROLE` credentials. When you use an AWS CodeBuild curated
-    #   image, you must use `CODEBUILD` credentials.
+    #   `SERVICE_ROLE` credentials. When you use an CodeBuild curated image,
+    #   you must use `CODEBUILD` credentials.
     #   @return [String]
     #
     # @!attribute [rw] registry_credential
@@ -2715,10 +2717,10 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] credential
-    #   The ARN or name of credentials created using AWS Secrets Manager.
+    #   The ARN or name of credentials created using Secrets Manager.
     #
     #   <note markdown="1"> The credential can use the name of the credentials only if they
-    #   exist in your current AWS Region.
+    #   exist in your current Amazon Web Services Region.
     #
     #    </note>
     #   @return [String]
@@ -2727,7 +2729,7 @@ module Aws::SecurityHub
     #   The service that created the credentials to access a private Docker
     #   registry.
     #
-    #   The valid value,` SECRETS_MANAGER`, is for AWS Secrets Manager.
+    #   The valid value,` SECRETS_MANAGER`, is for Secrets Manager.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCodeBuildProjectEnvironmentRegistryCredential AWS API Documentation
@@ -2757,10 +2759,10 @@ module Aws::SecurityHub
     #
     #   * `BITBUCKET` - The source code is in a Bitbucket repository.
     #
-    #   * `CODECOMMIT` - The source code is in an AWS CodeCommit repository.
+    #   * `CODECOMMIT` - The source code is in an CodeCommit repository.
     #
     #   * `CODEPIPELINE` - The source code settings are specified in the
-    #     source action of a pipeline in AWS CodePipeline.
+    #     source action of a pipeline in CodePipeline.
     #
     #   * `GITHUB` - The source code is in a GitHub repository.
     #
@@ -2778,14 +2780,14 @@ module Aws::SecurityHub
     #   Valid values include:
     #
     #   * For source code settings that are specified in the source action
-    #     of a pipeline in AWS CodePipeline, location should not be
-    #     specified. If it is specified, AWS CodePipeline ignores it. This
-    #     is because AWS CodePipeline uses the settings in a pipeline's
-    #     source action instead of this value.
+    #     of a pipeline in CodePipeline, location should not be specified.
+    #     If it is specified, CodePipeline ignores it. This is because
+    #     CodePipeline uses the settings in a pipeline's source action
+    #     instead of this value.
     #
-    #   * For source code in an AWS CodeCommit repository, the HTTPS clone
-    #     URL to the repository that contains the source code and the build
-    #     spec file (for example,
+    #   * For source code in an CodeCommit repository, the HTTPS clone URL
+    #     to the repository that contains the source code and the build spec
+    #     file (for example,
     #     `https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name`
     #     ).
     #
@@ -2824,7 +2826,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Information about the VPC configuration that AWS CodeBuild accesses.
+    # Information about the VPC configuration that CodeBuild accesses.
     #
     # @note When making an API call, you may pass AwsCodeBuildProjectVpcConfig
     #   data as a hash:
@@ -2840,11 +2842,11 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   A list of one or more subnet IDs in your Amazon VPC.
+    #   A list of one or more subnet IDs in your VPC.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   A list of one or more security group IDs in your Amazon VPC.
+    #   A list of one or more security group IDs in your VPC.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCodeBuildProjectVpcConfig AWS API Documentation
@@ -3508,8 +3510,8 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsDynamoDbTableReplicaGlobalSecondaryIndex>]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The identifier of the AWS KMS customer master key (CMK) that will be
-    #   used for AWS KMS encryption for the replica.
+    #   The identifier of the KMS customer master key (CMK) that will be
+    #   used for KMS encryption for the replica.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_override
@@ -3653,8 +3655,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_arn
-    #   The ARN of the AWS KMS customer master key (CMK) that is used for
-    #   the AWS KMS encryption.
+    #   The ARN of the KMS customer master key (CMK) that is used for the
+    #   KMS encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableSseDescription AWS API Documentation
@@ -3722,8 +3724,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] allocation_id
-    #   The identifier that AWS assigns to represent the allocation of the
-    #   Elastic IP address for use with Amazon VPC.
+    #   The identifier that Amazon Web Services assigns to represent the
+    #   allocation of the Elastic IP address for use with Amazon VPC.
     #   @return [String]
     #
     # @!attribute [rw] association_id
@@ -3753,7 +3755,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] network_interface_owner_id
-    #   The AWS account ID of the owner of the network interface.
+    #   The Amazon Web Services account ID of the owner of the network
+    #   interface.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -3970,7 +3973,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The identifier of the AWS account that owns the network ACL.
+    #   The identifier of the Amazon Web Services account that owns the
+    #   network ACL.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -4118,7 +4122,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] instance_owner_id
-    #   The AWS account ID of the owner of the instance.
+    #   The Amazon Web Services account ID of the owner of the instance.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4389,7 +4393,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the owner of the security group.
+    #   The Amazon Web Services account ID of the owner of the security
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -4485,7 +4490,7 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
-    #   The security group and AWS account ID pairs.
+    #   The security group and Amazon Web Services account ID pairs.
     #   @return [Array<Types::AwsEc2SecurityGroupUserIdGroupPair>]
     #
     # @!attribute [rw] ip_ranges
@@ -4497,9 +4502,10 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsEc2SecurityGroupIpv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   \[VPC only\] The prefix list IDs for an AWS service. With outbound
-    #   rules, this is the AWS service to access through a VPC endpoint from
-    #   instances associated with the security group.
+    #   \[VPC only\] The prefix list IDs for an Amazon Web Services service.
+    #   With outbound rules, this is the Amazon Web Services service to
+    #   access through a VPC endpoint from instances associated with the
+    #   security group.
     #   @return [Array<Types::AwsEc2SecurityGroupPrefixListId>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2SecurityGroupIpPermission AWS API Documentation
@@ -4610,7 +4616,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The ID of an AWS account.
+    #   The ID of an Amazon Web Services account.
     #
     #   For a referenced security group in another VPC, the account ID of
     #   the referenced security group is returned in the response. If the
@@ -4641,7 +4647,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Contains information about a subnet in EC2.
+    # Contains information about a subnet in Amazon EC2.
     #
     # @note When making an API call, you may pass AwsEc2SubnetDetails
     #   data as a hash:
@@ -4699,7 +4705,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] owner_id
-    #   The identifier of the AWS account that owns the subnet.
+    #   The identifier of the Amazon Web Services account that owns the
+    #   subnet.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -4742,7 +4749,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # An attachment to an AWS EC2 volume.
+    # An attachment to an Amazon EC2 volume.
     #
     # @note When making an API call, you may pass AwsEc2VolumeAttachment
     #   data as a hash:
@@ -4833,9 +4840,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) that was used to protect the volume encryption key for the
-    #   volume.
+    #   The ARN of the KMS customer master key (CMK) that was used to
+    #   protect the volume encryption key for the volume.
     #   @return [String]
     #
     # @!attribute [rw] attachments
@@ -5154,6 +5160,662 @@ module Aws::SecurityHub
       :cluster_settings,
       :configuration,
       :default_capacity_provider_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Strategy item for the capacity provider strategy that the service
+    # uses.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceCapacityProviderStrategyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         base: 1,
+    #         capacity_provider: "NonEmptyString",
+    #         weight: 1,
+    #       }
+    #
+    # @!attribute [rw] base
+    #   The minimum number of tasks to run on the capacity provider. Only
+    #   one strategy item can specify a value for `Base`.
+    #
+    #   The value must be between 0 and 100000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_provider
+    #   The short name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The relative percentage of the total number of tasks that should use
+    #   the capacity provider.
+    #
+    #   If no weight is specified, the default value is 0. At least one
+    #   capacity provider must have a weight greater than 0.
+    #
+    #   The value can be between 0 and 1000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceCapacityProviderStrategyDetails AWS API Documentation
+    #
+    class AwsEcsServiceCapacityProviderStrategyDetails < Struct.new(
+      :base,
+      :capacity_provider,
+      :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Determines whether a service deployment fails if a service cannot
+    # reach a steady state.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails
+    #   data as a hash:
+    #
+    #       {
+    #         enable: false,
+    #         rollback: false,
+    #       }
+    #
+    # @!attribute [rw] enable
+    #   Whether to enable the deployment circuit breaker logic for the
+    #   service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rollback
+    #   Whether to roll back the service if a service deployment fails. If
+    #   rollback is enabled, when a service deployment fails, the service is
+    #   rolled back to the last deployment that completed successfully.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails AWS API Documentation
+    #
+    class AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails < Struct.new(
+      :enable,
+      :rollback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional deployment parameters for the service.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceDeploymentConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_circuit_breaker: {
+    #           enable: false,
+    #           rollback: false,
+    #         },
+    #         maximum_percent: 1,
+    #         minimum_healthy_percent: 1,
+    #       }
+    #
+    # @!attribute [rw] deployment_circuit_breaker
+    #   Determines whether a service deployment fails if a service cannot
+    #   reach a steady state.
+    #   @return [Types::AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails]
+    #
+    # @!attribute [rw] maximum_percent
+    #   For a service that uses the rolling update (`ECS`) deployment type,
+    #   the maximum number of tasks in a service that are allowed in the
+    #   `RUNNING` or `PENDING` state during a deployment, and for tasks that
+    #   use the EC2 launch type, when any container instances are in the
+    #   `DRAINING` state. Provided as a percentage of the desired number of
+    #   tasks. The default value is 200%.
+    #
+    #   For a service that uses the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
+    #   deployment types, and tasks that use the EC2 launch type, the
+    #   maximum number of tasks in the service that remain in the `RUNNING`
+    #   state while the container instances are in the `DRAINING` state.
+    #
+    #   For the Fargate launch type, the maximum percent value is not used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_healthy_percent
+    #   For a service that uses the rolling update (`ECS`) deployment type,
+    #   the minimum number of tasks in a service that must remain in the
+    #   `RUNNING` state during a deployment, and while any container
+    #   instances are in the `DRAINING` state if the service contains tasks
+    #   using the EC2 launch type. Expressed as a percentage of the desired
+    #   number of tasks. The default value is 100%.
+    #
+    #   For a service that uses the blue/green (`CODE_DEPLOY`) or `EXTERNAL`
+    #   deployment types and tasks that use the EC2 launch type, the minimum
+    #   number of the tasks in the service that remain in the `RUNNING`
+    #   state while the container instances are in the `DRAINING` state.
+    #
+    #   For the Fargate launch type, the minimum healthy percent value is
+    #   not used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceDeploymentConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsServiceDeploymentConfigurationDetails < Struct.new(
+      :deployment_circuit_breaker,
+      :maximum_percent,
+      :minimum_healthy_percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the deployment controller type that the service
+    # uses.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceDeploymentControllerDetails
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The rolling update (`ECS`) deployment type replaces the current
+    #   running version of the container with the latest version.
+    #
+    #   The blue/green (`CODE_DEPLOY`) deployment type uses the blue/green
+    #   deployment model that is powered by CodeDeploy. This deployment
+    #   model a new deployment of a service can be verified before
+    #   production traffic is sent to it.
+    #
+    #   The external (`EXTERNAL`) deployment type allows the use of any
+    #   third-party deployment controller for full control over the
+    #   deployment process for an Amazon ECS service.
+    #
+    #   Valid values: `ECS` \| `CODE_DEPLOY` \| `EXTERNAL`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceDeploymentControllerDetails AWS API Documentation
+    #
+    class AwsEcsServiceDeploymentControllerDetails < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a service within an ECS cluster.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceDetails
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_provider_strategy: [
+    #           {
+    #             base: 1,
+    #             capacity_provider: "NonEmptyString",
+    #             weight: 1,
+    #           },
+    #         ],
+    #         cluster: "NonEmptyString",
+    #         deployment_configuration: {
+    #           deployment_circuit_breaker: {
+    #             enable: false,
+    #             rollback: false,
+    #           },
+    #           maximum_percent: 1,
+    #           minimum_healthy_percent: 1,
+    #         },
+    #         deployment_controller: {
+    #           type: "NonEmptyString",
+    #         },
+    #         desired_count: 1,
+    #         enable_ecs_managed_tags: false,
+    #         enable_execute_command: false,
+    #         health_check_grace_period_seconds: 1,
+    #         launch_type: "NonEmptyString",
+    #         load_balancers: [
+    #           {
+    #             container_name: "NonEmptyString",
+    #             container_port: 1,
+    #             load_balancer_name: "NonEmptyString",
+    #             target_group_arn: "NonEmptyString",
+    #           },
+    #         ],
+    #         name: "NonEmptyString",
+    #         network_configuration: {
+    #           aws_vpc_configuration: {
+    #             assign_public_ip: "NonEmptyString",
+    #             security_groups: ["NonEmptyString"],
+    #             subnets: ["NonEmptyString"],
+    #           },
+    #         },
+    #         placement_constraints: [
+    #           {
+    #             expression: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #           },
+    #         ],
+    #         placement_strategies: [
+    #           {
+    #             field: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #           },
+    #         ],
+    #         platform_version: "NonEmptyString",
+    #         propagate_tags: "NonEmptyString",
+    #         role: "NonEmptyString",
+    #         scheduling_strategy: "NonEmptyString",
+    #         service_arn: "NonEmptyString",
+    #         service_name: "NonEmptyString",
+    #         service_registries: [
+    #           {
+    #             container_name: "NonEmptyString",
+    #             container_port: 1,
+    #             port: 1,
+    #             registry_arn: "NonEmptyString",
+    #           },
+    #         ],
+    #         task_definition: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy that the service uses.
+    #   @return [Array<Types::AwsEcsServiceCapacityProviderStrategyDetails>]
+    #
+    # @!attribute [rw] cluster
+    #   The ARN of the cluster that hosts the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   Deployment parameters for the service. Includes the number of tasks
+    #   that run and the order in which to start and stop tasks.
+    #   @return [Types::AwsEcsServiceDeploymentConfigurationDetails]
+    #
+    # @!attribute [rw] deployment_controller
+    #   Contains the deployment controller type that the service uses.
+    #   @return [Types::AwsEcsServiceDeploymentControllerDetails]
+    #
+    # @!attribute [rw] desired_count
+    #   The number of instantiations of the task definition to run on the
+    #   service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_ecs_managed_tags
+    #   Whether to enable Amazon ECS managed tags for the tasks in the
+    #   service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_execute_command
+    #   Whether the execute command functionality is enabled for the
+    #   service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] health_check_grace_period_seconds
+    #   After a task starts, the amount of time in seconds that the Amazon
+    #   ECS service scheduler ignores unhealthy Elastic Load Balancing
+    #   target health checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] launch_type
+    #   The launch type that the service uses.
+    #
+    #   Valid values: `EC2` \| `FARGATE` \| `EXTERNAL`
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancers
+    #   Information about the load balancers that the service uses.
+    #   @return [Array<Types::AwsEcsServiceLoadBalancersDetails>]
+    #
+    # @!attribute [rw] name
+    #   The name of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   For tasks that use the `awsvpc` networking mode, the VPC subnet and
+    #   security group configuration.
+    #   @return [Types::AwsEcsServiceNetworkConfigurationDetails]
+    #
+    # @!attribute [rw] placement_constraints
+    #   The placement constraints for the tasks in the service.
+    #   @return [Array<Types::AwsEcsServicePlacementConstraintsDetails>]
+    #
+    # @!attribute [rw] placement_strategies
+    #   Information about how tasks for the service are placed.
+    #   @return [Array<Types::AwsEcsServicePlacementStrategiesDetails>]
+    #
+    # @!attribute [rw] platform_version
+    #   The platform version on which to run the service. Only specified for
+    #   tasks that are hosted on Fargate. If a platform version is not
+    #   specified, the `LATEST` platform version is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Indicates whether to propagate the tags from the task definition to
+    #   the task or from the service to the task. If no value is provided,
+    #   then tags are not propagated.
+    #
+    #   Valid values: `TASK_DEFINITION` \| `SERVICE`
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The ARN of the IAM role that is associated with the service. The
+    #   role allows the Amazon ECS container agent to register container
+    #   instances with an Elastic Load Balancing load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_strategy
+    #   The scheduling strategy to use for the service.
+    #
+    #   The `REPLICA` scheduling strategy places and maintains the desired
+    #   number of tasks across the cluster. By default, the service
+    #   scheduler spreads tasks across Availability Zones. Task placement
+    #   strategies and constraints are used to customize task placement
+    #   decisions.
+    #
+    #   The `DAEMON` scheduling strategy deploys exactly one task on each
+    #   active container instance that meets all of the task placement
+    #   constraints that are specified in the cluster. The service scheduler
+    #   also evaluates the task placement constraints for running tasks and
+    #   stops tasks that do not meet the placement constraints.
+    #
+    #   Valid values: `REPLICA` \| `DAEMON`
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service.
+    #
+    #   The name can contain up to 255 characters. It can use letters,
+    #   numbers, underscores, and hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_registries
+    #   Information about the service discovery registries to assign to the
+    #   service.
+    #   @return [Array<Types::AwsEcsServiceServiceRegistriesDetails>]
+    #
+    # @!attribute [rw] task_definition
+    #   The task definition to use for tasks in the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceDetails AWS API Documentation
+    #
+    class AwsEcsServiceDetails < Struct.new(
+      :capacity_provider_strategy,
+      :cluster,
+      :deployment_configuration,
+      :deployment_controller,
+      :desired_count,
+      :enable_ecs_managed_tags,
+      :enable_execute_command,
+      :health_check_grace_period_seconds,
+      :launch_type,
+      :load_balancers,
+      :name,
+      :network_configuration,
+      :placement_constraints,
+      :placement_strategies,
+      :platform_version,
+      :propagate_tags,
+      :role,
+      :scheduling_strategy,
+      :service_arn,
+      :service_name,
+      :service_registries,
+      :task_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a load balancer that the service uses.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceLoadBalancersDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "NonEmptyString",
+    #         container_port: 1,
+    #         load_balancer_name: "NonEmptyString",
+    #         target_group_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container to associate with the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port on the container to associate with the load balancer. This
+    #   port must correspond to a `containerPort` in the task definition the
+    #   tasks in the service are using. For tasks that use the EC2 launch
+    #   type, the container instance they are launched on must allow ingress
+    #   traffic on the `hostPort` of the port mapping.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer to associate with the Amazon ECS
+    #   service or task set.
+    #
+    #   Only specified when using a Classic Load Balancer. For an
+    #   Application Load Balancer or a Network Load Balancer, the load
+    #   balancer name is omitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_arn
+    #   The ARN of the Elastic Load Balancing target group or groups
+    #   associated with a service or task set.
+    #
+    #   Only specified when using an Application Load Balancer or a Network
+    #   Load Balancer. For a Classic Load Balancer, the target group ARN is
+    #   omitted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceLoadBalancersDetails AWS API Documentation
+    #
+    class AwsEcsServiceLoadBalancersDetails < Struct.new(
+      :container_name,
+      :container_port,
+      :load_balancer_name,
+      :target_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For tasks that use the `awsvpc` networking mode, the VPC subnet and
+    # security group configuration.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         assign_public_ip: "NonEmptyString",
+    #         security_groups: ["NonEmptyString"],
+    #         subnets: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] assign_public_ip
+    #   Whether the task's elastic network interface receives a public IP
+    #   address. The default value is `DISABLED`.
+    #
+    #   Valid values: `ENABLED` \| `DISABLED`
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   The IDs of the security groups associated with the task or service.
+    #
+    #   You can provide up to five security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The IDs of the subnets associated with the task or service.
+    #
+    #   You can provide up to 16 subnets.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails < Struct.new(
+      :assign_public_ip,
+      :security_groups,
+      :subnets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For tasks that use the `awsvpc` networking mode, the VPC subnet and
+    # security group configuration.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceNetworkConfigurationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         aws_vpc_configuration: {
+    #           assign_public_ip: "NonEmptyString",
+    #           security_groups: ["NonEmptyString"],
+    #           subnets: ["NonEmptyString"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_vpc_configuration
+    #   The VPC subnet and security group configuration.
+    #   @return [Types::AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceNetworkConfigurationDetails AWS API Documentation
+    #
+    class AwsEcsServiceNetworkConfigurationDetails < Struct.new(
+      :aws_vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A placement constraint for the tasks in the service.
+    #
+    # @note When making an API call, you may pass AwsEcsServicePlacementConstraintsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         expression: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] expression
+    #   A cluster query language expression to apply to the constraint. You
+    #   cannot specify an expression if the constraint type is
+    #   `distinctInstance`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of constraint. Use `distinctInstance` to run each task in a
+    #   particular group on a different container instance. Use `memberOf`
+    #   to restrict the selection to a group of valid candidates.
+    #
+    #   Valid values: `distinctInstance` \| `memberOf`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServicePlacementConstraintsDetails AWS API Documentation
+    #
+    class AwsEcsServicePlacementConstraintsDetails < Struct.new(
+      :expression,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A placement strategy that determines how to place the tasks for the
+    # service.
+    #
+    # @note When making an API call, you may pass AwsEcsServicePlacementStrategiesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         field: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] field
+    #   The field to apply the placement strategy against.
+    #
+    #   For the `spread` placement strategy, valid values are `instanceId`
+    #   (or `host`, which has the same effect), or any platform or custom
+    #   attribute that is applied to a container instance, such as
+    #   `attribute:ecs.availability-zone`.
+    #
+    #   For the `binpack` placement strategy, valid values are `cpu` and
+    #   `memory`.
+    #
+    #   For the `random` placement strategy, this attribute is not used.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of placement strategy.
+    #
+    #   The `random` placement strategy randomly places tasks on available
+    #   candidates.
+    #
+    #   The `spread` placement strategy spreads placement across available
+    #   candidates evenly based on the value of `Field`.
+    #
+    #   The `binpack` strategy places tasks on available candidates that
+    #   have the least available amount of the resource that is specified in
+    #   `Field`.
+    #
+    #   Valid values: `random` \| `spread` \| `binpack`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServicePlacementStrategiesDetails AWS API Documentation
+    #
+    class AwsEcsServicePlacementStrategiesDetails < Struct.new(
+      :field,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a service discovery registry to assign to the
+    # service.
+    #
+    # @note When making an API call, you may pass AwsEcsServiceServiceRegistriesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "NonEmptyString",
+    #         container_port: 1,
+    #         port: 1,
+    #         registry_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The container name value to use for the service discovery service.
+    #
+    #   If the task definition uses the `bridge` or `host` network mode, you
+    #   must specify `ContainerName` and `ContainerPort`.
+    #
+    #   If the task definition uses the `awsvpc` network mode and a type SRV
+    #   DNS record, you must specify either `ContainerName` and
+    #   `ContainerPort`, or `Port` , but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port value to use for the service discovery service.
+    #
+    #   If the task definition uses the `bridge` or `host` network mode, you
+    #   must specify `ContainerName` and `ContainerPort`.
+    #
+    #   If the task definition uses the `awsvpc` network mode and a type SRV
+    #   DNS record, you must specify either `ContainerName` and
+    #   `ContainerPort`, or `Port` , but not both.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port
+    #   The port value to use for a service discovery service that specifies
+    #   an SRV record. This field can be used if both the `awsvpc`awsvpc
+    #   network mode and SRV records are used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registry_arn
+    #   The ARN of the service registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcsServiceServiceRegistriesDetails AWS API Documentation
+    #
+    class AwsEcsServiceServiceRegistriesDetails < Struct.new(
+      :container_name,
+      :container_port,
+      :port,
+      :registry_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6515,7 +7177,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] task_role_arn
     #   The short name or ARN of the IAM role that grants containers in the
-    #   task permission to call AWS API operations on your behalf.
+    #   task permission to call Amazon Web Services API operations on your
+    #   behalf.
     #   @return [String]
     #
     # @!attribute [rw] volumes
@@ -7112,7 +7775,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Information about an Elasticsearch domain.
+    # Information about an Amazon Elasticsearch Service domain.
     #
     # @note When making an API call, you may pass AwsElasticsearchDomainDetails
     #   data as a hash:
@@ -7130,6 +7793,17 @@ module Aws::SecurityHub
     #           "NonEmptyString" => "NonEmptyString",
     #         },
     #         elasticsearch_version: "NonEmptyString",
+    #         elasticsearch_cluster_config: {
+    #           dedicated_master_count: 1,
+    #           dedicated_master_enabled: false,
+    #           dedicated_master_type: "NonEmptyString",
+    #           instance_count: 1,
+    #           instance_type: "NonEmptyString",
+    #           zone_awareness_config: {
+    #             availability_zone_count: 1,
+    #           },
+    #           zone_awareness_enabled: false,
+    #         },
     #         encryption_at_rest_options: {
     #           enabled: false,
     #           kms_key_id: "NonEmptyString",
@@ -7140,6 +7814,10 @@ module Aws::SecurityHub
     #             enabled: false,
     #           },
     #           search_slow_logs: {
+    #             cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #             enabled: false,
+    #           },
+    #           audit_logs: {
     #             cloud_watch_logs_log_group_arn: "NonEmptyString",
     #             enabled: false,
     #           },
@@ -7166,7 +7844,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] access_policies
     #   IAM policy document specifying the access policies for the new
-    #   Amazon ES domain.
+    #   Elasticsearch domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_endpoint_options
@@ -7174,14 +7852,14 @@ module Aws::SecurityHub
     #   @return [Types::AwsElasticsearchDomainDomainEndpointOptions]
     #
     # @!attribute [rw] domain_id
-    #   Unique identifier for an Amazon ES domain.
+    #   Unique identifier for an Elasticsearch domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of an Amazon ES domain.
+    #   Name of an Elasticsearch domain.
     #
     #   Domain names are unique across all domains owned by the same account
-    #   within an AWS Region.
+    #   within an Amazon Web Services Region.
     #
     #   Domain names must start with a lowercase letter and must be between
     #   3 and 28 characters.
@@ -7191,19 +7869,23 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] endpoint
     #   Domain-specific endpoint used to submit index, search, and data
-    #   upload requests to an Amazon ES domain.
+    #   upload requests to an Elasticsearch domain.
     #
     #   The endpoint is a service URL.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
-    #   The key-value pair that exists if the Amazon ES domain uses VPC
+    #   The key-value pair that exists if the Elasticsearch domain uses VPC
     #   endpoints.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] elasticsearch_version
     #   Elasticsearch version.
     #   @return [String]
+    #
+    # @!attribute [rw] elasticsearch_cluster_config
+    #   Information about an Elasticsearch cluster configuration.
+    #   @return [Types::AwsElasticsearchDomainElasticsearchClusterConfigDetails]
     #
     # @!attribute [rw] encryption_at_rest_options
     #   Details about the configuration for encryption at rest.
@@ -7224,7 +7906,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsElasticsearchDomainServiceSoftwareOptions]
     #
     # @!attribute [rw] vpc_options
-    #   Information that Amazon ES derives based on `VPCOptions` for the
+    #   Information that Elasticsearch derives based on `VPCOptions` for the
     #   domain.
     #   @return [Types::AwsElasticsearchDomainVPCOptions]
     #
@@ -7238,6 +7920,7 @@ module Aws::SecurityHub
       :endpoint,
       :endpoints,
       :elasticsearch_version,
+      :elasticsearch_cluster_config,
       :encryption_at_rest_options,
       :log_publishing_options,
       :node_to_node_encryption_options,
@@ -7278,6 +7961,100 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainDomainEndpointOptions < Struct.new(
       :enforce_https,
       :tls_security_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # details about the configuration of an Elasticsearch cluster.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainElasticsearchClusterConfigDetails
+    #   data as a hash:
+    #
+    #       {
+    #         dedicated_master_count: 1,
+    #         dedicated_master_enabled: false,
+    #         dedicated_master_type: "NonEmptyString",
+    #         instance_count: 1,
+    #         instance_type: "NonEmptyString",
+    #         zone_awareness_config: {
+    #           availability_zone_count: 1,
+    #         },
+    #         zone_awareness_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] dedicated_master_count
+    #   The number of instances to use for the master node. If this
+    #   attribute is specified, then `DedicatedMasterEnabled` must be
+    #   `true`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dedicated_master_enabled
+    #   Whether to use a dedicated master node for the Elasticsearch domain.
+    #   A dedicated master node performs cluster management tasks, but
+    #   doesn't hold data or respond to data upload requests.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dedicated_master_type
+    #   The hardware configuration of the computer that hosts the dedicated
+    #   master node. For example, `m3.medium.elasticsearch`. If this
+    #   attribute is specified, then `DedicatedMasterEnabled` must be
+    #   `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of data nodes to use in the Elasticsearch domain.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type for your data nodes. For example,
+    #   `m3.medium.elasticsearch`.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_awareness_config
+    #   Configuration options for zone awareness. Provided if
+    #   `ZoneAwarenessEnabled` is `true`.
+    #   @return [Types::AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails]
+    #
+    # @!attribute [rw] zone_awareness_enabled
+    #   Whether to enable zone awareness for the Elasticsearch domain. When
+    #   zone awareness is enabled, Elasticsearch allocates the cluster's
+    #   nodes and replica index shards across Availability Zones in the same
+    #   Region. This prevents data loss and minimizes downtime if a node or
+    #   data center fails.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainElasticsearchClusterConfigDetails AWS API Documentation
+    #
+    class AwsElasticsearchDomainElasticsearchClusterConfigDetails < Struct.new(
+      :dedicated_master_count,
+      :dedicated_master_enabled,
+      :dedicated_master_type,
+      :instance_count,
+      :instance_type,
+      :zone_awareness_config,
+      :zone_awareness_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration options for zone awareness.
+    #
+    # @note When making an API call, you may pass AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zone_count: 1,
+    #       }
+    #
+    # @!attribute [rw] availability_zone_count
+    #   he number of Availability Zones that the domain uses. Valid values
+    #   are 2 and 3. The default is 2.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails AWS API Documentation
+    #
+    class AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails < Struct.new(
+      :availability_zone_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7324,6 +8101,10 @@ module Aws::SecurityHub
     #           cloud_watch_logs_log_group_arn: "NonEmptyString",
     #           enabled: false,
     #         },
+    #         audit_logs: {
+    #           cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] index_slow_logs
@@ -7334,11 +8115,16 @@ module Aws::SecurityHub
     #   Configures the Elasticsearch search slow log publishing.
     #   @return [Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig]
     #
+    # @!attribute [rw] audit_logs
+    #   The log configuration.
+    #   @return [Types::AwsElasticsearchDomainLogPublishingOptionsLogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElasticsearchDomainLogPublishingOptions AWS API Documentation
     #
     class AwsElasticsearchDomainLogPublishingOptions < Struct.new(
       :index_slow_logs,
-      :search_slow_logs)
+      :search_slow_logs,
+      :audit_logs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7452,7 +8238,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Information that Amazon ES derives based on `VPCOptions` for the
+    # Information that Elasticsearch derives based on `VPCOptions` for the
     # domain.
     #
     # @note When making an API call, you may pass AwsElasticsearchDomainVPCOptions
@@ -8369,7 +9155,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the account for the key.
+    #   The Amazon Web Services account ID of the account for the key.
     #   @return [String]
     #
     # @!attribute [rw] access_key_id
@@ -8496,7 +9282,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The identifier of the AWS account that created the session.
+    #   The identifier of the Amazon Web Services account that created the
+    #   session.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -9189,7 +9976,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The twelve-digit account ID of the AWS account that owns the CMK.
+    #   The twelve-digit account ID of the Amazon Web Services account that
+    #   owns the CMK.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -9209,8 +9997,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] key_manager
-    #   The manager of the CMK. CMKs in your AWS account are either customer
-    #   managed or AWS managed.
+    #   The manager of the CMK. CMKs in your Amazon Web Services account are
+    #   either customer managed or Amazon Web Services managed.
     #   @return [String]
     #
     # @!attribute [rw] key_state
@@ -9220,14 +10008,14 @@ module Aws::SecurityHub
     # @!attribute [rw] origin
     #   The source of the CMK's key material.
     #
-    #   When this value is `AWS_KMS`, AWS KMS created the key material.
+    #   When this value is `AWS_KMS`, KMS created the key material.
     #
     #   When this value is `EXTERNAL`, the key material was imported from
     #   your existing key management infrastructure or the CMK lacks key
     #   material.
     #
     #   When this value is `AWS_CLOUDHSM`, the key material was created in
-    #   the AWS CloudHSM cluster associated with a custom key store.
+    #   the CloudHSM cluster associated with a custom key store.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -9262,8 +10050,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] s3_bucket
-    #   An Amazon S3 bucket in the same AWS Region as your function. The
-    #   bucket can be in a different AWS account.
+    #   An Amazon S3 bucket in the same Amazon Web Services Region as your
+    #   function. The bucket can be in a different Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -9276,8 +10065,9 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] zip_file
-    #   The base64-encoded contents of the deployment package. AWS SDK and
-    #   AWS CLI clients handle the encoding for you.
+    #   The base64-encoded contents of the deployment package. Amazon Web
+    #   Services SDK and Amazon Web Services CLI clients handle the encoding
+    #   for you.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionCode AWS API Documentation
@@ -9301,7 +10091,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The ARN of an Amazon SQS queue or Amazon SNS topic.
+    #   The ARN of an SQS queue or SNS topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionDeadLetterConfig AWS API Documentation
@@ -9389,7 +10179,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The KMS key that's used to encrypt the function's environment
+    #   The KMS key that is used to encrypt the function's environment
     #   variables. This key is only returned if you've configured a
     #   customer managed CMK.
     #   @return [String]
@@ -9436,7 +10226,7 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] tracing_config
-    #   The function's AWS X-Ray tracing configuration.
+    #   The function's X-Ray tracing configuration.
     #   @return [Types::AwsLambdaFunctionTracingConfig]
     #
     # @!attribute [rw] vpc_config
@@ -9531,7 +10321,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # An AWS Lambda layer.
+    # An Lambda layer.
     #
     # @note When making an API call, you may pass AwsLambdaFunctionLayer
     #   data as a hash:
@@ -9558,7 +10348,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The function's AWS X-Ray tracing configuration.
+    # The function's X-Ray tracing configuration.
     #
     # @note When making an API call, you may pass AwsLambdaFunctionTracingConfig
     #   data as a hash:
@@ -9854,13 +10644,13 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the AWS KMS master key that is used to encrypt the
-    #   database instances in the DB cluster.
+    #   The ARN of the KMS master key that is used to encrypt the database
+    #   instances in the DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_resource_id
     #   The identifier of the DB cluster. The identifier must be unique
-    #   within each AWS Region and is immutable.
+    #   within each Amazon Web Services Region and is immutable.
     #   @return [String]
     #
     # @!attribute [rw] associated_roles
@@ -9909,7 +10699,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] cross_account_clone
     #   Whether the DB cluster is a clone of a DB cluster owned by a
-    #   different AWS account.
+    #   different Amazon Web Services account.
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_memberships
@@ -10160,8 +10950,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN of the AWS KMS master key that is used to encrypt the
-    #   database instances in the DB cluster.
+    #   The ARN of the KMS master key that is used to encrypt the database
+    #   instances in the DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_identifier
@@ -10243,8 +11033,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # An AWS Identity and Access Management (IAM) role associated with the
-    # DB instance.
+    # An IAM role associated with the DB instance.
     #
     # @note When making an API call, you may pass AwsRdsDbInstanceAssociatedRole
     #   data as a hash:
@@ -10260,7 +11049,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] feature_name
-    #   The name of the feature associated with the IAM)role.
+    #   The name of the feature associated with the IAM role.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10269,14 +11058,15 @@ module Aws::SecurityHub
     #   values:
     #
     #   * `ACTIVE` - The IAM role ARN is associated with the DB instance and
-    #     can be used to access other AWS services on your behalf.
+    #     can be used to access other Amazon Web Services services on your
+    #     behalf.
     #
     #   * `PENDING` - The IAM role ARN is being associated with the DB
     #     instance.
     #
     #   * `INVALID` - The IAM role ARN is associated with the DB instance.
     #     But the DB instance is unable to assume the IAM role in order to
-    #     access other AWS services on your behalf.
+    #     access other Amazon Web Services services on your behalf.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbInstanceAssociatedRole AWS API Documentation
@@ -10442,8 +11232,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] associated_roles
-    #   The AWS Identity and Access Management (IAM) roles associated with
-    #   the DB instance.
+    #   The IAM roles associated with the DB instance.
     #   @return [Array<Types::AwsRdsDbInstanceAssociatedRole>]
     #
     # @!attribute [rw] ca_certificate_identifier
@@ -10472,9 +11261,9 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] dbi_resource_id
-    #   The AWS Region-unique, immutable identifier for the DB instance.
-    #   This identifier is found in AWS CloudTrail log entries whenever the
-    #   AWS KMS key for the DB instance is accessed.
+    #   The Amazon Web Services Region-unique, immutable identifier for the
+    #   DB instance. This identifier is found in CloudTrail log entries
+    #   whenever the KMS key for the DB instance is accessed.
     #   @return [String]
     #
     # @!attribute [rw] db_name
@@ -10515,8 +11304,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
-    #   True if mapping of AWS Identity and Access Management (IAM) accounts
-    #   to database accounts is enabled, and otherwise false.
+    #   True if mapping of IAM accounts to database accounts is enabled, and
+    #   otherwise false.
     #
     #   IAM database authentication can be enabled for the following
     #   database engines.
@@ -10541,7 +11330,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   If `StorageEncrypted` is true, the AWS KMS key identifier for the
+    #   If `StorageEncrypted` is true, the KMS key identifier for the
     #   encrypted DB instance.
     #   @return [String]
     #
@@ -10732,7 +11521,7 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
-    #   The identifier of the AWS KMS key used to encrypt the Performance
+    #   The identifier of the KMS key used to encrypt the Performance
     #   Insights data.
     #   @return [String]
     #
@@ -11194,7 +11983,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] source_region
-    #   The AWS Region that the DB snapshot was created in or copied from.
+    #   The Amazon Web Services Region that the DB snapshot was created in
+    #   or copied from.
     #   @return [String]
     #
     # @!attribute [rw] source_db_snapshot_identifier
@@ -11215,8 +12005,8 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   If `Encrypted` is `true`, the AWS KMS key identifier for the
-    #   encrypted DB snapshot.
+    #   If `Encrypted` is `true`, the KMS key identifier for the encrypted
+    #   DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] timezone
@@ -11423,6 +12213,96 @@ module Aws::SecurityHub
     #
     class AwsRdsDbSubnetGroupSubnetAvailabilityZone < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an Amazon RDS event notification subscription. The
+    # subscription allows Amazon RDS to post events to an SNS topic.
+    #
+    # @note When making an API call, you may pass AwsRdsEventSubscriptionDetails
+    #   data as a hash:
+    #
+    #       {
+    #         cust_subscription_id: "NonEmptyString",
+    #         customer_aws_id: "NonEmptyString",
+    #         enabled: false,
+    #         event_categories_list: ["NonEmptyString"],
+    #         event_subscription_arn: "NonEmptyString",
+    #         sns_topic_arn: "NonEmptyString",
+    #         source_ids_list: ["NonEmptyString"],
+    #         source_type: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         subscription_creation_time: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cust_subscription_id
+    #   The identifier of the account that is associated with the event
+    #   notification subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_aws_id
+    #   The identifier of the event notification subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the event notification subscription is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] event_categories_list
+    #   The list of event categories for the event notification
+    #   subscription.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] event_subscription_arn
+    #   The ARN of the event notification subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The ARN of the SNS topic to post the event notifications to.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_ids_list
+    #   A list of source identifiers for the event notification
+    #   subscription.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_type
+    #   The source type for the event notification subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the event notification subscription.
+    #
+    #   Valid values: `creating` \| `modifying` \| `deleting` \| `active` \|
+    #   `no-permission` \| `topic-not-exist`
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_creation_time
+    #   The datetime when the event notification subscription was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsEventSubscriptionDetails AWS API Documentation
+    #
+    class AwsRdsEventSubscriptionDetails < Struct.new(
+      :cust_subscription_id,
+      :customer_aws_id,
+      :enabled,
+      :event_categories_list,
+      :event_subscription_arn,
+      :sns_topic_arn,
+      :source_ids_list,
+      :source_type,
+      :status,
+      :subscription_creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11978,12 +12858,12 @@ module Aws::SecurityHub
     #   @return [Types::AwsRedshiftClusterHsmStatus]
     #
     # @!attribute [rw] iam_roles
-    #   A list of IAM roles that the cluster can use to access other AWS
-    #   services.
+    #   A list of IAM roles that the cluster can use to access other Amazon
+    #   Web Services services.
     #   @return [Array<Types::AwsRedshiftClusterIamRole>]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the AWS KMS encryption key that is used to encrypt
+    #   The identifier of the KMS encryption key that is used to encrypt
     #   data in the cluster.
     #   @return [String]
     #
@@ -12229,7 +13109,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # An IAM role that the cluster can use to access other AWS services.
+    # An IAM role that the cluster can use to access other Amazon Web
+    # Services services.
     #
     # @note When making an API call, you may pass AwsRedshiftClusterIamRole
     #   data as a hash:
@@ -12505,8 +13386,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] restrict_public_buckets
     #   Indicates whether to restrict access to an access point or S3 bucket
-    #   that has a public policy to only AWS service principals and
-    #   authorized users within the S3 bucket owner's account.
+    #   that has a public policy to only Amazon Web Services service
+    #   principals and authorized users within the S3 bucket owner's
+    #   account.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccountPublicAccessBlockDetails AWS API Documentation
@@ -13135,8 +14017,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   AWS KMS customer master key (CMK) ID to use for the default
-    #   encryption.
+    #   KMS customer master key (CMK) ID to use for the default encryption.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketServerSideEncryptionByDefault AWS API Documentation
@@ -13248,9 +14129,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) symmetric
-    #   customer managed customer master key (CMK) that was used for the
-    #   object.
+    #   The identifier of the KMS symmetric customer managed customer master
+    #   key (CMK) that was used for the object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3ObjectDetails AWS API Documentation
@@ -13266,7 +14146,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details about an AWS Secrets Manager secret.
+    # Details about an Secrets Manager secret.
     #
     # @note When making an API call, you may pass AwsSecretsManagerSecretDetails
     #   data as a hash:
@@ -13294,9 +14174,9 @@ module Aws::SecurityHub
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN, Key ID, or alias of the AWS KMS customer master key (CMK)
-    #   used to encrypt the `SecretString` or `SecretBinary` values for
-    #   versions of this secret.
+    #   The ARN, Key ID, or alias of the KMS customer master key (CMK) used
+    #   to encrypt the `SecretString` or `SecretBinary` values for versions
+    #   of this secret.
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
@@ -13357,12 +14237,12 @@ module Aws::SecurityHub
 
     # Provides consistent format for the contents of the Security
     # Hub-aggregated findings. `AwsSecurityFinding` format enables you to
-    # share findings between AWS security services and third-party
-    # solutions, and security standards checks.
+    # share findings between Amazon Web Services security services and
+    # third-party solutions, and security standards checks.
     #
-    # <note markdown="1"> A finding is a potential security issue generated either by AWS
-    # services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by
-    # the integrated third-party solutions and standards checks.
+    # <note markdown="1"> A finding is a potential security issue generated either by Amazon Web
+    # Services services or by the integrated third-party solutions and
+    # standards checks.
     #
     #  </note>
     #
@@ -13373,6 +14253,9 @@ module Aws::SecurityHub
     #         schema_version: "NonEmptyString", # required
     #         id: "NonEmptyString", # required
     #         product_arn: "NonEmptyString", # required
+    #         product_name: "NonEmptyString",
+    #         company_name: "NonEmptyString",
+    #         region: "NonEmptyString",
     #         generator_id: "NonEmptyString", # required
     #         aws_account_id: "NonEmptyString", # required
     #         types: ["NonEmptyString"],
@@ -13992,6 +14875,17 @@ module Aws::SecurityHub
     #                   "NonEmptyString" => "NonEmptyString",
     #                 },
     #                 elasticsearch_version: "NonEmptyString",
+    #                 elasticsearch_cluster_config: {
+    #                   dedicated_master_count: 1,
+    #                   dedicated_master_enabled: false,
+    #                   dedicated_master_type: "NonEmptyString",
+    #                   instance_count: 1,
+    #                   instance_type: "NonEmptyString",
+    #                   zone_awareness_config: {
+    #                     availability_zone_count: 1,
+    #                   },
+    #                   zone_awareness_enabled: false,
+    #                 },
     #                 encryption_at_rest_options: {
     #                   enabled: false,
     #                   kms_key_id: "NonEmptyString",
@@ -14002,6 +14896,10 @@ module Aws::SecurityHub
     #                     enabled: false,
     #                   },
     #                   search_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   audit_logs: {
     #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
     #                     enabled: false,
     #                   },
@@ -15391,6 +16289,87 @@ module Aws::SecurityHub
     #               other: {
     #                 "NonEmptyString" => "NonEmptyString",
     #               },
+    #               aws_rds_event_subscription: {
+    #                 cust_subscription_id: "NonEmptyString",
+    #                 customer_aws_id: "NonEmptyString",
+    #                 enabled: false,
+    #                 event_categories_list: ["NonEmptyString"],
+    #                 event_subscription_arn: "NonEmptyString",
+    #                 sns_topic_arn: "NonEmptyString",
+    #                 source_ids_list: ["NonEmptyString"],
+    #                 source_type: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 subscription_creation_time: "NonEmptyString",
+    #               },
+    #               aws_ecs_service: {
+    #                 capacity_provider_strategy: [
+    #                   {
+    #                     base: 1,
+    #                     capacity_provider: "NonEmptyString",
+    #                     weight: 1,
+    #                   },
+    #                 ],
+    #                 cluster: "NonEmptyString",
+    #                 deployment_configuration: {
+    #                   deployment_circuit_breaker: {
+    #                     enable: false,
+    #                     rollback: false,
+    #                   },
+    #                   maximum_percent: 1,
+    #                   minimum_healthy_percent: 1,
+    #                 },
+    #                 deployment_controller: {
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 desired_count: 1,
+    #                 enable_ecs_managed_tags: false,
+    #                 enable_execute_command: false,
+    #                 health_check_grace_period_seconds: 1,
+    #                 launch_type: "NonEmptyString",
+    #                 load_balancers: [
+    #                   {
+    #                     container_name: "NonEmptyString",
+    #                     container_port: 1,
+    #                     load_balancer_name: "NonEmptyString",
+    #                     target_group_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 name: "NonEmptyString",
+    #                 network_configuration: {
+    #                   aws_vpc_configuration: {
+    #                     assign_public_ip: "NonEmptyString",
+    #                     security_groups: ["NonEmptyString"],
+    #                     subnets: ["NonEmptyString"],
+    #                   },
+    #                 },
+    #                 placement_constraints: [
+    #                   {
+    #                     expression: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 placement_strategies: [
+    #                   {
+    #                     field: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 platform_version: "NonEmptyString",
+    #                 propagate_tags: "NonEmptyString",
+    #                 role: "NonEmptyString",
+    #                 scheduling_strategy: "NonEmptyString",
+    #                 service_arn: "NonEmptyString",
+    #                 service_name: "NonEmptyString",
+    #                 service_registries: [
+    #                   {
+    #                     container_name: "NonEmptyString",
+    #                     container_port: 1,
+    #                     port: 1,
+    #                     registry_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 task_definition: "NonEmptyString",
+    #               },
     #             },
     #           },
     #         ],
@@ -15604,6 +16583,50 @@ module Aws::SecurityHub
     #   custom integration.
     #   @return [String]
     #
+    # @!attribute [rw] product_name
+    #   The name of the product that generated the finding.
+    #
+    #   Security Hub populates this attribute automatically for each
+    #   finding. You cannot update it using `BatchImportFindings` or
+    #   `BatchUpdateFindings`. The exception to this is when you use a
+    #   custom integration.
+    #
+    #   When you use the Security Hub console to filter findings by product
+    #   name, you use this attribute.
+    #
+    #   When you use the Security Hub API to filter findings by product
+    #   name, you use the `aws/securityhub/ProductyName` attribute under
+    #   `ProductFields`.
+    #
+    #   Security Hub does not synchronize those two attributes.
+    #   @return [String]
+    #
+    # @!attribute [rw] company_name
+    #   The name of the company for the product that generated the finding.
+    #
+    #   Security Hub populates this attribute automatically for each
+    #   finding. You cannot be updated using `BatchImportFindings` or
+    #   `BatchUpdateFindings`. The exception to this is when you use a
+    #   custom integration.
+    #
+    #   When you use the Security Hub console to filter findings by company
+    #   name, you use this attribute.
+    #
+    #   When you use the Security Hub API to filter findings by company
+    #   name, you use the `aws/securityhub/CompanyName` attribute under
+    #   `ProductFields`.
+    #
+    #   Security Hub does not synchronize those two attributes.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region from which the finding was generated.
+    #
+    #   Security Hub populates this attribute automatically for each
+    #   finding. You cannot update it using `BatchImportFindings` or
+    #   `BatchUpdateFindings`.
+    #   @return [String]
+    #
     # @!attribute [rw] generator_id
     #   The identifier for the solution-specific component (a discrete unit
     #   of logic) that generated a finding. In various security-findings
@@ -15612,7 +16635,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID that a finding is generated in.
+    #   The Amazon Web Services account ID that a finding is generated in.
     #   @return [String]
     #
     # @!attribute [rw] types
@@ -15727,6 +16750,10 @@ module Aws::SecurityHub
     #   A data type where security-findings providers can include additional
     #   solution-specific details that aren't part of the defined
     #   `AwsSecurityFinding` format.
+    #
+    #   Can contain up to 50 key-value pairs. For each key-value pair, the
+    #   key can contain up to 128 characters, and the value can contain up
+    #   to 2048 characters.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_defined_fields
@@ -15764,8 +16791,8 @@ module Aws::SecurityHub
     # @!attribute [rw] compliance
     #   This data type is exclusive to findings that are generated as the
     #   result of a check run against a specific rule in a supported
-    #   security standard, such as CIS AWS Foundations. Contains security
-    #   standard-related finding details.
+    #   security standard, such as CIS Amazon Web Services Foundations.
+    #   Contains security standard-related finding details.
     #   @return [Types::Compliance]
     #
     # @!attribute [rw] verification_state
@@ -15819,6 +16846,9 @@ module Aws::SecurityHub
       :schema_version,
       :id,
       :product_arn,
+      :product_name,
+      :company_name,
+      :region,
       :generator_id,
       :aws_account_id,
       :types,
@@ -15886,6 +16916,12 @@ module Aws::SecurityHub
     #           },
     #         ],
     #         generator_id: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
+    #         region: [
     #           {
     #             value: "NonEmptyString",
     #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
@@ -16300,6 +17336,12 @@ module Aws::SecurityHub
     #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
+    #         resource_aws_iam_access_key_principal_name: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #           },
+    #         ],
     #         resource_aws_iam_access_key_status: [
     #           {
     #             value: "NonEmptyString",
@@ -16314,6 +17356,12 @@ module Aws::SecurityHub
     #               value: 1,
     #               unit: "DAYS", # accepts DAYS
     #             },
+    #           },
+    #         ],
+    #         resource_aws_iam_user_user_name: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
     #         resource_container_name: [
@@ -16474,7 +17522,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID that a finding is generated in.
+    #   The Amazon Web Services account ID that a finding is generated in.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] id
@@ -16486,6 +17534,10 @@ module Aws::SecurityHub
     #   of logic) that generated a finding. In various security-findings
     #   providers' solutions, this generator can be called a rule, a check,
     #   a detector, a plugin, etc.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] region
+    #   The Region from which the finding was generated.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] type
@@ -16573,11 +17625,19 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] product_name
     #   The name of the solution (product) that generates findings.
+    #
+    #   Note that this is a filter against the `aws/securityhub/ProductName`
+    #   field in `ProductFields`. It is not a filter for the top-level
+    #   `ProductName` field.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] company_name
     #   The name of the findings provider (company) that owns the solution
     #   (product) that generates findings.
+    #
+    #   Note that this is a filter against the `aws/securityhub/CompanyName`
+    #   field in `ProductFields`. It is not a filter for the top-level
+    #   `CompanyName` field.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] user_defined_fields
@@ -16710,17 +17770,18 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_partition
-    #   The canonical AWS partition name that the Region is assigned to.
+    #   The canonical Amazon Web Services partition name that the Region is
+    #   assigned to.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_region
-    #   The canonical AWS external Region name where this resource is
-    #   located.
+    #   The canonical Amazon Web Services external Region name where this
+    #   resource is located.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_tags
-    #   A list of AWS tags associated with a resource at the time the
-    #   finding was processed.
+    #   A list of Amazon Web Services tags associated with a resource at the
+    #   time the finding was processed.
     #   @return [Array<Types::MapFilter>]
     #
     # @!attribute [rw] resource_aws_ec2_instance_type
@@ -16771,6 +17832,10 @@ module Aws::SecurityHub
     #   The user associated with the IAM access key related to a finding.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] resource_aws_iam_access_key_principal_name
+    #   The name of the principal that is associated with an IAM access key.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @!attribute [rw] resource_aws_iam_access_key_status
     #   The status of the IAM access key related to a finding.
     #   @return [Array<Types::StringFilter>]
@@ -16778,6 +17843,10 @@ module Aws::SecurityHub
     # @!attribute [rw] resource_aws_iam_access_key_created_at
     #   The creation date/time of the IAM access key related to a finding.
     #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] resource_aws_iam_user_user_name
+    #   The name of an IAM user.
+    #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_container_name
     #   The name of the container related to a finding.
@@ -16802,8 +17871,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] compliance_status
     #   Exclusive to findings that are generated as the result of a check
-    #   run against a specific rule in a supported standard, such as CIS AWS
-    #   Foundations. Contains security standard-related finding details.
+    #   run against a specific rule in a supported standard, such as CIS
+    #   Amazon Web Services Foundations. Contains security standard-related
+    #   finding details.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] verification_state
@@ -16924,6 +17994,7 @@ module Aws::SecurityHub
       :aws_account_id,
       :id,
       :generator_id,
+      :region,
       :type,
       :first_observed_at,
       :last_observed_at,
@@ -16986,8 +18057,10 @@ module Aws::SecurityHub
       :resource_aws_s3_bucket_owner_id,
       :resource_aws_s3_bucket_owner_name,
       :resource_aws_iam_access_key_user_name,
+      :resource_aws_iam_access_key_principal_name,
       :resource_aws_iam_access_key_status,
       :resource_aws_iam_access_key_created_at,
+      :resource_aws_iam_user_user_name,
       :resource_container_name,
       :resource_container_image_id,
       :resource_container_image_name,
@@ -17064,13 +18137,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] kms_master_key_id
-    #   The ID of an AWS managed customer master key (CMK) for Amazon SNS or
-    #   a custom CMK.
+    #   The ID of an Amazon Web Services managed customer master key (CMK)
+    #   for Amazon SNS or a custom CMK.
     #   @return [String]
     #
     # @!attribute [rw] subscription
     #   Subscription is an embedded property that describes the subscription
-    #   endpoints of an Amazon SNS topic.
+    #   endpoints of an SNS topic.
     #   @return [Array<Types::AwsSnsTopicSubscription>]
     #
     # @!attribute [rw] topic_name
@@ -17133,13 +18206,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] kms_data_key_reuse_period_seconds
     #   The length of time, in seconds, for which Amazon SQS can reuse a
-    #   data key to encrypt or decrypt messages before calling AWS KMS
-    #   again.
+    #   data key to encrypt or decrypt messages before calling KMS again.
     #   @return [Integer]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The ID of an AWS managed customer master key (CMK) for Amazon SQS or
-    #   a custom CMK.
+    #   The ID of an Amazon Web Services managed customer master key (CMK)
+    #   for Amazon SQS or a custom CMK.
     #   @return [String]
     #
     # @!attribute [rw] queue_name
@@ -17392,7 +18464,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details about a WAF WebACL.
+    # Details about an WAF WebACL.
     #
     # @note When making an API call, you may pass AwsWafWebAclDetails
     #   data as a hash:
@@ -17451,7 +18523,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details for a rule in a WAF WebACL.
+    # Details for a rule in an WAF WebACL.
     #
     # @note When making an API call, you may pass AwsWafWebAclRule
     #   data as a hash:
@@ -17474,8 +18546,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] action
-    #   Specifies the action that CloudFront or AWS WAF takes when a web
-    #   request matches the conditions in the rule.
+    #   Specifies the action that CloudFront or WAF takes when a web request
+    #   matches the conditions in the rule.
     #   @return [Types::WafAction]
     #
     # @!attribute [rw] excluded_rules
@@ -17613,6 +18685,9 @@ module Aws::SecurityHub
     #             schema_version: "NonEmptyString", # required
     #             id: "NonEmptyString", # required
     #             product_arn: "NonEmptyString", # required
+    #             product_name: "NonEmptyString",
+    #             company_name: "NonEmptyString",
+    #             region: "NonEmptyString",
     #             generator_id: "NonEmptyString", # required
     #             aws_account_id: "NonEmptyString", # required
     #             types: ["NonEmptyString"],
@@ -18232,6 +19307,17 @@ module Aws::SecurityHub
     #                       "NonEmptyString" => "NonEmptyString",
     #                     },
     #                     elasticsearch_version: "NonEmptyString",
+    #                     elasticsearch_cluster_config: {
+    #                       dedicated_master_count: 1,
+    #                       dedicated_master_enabled: false,
+    #                       dedicated_master_type: "NonEmptyString",
+    #                       instance_count: 1,
+    #                       instance_type: "NonEmptyString",
+    #                       zone_awareness_config: {
+    #                         availability_zone_count: 1,
+    #                       },
+    #                       zone_awareness_enabled: false,
+    #                     },
     #                     encryption_at_rest_options: {
     #                       enabled: false,
     #                       kms_key_id: "NonEmptyString",
@@ -18242,6 +19328,10 @@ module Aws::SecurityHub
     #                         enabled: false,
     #                       },
     #                       search_slow_logs: {
+    #                         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                         enabled: false,
+    #                       },
+    #                       audit_logs: {
     #                         cloud_watch_logs_log_group_arn: "NonEmptyString",
     #                         enabled: false,
     #                       },
@@ -19631,6 +20721,87 @@ module Aws::SecurityHub
     #                   other: {
     #                     "NonEmptyString" => "NonEmptyString",
     #                   },
+    #                   aws_rds_event_subscription: {
+    #                     cust_subscription_id: "NonEmptyString",
+    #                     customer_aws_id: "NonEmptyString",
+    #                     enabled: false,
+    #                     event_categories_list: ["NonEmptyString"],
+    #                     event_subscription_arn: "NonEmptyString",
+    #                     sns_topic_arn: "NonEmptyString",
+    #                     source_ids_list: ["NonEmptyString"],
+    #                     source_type: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     subscription_creation_time: "NonEmptyString",
+    #                   },
+    #                   aws_ecs_service: {
+    #                     capacity_provider_strategy: [
+    #                       {
+    #                         base: 1,
+    #                         capacity_provider: "NonEmptyString",
+    #                         weight: 1,
+    #                       },
+    #                     ],
+    #                     cluster: "NonEmptyString",
+    #                     deployment_configuration: {
+    #                       deployment_circuit_breaker: {
+    #                         enable: false,
+    #                         rollback: false,
+    #                       },
+    #                       maximum_percent: 1,
+    #                       minimum_healthy_percent: 1,
+    #                     },
+    #                     deployment_controller: {
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     desired_count: 1,
+    #                     enable_ecs_managed_tags: false,
+    #                     enable_execute_command: false,
+    #                     health_check_grace_period_seconds: 1,
+    #                     launch_type: "NonEmptyString",
+    #                     load_balancers: [
+    #                       {
+    #                         container_name: "NonEmptyString",
+    #                         container_port: 1,
+    #                         load_balancer_name: "NonEmptyString",
+    #                         target_group_arn: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     name: "NonEmptyString",
+    #                     network_configuration: {
+    #                       aws_vpc_configuration: {
+    #                         assign_public_ip: "NonEmptyString",
+    #                         security_groups: ["NonEmptyString"],
+    #                         subnets: ["NonEmptyString"],
+    #                       },
+    #                     },
+    #                     placement_constraints: [
+    #                       {
+    #                         expression: "NonEmptyString",
+    #                         type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     placement_strategies: [
+    #                       {
+    #                         field: "NonEmptyString",
+    #                         type: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     platform_version: "NonEmptyString",
+    #                     propagate_tags: "NonEmptyString",
+    #                     role: "NonEmptyString",
+    #                     scheduling_strategy: "NonEmptyString",
+    #                     service_arn: "NonEmptyString",
+    #                     service_name: "NonEmptyString",
+    #                     service_registries: [
+    #                       {
+    #                         container_name: "NonEmptyString",
+    #                         container_port: 1,
+    #                         port: 1,
+    #                         registry_arn: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     task_definition: "NonEmptyString",
+    #                   },
     #                 },
     #               },
     #             ],
@@ -19833,8 +21004,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] findings
     #   A list of findings to import. To successfully import a finding, it
-    #   must follow the [AWS Security Finding Format][1]. Maximum of 100
-    #   findings per request.
+    #   must follow the [Amazon Web Services Security Finding Format][1].
+    #   Maximum of 100 findings per request.
     #
     #
     #
@@ -20378,9 +21549,9 @@ module Aws::SecurityHub
     #       resource.
     #
     #     * `NOT_AVAILABLE` - Check could not be performed due to a service
-    #       outage, API error, or because the result of the AWS Config
-    #       evaluation was `NOT_APPLICABLE`. If the AWS Config evaluation
-    #       result was `NOT_APPLICABLE`, then after 3 days, Security Hub
+    #       outage, API error, or because the result of the Config
+    #       evaluation was `NOT_APPLICABLE`. If the Config evaluation result
+    #       was `NOT_APPLICABLE`, then after 3 days, Security Hub
     #       automatically archives the finding.
     #   @return [String]
     #
@@ -20394,7 +21565,7 @@ module Aws::SecurityHub
     #   For findings generated from controls, a list of reasons behind the
     #   value of `Status`. For the list of status reason codes and their
     #   meanings, see [Standards-related information in the ASFF][1] in the
-    #   *AWS Security Hub User Guide*.
+    #   *Security Hub User Guide*.
     #
     #
     #
@@ -20555,6 +21726,12 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           generator_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           region: [
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
@@ -20969,6 +22146,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
+    #           resource_aws_iam_access_key_principal_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
@@ -20983,6 +22166,12 @@ module Aws::SecurityHub
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
     #               },
+    #             },
+    #           ],
+    #           resource_aws_iam_user_user_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_name: [
@@ -21204,8 +22393,9 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   The list of AWS accounts that were not processed. For each account,
-    #   the list includes the account ID and the email address.
+    #   The list of Amazon Web Services accounts that were not processed.
+    #   For each account, the list includes the account ID and the email
+    #   address.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateMembersResponse AWS API Documentation
@@ -21645,8 +22835,9 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   The list of AWS accounts that were not processed. For each account,
-    #   the list includes the account ID and the email address.
+    #   The list of Amazon Web Services accounts that were not processed.
+    #   For each account, the list includes the account ID and the email
+    #   address.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeclineInvitationsResponse AWS API Documentation
@@ -21739,9 +22930,9 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   The list of AWS accounts for which the invitations were not deleted.
-    #   For each account, the list includes the account ID and the email
-    #   address.
+    #   The list of Amazon Web Services accounts for which the invitations
+    #   were not deleted. For each account, the list includes the account ID
+    #   and the email address.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteInvitationsResponse AWS API Documentation
@@ -21772,8 +22963,9 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   The list of AWS accounts that were not deleted. For each account,
-    #   the list includes the account ID and the email address.
+    #   The list of Amazon Web Services accounts that were not deleted. For
+    #   each account, the list includes the account ID and the email
+    #   address.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteMembersResponse AWS API Documentation
@@ -21981,7 +23173,7 @@ module Aws::SecurityHub
     # @!attribute [rw] standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a
     #   supported standard. To get the subscription ARNs of the standards
-    #   you have enabled, use the ` GetEnabledStandards ` operation.
+    #   you have enabled, use the `GetEnabledStandards` operation.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -22104,8 +23296,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The AWS account identifier of the Security Hub administrator
-    #   account.
+    #   The Amazon Web Services account identifier of the Security Hub
+    #   administrator account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountRequest AWS API Documentation
@@ -22248,8 +23440,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The AWS account identifier of the account to designate as the
-    #   Security Hub administrator account.
+    #   The Amazon Web Services account identifier of the account to
+    #   designate as the Security Hub administrator account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountRequest AWS API Documentation
@@ -22521,6 +23713,12 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           generator_id: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           region: [
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
@@ -22935,6 +24133,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
+    #           resource_aws_iam_access_key_principal_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
@@ -22949,6 +24153,12 @@ module Aws::SecurityHub
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
     #               },
+    #             },
+    #           ],
+    #           resource_aws_iam_user_user_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_name: [
@@ -23316,8 +24526,9 @@ module Aws::SecurityHub
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] unprocessed_accounts
-    #   The list of AWS accounts that could not be processed. For each
-    #   account, the list includes the account ID and the email address.
+    #   The list of Amazon Web Services accounts that could not be
+    #   processed. For each account, the list includes the account ID and
+    #   the email address.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetMembersResponse AWS API Documentation
@@ -23562,8 +24773,8 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] account_ids
-    #   The list of account IDs of the AWS accounts to invite to Security
-    #   Hub as members.
+    #   The list of account IDs of the Amazon Web Services accounts to
+    #   invite to Security Hub as members.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InviteMembersRequest AWS API Documentation
@@ -23575,8 +24786,9 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   The list of AWS accounts that could not be processed. For each
-    #   account, the list includes the account ID and the email address.
+    #   The list of Amazon Web Services accounts that could not be
+    #   processed. For each account, the list includes the account ID and
+    #   the email address.
     #   @return [Array<Types::Result>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InviteMembersResponse AWS API Documentation
@@ -23702,8 +24914,8 @@ module Aws::SecurityHub
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS account or throttling limits. The error code
-    # describes the limit exceeded.
+    # beyond the current Amazon Web Services account or throttling limits.
+    # The error code describes the limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -24090,7 +25302,7 @@ module Aws::SecurityHub
     # The details about a member account.
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID of the member account.
+    #   The Amazon Web Services account ID of the member account.
     #   @return [String]
     #
     # @!attribute [rw] email
@@ -24100,13 +25312,13 @@ module Aws::SecurityHub
     # @!attribute [rw] master_id
     #   This is replaced by `AdministratorID`.
     #
-    #   The AWS account ID of the Security Hub administrator account
-    #   associated with this member account.
+    #   The Amazon Web Services account ID of the Security Hub administrator
+    #   account associated with this member account.
     #   @return [String]
     #
     # @!attribute [rw] administrator_id
-    #   The AWS account ID of the Security Hub administrator account
-    #   associated with this member account.
+    #   The Amazon Web Services account ID of the Security Hub administrator
+    #   account associated with this member account.
     #   @return [String]
     #
     # @!attribute [rw] member_status
@@ -24134,6 +25346,11 @@ module Aws::SecurityHub
     #
     #   * `DELETED` - Indicates that the administrator account deleted the
     #     member account.
+    #
+    #   * `ACCOUNT_SUSPENDED` - Indicates that an organization account was
+    #     suspended from Amazon Web Services at the same time that the
+    #     administrator account tried to enable the organization account as
+    #     a member account.
     #   @return [String]
     #
     # @!attribute [rw] invited_at
@@ -25121,11 +26338,11 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] marketplace_url
-    #   For integrations with AWS services, the AWS Console URL from which
-    #   to activate the service.
+    #   For integrations with Amazon Web Services services, the Amazon Web
+    #   Services Console URL from which to activate the service.
     #
-    #   For integrations with third-party products, the AWS Marketplace URL
-    #   from which to subscribe to or purchase the product.
+    #   For integrations with third-party products, the Marketplace URL from
+    #   which to subscribe to or purchase the product.
     #   @return [String]
     #
     # @!attribute [rw] activation_url
@@ -25808,6 +27025,17 @@ module Aws::SecurityHub
     #               "NonEmptyString" => "NonEmptyString",
     #             },
     #             elasticsearch_version: "NonEmptyString",
+    #             elasticsearch_cluster_config: {
+    #               dedicated_master_count: 1,
+    #               dedicated_master_enabled: false,
+    #               dedicated_master_type: "NonEmptyString",
+    #               instance_count: 1,
+    #               instance_type: "NonEmptyString",
+    #               zone_awareness_config: {
+    #                 availability_zone_count: 1,
+    #               },
+    #               zone_awareness_enabled: false,
+    #             },
     #             encryption_at_rest_options: {
     #               enabled: false,
     #               kms_key_id: "NonEmptyString",
@@ -25818,6 +27046,10 @@ module Aws::SecurityHub
     #                 enabled: false,
     #               },
     #               search_slow_logs: {
+    #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                 enabled: false,
+    #               },
+    #               audit_logs: {
     #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
     #                 enabled: false,
     #               },
@@ -27207,6 +28439,87 @@ module Aws::SecurityHub
     #           other: {
     #             "NonEmptyString" => "NonEmptyString",
     #           },
+    #           aws_rds_event_subscription: {
+    #             cust_subscription_id: "NonEmptyString",
+    #             customer_aws_id: "NonEmptyString",
+    #             enabled: false,
+    #             event_categories_list: ["NonEmptyString"],
+    #             event_subscription_arn: "NonEmptyString",
+    #             sns_topic_arn: "NonEmptyString",
+    #             source_ids_list: ["NonEmptyString"],
+    #             source_type: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             subscription_creation_time: "NonEmptyString",
+    #           },
+    #           aws_ecs_service: {
+    #             capacity_provider_strategy: [
+    #               {
+    #                 base: 1,
+    #                 capacity_provider: "NonEmptyString",
+    #                 weight: 1,
+    #               },
+    #             ],
+    #             cluster: "NonEmptyString",
+    #             deployment_configuration: {
+    #               deployment_circuit_breaker: {
+    #                 enable: false,
+    #                 rollback: false,
+    #               },
+    #               maximum_percent: 1,
+    #               minimum_healthy_percent: 1,
+    #             },
+    #             deployment_controller: {
+    #               type: "NonEmptyString",
+    #             },
+    #             desired_count: 1,
+    #             enable_ecs_managed_tags: false,
+    #             enable_execute_command: false,
+    #             health_check_grace_period_seconds: 1,
+    #             launch_type: "NonEmptyString",
+    #             load_balancers: [
+    #               {
+    #                 container_name: "NonEmptyString",
+    #                 container_port: 1,
+    #                 load_balancer_name: "NonEmptyString",
+    #                 target_group_arn: "NonEmptyString",
+    #               },
+    #             ],
+    #             name: "NonEmptyString",
+    #             network_configuration: {
+    #               aws_vpc_configuration: {
+    #                 assign_public_ip: "NonEmptyString",
+    #                 security_groups: ["NonEmptyString"],
+    #                 subnets: ["NonEmptyString"],
+    #               },
+    #             },
+    #             placement_constraints: [
+    #               {
+    #                 expression: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #               },
+    #             ],
+    #             placement_strategies: [
+    #               {
+    #                 field: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #               },
+    #             ],
+    #             platform_version: "NonEmptyString",
+    #             propagate_tags: "NonEmptyString",
+    #             role: "NonEmptyString",
+    #             scheduling_strategy: "NonEmptyString",
+    #             service_arn: "NonEmptyString",
+    #             service_name: "NonEmptyString",
+    #             service_registries: [
+    #               {
+    #                 container_name: "NonEmptyString",
+    #                 container_port: 1,
+    #                 port: 1,
+    #                 registry_arn: "NonEmptyString",
+    #               },
+    #             ],
+    #             task_definition: "NonEmptyString",
+    #           },
     #         },
     #       }
     #
@@ -27225,12 +28538,13 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] partition
-    #   The canonical AWS partition name that the Region is assigned to.
+    #   The canonical Amazon Web Services partition name that the Region is
+    #   assigned to.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The canonical AWS external Region name where this resource is
-    #   located.
+    #   The canonical Amazon Web Services external Region name where this
+    #   resource is located.
     #   @return [String]
     #
     # @!attribute [rw] resource_role
@@ -27239,8 +28553,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of AWS tags associated with a resource at the time the
-    #   finding was processed.
+    #   A list of Amazon Web Services tags associated with a resource at the
+    #   time the finding was processed.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] data_classification
@@ -27665,6 +28979,17 @@ module Aws::SecurityHub
     #             "NonEmptyString" => "NonEmptyString",
     #           },
     #           elasticsearch_version: "NonEmptyString",
+    #           elasticsearch_cluster_config: {
+    #             dedicated_master_count: 1,
+    #             dedicated_master_enabled: false,
+    #             dedicated_master_type: "NonEmptyString",
+    #             instance_count: 1,
+    #             instance_type: "NonEmptyString",
+    #             zone_awareness_config: {
+    #               availability_zone_count: 1,
+    #             },
+    #             zone_awareness_enabled: false,
+    #           },
     #           encryption_at_rest_options: {
     #             enabled: false,
     #             kms_key_id: "NonEmptyString",
@@ -27675,6 +29000,10 @@ module Aws::SecurityHub
     #               enabled: false,
     #             },
     #             search_slow_logs: {
+    #               cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #               enabled: false,
+    #             },
+    #             audit_logs: {
     #               cloud_watch_logs_log_group_arn: "NonEmptyString",
     #               enabled: false,
     #             },
@@ -29064,6 +30393,87 @@ module Aws::SecurityHub
     #         other: {
     #           "NonEmptyString" => "NonEmptyString",
     #         },
+    #         aws_rds_event_subscription: {
+    #           cust_subscription_id: "NonEmptyString",
+    #           customer_aws_id: "NonEmptyString",
+    #           enabled: false,
+    #           event_categories_list: ["NonEmptyString"],
+    #           event_subscription_arn: "NonEmptyString",
+    #           sns_topic_arn: "NonEmptyString",
+    #           source_ids_list: ["NonEmptyString"],
+    #           source_type: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           subscription_creation_time: "NonEmptyString",
+    #         },
+    #         aws_ecs_service: {
+    #           capacity_provider_strategy: [
+    #             {
+    #               base: 1,
+    #               capacity_provider: "NonEmptyString",
+    #               weight: 1,
+    #             },
+    #           ],
+    #           cluster: "NonEmptyString",
+    #           deployment_configuration: {
+    #             deployment_circuit_breaker: {
+    #               enable: false,
+    #               rollback: false,
+    #             },
+    #             maximum_percent: 1,
+    #             minimum_healthy_percent: 1,
+    #           },
+    #           deployment_controller: {
+    #             type: "NonEmptyString",
+    #           },
+    #           desired_count: 1,
+    #           enable_ecs_managed_tags: false,
+    #           enable_execute_command: false,
+    #           health_check_grace_period_seconds: 1,
+    #           launch_type: "NonEmptyString",
+    #           load_balancers: [
+    #             {
+    #               container_name: "NonEmptyString",
+    #               container_port: 1,
+    #               load_balancer_name: "NonEmptyString",
+    #               target_group_arn: "NonEmptyString",
+    #             },
+    #           ],
+    #           name: "NonEmptyString",
+    #           network_configuration: {
+    #             aws_vpc_configuration: {
+    #               assign_public_ip: "NonEmptyString",
+    #               security_groups: ["NonEmptyString"],
+    #               subnets: ["NonEmptyString"],
+    #             },
+    #           },
+    #           placement_constraints: [
+    #             {
+    #               expression: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #             },
+    #           ],
+    #           placement_strategies: [
+    #             {
+    #               field: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #             },
+    #           ],
+    #           platform_version: "NonEmptyString",
+    #           propagate_tags: "NonEmptyString",
+    #           role: "NonEmptyString",
+    #           scheduling_strategy: "NonEmptyString",
+    #           service_arn: "NonEmptyString",
+    #           service_name: "NonEmptyString",
+    #           service_registries: [
+    #             {
+    #               container_name: "NonEmptyString",
+    #               container_port: 1,
+    #               port: 1,
+    #               registry_arn: "NonEmptyString",
+    #             },
+    #           ],
+    #           task_definition: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] aws_auto_scaling_auto_scaling_group
@@ -29071,7 +30481,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsAutoScalingAutoScalingGroupDetails]
     #
     # @!attribute [rw] aws_code_build_project
-    #   Details for an AWS CodeBuild project.
+    #   Details for an CodeBuild project.
     #   @return [Types::AwsCodeBuildProjectDetails]
     #
     # @!attribute [rw] aws_cloud_front_distribution
@@ -29083,7 +30493,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsEc2InstanceDetails]
     #
     # @!attribute [rw] aws_ec2_network_interface
-    #   Details for an Amazon EC2 network interface.
+    #   Details for an EC2 network interface.
     #   @return [Types::AwsEc2NetworkInterfaceDetails]
     #
     # @!attribute [rw] aws_ec2_security_group
@@ -29103,7 +30513,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsEc2EipDetails]
     #
     # @!attribute [rw] aws_ec2_subnet
-    #   Details about a subnet in EC2.
+    #   Details about a subnet in Amazon EC2.
     #   @return [Types::AwsEc2SubnetDetails]
     #
     # @!attribute [rw] aws_ec2_network_acl
@@ -29123,7 +30533,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsElasticsearchDomainDetails]
     #
     # @!attribute [rw] aws_s3_bucket
-    #   Details about an Amazon S3 bucket related to a finding.
+    #   Details about an S3 bucket related to a finding.
     #   @return [Types::AwsS3BucketDetails]
     #
     # @!attribute [rw] aws_s3_account_public_access_block
@@ -29132,7 +30542,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
     #
     # @!attribute [rw] aws_s3_object
-    #   Details about an Amazon S3 object related to a finding.
+    #   Details about an S3 object related to a finding.
     #   @return [Types::AwsS3ObjectDetails]
     #
     # @!attribute [rw] aws_secrets_manager_secret
@@ -29182,7 +30592,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsSsmPatchComplianceDetails]
     #
     # @!attribute [rw] aws_certificate_manager_certificate
-    #   Provides details about an AWS Certificate Manager (ACM) certificate.
+    #   Provides details about an Certificate Manager certificate.
     #   @return [Types::AwsCertificateManagerCertificateDetails]
     #
     # @!attribute [rw] aws_redshift_cluster
@@ -29202,7 +30612,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsIamRoleDetails]
     #
     # @!attribute [rw] aws_kms_key
-    #   Details about a KMS key.
+    #   Details about an KMS key.
     #   @return [Types::AwsKmsKeyDetails]
     #
     # @!attribute [rw] aws_lambda_function
@@ -29226,7 +30636,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsSqsQueueDetails]
     #
     # @!attribute [rw] aws_waf_web_acl
-    #   Details for a WAF WebACL.
+    #   Details for an WAF WebACL.
     #   @return [Types::AwsWafWebAclDetails]
     #
     # @!attribute [rw] aws_rds_db_snapshot
@@ -29268,6 +30678,14 @@ module Aws::SecurityHub
     #   * The resource type does not have a corresponding object. This
     #     includes resources for which the type is `Other`.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] aws_rds_event_subscription
+    #   Details about an RDS event notification subscription.
+    #   @return [Types::AwsRdsEventSubscriptionDetails]
+    #
+    # @!attribute [rw] aws_ecs_service
+    #   Details about a service within an ECS cluster.
+    #   @return [Types::AwsEcsServiceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
@@ -29318,7 +30736,9 @@ module Aws::SecurityHub
       :aws_ecs_cluster,
       :aws_ecs_task_definition,
       :container,
-      :other)
+      :other,
+      :aws_rds_event_subscription,
+      :aws_ecs_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29344,7 +30764,8 @@ module Aws::SecurityHub
     # Details about the account that was not processed.
     #
     # @!attribute [rw] account_id
-    #   An AWS account ID of the account that was not processed.
+    #   An Amazon Web Services account ID of the account that was not
+    #   processed.
     #   @return [String]
     #
     # @!attribute [rw] processing_result
@@ -29551,8 +30972,8 @@ module Aws::SecurityHub
     #   Deprecated. This attribute is being deprecated. Instead of providing
     #   `Product`, provide `Original`.
     #
-    #   The native severity as defined by the AWS service or integrated
-    #   partner product that generated the finding.
+    #   The native severity as defined by the Amazon Web Services service or
+    #   integrated partner product that generated the finding.
     #   @return [Float]
     #
     # @!attribute [rw] label
@@ -29649,8 +31070,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] product
-    #   The native severity as defined by the AWS service or integrated
-    #   partner product that generated the finding.
+    #   The native severity as defined by the Amazon Web Services service or
+    #   integrated partner product that generated the finding.
     #   @return [Float]
     #
     # @!attribute [rw] label
@@ -29831,7 +31252,8 @@ module Aws::SecurityHub
     #   control.
     #
     #   The finding severity is based on an assessment of how easy it would
-    #   be to compromise AWS resources if the issue is detected.
+    #   be to compromise Amazon Web Services resources if the issue is
+    #   detected.
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
@@ -29912,7 +31334,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_arn
     #   The ARN of the standard that you want to enable. To view the list of
-    #   available standards and their ARNs, use the ` DescribeStandards `
+    #   available standards and their ARNs, use the `DescribeStandards`
     #   operation.
     #   @return [String]
     #
@@ -29942,7 +31364,7 @@ module Aws::SecurityHub
     # @!attribute [rw] reason_code
     #   A code that represents a reason for the control status. For the list
     #   of status reason codes and their meanings, see [Standards-related
-    #   information in the ASFF][1] in the *AWS Security Hub User Guide*.
+    #   information in the ASFF][1] in the *Security Hub User Guide*.
     #
     #
     #
@@ -30247,6 +31669,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
+    #           region: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #           type: [
     #             {
     #               value: "NonEmptyString",
@@ -30656,6 +32084,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
+    #           resource_aws_iam_access_key_principal_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
@@ -30670,6 +32104,12 @@ module Aws::SecurityHub
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
     #               },
+    #             },
+    #           ],
+    #           resource_aws_iam_user_user_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_name: [
@@ -30886,6 +32326,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
+    #           region: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #           type: [
     #             {
     #               value: "NonEmptyString",
@@ -31295,6 +32741,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
+    #           resource_aws_iam_access_key_principal_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
     #           resource_aws_iam_access_key_status: [
     #             {
     #               value: "NonEmptyString",
@@ -31309,6 +32761,12 @@ module Aws::SecurityHub
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
     #               },
+    #             },
+    #           ],
+    #           resource_aws_iam_user_user_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
     #           resource_container_name: [
@@ -31723,7 +33181,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details about the action that CloudFront or AWS WAF takes when a web
+    # Details about the action that CloudFront or WAF takes when a web
     # request matches the conditions in the rule.
     #
     # @note When making an API call, you may pass WafAction
@@ -31734,20 +33192,19 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] type
-    #   Specifies how you want AWS WAF to respond to requests that match the
+    #   Specifies how you want WAF to respond to requests that match the
     #   settings in a rule.
     #
     #   Valid settings include the following:
     #
-    #   * `ALLOW` - AWS WAF allows requests
+    #   * `ALLOW` - WAF allows requests
     #
-    #   * `BLOCK` - AWS WAF blocks requests
+    #   * `BLOCK` - WAF blocks requests
     #
-    #   * `COUNT` - AWS WAF increments a counter of the requests that match
-    #     all of the conditions in the rule. AWS WAF then continues to
-    #     inspect the web request based on the remaining rules in the web
-    #     ACL. You can't specify `COUNT` for the default action for a
-    #     WebACL.
+    #   * `COUNT` - WAF increments a counter of the requests that match all
+    #     of the conditions in the rule. WAF then continues to inspect the
+    #     web request based on the remaining rules in the web ACL. You
+    #     can't specify `COUNT` for the default action for a WebACL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/WafAction AWS API Documentation

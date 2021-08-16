@@ -104,6 +104,12 @@ module AwsSdkCodeGenerator
           if member_ref['jsonvalue']
             docstring = docstring.to_s + "<p><b>SDK automatically handles json encoding and base64 encoding for you when the required value (Hash, Array, etc.) is provided according to the description.</b></p>"
           end
+          if member_shape['document']
+            docstring = docstring.to_s + "<p>Document type used to carry open content (Hash,Array,String,Numeric,Boolean). A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.</p>"
+          end
+          if member_ref['union']
+            docstring = docstring.to_s + "<p>This is a union type and you must set exactly one of the members.</p>"
+          end
           YardOptionTag.new(
             name: Underscore.underscore(member_name),
             ruby_type: Api.ruby_input_type(member_ref, api, operation),

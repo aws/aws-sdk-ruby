@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2021-07-30)
+------------------
+
+* Feature - Client Port Preservation ALB Attribute Launch
+
+1.65.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2021-07-22)
+------------------
+
+* Feature - Adds support for enabling TLS protocol version and cipher suite headers to be sent to backend targets for Application Load Balancers.
+
+1.63.0 (2021-07-21)
+------------------
+
+* Feature - Adds support for enabling TLS protocol version and cipher suite headers to be sent to backend targets for Application Load Balancers.
+
 1.62.0 (2021-07-02)
 ------------------
 

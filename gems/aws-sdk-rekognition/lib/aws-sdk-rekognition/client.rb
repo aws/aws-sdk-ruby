@@ -699,7 +699,9 @@ module Aws::Rekognition
     #   A name for the version of the model. This value must be unique.
     #
     # @option params [required, Types::OutputConfig] :output_config
-    #   The Amazon S3 location to store the results of training.
+    #   The Amazon S3 bucket location to store the results of training. The S3
+    #   bucket can be in any AWS account as long as the caller has
+    #   `s3:PutObject` permissions on the S3 bucket.
     #
     # @option params [required, Types::TrainingData] :training_data
     #   The dataset to use for training.
@@ -713,11 +715,22 @@ module Aws::Rekognition
     # @option params [String] :kms_key_id
     #   The identifier for your AWS Key Management Service (AWS KMS) customer
     #   master key (CMK). You can supply the Amazon Resource Name (ARN) of
-    #   your CMK, the ID of your CMK, or an alias for your CMK. The key is
-    #   used to encrypt training and test images copied into the service for
-    #   model training. Your source images are unaffected. The key is also
-    #   used to encrypt training results and manifest files written to the
-    #   output Amazon S3 bucket (`OutputConfig`).
+    #   your CMK, the ID of your CMK, an alias for your CMK, or an alias ARN.
+    #   The key is used to encrypt training and test images copied into the
+    #   service for model training. Your source images are unaffected. The key
+    #   is also used to encrypt training results and manifest files written to
+    #   the output Amazon S3 bucket (`OutputConfig`).
+    #
+    #   If you choose to use your own CMK, you need the following permissions
+    #   on the CMK.
+    #
+    #   * kms:CreateGrant
+    #
+    #   * kms:DescribeKey
+    #
+    #   * kms:GenerateDataKey
+    #
+    #   * kms:Decrypt
     #
     #   If you don't specify a value for `KmsKeyId`, images copied into the
     #   service are encrypted using a key that AWS owns and manages.
@@ -1990,7 +2003,7 @@ module Aws::Rekognition
     # the image.
     #
     # A word is one or more ISO basic latin script characters that are not
-    # separated by spaces. `DetectText` can detect up to 50 words in an
+    # separated by spaces. `DetectText` can detect up to 100 words in an
     # image.
     #
     # A line is a string of equally spaced words. A line isn't necessarily
@@ -2225,6 +2238,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.color_range #=> String, one of "FULL", "LIMITED"
     #   resp.next_token #=> String
     #   resp.celebrities #=> Array
     #   resp.celebrities[0].timestamp #=> Integer
@@ -2280,26 +2294,29 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Gets the unsafe content analysis results for a Amazon Rekognition
-    # Video analysis started by StartContentModeration.
+    # Gets the inappropriate, unwanted, or offensive content analysis
+    # results for a Amazon Rekognition Video analysis started by
+    # StartContentModeration. For a list of moderation labels in Amazon
+    # Rekognition, see [Using the image and video moderation APIs][1].
     #
-    # Unsafe content analysis of a video is an asynchronous operation. You
-    # start analysis by calling StartContentModeration which returns a job
-    # identifier (`JobId`). When analysis finishes, Amazon Rekognition Video
-    # publishes a completion status to the Amazon Simple Notification
-    # Service topic registered in the initial call to
-    # `StartContentModeration`. To get the results of the unsafe content
-    # analysis, first check that the status value published to the Amazon
-    # SNS topic is `SUCCEEDED`. If so, call `GetContentModeration` and pass
-    # the job identifier (`JobId`) from the initial call to
-    # `StartContentModeration`.
+    # Amazon Rekognition Video inappropriate or offensive content detection
+    # in a stored video is an asynchronous operation. You start analysis by
+    # calling StartContentModeration which returns a job identifier
+    # (`JobId`). When analysis finishes, Amazon Rekognition Video publishes
+    # a completion status to the Amazon Simple Notification Service topic
+    # registered in the initial call to `StartContentModeration`. To get the
+    # results of the content analysis, first check that the status value
+    # published to the Amazon SNS topic is `SUCCEEDED`. If so, call
+    # `GetContentModeration` and pass the job identifier (`JobId`) from the
+    # initial call to `StartContentModeration`.
     #
     # For more information, see Working with Stored Videos in the Amazon
     # Rekognition Devlopers Guide.
     #
-    # `GetContentModeration` returns detected unsafe content labels, and the
-    # time they are detected, in an array, `ModerationLabels`, of
-    # ContentModerationDetection objects.
+    # `GetContentModeration` returns detected inappropriate, unwanted, or
+    # offensive content moderation labels, and the time they are detected,
+    # in an array, `ModerationLabels`, of ContentModerationDetection
+    # objects.
     #
     # By default, the moderated labels are returned sorted by time, in
     # milliseconds from the start of the video. You can also sort them by
@@ -2314,12 +2331,17 @@ module Aws::Rekognition
     # and populate the `NextToken` request parameter with the value of
     # `NextToken` returned from the previous call to `GetContentModeration`.
     #
-    # For more information, see Detecting Unsafe Content in the Amazon
-    # Rekognition Developer Guide.
+    # For more information, see Content moderation in the Amazon Rekognition
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api
     #
     # @option params [required, String] :job_id
-    #   The identifier for the unsafe content job. Use `JobId` to identify the
-    #   job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the inappropriate, unwanted, or offensive content
+    #   moderation job. Use `JobId` to identify the job in a subsequent call
+    #   to `GetContentModeration`.
     #
     # @option params [Integer] :max_results
     #   Maximum number of results to return per paginated call. The largest
@@ -2331,7 +2353,7 @@ module Aws::Rekognition
     #   If the previous response was incomplete (because there is more data to
     #   retrieve), Amazon Rekognition returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of unsafe content labels.
+    #   of content moderation labels.
     #
     # @option params [String] :sort_by
     #   Sort to use for elements in the `ModerationLabelDetections` array. Use
@@ -2370,6 +2392,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.color_range #=> String, one of "FULL", "LIMITED"
     #   resp.moderation_labels #=> Array
     #   resp.moderation_labels[0].timestamp #=> Integer
     #   resp.moderation_labels[0].moderation_label.confidence #=> Float
@@ -2453,6 +2476,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.color_range #=> String, one of "FULL", "LIMITED"
     #   resp.next_token #=> String
     #   resp.faces #=> Array
     #   resp.faces[0].timestamp #=> Integer
@@ -2586,6 +2610,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.color_range #=> String, one of "FULL", "LIMITED"
     #   resp.persons #=> Array
     #   resp.persons[0].timestamp #=> Integer
     #   resp.persons[0].person.index #=> Integer
@@ -2733,6 +2758,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.color_range #=> String, one of "FULL", "LIMITED"
     #   resp.next_token #=> String
     #   resp.labels #=> Array
     #   resp.labels[0].timestamp #=> Integer
@@ -2846,6 +2872,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.color_range #=> String, one of "FULL", "LIMITED"
     #   resp.next_token #=> String
     #   resp.persons #=> Array
     #   resp.persons[0].timestamp #=> Integer
@@ -2978,6 +3005,7 @@ module Aws::Rekognition
     #   resp.video_metadata[0].frame_rate #=> Float
     #   resp.video_metadata[0].frame_height #=> Integer
     #   resp.video_metadata[0].frame_width #=> Integer
+    #   resp.video_metadata[0].color_range #=> String, one of "FULL", "LIMITED"
     #   resp.audio_metadata #=> Array
     #   resp.audio_metadata[0].codec #=> String
     #   resp.audio_metadata[0].duration_millis #=> Integer
@@ -2992,10 +3020,13 @@ module Aws::Rekognition
     #   resp.segments[0].start_timecode_smpte #=> String
     #   resp.segments[0].end_timecode_smpte #=> String
     #   resp.segments[0].duration_smpte #=> String
-    #   resp.segments[0].technical_cue_segment.type #=> String, one of "ColorBars", "EndCredits", "BlackFrames"
+    #   resp.segments[0].technical_cue_segment.type #=> String, one of "ColorBars", "EndCredits", "BlackFrames", "OpeningCredits", "StudioLogo", "Slate", "Content"
     #   resp.segments[0].technical_cue_segment.confidence #=> Float
     #   resp.segments[0].shot_segment.index #=> Integer
     #   resp.segments[0].shot_segment.confidence #=> Float
+    #   resp.segments[0].start_frame_number #=> Integer
+    #   resp.segments[0].end_frame_number #=> Integer
+    #   resp.segments[0].duration_frames #=> Integer
     #   resp.selected_segment_types #=> Array
     #   resp.selected_segment_types[0].type #=> String, one of "TECHNICAL_CUE", "SHOT"
     #   resp.selected_segment_types[0].model_version #=> String
@@ -3082,6 +3113,7 @@ module Aws::Rekognition
     #   resp.video_metadata.frame_rate #=> Float
     #   resp.video_metadata.frame_height #=> Integer
     #   resp.video_metadata.frame_width #=> Integer
+    #   resp.video_metadata.color_range #=> String, one of "FULL", "LIMITED"
     #   resp.text_detections #=> Array
     #   resp.text_detections[0].timestamp #=> Integer
     #   resp.text_detections[0].text_detection.detected_text #=> String
@@ -4325,7 +4357,9 @@ module Aws::Rekognition
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
     #   publish the completion status of the celebrity recognition analysis
-    #   to.
+    #   to. The Amazon SNS topic must have a topic name that begins with
+    #   *AmazonRekognition* if you are using the AmazonRekognitionServiceRole
+    #   permissions policy.
     #
     # @option params [String] :job_tag
     #   An identifier you specify that's returned in the completion
@@ -4366,27 +4400,33 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Starts asynchronous detection of unsafe content in a stored video.
+    # Starts asynchronous detection of inappropriate, unwanted, or offensive
+    # content in a stored video. For a list of moderation labels in Amazon
+    # Rekognition, see [Using the image and video moderation APIs][1].
     #
     # Amazon Rekognition Video can moderate content in a video stored in an
     # Amazon S3 bucket. Use Video to specify the bucket name and the
     # filename of the video. `StartContentModeration` returns a job
     # identifier (`JobId`) which you use to get the results of the analysis.
-    # When unsafe content analysis is finished, Amazon Rekognition Video
-    # publishes a completion status to the Amazon Simple Notification
-    # Service topic that you specify in `NotificationChannel`.
+    # When content analysis is finished, Amazon Rekognition Video publishes
+    # a completion status to the Amazon Simple Notification Service topic
+    # that you specify in `NotificationChannel`.
     #
-    # To get the results of the unsafe content analysis, first check that
-    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
-    # so, call GetContentModeration and pass the job identifier (`JobId`)
-    # from the initial call to `StartContentModeration`.
+    # To get the results of the content analysis, first check that the
+    # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
+    # call GetContentModeration and pass the job identifier (`JobId`) from
+    # the initial call to `StartContentModeration`.
     #
-    # For more information, see Detecting Unsafe Content in the Amazon
-    # Rekognition Developer Guide.
+    # For more information, see Content moderation in the Amazon Rekognition
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api
     #
     # @option params [required, Types::Video] :video
-    #   The video in which you want to detect unsafe content. The video must
-    #   be stored in an Amazon S3 bucket.
+    #   The video in which you want to detect inappropriate, unwanted, or
+    #   offensive content. The video must be stored in an Amazon S3 bucket.
     #
     # @option params [Float] :min_confidence
     #   Specifies the minimum confidence that Amazon Rekognition must have in
@@ -4406,7 +4446,10 @@ module Aws::Rekognition
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
-    #   publish the completion status of the unsafe content analysis to.
+    #   publish the completion status of the content analysis to. The Amazon
+    #   SNS topic must have a topic name that begins with *AmazonRekognition*
+    #   if you are using the AmazonRekognitionServiceRole permissions policy
+    #   to access the topic.
     #
     # @option params [String] :job_tag
     #   An identifier you specify that's returned in the completion
@@ -4478,7 +4521,9 @@ module Aws::Rekognition
     # @option params [Types::NotificationChannel] :notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
     #   Video to publish the completion status of the face detection
-    #   operation.
+    #   operation. The Amazon SNS topic must have a topic name that begins
+    #   with *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy.
     #
     # @option params [String] :face_attributes
     #   The face attributes you want returned.
@@ -4563,7 +4608,10 @@ module Aws::Rekognition
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
-    #   Video to publish the completion status of the search.
+    #   Video to publish the completion status of the search. The Amazon SNS
+    #   topic must have a topic name that begins with *AmazonRekognition* if
+    #   you are using the AmazonRekognitionServiceRole permissions policy to
+    #   access the topic.
     #
     # @option params [String] :job_tag
     #   An identifier you specify that's returned in the completion
@@ -4649,7 +4697,9 @@ module Aws::Rekognition
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon SNS topic ARN you want Amazon Rekognition Video to publish
-    #   the completion status of the label detection operation to.
+    #   the completion status of the label detection operation to. The Amazon
+    #   SNS topic must have a topic name that begins with *AmazonRekognition*
+    #   if you are using the AmazonRekognitionServiceRole permissions policy.
     #
     # @option params [String] :job_tag
     #   An identifier you specify that's returned in the completion
@@ -4719,7 +4769,9 @@ module Aws::Rekognition
     #
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon SNS topic ARN you want Amazon Rekognition Video to publish
-    #   the completion status of the people detection operation to.
+    #   the completion status of the people detection operation to. The Amazon
+    #   SNS topic must have a topic name that begins with *AmazonRekognition*
+    #   if you are using the AmazonRekognitionServiceRole permissions policy.
     #
     # @option params [String] :job_tag
     #   An identifier you specify that's returned in the completion
@@ -4848,7 +4900,9 @@ module Aws::Rekognition
     # @option params [Types::NotificationChannel] :notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
     #   Video to publish the completion status of the segment detection
-    #   operation.
+    #   operation. Note that the Amazon SNS topic must have a topic name that
+    #   begins with *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy to access the topic.
     #
     # @option params [String] :job_tag
     #   An identifier you specify that's returned in the completion
@@ -4886,6 +4940,10 @@ module Aws::Rekognition
     #     filters: {
     #       technical_cue_filter: {
     #         min_segment_confidence: 1.0,
+    #         black_frame: {
+    #           max_pixel_threshold: 1.0,
+    #           min_coverage_percentage: 1.0,
+    #         },
     #       },
     #       shot_filter: {
     #         min_segment_confidence: 1.0,
@@ -4958,7 +5016,15 @@ module Aws::Rekognition
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon Simple Notification Service topic to which Amazon
     #   Rekognition publishes the completion status of a video analysis
-    #   operation. For more information, see api-video.
+    #   operation. For more information, see api-video. Note that the Amazon
+    #   SNS topic must have a topic name that begins with *AmazonRekognition*
+    #   if you are using the AmazonRekognitionServiceRole permissions policy
+    #   to access the topic. For more information, see [Giving access to
+    #   multiple Amazon SNS topics][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #
     # @option params [String] :job_tag
     #   An identifier returned in the completion status published by your
@@ -5150,7 +5216,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

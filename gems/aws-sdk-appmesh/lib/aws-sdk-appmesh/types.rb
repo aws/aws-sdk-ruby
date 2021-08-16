@@ -13,14 +13,9 @@ module Aws::AppMesh
     # An object that represents the access logging information for a virtual
     # node.
     #
-    # @note When making an API call, you may pass AccessLog
-    #   data as a hash:
+    # @note AccessLog is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           path: "FilePath", # required
-    #         },
-    #       }
+    # @note AccessLog is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AccessLog corresponding to the set member.
     #
     # @!attribute [rw] file
     #   The file object to send virtual node access logs to.
@@ -29,9 +24,14 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AccessLog AWS API Documentation
     #
     class AccessLog < Struct.new(
-      :file)
+      :file,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < AccessLog; end
+      class Unknown < AccessLog; end
     end
 
     # An object that represents the Cloud Map attribute information for your
@@ -119,47 +119,9 @@ module Aws::AppMesh
     # An object that represents the backends that a virtual node is expected
     # to send outbound traffic to.
     #
-    # @note When making an API call, you may pass Backend
-    #   data as a hash:
+    # @note Backend is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         virtual_service: {
-    #           client_policy: {
-    #             tls: {
-    #               certificate: {
-    #                 file: {
-    #                   certificate_chain: "FilePath", # required
-    #                   private_key: "FilePath", # required
-    #                 },
-    #                 sds: {
-    #                   secret_name: "SdsSecretName", # required
-    #                 },
-    #               },
-    #               enforce: false,
-    #               ports: [1],
-    #               validation: { # required
-    #                 subject_alternative_names: {
-    #                   match: { # required
-    #                     exact: ["SubjectAlternativeName"], # required
-    #                   },
-    #                 },
-    #                 trust: { # required
-    #                   acm: {
-    #                     certificate_authority_arns: ["Arn"], # required
-    #                   },
-    #                   file: {
-    #                     certificate_chain: "FilePath", # required
-    #                   },
-    #                   sds: {
-    #                     secret_name: "SdsSecretName", # required
-    #                   },
-    #                 },
-    #               },
-    #             },
-    #           },
-    #           virtual_service_name: "ServiceName", # required
-    #         },
-    #       }
+    # @note Backend is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Backend corresponding to the set member.
     #
     # @!attribute [rw] virtual_service
     #   Specifies a virtual service to use as a backend.
@@ -168,9 +130,14 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Backend AWS API Documentation
     #
     class Backend < Struct.new(
-      :virtual_service)
+      :virtual_service,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class VirtualService < Backend; end
+      class Unknown < Backend; end
     end
 
     # An object that represents the default properties for a backend.
@@ -361,18 +328,9 @@ module Aws::AppMesh
 
     # An object that represents the client's certificate.
     #
-    # @note When making an API call, you may pass ClientTlsCertificate
-    #   data as a hash:
+    # @note ClientTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note ClientTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ClientTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a local file certificate. The certificate
@@ -394,9 +352,15 @@ module Aws::AppMesh
     #
     class ClientTlsCertificate < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < ClientTlsCertificate; end
+      class Sds < ClientTlsCertificate; end
+      class Unknown < ClientTlsCertificate; end
     end
 
     # The request contains a client token that was used for a previous
@@ -3246,19 +3210,9 @@ module Aws::AppMesh
 
     # An object representing the method header to be matched.
     #
-    # @note When making an API call, you may pass GrpcMetadataMatchMethod
-    #   data as a hash:
+    # @note GrpcMetadataMatchMethod is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         exact: "HeaderMatch",
-    #         prefix: "HeaderMatch",
-    #         range: {
-    #           end: 1, # required
-    #           start: 1, # required
-    #         },
-    #         regex: "HeaderMatch",
-    #         suffix: "HeaderMatch",
-    #       }
+    # @note GrpcMetadataMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GrpcMetadataMatchMethod corresponding to the set member.
     #
     # @!attribute [rw] exact
     #   The exact method header to be matched on.
@@ -3291,9 +3245,18 @@ module Aws::AppMesh
       :prefix,
       :range,
       :regex,
-      :suffix)
+      :suffix,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Exact < GrpcMetadataMatchMethod; end
+      class Prefix < GrpcMetadataMatchMethod; end
+      class Range < GrpcMetadataMatchMethod; end
+      class Regex < GrpcMetadataMatchMethod; end
+      class Suffix < GrpcMetadataMatchMethod; end
+      class Unknown < GrpcMetadataMatchMethod; end
     end
 
     # An object that represents a retry policy. Specify at least one value
@@ -3573,19 +3536,9 @@ module Aws::AppMesh
     # An object that represents the match method. Specify one of the match
     # values.
     #
-    # @note When making an API call, you may pass GrpcRouteMetadataMatchMethod
-    #   data as a hash:
+    # @note GrpcRouteMetadataMatchMethod is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         exact: "HeaderMatch",
-    #         prefix: "HeaderMatch",
-    #         range: {
-    #           end: 1, # required
-    #           start: 1, # required
-    #         },
-    #         regex: "HeaderMatch",
-    #         suffix: "HeaderMatch",
-    #       }
+    # @note GrpcRouteMetadataMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GrpcRouteMetadataMatchMethod corresponding to the set member.
     #
     # @!attribute [rw] exact
     #   The value sent by the client must match the specified value exactly.
@@ -3615,9 +3568,18 @@ module Aws::AppMesh
       :prefix,
       :range,
       :regex,
-      :suffix)
+      :suffix,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Exact < GrpcRouteMetadataMatchMethod; end
+      class Prefix < GrpcRouteMetadataMatchMethod; end
+      class Range < GrpcRouteMetadataMatchMethod; end
+      class Regex < GrpcRouteMetadataMatchMethod; end
+      class Suffix < GrpcRouteMetadataMatchMethod; end
+      class Unknown < GrpcRouteMetadataMatchMethod; end
     end
 
     # An object that represents types of timeouts.
@@ -3664,19 +3626,9 @@ module Aws::AppMesh
     # An object that represents the method and value to match with the
     # header value sent in a request. Specify one match method.
     #
-    # @note When making an API call, you may pass HeaderMatchMethod
-    #   data as a hash:
+    # @note HeaderMatchMethod is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         exact: "HeaderMatch",
-    #         prefix: "HeaderMatch",
-    #         range: {
-    #           end: 1, # required
-    #           start: 1, # required
-    #         },
-    #         regex: "HeaderMatch",
-    #         suffix: "HeaderMatch",
-    #       }
+    # @note HeaderMatchMethod is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HeaderMatchMethod corresponding to the set member.
     #
     # @!attribute [rw] exact
     #   The value sent by the client must match the specified value exactly.
@@ -3706,9 +3658,18 @@ module Aws::AppMesh
       :prefix,
       :range,
       :regex,
-      :suffix)
+      :suffix,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Exact < HeaderMatchMethod; end
+      class Prefix < HeaderMatchMethod; end
+      class Range < HeaderMatchMethod; end
+      class Regex < HeaderMatchMethod; end
+      class Suffix < HeaderMatchMethod; end
+      class Unknown < HeaderMatchMethod; end
     end
 
     # An object that represents the health check policy for a virtual
@@ -5362,47 +5323,9 @@ module Aws::AppMesh
 
     # An object that represents timeouts for different protocols.
     #
-    # @note When making an API call, you may pass ListenerTimeout
-    #   data as a hash:
+    # @note ListenerTimeout is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         grpc: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #           per_request: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #         http: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #           per_request: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #         http2: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #           per_request: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #         tcp: {
-    #           idle: {
-    #             unit: "s", # accepts s, ms
-    #             value: 1,
-    #           },
-    #         },
-    #       }
+    # @note ListenerTimeout is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTimeout corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents types of timeouts.
@@ -5426,9 +5349,17 @@ module Aws::AppMesh
       :grpc,
       :http,
       :http2,
-      :tcp)
+      :tcp,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Grpc < ListenerTimeout; end
+      class Http < ListenerTimeout; end
+      class Http2 < ListenerTimeout; end
+      class Tcp < ListenerTimeout; end
+      class Unknown < ListenerTimeout; end
     end
 
     # An object that represents the Transport Layer Security (TLS)
@@ -5530,21 +5461,9 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # certificate.
     #
-    # @note When making an API call, you may pass ListenerTlsCertificate
-    #   data as a hash:
+    # @note ListenerTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_arn: "Arn", # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note ListenerTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents an AWS Certicate Manager
@@ -5565,9 +5484,16 @@ module Aws::AppMesh
     class ListenerTlsCertificate < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < ListenerTlsCertificate; end
+      class File < ListenerTlsCertificate; end
+      class Sds < ListenerTlsCertificate; end
+      class Unknown < ListenerTlsCertificate; end
     end
 
     # An object that represents a local file certificate. The certificate
@@ -5680,17 +5606,9 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # validation context trust.
     #
-    # @note When making an API call, you may pass ListenerTlsValidationContextTrust
-    #   data as a hash:
+    # @note ListenerTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note ListenerTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListenerTlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a Transport Layer Security (TLS)
@@ -5707,9 +5625,15 @@ module Aws::AppMesh
     #
     class ListenerTlsValidationContextTrust < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < ListenerTlsValidationContextTrust; end
+      class Sds < ListenerTlsValidationContextTrust; end
+      class Unknown < ListenerTlsValidationContextTrust; end
     end
 
     # An object that represents the logging information for a virtual node.
@@ -6440,25 +6364,9 @@ module Aws::AppMesh
     # An object that represents the service discovery information for a
     # virtual node.
     #
-    # @note When making an API call, you may pass ServiceDiscovery
-    #   data as a hash:
+    # @note ServiceDiscovery is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         aws_cloud_map: {
-    #           attributes: [
-    #             {
-    #               key: "AwsCloudMapInstanceAttributeKey", # required
-    #               value: "AwsCloudMapInstanceAttributeValue", # required
-    #             },
-    #           ],
-    #           namespace_name: "AwsCloudMapName", # required
-    #           service_name: "AwsCloudMapName", # required
-    #         },
-    #         dns: {
-    #           hostname: "Hostname", # required
-    #           response_type: "LOADBALANCER", # accepts LOADBALANCER, ENDPOINTS
-    #         },
-    #       }
+    # @note ServiceDiscovery is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ServiceDiscovery corresponding to the set member.
     #
     # @!attribute [rw] aws_cloud_map
     #   Specifies any Cloud Map information for the virtual node.
@@ -6472,9 +6380,15 @@ module Aws::AppMesh
     #
     class ServiceDiscovery < Struct.new(
       :aws_cloud_map,
-      :dns)
+      :dns,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsCloudMap < ServiceDiscovery; end
+      class Dns < ServiceDiscovery; end
+      class Unknown < ServiceDiscovery; end
     end
 
     # The request has failed due to a temporary failure of the service.
@@ -6830,20 +6744,9 @@ module Aws::AppMesh
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
     #
-    # @note When making an API call, you may pass TlsValidationContextTrust
-    #   data as a hash:
+    # @note TlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_authority_arns: ["Arn"], # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "SdsSecretName", # required
-    #         },
-    #       }
+    # @note TlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents a Transport Layer Security
@@ -6866,9 +6769,16 @@ module Aws::AppMesh
     class TlsValidationContextTrust < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < TlsValidationContextTrust; end
+      class File < TlsValidationContextTrust; end
+      class Sds < TlsValidationContextTrust; end
+      class Unknown < TlsValidationContextTrust; end
     end
 
     # The maximum request rate permitted by the App Mesh APIs has been
@@ -8131,14 +8041,9 @@ module Aws::AppMesh
 
     # The access log configuration for a virtual gateway.
     #
-    # @note When making an API call, you may pass VirtualGatewayAccessLog
-    #   data as a hash:
+    # @note VirtualGatewayAccessLog is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           path: "FilePath", # required
-    #         },
-    #       }
+    # @note VirtualGatewayAccessLog is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayAccessLog corresponding to the set member.
     #
     # @!attribute [rw] file
     #   The file object to send virtual gateway access logs to.
@@ -8147,9 +8052,14 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayAccessLog AWS API Documentation
     #
     class VirtualGatewayAccessLog < Struct.new(
-      :file)
+      :file,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < VirtualGatewayAccessLog; end
+      class Unknown < VirtualGatewayAccessLog; end
     end
 
     # An object that represents the default properties for a backend.
@@ -8328,18 +8238,9 @@ module Aws::AppMesh
     # An object that represents the virtual gateway's client's Transport
     # Layer Security (TLS) certificate.
     #
-    # @note When making an API call, you may pass VirtualGatewayClientTlsCertificate
-    #   data as a hash:
+    # @note VirtualGatewayClientTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayClientTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayClientTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a local file certificate. The certificate
@@ -8361,9 +8262,15 @@ module Aws::AppMesh
     #
     class VirtualGatewayClientTlsCertificate < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < VirtualGatewayClientTlsCertificate; end
+      class Sds < VirtualGatewayClientTlsCertificate; end
+      class Unknown < VirtualGatewayClientTlsCertificate; end
     end
 
     # An object that represents the type of virtual gateway connection pool.
@@ -8374,21 +8281,9 @@ module Aws::AppMesh
     # If not present the default value for `maxPendingRequests` is
     # `2147483647`.
     #
-    # @note When making an API call, you may pass VirtualGatewayConnectionPool
-    #   data as a hash:
+    # @note VirtualGatewayConnectionPool is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         grpc: {
-    #           max_requests: 1, # required
-    #         },
-    #         http: {
-    #           max_connections: 1, # required
-    #           max_pending_requests: 1,
-    #         },
-    #         http2: {
-    #           max_requests: 1, # required
-    #         },
-    #       }
+    # @note VirtualGatewayConnectionPool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayConnectionPool corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents a type of connection pool.
@@ -8407,9 +8302,16 @@ module Aws::AppMesh
     class VirtualGatewayConnectionPool < Struct.new(
       :grpc,
       :http,
-      :http2)
+      :http2,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Grpc < VirtualGatewayConnectionPool; end
+      class Http < VirtualGatewayConnectionPool; end
+      class Http2 < VirtualGatewayConnectionPool; end
+      class Unknown < VirtualGatewayConnectionPool; end
     end
 
     # An object that represents a virtual gateway returned by a describe
@@ -8806,21 +8708,9 @@ module Aws::AppMesh
     # An object that represents a listener's Transport Layer Security (TLS)
     # certificate.
     #
-    # @note When making an API call, you may pass VirtualGatewayListenerTlsCertificate
-    #   data as a hash:
+    # @note VirtualGatewayListenerTlsCertificate is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_arn: "Arn", # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #           private_key: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayListenerTlsCertificate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayListenerTlsCertificate corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents an Certificate Manager
@@ -8841,9 +8731,16 @@ module Aws::AppMesh
     class VirtualGatewayListenerTlsCertificate < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < VirtualGatewayListenerTlsCertificate; end
+      class File < VirtualGatewayListenerTlsCertificate; end
+      class Sds < VirtualGatewayListenerTlsCertificate; end
+      class Unknown < VirtualGatewayListenerTlsCertificate; end
     end
 
     # An object that represents a local file certificate. The certificate
@@ -8957,17 +8854,9 @@ module Aws::AppMesh
     # An object that represents a virtual gateway's listener's Transport
     # Layer Security (TLS) validation context trust.
     #
-    # @note When making an API call, you may pass VirtualGatewayListenerTlsValidationContextTrust
-    #   data as a hash:
+    # @note VirtualGatewayListenerTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayListenerTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayListenerTlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] file
     #   An object that represents a Transport Layer Security (TLS)
@@ -8984,9 +8873,15 @@ module Aws::AppMesh
     #
     class VirtualGatewayListenerTlsValidationContextTrust < Struct.new(
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class File < VirtualGatewayListenerTlsValidationContextTrust; end
+      class Sds < VirtualGatewayListenerTlsValidationContextTrust; end
+      class Unknown < VirtualGatewayListenerTlsValidationContextTrust; end
     end
 
     # An object that represents logging information.
@@ -9378,20 +9273,9 @@ module Aws::AppMesh
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
     #
-    # @note When making an API call, you may pass VirtualGatewayTlsValidationContextTrust
-    #   data as a hash:
+    # @note VirtualGatewayTlsValidationContextTrust is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         acm: {
-    #           certificate_authority_arns: ["Arn"], # required
-    #         },
-    #         file: {
-    #           certificate_chain: "FilePath", # required
-    #         },
-    #         sds: {
-    #           secret_name: "VirtualGatewaySdsSecretName", # required
-    #         },
-    #       }
+    # @note VirtualGatewayTlsValidationContextTrust is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualGatewayTlsValidationContextTrust corresponding to the set member.
     #
     # @!attribute [rw] acm
     #   A reference to an object that represents a Transport Layer Security
@@ -9415,9 +9299,16 @@ module Aws::AppMesh
     class VirtualGatewayTlsValidationContextTrust < Struct.new(
       :acm,
       :file,
-      :sds)
+      :sds,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Acm < VirtualGatewayTlsValidationContextTrust; end
+      class File < VirtualGatewayTlsValidationContextTrust; end
+      class Sds < VirtualGatewayTlsValidationContextTrust; end
+      class Unknown < VirtualGatewayTlsValidationContextTrust; end
     end
 
     # An object that represents the type of virtual node connection pool.
@@ -9428,24 +9319,9 @@ module Aws::AppMesh
     # If not present the default value for `maxPendingRequests` is
     # `2147483647`.
     #
-    # @note When making an API call, you may pass VirtualNodeConnectionPool
-    #   data as a hash:
+    # @note VirtualNodeConnectionPool is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         grpc: {
-    #           max_requests: 1, # required
-    #         },
-    #         http: {
-    #           max_connections: 1, # required
-    #           max_pending_requests: 1,
-    #         },
-    #         http2: {
-    #           max_requests: 1, # required
-    #         },
-    #         tcp: {
-    #           max_connections: 1, # required
-    #         },
-    #       }
+    # @note VirtualNodeConnectionPool is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualNodeConnectionPool corresponding to the set member.
     #
     # @!attribute [rw] grpc
     #   An object that represents a type of connection pool.
@@ -9469,9 +9345,17 @@ module Aws::AppMesh
       :grpc,
       :http,
       :http2,
-      :tcp)
+      :tcp,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Grpc < VirtualNodeConnectionPool; end
+      class Http < VirtualNodeConnectionPool; end
+      class Http2 < VirtualNodeConnectionPool; end
+      class Tcp < VirtualNodeConnectionPool; end
+      class Unknown < VirtualNodeConnectionPool; end
     end
 
     # An object that represents a virtual node returned by a describe
@@ -10250,17 +10134,9 @@ module Aws::AppMesh
 
     # An object that represents the provider for a virtual service.
     #
-    # @note When making an API call, you may pass VirtualServiceProvider
-    #   data as a hash:
+    # @note VirtualServiceProvider is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         virtual_node: {
-    #           virtual_node_name: "ResourceName", # required
-    #         },
-    #         virtual_router: {
-    #           virtual_router_name: "ResourceName", # required
-    #         },
-    #       }
+    # @note VirtualServiceProvider is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of VirtualServiceProvider corresponding to the set member.
     #
     # @!attribute [rw] virtual_node
     #   The virtual node associated with a virtual service.
@@ -10274,9 +10150,15 @@ module Aws::AppMesh
     #
     class VirtualServiceProvider < Struct.new(
       :virtual_node,
-      :virtual_router)
+      :virtual_router,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class VirtualNode < VirtualServiceProvider; end
+      class VirtualRouter < VirtualServiceProvider; end
+      class Unknown < VirtualServiceProvider; end
     end
 
     # An object that represents a virtual service returned by a list

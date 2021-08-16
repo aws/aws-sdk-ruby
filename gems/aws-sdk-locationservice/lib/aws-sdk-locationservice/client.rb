@@ -331,6 +331,9 @@ module Aws::LocationService
     # resource. This allows the tracker resource to communicate location
     # data to the linked geofence collection.
     #
+    # You can associate up to five geofence collections to each tracker
+    # resource.
+    #
     # <note markdown="1"> Currently not supported — Cross-account configurations, such as
     # creating associations between a tracker resource in one account and a
     # geofence collection in another account.
@@ -450,12 +453,21 @@ module Aws::LocationService
     end
 
     # Evaluates device positions against the geofence geometries from a
-    # given geofence collection. The evaluation determines if the device has
-    # entered or exited a geofenced area, which publishes ENTER or EXIT
-    # geofence events to Amazon EventBridge.
+    # given geofence collection.
     #
-    # <note markdown="1"> The last geofence that a device was observed within, if any, is
-    # tracked for 30 days after the most recent device position update
+    # This operation always returns an empty response because geofences are
+    # asynchronously evaluated. The evaluation determines if the device has
+    # entered or exited a geofenced area, and then publishes one of the
+    # following events to Amazon EventBridge:
+    #
+    # * `ENTER` if Amazon Location determines that the tracked device has
+    #   entered a geofenced area.
+    #
+    # * `EXIT` if Amazon Location determines that the tracked device has
+    #   exited a geofenced area.
+    #
+    # <note markdown="1"> The last geofence that a device was observed within is tracked for 30
+    # days after the most recent device position update.
     #
     #  </note>
     #
@@ -501,7 +513,7 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # A batch request to retrieve all device positions.
+    # Lists the latest device positions for requested devices.
     #
     # @option params [required, Array<String>] :device_ids
     #   Devices whose position you want to retrieve.
@@ -653,7 +665,7 @@ module Aws::LocationService
 
     # [Calculates a route][1] given the following required parameters:
     # `DeparturePostiton` and `DestinationPosition`. Requires that you first
-    # [create aroute calculator resource][2]
+    # [create a route calculator resource][2]
     #
     # By default, a request that doesn't specify a departure time uses the
     # best time of day to travel with the best traffic conditions when
@@ -671,7 +683,7 @@ module Aws::LocationService
     #    </note>
     #
     # * [Specifying a travel mode][4] using TravelMode. This lets you
-    #   specify additional route preference such as `CarModeOptions` if
+    #   specify an additional route preference such as `CarModeOptions` if
     #   traveling by `Car`, or `TruckModeOptions` if traveling by `Truck`.
     #
     #
@@ -1101,31 +1113,40 @@ module Aws::LocationService
     #   Specifies the data provider of geospatial data.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
-    #   example, entering `HERE` will return an error.
+    #   example, entering `HERE` returns an error.
     #
     #    </note>
     #
     #   Valid values include:
     #
-    #   * `Esri`
+    #   * `Esri` – For additional information about [Esri][1]'s coverage in
+    #     your region of interest, see [Esri details on geocoding
+    #     coverage][2].
     #
-    #   * `Here`
+    #   * `Here` – For additional information about [HERE Technologies][3]'s
+    #     coverage in your region of interest, see [HERE details on goecoding
+    #     coverage][4].
     #
-    #     Place index resources using HERE as a data provider can't be used
-    #     to [store][1] results for locations in Japan. For more information,
-    #     see the [AWS Service Terms][2] for Amazon Location Service.
+    #     Place index resources using HERE Technologies as a data provider
+    #     can't [store results][5] for locations in Japan. For more
+    #     information, see the [AWS Service Terms][6] for Amazon Location
+    #     Service.
     #
-    #   For additional details on data providers, see the [Amazon Location
-    #   Service data providers page][3].
+    #   For additional information , see [Data providers][7] on the *Amazon
+    #   Location Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
-    #   [2]: https://aws.amazon.com/service-terms/
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+    #   [2]: https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [4]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
+    #   [5]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
+    #   [6]: https://aws.amazon.com/service-terms/
+    #   [7]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #
     # @option params [Types::DataSourceConfiguration] :data_source_configuration
-    #   Specifies the data storage option for requesting Places.
+    #   Specifies the data storage option requesting Places.
     #
     # @option params [String] :description
     #   The optional description for the place index resource.
@@ -1234,14 +1255,27 @@ module Aws::LocationService
     #
     #    </note>
     #
-    #   Valid Values: `Esri` \| `Here`
+    #   Valid values include:
     #
-    #   For more information about data providers, see [Amazon Location
-    #   Service data providers][1].
+    #   * `Esri` – For additional information about [Esri][1]'s coverage in
+    #     your region of interest, see [Esri details on street networks and
+    #     traffic coverage][2].
+    #
+    #   * `Here` – For additional information about [HERE Technologies][3]'s
+    #     coverage in your region of interest, see [HERE car routing
+    #     coverage][4] and [HERE truck routing coverage][5].
+    #
+    #   For additional information , see [Data providers][6] on the *Amazon
+    #   Location Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+    #   [2]: https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   [4]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
+    #   [5]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
+    #   [6]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #
     # @option params [String] :description
     #   The optional description for the route calculator resource.
@@ -2005,7 +2039,36 @@ module Aws::LocationService
     #
     # @option params [required, String] :font_stack
     #   A comma-separated list of fonts to load glyphs from in order of
-    #   preference.. For example, `Noto Sans, Arial Unicode`.
+    #   preference. For example, `Noto Sans Regular, Arial Unicode`.
+    #
+    #   Valid fonts for [Esri][1] styles:
+    #
+    #   * VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` \| `Ubuntu Medium`
+    #     \| `Ubuntu Italic` \| `Ubuntu Regular` \| `Ubuntu Bold`
+    #
+    #   * VectorEsriLightGrayCanvas – `Ubuntu Italic` \| `Ubuntu Regular` \|
+    #     `Ubuntu Light` \| `Ubuntu Bold`
+    #
+    #   * VectorEsriTopographic – `Noto Sans Italic` \| `Noto Sans Regular` \|
+    #     `Noto Sans Bold` \| `Noto Serif Regular` \| `Roboto Condensed Light
+    #     Italic`
+    #
+    #   * VectorEsriStreets – `Arial Regular` \| `Arial Italic` \| `Arial
+    #     Bold`
+    #
+    #   * VectorEsriNavigation – `Arial Regular` \| `Arial Italic` \| `Arial
+    #     Bold`
+    #
+    #   Valid fonts for [HERE Technologies][2] styles:
+    #
+    #   * `VectorHereBerlin` – `Fira GO Regular` \| `Fira GO Bold`
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
     #
     # @option params [required, String] :font_unicode_range
     #   A Unicode range of characters to download glyphs for. Each response
@@ -2175,7 +2238,7 @@ module Aws::LocationService
       req.send_request(options, &block)
     end
 
-    # Lists the latest device positions for requested devices.
+    # A batch request to retrieve all device positions.
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of entries returned in a single call.
@@ -2462,11 +2525,17 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Returns the tags for the specified Amazon Location Service resource.
+    # Returns a list of tags that are applied to the specified Amazon
+    # Location resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want to
     #   retrieve.
+    #
+    #   * Format example:
+    #     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+    #
+    #   ^
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2835,15 +2904,24 @@ module Aws::LocationService
     # Assigns one or more tags (key-value pairs) to the specified Amazon
     # Location Service resource.
     #
-    #      <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. </p> <p>You can associate as many as 50 tags with a resource.</p>
+    #      <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>You can use the <code>TagResource</code> operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that's already associated with the resource, the new tag value that you specify replaces the previous value for that tag. </p> <p>You can associate up to 50 tags with a resource.</p>
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want to
     #   update.
     #
+    #   * Format example:
+    #     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+    #
+    #   ^
+    #
     # @option params [required, Hash<String,String>] :tags
-    #   The mapping from tag key to tag value for each tag associated with the
-    #   specified resource.
+    #   Tags that have been applied to the specified resource. Tags are mapped
+    #   from the tag key to the tag value: `"TagKey" : "TagValue"`.
+    #
+    #   * Format example: `\{"tag1" : "value1", "tag2" : "value2"\} `
+    #
+    #   ^
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2865,15 +2943,19 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Removes one or more tags from the specified Amazon Location Service
-    # resource.
+    # Removes one or more tags from the specified Amazon Location resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which you want to
     #   remove tags.
     #
+    #   * Format example:
+    #     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+    #
+    #   ^
+    #
     # @option params [required, Array<String>] :tag_keys
-    #   The list of tag keys to remove from the resource.
+    #   The list of tag keys to remove from the specified resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2893,6 +2975,298 @@ module Aws::LocationService
       req.send_request(options)
     end
 
+    # Updates the specified properties of a given geofence collection.
+    #
+    # @option params [required, String] :collection_name
+    #   The name of the geofence collection to update.
+    #
+    # @option params [String] :description
+    #   Updates the description for the geofence collection.
+    #
+    # @option params [String] :pricing_plan
+    #   Updates the pricing plan for the geofence collection.
+    #
+    #   For more information about each pricing plan option restrictions, see
+    #   [Amazon Location Service pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #
+    # @option params [String] :pricing_plan_data_source
+    #   Updates the data provider for the geofence collection.
+    #
+    #   A required value for the following pricing plans:
+    #   `MobileAssetTracking`\| `MobileAssetManagement`
+    #
+    #   For more information about [data providers][1] and [pricing plans][2],
+    #   see the Amazon Location Service product page.
+    #
+    #   <note markdown="1"> This can only be updated when updating the `PricingPlan` in the same
+    #   request.
+    #
+    #    Amazon Location Service uses `PricingPlanDataSource` to calculate
+    #   billing for your geofence collection. Your data won't be shared with
+    #   the data provider, and will remain in your AWS account and Region
+    #   unless you move it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/data-providers/
+    #   [2]: https://aws.amazon.com/location/pricing/
+    #
+    # @return [Types::UpdateGeofenceCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGeofenceCollectionResponse#collection_arn #collection_arn} => String
+    #   * {Types::UpdateGeofenceCollectionResponse#collection_name #collection_name} => String
+    #   * {Types::UpdateGeofenceCollectionResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_geofence_collection({
+    #     collection_name: "ResourceName", # required
+    #     description: "ResourceDescription",
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan_data_source: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collection_arn #=> String
+    #   resp.collection_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateGeofenceCollection AWS API Documentation
+    #
+    # @overload update_geofence_collection(params = {})
+    # @param [Hash] params ({})
+    def update_geofence_collection(params = {}, options = {})
+      req = build_request(:update_geofence_collection, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified properties of a given map resource.
+    #
+    # @option params [String] :description
+    #   Updates the description for the map resource.
+    #
+    # @option params [required, String] :map_name
+    #   The name of the map resource to update.
+    #
+    # @option params [String] :pricing_plan
+    #   Updates the pricing plan for the map resource.
+    #
+    #   For more information about each pricing plan option restrictions, see
+    #   [Amazon Location Service pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #
+    # @return [Types::UpdateMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMapResponse#map_arn #map_arn} => String
+    #   * {Types::UpdateMapResponse#map_name #map_name} => String
+    #   * {Types::UpdateMapResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_map({
+    #     description: "ResourceDescription",
+    #     map_name: "ResourceName", # required
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.map_arn #=> String
+    #   resp.map_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMap AWS API Documentation
+    #
+    # @overload update_map(params = {})
+    # @param [Hash] params ({})
+    def update_map(params = {}, options = {})
+      req = build_request(:update_map, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified properties of a given place index resource.
+    #
+    # @option params [Types::DataSourceConfiguration] :data_source_configuration
+    #   Updates the data storage option for the place index resource.
+    #
+    # @option params [String] :description
+    #   Updates the description for the place index resource.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the place index resource to update.
+    #
+    # @option params [String] :pricing_plan
+    #   Updates the pricing plan for the place index resource.
+    #
+    #   For more information about each pricing plan option restrictions, see
+    #   [Amazon Location Service pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #
+    # @return [Types::UpdatePlaceIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePlaceIndexResponse#index_arn #index_arn} => String
+    #   * {Types::UpdatePlaceIndexResponse#index_name #index_name} => String
+    #   * {Types::UpdatePlaceIndexResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_place_index({
+    #     data_source_configuration: {
+    #       intended_use: "SingleUse", # accepts SingleUse, Storage
+    #     },
+    #     description: "ResourceDescription",
+    #     index_name: "ResourceName", # required
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.index_arn #=> String
+    #   resp.index_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdatePlaceIndex AWS API Documentation
+    #
+    # @overload update_place_index(params = {})
+    # @param [Hash] params ({})
+    def update_place_index(params = {}, options = {})
+      req = build_request(:update_place_index, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified properties for a given route calculator
+    # resource.
+    #
+    # @option params [required, String] :calculator_name
+    #   The name of the route calculator resource to update.
+    #
+    # @option params [String] :description
+    #   Updates the description for the route calculator resource.
+    #
+    # @option params [String] :pricing_plan
+    #   Updates the pricing plan for the route calculator resource.
+    #
+    #   For more information about each pricing plan option restrictions, see
+    #   [Amazon Location Service pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #
+    # @return [Types::UpdateRouteCalculatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRouteCalculatorResponse#calculator_arn #calculator_arn} => String
+    #   * {Types::UpdateRouteCalculatorResponse#calculator_name #calculator_name} => String
+    #   * {Types::UpdateRouteCalculatorResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_route_calculator({
+    #     calculator_name: "ResourceName", # required
+    #     description: "ResourceDescription",
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.calculator_arn #=> String
+    #   resp.calculator_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateRouteCalculator AWS API Documentation
+    #
+    # @overload update_route_calculator(params = {})
+    # @param [Hash] params ({})
+    def update_route_calculator(params = {}, options = {})
+      req = build_request(:update_route_calculator, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified properties of a given tracker resource.
+    #
+    # @option params [String] :description
+    #   Updates the description for the tracker resource.
+    #
+    # @option params [String] :pricing_plan
+    #   Updates the pricing plan for the tracker resource.
+    #
+    #   For more information about each pricing plan option restrictions, see
+    #   [Amazon Location Service pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/pricing/
+    #
+    # @option params [String] :pricing_plan_data_source
+    #   Updates the data provider for the tracker resource.
+    #
+    #   A required value for the following pricing plans:
+    #   `MobileAssetTracking`\| `MobileAssetManagement`
+    #
+    #   For more information about [data providers][1] and [pricing plans][2],
+    #   see the Amazon Location Service product page
+    #
+    #   <note markdown="1"> This can only be updated when updating the `PricingPlan` in the same
+    #   request.
+    #
+    #    Amazon Location Service uses `PricingPlanDataSource` to calculate
+    #   billing for your tracker resource. Your data won't be shared with the
+    #   data provider, and will remain in your AWS account and Region unless
+    #   you move it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/data-providers/
+    #   [2]: https://aws.amazon.com/location/pricing/
+    #
+    # @option params [required, String] :tracker_name
+    #   The name of the tracker resource to update.
+    #
+    # @return [Types::UpdateTrackerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTrackerResponse#tracker_arn #tracker_arn} => String
+    #   * {Types::UpdateTrackerResponse#tracker_name #tracker_name} => String
+    #   * {Types::UpdateTrackerResponse#update_time #update_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_tracker({
+    #     description: "ResourceDescription",
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan_data_source: "String",
+    #     tracker_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracker_arn #=> String
+    #   resp.tracker_name #=> String
+    #   resp.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateTracker AWS API Documentation
+    #
+    # @overload update_tracker(params = {})
+    # @param [Hash] params ({})
+    def update_tracker(params = {}, options = {})
+      req = build_request(:update_tracker, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2906,7 +3280,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -105,6 +105,7 @@ module Aws::AutoScaling
     DescribeTerminationPolicyTypesAnswer = Shapes::StructureShape.new(name: 'DescribeTerminationPolicyTypesAnswer')
     DescribeWarmPoolAnswer = Shapes::StructureShape.new(name: 'DescribeWarmPoolAnswer')
     DescribeWarmPoolType = Shapes::StructureShape.new(name: 'DescribeWarmPoolType')
+    DesiredConfiguration = Shapes::StructureShape.new(name: 'DesiredConfiguration')
     DetachInstancesAnswer = Shapes::StructureShape.new(name: 'DetachInstancesAnswer')
     DetachInstancesQuery = Shapes::StructureShape.new(name: 'DetachInstancesQuery')
     DetachLoadBalancerTargetGroupsResultType = Shapes::StructureShape.new(name: 'DetachLoadBalancerTargetGroupsResultType')
@@ -282,6 +283,7 @@ module Aws::AutoScaling
     SetInstanceProtectionQuery = Shapes::StructureShape.new(name: 'SetInstanceProtectionQuery')
     ShouldDecrementDesiredCapacity = Shapes::BooleanShape.new(name: 'ShouldDecrementDesiredCapacity')
     ShouldRespectGracePeriod = Shapes::BooleanShape.new(name: 'ShouldRespectGracePeriod')
+    SkipMatching = Shapes::BooleanShape.new(name: 'SkipMatching')
     SpotInstancePools = Shapes::IntegerShape.new(name: 'SpotInstancePools')
     SpotPrice = Shapes::StringShape.new(name: 'SpotPrice')
     StartInstanceRefreshAnswer = Shapes::StructureShape.new(name: 'StartInstanceRefreshAnswer')
@@ -687,6 +689,10 @@ module Aws::AutoScaling
     DescribeWarmPoolType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeWarmPoolType.struct_class = Types::DescribeWarmPoolType
 
+    DesiredConfiguration.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    DesiredConfiguration.add_member(:mixed_instances_policy, Shapes::ShapeRef.new(shape: MixedInstancesPolicy, location_name: "MixedInstancesPolicy"))
+    DesiredConfiguration.struct_class = Types::DesiredConfiguration
+
     DetachInstancesAnswer.add_member(:activities, Shapes::ShapeRef.new(shape: Activities, location_name: "Activities"))
     DetachInstancesAnswer.struct_class = Types::DetachInstancesAnswer
 
@@ -807,6 +813,8 @@ module Aws::AutoScaling
     InstanceRefresh.add_member(:percentage_complete, Shapes::ShapeRef.new(shape: IntPercent, location_name: "PercentageComplete"))
     InstanceRefresh.add_member(:instances_to_update, Shapes::ShapeRef.new(shape: InstancesToUpdate, location_name: "InstancesToUpdate"))
     InstanceRefresh.add_member(:progress_details, Shapes::ShapeRef.new(shape: InstanceRefreshProgressDetails, location_name: "ProgressDetails"))
+    InstanceRefresh.add_member(:preferences, Shapes::ShapeRef.new(shape: RefreshPreferences, location_name: "Preferences"))
+    InstanceRefresh.add_member(:desired_configuration, Shapes::ShapeRef.new(shape: DesiredConfiguration, location_name: "DesiredConfiguration"))
     InstanceRefresh.struct_class = Types::InstanceRefresh
 
     InstanceRefreshIds.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
@@ -1096,6 +1104,7 @@ module Aws::AutoScaling
     RefreshPreferences.add_member(:instance_warmup, Shapes::ShapeRef.new(shape: RefreshInstanceWarmup, location_name: "InstanceWarmup"))
     RefreshPreferences.add_member(:checkpoint_percentages, Shapes::ShapeRef.new(shape: CheckpointPercentages, location_name: "CheckpointPercentages"))
     RefreshPreferences.add_member(:checkpoint_delay, Shapes::ShapeRef.new(shape: CheckpointDelay, location_name: "CheckpointDelay"))
+    RefreshPreferences.add_member(:skip_matching, Shapes::ShapeRef.new(shape: SkipMatching, location_name: "SkipMatching"))
     RefreshPreferences.struct_class = Types::RefreshPreferences
 
     ResourceContentionFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
@@ -1191,6 +1200,7 @@ module Aws::AutoScaling
 
     StartInstanceRefreshType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
     StartInstanceRefreshType.add_member(:strategy, Shapes::ShapeRef.new(shape: RefreshStrategy, location_name: "Strategy"))
+    StartInstanceRefreshType.add_member(:desired_configuration, Shapes::ShapeRef.new(shape: DesiredConfiguration, location_name: "DesiredConfiguration"))
     StartInstanceRefreshType.add_member(:preferences, Shapes::ShapeRef.new(shape: RefreshPreferences, location_name: "Preferences"))
     StartInstanceRefreshType.struct_class = Types::StartInstanceRefreshType
 

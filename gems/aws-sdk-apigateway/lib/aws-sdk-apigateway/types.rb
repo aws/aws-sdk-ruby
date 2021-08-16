@@ -1046,6 +1046,7 @@ module Aws::APIGateway
     #           truststore_uri: "String",
     #           truststore_version: "String",
     #         },
+    #         ownership_verification_certificate_arn: "String",
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1118,6 +1119,13 @@ module Aws::APIGateway
     #   certificate to access your custom domain name.
     #   @return [Types::MutualTlsAuthenticationInput]
     #
+    # @!attribute [rw] ownership_verification_certificate_arn
+    #   The ARN of the public certificate issued by ACM to validate
+    #   ownership of your custom domain. Only required when configuring
+    #   mutual TLS and using an ACM imported or private CA certificate ARN
+    #   as the regionalCertificateArn.
+    #   @return [String]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -1130,7 +1138,8 @@ module Aws::APIGateway
       :endpoint_configuration,
       :tags,
       :security_policy,
-      :mutual_tls_authentication)
+      :mutual_tls_authentication,
+      :ownership_verification_certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2663,9 +2672,10 @@ module Aws::APIGateway
     #
     # @!attribute [rw] domain_name_status
     #   The status of the DomainName migration. The valid values are
-    #   `AVAILABLE` and `UPDATING`. If the status is `UPDATING`, the domain
-    #   cannot be modified further until the existing operation is complete.
-    #   If it is `AVAILABLE`, the domain can be updated.
+    #   `AVAILABLE`, `UPDATING`, `PENDING_CERTIFICATE_REIMPORT`, and
+    #   `PENDING_OWNERSHIP_VERIFICATION`. If the status is `UPDATING`, the
+    #   domain cannot be modified further until the existing operation is
+    #   complete. If it is `AVAILABLE`, the domain can be updated.
     #   @return [String]
     #
     # @!attribute [rw] domain_name_status_message
@@ -2690,6 +2700,13 @@ module Aws::APIGateway
     #   certificate to access your API.
     #   @return [Types::MutualTlsAuthentication]
     #
+    # @!attribute [rw] ownership_verification_certificate_arn
+    #   The ARN of the public certificate issued by ACM to validate
+    #   ownership of your custom domain. Only required when configuring
+    #   mutual TLS and using an ACM imported or private CA certificate ARN
+    #   as the regionalCertificateArn.
+    #   @return [String]
+    #
     class DomainName < Struct.new(
       :domain_name,
       :certificate_name,
@@ -2706,7 +2723,8 @@ module Aws::APIGateway
       :domain_name_status_message,
       :security_policy,
       :tags,
-      :mutual_tls_authentication)
+      :mutual_tls_authentication,
+      :ownership_verification_certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end

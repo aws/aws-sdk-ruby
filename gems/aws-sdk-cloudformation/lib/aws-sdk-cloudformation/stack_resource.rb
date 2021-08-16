@@ -50,14 +50,14 @@ module Aws::CloudFormation
     end
 
     # The name or unique identifier that corresponds to a physical instance
-    # ID of a resource supported by AWS CloudFormation.
+    # ID of a resource supported by CloudFormation.
     # @return [String]
     def physical_resource_id
       data[:physical_resource_id]
     end
 
-    # Type of resource. ((For more information, go to [ AWS Resource Types
-    # Reference][1] in the AWS CloudFormation User Guide.)
+    # Type of resource. ((For more information, go to [Amazon Web Services
+    # Resource Types Reference][1] in the CloudFormation User Guide.)
     #
     #
     #
@@ -92,8 +92,8 @@ module Aws::CloudFormation
     end
 
     # The content of the `Metadata` attribute declared for the resource. For
-    # more information, see [Metadata Attribute][1] in the AWS
-    # CloudFormation User Guide.
+    # more information, see [Metadata Attribute][1] in the CloudFormation
+    # User Guide.
     #
     #
     #

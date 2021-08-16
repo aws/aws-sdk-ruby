@@ -48,6 +48,6 @@ require_relative 'aws-sdk-sagemakerfeaturestoreruntime/customizations'
 # @!group service
 module Aws::SageMakerFeatureStoreRuntime
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.5.0'
 
 end

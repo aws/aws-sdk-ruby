@@ -48,6 +48,6 @@ require_relative 'aws-sdk-kms/customizations'
 # @!group service
 module Aws::KMS
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.46.0'
 
 end

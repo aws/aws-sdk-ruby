@@ -945,13 +945,13 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the dimension. Dimension names cannot contain blank
-    #   spaces or non-ASCII characters.
+    #   The name of the dimension. Dimension names must contain only ASCII
+    #   characters and must include at least one non-whitespace character.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the dimension. Dimension values cannot contain blank
-    #   spaces or non-ASCII characters.
+    #   The value of the dimension. Dimension values must contain only ASCII
+    #   characters and must include at least one non-whitespace character.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Dimension AWS API Documentation
@@ -1313,6 +1313,7 @@ module Aws::CloudWatch
     #             label: "MetricLabel",
     #             return_data: false,
     #             period: 1,
+    #             account_id: "AccountId",
     #           },
     #         ],
     #         start_time: Time.now, # required
@@ -1756,10 +1757,10 @@ module Aws::CloudWatch
     #   `</GetMetricWidgetImageResponse>`
     #
     #   The `image/png` setting is intended only for custom HTTP requests.
-    #   For most use cases, and all actions using an AWS SDK, you should use
-    #   `png`. If you specify `image/png`, the HTTP response has a
-    #   content-type set to `image/png`, and the body of the response is a
-    #   PNG image.
+    #   For most use cases, and all actions using an Amazon Web Services
+    #   SDK, you should use `png`. If you specify `image/png`, the HTTP
+    #   response has a content-type set to `image/png`, and the body of the
+    #   response is a PNG image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricWidgetImageInput AWS API Documentation
@@ -2316,6 +2317,11 @@ module Aws::CloudWatch
     # A message returned by the `GetMetricData`API, including a code and a
     # description.
     #
+    # If a cross-Region `GetMetricData` operation fails with a code of
+    # `Forbidden` and a value of `Authentication too complex to retrieve
+    # cross region data`, you can correct the problem by running the
+    # `GetMetricData` operation in the same Region where the metric data is.
+    #
     # @!attribute [rw] code
     #   The error code or status code associated with the message.
     #   @return [String]
@@ -2599,6 +2605,7 @@ module Aws::CloudWatch
     #         label: "MetricLabel",
     #         return_data: false,
     #         period: 1,
+    #         account_id: "AccountId",
     #       }
     #
     # @!attribute [rw] id
@@ -2674,6 +2681,14 @@ module Aws::CloudWatch
     #   second`.
     #   @return [Integer]
     #
+    # @!attribute [rw] account_id
+    #   The ID of the account where the metrics are located, if this is a
+    #   cross-account alarm.
+    #
+    #   Use this field only for `PutMetricAlarm` operations. It is not used
+    #   in `GetMetricData` operations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery AWS API Documentation
     #
     class MetricDataQuery < Struct.new(
@@ -2682,7 +2697,8 @@ module Aws::CloudWatch
       :expression,
       :label,
       :return_data,
-      :period)
+      :period,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3441,6 +3457,7 @@ module Aws::CloudWatch
     #             label: "MetricLabel",
     #             return_data: false,
     #             period: 1,
+    #             account_id: "AccountId",
     #           },
     #         ],
     #         tags: [
@@ -3499,7 +3516,9 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity `
+    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity ` \|
+    #   `arn:aws:ssm-incidents::account-id:response-plan:response-plan-name
+    #   `
     #
     #   Valid Values (for use with IAM roles):
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
@@ -3507,6 +3526,8 @@ module Aws::CloudWatch
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
+    #   \|
+    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
     #   @return [Array<String>]
     #
     # @!attribute [rw] insufficient_data_actions
@@ -3803,8 +3824,8 @@ module Aws::CloudWatch
     # @!attribute [rw] namespace
     #   The namespace for the metric data.
     #
-    #   To avoid conflicts with AWS service namespaces, you should not
-    #   specify a namespace that begins with `AWS/`
+    #   To avoid conflicts with Amazon Web Services service namespaces, you
+    #   should not specify a namespace that begins with `AWS/`
     #   @return [String]
     #
     # @!attribute [rw] metric_data
@@ -3910,6 +3931,17 @@ module Aws::CloudWatch
     #   also use them to scope user permissions by granting a user
     #   permission to access or change only resources with certain tag
     #   values.
+    #
+    #   You can use this parameter only when you are creating a new metric
+    #   stream. If you are using this operation to update an existing metric
+    #   stream, any tags you specify in this parameter are ignored. To
+    #   change the tags of an existing metric stream, use [TagResource][1]
+    #   or [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricStreamInput AWS API Documentation

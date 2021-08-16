@@ -58,11 +58,13 @@ module Aws::QLDB
     #         },
     #         permissions_mode: "ALLOW_ALL", # required, accepts ALLOW_ALL, STANDARD
     #         deletion_protection: false,
+    #         kms_key: "KmsKey",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the ledger that you want to create. The name must be
-    #   unique among all of your ledgers in the current AWS Region.
+    #   unique among all of the ledgers in your account in the current
+    #   Region.
     #
     #   Naming constraints for ledger names are defined in [Quotas in Amazon
     #   QLDB][1] in the *Amazon QLDB Developer Guide*.
@@ -123,13 +125,60 @@ module Aws::QLDB
     #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key
+    #   The key in Key Management Service (KMS) to use for encryption of
+    #   data at rest in the ledger. For more information, see [Encryption at
+    #   rest][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #   Use one of the following options to specify this parameter:
+    #
+    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #     Amazon Web Services on your behalf.
+    #
+    #   * **Undefined**\: By default, use an Amazon Web Services owned KMS
+    #     key.
+    #
+    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #     KMS key in your account that you create, own, and manage.
+    #
+    #     Amazon QLDB does not support asymmetric keys. For more
+    #     information, see [Using symmetric and asymmetric keys][2] in the
+    #     *Key Management Service Developer Guide*.
+    #
+    #   To specify a customer managed KMS key, you can use its key ID,
+    #   Amazon Resource Name (ARN), alias name, or alias ARN. When using an
+    #   alias name, prefix it with `"alias/"`. To specify a key in a
+    #   different account, you must use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   For more information, see [Key identifiers (KeyId)][3] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedgerRequest AWS API Documentation
     #
     class CreateLedgerRequest < Struct.new(
       :name,
       :tags,
       :permissions_mode,
-      :deletion_protection)
+      :deletion_protection,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -166,6 +215,12 @@ module Aws::QLDB
     #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the customer managed KMS key that the ledger uses for
+    #   encryption at rest. If this parameter is undefined, the ledger uses
+    #   an Amazon Web Services owned KMS key for encryption.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedgerResponse AWS API Documentation
     #
     class CreateLedgerResponse < Struct.new(
@@ -174,7 +229,8 @@ module Aws::QLDB
       :state,
       :creation_date_time,
       :permissions_mode,
-      :deletion_protection)
+      :deletion_protection,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -327,6 +383,12 @@ module Aws::QLDB
     #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] encryption_description
+    #   Information about the encryption of data at rest in the ledger. This
+    #   includes the current status, the KMS key, and when the key became
+    #   inaccessible (in the case of an error).
+    #   @return [Types::LedgerEncryptionDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedgerResponse AWS API Documentation
     #
     class DescribeLedgerResponse < Struct.new(
@@ -335,7 +397,8 @@ module Aws::QLDB
       :state,
       :creation_date_time,
       :permissions_mode,
-      :deletion_protection)
+      :deletion_protection,
+      :encryption_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -401,9 +464,8 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in AWS Key
-    #     Management Service (AWS KMS) for server-side encryption of your
-    #     exported data.
+    #   * (Optional) Use your customer master key (CMK) in Key Management
+    #     Service (KMS) for server-side encryption of your exported data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ExportJournalToS3Request AWS API Documentation
@@ -645,7 +707,7 @@ module Aws::QLDB
     #
     # @!attribute [rw] exclusive_end_time
     #   The exclusive date and time that specifies when the stream ends. If
-    #   this parameter is blank, the stream runs indefinitely until you
+    #   this parameter is undefined, the stream runs indefinitely until you
     #   cancel it.
     #   @return [Time]
     #
@@ -746,9 +808,8 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in AWS Key
-    #     Management Service (AWS KMS) for server-side encryption of your
-    #     exported data.
+    #   * (Optional) Use your customer master key (CMK) in Key Management
+    #     Service (KMS) for server-side encryption of your exported data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/JournalS3ExportDescription AWS API Documentation
@@ -803,6 +864,72 @@ module Aws::QLDB
     class KinesisConfiguration < Struct.new(
       :stream_arn,
       :aggregation_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the encryption of data at rest in an Amazon QLDB
+    # ledger. This includes the current status, the key in Key Management
+    # Service (KMS), and when the key became inaccessible (in the case of an
+    # error).
+    #
+    # For more information, see [Encryption at rest][1] in the *Amazon QLDB
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key that
+    #   the ledger uses for encryption at rest. If this parameter is
+    #   undefined, the ledger uses an Amazon Web Services owned KMS key for
+    #   encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_status
+    #   The current state of encryption at rest for the ledger. This can be
+    #   one of the following values:
+    #
+    #   * `ENABLED`\: Encryption is fully enabled using the specified key.
+    #
+    #   * `UPDATING`\: The ledger is actively processing the specified key
+    #     change.
+    #
+    #     Key changes in QLDB are asynchronous. The ledger is fully
+    #     accessible without any performance impact while the key change is
+    #     being processed. The amount of time it takes to update a key
+    #     varies depending on the ledger size.
+    #
+    #   * `KMS_KEY_INACCESSIBLE`\: The specified customer managed KMS key is
+    #     not accessible, and the ledger is impaired. Either the key was
+    #     disabled or deleted, or the grants on the key were revoked. When a
+    #     ledger is impaired, it is not accessible and does not accept any
+    #     read or write requests.
+    #
+    #     An impaired ledger automatically returns to an active state after
+    #     you restore the grants on the key, or re-enable the key that was
+    #     disabled. However, deleting a customer managed KMS key is
+    #     irreversible. After a key is deleted, you can no longer access the
+    #     ledgers that are protected with that key, and the data becomes
+    #     unrecoverable permanently.
+    #   @return [String]
+    #
+    # @!attribute [rw] inaccessible_kms_key_date_time
+    #   The date and time, in epoch time format, when the KMS key first
+    #   became inaccessible, in the case of an error. (Epoch time format is
+    #   the number of seconds that have elapsed since 12:00:00 AM January 1,
+    #   1970 UTC.)
+    #
+    #   This parameter is undefined if the KMS key is accessible.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/LedgerEncryptionDescription AWS API Documentation
+    #
+    class LedgerEncryptionDescription < Struct.new(
+      :kms_key_arn,
+      :encryption_status,
+      :inaccessible_kms_key_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1002,7 +1129,7 @@ module Aws::QLDB
 
     # @!attribute [rw] journal_s3_exports
     #   The array of journal export job descriptions for all ledgers that
-    #   are associated with the current AWS account and Region.
+    #   are associated with the current account and Region.
     #   @return [Array<Types::JournalS3ExportDescription>]
     #
     # @!attribute [rw] next_token
@@ -1054,7 +1181,7 @@ module Aws::QLDB
 
     # @!attribute [rw] ledgers
     #   The array of ledger summaries that are associated with the current
-    #   AWS account and Region.
+    #   account and Region.
     #   @return [Array<Types::LedgerSummary>]
     #
     # @!attribute [rw] next_token
@@ -1229,9 +1356,9 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) for a symmetric customer master key
-    #   (CMK) in AWS Key Management Service (AWS KMS). Amazon S3 does not
-    #   support asymmetric CMKs.
+    #   The Amazon Resource Name (ARN) of a symmetric customer master key
+    #   (CMK) in Key Management Service (KMS). Amazon S3 does not support
+    #   asymmetric CMKs.
     #
     #   You must provide a `KmsKeyArn` if you specify `SSE_KMS` as the
     #   `ObjectEncryptionType`.
@@ -1571,6 +1698,7 @@ module Aws::QLDB
     #       {
     #         name: "LedgerName", # required
     #         deletion_protection: false,
+    #         kms_key: "KmsKey",
     #       }
     #
     # @!attribute [rw] name
@@ -1587,11 +1715,57 @@ module Aws::QLDB
     #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key
+    #   The key in Key Management Service (KMS) to use for encryption of
+    #   data at rest in the ledger. For more information, see [Encryption at
+    #   rest][1] in the *Amazon QLDB Developer Guide*.
+    #
+    #   Use one of the following options to specify this parameter:
+    #
+    #   * `AWS_OWNED_KMS_KEY`\: Use an KMS key that is owned and managed by
+    #     Amazon Web Services on your behalf.
+    #
+    #   * **Undefined**\: Make no changes to the KMS key of the ledger.
+    #
+    #   * **A valid symmetric customer managed KMS key**\: Use the specified
+    #     KMS key in your account that you create, own, and manage.
+    #
+    #     Amazon QLDB does not support asymmetric keys. For more
+    #     information, see [Using symmetric and asymmetric keys][2] in the
+    #     *Key Management Service Developer Guide*.
+    #
+    #   To specify a customer managed KMS key, you can use its key ID,
+    #   Amazon Resource Name (ARN), alias name, or alias ARN. When using an
+    #   alias name, prefix it with `"alias/"`. To specify a key in a
+    #   different account, you must use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   For more information, see [Key identifiers (KeyId)][3] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerRequest AWS API Documentation
     #
     class UpdateLedgerRequest < Struct.new(
       :name,
-      :deletion_protection)
+      :deletion_protection,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1624,6 +1798,12 @@ module Aws::QLDB
     #   `UpdateLedger` operation to set the flag to `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] encryption_description
+    #   Information about the encryption of data at rest in the ledger. This
+    #   includes the current status, the KMS key, and when the key became
+    #   inaccessible (in the case of an error).
+    #   @return [Types::LedgerEncryptionDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedgerResponse AWS API Documentation
     #
     class UpdateLedgerResponse < Struct.new(
@@ -1631,7 +1811,8 @@ module Aws::QLDB
       :arn,
       :state,
       :creation_date_time,
-      :deletion_protection)
+      :deletion_protection,
+      :encryption_description)
       SENSITIVE = []
       include Aws::Structure
     end

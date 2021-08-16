@@ -45,7 +45,7 @@ module Aws::RDS
     alias :db_snapshot_identifier :snapshot_id
 
     # Specifies when the snapshot was taken in Coordinated Universal Time
-    # (UTC).
+    # (UTC). Changes for the copy when the snapshot is copied.
     # @return [Time]
     def snapshot_create_time
       data[:snapshot_create_time]
@@ -147,8 +147,8 @@ module Aws::RDS
     end
 
     # The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was
-    # copied from. It only has value in case of cross-customer or
-    # cross-region copy.
+    # copied from. It only has a value in the case of a cross-account or
+    # cross-Region copy.
     # @return [String]
     def source_db_snapshot_identifier
       data[:source_db_snapshot_identifier]
@@ -229,6 +229,13 @@ module Aws::RDS
     # @return [Array<Types::Tag>]
     def tag_list
       data[:tag_list]
+    end
+
+    # Specifies the time of the CreateDBSnapshot operation in Coordinated
+    # Universal Time (UTC). Doesn't change when the snapshot is copied.
+    # @return [Time]
+    def original_snapshot_create_time
+      data[:original_snapshot_create_time]
     end
 
     # @!endgroup

@@ -1545,7 +1545,8 @@ module Aws::EC2
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #
-    #   * `network-interface-owner-id` - The account ID of the owner.
+    #   * `network-interface-owner-id` - The Amazon Web Services account ID of
+    #     the owner.
     #
     #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
     #     with the Elastic IP address.

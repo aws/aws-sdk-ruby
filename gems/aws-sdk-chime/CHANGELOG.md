@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-08-10)
+------------------
+
+* Feature - Add support for "auto" in Region field of StartMeetingTranscription API request.
+
+1.54.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2021-07-29)
+------------------
+
+* Feature - Adds support for live transcription of meetings with Amazon Transcribe and Amazon Transcribe Medical.  The new APIs, StartMeetingTranscription and StopMeetingTranscription, control the generation of user-attributed transcriptions sent to meeting clients via Amazon Chime SDK data messages.
+
+1.52.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.51.0 (2021-07-16)
 ------------------
 

@@ -48,6 +48,6 @@ require_relative 'aws-sdk-qldb/customizations'
 # @!group service
 module Aws::QLDB
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.18.0'
 
 end

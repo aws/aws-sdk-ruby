@@ -1040,6 +1040,7 @@ module Aws::MediaLive
     #               style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #             },
     #             webvtt_destination_settings: {
+    #               style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #             },
     #           },
     #           language_code: "__string",
@@ -1641,6 +1642,10 @@ module Aws::MediaLive
     #             {
     #               name: "__stringMin1", # required
     #               selector_settings: {
+    #                 audio_hls_rendition_selection: {
+    #                   group_id: "__stringMin1", # required
+    #                   name: "__stringMin1", # required
+    #                 },
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
     #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -1897,6 +1902,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
@@ -2295,6 +2301,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -2942,6 +2950,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -3340,6 +3349,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -3858,6 +3869,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -4256,6 +4268,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -4958,6 +4972,8 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_id #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -5786,6 +5802,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -6184,6 +6201,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -6484,6 +6503,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.encoder_settings.caption_descriptions[0].name #=> String
@@ -6882,6 +6902,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -7297,6 +7319,7 @@ module Aws::MediaLive
     #               style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #             },
     #             webvtt_destination_settings: {
+    #               style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #             },
     #           },
     #           language_code: "__string",
@@ -7898,6 +7921,10 @@ module Aws::MediaLive
     #             {
     #               name: "__stringMin1", # required
     #               selector_settings: {
+    #                 audio_hls_rendition_selection: {
+    #                   group_id: "__stringMin1", # required
+    #                   name: "__stringMin1", # required
+    #                 },
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
     #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -8144,6 +8171,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
@@ -8542,6 +8570,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -8803,6 +8833,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_control #=> String, one of "NO_STYLE_DATA", "PASSTHROUGH"
     #   resp.channel.encoder_settings.caption_descriptions[0].language_code #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].language_description #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].name #=> String
@@ -9201,6 +9232,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].name #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.group_id #=> String
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_hls_rendition_selection.name #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
@@ -9704,7 +9737,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
