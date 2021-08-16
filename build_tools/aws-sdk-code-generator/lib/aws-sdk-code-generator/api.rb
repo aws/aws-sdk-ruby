@@ -77,12 +77,7 @@ module AwsSdkCodeGenerator
             "Hash<String,#{ruby_input_type(shape['value'], api, operation, nested: true)}>"
           end
         when 'string' then 'String'
-        when 'structure'
-          if shape['document']
-            'Hash,Array,String,Numeric,Boolean'
-          else
-            "Types::#{shape_ref['shape']}"
-          end
+        when 'structure' then "Types::#{shape_ref['shape']}"
         when 'timestamp' then 'Time,DateTime,Date,Integer,String'
         else
           raise "unhandled type #{shape.type}.inspect"
@@ -103,12 +98,7 @@ module AwsSdkCodeGenerator
         when 'long' then 'Integer'
         when 'map' then "Hash<String,#{ruby_type(shape['value'], api)}>"
         when 'string' then streaming?(shape_ref, api) ? 'IO' : 'String'
-        when 'structure'
-          if shape['document']
-            'Hash,Array,String,Numeric,Boolean'
-          else
-            "Types::#{shape_ref['shape']}"
-          end
+        when 'structure' then "Types::#{shape_ref['shape']}"
         when 'timestamp' then 'Time'
         else
           raise "unhandled type #{shape['type'].inspect}"

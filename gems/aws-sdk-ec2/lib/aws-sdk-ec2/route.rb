@@ -48,7 +48,7 @@ module Aws::EC2
       data[:destination_ipv_6_cidr_block]
     end
 
-    # The prefix of the Amazon Web Service.
+    # The prefix of the AWS service.
     # @return [String]
     def destination_prefix_list_id
       data[:destination_prefix_list_id]
@@ -72,7 +72,7 @@ module Aws::EC2
       data[:instance_id]
     end
 
-    # The ID of Amazon Web Services account that owns the instance.
+    # The AWS account ID of the owner of the instance.
     # @return [String]
     def instance_owner_id
       data[:instance_owner_id]

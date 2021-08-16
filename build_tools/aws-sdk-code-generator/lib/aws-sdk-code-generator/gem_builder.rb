@@ -8,15 +8,10 @@ module AwsSdkCodeGenerator
     def initialize(options)
       @options = options
       @service = options.fetch(:service)
-      validate_model!
     end
 
     # @return [Hash]
     attr_reader :options
-
-    def validate_model!
-      validate_document_support!
-    end
 
     def each(&block)
       Enumerator.new do |y|
@@ -69,20 +64,6 @@ module AwsSdkCodeGenerator
 
     def license_file
       File.read(File.expand_path('../../../templates/license.txt',__FILE__ ))
-    end
-
-    private
-
-    # document types are only supported for rest-json and json
-    def validate_document_support!
-      return if ['rest-json', 'json'].include?(@service.protocol)
-
-      # Check all shapes and raise if any are Document types
-      @service.api.fetch('shapes', {}).each do |name, shape|
-        if shape['type'] == 'structure' && shape['document']
-          raise "Shape #{name} is a document type.  Document types are only supported in json protocols."
-        end
-      end
     end
   end
 end

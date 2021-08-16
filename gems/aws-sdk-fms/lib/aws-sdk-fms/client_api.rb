@@ -15,7 +15,6 @@ module Aws::FMS
 
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
     AccountRoleStatus = Shapes::StringShape.new(name: 'AccountRoleStatus')
-    ActionTarget = Shapes::StructureShape.new(name: 'ActionTarget')
     App = Shapes::StructureShape.new(name: 'App')
     AppsList = Shapes::ListShape.new(name: 'AppsList')
     AppsListData = Shapes::StructureShape.new(name: 'AppsListData')
@@ -40,7 +39,6 @@ module Aws::FMS
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
     DeleteProtocolsListRequest = Shapes::StructureShape.new(name: 'DeleteProtocolsListRequest')
     DependentServiceName = Shapes::StringShape.new(name: 'DependentServiceName')
-    DestinationType = Shapes::StringShape.new(name: 'DestinationType')
     DetailedInfo = Shapes::StringShape.new(name: 'DetailedInfo')
     DisassociateAdminAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAdminAccountRequest')
     DnsDuplicateRuleGroupViolation = Shapes::StructureShape.new(name: 'DnsDuplicateRuleGroupViolation')
@@ -48,18 +46,9 @@ module Aws::FMS
     DnsRuleGroupPriorities = Shapes::ListShape.new(name: 'DnsRuleGroupPriorities')
     DnsRuleGroupPriority = Shapes::IntegerShape.new(name: 'DnsRuleGroupPriority')
     DnsRuleGroupPriorityConflictViolation = Shapes::StructureShape.new(name: 'DnsRuleGroupPriorityConflictViolation')
-    EC2AssociateRouteTableAction = Shapes::StructureShape.new(name: 'EC2AssociateRouteTableAction')
-    EC2CopyRouteTableAction = Shapes::StructureShape.new(name: 'EC2CopyRouteTableAction')
-    EC2CreateRouteAction = Shapes::StructureShape.new(name: 'EC2CreateRouteAction')
-    EC2CreateRouteTableAction = Shapes::StructureShape.new(name: 'EC2CreateRouteTableAction')
-    EC2DeleteRouteAction = Shapes::StructureShape.new(name: 'EC2DeleteRouteAction')
-    EC2ReplaceRouteAction = Shapes::StructureShape.new(name: 'EC2ReplaceRouteAction')
-    EC2ReplaceRouteTableAssociationAction = Shapes::StructureShape.new(name: 'EC2ReplaceRouteTableAssociationAction')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
-    ExpectedRoute = Shapes::StructureShape.new(name: 'ExpectedRoute')
-    ExpectedRoutes = Shapes::ListShape.new(name: 'ExpectedRoutes')
     GetAdminAccountRequest = Shapes::StructureShape.new(name: 'GetAdminAccountRequest')
     GetAdminAccountResponse = Shapes::StructureShape.new(name: 'GetAdminAccountResponse')
     GetAppsListRequest = Shapes::StructureShape.new(name: 'GetAppsListRequest')
@@ -83,7 +72,6 @@ module Aws::FMS
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
     IssueInfoMap = Shapes::MapShape.new(name: 'IssueInfoMap')
     LengthBoundedString = Shapes::StringShape.new(name: 'LengthBoundedString')
-    LengthBoundedStringList = Shapes::ListShape.new(name: 'LengthBoundedStringList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAppsListsRequest = Shapes::StructureShape.new(name: 'ListAppsListsRequest')
     ListAppsListsResponse = Shapes::StructureShape.new(name: 'ListAppsListsResponse')
@@ -102,19 +90,12 @@ module Aws::FMS
     MemberAccounts = Shapes::ListShape.new(name: 'MemberAccounts')
     NetworkFirewallAction = Shapes::StringShape.new(name: 'NetworkFirewallAction')
     NetworkFirewallActionList = Shapes::ListShape.new(name: 'NetworkFirewallActionList')
-    NetworkFirewallBlackHoleRouteDetectedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallBlackHoleRouteDetectedViolation')
-    NetworkFirewallInternetTrafficNotInspectedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallInternetTrafficNotInspectedViolation')
-    NetworkFirewallInvalidRouteConfigurationViolation = Shapes::StructureShape.new(name: 'NetworkFirewallInvalidRouteConfigurationViolation')
     NetworkFirewallMissingExpectedRTViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingExpectedRTViolation')
-    NetworkFirewallMissingExpectedRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingExpectedRoutesViolation')
     NetworkFirewallMissingFirewallViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingFirewallViolation')
     NetworkFirewallMissingSubnetViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingSubnetViolation')
     NetworkFirewallPolicyDescription = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyDescription')
     NetworkFirewallPolicyModifiedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyModifiedViolation')
     NetworkFirewallResourceName = Shapes::StringShape.new(name: 'NetworkFirewallResourceName')
-    NetworkFirewallUnexpectedFirewallRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallUnexpectedFirewallRoutesViolation')
-    NetworkFirewallUnexpectedGatewayRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallUnexpectedGatewayRoutesViolation')
-    OrderedRemediationActions = Shapes::ListShape.new(name: 'OrderedRemediationActions')
     PaginationMaxResults = Shapes::IntegerShape.new(name: 'PaginationMaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartialMatch = Shapes::StructureShape.new(name: 'PartialMatch')
@@ -128,9 +109,6 @@ module Aws::FMS
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyUpdateToken = Shapes::StringShape.new(name: 'PolicyUpdateToken')
-    PossibleRemediationAction = Shapes::StructureShape.new(name: 'PossibleRemediationAction')
-    PossibleRemediationActionList = Shapes::ListShape.new(name: 'PossibleRemediationActionList')
-    PossibleRemediationActions = Shapes::StructureShape.new(name: 'PossibleRemediationActions')
     PreviousAppsList = Shapes::MapShape.new(name: 'PreviousAppsList')
     PreviousListVersion = Shapes::StringShape.new(name: 'PreviousListVersion')
     PreviousProtocolsList = Shapes::MapShape.new(name: 'PreviousProtocolsList')
@@ -148,10 +126,8 @@ module Aws::FMS
     PutProtocolsListRequest = Shapes::StructureShape.new(name: 'PutProtocolsListRequest')
     PutProtocolsListResponse = Shapes::StructureShape.new(name: 'PutProtocolsListResponse')
     ReferenceRule = Shapes::StringShape.new(name: 'ReferenceRule')
-    RemediationAction = Shapes::StructureShape.new(name: 'RemediationAction')
     RemediationActionDescription = Shapes::StringShape.new(name: 'RemediationActionDescription')
     RemediationActionType = Shapes::StringShape.new(name: 'RemediationActionType')
-    RemediationActionWithOrder = Shapes::StructureShape.new(name: 'RemediationActionWithOrder')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -166,8 +142,6 @@ module Aws::FMS
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResourceViolation = Shapes::StructureShape.new(name: 'ResourceViolation')
     ResourceViolations = Shapes::ListShape.new(name: 'ResourceViolations')
-    Route = Shapes::StructureShape.new(name: 'Route')
-    Routes = Shapes::ListShape.new(name: 'Routes')
     SecurityGroupRemediationAction = Shapes::StructureShape.new(name: 'SecurityGroupRemediationAction')
     SecurityGroupRemediationActions = Shapes::ListShape.new(name: 'SecurityGroupRemediationActions')
     SecurityGroupRuleDescription = Shapes::StructureShape.new(name: 'SecurityGroupRuleDescription')
@@ -185,7 +159,6 @@ module Aws::FMS
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
-    TargetType = Shapes::StringShape.new(name: 'TargetType')
     TargetViolationReason = Shapes::StringShape.new(name: 'TargetViolationReason')
     TargetViolationReasons = Shapes::ListShape.new(name: 'TargetViolationReasons')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
@@ -195,10 +168,6 @@ module Aws::FMS
     ViolationDetail = Shapes::StructureShape.new(name: 'ViolationDetail')
     ViolationReason = Shapes::StringShape.new(name: 'ViolationReason')
     ViolationTarget = Shapes::StringShape.new(name: 'ViolationTarget')
-
-    ActionTarget.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
-    ActionTarget.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    ActionTarget.struct_class = Types::ActionTarget
 
     App.add_member(:app_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AppName"))
     App.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
@@ -287,66 +256,12 @@ module Aws::FMS
     DnsRuleGroupPriorityConflictViolation.add_member(:unavailable_priorities, Shapes::ShapeRef.new(shape: DnsRuleGroupPriorities, location_name: "UnavailablePriorities"))
     DnsRuleGroupPriorityConflictViolation.struct_class = Types::DnsRuleGroupPriorityConflictViolation
 
-    EC2AssociateRouteTableAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    EC2AssociateRouteTableAction.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "RouteTableId"))
-    EC2AssociateRouteTableAction.add_member(:subnet_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "SubnetId"))
-    EC2AssociateRouteTableAction.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "GatewayId"))
-    EC2AssociateRouteTableAction.struct_class = Types::EC2AssociateRouteTableAction
-
-    EC2CopyRouteTableAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    EC2CopyRouteTableAction.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "VpcId"))
-    EC2CopyRouteTableAction.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "RouteTableId"))
-    EC2CopyRouteTableAction.struct_class = Types::EC2CopyRouteTableAction
-
-    EC2CreateRouteAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    EC2CreateRouteAction.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: CIDR, location_name: "DestinationCidrBlock"))
-    EC2CreateRouteAction.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DestinationPrefixListId"))
-    EC2CreateRouteAction.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: CIDR, location_name: "DestinationIpv6CidrBlock"))
-    EC2CreateRouteAction.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "VpcEndpointId"))
-    EC2CreateRouteAction.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "GatewayId"))
-    EC2CreateRouteAction.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "RouteTableId"))
-    EC2CreateRouteAction.struct_class = Types::EC2CreateRouteAction
-
-    EC2CreateRouteTableAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    EC2CreateRouteTableAction.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "VpcId"))
-    EC2CreateRouteTableAction.struct_class = Types::EC2CreateRouteTableAction
-
-    EC2DeleteRouteAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    EC2DeleteRouteAction.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: CIDR, location_name: "DestinationCidrBlock"))
-    EC2DeleteRouteAction.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DestinationPrefixListId"))
-    EC2DeleteRouteAction.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: CIDR, location_name: "DestinationIpv6CidrBlock"))
-    EC2DeleteRouteAction.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "RouteTableId"))
-    EC2DeleteRouteAction.struct_class = Types::EC2DeleteRouteAction
-
-    EC2ReplaceRouteAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    EC2ReplaceRouteAction.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: CIDR, location_name: "DestinationCidrBlock"))
-    EC2ReplaceRouteAction.add_member(:destination_prefix_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DestinationPrefixListId"))
-    EC2ReplaceRouteAction.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: CIDR, location_name: "DestinationIpv6CidrBlock"))
-    EC2ReplaceRouteAction.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "GatewayId"))
-    EC2ReplaceRouteAction.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "RouteTableId"))
-    EC2ReplaceRouteAction.struct_class = Types::EC2ReplaceRouteAction
-
-    EC2ReplaceRouteTableAssociationAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    EC2ReplaceRouteTableAssociationAction.add_member(:association_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "AssociationId"))
-    EC2ReplaceRouteTableAssociationAction.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "RouteTableId"))
-    EC2ReplaceRouteTableAssociationAction.struct_class = Types::EC2ReplaceRouteTableAssociationAction
-
     EvaluationResult.add_member(:compliance_status, Shapes::ShapeRef.new(shape: PolicyComplianceStatusType, location_name: "ComplianceStatus"))
     EvaluationResult.add_member(:violator_count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "ViolatorCount"))
     EvaluationResult.add_member(:evaluation_limit_exceeded, Shapes::ShapeRef.new(shape: Boolean, location_name: "EvaluationLimitExceeded"))
     EvaluationResult.struct_class = Types::EvaluationResult
 
     EvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResult)
-
-    ExpectedRoute.add_member(:ip_v4_cidr, Shapes::ShapeRef.new(shape: CIDR, location_name: "IpV4Cidr"))
-    ExpectedRoute.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: CIDR, location_name: "PrefixListId"))
-    ExpectedRoute.add_member(:ip_v6_cidr, Shapes::ShapeRef.new(shape: CIDR, location_name: "IpV6Cidr"))
-    ExpectedRoute.add_member(:contributing_subnets, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "ContributingSubnets"))
-    ExpectedRoute.add_member(:allowed_targets, Shapes::ShapeRef.new(shape: LengthBoundedStringList, location_name: "AllowedTargets"))
-    ExpectedRoute.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
-    ExpectedRoute.struct_class = Types::ExpectedRoute
-
-    ExpectedRoutes.member = Shapes::ShapeRef.new(shape: ExpectedRoute)
 
     GetAdminAccountRequest.struct_class = Types::GetAdminAccountRequest
 
@@ -428,8 +343,6 @@ module Aws::FMS
     IssueInfoMap.key = Shapes::ShapeRef.new(shape: DependentServiceName)
     IssueInfoMap.value = Shapes::ShapeRef.new(shape: DetailedInfo)
 
-    LengthBoundedStringList.member = Shapes::ShapeRef.new(shape: LengthBoundedString)
-
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -486,58 +399,12 @@ module Aws::FMS
 
     NetworkFirewallActionList.member = Shapes::ShapeRef.new(shape: NetworkFirewallAction)
 
-    NetworkFirewallBlackHoleRouteDetectedViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
-    NetworkFirewallBlackHoleRouteDetectedViolation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
-    NetworkFirewallBlackHoleRouteDetectedViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
-    NetworkFirewallBlackHoleRouteDetectedViolation.add_member(:violating_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ViolatingRoutes"))
-    NetworkFirewallBlackHoleRouteDetectedViolation.struct_class = Types::NetworkFirewallBlackHoleRouteDetectedViolation
-
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "SubnetId"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZone"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:violating_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ViolatingRoutes"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:is_route_table_used_in_different_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRouteTableUsedInDifferentAZ"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:current_firewall_subnet_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentFirewallSubnetRouteTable"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:expected_firewall_endpoint, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ExpectedFirewallEndpoint"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallSubnetId"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:expected_firewall_subnet_routes, Shapes::ShapeRef.new(shape: ExpectedRoutes, location_name: "ExpectedFirewallSubnetRoutes"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:actual_firewall_subnet_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ActualFirewallSubnetRoutes"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "InternetGatewayId"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:current_internet_gateway_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentInternetGatewayRouteTable"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:expected_internet_gateway_routes, Shapes::ShapeRef.new(shape: ExpectedRoutes, location_name: "ExpectedInternetGatewayRoutes"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:actual_internet_gateway_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ActualInternetGatewayRoutes"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
-    NetworkFirewallInternetTrafficNotInspectedViolation.struct_class = Types::NetworkFirewallInternetTrafficNotInspectedViolation
-
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:affected_subnets, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "AffectedSubnets"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:is_route_table_used_in_different_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRouteTableUsedInDifferentAZ"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:violating_route, Shapes::ShapeRef.new(shape: Route, location_name: "ViolatingRoute"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:current_firewall_subnet_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentFirewallSubnetRouteTable"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:expected_firewall_endpoint, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ExpectedFirewallEndpoint"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:actual_firewall_endpoint, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ActualFirewallEndpoint"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:expected_firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ExpectedFirewallSubnetId"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:actual_firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ActualFirewallSubnetId"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:expected_firewall_subnet_routes, Shapes::ShapeRef.new(shape: ExpectedRoutes, location_name: "ExpectedFirewallSubnetRoutes"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:actual_firewall_subnet_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ActualFirewallSubnetRoutes"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "InternetGatewayId"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:current_internet_gateway_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentInternetGatewayRouteTable"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:expected_internet_gateway_routes, Shapes::ShapeRef.new(shape: ExpectedRoutes, location_name: "ExpectedInternetGatewayRoutes"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:actual_internet_gateway_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ActualInternetGatewayRoutes"))
-    NetworkFirewallInvalidRouteConfigurationViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
-    NetworkFirewallInvalidRouteConfigurationViolation.struct_class = Types::NetworkFirewallInvalidRouteConfigurationViolation
-
     NetworkFirewallMissingExpectedRTViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
     NetworkFirewallMissingExpectedRTViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
     NetworkFirewallMissingExpectedRTViolation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "AvailabilityZone"))
     NetworkFirewallMissingExpectedRTViolation.add_member(:current_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentRouteTable"))
     NetworkFirewallMissingExpectedRTViolation.add_member(:expected_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ExpectedRouteTable"))
     NetworkFirewallMissingExpectedRTViolation.struct_class = Types::NetworkFirewallMissingExpectedRTViolation
-
-    NetworkFirewallMissingExpectedRoutesViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
-    NetworkFirewallMissingExpectedRoutesViolation.add_member(:expected_routes, Shapes::ShapeRef.new(shape: ExpectedRoutes, location_name: "ExpectedRoutes"))
-    NetworkFirewallMissingExpectedRoutesViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
-    NetworkFirewallMissingExpectedRoutesViolation.struct_class = Types::NetworkFirewallMissingExpectedRoutesViolation
 
     NetworkFirewallMissingFirewallViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
     NetworkFirewallMissingFirewallViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
@@ -562,21 +429,6 @@ module Aws::FMS
     NetworkFirewallPolicyModifiedViolation.add_member(:current_policy_description, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyDescription, location_name: "CurrentPolicyDescription"))
     NetworkFirewallPolicyModifiedViolation.add_member(:expected_policy_description, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyDescription, location_name: "ExpectedPolicyDescription"))
     NetworkFirewallPolicyModifiedViolation.struct_class = Types::NetworkFirewallPolicyModifiedViolation
-
-    NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallSubnetId"))
-    NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:violating_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ViolatingRoutes"))
-    NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
-    NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:firewall_endpoint, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallEndpoint"))
-    NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
-    NetworkFirewallUnexpectedFirewallRoutesViolation.struct_class = Types::NetworkFirewallUnexpectedFirewallRoutesViolation
-
-    NetworkFirewallUnexpectedGatewayRoutesViolation.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "GatewayId"))
-    NetworkFirewallUnexpectedGatewayRoutesViolation.add_member(:violating_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ViolatingRoutes"))
-    NetworkFirewallUnexpectedGatewayRoutesViolation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
-    NetworkFirewallUnexpectedGatewayRoutesViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
-    NetworkFirewallUnexpectedGatewayRoutesViolation.struct_class = Types::NetworkFirewallUnexpectedGatewayRoutesViolation
-
-    OrderedRemediationActions.member = Shapes::ShapeRef.new(shape: RemediationActionWithOrder)
 
     PartialMatch.add_member(:reference, Shapes::ShapeRef.new(shape: ReferenceRule, location_name: "Reference"))
     PartialMatch.add_member(:target_violation_reasons, Shapes::ShapeRef.new(shape: TargetViolationReasons, location_name: "TargetViolationReasons"))
@@ -626,17 +478,6 @@ module Aws::FMS
     PolicySummary.struct_class = Types::PolicySummary
 
     PolicySummaryList.member = Shapes::ShapeRef.new(shape: PolicySummary)
-
-    PossibleRemediationAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    PossibleRemediationAction.add_member(:ordered_remediation_actions, Shapes::ShapeRef.new(shape: OrderedRemediationActions, required: true, location_name: "OrderedRemediationActions"))
-    PossibleRemediationAction.add_member(:is_default_action, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefaultAction"))
-    PossibleRemediationAction.struct_class = Types::PossibleRemediationAction
-
-    PossibleRemediationActionList.member = Shapes::ShapeRef.new(shape: PossibleRemediationAction)
-
-    PossibleRemediationActions.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    PossibleRemediationActions.add_member(:actions, Shapes::ShapeRef.new(shape: PossibleRemediationActionList, location_name: "Actions"))
-    PossibleRemediationActions.struct_class = Types::PossibleRemediationActions
 
     PreviousAppsList.key = Shapes::ShapeRef.new(shape: PreviousListVersion)
     PreviousAppsList.value = Shapes::ShapeRef.new(shape: AppsList)
@@ -691,20 +532,6 @@ module Aws::FMS
     PutProtocolsListResponse.add_member(:protocols_list_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProtocolsListArn"))
     PutProtocolsListResponse.struct_class = Types::PutProtocolsListResponse
 
-    RemediationAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
-    RemediationAction.add_member(:ec2_create_route_action, Shapes::ShapeRef.new(shape: EC2CreateRouteAction, location_name: "EC2CreateRouteAction"))
-    RemediationAction.add_member(:ec2_replace_route_action, Shapes::ShapeRef.new(shape: EC2ReplaceRouteAction, location_name: "EC2ReplaceRouteAction"))
-    RemediationAction.add_member(:ec2_delete_route_action, Shapes::ShapeRef.new(shape: EC2DeleteRouteAction, location_name: "EC2DeleteRouteAction"))
-    RemediationAction.add_member(:ec2_copy_route_table_action, Shapes::ShapeRef.new(shape: EC2CopyRouteTableAction, location_name: "EC2CopyRouteTableAction"))
-    RemediationAction.add_member(:ec2_replace_route_table_association_action, Shapes::ShapeRef.new(shape: EC2ReplaceRouteTableAssociationAction, location_name: "EC2ReplaceRouteTableAssociationAction"))
-    RemediationAction.add_member(:ec2_associate_route_table_action, Shapes::ShapeRef.new(shape: EC2AssociateRouteTableAction, location_name: "EC2AssociateRouteTableAction"))
-    RemediationAction.add_member(:ec2_create_route_table_action, Shapes::ShapeRef.new(shape: EC2CreateRouteTableAction, location_name: "EC2CreateRouteTableAction"))
-    RemediationAction.struct_class = Types::RemediationAction
-
-    RemediationActionWithOrder.add_member(:remediation_action, Shapes::ShapeRef.new(shape: RemediationAction, location_name: "RemediationAction"))
-    RemediationActionWithOrder.add_member(:order, Shapes::ShapeRef.new(shape: BasicInteger, location_name: "Order"))
-    RemediationActionWithOrder.struct_class = Types::RemediationActionWithOrder
-
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -725,27 +552,12 @@ module Aws::FMS
     ResourceViolation.add_member(:network_firewall_missing_subnet_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingSubnetViolation, location_name: "NetworkFirewallMissingSubnetViolation"))
     ResourceViolation.add_member(:network_firewall_missing_expected_rt_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingExpectedRTViolation, location_name: "NetworkFirewallMissingExpectedRTViolation"))
     ResourceViolation.add_member(:network_firewall_policy_modified_violation, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyModifiedViolation, location_name: "NetworkFirewallPolicyModifiedViolation"))
-    ResourceViolation.add_member(:network_firewall_internet_traffic_not_inspected_violation, Shapes::ShapeRef.new(shape: NetworkFirewallInternetTrafficNotInspectedViolation, location_name: "NetworkFirewallInternetTrafficNotInspectedViolation"))
-    ResourceViolation.add_member(:network_firewall_invalid_route_configuration_violation, Shapes::ShapeRef.new(shape: NetworkFirewallInvalidRouteConfigurationViolation, location_name: "NetworkFirewallInvalidRouteConfigurationViolation"))
-    ResourceViolation.add_member(:network_firewall_black_hole_route_detected_violation, Shapes::ShapeRef.new(shape: NetworkFirewallBlackHoleRouteDetectedViolation, location_name: "NetworkFirewallBlackHoleRouteDetectedViolation"))
-    ResourceViolation.add_member(:network_firewall_unexpected_firewall_routes_violation, Shapes::ShapeRef.new(shape: NetworkFirewallUnexpectedFirewallRoutesViolation, location_name: "NetworkFirewallUnexpectedFirewallRoutesViolation"))
-    ResourceViolation.add_member(:network_firewall_unexpected_gateway_routes_violation, Shapes::ShapeRef.new(shape: NetworkFirewallUnexpectedGatewayRoutesViolation, location_name: "NetworkFirewallUnexpectedGatewayRoutesViolation"))
-    ResourceViolation.add_member(:network_firewall_missing_expected_routes_violation, Shapes::ShapeRef.new(shape: NetworkFirewallMissingExpectedRoutesViolation, location_name: "NetworkFirewallMissingExpectedRoutesViolation"))
     ResourceViolation.add_member(:dns_rule_group_priority_conflict_violation, Shapes::ShapeRef.new(shape: DnsRuleGroupPriorityConflictViolation, location_name: "DnsRuleGroupPriorityConflictViolation"))
     ResourceViolation.add_member(:dns_duplicate_rule_group_violation, Shapes::ShapeRef.new(shape: DnsDuplicateRuleGroupViolation, location_name: "DnsDuplicateRuleGroupViolation"))
     ResourceViolation.add_member(:dns_rule_group_limit_exceeded_violation, Shapes::ShapeRef.new(shape: DnsRuleGroupLimitExceededViolation, location_name: "DnsRuleGroupLimitExceededViolation"))
-    ResourceViolation.add_member(:possible_remediation_actions, Shapes::ShapeRef.new(shape: PossibleRemediationActions, location_name: "PossibleRemediationActions"))
     ResourceViolation.struct_class = Types::ResourceViolation
 
     ResourceViolations.member = Shapes::ShapeRef.new(shape: ResourceViolation)
-
-    Route.add_member(:destination_type, Shapes::ShapeRef.new(shape: DestinationType, location_name: "DestinationType"))
-    Route.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
-    Route.add_member(:destination, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Destination"))
-    Route.add_member(:target, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Target"))
-    Route.struct_class = Types::Route
-
-    Routes.member = Shapes::ShapeRef.new(shape: Route)
 
     SecurityGroupRemediationAction.add_member(:remediation_action_type, Shapes::ShapeRef.new(shape: RemediationActionType, location_name: "RemediationActionType"))
     SecurityGroupRemediationAction.add_member(:description, Shapes::ShapeRef.new(shape: RemediationActionDescription, location_name: "Description"))
@@ -840,7 +652,6 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:delete_apps_list, Seahorse::Model::Operation.new.tap do |o|
@@ -1000,12 +811,6 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
       end)
 
       api.add_operation(:list_compliance_status, Seahorse::Model::Operation.new.tap do |o|
@@ -1067,12 +872,6 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

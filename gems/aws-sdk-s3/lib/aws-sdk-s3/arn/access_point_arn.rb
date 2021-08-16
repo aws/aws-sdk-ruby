@@ -28,11 +28,6 @@ module Aws
                 'and an account id.'
         end
 
-        if @region.include?('-fips') || @region.include?('fips-')
-          raise ArgumentError,
-                'S3 Access Point ARNs cannot contain a FIPS region'
-        end
-
         if @type != 'accesspoint'
           raise ArgumentError, 'Invalid ARN, resource format is not correct'
         end

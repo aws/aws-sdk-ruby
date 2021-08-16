@@ -48,6 +48,6 @@ require_relative 'aws-sdk-finspace/customizations'
 # @!group service
 module Aws::Finspace
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.2.0'
 
 end

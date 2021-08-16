@@ -43,8 +43,8 @@ module Aws::EC2
 
     # If you used CreateKeyPair to create the key pair, this is the SHA-1
     # digest of the DER encoded private key. If you used ImportKeyPair to
-    # provide Amazon Web Services the public key, this is the MD5 public key
-    # fingerprint as specified in section 4 of RFC4716.
+    # provide AWS the public key, this is the MD5 public key fingerprint as
+    # specified in section 4 of RFC4716.
     # @return [String]
     def key_fingerprint
       data[:key_fingerprint]

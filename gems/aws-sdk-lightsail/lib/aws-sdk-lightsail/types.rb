@@ -36,172 +36,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes an access key for an Amazon Lightsail bucket.
-    #
-    # Access keys grant full programmatic access to the specified bucket and
-    # its objects. You can have a maximum of two access keys per bucket. Use
-    # the CreateBucketAccessKey action to create an access key for a
-    # specific bucket. For more information about access keys, see [Creating
-    # access keys for a bucket in Amazon Lightsail][1] in the *Amazon
-    # Lightsail Developer Guide*.
-    #
-    # The `secretAccessKey` value is returned only in response to the
-    # `CreateBucketAccessKey` action. You can get a secret access key only
-    # when you first create an access key; you cannot get the secret access
-    # key later. If you lose the secret access key, you must create a new
-    # access key.
-    #
-    #
-    #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
-    #
-    # @!attribute [rw] access_key_id
-    #   The ID of the access key.
-    #   @return [String]
-    #
-    # @!attribute [rw] secret_access_key
-    #   The secret access key used to sign requests.
-    #
-    #   You should store the secret access key in a safe location. We
-    #   recommend that you delete the access key if the secret access key is
-    #   compromised.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the access key.
-    #
-    #   A status of `Active` means that the key is valid, while `Inactive`
-    #   means it is not.
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   The timestamp when the access key was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_used
-    #   An object that describes the last time the access key was used.
-    #
-    #   <note markdown="1"> This object does not include data in the response of a
-    #   CreateBucketAccessKey action. If the access key has not been used,
-    #   the `region` and `serviceName` values are `N/A`, and the
-    #   `lastUsedDate` value is null.
-    #
-    #    </note>
-    #   @return [Types::AccessKeyLastUsed]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessKey AWS API Documentation
-    #
-    class AccessKey < Struct.new(
-      :access_key_id,
-      :secret_access_key,
-      :status,
-      :created_at,
-      :last_used)
-      SENSITIVE = [:access_key_id]
-      include Aws::Structure
-    end
-
-    # Describes the last time an access key was used.
-    #
-    # <note markdown="1"> This object does not include data in the response of a
-    # CreateBucketAccessKey action.
-    #
-    #  </note>
-    #
-    # @!attribute [rw] last_used_date
-    #   The date and time when the access key was most recently used.
-    #
-    #   This value is null if the access key has not been used.
-    #   @return [Time]
-    #
-    # @!attribute [rw] region
-    #   The AWS Region where this access key was most recently used.
-    #
-    #   This value is `N/A` if the access key has not been used.
-    #   @return [String]
-    #
-    # @!attribute [rw] service_name
-    #   The name of the AWS service with which this access key was most
-    #   recently used.
-    #
-    #   This value is `N/A` if the access key has not been used.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessKeyLastUsed AWS API Documentation
-    #
-    class AccessKeyLastUsed < Struct.new(
-      :last_used_date,
-      :region,
-      :service_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Describes the anonymous access permissions for an Amazon Lightsail
-    # bucket and its objects.
-    #
-    # For more information about bucket access permissions, see
-    # [Understanding bucket permissions in Amazon Lightsail][1] in the
-    #
-    # *Amazon Lightsail Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-understanding-bucket-permissions
-    #
-    # @note When making an API call, you may pass AccessRules
-    #   data as a hash:
-    #
-    #       {
-    #         get_object: "public", # accepts public, private
-    #         allow_public_overrides: false,
-    #       }
-    #
-    # @!attribute [rw] get_object
-    #   Specifies the anonymous access to all objects in a bucket.
-    #
-    #   The following options can be specified:
-    #
-    #   * `public` - Sets all objects in the bucket to public (read-only),
-    #     making them readable by anyone in the world.
-    #
-    #     If the `getObject` value is set to `public`, then all objects in
-    #     the bucket default to public regardless of the
-    #     `allowPublicOverrides` value.
-    #
-    #   * `private` - Sets all objects in the bucket to private, making them
-    #     readable only by you or anyone you give access to.
-    #
-    #     If the `getObject` value is set to `private`, and the
-    #     `allowPublicOverrides` value is set to `true`, then all objects in
-    #     the bucket default to private unless they are configured with a
-    #     `public-read` ACL. Individual objects with a `public-read` ACL are
-    #     readable by anyone in the world.
-    #   @return [String]
-    #
-    # @!attribute [rw] allow_public_overrides
-    #   A Boolean value that indicates whether the access control list (ACL)
-    #   permissions that are applied to individual objects override the
-    #   `getObject` option that is currently specified.
-    #
-    #   When this is true, you can use the [PutObjectAcl][1] Amazon S3 API
-    #   action to set individual objects to public (read-only) using the
-    #   `public-read` ACL, or to private using the `private` ACL.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAcl.html
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessRules AWS API Documentation
-    #
-    class AccessRules < Struct.new(
-      :get_object,
-      :allow_public_overrides)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Lightsail throws this exception when an account is still in the setup
     # in progress state.
     #
@@ -311,8 +145,8 @@ module Aws::Lightsail
 
     # Describes an alarm.
     #
-    # An alarm is a way to monitor your Lightsail resource metrics. For more
-    # information, see [Alarms in Amazon Lightsail][1].
+    # An alarm is a way to monitor your Amazon Lightsail resource metrics.
+    # For more information, see [Alarms in Amazon Lightsail][1].
     #
     #
     #
@@ -959,194 +793,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes an Amazon Lightsail bucket.
-    #
-    # @!attribute [rw] resource_type
-    #   The Lightsail resource type of the bucket (for example, `Bucket`).
-    #   @return [String]
-    #
-    # @!attribute [rw] access_rules
-    #   An object that describes the access rules of the bucket.
-    #   @return [Types::AccessRules]
-    #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the bucket.
-    #   @return [String]
-    #
-    # @!attribute [rw] bundle_id
-    #   The ID of the bundle currently applied to the bucket.
-    #
-    #   A bucket bundle specifies the monthly cost, storage space, and data
-    #   transfer quota for a bucket.
-    #
-    #   Use the UpdateBucketBundle action to change the bundle of a bucket.
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   The timestamp when the distribution was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] url
-    #   The URL of the bucket.
-    #   @return [String]
-    #
-    # @!attribute [rw] location
-    #   Describes the resource location.
-    #   @return [Types::ResourceLocation]
-    #
-    # @!attribute [rw] name
-    #   The name of the bucket.
-    #   @return [String]
-    #
-    # @!attribute [rw] support_code
-    #   The support code for a bucket. Include this code in your email to
-    #   support when you have questions about a Lightsail bucket. This code
-    #   enables our support team to look up your Lightsail information more
-    #   easily.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tag keys and optional values for the bucket. For more
-    #   information, see [Tags in Amazon Lightsail][1] in the *Amazon
-    #   Lightsail Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] object_versioning
-    #   Indicates whether object versioning is enabled for the bucket.
-    #
-    #   The following options can be configured:
-    #
-    #   * `Enabled` - Object versioning is enabled.
-    #
-    #   * `Suspended` - Object versioning was previously enabled but is
-    #     currently suspended. Existing object versions are retained.
-    #
-    #   * `NeverEnabled` - Object versioning has never been enabled.
-    #   @return [String]
-    #
-    # @!attribute [rw] able_to_update_bundle
-    #   Indicates whether the bundle that is currently applied to a bucket
-    #   can be changed to another bundle.
-    #
-    #   You can update a bucket's bundle only one time within a monthly AWS
-    #   billing cycle.
-    #
-    #   Use the UpdateBucketBundle action to change a bucket's bundle.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] readonly_access_accounts
-    #   An array of strings that specify the AWS account IDs that have
-    #   read-only access to the bucket.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resources_receiving_access
-    #   An array of objects that describe Lightsail instances that have
-    #   access to the bucket.
-    #
-    #   Use the SetResourceAccessForBucket action to update the instances
-    #   that have access to a bucket.
-    #   @return [Array<Types::ResourceReceivingAccess>]
-    #
-    # @!attribute [rw] state
-    #   An object that describes the state of the bucket.
-    #   @return [Types::BucketState]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bucket AWS API Documentation
-    #
-    class Bucket < Struct.new(
-      :resource_type,
-      :access_rules,
-      :arn,
-      :bundle_id,
-      :created_at,
-      :url,
-      :location,
-      :name,
-      :support_code,
-      :tags,
-      :object_versioning,
-      :able_to_update_bundle,
-      :readonly_access_accounts,
-      :resources_receiving_access,
-      :state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Describes the specifications of a bundle that can be applied to an
-    # Amazon Lightsail bucket.
-    #
-    # A bucket bundle specifies the monthly cost, storage space, and data
-    # transfer quota for a bucket.
-    #
-    # @!attribute [rw] bundle_id
-    #   The ID of the bundle.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the bundle.
-    #   @return [String]
-    #
-    # @!attribute [rw] price
-    #   The monthly price of the bundle, in US dollars.
-    #   @return [Float]
-    #
-    # @!attribute [rw] storage_per_month_in_gb
-    #   The storage size of the bundle, in GB.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] transfer_per_month_in_gb
-    #   The monthly network transfer quota of the bundle.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] is_active
-    #   Indicates whether the bundle is active. Use for a new or existing
-    #   bucket.
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/BucketBundle AWS API Documentation
-    #
-    class BucketBundle < Struct.new(
-      :bundle_id,
-      :name,
-      :price,
-      :storage_per_month_in_gb,
-      :transfer_per_month_in_gb,
-      :is_active)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Describes the state of an Amazon Lightsail bucket.
-    #
-    # @!attribute [rw] code
-    #   The state code of the bucket.
-    #
-    #   The following codes are possible:
-    #
-    #   * `OK` - The bucket is in a running state.
-    #
-    #   * `Unknown` - Creation of the bucket might have timed-out. You might
-    #     want to delete the bucket and create a new one.
-    #   @return [String]
-    #
-    # @!attribute [rw] message
-    #   A message that describes the state of the bucket.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/BucketState AWS API Documentation
-    #
-    class BucketState < Struct.new(
-      :code,
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Describes a bundle, which is a set of specs describing your virtual
     # private server (or *instance*).
     #
@@ -1623,12 +1269,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] support_code
@@ -1686,12 +1332,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CertificateSummary AWS API Documentation
@@ -1753,7 +1399,7 @@ module Aws::Lightsail
     end
 
     # Describes a CloudFormation stack record created as a result of the
-    # `create cloud formation stack` action.
+    # `create cloud formation stack` operation.
     #
     # A CloudFormation stack record provides information about the AWS
     # CloudFormation stack used to create a new Amazon Elastic Compute Cloud
@@ -2013,12 +1659,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] power
@@ -2343,9 +1989,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] success_codes
     #   The HTTP codes to use when checking for a successful response from a
-    #   container. You can specify values between `200` and `499`. You can
-    #   specify multiple values (for example, `200,202`) or a range of
-    #   values (for example, `200-299`).
+    #   container. You can specify values between 200 and 499.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceHealthCheckConfig AWS API Documentation
@@ -2577,7 +2221,7 @@ module Aws::Lightsail
     #         restore_date: "string",
     #         use_latest_restorable_auto_snapshot: false,
     #         target_snapshot_name: "ResourceName", # required
-    #         source_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
+    #         source_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
     #       }
     #
     # @!attribute [rw] source_snapshot_name
@@ -2598,8 +2242,8 @@ module Aws::Lightsail
     #   Constraint:
     #
     #   * Define this parameter only when copying an automatic snapshot as a
-    #     manual snapshot. For more information, see the [Amazon Lightsail
-    #     Developer Guide][1].
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #   ^
     #
@@ -2623,8 +2267,8 @@ module Aws::Lightsail
     #     exclusive.
     #
     #   * Define this parameter only when copying an automatic snapshot as a
-    #     manual snapshot. For more information, see the [Amazon Lightsail
-    #     Developer Guide][1].
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -2642,8 +2286,8 @@ module Aws::Lightsail
     #     date` parameters are mutually exclusive.
     #
     #   * Define this parameter only when copying an automatic snapshot as a
-    #     manual snapshot. For more information, see the [Amazon Lightsail
-    #     Developer Guide][1].
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -2681,134 +2325,6 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotResult AWS API Documentation
     #
     class CopySnapshotResult < Struct.new(
-      :operations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass CreateBucketAccessKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket that the new access key will belong to, and
-    #   grant access to.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateBucketAccessKeyRequest AWS API Documentation
-    #
-    class CreateBucketAccessKeyRequest < Struct.new(
-      :bucket_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] access_key
-    #   An object that describes the access key that is created.
-    #   @return [Types::AccessKey]
-    #
-    # @!attribute [rw] operations
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the timestamp of the request, and the
-    #   resources affected by the request.
-    #   @return [Array<Types::Operation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateBucketAccessKeyResult AWS API Documentation
-    #
-    class CreateBucketAccessKeyResult < Struct.new(
-      :access_key,
-      :operations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass CreateBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bundle_id: "NonEmptyString", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey",
-    #             value: "TagValue",
-    #           },
-    #         ],
-    #         enable_object_versioning: false,
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name for the bucket.
-    #
-    #   For more information about bucket names, see [Bucket naming rules in
-    #   Amazon Lightsail][1] in the *Amazon Lightsail Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/bucket-naming-rules-in-amazon-lightsail
-    #   @return [String]
-    #
-    # @!attribute [rw] bundle_id
-    #   The ID of the bundle to use for the bucket.
-    #
-    #   A bucket bundle specifies the monthly cost, storage space, and data
-    #   transfer quota for a bucket.
-    #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
-    #
-    #   Use the UpdateBucketBundle action to change the bundle after the
-    #   bucket is created.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tag keys and optional values to add to the bucket during
-    #   creation.
-    #
-    #   Use the TagResource action to tag the bucket after it's created.
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] enable_object_versioning
-    #   A Boolean value that indicates whether to enable versioning of
-    #   objects in the bucket.
-    #
-    #   For more information about versioning, see [Enabling and suspending
-    #   object versioning in a bucket in Amazon Lightsail][1] in the *Amazon
-    #   Lightsail Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateBucketRequest AWS API Documentation
-    #
-    class CreateBucketRequest < Struct.new(
-      :bucket_name,
-      :bundle_id,
-      :tags,
-      :enable_object_versioning)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] bucket
-    #   An object that describes the bucket that is created.
-    #   @return [Types::Bucket]
-    #
-    # @!attribute [rw] operations
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the timestamp of the request, and the
-    #   resources affected by the request.
-    #   @return [Array<Types::Operation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateBucketResult AWS API Documentation
-    #
-    class CreateBucketResult < Struct.new(
-      :bucket,
       :operations)
       SENSITIVE = []
       include Aws::Structure
@@ -3191,17 +2707,14 @@ module Aws::Lightsail
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   The tag keys and optional values to add to the certificate during
-    #   create.
+    #   The tag keys and optional values for the container service.
     #
-    #   Use the `TagResource` action to tag a resource after it's created.
-    #
-    #   For more information about tags in Lightsail, see the [Amazon
-    #   Lightsail Developer Guide][1].
+    #   For more information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] public_domain_names
@@ -3341,8 +2854,8 @@ module Aws::Lightsail
     #     parameters are mutually exclusive.
     #
     #   * Define this parameter only when creating a new disk from an
-    #     automatic snapshot. For more information, see the [Amazon
-    #     Lightsail Developer Guide][1].
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -3364,8 +2877,8 @@ module Aws::Lightsail
     #     exclusive.
     #
     #   * Define this parameter only when creating a new disk from an
-    #     automatic snapshot. For more information, see the [Amazon
-    #     Lightsail Developer Guide][1].
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -3383,8 +2896,8 @@ module Aws::Lightsail
     #     date` parameters are mutually exclusive.
     #
     #   * Define this parameter only when creating a new disk from an
-    #     automatic snapshot. For more information, see the [Amazon
-    #     Lightsail Developer Guide][1].
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -3580,7 +3093,7 @@ module Aws::Lightsail
     #         distribution_name: "ResourceName", # required
     #         origin: { # required
     #           name: "ResourceName",
-    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
+    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
     #           protocol_policy: "http-only", # accepts http-only, https-only
     #         },
     #         default_cache_behavior: { # required
@@ -3777,8 +3290,8 @@ module Aws::Lightsail
     #   <note markdown="1"> You cannot register a new domain name using Lightsail. You must
     #   register a domain name using Amazon Route 53 or another domain name
     #   registrar. If you have already registered your domain, you can enter
-    #   its name in this parameter to manage the DNS records for that domain
-    #   using Lightsail.
+    #   its name in this parameter to manage the DNS records for that
+    #   domain.
     #
     #    </note>
     #   @return [String]
@@ -3951,13 +3464,13 @@ module Aws::Lightsail
     #   <note markdown="1"> Depending on the machine image you choose, the command to get
     #   software on your instance varies. Amazon Linux and CentOS use `yum`,
     #   Debian and Ubuntu use `apt-get`, and FreeBSD uses `pkg`. For a
-    #   complete list, see the [Amazon Lightsail Developer Guide][1].
+    #   complete list, see the [Dev Guide][1].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image
     #   @return [String]
     #
     # @!attribute [rw] key_pair_name
@@ -3996,8 +3509,8 @@ module Aws::Lightsail
     #     snapshot name` parameters are mutually exclusive.
     #
     #   * Define this parameter only when creating a new instance from an
-    #     automatic snapshot. For more information, see the [Amazon
-    #     Lightsail Developer Guide][1].
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -4019,8 +3532,8 @@ module Aws::Lightsail
     #     exclusive.
     #
     #   * Define this parameter only when creating a new instance from an
-    #     automatic snapshot. For more information, see the [Amazon
-    #     Lightsail Developer Guide][1].
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -4038,8 +3551,8 @@ module Aws::Lightsail
     #     date` parameters are mutually exclusive.
     #
     #   * Define this parameter only when creating a new instance from an
-    #     automatic snapshot. For more information, see the [Amazon
-    #     Lightsail Developer Guide][1].
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -4163,13 +3676,13 @@ module Aws::Lightsail
     #   <note markdown="1"> Depending on the machine image you choose, the command to get
     #   software on your instance varies. Amazon Linux and CentOS use `yum`,
     #   Debian and Ubuntu use `apt-get`, and FreeBSD uses `pkg`. For a
-    #   complete list, see the [Amazon Lightsail Developer Guide][1].
+    #   complete list, see the [Dev Guide][1].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image
     #   @return [String]
     #
     # @!attribute [rw] key_pair_name
@@ -5000,106 +4513,6 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAutoSnapshotResult AWS API Documentation
     #
     class DeleteAutoSnapshotResult < Struct.new(
-      :operations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DeleteBucketAccessKeyRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         access_key_id: "NonEmptyString", # required
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket that the access key belongs to.
-    #   @return [String]
-    #
-    # @!attribute [rw] access_key_id
-    #   The ID of the access key to delete.
-    #
-    #   Use the GetBucketAccessKeys action to get a list of access key IDs
-    #   that you can specify.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteBucketAccessKeyRequest AWS API Documentation
-    #
-    class DeleteBucketAccessKeyRequest < Struct.new(
-      :bucket_name,
-      :access_key_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] operations
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the timestamp of the request, and the
-    #   resources affected by the request.
-    #   @return [Array<Types::Operation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteBucketAccessKeyResult AWS API Documentation
-    #
-    class DeleteBucketAccessKeyResult < Struct.new(
-      :operations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DeleteBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         force_delete: false,
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket to delete.
-    #
-    #   Use the GetBuckets action to get a list of bucket names that you can
-    #   specify.
-    #   @return [String]
-    #
-    # @!attribute [rw] force_delete
-    #   A Boolean value that indicates whether to force delete the bucket.
-    #
-    #   You must force delete the bucket if it has one of the following
-    #   conditions:
-    #
-    #   * The bucket is the origin of a distribution.
-    #
-    #   * The bucket has instances that were granted access to it using the
-    #     SetResourceAccessForBucket action.
-    #
-    #   * The bucket has objects.
-    #
-    #   * The bucket has access keys.
-    #
-    #   Force deleting a bucket might impact other resources that rely on
-    #   the bucket, such as instances, distributions, or software that use
-    #   the issued access keys.
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteBucketRequest AWS API Documentation
-    #
-    class DeleteBucketRequest < Struct.new(
-      :bucket_name,
-      :force_delete)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] operations
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the timestamp of the request, and the
-    #   resources affected by the request.
-    #   @return [Array<Types::Operation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteBucketResult AWS API Documentation
-    #
-    class DeleteBucketResult < Struct.new(
       :operations)
       SENSITIVE = []
       include Aws::Structure
@@ -5960,7 +5373,7 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes a block storage disk.
+    # Describes a system disk or a block storage disk.
     #
     # @!attribute [rw] name
     #   The unique name of the disk.
@@ -5991,12 +5404,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] add_ons
@@ -6166,12 +5579,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] size_in_gb
@@ -6267,7 +5680,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] is_active
     #   Indicates whether the bundle is active, and can be specified for a
-    #   new or existing distribution.
+    #   new distribution.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DistributionBundle AWS API Documentation
@@ -6282,7 +5695,7 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes a domain where you are storing recordsets.
+    # Describes a domain where you are storing recordsets in Lightsail.
     #
     # @!attribute [rw] name
     #   The name of the domain.
@@ -6315,12 +5728,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] domain_entries
@@ -6368,17 +5781,12 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The target IP address (e.g., `192.0.2.0`), or AWS name server (e.g.,
-    #   `ns-111.awsdns-22.com.`).
+    #   The target AWS name server (e.g., `ns-111.awsdns-22.com.`).
     #
     #   For Lightsail load balancers, the value looks like
     #   `ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com`.
-    #   For Lightsail distributions, the value looks like
-    #   `exampled1182ne.cloudfront.net`. For Lightsail container services,
-    #   the value looks like
-    #   `container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com`.
     #   Be sure to also set `isAlias` to `true` when setting up an A record
-    #   for a Lightsail load balancer, distribution, or container service.
+    #   for a load balancer.
     #   @return [String]
     #
     # @!attribute [rw] is_alias
@@ -6389,16 +5797,13 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of domain entry, such as address for IPv4 (A), address for
-    #   IPv6 (AAAA), canonical name (CNAME), mail exchanger (MX), name
-    #   server (NS), start of authority (SOA), service locator (SRV), or
-    #   text (TXT).
+    #   The type of domain entry, such as address (A), canonical name
+    #   (CNAME), mail exchanger (MX), name server (NS), start of authority
+    #   (SOA), service locator (SRV), or text (TXT).
     #
     #   The following domain entry types can be used:
     #
     #   * `A`
-    #
-    #   * `AAAA`
     #
     #   * `CNAME`
     #
@@ -6910,267 +6315,6 @@ module Aws::Lightsail
     #
     class GetBlueprintsResult < Struct.new(
       :blueprints,
-      :next_page_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetBucketAccessKeysRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket for which to return access keys.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketAccessKeysRequest AWS API Documentation
-    #
-    class GetBucketAccessKeysRequest < Struct.new(
-      :bucket_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] access_keys
-    #   An object that describes the access keys for the specified bucket.
-    #   @return [Array<Types::AccessKey>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketAccessKeysResult AWS API Documentation
-    #
-    class GetBucketAccessKeysResult < Struct.new(
-      :access_keys)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetBucketBundlesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         include_inactive: false,
-    #       }
-    #
-    # @!attribute [rw] include_inactive
-    #   A Boolean value that indicates whether to include inactive
-    #   (unavailable) bundles in the response.
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketBundlesRequest AWS API Documentation
-    #
-    class GetBucketBundlesRequest < Struct.new(
-      :include_inactive)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] bundles
-    #   An object that describes bucket bundles.
-    #   @return [Array<Types::BucketBundle>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketBundlesResult AWS API Documentation
-    #
-    class GetBucketBundlesResult < Struct.new(
-      :bundles)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetBucketMetricDataRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         metric_name: "BucketSizeBytes", # required, accepts BucketSizeBytes, NumberOfObjects
-    #         start_time: Time.now, # required
-    #         end_time: Time.now, # required
-    #         period: 1, # required
-    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
-    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket for which to get metric data.
-    #   @return [String]
-    #
-    # @!attribute [rw] metric_name
-    #   The metric for which you want to return information.
-    #
-    #   Valid bucket metric names are listed below, along with the most
-    #   useful statistics to include in your request, and the published unit
-    #   value.
-    #
-    #   <note markdown="1"> These bucket metrics are reported once per day.
-    #
-    #    </note>
-    #
-    #   * <b> <code>BucketSizeBytes</code> </b> - The amount of data in
-    #     bytes stored in a bucket. This value is calculated by summing the
-    #     size of all objects in the bucket (including object versions),
-    #     including the size of all parts for all incomplete multipart
-    #     uploads to the bucket.
-    #
-    #     Statistics: The most useful statistic is `Maximum`.
-    #
-    #     Unit: The published unit is `Bytes`.
-    #
-    #   * <b> <code>NumberOfObjects</code> </b> - The total number of
-    #     objects stored in a bucket. This value is calculated by counting
-    #     all objects in the bucket (including object versions) and the
-    #     total number of parts for all incomplete multipart uploads to the
-    #     bucket.
-    #
-    #     Statistics: The most useful statistic is `Average`.
-    #
-    #     Unit: The published unit is `Count`.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   The timestamp indicating the earliest data to be returned.
-    #   @return [Time]
-    #
-    # @!attribute [rw] end_time
-    #   The timestamp indicating the latest data to be returned.
-    #   @return [Time]
-    #
-    # @!attribute [rw] period
-    #   The granularity, in seconds, of the returned data points.
-    #
-    #   <note markdown="1"> Bucket storage metrics are reported once per day. Therefore, you
-    #   should specify a period of 86400 seconds, which is the number of
-    #   seconds in a day.
-    #
-    #    </note>
-    #   @return [Integer]
-    #
-    # @!attribute [rw] statistics
-    #   The statistic for the metric.
-    #
-    #   The following statistics are available:
-    #
-    #   * `Minimum` - The lowest value observed during the specified period.
-    #     Use this value to determine low volumes of activity for your
-    #     application.
-    #
-    #   * `Maximum` - The highest value observed during the specified
-    #     period. Use this value to determine high volumes of activity for
-    #     your application.
-    #
-    #   * `Sum` - The sum of all values submitted for the matching metric.
-    #     You can use this statistic to determine the total volume of a
-    #     metric.
-    #
-    #   * `Average` - The value of `Sum` / `SampleCount` during the
-    #     specified period. By comparing this statistic with the `Minimum`
-    #     and `Maximum` values, you can determine the full scope of a metric
-    #     and how close the average use is to the `Minimum` and `Maximum`
-    #     values. This comparison helps you to know when to increase or
-    #     decrease your resources.
-    #
-    #   * `SampleCount` - The count, or number, of data points used for the
-    #     statistical calculation.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] unit
-    #   The unit for the metric data request.
-    #
-    #   Valid units depend on the metric data being requested. For the valid
-    #   units with each available metric, see the `metricName` parameter.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketMetricDataRequest AWS API Documentation
-    #
-    class GetBucketMetricDataRequest < Struct.new(
-      :bucket_name,
-      :metric_name,
-      :start_time,
-      :end_time,
-      :period,
-      :statistics,
-      :unit)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] metric_name
-    #   The name of the metric returned.
-    #   @return [String]
-    #
-    # @!attribute [rw] metric_data
-    #   An array of objects that describe the metric data returned.
-    #   @return [Array<Types::MetricDatapoint>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketMetricDataResult AWS API Documentation
-    #
-    class GetBucketMetricDataResult < Struct.new(
-      :metric_name,
-      :metric_data)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetBucketsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName",
-    #         page_token: "string",
-    #         include_connected_resources: false,
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket for which to return information.
-    #
-    #   When omitted, the response includes all of your buckets in the AWS
-    #   Region where the request is made.
-    #   @return [String]
-    #
-    # @!attribute [rw] page_token
-    #   The token to advance to the next page of results from your request.
-    #
-    #   To get a page token, perform an initial `GetBuckets` request. If
-    #   your results are paginated, the response will return a next page
-    #   token that you can specify as the page token in a subsequent
-    #   request.
-    #   @return [String]
-    #
-    # @!attribute [rw] include_connected_resources
-    #   A Boolean value that indicates whether to include Lightsail
-    #   instances that were given access to the bucket using the
-    #   SetResourceAccessForBucket action.
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketsRequest AWS API Documentation
-    #
-    class GetBucketsRequest < Struct.new(
-      :bucket_name,
-      :page_token,
-      :include_connected_resources)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] buckets
-    #   An array of objects that describe buckets.
-    #   @return [Array<Types::Bucket>]
-    #
-    # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of results from your request.
-    #
-    #   A next page token is not returned if there are no more results to
-    #   display.
-    #
-    #   To get the next page of results, perform another `GetBuckets`
-    #   request and specify the next page token using the `pageToken`
-    #   parameter.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketsResult AWS API Documentation
-    #
-    class GetBucketsResult < Struct.new(
-      :buckets,
       :next_page_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8163,6 +7307,9 @@ module Aws::Lightsail
     #
     # @!attribute [rw] distribution_name
     #   The name of the distribution for which to return information.
+    #
+    #   Use the `GetDistributions` action to get a list of distribution
+    #   names that you can specify.
     #
     #   When omitted, the response includes all of your distributions in the
     #   AWS Region where the request is made.
@@ -10404,7 +9551,7 @@ module Aws::Lightsail
     #
     #       {
     #         name: "ResourceName",
-    #         region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
+    #         region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
     #         protocol_policy: "http-only", # accepts http-only, https-only
     #       }
     #
@@ -10465,12 +9612,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] blueprint_id
@@ -11223,12 +10370,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] state
@@ -11398,7 +10545,7 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes an SSH key pair.
+    # Describes the SSH key pair.
     #
     # @!attribute [rw] name
     #   The friendly name of the SSH key pair.
@@ -11432,12 +10579,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] fingerprint
@@ -11565,12 +10712,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LightsailDistribution AWS API Documentation
@@ -11600,7 +10747,7 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes a load balancer.
+    # Describes the Lightsail load balancer.
     #
     # @!attribute [rw] name
     #   The name of the load balancer (e.g., `my-load-balancer`).
@@ -11633,12 +10780,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] dns_name
@@ -11779,12 +10926,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] load_balancer_name
@@ -13195,12 +12342,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] relational_database_blueprint_id
@@ -13596,12 +12743,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
-    #   information about tags in Lightsail, see the [Amazon Lightsail
-    #   Developer Guide][1].
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] engine
@@ -13818,26 +12965,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes an Amazon Lightsail instance that has access to a Lightsail
-    # bucket.
-    #
-    # @!attribute [rw] name
-    #   The name of the Lightsail instance.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   The Lightsail resource type (for example, `Instance`).
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResourceReceivingAccess AWS API Documentation
-    #
-    class ResourceReceivingAccess < Struct.new(
-      :name,
-      :resource_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Describes the domain name system (DNS) records to add to your
     # domain's DNS to validate it for an Amazon Lightsail certificate.
     #
@@ -13925,7 +13052,7 @@ module Aws::Lightsail
     #   data as a hash:
     #
     #       {
-    #         resource_type: "ContainerService", # required, accepts ContainerService, Instance, StaticIp, KeyPair, InstanceSnapshot, Domain, PeeredVpc, LoadBalancer, LoadBalancerTlsCertificate, Disk, DiskSnapshot, RelationalDatabase, RelationalDatabaseSnapshot, ExportSnapshotRecord, CloudFormationStackRecord, Alarm, ContactMethod, Distribution, Certificate, Bucket
+    #         resource_type: "ContainerService", # required, accepts ContainerService, Instance, StaticIp, KeyPair, InstanceSnapshot, Domain, PeeredVpc, LoadBalancer, LoadBalancerTlsCertificate, Disk, DiskSnapshot, RelationalDatabase, RelationalDatabaseSnapshot, ExportSnapshotRecord, CloudFormationStackRecord, Alarm, ContactMethod, Distribution, Certificate
     #         resource_name: "ResourceName", # required
     #         ip_address_type: "dualstack", # required, accepts dualstack, ipv4
     #       }
@@ -13973,60 +13100,6 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetIpAddressTypeResult AWS API Documentation
     #
     class SetIpAddressTypeResult < Struct.new(
-      :operations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass SetResourceAccessForBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_name: "ResourceName", # required
-    #         bucket_name: "BucketName", # required
-    #         access: "allow", # required, accepts allow, deny
-    #       }
-    #
-    # @!attribute [rw] resource_name
-    #   The name of the Lightsail instance for which to set bucket access.
-    #   The instance must be in a running or stopped state.
-    #   @return [String]
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket for which to set access to another Lightsail
-    #   resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] access
-    #   The access setting.
-    #
-    #   The following access settings are available:
-    #
-    #   * `allow` - Allows access to the bucket and its objects.
-    #
-    #   * `deny` - Denies access to the bucket and its objects. Use this
-    #     setting to remove access for a resource previously set to `allow`.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetResourceAccessForBucketRequest AWS API Documentation
-    #
-    class SetResourceAccessForBucketRequest < Struct.new(
-      :resource_name,
-      :bucket_name,
-      :access)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] operations
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the timestamp of the request, and the
-    #   resources affected by the request.
-    #   @return [Array<Types::Operation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetResourceAccessForBucketResult AWS API Documentation
-    #
-    class SetResourceAccessForBucketResult < Struct.new(
       :operations)
       SENSITIVE = []
       include Aws::Structure
@@ -14098,7 +13171,7 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes a static IP.
+    # Describes the static IP.
     #
     # @!attribute [rw] name
     #   The name of the static IP (e.g., `StaticIP-Ohio-EXAMPLE`).
@@ -14245,12 +13318,12 @@ module Aws::Lightsail
     # Describes a tag key and optional value assigned to an Amazon Lightsail
     # resource.
     #
-    # For more information about tags in Lightsail, see the [Amazon
-    # Lightsail Developer Guide][1].
+    # For more information about tags in Lightsail, see the [Lightsail Dev
+    # Guide][1].
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -14475,119 +13548,6 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UpdateBucketBundleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         bundle_id: "NonEmptyString", # required
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket for which to update the bundle.
-    #   @return [String]
-    #
-    # @!attribute [rw] bundle_id
-    #   The ID of the new bundle to apply to the bucket.
-    #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateBucketBundleRequest AWS API Documentation
-    #
-    class UpdateBucketBundleRequest < Struct.new(
-      :bucket_name,
-      :bundle_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] operations
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the timestamp of the request, and the
-    #   resources affected by the request.
-    #   @return [Array<Types::Operation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateBucketBundleResult AWS API Documentation
-    #
-    class UpdateBucketBundleResult < Struct.new(
-      :operations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass UpdateBucketRequest
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "BucketName", # required
-    #         access_rules: {
-    #           get_object: "public", # accepts public, private
-    #           allow_public_overrides: false,
-    #         },
-    #         versioning: "NonEmptyString",
-    #         readonly_access_accounts: ["NonEmptyString"],
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the bucket to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] access_rules
-    #   An object that sets the public accessibility of objects in the
-    #   specified bucket.
-    #   @return [Types::AccessRules]
-    #
-    # @!attribute [rw] versioning
-    #   Specifies whether to enable or suspend versioning of objects in the
-    #   bucket.
-    #
-    #   The following options can be specified:
-    #
-    #   * `Enabled` - Enables versioning of objects in the specified bucket.
-    #
-    #   * `Suspended` - Suspends versioning of objects in the specified
-    #     bucket. Existing object versions are retained.
-    #   @return [String]
-    #
-    # @!attribute [rw] readonly_access_accounts
-    #   An array of strings to specify the AWS account IDs that can access
-    #   the bucket.
-    #
-    #   You can give a maximum of 10 AWS accounts access to a bucket.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateBucketRequest AWS API Documentation
-    #
-    class UpdateBucketRequest < Struct.new(
-      :bucket_name,
-      :access_rules,
-      :versioning,
-      :readonly_access_accounts)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] bucket
-    #   An object that describes the bucket that is updated.
-    #   @return [Types::Bucket]
-    #
-    # @!attribute [rw] operations
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the timestamp of the request, and the
-    #   resources affected by the request.
-    #   @return [Array<Types::Operation>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateBucketResult AWS API Documentation
-    #
-    class UpdateBucketResult < Struct.new(
-      :bucket,
-      :operations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass UpdateContainerServiceRequest
     #   data as a hash:
     #
@@ -14729,7 +13689,7 @@ module Aws::Lightsail
     #         distribution_name: "ResourceName", # required
     #         origin: {
     #           name: "ResourceName",
-    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, eu-north-1
+    #           region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2
     #           protocol_policy: "http-only", # accepts http-only, https-only
     #         },
     #         default_cache_behavior: {

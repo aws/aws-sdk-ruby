@@ -41,10 +41,6 @@ module Aws::CodeGuruReviewer
     #             connection_arn: "ConnectionArn", # required
     #             owner: "Owner", # required
     #           },
-    #           s3_bucket: {
-    #             name: "Name", # required
-    #             bucket_name: "S3BucketName", # required
-    #           },
     #         },
     #         client_request_token: "ClientRequestToken",
     #         tags: {
@@ -130,80 +126,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # A type of [ `SourceCodeType` ][1] that specifies a code diff between a
-    # source and destination branch in an associated repository.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
-    #
-    # @note When making an API call, you may pass BranchDiffSourceCodeType
-    #   data as a hash:
-    #
-    #       {
-    #         source_branch_name: "BranchName", # required
-    #         destination_branch_name: "BranchName", # required
-    #       }
-    #
-    # @!attribute [rw] source_branch_name
-    #   The source branch for a diff in an associated repository.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_branch_name
-    #   The destination branch for a diff in an associated repository.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/BranchDiffSourceCodeType AWS API Documentation
-    #
-    class BranchDiffSourceCodeType < Struct.new(
-      :source_branch_name,
-      :destination_branch_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Code artifacts are source code artifacts and build artifacts used in a
-    # repository analysis or a pull request review.
-    #
-    # * Source code artifacts are source code files in a Git repository that
-    #   are compressed into a .zip file.
-    #
-    # * Build artifacts are .jar or .class files that are compressed in a
-    #   .zip file.
-    #
-    # @note When making an API call, you may pass CodeArtifacts
-    #   data as a hash:
-    #
-    #       {
-    #         source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #         build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #       }
-    #
-    # @!attribute [rw] source_code_artifacts_object_key
-    #   The S3 object key for a source code .zip file. This is required for
-    #   all code reviews.
-    #   @return [String]
-    #
-    # @!attribute [rw] build_artifacts_object_key
-    #   The S3 object key for a build artifacts .zip file that contains .jar
-    #   or .class files. This is required for a code review with security
-    #   analysis. For more information, see [Create code reviews with
-    #   security analysis][1] in the *Amazon CodeGuru Reviewer User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/code-review-security.html
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeArtifacts AWS API Documentation
-    #
-    class CodeArtifacts < Struct.new(
-      :source_code_artifacts_object_key,
-      :build_artifacts_object_key)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information about an AWS CodeCommit repository. The CodeCommit
     # repository must be in the same AWS Region and AWS account where its
     # CodeGuru Reviewer code reviews are configured.
@@ -255,8 +177,7 @@ module Aws::CodeGuruReviewer
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
     #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
-    #   the username for the account that owns the repository. For an S3
-    #   repository, it can be the username or AWS account ID.
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -318,12 +239,6 @@ module Aws::CodeGuruReviewer
     #   The statistics from the code review.
     #   @return [Types::Metrics]
     #
-    # @!attribute [rw] analysis_types
-    #   They types of analysis performed during a repository analysis or a
-    #   pull request review. You can specify either `Security`,
-    #   `CodeQuality`, or both.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeReview AWS API Documentation
     #
     class CodeReview < Struct.new(
@@ -340,8 +255,7 @@ module Aws::CodeGuruReviewer
       :pull_request_id,
       :source_code_type,
       :association_arn,
-      :metrics,
-      :analysis_types)
+      :metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -368,8 +282,7 @@ module Aws::CodeGuruReviewer
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
     #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
-    #   the username for the account that owns the repository. For an S3
-    #   repository, it can be the username or AWS account ID.
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -413,10 +326,6 @@ module Aws::CodeGuruReviewer
     #   The statistics from the code review.
     #   @return [Types::MetricsSummary]
     #
-    # @!attribute [rw] source_code_type
-    #   Specifies the source code that is analyzed in a code review.
-    #   @return [Types::SourceCodeType]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeReviewSummary AWS API Documentation
     #
     class CodeReviewSummary < Struct.new(
@@ -430,8 +339,7 @@ module Aws::CodeGuruReviewer
       :last_updated_time_stamp,
       :type,
       :pull_request_id,
-      :metrics_summary,
-      :source_code_type)
+      :metrics_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -439,7 +347,9 @@ module Aws::CodeGuruReviewer
     # The type of a code review. There are two code review types:
     #
     # * `PullRequest` - A code review that is automatically triggered by a
-    #   pull request on an associated repository.
+    #   pull request on an associated repository. Because this type of code
+    #   review is automatically generated, you cannot specify this code
+    #   review type using [ `CreateCodeReview` ][1].
     #
     # * `RepositoryAnalysis` - A code review that analyzes all code under a
     #   specified branch in an associated repository. The associated
@@ -454,44 +364,10 @@ module Aws::CodeGuruReviewer
     #
     #       {
     #         repository_analysis: { # required
-    #           repository_head: {
+    #           repository_head: { # required
     #             branch_name: "BranchName", # required
     #           },
-    #           source_code_type: {
-    #             commit_diff: {
-    #               source_commit: "CommitId",
-    #               destination_commit: "CommitId",
-    #               merge_base_commit: "CommitId",
-    #             },
-    #             repository_head: {
-    #               branch_name: "BranchName", # required
-    #             },
-    #             branch_diff: {
-    #               source_branch_name: "BranchName", # required
-    #               destination_branch_name: "BranchName", # required
-    #             },
-    #             s3_bucket_repository: {
-    #               name: "Name", # required
-    #               details: {
-    #                 bucket_name: "S3BucketName",
-    #                 code_artifacts: {
-    #                   source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #                   build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #                 },
-    #               },
-    #             },
-    #             request_metadata: {
-    #               request_id: "RequestId",
-    #               requester: "Requester",
-    #               event_info: {
-    #                 name: "EventName",
-    #                 state: "EventState",
-    #               },
-    #               vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #             },
-    #           },
     #         },
-    #         analysis_types: ["Security"], # accepts Security, CodeQuality
     #       }
     #
     # @!attribute [rw] repository_analysis
@@ -504,59 +380,34 @@ module Aws::CodeGuruReviewer
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview
     #   @return [Types::RepositoryAnalysis]
     #
-    # @!attribute [rw] analysis_types
-    #   They types of analysis performed during a repository analysis or a
-    #   pull request review. You can specify either `Security`,
-    #   `CodeQuality`, or both.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CodeReviewType AWS API Documentation
     #
     class CodeReviewType < Struct.new(
-      :repository_analysis,
-      :analysis_types)
+      :repository_analysis)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A type of [ `SourceCodeType` ][1] that specifies the commit diff for a
-    # pull request on an associated repository. The `SourceCommit` and
-    # `DestinationCommit` fields are required to do a pull request code
-    # review.
+    # pull request on an associated repository.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
     #
-    # @note When making an API call, you may pass CommitDiffSourceCodeType
-    #   data as a hash:
-    #
-    #       {
-    #         source_commit: "CommitId",
-    #         destination_commit: "CommitId",
-    #         merge_base_commit: "CommitId",
-    #       }
-    #
     # @!attribute [rw] source_commit
-    #   The SHA of the source commit used to generate a commit diff. This
-    #   field is required for a pull request code review.
+    #   The SHA of the source commit used to generate a commit diff.
     #   @return [String]
     #
     # @!attribute [rw] destination_commit
     #   The SHA of the destination commit used to generate a commit diff.
-    #   This field is required for a pull request code review.
-    #   @return [String]
-    #
-    # @!attribute [rw] merge_base_commit
-    #   The SHA of the merge base of a commit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CommitDiffSourceCodeType AWS API Documentation
     #
     class CommitDiffSourceCodeType < Struct.new(
       :source_commit,
-      :destination_commit,
-      :merge_base_commit)
+      :destination_commit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -584,44 +435,10 @@ module Aws::CodeGuruReviewer
     #         repository_association_arn: "AssociationArn", # required
     #         type: { # required
     #           repository_analysis: { # required
-    #             repository_head: {
+    #             repository_head: { # required
     #               branch_name: "BranchName", # required
     #             },
-    #             source_code_type: {
-    #               commit_diff: {
-    #                 source_commit: "CommitId",
-    #                 destination_commit: "CommitId",
-    #                 merge_base_commit: "CommitId",
-    #               },
-    #               repository_head: {
-    #                 branch_name: "BranchName", # required
-    #               },
-    #               branch_diff: {
-    #                 source_branch_name: "BranchName", # required
-    #                 destination_branch_name: "BranchName", # required
-    #               },
-    #               s3_bucket_repository: {
-    #                 name: "Name", # required
-    #                 details: {
-    #                   bucket_name: "S3BucketName",
-    #                   code_artifacts: {
-    #                     source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #                     build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #                   },
-    #                 },
-    #               },
-    #               request_metadata: {
-    #                 request_id: "RequestId",
-    #                 requester: "Requester",
-    #                 event_info: {
-    #                   name: "EventName",
-    #                   state: "EventState",
-    #                 },
-    #                 vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #               },
-    #             },
     #           },
-    #           analysis_types: ["Security"], # accepts Security, CodeQuality
     #         },
     #         client_request_token: "ClientRequestToken",
     #       }
@@ -885,36 +702,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about an event. The event might be a push, pull request,
-    # scheduled request, or another type of event.
-    #
-    # @note When making an API call, you may pass EventInfo
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EventName",
-    #         state: "EventState",
-    #       }
-    #
-    # @!attribute [rw] name
-    #   The name of the event. The possible names are `pull_request`,
-    #   `workflow_dispatch`, `schedule`, and `push`
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   The state of an event. The state might be open, closed, or another
-    #   state.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/EventInfo AWS API Documentation
-    #
-    class EventInfo < Struct.new(
-      :name,
-      :state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The server encountered an internal error and is unable to complete the
     # request.
     #
@@ -970,7 +757,7 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer, S3Bucket
+    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #         states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #         repository_names: ["Name"],
     #         type: "PullRequest", # required, accepts PullRequest, RepositoryAnalysis
@@ -1193,7 +980,7 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer, S3Bucket
+    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket, GitHubEnterpriseServer
     #         states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating, Disassociated
     #         names: ["Name"],
     #         owners: ["Owner"],
@@ -1596,10 +1383,6 @@ module Aws::CodeGuruReviewer
     #   for the lines of code between the start line and the end line.
     #   @return [String]
     #
-    # @!attribute [rw] recommendation_category
-    #   The type of a recommendation.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RecommendationSummary AWS API Documentation
     #
     class RecommendationSummary < Struct.new(
@@ -1607,8 +1390,7 @@ module Aws::CodeGuruReviewer
       :recommendation_id,
       :start_line,
       :end_line,
-      :description,
-      :recommendation_category)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1635,10 +1417,6 @@ module Aws::CodeGuruReviewer
     #           connection_arn: "ConnectionArn", # required
     #           owner: "Owner", # required
     #         },
-    #         s3_bucket: {
-    #           name: "Name", # required
-    #           bucket_name: "S3BucketName", # required
-    #         },
     #       }
     #
     # @!attribute [rw] code_commit
@@ -1653,17 +1431,12 @@ module Aws::CodeGuruReviewer
     #   Information about a GitHub Enterprise Server repository.
     #   @return [Types::ThirdPartySourceRepository]
     #
-    # @!attribute [rw] s3_bucket
-    #   Information about a repository in an S3 bucket.
-    #   @return [Types::S3Repository]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/Repository AWS API Documentation
     #
     class Repository < Struct.new(
       :code_commit,
       :bitbucket,
-      :git_hub_enterprise_server,
-      :s3_bucket)
+      :git_hub_enterprise_server)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1680,41 +1453,8 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         repository_head: {
+    #         repository_head: { # required
     #           branch_name: "BranchName", # required
-    #         },
-    #         source_code_type: {
-    #           commit_diff: {
-    #             source_commit: "CommitId",
-    #             destination_commit: "CommitId",
-    #             merge_base_commit: "CommitId",
-    #           },
-    #           repository_head: {
-    #             branch_name: "BranchName", # required
-    #           },
-    #           branch_diff: {
-    #             source_branch_name: "BranchName", # required
-    #             destination_branch_name: "BranchName", # required
-    #           },
-    #           s3_bucket_repository: {
-    #             name: "Name", # required
-    #             details: {
-    #               bucket_name: "S3BucketName",
-    #               code_artifacts: {
-    #                 source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #                 build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #               },
-    #             },
-    #           },
-    #           request_metadata: {
-    #             request_id: "RequestId",
-    #             requester: "Requester",
-    #             event_info: {
-    #               name: "EventName",
-    #               state: "EventState",
-    #             },
-    #             vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #           },
     #         },
     #       }
     #
@@ -1727,15 +1467,10 @@ module Aws::CodeGuruReviewer
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
     #   @return [Types::RepositoryHeadSourceCodeType]
     #
-    # @!attribute [rw] source_code_type
-    #   Specifies the source code that is analyzed in a code review.
-    #   @return [Types::SourceCodeType]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RepositoryAnalysis AWS API Documentation
     #
     class RepositoryAnalysis < Struct.new(
-      :repository_head,
-      :source_code_type)
+      :repository_head)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1777,8 +1512,7 @@ module Aws::CodeGuruReviewer
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
     #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
-    #   the username for the account that owns the repository. For an S3
-    #   repository, it can be the username or AWS account ID.
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -1852,12 +1586,6 @@ module Aws::CodeGuruReviewer
     #     association.
     #   @return [Types::KMSKeyDetails]
     #
-    # @!attribute [rw] s3_repository_details
-    #   Specifies the name of an S3 bucket and a `CodeArtifacts` object that
-    #   contains the S3 object keys for a source code .zip file and for a
-    #   build artifacts .zip file that contains .jar or .class files.
-    #   @return [Types::S3RepositoryDetails]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RepositoryAssociation AWS API Documentation
     #
     class RepositoryAssociation < Struct.new(
@@ -1871,8 +1599,7 @@ module Aws::CodeGuruReviewer
       :state_reason,
       :last_updated_time_stamp,
       :created_time_stamp,
-      :kms_key_details,
-      :s3_repository_details)
+      :kms_key_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1925,8 +1652,7 @@ module Aws::CodeGuruReviewer
     #   The owner of the repository. For an AWS CodeCommit repository, this
     #   is the AWS account ID of the account that owns the repository. For a
     #   GitHub, GitHub Enterprise Server, or Bitbucket repository, this is
-    #   the username for the account that owns the repository. For an S3
-    #   repository, it can be the username or AWS account ID.
+    #   the username for the account that owns the repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -2016,62 +1742,6 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Metadata that is associated with a code review. This applies to both
-    # pull request and repository analysis code reviews.
-    #
-    # @note When making an API call, you may pass RequestMetadata
-    #   data as a hash:
-    #
-    #       {
-    #         request_id: "RequestId",
-    #         requester: "Requester",
-    #         event_info: {
-    #           name: "EventName",
-    #           state: "EventState",
-    #         },
-    #         vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #       }
-    #
-    # @!attribute [rw] request_id
-    #   The ID of the request. This is required for a pull request code
-    #   review.
-    #   @return [String]
-    #
-    # @!attribute [rw] requester
-    #   An identifier, such as a name or account ID, that is associated with
-    #   the requester. The `Requester` is used to capture the `author/actor`
-    #   name of the event request.
-    #   @return [String]
-    #
-    # @!attribute [rw] event_info
-    #   Information about the event associated with a code review.
-    #   @return [Types::EventInfo]
-    #
-    # @!attribute [rw] vendor_name
-    #   The name of the repository vendor used to upload code to an S3
-    #   bucket for a CI/CD code review. For example, if code and artifacts
-    #   are uploaded to an S3 bucket for a CI/CD code review by GitHub
-    #   scripts from a GitHub repository, then the repository association's
-    #   `ProviderType` is `S3Bucket` and the CI/CD repository vendor name is
-    #   GitHub. For more information, see the definition for `ProviderType`
-    #   in [RepositoryAssociation][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/RequestMetadata AWS API Documentation
-    #
-    class RequestMetadata < Struct.new(
-      :request_id,
-      :requester,
-      :event_info,
-      :vendor_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The resource specified in the request was not found.
     #
     # @!attribute [rw] message
@@ -2085,145 +1755,9 @@ module Aws::CodeGuruReviewer
       include Aws::Structure
     end
 
-    # Information about an associated repository in an S3 bucket. The
-    # associated repository contains a source code .zip file and a build
-    # artifacts .zip file that contains .jar or .class files.
-    #
-    # @note When making an API call, you may pass S3BucketRepository
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         details: {
-    #           bucket_name: "S3BucketName",
-    #           code_artifacts: {
-    #             source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #             build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] name
-    #   The name of the repository when the `ProviderType` is `S3Bucket`.
-    #   @return [String]
-    #
-    # @!attribute [rw] details
-    #   An `S3RepositoryDetails` object that specifies the name of an S3
-    #   bucket and a `CodeArtifacts` object. The `CodeArtifacts` object
-    #   includes the S3 object keys for a source code .zip file and for a
-    #   build artifacts .zip file.
-    #   @return [Types::S3RepositoryDetails]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/S3BucketRepository AWS API Documentation
-    #
-    class S3BucketRepository < Struct.new(
-      :name,
-      :details)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about a repository in an S3 bucket.
-    #
-    # @note When making an API call, you may pass S3Repository
-    #   data as a hash:
-    #
-    #       {
-    #         name: "Name", # required
-    #         bucket_name: "S3BucketName", # required
-    #       }
-    #
-    # @!attribute [rw] name
-    #   The name of the repository in the S3 bucket.
-    #   @return [String]
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the S3 bucket used for associating a new S3 repository.
-    #   It must begin with `codeguru-reviewer-`.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/S3Repository AWS API Documentation
-    #
-    class S3Repository < Struct.new(
-      :name,
-      :bucket_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Specifies the name of an S3 bucket and a `CodeArtifacts` object that
-    # contains the S3 object keys for a source code .zip file and for a
-    # build artifacts .zip file that contains .jar or .class files.
-    #
-    # @note When making an API call, you may pass S3RepositoryDetails
-    #   data as a hash:
-    #
-    #       {
-    #         bucket_name: "S3BucketName",
-    #         code_artifacts: {
-    #           source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #           build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #         },
-    #       }
-    #
-    # @!attribute [rw] bucket_name
-    #   The name of the S3 bucket used for associating a new S3 repository.
-    #   It must begin with `codeguru-reviewer-`.
-    #   @return [String]
-    #
-    # @!attribute [rw] code_artifacts
-    #   A `CodeArtifacts` object. The `CodeArtifacts` object includes the S3
-    #   object key for a source code .zip file and for a build artifacts
-    #   .zip file that contains .jar or .class files.
-    #   @return [Types::CodeArtifacts]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/S3RepositoryDetails AWS API Documentation
-    #
-    class S3RepositoryDetails < Struct.new(
-      :bucket_name,
-      :code_artifacts)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Specifies the source code that is analyzed in a code review.
-    #
-    # @note When making an API call, you may pass SourceCodeType
-    #   data as a hash:
-    #
-    #       {
-    #         commit_diff: {
-    #           source_commit: "CommitId",
-    #           destination_commit: "CommitId",
-    #           merge_base_commit: "CommitId",
-    #         },
-    #         repository_head: {
-    #           branch_name: "BranchName", # required
-    #         },
-    #         branch_diff: {
-    #           source_branch_name: "BranchName", # required
-    #           destination_branch_name: "BranchName", # required
-    #         },
-    #         s3_bucket_repository: {
-    #           name: "Name", # required
-    #           details: {
-    #             bucket_name: "S3BucketName",
-    #             code_artifacts: {
-    #               source_code_artifacts_object_key: "SourceCodeArtifactsObjectKey", # required
-    #               build_artifacts_object_key: "BuildArtifactsObjectKey",
-    #             },
-    #           },
-    #         },
-    #         request_metadata: {
-    #           request_id: "RequestId",
-    #           requester: "Requester",
-    #           event_info: {
-    #             name: "EventName",
-    #             state: "EventState",
-    #           },
-    #           vendor_name: "GitHub", # accepts GitHub, GitLab, NativeS3
-    #         },
-    #       }
+    # Specifies the source code that is analyzed in a code review. A code
+    # review can analyze the source code that is specified using a pull
+    # request diff or a branch in an associated repository.
     #
     # @!attribute [rw] commit_diff
     #   A [ `SourceCodeType` ][1] that specifies a commit diff created by a
@@ -2243,44 +1777,11 @@ module Aws::CodeGuruReviewer
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
     #   @return [Types::RepositoryHeadSourceCodeType]
     #
-    # @!attribute [rw] branch_diff
-    #   A type of [ `SourceCodeType` ][1] that specifies a source branch
-    #   name and a destination branch name in an associated repository.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
-    #   @return [Types::BranchDiffSourceCodeType]
-    #
-    # @!attribute [rw] s3_bucket_repository
-    #   Information about an associated repository in an S3 bucket that
-    #   includes its name and an `S3RepositoryDetails` object. The
-    #   `S3RepositoryDetails` object includes the name of an S3 bucket, an
-    #   S3 key for a source code .zip file, and an S3 key for a build
-    #   artifacts .zip file. `S3BucketRepository` is required in [
-    #   `SourceCodeType` ][1] for `S3BucketRepository` based code reviews.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
-    #   @return [Types::S3BucketRepository]
-    #
-    # @!attribute [rw] request_metadata
-    #   Metadata that is associated with a code review. This applies to any
-    #   type of code review supported by CodeGuru Reviewer. The
-    #   `RequestMetadaa` field captures any event metadata. For example, it
-    #   might capture metadata associated with an event trigger, such as a
-    #   push or a pull request.
-    #   @return [Types::RequestMetadata]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/SourceCodeType AWS API Documentation
     #
     class SourceCodeType < Struct.new(
       :commit_diff,
-      :repository_head,
-      :branch_diff,
-      :s3_bucket_repository,
-      :request_metadata)
+      :repository_head)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2363,8 +1864,7 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] owner
     #   The owner of the repository. For a GitHub, GitHub Enterprise, or
     #   Bitbucket repository, this is the username for the account that owns
-    #   the repository. For an S3 repository, this can be the username or
-    #   AWS account ID.
+    #   the repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ThirdPartySourceRepository AWS API Documentation

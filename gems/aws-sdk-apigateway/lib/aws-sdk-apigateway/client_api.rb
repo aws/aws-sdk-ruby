@@ -423,7 +423,6 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateDomainNameRequest.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
     CreateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
-    CreateDomainNameRequest.add_member(:ownership_verification_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownershipVerificationCertificateArn"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -633,7 +632,6 @@ module Aws::APIGateway
     DomainName.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
     DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     DomainName.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
-    DomainName.add_member(:ownership_verification_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownershipVerificationCertificateArn"))
     DomainName.struct_class = Types::DomainName
 
     DomainNames.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))

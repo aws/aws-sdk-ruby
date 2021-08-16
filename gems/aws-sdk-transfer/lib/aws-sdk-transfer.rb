@@ -28,7 +28,7 @@ require_relative 'aws-sdk-transfer/customizations'
 # structure.
 #
 #     transfer = Aws::Transfer::Client.new
-#     resp = transfer.create_access(params)
+#     resp = transfer.create_server(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-transfer/customizations'
 # @!group service
 module Aws::Transfer
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.32.0'
 
 end

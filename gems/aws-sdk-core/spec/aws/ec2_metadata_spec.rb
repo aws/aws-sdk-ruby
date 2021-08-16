@@ -20,48 +20,6 @@ module Aws
       token_value
     end
 
-    context 'endpoint configuration' do
-      it 'can be configured without a scheme' do
-        client = EC2Metadata.new(endpoint: '123.123.123.123')
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('123.123.123.123')
-      end
-
-      it 'can be configured with a scheme' do
-        client = EC2Metadata.new(endpoint: 'http://123.123.123.123')
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('http://123.123.123.123')
-      end
-
-      it 'takes precedence over endpoint mode' do
-        client = EC2Metadata.new(
-          endpoint_mode: 'IPv6',
-          endpoint: '123.123.123.123'
-        )
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('123.123.123.123')
-      end
-    end
-
-    context 'endpoint mode configuration' do
-      it 'defaults to ipv4' do
-        client = EC2Metadata.new
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('http://169.254.169.254')
-      end
-
-      it 'can be configured to use ipv6 mode' do
-        client = EC2Metadata.new(endpoint_mode: 'IPv6')
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('http://[fd00:ec2::254]')
-      end
-
-      it 'raises with an unknown mode' do
-        expect { EC2Metadata.new(endpoint_mode: 'IPv69') }
-          .to raise_error(ArgumentError)
-      end
-    end
-
     describe '#get' do
       it 'fetches a token before getting metadata' do
         token = stub_get_token

@@ -18,7 +18,6 @@ module Aws::Chime
     AccountList = Shapes::ListShape.new(name: 'AccountList')
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
-    AccountStatus = Shapes::StringShape.new(name: 'AccountStatus')
     AccountType = Shapes::StringShape.new(name: 'AccountType')
     AlexaForBusinessMetadata = Shapes::StructureShape.new(name: 'AlexaForBusinessMetadata')
     Alpha2CountryCode = Shapes::StringShape.new(name: 'Alpha2CountryCode')
@@ -138,8 +137,6 @@ module Aws::Chime
     CreateChannelModeratorResponse = Shapes::StructureShape.new(name: 'CreateChannelModeratorResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
-    CreateMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineRequest')
-    CreateMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'CreateMediaCapturePipelineResponse')
     CreateMeetingDialOutRequest = Shapes::StructureShape.new(name: 'CreateMeetingDialOutRequest')
     CreateMeetingDialOutResponse = Shapes::StructureShape.new(name: 'CreateMeetingDialOutResponse')
     CreateMeetingRequest = Shapes::StructureShape.new(name: 'CreateMeetingRequest')
@@ -185,7 +182,6 @@ module Aws::Chime
     DeleteChannelModeratorRequest = Shapes::StructureShape.new(name: 'DeleteChannelModeratorRequest')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteEventsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEventsConfigurationRequest')
-    DeleteMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'DeleteMediaCapturePipelineRequest')
     DeleteMeetingRequest = Shapes::StructureShape.new(name: 'DeleteMeetingRequest')
     DeletePhoneNumberRequest = Shapes::StructureShape.new(name: 'DeletePhoneNumberRequest')
     DeleteProxySessionRequest = Shapes::StructureShape.new(name: 'DeleteProxySessionRequest')
@@ -232,8 +228,6 @@ module Aws::Chime
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailStatus = Shapes::StringShape.new(name: 'EmailStatus')
     EmergencyCallingConfiguration = Shapes::StructureShape.new(name: 'EmergencyCallingConfiguration')
-    EngineTranscribeMedicalSettings = Shapes::StructureShape.new(name: 'EngineTranscribeMedicalSettings')
-    EngineTranscribeSettings = Shapes::StructureShape.new(name: 'EngineTranscribeSettings')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     EventsConfiguration = Shapes::StructureShape.new(name: 'EventsConfiguration')
     ExternalMeetingIdType = Shapes::StringShape.new(name: 'ExternalMeetingIdType')
@@ -259,8 +253,6 @@ module Aws::Chime
     GetEventsConfigurationRequest = Shapes::StructureShape.new(name: 'GetEventsConfigurationRequest')
     GetEventsConfigurationResponse = Shapes::StructureShape.new(name: 'GetEventsConfigurationResponse')
     GetGlobalSettingsResponse = Shapes::StructureShape.new(name: 'GetGlobalSettingsResponse')
-    GetMediaCapturePipelineRequest = Shapes::StructureShape.new(name: 'GetMediaCapturePipelineRequest')
-    GetMediaCapturePipelineResponse = Shapes::StructureShape.new(name: 'GetMediaCapturePipelineResponse')
     GetMeetingRequest = Shapes::StructureShape.new(name: 'GetMeetingRequest')
     GetMeetingResponse = Shapes::StructureShape.new(name: 'GetMeetingResponse')
     GetMessagingSessionEndpointRequest = Shapes::StructureShape.new(name: 'GetMessagingSessionEndpointRequest')
@@ -344,8 +336,6 @@ module Aws::Chime
     ListChannelsModeratedByAppInstanceUserResponse = Shapes::StructureShape.new(name: 'ListChannelsModeratedByAppInstanceUserResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
-    ListMediaCapturePipelinesRequest = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesRequest')
-    ListMediaCapturePipelinesResponse = Shapes::StructureShape.new(name: 'ListMediaCapturePipelinesResponse')
     ListMeetingTagsRequest = Shapes::StructureShape.new(name: 'ListMeetingTagsRequest')
     ListMeetingTagsResponse = Shapes::StructureShape.new(name: 'ListMeetingTagsResponse')
     ListMeetingsRequest = Shapes::StructureShape.new(name: 'ListMeetingsRequest')
@@ -380,11 +370,6 @@ module Aws::Chime
     LogoutUserRequest = Shapes::StructureShape.new(name: 'LogoutUserRequest')
     LogoutUserResponse = Shapes::StructureShape.new(name: 'LogoutUserResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
-    MediaCapturePipeline = Shapes::StructureShape.new(name: 'MediaCapturePipeline')
-    MediaCapturePipelineList = Shapes::ListShape.new(name: 'MediaCapturePipelineList')
-    MediaPipelineSinkType = Shapes::StringShape.new(name: 'MediaPipelineSinkType')
-    MediaPipelineSourceType = Shapes::StringShape.new(name: 'MediaPipelineSourceType')
-    MediaPipelineStatus = Shapes::StringShape.new(name: 'MediaPipelineStatus')
     MediaPlacement = Shapes::StructureShape.new(name: 'MediaPlacement')
     Meeting = Shapes::StructureShape.new(name: 'Meeting')
     MeetingList = Shapes::ListShape.new(name: 'MeetingList')
@@ -499,7 +484,6 @@ module Aws::Chime
     RoomMembershipList = Shapes::ListShape.new(name: 'RoomMembershipList')
     RoomMembershipRole = Shapes::StringShape.new(name: 'RoomMembershipRole')
     RoomRetentionSettings = Shapes::StructureShape.new(name: 'RoomRetentionSettings')
-    SMAUpdateCallArgumentsMap = Shapes::MapShape.new(name: 'SMAUpdateCallArgumentsMap')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
     SendChannelMessageRequest = Shapes::StructureShape.new(name: 'SendChannelMessageRequest')
@@ -525,10 +509,6 @@ module Aws::Chime
     SipRuleTargetApplicationList = Shapes::ListShape.new(name: 'SipRuleTargetApplicationList')
     SipRuleTriggerType = Shapes::StringShape.new(name: 'SipRuleTriggerType')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
-    StartMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionRequest')
-    StartMeetingTranscriptionResponse = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionResponse')
-    StopMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionRequest')
-    StopMeetingTranscriptionResponse = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionResponse')
     StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
     StreamingNotificationTarget = Shapes::StructureShape.new(name: 'StreamingNotificationTarget')
     StreamingNotificationTargetList = Shapes::ListShape.new(name: 'StreamingNotificationTargetList')
@@ -549,14 +529,6 @@ module Aws::Chime
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TollFreePrefix = Shapes::StringShape.new(name: 'TollFreePrefix')
-    TranscribeLanguageCode = Shapes::StringShape.new(name: 'TranscribeLanguageCode')
-    TranscribeMedicalLanguageCode = Shapes::StringShape.new(name: 'TranscribeMedicalLanguageCode')
-    TranscribeMedicalRegion = Shapes::StringShape.new(name: 'TranscribeMedicalRegion')
-    TranscribeMedicalSpecialty = Shapes::StringShape.new(name: 'TranscribeMedicalSpecialty')
-    TranscribeMedicalType = Shapes::StringShape.new(name: 'TranscribeMedicalType')
-    TranscribeRegion = Shapes::StringShape.new(name: 'TranscribeRegion')
-    TranscribeVocabularyFilterMethod = Shapes::StringShape.new(name: 'TranscribeVocabularyFilterMethod')
-    TranscriptionConfiguration = Shapes::StructureShape.new(name: 'TranscriptionConfiguration')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
     UntagAttendeeRequest = Shapes::StructureShape.new(name: 'UntagAttendeeRequest')
@@ -590,8 +562,6 @@ module Aws::Chime
     UpdateRoomMembershipResponse = Shapes::StructureShape.new(name: 'UpdateRoomMembershipResponse')
     UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
     UpdateRoomResponse = Shapes::StructureShape.new(name: 'UpdateRoomResponse')
-    UpdateSipMediaApplicationCallRequest = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationCallRequest')
-    UpdateSipMediaApplicationCallResponse = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationCallResponse')
     UpdateSipMediaApplicationRequest = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationRequest')
     UpdateSipMediaApplicationResponse = Shapes::StructureShape.new(name: 'UpdateSipMediaApplicationResponse')
     UpdateSipRuleRequest = Shapes::StructureShape.new(name: 'UpdateSipRuleRequest')
@@ -640,7 +610,6 @@ module Aws::Chime
     Account.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     Account.add_member(:default_license, Shapes::ShapeRef.new(shape: License, location_name: "DefaultLicense"))
     Account.add_member(:supported_licenses, Shapes::ShapeRef.new(shape: LicenseList, location_name: "SupportedLicenses"))
-    Account.add_member(:account_status, Shapes::ShapeRef.new(shape: AccountStatus, location_name: "AccountStatus"))
     Account.add_member(:signin_delegate_groups, Shapes::ShapeRef.new(shape: SigninDelegateGroupList, location_name: "SigninDelegateGroups"))
     Account.struct_class = Types::Account
 
@@ -1050,16 +1019,6 @@ module Aws::Chime
     CreateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
-    CreateMediaCapturePipelineRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: MediaPipelineSourceType, required: true, location_name: "SourceType"))
-    CreateMediaCapturePipelineRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SourceArn"))
-    CreateMediaCapturePipelineRequest.add_member(:sink_type, Shapes::ShapeRef.new(shape: MediaPipelineSinkType, required: true, location_name: "SinkType"))
-    CreateMediaCapturePipelineRequest.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SinkArn"))
-    CreateMediaCapturePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
-    CreateMediaCapturePipelineRequest.struct_class = Types::CreateMediaCapturePipelineRequest
-
-    CreateMediaCapturePipelineResponse.add_member(:media_capture_pipeline, Shapes::ShapeRef.new(shape: MediaCapturePipeline, location_name: "MediaCapturePipeline"))
-    CreateMediaCapturePipelineResponse.struct_class = Types::CreateMediaCapturePipelineResponse
-
     CreateMeetingDialOutRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     CreateMeetingDialOutRequest.add_member(:from_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "FromPhoneNumber"))
     CreateMeetingDialOutRequest.add_member(:to_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "ToPhoneNumber"))
@@ -1246,9 +1205,6 @@ module Aws::Chime
     DeleteEventsConfigurationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
     DeleteEventsConfigurationRequest.struct_class = Types::DeleteEventsConfigurationRequest
 
-    DeleteMediaCapturePipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
-    DeleteMediaCapturePipelineRequest.struct_class = Types::DeleteMediaCapturePipelineRequest
-
     DeleteMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     DeleteMeetingRequest.struct_class = Types::DeleteMeetingRequest
 
@@ -1396,20 +1352,6 @@ module Aws::Chime
     EmergencyCallingConfiguration.add_member(:dnis, Shapes::ShapeRef.new(shape: DNISEmergencyCallingConfigurationList, location_name: "DNIS"))
     EmergencyCallingConfiguration.struct_class = Types::EmergencyCallingConfiguration
 
-    EngineTranscribeMedicalSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeMedicalLanguageCode, required: true, location_name: "LanguageCode"))
-    EngineTranscribeMedicalSettings.add_member(:specialty, Shapes::ShapeRef.new(shape: TranscribeMedicalSpecialty, required: true, location_name: "Specialty"))
-    EngineTranscribeMedicalSettings.add_member(:type, Shapes::ShapeRef.new(shape: TranscribeMedicalType, required: true, location_name: "Type"))
-    EngineTranscribeMedicalSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
-    EngineTranscribeMedicalSettings.add_member(:region, Shapes::ShapeRef.new(shape: TranscribeMedicalRegion, location_name: "Region"))
-    EngineTranscribeMedicalSettings.struct_class = Types::EngineTranscribeMedicalSettings
-
-    EngineTranscribeSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, required: true, location_name: "LanguageCode"))
-    EngineTranscribeSettings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: TranscribeVocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
-    EngineTranscribeSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyFilterName"))
-    EngineTranscribeSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
-    EngineTranscribeSettings.add_member(:region, Shapes::ShapeRef.new(shape: TranscribeRegion, location_name: "Region"))
-    EngineTranscribeSettings.struct_class = Types::EngineTranscribeSettings
-
     EventsConfiguration.add_member(:bot_id, Shapes::ShapeRef.new(shape: String, location_name: "BotId"))
     EventsConfiguration.add_member(:outbound_events_https_endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "OutboundEventsHTTPSEndpoint"))
     EventsConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "LambdaFunctionArn"))
@@ -1480,12 +1422,6 @@ module Aws::Chime
     GetGlobalSettingsResponse.add_member(:business_calling, Shapes::ShapeRef.new(shape: BusinessCallingSettings, location_name: "BusinessCalling"))
     GetGlobalSettingsResponse.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, location_name: "VoiceConnector"))
     GetGlobalSettingsResponse.struct_class = Types::GetGlobalSettingsResponse
-
-    GetMediaCapturePipelineRequest.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "mediaPipelineId"))
-    GetMediaCapturePipelineRequest.struct_class = Types::GetMediaCapturePipelineRequest
-
-    GetMediaCapturePipelineResponse.add_member(:media_capture_pipeline, Shapes::ShapeRef.new(shape: MediaCapturePipeline, location_name: "MediaCapturePipeline"))
-    GetMediaCapturePipelineResponse.struct_class = Types::GetMediaCapturePipelineResponse
 
     GetMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     GetMeetingRequest.struct_class = Types::GetMeetingRequest
@@ -1785,14 +1721,6 @@ module Aws::Chime
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
 
-    ListMediaCapturePipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListMediaCapturePipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
-    ListMediaCapturePipelinesRequest.struct_class = Types::ListMediaCapturePipelinesRequest
-
-    ListMediaCapturePipelinesResponse.add_member(:media_capture_pipelines, Shapes::ShapeRef.new(shape: MediaCapturePipelineList, location_name: "MediaCapturePipelines"))
-    ListMediaCapturePipelinesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListMediaCapturePipelinesResponse.struct_class = Types::ListMediaCapturePipelinesResponse
-
     ListMeetingTagsRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     ListMeetingTagsRequest.struct_class = Types::ListMeetingTagsRequest
 
@@ -1928,18 +1856,6 @@ module Aws::Chime
 
     LogoutUserResponse.struct_class = Types::LogoutUserResponse
 
-    MediaCapturePipeline.add_member(:media_pipeline_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MediaPipelineId"))
-    MediaCapturePipeline.add_member(:source_type, Shapes::ShapeRef.new(shape: MediaPipelineSourceType, location_name: "SourceType"))
-    MediaCapturePipeline.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceArn"))
-    MediaCapturePipeline.add_member(:status, Shapes::ShapeRef.new(shape: MediaPipelineStatus, location_name: "Status"))
-    MediaCapturePipeline.add_member(:sink_type, Shapes::ShapeRef.new(shape: MediaPipelineSinkType, location_name: "SinkType"))
-    MediaCapturePipeline.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SinkArn"))
-    MediaCapturePipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
-    MediaCapturePipeline.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
-    MediaCapturePipeline.struct_class = Types::MediaCapturePipeline
-
-    MediaCapturePipelineList.member = Shapes::ShapeRef.new(shape: MediaCapturePipeline)
-
     MediaPlacement.add_member(:audio_host_url, Shapes::ShapeRef.new(shape: UriType, location_name: "AudioHostUrl"))
     MediaPlacement.add_member(:audio_fallback_url, Shapes::ShapeRef.new(shape: UriType, location_name: "AudioFallbackUrl"))
     MediaPlacement.add_member(:screen_data_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenDataUrl"))
@@ -1947,7 +1863,6 @@ module Aws::Chime
     MediaPlacement.add_member(:screen_viewing_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenViewingUrl"))
     MediaPlacement.add_member(:signaling_url, Shapes::ShapeRef.new(shape: UriType, location_name: "SignalingUrl"))
     MediaPlacement.add_member(:turn_control_url, Shapes::ShapeRef.new(shape: UriType, location_name: "TurnControlUrl"))
-    MediaPlacement.add_member(:event_ingestion_url, Shapes::ShapeRef.new(shape: UriType, location_name: "EventIngestionUrl"))
     MediaPlacement.struct_class = Types::MediaPlacement
 
     Meeting.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MeetingId"))
@@ -2267,9 +2182,6 @@ module Aws::Chime
     RoomRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
     RoomRetentionSettings.struct_class = Types::RoomRetentionSettings
 
-    SMAUpdateCallArgumentsMap.key = Shapes::ShapeRef.new(shape: SensitiveString)
-    SMAUpdateCallArgumentsMap.value = Shapes::ShapeRef.new(shape: SensitiveString)
-
     SearchAvailablePhoneNumbersRequest.add_member(:area_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "area-code"))
     SearchAvailablePhoneNumbersRequest.add_member(:city, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "city"))
     SearchAvailablePhoneNumbersRequest.add_member(:country, Shapes::ShapeRef.new(shape: Alpha2CountryCode, location: "querystring", location_name: "country"))
@@ -2352,17 +2264,6 @@ module Aws::Chime
 
     SipRuleTargetApplicationList.member = Shapes::ShapeRef.new(shape: SipRuleTargetApplication)
 
-    StartMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
-    StartMeetingTranscriptionRequest.add_member(:transcription_configuration, Shapes::ShapeRef.new(shape: TranscriptionConfiguration, required: true, location_name: "TranscriptionConfiguration"))
-    StartMeetingTranscriptionRequest.struct_class = Types::StartMeetingTranscriptionRequest
-
-    StartMeetingTranscriptionResponse.struct_class = Types::StartMeetingTranscriptionResponse
-
-    StopMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
-    StopMeetingTranscriptionRequest.struct_class = Types::StopMeetingTranscriptionRequest
-
-    StopMeetingTranscriptionResponse.struct_class = Types::StopMeetingTranscriptionResponse
-
     StreamingConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, required: true, location_name: "DataRetentionInHours"))
     StreamingConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
     StreamingConfiguration.add_member(:streaming_notification_targets, Shapes::ShapeRef.new(shape: StreamingNotificationTargetList, location_name: "StreamingNotificationTargets"))
@@ -2416,10 +2317,6 @@ module Aws::Chime
     ThrottledClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottledClientException.struct_class = Types::ThrottledClientException
 
-    TranscriptionConfiguration.add_member(:engine_transcribe_settings, Shapes::ShapeRef.new(shape: EngineTranscribeSettings, location_name: "EngineTranscribeSettings"))
-    TranscriptionConfiguration.add_member(:engine_transcribe_medical_settings, Shapes::ShapeRef.new(shape: EngineTranscribeMedicalSettings, location_name: "EngineTranscribeMedicalSettings"))
-    TranscriptionConfiguration.struct_class = Types::TranscriptionConfiguration
-
     UnauthorizedClientException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     UnauthorizedClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnauthorizedClientException.struct_class = Types::UnauthorizedClientException
@@ -2443,7 +2340,6 @@ module Aws::Chime
 
     UpdateAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateAccountRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
-    UpdateAccountRequest.add_member(:default_license, Shapes::ShapeRef.new(shape: License, location_name: "DefaultLicense"))
     UpdateAccountRequest.struct_class = Types::UpdateAccountRequest
 
     UpdateAccountResponse.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))
@@ -2554,14 +2450,6 @@ module Aws::Chime
 
     UpdateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     UpdateRoomResponse.struct_class = Types::UpdateRoomResponse
-
-    UpdateSipMediaApplicationCallRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
-    UpdateSipMediaApplicationCallRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "transactionId"))
-    UpdateSipMediaApplicationCallRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: SMAUpdateCallArgumentsMap, required: true, location_name: "Arguments"))
-    UpdateSipMediaApplicationCallRequest.struct_class = Types::UpdateSipMediaApplicationCallRequest
-
-    UpdateSipMediaApplicationCallResponse.add_member(:sip_media_application_call, Shapes::ShapeRef.new(shape: SipMediaApplicationCall, location_name: "SipMediaApplicationCall"))
-    UpdateSipMediaApplicationCallResponse.struct_class = Types::UpdateSipMediaApplicationCallResponse
 
     UpdateSipMediaApplicationRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
     UpdateSipMediaApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
@@ -3061,21 +2949,6 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
-      api.add_operation(:create_media_capture_pipeline, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateMediaCapturePipeline"
-        o.http_method = "POST"
-        o.http_request_uri = "/media-capture-pipelines"
-        o.input = Shapes::ShapeRef.new(shape: CreateMediaCapturePipelineRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateMediaCapturePipelineResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
-      end)
-
       api.add_operation(:create_meeting, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMeeting"
         o.http_method = "POST"
@@ -3478,21 +3351,6 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-      end)
-
-      api.add_operation(:delete_media_capture_pipeline, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteMediaCapturePipeline"
-        o.http_method = "DELETE"
-        o.http_request_uri = "/media-capture-pipelines/{mediaPipelineId}"
-        o.input = Shapes::ShapeRef.new(shape: DeleteMediaCapturePipelineRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:delete_meeting, Seahorse::Model::Operation.new.tap do |o|
@@ -4075,21 +3933,6 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
-      end)
-
-      api.add_operation(:get_media_capture_pipeline, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetMediaCapturePipeline"
-        o.http_method = "GET"
-        o.http_request_uri = "/media-capture-pipelines/{mediaPipelineId}"
-        o.input = Shapes::ShapeRef.new(shape: GetMediaCapturePipelineRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetMediaCapturePipelineResponse)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -4748,26 +4591,6 @@ module Aws::Chime
         )
       end)
 
-      api.add_operation(:list_media_capture_pipelines, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListMediaCapturePipelines"
-        o.http_method = "GET"
-        o.http_request_uri = "/media-capture-pipelines"
-        o.input = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListMediaCapturePipelinesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
       api.add_operation(:list_meeting_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMeetingTags"
         o.http_method = "GET"
@@ -5386,39 +5209,6 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
-      api.add_operation(:start_meeting_transcription, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "StartMeetingTranscription"
-        o.http_method = "POST"
-        o.http_request_uri = "/meetings/{meetingId}/transcription?operation=start"
-        o.input = Shapes::ShapeRef.new(shape: StartMeetingTranscriptionRequest)
-        o.output = Shapes::ShapeRef.new(shape: StartMeetingTranscriptionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
-      end)
-
-      api.add_operation(:stop_meeting_transcription, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "StopMeetingTranscription"
-        o.http_method = "POST"
-        o.http_request_uri = "/meetings/{meetingId}/transcription?operation=stop"
-        o.input = Shapes::ShapeRef.new(shape: StopMeetingTranscriptionRequest)
-        o.output = Shapes::ShapeRef.new(shape: StopMeetingTranscriptionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
-      end)
-
       api.add_operation(:tag_attendee, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagAttendee"
         o.http_method = "POST"
@@ -5745,22 +5535,6 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
-      end)
-
-      api.add_operation(:update_sip_media_application_call, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateSipMediaApplicationCall"
-        o.http_method = "POST"
-        o.http_request_uri = "/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}"
-        o.input = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateSipMediaApplicationCallResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

@@ -55,8 +55,6 @@ module Aws::AutoScaling
     #
     # * `SimpleScaling` (default)
     #
-    # * `PredictiveScaling`
-    #
     # For more information, see [Target tracking scaling policies][1] and
     # [Step and simple scaling policies][2] in the *Amazon EC2 Auto Scaling
     # User Guide*.
@@ -144,12 +142,6 @@ module Aws::AutoScaling
     # @return [Boolean]
     def enabled
       data[:enabled]
-    end
-
-    # A predictive scaling policy.
-    # @return [Types::PredictiveScalingConfiguration]
-    def predictive_scaling_configuration
-      data[:predictive_scaling_configuration]
     end
 
     # @!endgroup

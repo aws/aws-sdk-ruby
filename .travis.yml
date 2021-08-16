@@ -29,3 +29,11 @@ script: >
   (bundle exec rake test:spec)
 
 bundler_args: --without docs repl
+
+notifications:
+  webhooks:
+    urls:
+      - "https://webhooks.gitter.im/e/4442efd380ec811746d9"
+    on_success: change
+    on_failure: always
+    on_start: false

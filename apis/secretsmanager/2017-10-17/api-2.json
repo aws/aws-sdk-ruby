@@ -88,8 +88,7 @@
       "output":{"shape":"DescribeSecretResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServiceError"},
-        {"shape":"InvalidParameterException"}
+        {"shape":"InternalServiceError"}
       ]
     },
     "GetRandomPassword":{
@@ -117,8 +116,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServiceError"},
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"}
+        {"shape":"InvalidRequestException"}
       ]
     },
     "GetSecretValue":{
@@ -148,8 +146,7 @@
       "errors":[
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServiceError"},
-        {"shape":"InvalidParameterException"}
+        {"shape":"InternalServiceError"}
       ]
     },
     "ListSecrets":{
@@ -677,10 +674,6 @@
       },
       "exception":true
     },
-    "KmsKeyIdListType":{
-      "type":"list",
-      "member":{"shape":"KmsKeyIdType"}
-    },
     "KmsKeyIdType":{
       "type":"string",
       "max":2048,
@@ -1075,8 +1068,7 @@
         "CreatedDate":{
           "shape":"CreatedDateType",
           "box":true
-        },
-        "KmsKeyIds":{"shape":"KmsKeyIdListType"}
+        }
       }
     },
     "SecretVersionsListType":{

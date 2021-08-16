@@ -801,35 +801,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Audio Hls Rendition Selection
-    #
-    # @note When making an API call, you may pass AudioHlsRenditionSelection
-    #   data as a hash:
-    #
-    #       {
-    #         group_id: "__stringMin1", # required
-    #         name: "__stringMin1", # required
-    #       }
-    #
-    # @!attribute [rw] group_id
-    #   Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS
-    #   audio rendition.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio
-    #   rendition.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioHlsRenditionSelection AWS API Documentation
-    #
-    class AudioHlsRenditionSelection < Struct.new(
-      :group_id,
-      :name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Audio Language Selection
     #
     # @note When making an API call, you may pass AudioLanguageSelection
@@ -990,10 +961,6 @@ module Aws::MediaLive
     #       {
     #         name: "__stringMin1", # required
     #         selector_settings: {
-    #           audio_hls_rendition_selection: {
-    #             group_id: "__stringMin1", # required
-    #             name: "__stringMin1", # required
-    #           },
     #           audio_language_selection: {
     #             language_code: "__string", # required
     #             language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -1036,10 +1003,6 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         audio_hls_rendition_selection: {
-    #           group_id: "__stringMin1", # required
-    #           name: "__stringMin1", # required
-    #         },
     #         audio_language_selection: {
     #           language_code: "__string", # required
     #           language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -1056,10 +1019,6 @@ module Aws::MediaLive
     #         },
     #       }
     #
-    # @!attribute [rw] audio_hls_rendition_selection
-    #   Audio Hls Rendition Selection
-    #   @return [Types::AudioHlsRenditionSelection]
-    #
     # @!attribute [rw] audio_language_selection
     #   Audio Language Selection
     #   @return [Types::AudioLanguageSelection]
@@ -1075,7 +1034,6 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelectorSettings AWS API Documentation
     #
     class AudioSelectorSettings < Struct.new(
-      :audio_hls_rendition_selection,
       :audio_language_selection,
       :audio_pid_selection,
       :audio_track_selection)
@@ -2364,7 +2322,6 @@ module Aws::MediaLive
     #             style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #           },
     #           webvtt_destination_settings: {
-    #             style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #           },
     #         },
     #         language_code: "__string",
@@ -2487,7 +2444,6 @@ module Aws::MediaLive
     #           style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #         },
     #         webvtt_destination_settings: {
-    #           style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #         },
     #       }
     #
@@ -2685,7 +2641,6 @@ module Aws::MediaLive
     #           arib_source_settings: {
     #           },
     #           dvb_sub_source_settings: {
-    #             ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #             pid: 1,
     #           },
     #           embedded_source_settings: {
@@ -2699,7 +2654,6 @@ module Aws::MediaLive
     #             source_608_channel_number: 1,
     #           },
     #           scte_27_source_settings: {
-    #             ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #             pid: 1,
     #           },
     #           teletext_source_settings: {
@@ -2751,7 +2705,6 @@ module Aws::MediaLive
     #         arib_source_settings: {
     #         },
     #         dvb_sub_source_settings: {
-    #           ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #           pid: 1,
     #         },
     #         embedded_source_settings: {
@@ -2765,7 +2718,6 @@ module Aws::MediaLive
     #           source_608_channel_number: 1,
     #         },
     #         scte_27_source_settings: {
-    #           ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #           pid: 1,
     #         },
     #         teletext_source_settings: {
@@ -3372,7 +3324,6 @@ module Aws::MediaLive
     #                   style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #                 },
     #                 webvtt_destination_settings: {
-    #                   style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #                 },
     #               },
     #               language_code: "__string",
@@ -3809,7 +3760,7 @@ module Aws::MediaLive
     #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   bitrate: 1,
     #                   buf_fill_pct: 1,
@@ -3864,7 +3815,7 @@ module Aws::MediaLive
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #                 },
     #                 h265_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #                   bitrate: 1,
@@ -3974,10 +3925,6 @@ module Aws::MediaLive
     #                 {
     #                   name: "__stringMin1", # required
     #                   selector_settings: {
-    #                     audio_hls_rendition_selection: {
-    #                       group_id: "__stringMin1", # required
-    #                       name: "__stringMin1", # required
-    #                     },
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
     #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -4006,7 +3953,6 @@ module Aws::MediaLive
     #                     arib_source_settings: {
     #                     },
     #                     dvb_sub_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     embedded_source_settings: {
@@ -4020,7 +3966,6 @@ module Aws::MediaLive
     #                       source_608_channel_number: 1,
     #                     },
     #                     scte_27_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     teletext_source_settings: {
@@ -4045,7 +3990,6 @@ module Aws::MediaLive
     #                   buffer_segments: 1,
     #                   retries: 1,
     #                   retry_interval: 1,
-    #                   scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },
@@ -6120,15 +6064,8 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #         pid: 1,
     #       }
-    #
-    # @!attribute [rw] ocr_language
-    #   If you will configure a WebVTT caption description that references
-    #   this caption selector, use this field to provide the language to
-    #   consider when translating the image-based source to text.
-    #   @return [String]
     #
     # @!attribute [rw] pid
     #   When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the
@@ -6139,7 +6076,6 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbSubSourceSettings AWS API Documentation
     #
     class DvbSubSourceSettings < Struct.new(
-      :ocr_language,
       :pid)
       SENSITIVE = []
       include Aws::Structure
@@ -6658,7 +6594,6 @@ module Aws::MediaLive
     #                 style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #               },
     #               webvtt_destination_settings: {
-    #                 style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #               },
     #             },
     #             language_code: "__string",
@@ -7095,7 +7030,7 @@ module Aws::MediaLive
     #                 capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #               },
     #               h264_settings: {
-    #                 adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                 bitrate: 1,
     #                 buf_fill_pct: 1,
@@ -7150,7 +7085,7 @@ module Aws::MediaLive
     #                 timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #               },
     #               h265_settings: {
-    #                 adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                 afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                 alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #                 bitrate: 1,
@@ -7838,7 +7773,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #         adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #         bitrate: 1,
     #         buf_fill_pct: 1,
@@ -7894,16 +7829,8 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] adaptive_quantization
-    #   Enables or disables adaptive quantization, which is a technique
-    #   MediaLive can apply to video on a frame-by-frame basis to produce
-    #   more compression without losing quality. There are three types of
-    #   adaptive quantization: flicker, spatial, and temporal. Set the field
-    #   in one of these ways: Set to Auto. Recommended. For each type of AQ,
-    #   MediaLive will determine if AQ is needed, and if so, the appropriate
-    #   strength. Set a strength (a value other than Auto or Disable). This
-    #   strength will apply to any of the AQ fields that you choose to
-    #   enable. Set to Disabled to disable all types of adaptive
-    #   quantization.
+    #   Adaptive quantization. Allows intra-frame quantizers to vary to
+    #   improve visual quality.
     #   @return [String]
     #
     # @!attribute [rw] afd_signaling
@@ -7953,17 +7880,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] flicker_aq
-    #   Flicker AQ makes adjustments within each frame to reduce flicker or
-    #   'pop' on I-frames. The value to enter in this field depends on the
-    #   value in the Adaptive quantization field: If you have set the
-    #   Adaptive quantization field to Auto, MediaLive ignores any value in
-    #   this field. MediaLive will determine if flicker AQ is appropriate
-    #   and will apply the appropriate strength. If you have set the
-    #   Adaptive quantization field to a strength, you can set this field to
-    #   Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using
-    #   the specified strength. Disabled: MediaLive won't apply flicker AQ.
-    #   If you have set the Adaptive quantization to Disabled, MediaLive
-    #   ignores any value in this field and doesn't apply flicker AQ.
+    #   If set to enabled, adjust quantization within each frame to reduce
+    #   flicker or 'pop' on I-frames.
     #   @return [String]
     #
     # @!attribute [rw] force_field_pictures
@@ -8088,17 +8006,12 @@ module Aws::MediaLive
     #
     # @!attribute [rw] qvbr_quality_level
     #   Controls the target quality for the video encode. Applies only when
-    #   the rate control mode is QVBR. You can set a target quality or you
-    #   can let MediaLive determine the best quality. To set a target
-    #   quality, enter values in the QVBR quality level field and the Max
-    #   bitrate field. Enter values that suit your most important viewing
+    #   the rate control mode is QVBR. Set values for the QVBR quality level
+    #   field and Max bitrate field that suit your most important viewing
     #   devices. Recommended values are: - Primary screen: Quality level: 8
     #   to 10. Max bitrate: 4M - PC or tablet: Quality level: 7. Max
     #   bitrate: 1.5M to 3M - Smartphone: Quality level: 6. Max bitrate: 1M
-    #   to 1.5M To let MediaLive decide, leave the QVBR quality level field
-    #   empty, and in Max bitrate enter the maximum rate you want in the
-    #   video. For more information, see the section called "Video - rate
-    #   control mode" in the MediaLive user guide
+    #   to 1.5M
     #   @return [Integer]
     #
     # @!attribute [rw] rate_control_mode
@@ -8142,18 +8055,8 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_aq
-    #   Spatial AQ makes adjustments within each frame based on spatial
-    #   variation of content complexity. The value to enter in this field
-    #   depends on the value in the Adaptive quantization field: If you have
-    #   set the Adaptive quantization field to Auto, MediaLive ignores any
-    #   value in this field. MediaLive will determine if spatial AQ is
-    #   appropriate and will apply the appropriate strength. If you have set
-    #   the Adaptive quantization field to a strength, you can set this
-    #   field to Enabled or Disabled. Enabled: MediaLive will apply spatial
-    #   AQ using the specified strength. Disabled: MediaLive won't apply
-    #   spatial AQ. If you have set the Adaptive quantization to Disabled,
-    #   MediaLive ignores any value in this field and doesn't apply spatial
-    #   AQ.
+    #   If set to enabled, adjust quantization within each frame based on
+    #   spatial variation of content complexity.
     #   @return [String]
     #
     # @!attribute [rw] subgop_length
@@ -8167,18 +8070,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] temporal_aq
-    #   Temporal makes adjustments within each frame based on temporal
-    #   variation of content complexity. The value to enter in this field
-    #   depends on the value in the Adaptive quantization field: If you have
-    #   set the Adaptive quantization field to Auto, MediaLive ignores any
-    #   value in this field. MediaLive will determine if temporal AQ is
-    #   appropriate and will apply the appropriate strength. If you have set
-    #   the Adaptive quantization field to a strength, you can set this
-    #   field to Enabled or Disabled. Enabled: MediaLive will apply temporal
-    #   AQ using the specified strength. Disabled: MediaLive won't apply
-    #   temporal AQ. If you have set the Adaptive quantization to Disabled,
-    #   MediaLive ignores any value in this field and doesn't apply
-    #   temporal AQ.
+    #   If set to enabled, adjust quantization within each frame based on
+    #   temporal variation of content complexity.
     #   @return [String]
     #
     # @!attribute [rw] timecode_insertion
@@ -8311,7 +8204,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #         adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #         afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #         alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #         bitrate: 1,
@@ -9233,7 +9126,6 @@ module Aws::MediaLive
     #         buffer_segments: 1,
     #         retries: 1,
     #         retry_interval: 1,
-    #         scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #       }
     #
     # @!attribute [rw] bandwidth
@@ -9260,21 +9152,13 @@ module Aws::MediaLive
     #   manifest or segment fails.
     #   @return [Integer]
     #
-    # @!attribute [rw] scte_35_source
-    #   Identifies the source for the SCTE-35 messages that MediaLive will
-    #   ingest. Messages can be ingested from the content segments (in the
-    #   stream) or from tags in the playlist (the HLS manifest). MediaLive
-    #   ignores SCTE-35 information in the source that is not selected.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsInputSettings AWS API Documentation
     #
     class HlsInputSettings < Struct.new(
       :bandwidth,
       :buffer_segments,
       :retries,
-      :retry_interval,
-      :scte_35_source)
+      :retry_interval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9723,10 +9607,6 @@ module Aws::MediaLive
     #             {
     #               name: "__stringMin1", # required
     #               selector_settings: {
-    #                 audio_hls_rendition_selection: {
-    #                   group_id: "__stringMin1", # required
-    #                   name: "__stringMin1", # required
-    #                 },
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
     #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -9755,7 +9635,6 @@ module Aws::MediaLive
     #                 arib_source_settings: {
     #                 },
     #                 dvb_sub_source_settings: {
-    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 embedded_source_settings: {
@@ -9769,7 +9648,6 @@ module Aws::MediaLive
     #                   source_608_channel_number: 1,
     #                 },
     #                 scte_27_source_settings: {
-    #                   ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                   pid: 1,
     #                 },
     #                 teletext_source_settings: {
@@ -9794,7 +9672,6 @@ module Aws::MediaLive
     #               buffer_segments: 1,
     #               retries: 1,
     #               retry_interval: 1,
-    #               scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
@@ -10608,10 +10485,6 @@ module Aws::MediaLive
     #           {
     #             name: "__stringMin1", # required
     #             selector_settings: {
-    #               audio_hls_rendition_selection: {
-    #                 group_id: "__stringMin1", # required
-    #                 name: "__stringMin1", # required
-    #               },
     #               audio_language_selection: {
     #                 language_code: "__string", # required
     #                 language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -10640,7 +10513,6 @@ module Aws::MediaLive
     #               arib_source_settings: {
     #               },
     #               dvb_sub_source_settings: {
-    #                 ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                 pid: 1,
     #               },
     #               embedded_source_settings: {
@@ -10654,7 +10526,6 @@ module Aws::MediaLive
     #                 source_608_channel_number: 1,
     #               },
     #               scte_27_source_settings: {
-    #                 ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                 pid: 1,
     #               },
     #               teletext_source_settings: {
@@ -10679,7 +10550,6 @@ module Aws::MediaLive
     #             buffer_segments: 1,
     #             retries: 1,
     #             retry_interval: 1,
-    #             scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #           },
     #           server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #         },
@@ -13426,7 +13296,6 @@ module Aws::MediaLive
     #           buffer_segments: 1,
     #           retries: 1,
     #           retry_interval: 1,
-    #           scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #         },
     #         server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #       }
@@ -15865,15 +15734,8 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #         pid: 1,
     #       }
-    #
-    # @!attribute [rw] ocr_language
-    #   If you will configure a WebVTT caption description that references
-    #   this caption selector, use this field to provide the language to
-    #   consider when translating the image-based source to text.
-    #   @return [String]
     #
     # @!attribute [rw] pid
     #   The pid field is used in conjunction with the caption selector
@@ -15889,7 +15751,6 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27SourceSettings AWS API Documentation
     #
     class Scte27SourceSettings < Struct.new(
-      :ocr_language,
       :pid)
       SENSITIVE = []
       include Aws::Structure
@@ -17128,6 +16989,9 @@ module Aws::MediaLive
     #   The AWS account ID for the recipient of the input device transfer.
     #   @return [String]
     #
+    # @!attribute [rw] target_region
+    #   @return [String]
+    #
     # @!attribute [rw] transfer_type
     #   The type (direction) of the input device transfer.
     #   @return [String]
@@ -17138,6 +17002,7 @@ module Aws::MediaLive
       :id,
       :message,
       :target_customer_id,
+      :target_region,
       :transfer_type)
       SENSITIVE = []
       include Aws::Structure
@@ -17772,7 +17637,6 @@ module Aws::MediaLive
     #                   style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #                 },
     #                 webvtt_destination_settings: {
-    #                   style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #                 },
     #               },
     #               language_code: "__string",
@@ -18209,7 +18073,7 @@ module Aws::MediaLive
     #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   bitrate: 1,
     #                   buf_fill_pct: 1,
@@ -18264,7 +18128,7 @@ module Aws::MediaLive
     #                   timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #                 },
     #                 h265_settings: {
-    #                   adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #                   afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #                   alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #                   bitrate: 1,
@@ -18374,10 +18238,6 @@ module Aws::MediaLive
     #                 {
     #                   name: "__stringMin1", # required
     #                   selector_settings: {
-    #                     audio_hls_rendition_selection: {
-    #                       group_id: "__stringMin1", # required
-    #                       name: "__stringMin1", # required
-    #                     },
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
     #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -18406,7 +18266,6 @@ module Aws::MediaLive
     #                     arib_source_settings: {
     #                     },
     #                     dvb_sub_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     embedded_source_settings: {
@@ -18420,7 +18279,6 @@ module Aws::MediaLive
     #                       source_608_channel_number: 1,
     #                     },
     #                     scte_27_source_settings: {
-    #                       ocr_language: "DEU", # accepts DEU, ENG, FRA, NLD, POR, SPA
     #                       pid: 1,
     #                     },
     #                     teletext_source_settings: {
@@ -18445,7 +18303,6 @@ module Aws::MediaLive
     #                   buffer_segments: 1,
     #                   retries: 1,
     #                   retry_interval: 1,
-    #                   scte_35_source: "MANIFEST", # accepts MANIFEST, SEGMENTS
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },
@@ -19168,7 +19025,7 @@ module Aws::MediaLive
     #           capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #         },
     #         h264_settings: {
-    #           adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #           bitrate: 1,
     #           buf_fill_pct: 1,
@@ -19223,7 +19080,7 @@ module Aws::MediaLive
     #           timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #         },
     #         h265_settings: {
-    #           adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #           afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #           alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #           bitrate: 1,
@@ -19333,7 +19190,7 @@ module Aws::MediaLive
     #             capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #           },
     #           h264_settings: {
-    #             adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #             bitrate: 1,
     #             buf_fill_pct: 1,
@@ -19388,7 +19245,7 @@ module Aws::MediaLive
     #             timecode_insertion: "DISABLED", # accepts DISABLED, PIC_TIMING_SEI
     #           },
     #           h265_settings: {
-    #             adaptive_quantization: "AUTO", # accepts AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
+    #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
     #             afd_signaling: "AUTO", # accepts AUTO, FIXED, NONE
     #             alternative_transfer_function: "INSERT", # accepts INSERT, OMIT
     #             bitrate: 1,
@@ -19806,28 +19663,11 @@ module Aws::MediaLive
 
     # Webvtt Destination Settings
     #
-    # @note When making an API call, you may pass WebvttDestinationSettings
-    #   data as a hash:
-    #
-    #       {
-    #         style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
-    #       }
-    #
-    # @!attribute [rw] style_control
-    #   Controls whether the color and position of the source captions is
-    #   passed through to the WebVTT output captions. PASSTHROUGH - Valid
-    #   only if the source captions are EMBEDDED or TELETEXT.
-    #   NO\_STYLE\_DATA - Don't pass through the style. The output captions
-    #   will not contain any font styling information.
-    #   @return [String]
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/WebvttDestinationSettings AWS API Documentation
     #
-    class WebvttDestinationSettings < Struct.new(
-      :style_control)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class WebvttDestinationSettings < Aws::EmptyStructure; end
 
   end
 end

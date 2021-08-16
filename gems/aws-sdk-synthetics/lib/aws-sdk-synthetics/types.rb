@@ -10,39 +10,6 @@
 module Aws::Synthetics
   module Types
 
-    # A structure representing a screenshot that is used as a baseline
-    # during visual monitoring comparisons made by the canary.
-    #
-    # @note When making an API call, you may pass BaseScreenshot
-    #   data as a hash:
-    #
-    #       {
-    #         screenshot_name: "String", # required
-    #         ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"],
-    #       }
-    #
-    # @!attribute [rw] screenshot_name
-    #   The name of the screenshot. This is generated the first time the
-    #   canary is run after the `UpdateCanary` operation that specified for
-    #   this canary to perform visual monitoring.
-    #   @return [String]
-    #
-    # @!attribute [rw] ignore_coordinates
-    #   Coordinates that define the part of a screen to ignore during
-    #   screenshot comparisons. To obtain the coordinates to use here, use
-    #   the CloudWatch Logs console to draw the boundaries on the screen.
-    #   For more information, see \\\{LINK\\}
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/BaseScreenshot AWS API Documentation
-    #
-    class BaseScreenshot < Struct.new(
-      :screenshot_name,
-      :ignore_coordinates)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # This structure contains all information about one canary in your
     # account.
     #
@@ -128,13 +95,6 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
     #   @return [Types::VpcConfigOutput]
     #
-    # @!attribute [rw] visual_reference
-    #   If this canary performs visual monitoring by comparing screenshots,
-    #   this structure contains the ID of the canary run to use as the
-    #   baseline for screenshots, and the coordinates of any parts of the
-    #   screen to ignore during the visual monitoring comparison.
-    #   @return [Types::VisualReferenceOutput]
-    #
     # @!attribute [rw] tags
     #   The list of key-value pairs that are associated with the canary.
     #   @return [Hash<String,String>]
@@ -156,7 +116,6 @@ module Aws::Synthetics
       :engine_arn,
       :runtime_version,
       :vpc_config,
-      :visual_reference,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -181,8 +140,9 @@ module Aws::Synthetics
     #       }
     #
     # @!attribute [rw] s3_bucket
-    #   If your canary script is located in S3, specify the bucket name
-    #   here. Do not include `s3://` as the start of the bucket name.
+    #   If your canary script is located in S3, specify the full bucket name
+    #   here. The bucket must already exist. Specify the full bucket name,
+    #   including `s3://` as the start of the bucket name.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
@@ -200,15 +160,13 @@ module Aws::Synthetics
     #
     # @!attribute [rw] zip_file
     #   If you input your canary script directly into the canary instead of
-    #   referring to an S3 location, the value of this parameter is the
-    #   base64-encoded contents of the .zip file that contains the script.
-    #   It must be smaller than 256 Kb.
+    #   referring to an S3 location, the value of this parameter is the .zip
+    #   file that contains the script. It can be up to 5 MB.
     #   @return [String]
     #
     # @!attribute [rw] handler
     #   The entry point to use for the source code when running the canary.
-    #   This value must end with the string `.handler`. The string is
-    #   limited to 29 characters or fewer.
+    #   This value must end with the string `.handler`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryCodeInput AWS API Documentation
@@ -328,12 +286,12 @@ module Aws::Synthetics
     #   @return [Integer]
     #
     # @!attribute [rw] active_tracing
-    #   Specifies whether this canary is to use active X-Ray tracing when it
-    #   runs. Active tracing enables this canary run to be displayed in the
-    #   ServiceLens and X-Ray service maps even if the canary does not hit
-    #   an endpoint that has X-Ray tracing enabled. Using X-Ray tracing
-    #   incurs charges. For more information, see [ Canaries and X-Ray
-    #   tracing][1].
+    #   Specifies whether this canary is to use active AWS X-Ray tracing
+    #   when it runs. Active tracing enables this canary run to be displayed
+    #   in the ServiceLens and X-Ray service maps even if the canary does
+    #   not hit an endpoint that has X-ray tracing enabled. Using X-Ray
+    #   tracing incurs charges. For more information, see [ Canaries and
+    #   X-Ray tracing][1].
     #
     #   You can enable active tracing only for canaries that use version
     #   `syn-nodejs-2.0` or later for their canary runtime.
@@ -383,7 +341,7 @@ module Aws::Synthetics
     #   @return [Integer]
     #
     # @!attribute [rw] active_tracing
-    #   Displays whether this canary run used active X-Ray tracing.
+    #   Displays whether this canary run used active AWS X-Ray tracing.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigOutput AWS API Documentation
@@ -455,11 +413,9 @@ module Aws::Synthetics
     #       }
     #
     # @!attribute [rw] expression
-    #   A `rate` expression or a `cron` expression that defines how often
-    #   the canary is to run.
-    #
-    #   For a rate expression, The syntax is `rate(number unit)`. *unit* can
-    #   be `minute`, `minutes`, or `hour`.
+    #   A rate expression that defines how often the canary is to run. The
+    #   syntax is `rate(number unit)`. *unit* can be `minute`, `minutes`, or
+    #   `hour`.
     #
     #   For example, `rate(1 minute)` runs the canary once a minute,
     #   `rate(10 minutes)` runs it once every 10 minutes, and `rate(1 hour)`
@@ -468,15 +424,6 @@ module Aws::Synthetics
     #
     #   Specifying `rate(0 minute)` or `rate(0 hour)` is a special value
     #   that causes the canary to run only once when it is started.
-    #
-    #   Use `cron(expression)` to specify a cron expression. You can't
-    #   schedule a canary to wait for more than a year before running. For
-    #   information about the syntax for cron expressions, see [ Scheduling
-    #   canary runs using cron][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html
     #   @return [String]
     #
     # @!attribute [rw] duration_in_seconds
@@ -499,27 +446,16 @@ module Aws::Synthetics
     # according to the schedule in the `Expression` value.
     #
     # @!attribute [rw] expression
-    #   A `rate` expression or a `cron` expression that defines how often
-    #   the canary is to run.
-    #
-    #   For a rate expression, The syntax is `rate(number unit)`. *unit* can
-    #   be `minute`, `minutes`, or `hour`.
+    #   A rate expression that defines how often the canary is to run. The
+    #   syntax is `rate(number unit)`. *unit* can be `minute`, `minutes`, or
+    #   `hour`.
     #
     #   For example, `rate(1 minute)` runs the canary once a minute,
     #   `rate(10 minutes)` runs it once every 10 minutes, and `rate(1 hour)`
-    #   runs it once every hour. You can specify a frequency between `rate(1
-    #   minute)` and `rate(1 hour)`.
+    #   runs it once every hour.
     #
     #   Specifying `rate(0 minute)` or `rate(0 hour)` is a special value
     #   that causes the canary to run only once when it is started.
-    #
-    #   Use `cron(expression)` to specify a cron expression. For information
-    #   about the syntax for cron expressions, see [ Scheduling canary runs
-    #   using cron][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html
     #   @return [String]
     #
     # @!attribute [rw] duration_in_seconds
@@ -668,8 +604,7 @@ module Aws::Synthetics
     # @!attribute [rw] artifact_s3_location
     #   The location in Amazon S3 where Synthetics stores artifacts from the
     #   test runs of this canary. Artifacts include the log file,
-    #   screenshots, and HAR files. The name of the S3 bucket can't include
-    #   a period (.).
+    #   screenshots, and HAR files.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -1292,15 +1227,6 @@ module Aws::Synthetics
     #           subnet_ids: ["SubnetId"],
     #           security_group_ids: ["SecurityGroupId"],
     #         },
-    #         visual_reference: {
-    #           base_screenshots: [
-    #             {
-    #               screenshot_name: "String", # required
-    #               ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"],
-    #             },
-    #           ],
-    #           base_canary_run_id: "String", # required
-    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1381,22 +1307,6 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
     #   @return [Types::VpcConfigInput]
     #
-    # @!attribute [rw] visual_reference
-    #   Defines the screenshots to use as the baseline for comparisons
-    #   during visual monitoring comparisons during future runs of this
-    #   canary. If you omit this parameter, no changes are made to any
-    #   baseline screenshots that the canary might be using already.
-    #
-    #   Visual monitoring is supported only on canaries running the
-    #   **syn-puppeteer-node-3.2** runtime or later. For more information,
-    #   see [ Visual monitoring][1] and [ Visual monitoring blueprint][2]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
-    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
-    #   @return [Types::VisualReferenceInput]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanaryRequest AWS API Documentation
     #
     class UpdateCanaryRequest < Struct.new(
@@ -1408,8 +1318,7 @@ module Aws::Synthetics
       :run_config,
       :success_retention_period_in_days,
       :failure_retention_period_in_days,
-      :vpc_config,
-      :visual_reference)
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1427,89 +1336,6 @@ module Aws::Synthetics
     #
     class ValidationException < Struct.new(
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # An object that specifies what screenshots to use as a baseline for
-    # visual monitoring by this canary, and optionally the parts of the
-    # screenshots to ignore during the visual monitoring comparison.
-    #
-    # Visual monitoring is supported only on canaries running the
-    # **syn-puppeteer-node-3.2** runtime or later. For more information, see
-    # [ Visual monitoring][1] and [ Visual monitoring blueprint][2]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
-    #
-    # @note When making an API call, you may pass VisualReferenceInput
-    #   data as a hash:
-    #
-    #       {
-    #         base_screenshots: [
-    #           {
-    #             screenshot_name: "String", # required
-    #             ignore_coordinates: ["BaseScreenshotConfigIgnoreCoordinate"],
-    #           },
-    #         ],
-    #         base_canary_run_id: "String", # required
-    #       }
-    #
-    # @!attribute [rw] base_screenshots
-    #   An array of screenshots that will be used as the baseline for visual
-    #   monitoring in future runs of this canary. If there is a screenshot
-    #   that you don't want to be used for visual monitoring, remove it
-    #   from this array.
-    #   @return [Array<Types::BaseScreenshot>]
-    #
-    # @!attribute [rw] base_canary_run_id
-    #   Specifies which canary run to use the screenshots from as the
-    #   baseline for future visual monitoring with this canary. Valid values
-    #   are `nextrun` to use the screenshots from the next run after this
-    #   update is made, `lastrun` to use the screenshots from the most
-    #   recent run before this update was made, or the value of `Id` in the
-    #   [ CanaryRun][1] from any past run of this canary.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/VisualReferenceInput AWS API Documentation
-    #
-    class VisualReferenceInput < Struct.new(
-      :base_screenshots,
-      :base_canary_run_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # If this canary performs visual monitoring by comparing screenshots,
-    # this structure contains the ID of the canary run that is used as the
-    # baseline for screenshots, and the coordinates of any parts of those
-    # screenshots that are ignored during visual monitoring comparison.
-    #
-    # Visual monitoring is supported only on canaries running the
-    # **syn-puppeteer-node-3.2** runtime or later.
-    #
-    # @!attribute [rw] base_screenshots
-    #   An array of screenshots that are used as the baseline for
-    #   comparisons during visual monitoring.
-    #   @return [Array<Types::BaseScreenshot>]
-    #
-    # @!attribute [rw] base_canary_run_id
-    #   The ID of the canary run that produced the screenshots that are used
-    #   as the baseline for visual monitoring comparisons during future runs
-    #   of this canary.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/VisualReferenceOutput AWS API Documentation
-    #
-    class VisualReferenceOutput < Struct.new(
-      :base_screenshots,
-      :base_canary_run_id)
       SENSITIVE = []
       include Aws::Structure
     end

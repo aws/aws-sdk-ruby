@@ -28,7 +28,7 @@ require_relative 'aws-sdk-sagemakerfeaturestoreruntime/customizations'
 # structure.
 #
 #     sage_maker_feature_store_runtime = Aws::SageMakerFeatureStoreRuntime::Client.new
-#     resp = sage_maker_feature_store_runtime.batch_get_record(params)
+#     resp = sage_maker_feature_store_runtime.delete_record(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-sagemakerfeaturestoreruntime/customizations'
 # @!group service
 module Aws::SageMakerFeatureStoreRuntime
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.2.0'
 
 end

@@ -50,7 +50,6 @@ module Aws::ElasticsearchService
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     CognitoOptions = Shapes::StructureShape.new(name: 'CognitoOptions')
     CognitoOptionsStatus = Shapes::StructureShape.new(name: 'CognitoOptionsStatus')
-    ColdStorageOptions = Shapes::StructureShape.new(name: 'ColdStorageOptions')
     CommitMessage = Shapes::StringShape.new(name: 'CommitMessage')
     CompatibleElasticsearchVersionsList = Shapes::ListShape.new(name: 'CompatibleElasticsearchVersionsList')
     CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
@@ -403,9 +402,6 @@ module Aws::ElasticsearchService
     CognitoOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     CognitoOptionsStatus.struct_class = Types::CognitoOptionsStatus
 
-    ColdStorageOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
-    ColdStorageOptions.struct_class = Types::ColdStorageOptions
-
     CompatibleElasticsearchVersionsList.member = Shapes::ShapeRef.new(shape: CompatibleVersionsMap)
 
     CompatibleVersionsMap.add_member(:source_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "SourceVersion"))
@@ -637,7 +633,6 @@ module Aws::ElasticsearchService
     ElasticsearchClusterConfig.add_member(:warm_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "WarmEnabled"))
     ElasticsearchClusterConfig.add_member(:warm_type, Shapes::ShapeRef.new(shape: ESWarmPartitionInstanceType, location_name: "WarmType"))
     ElasticsearchClusterConfig.add_member(:warm_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "WarmCount"))
-    ElasticsearchClusterConfig.add_member(:cold_storage_options, Shapes::ShapeRef.new(shape: ColdStorageOptions, location_name: "ColdStorageOptions"))
     ElasticsearchClusterConfig.struct_class = Types::ElasticsearchClusterConfig
 
     ElasticsearchClusterConfigStatus.add_member(:options, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, required: true, location_name: "Options"))

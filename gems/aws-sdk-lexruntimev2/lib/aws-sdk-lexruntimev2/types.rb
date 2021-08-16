@@ -23,12 +23,11 @@ module Aws::LexRuntimeV2
     end
 
     # Contains information about the contexts that a user is using in a
-    # session. You can configure Amazon Lex V2 to set a context when an
-    # intent is fulfilled, or you can set a context using the , , or
-    # operations.
+    # session. You can configure Amazon Lex to set a context when an intent
+    # is fulfilled, or you can set a context using the , , or operations.
     #
-    # Use a context to indicate to Amazon Lex V2 intents that should be used
-    # as follow-up intents. For example, if the active context is
+    # Use a context to indicate to Amazon Lex intents that should be used as
+    # follow-up intents. For example, if the active context is
     # `order-fulfilled`, only intents that have `order-fulfilled` configured
     # as a trigger are considered for follow up.
     #
@@ -41,7 +40,7 @@ module Aws::LexRuntimeV2
     #           time_to_live_in_seconds: 1, # required
     #           turns_to_live: 1, # required
     #         },
-    #         context_attributes: { # required
+    #         context_attributes: {
     #           "ParameterName" => "Text",
     #         },
     #       }
@@ -107,9 +106,9 @@ module Aws::LexRuntimeV2
     end
 
     # Represents a chunk of audio sent from the client application to Amazon
-    # Lex V2. The audio is all or part of an utterance from the user.
+    # Lex. The audio is all or part of an utterance from the user.
     #
-    # Amazon Lex V2 accumulates audio chunks until it recognizes a natural
+    # Amazon Lex accumulates audio chunks until it recognizes a natural
     # pause in speech before processing the input.
     #
     # @note When making an API call, you may pass AudioInputEvent
@@ -141,7 +140,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] client_timestamp_millis
     #   A timestamp set by the client of the date and time that the event
-    #   was sent to Amazon Lex V2.
+    #   was sent to Amazon Lex.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/AudioInputEvent AWS API Documentation
@@ -156,7 +155,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # An event sent from Amazon Lex V2 to your client application containing
+    # An event sent from Amazon Lex to your client application containing
     # audio to play to the user.
     #
     # @!attribute [rw] audio_chunk
@@ -169,10 +168,10 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   A unique identifier of the event sent by Amazon Lex V2. The
-    #   identifier is in the form `RESPONSE-N`, where N is a number starting
-    #   with one and incremented for each event sent by Amazon Lex V2 in the
-    #   current session.
+    #   A unique identifier of the event sent by Amazon Lex. The identifier
+    #   is in the form `RESPONSE-N`, where N is a number starting with one
+    #   and incremented for each event sent by Amazon Lex in the current
+    #   session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/AudioResponseEvent AWS API Documentation
@@ -213,7 +212,7 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value returned to Amazon Lex V2 when a user chooses the button.
+    #   The value returned to Amazon Lex when a user chooses the button.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/Button AWS API Documentation
@@ -225,11 +224,11 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # Provides a score that indicates the confidence that Amazon Lex V2 has
+    # Provides a score that indicates the confidence that Amazon Lex has
     # that an intent is the one that satisfies the user's intent.
     #
     # @!attribute [rw] score
-    #   A score that indicates how confident Amazon Lex V2 is that an intent
+    #   A score that indicates how confident Amazon Lex is that an intent
     #   satisfies the user's intent. Ranges between 0.00 and 1.00. Higher
     #   scores indicate higher confidence.
     #   @return [Float]
@@ -242,9 +241,9 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # The initial event sent from the application to Amazon Lex V2 to
-    # configure the conversation, including session and request attributes
-    # and the response content type.
+    # The initial event sent from the application to Amazon Lex to configure
+    # the conversation, including session and request attributes and the
+    # response content type.
     #
     # @note When making an API call, you may pass ConfigurationEvent
     #   data as a hash:
@@ -268,12 +267,6 @@ module Aws::LexRuntimeV2
     #                   interpreted_value: "NonEmptyString", # required
     #                   resolved_values: ["NonEmptyString"],
     #                 },
-    #                 shape: "Scalar", # accepts Scalar, List
-    #                 values: [
-    #                   {
-    #                     # recursive Slot
-    #                   },
-    #                 ],
     #               },
     #             },
     #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -286,7 +279,7 @@ module Aws::LexRuntimeV2
     #                 time_to_live_in_seconds: 1, # required
     #                 turns_to_live: 1, # required
     #               },
-    #               context_attributes: { # required
+    #               context_attributes: {
     #                 "ParameterName" => "Text",
     #               },
     #             },
@@ -299,7 +292,7 @@ module Aws::LexRuntimeV2
     #         welcome_messages: [
     #           {
     #             content: "Text",
-    #             content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
+    #             content_type: "CustomPayload", # accepts CustomPayload, ImageResponseCard, PlainText, SSML
     #             image_response_card: {
     #               title: "AttachmentTitle", # required
     #               subtitle: "AttachmentTitle",
@@ -320,25 +313,25 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] request_attributes
     #   Request-specific information passed between the client application
-    #   and Amazon Lex V2.
+    #   and Amazon Lex.
     #
     #   The namespace `x-amz-lex:` is reserved for special attributes.
     #   Don't create any request attributes for prefix `x-amz-lex:`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_content_type
-    #   The message that Amazon Lex V2 returns in the response can be either
+    #   The message that Amazon Lex returns in the response can be either
     #   text or speech based on the `responseContentType` value.
     #
-    #   * If the value is `text/plain;charset=utf-8`, Amazon Lex V2 returns
+    #   * If the value is `text/plain;charset=utf-8`, Amazon Lex returns
     #     text in the response.
     #
-    #   * If the value begins with `audio/`, Amazon Lex V2 returns speech in
-    #     the response. Amazon Lex V2 uses Amazon Polly to generate the
-    #     speech using the configuration that you specified in the
+    #   * If the value begins with `audio/`, Amazon Lex returns speech in
+    #     the response. Amazon Lex uses Amazon Polly to generate the speech
+    #     using the configuration that you specified in the
     #     `requestContentType` parameter. For example, if you specify
-    #     `audio/mpeg` as the value, Amazon Lex V2 returns speech in the
-    #     MPEG format.
+    #     `audio/mpeg` as the value, Amazon Lex returns speech in the MPEG
+    #     format.
     #
     #   * If the value is `audio/pcm`, the speech returned is audio/pcm in
     #     16-bit, little-endian format.
@@ -357,7 +350,7 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] session_state
-    #   The state of the user's session with Amazon Lex V2.
+    #   The state of the user's session with Amazon Lex.
     #   @return [Types::SessionState]
     #
     # @!attribute [rw] welcome_messages
@@ -365,7 +358,7 @@ module Aws::LexRuntimeV2
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] disable_playback
-    #   Determines whether Amazon Lex V2 should send audio responses to the
+    #   Determines whether Amazon Lex should send audio responses to the
     #   client application. When this parameter if `false`, the client
     #   application needs to create responses for the user.
     #   @return [Boolean]
@@ -377,7 +370,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] client_timestamp_millis
     #   A timestamp set by the client of the date and time that the event
-    #   was sent to Amazon Lex V2.
+    #   was sent to Amazon Lex.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/ConfigurationEvent AWS API Documentation
@@ -409,7 +402,7 @@ module Aws::LexRuntimeV2
 
     # A DTMF character sent from the client application. DTMF characters are
     # typically sent from a phone keypad to represent numbers. For example,
-    # you can have Amazon Lex V2 process a credit card number input from a
+    # you can have Amazon Lex process a credit card number input from a
     # phone.
     #
     # @note When making an API call, you may pass DTMFInputEvent
@@ -433,7 +426,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] client_timestamp_millis
     #   A timestamp set by the client of the date and time that the event
-    #   was sent to Amazon Lex V2.
+    #   was sent to Amazon Lex.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/DTMFInputEvent AWS API Documentation
@@ -525,7 +518,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # The next action that Amazon Lex V2 should take.
+    # The next action that Amazon Lex should take.
     #
     # @note When making an API call, you may pass DialogAction
     #   data as a hash:
@@ -547,7 +540,7 @@ module Aws::LexRuntimeV2
     #     is complete and ready to be fulfilled. This is a yes/no question
     #     such as "Place the order?"
     #
-    #   * `Delegate` - The next action is determined by Amazon Lex V2.
+    #   * `Delegate` - The next action is determined by Amazon Lex.
     #
     #   * `ElicitSlot` - The next action is to elicit a slot value from the
     #     user.
@@ -567,7 +560,7 @@ module Aws::LexRuntimeV2
     end
 
     # A notification from the client that it is disconnecting from Amazon
-    # Lex V2. Sending a `DisconnectionEvent` event is optional, but can help
+    # Lex. Sending a `DisconnectionEvent` event is optional, but can help
     # identify a conversation in logs.
     #
     # @note When making an API call, you may pass DisconnectionEvent
@@ -585,7 +578,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] client_timestamp_millis
     #   A timestamp set by the client of the date and time that the event
-    #   was sent to Amazon Lex V2.
+    #   was sent to Amazon Lex.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/DisconnectionEvent AWS API Documentation
@@ -647,12 +640,12 @@ module Aws::LexRuntimeV2
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] interpretations
-    #   A list of intents that Amazon Lex V2 determined might satisfy the
+    #   A list of intents that Amazon Lex determined might satisfy the
     #   user's utterance.
     #
     #   Each interpretation includes the intent, a score that indicates how
-    #   confident Amazon Lex V2 is that the interpretation is the correct
-    #   one, and an optional sentiment response that indicates the sentiment
+    #   confident Amazon Lex is that the interpretation is the correct one,
+    #   and an optional sentiment response that indicates the sentiment
     #   expressed in the utterance.
     #   @return [Array<Types::Interpretation>]
     #
@@ -675,14 +668,14 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # Event that Amazon Lex V2 sends to indicate that the stream is still
-    # open between the client application and Amazon Lex V2
+    # Event that Amazon Lex sends to indicate that the stream is still open
+    # between the client application and Amazon Lex
     #
     # @!attribute [rw] event_id
-    #   A unique identifier of the event sent by Amazon Lex V2. The
-    #   identifier is in the form `RESPONSE-N`, where N is a number starting
-    #   with one and incremented for each event sent by Amazon Lex V2 in the
-    #   current session.
+    #   A unique identifier of the event sent by Amazon Lex. The identifier
+    #   is in the form `RESPONSE-N`, where N is a number starting with one
+    #   and incremented for each event sent by Amazon Lex in the current
+    #   session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/HeartbeatEvent AWS API Documentation
@@ -748,7 +741,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # The current intent that Amazon Lex V2 is attempting to fulfill.
+    # The current intent that Amazon Lex is attempting to fulfill.
     #
     # @note When making an API call, you may pass Intent
     #   data as a hash:
@@ -762,12 +755,6 @@ module Aws::LexRuntimeV2
     #               interpreted_value: "NonEmptyString", # required
     #               resolved_values: ["NonEmptyString"],
     #             },
-    #             shape: "Scalar", # accepts Scalar, List
-    #             values: [
-    #               {
-    #                 # recursive Slot
-    #               },
-    #             ],
     #           },
     #         },
     #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -805,24 +792,24 @@ module Aws::LexRuntimeV2
     end
 
     # Contains the current state of the conversation between the client
-    # application and Amazon Lex V2.
+    # application and Amazon Lex.
     #
     # @!attribute [rw] input_mode
     #   Indicates whether the input to the operation was text or speech.
     #   @return [String]
     #
     # @!attribute [rw] interpretations
-    #   A list of intents that Amazon Lex V2 determined might satisfy the
+    #   A list of intents that Amazon Lex determined might satisfy the
     #   user's utterance.
     #
     #   Each interpretation includes the intent, a score that indicates how
-    #   confident Amazon Lex V2 is that the interpretation is the correct
-    #   one, and an optional sentiment response that indicates the sentiment
+    #   confident Amazon Lex is that the interpretation is the correct one,
+    #   and an optional sentiment response that indicates the sentiment
     #   expressed in the utterance.
     #   @return [Array<Types::Interpretation>]
     #
     # @!attribute [rw] session_state
-    #   The state of the user's session with Amazon Lex V2.
+    #   The state of the user's session with Amazon Lex.
     #   @return [Types::SessionState]
     #
     # @!attribute [rw] request_attributes
@@ -834,10 +821,10 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   A unique identifier of the event sent by Amazon Lex V2. The
-    #   identifier is in the form `RESPONSE-N`, where N is a number starting
-    #   with one and incremented for each event sent by Amazon Lex V2 in the
-    #   current session.
+    #   A unique identifier of the event sent by Amazon Lex. The identifier
+    #   is in the form `RESPONSE-N`, where N is a number starting with one
+    #   and incremented for each event sent by Amazon Lex in the current
+    #   session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/IntentResultEvent AWS API Documentation
@@ -866,11 +853,11 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # An intent that Amazon Lex V2 determined might satisfy the user's
+    # An intent that Amazon Lex determined might satisfy the user's
     # utterance. The intents are ordered by the confidence score.
     #
     # @!attribute [rw] nlu_confidence
-    #   Determines the threshold where Amazon Lex V2 will insert the
+    #   Determines the threshold where Amazon Lex will insert the
     #   `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
     #   returning alternative intents in a response. `AMAZON.FallbackIntent`
     #   and `AMAZON.KendraSearchIntent` are only inserted if they are
@@ -907,7 +894,7 @@ module Aws::LexRuntimeV2
     #
     #       {
     #         content: "Text",
-    #         content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
+    #         content_type: "CustomPayload", # accepts CustomPayload, ImageResponseCard, PlainText, SSML
     #         image_response_card: {
     #           title: "AttachmentTitle", # required
     #           subtitle: "AttachmentTitle",
@@ -947,8 +934,8 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # Event sent from the client application to Amazon Lex V2 to indicate
-    # that playback of audio is complete and that Amazon Lex V2 should start
+    # Event sent from the client application to Amazon Lex to indicate that
+    # playback of audio is complete and that Amazon Lex should start
     # processing the user's input.
     #
     # @note When making an API call, you may pass PlaybackCompletionEvent
@@ -966,7 +953,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] client_timestamp_millis
     #   A timestamp set by the client of the date and time that the event
-    #   was sent to Amazon Lex V2.
+    #   was sent to Amazon Lex.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/PlaybackCompletionEvent AWS API Documentation
@@ -979,15 +966,15 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # Event sent from Amazon Lex V2 to indicate to the client application
+    # Event sent from Amazon Lex to indicate to the client application
     # should stop playback of audio. For example, if the client is playing a
     # prompt that asks for the user's telephone number, the user might
     # start to say the phone number before the prompt is complete. Amazon
-    # Lex V2 sends this event to the client application to indicate that the
-    # user is responding and that Amazon Lex V2 is processing their input.
+    # Lex sends this event to the client application to indicate that the
+    # user is responding and that Amazon Lex is processing their input.
     #
     # @!attribute [rw] event_reason
-    #   Indicates the type of user input that Amazon Lex V2 detected.
+    #   Indicates the type of user input that Amazon Lex detected.
     #   @return [String]
     #
     # @!attribute [rw] caused_by_event_id
@@ -996,10 +983,10 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   A unique identifier of the event sent by Amazon Lex V2. The
-    #   identifier is in the form `RESPONSE-N`, where N is a number starting
-    #   with one and incremented for each event sent by Amazon Lex V2 in the
-    #   current session.
+    #   A unique identifier of the event sent by Amazon Lex. The identifier
+    #   is in the form `RESPONSE-N`, where N is a number starting with one
+    #   and incremented for each event sent by Amazon Lex in the current
+    #   session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/PlaybackInterruptionEvent AWS API Documentation
@@ -1024,7 +1011,7 @@ module Aws::LexRuntimeV2
     #         messages: [
     #           {
     #             content: "Text",
-    #             content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
+    #             content_type: "CustomPayload", # accepts CustomPayload, ImageResponseCard, PlainText, SSML
     #             image_response_card: {
     #               title: "AttachmentTitle", # required
     #               subtitle: "AttachmentTitle",
@@ -1052,12 +1039,6 @@ module Aws::LexRuntimeV2
     #                   interpreted_value: "NonEmptyString", # required
     #                   resolved_values: ["NonEmptyString"],
     #                 },
-    #                 shape: "Scalar", # accepts Scalar, List
-    #                 values: [
-    #                   {
-    #                     # recursive Slot
-    #                   },
-    #                 ],
     #               },
     #             },
     #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -1070,7 +1051,7 @@ module Aws::LexRuntimeV2
     #                 time_to_live_in_seconds: 1, # required
     #                 turns_to_live: 1, # required
     #               },
-    #               context_attributes: { # required
+    #               context_attributes: {
     #                 "ParameterName" => "Text",
     #               },
     #             },
@@ -1110,12 +1091,12 @@ module Aws::LexRuntimeV2
     # @!attribute [rw] session_state
     #   Sets the state of the session with the user. You can use this to set
     #   the current intent, attributes, context, and dialog action. Use the
-    #   dialog action to determine the next step that Amazon Lex V2 should
-    #   use in the conversation with the user.
+    #   dialog action to determine the next step that Amazon Lex should use
+    #   in the conversation with the user.
     #   @return [Types::SessionState]
     #
     # @!attribute [rw] request_attributes
-    #   Request-specific information passed between Amazon Lex V2 and the
+    #   Request-specific information passed between Amazon Lex and the
     #   client application.
     #
     #   The namespace `x-amz-lex:` is reserved for special attributes.
@@ -1123,10 +1104,10 @@ module Aws::LexRuntimeV2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_content_type
-    #   The message that Amazon Lex V2 returns in the response can be either
+    #   The message that Amazon Lex returns in the response can be either
     #   text or speech depending on the value of this parameter.
     #
-    #   * If the value is `text/plain; charset=utf-8`, Amazon Lex V2 returns
+    #   * If the value is `text/plain; charset=utf-8`, Amazon Lex returns
     #     text in the response.
     #
     #   ^
@@ -1168,7 +1149,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] request_attributes
     #   Request-specific information passed between the client application
-    #   and Amazon Lex V2. These are the same as the `requestAttribute`
+    #   and Amazon Lex. These are the same as the `requestAttribute`
     #   parameter in the call to the `PutSession` operation.
     #   @return [String]
     #
@@ -1217,12 +1198,6 @@ module Aws::LexRuntimeV2
     #                   interpreted_value: "NonEmptyString", # required
     #                   resolved_values: ["NonEmptyString"],
     #                 },
-    #                 shape: "Scalar", # accepts Scalar, List
-    #                 values: [
-    #                   {
-    #                     # recursive Slot
-    #                   },
-    #                 ],
     #               },
     #             },
     #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -1235,7 +1210,7 @@ module Aws::LexRuntimeV2
     #                 time_to_live_in_seconds: 1, # required
     #                 turns_to_live: 1, # required
     #               },
-    #               context_attributes: { # required
+    #               context_attributes: {
     #                 "ParameterName" => "Text",
     #               },
     #             },
@@ -1267,7 +1242,7 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] text
-    #   The text that the user entered. Amazon Lex V2 interprets this text.
+    #   The text that the user entered. Amazon Lex interprets this text.
     #   @return [String]
     #
     # @!attribute [rw] session_state
@@ -1276,7 +1251,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] request_attributes
     #   Request-specific information passed between the client application
-    #   and Amazon Lex V2
+    #   and Amazon Lex
     #
     #   The namespace `x-amz-lex:` is reserved for special attributes.
     #   Don't create any request attributes with the prefix `x-amz-lex:`.
@@ -1311,12 +1286,12 @@ module Aws::LexRuntimeV2
     #   @return [Types::SessionState]
     #
     # @!attribute [rw] interpretations
-    #   A list of intents that Amazon Lex V2 determined might satisfy the
+    #   A list of intents that Amazon Lex determined might satisfy the
     #   user's utterance.
     #
     #   Each interpretation includes the intent, a score that indicates now
-    #   confident Amazon Lex V2 is that the interpretation is the correct
-    #   one, and an optional sentiment response that indicates the sentiment
+    #   confident Amazon Lex is that the interpretation is the correct one,
+    #   and an optional sentiment response that indicates the sentiment
     #   expressed in the utterance.
     #   @return [Array<Types::Interpretation>]
     #
@@ -1375,22 +1350,16 @@ module Aws::LexRuntimeV2
     # @!attribute [rw] session_state
     #   Sets the state of the session with the user. You can use this to set
     #   the current intent, attributes, context, and dialog action. Use the
-    #   dialog action to determine the next step that Amazon Lex V2 should
-    #   use in the conversation with the user.
-    #
-    #   The `sessionState` field must be compressed using gzip and then
-    #   base64 encoded before sending to Amazon Lex V2.
+    #   dialog action to determine the next step that Amazon Lex should use
+    #   in the conversation with the user.
     #   @return [String]
     #
     # @!attribute [rw] request_attributes
     #   Request-specific information passed between the client application
-    #   and Amazon Lex V2
+    #   and Amazon Lex
     #
     #   The namespace `x-amz-lex:` is reserved for special attributes.
     #   Don't create any request attributes for prefix `x-amz-lex:`.
-    #
-    #   The `requestAttributes` field must be compressed using gzip and then
-    #   base64 encoded before sending to Amazon Lex V2.
     #   @return [String]
     #
     # @!attribute [rw] request_content_type
@@ -1420,18 +1389,18 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] response_content_type
-    #   The message that Amazon Lex V2 returns in the response can be either
+    #   The message that Amazon Lex returns in the response can be either
     #   text or speech based on the `responseContentType` value.
     #
-    #   * If the value is `text/plain;charset=utf-8`, Amazon Lex V2 returns
+    #   * If the value is `text/plain;charset=utf-8`, Amazon Lex returns
     #     text in the response.
     #
-    #   * If the value begins with `audio/`, Amazon Lex V2 returns speech in
-    #     the response. Amazon Lex V2 uses Amazon Polly to generate the
-    #     speech using the configuration that you specified in the
+    #   * If the value begins with `audio/`, Amazon Lex returns speech in
+    #     the response. Amazon Lex uses Amazon Polly to generate the speech
+    #     using the configuration that you specified in the
     #     `requestContentType` parameter. For example, if you specify
-    #     `audio/mpeg` as the value, Amazon Lex V2 returns speech in the
-    #     MPEG format.
+    #     `audio/mpeg` as the value, Amazon Lex returns speech in the MPEG
+    #     format.
     #
     #   * If the value is `audio/pcm`, the speech returned is `audio/pcm` at
     #     16 KHz in 16-bit, little-endian format.
@@ -1485,26 +1454,16 @@ module Aws::LexRuntimeV2
     #   ordered based on the order that you returned the messages from your
     #   Lambda function or the order that the messages are defined in the
     #   bot.
-    #
-    #   The `messages` field is compressed with gzip and then base64
-    #   encoded. Before you can use the contents of the field, you must
-    #   decode and decompress the contents. See the example for a simple
-    #   function to decode and decompress the contents.
     #   @return [String]
     #
     # @!attribute [rw] interpretations
-    #   A list of intents that Amazon Lex V2 determined might satisfy the
+    #   A list of intents that Amazon Lex determined might satisfy the
     #   user's utterance.
     #
     #   Each interpretation includes the intent, a score that indicates how
-    #   confident Amazon Lex V2 is that the interpretation is the correct
-    #   one, and an optional sentiment response that indicates the sentiment
+    #   confident Amazon Lex is that the interpretation is the correct one,
+    #   and an optional sentiment response that indicates the sentiment
     #   expressed in the utterance.
-    #
-    #   The `interpretations` field is compressed with gzip and then base64
-    #   encoded. Before you can use the contents of the field, you must
-    #   decode and decompress the contents. See the example for a simple
-    #   function to decode and decompress the contents.
     #   @return [String]
     #
     # @!attribute [rw] session_state
@@ -1513,19 +1472,10 @@ module Aws::LexRuntimeV2
     #
     #   Use this to determine the progress of the conversation and what the
     #   next action might be.
-    #
-    #   The `sessionState` field is compressed with gzip and then base64
-    #   encoded. Before you can use the contents of the field, you must
-    #   decode and decompress the contents. See the example for a simple
-    #   function to decode and decompress the contents.
     #   @return [String]
     #
     # @!attribute [rw] request_attributes
     #   The attributes sent in the request.
-    #
-    #   The `requestAttributes` field is compressed with gzip and then
-    #   base64 encoded. Before you can use the contents of the field, you
-    #   must decode and decompress the contents.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -1538,24 +1488,19 @@ module Aws::LexRuntimeV2
     #   If the input was an audio stream, the `inputTranscript` field
     #   contains the text extracted from the audio stream. This is the text
     #   that is actually processed to recognize intents and slot values. You
-    #   can use this information to determine if Amazon Lex V2 is correctly
+    #   can use this information to determine if Amazon Lex is correctly
     #   processing the audio that you send.
-    #
-    #   The `inputTranscript` field is compressed with gzip and then base64
-    #   encoded. Before you can use the contents of the field, you must
-    #   decode and decompress the contents. See the example for a simple
-    #   function to decode and decompress the contents.
     #   @return [String]
     #
     # @!attribute [rw] audio_stream
     #   The prompt or statement to send to the user. This is based on the
-    #   bot configuration and context. For example, if Amazon Lex V2 did not
+    #   bot configuration and context. For example, if Amazon Lex did not
     #   understand the user intent, it sends the `clarificationPrompt`
     #   configured for the bot. If the intent requires confirmation before
     #   taking the fulfillment action, it sends the `confirmationPrompt`.
     #   Another example: Suppose that the Lambda function successfully
     #   fulfilled the intent, and sent a message to convey to the user. Then
-    #   Amazon Lex V2 sends that message in the response.
+    #   Amazon Lex sends that message in the response.
     #   @return [IO]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizeUtteranceResponse AWS API Documentation
@@ -1650,7 +1595,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # The state of the user's session with Amazon Lex V2.
+    # The state of the user's session with Amazon Lex.
     #
     # @note When making an API call, you may pass SessionState
     #   data as a hash:
@@ -1669,12 +1614,6 @@ module Aws::LexRuntimeV2
     #                 interpreted_value: "NonEmptyString", # required
     #                 resolved_values: ["NonEmptyString"],
     #               },
-    #               shape: "Scalar", # accepts Scalar, List
-    #               values: [
-    #                 {
-    #                   # recursive Slot
-    #                 },
-    #               ],
     #             },
     #           },
     #           state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -1687,7 +1626,7 @@ module Aws::LexRuntimeV2
     #               time_to_live_in_seconds: 1, # required
     #               turns_to_live: 1, # required
     #             },
-    #             context_attributes: { # required
+    #             context_attributes: {
     #               "ParameterName" => "Text",
     #             },
     #           },
@@ -1699,25 +1638,24 @@ module Aws::LexRuntimeV2
     #       }
     #
     # @!attribute [rw] dialog_action
-    #   The next step that Amazon Lex V2 should take in the conversation
-    #   with a user.
+    #   The next step that Amazon Lex should take in the conversation with a
+    #   user.
     #   @return [Types::DialogAction]
     #
     # @!attribute [rw] intent
-    #   The active intent that Amazon Lex V2 is processing.
+    #   The active intent that Amazon Lex is processing.
     #   @return [Types::Intent]
     #
     # @!attribute [rw] active_contexts
-    #   One or more contexts that indicate to Amazon Lex V2 the context of a
-    #   request. When a context is active, Amazon Lex V2 considers intents
-    #   with the matching context as a trigger as the next intent in a
-    #   session.
+    #   One or more contexts that indicate to Amazon Lex the context of a
+    #   request. When a context is active, Amazon Lex considers intents with
+    #   the matching context as a trigger as the next intent in a session.
     #   @return [Array<Types::ActiveContext>]
     #
     # @!attribute [rw] session_attributes
     #   Map of key/value pairs representing session-specific context
     #   information. It contains application information passed between
-    #   Amazon Lex V2 and a client application.
+    #   Amazon Lex and a client application.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] originating_request_id
@@ -1735,7 +1673,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # A value that Amazon Lex V2 uses to fulfill an intent.
+    # A value that Amazon Lex uses to fulfill an intent.
     #
     # @note When making an API call, you may pass Slot
     #   data as a hash:
@@ -1746,44 +1684,16 @@ module Aws::LexRuntimeV2
     #           interpreted_value: "NonEmptyString", # required
     #           resolved_values: ["NonEmptyString"],
     #         },
-    #         shape: "Scalar", # accepts Scalar, List
-    #         values: [
-    #           {
-    #             value: {
-    #               original_value: "NonEmptyString",
-    #               interpreted_value: "NonEmptyString", # required
-    #               resolved_values: ["NonEmptyString"],
-    #             },
-    #             shape: "Scalar", # accepts Scalar, List
-    #             values: {
-    #               # recursive Values
-    #             },
-    #           },
-    #         ],
     #       }
     #
     # @!attribute [rw] value
     #   The current value of the slot.
     #   @return [Types::Value]
     #
-    # @!attribute [rw] shape
-    #   When the `shape` value is `List`, it indicates that the `values`
-    #   field contains a list of slot values. When the value is `Scalar`, it
-    #   indicates that the `value` field contains a single value.
-    #   @return [String]
-    #
-    # @!attribute [rw] values
-    #   A list of one or more values that the user provided for the slot.
-    #   For example, if a for a slot that elicits pizza toppings, the values
-    #   might be "pepperoni" and "pineapple."
-    #   @return [Array<Types::Slot>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/Slot AWS API Documentation
     #
     class Slot < Struct.new(
-      :value,
-      :shape,
-      :values)
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1817,14 +1727,14 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] conversation_mode
-    #   The conversation type that you are using the Amazon Lex V2. If the
+    #   The conversation type that you are using the Amazon Lex. If the
     #   conversation mode is `AUDIO` you can send both audio and DTMF
     #   information. If the mode is `TEXT` you can only send text.
     #   @return [String]
     #
     # @!attribute [rw] request_event_stream
-    #   Represents the stream of events to Amazon Lex V2 from your
-    #   application. The events are encoded as HTTP/2 data frames.
+    #   Represents the stream of events to Amazon Lex from your application.
+    #   The events are encoded as HTTP/2 data frames.
     #   @return [Types::StartConversationRequestEventStream]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/StartConversationRequest AWS API Documentation
@@ -1841,8 +1751,8 @@ module Aws::LexRuntimeV2
     end
 
     # @!attribute [rw] response_event_stream
-    #   Represents the stream of events from Amazon Lex V2 to your
-    #   application. The events are encoded as HTTP/2 data frames.
+    #   Represents the stream of events from Amazon Lex to your application.
+    #   The events are encoded as HTTP/2 data frames.
     #   @return [Types::StartConversationResponseEventStream]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/StartConversationResponse AWS API Documentation
@@ -1853,7 +1763,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # The event sent from your client application to Amazon Lex V2 with text
+    # The event sent from your client application to Amazon Lex with text
     # input from the user.
     #
     # @note When making an API call, you may pass TextInputEvent
@@ -1866,7 +1776,7 @@ module Aws::LexRuntimeV2
     #       }
     #
     # @!attribute [rw] text
-    #   The text from the user. Amazon Lex V2 processes this as a complete
+    #   The text from the user. Amazon Lex processes this as a complete
     #   statement.
     #   @return [String]
     #
@@ -1877,7 +1787,7 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] client_timestamp_millis
     #   A timestamp set by the client of the date and time that the event
-    #   was sent to Amazon Lex V2.
+    #   was sent to Amazon Lex.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/TextInputEvent AWS API Documentation
@@ -1891,7 +1801,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # The event sent from Amazon Lex V2 to your application with text to
+    # The event sent from Amazon Lex to your application with text to
     # present to the user.
     #
     # @!attribute [rw] messages
@@ -1901,10 +1811,10 @@ module Aws::LexRuntimeV2
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] event_id
-    #   A unique identifier of the event sent by Amazon Lex V2. The
-    #   identifier is in the form `RESPONSE-N`, where N is a number starting
-    #   with one and incremented for each event sent by Amazon Lex V2 in the
-    #   current session.
+    #   A unique identifier of the event sent by Amazon Lex. The identifier
+    #   is in the form `RESPONSE-N`, where N is a number starting with one
+    #   and incremented for each event sent by Amazon Lex in the current
+    #   session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/TextResponseEvent AWS API Documentation
@@ -1929,18 +1839,18 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # Event sent from Amazon Lex V2 to your client application that contains
-    # a transcript of voice audio.
+    # Event sent from Amazon Lex to your client application that contains a
+    # transcript of voice audio.
     #
     # @!attribute [rw] transcript
     #   The transcript of the voice audio from the user.
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   A unique identifier of the event sent by Amazon Lex V2. The
-    #   identifier is in the form `RESPONSE-N`, where N is a number starting
-    #   with one and incremented for each event sent by Amazon Lex V2 in the
-    #   current session.
+    #   A unique identifier of the event sent by Amazon Lex. The identifier
+    #   is in the form `RESPONSE-N`, where N is a number starting with one
+    #   and incremented for each event sent by Amazon Lex in the current
+    #   session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/TranscriptEvent AWS API Documentation
@@ -1982,11 +1892,10 @@ module Aws::LexRuntimeV2
     #   @return [String]
     #
     # @!attribute [rw] interpreted_value
-    #   The value that Amazon Lex V2 determines for the slot. The actual
-    #   value depends on the setting of the value selection strategy for the
-    #   bot. You can choose to use the value entered by the user, or you can
-    #   have Amazon Lex V2 choose the first value in the `resolvedValues`
-    #   list.
+    #   The value that Amazon Lex determines for the slot. The actual value
+    #   depends on the setting of the value selection strategy for the bot.
+    #   You can choose to use the value entered by the user, or you can have
+    #   Amazon Lex choose the first value in the `resolvedValues` list.
     #   @return [String]
     #
     # @!attribute [rw] resolved_values
@@ -2003,8 +1912,7 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
-    # Represents a stream of events between your application and Amazon Lex
-    # V2.
+    # Represents a stream of events between your application and Amazon Lex.
     #
     # @note When making an API call, you may pass StartConversationRequestEventStream
     #   data as a hash:
@@ -2029,12 +1937,6 @@ module Aws::LexRuntimeV2
     #                     interpreted_value: "NonEmptyString", # required
     #                     resolved_values: ["NonEmptyString"],
     #                   },
-    #                   shape: "Scalar", # accepts Scalar, List
-    #                   values: [
-    #                     {
-    #                       # recursive Slot
-    #                     },
-    #                   ],
     #                 },
     #               },
     #               state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
@@ -2047,7 +1949,7 @@ module Aws::LexRuntimeV2
     #                   time_to_live_in_seconds: 1, # required
     #                   turns_to_live: 1, # required
     #                 },
-    #                 context_attributes: { # required
+    #                 context_attributes: {
     #                   "ParameterName" => "Text",
     #                 },
     #               },
@@ -2060,7 +1962,7 @@ module Aws::LexRuntimeV2
     #           welcome_messages: [
     #             {
     #               content: "Text",
-    #               content_type: "CustomPayload", # required, accepts CustomPayload, ImageResponseCard, PlainText, SSML
+    #               content_type: "CustomPayload", # accepts CustomPayload, ImageResponseCard, PlainText, SSML
     #               image_response_card: {
     #                 title: "AttachmentTitle", # required
     #                 subtitle: "AttachmentTitle",
@@ -2124,8 +2026,7 @@ module Aws::LexRuntimeV2
 
     end
 
-    # Represents a stream of events between Amazon Lex V2 and your
-    # application.
+    # Represents a stream of events between Amazon Lex and your application.
     #
     # EventStream is an Enumerator of Events.
     #  #event_types #=> Array, returns all modeled event types in the stream

@@ -174,12 +174,6 @@
       "output_token": "NextToken",
       "result_key": "InstanceCreditSpecifications"
     },
-    "DescribeInstanceEventWindows": {
-      "input_token": "NextToken",
-      "limit_key": "MaxResults",
-      "output_token": "NextToken",
-      "result_key": "InstanceEventWindows"
-    },
     "DescribeInstanceStatus": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -379,12 +373,6 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "ScheduledInstanceSet"
-    },
-    "DescribeSecurityGroupRules": {
-      "input_token": "NextToken",
-      "limit_key": "MaxResults",
-      "output_token": "NextToken",
-      "result_key": "SecurityGroupRules"
     },
     "DescribeSecurityGroups": {
       "input_token": "NextToken",

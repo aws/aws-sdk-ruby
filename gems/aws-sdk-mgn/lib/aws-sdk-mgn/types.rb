@@ -132,7 +132,7 @@ module Aws::Mgn
     #         create_public_ip: false, # required
     #         data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
     #         default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1
-    #         ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
+    #         ebs_encryption: "NONE", # required, accepts NONE, DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         replication_server_instance_type: "EC2InstanceType", # required
     #         replication_servers_security_groups_i_ds: ["SecurityGroupID"], # required
@@ -1974,7 +1974,7 @@ module Aws::Mgn
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
     #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1
-    #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
+    #         ebs_encryption: "NONE", # accepts NONE, DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         name: "SmallBoundedString",
     #         replicated_disks: [
@@ -2092,7 +2092,7 @@ module Aws::Mgn
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
     #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1
-    #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
+    #         ebs_encryption: "NONE", # accepts NONE, DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
     #         replication_server_instance_type: "EC2InstanceType",

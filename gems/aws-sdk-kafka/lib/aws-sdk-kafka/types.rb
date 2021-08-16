@@ -281,9 +281,6 @@ module Aws::Kafka
     #           scram: {
     #             enabled: false,
     #           },
-    #           iam: {
-    #             enabled: false,
-    #           },
     #         },
     #         tls: {
     #           certificate_authority_arn_list: ["__string"],
@@ -694,9 +691,6 @@ module Aws::Kafka
     #         client_authentication: {
     #           sasl: {
     #             scram: {
-    #               enabled: false,
-    #             },
-    #             iam: {
     #               enabled: false,
     #             },
     #           },
@@ -1478,20 +1472,12 @@ module Aws::Kafka
     #   <programlisting>\{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096" \}</programlisting>
     #   @return [String]
     #
-    # @!attribute [rw] bootstrap_broker_string_sasl_iam
-    #   A string that contains one or more DNS names (or IP addresses) and
-    #   SASL IAM port pairs. The following is an example.
-    #
-    #   <programlisting>\{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9098" \}</programlisting>
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokersResponse AWS API Documentation
     #
     class GetBootstrapBrokersResponse < Struct.new(
       :bootstrap_broker_string,
       :bootstrap_broker_string_tls,
-      :bootstrap_broker_string_sasl_scram,
-      :bootstrap_broker_string_sasl_iam)
+      :bootstrap_broker_string_sasl_scram)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2083,22 +2069,15 @@ module Aws::Kafka
     #         scram: {
     #           enabled: false,
     #         },
-    #         iam: {
-    #           enabled: false,
-    #         },
     #       }
     #
     # @!attribute [rw] scram
     #   @return [Types::Scram]
     #
-    # @!attribute [rw] iam
-    #   @return [Types::Iam]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Sasl AWS API Documentation
     #
     class Sasl < Struct.new(
-      :scram,
-      :iam)
+      :scram)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2116,24 +2095,6 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Scram AWS API Documentation
     #
     class Scram < Struct.new(
-      :enabled)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass Iam
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false,
-    #       }
-    #
-    # @!attribute [rw] enabled
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Iam AWS API Documentation
-    #
-    class Iam < Struct.new(
       :enabled)
       SENSITIVE = []
       include Aws::Structure

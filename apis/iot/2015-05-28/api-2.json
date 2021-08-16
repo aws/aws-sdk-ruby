@@ -420,23 +420,6 @@
         {"shape":"ServiceUnavailableException"}
       ]
     },
-    "CreateJobTemplate":{
-      "name":"CreateJobTemplate",
-      "http":{
-        "method":"PUT",
-        "requestUri":"/job-templates/{jobTemplateId}"
-      },
-      "input":{"shape":"CreateJobTemplateRequest"},
-      "output":{"shape":"CreateJobTemplateResponse"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"ConflictException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalFailureException"}
-      ]
-    },
     "CreateKeysAndCertificate":{
       "name":"CreateKeysAndCertificate",
       "http":{
@@ -914,20 +897,6 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"ServiceUnavailableException"}
-      ]
-    },
-    "DeleteJobTemplate":{
-      "name":"DeleteJobTemplate",
-      "http":{
-        "method":"DELETE",
-        "requestUri":"/job-templates/{jobTemplateId}"
-      },
-      "input":{"shape":"DeleteJobTemplateRequest"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalFailureException"}
       ]
     },
     "DeleteMitigationAction":{
@@ -1516,21 +1485,6 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"ServiceUnavailableException"}
-      ]
-    },
-    "DescribeJobTemplate":{
-      "name":"DescribeJobTemplate",
-      "http":{
-        "method":"GET",
-        "requestUri":"/job-templates/{jobTemplateId}"
-      },
-      "input":{"shape":"DescribeJobTemplateRequest"},
-      "output":{"shape":"DescribeJobTemplateResponse"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalFailureException"}
       ]
     },
     "DescribeMitigationAction":{
@@ -2351,20 +2305,6 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"ServiceUnavailableException"}
-      ]
-    },
-    "ListJobTemplates":{
-      "name":"ListJobTemplates",
-      "http":{
-        "method":"GET",
-        "requestUri":"/job-templates"
-      },
-      "input":{"shape":"ListJobTemplatesRequest"},
-      "output":{"shape":"ListJobTemplatesResponse"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalFailureException"}
       ]
     },
     "ListJobs":{
@@ -4991,14 +4931,6 @@
       "max":2048,
       "min":1
     },
-    "ConflictException":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"errorMessage"}
-      },
-      "error":{"httpStatusCode":409},
-      "exception":true
-    },
     "ConflictingResourceUpdateException":{
       "type":"structure",
       "members":{
@@ -5246,8 +5178,7 @@
         "abortConfig":{"shape":"AbortConfig"},
         "timeoutConfig":{"shape":"TimeoutConfig"},
         "tags":{"shape":"TagList"},
-        "namespaceId":{"shape":"NamespaceId"},
-        "jobTemplateArn":{"shape":"JobTemplateArn"}
+        "namespaceId":{"shape":"NamespaceId"}
       }
     },
     "CreateJobResponse":{
@@ -5256,36 +5187,6 @@
         "jobArn":{"shape":"JobArn"},
         "jobId":{"shape":"JobId"},
         "description":{"shape":"JobDescription"}
-      }
-    },
-    "CreateJobTemplateRequest":{
-      "type":"structure",
-      "required":[
-        "jobTemplateId",
-        "description"
-      ],
-      "members":{
-        "jobTemplateId":{
-          "shape":"JobTemplateId",
-          "location":"uri",
-          "locationName":"jobTemplateId"
-        },
-        "jobArn":{"shape":"JobArn"},
-        "documentSource":{"shape":"JobDocumentSource"},
-        "document":{"shape":"JobDocument"},
-        "description":{"shape":"JobDescription"},
-        "presignedUrlConfig":{"shape":"PresignedUrlConfig"},
-        "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
-        "abortConfig":{"shape":"AbortConfig"},
-        "timeoutConfig":{"shape":"TimeoutConfig"},
-        "tags":{"shape":"TagList"}
-      }
-    },
-    "CreateJobTemplateResponse":{
-      "type":"structure",
-      "members":{
-        "jobTemplateArn":{"shape":"JobTemplateArn"},
-        "jobTemplateId":{"shape":"JobTemplateId"}
       }
     },
     "CreateKeysAndCertificateRequest":{
@@ -5707,7 +5608,7 @@
     "CreationDate":{"type":"timestamp"},
     "CredentialDurationSeconds":{
       "type":"integer",
-      "max":43200,
+      "max":3600,
       "min":900
     },
     "CustomCodeSigning":{
@@ -5993,17 +5894,6 @@
           "shape":"NamespaceId",
           "location":"querystring",
           "locationName":"namespaceId"
-        }
-      }
-    },
-    "DeleteJobTemplateRequest":{
-      "type":"structure",
-      "required":["jobTemplateId"],
-      "members":{
-        "jobTemplateId":{
-          "shape":"JobTemplateId",
-          "location":"uri",
-          "locationName":"jobTemplateId"
         }
       }
     },
@@ -6691,32 +6581,6 @@
       "members":{
         "documentSource":{"shape":"JobDocumentSource"},
         "job":{"shape":"Job"}
-      }
-    },
-    "DescribeJobTemplateRequest":{
-      "type":"structure",
-      "required":["jobTemplateId"],
-      "members":{
-        "jobTemplateId":{
-          "shape":"JobTemplateId",
-          "location":"uri",
-          "locationName":"jobTemplateId"
-        }
-      }
-    },
-    "DescribeJobTemplateResponse":{
-      "type":"structure",
-      "members":{
-        "jobTemplateArn":{"shape":"JobTemplateArn"},
-        "jobTemplateId":{"shape":"JobTemplateId"},
-        "description":{"shape":"JobDescription"},
-        "documentSource":{"shape":"JobDocumentSource"},
-        "document":{"shape":"JobDocument"},
-        "createdAt":{"shape":"DateType"},
-        "presignedUrlConfig":{"shape":"PresignedUrlConfig"},
-        "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
-        "abortConfig":{"shape":"AbortConfig"},
-        "timeoutConfig":{"shape":"TimeoutConfig"}
       }
     },
     "DescribeMitigationActionRequest":{
@@ -8037,8 +7901,7 @@
         "completedAt":{"shape":"DateType"},
         "jobProcessDetails":{"shape":"JobProcessDetails"},
         "timeoutConfig":{"shape":"TimeoutConfig"},
-        "namespaceId":{"shape":"NamespaceId"},
-        "jobTemplateArn":{"shape":"JobTemplateArn"}
+        "namespaceId":{"shape":"NamespaceId"}
       }
     },
     "JobArn":{"type":"string"},
@@ -8189,31 +8052,6 @@
       "type":"list",
       "member":{"shape":"TargetArn"},
       "min":1
-    },
-    "JobTemplateArn":{
-      "type":"string",
-      "max":1600,
-      "min":1,
-      "pattern":"^arn:[!-~]+$"
-    },
-    "JobTemplateId":{
-      "type":"string",
-      "max":64,
-      "min":1,
-      "pattern":"[a-zA-Z0-9_-]+"
-    },
-    "JobTemplateSummary":{
-      "type":"structure",
-      "members":{
-        "jobTemplateArn":{"shape":"JobTemplateArn"},
-        "jobTemplateId":{"shape":"JobTemplateId"},
-        "description":{"shape":"JobDescription"},
-        "createdAt":{"shape":"DateType"}
-      }
-    },
-    "JobTemplateSummaryList":{
-      "type":"list",
-      "member":{"shape":"JobTemplateSummary"}
     },
     "JsonDocument":{"type":"string"},
     "KafkaAction":{
@@ -8923,28 +8761,6 @@
       "type":"structure",
       "members":{
         "executionSummaries":{"shape":"JobExecutionSummaryForThingList"},
-        "nextToken":{"shape":"NextToken"}
-      }
-    },
-    "ListJobTemplatesRequest":{
-      "type":"structure",
-      "members":{
-        "maxResults":{
-          "shape":"LaserMaxResults",
-          "location":"querystring",
-          "locationName":"maxResults"
-        },
-        "nextToken":{
-          "shape":"NextToken",
-          "location":"querystring",
-          "locationName":"nextToken"
-        }
-      }
-    },
-    "ListJobTemplatesResponse":{
-      "type":"structure",
-      "members":{
-        "jobTemplates":{"shape":"JobTemplateSummaryList"},
         "nextToken":{"shape":"NextToken"}
       }
     },
@@ -9978,6 +9794,7 @@
     },
     "MaxJobExecutionsPerMin":{
       "type":"integer",
+      "max":1000,
       "min":1
     },
     "MaxResults":{

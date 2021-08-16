@@ -102,7 +102,6 @@ module Aws::Health
     healthServiceAccessStatusForOrganization = Shapes::StringShape.new(name: 'healthServiceAccessStatusForOrganization')
     locale = Shapes::StringShape.new(name: 'locale')
     maxResults = Shapes::IntegerShape.new(name: 'maxResults')
-    maxResultsLowerRange = Shapes::IntegerShape.new(name: 'maxResultsLowerRange')
     metadataKey = Shapes::StringShape.new(name: 'metadataKey')
     metadataValue = Shapes::StringShape.new(name: 'metadataValue')
     nextToken = Shapes::StringShape.new(name: 'nextToken')
@@ -149,7 +148,7 @@ module Aws::Health
     DescribeAffectedEntitiesForOrganizationRequest.add_member(:organization_entity_filters, Shapes::ShapeRef.new(shape: OrganizationEntityFiltersList, required: true, location_name: "organizationEntityFilters"))
     DescribeAffectedEntitiesForOrganizationRequest.add_member(:locale, Shapes::ShapeRef.new(shape: locale, location_name: "locale"))
     DescribeAffectedEntitiesForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
-    DescribeAffectedEntitiesForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResultsLowerRange, location_name: "maxResults"))
+    DescribeAffectedEntitiesForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
     DescribeAffectedEntitiesForOrganizationRequest.struct_class = Types::DescribeAffectedEntitiesForOrganizationRequest
 
     DescribeAffectedEntitiesForOrganizationResponse.add_member(:entities, Shapes::ShapeRef.new(shape: EntityList, location_name: "entities"))
@@ -219,7 +218,7 @@ module Aws::Health
 
     DescribeEventsForOrganizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OrganizationEventFilter, location_name: "filter"))
     DescribeEventsForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
-    DescribeEventsForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResultsLowerRange, location_name: "maxResults"))
+    DescribeEventsForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
     DescribeEventsForOrganizationRequest.add_member(:locale, Shapes::ShapeRef.new(shape: locale, location_name: "locale"))
     DescribeEventsForOrganizationRequest.struct_class = Types::DescribeEventsForOrganizationRequest
 

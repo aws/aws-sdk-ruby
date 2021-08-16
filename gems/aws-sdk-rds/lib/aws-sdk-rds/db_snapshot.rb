@@ -45,7 +45,7 @@ module Aws::RDS
     alias :db_snapshot_identifier :snapshot_id
 
     # Specifies when the snapshot was taken in Coordinated Universal Time
-    # (UTC). Changes for the copy when the snapshot is copied.
+    # (UTC).
     # @return [Time]
     def snapshot_create_time
       data[:snapshot_create_time]
@@ -139,16 +139,15 @@ module Aws::RDS
       data[:percent_progress]
     end
 
-    # The Amazon Web Services Region that the DB snapshot was created in or
-    # copied from.
+    # The AWS Region that the DB snapshot was created in or copied from.
     # @return [String]
     def source_region
       data[:source_region]
     end
 
     # The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was
-    # copied from. It only has a value in the case of a cross-account or
-    # cross-Region copy.
+    # copied from. It only has value in case of cross-customer or
+    # cross-region copy.
     # @return [String]
     def source_db_snapshot_identifier
       data[:source_db_snapshot_identifier]
@@ -173,12 +172,11 @@ module Aws::RDS
       data[:encrypted]
     end
 
-    # If `Encrypted` is true, the Amazon Web Services KMS key identifier for
-    # the encrypted DB snapshot.
+    # If `Encrypted` is true, the AWS KMS key identifier for the encrypted
+    # DB snapshot.
     #
-    # The Amazon Web Services KMS key identifier is the key ARN, key ID,
-    # alias ARN, or alias name for the Amazon Web Services KMS customer
-    # master key (CMK).
+    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    # name for the AWS KMS customer master key (CMK).
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -199,8 +197,8 @@ module Aws::RDS
       data[:timezone]
     end
 
-    # True if mapping of Amazon Web Services Identity and Access Management
-    # (IAM) accounts to database accounts is enabled, and otherwise false.
+    # True if mapping of AWS Identity and Access Management (IAM) accounts
+    # to database accounts is enabled, and otherwise false.
     # @return [Boolean]
     def iam_database_authentication_enabled
       data[:iam_database_authentication_enabled]
@@ -214,7 +212,7 @@ module Aws::RDS
     end
 
     # The identifier for the source DB instance, which can't be changed and
-    # which is unique to an Amazon Web Services Region.
+    # which is unique to an AWS Region.
     # @return [String]
     def dbi_resource_id
       data[:dbi_resource_id]
@@ -229,13 +227,6 @@ module Aws::RDS
     # @return [Array<Types::Tag>]
     def tag_list
       data[:tag_list]
-    end
-
-    # Specifies the time of the CreateDBSnapshot operation in Coordinated
-    # Universal Time (UTC). Doesn't change when the snapshot is copied.
-    # @return [Time]
-    def original_snapshot_create_time
-      data[:original_snapshot_create_time]
     end
 
     # @!endgroup
@@ -438,31 +429,26 @@ module Aws::RDS
     #
     #   Example: `my-db-snapshot`
     # @option options [String] :kms_key_id
-    #   The Amazon Web Services KMS key identifier for an encrypted DB
-    #   snapshot. The Amazon Web Services KMS key identifier is the key ARN,
-    #   key ID, alias ARN, or alias name for the Amazon Web Services KMS
-    #   customer master key (CMK).
+    #   The AWS KMS key identifier for an encrypted DB snapshot. The AWS KMS
+    #   key identifier is the key ARN, key ID, alias ARN, or alias name for
+    #   the AWS KMS customer master key (CMK).
     #
-    #   If you copy an encrypted DB snapshot from your Amazon Web Services
-    #   account, you can specify a value for this parameter to encrypt the
-    #   copy with a new Amazon Web Services KMS CMK. If you don't specify a
-    #   value for this parameter, then the copy of the DB snapshot is
-    #   encrypted with the same Amazon Web Services KMS key as the source DB
-    #   snapshot.
+    #   If you copy an encrypted DB snapshot from your AWS account, you can
+    #   specify a value for this parameter to encrypt the copy with a new AWS
+    #   KMS CMK. If you don't specify a value for this parameter, then the
+    #   copy of the DB snapshot is encrypted with the same AWS KMS key as the
+    #   source DB snapshot.
     #
-    #   If you copy an encrypted DB snapshot that is shared from another
-    #   Amazon Web Services account, then you must specify a value for this
-    #   parameter.
+    #   If you copy an encrypted DB snapshot that is shared from another AWS
+    #   account, then you must specify a value for this parameter.
     #
     #   If you specify this parameter when you copy an unencrypted snapshot,
     #   the copy is encrypted.
     #
-    #   If you copy an encrypted snapshot to a different Amazon Web Services
-    #   Region, then you must specify a Amazon Web Services KMS key identifier
-    #   for the destination Amazon Web Services Region. Amazon Web Services
-    #   KMS CMKs are specific to the Amazon Web Services Region that they are
-    #   created in, and you can't use CMKs from one Amazon Web Services
-    #   Region in another Amazon Web Services Region.
+    #   If you copy an encrypted snapshot to a different AWS Region, then you
+    #   must specify a AWS KMS key identifier for the destination AWS Region.
+    #   AWS KMS CMKs are specific to the AWS Region that they are created in,
+    #   and you can't use CMKs from one AWS Region in another AWS Region.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
     #   Resources][1] in the *Amazon RDS User Guide.*
@@ -475,58 +461,53 @@ module Aws::RDS
     #   snapshot to the target DB snapshot. By default, tags are not copied.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
-    #   `CopyDBSnapshot` API action in the source Amazon Web Services Region
-    #   that contains the source DB snapshot to copy.
+    #   `CopyDBSnapshot` API action in the source AWS Region that contains the
+    #   source DB snapshot to copy.
     #
     #   You must specify this parameter when you copy an encrypted DB snapshot
-    #   from another Amazon Web Services Region by using the Amazon RDS API.
-    #   Don't specify `PreSignedUrl` when you are copying an encrypted DB
-    #   snapshot in the same Amazon Web Services Region.
+    #   from another AWS Region by using the Amazon RDS API. Don't specify
+    #   `PreSignedUrl` when you are copying an encrypted DB snapshot in the
+    #   same AWS Region.
     #
     #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
-    #   action that can be executed in the source Amazon Web Services Region
-    #   that contains the encrypted DB snapshot to be copied. The presigned
-    #   URL request must contain the following parameter values:
+    #   action that can be executed in the source AWS Region that contains the
+    #   encrypted DB snapshot to be copied. The presigned URL request must
+    #   contain the following parameter values:
     #
-    #   * `DestinationRegion` - The Amazon Web Services Region that the
-    #     encrypted DB snapshot is copied to. This Amazon Web Services Region
-    #     is the same one where the `CopyDBSnapshot` action is called that
-    #     contains this presigned URL.
+    #   * `DestinationRegion` - The AWS Region that the encrypted DB snapshot
+    #     is copied to. This AWS Region is the same one where the
+    #     `CopyDBSnapshot` action is called that contains this presigned URL.
     #
     #     For example, if you copy an encrypted DB snapshot from the us-west-2
-    #     Amazon Web Services Region to the us-east-1 Amazon Web Services
-    #     Region, then you call the `CopyDBSnapshot` action in the us-east-1
-    #     Amazon Web Services Region and provide a presigned URL that contains
-    #     a call to the `CopyDBSnapshot` action in the us-west-2 Amazon Web
-    #     Services Region. For this example, the `DestinationRegion` in the
-    #     presigned URL must be set to the us-east-1 Amazon Web Services
-    #     Region.
+    #     AWS Region to the us-east-1 AWS Region, then you call the
+    #     `CopyDBSnapshot` action in the us-east-1 AWS Region and provide a
+    #     presigned URL that contains a call to the `CopyDBSnapshot` action in
+    #     the us-west-2 AWS Region. For this example, the `DestinationRegion`
+    #     in the presigned URL must be set to the us-east-1 AWS Region.
     #
-    #   * `KmsKeyId` - The Amazon Web Services KMS key identifier for the
-    #     customer master key (CMK) to use to encrypt the copy of the DB
-    #     snapshot in the destination Amazon Web Services Region. This is the
-    #     same identifier for both the `CopyDBSnapshot` action that is called
-    #     in the destination Amazon Web Services Region, and the action
-    #     contained in the presigned URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the customer master key
+    #     (CMK) to use to encrypt the copy of the DB snapshot in the
+    #     destination AWS Region. This is the same identifier for both the
+    #     `CopyDBSnapshot` action that is called in the destination AWS
+    #     Region, and the action contained in the presigned URL.
     #
     #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
     #     encrypted snapshot to be copied. This identifier must be in the
-    #     Amazon Resource Name (ARN) format for the source Amazon Web Services
-    #     Region. For example, if you are copying an encrypted DB snapshot
-    #     from the us-west-2 Amazon Web Services Region, then your
-    #     `SourceDBSnapshotIdentifier` looks like the following example:
+    #     Amazon Resource Name (ARN) format for the source AWS Region. For
+    #     example, if you are copying an encrypted DB snapshot from the
+    #     us-west-2 AWS Region, then your `SourceDBSnapshotIdentifier` looks
+    #     like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see
-    #   [Authenticating Requests: Using Query Parameters (Amazon Web Services
-    #   Signature Version 4)][1] and [Signature Version 4 Signing Process][2].
+    #   [Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [Signature Version 4 Signing Process][2].
     #
-    #   <note markdown="1"> If you are using an Amazon Web Services SDK tool or the CLI, you can
-    #   specify `SourceRegion` (or `--source-region` for the CLI) instead of
+    #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
+    #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a pre-signed URL that is a valid request for the
-    #   operation that can be executed in the source Amazon Web Services
-    #   Region.
+    #   operation that can be executed in the source AWS Region.
     #
     #    </note>
     #
@@ -538,13 +519,12 @@ module Aws::RDS
     #   The name of an option group to associate with the copy of the
     #   snapshot.
     #
-    #   Specify this option if you are copying a snapshot from one Amazon Web
-    #   Services Region to another, and your DB instance uses a nondefault
-    #   option group. If your source DB instance uses Transparent Data
-    #   Encryption for Oracle or Microsoft SQL Server, you must specify this
-    #   option when copying across Amazon Web Services Regions. For more
-    #   information, see [Option group considerations][1] in the *Amazon RDS
-    #   User Guide.*
+    #   Specify this option if you are copying a snapshot from one AWS Region
+    #   to another, and your DB instance uses a nondefault option group. If
+    #   your source DB instance uses Transparent Data Encryption for Oracle or
+    #   Microsoft SQL Server, you must specify this option when copying across
+    #   AWS Regions. For more information, see [Option group
+    #   considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -644,9 +624,9 @@ module Aws::RDS
     # @option options [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
     #   example, `db.m4.large`. Not all DB instance classes are available in
-    #   all Amazon Web Services Regions, or for all database engines. For the
-    #   full list of DB instance classes, and availability for your engine,
-    #   see [DB Instance Class][1] in the *Amazon RDS User Guide.*
+    #   all AWS Regions, or for all database engines. For the full list of DB
+    #   instance classes, and availability for your engine, see [DB Instance
+    #   Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -729,11 +709,11 @@ module Aws::RDS
     #
     #   * `oracle-ee`
     #
-    #   * `oracle-ee-cdb`
-    #
     #   * `oracle-se2`
     #
-    #   * `oracle-se2-cdb`
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
     #
     #   * `postgres`
     #
@@ -816,9 +796,9 @@ module Aws::RDS
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     # @option options [Boolean] :enable_iam_database_authentication
-    #   A value that indicates whether to enable mapping of Amazon Web
-    #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping is disabled.
+    #   A value that indicates whether to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts. By default,
+    #   mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -876,11 +856,10 @@ module Aws::RDS
     #   from outside of its virtual private cloud (VPC) on your local network.
     #
     #   For more information about RDS on Outposts, see [Working with Amazon
-    #   RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
-    #   Guide*.
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
     #
     #   For more information about CoIPs, see [Customer-owned IP addresses][2]
-    #   in the *Amazon Web Services Outposts User Guide*.
+    #   in the *AWS Outposts User Guide*.
     #
     #
     #

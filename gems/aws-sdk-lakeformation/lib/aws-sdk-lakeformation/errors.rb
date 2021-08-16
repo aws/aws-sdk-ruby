@@ -27,36 +27,18 @@ module Aws::LakeFormation
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
-  # * {AccessDeniedException}
   # * {AlreadyExistsException}
   # * {ConcurrentModificationException}
   # * {EntityNotFoundException}
-  # * {GlueEncryptionException}
   # * {InternalServiceException}
   # * {InvalidInputException}
   # * {OperationTimeoutException}
-  # * {ResourceNumberLimitExceededException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
-
-    class AccessDeniedException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::LakeFormation::Types::AccessDeniedException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
 
     class AlreadyExistsException < ServiceError
 
@@ -103,21 +85,6 @@ module Aws::LakeFormation
       end
     end
 
-    class GlueEncryptionException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::LakeFormation::Types::GlueEncryptionException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
     class InternalServiceException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -153,21 +120,6 @@ module Aws::LakeFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::LakeFormation::Types::OperationTimeoutException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class ResourceNumberLimitExceededException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::LakeFormation::Types::ResourceNumberLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

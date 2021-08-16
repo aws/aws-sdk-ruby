@@ -1,41 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.84.0 (2021-08-11)
-------------------
-
-* Feature - Documentation updates for ECS.
-
-1.83.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.82.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.81.0 (2021-07-15)
-------------------
-
-* Feature - Documentation updates for support of awsvpc mode on Windows.
-
-1.80.0 (2021-06-02)
-------------------
-
-* Feature - Documentation updates for Amazon ECS.
-
-1.79.0 (2021-05-26)
-------------------
-
-* Feature - The release adds support for registering External instances to your Amazon ECS clusters.
-
-1.78.0 (2021-05-10)
-------------------
-
-* Feature - This release contains updates for Amazon ECS.
-
 1.77.0 (2021-04-29)
 ------------------
 

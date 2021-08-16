@@ -3,8 +3,6 @@
 require_relative '../spec_helper'
 
 module Aws
-  class TestClass; end
-
   describe ParamValidator do
 
     let(:shapes) { ApiHelper.sample_shapes }
@@ -57,7 +55,7 @@ module Aws
         validate({})
       end
 
-      it 'raises an error when a required parameter is missing' do
+      it 'raises an error when a required paramter is missing' do
         shapes['StructureShape']['required'] = %w(String)
         validate({}, 'missing required parameter params[:string]')
       end
@@ -89,23 +87,6 @@ module Aws
         validate({})
       end
 
-    end
-
-    describe 'unions' do
-      it 'raises an error when no values are set' do
-        shapes['StructureShape']['union'] = true
-        validate({}, 'No values provided to union')
-      end
-
-      it 'raises an error when multiple values are set' do
-        shapes['StructureShape']['union'] = true
-        validate({string: 's', boolean: true}, 'multiple values provided to union')
-      end
-
-      it 'access a struct with exactly one value set' do
-        shapes['StructureShape']['union'] = true
-        validate({string: 's'})
-      end
     end
 
     describe 'lists' do
@@ -216,62 +197,6 @@ module Aws
         validate(string: 'john doe')
         validate({ string: 123 },
           [/expected params\[:string\] to be a String, got value 123 \(class: (Fixnum|Integer)\) instead./])
-      end
-
-    end
-
-    describe 'document types' do
-
-      it 'accepts numeric objects' do
-        validate(document_type: 123)
-        validate(document_type: 3.14159)
-      end
-
-      it 'accepts string objects' do
-        validate(document_type: 'test string')
-      end
-
-      it 'accepts booleans' do
-        validate(document_type: true)
-        validate(document_type: false)
-      end
-
-      it 'accepts nil' do
-        validate(document_type: nil)
-      end
-
-      it 'rejects Objects' do
-        validate({ document_type: TestClass.new },
-                 [/expected params\[:document_type\] to be one of Hash, Array, Numeric, String, TrueClass, FalseClass, NilClass, got value #<Aws::TestClass:[0-9a-z]+> \(class: Aws::TestClass\) instead/]
-        )
-      end
-
-      describe 'Hash' do
-        it 'accepts a flat Hash' do
-          validate(document_type: {a: 1, b: 2})
-        end
-
-        it 'accepts a nested Hash' do
-          validate(document_type: {a: 1, b: {c: 'nested'} })
-        end
-
-        it 'recursively validates and rejects a nested arbitrary Object' do
-          validate({ document_type: {a: 1, b: { c: TestClass.new }} },
-                   [/expected params\[:document_type\]\[b\]\[c\] to be one of Hash, Array, Numeric, String, TrueClass, FalseClass, NilClass, got value #<Aws::TestClass:[0-9a-z]+> \(class: Aws::TestClass\) instead/]
-          )
-        end
-      end
-
-      describe 'Array' do
-        it 'accepts an array' do
-          validate(document_type: [1,2,3])
-        end
-
-        it 'rejects an array with arbitrary Objects' do
-          validate({ document_type: [1,2,TestClass.new] },
-                   [/expected params\[:document_type\] to be one of Hash, Array, Numeric, String, TrueClass, FalseClass, NilClass, got value #<Aws::TestClass:[0-9a-z]+> \(class: Aws::TestClass\) instead/]
-          )
-        end
       end
 
     end

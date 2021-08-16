@@ -249,7 +249,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
-    #   in the *Amazon Web Services General Reference*.
+    #   in the *AWS General Reference*.
     #
     #
     #
@@ -317,10 +317,10 @@ module Aws::IAM
     # @option options [required, String] :policy_document
     #   The policy document.
     #
-    #   You must provide policies in JSON format in IAM. However, for
+    #   You must provide policies in JSON format in IAM. However, for AWS
     #   CloudFormation templates formatted in YAML, you can provide the policy
-    #   in JSON or YAML format. CloudFormation always converts a YAML policy
-    #   to JSON format before submitting it to = IAM.
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -369,7 +369,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
-    #   in the *Amazon Web Services General Reference*.
+    #   in the *AWS General Reference*.
     #
     #
     #

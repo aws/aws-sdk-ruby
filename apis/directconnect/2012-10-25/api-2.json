@@ -987,7 +987,6 @@
       "deprecated":true
     },
     "AwsDeviceV2":{"type":"string"},
-    "AwsLogicalDeviceId":{"type":"string"},
     "BGPAuthKey":{"type":"string"},
     "BGPPeer":{
       "type":"structure",
@@ -1000,8 +999,7 @@
         "customerAddress":{"shape":"CustomerAddress"},
         "bgpPeerState":{"shape":"BGPPeerState"},
         "bgpStatus":{"shape":"BGPStatus"},
-        "awsDeviceV2":{"shape":"AwsDeviceV2"},
-        "awsLogicalDeviceId":{"shape":"AwsLogicalDeviceId"}
+        "awsDeviceV2":{"shape":"AwsDeviceV2"}
       }
     },
     "BGPPeerId":{"type":"string"},
@@ -1111,7 +1109,6 @@
         "awsDevice":{"shape":"AwsDevice"},
         "jumboFrameCapable":{"shape":"JumboFrameCapable"},
         "awsDeviceV2":{"shape":"AwsDeviceV2"},
-        "awsLogicalDeviceId":{"shape":"AwsLogicalDeviceId"},
         "hasLogicalRedundancy":{"shape":"HasLogicalRedundancy"},
         "tags":{"shape":"TagList"},
         "providerName":{"shape":"ProviderName"},
@@ -1754,7 +1751,6 @@
         "awsDevice":{"shape":"AwsDevice"},
         "jumboFrameCapable":{"shape":"JumboFrameCapable"},
         "awsDeviceV2":{"shape":"AwsDeviceV2"},
-        "awsLogicalDeviceId":{"shape":"AwsLogicalDeviceId"},
         "hasLogicalRedundancy":{"shape":"HasLogicalRedundancy"},
         "tags":{"shape":"TagList"},
         "providerName":{"shape":"ProviderName"}
@@ -1799,7 +1795,6 @@
         "minimumLinks":{"shape":"Count"},
         "awsDevice":{"shape":"AwsDevice"},
         "awsDeviceV2":{"shape":"AwsDeviceV2"},
-        "awsLogicalDeviceId":{"shape":"AwsLogicalDeviceId"},
         "connections":{"shape":"ConnectionList"},
         "allowsHostedConnections":{"shape":"BooleanFlag"},
         "jumboFrameCapable":{"shape":"JumboFrameCapable"},
@@ -2261,7 +2256,6 @@
         "bgpPeers":{"shape":"BGPPeerList"},
         "region":{"shape":"Region"},
         "awsDeviceV2":{"shape":"AwsDeviceV2"},
-        "awsLogicalDeviceId":{"shape":"AwsLogicalDeviceId"},
         "tags":{"shape":"TagList"}
       }
     },

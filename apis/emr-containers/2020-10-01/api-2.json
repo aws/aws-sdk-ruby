@@ -264,12 +264,6 @@
         "logStreamNamePrefix":{"shape":"String256"}
       }
     },
-    "ClusterId":{
-      "type":"string",
-      "max":100,
-      "min":1,
-      "pattern":"^[0-9A-Za-z][A-Za-z0-9\\-_]*"
-    },
     "Configuration":{
       "type":"structure",
       "required":["classification"],
@@ -306,7 +300,7 @@
       ],
       "members":{
         "type":{"shape":"ContainerProviderType"},
-        "id":{"shape":"ClusterId"},
+        "id":{"shape":"String256"},
         "info":{"shape":"ContainerInfo"}
       }
     },
@@ -495,7 +489,7 @@
     "EksInfo":{
       "type":"structure",
       "members":{
-        "namespace":{"shape":"KubernetesNamespace"}
+        "namespace":{"shape":"String256"}
       }
     },
     "Endpoint":{
@@ -515,8 +509,6 @@
         "createdAt":{"shape":"Date"},
         "securityGroup":{"shape":"String256"},
         "subnetIds":{"shape":"SubnetIds"},
-        "stateDetails":{"shape":"String256"},
-        "failureReason":{"shape":"FailureReason"},
         "tags":{"shape":"TagMap"}
       }
     },
@@ -651,12 +643,6 @@
     "JobRuns":{
       "type":"list",
       "member":{"shape":"JobRun"}
-    },
-    "KubernetesNamespace":{
-      "type":"string",
-      "max":63,
-      "min":1,
-      "pattern":"[a-z0-9]([-a-z0-9]*[a-z0-9])?"
     },
     "ListJobRunsRequest":{
       "type":"structure",
@@ -908,7 +894,7 @@
     },
     "SparkSubmitParameters":{
       "type":"string",
-      "max":102400,
+      "max":1024,
       "min":1,
       "pattern":"(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
       "sensitive":true

@@ -177,7 +177,7 @@ module Aws::EFS
     #   Describes the status of the file system's backup policy.
     #
     #   * <b> <code>ENABLED</code> </b> - EFS is automatically backing up
-    #     the file system.
+    #     the file system.&gt;
     #
     #   * <b> <code>ENABLING</code> </b> - EFS is turning on automatic
     #     backups for the file system.
@@ -361,11 +361,11 @@ module Aws::EFS
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS KMS CMK that you want to use to protect the
-    #   encrypted file system. This parameter is only required if you want
-    #   to use a non-default KMS key. If this parameter is not specified,
-    #   the default CMK for Amazon EFS is used. This ID can be in one of the
-    #   following formats:
+    #   The ID of the AWS KMS CMK to be used to protect the encrypted file
+    #   system. This parameter is only required if you want to use a
+    #   non-default CMK. If this parameter is not specified, the default CMK
+    #   for Amazon EFS is used. This ID can be in one of the following
+    #   formats:
     #
     #   * Key ID - A unique identifier of the key, for example
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
@@ -382,8 +382,8 @@ module Aws::EFS
     #   If `KmsKeyId` is specified, the CreateFileSystemRequest$Encrypted
     #   parameter must be set to true.
     #
-    #   EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS
-    #   keys with EFS file systems.
+    #   EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with
+    #   EFS file systems.
     #   @return [String]
     #
     # @!attribute [rw] throughput_mode
@@ -779,47 +779,6 @@ module Aws::EFS
     #
     class DescribeAccessPointsResponse < Struct.new(
       :access_points,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeAccountPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "Token",
-    #         max_results: 1,
-    #       }
-    #
-    # @!attribute [rw] next_token
-    #   Token used for pagination.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   Max results used for pagination.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccountPreferencesRequest AWS API Documentation
-    #
-    class DescribeAccountPreferencesRequest < Struct.new(
-      :next_token,
-      :max_results)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] resource_id_preference
-    #   @return [Types::ResourceIdPreference]
-    #
-    # @!attribute [rw] next_token
-    #   Token used for pagination.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccountPreferencesResponse AWS API Documentation
-    #
-    class DescribeAccountPreferencesResponse < Struct.new(
-      :resource_id_preference,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1570,9 +1529,9 @@ module Aws::EFS
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) You can use `NextToken` in a subsequent request to fetch
-    #   the next page of access point descriptions if the response payload
-    #   was paginated.
+    #   You can use `NextToken` in a subsequent request to fetch the next
+    #   page of access point descriptions if the response payload was
+    #   paginated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ListTagsForResourceRequest AWS API Documentation
@@ -1834,37 +1793,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutAccountPreferencesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_id_type: "LONG_ID", # required, accepts LONG_ID, SHORT_ID
-    #       }
-    #
-    # @!attribute [rw] resource_id_type
-    #   A preference indicating a choice to use 63bit/32bit IDs for all
-    #   applicable resources.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutAccountPreferencesRequest AWS API Documentation
-    #
-    class PutAccountPreferencesRequest < Struct.new(
-      :resource_id_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] resource_id_preference
-    #   @return [Types::ResourceIdPreference]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutAccountPreferencesResponse AWS API Documentation
-    #
-    class PutAccountPreferencesResponse < Struct.new(
-      :resource_id_preference)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass PutBackupPolicyRequest
     #   data as a hash:
     #
@@ -1968,24 +1896,6 @@ module Aws::EFS
     class PutLifecycleConfigurationRequest < Struct.new(
       :file_system_id,
       :lifecycle_policies)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] resource_id_type
-    #   A preference indicating a choice to use 63bit/32bit IDs for all
-    #   applicable resources.
-    #   @return [String]
-    #
-    # @!attribute [rw] resources
-    #   EFS resources to which a preference applies to.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ResourceIdPreference AWS API Documentation
-    #
-    class ResourceIdPreference < Struct.new(
-      :resource_id_type,
-      :resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2095,7 +2005,7 @@ module Aws::EFS
 
     # A tag is a key-value pair. Allowed characters are letters, white
     # space, and numbers that can be represented in UTF-8, and the following
-    # characters:` + - = . _ : /`.
+    # characters:` + - = . _ : /`
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -2141,8 +2051,6 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   An array of `Tag` objects to add. Each `Tag` object is a key-value
-    #   pair.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/TagResourceRequest AWS API Documentation

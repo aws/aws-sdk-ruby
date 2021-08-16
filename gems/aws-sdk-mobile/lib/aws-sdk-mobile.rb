@@ -48,6 +48,6 @@ require_relative 'aws-sdk-mobile/customizations'
 # @!group service
 module Aws::Mobile
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.26.0'
 
 end

@@ -1,41 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.51.0 (2021-08-13)
-------------------
-
-* Feature - Documentation updates for QuickSight.
-
-1.50.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.49.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.48.0 (2021-07-27)
-------------------
-
-* Feature - Add support to use row-level security with tags when embedding dashboards for users not provisioned in QuickSight
-
-1.47.0 (2021-06-23)
-------------------
-
-* Feature - Releasing new APIs for AWS QuickSight Folders
-
-1.46.0 (2021-05-24)
-------------------
-
-* Feature - Add new parameters on RegisterUser and UpdateUser APIs to assign or update external ID associated to QuickSight users federated through web identity.
-
-1.45.0 (2021-05-20)
-------------------
-
-* Feature - Add ARN based Row Level Security support to CreateDataSet/UpdateDataSet APIs.
-
 1.44.0 (2021-03-10)
 ------------------
 

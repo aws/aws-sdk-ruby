@@ -64,7 +64,6 @@ module AwsSdkCodeGenerator
 
     def default_async_plugins
       plugins = default_plugins.dup
-      plugins.delete('Seahorse::Client::Plugins::ContentLength')
       plugins.delete('Aws::Plugins::ResponsePaging')
       plugins.delete('Aws::Plugins::EndpointDiscovery')
       plugins.delete('Aws::Plugins::EndpointPattern')

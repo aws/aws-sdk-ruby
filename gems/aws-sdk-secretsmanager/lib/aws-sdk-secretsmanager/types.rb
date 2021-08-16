@@ -125,14 +125,13 @@ module Aws::SecretsManager
     #   initial version is created as part of the secret, and this parameter
     #   specifies a unique identifier for the new version.
     #
-    #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
-    #   Services SDK to call this operation, then you can leave this
-    #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes it as the value for this parameter in the request. If you
-    #   don't use the SDK and instead generate a raw HTTP request to the
-    #   Secrets Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for the new version and include the
-    #   value in the request.
+    #   <note markdown="1"> If you use the AWS CLI or one of the AWS SDK to call this operation,
+    #   then you can leave this parameter empty. The CLI or SDK generates a
+    #   random UUID for you and includes it as the value for this parameter
+    #   in the request. If you don't use the SDK and instead generate a raw
+    #   HTTP request to the Secrets Manager service endpoint, then you must
+    #   generate a `ClientRequestToken` yourself for the new version and
+    #   include the value in the request.
     #
     #    </note>
     #
@@ -170,21 +169,20 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   (Optional) Specifies the ARN, Key ID, or alias of the Amazon Web
-    #   Services KMS customer master key (CMK) to be used to encrypt the
-    #   `SecretString` or `SecretBinary` values in the versions stored in
-    #   this secret.
+    #   (Optional) Specifies the ARN, Key ID, or alias of the AWS KMS
+    #   customer master key (CMK) to be used to encrypt the `SecretString`
+    #   or `SecretBinary` values in the versions stored in this secret.
     #
-    #   You can specify any of the supported ways to identify a Amazon Web
-    #   Services KMS key ID. If you need to reference a CMK in a different
-    #   account, you can use only the key ARN or the alias ARN.
+    #   You can specify any of the supported ways to identify a AWS KMS key
+    #   ID. If you need to reference a CMK in a different account, you can
+    #   use only the key ARN or the alias ARN.
     #
     #   If you don't specify this value, then Secrets Manager defaults to
-    #   using the Amazon Web Services account's default CMK (the one named
-    #   `aws/secretsmanager`). If a Amazon Web Services KMS CMK with that
-    #   name doesn't yet exist, then Secrets Manager creates it for you
-    #   automatically the first time it needs to encrypt a version's
-    #   `SecretString` or `SecretBinary` fields.
+    #   using the AWS account's default CMK (the one named
+    #   `aws/secretsmanager`). If a AWS KMS CMK with that name doesn't yet
+    #   exist, then Secrets Manager creates it for you automatically the
+    #   first time it needs to encrypt a version's `SecretString` or
+    #   `SecretBinary` fields.
     #
     #   You can use the account default CMK to encrypt and decrypt only if
     #   you call this operation using credentials from the same account that
@@ -203,8 +201,7 @@ module Aws::SecretsManager
     #   both. They cannot both be empty.
     #
     #   This parameter is not available using the Secrets Manager console.
-    #   It can be accessed only by using the Amazon Web Services CLI or one
-    #   of the Amazon Web Services SDKs.
+    #   It can be accessed only by using the AWS CLI or one of the AWS SDKs.
     #   @return [String]
     #
     # @!attribute [rw] secret_string
@@ -223,8 +220,8 @@ module Aws::SecretsManager
     #   For storing multiple values, we recommend that you use a JSON text
     #   string argument and specify key/value pairs. For information on how
     #   to format a JSON parameter for the various command line tool
-    #   environments, see [Using JSON for Parameters][1] in the *CLI User
-    #   Guide*. For example:
+    #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
+    #   User Guide*. For example:
     #
     #   `\{"username":"bob","password":"abc123xyz456"\}`
     #
@@ -254,8 +251,8 @@ module Aws::SecretsManager
     #
     #   This parameter requires a JSON text string argument. For information
     #   on how to format a JSON parameter for the various command line tool
-    #   environments, see [Using JSON for Parameters][1] in the *CLI User
-    #   Guide*. For example:
+    #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
+    #   User Guide*. For example:
     #
     #   `[\{"Key":"CostCenter","Value":"12345"\},\{"Key":"environment","Value":"production"\}]`
     #
@@ -274,9 +271,9 @@ module Aws::SecretsManager
     #   * Tag keys and values are case sensitive.
     #
     #   * Do not use the `aws:` prefix in your tag names or values because
-    #     Amazon Web Services reserves it for Amazon Web Services use. You
-    #     can't edit or delete tag names or values with this prefix. Tags
-    #     with this prefix do not count against your tags per secret limit.
+    #     AWS reserves it for AWS use. You can't edit or delete tag names
+    #     or values with this prefix. Tags with this prefix do not count
+    #     against your tags per secret limit.
     #
     #   * If you use your tagging schema across multiple services and
     #     resources, remember other services might have restrictions on
@@ -489,10 +486,10 @@ module Aws::SecretsManager
     #
     #   Use this parameter with caution. This parameter causes the operation
     #   to skip the normal waiting period before the permanent deletion that
-    #   Amazon Web Services would normally impose with the
-    #   `RecoveryWindowInDays` parameter. If you delete a secret with the
-    #   `ForceDeleteWithouRecovery` parameter, then you have no opportunity
-    #   to recover the secret. You lose the secret permanently.
+    #   AWS would normally impose with the `RecoveryWindowInDays` parameter.
+    #   If you delete a secret with the `ForceDeleteWithouRecovery`
+    #   parameter, then you have no opportunity to recover the secret. You
+    #   lose the secret permanently.
     #
     #   If you use this parameter and include a previously deleted or
     #   nonexistent secret, the operation does not return the error
@@ -590,12 +587,11 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN or alias of the Amazon Web Services KMS customer master key
-    #   (CMK) that's used to encrypt the `SecretString` or `SecretBinary`
-    #   fields in each version of the secret. If you don't provide a key,
-    #   then Secrets Manager defaults to encrypting the secret fields with
-    #   the default Amazon Web Services KMS CMK (the one named
-    #   `awssecretsmanager`) for this account.
+    #   The ARN or alias of the AWS KMS customer master key (CMK) that's
+    #   used to encrypt the `SecretString` or `SecretBinary` fields in each
+    #   version of the secret. If you don't provide a key, then Secrets
+    #   Manager defaults to encrypting the secret fields with the default
+    #   AWS KMS CMK (the one named `awssecretsmanager`) for this account.
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
@@ -911,9 +907,8 @@ module Aws::SecretsManager
     #   with any permissions that are associated with the user or role that
     #   attempts to access this secret. The combined permissions specify who
     #   can access the secret and what actions they can perform. For more
-    #   information, see [Authentication and Access Control for Amazon Web
-    #   Services Secrets Manager][1] in the *Amazon Web Services Secrets
-    #   Manager User Guide*.
+    #   information, see [Authentication and Access Control for AWS Secrets
+    #   Manager][1] in the *AWS Secrets Manager User Guide*.
     #
     #
     #
@@ -1431,11 +1426,11 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] resource_policy
     #   A JSON-formatted string constructed according to the grammar and
-    #   syntax for an Amazon Web Services resource-based policy. The policy
-    #   in the string identifies who can access or manage this secret and
-    #   its versions. For information on how to format a JSON parameter for
-    #   the various command line tool environments, see [Using JSON for
-    #   Parameters][1] in the *CLI User Guide*.
+    #   syntax for an AWS resource-based policy. The policy in the string
+    #   identifies who can access or manage this secret and its versions.
+    #   For information on how to format a JSON parameter for the various
+    #   command line tool environments, see [Using JSON for Parameters][1]
+    #   in the *AWS CLI User Guide*.
     #
     #
     #
@@ -1519,13 +1514,13 @@ module Aws::SecretsManager
     #   (Optional) Specifies a unique identifier for the new version of the
     #   secret.
     #
-    #   <note markdown="1"> If you use the Amazon Web Services CLI or one of the Amazon Web
-    #   Services SDK to call this operation, then you can leave this
-    #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes that in the request. If you don't use the SDK and instead
-    #   generate a raw HTTP request to the Secrets Manager service endpoint,
-    #   then you must generate a `ClientRequestToken` yourself for new
-    #   versions and include that value in the request.
+    #   <note markdown="1"> If you use the AWS CLI or one of the AWS SDK to call this operation,
+    #   then you can leave this parameter empty. The CLI or SDK generates a
+    #   random UUID for you and includes that in the request. If you don't
+    #   use the SDK and instead generate a raw HTTP request to the Secrets
+    #   Manager service endpoint, then you must generate a
+    #   `ClientRequestToken` yourself for new versions and include that
+    #   value in the request.
     #
     #    </note>
     #
@@ -1587,8 +1582,8 @@ module Aws::SecretsManager
     #   For storing multiple values, we recommend that you use a JSON text
     #   string argument and specify key/value pairs. For information on how
     #   to format a JSON parameter for the various command line tool
-    #   environments, see [Using JSON for Parameters][1] in the *CLI User
-    #   Guide*.
+    #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
+    #   User Guide*.
     #
     #   For example:
     #
@@ -1957,14 +1952,13 @@ module Aws::SecretsManager
     #   (Optional) Specifies a unique identifier for the new version of the
     #   secret that helps ensure idempotency.
     #
-    #   If you use the Amazon Web Services CLI or one of the Amazon Web
-    #   Services SDK to call this operation, then you can leave this
-    #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes that in the request for this parameter. If you don't use
-    #   the SDK and instead generate a raw HTTP request to the Secrets
-    #   Manager service endpoint, then you must generate a
-    #   `ClientRequestToken` yourself for new versions and include that
-    #   value in the request.
+    #   If you use the AWS CLI or one of the AWS SDK to call this operation,
+    #   then you can leave this parameter empty. The CLI or SDK generates a
+    #   random UUID for you and includes that in the request for this
+    #   parameter. If you don't use the SDK and instead generate a raw HTTP
+    #   request to the Secrets Manager service endpoint, then you must
+    #   generate a `ClientRequestToken` yourself for new versions and
+    #   include that value in the request.
     #
     #   You only need to specify your own value if you implement your own
     #   retry logic and want to ensure that a given secret is not created
@@ -2065,8 +2059,7 @@ module Aws::SecretsManager
     #   The Amazon Resource Name (ARN) of the secret.
     #
     #   For more information about ARNs in Secrets Manager, see [Policy
-    #   Resources][1] in the *Amazon Web Services Secrets Manager User
-    #   Guide*.
+    #   Resources][1] in the *AWS Secrets Manager User Guide*.
     #
     #
     #
@@ -2085,12 +2078,11 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ARN or alias of the Amazon Web Services KMS customer master key
-    #   (CMK) used to encrypt the `SecretString` and `SecretBinary` fields
-    #   in each version of the secret. If you don't provide a key, then
-    #   Secrets Manager defaults to encrypting the secret fields with the
-    #   default KMS CMK, the key named `awssecretsmanager`, for this
-    #   account.
+    #   The ARN or alias of the AWS KMS customer master key (CMK) used to
+    #   encrypt the `SecretString` and `SecretBinary` fields in each version
+    #   of the secret. If you don't provide a key, then Secrets Manager
+    #   defaults to encrypting the secret fields with the default KMS CMK,
+    #   the key named `awssecretsmanager`, for this account.
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
@@ -2099,9 +2091,9 @@ module Aws::SecretsManager
     #   @return [Boolean]
     #
     # @!attribute [rw] rotation_lambda_arn
-    #   The ARN of an Amazon Web Services Lambda function invoked by Secrets
-    #   Manager to rotate and expire the secret either automatically per the
-    #   schedule or manually by a call to RotateSecret.
+    #   The ARN of an AWS Lambda function invoked by Secrets Manager to
+    #   rotate and expire the secret either automatically per the schedule
+    #   or manually by a call to RotateSecret.
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
@@ -2206,18 +2198,13 @@ module Aws::SecretsManager
     #   The date and time this version of the secret was created.
     #   @return [Time]
     #
-    # @!attribute [rw] kms_key_ids
-    #   The KMS keys used to encrypt the secret version.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretVersionsListEntry AWS API Documentation
     #
     class SecretVersionsListEntry < Struct.new(
       :version_id,
       :version_stages,
       :last_accessed_date,
-      :created_date,
-      :kms_key_ids)
+      :created_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2330,8 +2317,9 @@ module Aws::SecretsManager
     #   This parameter to the API requires a JSON text string argument. For
     #   information on how to format a JSON parameter for the various
     #   command line tool environments, see [Using JSON for Parameters][1]
-    #   in the *CLI User Guide*. For the CLI, you can also use the syntax:
-    #   `--Tags Key="Key1",Value="Value1" Key="Key2",Value="Value2"[,…]`
+    #   in the *AWS CLI User Guide*. For the AWS CLI, you can also use the
+    #   syntax: `--Tags Key="Key1",Value="Value1"
+    #   Key="Key2",Value="Value2"[,…]`
     #
     #
     #
@@ -2391,7 +2379,7 @@ module Aws::SecretsManager
     #   This parameter to the API requires a JSON text string argument. For
     #   information on how to format a JSON parameter for the various
     #   command line tool environments, see [Using JSON for Parameters][1]
-    #   in the *CLI User Guide*.
+    #   in the *AWS CLI User Guide*.
     #
     #
     #
@@ -2452,13 +2440,13 @@ module Aws::SecretsManager
     #   parameter specifies a unique identifier for the new version that
     #   helps ensure idempotency.
     #
-    #   If you use the Amazon Web Services CLI or one of the Amazon Web
-    #   Services SDK to call this operation, then you can leave this
-    #   parameter empty. The CLI or SDK generates a random UUID for you and
-    #   includes that in the request. If you don't use the SDK and instead
-    #   generate a raw HTTP request to the Secrets Manager service endpoint,
-    #   then you must generate a `ClientRequestToken` yourself for new
-    #   versions and include that value in the request.
+    #   If you use the AWS CLI or one of the AWS SDK to call this operation,
+    #   then you can leave this parameter empty. The CLI or SDK generates a
+    #   random UUID for you and includes that in the request. If you don't
+    #   use the SDK and instead generate a raw HTTP request to the Secrets
+    #   Manager service endpoint, then you must generate a
+    #   `ClientRequestToken` yourself for new versions and include that
+    #   value in the request.
     #
     #   You typically only need to interact with this value if you implement
     #   your own retry logic and want to ensure that a given secret is not
@@ -2498,9 +2486,9 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   (Optional) Specifies an updated ARN or alias of the Amazon Web
-    #   Services KMS customer master key (CMK) to be used to encrypt the
-    #   protected text in new versions of this secret.
+    #   (Optional) Specifies an updated ARN or alias of the AWS KMS customer
+    #   master key (CMK) to be used to encrypt the protected text in new
+    #   versions of this secret.
     #
     #   You can only use the account's default CMK to encrypt and decrypt
     #   if you call this operation using credentials from the same account
@@ -2537,8 +2525,8 @@ module Aws::SecretsManager
     #   For storing multiple values, we recommend that you use a JSON text
     #   string argument and specify key/value pairs. For information on how
     #   to format a JSON parameter for the various command line tool
-    #   environments, see [Using JSON for Parameters][1] in the *CLI User
-    #   Guide*. For example:
+    #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
+    #   User Guide*. For example:
     #
     #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
     #
@@ -2730,11 +2718,11 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] resource_policy
     #   A JSON-formatted string constructed according to the grammar and
-    #   syntax for an Amazon Web Services resource-based policy. The policy
-    #   in the string identifies who can access or manage this secret and
-    #   its versions. For information on how to format a JSON parameter for
-    #   the various command line tool environments, see [Using JSON for
-    #   Parameters][1] in the *CLI User Guide*.publi
+    #   syntax for an AWS resource-based policy. The policy in the string
+    #   identifies who can access or manage this secret and its versions.
+    #   For information on how to format a JSON parameter for the various
+    #   command line tool environments, see [Using JSON for Parameters][1]
+    #   in the *AWS CLI User Guide*.publi
     #
     #
     #

@@ -10,8 +10,8 @@
 module Aws::LocationService
   module Types
 
-    # The request was denied because of insufficient access or permissions.
-    # Check with an administrator to verify your permissions.
+    # The request was denied due to insufficient access or permission. Check
+    # with an administrator to verify your permissions.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -38,7 +38,7 @@ module Aws::LocationService
     #   resource across all AWS.
     #
     #   * Format example:
-    #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
+    #     `arn:partition:service:region:account-id:resource-type:resource-id`
     #
     #   ^
     #   @return [String]
@@ -60,70 +60,6 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/AssociateTrackerConsumerResponse AWS API Documentation
     #
     class AssociateTrackerConsumerResponse < Aws::EmptyStructure; end
-
-    # Contains the tracker resource details.
-    #
-    # @!attribute [rw] device_id
-    #   The ID of the device for this position.
-    #   @return [String]
-    #
-    # @!attribute [rw] error
-    #   Contains the batch request error details associated with the
-    #   request.
-    #   @return [Types::BatchItemError]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchDeleteDevicePositionHistoryError AWS API Documentation
-    #
-    class BatchDeleteDevicePositionHistoryError < Struct.new(
-      :device_id,
-      :error)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass BatchDeleteDevicePositionHistoryRequest
-    #   data as a hash:
-    #
-    #       {
-    #         device_ids: ["Id"], # required
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] device_ids
-    #   Devices whose position history you want to delete.
-    #
-    #   * For example, for two devices: `“DeviceIds” :
-    #     [DeviceId1,DeviceId2]`
-    #
-    #   ^
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource to delete the device position
-    #   history from.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchDeleteDevicePositionHistoryRequest AWS API Documentation
-    #
-    class BatchDeleteDevicePositionHistoryRequest < Struct.new(
-      :device_ids,
-      :tracker_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] errors
-    #   Contains error details for each device history that failed to
-    #   delete.
-    #   @return [Array<Types::BatchDeleteDevicePositionHistoryError>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchDeleteDevicePositionHistoryResponse AWS API Documentation
-    #
-    class BatchDeleteDevicePositionHistoryResponse < Struct.new(
-      :errors)
-      SENSITIVE = []
-      include Aws::Structure
-    end
 
     # Contains error details for each geofence that failed to delete from
     # the geofence collection.
@@ -573,422 +509,7 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # Contains details about additional route preferences for requests that
-    # specify `TravelMode` as `Car`.
-    #
-    # @note When making an API call, you may pass CalculateRouteCarModeOptions
-    #   data as a hash:
-    #
-    #       {
-    #         avoid_ferries: false,
-    #         avoid_tolls: false,
-    #       }
-    #
-    # @!attribute [rw] avoid_ferries
-    #   Avoids ferries when calculating routes.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] avoid_tolls
-    #   Avoids tolls when calculating routes.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteCarModeOptions AWS API Documentation
-    #
-    class CalculateRouteCarModeOptions < Struct.new(
-      :avoid_ferries,
-      :avoid_tolls)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass CalculateRouteRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #         car_mode_options: {
-    #           avoid_ferries: false,
-    #           avoid_tolls: false,
-    #         },
-    #         depart_now: false,
-    #         departure_position: [1.0], # required
-    #         departure_time: Time.now,
-    #         destination_position: [1.0], # required
-    #         distance_unit: "Kilometers", # accepts Kilometers, Miles
-    #         include_leg_geometry: false,
-    #         travel_mode: "Car", # accepts Car, Truck, Walking
-    #         truck_mode_options: {
-    #           avoid_ferries: false,
-    #           avoid_tolls: false,
-    #           dimensions: {
-    #             height: 1.0,
-    #             length: 1.0,
-    #             unit: "Meters", # accepts Meters, Feet
-    #             width: 1.0,
-    #           },
-    #           weight: {
-    #             total: 1.0,
-    #             unit: "Kilograms", # accepts Kilograms, Pounds
-    #           },
-    #         },
-    #         waypoint_positions: [
-    #           [1.0],
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource that you want to use to
-    #   calculate a route.
-    #   @return [String]
-    #
-    # @!attribute [rw] car_mode_options
-    #   Specifies route preferences when traveling by `Car`, such as
-    #   avoiding routes that use ferries or tolls.
-    #
-    #   Requirements: `TravelMode` must be specified as `Car`.
-    #   @return [Types::CalculateRouteCarModeOptions]
-    #
-    # @!attribute [rw] depart_now
-    #   Sets the time of departure as the current time. Uses the current
-    #   time to calculate a route. Otherwise, the best time of day to travel
-    #   with the best traffic conditions is used to calculate the route.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] departure_position
-    #   The start position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
-    #
-    #   * For example, `[-123.115, 49.285]`
-    #
-    #   ^
-    #
-    #   <note markdown="1"> If you specify a departure that's not located on a road, Amazon
-    #   Location [moves the position to the nearest road][2].
-    #
-    #    </note>
-    #
-    #   Valid Values: `[-180 to 180,-90 to 90]`
-    #
-    #
-    #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] departure_time
-    #   Specifies the desired time of departure. Uses the given time to
-    #   calculate a route. Otherwise, the best time of day to travel with
-    #   the best traffic conditions is used to calculate the route.
-    #
-    #   <note markdown="1"> Setting a departure time in the past returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
-    #
-    #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
-    #     `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @!attribute [rw] destination_position
-    #   The finish position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
-    #
-    #   * For example, `[-122.339, 47.615]`
-    #
-    #   ^
-    #
-    #   <note markdown="1"> If you specify a destination that's not located on a road, Amazon
-    #   Location [moves the position to the nearest road][2].
-    #
-    #    </note>
-    #
-    #   Valid Values: `[-180 to 180,-90 to 90]`
-    #
-    #
-    #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] distance_unit
-    #   Set the unit system to specify the distance.
-    #
-    #   Default Value: `Kilometers`
-    #   @return [String]
-    #
-    # @!attribute [rw] include_leg_geometry
-    #   Set to include the geometry details in the result for each path
-    #   between a pair of positions.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] travel_mode
-    #   Specifies the mode of transport when calculating a route. Used in
-    #   estimating the speed of travel and road compatibility.
-    #
-    #   The `TravelMode` you specify determines how you specify route
-    #   preferences:
-    #
-    #   * If traveling by `Car` use the `CarModeOptions` parameter.
-    #
-    #   * If traveling by `Truck` use the `TruckModeOptions` parameter.
-    #
-    #   Default Value: `Car`
-    #   @return [String]
-    #
-    # @!attribute [rw] truck_mode_options
-    #   Specifies route preferences when traveling by `Truck`, such as
-    #   avoiding routes that use ferries or tolls, and truck specifications
-    #   to consider when choosing an optimal road.
-    #
-    #   Requirements: `TravelMode` must be specified as `Truck`.
-    #   @return [Types::CalculateRouteTruckModeOptions]
-    #
-    # @!attribute [rw] waypoint_positions
-    #   Specifies an ordered list of up to 23 intermediate positions to
-    #   include along a route between the departure position and destination
-    #   position.
-    #
-    #   * For example, from the `DeparturePosition` `[-123.115, 49.285]`,
-    #     the route follows the order that the waypoint positions are given
-    #     `[[-122.757, 49.0021],[-122.349, 47.620]]`
-    #
-    #   ^
-    #
-    #   <note markdown="1"> If you specify a waypoint position that's not located on a road,
-    #   Amazon Location [moves the position to the nearest road][1].
-    #
-    #    Specifying more than 23 waypoints returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
-    #
-    #   Valid Values: `[-180 to 180,-90 to 90]`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
-    #   @return [Array<Array<Float>>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteRequest AWS API Documentation
-    #
-    class CalculateRouteRequest < Struct.new(
-      :calculator_name,
-      :car_mode_options,
-      :depart_now,
-      :departure_position,
-      :departure_time,
-      :destination_position,
-      :distance_unit,
-      :include_leg_geometry,
-      :travel_mode,
-      :truck_mode_options,
-      :waypoint_positions)
-      SENSITIVE = [:departure_position, :destination_position]
-      include Aws::Structure
-    end
-
-    # Returns the result of the route calculation. Metadata includes legs
-    # and route summary.
-    #
-    # @!attribute [rw] legs
-    #   Contains details about each path between a pair of positions
-    #   included along a route such as: `StartPosition`, `EndPosition`,
-    #   `Distance`, `DurationSeconds`, `Geometry`, and `Steps`. The number
-    #   of legs returned corresponds to one fewer than the total number of
-    #   positions in the request.
-    #
-    #   For example, a route with a departure position and destination
-    #   position returns one leg with the positions [snapped to a nearby
-    #   road][1]\:
-    #
-    #   * The `StartPosition` is the departure position.
-    #
-    #   * The `EndPosition` is the destination position.
-    #
-    #   A route with a waypoint between the departure and destination
-    #   position returns two legs with the positions snapped to a nearby
-    #   road:
-    #
-    #   * Leg 1: The `StartPosition` is the departure position . The
-    #     `EndPosition` is the waypoint positon.
-    #
-    #   * Leg 2: The `StartPosition` is the waypoint position. The
-    #     `EndPosition` is the destination position.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
-    #   @return [Array<Types::Leg>]
-    #
-    # @!attribute [rw] summary
-    #   Contains information about the whole route, such as: `RouteBBox`,
-    #   `DataSource`, `Distance`, `DistanceUnit`, and `DurationSeconds`.
-    #   @return [Types::CalculateRouteSummary]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteResponse AWS API Documentation
-    #
-    class CalculateRouteResponse < Struct.new(
-      :legs,
-      :summary)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A summary of the calculated route.
-    #
-    # @!attribute [rw] data_source
-    #   The data provider of traffic and road network data used to calculate
-    #   the route. Indicates one of the available providers:
-    #
-    #   * `Esri`
-    #
-    #   * `Here`
-    #
-    #   For more information about data providers, see [Amazon Location
-    #   Service data providers][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
-    #   @return [String]
-    #
-    # @!attribute [rw] distance
-    #   The total distance covered by the route. The sum of the distance
-    #   travelled between every stop on the route.
-    #
-    #   <note markdown="1"> The route `distance` can't be greater than 250 km. If the route
-    #   exceeds 250 km, the response returns a `400
-    #   RoutesValidationException` error.
-    #
-    #    </note>
-    #   @return [Float]
-    #
-    # @!attribute [rw] distance_unit
-    #   The unit of measurement for the distance.
-    #   @return [String]
-    #
-    # @!attribute [rw] duration_seconds
-    #   The total travel time for the route measured in seconds. The sum of
-    #   the travel time between every stop on the route.
-    #   @return [Float]
-    #
-    # @!attribute [rw] route_b_box
-    #   Specifies a geographical box surrounding a route. Used to zoom into
-    #   a route when displaying it in a map. For example, `[min x, min y,
-    #   max x, max y]`.
-    #
-    #   The first 2 `bbox` parameters describe the lower southwest corner:
-    #
-    #   * The first `bbox` position is the X coordinate or longitude of the
-    #     lower southwest corner.
-    #
-    #   * The second `bbox` position is the Y coordinate or latitude of the
-    #     lower southwest corner.
-    #
-    #   The next 2 `bbox` parameters describe the upper northeast corner:
-    #
-    #   * The third `bbox` position is the X coordinate, or longitude of the
-    #     upper northeast corner.
-    #
-    #   * The fourth `bbox` position is the Y coordinate, or longitude of
-    #     the upper northeast corner.
-    #   @return [Array<Float>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteSummary AWS API Documentation
-    #
-    class CalculateRouteSummary < Struct.new(
-      :data_source,
-      :distance,
-      :distance_unit,
-      :duration_seconds,
-      :route_b_box)
-      SENSITIVE = [:route_b_box]
-      include Aws::Structure
-    end
-
-    # Contains details about additional route preferences for requests that
-    # specify `TravelMode` as `Truck`.
-    #
-    # @note When making an API call, you may pass CalculateRouteTruckModeOptions
-    #   data as a hash:
-    #
-    #       {
-    #         avoid_ferries: false,
-    #         avoid_tolls: false,
-    #         dimensions: {
-    #           height: 1.0,
-    #           length: 1.0,
-    #           unit: "Meters", # accepts Meters, Feet
-    #           width: 1.0,
-    #         },
-    #         weight: {
-    #           total: 1.0,
-    #           unit: "Kilograms", # accepts Kilograms, Pounds
-    #         },
-    #       }
-    #
-    # @!attribute [rw] avoid_ferries
-    #   Avoids ferries when calculating routes.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] avoid_tolls
-    #   Avoids ferries when calculating routes.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] dimensions
-    #   Specifies the truck's dimension specifications including length,
-    #   height, width, and unit of measurement. Used to avoid roads that
-    #   can't support the truck's dimensions.
-    #   @return [Types::TruckDimensions]
-    #
-    # @!attribute [rw] weight
-    #   Specifies the truck's weight specifications including total weight
-    #   and unit of measurement. Used to avoid roads that can't support the
-    #   truck's weight.
-    #   @return [Types::TruckWeight]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteTruckModeOptions AWS API Documentation
-    #
-    class CalculateRouteTruckModeOptions < Struct.new(
-      :avoid_ferries,
-      :avoid_tolls,
-      :dimensions,
-      :weight)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The request was unsuccessful because of a conflict.
+    # The request was unsuccessful due to a conflict.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1007,12 +528,8 @@ module Aws::LocationService
     #       {
     #         collection_name: "ResourceName", # required
     #         description: "ResourceDescription",
-    #         kms_key_id: "KmsKeyId",
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
     #       }
     #
     # @!attribute [rw] collection_name
@@ -1020,7 +537,7 @@ module Aws::LocationService
     #
     #   Requirements:
     #
-    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+    #   * Contain only alphanumeric characters (A–Z, a–z, 0-9), hyphens (-),
     #     periods (.), and underscores (\_).
     #
     #   * Must be a unique geofence collection name.
@@ -1032,17 +549,8 @@ module Aws::LocationService
     #   An optional description for the geofence collection.
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1]. Enter a
-    #   key ID, key ARN, alias name, or alias ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for the geofence collection.
+    #   Specifies the pricing plan for your geofence collection.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -1053,61 +561,29 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   Specifies the data provider for the geofence collection.
+    #   Specifies the plan data source. Required if the Mobile Asset
+    #   Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is
+    #   selected.
     #
-    #   * Required value for the following pricing plans:
-    #     `MobileAssetTracking `\| `MobileAssetManagement`
-    #
-    #   ^
-    #
-    #   For more information about [Data Providers][1], and [Pricing
-    #   plans][2], see the Amazon Location Service product page.
-    #
-    #   <note markdown="1"> Amazon Location Service only uses `PricingPlanDataSource` to
-    #   calculate billing for your geofence collection. Your data won't be
-    #   shared with the data provider, and will remain in your AWS account
-    #   or Region unless you move it.
-    #
-    #    </note>
+    #   Billing is determined by the resource usage, the associated pricing
+    #   plan, and the data source that was specified. For more information
+    #   about each pricing plan option and restrictions, see the [Amazon
+    #   Location Service pricing page][1].
     #
     #   Valid Values: `Esri `\| `Here`
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://aws.amazon.com/location/pricing/
     #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Applies one or more tags to the geofence collection. A tag is a
-    #   key-value pair helps manage, identify, search, and filter your
-    #   resources by labelling them.
-    #
-    #   Format: `"key" : "value"`
-    #
-    #   Restrictions:
-    #
-    #   * Maximum 50 tags per resource
-    #
-    #   * Each resource tag must be unique with a maximum of one value.
-    #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
-    #
-    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
-    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateGeofenceCollectionRequest AWS API Documentation
     #
     class CreateGeofenceCollectionRequest < Struct.new(
       :collection_name,
       :description,
-      :kms_key_id,
       :pricing_plan,
-      :pricing_plan_data_source,
-      :tags)
+      :pricing_plan_data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1115,11 +591,6 @@ module Aws::LocationService
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) for the geofence collection resource.
     #   Used when you need to specify a resource across all AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
-    #
-    #   ^
     #   @return [String]
     #
     # @!attribute [rw] collection_name
@@ -1155,9 +626,6 @@ module Aws::LocationService
     #         description: "ResourceDescription",
     #         map_name: "ResourceName", # required
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
     #       }
     #
     # @!attribute [rw] configuration
@@ -1192,35 +660,13 @@ module Aws::LocationService
     #   [1]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   Applies one or more tags to the map resource. A tag is a key-value
-    #   pair helps manage, identify, search, and filter your resources by
-    #   labelling them.
-    #
-    #   Format: `"key" : "value"`
-    #
-    #   Restrictions:
-    #
-    #   * Maximum 50 tags per resource
-    #
-    #   * Each resource tag must be unique with a maximum of one value.
-    #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
-    #
-    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateMapRequest AWS API Documentation
     #
     class CreateMapRequest < Struct.new(
       :configuration,
       :description,
       :map_name,
-      :pricing_plan,
-      :tags)
+      :pricing_plan)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1235,10 +681,11 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] map_arn
-    #   The Amazon Resource Name (ARN) for the map resource. Used to specify
-    #   a resource across all AWS.
+    #   The Amazon Resource Name (ARN) for the map resource. Used when you
+    #   need to specify a resource across all AWS.
     #
-    #   * Format example: `arn:aws:geo:region:account-id:maps/ExampleMap`
+    #   * Format example:
+    #     `arn:partition:service:region:account-id:resource-type:resource-id`
     #
     #   ^
     #   @return [String]
@@ -1268,71 +715,53 @@ module Aws::LocationService
     #         description: "ResourceDescription",
     #         index_name: "ResourceName", # required
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
     #       }
     #
     # @!attribute [rw] data_source
     #   Specifies the data provider of geospatial data.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
-    #   example, entering `HERE` returns an error.
+    #   example, entering `HERE` will return an error.
     #
     #    </note>
     #
     #   Valid values include:
     #
-    #   * `Esri` – For additional information about [Esri][1]'s coverage in
-    #     your region of interest, see [Esri details on geocoding
-    #     coverage][2].
+    #   * `Esri`
     #
-    #   * `Here` – For additional information about [HERE
-    #     Technologies][3]'s coverage in your region of interest, see [HERE
-    #     details on goecoding coverage][4].
+    #   * `Here`
     #
-    #     Place index resources using HERE Technologies as a data provider
-    #     can't [store results][5] for locations in Japan. For more
-    #     information, see the [AWS Service Terms][6] for Amazon Location
-    #     Service.
-    #
-    #   For additional information , see [Data providers][7] on the *Amazon
-    #   Location Service Developer Guide*.
+    #   For additional details on data providers, see the [Amazon Location
+    #   Service data providers page][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-    #   [2]: https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [4]: https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html
-    #   [5]: https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html
-    #   [6]: https://aws.amazon.com/service-terms/
-    #   [7]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
-    #   Specifies the data storage option requesting Places.
+    #   Specifies the data storage option for requesting Places.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
-    #   The optional description for the place index resource.
+    #   The optional description for the Place index resource.
     #   @return [String]
     #
     # @!attribute [rw] index_name
-    #   The name of the place index resource.
+    #   The name of the Place index resource.
     #
     #   Requirements:
     #
-    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-    #     periods (.), and underscores (\_).
+    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens
+    #     (-), periods (.), and underscores (\_).
     #
-    #   * Must be a unique place index resource name.
+    #   * Must be a unique Place index resource name.
     #
     #   * No spaces allowed. For example, `ExamplePlaceIndex`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your place index resource.
+    #   Specifies the pricing plan for your Place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -1342,27 +771,6 @@ module Aws::LocationService
     #   [1]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   Applies one or more tags to the place index resource. A tag is a
-    #   key-value pair helps manage, identify, search, and filter your
-    #   resources by labelling them.
-    #
-    #   Format: `"key" : "value"`
-    #
-    #   Restrictions:
-    #
-    #   * Maximum 50 tags per resource
-    #
-    #   * Each resource tag must be unique with a maximum of one value.
-    #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
-    #
-    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreatePlaceIndexRequest AWS API Documentation
     #
     class CreatePlaceIndexRequest < Struct.new(
@@ -1370,14 +778,13 @@ module Aws::LocationService
       :data_source_configuration,
       :description,
       :index_name,
-      :pricing_plan,
-      :tags)
+      :pricing_plan)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] create_time
-    #   The timestamp for when the place index resource was created in [ISO
+    #   The timestamp for when the Place index resource was created in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -1386,17 +793,12 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] index_arn
-    #   The Amazon Resource Name (ARN) for the place index resource. Used to
-    #   specify a resource across AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex`
-    #
-    #   ^
+    #   The Amazon Resource Name (ARN) for the Place index resource. Used
+    #   when you need to specify a resource across all AWS.
     #   @return [String]
     #
     # @!attribute [rw] index_name
-    #   The name for the place index resource.
+    #   The name for the Place index resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreatePlaceIndexResponse AWS API Documentation
@@ -1409,167 +811,13 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #         data_source: "String", # required
-    #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource.
-    #
-    #   Requirements:
-    #
-    #   * Can use alphanumeric characters (A–Z, a–z, 0–9) , hyphens (-),
-    #     periods (.), and underscores (\_).
-    #
-    #   * Must be a unique Route calculator resource name.
-    #
-    #   * No spaces allowed. For example, `ExampleRouteCalculator`.
-    #   @return [String]
-    #
-    # @!attribute [rw] data_source
-    #   Specifies the data provider of traffic and road network data.
-    #
-    #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
-    #   example, entering `HERE` returns an error.
-    #
-    #    </note>
-    #
-    #   Valid values include:
-    #
-    #   * `Esri` – For additional information about [Esri][1]'s coverage in
-    #     your region of interest, see [Esri details on street networks and
-    #     traffic coverage][2].
-    #
-    #   * `Here` – For additional information about [HERE
-    #     Technologies][3]'s coverage in your region of interest, see [HERE
-    #     car routing coverage][4] and [HERE truck routing coverage][5].
-    #
-    #   For additional information , see [Data providers][6] on the *Amazon
-    #   Location Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-    #   [2]: https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm
-    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [4]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html
-    #   [5]: https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html
-    #   [6]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The optional description for the route calculator resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your route calculator resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Applies one or more tags to the route calculator resource. A tag is
-    #   a key-value pair helps manage, identify, search, and filter your
-    #   resources by labelling them.
-    #
-    #   * For example: \\\{ `"tag1" : "value1"`, `"tag2" : "value2"`\\}
-    #
-    #   ^
-    #
-    #   Format: `"key" : "value"`
-    #
-    #   Restrictions:
-    #
-    #   * Maximum 50 tags per resource
-    #
-    #   * Each resource tag must be unique with a maximum of one value.
-    #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
-    #
-    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
-    #   @return [Hash<String,String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateRouteCalculatorRequest AWS API Documentation
-    #
-    class CreateRouteCalculatorRequest < Struct.new(
-      :calculator_name,
-      :data_source,
-      :description,
-      :pricing_plan,
-      :tags)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] calculator_arn
-    #   The Amazon Resource Name (ARN) for the route calculator resource.
-    #   Use the ARN when you specify a resource across all AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:route-calculator/ExampleCalculator`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource.
-    #
-    #   * For example, `ExampleRouteCalculator`.
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] create_time
-    #   The timestamp when the route calculator resource was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateRouteCalculatorResponse AWS API Documentation
-    #
-    class CreateRouteCalculatorResponse < Struct.new(
-      :calculator_arn,
-      :calculator_name,
-      :create_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass CreateTrackerRequest
     #   data as a hash:
     #
     #       {
     #         description: "ResourceDescription",
-    #         kms_key_id: "KmsKeyId",
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
-    #         tags: {
-    #           "TagKey" => "TagValue",
-    #         },
     #         tracker_name: "ResourceName", # required
     #       }
     #
@@ -1577,17 +825,8 @@ module Aws::LocationService
     #   An optional description for the tracker resource.
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1]. Enter a
-    #   key ID, key ARN, alias name, or alias ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for the tracker resource.
+    #   Specifies the pricing plan for your tracker resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -1598,51 +837,21 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   Specifies the data provider for the tracker resource.
+    #   Specifies the plan data source. Required if the Mobile Asset
+    #   Tracking (MAT) or the Mobile Asset Management (MAM) pricing plan is
+    #   selected.
     #
-    #   * Required value for the following pricing plans:
-    #     `MobileAssetTracking `\| `MobileAssetManagement`
-    #
-    #   ^
-    #
-    #   For more information about [Data Providers][1], and [Pricing
-    #   plans][2], see the Amazon Location Service product page.
-    #
-    #   <note markdown="1"> Amazon Location Service only uses `PricingPlanDataSource` to
-    #   calculate billing for your tracker resource. Your data will not be
-    #   shared with the data provider, and will remain in your AWS account
-    #   or Region unless you move it.
-    #
-    #    </note>
+    #   Billing is determined by the resource usage, the associated pricing
+    #   plan, and data source that was specified. For more information about
+    #   each pricing plan option and restrictions, see the [Amazon Location
+    #   Service pricing page][1].
     #
     #   Valid Values: `Esri` \| `Here`
     #
     #
     #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   [1]: https://aws.amazon.com/location/pricing/
     #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Applies one or more tags to the tracker resource. A tag is a
-    #   key-value pair helps manage, identify, search, and filter your
-    #   resources by labelling them.
-    #
-    #   Format: `"key" : "value"`
-    #
-    #   Restrictions:
-    #
-    #   * Maximum 50 tags per resource
-    #
-    #   * Each resource tag must be unique with a maximum of one value.
-    #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
-    #
-    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tracker_name
     #   The name for the tracker resource.
@@ -1661,10 +870,8 @@ module Aws::LocationService
     #
     class CreateTrackerRequest < Struct.new(
       :description,
-      :kms_key_id,
       :pricing_plan,
       :pricing_plan_data_source,
-      :tags,
       :tracker_name)
       SENSITIVE = []
       include Aws::Structure
@@ -1682,11 +889,6 @@ module Aws::LocationService
     # @!attribute [rw] tracker_arn
     #   The Amazon Resource Name (ARN) for the tracker resource. Used when
     #   you need to specify a resource across all AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
-    #
-    #   ^
     #   @return [String]
     #
     # @!attribute [rw] tracker_name
@@ -1705,19 +907,17 @@ module Aws::LocationService
 
     # Specifies the data storage option chosen for requesting Places.
     #
-    # When using Amazon Location Places:
+    # <note markdown="1"> By using Places, you agree that AWS may transmit your API queries to
+    # your selected third party provider for processing, which may be
+    # outside the AWS region you are currently using.
     #
-    #  * If using HERE Technologies as a data provider, you can't store
-    #   results for locations in Japan by setting `IntendedUse` to
-    #   `Storage`. parameter.
+    #  Also, when using HERE as your data provider, you may not (a) use HERE
+    # Places for Asset Management, or (b) select the `Storage` option for
+    # the `IntendedUse` parameter when requesting Places in Japan. For more
+    # information, see the [AWS Service Terms][1] for Amazon Location
+    # Service.
     #
-    # * Under the `MobileAssetTracking` or `MobilAssetManagement` pricing
-    #   plan, you can't store results from your place index resources by
-    #   setting `IntendedUse` to `Storage`. This returns a validation
-    #   exception error.
-    #
-    #  For more information, see the [AWS Service Terms][1] for Amazon
-    # Location Service.
+    #  </note>
     #
     #
     #
@@ -1806,7 +1006,7 @@ module Aws::LocationService
     #       }
     #
     # @!attribute [rw] index_name
-    #   The name of the place index resource to be deleted.
+    #   The name of the Place index resource to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeletePlaceIndexRequest AWS API Documentation
@@ -1820,29 +1020,6 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeletePlaceIndexResponse AWS API Documentation
     #
     class DeletePlaceIndexResponse < Aws::EmptyStructure; end
-
-    # @note When making an API call, you may pass DeleteRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource to be deleted.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteRouteCalculatorRequest AWS API Documentation
-    #
-    class DeleteRouteCalculatorRequest < Struct.new(
-      :calculator_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteRouteCalculatorResponse AWS API Documentation
-    #
-    class DeleteRouteCalculatorResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteTrackerRequest
     #   data as a hash:
@@ -1889,11 +1066,6 @@ module Aws::LocationService
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) for the geofence collection resource.
     #   Used when you need to specify a resource across all AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
-    #
-    #   ^
     #   @return [String]
     #
     # @!attribute [rw] collection_name
@@ -1913,15 +1085,6 @@ module Aws::LocationService
     #   The optional description for the geofence collection.
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1] assigned
-    #   to the Amazon Location resource
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   The pricing plan selected for the specified geofence collection.
     #
@@ -1934,12 +1097,9 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the geofence collection.
+    #   The data source selected for the geofence collection and associated
+    #   pricing plan.
     #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Displays the key, value pairs of tags associated with this resource.
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the geofence collection was last updated in
@@ -1957,10 +1117,8 @@ module Aws::LocationService
       :collection_name,
       :create_time,
       :description,
-      :kms_key_id,
       :pricing_plan,
       :pricing_plan_data_source,
-      :tags,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2007,12 +1165,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] map_arn
-    #   The Amazon Resource Name (ARN) for the map resource. Used to specify
-    #   a resource across all AWS.
-    #
-    #   * Format example: `arn:aws:geo:region:account-id:maps/ExampleMap`
-    #
-    #   ^
+    #   The Amazon Resource Name (ARN) for the map resource. Used when you
+    #   need to specify a resource across all AWS.
     #   @return [String]
     #
     # @!attribute [rw] map_name
@@ -2024,10 +1178,6 @@ module Aws::LocationService
     #
     #        <p>For additional details and restrictions on each pricing plan option, see the <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing page</a>.</p>
     #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Tags associated with the map resource.
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the map resource was last update in [ISO
@@ -2048,7 +1198,6 @@ module Aws::LocationService
       :map_arn,
       :map_name,
       :pricing_plan,
-      :tags,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2062,7 +1211,7 @@ module Aws::LocationService
     #       }
     #
     # @!attribute [rw] index_name
-    #   The name of the place index resource.
+    #   The name of the Place index resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribePlaceIndexRequest AWS API Documentation
@@ -2074,7 +1223,7 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] create_time
-    #   The timestamp for when the place index resource was created in [ISO
+    #   The timestamp for when the Place index resource was created in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -2103,25 +1252,20 @@ module Aws::LocationService
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
-    #   The optional description for the place index resource.
+    #   The optional description for the Place index resource.
     #   @return [String]
     #
     # @!attribute [rw] index_arn
-    #   The Amazon Resource Name (ARN) for the place index resource. Used to
-    #   specify a resource across AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex`
-    #
-    #   ^
+    #   The Amazon Resource Name (ARN) for the Place index resource. Used
+    #   when you need to specify a resource across all AWS.
     #   @return [String]
     #
     # @!attribute [rw] index_name
-    #   The name of the place index resource being described.
+    #   The name of the Place index resource being described.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan selected for the specified place index resource.
+    #   The pricing plan selected for the specified Place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -2131,12 +1275,8 @@ module Aws::LocationService
     #   [1]: https://aws.amazon.com/location/pricing/
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   Tags associated with place index resource.
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] update_time
-    #   The timestamp for when the place index resource was last updated in
+    #   The timestamp for when the Place index resource was last updated in
     #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -2154,117 +1294,6 @@ module Aws::LocationService
       :index_arn,
       :index_name,
       :pricing_plan,
-      :tags,
-      :update_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeRouteCalculatorRequest AWS API Documentation
-    #
-    class DescribeRouteCalculatorRequest < Struct.new(
-      :calculator_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] calculator_arn
-    #   The Amazon Resource Name (ARN) for the Route calculator resource.
-    #   Use the ARN when you specify a resource across AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:route-calculator/ExampleCalculator`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource being described.
-    #   @return [String]
-    #
-    # @!attribute [rw] create_time
-    #   The timestamp when the route calculator resource was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @!attribute [rw] data_source
-    #   The data provider of traffic and road network data. Indicates one of
-    #   the available providers:
-    #
-    #   * `Esri`
-    #
-    #   * `Here`
-    #
-    #   For more information about data providers, see [Amazon Location
-    #   Service data providers][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The optional description of the route calculator resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   The pricing plan selected for the specified route calculator
-    #   resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Tags associated with route calculator resource.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] update_time
-    #   The timestamp when the route calculator resource was last updated in
-    #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeRouteCalculatorResponse AWS API Documentation
-    #
-    class DescribeRouteCalculatorResponse < Struct.new(
-      :calculator_arn,
-      :calculator_name,
-      :create_time,
-      :data_source,
-      :description,
-      :pricing_plan,
-      :tags,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2302,15 +1331,6 @@ module Aws::LocationService
     #   The optional description for the tracker resource.
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [AWS KMS customer managed key][1] assigned
-    #   to the Amazon Location resource.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   The pricing plan selected for the specified tracker resource.
     #
@@ -2323,21 +1343,13 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the tracker resource.
+    #   The data source selected for the tracker resource and associated
+    #   pricing plan.
     #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tags associated with the tracker resource.
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tracker_arn
     #   The Amazon Resource Name (ARN) for the tracker resource. Used when
     #   you need to specify a resource across all AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
-    #
-    #   ^
     #   @return [String]
     #
     # @!attribute [rw] tracker_name
@@ -2358,10 +1370,8 @@ module Aws::LocationService
     class DescribeTrackerResponse < Struct.new(
       :create_time,
       :description,
-      :kms_key_id,
       :pricing_plan,
       :pricing_plan_data_source,
-      :tags,
       :tracker_arn,
       :tracker_name,
       :update_time)
@@ -2465,7 +1475,7 @@ module Aws::LocationService
     #   specify a resource across all AWS.
     #
     #   * Format example:
-    #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
+    #     `arn:partition:service:region:account-id:resource-type:resource-id`
     #
     #   ^
     #   @return [String]
@@ -2490,7 +1500,7 @@ module Aws::LocationService
 
     # Contains the geofence geometry details.
     #
-    # <note markdown="1"> Amazon Location doesn't currently support polygons with holes,
+    # <note markdown="1"> Amazon Location does not currently support polygons with holes,
     # multipolygons, polygons that are wound clockwise, or that cross the
     # antimeridian.
     #
@@ -2774,41 +1784,12 @@ module Aws::LocationService
     #
     # @!attribute [rw] font_stack
     #   A comma-separated list of fonts to load glyphs from in order of
-    #   preference. For example, `Noto Sans Regular, Arial Unicode`.
-    #
-    #   Valid fonts for [Esri][1] styles:
-    #
-    #   * VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` \| `Ubuntu
-    #     Medium` \| `Ubuntu Italic` \| `Ubuntu Regular` \| `Ubuntu Bold`
-    #
-    #   * VectorEsriLightGrayCanvas – `Ubuntu Italic` \| `Ubuntu Regular` \|
-    #     `Ubuntu Light` \| `Ubuntu Bold`
-    #
-    #   * VectorEsriTopographic – `Noto Sans Italic` \| `Noto Sans Regular`
-    #     \| `Noto Sans Bold` \| `Noto Serif Regular` \| `Roboto Condensed
-    #     Light Italic`
-    #
-    #   * VectorEsriStreets – `Arial Regular` \| `Arial Italic` \| `Arial
-    #     Bold`
-    #
-    #   * VectorEsriNavigation – `Arial Regular` \| `Arial Italic` \| `Arial
-    #     Bold`
-    #
-    #   Valid fonts for [HERE Technologies][2] styles:
-    #
-    #   * `VectorHereBerlin` – `Fira GO Regular` \| `Fira GO Bold`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+    #   preference.. For example, `Noto Sans, Arial Unicode`.
     #   @return [String]
     #
     # @!attribute [rw] font_unicode_range
     #   A Unicode range of characters to download glyphs for. Each response
-    #   will contain 256 characters. For example, 0–255 includes all
+    #   will contain 256 characters. For example, 0-255 includes all
     #   characters from range `U+0000` to `00FF`. Must be aligned to
     #   multiples of 256.
     #   @return [String]
@@ -3006,212 +1987,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # Contains the calculated route's details for each path between a pair
-    # of positions. The number of legs returned corresponds to one fewer
-    # than the total number of positions in the request.
-    #
-    # For example, a route with a departure position and destination
-    # position returns one leg with the positions [snapped to a nearby
-    # road][1]\:
-    #
-    # * The `StartPosition` is the departure position.
-    #
-    # * The `EndPosition` is the destination position.
-    #
-    # A route with a waypoint between the departure and destination position
-    # returns two legs with the positions snapped to a nearby road:
-    #
-    # * Leg 1: The `StartPosition` is the departure position . The
-    #   `EndPosition` is the waypoint positon.
-    #
-    # * Leg 2: The `StartPosition` is the waypoint position. The
-    #   `EndPosition` is the destination position.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
-    #
-    # @!attribute [rw] distance
-    #   The distance between the leg's `StartPosition` and `EndPosition`
-    #   along a calculated route.
-    #
-    #   * The default measurement is `Kilometers` unless the request
-    #     specifies a `DistanceUnit` of `Miles`.
-    #
-    #   ^
-    #   @return [Float]
-    #
-    # @!attribute [rw] duration_seconds
-    #   The estimated travel time between the leg's `StartPosition` and
-    #   `EndPosition`. The travel mode and departure time that you specify
-    #   in the request determines the calculated time.
-    #   @return [Float]
-    #
-    # @!attribute [rw] end_position
-    #   The terminating position of the leg. Follows the format
-    #   `[longitude,latitude]`.
-    #
-    #   <note markdown="1"> If the `EndPosition` isn't located on a road, it's [snapped to a
-    #   nearby road][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] geometry
-    #   Contains the calculated route's path as a linestring geometry.
-    #   @return [Types::LegGeometry]
-    #
-    # @!attribute [rw] start_position
-    #   The starting position of the leg. Follows the format
-    #   `[longitude,latitude]`.
-    #
-    #   <note markdown="1"> If the `StartPosition` isn't located on a road, it's [snapped to a
-    #   nearby road][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] steps
-    #   Contains a list of steps, which represent subsections of a leg. Each
-    #   step provides instructions for how to move to the next step in the
-    #   leg such as the step's start position, end position, travel
-    #   distance, travel duration, and geometry offset.
-    #   @return [Array<Types::Step>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Leg AWS API Documentation
-    #
-    class Leg < Struct.new(
-      :distance,
-      :duration_seconds,
-      :end_position,
-      :geometry,
-      :start_position,
-      :steps)
-      SENSITIVE = [:end_position, :start_position]
-      include Aws::Structure
-    end
-
-    # Contains the geometry details for each path between a pair of
-    # positions. Used in plotting a route leg on a map.
-    #
-    # @!attribute [rw] line_string
-    #   An ordered list of positions used to plot a route on a map.
-    #
-    #   The first position is closest to the start position for the leg, and
-    #   the last position is the closest to the end position for the leg.
-    #
-    #   * For example, `[[-123.117, 49.284],[-123.115, 49.285],[-123.115,
-    #     49.285]]`
-    #
-    #   ^
-    #   @return [Array<Array<Float>>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/LegGeometry AWS API Documentation
-    #
-    class LegGeometry < Struct.new(
-      :line_string)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListDevicePositionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] max_results
-    #   An optional limit for the number of entries returned in a single
-    #   call.
-    #
-    #   Default value: `100`
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The pagination token specifying which page of results to return in
-    #   the response. If no token is provided, the default page is the first
-    #   page.
-    #
-    #   Default value: `null`
-    #   @return [String]
-    #
-    # @!attribute [rw] tracker_name
-    #   The tracker resource containing the requested devices.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositionsRequest AWS API Documentation
-    #
-    class ListDevicePositionsRequest < Struct.new(
-      :max_results,
-      :next_token,
-      :tracker_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] entries
-    #   Contains details about each device's last known position. These
-    #   details includes the device ID, the time when the position was
-    #   sampled on the device, the time that the service received the
-    #   update, and the most recent coordinates.
-    #   @return [Array<Types::ListDevicePositionsResponseEntry>]
-    #
-    # @!attribute [rw] next_token
-    #   A pagination token indicating there are additional pages available.
-    #   You can use the token in a following request to fetch the next set
-    #   of results.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositionsResponse AWS API Documentation
-    #
-    class ListDevicePositionsResponse < Struct.new(
-      :entries,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains the tracker resource details.
-    #
-    # @!attribute [rw] device_id
-    #   The ID of the device for this position.
-    #   @return [String]
-    #
-    # @!attribute [rw] position
-    #   The last known device position. Empty if no positions currently
-    #   stored.
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] sample_time
-    #   The timestamp at which the device position was determined. Uses [
-    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositionsResponseEntry AWS API Documentation
-    #
-    class ListDevicePositionsResponseEntry < Struct.new(
-      :device_id,
-      :position,
-      :sample_time)
-      SENSITIVE = [:position]
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass ListGeofenceCollectionsRequest
     #   data as a hash:
     #
@@ -3294,7 +2069,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the geofence collection.
+    #   The data source selected for the geofence collection and associated
+    #   pricing plan.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -3562,7 +2338,7 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] entries
-    #   Lists the place index resources that exist in your AWS account
+    #   Lists the Place index resources that exist in your AWS account
     #   @return [Array<Types::ListPlaceIndexesResponseEntry>]
     #
     # @!attribute [rw] next_token
@@ -3580,10 +2356,10 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # A place index resource listed in your AWS account.
+    # A Place index resource listed in your AWS account.
     #
     # @!attribute [rw] create_time
-    #   The timestamp for when the place index resource was created in [ISO
+    #   The timestamp for when the Place index resource was created in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -3595,9 +2371,9 @@ module Aws::LocationService
     #   The data provider of geospatial data. Indicates one of the available
     #   providers:
     #
-    #   * `Esri`
+    #   * Esri
     #
-    #   * `Here`
+    #   * HERE
     #
     #   For additional details on data providers, see the [Amazon Location
     #   Service data providers page][1].
@@ -3608,15 +2384,15 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The optional description for the place index resource.
+    #   The optional description for the Place index resource.
     #   @return [String]
     #
     # @!attribute [rw] index_name
-    #   The name of the place index resource.
+    #   The name of the Place index resource.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan for the specified place index resource.
+    #   The pricing plan for the specified Place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -3627,7 +2403,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] update_time
-    #   The timestamp for when the place index resource was last updated in
+    #   The timestamp for when the Place index resource was last updated in
     #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
@@ -3644,174 +2420,6 @@ module Aws::LocationService
       :index_name,
       :pricing_plan,
       :update_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListRouteCalculatorsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         max_results: 1,
-    #         next_token: "Token",
-    #       }
-    #
-    # @!attribute [rw] max_results
-    #   An optional maximum number of results returned in a single call.
-    #
-    #   Default Value: `100`
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The pagination token specifying which page of results to return in
-    #   the response. If no token is provided, the default page is the first
-    #   page.
-    #
-    #   Default Value: `null`
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListRouteCalculatorsRequest AWS API Documentation
-    #
-    class ListRouteCalculatorsRequest < Struct.new(
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] entries
-    #   Lists the route calculator resources that exist in your AWS account
-    #   @return [Array<Types::ListRouteCalculatorsResponseEntry>]
-    #
-    # @!attribute [rw] next_token
-    #   A pagination token indicating there are additional pages available.
-    #   You can use the token in a subsequent request to fetch the next set
-    #   of results.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListRouteCalculatorsResponse AWS API Documentation
-    #
-    class ListRouteCalculatorsResponse < Struct.new(
-      :entries,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A route calculator resource listed in your AWS account.
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] create_time
-    #   The timestamp when the route calculator resource was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @!attribute [rw] data_source
-    #   The data provider of traffic and road network data. Indicates one of
-    #   the available providers:
-    #
-    #   * `Esri`
-    #
-    #   * `Here`
-    #
-    #   For more information about data providers, see [Amazon Location
-    #   Service data providers][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The optional description of the route calculator resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   The pricing plan for the specified route calculator resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The timestamp when the route calculator resource was last updated in
-    #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListRouteCalculatorsResponseEntry AWS API Documentation
-    #
-    class ListRouteCalculatorsResponseEntry < Struct.new(
-      :calculator_name,
-      :create_time,
-      :data_source,
-      :description,
-      :pricing_plan,
-      :update_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListTagsForResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #       }
-    #
-    # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource whose tags you want
-    #   to retrieve.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListTagsForResourceRequest AWS API Documentation
-    #
-    class ListTagsForResourceRequest < Struct.new(
-      :resource_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tags
-    #   Tags that have been applied to the specified resource. Tags are
-    #   mapped from the tag key to the tag value: `"TagKey" : "TagValue"`.
-    #
-    #   * Format example: `\{"tag1" : "value1", "tag2" : "value2"\} `
-    #
-    #   ^
-    #   @return [Hash<String,String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListTagsForResourceResponse AWS API Documentation
-    #
-    class ListTagsForResourceResponse < Struct.new(
-      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3955,7 +2563,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the tracker resource.
+    #   The data source selected for the tracker resource and associated
+    #   pricing plan.
     #   @return [String]
     #
     # @!attribute [rw] tracker_name
@@ -3995,59 +2604,20 @@ module Aws::LocationService
     #
     # @!attribute [rw] style
     #   Specifies the map style selected from an available data provider.
-    #   For additional information on each map style and to preview each map
-    #   style, see [Esri map
-    #   styles](location/latest/developerguide/esri.html#esri-map-styles)
-    #   and [HERE map
-    #   styles](location/latest/developerguide/HERE.html#HERE-map-styles).
     #
-    #   Valid [Esri][1] styles:
+    #   Valid styles: `VectorEsriStreets`, `VectorEsriTopographic`,
+    #   `VectorEsriNavigation`, `VectorEsriDarkGrayCanvas`,
+    #   `VectorEsriLightGrayCanvas`, `VectorHereBerlin`.
     #
-    #   * `VectorEsriDarkGrayCanvas` – The Esri Dark Gray Canvas map style.
-    #     A vector basemap with a dark gray, neutral background with minimal
-    #     colors, labels, and features that's designed to draw attention to
-    #     your thematic content.
+    #   <note markdown="1"> When using HERE as your data provider, and selecting the Style
+    #   `VectorHereBerlin`, you may not use HERE Maps for Asset Management.
+    #   See the [AWS Service Terms][1] for Amazon Location Service.
     #
-    #   * `RasterEsriImagery` – The Esri Imagery map style. A raster basemap
-    #     that provides one meter or better satellite and aerial imagery in
-    #     many parts of the world and lower resolution satellite imagery
-    #     worldwide.
-    #
-    #   * `VectorEsriLightGrayCanvas` – The Esri Light Gray Canvas map
-    #     style, which provides a detailed vector basemap with a light gray,
-    #     neutral background style with minimal colors, labels, and features
-    #     that's designed to draw attention to your thematic content.
-    #
-    #   * `VectorEsriTopographic` – The Esri Light map style, which provides
-    #     a detailed vector basemap with a classic Esri map style.
-    #
-    #   * `VectorEsriStreets` – The Esri World Streets map style, which
-    #     provides a detailed vector basemap for the world symbolized with a
-    #     classic Esri street map style. The vector tile layer is similar in
-    #     content and style to the World Street Map raster map.
-    #
-    #   * `VectorEsriNavigation` – The Esri World Navigation map style,
-    #     which provides a detailed basemap for the world symbolized with a
-    #     custom navigation map style that's designed for use during the
-    #     day in mobile devices.
-    #
-    #   Valid [HERE Technologies][2] styles:
-    #
-    #   * `VectorHereBerlin` – The HERE Berlin map style is a high contrast
-    #     detailed base map of the world that blends 3D and 2D rendering.
-    #
-    #     <note markdown="1"> When using HERE as your data provider, and selecting the Style
-    #     `VectorHereBerlin`, you may not use HERE Technologies maps for
-    #     Asset Management. See the [AWS Service Terms][3] for Amazon
-    #     Location Service.
-    #
-    #      </note>
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
-    #   [3]: https://aws.amazon.com/service-terms/
+    #   [1]: https://aws.amazon.com/service-terms/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
@@ -4244,7 +2814,7 @@ module Aws::LocationService
     end
 
     # Specifies a single point of interest, or Place as a result of a search
-    # query obtained from a dataset configured in the place index resource.
+    # query obtained from a dataset configured in the Place index Resource.
     #
     # @!attribute [rw] place
     #   Contains details about the relevant point of interest.
@@ -4283,7 +2853,7 @@ module Aws::LocationService
     #       }
     #
     # @!attribute [rw] index_name
-    #   The name of the place index resource you want to use for the search.
+    #   The name of the Place index resource you want to use for the search.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4435,7 +3005,7 @@ module Aws::LocationService
     #   @return [Array<String>]
     #
     # @!attribute [rw] index_name
-    #   The name of the place index resource you want to use for the search.
+    #   The name of the Place index resource you want to use for the search.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4546,116 +3116,7 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # The operation was denied because the request would exceed the maximum
-    # [quota][1] set for Amazon Location Service.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html
-    #
-    # @!attribute [rw] message
-    #   A message with the reason for the service quota exceeded exception
-    #   error.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ServiceQuotaExceededException AWS API Documentation
-    #
-    class ServiceQuotaExceededException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Represents an element of a leg within a route. A step contains
-    # instructions for how to move to the next step in the leg.
-    #
-    # @!attribute [rw] distance
-    #   The travel distance between the step's `StartPosition` and
-    #   `EndPosition`.
-    #   @return [Float]
-    #
-    # @!attribute [rw] duration_seconds
-    #   The estimated travel time, in seconds, from the step's
-    #   `StartPosition` to the `EndPosition`. . The travel mode and
-    #   departure time that you specify in the request determines the
-    #   calculated time.
-    #   @return [Float]
-    #
-    # @!attribute [rw] end_position
-    #   The end position of a step. If the position the last step in the
-    #   leg, this position is the same as the end position of the leg.
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] geometry_offset
-    #   Represents the start position, or index, in a sequence of steps
-    #   within the leg's line string geometry. For example, the index of
-    #   the first step in a leg geometry is `0`.
-    #
-    #   Included in the response for queries that set `IncludeLegGeometry`
-    #   to `True`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] start_position
-    #   The starting position of a step. If the position is the first step
-    #   in the leg, this position is the same as the start position of the
-    #   leg.
-    #   @return [Array<Float>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Step AWS API Documentation
-    #
-    class Step < Struct.new(
-      :distance,
-      :duration_seconds,
-      :end_position,
-      :geometry_offset,
-      :start_position)
-      SENSITIVE = [:end_position, :start_position]
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass TagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tags: { # required
-    #           "TagKey" => "TagValue",
-    #         },
-    #       }
-    #
-    # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource whose tags you want
-    #   to update.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Tags that have been applied to the specified resource. Tags are
-    #   mapped from the tag key to the tag value: `"TagKey" : "TagValue"`.
-    #
-    #   * Format example: `\{"tag1" : "value1", "tag2" : "value2"\} `
-    #
-    #   ^
-    #   @return [Hash<String,String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TagResourceRequest AWS API Documentation
-    #
-    class TagResourceRequest < Struct.new(
-      :resource_arn,
-      :tags)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TagResourceResponse AWS API Documentation
-    #
-    class TagResourceResponse < Aws::EmptyStructure; end
-
-    # The request was denied because of request throttling.
+    # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4664,548 +3125,6 @@ module Aws::LocationService
     #
     class ThrottlingException < Struct.new(
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains details about the truck dimensions in the unit of measurement
-    # that you specify. Used to filter out roads that can't support or
-    # allow the specified dimensions for requests that specify `TravelMode`
-    # as `Truck`.
-    #
-    # @note When making an API call, you may pass TruckDimensions
-    #   data as a hash:
-    #
-    #       {
-    #         height: 1.0,
-    #         length: 1.0,
-    #         unit: "Meters", # accepts Meters, Feet
-    #         width: 1.0,
-    #       }
-    #
-    # @!attribute [rw] height
-    #   The height of the truck.
-    #
-    #   * For example, `4.5`.
-    #
-    #   ^
-    #   @return [Float]
-    #
-    # @!attribute [rw] length
-    #   The length of the truck.
-    #
-    #   * For example, `15.5`.
-    #
-    #   ^
-    #   @return [Float]
-    #
-    # @!attribute [rw] unit
-    #   Specifies the unit of measurement for the truck dimensions.
-    #
-    #   Default Value: `Meters`
-    #   @return [String]
-    #
-    # @!attribute [rw] width
-    #   The width of the truck.
-    #
-    #   * For example, `4.5`.
-    #
-    #   ^
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TruckDimensions AWS API Documentation
-    #
-    class TruckDimensions < Struct.new(
-      :height,
-      :length,
-      :unit,
-      :width)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains details about the truck's weight specifications. Used to
-    # avoid roads that can't support or allow the total weight for requests
-    # that specify `TravelMode` as `Truck`.
-    #
-    # @note When making an API call, you may pass TruckWeight
-    #   data as a hash:
-    #
-    #       {
-    #         total: 1.0,
-    #         unit: "Kilograms", # accepts Kilograms, Pounds
-    #       }
-    #
-    # @!attribute [rw] total
-    #   The total weight of the truck.
-    #
-    #   * For example, `3500`.
-    #
-    #   ^
-    #   @return [Float]
-    #
-    # @!attribute [rw] unit
-    #   The unit of measurement to use for the truck weight.
-    #
-    #   Default Value: `Kilograms`
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TruckWeight AWS API Documentation
-    #
-    class TruckWeight < Struct.new(
-      :total,
-      :unit)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "Arn", # required
-    #         tag_keys: ["String"], # required
-    #       }
-    #
-    # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which you want
-    #   to remove tags.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] tag_keys
-    #   The list of tag keys to remove from the specified resource.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UntagResourceRequest AWS API Documentation
-    #
-    class UntagResourceRequest < Struct.new(
-      :resource_arn,
-      :tag_keys)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UntagResourceResponse AWS API Documentation
-    #
-    class UntagResourceResponse < Aws::EmptyStructure; end
-
-    # @note When making an API call, you may pass UpdateGeofenceCollectionRequest
-    #   data as a hash:
-    #
-    #       {
-    #         collection_name: "ResourceName", # required
-    #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         pricing_plan_data_source: "String",
-    #       }
-    #
-    # @!attribute [rw] collection_name
-    #   The name of the geofence collection to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Updates the description for the geofence collection.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the geofence collection.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan_data_source
-    #   Updates the data provider for the geofence collection.
-    #
-    #   A required value for the following pricing plans:
-    #   `MobileAssetTracking`\| `MobileAssetManagement`
-    #
-    #   For more information about [data providers][1] and [pricing
-    #   plans][2], see the Amazon Location Service product page.
-    #
-    #   <note markdown="1"> This can only be updated when updating the `PricingPlan` in the same
-    #   request.
-    #
-    #    Amazon Location Service uses `PricingPlanDataSource` to calculate
-    #   billing for your geofence collection. Your data won't be shared
-    #   with the data provider, and will remain in your AWS account and
-    #   Region unless you move it.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateGeofenceCollectionRequest AWS API Documentation
-    #
-    class UpdateGeofenceCollectionRequest < Struct.new(
-      :collection_name,
-      :description,
-      :pricing_plan,
-      :pricing_plan_data_source)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] collection_arn
-    #   The Amazon Resource Name (ARN) of the updated geofence collection.
-    #   Used to specify a resource across AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] collection_name
-    #   The name of the updated geofence collection.
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The time when the geofence collection was last updated in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateGeofenceCollectionResponse AWS API Documentation
-    #
-    class UpdateGeofenceCollectionResponse < Struct.new(
-      :collection_arn,
-      :collection_name,
-      :update_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass UpdateMapRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         map_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #       }
-    #
-    # @!attribute [rw] description
-    #   Updates the description for the map resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] map_name
-    #   The name of the map resource to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the map resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMapRequest AWS API Documentation
-    #
-    class UpdateMapRequest < Struct.new(
-      :description,
-      :map_name,
-      :pricing_plan)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] map_arn
-    #   The Amazon Resource Name (ARN) of the updated map resource. Used to
-    #   specify a resource across AWS.
-    #
-    #   * Format example: `arn:aws:geo:region:account-id:maps/ExampleMap`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] map_name
-    #   The name of the updated map resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The timestamp for when the map resource was last updated in [ ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMapResponse AWS API Documentation
-    #
-    class UpdateMapResponse < Struct.new(
-      :map_arn,
-      :map_name,
-      :update_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass UpdatePlaceIndexRequest
-    #   data as a hash:
-    #
-    #       {
-    #         data_source_configuration: {
-    #           intended_use: "SingleUse", # accepts SingleUse, Storage
-    #         },
-    #         description: "ResourceDescription",
-    #         index_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #       }
-    #
-    # @!attribute [rw] data_source_configuration
-    #   Updates the data storage option for the place index resource.
-    #   @return [Types::DataSourceConfiguration]
-    #
-    # @!attribute [rw] description
-    #   Updates the description for the place index resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] index_name
-    #   The name of the place index resource to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the place index resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdatePlaceIndexRequest AWS API Documentation
-    #
-    class UpdatePlaceIndexRequest < Struct.new(
-      :data_source_configuration,
-      :description,
-      :index_name,
-      :pricing_plan)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] index_arn
-    #   The Amazon Resource Name (ARN) of the upated place index resource.
-    #   Used to specify a resource across AWS.
-    #
-    #   * Format example: `arn:aws:geo:region:account-id:place-
-    #     index/ExamplePlaceIndex`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] index_name
-    #   The name of the updated place index resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The timestamp for when the place index resource was last updated in
-    #   [ ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdatePlaceIndexResponse AWS API Documentation
-    #
-    class UpdatePlaceIndexResponse < Struct.new(
-      :index_arn,
-      :index_name,
-      :update_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass UpdateRouteCalculatorRequest
-    #   data as a hash:
-    #
-    #       {
-    #         calculator_name: "ResourceName", # required
-    #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #       }
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   Updates the description for the route calculator resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the route calculator resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateRouteCalculatorRequest AWS API Documentation
-    #
-    class UpdateRouteCalculatorRequest < Struct.new(
-      :calculator_name,
-      :description,
-      :pricing_plan)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] calculator_arn
-    #   The Amazon Resource Name (ARN) of the updated route calculator
-    #   resource. Used to specify a resource across AWS.
-    #
-    #   * Format example: `arn:aws:geo:region:account-id:route-
-    #     calculator/ExampleCalculator`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the updated route calculator resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The timestamp for when the route calculator was last updated in [
-    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateRouteCalculatorResponse AWS API Documentation
-    #
-    class UpdateRouteCalculatorResponse < Struct.new(
-      :calculator_arn,
-      :calculator_name,
-      :update_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass UpdateTrackerRequest
-    #   data as a hash:
-    #
-    #       {
-    #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
-    #         pricing_plan_data_source: "String",
-    #         tracker_name: "ResourceName", # required
-    #       }
-    #
-    # @!attribute [rw] description
-    #   Updates the description for the tracker resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the tracker resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan_data_source
-    #   Updates the data provider for the tracker resource.
-    #
-    #   A required value for the following pricing plans:
-    #   `MobileAssetTracking`\| `MobileAssetManagement`
-    #
-    #   For more information about [data providers][1] and [pricing
-    #   plans][2], see the Amazon Location Service product page
-    #
-    #   <note markdown="1"> This can only be updated when updating the `PricingPlan` in the same
-    #   request.
-    #
-    #    Amazon Location Service uses `PricingPlanDataSource` to calculate
-    #   billing for your tracker resource. Your data won't be shared with
-    #   the data provider, and will remain in your AWS account and Region
-    #   unless you move it.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
-    #   @return [String]
-    #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource to update.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateTrackerRequest AWS API Documentation
-    #
-    class UpdateTrackerRequest < Struct.new(
-      :description,
-      :pricing_plan,
-      :pricing_plan_data_source,
-      :tracker_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tracker_arn
-    #   The Amazon Resource Name (ARN) of the updated tracker resource. Used
-    #   to specify a resource across AWS.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] tracker_name
-    #   The name of the updated tracker resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The timestamp for when the tracker resource was last updated in [
-    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateTrackerResponse AWS API Documentation
-    #
-    class UpdateTrackerResponse < Struct.new(
-      :tracker_arn,
-      :tracker_name,
-      :update_time)
       SENSITIVE = []
       include Aws::Structure
     end

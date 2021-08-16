@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.44.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.43.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.42.0 (2021-05-27)
-------------------
-
-* Feature - Introduces support for using our desktop testing service with applications hosted within your Virtual Private Cloud (VPC).
-
 1.41.0 (2021-03-10)
 ------------------
 

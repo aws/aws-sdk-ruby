@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.37.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.36.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.35.0 (2021-06-04)
-------------------
-
-* Feature - AWS CloudTrail supports data events on new service resources, including Amazon DynamoDB tables and S3 Object Lambda access points.
-
 1.34.0 (2021-03-10)
 ------------------
 

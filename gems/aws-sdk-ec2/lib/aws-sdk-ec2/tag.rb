@@ -224,8 +224,8 @@ module Aws::EC2
     #   if its value is an empty string.
     #
     #   If you omit this parameter, we delete all user-defined tags for the
-    #   specified resources. We do not delete Amazon Web Services-generated
-    #   tags (tags that have the `aws:` prefix).
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
     # @return [EmptyStructure]
     def delete(options = {})
       options = Aws::Util.deep_merge(options,

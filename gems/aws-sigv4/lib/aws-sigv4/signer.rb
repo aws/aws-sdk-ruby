@@ -127,7 +127,7 @@ module Aws
         @unsigned_headers << 'x-amzn-trace-id'
         @unsigned_headers << 'expect'
         [:uri_escape_path, :apply_checksum_header].each do |opt|
-          instance_variable_set("@#{opt}", options.key?(opt) ? !!options[opt] : true)
+          instance_variable_set("@#{opt}", options.key?(opt) ? !!options[:opt] : true)
         end
       end
 

@@ -1,31 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.75.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.74.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.73.0 (2021-07-22)
-------------------
-
-* Feature - MediaLive now supports passing through style data on WebVTT caption outputs.
-
-1.72.0 (2021-06-11)
-------------------
-
-* Feature - AWS MediaLive now supports OCR-based conversion of DVB-Sub and SCTE-27 image-based source captions to WebVTT, and supports ingest of ad avail decorations in HLS input manifests.
-
-1.71.0 (2021-06-04)
-------------------
-
-* Feature - Add support for automatically setting the H.264 adaptive quantization and GOP B-frame fields.
-
 1.70.0 (2021-04-06)
 ------------------
 

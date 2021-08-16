@@ -30,23 +30,6 @@
         {"shape":"ThrottlingException"}
       ]
     },
-    "AssociateBot":{
-      "name":"AssociateBot",
-      "http":{
-        "method":"PUT",
-        "requestUri":"/instance/{InstanceId}/bot"
-      },
-      "input":{"shape":"AssociateBotRequest"},
-      "errors":[
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"ResourceConflictException"},
-        {"shape":"InternalServiceException"},
-        {"shape":"InvalidRequestException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"ServiceQuotaExceededException"},
-        {"shape":"ThrottlingException"}
-      ]
-    },
     "AssociateInstanceStorageConfig":{
       "name":"AssociateInstanceStorageConfig",
       "http":{
@@ -147,24 +130,6 @@
         {"shape":"ThrottlingException"}
       ]
     },
-    "CreateAgentStatus":{
-      "name":"CreateAgentStatus",
-      "http":{
-        "method":"PUT",
-        "requestUri":"/agent-status/{InstanceId}"
-      },
-      "input":{"shape":"CreateAgentStatusRequest"},
-      "output":{"shape":"CreateAgentStatusResponse"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"},
-        {"shape":"DuplicateResourceException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalServiceException"}
-      ]
-    },
     "CreateContactFlow":{
       "name":"CreateContactFlow",
       "http":{
@@ -180,24 +145,6 @@
         {"shape":"DuplicateResourceException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalServiceException"}
-      ]
-    },
-    "CreateHoursOfOperation":{
-      "name":"CreateHoursOfOperation",
-      "http":{
-        "method":"PUT",
-        "requestUri":"/hours-of-operations/{InstanceId}"
-      },
-      "input":{"shape":"CreateHoursOfOperationRequest"},
-      "output":{"shape":"CreateHoursOfOperationResponse"},
-      "errors":[
-        {"shape":"DuplicateResourceException"},
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"LimitExceededException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
       ]
@@ -340,21 +287,6 @@
         {"shape":"InternalServiceException"}
       ]
     },
-    "DeleteHoursOfOperation":{
-      "name":"DeleteHoursOfOperation",
-      "http":{
-        "method":"DELETE",
-        "requestUri":"/hours-of-operations/{InstanceId}/{HoursOfOperationId}"
-      },
-      "input":{"shape":"DeleteHoursOfOperationRequest"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalServiceException"}
-      ]
-    },
     "DeleteInstance":{
       "name":"DeleteInstance",
       "http":{
@@ -438,22 +370,6 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceInUseException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalServiceException"}
-      ]
-    },
-    "DescribeAgentStatus":{
-      "name":"DescribeAgentStatus",
-      "http":{
-        "method":"GET",
-        "requestUri":"/agent-status/{InstanceId}/{AgentStatusId}"
-      },
-      "input":{"shape":"DescribeAgentStatusRequest"},
-      "output":{"shape":"DescribeAgentStatusResponse"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"},
-        {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
       ]
@@ -648,20 +564,6 @@
         {"shape":"ThrottlingException"}
       ]
     },
-    "DisassociateBot":{
-      "name":"DisassociateBot",
-      "http":{
-        "method":"POST",
-        "requestUri":"/instance/{InstanceId}/bot"
-      },
-      "input":{"shape":"DisassociateBotRequest"},
-      "errors":[
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServiceException"},
-        {"shape":"InvalidRequestException"},
-        {"shape":"ThrottlingException"}
-      ]
-    },
     "DisassociateInstanceStorageConfig":{
       "name":"DisassociateInstanceStorageConfig",
       "http":{
@@ -815,22 +717,6 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
-    "ListAgentStatuses":{
-      "name":"ListAgentStatuses",
-      "http":{
-        "method":"GET",
-        "requestUri":"/agent-status/{InstanceId}"
-      },
-      "input":{"shape":"ListAgentStatusRequest"},
-      "output":{"shape":"ListAgentStatusResponse"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalServiceException"}
-      ]
-    },
     "ListApprovedOrigins":{
       "name":"ListApprovedOrigins",
       "http":{
@@ -844,21 +730,6 @@
         {"shape":"InternalServiceException"},
         {"shape":"InvalidRequestException"},
         {"shape":"InvalidParameterException"},
-        {"shape":"ThrottlingException"}
-      ]
-    },
-    "ListBots":{
-      "name":"ListBots",
-      "http":{
-        "method":"GET",
-        "requestUri":"/instance/{InstanceId}/bots"
-      },
-      "input":{"shape":"ListBotsRequest"},
-      "output":{"shape":"ListBotsResponse"},
-      "errors":[
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServiceException"},
-        {"shape":"InvalidRequestException"},
         {"shape":"ThrottlingException"}
       ]
     },
@@ -1347,23 +1218,6 @@
         {"shape":"ThrottlingException"}
       ]
     },
-    "UpdateAgentStatus":{
-      "name":"UpdateAgentStatus",
-      "http":{
-        "method":"POST",
-        "requestUri":"/agent-status/{InstanceId}/{AgentStatusId}"
-      },
-      "input":{"shape":"UpdateAgentStatusRequest"},
-      "errors":[
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"},
-        {"shape":"DuplicateResourceException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalServiceException"}
-      ]
-    },
     "UpdateContactAttributes":{
       "name":"UpdateContactAttributes",
       "http":{
@@ -1406,22 +1260,6 @@
         {"shape":"InvalidRequestException"},
         {"shape":"InvalidParameterException"},
         {"shape":"DuplicateResourceException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"ThrottlingException"},
-        {"shape":"InternalServiceException"}
-      ]
-    },
-    "UpdateHoursOfOperation":{
-      "name":"UpdateHoursOfOperation",
-      "http":{
-        "method":"POST",
-        "requestUri":"/hours-of-operations/{InstanceId}/{HoursOfOperationId}"
-      },
-      "input":{"shape":"UpdateHoursOfOperationRequest"},
-      "errors":[
-        {"shape":"DuplicateResourceException"},
-        {"shape":"InvalidRequestException"},
-        {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServiceException"}
@@ -1748,74 +1586,7 @@
       "max":100,
       "min":1
     },
-    "AgentStatus":{
-      "type":"structure",
-      "members":{
-        "AgentStatusARN":{"shape":"ARN"},
-        "AgentStatusId":{"shape":"AgentStatusId"},
-        "Name":{"shape":"AgentStatusName"},
-        "Description":{"shape":"AgentStatusDescription"},
-        "Type":{"shape":"AgentStatusType"},
-        "DisplayOrder":{"shape":"AgentStatusOrderNumber"},
-        "State":{"shape":"AgentStatusState"},
-        "Tags":{"shape":"TagMap"}
-      }
-    },
-    "AgentStatusDescription":{
-      "type":"string",
-      "max":250,
-      "min":1
-    },
-    "AgentStatusId":{"type":"string"},
-    "AgentStatusName":{
-      "type":"string",
-      "max":127,
-      "min":1
-    },
-    "AgentStatusOrderNumber":{
-      "type":"integer",
-      "max":50,
-      "min":1
-    },
-    "AgentStatusState":{
-      "type":"string",
-      "enum":[
-        "ENABLED",
-        "DISABLED"
-      ]
-    },
-    "AgentStatusSummary":{
-      "type":"structure",
-      "members":{
-        "Id":{"shape":"AgentStatusId"},
-        "Arn":{"shape":"ARN"},
-        "Name":{"shape":"AgentStatusName"},
-        "Type":{"shape":"AgentStatusType"}
-      }
-    },
-    "AgentStatusSummaryList":{
-      "type":"list",
-      "member":{"shape":"AgentStatusSummary"}
-    },
-    "AgentStatusType":{
-      "type":"string",
-      "enum":[
-        "ROUTABLE",
-        "CUSTOM",
-        "OFFLINE"
-      ]
-    },
-    "AgentStatusTypes":{
-      "type":"list",
-      "member":{"shape":"AgentStatusType"},
-      "max":3
-    },
     "AgentUsername":{
-      "type":"string",
-      "max":100,
-      "min":1
-    },
-    "AliasArn":{
       "type":"string",
       "max":100,
       "min":1
@@ -1833,19 +1604,6 @@
           "locationName":"InstanceId"
         },
         "Origin":{"shape":"Origin"}
-      }
-    },
-    "AssociateBotRequest":{
-      "type":"structure",
-      "required":["InstanceId"],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "LexBot":{"shape":"LexBot"},
-        "LexV2Bot":{"shape":"LexV2Bot"}
       }
     },
     "AssociateInstanceStorageConfigRequest":{
@@ -1996,7 +1754,6 @@
       "member":{"shape":"Attribute"}
     },
     "AutoAccept":{"type":"boolean"},
-    "Boolean":{"type":"boolean"},
     "BotName":{
       "type":"string",
       "max":50
@@ -2043,6 +1800,11 @@
     "ClientToken":{
       "type":"string",
       "max":500
+    },
+    "CommonDescriptionLength250":{
+      "type":"string",
+      "max":250,
+      "min":0
     },
     "CommonNameLength127":{
       "type":"string",
@@ -2138,36 +1900,6 @@
       "key":{"shape":"ReferenceKey"},
       "value":{"shape":"Reference"}
     },
-    "CreateAgentStatusRequest":{
-      "type":"structure",
-      "required":[
-        "InstanceId",
-        "Name",
-        "State"
-      ],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "Name":{"shape":"AgentStatusName"},
-        "Description":{"shape":"AgentStatusDescription"},
-        "State":{"shape":"AgentStatusState"},
-        "DisplayOrder":{
-          "shape":"AgentStatusOrderNumber",
-          "box":true
-        },
-        "Tags":{"shape":"TagMap"}
-      }
-    },
-    "CreateAgentStatusResponse":{
-      "type":"structure",
-      "members":{
-        "AgentStatusARN":{"shape":"ARN"},
-        "AgentStatusId":{"shape":"AgentStatusId"}
-      }
-    },
     "CreateContactFlowRequest":{
       "type":"structure",
       "required":[
@@ -2194,34 +1926,6 @@
       "members":{
         "ContactFlowId":{"shape":"ContactFlowId"},
         "ContactFlowArn":{"shape":"ARN"}
-      }
-    },
-    "CreateHoursOfOperationRequest":{
-      "type":"structure",
-      "required":[
-        "InstanceId",
-        "Name",
-        "TimeZone",
-        "Config"
-      ],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "Name":{"shape":"CommonNameLength127"},
-        "Description":{"shape":"HoursOfOperationDescription"},
-        "TimeZone":{"shape":"TimeZone"},
-        "Config":{"shape":"HoursOfOperationConfigList"},
-        "Tags":{"shape":"TagMap"}
-      }
-    },
-    "CreateHoursOfOperationResponse":{
-      "type":"structure",
-      "members":{
-        "HoursOfOperationId":{"shape":"HoursOfOperationId"},
-        "HoursOfOperationArn":{"shape":"ARN"}
       }
     },
     "CreateInstanceRequest":{
@@ -2267,8 +1971,7 @@
         "IntegrationArn":{"shape":"ARN"},
         "SourceApplicationUrl":{"shape":"URI"},
         "SourceApplicationName":{"shape":"SourceApplicationName"},
-        "SourceType":{"shape":"SourceType"},
-        "Tags":{"shape":"TagMap"}
+        "SourceType":{"shape":"SourceType"}
       }
     },
     "CreateIntegrationAssociationResponse":{
@@ -2384,8 +2087,7 @@
           "location":"uri",
           "locationName":"IntegrationAssociationId"
         },
-        "UseCaseType":{"shape":"UseCaseType"},
-        "Tags":{"shape":"TagMap"}
+        "UseCaseType":{"shape":"UseCaseType"}
       }
     },
     "CreateUseCaseResponse":{
@@ -2519,25 +2221,6 @@
       "max":9999,
       "min":0
     },
-    "DeleteHoursOfOperationRequest":{
-      "type":"structure",
-      "required":[
-        "InstanceId",
-        "HoursOfOperationId"
-      ],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "HoursOfOperationId":{
-          "shape":"HoursOfOperationId",
-          "location":"uri",
-          "locationName":"HoursOfOperationId"
-        }
-      }
-    },
     "DeleteInstanceRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -2648,31 +2331,6 @@
           "location":"uri",
           "locationName":"UserId"
         }
-      }
-    },
-    "DescribeAgentStatusRequest":{
-      "type":"structure",
-      "required":[
-        "InstanceId",
-        "AgentStatusId"
-      ],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "AgentStatusId":{
-          "shape":"AgentStatusId",
-          "location":"uri",
-          "locationName":"AgentStatusId"
-        }
-      }
-    },
-    "DescribeAgentStatusResponse":{
-      "type":"structure",
-      "members":{
-        "AgentStatus":{"shape":"AgentStatus"}
       }
     },
     "DescribeContactFlowRequest":{
@@ -2999,19 +2657,6 @@
           "location":"querystring",
           "locationName":"origin"
         }
-      }
-    },
-    "DisassociateBotRequest":{
-      "type":"structure",
-      "required":["InstanceId"],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "LexBot":{"shape":"LexBot"},
-        "LexV2Bot":{"shape":"LexV2Bot"}
       }
     },
     "DisassociateInstanceStorageConfigRequest":{
@@ -3466,7 +3111,7 @@
         "HoursOfOperationId":{"shape":"HoursOfOperationId"},
         "HoursOfOperationArn":{"shape":"ARN"},
         "Name":{"shape":"CommonNameLength127"},
-        "Description":{"shape":"HoursOfOperationDescription"},
+        "Description":{"shape":"CommonDescriptionLength250"},
         "TimeZone":{"shape":"TimeZone"},
         "Config":{"shape":"HoursOfOperationConfigList"},
         "Tags":{"shape":"TagMap"}
@@ -3474,11 +3119,6 @@
     },
     "HoursOfOperationConfig":{
       "type":"structure",
-      "required":[
-        "Day",
-        "StartTime",
-        "EndTime"
-      ],
       "members":{
         "Day":{"shape":"HoursOfOperationDays"},
         "StartTime":{"shape":"HoursOfOperationTimeSlice"},
@@ -3487,9 +3127,7 @@
     },
     "HoursOfOperationConfigList":{
       "type":"list",
-      "member":{"shape":"HoursOfOperationConfig"},
-      "max":100,
-      "min":0
+      "member":{"shape":"HoursOfOperationConfig"}
     },
     "HoursOfOperationDays":{
       "type":"string",
@@ -3502,11 +3140,6 @@
         "FRIDAY",
         "SATURDAY"
       ]
-    },
-    "HoursOfOperationDescription":{
-      "type":"string",
-      "max":250,
-      "min":1
     },
     "HoursOfOperationId":{"type":"string"},
     "HoursOfOperationName":{"type":"string"},
@@ -3524,19 +3157,9 @@
     },
     "HoursOfOperationTimeSlice":{
       "type":"structure",
-      "required":[
-        "Hours",
-        "Minutes"
-      ],
       "members":{
-        "Hours":{
-          "shape":"Hours24Format",
-          "box":true
-        },
-        "Minutes":{
-          "shape":"MinutesLimit60",
-          "box":true
-        }
+        "Hours":{"shape":"Hours24Format"},
+        "Minutes":{"shape":"MinutesLimit60"}
       }
     },
     "InboundCallsEnabled":{"type":"boolean"},
@@ -3733,17 +3356,6 @@
         "LexRegion":{"shape":"LexRegion"}
       }
     },
-    "LexBotConfig":{
-      "type":"structure",
-      "members":{
-        "LexBot":{"shape":"LexBot"},
-        "LexV2Bot":{"shape":"LexV2Bot"}
-      }
-    },
-    "LexBotConfigList":{
-      "type":"list",
-      "member":{"shape":"LexBotConfig"}
-    },
     "LexBotsList":{
       "type":"list",
       "member":{"shape":"LexBot"}
@@ -3752,19 +3364,6 @@
       "type":"string",
       "max":60
     },
-    "LexV2Bot":{
-      "type":"structure",
-      "members":{
-        "AliasArn":{"shape":"AliasArn"}
-      }
-    },
-    "LexVersion":{
-      "type":"string",
-      "enum":[
-        "V1",
-        "V2"
-      ]
-    },
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -3772,40 +3371,6 @@
       },
       "error":{"httpStatusCode":429},
       "exception":true
-    },
-    "ListAgentStatusRequest":{
-      "type":"structure",
-      "required":["InstanceId"],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "NextToken":{
-          "shape":"NextToken",
-          "location":"querystring",
-          "locationName":"nextToken"
-        },
-        "MaxResults":{
-          "shape":"MaxResult1000",
-          "box":true,
-          "location":"querystring",
-          "locationName":"maxResults"
-        },
-        "AgentStatusTypes":{
-          "shape":"AgentStatusTypes",
-          "location":"querystring",
-          "locationName":"AgentStatusTypes"
-        }
-      }
-    },
-    "ListAgentStatusResponse":{
-      "type":"structure",
-      "members":{
-        "NextToken":{"shape":"NextToken"},
-        "AgentStatusSummaryList":{"shape":"AgentStatusSummaryList"}
-      }
     },
     "ListApprovedOriginsRequest":{
       "type":"structure",
@@ -3833,43 +3398,6 @@
       "type":"structure",
       "members":{
         "Origins":{"shape":"OriginsList"},
-        "NextToken":{"shape":"NextToken"}
-      }
-    },
-    "ListBotsRequest":{
-      "type":"structure",
-      "required":[
-        "InstanceId",
-        "LexVersion"
-      ],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "NextToken":{
-          "shape":"NextToken",
-          "location":"querystring",
-          "locationName":"nextToken"
-        },
-        "MaxResults":{
-          "shape":"MaxResult25",
-          "box":true,
-          "location":"querystring",
-          "locationName":"maxResults"
-        },
-        "LexVersion":{
-          "shape":"LexVersion",
-          "location":"querystring",
-          "locationName":"lexVersion"
-        }
-      }
-    },
-    "ListBotsResponse":{
-      "type":"structure",
-      "members":{
-        "LexBots":{"shape":"LexBotConfigList"},
         "NextToken":{"shape":"NextToken"}
       }
     },
@@ -5080,7 +4608,7 @@
     "QuickConnectDescription":{
       "type":"string",
       "max":250,
-      "min":1
+      "min":0
     },
     "QuickConnectId":{"type":"string"},
     "QuickConnectName":{
@@ -5630,38 +5158,6 @@
         }
       }
     },
-    "UpdateAgentStatusDescription":{
-      "type":"string",
-      "max":250,
-      "min":0
-    },
-    "UpdateAgentStatusRequest":{
-      "type":"structure",
-      "required":[
-        "InstanceId",
-        "AgentStatusId"
-      ],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "AgentStatusId":{
-          "shape":"AgentStatusId",
-          "location":"uri",
-          "locationName":"AgentStatusId"
-        },
-        "Name":{"shape":"AgentStatusName"},
-        "Description":{"shape":"UpdateAgentStatusDescription"},
-        "State":{"shape":"AgentStatusState"},
-        "DisplayOrder":{
-          "shape":"AgentStatusOrderNumber",
-          "box":true
-        },
-        "ResetOrderNumber":{"shape":"Boolean"}
-      }
-    },
     "UpdateContactAttributesRequest":{
       "type":"structure",
       "required":[
@@ -5720,34 +5216,6 @@
         },
         "Name":{"shape":"ContactFlowName"},
         "Description":{"shape":"ContactFlowDescription"}
-      }
-    },
-    "UpdateHoursOfOperationDescription":{
-      "type":"string",
-      "max":250,
-      "min":0
-    },
-    "UpdateHoursOfOperationRequest":{
-      "type":"structure",
-      "required":[
-        "InstanceId",
-        "HoursOfOperationId"
-      ],
-      "members":{
-        "InstanceId":{
-          "shape":"InstanceId",
-          "location":"uri",
-          "locationName":"InstanceId"
-        },
-        "HoursOfOperationId":{
-          "shape":"HoursOfOperationId",
-          "location":"uri",
-          "locationName":"HoursOfOperationId"
-        },
-        "Name":{"shape":"CommonNameLength127"},
-        "Description":{"shape":"UpdateHoursOfOperationDescription"},
-        "TimeZone":{"shape":"TimeZone"},
-        "Config":{"shape":"HoursOfOperationConfigList"}
       }
     },
     "UpdateInstanceAttributeRequest":{
@@ -5926,11 +5394,6 @@
         "QuickConnectConfig":{"shape":"QuickConnectConfig"}
       }
     },
-    "UpdateQuickConnectDescription":{
-      "type":"string",
-      "max":250,
-      "min":0
-    },
     "UpdateQuickConnectNameRequest":{
       "type":"structure",
       "required":[
@@ -5949,7 +5412,7 @@
           "locationName":"QuickConnectId"
         },
         "Name":{"shape":"QuickConnectName"},
-        "Description":{"shape":"UpdateQuickConnectDescription"}
+        "Description":{"shape":"QuickConnectDescription"}
       }
     },
     "UpdateRoutingProfileConcurrencyRequest":{

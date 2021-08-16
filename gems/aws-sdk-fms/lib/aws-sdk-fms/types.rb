@@ -10,26 +10,7 @@
 module Aws::FMS
   module Types
 
-    # Describes a remediation action target.
-    #
-    # @!attribute [rw] resource_id
-    #   The ID of the remediation target.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   A description of the remediation action target.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ActionTarget AWS API Documentation
-    #
-    class ActionTarget < Struct.new(
-      :resource_id,
-      :description)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # An individual Firewall Manager application.
+    # An individual AWS Firewall Manager application.
     #
     # @note When making an API call, you may pass App
     #   data as a hash:
@@ -68,7 +49,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # An Firewall Manager applications list.
+    # An AWS Firewall Manager applications list.
     #
     # @note When making an API call, you may pass AppsListData
     #   data as a hash:
@@ -98,11 +79,11 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] list_id
-    #   The ID of the Firewall Manager applications list.
+    #   The ID of the AWS Firewall Manager applications list.
     #   @return [String]
     #
     # @!attribute [rw] list_name
-    #   The name of the Firewall Manager applications list.
+    #   The name of the AWS Firewall Manager applications list.
     #   @return [String]
     #
     # @!attribute [rw] list_update_token
@@ -113,16 +94,18 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The time that the Firewall Manager applications list was created.
+    #   The time that the AWS Firewall Manager applications list was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_update_time
-    #   The time that the Firewall Manager applications list was last
+    #   The time that the AWS Firewall Manager applications list was last
     #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] apps_list
-    #   An array of applications in the Firewall Manager applications list.
+    #   An array of applications in the AWS Firewall Manager applications
+    #   list.
     #   @return [Array<Types::App>]
     #
     # @!attribute [rw] previous_apps_list
@@ -144,7 +127,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Details of the Firewall Manager applications list.
+    # Details of the AWS Firewall Manager applications list.
     #
     # @!attribute [rw] list_arn
     #   The Amazon Resource Name (ARN) of the applications list.
@@ -159,7 +142,8 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] apps_list
-    #   An array of `App` objects in the Firewall Manager applications list.
+    #   An array of `App` objects in the AWS Firewall Manager applications
+    #   list.
     #   @return [Array<Types::App>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AppsListDataSummary AWS API Documentation
@@ -181,11 +165,11 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] admin_account
-    #   The Amazon Web Services account ID to associate with Firewall
-    #   Manager as the Firewall Manager administrator account. This must be
-    #   an Organizations member account. For more information about
-    #   Organizations, see [Managing the Amazon Web Services Accounts in
-    #   Your Organization][1].
+    #   The AWS account ID to associate with AWS Firewall Manager as the AWS
+    #   Firewall Manager administrator account. This can be an AWS
+    #   Organizations master account or a member account. For more
+    #   information about AWS Organizations and master accounts, see
+    #   [Managing the AWS Accounts in Your Organization][1].
     #
     #
     #
@@ -200,15 +184,14 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for an EC2 instance resource.
+    # Violations for an EC2 instance resource.
     #
     # @!attribute [rw] violation_target
     #   The resource ID of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] aws_ec2_network_interface_violations
-    #   Violation detail for network interfaces associated with the EC2
-    #   instance.
+    #   Violations for network interfaces associated with the EC2 instance.
     #   @return [Array<Types::AwsEc2NetworkInterfaceViolation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AwsEc2InstanceViolation AWS API Documentation
@@ -220,8 +203,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for network interfaces associated with an EC2
-    # instance.
+    # Violations for network interfaces associated with an EC2 instance.
     #
     # @!attribute [rw] violation_target
     #   The resource ID of the network interface.
@@ -229,7 +211,7 @@ module Aws::FMS
     #
     # @!attribute [rw] violating_security_groups
     #   List of security groups that violate the rules specified in the
-    #   primary security group of the Firewall Manager policy.
+    #   master security group of the AWS Firewall Manager policy.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AwsEc2NetworkInterfaceViolation AWS API Documentation
@@ -241,8 +223,8 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for the rule violation in a security group when
-    # compared to the primary security group of the Firewall Manager policy.
+    # Details of the rule violation in a security group when compared to the
+    # master security group of the AWS Firewall Manager policy.
     #
     # @!attribute [rw] violation_target
     #   The security group rule that is being evaluated.
@@ -253,7 +235,7 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] partial_matches
-    #   List of rules specified in the security group of the Firewall
+    #   List of rules specified in the security group of the AWS Firewall
     #   Manager policy that partially match the `ViolationTarget` rule.
     #   @return [Array<Types::PartialMatch>]
     #
@@ -283,8 +265,8 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type. This is in the format shown in the [Amazon Web
-    #   Services Resource Types Reference][1]. For example:
+    #   The resource type. This is in the format shown in the [AWS Resource
+    #   Types Reference][1]. For example:
     #   `AWS::ElasticLoadBalancingV2::LoadBalancer`,
     #   `AWS::CloudFront::Distribution`, or
     #   `AWS::NetworkFirewall::FirewallPolicy`.
@@ -348,10 +330,10 @@ module Aws::FMS
     #   If `True`, the request performs cleanup according to the policy
     #   type.
     #
-    #   For WAF and Shield Advanced policies, the cleanup does the
+    #   For AWS WAF and Shield Advanced policies, the cleanup does the
     #   following:
     #
-    #   * Deletes rule groups created by Firewall Manager
+    #   * Deletes rule groups created by AWS Firewall Manager
     #
     #   * Removes web ACLs from in-scope resources
     #
@@ -417,7 +399,7 @@ module Aws::FMS
     # again.
     #
     # @!attribute [rw] violation_target
-    #   Information about the VPC ID.
+    #   The ID of the VPC.
     #   @return [String]
     #
     # @!attribute [rw] violation_target_description
@@ -440,7 +422,7 @@ module Aws::FMS
     # due to the limit.
     #
     # @!attribute [rw] violation_target
-    #   Information about the VPC ID.
+    #   The ID of the VPC.
     #   @return [String]
     #
     # @!attribute [rw] violation_target_description
@@ -466,7 +448,7 @@ module Aws::FMS
     # the same priority as a rule group that's already associated.
     #
     # @!attribute [rw] violation_target
-    #   Information about the VPC ID.
+    #   The ID of the VPC.
     #   @return [String]
     #
     # @!attribute [rw] violation_target_description
@@ -502,254 +484,19 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # The action of associating an EC2 resource, such as a subnet or
-    # internet gateway, with a route table.
-    #
-    # @!attribute [rw] description
-    #   A description of the EC2 route table that is associated with the
-    #   remediation action.
-    #   @return [String]
-    #
-    # @!attribute [rw] route_table_id
-    #   The ID of the EC2 route table that is associated with the
-    #   remediation action.
-    #   @return [Types::ActionTarget]
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet for the EC2 route table that is associated with
-    #   the remediation action.
-    #   @return [Types::ActionTarget]
-    #
-    # @!attribute [rw] gateway_id
-    #   The ID of the gateway to be used with the EC2 route table that is
-    #   associated with the remediation action.
-    #   @return [Types::ActionTarget]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EC2AssociateRouteTableAction AWS API Documentation
-    #
-    class EC2AssociateRouteTableAction < Struct.new(
-      :description,
-      :route_table_id,
-      :subnet_id,
-      :gateway_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # An action that copies the EC2 route table for use in remediation.
-    #
-    # @!attribute [rw] description
-    #   A description of the copied EC2 route table that is associated with
-    #   the remediation action.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   The VPC ID of the copied EC2 route table that is associated with the
-    #   remediation action.
-    #   @return [Types::ActionTarget]
-    #
-    # @!attribute [rw] route_table_id
-    #   The ID of the copied EC2 route table that is associated with the
-    #   remediation action.
-    #   @return [Types::ActionTarget]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EC2CopyRouteTableAction AWS API Documentation
-    #
-    class EC2CopyRouteTableAction < Struct.new(
-      :description,
-      :vpc_id,
-      :route_table_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the CreateRoute action in Amazon EC2.
-    #
-    # @!attribute [rw] description
-    #   A description of CreateRoute action in Amazon EC2.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_cidr_block
-    #   Information about the IPv4 CIDR address block used for the
-    #   destination match.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_prefix_list_id
-    #   Information about the ID of a prefix list used for the destination
-    #   match.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_ipv_6_cidr_block
-    #   Information about the IPv6 CIDR block destination.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_endpoint_id
-    #   Information about the ID of a VPC endpoint. Supported for Gateway
-    #   Load Balancer endpoints only.
-    #   @return [Types::ActionTarget]
-    #
-    # @!attribute [rw] gateway_id
-    #   Information about the ID of an internet gateway or virtual private
-    #   gateway attached to your VPC.
-    #   @return [Types::ActionTarget]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the ID of the route table for the route.
-    #   @return [Types::ActionTarget]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EC2CreateRouteAction AWS API Documentation
-    #
-    class EC2CreateRouteAction < Struct.new(
-      :description,
-      :destination_cidr_block,
-      :destination_prefix_list_id,
-      :destination_ipv_6_cidr_block,
-      :vpc_endpoint_id,
-      :gateway_id,
-      :route_table_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the CreateRouteTable action in Amazon EC2.
-    #
-    # @!attribute [rw] description
-    #   A description of the CreateRouteTable action.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   Information about the ID of a VPC.
-    #   @return [Types::ActionTarget]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EC2CreateRouteTableAction AWS API Documentation
-    #
-    class EC2CreateRouteTableAction < Struct.new(
-      :description,
-      :vpc_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the DeleteRoute action in Amazon EC2.
-    #
-    # @!attribute [rw] description
-    #   A description of the DeleteRoute action.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_cidr_block
-    #   Information about the IPv4 CIDR range for the route. The value you
-    #   specify must match the CIDR for the route exactly.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_prefix_list_id
-    #   Information about the ID of the prefix list for the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_ipv_6_cidr_block
-    #   Information about the IPv6 CIDR range for the route. The value you
-    #   specify must match the CIDR for the route exactly.
-    #   @return [String]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the ID of the route table.
-    #   @return [Types::ActionTarget]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EC2DeleteRouteAction AWS API Documentation
-    #
-    class EC2DeleteRouteAction < Struct.new(
-      :description,
-      :destination_cidr_block,
-      :destination_prefix_list_id,
-      :destination_ipv_6_cidr_block,
-      :route_table_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the ReplaceRoute action in Amazon EC2.
-    #
-    # @!attribute [rw] description
-    #   A description of the ReplaceRoute action in Amazon EC2.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_cidr_block
-    #   Information about the IPv4 CIDR address block used for the
-    #   destination match. The value that you provide must match the CIDR of
-    #   an existing route in the table.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_prefix_list_id
-    #   Information about the ID of the prefix list for the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination_ipv_6_cidr_block
-    #   Information about the IPv6 CIDR address block used for the
-    #   destination match. The value that you provide must match the CIDR of
-    #   an existing route in the table.
-    #   @return [String]
-    #
-    # @!attribute [rw] gateway_id
-    #   Information about the ID of an internet gateway or virtual private
-    #   gateway.
-    #   @return [Types::ActionTarget]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the ID of the route table.
-    #   @return [Types::ActionTarget]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EC2ReplaceRouteAction AWS API Documentation
-    #
-    class EC2ReplaceRouteAction < Struct.new(
-      :description,
-      :destination_cidr_block,
-      :destination_prefix_list_id,
-      :destination_ipv_6_cidr_block,
-      :gateway_id,
-      :route_table_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the ReplaceRouteTableAssociation action in Amazon
-    # EC2.
-    #
-    # @!attribute [rw] description
-    #   A description of the ReplaceRouteTableAssociation action in Amazon
-    #   EC2.
-    #   @return [String]
-    #
-    # @!attribute [rw] association_id
-    #   Information about the association ID.
-    #   @return [Types::ActionTarget]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the ID of the new route table to associate with
-    #   the subnet.
-    #   @return [Types::ActionTarget]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EC2ReplaceRouteTableAssociationAction AWS API Documentation
-    #
-    class EC2ReplaceRouteTableAssociationAction < Struct.new(
-      :description,
-      :association_id,
-      :route_table_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Describes the compliance status for the account. An account is
     # considered noncompliant if it includes resources that are not
     # protected by the specified policy or that don't comply with the
     # policy.
     #
     # @!attribute [rw] compliance_status
-    #   Describes an Amazon Web Services account's compliance with the
-    #   Firewall Manager policy.
+    #   Describes an AWS account's compliance with the AWS Firewall Manager
+    #   policy.
     #   @return [String]
     #
     # @!attribute [rw] violator_count
     #   The number of resources that are noncompliant with the specified
-    #   policy. For WAF and Shield Advanced policies, a resource is
+    #   policy. For AWS WAF and Shield Advanced policies, a resource is
     #   considered noncompliant if it is not associated with the policy. For
     #   security group policies, a resource is considered noncompliant if it
     #   doesn't comply with the rules of the policy and remediation is
@@ -757,8 +504,8 @@ module Aws::FMS
     #   @return [Integer]
     #
     # @!attribute [rw] evaluation_limit_exceeded
-    #   Indicates that over 100 resources are noncompliant with the Firewall
-    #   Manager policy.
+    #   Indicates that over 100 resources are noncompliant with the AWS
+    #   Firewall Manager policy.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/EvaluationResult AWS API Documentation
@@ -771,45 +518,6 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Information about the expected route in the route table.
-    #
-    # @!attribute [rw] ip_v4_cidr
-    #   Information about the IPv4 CIDR block.
-    #   @return [String]
-    #
-    # @!attribute [rw] prefix_list_id
-    #   Information about the ID of the prefix list for the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] ip_v6_cidr
-    #   Information about the IPv6 CIDR block.
-    #   @return [String]
-    #
-    # @!attribute [rw] contributing_subnets
-    #   Information about the contributing subnets.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] allowed_targets
-    #   Information about the allowed targets.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the route table ID.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ExpectedRoute AWS API Documentation
-    #
-    class ExpectedRoute < Struct.new(
-      :ip_v4_cidr,
-      :prefix_list_id,
-      :ip_v6_cidr,
-      :contributing_subnets,
-      :allowed_targets,
-      :route_table_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountRequest AWS API Documentation
@@ -817,13 +525,13 @@ module Aws::FMS
     class GetAdminAccountRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] admin_account
-    #   The Amazon Web Services account that is set as the Firewall Manager
+    #   The AWS account that is set as the AWS Firewall Manager
     #   administrator.
     #   @return [String]
     #
     # @!attribute [rw] role_status
-    #   The status of the Amazon Web Services account that you set as the
-    #   Firewall Manager administrator.
+    #   The status of the AWS account that you set as the AWS Firewall
+    #   Manager administrator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccountResponse AWS API Documentation
@@ -844,13 +552,13 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] list_id
-    #   The ID of the Firewall Manager applications list that you want the
-    #   details for.
+    #   The ID of the AWS Firewall Manager applications list that you want
+    #   the details for.
     #   @return [String]
     #
     # @!attribute [rw] default_list
     #   Specifies whether the list to retrieve is a default list owned by
-    #   Firewall Manager.
+    #   AWS Firewall Manager.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAppsListRequest AWS API Documentation
@@ -863,7 +571,8 @@ module Aws::FMS
     end
 
     # @!attribute [rw] apps_list
-    #   Information about the specified Firewall Manager applications list.
+    #   Information about the specified AWS Firewall Manager applications
+    #   list.
     #   @return [Types::AppsListData]
     #
     # @!attribute [rw] apps_list_arn
@@ -893,8 +602,8 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] member_account
-    #   The Amazon Web Services account that owns the resources that you
-    #   want to get the details for.
+    #   The AWS account that owns the resources that you want to get the
+    #   details for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetComplianceDetailRequest AWS API Documentation
@@ -926,12 +635,12 @@ module Aws::FMS
     class GetNotificationChannelRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] sns_topic_arn
-    #   The SNS topic that records Firewall Manager activity.
+    #   The SNS topic that records AWS Firewall Manager activity.
     #   @return [String]
     #
     # @!attribute [rw] sns_role_name
-    #   The IAM role that is used by Firewall Manager to record activity to
-    #   SNS.
+    #   The IAM role that is used by AWS Firewall Manager to record activity
+    #   to SNS.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetNotificationChannelResponse AWS API Documentation
@@ -951,7 +660,8 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] policy_id
-    #   The ID of the Firewall Manager policy that you want the details for.
+    #   The ID of the AWS Firewall Manager policy that you want the details
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetPolicyRequest AWS API Documentation
@@ -963,7 +673,7 @@ module Aws::FMS
     end
 
     # @!attribute [rw] policy
-    #   Information about the specified Firewall Manager policy.
+    #   Information about the specified AWS Firewall Manager policy.
     #   @return [Types::Policy]
     #
     # @!attribute [rw] policy_arn
@@ -997,37 +707,37 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] member_account_id
-    #   The Amazon Web Services account that is in scope of the policy that
-    #   you want to get the details for.
+    #   The AWS account that is in scope of the policy that you want to get
+    #   the details for.
     #   @return [String]
     #
     # @!attribute [rw] start_time
     #   The start of the time period to query for the attacks. This is a
     #   `timestamp` type. The request syntax listing indicates a `number`
-    #   type because the default used by Firewall Manager is Unix time in
-    #   seconds. However, any valid `timestamp` format is allowed.
+    #   type because the default used by AWS Firewall Manager is Unix time
+    #   in seconds. However, any valid `timestamp` format is allowed.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period to query for the attacks. This is a
     #   `timestamp` type. The request syntax listing indicates a `number`
-    #   type because the default used by Firewall Manager is Unix time in
-    #   seconds. However, any valid `timestamp` format is allowed.
+    #   type because the default used by AWS Firewall Manager is Unix time
+    #   in seconds. However, any valid `timestamp` format is allowed.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more objects
-    #   than the number that you specify for `MaxResults`, Firewall Manager
-    #   returns a `NextToken` value in the response, which you can use to
-    #   retrieve another group of objects. For the second and subsequent
-    #   `GetProtectionStatus` requests, specify the value of `NextToken`
-    #   from the previous response to get information about another batch of
-    #   objects.
+    #   than the number that you specify for `MaxResults`, AWS Firewall
+    #   Manager returns a `NextToken` value in the response, which you can
+    #   use to retrieve another group of objects. For the second and
+    #   subsequent `GetProtectionStatus` requests, specify the value of
+    #   `NextToken` from the previous response to get information about
+    #   another batch of objects.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the number of objects that you want Firewall Manager to
-    #   return for this request. If you have more objects than the number
+    #   Specifies the number of objects that you want AWS Firewall Manager
+    #   to return for this request. If you have more objects than the number
     #   that you specify for `MaxResults`, the response includes a
     #   `NextToken` value that you can use to get another batch of objects.
     #   @return [Integer]
@@ -1046,8 +756,7 @@ module Aws::FMS
     end
 
     # @!attribute [rw] admin_account_id
-    #   The ID of the Firewall Manager administrator account for this
-    #   policy.
+    #   The ID of the AWS Firewall administrator account for this policy.
     #   @return [String]
     #
     # @!attribute [rw] service_type
@@ -1078,10 +787,10 @@ module Aws::FMS
     #   request, and specify the `NextToken` value from the response in the
     #   `NextToken` value in the next request.
     #
-    #   Amazon Web Services SDKs provide auto-pagination that identify
-    #   `NextToken` in a response and make subsequent request calls
-    #   automatically on your behalf. However, this feature is not supported
-    #   by `GetProtectionStatus`. You must submit subsequent requests with
+    #   AWS SDKs provide auto-pagination that identify `NextToken` in a
+    #   response and make subsequent request calls automatically on your
+    #   behalf. However, this feature is not supported by
+    #   `GetProtectionStatus`. You must submit subsequent requests with
     #   `NextToken` using your own processes.
     #   @return [String]
     #
@@ -1105,13 +814,13 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] list_id
-    #   The ID of the Firewall Manager protocols list that you want the
+    #   The ID of the AWS Firewall Manager protocols list that you want the
     #   details for.
     #   @return [String]
     #
     # @!attribute [rw] default_list
     #   Specifies whether the list to retrieve is a default list owned by
-    #   Firewall Manager.
+    #   AWS Firewall Manager.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtocolsListRequest AWS API Documentation
@@ -1124,7 +833,7 @@ module Aws::FMS
     end
 
     # @!attribute [rw] protocols_list
-    #   Information about the specified Firewall Manager protocols list.
+    #   Information about the specified AWS Firewall Manager protocols list.
     #   @return [Types::ProtocolsListData]
     #
     # @!attribute [rw] protocols_list_arn
@@ -1151,12 +860,13 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] policy_id
-    #   The ID of the Firewall Manager policy that you want the details for.
-    #   This currently only supports security group content audit policies.
+    #   The ID of the AWS Firewall Manager policy that you want the details
+    #   for. This currently only supports security group content audit
+    #   policies.
     #   @return [String]
     #
     # @!attribute [rw] member_account
-    #   The Amazon Web Services account ID that you want the details for.
+    #   The AWS account ID that you want the details for.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1164,8 +874,8 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type. This is in the format shown in the [Amazon Web
-    #   Services Resource Types Reference][1]. Supported resource types are:
+    #   The resource type. This is in the format shown in the [AWS Resource
+    #   Types Reference][1]. Supported resource types are:
     #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`,
     #   `AWS::EC2::SecurityGroup`, `AWS::NetworkFirewall::FirewallPolicy`,
     #   and `AWS::EC2::Subnet`.
@@ -1228,9 +938,9 @@ module Aws::FMS
     # The operation failed because there was nothing to do or the operation
     # wasn't possible. For example, you might have submitted an
     # `AssociateAdminAccount` request for an account ID that was already set
-    # as the Firewall Manager administrator. Or you might have tried to
+    # as the AWS Firewall Manager administrator. Or you might have tried to
     # access a Region that's disabled by default, and that you need to
-    # enable for the Firewall Manager administrator account and for
+    # enable for the Firewall Manager administrator account and for AWS
     # Organizations before you can access it.
     #
     # @!attribute [rw] message
@@ -1258,9 +968,9 @@ module Aws::FMS
     end
 
     # The operation exceeds a resource limit, for example, the maximum
-    # number of `policy` objects that you can create for an Amazon Web
-    # Services account. For more information, see [Firewall Manager
-    # Limits][1] in the *WAF Developer Guide*.
+    # number of `policy` objects that you can create for an AWS account. For
+    # more information, see [Firewall Manager Limits][1] in the *AWS WAF
+    # Developer Guide*.
     #
     #
     #
@@ -1288,25 +998,25 @@ module Aws::FMS
     #
     # @!attribute [rw] default_lists
     #   Specifies whether the lists to retrieve are default lists owned by
-    #   Firewall Manager.
+    #   AWS Firewall Manager.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` in your list request, and
-    #   you have more objects than the maximum, Firewall Manager returns
+    #   you have more objects than the maximum, AWS Firewall Manager returns
     #   this token in the response. For all but the first request, you
     #   provide the token returned by the prior request in the request
     #   parameters, to retrieve the next batch of objects.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of objects that you want Firewall Manager to
+    #   The maximum number of objects that you want AWS Firewall Manager to
     #   return for this request. If more objects are available, in the
-    #   response, Firewall Manager provides a `NextToken` value that you can
-    #   use in a subsequent call to get the next batch of objects.
+    #   response, AWS Firewall Manager provides a `NextToken` value that you
+    #   can use in a subsequent call to get the next batch of objects.
     #
-    #   If you don't specify this, Firewall Manager returns all available
-    #   objects.
+    #   If you don't specify this, AWS Firewall Manager returns all
+    #   available objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListAppsListsRequest AWS API Documentation
@@ -1325,7 +1035,7 @@ module Aws::FMS
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` in your list request, and
-    #   you have more objects than the maximum, Firewall Manager returns
+    #   you have more objects than the maximum, AWS Firewall Manager returns
     #   this token in the response. You can use this token in subsequent
     #   requests to retrieve the next batch of objects.
     #   @return [String]
@@ -1349,14 +1059,15 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] policy_id
-    #   The ID of the Firewall Manager policy that you want the details for.
+    #   The ID of the AWS Firewall Manager policy that you want the details
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more
     #   `PolicyComplianceStatus` objects than the number that you specify
-    #   for `MaxResults`, Firewall Manager returns a `NextToken` value in
-    #   the response that allows you to list another group of
+    #   for `MaxResults`, AWS Firewall Manager returns a `NextToken` value
+    #   in the response that allows you to list another group of
     #   `PolicyComplianceStatus` objects. For the second and subsequent
     #   `ListComplianceStatus` requests, specify the value of `NextToken`
     #   from the previous response to get information about another batch of
@@ -1365,10 +1076,11 @@ module Aws::FMS
     #
     # @!attribute [rw] max_results
     #   Specifies the number of `PolicyComplianceStatus` objects that you
-    #   want Firewall Manager to return for this request. If you have more
-    #   `PolicyComplianceStatus` objects than the number that you specify
-    #   for `MaxResults`, the response includes a `NextToken` value that you
-    #   can use to get another batch of `PolicyComplianceStatus` objects.
+    #   want AWS Firewall Manager to return for this request. If you have
+    #   more `PolicyComplianceStatus` objects than the number that you
+    #   specify for `MaxResults`, the response includes a `NextToken` value
+    #   that you can use to get another batch of `PolicyComplianceStatus`
+    #   objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListComplianceStatusRequest AWS API Documentation
@@ -1413,7 +1125,7 @@ module Aws::FMS
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more account
-    #   IDs than the number that you specify for `MaxResults`, Firewall
+    #   IDs than the number that you specify for `MaxResults`, AWS Firewall
     #   Manager returns a `NextToken` value in the response that allows you
     #   to list another group of IDs. For the second and subsequent
     #   `ListMemberAccountsRequest` requests, specify the value of
@@ -1422,11 +1134,11 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the number of member account IDs that you want Firewall
-    #   Manager to return for this request. If you have more IDs than the
-    #   number that you specify for `MaxResults`, the response includes a
-    #   `NextToken` value that you can use to get another batch of member
-    #   account IDs.
+    #   Specifies the number of member account IDs that you want AWS
+    #   Firewall Manager to return for this request. If you have more IDs
+    #   than the number that you specify for `MaxResults`, the response
+    #   includes a `NextToken` value that you can use to get another batch
+    #   of member account IDs.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsRequest AWS API Documentation
@@ -1470,15 +1182,16 @@ module Aws::FMS
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` and you have more
     #   `PolicySummary` objects than the number that you specify for
-    #   `MaxResults`, Firewall Manager returns a `NextToken` value in the
-    #   response that allows you to list another group of `PolicySummary`
-    #   objects. For the second and subsequent `ListPolicies` requests,
-    #   specify the value of `NextToken` from the previous response to get
-    #   information about another batch of `PolicySummary` objects.
+    #   `MaxResults`, AWS Firewall Manager returns a `NextToken` value in
+    #   the response that allows you to list another group of
+    #   `PolicySummary` objects. For the second and subsequent
+    #   `ListPolicies` requests, specify the value of `NextToken` from the
+    #   previous response to get information about another batch of
+    #   `PolicySummary` objects.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specifies the number of `PolicySummary` objects that you want
+    #   Specifies the number of `PolicySummary` objects that you want AWS
     #   Firewall Manager to return for this request. If you have more
     #   `PolicySummary` objects than the number that you specify for
     #   `MaxResults`, the response includes a `NextToken` value that you can
@@ -1526,25 +1239,25 @@ module Aws::FMS
     #
     # @!attribute [rw] default_lists
     #   Specifies whether the lists to retrieve are default lists owned by
-    #   Firewall Manager.
+    #   AWS Firewall Manager.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` in your list request, and
-    #   you have more objects than the maximum, Firewall Manager returns
+    #   you have more objects than the maximum, AWS Firewall Manager returns
     #   this token in the response. For all but the first request, you
     #   provide the token returned by the prior request in the request
     #   parameters, to retrieve the next batch of objects.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of objects that you want Firewall Manager to
+    #   The maximum number of objects that you want AWS Firewall Manager to
     #   return for this request. If more objects are available, in the
-    #   response, Firewall Manager provides a `NextToken` value that you can
-    #   use in a subsequent call to get the next batch of objects.
+    #   response, AWS Firewall Manager provides a `NextToken` value that you
+    #   can use in a subsequent call to get the next batch of objects.
     #
-    #   If you don't specify this, Firewall Manager returns all available
-    #   objects.
+    #   If you don't specify this, AWS Firewall Manager returns all
+    #   available objects.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListProtocolsListsRequest AWS API Documentation
@@ -1563,7 +1276,7 @@ module Aws::FMS
     #
     # @!attribute [rw] next_token
     #   If you specify a value for `MaxResults` in your list request, and
-    #   you have more objects than the maximum, Firewall Manager returns
+    #   you have more objects than the maximum, AWS Firewall Manager returns
     #   this token in the response. You can use this token in subsequent
     #   requests to retrieve the next batch of objects.
     #   @return [String]
@@ -1586,8 +1299,8 @@ module Aws::FMS
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return tags for.
-    #   The Firewall Manager resources that support tagging are policies,
-    #   applications lists, and protocols lists.
+    #   The AWS Firewall Manager resources that support tagging are
+    #   policies, applications lists, and protocols lists.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListTagsForResourceRequest AWS API Documentation
@@ -1610,220 +1323,12 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for an internet gateway route with an inactive state
-    # in the customer subnet route table or Network Firewall subnet route
-    # table.
-    #
-    # @!attribute [rw] violation_target
-    #   The subnet that has an inactive state.
-    #   @return [String]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the route table ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   Information about the VPC ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] violating_routes
-    #   Information about the route or routes that are in violation.
-    #   @return [Array<Types::Route>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallBlackHoleRouteDetectedViolation AWS API Documentation
-    #
-    class NetworkFirewallBlackHoleRouteDetectedViolation < Struct.new(
-      :violation_target,
-      :route_table_id,
-      :vpc_id,
-      :violating_routes)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Violation detail for the subnet for which internet traffic that
-    # hasn't been inspected.
-    #
-    # @!attribute [rw] subnet_id
-    #   The subnet ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] subnet_availability_zone
-    #   The subnet Availability Zone.
-    #   @return [String]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the route table ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] violating_routes
-    #   The route or routes that are in violation.
-    #   @return [Array<Types::Route>]
-    #
-    # @!attribute [rw] is_route_table_used_in_different_az
-    #   Information about whether the route table is used in another
-    #   Availability Zone.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] current_firewall_subnet_route_table
-    #   Information about the subnet route table for the current firewall.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_firewall_endpoint
-    #   The expected endpoint for the current firewall.
-    #   @return [String]
-    #
-    # @!attribute [rw] firewall_subnet_id
-    #   The firewall subnet ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_firewall_subnet_routes
-    #   The firewall subnet routes that are expected.
-    #   @return [Array<Types::ExpectedRoute>]
-    #
-    # @!attribute [rw] actual_firewall_subnet_routes
-    #   The actual firewall subnet routes.
-    #   @return [Array<Types::Route>]
-    #
-    # @!attribute [rw] internet_gateway_id
-    #   The internet gateway ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] current_internet_gateway_route_table
-    #   The current route table for the internet gateway.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_internet_gateway_routes
-    #   The internet gateway routes that are expected.
-    #   @return [Array<Types::ExpectedRoute>]
-    #
-    # @!attribute [rw] actual_internet_gateway_routes
-    #   The actual internet gateway routes.
-    #   @return [Array<Types::Route>]
-    #
-    # @!attribute [rw] vpc_id
-    #   Information about the VPC ID.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallInternetTrafficNotInspectedViolation AWS API Documentation
-    #
-    class NetworkFirewallInternetTrafficNotInspectedViolation < Struct.new(
-      :subnet_id,
-      :subnet_availability_zone,
-      :route_table_id,
-      :violating_routes,
-      :is_route_table_used_in_different_az,
-      :current_firewall_subnet_route_table,
-      :expected_firewall_endpoint,
-      :firewall_subnet_id,
-      :expected_firewall_subnet_routes,
-      :actual_firewall_subnet_routes,
-      :internet_gateway_id,
-      :current_internet_gateway_route_table,
-      :expected_internet_gateway_routes,
-      :actual_internet_gateway_routes,
-      :vpc_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Violation detail for the improperly configured subnet route. It's
-    # possible there is a missing route table route, or a configuration that
-    # causes traffic to cross an Availability Zone boundary.
-    #
-    # @!attribute [rw] affected_subnets
-    #   The subnets that are affected.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] route_table_id
-    #   The route table ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] is_route_table_used_in_different_az
-    #   Information about whether the route table is used in another
-    #   Availability Zone.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] violating_route
-    #   The route that's in violation.
-    #   @return [Types::Route]
-    #
-    # @!attribute [rw] current_firewall_subnet_route_table
-    #   The subnet route table for the current firewall.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_firewall_endpoint
-    #   The firewall endpoint that's expected.
-    #   @return [String]
-    #
-    # @!attribute [rw] actual_firewall_endpoint
-    #   The actual firewall endpoint.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_firewall_subnet_id
-    #   The expected subnet ID for the firewall.
-    #   @return [String]
-    #
-    # @!attribute [rw] actual_firewall_subnet_id
-    #   The actual subnet ID for the firewall.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_firewall_subnet_routes
-    #   The firewall subnet routes that are expected.
-    #   @return [Array<Types::ExpectedRoute>]
-    #
-    # @!attribute [rw] actual_firewall_subnet_routes
-    #   The actual firewall subnet routes that are expected.
-    #   @return [Array<Types::Route>]
-    #
-    # @!attribute [rw] internet_gateway_id
-    #   The internet gateway ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] current_internet_gateway_route_table
-    #   The route table for the current internet gateway.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_internet_gateway_routes
-    #   The expected routes for the internet gateway.
-    #   @return [Array<Types::ExpectedRoute>]
-    #
-    # @!attribute [rw] actual_internet_gateway_routes
-    #   The actual internet gateway routes.
-    #   @return [Array<Types::Route>]
-    #
-    # @!attribute [rw] vpc_id
-    #   Information about the VPC ID.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallInvalidRouteConfigurationViolation AWS API Documentation
-    #
-    class NetworkFirewallInvalidRouteConfigurationViolation < Struct.new(
-      :affected_subnets,
-      :route_table_id,
-      :is_route_table_used_in_different_az,
-      :violating_route,
-      :current_firewall_subnet_route_table,
-      :expected_firewall_endpoint,
-      :actual_firewall_endpoint,
-      :expected_firewall_subnet_id,
-      :actual_firewall_subnet_id,
-      :expected_firewall_subnet_routes,
-      :actual_firewall_subnet_routes,
-      :internet_gateway_id,
-      :current_internet_gateway_route_table,
-      :expected_internet_gateway_routes,
-      :actual_internet_gateway_routes,
-      :vpc_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Violation detail for Network Firewall for a subnet that's not
+    # Violation details for AWS Network Firewall for a subnet that's not
     # associated to the expected Firewall Manager managed route table.
     #
     # @!attribute [rw] violation_target
-    #   The ID of the Network Firewall or VPC resource that's in violation.
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -1856,35 +1361,12 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for an expected route missing in Network Firewall.
+    # Violation details for AWS Network Firewall for a subnet that doesn't
+    # have a Firewall Manager managed firewall in its VPC.
     #
     # @!attribute [rw] violation_target
-    #   The target of the violation.
-    #   @return [String]
-    #
-    # @!attribute [rw] expected_routes
-    #   The expected routes.
-    #   @return [Array<Types::ExpectedRoute>]
-    #
-    # @!attribute [rw] vpc_id
-    #   Information about the VPC ID.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallMissingExpectedRoutesViolation AWS API Documentation
-    #
-    class NetworkFirewallMissingExpectedRoutesViolation < Struct.new(
-      :violation_target,
-      :expected_routes,
-      :vpc_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Violation detail for Network Firewall for a subnet that doesn't have
-    # a Firewall Manager managed firewall in its VPC.
-    #
-    # @!attribute [rw] violation_target
-    #   The ID of the Network Firewall or VPC resource that's in violation.
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -1910,11 +1392,12 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for Network Firewall for an Availability Zone that's
-    # missing the expected Firewall Manager managed subnet.
+    # Violation details for AWS Network Firewall for an Availability Zone
+    # that's missing the expected Firewall Manager managed subnet.
     #
     # @!attribute [rw] violation_target
-    #   The ID of the Network Firewall or VPC resource that's in violation.
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -1940,7 +1423,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # The definition of the Network Firewall firewall policy.
+    # The definition of the AWS Network Firewall firewall policy.
     #
     # @!attribute [rw] stateless_rule_groups
     #   The stateless rule groups that are used in the Network Firewall
@@ -1979,12 +1462,13 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for Network Firewall for a firewall policy that has a
-    # different NetworkFirewallPolicyDescription than is required by the
-    # Firewall Manager policy.
+    # Violation details for AWS Network Firewall for a firewall policy that
+    # has a different NetworkFirewallPolicyDescription than is required by
+    # the Firewall Manager policy.
     #
     # @!attribute [rw] violation_target
-    #   The ID of the Network Firewall or VPC resource that's in violation.
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
     #   @return [String]
     #
     # @!attribute [rw] current_policy_description
@@ -2006,77 +1490,12 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Violation detail for an unexpected route that's present in a route
-    # table.
-    #
-    # @!attribute [rw] firewall_subnet_id
-    #   The subnet ID for the firewall.
-    #   @return [String]
-    #
-    # @!attribute [rw] violating_routes
-    #   The routes that are in violation.
-    #   @return [Array<Types::Route>]
-    #
-    # @!attribute [rw] route_table_id
-    #   The ID of the route table.
-    #   @return [String]
-    #
-    # @!attribute [rw] firewall_endpoint
-    #   The endpoint of the firewall.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   Information about the VPC ID.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallUnexpectedFirewallRoutesViolation AWS API Documentation
-    #
-    class NetworkFirewallUnexpectedFirewallRoutesViolation < Struct.new(
-      :firewall_subnet_id,
-      :violating_routes,
-      :route_table_id,
-      :firewall_endpoint,
-      :vpc_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Violation detail for an unexpected gateway route that’s present in a
-    # route table.
-    #
-    # @!attribute [rw] gateway_id
-    #   Information about the gateway ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] violating_routes
-    #   The routes that are in violation.
-    #   @return [Array<Types::Route>]
-    #
-    # @!attribute [rw] route_table_id
-    #   Information about the route table.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpc_id
-    #   Information about the VPC ID.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallUnexpectedGatewayRoutesViolation AWS API Documentation
-    #
-    class NetworkFirewallUnexpectedGatewayRoutesViolation < Struct.new(
-      :gateway_id,
-      :violating_routes,
-      :route_table_id,
-      :vpc_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The reference rule that partially matches the `ViolationTarget` rule
     # and violation reason.
     #
     # @!attribute [rw] reference
-    #   The reference rule from the primary security group of the Firewall
-    #   Manager policy.
+    #   The reference rule from the master security group of the AWS
+    #   Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] target_violation_reasons
@@ -2092,7 +1511,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # An Firewall Manager policy.
+    # An AWS Firewall Manager policy.
     #
     # @note When making an API call, you may pass Policy
     #   data as a hash:
@@ -2124,11 +1543,11 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] policy_id
-    #   The ID of the Firewall Manager policy.
+    #   The ID of the AWS Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   The name of the Firewall Manager policy.
+    #   The name of the AWS Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] policy_update_token
@@ -2146,12 +1565,8 @@ module Aws::FMS
     #
     # @!attribute [rw] resource_type
     #   The type of resource protected by or in scope of the policy. This is
-    #   in the format shown in the [Amazon Web Services Resource Types
-    #   Reference][1]. To apply this policy to multiple resource types,
-    #   specify a resource type of `ResourceTypeList` and then specify the
-    #   resource types in a `ResourceTypeList`.
-    #
-    #   For WAF and Shield Advanced, example resource types include
+    #   in the format shown in the [AWS Resource Types Reference][1]. For
+    #   AWS WAF and Shield Advanced, examples include
     #   `AWS::ElasticLoadBalancingV2::LoadBalancer` and
     #   `AWS::CloudFront::Distribution`. For a security group common policy,
     #   valid values are `AWS::EC2::NetworkInterface` and
@@ -2159,8 +1574,8 @@ module Aws::FMS
     #   valid values are `AWS::EC2::SecurityGroup`,
     #   `AWS::EC2::NetworkInterface`, and `AWS::EC2::Instance`. For a
     #   security group usage audit policy, the value is
-    #   `AWS::EC2::SecurityGroup`. For an Network Firewall policy or DNS
-    #   Firewall policy, the value is `AWS::EC2::VPC`.
+    #   `AWS::EC2::SecurityGroup`. For an AWS Network Firewall policy, the
+    #   value is `AWS::EC2::VPC`.
     #
     #
     #
@@ -2168,9 +1583,7 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] resource_type_list
-    #   An array of `ResourceType` objects. Use this only to specify
-    #   multiple resource types. To specify a single resource type, use
-    #   `ResourceType`.
+    #   An array of `ResourceType`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_tags
@@ -2190,18 +1603,18 @@ module Aws::FMS
     #   @return [Boolean]
     #
     # @!attribute [rw] include_map
-    #   Specifies the Amazon Web Services account IDs and Organizations
-    #   organizational units (OUs) to include in the policy. Specifying an
-    #   OU is the equivalent of specifying all accounts in the OU and in any
-    #   of its child OUs, including any child OUs and accounts that are
-    #   added at a later time.
+    #   Specifies the AWS account IDs and AWS Organizations organizational
+    #   units (OUs) to include in the policy. Specifying an OU is the
+    #   equivalent of specifying all accounts in the OU and in any of its
+    #   child OUs, including any child OUs and accounts that are added at a
+    #   later time.
     #
     #   You can specify inclusions or exclusions, but not both. If you
-    #   specify an `IncludeMap`, Firewall Manager applies the policy to all
-    #   accounts specified by the `IncludeMap`, and does not evaluate any
-    #   `ExcludeMap` specifications. If you do not specify an `IncludeMap`,
-    #   then Firewall Manager applies the policy to all accounts except for
-    #   those specified by the `ExcludeMap`.
+    #   specify an `IncludeMap`, AWS Firewall Manager applies the policy to
+    #   all accounts specified by the `IncludeMap`, and does not evaluate
+    #   any `ExcludeMap` specifications. If you do not specify an
+    #   `IncludeMap`, then Firewall Manager applies the policy to all
+    #   accounts except for those specified by the `ExcludeMap`.
     #
     #   You can specify account IDs, OUs, or a combination:
     #
@@ -2220,18 +1633,18 @@ module Aws::FMS
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] exclude_map
-    #   Specifies the Amazon Web Services account IDs and Organizations
-    #   organizational units (OUs) to exclude from the policy. Specifying an
-    #   OU is the equivalent of specifying all accounts in the OU and in any
-    #   of its child OUs, including any child OUs and accounts that are
-    #   added at a later time.
+    #   Specifies the AWS account IDs and AWS Organizations organizational
+    #   units (OUs) to exclude from the policy. Specifying an OU is the
+    #   equivalent of specifying all accounts in the OU and in any of its
+    #   child OUs, including any child OUs and accounts that are added at a
+    #   later time.
     #
     #   You can specify inclusions or exclusions, but not both. If you
-    #   specify an `IncludeMap`, Firewall Manager applies the policy to all
-    #   accounts specified by the `IncludeMap`, and does not evaluate any
-    #   `ExcludeMap` specifications. If you do not specify an `IncludeMap`,
-    #   then Firewall Manager applies the policy to all accounts except for
-    #   those specified by the `ExcludeMap`.
+    #   specify an `IncludeMap`, AWS Firewall Manager applies the policy to
+    #   all accounts specified by the `IncludeMap`, and does not evaluate
+    #   any `ExcludeMap` specifications. If you do not specify an
+    #   `IncludeMap`, then Firewall Manager applies the policy to all
+    #   accounts except for those specified by the `ExcludeMap`.
     #
     #   You can specify account IDs, OUs, or a combination:
     #
@@ -2268,32 +1681,31 @@ module Aws::FMS
     end
 
     # Describes the noncompliant resources in a member account for a
-    # specific Firewall Manager policy. A maximum of 100 entries are
+    # specific AWS Firewall Manager policy. A maximum of 100 entries are
     # displayed. If more than 100 resources are noncompliant,
     # `EvaluationLimitExceeded` is set to `True`.
     #
     # @!attribute [rw] policy_owner
-    #   The Amazon Web Services account that created the Firewall Manager
-    #   policy.
+    #   The AWS account that created the AWS Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] policy_id
-    #   The ID of the Firewall Manager policy.
+    #   The ID of the AWS Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] member_account
-    #   The Amazon Web Services account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] violators
-    #   An array of resources that aren't protected by the WAF or Shield
-    #   Advanced policy or that aren't in compliance with the security
-    #   group policy.
+    #   An array of resources that aren't protected by the AWS WAF or
+    #   Shield Advanced policy or that aren't in compliance with the
+    #   security group policy.
     #   @return [Array<Types::ComplianceViolator>]
     #
     # @!attribute [rw] evaluation_limit_exceeded
-    #   Indicates if over 100 resources are noncompliant with the Firewall
-    #   Manager policy.
+    #   Indicates if over 100 resources are noncompliant with the AWS
+    #   Firewall Manager policy.
     #   @return [Boolean]
     #
     # @!attribute [rw] expired_at
@@ -2302,9 +1714,10 @@ module Aws::FMS
     #   @return [Time]
     #
     # @!attribute [rw] issue_info_map
-    #   Details about problems with dependent services, such as WAF or
-    #   Config, and the error message received that indicates the problem
-    #   with the service.
+    #   Details about problems with dependent services, such as AWS WAF or
+    #   AWS Config, that are causing a resource to be noncompliant. The
+    #   details include the name of the dependent service and the error
+    #   message received that indicates the problem with the service.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceDetail AWS API Documentation
@@ -2323,20 +1736,20 @@ module Aws::FMS
 
     # Indicates whether the account is compliant with the specified policy.
     # An account is considered noncompliant if it includes resources that
-    # are not protected by the policy, for WAF and Shield Advanced policies,
-    # or that are noncompliant with the policy, for security group policies.
+    # are not protected by the policy, for AWS WAF and Shield Advanced
+    # policies, or that are noncompliant with the policy, for security group
+    # policies.
     #
     # @!attribute [rw] policy_owner
-    #   The Amazon Web Services account that created the Firewall Manager
-    #   policy.
+    #   The AWS account that created the AWS Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] policy_id
-    #   The ID of the Firewall Manager policy.
+    #   The ID of the AWS Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   The name of the Firewall Manager policy.
+    #   The name of the AWS Firewall Manager policy.
     #   @return [String]
     #
     # @!attribute [rw] member_account
@@ -2352,9 +1765,10 @@ module Aws::FMS
     #   @return [Time]
     #
     # @!attribute [rw] issue_info_map
-    #   Details about problems with dependent services, such as WAF or
-    #   Config, and the error message received that indicates the problem
-    #   with the service.
+    #   Details about problems with dependent services, such as AWS WAF or
+    #   AWS Config, that are causing a resource to be noncompliant. The
+    #   details include the name of the dependent service and the error
+    #   message received that indicates the problem with the service.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyComplianceStatus AWS API Documentation
@@ -2371,7 +1785,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Details of the Firewall Manager policy.
+    # Details of the AWS Firewall Manager policy.
     #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the specified policy.
@@ -2387,8 +1801,8 @@ module Aws::FMS
     #
     # @!attribute [rw] resource_type
     #   The type of resource protected by or in scope of the policy. This is
-    #   in the format shown in the [Amazon Web Services Resource Types
-    #   Reference][1]. For WAF and Shield Advanced, examples include
+    #   in the format shown in the [AWS Resource Types Reference][1]. For
+    #   AWS WAF and Shield Advanced, examples include
     #   `AWS::ElasticLoadBalancingV2::LoadBalancer` and
     #   `AWS::CloudFront::Distribution`. For a security group common policy,
     #   valid values are `AWS::EC2::NetworkInterface` and
@@ -2396,8 +1810,8 @@ module Aws::FMS
     #   valid values are `AWS::EC2::SecurityGroup`,
     #   `AWS::EC2::NetworkInterface`, and `AWS::EC2::Instance`. For a
     #   security group usage audit policy, the value is
-    #   `AWS::EC2::SecurityGroup`. For an Network Firewall policy or DNS
-    #   Firewall policy, the value is `AWS::EC2::VPC`.
+    #   `AWS::EC2::SecurityGroup`. For an AWS Network Firewall policy, the
+    #   value is `AWS::EC2::VPC`.
     #
     #
     #
@@ -2406,8 +1820,8 @@ module Aws::FMS
     #
     # @!attribute [rw] security_service_type
     #   The service that the policy is using to protect the resources. This
-    #   specifies the type of policy that is created, either an WAF policy,
-    #   a Shield Advanced policy, or a security group policy.
+    #   specifies the type of policy that is created, either an AWS WAF
+    #   policy, a Shield Advanced policy, or a security group policy.
     #   @return [String]
     #
     # @!attribute [rw] remediation_enabled
@@ -2428,51 +1842,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # A list of remediation actions.
-    #
-    # @!attribute [rw] description
-    #   A description of the list of remediation actions.
-    #   @return [String]
-    #
-    # @!attribute [rw] ordered_remediation_actions
-    #   The ordered list of remediation actions.
-    #   @return [Array<Types::RemediationActionWithOrder>]
-    #
-    # @!attribute [rw] is_default_action
-    #   Information about whether an action is taken by default.
-    #   @return [Boolean]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PossibleRemediationAction AWS API Documentation
-    #
-    class PossibleRemediationAction < Struct.new(
-      :description,
-      :ordered_remediation_actions,
-      :is_default_action)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A list of possible remediation action lists. Each individual possible
-    # remediation action is a list of individual remediation actions.
-    #
-    # @!attribute [rw] description
-    #   A description of the possible remediation actions list.
-    #   @return [String]
-    #
-    # @!attribute [rw] actions
-    #   Information about the actions.
-    #   @return [Array<Types::PossibleRemediationAction>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PossibleRemediationActions AWS API Documentation
-    #
-    class PossibleRemediationActions < Struct.new(
-      :description,
-      :actions)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # An Firewall Manager protocols list.
+    # An AWS Firewall Manager protocols list.
     #
     # @note When making an API call, you may pass ProtocolsListData
     #   data as a hash:
@@ -2490,11 +1860,11 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] list_id
-    #   The ID of the Firewall Manager protocols list.
+    #   The ID of the AWS Firewall Manager protocols list.
     #   @return [String]
     #
     # @!attribute [rw] list_name
-    #   The name of the Firewall Manager protocols list.
+    #   The name of the AWS Firewall Manager protocols list.
     #   @return [String]
     #
     # @!attribute [rw] list_update_token
@@ -2505,15 +1875,16 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The time that the Firewall Manager protocols list was created.
+    #   The time that the AWS Firewall Manager protocols list was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_update_time
-    #   The time that the Firewall Manager protocols list was last updated.
+    #   The time that the AWS Firewall Manager protocols list was last
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] protocols_list
-    #   An array of protocols in the Firewall Manager protocols list.
+    #   An array of protocols in the AWS Firewall Manager protocols list.
     #   @return [Array<String>]
     #
     # @!attribute [rw] previous_protocols_list
@@ -2535,7 +1906,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Details of the Firewall Manager protocols list.
+    # Details of the AWS Firewall Manager protocols list.
     #
     # @!attribute [rw] list_arn
     #   The Amazon Resource Name (ARN) of the specified protocols list.
@@ -2550,7 +1921,7 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] protocols_list
-    #   An array of protocols in the Firewall Manager protocols list.
+    #   An array of protocols in the AWS Firewall Manager protocols list.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ProtocolsListDataSummary AWS API Documentation
@@ -2600,7 +1971,8 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] apps_list
-    #   The details of the Firewall Manager applications list to be created.
+    #   The details of the AWS Firewall Manager applications list to be
+    #   created.
     #   @return [Types::AppsListData]
     #
     # @!attribute [rw] tag_list
@@ -2617,7 +1989,7 @@ module Aws::FMS
     end
 
     # @!attribute [rw] apps_list
-    #   The details of the Firewall Manager applications list.
+    #   The details of the AWS Firewall Manager applications list.
     #   @return [Types::AppsListData]
     #
     # @!attribute [rw] apps_list_arn
@@ -2643,12 +2015,12 @@ module Aws::FMS
     #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic that collects
-    #   notifications from Firewall Manager.
+    #   notifications from AWS Firewall Manager.
     #   @return [String]
     #
     # @!attribute [rw] sns_role_name
     #   The Amazon Resource Name (ARN) of the IAM role that allows Amazon
-    #   SNS to record Firewall Manager activity.
+    #   SNS to record AWS Firewall Manager activity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutNotificationChannelRequest AWS API Documentation
@@ -2698,11 +2070,11 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] policy
-    #   The details of the Firewall Manager policy to be created.
+    #   The details of the AWS Firewall Manager policy to be created.
     #   @return [Types::Policy]
     #
     # @!attribute [rw] tag_list
-    #   The tags to add to the Amazon Web Services resource.
+    #   The tags to add to the AWS resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicyRequest AWS API Documentation
@@ -2715,7 +2087,7 @@ module Aws::FMS
     end
 
     # @!attribute [rw] policy
-    #   The details of the Firewall Manager policy.
+    #   The details of the AWS Firewall Manager policy.
     #   @return [Types::Policy]
     #
     # @!attribute [rw] policy_arn
@@ -2755,7 +2127,8 @@ module Aws::FMS
     #       }
     #
     # @!attribute [rw] protocols_list
-    #   The details of the Firewall Manager protocols list to be created.
+    #   The details of the AWS Firewall Manager protocols list to be
+    #   created.
     #   @return [Types::ProtocolsListData]
     #
     # @!attribute [rw] tag_list
@@ -2772,7 +2145,7 @@ module Aws::FMS
     end
 
     # @!attribute [rw] protocols_list
-    #   The details of the Firewall Manager protocols list.
+    #   The details of the AWS Firewall Manager protocols list.
     #   @return [Types::ProtocolsListData]
     #
     # @!attribute [rw] protocols_list_arn
@@ -2784,77 +2157,6 @@ module Aws::FMS
     class PutProtocolsListResponse < Struct.new(
       :protocols_list,
       :protocols_list_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about an individual action you can take to remediate a
-    # violation.
-    #
-    # @!attribute [rw] description
-    #   A description of a remediation action.
-    #   @return [String]
-    #
-    # @!attribute [rw] ec2_create_route_action
-    #   Information about the CreateRoute action in the Amazon EC2 API.
-    #   @return [Types::EC2CreateRouteAction]
-    #
-    # @!attribute [rw] ec2_replace_route_action
-    #   Information about the ReplaceRoute action in the Amazon EC2 API.
-    #   @return [Types::EC2ReplaceRouteAction]
-    #
-    # @!attribute [rw] ec2_delete_route_action
-    #   Information about the DeleteRoute action in the Amazon EC2 API.
-    #   @return [Types::EC2DeleteRouteAction]
-    #
-    # @!attribute [rw] ec2_copy_route_table_action
-    #   Information about the CopyRouteTable action in the Amazon EC2 API.
-    #   @return [Types::EC2CopyRouteTableAction]
-    #
-    # @!attribute [rw] ec2_replace_route_table_association_action
-    #   Information about the ReplaceRouteTableAssociation action in the
-    #   Amazon EC2 API.
-    #   @return [Types::EC2ReplaceRouteTableAssociationAction]
-    #
-    # @!attribute [rw] ec2_associate_route_table_action
-    #   Information about the AssociateRouteTable action in the Amazon EC2
-    #   API.
-    #   @return [Types::EC2AssociateRouteTableAction]
-    #
-    # @!attribute [rw] ec2_create_route_table_action
-    #   Information about the CreateRouteTable action in the Amazon EC2 API.
-    #   @return [Types::EC2CreateRouteTableAction]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/RemediationAction AWS API Documentation
-    #
-    class RemediationAction < Struct.new(
-      :description,
-      :ec2_create_route_action,
-      :ec2_replace_route_action,
-      :ec2_delete_route_action,
-      :ec2_copy_route_table_action,
-      :ec2_replace_route_table_association_action,
-      :ec2_associate_route_table_action,
-      :ec2_create_route_table_action)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # An ordered list of actions you can take to remediate a violation.
-    #
-    # @!attribute [rw] remediation_action
-    #   Information about an action you can take to remediate a violation.
-    #   @return [Types::RemediationAction]
-    #
-    # @!attribute [rw] order
-    #   The order of the remediation actions in the list.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/RemediationActionWithOrder AWS API Documentation
-    #
-    class RemediationActionWithOrder < Struct.new(
-      :remediation_action,
-      :order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2872,9 +2174,9 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # The resource tags that Firewall Manager uses to determine if a
-    # particular resource should be included or excluded from the Firewall
-    # Manager policy. Tags enable you to categorize your Amazon Web Services
+    # The resource tags that AWS Firewall Manager uses to determine if a
+    # particular resource should be included or excluded from the AWS
+    # Firewall Manager policy. Tags enable you to categorize your AWS
     # resources in different ways, for example, by purpose, owner, or
     # environment. Each tag consists of a key and an optional value.
     # Firewall Manager combines the tags with "AND" so that, if you add
@@ -2914,15 +2216,15 @@ module Aws::FMS
     # Violation detail based on resource type.
     #
     # @!attribute [rw] aws_vpc_security_group_violation
-    #   Violation detail for security groups.
+    #   Violation details for security groups.
     #   @return [Types::AwsVPCSecurityGroupViolation]
     #
     # @!attribute [rw] aws_ec2_network_interface_violation
-    #   Violation detail for a network interface.
+    #   Violation details for network interface.
     #   @return [Types::AwsEc2NetworkInterfaceViolation]
     #
     # @!attribute [rw] aws_ec2_instance_violation
-    #   Violation detail for an EC2 instance.
+    #   Violation details for an EC2 instance.
     #   @return [Types::AwsEc2InstanceViolation]
     #
     # @!attribute [rw] network_firewall_missing_firewall_violation
@@ -2950,33 +2252,6 @@ module Aws::FMS
     #   stateless rule group, or changed a policy default action.
     #   @return [Types::NetworkFirewallPolicyModifiedViolation]
     #
-    # @!attribute [rw] network_firewall_internet_traffic_not_inspected_violation
-    #   Violation detail for the subnet for which internet traffic hasn't
-    #   been inspected.
-    #   @return [Types::NetworkFirewallInternetTrafficNotInspectedViolation]
-    #
-    # @!attribute [rw] network_firewall_invalid_route_configuration_violation
-    #   The route configuration is invalid.
-    #   @return [Types::NetworkFirewallInvalidRouteConfigurationViolation]
-    #
-    # @!attribute [rw] network_firewall_black_hole_route_detected_violation
-    #   Violation detail for an internet gateway route with an inactive
-    #   state in the customer subnet route table or Network Firewall subnet
-    #   route table.
-    #   @return [Types::NetworkFirewallBlackHoleRouteDetectedViolation]
-    #
-    # @!attribute [rw] network_firewall_unexpected_firewall_routes_violation
-    #   There's an unexpected firewall route.
-    #   @return [Types::NetworkFirewallUnexpectedFirewallRoutesViolation]
-    #
-    # @!attribute [rw] network_firewall_unexpected_gateway_routes_violation
-    #   There's an unexpected gateway route.
-    #   @return [Types::NetworkFirewallUnexpectedGatewayRoutesViolation]
-    #
-    # @!attribute [rw] network_firewall_missing_expected_routes_violation
-    #   Expected routes are missing from Network Firewall.
-    #   @return [Types::NetworkFirewallMissingExpectedRoutesViolation]
-    #
     # @!attribute [rw] dns_rule_group_priority_conflict_violation
     #   Violation detail for a DNS Firewall policy that indicates that a
     #   rule group that Firewall Manager tried to associate with a VPC has
@@ -2990,17 +2265,11 @@ module Aws::FMS
     #   @return [Types::DnsDuplicateRuleGroupViolation]
     #
     # @!attribute [rw] dns_rule_group_limit_exceeded_violation
-    #   Violation detail for a DNS Firewall policy that indicates that the
+    #   Violation details for a DNS Firewall policy that indicates that the
     #   VPC reached the limit for associated DNS Firewall rule groups.
     #   Firewall Manager tried to associate another rule group with the VPC
     #   and failed.
     #   @return [Types::DnsRuleGroupLimitExceededViolation]
-    #
-    # @!attribute [rw] possible_remediation_actions
-    #   A list of possible remediation action lists. Each individual
-    #   possible remediation action is a list of individual remediation
-    #   actions.
-    #   @return [Types::PossibleRemediationActions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceViolation AWS API Documentation
     #
@@ -3012,45 +2281,9 @@ module Aws::FMS
       :network_firewall_missing_subnet_violation,
       :network_firewall_missing_expected_rt_violation,
       :network_firewall_policy_modified_violation,
-      :network_firewall_internet_traffic_not_inspected_violation,
-      :network_firewall_invalid_route_configuration_violation,
-      :network_firewall_black_hole_route_detected_violation,
-      :network_firewall_unexpected_firewall_routes_violation,
-      :network_firewall_unexpected_gateway_routes_violation,
-      :network_firewall_missing_expected_routes_violation,
       :dns_rule_group_priority_conflict_violation,
       :dns_duplicate_rule_group_violation,
-      :dns_rule_group_limit_exceeded_violation,
-      :possible_remediation_actions)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Describes a route in a route table.
-    #
-    # @!attribute [rw] destination_type
-    #   The type of destination for the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] target_type
-    #   The type of target for the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] destination
-    #   The destination of the route.
-    #   @return [String]
-    #
-    # @!attribute [rw] target
-    #   The route's target.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Route AWS API Documentation
-    #
-    class Route < Struct.new(
-      :destination_type,
-      :target_type,
-      :destination,
-      :target)
+      :dns_rule_group_limit_exceeded_violation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3140,22 +2373,18 @@ module Aws::FMS
     #
     # @!attribute [rw] type
     #   The service that the policy is using to protect the resources. This
-    #   specifies the type of policy that is created, either an WAF policy,
-    #   a Shield Advanced policy, or a security group policy. For security
-    #   group policies, Firewall Manager supports one security group for
-    #   each common policy and for each content audit policy. This is an
-    #   adjustable limit that you can increase by contacting Amazon Web
-    #   Services Support.
+    #   specifies the type of policy that is created, either an AWS WAF
+    #   policy, a Shield Advanced policy, or a security group policy. For
+    #   security group policies, Firewall Manager supports one security
+    #   group for each common policy and for each content audit policy. This
+    #   is an adjustable limit that you can increase by contacting AWS
+    #   Support.
     #   @return [String]
     #
     # @!attribute [rw] managed_service_data
     #   Details about the service that are specific to the service type, in
     #   JSON format. For service type `SHIELD_ADVANCED`, this is an empty
     #   string.
-    #
-    #   * Example: `DNS_FIREWALL`
-    #
-    #     `"\{"type":"DNS_FIREWALL","preProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-1","priority":10\}],"postProcessRuleGroups":[\{"ruleGroupId":"rslvr-frg-2","priority":9911\}]\}"`
     #
     #   * Example: `NETWORK_FIREWALL`
     #
@@ -3184,13 +2413,6 @@ module Aws::FMS
     #     "applyToAllEC2InstanceENIs":false,"securityGroups":[\{"id":"
     #     sg-000e55995d61a06bd"\}]\}"`
     #
-    #   * Example: Shared VPCs. Apply the preceding policy to resources in
-    #     shared VPCs as well as to those in VPCs that the account owns
-    #
-    #     `"\{"type":"SECURITY_GROUPS_COMMON","revertManualSecurityGroupChanges":false,"exclusiveResourceSecurityGroupManagement":false,
-    #     "applyToAllEC2InstanceENIs":false,"includeSharedVPC":true,"securityGroups":[\{"id":"
-    #     sg-000e55995d61a06bd"\}]\}"`
-    #
     #   * Example: `SECURITY_GROUPS_CONTENT_AUDIT`
     #
     #     `"\{"type":"SECURITY_GROUPS_CONTENT_AUDIT","securityGroups":[\{"id":"sg-000e55995d61a06bd"\}],"securityGroupAction":\{"type":"ALLOW"\}\}"`
@@ -3216,7 +2438,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Network Firewall stateful rule group, used in a
+    # AWS Network Firewall stateful rule group, used in a
     # NetworkFirewallPolicyDescription.
     #
     # @!attribute [rw] rule_group_name
@@ -3236,7 +2458,7 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # Network Firewall stateless rule group, used in a
+    # AWS Network Firewall stateless rule group, used in a
     # NetworkFirewallPolicyDescription.
     #
     # @!attribute [rw] rule_group_name
@@ -3248,7 +2470,7 @@ module Aws::FMS
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   The priority of the rule group. Network Firewall evaluates the
+    #   The priority of the rule group. AWS Network Firewall evaluates the
     #   stateless rule groups in a firewall policy starting from the lowest
     #   priority setting.
     #   @return [Integer]
@@ -3263,12 +2485,12 @@ module Aws::FMS
       include Aws::Structure
     end
 
-    # A collection of key:value pairs associated with an Amazon Web Services
-    # resource. The key:value pair can be anything you define. Typically,
-    # the tag key represents a category (such as "environment") and the
-    # tag value represents a specific value within that category (such as
-    # "test," "development," or "production"). You can add up to 50
-    # tags to each Amazon Web Services resource.
+    # A collection of key:value pairs associated with an AWS resource. The
+    # key:value pair can be anything you define. Typically, the tag key
+    # represents a category (such as "environment") and the tag value
+    # represents a specific value within that category (such as "test,"
+    # "development," or "production"). You can add up to 50 tags to each
+    # AWS resource.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -3314,8 +2536,8 @@ module Aws::FMS
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return tags for.
-    #   The Firewall Manager resources that support tagging are policies,
-    #   applications lists, and protocols lists.
+    #   The AWS Firewall Manager resources that support tagging are
+    #   policies, applications lists, and protocols lists.
     #   @return [String]
     #
     # @!attribute [rw] tag_list
@@ -3345,8 +2567,8 @@ module Aws::FMS
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to return tags for.
-    #   The Firewall Manager resources that support tagging are policies,
-    #   applications lists, and protocols lists.
+    #   The AWS Firewall Manager resources that support tagging are
+    #   policies, applications lists, and protocols lists.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -3366,17 +2588,16 @@ module Aws::FMS
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # Violations for a resource based on the specified Firewall Manager
-    # policy and Amazon Web Services account.
+    # Violations for a resource based on the specified AWS Firewall Manager
+    # policy and AWS account.
     #
     # @!attribute [rw] policy_id
-    #   The ID of the Firewall Manager policy that the violation details
+    #   The ID of the AWS Firewall Manager policy that the violation details
     #   were requested for.
     #   @return [String]
     #
     # @!attribute [rw] member_account
-    #   The Amazon Web Services account that the violation details were
-    #   requested for.
+    #   The AWS account that the violation details were requested for.
     #   @return [String]
     #
     # @!attribute [rw] resource_id

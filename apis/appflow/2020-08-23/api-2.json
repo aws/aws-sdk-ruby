@@ -1532,8 +1532,7 @@
         "TRUNCATE_LENGTH",
         "MATH_OPERATION_FIELDS_ORDER",
         "CONCAT_FORMAT",
-        "SUBFIELD_CATEGORY_MAP",
-        "EXCLUDE_SOURCE_FIELDS_LIST"
+        "SUBFIELD_CATEGORY_MAP"
       ]
     },
     "Password":{
@@ -2198,7 +2197,6 @@
         "Arithmetic",
         "Filter",
         "Map",
-        "Map_all",
         "Mask",
         "Merge",
         "Truncate",

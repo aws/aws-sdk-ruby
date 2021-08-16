@@ -19,7 +19,7 @@ module Aws
       let(:rules) { operation.input }
 
       def xml(params)
-        Builder.new(rules, indent: '  ').to_xml(params)
+        Builder.new(rules).to_xml(params)
       end
 
       it 'serializes empty values as empty elements' do

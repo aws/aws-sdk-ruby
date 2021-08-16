@@ -1272,12 +1272,11 @@ module Aws::ApiGatewayV2
     #             certificate_arn: "Arn",
     #             certificate_name: "StringWithLengthBetween1And128",
     #             certificate_upload_date: Time.now,
-    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, PENDING_OWNERSHIP_VERIFICATION
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
     #             domain_name_status_message: "__string",
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
     #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #             ownership_verification_certificate_arn: "Arn",
     #           },
     #         ],
     #         mutual_tls_authentication: {
@@ -3442,12 +3441,11 @@ module Aws::ApiGatewayV2
     #         certificate_arn: "Arn",
     #         certificate_name: "StringWithLengthBetween1And128",
     #         certificate_upload_date: Time.now,
-    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, PENDING_OWNERSHIP_VERIFICATION
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
     #         domain_name_status_message: "__string",
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #         ownership_verification_certificate_arn: "Arn",
     #       }
     #
     # @!attribute [rw] api_gateway_domain_name
@@ -3472,10 +3470,9 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] domain_name_status
     #   The status of the domain name migration. The valid values are
-    #   AVAILABLE, UPDATING, PENDING\_CERTIFICATE\_REIMPORT, and
-    #   PENDING\_OWNERSHIP\_VERIFICATION. If the status is UPDATING, the
-    #   domain cannot be modified further until the existing operation is
-    #   complete. If it is AVAILABLE, the domain can be updated.
+    #   AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot
+    #   be modified further until the existing operation is complete. If it
+    #   is AVAILABLE, the domain can be updated.
     #   @return [String]
     #
     # @!attribute [rw] domain_name_status_message
@@ -3496,13 +3493,6 @@ module Aws::ApiGatewayV2
     #   for this domain name. The valid values are TLS\_1\_0 and TLS\_1\_2.
     #   @return [String]
     #
-    # @!attribute [rw] ownership_verification_certificate_arn
-    #   The ARN of the public certificate issued by ACM to validate
-    #   ownership of your custom domain. Only required when configuring
-    #   mutual TLS and using an ACM imported or private CA certificate ARN
-    #   as the regionalCertificateArn
-    #   @return [String]
-    #
     class DomainNameConfiguration < Struct.new(
       :api_gateway_domain_name,
       :certificate_arn,
@@ -3512,8 +3502,7 @@ module Aws::ApiGatewayV2
       :domain_name_status_message,
       :endpoint_type,
       :hosted_zone_id,
-      :security_policy,
-      :ownership_verification_certificate_arn)
+      :security_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7266,12 +7255,11 @@ module Aws::ApiGatewayV2
     #             certificate_arn: "Arn",
     #             certificate_name: "StringWithLengthBetween1And128",
     #             certificate_upload_date: Time.now,
-    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, PENDING_OWNERSHIP_VERIFICATION
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
     #             domain_name_status_message: "__string",
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
     #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #             ownership_verification_certificate_arn: "Arn",
     #           },
     #         ],
     #         mutual_tls_authentication: {

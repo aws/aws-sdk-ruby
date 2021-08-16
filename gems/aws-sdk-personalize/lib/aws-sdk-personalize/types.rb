@@ -734,7 +734,7 @@ module Aws::Personalize
     #       {
     #         name: "Name", # required
     #         solution_version_arn: "Arn", # required
-    #         min_provisioned_tps: 1,
+    #         min_provisioned_tps: 1, # required
     #         campaign_config: {
     #           item_exploration_config: {
     #             "ParameterName" => "ParameterValue",
@@ -817,8 +817,9 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that has
-    #   permissions to add data to your output Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management service role that has permissions to add data to your
+    #   output Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] job_output
@@ -863,14 +864,13 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the Identity and Access Management (IAM) role that has
-    #   permissions to access the Key Management Service (KMS) key.
+    #   The ARN of the IAM role that has permissions to access the KMS key.
     #   Supplying an IAM role is only valid when also specifying a KMS key.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of a Key Management Service (KMS) key
-    #   used to encrypt the datasets.
+    #   The Amazon Resource Name (ARN) of a KMS key used to encrypt the
+    #   datasets.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetGroupRequest AWS API Documentation
@@ -1192,10 +1192,6 @@ module Aws::Personalize
     #             metric_name: "MetricName",
     #             recipe_list: ["Arn"],
     #           },
-    #           optimization_objective: {
-    #             item_attribute: "ItemAttribute",
-    #             objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
-    #           },
     #         },
     #       }
     #
@@ -1452,8 +1448,9 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that has
-    #   permissions to add data to your output Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management service role that has permissions to add data to your
+    #   output Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1584,7 +1581,7 @@ module Aws::Personalize
     # and train a solution by calling CreateSolution. A dataset group can
     # contain only one of each type of dataset.
     #
-    # You can specify an Key Management Service (KMS) key to encrypt the
+    # You can specify an AWS Key Management Service (KMS) key to encrypt the
     # datasets in the group.
     #
     # @!attribute [rw] name
@@ -1612,8 +1609,8 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
-    #   key used to encrypt the datasets.
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   datasets.
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -1720,8 +1717,8 @@ module Aws::Personalize
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that has permissions to read from the Amazon
-    #   S3 data source.
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   has permissions to read from the Amazon S3 data source.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2648,7 +2645,7 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account that owns the event tracker.
+    #   The Amazon AWS account that owns the event tracker.
     #   @return [String]
     #
     # @!attribute [rw] tracking_id
@@ -3774,42 +3771,6 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # Describes the additional objective for the solution, such as
-    # maximizing streaming minutes or increasing revenue. For more
-    # information see [Optimizing a solution][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html
-    #
-    # @note When making an API call, you may pass OptimizationObjective
-    #   data as a hash:
-    #
-    #       {
-    #         item_attribute: "ItemAttribute",
-    #         objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
-    #       }
-    #
-    # @!attribute [rw] item_attribute
-    #   The numerical metadata column in an Items dataset related to the
-    #   optimization objective. For example, VIDEO\_LENGTH (to maximize
-    #   streaming minutes), or PRICE (to maximize revenue).
-    #   @return [String]
-    #
-    # @!attribute [rw] objective_sensitivity
-    #   Specifies how Amazon Personalize balances the importance of your
-    #   optimization objective versus relevance.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/OptimizationObjective AWS API Documentation
-    #
-    class OptimizationObjective < Struct.new(
-      :item_attribute,
-      :objective_sensitivity)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Provides information about a recipe. Each recipe provides an algorithm
     # that Amazon Personalize uses in model training when you use the
     # CreateSolution operation.
@@ -3962,9 +3923,9 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
-    #   key that Amazon Personalize uses to encrypt or decrypt the input and
-    #   output files of a batch inference job.
+    #   The Amazon Resource Name (ARN) of the Amazon Key Management Service
+    #   (KMS) key that Amazon Personalize uses to encrypt or decrypt the
+    #   input and output files of a batch inference job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/S3DataConfig AWS API Documentation
@@ -4117,10 +4078,6 @@ module Aws::Personalize
     #           metric_name: "MetricName",
     #           recipe_list: ["Arn"],
     #         },
-    #         optimization_objective: {
-    #           item_attribute: "ItemAttribute",
-    #           objective_sensitivity: "LOW", # accepts LOW, MEDIUM, HIGH, OFF
-    #         },
     #       }
     #
     # @!attribute [rw] event_value_threshold
@@ -4145,16 +4102,6 @@ module Aws::Personalize
     #   AutoML is performed.
     #   @return [Types::AutoMLConfig]
     #
-    # @!attribute [rw] optimization_objective
-    #   Describes the additional objective for the solution, such as
-    #   maximizing streaming minutes or increasing revenue. For more
-    #   information see [Optimizing a solution][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html
-    #   @return [Types::OptimizationObjective]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionConfig AWS API Documentation
     #
     class SolutionConfig < Struct.new(
@@ -4162,8 +4109,7 @@ module Aws::Personalize
       :hpo_config,
       :algorithm_hyper_parameters,
       :feature_transformation_parameters,
-      :auto_ml_config,
-      :optimization_objective)
+      :auto_ml_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4293,10 +4239,6 @@ module Aws::Personalize
     #   * ACTIVE
     #
     #   * CREATE FAILED
-    #
-    #   * CREATE STOPPING
-    #
-    #   * CREATE STOPPED
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -4374,26 +4316,6 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass StopSolutionVersionCreationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         solution_version_arn: "Arn", # required
-    #       }
-    #
-    # @!attribute [rw] solution_version_arn
-    #   The Amazon Resource Name (ARN) of the solution version you want to
-    #   stop creating.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopSolutionVersionCreationRequest AWS API Documentation
-    #
-    class StopSolutionVersionCreationRequest < Struct.new(
-      :solution_version_arn)
       SENSITIVE = []
       include Aws::Structure
     end

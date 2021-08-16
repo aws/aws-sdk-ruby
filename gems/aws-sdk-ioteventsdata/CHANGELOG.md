@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.18.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.17.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.16.0 (2021-05-27)
-------------------
-
-* Feature - Releasing new APIs for AWS IoT Events Alarms
-
 1.15.0 (2021-03-10)
 ------------------
 

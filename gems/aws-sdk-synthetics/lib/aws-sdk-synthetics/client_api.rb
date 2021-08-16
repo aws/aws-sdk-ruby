@@ -13,10 +13,6 @@ module Aws::Synthetics
 
     include Seahorse::Model
 
-    BaseScreenshot = Shapes::StructureShape.new(name: 'BaseScreenshot')
-    BaseScreenshotConfigIgnoreCoordinate = Shapes::StringShape.new(name: 'BaseScreenshotConfigIgnoreCoordinate')
-    BaseScreenshotIgnoreCoordinates = Shapes::ListShape.new(name: 'BaseScreenshotIgnoreCoordinates')
-    BaseScreenshots = Shapes::ListShape.new(name: 'BaseScreenshots')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Canaries = Shapes::ListShape.new(name: 'Canaries')
     CanariesLastRun = Shapes::ListShape.new(name: 'CanariesLastRun')
@@ -97,19 +93,9 @@ module Aws::Synthetics
     UpdateCanaryRequest = Shapes::StructureShape.new(name: 'UpdateCanaryRequest')
     UpdateCanaryResponse = Shapes::StructureShape.new(name: 'UpdateCanaryResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
-    VisualReferenceInput = Shapes::StructureShape.new(name: 'VisualReferenceInput')
-    VisualReferenceOutput = Shapes::StructureShape.new(name: 'VisualReferenceOutput')
     VpcConfigInput = Shapes::StructureShape.new(name: 'VpcConfigInput')
     VpcConfigOutput = Shapes::StructureShape.new(name: 'VpcConfigOutput')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
-
-    BaseScreenshot.add_member(:screenshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScreenshotName"))
-    BaseScreenshot.add_member(:ignore_coordinates, Shapes::ShapeRef.new(shape: BaseScreenshotIgnoreCoordinates, location_name: "IgnoreCoordinates"))
-    BaseScreenshot.struct_class = Types::BaseScreenshot
-
-    BaseScreenshotIgnoreCoordinates.member = Shapes::ShapeRef.new(shape: BaseScreenshotConfigIgnoreCoordinate)
-
-    BaseScreenshots.member = Shapes::ShapeRef.new(shape: BaseScreenshot)
 
     Canaries.member = Shapes::ShapeRef.new(shape: Canary)
 
@@ -129,7 +115,6 @@ module Aws::Synthetics
     Canary.add_member(:engine_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "EngineArn"))
     Canary.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, location_name: "RuntimeVersion"))
     Canary.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigOutput, location_name: "VpcConfig"))
-    Canary.add_member(:visual_reference, Shapes::ShapeRef.new(shape: VisualReferenceOutput, location_name: "VisualReference"))
     Canary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Canary.struct_class = Types::Canary
 
@@ -322,21 +307,12 @@ module Aws::Synthetics
     UpdateCanaryRequest.add_member(:success_retention_period_in_days, Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "SuccessRetentionPeriodInDays"))
     UpdateCanaryRequest.add_member(:failure_retention_period_in_days, Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
     UpdateCanaryRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
-    UpdateCanaryRequest.add_member(:visual_reference, Shapes::ShapeRef.new(shape: VisualReferenceInput, location_name: "VisualReference"))
     UpdateCanaryRequest.struct_class = Types::UpdateCanaryRequest
 
     UpdateCanaryResponse.struct_class = Types::UpdateCanaryResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
-
-    VisualReferenceInput.add_member(:base_screenshots, Shapes::ShapeRef.new(shape: BaseScreenshots, location_name: "BaseScreenshots"))
-    VisualReferenceInput.add_member(:base_canary_run_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BaseCanaryRunId"))
-    VisualReferenceInput.struct_class = Types::VisualReferenceInput
-
-    VisualReferenceOutput.add_member(:base_screenshots, Shapes::ShapeRef.new(shape: BaseScreenshots, location_name: "BaseScreenshots"))
-    VisualReferenceOutput.add_member(:base_canary_run_id, Shapes::ShapeRef.new(shape: String, location_name: "BaseCanaryRunId"))
-    VisualReferenceOutput.struct_class = Types::VisualReferenceOutput
 
     VpcConfigInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     VpcConfigInput.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))

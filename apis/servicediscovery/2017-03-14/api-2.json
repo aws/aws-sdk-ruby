@@ -310,21 +310,6 @@
         {"shape":"InvalidInput"}
       ]
     },
-    "UpdateHttpNamespace":{
-      "name":"UpdateHttpNamespace",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"UpdateHttpNamespaceRequest"},
-      "output":{"shape":"UpdateHttpNamespaceResponse"},
-      "errors":[
-        {"shape":"InvalidInput"},
-        {"shape":"NamespaceNotFound"},
-        {"shape":"ResourceInUse"},
-        {"shape":"DuplicateRequest"}
-      ]
-    },
     "UpdateInstanceCustomHealthStatus":{
       "name":"UpdateInstanceCustomHealthStatus",
       "http":{
@@ -337,36 +322,6 @@
         {"shape":"ServiceNotFound"},
         {"shape":"CustomHealthNotFound"},
         {"shape":"InvalidInput"}
-      ]
-    },
-    "UpdatePrivateDnsNamespace":{
-      "name":"UpdatePrivateDnsNamespace",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"UpdatePrivateDnsNamespaceRequest"},
-      "output":{"shape":"UpdatePrivateDnsNamespaceResponse"},
-      "errors":[
-        {"shape":"InvalidInput"},
-        {"shape":"NamespaceNotFound"},
-        {"shape":"ResourceInUse"},
-        {"shape":"DuplicateRequest"}
-      ]
-    },
-    "UpdatePublicDnsNamespace":{
-      "name":"UpdatePublicDnsNamespace",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"UpdatePublicDnsNamespaceRequest"},
-      "output":{"shape":"UpdatePublicDnsNamespaceResponse"},
-      "errors":[
-        {"shape":"InvalidInput"},
-        {"shape":"NamespaceNotFound"},
-        {"shape":"ResourceInUse"},
-        {"shape":"DuplicateRequest"}
       ]
     },
     "UpdateService":{
@@ -443,8 +398,7 @@
         },
         "Description":{"shape":"ResourceDescription"},
         "Vpc":{"shape":"ResourceId"},
-        "Tags":{"shape":"TagList"},
-        "Properties":{"shape":"PrivateDnsNamespaceProperties"}
+        "Tags":{"shape":"TagList"}
       }
     },
     "CreatePrivateDnsNamespaceResponse":{
@@ -463,8 +417,7 @@
           "idempotencyToken":true
         },
         "Description":{"shape":"ResourceDescription"},
-        "Tags":{"shape":"TagList"},
-        "Properties":{"shape":"PublicDnsNamespaceProperties"}
+        "Tags":{"shape":"TagList"}
       }
     },
     "CreatePublicDnsNamespaceResponse":{
@@ -602,8 +555,7 @@
     "DnsProperties":{
       "type":"structure",
       "members":{
-        "HostedZoneId":{"shape":"ResourceId"},
-        "SOA":{"shape":"SOA"}
+        "HostedZoneId":{"shape":"ResourceId"}
       }
     },
     "DnsRecord":{
@@ -765,8 +717,7 @@
       "enum":[
         "HEALTHY",
         "UNHEALTHY",
-        "ALL",
-        "HEALTHY_OR_ELSE_ALL"
+        "ALL"
       ]
     },
     "HttpInstanceSummary":{
@@ -782,13 +733,6 @@
     "HttpInstanceSummaryList":{
       "type":"list",
       "member":{"shape":"HttpInstanceSummary"}
-    },
-    "HttpNamespaceChange":{
-      "type":"structure",
-      "required":["Description"],
-      "members":{
-        "Description":{"shape":"ResourceDescription"}
-      }
     },
     "HttpProperties":{
       "type":"structure",
@@ -809,11 +753,6 @@
       "type":"map",
       "key":{"shape":"ResourceId"},
       "value":{"shape":"HealthStatus"}
-    },
-    "InstanceId":{
-      "type":"string",
-      "max":64,
-      "pattern":"^[0-9a-zA-Z_/:.@-]+$"
     },
     "InstanceIdList":{
       "type":"list",
@@ -1118,81 +1057,10 @@
       "enum":[
         "CREATE_NAMESPACE",
         "DELETE_NAMESPACE",
-        "UPDATE_NAMESPACE",
         "UPDATE_SERVICE",
         "REGISTER_INSTANCE",
         "DEREGISTER_INSTANCE"
       ]
-    },
-    "PrivateDnsNamespaceChange":{
-      "type":"structure",
-      "members":{
-        "Description":{"shape":"ResourceDescription"},
-        "Properties":{"shape":"PrivateDnsNamespacePropertiesChange"}
-      }
-    },
-    "PrivateDnsNamespaceProperties":{
-      "type":"structure",
-      "required":["DnsProperties"],
-      "members":{
-        "DnsProperties":{"shape":"PrivateDnsPropertiesMutable"}
-      }
-    },
-    "PrivateDnsNamespacePropertiesChange":{
-      "type":"structure",
-      "required":["DnsProperties"],
-      "members":{
-        "DnsProperties":{"shape":"PrivateDnsPropertiesMutableChange"}
-      }
-    },
-    "PrivateDnsPropertiesMutable":{
-      "type":"structure",
-      "required":["SOA"],
-      "members":{
-        "SOA":{"shape":"SOA"}
-      }
-    },
-    "PrivateDnsPropertiesMutableChange":{
-      "type":"structure",
-      "required":["SOA"],
-      "members":{
-        "SOA":{"shape":"SOAChange"}
-      }
-    },
-    "PublicDnsNamespaceChange":{
-      "type":"structure",
-      "members":{
-        "Description":{"shape":"ResourceDescription"},
-        "Properties":{"shape":"PublicDnsNamespacePropertiesChange"}
-      }
-    },
-    "PublicDnsNamespaceProperties":{
-      "type":"structure",
-      "required":["DnsProperties"],
-      "members":{
-        "DnsProperties":{"shape":"PublicDnsPropertiesMutable"}
-      }
-    },
-    "PublicDnsNamespacePropertiesChange":{
-      "type":"structure",
-      "required":["DnsProperties"],
-      "members":{
-        "DnsProperties":{"shape":"PublicDnsPropertiesMutableChange"}
-      }
-    },
-    "PublicDnsPropertiesMutable":{
-      "type":"structure",
-      "required":["SOA"],
-      "members":{
-        "SOA":{"shape":"SOA"}
-      }
-    },
-    "PublicDnsPropertiesMutableChange":{
-      "type":"structure",
-      "required":["SOA"],
-      "members":{
-        "SOA":{"shape":"SOAChange"}
-      }
     },
     "RecordTTL":{
       "type":"long",
@@ -1217,7 +1085,7 @@
       ],
       "members":{
         "ServiceId":{"shape":"ResourceId"},
-        "InstanceId":{"shape":"InstanceId"},
+        "InstanceId":{"shape":"ResourceId"},
         "CreatorRequestId":{
           "shape":"ResourceId",
           "idempotencyToken":true
@@ -1278,20 +1146,6 @@
         "MULTIVALUE",
         "WEIGHTED"
       ]
-    },
-    "SOA":{
-      "type":"structure",
-      "required":["TTL"],
-      "members":{
-        "TTL":{"shape":"RecordTTL"}
-      }
-    },
-    "SOAChange":{
-      "type":"structure",
-      "required":["TTL"],
-      "members":{
-        "TTL":{"shape":"RecordTTL"}
-      }
     },
     "Service":{
       "type":"structure",
@@ -1463,27 +1317,6 @@
       "members":{
       }
     },
-    "UpdateHttpNamespaceRequest":{
-      "type":"structure",
-      "required":[
-        "Id",
-        "Namespace"
-      ],
-      "members":{
-        "Id":{"shape":"ResourceId"},
-        "UpdaterRequestId":{
-          "shape":"ResourceId",
-          "idempotencyToken":true
-        },
-        "Namespace":{"shape":"HttpNamespaceChange"}
-      }
-    },
-    "UpdateHttpNamespaceResponse":{
-      "type":"structure",
-      "members":{
-        "OperationId":{"shape":"OperationId"}
-      }
-    },
     "UpdateInstanceCustomHealthStatusRequest":{
       "type":"structure",
       "required":[
@@ -1495,48 +1328,6 @@
         "ServiceId":{"shape":"ResourceId"},
         "InstanceId":{"shape":"ResourceId"},
         "Status":{"shape":"CustomHealthStatus"}
-      }
-    },
-    "UpdatePrivateDnsNamespaceRequest":{
-      "type":"structure",
-      "required":[
-        "Id",
-        "Namespace"
-      ],
-      "members":{
-        "Id":{"shape":"ResourceId"},
-        "UpdaterRequestId":{
-          "shape":"ResourceId",
-          "idempotencyToken":true
-        },
-        "Namespace":{"shape":"PrivateDnsNamespaceChange"}
-      }
-    },
-    "UpdatePrivateDnsNamespaceResponse":{
-      "type":"structure",
-      "members":{
-        "OperationId":{"shape":"OperationId"}
-      }
-    },
-    "UpdatePublicDnsNamespaceRequest":{
-      "type":"structure",
-      "required":[
-        "Id",
-        "Namespace"
-      ],
-      "members":{
-        "Id":{"shape":"ResourceId"},
-        "UpdaterRequestId":{
-          "shape":"ResourceId",
-          "idempotencyToken":true
-        },
-        "Namespace":{"shape":"PublicDnsNamespaceChange"}
-      }
-    },
-    "UpdatePublicDnsNamespaceResponse":{
-      "type":"structure",
-      "members":{
-        "OperationId":{"shape":"OperationId"}
       }
     },
     "UpdateServiceRequest":{

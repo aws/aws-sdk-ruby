@@ -1855,30 +1855,6 @@ module Aws::FraudDetector
     #   Names of the event type's variables you defined in Amazon Fraud
     #   Detector to represent data elements and their corresponding values
     #   for the event you are sending for evaluation.
-    #
-    #   * You must provide at least one eventVariable
-    #
-    #   * If detectorVersion is associated with a modelVersion, you must
-    #     provide at least one associated eventVariable
-    #
-    #   To ensure highest possible fraud prediction and to simplify your
-    #   data preparation, Amazon Fraud Detector will replace all missing
-    #   variables or values as follows:
-    #
-    #   **For Amazon Fraud Detector trained models:**
-    #
-    #   If a null value is provided explicitly for a variable or if a
-    #   variable is missing, model will replace the null value or the
-    #   missing variable (no variable name in the eventVariables map) with
-    #   calculated default mean/medians for numeric variables and with
-    #   special values for categorical variables.
-    #
-    #   **For External models ( for example, imported SageMaker):**
-    #
-    #   If a null value is provided explicitly for a variable, the model and
-    #   rules will use “null” as the value. If a variable is not provided
-    #   (no variable name in the eventVariables map), model and rules will
-    #   use the default value that is provided for the variable.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] external_model_endpoint_data_blobs
@@ -2522,30 +2498,6 @@ module Aws::FraudDetector
     class ListTagsForResourceResult < Struct.new(
       :tags,
       :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The logit metric details.
-    #
-    # @!attribute [rw] variable_name
-    #   The name of the variable.
-    #   @return [String]
-    #
-    # @!attribute [rw] variable_type
-    #   The type of variable.
-    #   @return [String]
-    #
-    # @!attribute [rw] variable_importance
-    #   The relative importance of the variable.
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/LogitMetric AWS API Documentation
-    #
-    class LogitMetric < Struct.new(
-      :variable_name,
-      :variable_type,
-      :variable_importance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3493,16 +3445,11 @@ module Aws::FraudDetector
     #   The training metric details.
     #   @return [Types::TrainingMetrics]
     #
-    # @!attribute [rw] variable_importance_metrics
-    #   The variable importance metrics.
-    #   @return [Types::VariableImportanceMetrics]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/TrainingResult AWS API Documentation
     #
     class TrainingResult < Struct.new(
       :data_validation_metrics,
-      :training_metrics,
-      :variable_importance_metrics)
+      :training_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4138,20 +4085,6 @@ module Aws::FraudDetector
       :default_value,
       :description,
       :variable_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The variable importance metrics details.
-    #
-    # @!attribute [rw] logit_metrics
-    #   List of variable metrics.
-    #   @return [Array<Types::LogitMetric>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/VariableImportanceMetrics AWS API Documentation
-    #
-    class VariableImportanceMetrics < Struct.new(
-      :logit_metrics)
       SENSITIVE = []
       include Aws::Structure
     end

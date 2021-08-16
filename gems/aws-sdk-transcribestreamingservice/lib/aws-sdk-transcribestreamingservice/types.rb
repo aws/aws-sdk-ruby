@@ -145,12 +145,6 @@ module Aws::TranscribeStreamingService
     #   transcribes.
     #   @return [Float]
     #
-    # @!attribute [rw] stable
-    #   If partial result stabilization has been enabled, indicates whether
-    #   the word or phrase in the item is stable. If `Stable` is `true`, the
-    #   result is stable.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Item AWS API Documentation
     #
     class Item < Struct.new(
@@ -160,8 +154,7 @@ module Aws::TranscribeStreamingService
       :content,
       :vocabulary_filter_match,
       :speaker,
-      :confidence,
-      :stable)
+      :confidence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -651,8 +644,6 @@ module Aws::TranscribeStreamingService
     #         show_speaker_label: false,
     #         enable_channel_identification: false,
     #         number_of_channels: 1,
-    #         enable_partial_results_stabilization: false,
-    #         partial_results_stability: "high", # accepts high, medium, low
     #       }
     #
     # @!attribute [rw] language_code
@@ -724,22 +715,6 @@ module Aws::TranscribeStreamingService
     #   The number of channels that are in your audio stream.
     #   @return [Integer]
     #
-    # @!attribute [rw] enable_partial_results_stabilization
-    #   When `true`, instructs Amazon Transcribe to present transcription
-    #   results that have the partial results stabilized. Normally, any word
-    #   or phrase from one partial result can change in a subsequent partial
-    #   result. With partial results stabilization enabled, only the last
-    #   few words of one partial result can change in another partial
-    #   result.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] partial_results_stability
-    #   You can use this field to set the stability level of the
-    #   transcription results. A higher stability level means that the
-    #   transcription results are less likely to change. Higher stability
-    #   levels can come with lower overall transcription accuracy.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -753,9 +728,7 @@ module Aws::TranscribeStreamingService
       :vocabulary_filter_method,
       :show_speaker_label,
       :enable_channel_identification,
-      :number_of_channels,
-      :enable_partial_results_stabilization,
-      :partial_results_stability)
+      :number_of_channels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -810,16 +783,6 @@ module Aws::TranscribeStreamingService
     #   The number of channels identified in the stream.
     #   @return [Integer]
     #
-    # @!attribute [rw] enable_partial_results_stabilization
-    #   Shows whether partial results stabilization has been enabled in the
-    #   stream.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] partial_results_stability
-    #   If partial results stabilization has been enabled in the stream,
-    #   shows the stability level.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -834,9 +797,7 @@ module Aws::TranscribeStreamingService
       :vocabulary_filter_method,
       :show_speaker_label,
       :enable_channel_identification,
-      :number_of_channels,
-      :enable_partial_results_stabilization,
-      :partial_results_stability)
+      :number_of_channels)
       SENSITIVE = []
       include Aws::Structure
     end

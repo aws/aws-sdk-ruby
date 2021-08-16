@@ -245,11 +245,9 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Id of the resource in the conflicting operation.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Type of the resource in the conflicting operation.
     #   @return [String]
     #
     class ConflictException < Struct.new(
@@ -606,11 +604,6 @@ module Aws::IoTWireless
     #         lo_ra_wan: { # required
     #           gateway_eui: "GatewayEui",
     #           rf_region: "RfRegion",
-    #           join_eui_filters: [
-    #             ["JoinEui"],
-    #           ],
-    #           net_id_filters: ["NetId"],
-    #           sub_bands: [1],
     #         },
     #         tags: [
     #           {
@@ -1167,30 +1160,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @api private
-    #
-    class GetLogLevelsByResourceTypesRequest < Aws::EmptyStructure; end
-
-    # @!attribute [rw] default_log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    # @!attribute [rw] wireless_gateway_log_options
-    #   The list of wireless gateway log options.
-    #   @return [Array<Types::WirelessGatewayLogOption>]
-    #
-    # @!attribute [rw] wireless_device_log_options
-    #   The list of wireless device log options.
-    #   @return [Array<Types::WirelessDeviceLogOption>]
-    #
-    class GetLogLevelsByResourceTypesResponse < Struct.new(
-      :default_log_level,
-      :wireless_gateway_log_options,
-      :wireless_device_log_options)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass GetPartnerAccountRequest
     #   data as a hash:
     #
@@ -1225,42 +1194,6 @@ module Aws::IoTWireless
     class GetPartnerAccountResponse < Struct.new(
       :sidewalk,
       :account_linked)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetResourceLogLevelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "ResourceIdentifier", # required
-    #         resource_type: "ResourceType", # required
-    #       }
-    #
-    # @!attribute [rw] resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless
-    #   gateway ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
-    #   @return [String]
-    #
-    class GetResourceLogLevelRequest < Struct.new(
-      :resource_identifier,
-      :resource_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    class GetResourceLogLevelResponse < Struct.new(
-      :log_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1351,7 +1284,7 @@ module Aws::IoTWireless
     #
     #       {
     #         identifier: "Identifier", # required
-    #         identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName, SidewalkManufacturingSn
+    #         identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName
     #       }
     #
     # @!attribute [rw] identifier
@@ -2329,11 +2262,6 @@ module Aws::IoTWireless
     #       {
     #         gateway_eui: "GatewayEui",
     #         rf_region: "RfRegion",
-    #         join_eui_filters: [
-    #           ["JoinEui"],
-    #         ],
-    #         net_id_filters: ["NetId"],
-    #         sub_bands: [1],
     #       }
     #
     # @!attribute [rw] gateway_eui
@@ -2344,26 +2272,9 @@ module Aws::IoTWireless
     #   The frequency band (RFRegion) value.
     #   @return [String]
     #
-    # @!attribute [rw] join_eui_filters
-    #   A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
-    #   @return [Array<Array<String>>]
-    #
-    # @!attribute [rw] net_id_filters
-    #   A list of NetId values that are used by LoRa gateways to filter the
-    #   uplink frames.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] sub_bands
-    #   A list of integer indicating which sub bands are supported by LoRa
-    #   gateway.
-    #   @return [Array<Integer>]
-    #
     class LoRaWANGateway < Struct.new(
       :gateway_eui,
-      :rf_region,
-      :join_eui_filters,
-      :net_id_filters,
-      :sub_bands)
+      :rf_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2731,85 +2642,15 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass PutResourceLogLevelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "ResourceIdentifier", # required
-    #         resource_type: "ResourceType", # required
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #       }
-    #
-    # @!attribute [rw] resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless
-    #   gateway ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
-    #   @return [String]
-    #
-    # @!attribute [rw] log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    class PutResourceLogLevelRequest < Struct.new(
-      :resource_identifier,
-      :resource_type,
-      :log_level)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    class PutResourceLogLevelResponse < Aws::EmptyStructure; end
-
-    # @api private
-    #
-    class ResetAllResourceLogLevelsRequest < Aws::EmptyStructure; end
-
-    class ResetAllResourceLogLevelsResponse < Aws::EmptyStructure; end
-
-    # @note When making an API call, you may pass ResetResourceLogLevelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_identifier: "ResourceIdentifier", # required
-    #         resource_type: "ResourceType", # required
-    #       }
-    #
-    # @!attribute [rw] resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless
-    #   gateway ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
-    #   @return [String]
-    #
-    class ResetResourceLogLevelRequest < Struct.new(
-      :resource_identifier,
-      :resource_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    class ResetResourceLogLevelResponse < Aws::EmptyStructure; end
-
     # Resource does not exist.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Id of the not found resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Type of the font found resource.
     #   @return [String]
     #
     class ResourceNotFoundException < Struct.new(
@@ -2849,7 +2690,7 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] payload_data
-    #   The binary to be sent to the end device, encoded in base64.
+    #   The message payload to send.
     #   @return [String]
     #
     # @!attribute [rw] wireless_metadata
@@ -3008,10 +2849,6 @@ module Aws::IoTWireless
 
     # Sidewalk device object.
     #
-    # @!attribute [rw] amazon_id
-    #   The Sidewalk Amazon ID.
-    #   @return [String]
-    #
     # @!attribute [rw] sidewalk_id
     #   The sidewalk device identification.
     #   @return [String]
@@ -3025,7 +2862,6 @@ module Aws::IoTWireless
     #   @return [Array<Types::CertificateList>]
     #
     class SidewalkDevice < Struct.new(
-      :amazon_id,
       :sidewalk_id,
       :sidewalk_manufacturing_sn,
       :device_certificates)
@@ -3102,8 +2938,7 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] message_type
-    #   Sidewalk device message type. Default value is
-    #   `CUSTOM_COMMAND_ID_NOTIFY`.
+    #   Sidewalk device message type.
     #   @return [String]
     #
     class SidewalkSendDataToDevice < Struct.new(
@@ -3233,7 +3068,6 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] resource_name
-    #   Name of the resource that exceeds maximum number of tags allowed.
     #   @return [String]
     #
     class TooManyTagsException < Struct.new(
@@ -3310,59 +3144,6 @@ module Aws::IoTWireless
     end
 
     class UpdateDestinationResponse < Aws::EmptyStructure; end
-
-    # @note When making an API call, you may pass UpdateLogLevelsByResourceTypesRequest
-    #   data as a hash:
-    #
-    #       {
-    #         default_log_level: "INFO", # accepts INFO, ERROR, DISABLED
-    #         wireless_device_log_options: [
-    #           {
-    #             type: "Sidewalk", # required, accepts Sidewalk, LoRaWAN
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #             events: [
-    #               {
-    #                 event: "Join", # required, accepts Join, Rejoin, Uplink_Data, Downlink_Data, Registration
-    #                 log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         wireless_gateway_log_options: [
-    #           {
-    #             type: "LoRaWAN", # required, accepts LoRaWAN
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #             events: [
-    #               {
-    #                 event: "CUPS_Request", # required, accepts CUPS_Request, Certificate
-    #                 log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] default_log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    # @!attribute [rw] wireless_device_log_options
-    #   The list of wireless device log options.
-    #   @return [Array<Types::WirelessDeviceLogOption>]
-    #
-    # @!attribute [rw] wireless_gateway_log_options
-    #   The list of wireless gateway log options.
-    #   @return [Array<Types::WirelessGatewayLogOption>]
-    #
-    class UpdateLogLevelsByResourceTypesRequest < Struct.new(
-      :default_log_level,
-      :wireless_device_log_options,
-      :wireless_gateway_log_options)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    class UpdateLogLevelsByResourceTypesResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePartnerAccountRequest
     #   data as a hash:
@@ -3450,10 +3231,6 @@ module Aws::IoTWireless
     #         id: "WirelessGatewayId", # required
     #         name: "WirelessGatewayName",
     #         description: "Description",
-    #         join_eui_filters: [
-    #           ["JoinEui"],
-    #         ],
-    #         net_id_filters: ["NetId"],
     #       }
     #
     # @!attribute [rw] id
@@ -3468,21 +3245,10 @@ module Aws::IoTWireless
     #   A new description of the resource.
     #   @return [String]
     #
-    # @!attribute [rw] join_eui_filters
-    #   A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
-    #   @return [Array<Array<String>>]
-    #
-    # @!attribute [rw] net_id_filters
-    #   A list of NetId values that are used by LoRa gateways to filter the
-    #   uplink frames.
-    #   @return [Array<String>]
-    #
     class UpdateWirelessGatewayRequest < Struct.new(
       :id,
       :name,
-      :description,
-      :join_eui_filters,
-      :net_id_filters)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3566,75 +3332,6 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # The log options for a wireless device event and can be used to set log
-    # levels for a specific wireless device event.
-    #
-    # For a LoRaWAN device, possible events for a log messsage are: `Join`,
-    # `Rejoin`, `Downlink_Data`, and `Uplink_Data`. For a Sidewalk device,
-    # possible events for a log message are `Registration`, `Downlink_Data`,
-    # and `Uplink_Data`.
-    #
-    # @note When making an API call, you may pass WirelessDeviceEventLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         event: "Join", # required, accepts Join, Rejoin, Uplink_Data, Downlink_Data, Registration
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #       }
-    #
-    # @!attribute [rw] event
-    #   The event for a log message, if the log message is tied to a
-    #   wireless device.
-    #   @return [String]
-    #
-    # @!attribute [rw] log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    class WirelessDeviceEventLogOption < Struct.new(
-      :event,
-      :log_level)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The log options for wireless devices and can be used to set log levels
-    # for a specific type of wireless device.
-    #
-    # @note When making an API call, you may pass WirelessDeviceLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         type: "Sidewalk", # required, accepts Sidewalk, LoRaWAN
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #         events: [
-    #           {
-    #             event: "Join", # required, accepts Join, Rejoin, Uplink_Data, Downlink_Data, Registration
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] type
-    #   The wireless device type.
-    #   @return [String]
-    #
-    # @!attribute [rw] log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    # @!attribute [rw] events
-    #   The list of wireless device event log options.
-    #   @return [Array<Types::WirelessDeviceEventLogOption>]
-    #
-    class WirelessDeviceLogOption < Struct.new(
-      :type,
-      :log_level,
-      :events)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information about a wireless device's operation.
     #
     # @!attribute [rw] arn
@@ -3678,73 +3375,6 @@ module Aws::IoTWireless
       :last_uplink_received_at,
       :lo_ra_wan,
       :sidewalk)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The log options for a wireless gateway event and can be used to set
-    # log levels for a specific wireless gateway event.
-    #
-    # For a LoRaWAN gateway, possible events for a log message are
-    # `CUPS_Request` and `Certificate`.
-    #
-    # @note When making an API call, you may pass WirelessGatewayEventLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         event: "CUPS_Request", # required, accepts CUPS_Request, Certificate
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #       }
-    #
-    # @!attribute [rw] event
-    #   The event for a log message, if the log message is tied to a
-    #   wireless gateway.
-    #   @return [String]
-    #
-    # @!attribute [rw] log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    class WirelessGatewayEventLogOption < Struct.new(
-      :event,
-      :log_level)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The log options for wireless gateways and can be used to set log
-    # levels for a specific type of wireless gateway.
-    #
-    # @note When making an API call, you may pass WirelessGatewayLogOption
-    #   data as a hash:
-    #
-    #       {
-    #         type: "LoRaWAN", # required, accepts LoRaWAN
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #         events: [
-    #           {
-    #             event: "CUPS_Request", # required, accepts CUPS_Request, Certificate
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] type
-    #   The wireless gateway type.
-    #   @return [String]
-    #
-    # @!attribute [rw] log_level
-    #   The log level for a log message.
-    #   @return [String]
-    #
-    # @!attribute [rw] events
-    #   The list of wireless gateway event log options.
-    #   @return [Array<Types::WirelessGatewayEventLogOption>]
-    #
-    class WirelessGatewayLogOption < Struct.new(
-      :type,
-      :log_level,
-      :events)
       SENSITIVE = []
       include Aws::Structure
     end

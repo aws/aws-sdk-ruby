@@ -2206,8 +2206,7 @@
         "endpointConfiguration":{"shape":"EndpointConfiguration"},
         "tags":{"shape":"MapOfStringToString"},
         "securityPolicy":{"shape":"SecurityPolicy"},
-        "mutualTlsAuthentication":{"shape":"MutualTlsAuthenticationInput"},
-        "ownershipVerificationCertificateArn":{"shape":"String"}
+        "mutualTlsAuthentication":{"shape":"MutualTlsAuthenticationInput"}
       }
     },
     "CreateModelRequest":{
@@ -2855,8 +2854,7 @@
         "domainNameStatusMessage":{"shape":"String"},
         "securityPolicy":{"shape":"SecurityPolicy"},
         "tags":{"shape":"MapOfStringToString"},
-        "mutualTlsAuthentication":{"shape":"MutualTlsAuthentication"},
-        "ownershipVerificationCertificateArn":{"shape":"String"}
+        "mutualTlsAuthentication":{"shape":"MutualTlsAuthentication"}
       }
     },
     "DomainNameStatus":{
@@ -2864,9 +2862,7 @@
       "enum":[
         "AVAILABLE",
         "UPDATING",
-        "PENDING",
-        "PENDING_CERTIFICATE_REIMPORT",
-        "PENDING_OWNERSHIP_VERIFICATION"
+        "PENDING"
       ]
     },
     "DomainNames":{

@@ -569,11 +569,6 @@
     }
   },
   "shapes":{
-    "AccountId":{
-      "type":"string",
-      "max":255,
-      "min":1
-    },
     "ActionPrefix":{
       "type":"string",
       "max":1024,
@@ -1676,8 +1671,7 @@
         "Expression":{"shape":"MetricExpression"},
         "Label":{"shape":"MetricLabel"},
         "ReturnData":{"shape":"ReturnData"},
-        "Period":{"shape":"Period"},
-        "AccountId":{"shape":"AccountId"}
+        "Period":{"shape":"Period"}
       }
     },
     "MetricDataResult":{

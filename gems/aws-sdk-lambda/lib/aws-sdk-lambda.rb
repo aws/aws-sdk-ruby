@@ -49,6 +49,6 @@ require_relative 'aws-sdk-lambda/customizations'
 # @!group service
 module Aws::Lambda
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.62.0'
 
 end

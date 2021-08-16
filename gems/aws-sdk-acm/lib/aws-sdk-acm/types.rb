@@ -69,7 +69,7 @@ module Aws::ACM
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the certificate. For more
     #   information about ARNs, see [Amazon Resource Names (ARNs)][1] in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #
     #
     #
@@ -155,16 +155,15 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] in_use_by
-    #   A list of ARNs for the Amazon Web Services resources that are using
-    #   the certificate. A certificate can be used by multiple Amazon Web
-    #   Services resources.
+    #   A list of ARNs for the AWS resources that are using the certificate.
+    #   A certificate can be used by multiple AWS resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_reason
     #   The reason the certificate request failed. This value exists only
     #   when the certificate status is `FAILED`. For more information, see
-    #   [Certificate Request Failed][1] in the *Amazon Web Services
-    #   Certificate Manager User Guide*.
+    #   [Certificate Request Failed][1] in the *AWS Certificate Manager User
+    #   Guide*.
     #
     #
     #
@@ -178,7 +177,7 @@ module Aws::ACM
     #   provide [managed renewal][1] for imported certificates. For more
     #   information about the differences between certificates that you
     #   import and those that ACM provides, see [Importing Certificates][2]
-    #   in the *Amazon Web Services Certificate Manager User Guide*.
+    #   in the *AWS Certificate Manager User Guide*.
     #
     #
     #
@@ -518,8 +517,8 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # Object containing expiration events options associated with an Amazon
-    # Web Services account.
+    # Object containing expiration events options associated with an AWS
+    # account.
     #
     # @note When making an API call, you may pass ExpiryEventsConfiguration
     #   data as a hash:
@@ -652,7 +651,7 @@ module Aws::ACM
     #       {
     #         extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
     #         key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
-    #         key_types: ["RSA_1024"], # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #         key_types: ["RSA_2048"], # accepts RSA_2048, RSA_1024, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
     #       }
     #
     # @!attribute [rw] extended_key_usage
@@ -686,8 +685,8 @@ module Aws::ACM
     end
 
     # @!attribute [rw] expiry_events
-    #   Expiration events configuration options associated with the Amazon
-    #   Web Services account.
+    #   Expiration events configuration options associated with the AWS
+    #   account.
     #   @return [Types::ExpiryEventsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetAccountConfigurationResponse AWS API Documentation
@@ -936,7 +935,7 @@ module Aws::ACM
     #         includes: {
     #           extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
     #           key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
-    #           key_types: ["RSA_1024"], # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #           key_types: ["RSA_2048"], # accepts RSA_2048, RSA_1024, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
     #         },
     #         next_token: "NextToken",
     #         max_items: 1,
@@ -1300,9 +1299,9 @@ module Aws::ACM
     #   (CA) that will be used to issue the certificate. If you do not
     #   provide an ARN and you are trying to request a private certificate,
     #   ACM will attempt to issue a public certificate. For more information
-    #   about private CAs, see the [Amazon Web Services Certificate Manager
-    #   Private Certificate Authority (PCA)][1] user guide. The ARN must
-    #   have the following form:
+    #   about private CAs, see the [AWS Certificate Manager Private
+    #   Certificate Authority (PCA)][1] user guide. The ARN must have the
+    #   following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #
@@ -1414,8 +1413,8 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # The certificate is in use by another Amazon Web Services service in
-    # the caller's account. Remove the association and try again.
+    # The certificate is in use by another AWS service in the caller's
+    # account. Remove the association and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1442,8 +1441,9 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # Contains a DNS record value that you can use to validate ownership or
-    # control of a domain. This is used by the DescribeCertificate action.
+    # Contains a DNS record value that you can use to can use to validate
+    # ownership or control of a domain. This is used by the
+    # DescribeCertificate action.
     #
     # @!attribute [rw] name
     #   The name of the DNS record to create in your domain. This is
@@ -1574,8 +1574,7 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # The supplied input failed to satisfy constraints of an Amazon Web
-    # Services service.
+    # The supplied input failed to satisfy constraints of an AWS service.
     #
     # @!attribute [rw] message
     #   @return [String]

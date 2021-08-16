@@ -1488,7 +1488,7 @@ module Aws::Appflow
     #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
@@ -2202,7 +2202,6 @@ module Aws::Appflow
     #   @return [Types::CustomerProfilesDestinationProperties]
     #
     # @!attribute [rw] zendesk
-    #   The properties required to query Zendesk.
     #   @return [Types::ZendeskDestinationProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
@@ -4658,7 +4657,7 @@ module Aws::Appflow
     #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -5262,7 +5261,7 @@ module Aws::Appflow
     #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
@@ -5572,8 +5571,6 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # The properties that are applied when Zendesk is used as a destination.
-    #
     # @note When making an API call, you may pass ZendeskDestinationProperties
     #   data as a hash:
     #
@@ -5589,7 +5586,6 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] object
-    #   The object specified in the Zendesk flow destination.
     #   @return [String]
     #
     # @!attribute [rw] id_field_names

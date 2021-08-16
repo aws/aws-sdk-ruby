@@ -267,21 +267,6 @@
         "shape": "GetPlaybackConfigurationResponse"
       }
     },
-    "ListAlerts": {
-      "errors": [],
-      "http": {
-        "method": "GET",
-        "requestUri": "/alerts",
-        "responseCode": 200
-      },
-      "input": {
-        "shape": "ListAlertsRequest"
-      },
-      "name": "ListAlerts",
-      "output": {
-        "shape": "ListAlertsResponse"
-      }
-    },
     "ListChannels": {
       "errors": [],
       "http": {
@@ -504,17 +489,13 @@
       "members": {
         "AccessType": {
           "shape": "AccessType"
-        },
-        "SecretsManagerAccessTokenConfiguration": {
-          "shape": "SecretsManagerAccessTokenConfiguration"
         }
       },
       "type": "structure"
     },
     "AccessType": {
       "enum": [
-        "S3_SIGV4",
-        "SECRETS_MANAGER_ACCESS_TOKEN"
+        "S3_SIGV4"
       ],
       "type": "string"
     },
@@ -541,33 +522,6 @@
           "shape": "__boolean"
         }
       },
-      "type": "structure"
-    },
-    "Alert": {
-      "members": {
-        "AlertCode": {
-          "shape": "__string"
-        },
-        "AlertMessage": {
-          "shape": "__string"
-        },
-        "LastModifiedTime": {
-          "shape": "__timestampUnix"
-        },
-        "RelatedResourceArns": {
-          "shape": "__listOf__string"
-        },
-        "ResourceArn": {
-          "shape": "__string"
-        }
-      },
-      "required": [
-        "ResourceArn",
-        "AlertCode",
-        "LastModifiedTime",
-        "RelatedResourceArns",
-        "AlertMessage"
-      ],
       "type": "structure"
     },
     "AvailSuppression": {
@@ -1429,40 +1383,6 @@
       },
       "type": "list"
     },
-    "ListAlertsRequest": {
-      "members": {
-        "MaxResults": {
-          "location": "querystring",
-          "locationName": "maxResults",
-          "shape": "MaxResults"
-        },
-        "NextToken": {
-          "location": "querystring",
-          "locationName": "nextToken",
-          "shape": "__string"
-        },
-        "ResourceArn": {
-          "location": "querystring",
-          "locationName": "resourceArn",
-          "shape": "__string"
-        }
-      },
-      "required": [
-        "ResourceArn"
-      ],
-      "type": "structure"
-    },
-    "ListAlertsResponse": {
-      "members": {
-        "Items": {
-          "shape": "__listOfAlert"
-        },
-        "NextToken": {
-          "shape": "__string"
-        }
-      },
-      "type": "structure"
-    },
     "ListChannelsRequest": {
       "members": {
         "MaxResults": {
@@ -1901,23 +1821,6 @@
       },
       "type": "list"
     },
-    "ScheduleAdBreak": {
-      "members": {
-        "ApproximateDurationSeconds": {
-          "shape": "__long"
-        },
-        "ApproximateStartTime": {
-          "shape": "__timestampUnix"
-        },
-        "SourceLocationName": {
-          "shape": "__string"
-        },
-        "VodSourceName": {
-          "shape": "__string"
-        }
-      },
-      "type": "structure"
-    },
     "ScheduleConfiguration": {
       "members": {
         "Transition": {
@@ -1946,9 +1849,6 @@
         "ProgramName": {
           "shape": "__string"
         },
-        "ScheduleAdBreaks": {
-          "shape": "__listOfScheduleAdBreak"
-        },
         "SourceLocationName": {
           "shape": "__string"
         },
@@ -1963,20 +1863,6 @@
         "Arn",
         "ProgramName"
       ],
-      "type": "structure"
-    },
-    "SecretsManagerAccessTokenConfiguration": {
-      "members": {
-        "HeaderName": {
-          "shape": "__string"
-        },
-        "SecretArn": {
-          "shape": "__string"
-        },
-        "SecretStringKey": {
-          "shape": "__string"
-        }
-      },
       "type": "structure"
     },
     "SlateSource": {
@@ -2337,12 +2223,6 @@
       },
       "type": "list"
     },
-    "__listOfAlert": {
-      "member": {
-        "shape": "Alert"
-      },
-      "type": "list"
-    },
     "__listOfChannel": {
       "member": {
         "shape": "Channel"
@@ -2352,12 +2232,6 @@
     "__listOfPlaybackConfiguration": {
       "member": {
         "shape": "PlaybackConfiguration"
-      },
-      "type": "list"
-    },
-    "__listOfScheduleAdBreak": {
-      "member": {
-        "shape": "ScheduleAdBreak"
       },
       "type": "list"
     },

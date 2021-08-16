@@ -1365,8 +1365,8 @@ module Aws::ElasticLoadBalancingV2
     #   \[HTTP1 or HTTP2 protocol version\] The ping path. The default is /.
     #
     #   \[GRPC protocol version\] The path of a custom health check method
-    #   with the format /package.service/method. The default is /Amazon Web
-    #   Services.ALB/healthcheck.
+    #   with the format /package.service/method. The default is
+    #   /AWS.ALB/healthcheck.
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
@@ -1720,7 +1720,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Describes the current Elastic Load Balancing resource limits for your
-    # Amazon Web Services account.
+    # AWS account.
     #
     # For more information, see the following:
     #
@@ -3520,13 +3520,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :health_check_protocol
     #   The protocol the load balancer uses when performing health checks on
-    #   targets. For Application Load Balancers, the default is HTTP. For
-    #   Network Load Balancers and Gateway Load Balancers, the default is TCP.
-    #   The TCP protocol is not supported for health checks if the protocol of
-    #   the target group is HTTP or HTTPS. It is supported for health checks
-    #   only if the protocol of the target group is TCP, TLS, UDP, or
-    #   TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are not
-    #   supported for health checks.
+    #   targets. The TCP protocol is supported for health checks only if the
+    #   protocol of the target group is TCP, TLS, UDP, or TCP\_UDP. The
+    #   GENEVE, TLS, UDP, and TCP\_UDP protocols are not supported for health
+    #   checks.
     #
     #   With Network Load Balancers, you can't modify this setting.
     #
@@ -3541,8 +3538,8 @@ module Aws::ElasticLoadBalancingV2
     #   \[HTTP1 or HTTP2 protocol version\] The ping path. The default is /.
     #
     #   \[GRPC protocol version\] The path of a custom health check method
-    #   with the format /package.service/method. The default is /Amazon Web
-    #   Services.ALB/healthcheck.
+    #   with the format /package.service/method. The default is
+    #   /AWS.ALB/healthcheck.
     #
     # @option params [Boolean] :health_check_enabled
     #   Indicates whether health checks are enabled.
@@ -4272,7 +4269,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

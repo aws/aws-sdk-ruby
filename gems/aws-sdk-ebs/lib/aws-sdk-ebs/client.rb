@@ -559,7 +559,7 @@ module Aws::EBS
     # data, the existing data is overwritten. The target snapshot must be in
     # the `pending` state.
     #
-    # Data written to a snapshot must be aligned with 512-KiB sectors.
+    # Data written to a snapshot must be aligned with 512-byte sectors.
     #
     # @option params [required, String] :snapshot_id
     #   The ID of the snapshot.
@@ -592,7 +592,7 @@ module Aws::EBS
     #
     # @option params [required, Integer] :data_length
     #   The size of the data to write to the block, in bytes. Currently, the
-    #   only supported size is `524288` bytes.
+    #   only supported size is `524288`.
     #
     #   Valid values: `524288`
     #
@@ -680,7 +680,7 @@ module Aws::EBS
     #   and they have no additional effect.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the Amazon Web Services SDK.
+    #   by the AWS SDK.
     #
     #   For more information, see [ Idempotency for StartSnapshot API][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
@@ -699,12 +699,12 @@ module Aws::EBS
     #
     #   If you specify a value for **ParentSnapshotId**, omit this parameter.
     #
-    #   If you specify `true`, the snapshot is encrypted using the KMS key
+    #   If you specify `true`, the snapshot is encrypted using the CMK
     #   specified using the **KmsKeyArn** parameter. If no value is specified
-    #   for **KmsKeyArn**, the default KMS key for your account is used. If no
-    #   default KMS key has been specified for your account, the Amazon Web
-    #   Services managed KMS key is used. To set a default KMS key for your
-    #   account, use [ ModifyEbsDefaultKmsKeyId][1].
+    #   for **KmsKeyArn**, the default CMK for your account is used. If no
+    #   default CMK has been specified for your account, the AWS managed CMK
+    #   is used. To set a default CMK for your account, use [
+    #   ModifyEbsDefaultKmsKeyId][1].
     #
     #   If your account is enabled for encryption by default, you cannot set
     #   this parameter to `false`. In this case, you can omit this parameter.
@@ -718,15 +718,15 @@ module Aws::EBS
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption
     #
     # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS) key
-    #   to be used to encrypt the snapshot. If you do not specify a KMS key,
-    #   the default Amazon Web Services managed KMS key is used.
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) to be used to encrypt the snapshot. If
+    #   you do not specify a CMK, the default AWS managed CMK is used.
     #
     #   If you specify a **ParentSnapshotId**, omit this parameter; the
-    #   snapshot will be encrypted using the same KMS key that was used to
-    #   encrypt the parent snapshot.
+    #   snapshot will be encrypted using the same CMK that was used to encrypt
+    #   the parent snapshot.
     #
-    #   If **Encrypted** is set to `true`, you must specify a KMS key ARN.
+    #   If **Encrypted** is set to `true`, you must specify a CMK ARN.
     #
     # @option params [Integer] :timeout
     #   The amount of time (in minutes) after which the snapshot is
@@ -806,7 +806,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

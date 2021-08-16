@@ -35,26 +35,26 @@ module Aws::PI
     #
     #       {
     #         service_type: "RDS", # required, accepts RDS
-    #         identifier: "RequestString", # required
+    #         identifier: "String", # required
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
-    #         metric: "RequestString", # required
+    #         metric: "String", # required
     #         period_in_seconds: 1,
     #         group_by: { # required
-    #           group: "RequestString", # required
-    #           dimensions: ["RequestString"],
+    #           group: "String", # required
+    #           dimensions: ["String"],
     #           limit: 1,
     #         },
     #         partition_by: {
-    #           group: "RequestString", # required
-    #           dimensions: ["RequestString"],
+    #           group: "String", # required
+    #           dimensions: ["String"],
     #           limit: 1,
     #         },
     #         filter: {
-    #           "RequestString" => "RequestString",
+    #           "String" => "String",
     #         },
     #         max_results: 1,
-    #         next_token: "NextToken",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] service_type
@@ -242,8 +242,8 @@ module Aws::PI
     #   data as a hash:
     #
     #       {
-    #         group: "RequestString", # required
-    #         dimensions: ["RequestString"],
+    #         group: "String", # required
+    #         dimensions: ["String"],
     #         limit: 1,
     #       }
     #
@@ -375,127 +375,22 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # An object that describes the details for a specified dimension.
-    #
-    # @!attribute [rw] value
-    #   The value of the dimension detail data. For the `db.sql.statement`
-    #   dimension, this value is either the full or truncated SQL query,
-    #   depending on the return status.
-    #   @return [String]
-    #
-    # @!attribute [rw] dimension
-    #   The full name of the dimension. The full name includes the group
-    #   name and key name. The only valid value is `db.sql.statement`.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the dimension detail data. Possible values include the
-    #   following:
-    #
-    #   * `AVAILABLE` - The dimension detail data is ready to be retrieved.
-    #
-    #   * `PROCESSING` - The dimension detail data isn't ready to be
-    #     retrieved because more processing time is required. If the
-    #     requested detail data for `db.sql.statement` has the status
-    #     `PROCESSING`, Performance Insights returns the truncated query.
-    #
-    #   * `UNAVAILABLE` - The dimension detail data could not be collected
-    #     successfully.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DimensionKeyDetail AWS API Documentation
-    #
-    class DimensionKeyDetail < Struct.new(
-      :value,
-      :dimension,
-      :status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetDimensionKeyDetailsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         service_type: "RDS", # required, accepts RDS
-    #         identifier: "IdentifierString", # required
-    #         group: "RequestString", # required
-    #         group_identifier: "RequestString", # required
-    #         requested_dimensions: ["RequestString"],
-    #       }
-    #
-    # @!attribute [rw] service_type
-    #   The AWS service for which Performance Insights returns data. The
-    #   only valid value is `RDS`.
-    #   @return [String]
-    #
-    # @!attribute [rw] identifier
-    #   The ID for a data source from which to gather dimension data. This
-    #   ID must be immutable and unique within an AWS Region. When a DB
-    #   instance is the data source, specify its `DbiResourceId` value. For
-    #   example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
-    #   @return [String]
-    #
-    # @!attribute [rw] group
-    #   The name of the dimension group. The only valid value is `db.sql`.
-    #   Performance Insights searches the specified group for the dimension
-    #   group ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] group_identifier
-    #   The ID of the dimension group from which to retrieve dimension
-    #   details. For dimension group `db.sql`, the group ID is `db.sql.id`.
-    #   @return [String]
-    #
-    # @!attribute [rw] requested_dimensions
-    #   A list of dimensions to retrieve the detail data for within the
-    #   given dimension group. For the dimension group `db.sql`, specify
-    #   either the full dimension name `db.sql.statement` or the short
-    #   dimension name `statement`. If you don't specify this parameter,
-    #   Performance Insights returns all dimension data within the specified
-    #   dimension group.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetDimensionKeyDetailsRequest AWS API Documentation
-    #
-    class GetDimensionKeyDetailsRequest < Struct.new(
-      :service_type,
-      :identifier,
-      :group,
-      :group_identifier,
-      :requested_dimensions)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] dimensions
-    #   The details for the requested dimensions.
-    #   @return [Array<Types::DimensionKeyDetail>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetDimensionKeyDetailsResponse AWS API Documentation
-    #
-    class GetDimensionKeyDetailsResponse < Struct.new(
-      :dimensions)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass GetResourceMetricsRequest
     #   data as a hash:
     #
     #       {
     #         service_type: "RDS", # required, accepts RDS
-    #         identifier: "RequestString", # required
+    #         identifier: "String", # required
     #         metric_queries: [ # required
     #           {
-    #             metric: "RequestString", # required
+    #             metric: "String", # required
     #             group_by: {
-    #               group: "RequestString", # required
-    #               dimensions: ["RequestString"],
+    #               group: "String", # required
+    #               dimensions: ["String"],
     #               limit: 1,
     #             },
     #             filter: {
-    #               "RequestString" => "RequestString",
+    #               "String" => "String",
     #             },
     #           },
     #         ],
@@ -503,7 +398,7 @@ module Aws::PI
     #         end_time: Time.now, # required
     #         period_in_seconds: 1,
     #         max_results: 1,
-    #         next_token: "NextToken",
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] service_type
@@ -694,14 +589,14 @@ module Aws::PI
     #   data as a hash:
     #
     #       {
-    #         metric: "RequestString", # required
+    #         metric: "String", # required
     #         group_by: {
-    #           group: "RequestString", # required
-    #           dimensions: ["RequestString"],
+    #           group: "String", # required
+    #           dimensions: ["String"],
     #           limit: 1,
     #         },
     #         filter: {
-    #           "RequestString" => "RequestString",
+    #           "String" => "String",
     #         },
     #       }
     #

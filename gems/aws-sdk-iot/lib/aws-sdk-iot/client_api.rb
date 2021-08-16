@@ -218,7 +218,6 @@ module Aws::IoT
     ConfirmTopicRuleDestinationRequest = Shapes::StructureShape.new(name: 'ConfirmTopicRuleDestinationRequest')
     ConfirmTopicRuleDestinationResponse = Shapes::StructureShape.new(name: 'ConfirmTopicRuleDestinationResponse')
     ConfirmationToken = Shapes::StringShape.new(name: 'ConfirmationToken')
-    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictingResourceUpdateException = Shapes::StructureShape.new(name: 'ConflictingResourceUpdateException')
     ConnectivityTimestamp = Shapes::IntegerShape.new(name: 'ConnectivityTimestamp')
     ConsecutiveDatapointsToAlarm = Shapes::IntegerShape.new(name: 'ConsecutiveDatapointsToAlarm')
@@ -242,8 +241,6 @@ module Aws::IoT
     CreateDynamicThingGroupResponse = Shapes::StructureShape.new(name: 'CreateDynamicThingGroupResponse')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
-    CreateJobTemplateRequest = Shapes::StructureShape.new(name: 'CreateJobTemplateRequest')
-    CreateJobTemplateResponse = Shapes::StructureShape.new(name: 'CreateJobTemplateResponse')
     CreateKeysAndCertificateRequest = Shapes::StructureShape.new(name: 'CreateKeysAndCertificateRequest')
     CreateKeysAndCertificateResponse = Shapes::StructureShape.new(name: 'CreateKeysAndCertificateResponse')
     CreateMitigationActionRequest = Shapes::StructureShape.new(name: 'CreateMitigationActionRequest')
@@ -314,7 +311,6 @@ module Aws::IoT
     DeleteDynamicThingGroupResponse = Shapes::StructureShape.new(name: 'DeleteDynamicThingGroupResponse')
     DeleteJobExecutionRequest = Shapes::StructureShape.new(name: 'DeleteJobExecutionRequest')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
-    DeleteJobTemplateRequest = Shapes::StructureShape.new(name: 'DeleteJobTemplateRequest')
     DeleteMitigationActionRequest = Shapes::StructureShape.new(name: 'DeleteMitigationActionRequest')
     DeleteMitigationActionResponse = Shapes::StructureShape.new(name: 'DeleteMitigationActionResponse')
     DeleteOTAUpdateRequest = Shapes::StructureShape.new(name: 'DeleteOTAUpdateRequest')
@@ -390,8 +386,6 @@ module Aws::IoT
     DescribeJobExecutionResponse = Shapes::StructureShape.new(name: 'DescribeJobExecutionResponse')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResponse = Shapes::StructureShape.new(name: 'DescribeJobResponse')
-    DescribeJobTemplateRequest = Shapes::StructureShape.new(name: 'DescribeJobTemplateRequest')
-    DescribeJobTemplateResponse = Shapes::StructureShape.new(name: 'DescribeJobTemplateResponse')
     DescribeMitigationActionRequest = Shapes::StructureShape.new(name: 'DescribeMitigationActionRequest')
     DescribeMitigationActionResponse = Shapes::StructureShape.new(name: 'DescribeMitigationActionResponse')
     DescribeProvisioningTemplateRequest = Shapes::StructureShape.new(name: 'DescribeProvisioningTemplateRequest')
@@ -602,10 +596,6 @@ module Aws::IoT
     JobSummary = Shapes::StructureShape.new(name: 'JobSummary')
     JobSummaryList = Shapes::ListShape.new(name: 'JobSummaryList')
     JobTargets = Shapes::ListShape.new(name: 'JobTargets')
-    JobTemplateArn = Shapes::StringShape.new(name: 'JobTemplateArn')
-    JobTemplateId = Shapes::StringShape.new(name: 'JobTemplateId')
-    JobTemplateSummary = Shapes::StructureShape.new(name: 'JobTemplateSummary')
-    JobTemplateSummaryList = Shapes::ListShape.new(name: 'JobTemplateSummaryList')
     JsonDocument = Shapes::StringShape.new(name: 'JsonDocument')
     KafkaAction = Shapes::StructureShape.new(name: 'KafkaAction')
     Key = Shapes::StringShape.new(name: 'Key')
@@ -658,8 +648,6 @@ module Aws::IoT
     ListJobExecutionsForJobResponse = Shapes::StructureShape.new(name: 'ListJobExecutionsForJobResponse')
     ListJobExecutionsForThingRequest = Shapes::StructureShape.new(name: 'ListJobExecutionsForThingRequest')
     ListJobExecutionsForThingResponse = Shapes::StructureShape.new(name: 'ListJobExecutionsForThingResponse')
-    ListJobTemplatesRequest = Shapes::StructureShape.new(name: 'ListJobTemplatesRequest')
-    ListJobTemplatesResponse = Shapes::StructureShape.new(name: 'ListJobTemplatesResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListMitigationActionsRequest = Shapes::StructureShape.new(name: 'ListMitigationActionsRequest')
@@ -1681,9 +1669,6 @@ module Aws::IoT
 
     ConfirmTopicRuleDestinationResponse.struct_class = Types::ConfirmTopicRuleDestinationResponse
 
-    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
-    ConflictException.struct_class = Types::ConflictException
-
     ConflictingResourceUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ConflictingResourceUpdateException.struct_class = Types::ConflictingResourceUpdateException
 
@@ -1792,29 +1777,12 @@ module Aws::IoT
     CreateJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
-    CreateJobRequest.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
     CreateJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     CreateJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
     CreateJobResponse.struct_class = Types::CreateJobResponse
-
-    CreateJobTemplateRequest.add_member(:job_template_id, Shapes::ShapeRef.new(shape: JobTemplateId, required: true, location: "uri", location_name: "jobTemplateId"))
-    CreateJobTemplateRequest.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
-    CreateJobTemplateRequest.add_member(:document_source, Shapes::ShapeRef.new(shape: JobDocumentSource, location_name: "documentSource"))
-    CreateJobTemplateRequest.add_member(:document, Shapes::ShapeRef.new(shape: JobDocument, location_name: "document"))
-    CreateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, required: true, location_name: "description"))
-    CreateJobTemplateRequest.add_member(:presigned_url_config, Shapes::ShapeRef.new(shape: PresignedUrlConfig, location_name: "presignedUrlConfig"))
-    CreateJobTemplateRequest.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: JobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
-    CreateJobTemplateRequest.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
-    CreateJobTemplateRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
-    CreateJobTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateJobTemplateRequest.struct_class = Types::CreateJobTemplateRequest
-
-    CreateJobTemplateResponse.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
-    CreateJobTemplateResponse.add_member(:job_template_id, Shapes::ShapeRef.new(shape: JobTemplateId, location_name: "jobTemplateId"))
-    CreateJobTemplateResponse.struct_class = Types::CreateJobTemplateResponse
 
     CreateKeysAndCertificateRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActive, location: "querystring", location_name: "setAsActive"))
     CreateKeysAndCertificateRequest.struct_class = Types::CreateKeysAndCertificateRequest
@@ -2078,9 +2046,6 @@ module Aws::IoT
     DeleteJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     DeleteJobRequest.struct_class = Types::DeleteJobRequest
 
-    DeleteJobTemplateRequest.add_member(:job_template_id, Shapes::ShapeRef.new(shape: JobTemplateId, required: true, location: "uri", location_name: "jobTemplateId"))
-    DeleteJobTemplateRequest.struct_class = Types::DeleteJobTemplateRequest
-
     DeleteMitigationActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, required: true, location: "uri", location_name: "actionName"))
     DeleteMitigationActionRequest.struct_class = Types::DeleteMitigationActionRequest
 
@@ -2334,21 +2299,6 @@ module Aws::IoT
     DescribeJobResponse.add_member(:document_source, Shapes::ShapeRef.new(shape: JobDocumentSource, location_name: "documentSource"))
     DescribeJobResponse.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "job"))
     DescribeJobResponse.struct_class = Types::DescribeJobResponse
-
-    DescribeJobTemplateRequest.add_member(:job_template_id, Shapes::ShapeRef.new(shape: JobTemplateId, required: true, location: "uri", location_name: "jobTemplateId"))
-    DescribeJobTemplateRequest.struct_class = Types::DescribeJobTemplateRequest
-
-    DescribeJobTemplateResponse.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
-    DescribeJobTemplateResponse.add_member(:job_template_id, Shapes::ShapeRef.new(shape: JobTemplateId, location_name: "jobTemplateId"))
-    DescribeJobTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
-    DescribeJobTemplateResponse.add_member(:document_source, Shapes::ShapeRef.new(shape: JobDocumentSource, location_name: "documentSource"))
-    DescribeJobTemplateResponse.add_member(:document, Shapes::ShapeRef.new(shape: JobDocument, location_name: "document"))
-    DescribeJobTemplateResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "createdAt"))
-    DescribeJobTemplateResponse.add_member(:presigned_url_config, Shapes::ShapeRef.new(shape: PresignedUrlConfig, location_name: "presignedUrlConfig"))
-    DescribeJobTemplateResponse.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: JobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
-    DescribeJobTemplateResponse.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
-    DescribeJobTemplateResponse.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
-    DescribeJobTemplateResponse.struct_class = Types::DescribeJobTemplateResponse
 
     DescribeMitigationActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, required: true, location: "uri", location_name: "actionName"))
     DescribeMitigationActionRequest.struct_class = Types::DescribeMitigationActionRequest
@@ -2848,7 +2798,6 @@ module Aws::IoT
     Job.add_member(:job_process_details, Shapes::ShapeRef.new(shape: JobProcessDetails, location_name: "jobProcessDetails"))
     Job.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     Job.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
-    Job.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -2914,14 +2863,6 @@ module Aws::IoT
     JobSummaryList.member = Shapes::ShapeRef.new(shape: JobSummary)
 
     JobTargets.member = Shapes::ShapeRef.new(shape: TargetArn)
-
-    JobTemplateSummary.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
-    JobTemplateSummary.add_member(:job_template_id, Shapes::ShapeRef.new(shape: JobTemplateId, location_name: "jobTemplateId"))
-    JobTemplateSummary.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
-    JobTemplateSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "createdAt"))
-    JobTemplateSummary.struct_class = Types::JobTemplateSummary
-
-    JobTemplateSummaryList.member = Shapes::ShapeRef.new(shape: JobTemplateSummary)
 
     KafkaAction.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "destinationArn"))
     KafkaAction.add_member(:topic, Shapes::ShapeRef.new(shape: String, required: true, location_name: "topic"))
@@ -3151,14 +3092,6 @@ module Aws::IoT
     ListJobExecutionsForThingResponse.add_member(:execution_summaries, Shapes::ShapeRef.new(shape: JobExecutionSummaryForThingList, location_name: "executionSummaries"))
     ListJobExecutionsForThingResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListJobExecutionsForThingResponse.struct_class = Types::ListJobExecutionsForThingResponse
-
-    ListJobTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LaserMaxResults, location: "querystring", location_name: "maxResults"))
-    ListJobTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListJobTemplatesRequest.struct_class = Types::ListJobTemplatesRequest
-
-    ListJobTemplatesResponse.add_member(:job_templates, Shapes::ShapeRef.new(shape: JobTemplateSummaryList, location_name: "jobTemplates"))
-    ListJobTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListJobTemplatesResponse.struct_class = Types::ListJobTemplatesResponse
 
     ListJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location: "querystring", location_name: "status"))
     ListJobsRequest.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location: "querystring", location_name: "targetSelection"))
@@ -4912,20 +4845,6 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
-      api.add_operation(:create_job_template, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateJobTemplate"
-        o.http_method = "PUT"
-        o.http_request_uri = "/job-templates/{jobTemplateId}"
-        o.input = Shapes::ShapeRef.new(shape: CreateJobTemplateRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateJobTemplateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-      end)
-
       api.add_operation(:create_keys_and_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateKeysAndCertificate"
         o.http_method = "POST"
@@ -5320,18 +5239,6 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-      end)
-
-      api.add_operation(:delete_job_template, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteJobTemplate"
-        o.http_method = "DELETE"
-        o.http_request_uri = "/job-templates/{jobTemplateId}"
-        o.input = Shapes::ShapeRef.new(shape: DeleteJobTemplateRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_mitigation_action, Seahorse::Model::Operation.new.tap do |o|
@@ -5813,18 +5720,6 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-      end)
-
-      api.add_operation(:describe_job_template, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeJobTemplate"
-        o.http_method = "GET"
-        o.http_request_uri = "/job-templates/{jobTemplateId}"
-        o.input = Shapes::ShapeRef.new(shape: DescribeJobTemplateRequest)
-        o.output = Shapes::ShapeRef.new(shape: DescribeJobTemplateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:describe_mitigation_action, Seahorse::Model::Operation.new.tap do |o|
@@ -6619,17 +6514,6 @@ module Aws::IoT
             "next_token" => "next_token"
           }
         )
-      end)
-
-      api.add_operation(:list_job_templates, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListJobTemplates"
-        o.http_method = "GET"
-        o.http_request_uri = "/job-templates"
-        o.input = Shapes::ShapeRef.new(shape: ListJobTemplatesRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListJobTemplatesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|

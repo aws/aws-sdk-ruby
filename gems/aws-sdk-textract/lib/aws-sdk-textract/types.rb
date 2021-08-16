@@ -103,71 +103,6 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass AnalyzeExpenseRequest
-    #   data as a hash:
-    #
-    #       {
-    #         document: { # required
-    #           bytes: "data",
-    #           s3_object: {
-    #             bucket: "S3Bucket",
-    #             name: "S3ObjectName",
-    #             version: "S3ObjectVersion",
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] document
-    #   The input document, either as bytes or as an S3 object.
-    #
-    #   You pass image bytes to an Amazon Textract API operation by using
-    #   the `Bytes` property. For example, you would use the `Bytes`
-    #   property to pass a document loaded from a local file system. Image
-    #   bytes passed by using the `Bytes` property must be base64 encoded.
-    #   Your code might not need to encode document file bytes if you're
-    #   using an AWS SDK to call Amazon Textract API operations.
-    #
-    #   You pass images stored in an S3 bucket to an Amazon Textract API
-    #   operation by using the `S3Object` property. Documents stored in an
-    #   S3 bucket don't need to be base64 encoded.
-    #
-    #   The AWS Region for the S3 bucket that contains the S3 object must
-    #   match the AWS Region that you use for Amazon Textract operations.
-    #
-    #   If you use the AWS CLI to call Amazon Textract operations, passing
-    #   image bytes using the Bytes property isn't supported. You must
-    #   first upload the document to an Amazon S3 bucket, and then call the
-    #   operation using the S3Object property.
-    #
-    #   For Amazon Textract to process an S3 object, the user must have
-    #   permission to access the S3 object.
-    #   @return [Types::Document]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeExpenseRequest AWS API Documentation
-    #
-    class AnalyzeExpenseRequest < Struct.new(
-      :document)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] document_metadata
-    #   Information about the input document.
-    #   @return [Types::DocumentMetadata]
-    #
-    # @!attribute [rw] expense_documents
-    #   The expenses detected by Amazon Textract.
-    #   @return [Array<Types::ExpenseDocument>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeExpenseResponse AWS API Documentation
-    #
-    class AnalyzeExpenseResponse < Struct.new(
-      :document_metadata,
-      :expense_documents)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Amazon Textract isn't able to read the document. For more information
     # on the document limits in Amazon Textract, see limits.
     #
@@ -564,111 +499,6 @@ module Aws::Textract
     #
     class DocumentTooLargeException < Aws::EmptyStructure; end
 
-    # An object used to store information about the Value or Label detected
-    # by Amazon Textract.
-    #
-    # @!attribute [rw] text
-    #   The word or line of text recognized by Amazon Textract
-    #   @return [String]
-    #
-    # @!attribute [rw] geometry
-    #   Information about where the following items are located on a
-    #   document page: detected page, text, key-value pairs, tables, table
-    #   cells, and selection elements.
-    #   @return [Types::Geometry]
-    #
-    # @!attribute [rw] confidence
-    #   The confidence in detection, as a percentage
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseDetection AWS API Documentation
-    #
-    class ExpenseDetection < Struct.new(
-      :text,
-      :geometry,
-      :confidence)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The structure holding all the information returned by AnalyzeExpense
-    #
-    # @!attribute [rw] expense_index
-    #   Denotes which invoice or receipt in the document the information is
-    #   coming from. First document will be 1, the second 2, and so on.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] summary_fields
-    #   Any information found outside of a table by Amazon Textract.
-    #   @return [Array<Types::ExpenseField>]
-    #
-    # @!attribute [rw] line_item_groups
-    #   Information detected on each table of a document, seperated into
-    #   `LineItems`.
-    #   @return [Array<Types::LineItemGroup>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseDocument AWS API Documentation
-    #
-    class ExpenseDocument < Struct.new(
-      :expense_index,
-      :summary_fields,
-      :line_item_groups)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Breakdown of detected information, seperated into the catagories Type,
-    # LableDetection, and ValueDetection
-    #
-    # @!attribute [rw] type
-    #   The implied label of a detected element. Present alongside
-    #   LabelDetection for explicit elements.
-    #   @return [Types::ExpenseType]
-    #
-    # @!attribute [rw] label_detection
-    #   The explicitly stated label of a detected element.
-    #   @return [Types::ExpenseDetection]
-    #
-    # @!attribute [rw] value_detection
-    #   The value of a detected element. Present in explicit and implicit
-    #   elements.
-    #   @return [Types::ExpenseDetection]
-    #
-    # @!attribute [rw] page_number
-    #   The page number the value was detected on.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseField AWS API Documentation
-    #
-    class ExpenseField < Struct.new(
-      :type,
-      :label_detection,
-      :value_detection,
-      :page_number)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # An object used to store information about the Type detected by Amazon
-    # Textract.
-    #
-    # @!attribute [rw] text
-    #   The word or line of text detected by Amazon Textract.
-    #   @return [String]
-    #
-    # @!attribute [rw] confidence
-    #   The confidence of accuracy, as a percentage.
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ExpenseType AWS API Documentation
-    #
-    class ExpenseType < Struct.new(
-      :text,
-      :confidence)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information about where the following items are located on a document
     # page: detected page, text, key-value pairs, tables, table cells, and
     # selection elements.
@@ -1039,44 +869,6 @@ module Aws::Textract
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # A structure that holds information about the different lines found in
-    # a document's tables.
-    #
-    # @!attribute [rw] line_item_expense_fields
-    #   ExpenseFields used to show information from detected lines on a
-    #   table.
-    #   @return [Array<Types::ExpenseField>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LineItemFields AWS API Documentation
-    #
-    class LineItemFields < Struct.new(
-      :line_item_expense_fields)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A grouping of tables which contain LineItems, with each table
-    # identified by the table's `LineItemGroupIndex`.
-    #
-    # @!attribute [rw] line_item_group_index
-    #   The number used to identify a specific table in a document. The
-    #   first table encountered will have a LineItemGroupIndex of 1, the
-    #   second 2, etc.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] line_items
-    #   The breakdown of information on a particular line of a table.
-    #   @return [Array<Types::LineItemFields>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LineItemGroup AWS API Documentation
-    #
-    class LineItemGroup < Struct.new(
-      :line_item_group_index,
-      :line_items)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The Amazon Simple Notification Service (Amazon SNS) topic to which
     # Amazon Textract publishes the completion status of an asynchronous
     # document operation, such as StartDocumentTextDetection.
@@ -1110,31 +902,6 @@ module Aws::Textract
 
     # Sets whether or not your output will go to a user created bucket. Used
     # to set the name of the bucket, and the prefix on the output file.
-    #
-    # `OutputConfig` is an optional parameter which lets you adjust where
-    # your output will be placed. By default, Amazon Textract will store the
-    # results internally and can only be accessed by the Get API operations.
-    # With OutputConfig enabled, you can set the name of the bucket the
-    # output will be sent to and the file prefix of the results where you
-    # can download your results. Additionally, you can set the `KMSKeyID`
-    # parameter to a customer master key (CMK) to encrypt your output.
-    # Without this parameter set Amazon Textract will encrypt server-side
-    # using the AWS managed CMK for Amazon S3.
-    #
-    # Decryption of Customer Content is necessary for processing of the
-    # documents by Amazon Textract. If your account is opted out under an AI
-    # services opt out policy then all unencrypted Customer Content is
-    # immediately and permanently deleted after the Customer Content has
-    # been processed by the service. No copy of of the output is retained by
-    # Amazon Textract. For information about how to opt out, see [ Managing
-    # AI services opt-out policy. ][1]
-    #
-    # For more information on data privacy, see the [Data Privacy FAQ][2].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
-    # [2]: https://aws.amazon.com/compliance/data-privacy-faq/
     #
     # @note When making an API call, you may pass OutputConfig
     #   data as a hash:
@@ -1246,8 +1013,7 @@ module Aws::Textract
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the S3 bucket. Note that the # character is not valid in
-    #   the file name.
+    #   The name of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] name

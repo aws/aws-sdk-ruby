@@ -696,8 +696,7 @@
         "NetworkOrigin":{"shape":"NetworkOrigin"},
         "VpcConfiguration":{"shape":"VpcConfiguration"},
         "Bucket":{"shape":"BucketName"},
-        "AccessPointArn":{"shape":"S3AccessPointArn"},
-        "Alias":{"shape":"Alias"}
+        "AccessPointArn":{"shape":"S3AccessPointArn"}
       }
     },
     "AccessPointList":{
@@ -709,7 +708,7 @@
     },
     "AccessPointName":{
       "type":"string",
-      "max":63,
+      "max":50,
       "min":3
     },
     "AccountId":{
@@ -730,11 +729,6 @@
       "members":{
         "IsEnabled":{"shape":"IsEnabled"}
       }
-    },
-    "Alias":{
-      "type":"string",
-      "max":63,
-      "pattern":"^[0-9a-z\\\\-]{63}"
     },
     "AwsLambdaTransformation":{
       "type":"structure",
@@ -879,8 +873,7 @@
     "CreateAccessPointResult":{
       "type":"structure",
       "members":{
-        "AccessPointArn":{"shape":"S3AccessPointArn"},
-        "Alias":{"shape":"Alias"}
+        "AccessPointArn":{"shape":"S3AccessPointArn"}
       }
     },
     "CreateBucketConfiguration":{
@@ -1273,11 +1266,6 @@
         "Job":{"shape":"JobDescriptor"}
       }
     },
-    "Endpoints":{
-      "type":"map",
-      "key":{"shape":"NonEmptyMaxLength64String"},
-      "value":{"shape":"NonEmptyMaxLength1024String"}
-    },
     "ExceptionMessage":{
       "type":"string",
       "max":1024,
@@ -1497,10 +1485,7 @@
         "NetworkOrigin":{"shape":"NetworkOrigin"},
         "VpcConfiguration":{"shape":"VpcConfiguration"},
         "PublicAccessBlockConfiguration":{"shape":"PublicAccessBlockConfiguration"},
-        "CreationDate":{"shape":"CreationDate"},
-        "Alias":{"shape":"Alias"},
-        "AccessPointArn":{"shape":"S3AccessPointArn"},
-        "Endpoints":{"shape":"Endpoints"}
+        "CreationDate":{"shape":"CreationDate"}
       }
     },
     "GetBucketLifecycleConfigurationRequest":{
@@ -2918,8 +2903,7 @@
         "TargetKeyPrefix":{"shape":"NonEmptyMaxLength1024String"},
         "ObjectLockLegalHoldStatus":{"shape":"S3ObjectLockLegalHoldStatus"},
         "ObjectLockMode":{"shape":"S3ObjectLockMode"},
-        "ObjectLockRetainUntilDate":{"shape":"TimeStamp"},
-        "BucketKeyEnabled":{"shape":"Boolean"}
+        "ObjectLockRetainUntilDate":{"shape":"TimeStamp"}
       }
     },
     "S3DeleteObjectTaggingOperation":{
@@ -3267,12 +3251,12 @@
       "type":"string",
       "max":1024,
       "min":1,
-      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*)$"
     },
     "TagValueString":{
       "type":"string",
       "max":1024,
-      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*)$"
     },
     "Tagging":{
       "type":"structure",

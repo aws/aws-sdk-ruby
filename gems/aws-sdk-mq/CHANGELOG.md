@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.39.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.38.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.37.0 (2021-07-07)
-------------------
-
-* Feature - adds support for modifying the maintenance window for brokers.
-
 1.36.0 (2021-03-10)
 ------------------
 

@@ -10,13 +10,12 @@
 module Aws::SSOAdmin
   module Types
 
-    # These are Amazon Web Services SSO identity store attributes that you
-    # can configure for use in attributes-based access control (ABAC). You
-    # can create permissions policies that determine who can access your
-    # Amazon Web Services resources based upon the configured attribute
-    # values. When you enable ABAC and specify `AccessControlAttributes`,
-    # Amazon Web Services SSO passes the attribute values of the
-    # authenticated user into IAM for use in policy evaluation.
+    # These are AWS SSO identity store attributes that you can configure for
+    # use in attributes-based access control (ABAC). You can create
+    # permission policies that determine who can access your AWS resources
+    # based upon the configured attribute value(s). When you enable ABAC and
+    # specify AccessControlAttributes, AWS SSO passes the attribute(s) value
+    # of the authenticated user into IAM for use in policy evaluation.
     #
     # @note When making an API call, you may pass AccessControlAttribute
     #   data as a hash:
@@ -31,7 +30,7 @@ module Aws::SSOAdmin
     # @!attribute [rw] key
     #   The name of the attribute associated with your identities in your
     #   identity source. This is used to map a specified attribute in your
-    #   identity source with an attribute in Amazon Web Services SSO.
+    #   identity source with an attribute in AWS SSO.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -59,8 +58,8 @@ module Aws::SSOAdmin
     #       }
     #
     # @!attribute [rw] source
-    #   The identity source to use when mapping a specified attribute to
-    #   Amazon Web Services SSO.
+    #   The identity source to use when mapping a specified attribute to AWS
+    #   SSO.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccessControlAttributeValue AWS API Documentation
@@ -85,22 +84,22 @@ module Aws::SSOAdmin
     end
 
     # The assignment that indicates a principal's limited access to a
-    # specified Amazon Web Services account with a specified permission set.
+    # specified AWS account with a specified permission set.
     #
     # <note markdown="1"> The term *principal* here refers to a user or group that is defined in
-    # Amazon Web Services SSO.
+    # AWS SSO.
     #
     #  </note>
     #
     # @!attribute [rw] account_id
-    #   The identifier of the Amazon Web Services account.
+    #   The identifier of the AWS account.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
+    #   [Amazon Resource Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] principal_type
@@ -108,11 +107,10 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   An identifier for an object in Amazon Web Services SSO, such as a
-    #   user or group. PrincipalIds are GUIDs (For example,
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
-    #   PrincipalIds in Amazon Web Services SSO, see the [Amazon Web
-    #   Services SSO Identity Store API
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
@@ -145,8 +143,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   TargetID is an Amazon Web Services account identifier, typically a
-    #   10-12 digit string (For example, 123456789012).
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -155,9 +153,9 @@ module Aws::SSOAdmin
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
+    #   [Amazon Resource Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] principal_type
@@ -165,11 +163,10 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   An identifier for an object in Amazon Web Services SSO, such as a
-    #   user or group. PrincipalIds are GUIDs (For example,
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
-    #   PrincipalIds in Amazon Web Services SSO, see the [Amazon Web
-    #   Services SSO Identity Store API
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
@@ -230,9 +227,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -266,9 +263,9 @@ module Aws::SSOAdmin
     #
     # @!attribute [rw] arn
     #   The ARN of the IAM managed policy. For more information about ARNs,
-    #   see [Amazon Resource Names (ARNs) and Amazon Web Services Service
+    #   see [Amazon Resource Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachedManagedPolicy AWS API Documentation
@@ -312,14 +309,14 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   TargetID is an Amazon Web Services account identifier, typically a
-    #   10-12 digit string (For example, 123456789012).
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -336,11 +333,10 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   An identifier for an object in Amazon Web Services SSO, such as a
-    #   user or group. PrincipalIds are GUIDs (For example,
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
-    #   PrincipalIds in Amazon Web Services SSO, see the [Amazon Web
-    #   Services SSO Identity Store API
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
@@ -392,14 +388,13 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] instance_access_control_attribute_configuration
-    #   Specifies the Amazon Web Services SSO identity store attributes to
-    #   add to your ABAC configuration. When using an external identity
-    #   provider as an identity source, you can pass attributes through the
-    #   SAML assertion. Doing so provides an alternative to configuring
-    #   attributes from the Amazon Web Services SSO identity store. If a
-    #   SAML assertion passes any of these attributes, Amazon Web Services
-    #   SSO will replace the attribute value with the value from the Amazon
-    #   Web Services SSO identity store.
+    #   Specifies the AWS SSO identity store attributes to add to your ABAC
+    #   configuration. When using an external identity provider as an
+    #   identity source, you can pass attributes through the SAML assertion
+    #   as an alternative to configuring attributes from the AWS SSO
+    #   identity store. If a SAML assertion passes any of these attributes,
+    #   AWS SSO will replace the attribute value with the value from the AWS
+    #   SSO identity store.
     #   @return [Types::InstanceAccessControlAttributeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
@@ -443,9 +438,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] session_duration
@@ -476,7 +471,7 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] permission_set
-    #   Defines the level of access on an Amazon Web Services account.
+    #   Defines the level of access on an AWS account.
     #   @return [Types::PermissionSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreatePermissionSetResponse AWS API Documentation
@@ -502,14 +497,14 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   TargetID is an Amazon Web Services account identifier, typically a
-    #   10-12 digit string (For example, 123456789012).
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -525,11 +520,10 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   An identifier for an object in Amazon Web Services SSO, such as a
-    #   user or group. PrincipalIds are GUIDs (For example,
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
     #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
-    #   PrincipalIds in Amazon Web Services SSO, see the [Amazon Web
-    #   Services SSO Identity Store API
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
     #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
@@ -569,9 +563,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -626,9 +620,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -659,9 +653,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] account_assignment_creation_request_id
@@ -700,9 +694,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] account_assignment_deletion_request_id
@@ -760,8 +754,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] instance_access_control_attribute_configuration
-    #   Gets the list of Amazon Web Services SSO identity store attributes
-    #   that have been added to your ABAC configuration.
+    #   Gets the list of AWS SSO identity store attributes added to your
+    #   ABAC configuration.
     #   @return [Types::InstanceAccessControlAttributeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfigurationResponse AWS API Documentation
@@ -785,9 +779,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] provision_permission_set_request_id
@@ -827,9 +821,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -846,7 +840,7 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] permission_set
-    #   Describes the level of access on an Amazon Web Services account.
+    #   Describes the level of access on an AWS account.
     #   @return [Types::PermissionSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribePermissionSetResponse AWS API Documentation
@@ -869,9 +863,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -908,9 +902,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -957,7 +951,7 @@ module Aws::SSOAdmin
     #
     # @!attribute [rw] access_control_attributes
     #   Lists the attributes that are configured for ABAC in the specified
-    #   Amazon Web Services SSO instance.
+    #   AWS SSO instance.
     #   @return [Array<Types::AccessControlAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/InstanceAccessControlAttributeConfiguration AWS API Documentation
@@ -973,9 +967,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] identity_store_id
@@ -1021,9 +1015,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1083,9 +1077,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1144,14 +1138,14 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The identifier of the Amazon Web Services account from which to list
-    #   the assignments.
+    #   The identifier of the AWS account from which to list the
+    #   assignments.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -1180,8 +1174,8 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] account_assignments
-    #   The list of assignments that match the input Amazon Web Services
-    #   account and permission set.
+    #   The list of assignments that match the input AWS account and
+    #   permission set.
     #   @return [Array<Types::AccountAssignment>]
     #
     # @!attribute [rw] next_token
@@ -1212,19 +1206,18 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
-    #   The ARN of the PermissionSet from which the associated Amazon Web
-    #   Services accounts will be listed.
+    #   The ARN of the PermissionSet from which the associated AWS accounts
+    #   will be listed.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_status
-    #   The permission set provisioning status for an Amazon Web Services
-    #   account.
+    #   The permission set provisioning status for an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1249,7 +1242,7 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] account_ids
-    #   The list of Amazon Web Services `AccountIds`.
+    #   The list of AWS `AccountIds`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1323,9 +1316,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -1385,9 +1378,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1446,14 +1439,14 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The identifier of the Amazon Web Services account from which to list
-    #   the assignments.
+    #   The identifier of the AWS account from which to list the
+    #   assignments.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_status
@@ -1487,7 +1480,7 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] permission_sets
-    #   Defines the level of access that an Amazon Web Services account has.
+    #   Defines the level of access that an AWS account has.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsProvisionedToAccountResponse AWS API Documentation
@@ -1511,9 +1504,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1536,7 +1529,7 @@ module Aws::SSOAdmin
     end
 
     # @!attribute [rw] permission_sets
-    #   Defines the level of access on an Amazon Web Services account.
+    #   Defines the level of access on an AWS account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1565,9 +1558,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1636,9 +1629,9 @@ module Aws::SSOAdmin
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set. For more information about ARNs, see
-    #   [Amazon Resource Names (ARNs) and Amazon Web Services Service
+    #   [Amazon Resource Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1685,16 +1678,15 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The identifier of the Amazon Web Services account from which to list
-    #   the assignments.
+    #   The identifier of the AWS account from which to list the
+    #   assignments.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
     #   The ARN of the permission set that is being provisioned. For more
-    #   information about ARNs, see [Amazon Resource Names (ARNs) and Amazon
-    #   Web Services Service
-    #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
+    #   Service Namespaces](/general/latest/gr/aws-arns-and-namespaces.html)
+    #   in the *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1757,9 +1749,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -1767,8 +1759,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   TargetID is an Amazon Web Services account identifier, typically a
-    #   10-12 digit string (For example, 123456789012).
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -1810,9 +1802,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn
@@ -1866,8 +1858,7 @@ module Aws::SSOAdmin
 
     # A set of key-value pairs that are used to manage the resource. Tags
     # can only be applied to permission sets and cannot be applied to
-    # corresponding roles that Amazon Web Services SSO creates in Amazon Web
-    # Services accounts.
+    # corresponding roles that AWS SSO creates in AWS accounts.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1911,9 +1902,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1964,9 +1955,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -2044,9 +2035,9 @@ module Aws::SSOAdmin
     # @!attribute [rw] instance_arn
     #   The ARN of the SSO instance under which the operation will be
     #   executed. For more information about ARNs, see [Amazon Resource
-    #   Names (ARNs) and Amazon Web Services Service
+    #   Names (ARNs) and AWS Service
     #   Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the
-    #   *Amazon Web Services General Reference*.
+    #   *AWS General Reference*.
     #   @return [String]
     #
     # @!attribute [rw] permission_set_arn

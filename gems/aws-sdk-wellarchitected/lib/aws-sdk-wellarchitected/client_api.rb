@@ -15,7 +15,6 @@ module Aws::WellArchitected
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Answer = Shapes::StructureShape.new(name: 'Answer')
-    AnswerReason = Shapes::StringShape.new(name: 'AnswerReason')
     AnswerSummaries = Shapes::ListShape.new(name: 'AnswerSummaries')
     AnswerSummary = Shapes::StructureShape.new(name: 'AnswerSummary')
     AssociateLensesInput = Shapes::StructureShape.new(name: 'AssociateLensesInput')
@@ -23,18 +22,9 @@ module Aws::WellArchitected
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     Base64String = Shapes::StringShape.new(name: 'Base64String')
     Choice = Shapes::StructureShape.new(name: 'Choice')
-    ChoiceAnswer = Shapes::StructureShape.new(name: 'ChoiceAnswer')
-    ChoiceAnswerSummaries = Shapes::ListShape.new(name: 'ChoiceAnswerSummaries')
-    ChoiceAnswerSummary = Shapes::StructureShape.new(name: 'ChoiceAnswerSummary')
-    ChoiceAnswers = Shapes::ListShape.new(name: 'ChoiceAnswers')
     ChoiceDescription = Shapes::StringShape.new(name: 'ChoiceDescription')
     ChoiceId = Shapes::StringShape.new(name: 'ChoiceId')
-    ChoiceNotes = Shapes::StringShape.new(name: 'ChoiceNotes')
-    ChoiceReason = Shapes::StringShape.new(name: 'ChoiceReason')
-    ChoiceStatus = Shapes::StringShape.new(name: 'ChoiceStatus')
     ChoiceTitle = Shapes::StringShape.new(name: 'ChoiceTitle')
-    ChoiceUpdate = Shapes::StructureShape.new(name: 'ChoiceUpdate')
-    ChoiceUpdates = Shapes::MapShape.new(name: 'ChoiceUpdates')
     Choices = Shapes::ListShape.new(name: 'Choices')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -212,11 +202,9 @@ module Aws::WellArchitected
     Answer.add_member(:helpful_resource_url, Shapes::ShapeRef.new(shape: HelpfulResourceUrl, location_name: "HelpfulResourceUrl"))
     Answer.add_member(:choices, Shapes::ShapeRef.new(shape: Choices, location_name: "Choices"))
     Answer.add_member(:selected_choices, Shapes::ShapeRef.new(shape: SelectedChoices, location_name: "SelectedChoices"))
-    Answer.add_member(:choice_answers, Shapes::ShapeRef.new(shape: ChoiceAnswers, location_name: "ChoiceAnswers"))
     Answer.add_member(:is_applicable, Shapes::ShapeRef.new(shape: IsApplicable, location_name: "IsApplicable"))
     Answer.add_member(:risk, Shapes::ShapeRef.new(shape: Risk, location_name: "Risk"))
     Answer.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
-    Answer.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
     Answer.struct_class = Types::Answer
 
     AnswerSummaries.member = Shapes::ShapeRef.new(shape: AnswerSummary)
@@ -226,10 +214,8 @@ module Aws::WellArchitected
     AnswerSummary.add_member(:question_title, Shapes::ShapeRef.new(shape: QuestionTitle, location_name: "QuestionTitle"))
     AnswerSummary.add_member(:choices, Shapes::ShapeRef.new(shape: Choices, location_name: "Choices"))
     AnswerSummary.add_member(:selected_choices, Shapes::ShapeRef.new(shape: SelectedChoices, location_name: "SelectedChoices"))
-    AnswerSummary.add_member(:choice_answer_summaries, Shapes::ShapeRef.new(shape: ChoiceAnswerSummaries, location_name: "ChoiceAnswerSummaries"))
     AnswerSummary.add_member(:is_applicable, Shapes::ShapeRef.new(shape: IsApplicable, location_name: "IsApplicable"))
     AnswerSummary.add_member(:risk, Shapes::ShapeRef.new(shape: Risk, location_name: "Risk"))
-    AnswerSummary.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
     AnswerSummary.struct_class = Types::AnswerSummary
 
     AssociateLensesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
@@ -240,29 +226,6 @@ module Aws::WellArchitected
     Choice.add_member(:title, Shapes::ShapeRef.new(shape: ChoiceTitle, location_name: "Title"))
     Choice.add_member(:description, Shapes::ShapeRef.new(shape: ChoiceDescription, location_name: "Description"))
     Choice.struct_class = Types::Choice
-
-    ChoiceAnswer.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
-    ChoiceAnswer.add_member(:status, Shapes::ShapeRef.new(shape: ChoiceStatus, location_name: "Status"))
-    ChoiceAnswer.add_member(:reason, Shapes::ShapeRef.new(shape: ChoiceReason, location_name: "Reason"))
-    ChoiceAnswer.add_member(:notes, Shapes::ShapeRef.new(shape: ChoiceNotes, location_name: "Notes"))
-    ChoiceAnswer.struct_class = Types::ChoiceAnswer
-
-    ChoiceAnswerSummaries.member = Shapes::ShapeRef.new(shape: ChoiceAnswerSummary)
-
-    ChoiceAnswerSummary.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
-    ChoiceAnswerSummary.add_member(:status, Shapes::ShapeRef.new(shape: ChoiceStatus, location_name: "Status"))
-    ChoiceAnswerSummary.add_member(:reason, Shapes::ShapeRef.new(shape: ChoiceReason, location_name: "Reason"))
-    ChoiceAnswerSummary.struct_class = Types::ChoiceAnswerSummary
-
-    ChoiceAnswers.member = Shapes::ShapeRef.new(shape: ChoiceAnswer)
-
-    ChoiceUpdate.add_member(:status, Shapes::ShapeRef.new(shape: ChoiceStatus, required: true, location_name: "Status"))
-    ChoiceUpdate.add_member(:reason, Shapes::ShapeRef.new(shape: ChoiceReason, location_name: "Reason"))
-    ChoiceUpdate.add_member(:notes, Shapes::ShapeRef.new(shape: ChoiceNotes, location_name: "Notes"))
-    ChoiceUpdate.struct_class = Types::ChoiceUpdate
-
-    ChoiceUpdates.key = Shapes::ShapeRef.new(shape: ChoiceId)
-    ChoiceUpdates.value = Shapes::ShapeRef.new(shape: ChoiceUpdate)
 
     Choices.member = Shapes::ShapeRef.new(shape: Choice)
 
@@ -640,10 +603,8 @@ module Aws::WellArchitected
     UpdateAnswerInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     UpdateAnswerInput.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, required: true, location: "uri", location_name: "QuestionId"))
     UpdateAnswerInput.add_member(:selected_choices, Shapes::ShapeRef.new(shape: SelectedChoices, location_name: "SelectedChoices"))
-    UpdateAnswerInput.add_member(:choice_updates, Shapes::ShapeRef.new(shape: ChoiceUpdates, location_name: "ChoiceUpdates"))
     UpdateAnswerInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
     UpdateAnswerInput.add_member(:is_applicable, Shapes::ShapeRef.new(shape: IsApplicable, location_name: "IsApplicable"))
-    UpdateAnswerInput.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
     UpdateAnswerInput.struct_class = Types::UpdateAnswerInput
 
     UpdateAnswerOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))

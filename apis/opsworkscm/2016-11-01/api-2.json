@@ -729,7 +729,6 @@
     "RestoreServerResponse":{
       "type":"structure",
       "members":{
-        "Server":{"shape":"Server"}
       }
     },
     "Server":{

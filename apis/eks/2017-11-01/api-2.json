@@ -578,8 +578,7 @@
         "ClusterUnreachable",
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
-        "AdmissionRequestDenied",
-        "UnsupportedAddonModification"
+        "AdmissionRequestDenied"
       ]
     },
     "AddonIssueList":{
@@ -881,14 +880,12 @@
         "remoteAccess":{"shape":"RemoteAccessConfig"},
         "nodeRole":{"shape":"String"},
         "labels":{"shape":"labelsMap"},
-        "taints":{"shape":"taintsList"},
         "tags":{"shape":"TagMap"},
         "clientRequestToken":{
           "shape":"String",
           "idempotencyToken":true
         },
         "launchTemplate":{"shape":"LaunchTemplateSpecification"},
-        "updateConfig":{"shape":"NodegroupUpdateConfig"},
         "capacityType":{"shape":"CapacityTypes"},
         "version":{"shape":"String"},
         "releaseVersion":{"shape":"String"}
@@ -1232,8 +1229,7 @@
         "ClusterUnreachable",
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
-        "AdmissionRequestDenied",
-        "UnsupportedAddonModification"
+        "AdmissionRequestDenied"
       ]
     },
     "ErrorDetail":{
@@ -1645,11 +1641,9 @@
         "amiType":{"shape":"AMITypes"},
         "nodeRole":{"shape":"String"},
         "labels":{"shape":"labelsMap"},
-        "taints":{"shape":"taintsList"},
         "resources":{"shape":"NodegroupResources"},
         "diskSize":{"shape":"BoxedInteger"},
         "health":{"shape":"NodegroupHealth"},
-        "updateConfig":{"shape":"NodegroupUpdateConfig"},
         "launchTemplate":{"shape":"LaunchTemplateSpecification"},
         "tags":{"shape":"TagMap"}
       }
@@ -1710,18 +1704,6 @@
         "DEGRADED"
       ]
     },
-    "NodegroupUpdateConfig":{
-      "type":"structure",
-      "members":{
-        "maxUnavailable":{"shape":"NonZeroInteger"},
-        "maxUnavailablePercentage":{"shape":"PercentCapacity"}
-      }
-    },
-    "NonZeroInteger":{
-      "type":"integer",
-      "box":true,
-      "min":1
-    },
     "NotFoundException":{
       "type":"structure",
       "members":{
@@ -1770,12 +1752,6 @@
         "groupsPrefix":{"shape":"String"},
         "requiredClaims":{"shape":"requiredClaimsMap"}
       }
-    },
-    "PercentCapacity":{
-      "type":"integer",
-      "box":true,
-      "max":100,
-      "min":1
     },
     "Provider":{
       "type":"structure",
@@ -1902,22 +1878,6 @@
     "TagValue":{
       "type":"string",
       "max":256
-    },
-    "Taint":{
-      "type":"structure",
-      "members":{
-        "key":{"shape":"taintKey"},
-        "value":{"shape":"taintValue"},
-        "effect":{"shape":"TaintEffect"}
-      }
-    },
-    "TaintEffect":{
-      "type":"string",
-      "enum":[
-        "NO_SCHEDULE",
-        "NO_EXECUTE",
-        "PREFER_NO_SCHEDULE"
-      ]
     },
     "Timestamp":{"type":"timestamp"},
     "UnsupportedAvailabilityZoneException":{
@@ -2071,9 +2031,7 @@
           "locationName":"nodegroupName"
         },
         "labels":{"shape":"UpdateLabelsPayload"},
-        "taints":{"shape":"UpdateTaintsPayload"},
         "scalingConfig":{"shape":"NodegroupScalingConfig"},
-        "updateConfig":{"shape":"NodegroupUpdateConfig"},
         "clientRequestToken":{
           "shape":"String",
           "idempotencyToken":true
@@ -2137,8 +2095,6 @@
         "DesiredSize",
         "LabelsToAdd",
         "LabelsToRemove",
-        "TaintsToAdd",
-        "TaintsToRemove",
         "MaxSize",
         "MinSize",
         "ReleaseVersion",
@@ -2149,9 +2105,7 @@
         "EncryptionConfig",
         "AddonVersion",
         "ServiceAccountRoleArn",
-        "ResolveConflicts",
-        "MaxUnavailable",
-        "MaxUnavailablePercentage"
+        "ResolveConflicts"
       ]
     },
     "UpdateParams":{
@@ -2166,13 +2120,6 @@
         "Cancelled",
         "Successful"
       ]
-    },
-    "UpdateTaintsPayload":{
-      "type":"structure",
-      "members":{
-        "addOrUpdateTaints":{"shape":"taintsList"},
-        "removeTaints":{"shape":"taintsList"}
-      }
     },
     "UpdateType":{
       "type":"string",
@@ -2229,7 +2176,7 @@
     },
     "labelValue":{
       "type":"string",
-      "max":63,
+      "max":253,
       "min":1
     },
     "labelsKeyList":{
@@ -2255,20 +2202,6 @@
       "type":"string",
       "max":253,
       "min":1
-    },
-    "taintKey":{
-      "type":"string",
-      "max":63,
-      "min":1
-    },
-    "taintValue":{
-      "type":"string",
-      "max":63,
-      "min":0
-    },
-    "taintsList":{
-      "type":"list",
-      "member":{"shape":"Taint"}
     }
   }
 }

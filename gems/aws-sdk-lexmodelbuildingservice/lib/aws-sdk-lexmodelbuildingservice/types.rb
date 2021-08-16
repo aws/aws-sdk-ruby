@@ -10,20 +10,6 @@
 module Aws::LexModelBuildingService
   module Types
 
-    # Your IAM user or role does not have permission to call the Amazon Lex
-    # V2 APIs required to migrate your bot.
-    #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/AccessDeniedException AWS API Documentation
-    #
-    class AccessDeniedException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The request is not well formed. For example, a value is invalid or a
     # required field is missing. Check the field values, and try again.
     #
@@ -1795,7 +1781,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-IN, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -1865,7 +1851,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-IN, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -2320,183 +2306,6 @@ module Aws::LexModelBuildingService
     #
     class GetIntentsResponse < Struct.new(
       :intents,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetMigrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         migration_id: "MigrationId", # required
-    #       }
-    #
-    # @!attribute [rw] migration_id
-    #   The unique identifier of the migration to view. The `migrationID` is
-    #   returned by the operation.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetMigrationRequest AWS API Documentation
-    #
-    class GetMigrationRequest < Struct.new(
-      :migration_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] migration_id
-    #   The unique identifier of the migration. This is the same as the
-    #   identifier used when calling the `GetMigration` operation.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_name
-    #   The name of the Amazon Lex V1 bot migrated to Amazon Lex V2.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_version
-    #   The version of the Amazon Lex V1 bot migrated to Amazon Lex V2.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_locale
-    #   The locale of the Amazon Lex V1 bot migrated to Amazon Lex V2.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_id
-    #   The unique identifier of the Amazon Lex V2 bot that the Amazon Lex
-    #   V1 is being migrated to.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_role
-    #   The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_status
-    #   Indicates the status of the migration. When the status is `COMPLETE`
-    #   the migration is finished and the bot is available in Amazon Lex V2.
-    #   There may be alerts and warnings that need to be resolved to
-    #   complete the migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_strategy
-    #   The strategy used to conduct the migration.
-    #
-    #   * `CREATE_NEW` - Creates a new Amazon Lex V2 bot and migrates the
-    #     Amazon Lex V1 bot to the new bot.
-    #
-    #   * `UPDATE_EXISTING` - Overwrites the existing Amazon Lex V2 bot
-    #     metadata and the locale being migrated. It doesn't change any
-    #     other locales in the Amazon Lex V2 bot. If the locale doesn't
-    #     exist, a new locale is created in the Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_timestamp
-    #   The date and time that the migration started.
-    #   @return [Time]
-    #
-    # @!attribute [rw] alerts
-    #   A list of alerts and warnings that indicate issues with the
-    #   migration for the Amazon Lex V1 bot to Amazon Lex V2. You receive a
-    #   warning when an Amazon Lex V1 feature has a different implementation
-    #   if Amazon Lex V2.
-    #
-    #   For more information, see [Migrating a bot][1] in the *Amazon Lex V2
-    #   developer guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/migrate.html
-    #   @return [Array<Types::MigrationAlert>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetMigrationResponse AWS API Documentation
-    #
-    class GetMigrationResponse < Struct.new(
-      :migration_id,
-      :v1_bot_name,
-      :v1_bot_version,
-      :v1_bot_locale,
-      :v2_bot_id,
-      :v2_bot_role,
-      :migration_status,
-      :migration_strategy,
-      :migration_timestamp,
-      :alerts)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass GetMigrationsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         sort_by_attribute: "V1_BOT_NAME", # accepts V1_BOT_NAME, MIGRATION_DATE_TIME
-    #         sort_by_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #         v1_bot_name_contains: "BotName",
-    #         migration_status_equals: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
-    # @!attribute [rw] sort_by_attribute
-    #   The field to sort the list of migrations by. You can sort by the
-    #   Amazon Lex V1 bot name or the date and time that the migration was
-    #   started.
-    #   @return [String]
-    #
-    # @!attribute [rw] sort_by_order
-    #   The order so sort the list.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_name_contains
-    #   Filters the list to contain only bots whose name contains the
-    #   specified string. The string is matched anywhere in bot name.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_status_equals
-    #   Filters the list to contain only migrations in the specified state.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of migrations to return in the response. The
-    #   default is 10.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   A pagination token that fetches the next page of migrations. If the
-    #   response to this operation is truncated, Amazon Lex returns a
-    #   pagination token in the response. To fetch the next page of
-    #   migrations, specify the pagination token in the request.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetMigrationsRequest AWS API Documentation
-    #
-    class GetMigrationsRequest < Struct.new(
-      :sort_by_attribute,
-      :sort_by_order,
-      :v1_bot_name_contains,
-      :migration_status_equals,
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] migration_summaries
-    #   An array of summaries for migrations from Amazon Lex V1 to Amazon
-    #   Lex V2. To see details of the migration, use the `migrationId` from
-    #   the summary in a call to the operation.
-    #   @return [Array<Types::MigrationSummary>]
-    #
-    # @!attribute [rw] next_token
-    #   If the response is truncated, it includes a pagination token that
-    #   you can specify in your next request to fetch the next page of
-    #   migrations.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetMigrationsResponse AWS API Documentation
-    #
-    class GetMigrationsResponse < Struct.new(
-      :migration_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3080,106 +2889,6 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
-    # Provides information about alerts and warnings that Amazon Lex sends
-    # during a migration. The alerts include information about how to
-    # resolve the issue.
-    #
-    # @!attribute [rw] type
-    #   The type of alert. There are two kinds of alerts:
-    #
-    #   * `ERROR` - There was an issue with the migration that can't be
-    #     resolved. The migration stops.
-    #
-    #   * `WARN` - There was an issue with the migration that requires
-    #     manual changes to the new Amazon Lex V2 bot. The migration
-    #     continues.
-    #   @return [String]
-    #
-    # @!attribute [rw] message
-    #   A message that describes why the alert was issued.
-    #   @return [String]
-    #
-    # @!attribute [rw] details
-    #   Additional details about the alert.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] reference_urls
-    #   A link to the Amazon Lex documentation that describes how to resolve
-    #   the alert.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/MigrationAlert AWS API Documentation
-    #
-    class MigrationAlert < Struct.new(
-      :type,
-      :message,
-      :details,
-      :reference_urls)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Provides information about migrating a bot from Amazon Lex V1 to
-    # Amazon Lex V2.
-    #
-    # @!attribute [rw] migration_id
-    #   The unique identifier that Amazon Lex assigned to the migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_name
-    #   The name of the Amazon Lex V1 bot that is the source of the
-    #   migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_version
-    #   The version of the Amazon Lex V1 bot that is the source of the
-    #   migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_locale
-    #   The locale of the Amazon Lex V1 bot that is the source of the
-    #   migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_id
-    #   The unique identifier of the Amazon Lex V2 that is the destination
-    #   of the migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_role
-    #   The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_status
-    #   The status of the operation. When the status is `COMPLETE` the bot
-    #   is available in Amazon Lex V2. There may be alerts and warnings that
-    #   need to be resolved to complete the migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_strategy
-    #   The strategy used to conduct the migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_timestamp
-    #   The date and time that the migration started.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/MigrationSummary AWS API Documentation
-    #
-    class MigrationSummary < Struct.new(
-      :migration_id,
-      :v1_bot_name,
-      :v1_bot_version,
-      :v1_bot_locale,
-      :v2_bot_id,
-      :v2_bot_role,
-      :migration_status,
-      :migration_strategy,
-      :migration_timestamp)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The resource specified in the request was not found. Check the
     # resource and try again.
     #
@@ -3470,7 +3179,7 @@ module Aws::LexModelBuildingService
     #         voice_id: "String",
     #         checksum: "String",
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
-    #         locale: "de-DE", # required, accepts de-DE, en-AU, en-GB, en-IN, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
+    #         locale: "de-DE", # required, accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT, ja-JP
     #         child_directed: false, # required
     #         detect_sentiment: false,
     #         create_version: false,
@@ -5027,115 +4736,6 @@ module Aws::LexModelBuildingService
       :import_status,
       :tags,
       :created_date)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass StartMigrationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         v1_bot_name: "BotName", # required
-    #         v1_bot_version: "Version", # required
-    #         v2_bot_name: "V2BotName", # required
-    #         v2_bot_role: "IamRoleArn", # required
-    #         migration_strategy: "CREATE_NEW", # required, accepts CREATE_NEW, UPDATE_EXISTING
-    #       }
-    #
-    # @!attribute [rw] v1_bot_name
-    #   The name of the Amazon Lex V1 bot that you are migrating to Amazon
-    #   Lex V2.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_version
-    #   The version of the bot to migrate to Amazon Lex V2. You can migrate
-    #   the `$LATEST` version as well as any numbered version.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_name
-    #   The name of the Amazon Lex V2 bot that you are migrating the Amazon
-    #   Lex V1 bot to.
-    #
-    #   * If the Amazon Lex V2 bot doesn't exist, you must use the
-    #     `CREATE_NEW` migration strategy.
-    #
-    #   * If the Amazon Lex V2 bot exists, you must use the
-    #     `UPDATE_EXISTING` migration strategy to change the contents of the
-    #     Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_role
-    #   The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_strategy
-    #   The strategy used to conduct the migration.
-    #
-    #   * `CREATE_NEW` - Creates a new Amazon Lex V2 bot and migrates the
-    #     Amazon Lex V1 bot to the new bot.
-    #
-    #   * `UPDATE_EXISTING` - Overwrites the existing Amazon Lex V2 bot
-    #     metadata and the locale being migrated. It doesn't change any
-    #     other locales in the Amazon Lex V2 bot. If the locale doesn't
-    #     exist, a new locale is created in the Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartMigrationRequest AWS API Documentation
-    #
-    class StartMigrationRequest < Struct.new(
-      :v1_bot_name,
-      :v1_bot_version,
-      :v2_bot_name,
-      :v2_bot_role,
-      :migration_strategy)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] v1_bot_name
-    #   The name of the Amazon Lex V1 bot that you are migrating to Amazon
-    #   Lex V2.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_version
-    #   The version of the bot to migrate to Amazon Lex V2.
-    #   @return [String]
-    #
-    # @!attribute [rw] v1_bot_locale
-    #   The locale used for the Amazon Lex V1 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_id
-    #   The unique identifier for the Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] v2_bot_role
-    #   The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_id
-    #   The unique identifier that Amazon Lex assigned to the migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_strategy
-    #   The strategy used to conduct the migration.
-    #   @return [String]
-    #
-    # @!attribute [rw] migration_timestamp
-    #   The date and time that the migration started.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartMigrationResponse AWS API Documentation
-    #
-    class StartMigrationResponse < Struct.new(
-      :v1_bot_name,
-      :v1_bot_version,
-      :v1_bot_locale,
-      :v2_bot_id,
-      :v2_bot_role,
-      :migration_id,
-      :migration_strategy,
-      :migration_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end

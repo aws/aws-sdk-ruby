@@ -11,7 +11,7 @@ module Aws
       def initialize(rules, options = {})
         @rules = rules
         @xml = options[:target] || []
-        indent = options[:indent] || ''
+        indent = options[:indent] || '  '
         pad = options[:pad] || ''
         @builder = DocBuilder.new(target: @xml, indent: indent, pad: pad)
       end

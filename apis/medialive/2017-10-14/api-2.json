@@ -2529,23 +2529,6 @@
         "USE_CONFIGURED"
       ]
     },
-    "AudioHlsRenditionSelection": {
-      "type": "structure",
-      "members": {
-        "GroupId": {
-          "shape": "__stringMin1",
-          "locationName": "groupId"
-        },
-        "Name": {
-          "shape": "__stringMin1",
-          "locationName": "name"
-        }
-      },
-      "required": [
-        "Name",
-        "GroupId"
-      ]
-    },
     "AudioLanguageSelection": {
       "type": "structure",
       "members": {
@@ -2667,10 +2650,6 @@
     "AudioSelectorSettings": {
       "type": "structure",
       "members": {
-        "AudioHlsRenditionSelection": {
-          "shape": "AudioHlsRenditionSelection",
-          "locationName": "audioHlsRenditionSelection"
-        },
         "AudioLanguageSelection": {
           "shape": "AudioLanguageSelection",
           "locationName": "audioLanguageSelection"
@@ -5393,24 +5372,9 @@
         "SCALED"
       ]
     },
-    "DvbSubOcrLanguage": {
-      "type": "string",
-      "enum": [
-        "DEU",
-        "ENG",
-        "FRA",
-        "NLD",
-        "POR",
-        "SPA"
-      ]
-    },
     "DvbSubSourceSettings": {
       "type": "structure",
       "members": {
-        "OcrLanguage": {
-          "shape": "DvbSubOcrLanguage",
-          "locationName": "ocrLanguage"
-        },
         "Pid": {
           "shape": "__integerMin1",
           "locationName": "pid"
@@ -5635,6 +5599,10 @@
         "FillLineGap": {
           "shape": "EbuTtDFillLineGapControl",
           "locationName": "fillLineGap"
+        },
+        "CopyrightHolder": {
+          "shape": "__stringMax1000",
+          "locationName": "copyrightHolder"
         },
         "FontFamily": {
           "shape": "__string",
@@ -6079,7 +6047,6 @@
     "H264AdaptiveQuantization": {
       "type": "string",
       "enum": [
-        "AUTO",
         "HIGH",
         "HIGHER",
         "LOW",
@@ -6448,7 +6415,6 @@
     "H265AdaptiveQuantization": {
       "type": "string",
       "enum": [
-        "AUTO",
         "HIGH",
         "HIGHER",
         "LOW",
@@ -7087,10 +7053,6 @@
         "RetryInterval": {
           "shape": "__integerMin0",
           "locationName": "retryInterval"
-        },
-        "Scte35Source": {
-          "shape": "HlsScte35SourceType",
-          "locationName": "scte35Source"
         }
       }
     },
@@ -7221,13 +7183,6 @@
           "locationName": "cannedAcl"
         }
       }
-    },
-    "HlsScte35SourceType": {
-      "type": "string",
-      "enum": [
-        "MANIFEST",
-        "SEGMENTS"
-      ]
     },
     "HlsSegmentationMode": {
       "type": "string",
@@ -10622,9 +10577,7 @@
       "type": "string",
       "enum": [
         "ADVANCED_AUDIO",
-        "AUDIO_NORMALIZATION",
-        "MGHD",
-        "MGUHD"
+        "AUDIO_NORMALIZATION"
       ]
     },
     "ReservationState": {
@@ -10904,24 +10857,9 @@
       "members": {
       }
     },
-    "Scte27OcrLanguage": {
-      "type": "string",
-      "enum": [
-        "DEU",
-        "ENG",
-        "FRA",
-        "NLD",
-        "POR",
-        "SPA"
-      ]
-    },
     "Scte27SourceSettings": {
       "type": "structure",
       "members": {
-        "OcrLanguage": {
-          "shape": "Scte27OcrLanguage",
-          "locationName": "ocrLanguage"
-        },
         "Pid": {
           "shape": "__integerMin1",
           "locationName": "pid"
@@ -11831,6 +11769,10 @@
           "shape": "__string",
           "locationName": "targetCustomerId"
         },
+        "TargetRegion": {
+          "shape": "__string",
+          "locationName": "targetRegion"
+        },
         "TransferType": {
           "shape": "InputDeviceTransferType",
           "locationName": "transferType"
@@ -12694,18 +12636,7 @@
     "WebvttDestinationSettings": {
       "type": "structure",
       "members": {
-        "StyleControl": {
-          "shape": "WebvttDestinationStyleControl",
-          "locationName": "styleControl"
-        }
       }
-    },
-    "WebvttDestinationStyleControl": {
-      "type": "string",
-      "enum": [
-        "NO_STYLE_DATA",
-        "PASSTHROUGH"
-      ]
     },
     "__boolean": {
       "type": "boolean"

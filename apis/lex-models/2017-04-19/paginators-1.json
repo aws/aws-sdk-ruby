@@ -40,11 +40,6 @@
       "output_token": "nextToken",
       "limit_key": "maxResults"
     },
-    "GetMigrations": {
-      "input_token": "nextToken",
-      "output_token": "nextToken",
-      "limit_key": "maxResults"
-    },
     "GetSlotTypeVersions": {
       "input_token": "nextToken",
       "output_token": "nextToken",

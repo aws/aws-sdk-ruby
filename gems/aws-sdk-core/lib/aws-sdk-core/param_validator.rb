@@ -70,14 +70,6 @@ module Aws
           end
         end
 
-        if @validate_required && shape.union
-          if values.length > 1
-            errors << "multiple values provided to union at #{context} - must contain exactly one of the supported types: #{shape.member_names.join(', ')}"
-          elsif values.length == 0
-            errors << "No values provided to union at #{context} - must contain exactly one of the supported types: #{shape.member_names.join(', ')}"
-          end
-        end
-
         # validate non-nil members
         values.each_pair do |name, value|
           unless value.nil?
@@ -125,32 +117,11 @@ module Aws
       end
     end
 
-    def document(ref, value, errors, context)
-      document_types = [Hash, Array, Numeric, String, TrueClass, FalseClass, NilClass]
-      unless document_types.any? { |t| value.is_a?(t) }
-        errors << expected_got(context, "one of #{document_types.join(', ')}", value)
-      end
-
-      # recursively validate types for aggregated types
-      case value
-      when Hash
-        value.each do |k, v|
-          document(ref, v, errors, context + "[#{k}]")
-        end
-      when Array
-        value.each do |v|
-          document(ref, v, errors, context)
-        end
-      end
-
-    end
-
     def shape(ref, value, errors, context)
       case ref.shape
       when StructureShape then structure(ref, value, errors, context)
       when ListShape then list(ref, value, errors, context)
       when MapShape then map(ref, value, errors, context)
-      when DocumentShape then document(ref, value, errors, context)
       when StringShape
         unless value.is_a?(String)
           errors << expected_got(context, "a String", value)

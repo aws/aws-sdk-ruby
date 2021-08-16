@@ -1,26 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.31.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.30.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.29.1 (2021-07-14)
-------------------
-
-* Issue - Remove `content-length` header from `AsyncClient`.
-
-1.29.0 (2021-05-11)
-------------------
-
-* Feature - Amazon Transcribe supports partial results stabilization for streaming transcription.
-
 1.28.0 (2021-03-15)
 ------------------
 

@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.20.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.19.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.18.0 (2021-05-14)
-------------------
-
-* Feature - Updated descriptions of array parameters to add the restrictions on the array and value lengths.
-
 1.17.0 (2021-04-21)
 ------------------
 

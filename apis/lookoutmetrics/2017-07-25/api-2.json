@@ -561,7 +561,6 @@
         "DELETING",
         "FAILED",
         "INACTIVE",
-        "LEARNING",
         "BACK_TEST_ACTIVATING",
         "BACK_TEST_ACTIVE",
         "BACK_TEST_COMPLETE"
@@ -1115,7 +1114,7 @@
       "type":"string",
       "max":2048,
       "min":20,
-      "pattern":"arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
+      "pattern":"arn:aws.*:kms:.*:[0-9]{12}:key/.*"
     },
     "LambdaConfiguration":{
       "type":"structure",
@@ -1558,7 +1557,7 @@
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^[a-zA-Z][a-zA-Z0-9_.]*$"
+      "pattern":"^[a-zA-Z][a-zA-Z0-9_]*$"
     },
     "TagKey":{
       "type":"string",
@@ -1683,7 +1682,7 @@
     "UUID":{
       "type":"string",
       "max":63,
-      "pattern":"[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
+      "pattern":"^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
     },
     "UntagResourceRequest":{
       "type":"structure",

@@ -424,7 +424,7 @@ module Aws::OpsWorksCM
     # @!attribute [rw] engine_version
     #   The major release version of the engine that you want to use. For a
     #   Chef server, the valid value for EngineVersion is currently `2`. For
-    #   a Puppet server, valid values are `2019` or `2017`.
+    #   a Puppet server, the valid value is `2017`.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
@@ -919,23 +919,11 @@ module Aws::OpsWorksCM
     #   running Chef Automate 1 must have had at least one successful
     #   maintenance run after November 1, 2019.
     #
-    #   *For Puppet servers:*
-    #   `DescribeServersResponse$Servers$EngineAttributes` contains the
-    #   following two responses:
-    #
-    #   * `PUPPET_API_CA_CERT`, the PEM-encoded CA certificate that is used
-    #     by the Puppet API over TCP port number 8140. The CA certificate is
-    #     also used to sign node certificates.
-    #
-    #   * `PUPPET_API_CRL`, a certificate revocation list. The certificate
-    #     revocation list is for internal maintenance purposes only. For
-    #     more information about the Puppet certificate revocation list, see
-    #     [Man Page: puppet certificate\_revocation\_list][1] in the Puppet
-    #     documentation.
-    #
-    #
-    #
-    #   [1]: https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html
+    #   *For Puppet Server:*
+    #   `DescribeServersResponse$Servers$EngineAttributes` contains
+    #   PUPPET\_API\_CA\_CERT. This is the PEM-encoded CA certificate that
+    #   is used by the Puppet API over TCP port number 8140. The CA
+    #   certificate is also used to sign node certificates.
     #   @return [Array<Types::Server>]
     #
     # @!attribute [rw] next_token
@@ -1295,17 +1283,9 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # @!attribute [rw] server
-    #   Describes a configuration management server.
-    #   @return [Types::Server]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerResponse AWS API Documentation
     #
-    class RestoreServerResponse < Struct.new(
-      :server)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class RestoreServerResponse < Aws::EmptyStructure; end
 
     # Describes a configuration management server.
     #
@@ -1391,8 +1371,8 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine_version
     #   The engine version of the server. For a Chef server, the valid value
-    #   for EngineVersion is currently `2`. For a Puppet server, specify
-    #   either `2019` or `2017`.
+    #   for EngineVersion is currently `2`. For a Puppet server, the valid
+    #   value is `2017`.
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_arn

@@ -37,8 +37,6 @@ module Aws::Snowball
     CreateClusterResult = Shapes::StructureShape.new(name: 'CreateClusterResult')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResult = Shapes::StructureShape.new(name: 'CreateJobResult')
-    CreateLongTermPricingRequest = Shapes::StructureShape.new(name: 'CreateLongTermPricingRequest')
-    CreateLongTermPricingResult = Shapes::StructureShape.new(name: 'CreateLongTermPricingResult')
     CreateReturnShippingLabelRequest = Shapes::StructureShape.new(name: 'CreateReturnShippingLabelRequest')
     CreateReturnShippingLabelResult = Shapes::StructureShape.new(name: 'CreateReturnShippingLabelResult')
     DataTransfer = Shapes::StructureShape.new(name: 'DataTransfer')
@@ -53,7 +51,6 @@ module Aws::Snowball
     DescribeReturnShippingLabelRequest = Shapes::StructureShape.new(name: 'DescribeReturnShippingLabelRequest')
     DescribeReturnShippingLabelResult = Shapes::StructureShape.new(name: 'DescribeReturnShippingLabelResult')
     DeviceConfiguration = Shapes::StructureShape.new(name: 'DeviceConfiguration')
-    DeviceServiceName = Shapes::StringShape.new(name: 'DeviceServiceName')
     Ec2AmiResource = Shapes::StructureShape.new(name: 'Ec2AmiResource')
     Ec2AmiResourceList = Shapes::ListShape.new(name: 'Ec2AmiResourceList')
     Ec2RequestFailedException = Shapes::StructureShape.new(name: 'Ec2RequestFailedException')
@@ -75,7 +72,6 @@ module Aws::Snowball
     InvalidJobStateException = Shapes::StructureShape.new(name: 'InvalidJobStateException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidResourceException = Shapes::StructureShape.new(name: 'InvalidResourceException')
-    JavaBoolean = Shapes::BooleanShape.new(name: 'JavaBoolean')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobListEntry = Shapes::StructureShape.new(name: 'JobListEntry')
     JobListEntryList = Shapes::ListShape.new(name: 'JobListEntryList')
@@ -100,18 +96,8 @@ module Aws::Snowball
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
     ListLimit = Shapes::IntegerShape.new(name: 'ListLimit')
-    ListLongTermPricingRequest = Shapes::StructureShape.new(name: 'ListLongTermPricingRequest')
-    ListLongTermPricingResult = Shapes::StructureShape.new(name: 'ListLongTermPricingResult')
     Long = Shapes::IntegerShape.new(name: 'Long')
-    LongTermPricingAssociatedJobIdList = Shapes::ListShape.new(name: 'LongTermPricingAssociatedJobIdList')
-    LongTermPricingEntryList = Shapes::ListShape.new(name: 'LongTermPricingEntryList')
-    LongTermPricingId = Shapes::StringShape.new(name: 'LongTermPricingId')
-    LongTermPricingListEntry = Shapes::StructureShape.new(name: 'LongTermPricingListEntry')
-    LongTermPricingType = Shapes::StringShape.new(name: 'LongTermPricingType')
-    NFSOnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'NFSOnDeviceServiceConfiguration')
     Notification = Shapes::StructureShape.new(name: 'Notification')
-    OnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'OnDeviceServiceConfiguration')
-    RemoteManagement = Shapes::StringShape.new(name: 'RemoteManagement')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ReturnShippingLabelAlreadyExistsException = Shapes::StructureShape.new(name: 'ReturnShippingLabelAlreadyExistsException')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
@@ -126,14 +112,9 @@ module Aws::Snowball
     SnowballType = Shapes::StringShape.new(name: 'SnowballType')
     SnowconeDeviceConfiguration = Shapes::StructureShape.new(name: 'SnowconeDeviceConfiguration')
     SnsTopicARN = Shapes::StringShape.new(name: 'SnsTopicARN')
-    StorageLimit = Shapes::IntegerShape.new(name: 'StorageLimit')
-    StorageUnit = Shapes::StringShape.new(name: 'StorageUnit')
     String = Shapes::StringShape.new(name: 'String')
-    TargetOnDeviceService = Shapes::StructureShape.new(name: 'TargetOnDeviceService')
-    TargetOnDeviceServiceList = Shapes::ListShape.new(name: 'TargetOnDeviceServiceList')
     TaxDocuments = Shapes::StructureShape.new(name: 'TaxDocuments')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
-    TransferOption = Shapes::StringShape.new(name: 'TransferOption')
     UnsupportedAddressException = Shapes::StructureShape.new(name: 'UnsupportedAddressException')
     UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
     UpdateClusterResult = Shapes::StructureShape.new(name: 'UpdateClusterResult')
@@ -141,8 +122,6 @@ module Aws::Snowball
     UpdateJobResult = Shapes::StructureShape.new(name: 'UpdateJobResult')
     UpdateJobShipmentStateRequest = Shapes::StructureShape.new(name: 'UpdateJobShipmentStateRequest')
     UpdateJobShipmentStateResult = Shapes::StructureShape.new(name: 'UpdateJobShipmentStateResult')
-    UpdateLongTermPricingRequest = Shapes::StructureShape.new(name: 'UpdateLongTermPricingRequest')
-    UpdateLongTermPricingResult = Shapes::StructureShape.new(name: 'UpdateLongTermPricingResult')
     WirelessConnection = Shapes::StructureShape.new(name: 'WirelessConnection')
 
     Address.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
@@ -198,7 +177,6 @@ module Aws::Snowball
     ClusterMetadata.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     ClusterMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     ClusterMetadata.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
-    ClusterMetadata.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
     ClusterMetadata.struct_class = Types::ClusterMetadata
 
     CompatibleImage.add_member(:ami_id, Shapes::ShapeRef.new(shape: String, location_name: "AmiId"))
@@ -219,17 +197,15 @@ module Aws::Snowball
 
     CreateClusterRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "JobType"))
     CreateClusterRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, required: true, location_name: "Resources"))
-    CreateClusterRequest.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
     CreateClusterRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateClusterRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, required: true, location_name: "AddressId"))
     CreateClusterRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyARN, location_name: "KmsKeyARN"))
     CreateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
-    CreateClusterRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, required: true, location_name: "SnowballType"))
+    CreateClusterRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
     CreateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, required: true, location_name: "ShippingOption"))
     CreateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     CreateClusterRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     CreateClusterRequest.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
-    CreateClusterRequest.add_member(:remote_management, Shapes::ShapeRef.new(shape: RemoteManagement, location_name: "RemoteManagement"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResult.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
@@ -237,7 +213,6 @@ module Aws::Snowball
 
     CreateJobRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
     CreateJobRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
-    CreateJobRequest.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
     CreateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateJobRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
     CreateJobRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyARN, location_name: "KmsKeyARN"))
@@ -250,20 +225,10 @@ module Aws::Snowball
     CreateJobRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     CreateJobRequest.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
     CreateJobRequest.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfiguration, location_name: "DeviceConfiguration"))
-    CreateJobRequest.add_member(:remote_management, Shapes::ShapeRef.new(shape: RemoteManagement, location_name: "RemoteManagement"))
-    CreateJobRequest.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     CreateJobResult.struct_class = Types::CreateJobResult
-
-    CreateLongTermPricingRequest.add_member(:long_term_pricing_type, Shapes::ShapeRef.new(shape: LongTermPricingType, required: true, location_name: "LongTermPricingType"))
-    CreateLongTermPricingRequest.add_member(:is_long_term_pricing_auto_renew, Shapes::ShapeRef.new(shape: JavaBoolean, location_name: "IsLongTermPricingAutoRenew"))
-    CreateLongTermPricingRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
-    CreateLongTermPricingRequest.struct_class = Types::CreateLongTermPricingRequest
-
-    CreateLongTermPricingResult.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
-    CreateLongTermPricingResult.struct_class = Types::CreateLongTermPricingResult
 
     CreateReturnShippingLabelRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     CreateReturnShippingLabelRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
@@ -305,7 +270,7 @@ module Aws::Snowball
     DescribeJobResult.add_member(:sub_job_metadata, Shapes::ShapeRef.new(shape: JobMetadataList, location_name: "SubJobMetadata"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
 
-    DescribeReturnShippingLabelRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeReturnShippingLabelRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     DescribeReturnShippingLabelRequest.struct_class = Types::DescribeReturnShippingLabelRequest
 
     DescribeReturnShippingLabelResult.add_member(:status, Shapes::ShapeRef.new(shape: ShippingLabelStatus, location_name: "Status"))
@@ -407,9 +372,6 @@ module Aws::Snowball
     JobMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     JobMetadata.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
     JobMetadata.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfiguration, location_name: "DeviceConfiguration"))
-    JobMetadata.add_member(:remote_management, Shapes::ShapeRef.new(shape: RemoteManagement, location_name: "RemoteManagement"))
-    JobMetadata.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
-    JobMetadata.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
     JobMetadata.struct_class = Types::JobMetadata
 
     JobMetadataList.member = Shapes::ShapeRef.new(shape: JobMetadata)
@@ -467,48 +429,16 @@ module Aws::Snowball
     ListJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListJobsResult.struct_class = Types::ListJobsResult
 
-    ListLongTermPricingRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
-    ListLongTermPricingRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListLongTermPricingRequest.struct_class = Types::ListLongTermPricingRequest
-
-    ListLongTermPricingResult.add_member(:long_term_pricing_entries, Shapes::ShapeRef.new(shape: LongTermPricingEntryList, location_name: "LongTermPricingEntries"))
-    ListLongTermPricingResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListLongTermPricingResult.struct_class = Types::ListLongTermPricingResult
-
-    LongTermPricingAssociatedJobIdList.member = Shapes::ShapeRef.new(shape: JobId)
-
-    LongTermPricingEntryList.member = Shapes::ShapeRef.new(shape: LongTermPricingListEntry)
-
-    LongTermPricingListEntry.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, location_name: "LongTermPricingId"))
-    LongTermPricingListEntry.add_member(:long_term_pricing_end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LongTermPricingEndDate"))
-    LongTermPricingListEntry.add_member(:long_term_pricing_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LongTermPricingStartDate"))
-    LongTermPricingListEntry.add_member(:long_term_pricing_type, Shapes::ShapeRef.new(shape: LongTermPricingType, location_name: "LongTermPricingType"))
-    LongTermPricingListEntry.add_member(:current_active_job, Shapes::ShapeRef.new(shape: JobId, location_name: "CurrentActiveJob"))
-    LongTermPricingListEntry.add_member(:replacement_job, Shapes::ShapeRef.new(shape: JobId, location_name: "ReplacementJob"))
-    LongTermPricingListEntry.add_member(:is_long_term_pricing_auto_renew, Shapes::ShapeRef.new(shape: JavaBoolean, location_name: "IsLongTermPricingAutoRenew"))
-    LongTermPricingListEntry.add_member(:long_term_pricing_status, Shapes::ShapeRef.new(shape: String, location_name: "LongTermPricingStatus"))
-    LongTermPricingListEntry.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
-    LongTermPricingListEntry.add_member(:job_ids, Shapes::ShapeRef.new(shape: LongTermPricingAssociatedJobIdList, location_name: "JobIds"))
-    LongTermPricingListEntry.struct_class = Types::LongTermPricingListEntry
-
-    NFSOnDeviceServiceConfiguration.add_member(:storage_limit, Shapes::ShapeRef.new(shape: StorageLimit, location_name: "StorageLimit"))
-    NFSOnDeviceServiceConfiguration.add_member(:storage_unit, Shapes::ShapeRef.new(shape: StorageUnit, location_name: "StorageUnit"))
-    NFSOnDeviceServiceConfiguration.struct_class = Types::NFSOnDeviceServiceConfiguration
-
     Notification.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicARN, location_name: "SnsTopicARN"))
     Notification.add_member(:job_states_to_notify, Shapes::ShapeRef.new(shape: JobStateList, location_name: "JobStatesToNotify"))
     Notification.add_member(:notify_all, Shapes::ShapeRef.new(shape: Boolean, location_name: "NotifyAll"))
     Notification.struct_class = Types::Notification
-
-    OnDeviceServiceConfiguration.add_member(:nfs_on_device_service, Shapes::ShapeRef.new(shape: NFSOnDeviceServiceConfiguration, location_name: "NFSOnDeviceService"))
-    OnDeviceServiceConfiguration.struct_class = Types::OnDeviceServiceConfiguration
 
     ReturnShippingLabelAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ReturnShippingLabelAlreadyExistsException.struct_class = Types::ReturnShippingLabelAlreadyExistsException
 
     S3Resource.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "BucketArn"))
     S3Resource.add_member(:key_range, Shapes::ShapeRef.new(shape: KeyRange, location_name: "KeyRange"))
-    S3Resource.add_member(:target_on_device_services, Shapes::ShapeRef.new(shape: TargetOnDeviceServiceList, location_name: "TargetOnDeviceServices"))
     S3Resource.struct_class = Types::S3Resource
 
     S3ResourceList.member = Shapes::ShapeRef.new(shape: S3Resource)
@@ -525,12 +455,6 @@ module Aws::Snowball
     SnowconeDeviceConfiguration.add_member(:wireless_connection, Shapes::ShapeRef.new(shape: WirelessConnection, location_name: "WirelessConnection"))
     SnowconeDeviceConfiguration.struct_class = Types::SnowconeDeviceConfiguration
 
-    TargetOnDeviceService.add_member(:service_name, Shapes::ShapeRef.new(shape: DeviceServiceName, location_name: "ServiceName"))
-    TargetOnDeviceService.add_member(:transfer_option, Shapes::ShapeRef.new(shape: TransferOption, location_name: "TransferOption"))
-    TargetOnDeviceService.struct_class = Types::TargetOnDeviceService
-
-    TargetOnDeviceServiceList.member = Shapes::ShapeRef.new(shape: TargetOnDeviceService)
-
     TaxDocuments.add_member(:ind, Shapes::ShapeRef.new(shape: INDTaxDocuments, location_name: "IND"))
     TaxDocuments.struct_class = Types::TaxDocuments
 
@@ -541,7 +465,6 @@ module Aws::Snowball
     UpdateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     UpdateClusterRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     UpdateClusterRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
-    UpdateClusterRequest.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
     UpdateClusterRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
     UpdateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
     UpdateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
@@ -554,7 +477,6 @@ module Aws::Snowball
     UpdateJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     UpdateJobRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     UpdateJobRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
-    UpdateJobRequest.add_member(:on_device_service_configuration, Shapes::ShapeRef.new(shape: OnDeviceServiceConfiguration, location_name: "OnDeviceServiceConfiguration"))
     UpdateJobRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
     UpdateJobRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
     UpdateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -569,13 +491,6 @@ module Aws::Snowball
     UpdateJobShipmentStateRequest.struct_class = Types::UpdateJobShipmentStateRequest
 
     UpdateJobShipmentStateResult.struct_class = Types::UpdateJobShipmentStateResult
-
-    UpdateLongTermPricingRequest.add_member(:long_term_pricing_id, Shapes::ShapeRef.new(shape: LongTermPricingId, required: true, location_name: "LongTermPricingId"))
-    UpdateLongTermPricingRequest.add_member(:replacement_job, Shapes::ShapeRef.new(shape: JobId, location_name: "ReplacementJob"))
-    UpdateLongTermPricingRequest.add_member(:is_long_term_pricing_auto_renew, Shapes::ShapeRef.new(shape: JavaBoolean, location_name: "IsLongTermPricingAutoRenew"))
-    UpdateLongTermPricingRequest.struct_class = Types::UpdateLongTermPricingRequest
-
-    UpdateLongTermPricingResult.struct_class = Types::UpdateLongTermPricingResult
 
     WirelessConnection.add_member(:is_wifi_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsWifiEnabled"))
     WirelessConnection.struct_class = Types::WirelessConnection
@@ -654,15 +569,6 @@ module Aws::Snowball
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
-      end)
-
-      api.add_operation(:create_long_term_pricing, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateLongTermPricing"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: CreateLongTermPricingRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateLongTermPricingResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
       end)
 
       api.add_operation(:create_return_shipping_label, Seahorse::Model::Operation.new.tap do |o|
@@ -814,16 +720,6 @@ module Aws::Snowball
         )
       end)
 
-      api.add_operation(:list_long_term_pricing, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListLongTermPricing"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListLongTermPricingRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListLongTermPricingResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-      end)
-
       api.add_operation(:update_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateCluster"
         o.http_method = "POST"
@@ -859,15 +755,6 @@ module Aws::Snowball
         o.output = Shapes::ShapeRef.new(shape: UpdateJobShipmentStateResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
-      end)
-
-      api.add_operation(:update_long_term_pricing, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateLongTermPricing"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: UpdateLongTermPricingRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateLongTermPricingResult)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
       end)
     end
 

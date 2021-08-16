@@ -36,19 +36,10 @@ module Aws
           )
         end
 
-        let(:boundary_obj) do
-          S3::Object.new(
-            bucket_name: 'bucket',
-            key: 'boundary',
-            client: client
-          )
-        end
-
         let(:one_meg) { 1024 * 1024 }
         let(:small_file) { Tempfile.new('small-file') }
         let(:large_file) { Tempfile.new('large-file') }
         let(:single_part_file) { Tempfile.new('single-part-file') }
-        let(:boundary_file) { Tempfile.new('range-boundary-file') }
         let(:version_id) { 'a-fake-version-id' }
 
         before(:each) do
@@ -121,6 +112,7 @@ module Aws
             response_target: path
           ).exactly(1).times
 
+          small_obj.put(body: small_file)
           small_obj.download_file(path)
         end
 
@@ -131,6 +123,7 @@ module Aws
             part_number: 1
           ).exactly(1).times
 
+          large_obj.upload_file(large_file)
           large_obj.download_file(path)
         end
 
@@ -141,6 +134,7 @@ module Aws
             part_number: 1
           ).exactly(1).times
 
+          single_obj.put(body: single_part_file)
           single_obj.download_file(path)
         end
 
@@ -152,6 +146,7 @@ module Aws
             response_target: path
           ).exactly(1).times
 
+          small_obj.put(body: small_file)
           small_obj.download_file(path, version_id: version_id)
         end
 
@@ -178,53 +173,6 @@ module Aws
               ArgumentError,
               ":chunk_size shouldn't exceed total file size."
             )
-        end
-
-        context 'file size is chunk size boundary' do
-          let(:file_size) { 5 * one_meg + 1 }
-          let(:chunk_size) { 5 * one_meg }
-
-          before :each do
-            allow(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'boundary',
-              part_number: 1
-            ).and_return(
-              client.stub_data(
-                :head_object,
-                content_length: file_size
-              )
-            )
-
-            client.stub_responses(:get_object, ->(context) {
-              # S3 does not allow 1 byte ranges. This shouldn't be raised.
-              if context.params[:range] == "bytes=#{file_size}-#{file_size}"
-                'InvalidRange'
-              else
-                { content_range: "bytes 0-#{chunk_size - 1}/#{file_size}" }
-              end
-            })
-          end
-
-          it 'downloads the file with default chunk size' do
-            expect(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'boundary',
-              part_number: 1
-            ).exactly(1).times
-
-            boundary_obj.download_file(path)
-          end
-
-          it 'downloads the file with provided chunk size' do
-            expect(client).to receive(:head_object).with(
-              bucket: 'bucket',
-              key: 'boundary',
-              part_number: 1
-            ).exactly(1).times
-
-            boundary_obj.download_file(path, chunk_size: chunk_size)
-          end
         end
       end
     end

@@ -13,27 +13,12 @@ module Aws::TranscribeService
 
     include Seahorse::Model
 
-    AbsoluteTimeRange = Shapes::StructureShape.new(name: 'AbsoluteTimeRange')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BaseModelName = Shapes::StringShape.new(name: 'BaseModelName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CLMLanguageCode = Shapes::StringShape.new(name: 'CLMLanguageCode')
-    CallAnalyticsJob = Shapes::StructureShape.new(name: 'CallAnalyticsJob')
-    CallAnalyticsJobName = Shapes::StringShape.new(name: 'CallAnalyticsJobName')
-    CallAnalyticsJobSettings = Shapes::StructureShape.new(name: 'CallAnalyticsJobSettings')
-    CallAnalyticsJobStatus = Shapes::StringShape.new(name: 'CallAnalyticsJobStatus')
-    CallAnalyticsJobSummaries = Shapes::ListShape.new(name: 'CallAnalyticsJobSummaries')
-    CallAnalyticsJobSummary = Shapes::StructureShape.new(name: 'CallAnalyticsJobSummary')
-    CategoryName = Shapes::StringShape.new(name: 'CategoryName')
-    CategoryProperties = Shapes::StructureShape.new(name: 'CategoryProperties')
-    CategoryPropertiesList = Shapes::ListShape.new(name: 'CategoryPropertiesList')
-    ChannelDefinition = Shapes::StructureShape.new(name: 'ChannelDefinition')
-    ChannelDefinitions = Shapes::ListShape.new(name: 'ChannelDefinitions')
-    ChannelId = Shapes::IntegerShape.new(name: 'ChannelId')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentRedaction = Shapes::StructureShape.new(name: 'ContentRedaction')
-    CreateCallAnalyticsCategoryRequest = Shapes::StructureShape.new(name: 'CreateCallAnalyticsCategoryRequest')
-    CreateCallAnalyticsCategoryResponse = Shapes::StructureShape.new(name: 'CreateCallAnalyticsCategoryResponse')
     CreateLanguageModelRequest = Shapes::StructureShape.new(name: 'CreateLanguageModelRequest')
     CreateLanguageModelResponse = Shapes::StructureShape.new(name: 'CreateLanguageModelResponse')
     CreateMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'CreateMedicalVocabularyRequest')
@@ -44,10 +29,6 @@ module Aws::TranscribeService
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
     DataAccessRoleArn = Shapes::StringShape.new(name: 'DataAccessRoleArn')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
-    DeleteCallAnalyticsCategoryRequest = Shapes::StructureShape.new(name: 'DeleteCallAnalyticsCategoryRequest')
-    DeleteCallAnalyticsCategoryResponse = Shapes::StructureShape.new(name: 'DeleteCallAnalyticsCategoryResponse')
-    DeleteCallAnalyticsJobRequest = Shapes::StructureShape.new(name: 'DeleteCallAnalyticsJobRequest')
-    DeleteCallAnalyticsJobResponse = Shapes::StructureShape.new(name: 'DeleteCallAnalyticsJobResponse')
     DeleteLanguageModelRequest = Shapes::StructureShape.new(name: 'DeleteLanguageModelRequest')
     DeleteMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteMedicalTranscriptionJobRequest')
     DeleteMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteMedicalVocabularyRequest')
@@ -57,10 +38,6 @@ module Aws::TranscribeService
     DescribeLanguageModelRequest = Shapes::StructureShape.new(name: 'DescribeLanguageModelRequest')
     DescribeLanguageModelResponse = Shapes::StructureShape.new(name: 'DescribeLanguageModelResponse')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
-    GetCallAnalyticsCategoryRequest = Shapes::StructureShape.new(name: 'GetCallAnalyticsCategoryRequest')
-    GetCallAnalyticsCategoryResponse = Shapes::StructureShape.new(name: 'GetCallAnalyticsCategoryResponse')
-    GetCallAnalyticsJobRequest = Shapes::StructureShape.new(name: 'GetCallAnalyticsJobRequest')
-    GetCallAnalyticsJobResponse = Shapes::StructureShape.new(name: 'GetCallAnalyticsJobResponse')
     GetMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobRequest')
     GetMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobResponse')
     GetMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'GetMedicalVocabularyRequest')
@@ -74,17 +51,12 @@ module Aws::TranscribeService
     IdentifiedLanguageScore = Shapes::FloatShape.new(name: 'IdentifiedLanguageScore')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
-    InterruptionFilter = Shapes::StructureShape.new(name: 'InterruptionFilter')
     JobExecutionSettings = Shapes::StructureShape.new(name: 'JobExecutionSettings')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LanguageModel = Shapes::StructureShape.new(name: 'LanguageModel')
     LanguageOptions = Shapes::ListShape.new(name: 'LanguageOptions')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
-    ListCallAnalyticsCategoriesRequest = Shapes::StructureShape.new(name: 'ListCallAnalyticsCategoriesRequest')
-    ListCallAnalyticsCategoriesResponse = Shapes::StructureShape.new(name: 'ListCallAnalyticsCategoriesResponse')
-    ListCallAnalyticsJobsRequest = Shapes::StructureShape.new(name: 'ListCallAnalyticsJobsRequest')
-    ListCallAnalyticsJobsResponse = Shapes::StructureShape.new(name: 'ListCallAnalyticsJobsResponse')
     ListLanguageModelsRequest = Shapes::StructureShape.new(name: 'ListLanguageModelsRequest')
     ListLanguageModelsResponse = Shapes::StructureShape.new(name: 'ListLanguageModelsResponse')
     ListMedicalTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsRequest')
@@ -103,7 +75,6 @@ module Aws::TranscribeService
     Media = Shapes::StructureShape.new(name: 'Media')
     MediaFormat = Shapes::StringShape.new(name: 'MediaFormat')
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
-    MedicalContentIdentificationType = Shapes::StringShape.new(name: 'MedicalContentIdentificationType')
     MedicalTranscript = Shapes::StructureShape.new(name: 'MedicalTranscript')
     MedicalTranscriptionJob = Shapes::StructureShape.new(name: 'MedicalTranscriptionJob')
     MedicalTranscriptionJobSummaries = Shapes::ListShape.new(name: 'MedicalTranscriptionJobSummaries')
@@ -114,46 +85,28 @@ module Aws::TranscribeService
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     Models = Shapes::ListShape.new(name: 'Models')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
-    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
-    NonTalkTimeFilter = Shapes::StructureShape.new(name: 'NonTalkTimeFilter')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OutputBucketName = Shapes::StringShape.new(name: 'OutputBucketName')
     OutputKey = Shapes::StringShape.new(name: 'OutputKey')
     OutputLocationType = Shapes::StringShape.new(name: 'OutputLocationType')
-    ParticipantRole = Shapes::StringShape.new(name: 'ParticipantRole')
-    Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     Phrase = Shapes::StringShape.new(name: 'Phrase')
     Phrases = Shapes::ListShape.new(name: 'Phrases')
     RedactionOutput = Shapes::StringShape.new(name: 'RedactionOutput')
     RedactionType = Shapes::StringShape.new(name: 'RedactionType')
-    RelativeTimeRange = Shapes::StructureShape.new(name: 'RelativeTimeRange')
-    Rule = Shapes::UnionShape.new(name: 'Rule')
-    RuleList = Shapes::ListShape.new(name: 'RuleList')
-    SentimentFilter = Shapes::StructureShape.new(name: 'SentimentFilter')
-    SentimentValue = Shapes::StringShape.new(name: 'SentimentValue')
-    SentimentValueList = Shapes::ListShape.new(name: 'SentimentValueList')
     Settings = Shapes::StructureShape.new(name: 'Settings')
     Specialty = Shapes::StringShape.new(name: 'Specialty')
-    StartCallAnalyticsJobRequest = Shapes::StructureShape.new(name: 'StartCallAnalyticsJobRequest')
-    StartCallAnalyticsJobResponse = Shapes::StructureShape.new(name: 'StartCallAnalyticsJobResponse')
     StartMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'StartMedicalTranscriptionJobRequest')
     StartMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'StartMedicalTranscriptionJobResponse')
     StartTranscriptionJobRequest = Shapes::StructureShape.new(name: 'StartTranscriptionJobRequest')
     StartTranscriptionJobResponse = Shapes::StructureShape.new(name: 'StartTranscriptionJobResponse')
     String = Shapes::StringShape.new(name: 'String')
-    StringTargetList = Shapes::ListShape.new(name: 'StringTargetList')
-    TimestampMilliseconds = Shapes::IntegerShape.new(name: 'TimestampMilliseconds')
     Transcript = Shapes::StructureShape.new(name: 'Transcript')
-    TranscriptFilter = Shapes::StructureShape.new(name: 'TranscriptFilter')
-    TranscriptFilterType = Shapes::StringShape.new(name: 'TranscriptFilterType')
     TranscriptionJob = Shapes::StructureShape.new(name: 'TranscriptionJob')
     TranscriptionJobName = Shapes::StringShape.new(name: 'TranscriptionJobName')
     TranscriptionJobStatus = Shapes::StringShape.new(name: 'TranscriptionJobStatus')
     TranscriptionJobSummaries = Shapes::ListShape.new(name: 'TranscriptionJobSummaries')
     TranscriptionJobSummary = Shapes::StructureShape.new(name: 'TranscriptionJobSummary')
     Type = Shapes::StringShape.new(name: 'Type')
-    UpdateCallAnalyticsCategoryRequest = Shapes::StructureShape.new(name: 'UpdateCallAnalyticsCategoryRequest')
-    UpdateCallAnalyticsCategoryResponse = Shapes::StructureShape.new(name: 'UpdateCallAnalyticsCategoryResponse')
     UpdateMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'UpdateMedicalVocabularyRequest')
     UpdateMedicalVocabularyResponse = Shapes::StructureShape.new(name: 'UpdateMedicalVocabularyResponse')
     UpdateVocabularyFilterRequest = Shapes::StructureShape.new(name: 'UpdateVocabularyFilterRequest')
@@ -172,64 +125,8 @@ module Aws::TranscribeService
     Word = Shapes::StringShape.new(name: 'Word')
     Words = Shapes::ListShape.new(name: 'Words')
 
-    AbsoluteTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: TimestampMilliseconds, location_name: "StartTime"))
-    AbsoluteTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampMilliseconds, location_name: "EndTime"))
-    AbsoluteTimeRange.add_member(:first, Shapes::ShapeRef.new(shape: TimestampMilliseconds, location_name: "First"))
-    AbsoluteTimeRange.add_member(:last, Shapes::ShapeRef.new(shape: TimestampMilliseconds, location_name: "Last"))
-    AbsoluteTimeRange.struct_class = Types::AbsoluteTimeRange
-
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
-
-    CallAnalyticsJob.add_member(:call_analytics_job_name, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, location_name: "CallAnalyticsJobName"))
-    CallAnalyticsJob.add_member(:call_analytics_job_status, Shapes::ShapeRef.new(shape: CallAnalyticsJobStatus, location_name: "CallAnalyticsJobStatus"))
-    CallAnalyticsJob.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    CallAnalyticsJob.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
-    CallAnalyticsJob.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
-    CallAnalyticsJob.add_member(:media, Shapes::ShapeRef.new(shape: Media, location_name: "Media"))
-    CallAnalyticsJob.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
-    CallAnalyticsJob.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    CallAnalyticsJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
-    CallAnalyticsJob.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
-    CallAnalyticsJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
-    CallAnalyticsJob.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
-    CallAnalyticsJob.add_member(:identified_language_score, Shapes::ShapeRef.new(shape: IdentifiedLanguageScore, location_name: "IdentifiedLanguageScore"))
-    CallAnalyticsJob.add_member(:settings, Shapes::ShapeRef.new(shape: CallAnalyticsJobSettings, location_name: "Settings"))
-    CallAnalyticsJob.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: ChannelDefinitions, location_name: "ChannelDefinitions"))
-    CallAnalyticsJob.struct_class = Types::CallAnalyticsJob
-
-    CallAnalyticsJobSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
-    CallAnalyticsJobSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
-    CallAnalyticsJobSettings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
-    CallAnalyticsJobSettings.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
-    CallAnalyticsJobSettings.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
-    CallAnalyticsJobSettings.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
-    CallAnalyticsJobSettings.struct_class = Types::CallAnalyticsJobSettings
-
-    CallAnalyticsJobSummaries.member = Shapes::ShapeRef.new(shape: CallAnalyticsJobSummary)
-
-    CallAnalyticsJobSummary.add_member(:call_analytics_job_name, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, location_name: "CallAnalyticsJobName"))
-    CallAnalyticsJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
-    CallAnalyticsJobSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
-    CallAnalyticsJobSummary.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
-    CallAnalyticsJobSummary.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
-    CallAnalyticsJobSummary.add_member(:call_analytics_job_status, Shapes::ShapeRef.new(shape: CallAnalyticsJobStatus, location_name: "CallAnalyticsJobStatus"))
-    CallAnalyticsJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
-    CallAnalyticsJobSummary.struct_class = Types::CallAnalyticsJobSummary
-
-    CategoryProperties.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, location_name: "CategoryName"))
-    CategoryProperties.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, location_name: "Rules"))
-    CategoryProperties.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime"))
-    CategoryProperties.add_member(:last_update_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastUpdateTime"))
-    CategoryProperties.struct_class = Types::CategoryProperties
-
-    CategoryPropertiesList.member = Shapes::ShapeRef.new(shape: CategoryProperties)
-
-    ChannelDefinition.add_member(:channel_id, Shapes::ShapeRef.new(shape: ChannelId, location_name: "ChannelId"))
-    ChannelDefinition.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
-    ChannelDefinition.struct_class = Types::ChannelDefinition
-
-    ChannelDefinitions.member = Shapes::ShapeRef.new(shape: ChannelDefinition)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -237,13 +134,6 @@ module Aws::TranscribeService
     ContentRedaction.add_member(:redaction_type, Shapes::ShapeRef.new(shape: RedactionType, required: true, location_name: "RedactionType"))
     ContentRedaction.add_member(:redaction_output, Shapes::ShapeRef.new(shape: RedactionOutput, required: true, location_name: "RedactionOutput"))
     ContentRedaction.struct_class = Types::ContentRedaction
-
-    CreateCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
-    CreateCallAnalyticsCategoryRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "Rules"))
-    CreateCallAnalyticsCategoryRequest.struct_class = Types::CreateCallAnalyticsCategoryRequest
-
-    CreateCallAnalyticsCategoryResponse.add_member(:category_properties, Shapes::ShapeRef.new(shape: CategoryProperties, location_name: "CategoryProperties"))
-    CreateCallAnalyticsCategoryResponse.struct_class = Types::CreateCallAnalyticsCategoryResponse
 
     CreateLanguageModelRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: CLMLanguageCode, required: true, location_name: "LanguageCode"))
     CreateLanguageModelRequest.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, required: true, location_name: "BaseModelName"))
@@ -294,16 +184,6 @@ module Aws::TranscribeService
     CreateVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CreateVocabularyResponse.struct_class = Types::CreateVocabularyResponse
 
-    DeleteCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
-    DeleteCallAnalyticsCategoryRequest.struct_class = Types::DeleteCallAnalyticsCategoryRequest
-
-    DeleteCallAnalyticsCategoryResponse.struct_class = Types::DeleteCallAnalyticsCategoryResponse
-
-    DeleteCallAnalyticsJobRequest.add_member(:call_analytics_job_name, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, required: true, location_name: "CallAnalyticsJobName"))
-    DeleteCallAnalyticsJobRequest.struct_class = Types::DeleteCallAnalyticsJobRequest
-
-    DeleteCallAnalyticsJobResponse.struct_class = Types::DeleteCallAnalyticsJobResponse
-
     DeleteLanguageModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DeleteLanguageModelRequest.struct_class = Types::DeleteLanguageModelRequest
 
@@ -327,18 +207,6 @@ module Aws::TranscribeService
 
     DescribeLanguageModelResponse.add_member(:language_model, Shapes::ShapeRef.new(shape: LanguageModel, location_name: "LanguageModel"))
     DescribeLanguageModelResponse.struct_class = Types::DescribeLanguageModelResponse
-
-    GetCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
-    GetCallAnalyticsCategoryRequest.struct_class = Types::GetCallAnalyticsCategoryRequest
-
-    GetCallAnalyticsCategoryResponse.add_member(:category_properties, Shapes::ShapeRef.new(shape: CategoryProperties, location_name: "CategoryProperties"))
-    GetCallAnalyticsCategoryResponse.struct_class = Types::GetCallAnalyticsCategoryResponse
-
-    GetCallAnalyticsJobRequest.add_member(:call_analytics_job_name, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, required: true, location_name: "CallAnalyticsJobName"))
-    GetCallAnalyticsJobRequest.struct_class = Types::GetCallAnalyticsJobRequest
-
-    GetCallAnalyticsJobResponse.add_member(:call_analytics_job, Shapes::ShapeRef.new(shape: CallAnalyticsJob, location_name: "CallAnalyticsJob"))
-    GetCallAnalyticsJobResponse.struct_class = Types::GetCallAnalyticsJobResponse
 
     GetMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     GetMedicalTranscriptionJobRequest.struct_class = Types::GetMedicalTranscriptionJobRequest
@@ -391,13 +259,6 @@ module Aws::TranscribeService
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalFailureException.struct_class = Types::InternalFailureException
 
-    InterruptionFilter.add_member(:threshold, Shapes::ShapeRef.new(shape: TimestampMilliseconds, location_name: "Threshold"))
-    InterruptionFilter.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
-    InterruptionFilter.add_member(:absolute_time_range, Shapes::ShapeRef.new(shape: AbsoluteTimeRange, location_name: "AbsoluteTimeRange"))
-    InterruptionFilter.add_member(:relative_time_range, Shapes::ShapeRef.new(shape: RelativeTimeRange, location_name: "RelativeTimeRange"))
-    InterruptionFilter.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
-    InterruptionFilter.struct_class = Types::InterruptionFilter
-
     JobExecutionSettings.add_member(:allow_deferred_execution, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowDeferredExecution"))
     JobExecutionSettings.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
     JobExecutionSettings.struct_class = Types::JobExecutionSettings
@@ -417,25 +278,6 @@ module Aws::TranscribeService
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
-
-    ListCallAnalyticsCategoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListCallAnalyticsCategoriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListCallAnalyticsCategoriesRequest.struct_class = Types::ListCallAnalyticsCategoriesRequest
-
-    ListCallAnalyticsCategoriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListCallAnalyticsCategoriesResponse.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryPropertiesList, location_name: "Categories"))
-    ListCallAnalyticsCategoriesResponse.struct_class = Types::ListCallAnalyticsCategoriesResponse
-
-    ListCallAnalyticsJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: CallAnalyticsJobStatus, location_name: "Status"))
-    ListCallAnalyticsJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, location_name: "JobNameContains"))
-    ListCallAnalyticsJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListCallAnalyticsJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    ListCallAnalyticsJobsRequest.struct_class = Types::ListCallAnalyticsJobsRequest
-
-    ListCallAnalyticsJobsResponse.add_member(:status, Shapes::ShapeRef.new(shape: CallAnalyticsJobStatus, location_name: "Status"))
-    ListCallAnalyticsJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListCallAnalyticsJobsResponse.add_member(:call_analytics_job_summaries, Shapes::ShapeRef.new(shape: CallAnalyticsJobSummaries, location_name: "CallAnalyticsJobSummaries"))
-    ListCallAnalyticsJobsResponse.struct_class = Types::ListCallAnalyticsJobsResponse
 
     ListLanguageModelsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "StatusEquals"))
     ListLanguageModelsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ModelName, location_name: "NameContains"))
@@ -501,7 +343,6 @@ module Aws::TranscribeService
     ListVocabularyFiltersResponse.struct_class = Types::ListVocabularyFiltersResponse
 
     Media.add_member(:media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "MediaFileUri"))
-    Media.add_member(:redacted_media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "RedactedMediaFileUri"))
     Media.struct_class = Types::Media
 
     MedicalTranscript.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "TranscriptFileUri"))
@@ -519,7 +360,6 @@ module Aws::TranscribeService
     MedicalTranscriptionJob.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
     MedicalTranscriptionJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     MedicalTranscriptionJob.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalTranscriptionSetting, location_name: "Settings"))
-    MedicalTranscriptionJob.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     MedicalTranscriptionJob.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, location_name: "Specialty"))
     MedicalTranscriptionJob.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
     MedicalTranscriptionJob.struct_class = Types::MedicalTranscriptionJob
@@ -535,7 +375,6 @@ module Aws::TranscribeService
     MedicalTranscriptionJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     MedicalTranscriptionJobSummary.add_member(:output_location_type, Shapes::ShapeRef.new(shape: OutputLocationType, location_name: "OutputLocationType"))
     MedicalTranscriptionJobSummary.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, location_name: "Specialty"))
-    MedicalTranscriptionJobSummary.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     MedicalTranscriptionJobSummary.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
     MedicalTranscriptionJobSummary.struct_class = Types::MedicalTranscriptionJobSummary
 
@@ -552,45 +391,10 @@ module Aws::TranscribeService
 
     Models.member = Shapes::ShapeRef.new(shape: LanguageModel)
 
-    NonTalkTimeFilter.add_member(:threshold, Shapes::ShapeRef.new(shape: TimestampMilliseconds, location_name: "Threshold"))
-    NonTalkTimeFilter.add_member(:absolute_time_range, Shapes::ShapeRef.new(shape: AbsoluteTimeRange, location_name: "AbsoluteTimeRange"))
-    NonTalkTimeFilter.add_member(:relative_time_range, Shapes::ShapeRef.new(shape: RelativeTimeRange, location_name: "RelativeTimeRange"))
-    NonTalkTimeFilter.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
-    NonTalkTimeFilter.struct_class = Types::NonTalkTimeFilter
-
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
     Phrases.member = Shapes::ShapeRef.new(shape: Phrase)
-
-    RelativeTimeRange.add_member(:start_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "StartPercentage"))
-    RelativeTimeRange.add_member(:end_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "EndPercentage"))
-    RelativeTimeRange.add_member(:first, Shapes::ShapeRef.new(shape: Percentage, location_name: "First"))
-    RelativeTimeRange.add_member(:last, Shapes::ShapeRef.new(shape: Percentage, location_name: "Last"))
-    RelativeTimeRange.struct_class = Types::RelativeTimeRange
-
-    Rule.add_member(:non_talk_time_filter, Shapes::ShapeRef.new(shape: NonTalkTimeFilter, location_name: "NonTalkTimeFilter"))
-    Rule.add_member(:interruption_filter, Shapes::ShapeRef.new(shape: InterruptionFilter, location_name: "InterruptionFilter"))
-    Rule.add_member(:transcript_filter, Shapes::ShapeRef.new(shape: TranscriptFilter, location_name: "TranscriptFilter"))
-    Rule.add_member(:sentiment_filter, Shapes::ShapeRef.new(shape: SentimentFilter, location_name: "SentimentFilter"))
-    Rule.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    Rule.add_member_subclass(:non_talk_time_filter, Types::Rule::NonTalkTimeFilter)
-    Rule.add_member_subclass(:interruption_filter, Types::Rule::InterruptionFilter)
-    Rule.add_member_subclass(:transcript_filter, Types::Rule::TranscriptFilter)
-    Rule.add_member_subclass(:sentiment_filter, Types::Rule::SentimentFilter)
-    Rule.add_member_subclass(:unknown, Types::Rule::Unknown)
-    Rule.struct_class = Types::Rule
-
-    RuleList.member = Shapes::ShapeRef.new(shape: Rule)
-
-    SentimentFilter.add_member(:sentiments, Shapes::ShapeRef.new(shape: SentimentValueList, required: true, location_name: "Sentiments"))
-    SentimentFilter.add_member(:absolute_time_range, Shapes::ShapeRef.new(shape: AbsoluteTimeRange, location_name: "AbsoluteTimeRange"))
-    SentimentFilter.add_member(:relative_time_range, Shapes::ShapeRef.new(shape: RelativeTimeRange, location_name: "RelativeTimeRange"))
-    SentimentFilter.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
-    SentimentFilter.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
-    SentimentFilter.struct_class = Types::SentimentFilter
-
-    SentimentValueList.member = Shapes::ShapeRef.new(shape: SentimentValue)
 
     Settings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
     Settings.add_member(:show_speaker_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabels"))
@@ -602,18 +406,6 @@ module Aws::TranscribeService
     Settings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
     Settings.struct_class = Types::Settings
 
-    StartCallAnalyticsJobRequest.add_member(:call_analytics_job_name, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, required: true, location_name: "CallAnalyticsJobName"))
-    StartCallAnalyticsJobRequest.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "Media"))
-    StartCallAnalyticsJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: Uri, location_name: "OutputLocation"))
-    StartCallAnalyticsJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
-    StartCallAnalyticsJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, required: true, location_name: "DataAccessRoleArn"))
-    StartCallAnalyticsJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: CallAnalyticsJobSettings, location_name: "Settings"))
-    StartCallAnalyticsJobRequest.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: ChannelDefinitions, location_name: "ChannelDefinitions"))
-    StartCallAnalyticsJobRequest.struct_class = Types::StartCallAnalyticsJobRequest
-
-    StartCallAnalyticsJobResponse.add_member(:call_analytics_job, Shapes::ShapeRef.new(shape: CallAnalyticsJob, location_name: "CallAnalyticsJob"))
-    StartCallAnalyticsJobResponse.struct_class = Types::StartCallAnalyticsJobResponse
-
     StartMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     StartMedicalTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     StartMedicalTranscriptionJobRequest.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
@@ -623,7 +415,6 @@ module Aws::TranscribeService
     StartMedicalTranscriptionJobRequest.add_member(:output_key, Shapes::ShapeRef.new(shape: OutputKey, location_name: "OutputKey"))
     StartMedicalTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
     StartMedicalTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalTranscriptionSetting, location_name: "Settings"))
-    StartMedicalTranscriptionJobRequest.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     StartMedicalTranscriptionJobRequest.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, required: true, location_name: "Specialty"))
     StartMedicalTranscriptionJobRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
     StartMedicalTranscriptionJobRequest.struct_class = Types::StartMedicalTranscriptionJobRequest
@@ -650,19 +441,9 @@ module Aws::TranscribeService
     StartTranscriptionJobResponse.add_member(:transcription_job, Shapes::ShapeRef.new(shape: TranscriptionJob, location_name: "TranscriptionJob"))
     StartTranscriptionJobResponse.struct_class = Types::StartTranscriptionJobResponse
 
-    StringTargetList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
-
     Transcript.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "TranscriptFileUri"))
     Transcript.add_member(:redacted_transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "RedactedTranscriptFileUri"))
     Transcript.struct_class = Types::Transcript
-
-    TranscriptFilter.add_member(:transcript_filter_type, Shapes::ShapeRef.new(shape: TranscriptFilterType, required: true, location_name: "TranscriptFilterType"))
-    TranscriptFilter.add_member(:absolute_time_range, Shapes::ShapeRef.new(shape: AbsoluteTimeRange, location_name: "AbsoluteTimeRange"))
-    TranscriptFilter.add_member(:relative_time_range, Shapes::ShapeRef.new(shape: RelativeTimeRange, location_name: "RelativeTimeRange"))
-    TranscriptFilter.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
-    TranscriptFilter.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
-    TranscriptFilter.add_member(:targets, Shapes::ShapeRef.new(shape: StringTargetList, required: true, location_name: "Targets"))
-    TranscriptFilter.struct_class = Types::TranscriptFilter
 
     TranscriptionJob.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "TranscriptionJobName"))
     TranscriptionJob.add_member(:transcription_job_status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "TranscriptionJobStatus"))
@@ -699,13 +480,6 @@ module Aws::TranscribeService
     TranscriptionJobSummary.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
     TranscriptionJobSummary.add_member(:identified_language_score, Shapes::ShapeRef.new(shape: IdentifiedLanguageScore, location_name: "IdentifiedLanguageScore"))
     TranscriptionJobSummary.struct_class = Types::TranscriptionJobSummary
-
-    UpdateCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
-    UpdateCallAnalyticsCategoryRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "Rules"))
-    UpdateCallAnalyticsCategoryRequest.struct_class = Types::UpdateCallAnalyticsCategoryRequest
-
-    UpdateCallAnalyticsCategoryResponse.add_member(:category_properties, Shapes::ShapeRef.new(shape: CategoryProperties, location_name: "CategoryProperties"))
-    UpdateCallAnalyticsCategoryResponse.struct_class = Types::UpdateCallAnalyticsCategoryResponse
 
     UpdateMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     UpdateMedicalVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
@@ -776,18 +550,6 @@ module Aws::TranscribeService
         "uid" => "transcribe-2017-10-26",
       }
 
-      api.add_operation(:create_call_analytics_category, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateCallAnalyticsCategory"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: CreateCallAnalyticsCategoryRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateCallAnalyticsCategoryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-      end)
-
       api.add_operation(:create_language_model, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLanguageModel"
         o.http_method = "POST"
@@ -834,29 +596,6 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-      end)
-
-      api.add_operation(:delete_call_analytics_category, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteCallAnalyticsCategory"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DeleteCallAnalyticsCategoryRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteCallAnalyticsCategoryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-      end)
-
-      api.add_operation(:delete_call_analytics_job, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteCallAnalyticsJob"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DeleteCallAnalyticsJobRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteCallAnalyticsJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_language_model, Seahorse::Model::Operation.new.tap do |o|
@@ -940,30 +679,6 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
-      api.add_operation(:get_call_analytics_category, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetCallAnalyticsCategory"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetCallAnalyticsCategoryRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetCallAnalyticsCategoryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-      end)
-
-      api.add_operation(:get_call_analytics_job, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetCallAnalyticsJob"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetCallAnalyticsJobRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetCallAnalyticsJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-      end)
-
       api.add_operation(:get_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMedicalTranscriptionJob"
         o.http_method = "POST"
@@ -1022,40 +737,6 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-      end)
-
-      api.add_operation(:list_call_analytics_categories, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListCallAnalyticsCategories"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListCallAnalyticsCategoriesRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListCallAnalyticsCategoriesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
-      api.add_operation(:list_call_analytics_jobs, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListCallAnalyticsJobs"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListCallAnalyticsJobsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListCallAnalyticsJobsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
       end)
 
       api.add_operation(:list_language_models, Seahorse::Model::Operation.new.tap do |o|
@@ -1160,18 +841,6 @@ module Aws::TranscribeService
         )
       end)
 
-      api.add_operation(:start_call_analytics_job, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "StartCallAnalyticsJob"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: StartCallAnalyticsJobRequest)
-        o.output = Shapes::ShapeRef.new(shape: StartCallAnalyticsJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-      end)
-
       api.add_operation(:start_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartMedicalTranscriptionJob"
         o.http_method = "POST"
@@ -1193,19 +862,6 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-      end)
-
-      api.add_operation(:update_call_analytics_category, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateCallAnalyticsCategory"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: UpdateCallAnalyticsCategoryRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateCallAnalyticsCategoryResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 

@@ -98,8 +98,6 @@ module Aws::WAFV2
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
     GetLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetLoggingConfigurationRequest')
     GetLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetLoggingConfigurationResponse')
-    GetManagedRuleSetRequest = Shapes::StructureShape.new(name: 'GetManagedRuleSetRequest')
-    GetManagedRuleSetResponse = Shapes::StructureShape.new(name: 'GetManagedRuleSetResponse')
     GetPermissionPolicyRequest = Shapes::StructureShape.new(name: 'GetPermissionPolicyRequest')
     GetPermissionPolicyResponse = Shapes::StructureShape.new(name: 'GetPermissionPolicyResponse')
     GetRateBasedStatementManagedKeysRequest = Shapes::StructureShape.new(name: 'GetRateBasedStatementManagedKeysRequest')
@@ -144,16 +142,12 @@ module Aws::WAFV2
     LabelSummaries = Shapes::ListShape.new(name: 'LabelSummaries')
     LabelSummary = Shapes::StructureShape.new(name: 'LabelSummary')
     Labels = Shapes::ListShape.new(name: 'Labels')
-    ListAvailableManagedRuleGroupVersionsRequest = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupVersionsRequest')
-    ListAvailableManagedRuleGroupVersionsResponse = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupVersionsResponse')
     ListAvailableManagedRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupsRequest')
     ListAvailableManagedRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
     ListIPSetsResponse = Shapes::StructureShape.new(name: 'ListIPSetsResponse')
     ListLoggingConfigurationsRequest = Shapes::StructureShape.new(name: 'ListLoggingConfigurationsRequest')
     ListLoggingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListLoggingConfigurationsResponse')
-    ListManagedRuleSetsRequest = Shapes::StructureShape.new(name: 'ListManagedRuleSetsRequest')
-    ListManagedRuleSetsResponse = Shapes::StructureShape.new(name: 'ListManagedRuleSetsResponse')
     ListMaxItems = Shapes::IntegerShape.new(name: 'ListMaxItems')
     ListRegexPatternSetsRequest = Shapes::StructureShape.new(name: 'ListRegexPatternSetsRequest')
     ListRegexPatternSetsResponse = Shapes::StructureShape.new(name: 'ListRegexPatternSetsResponse')
@@ -173,12 +167,6 @@ module Aws::WAFV2
     ManagedRuleGroupStatement = Shapes::StructureShape.new(name: 'ManagedRuleGroupStatement')
     ManagedRuleGroupSummaries = Shapes::ListShape.new(name: 'ManagedRuleGroupSummaries')
     ManagedRuleGroupSummary = Shapes::StructureShape.new(name: 'ManagedRuleGroupSummary')
-    ManagedRuleGroupVersion = Shapes::StructureShape.new(name: 'ManagedRuleGroupVersion')
-    ManagedRuleGroupVersions = Shapes::ListShape.new(name: 'ManagedRuleGroupVersions')
-    ManagedRuleSet = Shapes::StructureShape.new(name: 'ManagedRuleSet')
-    ManagedRuleSetSummaries = Shapes::ListShape.new(name: 'ManagedRuleSetSummaries')
-    ManagedRuleSetSummary = Shapes::StructureShape.new(name: 'ManagedRuleSetSummary')
-    ManagedRuleSetVersion = Shapes::StructureShape.new(name: 'ManagedRuleSetVersion')
     Method = Shapes::StructureShape.new(name: 'Method')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     NextMarker = Shapes::StringShape.new(name: 'NextMarker')
@@ -192,11 +180,8 @@ module Aws::WAFV2
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
-    PublishedVersions = Shapes::MapShape.new(name: 'PublishedVersions')
     PutLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutLoggingConfigurationRequest')
     PutLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutLoggingConfigurationResponse')
-    PutManagedRuleSetVersionsRequest = Shapes::StructureShape.new(name: 'PutManagedRuleSetVersionsRequest')
-    PutManagedRuleSetVersionsResponse = Shapes::StructureShape.new(name: 'PutManagedRuleSetVersionsResponse')
     PutPermissionPolicyRequest = Shapes::StructureShape.new(name: 'PutPermissionPolicyRequest')
     PutPermissionPolicyResponse = Shapes::StructureShape.new(name: 'PutPermissionPolicyResponse')
     QueryString = Shapes::StructureShape.new(name: 'QueryString')
@@ -253,15 +238,12 @@ module Aws::WAFV2
     TextTransformationType = Shapes::StringShape.new(name: 'TextTransformationType')
     TextTransformations = Shapes::ListShape.new(name: 'TextTransformations')
     TimeWindow = Shapes::StructureShape.new(name: 'TimeWindow')
-    TimeWindowDay = Shapes::IntegerShape.new(name: 'TimeWindowDay')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     URIString = Shapes::StringShape.new(name: 'URIString')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateIPSetRequest = Shapes::StructureShape.new(name: 'UpdateIPSetRequest')
     UpdateIPSetResponse = Shapes::StructureShape.new(name: 'UpdateIPSetResponse')
-    UpdateManagedRuleSetVersionExpiryDateRequest = Shapes::StructureShape.new(name: 'UpdateManagedRuleSetVersionExpiryDateRequest')
-    UpdateManagedRuleSetVersionExpiryDateResponse = Shapes::StructureShape.new(name: 'UpdateManagedRuleSetVersionExpiryDateResponse')
     UpdateRegexPatternSetRequest = Shapes::StructureShape.new(name: 'UpdateRegexPatternSetRequest')
     UpdateRegexPatternSetResponse = Shapes::StructureShape.new(name: 'UpdateRegexPatternSetResponse')
     UpdateRuleGroupRequest = Shapes::StructureShape.new(name: 'UpdateRuleGroupRequest')
@@ -270,13 +252,9 @@ module Aws::WAFV2
     UpdateWebACLResponse = Shapes::StructureShape.new(name: 'UpdateWebACLResponse')
     UriPath = Shapes::StructureShape.new(name: 'UriPath')
     VendorName = Shapes::StringShape.new(name: 'VendorName')
-    VersionKeyString = Shapes::StringShape.new(name: 'VersionKeyString')
-    VersionToPublish = Shapes::StructureShape.new(name: 'VersionToPublish')
-    VersionsToPublish = Shapes::MapShape.new(name: 'VersionsToPublish')
     VisibilityConfig = Shapes::StructureShape.new(name: 'VisibilityConfig')
     WAFAssociatedItemException = Shapes::StructureShape.new(name: 'WAFAssociatedItemException')
     WAFDuplicateItemException = Shapes::StructureShape.new(name: 'WAFDuplicateItemException')
-    WAFExpiredManagedRuleGroupVersionException = Shapes::StructureShape.new(name: 'WAFExpiredManagedRuleGroupVersionException')
     WAFInternalErrorException = Shapes::StructureShape.new(name: 'WAFInternalErrorException')
     WAFInvalidOperationException = Shapes::StructureShape.new(name: 'WAFInvalidOperationException')
     WAFInvalidParameterException = Shapes::StructureShape.new(name: 'WAFInvalidParameterException')
@@ -467,11 +445,8 @@ module Aws::WAFV2
     DescribeManagedRuleGroupRequest.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, required: true, location_name: "VendorName"))
     DescribeManagedRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     DescribeManagedRuleGroupRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    DescribeManagedRuleGroupRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "VersionName"))
     DescribeManagedRuleGroupRequest.struct_class = Types::DescribeManagedRuleGroupRequest
 
-    DescribeManagedRuleGroupResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "VersionName"))
-    DescribeManagedRuleGroupResponse.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "SnsTopicArn"))
     DescribeManagedRuleGroupResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "Capacity"))
     DescribeManagedRuleGroupResponse.add_member(:rules, Shapes::ShapeRef.new(shape: RuleSummaries, location_name: "Rules"))
     DescribeManagedRuleGroupResponse.add_member(:label_namespace, Shapes::ShapeRef.new(shape: LabelName, location_name: "LabelNamespace"))
@@ -542,15 +517,6 @@ module Aws::WAFV2
     GetLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     GetLoggingConfigurationResponse.struct_class = Types::GetLoggingConfigurationResponse
 
-    GetManagedRuleSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    GetManagedRuleSetRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    GetManagedRuleSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
-    GetManagedRuleSetRequest.struct_class = Types::GetManagedRuleSetRequest
-
-    GetManagedRuleSetResponse.add_member(:managed_rule_set, Shapes::ShapeRef.new(shape: ManagedRuleSet, location_name: "ManagedRuleSet"))
-    GetManagedRuleSetResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "LockToken"))
-    GetManagedRuleSetResponse.struct_class = Types::GetManagedRuleSetResponse
-
     GetPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     GetPermissionPolicyRequest.struct_class = Types::GetPermissionPolicyRequest
 
@@ -576,10 +542,9 @@ module Aws::WAFV2
     GetRegexPatternSetResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "LockToken"))
     GetRegexPatternSetResponse.struct_class = Types::GetRegexPatternSetResponse
 
-    GetRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    GetRuleGroupRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
-    GetRuleGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, location_name: "Id"))
-    GetRuleGroupRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ARN"))
+    GetRuleGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
+    GetRuleGroupRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    GetRuleGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
     GetRuleGroupRequest.struct_class = Types::GetRuleGroupRequest
 
     GetRuleGroupResponse.add_member(:rule_group, Shapes::ShapeRef.new(shape: RuleGroup, location_name: "RuleGroup"))
@@ -683,17 +648,6 @@ module Aws::WAFV2
 
     Labels.member = Shapes::ShapeRef.new(shape: Label)
 
-    ListAvailableManagedRuleGroupVersionsRequest.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, required: true, location_name: "VendorName"))
-    ListAvailableManagedRuleGroupVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    ListAvailableManagedRuleGroupVersionsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    ListAvailableManagedRuleGroupVersionsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-    ListAvailableManagedRuleGroupVersionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
-    ListAvailableManagedRuleGroupVersionsRequest.struct_class = Types::ListAvailableManagedRuleGroupVersionsRequest
-
-    ListAvailableManagedRuleGroupVersionsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-    ListAvailableManagedRuleGroupVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: ManagedRuleGroupVersions, location_name: "Versions"))
-    ListAvailableManagedRuleGroupVersionsResponse.struct_class = Types::ListAvailableManagedRuleGroupVersionsResponse
-
     ListAvailableManagedRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListAvailableManagedRuleGroupsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListAvailableManagedRuleGroupsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
@@ -720,15 +674,6 @@ module Aws::WAFV2
     ListLoggingConfigurationsResponse.add_member(:logging_configurations, Shapes::ShapeRef.new(shape: LoggingConfigurations, location_name: "LoggingConfigurations"))
     ListLoggingConfigurationsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListLoggingConfigurationsResponse.struct_class = Types::ListLoggingConfigurationsResponse
-
-    ListManagedRuleSetsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    ListManagedRuleSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-    ListManagedRuleSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
-    ListManagedRuleSetsRequest.struct_class = Types::ListManagedRuleSetsRequest
-
-    ListManagedRuleSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-    ListManagedRuleSetsResponse.add_member(:managed_rule_sets, Shapes::ShapeRef.new(shape: ManagedRuleSetSummaries, location_name: "ManagedRuleSets"))
-    ListManagedRuleSetsResponse.struct_class = Types::ListManagedRuleSetsResponse
 
     ListRegexPatternSetsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListRegexPatternSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -790,7 +735,6 @@ module Aws::WAFV2
 
     ManagedRuleGroupStatement.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, required: true, location_name: "VendorName"))
     ManagedRuleGroupStatement.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    ManagedRuleGroupStatement.add_member(:version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "Version"))
     ManagedRuleGroupStatement.add_member(:excluded_rules, Shapes::ShapeRef.new(shape: ExcludedRules, location_name: "ExcludedRules"))
     ManagedRuleGroupStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
     ManagedRuleGroupStatement.struct_class = Types::ManagedRuleGroupStatement
@@ -801,39 +745,6 @@ module Aws::WAFV2
     ManagedRuleGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
     ManagedRuleGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "Description"))
     ManagedRuleGroupSummary.struct_class = Types::ManagedRuleGroupSummary
-
-    ManagedRuleGroupVersion.add_member(:name, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "Name"))
-    ManagedRuleGroupVersion.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateTimestamp"))
-    ManagedRuleGroupVersion.struct_class = Types::ManagedRuleGroupVersion
-
-    ManagedRuleGroupVersions.member = Shapes::ShapeRef.new(shape: ManagedRuleGroupVersion)
-
-    ManagedRuleSet.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    ManagedRuleSet.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
-    ManagedRuleSet.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ARN"))
-    ManagedRuleSet.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "Description"))
-    ManagedRuleSet.add_member(:published_versions, Shapes::ShapeRef.new(shape: PublishedVersions, location_name: "PublishedVersions"))
-    ManagedRuleSet.add_member(:recommended_version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "RecommendedVersion"))
-    ManagedRuleSet.add_member(:label_namespace, Shapes::ShapeRef.new(shape: LabelName, location_name: "LabelNamespace"))
-    ManagedRuleSet.struct_class = Types::ManagedRuleSet
-
-    ManagedRuleSetSummaries.member = Shapes::ShapeRef.new(shape: ManagedRuleSetSummary)
-
-    ManagedRuleSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
-    ManagedRuleSetSummary.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, location_name: "Id"))
-    ManagedRuleSetSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "Description"))
-    ManagedRuleSetSummary.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "LockToken"))
-    ManagedRuleSetSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ARN"))
-    ManagedRuleSetSummary.add_member(:label_namespace, Shapes::ShapeRef.new(shape: LabelName, location_name: "LabelNamespace"))
-    ManagedRuleSetSummary.struct_class = Types::ManagedRuleSetSummary
-
-    ManagedRuleSetVersion.add_member(:associated_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "AssociatedRuleGroupArn"))
-    ManagedRuleSetVersion.add_member(:capacity, Shapes::ShapeRef.new(shape: CapacityUnit, location_name: "Capacity"))
-    ManagedRuleSetVersion.add_member(:forecasted_lifetime, Shapes::ShapeRef.new(shape: TimeWindowDay, location_name: "ForecastedLifetime"))
-    ManagedRuleSetVersion.add_member(:publish_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublishTimestamp"))
-    ManagedRuleSetVersion.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateTimestamp"))
-    ManagedRuleSetVersion.add_member(:expiry_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiryTimestamp"))
-    ManagedRuleSetVersion.struct_class = Types::ManagedRuleSetVersion
 
     Method.struct_class = Types::Method
 
@@ -849,25 +760,11 @@ module Aws::WAFV2
     OverrideAction.add_member(:none, Shapes::ShapeRef.new(shape: NoneAction, location_name: "None"))
     OverrideAction.struct_class = Types::OverrideAction
 
-    PublishedVersions.key = Shapes::ShapeRef.new(shape: VersionKeyString)
-    PublishedVersions.value = Shapes::ShapeRef.new(shape: ManagedRuleSetVersion)
-
     PutLoggingConfigurationRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, required: true, location_name: "LoggingConfiguration"))
     PutLoggingConfigurationRequest.struct_class = Types::PutLoggingConfigurationRequest
 
     PutLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     PutLoggingConfigurationResponse.struct_class = Types::PutLoggingConfigurationResponse
-
-    PutManagedRuleSetVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    PutManagedRuleSetVersionsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    PutManagedRuleSetVersionsRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
-    PutManagedRuleSetVersionsRequest.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "LockToken"))
-    PutManagedRuleSetVersionsRequest.add_member(:recommended_version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "RecommendedVersion"))
-    PutManagedRuleSetVersionsRequest.add_member(:versions_to_publish, Shapes::ShapeRef.new(shape: VersionsToPublish, location_name: "VersionsToPublish"))
-    PutManagedRuleSetVersionsRequest.struct_class = Types::PutManagedRuleSetVersionsRequest
-
-    PutManagedRuleSetVersionsResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
-    PutManagedRuleSetVersionsResponse.struct_class = Types::PutManagedRuleSetVersionsResponse
 
     PutPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     PutPermissionPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyString, required: true, location_name: "Policy"))
@@ -1056,19 +953,6 @@ module Aws::WAFV2
     UpdateIPSetResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
     UpdateIPSetResponse.struct_class = Types::UpdateIPSetResponse
 
-    UpdateManagedRuleSetVersionExpiryDateRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
-    UpdateManagedRuleSetVersionExpiryDateRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
-    UpdateManagedRuleSetVersionExpiryDateRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
-    UpdateManagedRuleSetVersionExpiryDateRequest.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "LockToken"))
-    UpdateManagedRuleSetVersionExpiryDateRequest.add_member(:version_to_expire, Shapes::ShapeRef.new(shape: VersionKeyString, required: true, location_name: "VersionToExpire"))
-    UpdateManagedRuleSetVersionExpiryDateRequest.add_member(:expiry_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExpiryTimestamp"))
-    UpdateManagedRuleSetVersionExpiryDateRequest.struct_class = Types::UpdateManagedRuleSetVersionExpiryDateRequest
-
-    UpdateManagedRuleSetVersionExpiryDateResponse.add_member(:expiring_version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "ExpiringVersion"))
-    UpdateManagedRuleSetVersionExpiryDateResponse.add_member(:expiry_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiryTimestamp"))
-    UpdateManagedRuleSetVersionExpiryDateResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
-    UpdateManagedRuleSetVersionExpiryDateResponse.struct_class = Types::UpdateManagedRuleSetVersionExpiryDateResponse
-
     UpdateRegexPatternSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     UpdateRegexPatternSetRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     UpdateRegexPatternSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
@@ -1109,13 +993,6 @@ module Aws::WAFV2
 
     UriPath.struct_class = Types::UriPath
 
-    VersionToPublish.add_member(:associated_rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "AssociatedRuleGroupArn"))
-    VersionToPublish.add_member(:forecasted_lifetime, Shapes::ShapeRef.new(shape: TimeWindowDay, location_name: "ForecastedLifetime"))
-    VersionToPublish.struct_class = Types::VersionToPublish
-
-    VersionsToPublish.key = Shapes::ShapeRef.new(shape: VersionKeyString)
-    VersionsToPublish.value = Shapes::ShapeRef.new(shape: VersionToPublish)
-
     VisibilityConfig.add_member(:sampled_requests_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "SampledRequestsEnabled"))
     VisibilityConfig.add_member(:cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "CloudWatchMetricsEnabled"))
     VisibilityConfig.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
@@ -1126,9 +1003,6 @@ module Aws::WAFV2
 
     WAFDuplicateItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFDuplicateItemException.struct_class = Types::WAFDuplicateItemException
-
-    WAFExpiredManagedRuleGroupVersionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
-    WAFExpiredManagedRuleGroupVersionException.struct_class = Types::WAFExpiredManagedRuleGroupVersionException
 
     WAFInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFInternalErrorException.struct_class = Types::WAFInternalErrorException
@@ -1245,7 +1119,6 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
       end)
 
       api.add_operation(:create_ip_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1431,7 +1304,6 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
       end)
 
       api.add_operation(:disassociate_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1467,18 +1339,6 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
-      end)
-
-      api.add_operation(:get_managed_rule_set, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetManagedRuleSet"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetManagedRuleSetRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetManagedRuleSetResponse)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
@@ -1565,17 +1425,6 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
-      api.add_operation(:list_available_managed_rule_group_versions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListAvailableManagedRuleGroupVersions"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListAvailableManagedRuleGroupVersionsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListAvailableManagedRuleGroupVersionsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
-      end)
-
       api.add_operation(:list_available_managed_rule_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAvailableManagedRuleGroups"
         o.http_method = "POST"
@@ -1604,17 +1453,6 @@ module Aws::WAFV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListLoggingConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLoggingConfigurationsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
-      end)
-
-      api.add_operation(:list_managed_rule_sets, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListManagedRuleSets"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListManagedRuleSetsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListManagedRuleSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
@@ -1694,19 +1532,6 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
       end)
 
-      api.add_operation(:put_managed_rule_set_versions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "PutManagedRuleSetVersions"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: PutManagedRuleSetVersionsRequest)
-        o.output = Shapes::ShapeRef.new(shape: PutManagedRuleSetVersionsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
-      end)
-
       api.add_operation(:put_permission_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutPermissionPolicy"
         o.http_method = "POST"
@@ -1763,19 +1588,6 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
-      api.add_operation(:update_managed_rule_set_version_expiry_date, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateManagedRuleSetVersionExpiryDate"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: UpdateManagedRuleSetVersionExpiryDateRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateManagedRuleSetVersionExpiryDateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
-      end)
-
       api.add_operation(:update_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateRegexPatternSet"
         o.http_method = "POST"
@@ -1824,7 +1636,6 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
-        o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
       end)
     end
 

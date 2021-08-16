@@ -18,9 +18,6 @@ module Aws
     # @return [Symbol, nil]
     attr_reader :limit_key
 
-    # @return [Hash, nil]
-    attr_reader :tokens
-
     # @param [Seahorse::Client::Response] response
     # @return [Hash]
     def next_tokens(response)

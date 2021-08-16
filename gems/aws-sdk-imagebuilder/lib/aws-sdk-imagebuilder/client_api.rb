@@ -15,7 +15,6 @@ module Aws::Imagebuilder
 
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
-    AdditionalInstanceConfiguration = Shapes::StructureShape.new(name: 'AdditionalInstanceConfiguration')
     Ami = Shapes::StructureShape.new(name: 'Ami')
     AmiDistributionConfiguration = Shapes::StructureShape.new(name: 'AmiDistributionConfiguration')
     AmiList = Shapes::ListShape.new(name: 'AmiList')
@@ -33,15 +32,6 @@ module Aws::Imagebuilder
     ComponentConfigurationList = Shapes::ListShape.new(name: 'ComponentConfigurationList')
     ComponentData = Shapes::StringShape.new(name: 'ComponentData')
     ComponentFormat = Shapes::StringShape.new(name: 'ComponentFormat')
-    ComponentParameter = Shapes::StructureShape.new(name: 'ComponentParameter')
-    ComponentParameterDescription = Shapes::StringShape.new(name: 'ComponentParameterDescription')
-    ComponentParameterDetail = Shapes::StructureShape.new(name: 'ComponentParameterDetail')
-    ComponentParameterDetailList = Shapes::ListShape.new(name: 'ComponentParameterDetailList')
-    ComponentParameterList = Shapes::ListShape.new(name: 'ComponentParameterList')
-    ComponentParameterName = Shapes::StringShape.new(name: 'ComponentParameterName')
-    ComponentParameterType = Shapes::StringShape.new(name: 'ComponentParameterType')
-    ComponentParameterValue = Shapes::StringShape.new(name: 'ComponentParameterValue')
-    ComponentParameterValueList = Shapes::ListShape.new(name: 'ComponentParameterValueList')
     ComponentSummary = Shapes::StructureShape.new(name: 'ComponentSummary')
     ComponentSummaryList = Shapes::ListShape.new(name: 'ComponentSummaryList')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
@@ -241,7 +231,6 @@ module Aws::Imagebuilder
     StartImagePipelineExecutionRequest = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionRequest')
     StartImagePipelineExecutionResponse = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionResponse')
     StringList = Shapes::ListShape.new(name: 'StringList')
-    SystemsManagerAgent = Shapes::StructureShape.new(name: 'SystemsManagerAgent')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -259,14 +248,9 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateInfrastructureConfigurationRequest')
     UpdateInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateInfrastructureConfigurationResponse')
     Uri = Shapes::StringShape.new(name: 'Uri')
-    UserDataOverride = Shapes::StringShape.new(name: 'UserDataOverride')
     VersionNumber = Shapes::StringShape.new(name: 'VersionNumber')
 
     AccountList.member = Shapes::ShapeRef.new(shape: AccountId)
-
-    AdditionalInstanceConfiguration.add_member(:systems_manager_agent, Shapes::ShapeRef.new(shape: SystemsManagerAgent, location_name: "systemsManagerAgent"))
-    AdditionalInstanceConfiguration.add_member(:user_data_override, Shapes::ShapeRef.new(shape: UserDataOverride, location_name: "userDataOverride"))
-    AdditionalInstanceConfiguration.struct_class = Types::AdditionalInstanceConfiguration
 
     Ami.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "region"))
     Ami.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "image"))
@@ -309,7 +293,6 @@ module Aws::Imagebuilder
     Component.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     Component.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     Component.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
-    Component.add_member(:parameters, Shapes::ShapeRef.new(shape: ComponentParameterDetailList, location_name: "parameters"))
     Component.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     Component.add_member(:data, Shapes::ShapeRef.new(shape: ComponentData, location_name: "data"))
     Component.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
@@ -319,26 +302,9 @@ module Aws::Imagebuilder
     Component.struct_class = Types::Component
 
     ComponentConfiguration.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentVersionArnOrBuildVersionArn, required: true, location_name: "componentArn"))
-    ComponentConfiguration.add_member(:parameters, Shapes::ShapeRef.new(shape: ComponentParameterList, location_name: "parameters"))
     ComponentConfiguration.struct_class = Types::ComponentConfiguration
 
     ComponentConfigurationList.member = Shapes::ShapeRef.new(shape: ComponentConfiguration)
-
-    ComponentParameter.add_member(:name, Shapes::ShapeRef.new(shape: ComponentParameterName, required: true, location_name: "name"))
-    ComponentParameter.add_member(:value, Shapes::ShapeRef.new(shape: ComponentParameterValueList, required: true, location_name: "value"))
-    ComponentParameter.struct_class = Types::ComponentParameter
-
-    ComponentParameterDetail.add_member(:name, Shapes::ShapeRef.new(shape: ComponentParameterName, required: true, location_name: "name"))
-    ComponentParameterDetail.add_member(:type, Shapes::ShapeRef.new(shape: ComponentParameterType, required: true, location_name: "type"))
-    ComponentParameterDetail.add_member(:default_value, Shapes::ShapeRef.new(shape: ComponentParameterValueList, location_name: "defaultValue"))
-    ComponentParameterDetail.add_member(:description, Shapes::ShapeRef.new(shape: ComponentParameterDescription, location_name: "description"))
-    ComponentParameterDetail.struct_class = Types::ComponentParameterDetail
-
-    ComponentParameterDetailList.member = Shapes::ShapeRef.new(shape: ComponentParameterDetail)
-
-    ComponentParameterList.member = Shapes::ShapeRef.new(shape: ComponentParameter)
-
-    ComponentParameterValueList.member = Shapes::ShapeRef.new(shape: ComponentParameterValue)
 
     ComponentSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     ComponentSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -490,7 +456,6 @@ module Aws::Imagebuilder
     CreateImageRecipeRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: InstanceBlockDeviceMappings, location_name: "blockDeviceMappings"))
     CreateImageRecipeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateImageRecipeRequest.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
-    CreateImageRecipeRequest.add_member(:additional_instance_configuration, Shapes::ShapeRef.new(shape: AdditionalInstanceConfiguration, location_name: "additionalInstanceConfiguration"))
     CreateImageRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateImageRecipeRequest.struct_class = Types::CreateImageRecipeRequest
 
@@ -773,7 +738,6 @@ module Aws::Imagebuilder
     ImageRecipe.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     ImageRecipe.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ImageRecipe.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
-    ImageRecipe.add_member(:additional_instance_configuration, Shapes::ShapeRef.new(shape: AdditionalInstanceConfiguration, location_name: "additionalInstanceConfiguration"))
     ImageRecipe.struct_class = Types::ImageRecipe
 
     ImageRecipeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -1129,9 +1093,6 @@ module Aws::Imagebuilder
     StartImagePipelineExecutionResponse.struct_class = Types::StartImagePipelineExecutionResponse
 
     StringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
-
-    SystemsManagerAgent.add_member(:uninstall_after_build, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "uninstallAfterBuild"))
-    SystemsManagerAgent.struct_class = Types::SystemsManagerAgent
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 

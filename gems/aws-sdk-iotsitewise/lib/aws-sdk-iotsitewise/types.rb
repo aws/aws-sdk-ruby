@@ -10,20 +10,19 @@
 module Aws::IoTSiteWise
   module Types
 
-    # Contains an access policy that defines an identity's access to an IoT
-    # SiteWise Monitor resource.
+    # Contains an access policy that defines an identity's access to an AWS
+    # IoT SiteWise Monitor resource.
     #
     # @!attribute [rw] id
     #   The ID of the access policy.
     #   @return [String]
     #
     # @!attribute [rw] identity
-    #   The identity (an Amazon Web Services SSO user, an Amazon Web
-    #   Services SSO group, or an IAM user).
+    #   The identity (an AWS SSO user, an AWS SSO group, or an IAM user).
     #   @return [Types::Identity]
     #
     # @!attribute [rw] resource
-    #   The IoT SiteWise Monitor resource (a portal or project).
+    #   The AWS IoT SiteWise Monitor resource (a portal or project).
     #   @return [Types::Resource]
     #
     # @!attribute [rw] permission
@@ -109,52 +108,6 @@ module Aws::IoTSiteWise
       :minimum,
       :sum,
       :standard_deviation)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains the configuration information of an alarm created in an IoT
-    # SiteWise Monitor portal. You can use the alarm to monitor an asset
-    # property and get notified when the asset property value is outside a
-    # specified range. For more information, see [Monitoring with alarms][1]
-    # in the *IoT SiteWise Application Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
-    #
-    # @note When making an API call, you may pass Alarms
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_role_arn: "ARN", # required
-    #         notification_lambda_arn: "ARN",
-    #       }
-    #
-    # @!attribute [rw] alarm_role_arn
-    #   The [ARN][1] of the IAM role that allows the alarm to perform
-    #   actions and access Amazon Web Services resources and services, such
-    #   as IoT Events.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] notification_lambda_arn
-    #   The [ARN][1] of the Lambda function that manages alarm
-    #   notifications. For more information, see [Managing alarm
-    #   notifications][2] in the *IoT Events Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [2]: https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html
-    #   @return [String]
-    #
-    class Alarms < Struct.new(
-      :alarm_role_arn,
-      :notification_lambda_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -276,11 +229,6 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -293,12 +241,6 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -314,11 +256,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
-    #                     offset: "Offset",
     #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -374,11 +312,6 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -391,12 +324,6 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -412,11 +339,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
-    #                     offset: "Offset",
     #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -539,11 +462,6 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
-    #             processing_config: {
-    #               forwarding_config: { # required
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -556,12 +474,6 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #               forwarding_config: {
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -577,11 +489,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
-    #                 offset: "Offset",
     #               },
-    #             },
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -639,11 +547,6 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
-    #             processing_config: {
-    #               forwarding_config: { # required
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -656,12 +559,6 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #               forwarding_config: {
-    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #               },
-    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -677,11 +574,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
-    #                 offset: "Offset",
     #               },
-    #             },
-    #             processing_config: {
-    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -727,8 +620,8 @@ module Aws::IoTSiteWise
     end
 
     # Contains current status information for an asset model. For more
-    # information, see [Asset and model states][1] in the *IoT SiteWise User
-    # Guide*.
+    # information, see [Asset and model states][1] in the *AWS IoT SiteWise
+    # User Guide*.
     #
     #
     #
@@ -752,7 +645,7 @@ module Aws::IoTSiteWise
     # Contains a summary of an asset model.
     #
     # @!attribute [rw] id
-    #   The ID of the asset model (used with IoT SiteWise APIs).
+    #   The ID of the asset model (used with AWS IoT SiteWise APIs).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -808,11 +701,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -919,8 +812,8 @@ module Aws::IoTSiteWise
     end
 
     # Contains information about the current status of an asset. For more
-    # information, see [Asset and model states][1] in the *IoT SiteWise User
-    # Guide*.
+    # information, see [Asset and model states][1] in the *AWS IoT SiteWise
+    # User Guide*.
     #
     #
     #
@@ -1013,7 +906,7 @@ module Aws::IoTSiteWise
     #   The ID of a hierarchy in the parent asset's model. Hierarchies
     #   allow different groupings of assets to be formed that all come from
     #   the same asset model. For more information, see [Asset
-    #   hierarchies][1] in the *IoT SiteWise User Guide*.
+    #   hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1097,7 +990,7 @@ module Aws::IoTSiteWise
     end
 
     # Contains an asset attribute property. For more information, see
-    # [Attributes][1] in the *IoT SiteWise User Guide*.
+    # [Attributes][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1114,7 +1007,7 @@ module Aws::IoTSiteWise
     #   The default value of the asset model property attribute. All assets
     #   that you create from the asset model contain this attribute value.
     #   You can update an attribute's value after you create an asset. For
-    #   more information, see [Updating attribute values][1] in the *IoT
+    #   more information, see [Updating attribute values][1] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #
@@ -1334,7 +1227,7 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains the details of an IoT SiteWise configuration error.
+    # Contains the details of an AWS IoT SiteWise configuration error.
     #
     # @!attribute [rw] code
     #   The error code.
@@ -1425,12 +1318,12 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] access_policy_identity
-    #   The identity for this access policy. Choose an Amazon Web Services
-    #   SSO user, an Amazon Web Services SSO group, or an IAM user.
+    #   The identity for this access policy. Choose an AWS SSO user, an AWS
+    #   SSO group, or an IAM user.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] access_policy_resource
-    #   The IoT SiteWise Monitor resource for this access policy. Choose
+    #   The AWS IoT SiteWise Monitor resource for this access policy. Choose
     #   either a portal or a project.
     #   @return [Types::Resource]
     #
@@ -1450,8 +1343,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the access
-    #   policy. For more information, see [Tagging your IoT SiteWise
-    #   resources][1] in the *IoT SiteWise User Guide*.
+    #   policy. For more information, see [Tagging your AWS IoT SiteWise
+    #   resources][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1506,11 +1399,6 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -1523,12 +1411,6 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -1544,11 +1426,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
-    #                     offset: "Offset",
     #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -1576,11 +1454,6 @@ module Aws::IoTSiteWise
     #                     default_value: "DefaultValue",
     #                   },
     #                   measurement: {
-    #                     processing_config: {
-    #                       forwarding_config: { # required
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
     #                   },
     #                   transform: {
     #                     expression: "Expression", # required
@@ -1593,12 +1466,6 @@ module Aws::IoTSiteWise
     #                         },
     #                       },
     #                     ],
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                       forwarding_config: {
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
     #                   },
     #                   metric: {
     #                     expression: "Expression", # required
@@ -1614,11 +1481,7 @@ module Aws::IoTSiteWise
     #                     window: { # required
     #                       tumbling: {
     #                         interval: "Interval", # required
-    #                         offset: "Offset",
     #                       },
-    #                     },
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                     },
     #                   },
     #                 },
@@ -1642,10 +1505,10 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_properties
     #   The property definitions of the asset model. For more information,
-    #   see [Asset properties][1] in the *IoT SiteWise User Guide*.
+    #   see [Asset properties][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 200 properties per asset model. For more
-    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1657,10 +1520,10 @@ module Aws::IoTSiteWise
     #   The hierarchy definitions of the asset model. Each hierarchy
     #   specifies an asset model whose assets can be children of any other
     #   assets created from this asset model. For more information, see
-    #   [Asset hierarchies][1] in the *IoT SiteWise User Guide*.
+    #   [Asset hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 10 hierarchies per asset model. For more
-    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1687,8 +1550,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the asset model.
-    #   For more information, see [Tagging your IoT SiteWise resources][1]
-    #   in the *IoT SiteWise User Guide*.
+    #   For more information, see [Tagging your AWS IoT SiteWise
+    #   resources][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1709,7 +1572,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model. You can use this ID when you call other
-    #   IoT SiteWise APIs.
+    #   AWS IoT SiteWise APIs.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_arn
@@ -1766,8 +1629,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the asset. For
-    #   more information, see [Tagging your IoT SiteWise resources][1] in
-    #   the *IoT SiteWise User Guide*.
+    #   more information, see [Tagging your AWS IoT SiteWise resources][1]
+    #   in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1785,7 +1648,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_id
     #   The ID of the asset. This ID uniquely identifies the asset within
-    #   IoT SiteWise and can be used with other IoT SiteWise APIs.
+    #   AWS IoT SiteWise and can be used with other AWS IoT SiteWise APIs.
     #   @return [String]
     #
     # @!attribute [rw] asset_arn
@@ -1839,8 +1702,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] dashboard_definition
     #   The dashboard definition specified in a JSON literal. For detailed
-    #   information, see [Creating dashboards (CLI)][1] in the *IoT SiteWise
-    #   User Guide*.
+    #   information, see [Creating dashboards (CLI)][1] in the *AWS IoT
+    #   SiteWise User Guide*.
     #
     #
     #
@@ -1858,8 +1721,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the dashboard.
-    #   For more information, see [Tagging your IoT SiteWise resources][1]
-    #   in the *IoT SiteWise User Guide*.
+    #   For more information, see [Tagging your AWS IoT SiteWise
+    #   resources][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1904,11 +1767,8 @@ module Aws::IoTSiteWise
     #       {
     #         gateway_name: "Name", # required
     #         gateway_platform: { # required
-    #           greengrass: {
+    #           greengrass: { # required
     #             group_arn: "ARN", # required
-    #           },
-    #           greengrass_v2: {
-    #             core_device_thing_name: "CoreDeviceThingName", # required
     #           },
     #         },
     #         tags: {
@@ -1927,8 +1787,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the gateway. For
-    #   more information, see [Tagging your IoT SiteWise resources][1] in
-    #   the *IoT SiteWise User Guide*.
+    #   more information, see [Tagging your AWS IoT SiteWise resources][1]
+    #   in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -1945,7 +1805,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] gateway_id
     #   The ID of the gateway device. You can use this ID when you call
-    #   other IoT SiteWise APIs.
+    #   other AWS IoT SiteWise APIs.
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
@@ -1982,11 +1842,6 @@ module Aws::IoTSiteWise
     #           "TagKey" => "TagValue",
     #         },
     #         portal_auth_mode: "IAM", # accepts IAM, SSO
-    #         notification_sender_email: "Email",
-    #         alarms: {
-    #           alarm_role_arn: "ARN", # required
-    #           notification_lambda_arn: "ARN",
-    #         },
     #       }
     #
     # @!attribute [rw] portal_name
@@ -1998,7 +1853,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] portal_contact_email
-    #   The Amazon Web Services administrator's contact email address.
+    #   The AWS administrator's contact email address.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -2017,9 +1872,9 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] role_arn
     #   The [ARN][1] of a service role that allows the portal's users to
-    #   access your IoT SiteWise resources on your behalf. For more
-    #   information, see [Using service roles for IoT SiteWise Monitor][2]
-    #   in the *IoT SiteWise User Guide*.
+    #   access your AWS IoT SiteWise resources on your behalf. For more
+    #   information, see [Using service roles for AWS IoT SiteWise
+    #   Monitor][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -2029,8 +1884,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the portal. For
-    #   more information, see [Tagging your IoT SiteWise resources][1] in
-    #   the *IoT SiteWise User Guide*.
+    #   more information, see [Tagging your AWS IoT SiteWise resources][1]
+    #   in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -2041,16 +1896,15 @@ module Aws::IoTSiteWise
     #   The service to use to authenticate users to the portal. Choose from
     #   the following options:
     #
-    #   * `SSO` – The portal uses Amazon Web Services Single Sign On to
-    #     authenticate users and manage user permissions. Before you can
-    #     create a portal that uses Amazon Web Services SSO, you must enable
-    #     Amazon Web Services SSO. For more information, see [Enabling
-    #     Amazon Web Services SSO][1] in the *IoT SiteWise User Guide*. This
-    #     option is only available in Amazon Web Services Regions other than
-    #     the China Regions.
+    #   * `SSO` – The portal uses AWS Single Sign-On to authenticate users
+    #     and manage user permissions. Before you can create a portal that
+    #     uses AWS SSO, you must enable AWS SSO. For more information, see
+    #     [Enabling AWS SSO][1] in the *AWS IoT SiteWise User Guide*. This
+    #     option is only available in AWS Regions other than the China
+    #     Regions.
     #
-    #   * `IAM` – The portal uses Identity and Access Management to
-    #     authenticate users and manage user permissions. This option is
+    #   * `IAM` – The portal uses AWS Identity and Access Management (IAM)
+    #     to authenticate users and manage user permissions. This option is
     #     only available in the China Regions.
     #
     #   You can't change this value after you create a portal.
@@ -2062,31 +1916,6 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso
     #   @return [String]
     #
-    # @!attribute [rw] notification_sender_email
-    #   The email address that sends alarm notifications.
-    #
-    #   If you use the [IoT Events managed Lambda function][1] to manage
-    #   your emails, you must [verify the sender email address in Amazon
-    #   SES][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
-    #   @return [String]
-    #
-    # @!attribute [rw] alarms
-    #   Contains the configuration information of an alarm created in an IoT
-    #   SiteWise Monitor portal. You can use the alarm to monitor an asset
-    #   property and get notified when the asset property value is outside a
-    #   specified range. For more information, see [Monitoring with
-    #   alarms][1] in the *IoT SiteWise Application Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
-    #   @return [Types::Alarms]
-    #
     class CreatePortalRequest < Struct.new(
       :portal_name,
       :portal_description,
@@ -2095,9 +1924,7 @@ module Aws::IoTSiteWise
       :portal_logo_image_file,
       :role_arn,
       :tags,
-      :portal_auth_mode,
-      :notification_sender_email,
-      :alarms)
+      :portal_auth_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2117,9 +1944,9 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] portal_start_url
-    #   The URL for the IoT SiteWise Monitor portal. You can use this URL to
-    #   access portals that use Amazon Web Services SSO for authentication.
-    #   For portals that use IAM for authentication, you must use the IoT
+    #   The URL for the AWS IoT SiteWise Monitor portal. You can use this
+    #   URL to access portals that use AWS SSO for authentication. For
+    #   portals that use IAM for authentication, you must use the AWS IoT
     #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
@@ -2129,8 +1956,7 @@ module Aws::IoTSiteWise
     #   @return [Types::PortalStatus]
     #
     # @!attribute [rw] sso_application_id
-    #   The associated Amazon Web Services SSO application ID, if the portal
-    #   uses Amazon Web Services SSO.
+    #   The associated AWS SSO application ID, if the portal uses AWS SSO.
     #   @return [String]
     #
     class CreatePortalResponse < Struct.new(
@@ -2179,8 +2005,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the project. For
-    #   more information, see [Tagging your IoT SiteWise resources][1] in
-    #   the *IoT SiteWise User Guide*.
+    #   more information, see [Tagging your AWS IoT SiteWise resources][1]
+    #   in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -2214,43 +2040,6 @@ module Aws::IoTSiteWise
     class CreateProjectResponse < Struct.new(
       :project_id,
       :project_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains information about a customer managed Amazon S3 bucket.
-    #
-    # @note When making an API call, you may pass CustomerManagedS3Storage
-    #   data as a hash:
-    #
-    #       {
-    #         s3_resource_arn: "ARN", # required
-    #         role_arn: "ARN", # required
-    #       }
-    #
-    # @!attribute [rw] s3_resource_arn
-    #   The [ARN][1] of the Amazon S3 object. For more information about how
-    #   to find the ARN for an Amazon S3 object, see [Amazon S3
-    #   resources][2] in the *Amazon Simple Storage Service User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-arn-format.html
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The [ARN][1] of the Identity and Access Management role that allows
-    #   IoT SiteWise to send data to Amazon S3.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    class CustomerManagedS3Storage < Struct.new(
-      :s3_resource_arn,
-      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2543,13 +2332,13 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] access_policy_identity
-    #   The identity (Amazon Web Services SSO user, Amazon Web Services SSO
-    #   group, or IAM user) to which this access policy applies.
+    #   The identity (AWS SSO user, AWS SSO group, or IAM user) to which
+    #   this access policy applies.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] access_policy_resource
-    #   The IoT SiteWise Monitor resource (portal or project) to which this
-    #   access policy provides access.
+    #   The AWS IoT SiteWise Monitor resource (portal or project) to which
+    #   this access policy provides access.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] access_policy_permission
@@ -2850,7 +2639,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] dashboard_definition
     #   The dashboard's definition JSON literal. For detailed information,
-    #   see [Creating dashboards (CLI)][1] in the *IoT SiteWise User Guide*.
+    #   see [Creating dashboards (CLI)][1] in the *AWS IoT SiteWise User
+    #   Guide*.
     #
     #
     #
@@ -2888,7 +2678,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] kms_key_arn
     #   The key ARN of the customer managed customer master key (CMK) used
-    #   for KMS encryption if you use `KMS_BASED_ENCRYPTION`.
+    #   for AWS KMS encryption if you use `KMS_BASED_ENCRYPTION`.
     #   @return [String]
     #
     # @!attribute [rw] configuration_status
@@ -2919,8 +2709,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] capability_namespace
     #   The namespace of the capability configuration. For example, if you
-    #   configure OPC-UA sources from the IoT SiteWise console, your OPC-UA
-    #   capability configuration has the namespace
+    #   configure OPC-UA sources from the AWS IoT SiteWise console, your
+    #   OPC-UA capability configuration has the namespace
     #   `iotsitewise:opcuacollector:version`, where `version` is a number
     #   such as `1`.
     #   @return [String]
@@ -2943,7 +2733,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] capability_configuration
     #   The JSON document that defines the gateway capability's
     #   configuration. For more information, see [Configuring data sources
-    #   (CLI)][1] in the *IoT SiteWise User Guide*.
+    #   (CLI)][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3095,21 +2885,20 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] portal_client_id
-    #   The Amazon Web Services SSO application generated client ID (used
-    #   with Amazon Web Services SSO APIs). IoT SiteWise includes
-    #   `portalClientId` for only portals that use Amazon Web Services SSO
-    #   to authenticate users.
+    #   The AWS SSO application generated client ID (used with AWS SSO
+    #   APIs). AWS IoT SiteWise includes `portalClientId` for only portals
+    #   that use AWS SSO to authenticate users.
     #   @return [String]
     #
     # @!attribute [rw] portal_start_url
-    #   The URL for the IoT SiteWise Monitor portal. You can use this URL to
-    #   access portals that use Amazon Web Services SSO for authentication.
-    #   For portals that use IAM for authentication, you must use the IoT
+    #   The URL for the AWS IoT SiteWise Monitor portal. You can use this
+    #   URL to access portals that use AWS SSO for authentication. For
+    #   portals that use IAM for authentication, you must use the AWS IoT
     #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
     # @!attribute [rw] portal_contact_email
-    #   The Amazon Web Services administrator's contact email address.
+    #   The AWS administrator's contact email address.
     #   @return [String]
     #
     # @!attribute [rw] portal_status
@@ -3131,9 +2920,9 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] role_arn
     #   The [ARN][1] of the service role that allows the portal's users to
-    #   access your IoT SiteWise resources on your behalf. For more
-    #   information, see [Using service roles for IoT SiteWise Monitor][2]
-    #   in the *IoT SiteWise User Guide*.
+    #   access your AWS IoT SiteWise resources on your behalf. For more
+    #   information, see [Using service roles for AWS IoT SiteWise
+    #   Monitor][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3144,15 +2933,6 @@ module Aws::IoTSiteWise
     # @!attribute [rw] portal_auth_mode
     #   The service to use to authenticate users to the portal.
     #   @return [String]
-    #
-    # @!attribute [rw] notification_sender_email
-    #   The email address that sends alarm notifications.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarms
-    #   Contains the configuration information of an alarm created in an IoT
-    #   SiteWise Monitor portal.
-    #   @return [Types::Alarms]
     #
     class DescribePortalResponse < Struct.new(
       :portal_id,
@@ -3167,9 +2947,7 @@ module Aws::IoTSiteWise
       :portal_last_update_date,
       :portal_logo_image_location,
       :role_arn,
-      :portal_auth_mode,
-      :notification_sender_email,
-      :alarms)
+      :portal_auth_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3237,61 +3015,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @api private
-    #
-    class DescribeStorageConfigurationRequest < Aws::EmptyStructure; end
-
-    # @!attribute [rw] storage_type
-    #   The type of storage that you specified for your data. The storage
-    #   type can be one of the following values:
-    #
-    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise replicates your data
-    #     into a service managed database.
-    #
-    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise replicates your data into a
-    #     service managed database and saves a copy of your raw data and
-    #     metadata in an Amazon S3 object that you specified.
-    #   @return [String]
-    #
-    # @!attribute [rw] multi_layer_storage
-    #   Contains information about the storage destination.
-    #   @return [Types::MultiLayerStorage]
-    #
-    # @!attribute [rw] configuration_status
-    #   Contains current status information for the configuration.
-    #   @return [Types::ConfigurationStatus]
-    #
-    # @!attribute [rw] last_update_date
-    #   The date the storage configuration was last updated, in Unix epoch
-    #   time.
-    #   @return [Time]
-    #
-    class DescribeStorageConfigurationResponse < Struct.new(
-      :storage_type,
-      :multi_layer_storage,
-      :configuration_status,
-      :last_update_date)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains detailed error information.
-    #
-    # @!attribute [rw] code
-    #   The error code.
-    #   @return [String]
-    #
-    # @!attribute [rw] message
-    #   The error message.
-    #   @return [String]
-    #
-    class DetailedError < Struct.new(
-      :code,
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass DisassociateAssetsRequest
     #   data as a hash:
     #
@@ -3312,7 +3035,7 @@ module Aws::IoTSiteWise
     #   allow different groupings of assets to be formed that all come from
     #   the same asset model. You can use the hierarchy ID to identify the
     #   correct asset to disassociate. For more information, see [Asset
-    #   hierarchies][1] in the *IoT SiteWise User Guide*.
+    #   hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3341,7 +3064,7 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains the details of an IoT SiteWise error.
+    # Contains the details of an AWS IoT SiteWise error.
     #
     # @!attribute [rw] code
     #   The error code.
@@ -3351,14 +3074,9 @@ module Aws::IoTSiteWise
     #   The error message.
     #   @return [String]
     #
-    # @!attribute [rw] details
-    #   A list of detailed errors.
-    #   @return [Array<Types::DetailedError>]
-    #
     class ErrorDetails < Struct.new(
       :code,
-      :message,
-      :details)
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3392,31 +3110,12 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # The forwarding configuration for a given property.
-    #
-    # @note When making an API call, you may pass ForwardingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #       }
-    #
-    # @!attribute [rw] state
-    #   The forwarding state for the given property.
-    #   @return [String]
-    #
-    class ForwardingConfig < Struct.new(
-      :state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Contains a summary of a gateway capability configuration.
     #
     # @!attribute [rw] capability_namespace
     #   The namespace of the capability configuration. For example, if you
-    #   configure OPC-UA sources from the IoT SiteWise console, your OPC-UA
-    #   capability configuration has the namespace
+    #   configure OPC-UA sources from the AWS IoT SiteWise console, your
+    #   OPC-UA capability configuration has the namespace
     #   `iotsitewise:opcuacollector:version`, where `version` is a number
     #   such as `1`.
     #   @return [String]
@@ -3446,25 +3145,17 @@ module Aws::IoTSiteWise
     #   data as a hash:
     #
     #       {
-    #         greengrass: {
+    #         greengrass: { # required
     #           group_arn: "ARN", # required
-    #         },
-    #         greengrass_v2: {
-    #           core_device_thing_name: "CoreDeviceThingName", # required
     #         },
     #       }
     #
     # @!attribute [rw] greengrass
-    #   A gateway that runs on IoT Greengrass.
+    #   A gateway that runs on AWS IoT Greengrass.
     #   @return [Types::Greengrass]
     #
-    # @!attribute [rw] greengrass_v2
-    #   A gateway that runs on IoT Greengrass V2.
-    #   @return [Types::GreengrassV2]
-    #
     class GatewayPlatform < Struct.new(
-      :greengrass,
-      :greengrass_v2)
+      :greengrass)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3478,10 +3169,6 @@ module Aws::IoTSiteWise
     # @!attribute [rw] gateway_name
     #   The name of the asset.
     #   @return [String]
-    #
-    # @!attribute [rw] gateway_platform
-    #   Contains a gateway's platform information.
-    #   @return [Types::GatewayPlatform]
     #
     # @!attribute [rw] gateway_capability_summaries
     #   A list of gateway capability summaries that each contain a namespace
@@ -3505,7 +3192,6 @@ module Aws::IoTSiteWise
     class GatewaySummary < Struct.new(
       :gateway_id,
       :gateway_name,
-      :gateway_platform,
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date)
@@ -3539,11 +3225,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] property_alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3583,7 +3269,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 100
     #   @return [Integer]
@@ -3644,11 +3330,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] property_alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3680,7 +3366,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 100
     #   @return [Integer]
@@ -3733,11 +3419,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] property_alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3789,11 +3475,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] property_alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3834,7 +3520,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #   If not specified, the default value is 10.
     #   @return [Integer]
     #
@@ -3877,12 +3563,12 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains details for a gateway that runs on IoT Greengrass. To create
-    # a gateway that runs on IoT Greengrass, you must add the IoT SiteWise
-    # connector to a Greengrass group and deploy it. Your Greengrass group
-    # must also have permissions to upload data to IoT SiteWise. For more
-    # information, see [Ingesting data using a gateway][1] in the *IoT
-    # SiteWise User Guide*.
+    # Contains details for a gateway that runs on AWS IoT Greengrass. To
+    # create a gateway that runs on AWS IoT Greengrass, you must add the IoT
+    # SiteWise connector to a Greengrass group and deploy it. Your
+    # Greengrass group must also have permissions to upload data to AWS IoT
+    # SiteWise. For more information, see [Ingesting data using a
+    # gateway][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -3898,7 +3584,7 @@ module Aws::IoTSiteWise
     # @!attribute [rw] group_arn
     #   The [ARN][1] of the Greengrass group. For more information about how
     #   to find a group's ARN, see [ListGroups][2] and [GetGroup][3] in the
-    #   *IoT Greengrass API Reference*.
+    #   *AWS IoT Greengrass API Reference*.
     #
     #
     #
@@ -3913,35 +3599,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains details for a gateway that runs on IoT Greengrass V2. To
-    # create a gateway that runs on IoT Greengrass V2, you must deploy the
-    # IoT SiteWise Edge component to your gateway device. Your [Greengrass
-    # device role][1] must use the `AWSIoTSiteWiseEdgeAccess` policy. For
-    # more information, see [Using IoT SiteWise at the edge][2] in the *IoT
-    # SiteWise User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html
-    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html
-    #
-    # @note When making an API call, you may pass GreengrassV2
-    #   data as a hash:
-    #
-    #       {
-    #         core_device_thing_name: "CoreDeviceThingName", # required
-    #       }
-    #
-    # @!attribute [rw] core_device_thing_name
-    #   The name of the IoT thing for your IoT Greengrass V2 core device.
-    #   @return [String]
-    #
-    class GreengrassV2 < Struct.new(
-      :core_device_thing_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Contains information for a group identity in an access policy.
     #
     # @note When making an API call, you may pass GroupIdentity
@@ -3952,7 +3609,7 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] id
-    #   The Amazon Web Services SSO ID of the group.
+    #   The AWS SSO ID of the group.
     #   @return [String]
     #
     class GroupIdentity < Struct.new(
@@ -3961,8 +3618,9 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains information about an Identity and Access Management role. For
-    # more information, see [IAM roles][1] in the *IAM User Guide*.
+    # Contains information about an AWS Identity and Access Management (IAM)
+    # role. For more information, see [IAM roles][1] in the *IAM User
+    # Guide*.
     #
     #
     #
@@ -3990,7 +3648,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains information about an Identity and Access Management user.
+    # Contains information about an AWS Identity and Access Management (IAM)
+    # user.
     #
     # @note When making an API call, you may pass IAMUserIdentity
     #   data as a hash:
@@ -4020,12 +3679,12 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains an identity that can access an IoT SiteWise Monitor resource.
+    # Contains an identity that can access an AWS IoT SiteWise Monitor
+    # resource.
     #
-    # <note markdown="1"> Currently, you can't use Amazon Web Services APIs to retrieve Amazon
-    # Web Services SSO identity IDs. You can find the Amazon Web Services
-    # SSO identity IDs in the URL of user and group pages in the [Amazon Web
-    # Services SSO console][1].
+    # <note markdown="1"> Currently, you can't use AWS APIs to retrieve AWS SSO identity IDs.
+    # You can find the AWS SSO identity IDs in the URL of user and group
+    # pages in the [AWS SSO console][1].
     #
     #  </note>
     #
@@ -4052,11 +3711,11 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] user
-    #   An Amazon Web Services SSO user identity.
+    #   An AWS SSO user identity.
     #   @return [Types::UserIdentity]
     #
     # @!attribute [rw] group
-    #   An Amazon Web Services SSO group identity.
+    #   An AWS SSO group identity.
     #   @return [Types::GroupIdentity]
     #
     # @!attribute [rw] iam_user
@@ -4136,8 +3795,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains an image that is uploaded to IoT SiteWise and available at a
-    # URL.
+    # Contains an image that is uploaded to AWS IoT SiteWise and available
+    # at a URL.
     #
     # @!attribute [rw] id
     #   The ID of the image.
@@ -4155,7 +3814,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # IoT SiteWise can't process your request right now. Try again later.
+    # AWS IoT SiteWise can't process your request right now. Try again
+    # later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4201,7 +3861,7 @@ module Aws::IoTSiteWise
     # assets or attempting to create more than the allowed number of
     # properties for an asset model.
     #
-    # For more information, see [Quotas][1] in the *IoT SiteWise User
+    # For more information, see [Quotas][1] in the *AWS IoT SiteWise User
     # Guide*.
     #
     #
@@ -4231,9 +3891,8 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] identity_type
-    #   The type of identity (Amazon Web Services SSO user, Amazon Web
-    #   Services SSO group, or IAM user). This parameter is required if you
-    #   specify `identityId`.
+    #   The type of identity (AWS SSO user, AWS SSO group, or IAM user).
+    #   This parameter is required if you specify `identityId`.
     #   @return [String]
     #
     # @!attribute [rw] identity_id
@@ -4266,7 +3925,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4312,7 +3971,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4371,7 +4030,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #   @return [Integer]
     #
     class ListAssetRelationshipsRequest < Struct.new(
@@ -4414,7 +4073,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4483,7 +4142,7 @@ module Aws::IoTSiteWise
     #   [DescribeAssetModel][2] operations. This parameter is required if
     #   you choose `CHILD` for `traversalDirection`.
     #
-    #   For more information, see [Asset hierarchies][3] in the *IoT
+    #   For more information, see [Asset hierarchies][3] in the *AWS IoT
     #   SiteWise User Guide*.
     #
     #
@@ -4511,7 +4170,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4560,7 +4219,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4602,7 +4261,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4643,7 +4302,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4689,7 +4348,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4737,7 +4396,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for each paginated request.
+    #   The maximum number of results to be returned per paginated request.
     #
     #   Default: 50
     #   @return [Integer]
@@ -4789,8 +4448,8 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] tags
     #   The list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tagging your IoT SiteWise resources][1]
-    #   in the *IoT SiteWise User Guide*.
+    #   For more information, see [Tagging your AWS IoT SiteWise
+    #   resources][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -4813,7 +4472,7 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] level
-    #   The IoT SiteWise logging verbosity level.
+    #   The AWS IoT SiteWise logging verbosity level.
     #   @return [String]
     #
     class LoggingOptions < Struct.new(
@@ -4823,59 +4482,15 @@ module Aws::IoTSiteWise
     end
 
     # Contains an asset measurement property. For more information, see
-    # [Measurements][1] in the *IoT SiteWise User Guide*.
+    # [Measurements][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements
     #
-    # @note When making an API call, you may pass Measurement
-    #   data as a hash:
+    # @api private
     #
-    #       {
-    #         processing_config: {
-    #           forwarding_config: { # required
-    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] processing_config
-    #   The processing configuration for the given measurement property. You
-    #   can configure measurements to be kept at the edge or forwarded to
-    #   the Amazon Web Services Cloud. By default, measurements are
-    #   forwarded to the cloud.
-    #   @return [Types::MeasurementProcessingConfig]
-    #
-    class Measurement < Struct.new(
-      :processing_config)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The processing configuration for the given measurement property. You
-    # can configure measurements to be kept at the edge or forwarded to the
-    # Amazon Web Services Cloud. By default, measurements are forwarded to
-    # the cloud.
-    #
-    # @note When making an API call, you may pass MeasurementProcessingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         forwarding_config: { # required
-    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #         },
-    #       }
-    #
-    # @!attribute [rw] forwarding_config
-    #   The forwarding configuration for the given measurement property.
-    #   @return [Types::ForwardingConfig]
-    #
-    class MeasurementProcessingConfig < Struct.new(
-      :forwarding_config)
-      SENSITIVE = []
-      include Aws::Structure
-    end
+    class Measurement < Aws::EmptyStructure; end
 
     # Contains an asset metric property. With metrics, you can calculate
     # aggregate functions, such as an average, maximum, or minimum, as
@@ -4888,7 +4503,7 @@ module Aws::IoTSiteWise
     # a metric can only have a data type of `DOUBLE` and consume properties
     # with data types of `INTEGER` or `DOUBLE`.
     #
-    # For more information, see [Metrics][1] in the *IoT SiteWise User
+    # For more information, see [Metrics][1] in the *AWS IoT SiteWise User
     # Guide*.
     #
     #
@@ -4912,11 +4527,7 @@ module Aws::IoTSiteWise
     #         window: { # required
     #           tumbling: {
     #             interval: "Interval", # required
-    #             offset: "Offset",
     #           },
-    #         },
-    #         processing_config: {
-    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #         },
     #       }
     #
@@ -4925,7 +4536,7 @@ module Aws::IoTSiteWise
     #   function. You can specify up to 10 variables per expression. You can
     #   specify up to 10 functions per expression.
     #
-    #   For more information, see [Quotas][1] in the *IoT SiteWise User
+    #   For more information, see [Quotas][1] in the *AWS IoT SiteWise User
     #   Guide*.
     #
     #
@@ -4938,43 +4549,15 @@ module Aws::IoTSiteWise
     #   @return [Array<Types::ExpressionVariable>]
     #
     # @!attribute [rw] window
-    #   The window (time interval) over which IoT SiteWise computes the
-    #   metric's aggregation expression. IoT SiteWise computes one data
+    #   The window (time interval) over which AWS IoT SiteWise computes the
+    #   metric's aggregation expression. AWS IoT SiteWise computes one data
     #   point per `window`.
     #   @return [Types::MetricWindow]
-    #
-    # @!attribute [rw] processing_config
-    #   The processing configuration for the given metric property. You can
-    #   configure metrics to be computed at the edge or in the Amazon Web
-    #   Services Cloud. By default, metrics are forwarded to the cloud.
-    #   @return [Types::MetricProcessingConfig]
     #
     class Metric < Struct.new(
       :expression,
       :variables,
-      :window,
-      :processing_config)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The processing configuration for the given metric property. You can
-    # configure metrics to be computed at the edge or in the Amazon Web
-    # Services Cloud. By default, metrics are forwarded to the cloud.
-    #
-    # @note When making an API call, you may pass MetricProcessingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #       }
-    #
-    # @!attribute [rw] compute_location
-    #   The compute location for the given metric property.
-    #   @return [String]
-    #
-    class MetricProcessingConfig < Struct.new(
-      :compute_location)
+      :window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4988,7 +4571,6 @@ module Aws::IoTSiteWise
     #       {
     #         tumbling: {
     #           interval: "Interval", # required
-    #           offset: "Offset",
     #         },
     #       }
     #
@@ -5002,7 +4584,7 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains IoT SiteWise Monitor error details.
+    # Contains AWS IoT SiteWise Monitor error details.
     #
     # @!attribute [rw] code
     #   The error code.
@@ -5019,29 +4601,7 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains information about the storage destination.
-    #
-    # @note When making an API call, you may pass MultiLayerStorage
-    #   data as a hash:
-    #
-    #       {
-    #         customer_managed_s3_storage: { # required
-    #           s3_resource_arn: "ARN", # required
-    #           role_arn: "ARN", # required
-    #         },
-    #       }
-    #
-    # @!attribute [rw] customer_managed_s3_storage
-    #   Contains information about a customer managed Amazon S3 bucket.
-    #   @return [Types::CustomerManagedS3Storage]
-    #
-    class MultiLayerStorage < Struct.new(
-      :customer_managed_s3_storage)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Identifies an IoT SiteWise Monitor portal.
+    # Identifies an AWS IoT SiteWise Monitor portal.
     #
     # @note When making an API call, you may pass PortalResource
     #   data as a hash:
@@ -5092,9 +4652,9 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] start_url
-    #   The URL for the IoT SiteWise Monitor portal. You can use this URL to
-    #   access portals that use Amazon Web Services SSO for authentication.
-    #   For portals that use IAM for authentication, you must use the IoT
+    #   The URL for the AWS IoT SiteWise Monitor portal. You can use this
+    #   URL to access portals that use AWS SSO for authentication. For
+    #   portals that use IAM for authentication, you must use the AWS IoT
     #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
@@ -5108,9 +4668,9 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] role_arn
     #   The [ARN][1] of the service role that allows the portal's users to
-    #   access your IoT SiteWise resources on your behalf. For more
-    #   information, see [Using service roles for IoT SiteWise Monitor][2]
-    #   in the *IoT SiteWise User Guide*.
+    #   access your AWS IoT SiteWise resources on your behalf. For more
+    #   information, see [Using service roles for AWS IoT SiteWise
+    #   Monitor][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -5135,7 +4695,7 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Identifies a specific IoT SiteWise Monitor project.
+    # Identifies a specific AWS IoT SiteWise Monitor project.
     #
     # @note When making an API call, you may pass ProjectResource
     #   data as a hash:
@@ -5197,11 +4757,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -5243,17 +4803,18 @@ module Aws::IoTSiteWise
     end
 
     # Contains asset property value notification information. When the
-    # notification state is enabled, IoT SiteWise publishes property value
-    # updates to a unique MQTT topic. For more information, see [Interacting
-    # with other services][1] in the *IoT SiteWise User Guide*.
+    # notification state is enabled, AWS IoT SiteWise publishes property
+    # value updates to a unique MQTT topic. For more information, see
+    # [Interacting with other services][1] in the *AWS IoT SiteWise User
+    # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html
     #
     # @!attribute [rw] topic
-    #   The MQTT topic to which IoT SiteWise publishes property value update
-    #   notifications.
+    #   The MQTT topic to which AWS IoT SiteWise publishes property value
+    #   update notifications.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -5278,11 +4839,6 @@ module Aws::IoTSiteWise
     #           default_value: "DefaultValue",
     #         },
     #         measurement: {
-    #           processing_config: {
-    #             forwarding_config: { # required
-    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #             },
-    #           },
     #         },
     #         transform: {
     #           expression: "Expression", # required
@@ -5295,12 +4851,6 @@ module Aws::IoTSiteWise
     #               },
     #             },
     #           ],
-    #           processing_config: {
-    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #             forwarding_config: {
-    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #             },
-    #           },
     #         },
     #         metric: {
     #           expression: "Expression", # required
@@ -5316,11 +4866,7 @@ module Aws::IoTSiteWise
     #           window: { # required
     #             tumbling: {
     #               interval: "Interval", # required
-    #               offset: "Offset",
     #             },
-    #           },
-    #           processing_config: {
-    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #           },
     #         },
     #       }
@@ -5411,11 +4957,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] property_alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -5451,7 +4997,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] kms_key_id
     #   The Key ID of the customer managed customer master key (CMK) used
-    #   for KMS encryption. This is required if you use
+    #   for AWS KMS encryption. This is required if you use
     #   `KMS_BASED_ENCRYPTION`.
     #   @return [String]
     #
@@ -5467,8 +5013,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Key ARN of the KMS CMK used for KMS encryption if you use
-    #   `KMS_BASED_ENCRYPTION`.
+    #   The Key ARN of the AWS KMS CMK used for AWS KMS encryption if you
+    #   use `KMS_BASED_ENCRYPTION`.
     #   @return [String]
     #
     # @!attribute [rw] configuration_status
@@ -5506,73 +5052,8 @@ module Aws::IoTSiteWise
 
     class PutLoggingOptionsResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass PutStorageConfigurationRequest
-    #   data as a hash:
-    #
-    #       {
-    #         storage_type: "SITEWISE_DEFAULT_STORAGE", # required, accepts SITEWISE_DEFAULT_STORAGE, MULTI_LAYER_STORAGE
-    #         multi_layer_storage: {
-    #           customer_managed_s3_storage: { # required
-    #             s3_resource_arn: "ARN", # required
-    #             role_arn: "ARN", # required
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] storage_type
-    #   The type of storage that you specified for your data. The storage
-    #   type can be one of the following values:
-    #
-    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise replicates your data
-    #     into a service managed database.
-    #
-    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise replicates your data into a
-    #     service managed database and saves a copy of your raw data and
-    #     metadata in an Amazon S3 object that you specified.
-    #   @return [String]
-    #
-    # @!attribute [rw] multi_layer_storage
-    #   Identifies a storage destination. If you specified
-    #   `MULTI_LAYER_STORAGE` for the storage type, you must specify a
-    #   `MultiLayerStorage` object.
-    #   @return [Types::MultiLayerStorage]
-    #
-    class PutStorageConfigurationRequest < Struct.new(
-      :storage_type,
-      :multi_layer_storage)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] storage_type
-    #   The type of storage that you specified for your data. The storage
-    #   type can be one of the following values:
-    #
-    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise replicates your data
-    #     into a service managed database.
-    #
-    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise replicates your data into a
-    #     service managed database and saves a copy of your raw data and
-    #     metadata in an Amazon S3 object that you specified.
-    #   @return [String]
-    #
-    # @!attribute [rw] multi_layer_storage
-    #   Contains information about the storage destination.
-    #   @return [Types::MultiLayerStorage]
-    #
-    # @!attribute [rw] configuration_status
-    #   Contains current status information for the configuration.
-    #   @return [Types::ConfigurationStatus]
-    #
-    class PutStorageConfigurationResponse < Struct.new(
-      :storage_type,
-      :multi_layer_storage,
-      :configuration_status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains an IoT SiteWise Monitor resource ID for a portal or project.
+    # Contains an AWS IoT SiteWise Monitor resource ID for a portal or
+    # project.
     #
     # @note When making an API call, you may pass Resource
     #   data as a hash:
@@ -5664,8 +5145,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
-    #   For more information, see [Tagging your IoT SiteWise resources][1]
-    #   in the *IoT SiteWise User Guide*.
+    #   For more information, see [Tagging your AWS IoT SiteWise
+    #   resources][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -5682,10 +5163,10 @@ module Aws::IoTSiteWise
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # Your request exceeded a rate limit. For example, you might have
-    # exceeded the number of IoT SiteWise assets that can be created per
+    # exceeded the number of AWS IoT SiteWise assets that can be created per
     # second, the allowed number of messages per second, and so on.
     #
-    # For more information, see [Quotas][1] in the *IoT SiteWise User
+    # For more information, see [Quotas][1] in the *AWS IoT SiteWise User
     # Guide*.
     #
     #
@@ -5729,7 +5210,7 @@ module Aws::IoTSiteWise
 
     # You've reached the limit for the number of tags allowed for a
     # resource. For more information, see [Tag naming limits and
-    # requirements][1] in the *Amazon Web Services General Reference*.
+    # requirements][1] in the *AWS General Reference*.
     #
     #
     #
@@ -5757,8 +5238,8 @@ module Aws::IoTSiteWise
     # `DOUBLE` and consume properties with data types of `INTEGER` or
     # `DOUBLE`.
     #
-    # For more information, see [Transforms][1] in the *IoT SiteWise User
-    # Guide*.
+    # For more information, see [Transforms][1] in the *AWS IoT SiteWise
+    # User Guide*.
     #
     #
     #
@@ -5778,12 +5259,6 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #         ],
-    #         processing_config: {
-    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #           forwarding_config: {
-    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #           },
-    #         },
     #       }
     #
     # @!attribute [rw] expression
@@ -5791,7 +5266,7 @@ module Aws::IoTSiteWise
     #   function. You can specify up to 10 variables per expression. You can
     #   specify up to 10 functions per expression.
     #
-    #   For more information, see [Quotas][1] in the *IoT SiteWise User
+    #   For more information, see [Quotas][1] in the *AWS IoT SiteWise User
     #   Guide*.
     #
     #
@@ -5803,144 +5278,40 @@ module Aws::IoTSiteWise
     #   The list of variables used in the expression.
     #   @return [Array<Types::ExpressionVariable>]
     #
-    # @!attribute [rw] processing_config
-    #   The processing configuration for the given transform property. You
-    #   can configure transforms to be kept at the edge or forwarded to the
-    #   Amazon Web Services Cloud. You can also configure transforms to be
-    #   computed at the edge or in the cloud.
-    #   @return [Types::TransformProcessingConfig]
-    #
     class Transform < Struct.new(
       :expression,
-      :variables,
-      :processing_config)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The processing configuration for the given transform property. You can
-    # configure transforms to be kept at the edge or forwarded to the Amazon
-    # Web Services Cloud. You can also configure transforms to be computed
-    # at the edge or in the cloud.
-    #
-    # @note When making an API call, you may pass TransformProcessingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #         forwarding_config: {
-    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #         },
-    #       }
-    #
-    # @!attribute [rw] compute_location
-    #   The compute location for the given transform property.
-    #   @return [String]
-    #
-    # @!attribute [rw] forwarding_config
-    #   The forwarding configuration for a given property.
-    #   @return [Types::ForwardingConfig]
-    #
-    class TransformProcessingConfig < Struct.new(
-      :compute_location,
-      :forwarding_config)
+      :variables)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains a tumbling window, which is a repeating fixed-sized,
-    # non-overlapping, and contiguous time window. You use this window in
-    # metrics to aggregate data from properties and other assets.
-    #
-    # You can use `m`, `h`, `d`, and `w` when you specify an interval or
-    # offset. Note that `m` represents minutes, and `w` represents weeks.
-    # You can also use `s` to represent seconds in `offset`.
-    #
-    # The `interval` and `offset` parameters support the [ISO 8601
-    # format][1]. For example, `PT5S` represents five seconds, `PT5M`
-    # represents five minutes, and `PT5H` represents five hours.
-    #
-    #
-    #
-    # [1]: https://en.wikipedia.org/wiki/ISO_8601
+    # non-overlapping, and contiguous time interval. This window is used in
+    # metric and aggregation computations.
     #
     # @note When making an API call, you may pass TumblingWindow
     #   data as a hash:
     #
     #       {
     #         interval: "Interval", # required
-    #         offset: "Offset",
     #       }
     #
     # @!attribute [rw] interval
-    #   The time interval for the tumbling window. The interval time must be
-    #   between 1 minute and 1 week.
+    #   The time interval for the tumbling window. Note that `w` represents
+    #   weeks, `d` represents days, `h` represents hours, and `m` represents
+    #   minutes. AWS IoT SiteWise computes the `1w` interval the end of
+    #   Sunday at midnight each week (UTC), the `1d` interval at the end of
+    #   each day at midnight (UTC), the `1h` interval at the end of each
+    #   hour, and so on.
     #
-    #   IoT SiteWise computes the `1w` interval the end of Sunday at
-    #   midnight each week (UTC), the `1d` interval at the end of each day
-    #   at midnight (UTC), the `1h` interval at the end of each hour, and so
-    #   on.
-    #
-    #   When IoT SiteWise aggregates data points for metric computations,
-    #   the start of each interval is exclusive and the end of each interval
-    #   is inclusive. IoT SiteWise places the computed data point at the end
-    #   of the interval.
-    #   @return [String]
-    #
-    # @!attribute [rw] offset
-    #   The offset for the tumbling window. The `offset` parameter accepts
-    #   the following:
-    #
-    #   * The offset time.
-    #
-    #     For example, if you specify `18h` for `offset` and `1d` for
-    #     `interval`, IoT SiteWise aggregates data in one of the following
-    #     ways:
-    #
-    #     * If you create the metric before or at 6:00 p.m. (UTC), you get
-    #       the first aggregation result at 6 p.m. (UTC) on the day when you
-    #       create the metric.
-    #
-    #     * If you create the metric after 6:00 p.m. (UTC), you get the
-    #       first aggregation result at 6 p.m. (UTC) the next day.
-    #
-    #   * The ISO 8601 format.
-    #
-    #     For example, if you specify `PT18H` for `offset` and `1d` for
-    #     `interval`, IoT SiteWise aggregates data in one of the following
-    #     ways:
-    #
-    #     * If you create the metric before or at 6:00 p.m. (UTC), you get
-    #       the first aggregation result at 6 p.m. (UTC) on the day when you
-    #       create the metric.
-    #
-    #     * If you create the metric after 6:00 p.m. (UTC), you get the
-    #       first aggregation result at 6 p.m. (UTC) the next day.
-    #
-    #   * The 24-hour clock.
-    #
-    #     For example, if you specify `00:03:00` for `offset` and `5m` for
-    #     `interval`, and you create the metric at 2 p.m. (UTC), you get the
-    #     first aggregation result at 2:03 p.m. (UTC). You get the second
-    #     aggregation result at 2:08 p.m. (UTC).
-    #
-    #   * The offset time zone.
-    #
-    #     For example, if you specify `2021-07-23T18:00-08` for `offset` and
-    #     `1d` for `interval`, IoT SiteWise aggregates data in one of the
-    #     following ways:
-    #
-    #     * If you create the metric before or at 6:00 p.m. (PST), you get
-    #       the first aggregation result at 6 p.m. (PST) on the day when you
-    #       create the metric.
-    #
-    #     * If you create the metric after 6:00 p.m. (PST), you get the
-    #       first aggregation result at 6 p.m. (PST) the next day.
+    #   When AWS IoT SiteWise aggregates data points for metric
+    #   computations, the start of each interval is exclusive and the end of
+    #   each interval is inclusive. AWS IoT SiteWise places the computed
+    #   data point at the end of the interval.
     #   @return [String]
     #
     class TumblingWindow < Struct.new(
-      :interval,
-      :offset)
+      :interval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6021,12 +5392,12 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] access_policy_identity
-    #   The identity for this access policy. Choose an Amazon Web Services
-    #   SSO user, an Amazon Web Services SSO group, or an IAM user.
+    #   The identity for this access policy. Choose an AWS SSO user, an AWS
+    #   SSO group, or an IAM user.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] access_policy_resource
-    #   The IoT SiteWise Monitor resource for this access policy. Choose
+    #   The AWS IoT SiteWise Monitor resource for this access policy. Choose
     #   either a portal or a project.
     #   @return [Types::Resource]
     #
@@ -6075,11 +5446,6 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
-    #                 processing_config: {
-    #                   forwarding_config: { # required
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -6092,12 +5458,6 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                   forwarding_config: {
-    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                   },
-    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -6113,11 +5473,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
-    #                     offset: "Offset",
     #                   },
-    #                 },
-    #                 processing_config: {
-    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -6147,11 +5503,6 @@ module Aws::IoTSiteWise
     #                     default_value: "DefaultValue",
     #                   },
     #                   measurement: {
-    #                     processing_config: {
-    #                       forwarding_config: { # required
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
     #                   },
     #                   transform: {
     #                     expression: "Expression", # required
@@ -6164,12 +5515,6 @@ module Aws::IoTSiteWise
     #                         },
     #                       },
     #                     ],
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
-    #                       forwarding_config: {
-    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
-    #                       },
-    #                     },
     #                   },
     #                   metric: {
     #                     expression: "Expression", # required
@@ -6185,11 +5530,7 @@ module Aws::IoTSiteWise
     #                     window: { # required
     #                       tumbling: {
     #                         interval: "Interval", # required
-    #                         offset: "Offset",
     #                       },
-    #                     },
-    #                     processing_config: {
-    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                     },
     #                   },
     #                 },
@@ -6214,11 +5555,11 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_properties
     #   The updated property definitions of the asset model. For more
-    #   information, see [Asset properties][1] in the *IoT SiteWise User
+    #   information, see [Asset properties][1] in the *AWS IoT SiteWise User
     #   Guide*.
     #
     #   You can specify up to 200 properties per asset model. For more
-    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -6230,10 +5571,10 @@ module Aws::IoTSiteWise
     #   The updated hierarchy definitions of the asset model. Each hierarchy
     #   specifies an asset model whose assets can be children of any other
     #   assets created from this asset model. For more information, see
-    #   [Asset hierarchies][1] in the *IoT SiteWise User Guide*.
+    #   [Asset hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #   You can specify up to 10 hierarchies per asset model. For more
-    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -6301,11 +5642,11 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] property_alias
-    #   The alias that identifies the property, such as an OPC-UA server
-    #   data stream path (for example,
+    #   The property alias that identifies the property, such as an OPC-UA
+    #   server data stream path (for example,
     #   `/company/windfarm/3/turbine/7/temperature`). For more information,
     #   see [Mapping industrial data streams to asset properties][1] in the
-    #   *IoT SiteWise User Guide*.
+    #   *AWS IoT SiteWise User Guide*.
     #
     #   If you omit this parameter, the alias is removed from the property.
     #
@@ -6316,10 +5657,10 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] property_notification_state
     #   The MQTT notification state (enabled or disabled) for this asset
-    #   property. When the notification state is enabled, IoT SiteWise
+    #   property. When the notification state is enabled, AWS IoT SiteWise
     #   publishes property value updates to a unique MQTT topic. For more
-    #   information, see [Interacting with other services][1] in the *IoT
-    #   SiteWise User Guide*.
+    #   information, see [Interacting with other services][1] in the *AWS
+    #   IoT SiteWise User Guide*.
     #
     #   If you omit this parameter, the notification state is set to
     #   `DISABLED`.
@@ -6418,8 +5759,8 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] dashboard_definition
     #   The new dashboard definition, as specified in a JSON literal. For
-    #   detailed information, see [Creating dashboards (CLI)][1] in the *IoT
-    #   SiteWise User Guide*.
+    #   detailed information, see [Creating dashboards (CLI)][1] in the *AWS
+    #   IoT SiteWise User Guide*.
     #
     #
     #
@@ -6462,16 +5803,16 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] capability_namespace
     #   The namespace of the gateway capability configuration to be updated.
-    #   For example, if you configure OPC-UA sources from the IoT SiteWise
-    #   console, your OPC-UA capability configuration has the namespace
-    #   `iotsitewise:opcuacollector:version`, where `version` is a number
-    #   such as `1`.
+    #   For example, if you configure OPC-UA sources from the AWS IoT
+    #   SiteWise console, your OPC-UA capability configuration has the
+    #   namespace `iotsitewise:opcuacollector:version`, where `version` is a
+    #   number such as `1`.
     #   @return [String]
     #
     # @!attribute [rw] capability_configuration
     #   The JSON document that defines the configuration for the gateway
     #   capability. For more information, see [Configuring data sources
-    #   (CLI)][1] in the *IoT SiteWise User Guide*.
+    #   (CLI)][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -6553,11 +5894,6 @@ module Aws::IoTSiteWise
     #         },
     #         role_arn: "ARN", # required
     #         client_token: "ClientToken",
-    #         notification_sender_email: "Email",
-    #         alarms: {
-    #           alarm_role_arn: "ARN", # required
-    #           notification_lambda_arn: "ARN",
-    #         },
     #       }
     #
     # @!attribute [rw] portal_id
@@ -6573,7 +5909,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] portal_contact_email
-    #   The Amazon Web Services administrator's contact email address.
+    #   The AWS administrator's contact email address.
     #   @return [String]
     #
     # @!attribute [rw] portal_logo_image
@@ -6587,9 +5923,9 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] role_arn
     #   The [ARN][1] of a service role that allows the portal's users to
-    #   access your IoT SiteWise resources on your behalf. For more
-    #   information, see [Using service roles for IoT SiteWise Monitor][2]
-    #   in the *IoT SiteWise User Guide*.
+    #   access your AWS IoT SiteWise resources on your behalf. For more
+    #   information, see [Using service roles for AWS IoT SiteWise
+    #   Monitor][2] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -6606,22 +5942,6 @@ module Aws::IoTSiteWise
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] notification_sender_email
-    #   The email address that sends alarm notifications.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarms
-    #   Contains the configuration information of an alarm created in an IoT
-    #   SiteWise Monitor portal. You can use the alarm to monitor an asset
-    #   property and get notified when the asset property value is outside a
-    #   specified range. For more information, see [Monitoring with
-    #   alarms][1] in the *IoT SiteWise Application Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
-    #   @return [Types::Alarms]
-    #
     class UpdatePortalRequest < Struct.new(
       :portal_id,
       :portal_name,
@@ -6629,9 +5949,7 @@ module Aws::IoTSiteWise
       :portal_contact_email,
       :portal_logo_image,
       :role_arn,
-      :client_token,
-      :notification_sender_email,
-      :alarms)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6699,7 +6017,7 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] id
-    #   The Amazon Web Services SSO ID of the user.
+    #   The AWS SSO ID of the user.
     #   @return [String]
     #
     class UserIdentity < Struct.new(
@@ -6731,7 +6049,7 @@ module Aws::IoTSiteWise
     #   several hierarchies using the same model and therefore the same
     #   `propertyId`. For example, you might have separately grouped assets
     #   that come from the same asset model. For more information, see
-    #   [Asset hierarchies][1] in the *IoT SiteWise User Guide*.
+    #   [Asset hierarchies][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #

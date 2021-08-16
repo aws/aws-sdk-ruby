@@ -13,7 +13,6 @@ module Aws::LexModelBuildingService
 
     include Seahorse::Model
 
-    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AliasNameOrListAll = Shapes::StringShape.new(name: 'AliasNameOrListAll')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
@@ -105,10 +104,6 @@ module Aws::LexModelBuildingService
     GetIntentVersionsResponse = Shapes::StructureShape.new(name: 'GetIntentVersionsResponse')
     GetIntentsRequest = Shapes::StructureShape.new(name: 'GetIntentsRequest')
     GetIntentsResponse = Shapes::StructureShape.new(name: 'GetIntentsResponse')
-    GetMigrationRequest = Shapes::StructureShape.new(name: 'GetMigrationRequest')
-    GetMigrationResponse = Shapes::StructureShape.new(name: 'GetMigrationResponse')
-    GetMigrationsRequest = Shapes::StructureShape.new(name: 'GetMigrationsRequest')
-    GetMigrationsResponse = Shapes::StructureShape.new(name: 'GetMigrationsResponse')
     GetSlotTypeRequest = Shapes::StructureShape.new(name: 'GetSlotTypeRequest')
     GetSlotTypeResponse = Shapes::StructureShape.new(name: 'GetSlotTypeResponse')
     GetSlotTypeVersionsRequest = Shapes::StructureShape.new(name: 'GetSlotTypeVersionsRequest')
@@ -151,20 +146,6 @@ module Aws::LexModelBuildingService
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageList = Shapes::ListShape.new(name: 'MessageList')
     MessageVersion = Shapes::StringShape.new(name: 'MessageVersion')
-    MigrationAlert = Shapes::StructureShape.new(name: 'MigrationAlert')
-    MigrationAlertDetail = Shapes::StringShape.new(name: 'MigrationAlertDetail')
-    MigrationAlertDetails = Shapes::ListShape.new(name: 'MigrationAlertDetails')
-    MigrationAlertMessage = Shapes::StringShape.new(name: 'MigrationAlertMessage')
-    MigrationAlertReferenceURL = Shapes::StringShape.new(name: 'MigrationAlertReferenceURL')
-    MigrationAlertReferenceURLs = Shapes::ListShape.new(name: 'MigrationAlertReferenceURLs')
-    MigrationAlertType = Shapes::StringShape.new(name: 'MigrationAlertType')
-    MigrationAlerts = Shapes::ListShape.new(name: 'MigrationAlerts')
-    MigrationId = Shapes::StringShape.new(name: 'MigrationId')
-    MigrationSortAttribute = Shapes::StringShape.new(name: 'MigrationSortAttribute')
-    MigrationStatus = Shapes::StringShape.new(name: 'MigrationStatus')
-    MigrationStrategy = Shapes::StringShape.new(name: 'MigrationStrategy')
-    MigrationSummary = Shapes::StructureShape.new(name: 'MigrationSummary')
-    MigrationSummaryList = Shapes::ListShape.new(name: 'MigrationSummaryList')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -212,11 +193,8 @@ module Aws::LexModelBuildingService
     SlotTypeRegexConfiguration = Shapes::StructureShape.new(name: 'SlotTypeRegexConfiguration')
     SlotUtteranceList = Shapes::ListShape.new(name: 'SlotUtteranceList')
     SlotValueSelectionStrategy = Shapes::StringShape.new(name: 'SlotValueSelectionStrategy')
-    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
     StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
-    StartMigrationRequest = Shapes::StructureShape.new(name: 'StartMigrationRequest')
-    StartMigrationResponse = Shapes::StructureShape.new(name: 'StartMigrationResponse')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusType = Shapes::StringShape.new(name: 'StatusType')
@@ -238,14 +216,9 @@ module Aws::LexModelBuildingService
     UtteranceData = Shapes::StructureShape.new(name: 'UtteranceData')
     UtteranceList = Shapes::StructureShape.new(name: 'UtteranceList')
     UtteranceString = Shapes::StringShape.new(name: 'UtteranceString')
-    V2BotId = Shapes::StringShape.new(name: 'V2BotId')
-    V2BotName = Shapes::StringShape.new(name: 'V2BotName')
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
     roleArn = Shapes::StringShape.new(name: 'roleArn')
-
-    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -623,33 +596,6 @@ module Aws::LexModelBuildingService
     GetIntentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetIntentsResponse.struct_class = Types::GetIntentsResponse
 
-    GetMigrationRequest.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, required: true, location: "uri", location_name: "migrationId"))
-    GetMigrationRequest.struct_class = Types::GetMigrationRequest
-
-    GetMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, location_name: "migrationId"))
-    GetMigrationResponse.add_member(:v1_bot_name, Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotName"))
-    GetMigrationResponse.add_member(:v1_bot_version, Shapes::ShapeRef.new(shape: Version, location_name: "v1BotVersion"))
-    GetMigrationResponse.add_member(:v1_bot_locale, Shapes::ShapeRef.new(shape: Locale, location_name: "v1BotLocale"))
-    GetMigrationResponse.add_member(:v2_bot_id, Shapes::ShapeRef.new(shape: V2BotId, location_name: "v2BotId"))
-    GetMigrationResponse.add_member(:v2_bot_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "v2BotRole"))
-    GetMigrationResponse.add_member(:migration_status, Shapes::ShapeRef.new(shape: MigrationStatus, location_name: "migrationStatus"))
-    GetMigrationResponse.add_member(:migration_strategy, Shapes::ShapeRef.new(shape: MigrationStrategy, location_name: "migrationStrategy"))
-    GetMigrationResponse.add_member(:migration_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "migrationTimestamp"))
-    GetMigrationResponse.add_member(:alerts, Shapes::ShapeRef.new(shape: MigrationAlerts, location_name: "alerts"))
-    GetMigrationResponse.struct_class = Types::GetMigrationResponse
-
-    GetMigrationsRequest.add_member(:sort_by_attribute, Shapes::ShapeRef.new(shape: MigrationSortAttribute, location: "querystring", location_name: "sortByAttribute"))
-    GetMigrationsRequest.add_member(:sort_by_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortByOrder"))
-    GetMigrationsRequest.add_member(:v1_bot_name_contains, Shapes::ShapeRef.new(shape: BotName, location: "querystring", location_name: "v1BotNameContains"))
-    GetMigrationsRequest.add_member(:migration_status_equals, Shapes::ShapeRef.new(shape: MigrationStatus, location: "querystring", location_name: "migrationStatusEquals"))
-    GetMigrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    GetMigrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    GetMigrationsRequest.struct_class = Types::GetMigrationsRequest
-
-    GetMigrationsResponse.add_member(:migration_summaries, Shapes::ShapeRef.new(shape: MigrationSummaryList, location_name: "migrationSummaries"))
-    GetMigrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    GetMigrationsResponse.struct_class = Types::GetMigrationsResponse
-
     GetSlotTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
     GetSlotTypeRequest.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location: "uri", location_name: "version"))
     GetSlotTypeRequest.struct_class = Types::GetSlotTypeRequest
@@ -762,31 +708,6 @@ module Aws::LexModelBuildingService
     Message.struct_class = Types::Message
 
     MessageList.member = Shapes::ShapeRef.new(shape: Message)
-
-    MigrationAlert.add_member(:type, Shapes::ShapeRef.new(shape: MigrationAlertType, location_name: "type"))
-    MigrationAlert.add_member(:message, Shapes::ShapeRef.new(shape: MigrationAlertMessage, location_name: "message"))
-    MigrationAlert.add_member(:details, Shapes::ShapeRef.new(shape: MigrationAlertDetails, location_name: "details"))
-    MigrationAlert.add_member(:reference_urls, Shapes::ShapeRef.new(shape: MigrationAlertReferenceURLs, location_name: "referenceURLs"))
-    MigrationAlert.struct_class = Types::MigrationAlert
-
-    MigrationAlertDetails.member = Shapes::ShapeRef.new(shape: MigrationAlertDetail)
-
-    MigrationAlertReferenceURLs.member = Shapes::ShapeRef.new(shape: MigrationAlertReferenceURL)
-
-    MigrationAlerts.member = Shapes::ShapeRef.new(shape: MigrationAlert)
-
-    MigrationSummary.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, location_name: "migrationId"))
-    MigrationSummary.add_member(:v1_bot_name, Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotName"))
-    MigrationSummary.add_member(:v1_bot_version, Shapes::ShapeRef.new(shape: Version, location_name: "v1BotVersion"))
-    MigrationSummary.add_member(:v1_bot_locale, Shapes::ShapeRef.new(shape: Locale, location_name: "v1BotLocale"))
-    MigrationSummary.add_member(:v2_bot_id, Shapes::ShapeRef.new(shape: V2BotId, location_name: "v2BotId"))
-    MigrationSummary.add_member(:v2_bot_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "v2BotRole"))
-    MigrationSummary.add_member(:migration_status, Shapes::ShapeRef.new(shape: MigrationStatus, location_name: "migrationStatus"))
-    MigrationSummary.add_member(:migration_strategy, Shapes::ShapeRef.new(shape: MigrationStrategy, location_name: "migrationStrategy"))
-    MigrationSummary.add_member(:migration_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "migrationTimestamp"))
-    MigrationSummary.struct_class = Types::MigrationSummary
-
-    MigrationSummaryList.member = Shapes::ShapeRef.new(shape: MigrationSummary)
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
@@ -992,23 +913,6 @@ module Aws::LexModelBuildingService
     StartImportResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     StartImportResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     StartImportResponse.struct_class = Types::StartImportResponse
-
-    StartMigrationRequest.add_member(:v1_bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location_name: "v1BotName"))
-    StartMigrationRequest.add_member(:v1_bot_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "v1BotVersion"))
-    StartMigrationRequest.add_member(:v2_bot_name, Shapes::ShapeRef.new(shape: V2BotName, required: true, location_name: "v2BotName"))
-    StartMigrationRequest.add_member(:v2_bot_role, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "v2BotRole"))
-    StartMigrationRequest.add_member(:migration_strategy, Shapes::ShapeRef.new(shape: MigrationStrategy, required: true, location_name: "migrationStrategy"))
-    StartMigrationRequest.struct_class = Types::StartMigrationRequest
-
-    StartMigrationResponse.add_member(:v1_bot_name, Shapes::ShapeRef.new(shape: BotName, location_name: "v1BotName"))
-    StartMigrationResponse.add_member(:v1_bot_version, Shapes::ShapeRef.new(shape: Version, location_name: "v1BotVersion"))
-    StartMigrationResponse.add_member(:v1_bot_locale, Shapes::ShapeRef.new(shape: Locale, location_name: "v1BotLocale"))
-    StartMigrationResponse.add_member(:v2_bot_id, Shapes::ShapeRef.new(shape: V2BotId, location_name: "v2BotId"))
-    StartMigrationResponse.add_member(:v2_bot_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "v2BotRole"))
-    StartMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, location_name: "migrationId"))
-    StartMigrationResponse.add_member(:migration_strategy, Shapes::ShapeRef.new(shape: MigrationStrategy, location_name: "migrationStrategy"))
-    StartMigrationResponse.add_member(:migration_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "migrationTimestamp"))
-    StartMigrationResponse.struct_class = Types::StartMigrationResponse
 
     Statement.add_member(:messages, Shapes::ShapeRef.new(shape: MessageList, required: true, location_name: "messages"))
     Statement.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
@@ -1456,35 +1360,6 @@ module Aws::LexModelBuildingService
         )
       end)
 
-      api.add_operation(:get_migration, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetMigration"
-        o.http_method = "GET"
-        o.http_request_uri = "/migrations/{migrationId}"
-        o.input = Shapes::ShapeRef.new(shape: GetMigrationRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetMigrationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-      end)
-
-      api.add_operation(:get_migrations, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetMigrations"
-        o.http_method = "GET"
-        o.http_request_uri = "/migrations"
-        o.input = Shapes::ShapeRef.new(shape: GetMigrationsRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetMigrationsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
       api.add_operation(:get_slot_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSlotType"
         o.http_method = "GET"
@@ -1617,19 +1492,6 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-      end)
-
-      api.add_operation(:start_migration, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "StartMigration"
-        o.http_method = "POST"
-        o.http_request_uri = "/migrations"
-        o.input = Shapes::ShapeRef.new(shape: StartMigrationRequest)
-        o.output = Shapes::ShapeRef.new(shape: StartMigrationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

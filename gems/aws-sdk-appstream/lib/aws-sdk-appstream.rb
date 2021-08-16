@@ -49,6 +49,6 @@ require_relative 'aws-sdk-appstream/customizations'
 # @!group service
 module Aws::AppStream
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.52.0'
 
 end

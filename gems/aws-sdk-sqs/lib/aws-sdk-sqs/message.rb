@@ -43,7 +43,7 @@ module Aws::SQS
     end
 
     # A unique identifier for the message. A `MessageId`is considered unique
-    # across all accounts for an extended period of time.
+    # across all AWS accounts for an extended period of time.
     # @return [String]
     def message_id
       data[:message_id]
@@ -104,8 +104,8 @@ module Aws::SQS
     end
 
     # Each message attribute consists of a `Name`, `Type`, and `Value`. For
-    # more information, see [Amazon SQS message attributes][1] in the
-    # *Amazon SQS Developer Guide*.
+    # more information, see [Amazon SQS Message Attributes][1] in the
+    # *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #

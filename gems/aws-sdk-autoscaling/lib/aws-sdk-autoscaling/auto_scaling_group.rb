@@ -77,13 +77,6 @@ module Aws::AutoScaling
       data[:desired_capacity]
     end
 
-    # The predicted capacity of the group when it has a predictive scaling
-    # policy.
-    # @return [Integer]
-    def predicted_capacity
-      data[:predicted_capacity]
-    end
-
     # The duration of the default cooldown period, in seconds.
     # @return [Integer]
     def default_cooldown
@@ -110,7 +103,7 @@ module Aws::AutoScaling
     end
 
     # The service to use for the health checks. The valid values are `EC2`
-    # and `ELB`. If you configure an Auto Scaling group to use `ELB` health
+    # and `ELB`. If you configure an Auto Scaling group to use ELB health
     # checks, it considers the instance unhealthy if it fails either the EC2
     # status checks or the load balancer health checks.
     # @return [String]
@@ -178,8 +171,7 @@ module Aws::AutoScaling
     end
 
     # The Amazon Resource Name (ARN) of the service-linked role that the
-    # Auto Scaling group uses to call other Amazon Web Services on your
-    # behalf.
+    # Auto Scaling group uses to call other AWS services on your behalf.
     # @return [String]
     def service_linked_role_arn
       data[:service_linked_role_arn]
@@ -210,12 +202,6 @@ module Aws::AutoScaling
     # @return [Integer]
     def warm_pool_size
       data[:warm_pool_size]
-    end
-
-    # Reserved.
-    # @return [String]
-    def context
-      data[:context]
     end
 
     # @!endgroup
@@ -641,29 +627,6 @@ module Aws::AutoScaling
     #       disable_scale_in: false,
     #     },
     #     enabled: false,
-    #     predictive_scaling_configuration: {
-    #       metric_specifications: [ # required
-    #         {
-    #           target_value: 1.0, # required
-    #           predefined_metric_pair_specification: {
-    #             predefined_metric_type: "ASGCPUUtilization", # required, accepts ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, ALBRequestCount
-    #             resource_label: "XmlStringMaxLen1023",
-    #           },
-    #           predefined_scaling_metric_specification: {
-    #             predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
-    #             resource_label: "XmlStringMaxLen1023",
-    #           },
-    #           predefined_load_metric_specification: {
-    #             predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
-    #             resource_label: "XmlStringMaxLen1023",
-    #           },
-    #         },
-    #       ],
-    #       mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
-    #       scheduling_buffer_time: 1,
-    #       max_capacity_breach_behavior: "HonorMaxCapacity", # accepts HonorMaxCapacity, IncreaseMaxCapacity
-    #       max_capacity_buffer: 1,
-    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :policy_name
@@ -676,8 +639,6 @@ module Aws::AutoScaling
     #   * `StepScaling`
     #
     #   * `SimpleScaling` (default)
-    #
-    #   * `PredictiveScaling`
     # @option options [String] :adjustment_type
     #   Specifies how the scaling adjustment is interpreted (for example, an
     #   absolute number or a percentage). The valid values are
@@ -756,7 +717,7 @@ module Aws::AutoScaling
     #   Valid only if the policy type is `TargetTrackingScaling` or
     #   `StepScaling`.
     # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
-    #   A target tracking scaling policy. Provides support for predefined or
+    #   A target tracking scaling policy. Includes support for predefined or
     #   customized metrics.
     #
     #   The following predefined metrics are available:
@@ -790,21 +751,6 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
-    # @option options [Types::PredictiveScalingConfiguration] :predictive_scaling_configuration
-    #   A predictive scaling policy. Provides support for only predefined
-    #   metrics.
-    #
-    #   Predictive scaling works with CPU utilization, network in/out, and the
-    #   Application Load Balancer request count.
-    #
-    #   For more information, see [PredictiveScalingConfiguration][1] in the
-    #   *Amazon EC2 Auto Scaling API Reference*.
-    #
-    #   Required if the policy type is `PredictiveScaling`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1037,7 +983,6 @@ module Aws::AutoScaling
     #     service_linked_role_arn: "ResourceName",
     #     max_instance_lifetime: 1,
     #     capacity_rebalance: false,
-    #     context: "Context",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1092,7 +1037,7 @@ module Aws::AutoScaling
     #   One or more Availability Zones for the group.
     # @option options [String] :health_check_type
     #   The service to use for the health checks. The valid values are `EC2`
-    #   and `ELB`. If you configure an Auto Scaling group to use `ELB` health
+    #   and `ELB`. If you configure an Auto Scaling group to use ELB health
     #   checks, it considers the instance unhealthy if it fails either the EC2
     #   status checks or the load balancer health checks.
     # @option options [Integer] :health_check_grace_period
@@ -1145,9 +1090,9 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
     # @option options [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
-    #   Auto Scaling group uses to call other Amazon Web Services on your
-    #   behalf. For more information, see [Service-linked roles][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   Auto Scaling group uses to call other AWS services on your behalf. For
+    #   more information, see [Service-linked roles][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
     #
     #
     #
@@ -1171,8 +1116,6 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
-    # @option options [String] :context
-    #   Reserved.
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -1193,13 +1136,11 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
-    #   The activity IDs of the desired scaling activities. If you omit this
-    #   parameter, all activities for the past six weeks are described. If
-    #   unknown activities are requested, they are ignored with no error. If
-    #   you specify an Auto Scaling group, the results are limited to that
-    #   group.
-    #
-    #   Array Members: Maximum number of 50 IDs.
+    #   The activity IDs of the desired scaling activities. You can specify up
+    #   to 50 IDs. If you omit this parameter, all activities for the past six
+    #   weeks are described. If unknown activities are requested, they are
+    #   ignored with no error. If you specify an Auto Scaling group, the
+    #   results are limited to that group.
     # @option options [Boolean] :include_deleted_groups
     #   Indicates whether to include scaling activity from deleted Auto
     #   Scaling groups.
@@ -1365,13 +1306,11 @@ module Aws::AutoScaling
     # @option options [Array<String>] :policy_names
     #   The names of one or more policies. If you omit this parameter, all
     #   policies are described. If a group name is provided, the results are
-    #   limited to that group. If you specify an unknown policy name, it is
-    #   ignored with no error.
-    #
-    #   Array Members: Maximum number of 50 items.
+    #   limited to that group. This list is limited to 50 items. If you
+    #   specify an unknown policy name, it is ignored with no error.
     # @option options [Array<String>] :policy_types
     #   One or more policy types. The valid values are `SimpleScaling`,
-    #   `StepScaling`, `TargetTrackingScaling`, and `PredictiveScaling`.
+    #   `StepScaling`, and `TargetTrackingScaling`.
     # @return [ScalingPolicy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|
@@ -1401,11 +1340,10 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :scheduled_action_names
-    #   The names of one or more scheduled actions. If you omit this
-    #   parameter, all scheduled actions are described. If you specify an
-    #   unknown scheduled action, it is ignored with no error.
-    #
-    #   Array Members: Maximum number of 50 actions.
+    #   The names of one or more scheduled actions. You can specify up to 50
+    #   actions. If you omit this parameter, all scheduled actions are
+    #   described. If you specify an unknown scheduled action, it is ignored
+    #   with no error.
     # @option options [Time,DateTime,Date,Integer,String] :start_time
     #   The earliest scheduled start time to return. If scheduled action names
     #   are provided, this parameter is ignored.

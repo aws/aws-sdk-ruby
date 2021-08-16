@@ -344,11 +344,11 @@ module Aws::Support
     # after it's created. The `expiryTime` returned in the response is when
     # the set expires.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -411,11 +411,11 @@ module Aws::Support
     # using the `ccEmailAddresses` parameter. The `communicationBody` value
     # contains the text of the communication.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -426,8 +426,8 @@ module Aws::Support
     # [1]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [String] :case_id
-    #   The support case ID requested or returned in the call. The case ID is
-    #   an alphanumeric string formatted as shown in this example:
+    #   The AWS Support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #
     # @option params [required, String] :communication_body
@@ -488,11 +488,11 @@ module Aws::Support
     # Support Center][3]. Use the DescribeCases operation to get the
     # `displayId`.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][4].
     #
@@ -506,8 +506,8 @@ module Aws::Support
     # [4]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [required, String] :subject
-    #   The title of the support case. The title appears in the **Subject**
-    #   field on the AWS Support Center [Create Case][1] page.
+    #   The title of the AWS Support case. The title appears in the
+    #   **Subject** field on the AWS Support Center [Create Case][1] page.
     #
     #
     #
@@ -536,7 +536,7 @@ module Aws::Support
     #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
     #
     # @option params [String] :category_code
-    #   The category of problem for the support case. You also use the
+    #   The category of problem for the AWS Support case. You also use the
     #   DescribeServices operation to get the category code for a service.
     #   Each AWS service defines its own set of category codes.
     #
@@ -612,11 +612,11 @@ module Aws::Support
     # are returned in the AttachmentDetails objects that are returned by the
     # DescribeCommunications operation.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -670,11 +670,11 @@ module Aws::Support
     # Case data is available for 12 months after creation. If a case was
     # created more than 12 months ago, a request might return an error.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][2].
     #
@@ -720,7 +720,7 @@ module Aws::Support
     #
     # @option params [Boolean] :include_communications
     #   Specifies whether to include communications in the `DescribeCases`
-    #   response. By default, communications are included.
+    #   response. By default, communications are incuded.
     #
     # @return [Types::DescribeCasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -792,11 +792,11 @@ module Aws::Support
     # that you want to display on each page, and use `nextToken` to specify
     # the resumption of pagination.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -807,8 +807,8 @@ module Aws::Support
     # [1]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [required, String] :case_id
-    #   The support case ID requested or returned in the call. The case ID is
-    #   an alphanumeric string formatted as shown in this example:
+    #   The AWS Support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #
     # @option params [String] :before_time
@@ -878,11 +878,11 @@ module Aws::Support
     # categories that the `DescribeServices` operation returns, so that you
     # have the most recent set of service and category codes.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][2].
     #
@@ -931,15 +931,15 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns the list of severity levels that you can assign to a support
-    # case. The severity level for a case is also a field in the CaseDetails
-    # data type that you include for a CreateCase request.
+    # Returns the list of severity levels that you can assign to an AWS
+    # Support case. The severity level for a case is also a field in the
+    # CaseDetails data type that you include for a CreateCase request.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -990,11 +990,11 @@ module Aws::Support
     # this operation for these checks, you might see an
     # `InvalidParameterValue` error.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -1005,7 +1005,7 @@ module Aws::Support
     # [1]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [required, Array<String>] :check_ids
-    #   The IDs of the Trusted Advisor checks to get the status.
+    #   The IDs of the Trusted Advisor checks to get the status of.
     #
     #   <note markdown="1"> If you specify the check ID of a check that is automatically
     #   refreshed, you might see an `InvalidParameterValue` error.
@@ -1053,18 +1053,18 @@ module Aws::Support
     #
     # In addition, the response contains these fields:
     #
-    # * **status** - The alert status of the check can be `ok` (green),
-    #   `warning` (yellow), `error` (red), or `not_available`.
+    # * **status** - The alert status of the check: "ok" (green),
+    #   "warning" (yellow), "error" (red), or "not\_available".
     #
     # * **timestamp** - The time of the last refresh of the check.
     #
     # * **checkId** - The unique identifier for the check.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -1128,11 +1128,11 @@ module Aws::Support
     #
     # The response contains an array of TrustedAdvisorCheckSummary objects.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -1185,17 +1185,13 @@ module Aws::Support
     # TrustedAdvisorCheckDescription object for each check. You must set the
     # AWS Region to us-east-1.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
-    #
-    # * The names and descriptions for Trusted Advisor checks are subject to
-    #   change. We recommend that you specify the check ID in your code to
-    #   uniquely identify a check.
     #
     #  </note>
     #
@@ -1250,11 +1246,11 @@ module Aws::Support
     #
     # The response contains a TrustedAdvisorCheckRefreshStatus object.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -1266,11 +1262,8 @@ module Aws::Support
     #
     # @option params [required, String] :check_id
     #   The unique identifier for the Trusted Advisor check to refresh.
-    #
-    #   <note markdown="1"> Specifying the check ID of a check that is automatically refreshed
-    #   causes an `InvalidParameterValue` error.
-    #
-    #    </note>
+    #   **Note:** Specifying the check ID of a check that is automatically
+    #   refreshed causes an `InvalidParameterValue` error.
     #
     # @return [Types::RefreshTrustedAdvisorCheckResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1300,11 +1293,11 @@ module Aws::Support
     # Resolves a support case. This operation takes a `caseId` and returns
     # the initial and final state of the case.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
+    # <note markdown="1"> * You must have a Business or Enterprise support plan to use the AWS
     #   Support API.
     #
     # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
+    #   Business or Enterprise support plan, the
     #   `SubscriptionRequiredException` error message appears. For
     #   information about changing your support plan, see [AWS Support][1].
     #
@@ -1315,8 +1308,8 @@ module Aws::Support
     # [1]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [String] :case_id
-    #   The support case ID requested or returned in the call. The case ID is
-    #   an alphanumeric string formatted as shown in this example:
+    #   The AWS Support case ID requested or returned in the call. The case ID
+    #   is an alphanumeric string formatted as shown in this example:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #
     # @return [Types::ResolveCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1357,7 +1350,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

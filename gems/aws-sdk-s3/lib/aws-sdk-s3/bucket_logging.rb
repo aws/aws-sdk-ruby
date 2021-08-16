@@ -36,7 +36,8 @@ module Aws::S3
 
     # Describes where logs are stored and the prefix that Amazon S3 assigns
     # to all log object keys for a bucket. For more information, see [PUT
-    # Bucket logging][1] in the *Amazon S3 API Reference*.
+    # Bucket logging][1] in the *Amazon Simple Storage Service API
+    # Reference*.
     #
     #
     #

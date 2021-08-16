@@ -1,36 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.93.0 (2021-08-03)
-------------------
-
-* Feature - Add ConcurrentModificationException to create-table, delete-table, create-database, update-database, delete-database
-
-1.92.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.91.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.90.0 (2021-07-14)
-------------------
-
-* Feature - Add support for Event Driven Workflows
-
-1.89.0 (2021-06-28)
-------------------
-
-* Feature - Add JSON Support for Glue Schema Registry
-
-1.88.0 (2021-06-07)
-------------------
-
-* Feature - Add SampleSize variable to S3Target to enable s3-sampling feature through API.
-
 1.87.0 (2021-04-26)
 ------------------
 

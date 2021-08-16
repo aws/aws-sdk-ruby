@@ -43,7 +43,7 @@ module Aws::SNS
     # * `DisplayName` – The human-readable name used in the `From` field for
     #   notifications to `email` and `email-json` endpoints.
     #
-    # * `Owner` – The account ID of the topic's owner.
+    # * `Owner` – The AWS account ID of the topic's owner.
     #
     # * `Policy` – The JSON serialization of the topic's access control
     #   policy.
@@ -64,10 +64,10 @@ module Aws::SNS
     #
     # The following attribute applies only to [server-side-encryption][1]\:
     #
-    # * `KmsMasterKeyId` - The ID of an Amazon Web Services managed customer
-    #   master key (CMK) for Amazon SNS or a custom CMK. For more
-    #   information, see [Key Terms][2]. For more examples, see [KeyId][3]
-    #   in the *Key Management Service API Reference*.
+    # * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #   Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #   Management Service API Reference*.
     #
     # ^
     #
@@ -88,8 +88,8 @@ module Aws::SNS
     #     the body of the message (but not the attributes of the message).
     #
     #     (Optional) To override the generated value, you can specify a
-    #     value for the `MessageDeduplicationId` parameter for the `Publish`
-    #     action.
+    #     value for the the `MessageDeduplicationId` parameter for the
+    #     `Publish` action.
     #
     #
     #
@@ -151,9 +151,9 @@ module Aws::SNS
     # @option options [required, String] :label
     #   A unique identifier for the new policy statement.
     # @option options [required, Array<String>] :aws_account_id
-    #   The account IDs of the users (principals) who will be given access to
-    #   the specified actions. The users must have account, but do not need to
-    #   be signed up for this service.
+    #   The AWS account IDs of the users (principals) who will be given access
+    #   to the specified actions. The users must have AWS accounts, but do not
+    #   need to be signed up for this service.
     # @option options [required, Array<String>] :action_name
     #   The action you want to allow for the specified principal(s).
     #
@@ -176,10 +176,10 @@ module Aws::SNS
     #   Short-lived token sent to an endpoint during the `Subscribe` action.
     # @option options [String] :authenticate_on_unsubscribe
     #   Disallows unauthenticated unsubscribes of the subscription. If the
-    #   value of this parameter is `true` and the request has an Amazon Web
-    #   Services signature, then only the topic owner and the subscription
-    #   owner can unsubscribe the endpoint. The unsubscribe action requires
-    #   Amazon Web Services authentication.
+    #   value of this parameter is `true` and the request has an AWS
+    #   signature, then only the topic owner and the subscription owner can
+    #   unsubscribe the endpoint. The unsubscribe action requires AWS
+    #   authentication.
     # @return [Subscription]
     def confirm_subscription(options = {})
       options = options.merge(topic_arn: @arn)
@@ -381,10 +381,10 @@ module Aws::SNS
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed customer
-    #     master key (CMK) for Amazon SNS or a custom CMK. For more
-    #     information, see [Key Terms][2]. For more examples, see [KeyId][3]
-    #     in the *Key Management Service API Reference*.
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
+    #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
     #
     #   ^
     #
@@ -403,8 +403,8 @@ module Aws::SNS
     #       the body of the message (but not the attributes of the message).
     #
     #       (Optional) To override the generated value, you can specify a
-    #       value for the `MessageDeduplicationId` parameter for the `Publish`
-    #       action.
+    #       value for the the `MessageDeduplicationId` parameter for the
+    #       `Publish` action.
     #
     #
     #
@@ -451,7 +451,8 @@ module Aws::SNS
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
     #     for a mobile app and device
     #
-    #   * `lambda` – delivery of JSON-encoded message to an Lambda function
+    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
+    #     function
     #
     #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
     #     Data Firehose delivery stream.
@@ -478,7 +479,7 @@ module Aws::SNS
     #   * For the `application` protocol, the endpoint is the EndpointArn of a
     #     mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an Lambda
+    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
     #     function.
     #
     #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
@@ -487,7 +488,7 @@ module Aws::SNS
     #   A map of attributes with their corresponding values.
     #
     #   The following lists the names, descriptions, and values of the special
-    #   request parameters that the `Subscribe` action uses:
+    #   request parameters that the `SetTopicAttributes` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.

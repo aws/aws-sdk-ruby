@@ -264,28 +264,5 @@ module Aws
         expect(config.correct_clock_skew).to eq('false')
       end
     end
-
-    context 'ec2_metadata_service_endpoint selection' do
-      it 'can resolve ec2_metadata_service_endpoint from config file' do
-        config = SharedConfig.new(
-          config_path: mock_config_file,
-          config_enabled: true,
-          profile_name: 'ec2_metadata_service_endpoint'
-        )
-        expect(config.ec2_metadata_service_endpoint)
-          .to eq('http://123.123.123.123')
-      end
-    end
-
-    context 'ec2_metadata_service_endpoint_mode selection' do
-      it 'can resolve ec2_metadata_service_endpoint_mode from config file' do
-        config = SharedConfig.new(
-          config_path: mock_config_file,
-          config_enabled: true,
-          profile_name: 'ec2_metadata_service_endpoint_mode'
-        )
-        expect(config.ec2_metadata_service_endpoint_mode).to eq('IPv6')
-      end
-    end
   end
 end

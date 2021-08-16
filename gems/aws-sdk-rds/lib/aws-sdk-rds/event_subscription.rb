@@ -35,8 +35,8 @@ module Aws::RDS
     end
     alias :cust_subscription_id :name
 
-    # The Amazon Web Services customer account associated with the RDS event
-    # notification subscription.
+    # The AWS customer account associated with the RDS event notification
+    # subscription.
     # @return [String]
     def customer_aws_id
       data[:customer_aws_id]

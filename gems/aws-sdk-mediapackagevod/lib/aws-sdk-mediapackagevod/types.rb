@@ -207,20 +207,12 @@ module Aws::MediaPackageVod
     #   data as a hash:
     #
     #       {
-    #         constant_initialization_vector: "__string",
     #         speke_key_provider: { # required
     #           role_arn: "__string", # required
     #           system_ids: ["__string"], # required
     #           url: "__string", # required
     #         },
     #       }
-    #
-    # @!attribute [rw] constant_initialization_vector
-    #   An optional 128-bit, 16-byte hex value represented by a 32-character
-    #   string, used in conjunction with the key for encrypting blocks. If
-    #   you don't specify a value, then MediaPackage creates the constant
-    #   initialization vector (IV).
-    #   @return [String]
     #
     # @!attribute [rw] speke_key_provider
     #   A configuration for accessing an external Secure Packager and
@@ -231,7 +223,6 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CmafEncryption AWS API Documentation
     #
     class CmafEncryption < Struct.new(
-      :constant_initialization_vector,
       :speke_key_provider)
       SENSITIVE = []
       include Aws::Structure
@@ -244,7 +235,6 @@ module Aws::MediaPackageVod
     #
     #       {
     #         encryption: {
-    #           constant_initialization_vector: "__string",
     #           speke_key_provider: { # required
     #             role_arn: "__string", # required
     #             system_ids: ["__string"], # required
@@ -472,7 +462,6 @@ module Aws::MediaPackageVod
     #       {
     #         cmaf_package: {
     #           encryption: {
-    #             constant_initialization_vector: "__string",
     #             speke_key_provider: { # required
     #               role_arn: "__string", # required
     #               system_ids: ["__string"], # required

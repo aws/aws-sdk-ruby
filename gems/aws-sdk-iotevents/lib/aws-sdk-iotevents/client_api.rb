@@ -13,25 +13,8 @@ module Aws::IoTEvents
 
     include Seahorse::Model
 
-    AcknowledgeFlow = Shapes::StructureShape.new(name: 'AcknowledgeFlow')
-    AcknowledgeFlowEnabled = Shapes::BooleanShape.new(name: 'AcknowledgeFlowEnabled')
     Action = Shapes::StructureShape.new(name: 'Action')
     Actions = Shapes::ListShape.new(name: 'Actions')
-    AlarmAction = Shapes::StructureShape.new(name: 'AlarmAction')
-    AlarmActions = Shapes::ListShape.new(name: 'AlarmActions')
-    AlarmCapabilities = Shapes::StructureShape.new(name: 'AlarmCapabilities')
-    AlarmEventActions = Shapes::StructureShape.new(name: 'AlarmEventActions')
-    AlarmModelArn = Shapes::StringShape.new(name: 'AlarmModelArn')
-    AlarmModelDescription = Shapes::StringShape.new(name: 'AlarmModelDescription')
-    AlarmModelName = Shapes::StringShape.new(name: 'AlarmModelName')
-    AlarmModelSummaries = Shapes::ListShape.new(name: 'AlarmModelSummaries')
-    AlarmModelSummary = Shapes::StructureShape.new(name: 'AlarmModelSummary')
-    AlarmModelVersion = Shapes::StringShape.new(name: 'AlarmModelVersion')
-    AlarmModelVersionStatus = Shapes::StringShape.new(name: 'AlarmModelVersionStatus')
-    AlarmModelVersionSummaries = Shapes::ListShape.new(name: 'AlarmModelVersionSummaries')
-    AlarmModelVersionSummary = Shapes::StructureShape.new(name: 'AlarmModelVersionSummary')
-    AlarmNotification = Shapes::StructureShape.new(name: 'AlarmNotification')
-    AlarmRule = Shapes::StructureShape.new(name: 'AlarmRule')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AnalysisId = Shapes::StringShape.new(name: 'AnalysisId')
     AnalysisMessage = Shapes::StringShape.new(name: 'AnalysisMessage')
@@ -44,7 +27,6 @@ module Aws::IoTEvents
     AnalysisStatus = Shapes::StringShape.new(name: 'AnalysisStatus')
     AnalysisType = Shapes::StringShape.new(name: 'AnalysisType')
     AssetId = Shapes::StringShape.new(name: 'AssetId')
-    AssetModelId = Shapes::StringShape.new(name: 'AssetModelId')
     AssetPropertyAlias = Shapes::StringShape.new(name: 'AssetPropertyAlias')
     AssetPropertyBooleanValue = Shapes::StringShape.new(name: 'AssetPropertyBooleanValue')
     AssetPropertyDoubleValue = Shapes::StringShape.new(name: 'AssetPropertyDoubleValue')
@@ -62,24 +44,17 @@ module Aws::IoTEvents
     AttributeJsonPath = Shapes::StringShape.new(name: 'AttributeJsonPath')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
     ClearTimerAction = Shapes::StructureShape.new(name: 'ClearTimerAction')
-    ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     Condition = Shapes::StringShape.new(name: 'Condition')
     ContentExpression = Shapes::StringShape.new(name: 'ContentExpression')
-    CreateAlarmModelRequest = Shapes::StructureShape.new(name: 'CreateAlarmModelRequest')
-    CreateAlarmModelResponse = Shapes::StructureShape.new(name: 'CreateAlarmModelResponse')
     CreateDetectorModelRequest = Shapes::StructureShape.new(name: 'CreateDetectorModelRequest')
     CreateDetectorModelResponse = Shapes::StructureShape.new(name: 'CreateDetectorModelResponse')
     CreateInputRequest = Shapes::StructureShape.new(name: 'CreateInputRequest')
     CreateInputResponse = Shapes::StructureShape.new(name: 'CreateInputResponse')
-    DeleteAlarmModelRequest = Shapes::StructureShape.new(name: 'DeleteAlarmModelRequest')
-    DeleteAlarmModelResponse = Shapes::StructureShape.new(name: 'DeleteAlarmModelResponse')
     DeleteDetectorModelRequest = Shapes::StructureShape.new(name: 'DeleteDetectorModelRequest')
     DeleteDetectorModelResponse = Shapes::StructureShape.new(name: 'DeleteDetectorModelResponse')
     DeleteInputRequest = Shapes::StructureShape.new(name: 'DeleteInputRequest')
     DeleteInputResponse = Shapes::StructureShape.new(name: 'DeleteInputResponse')
     DeliveryStreamName = Shapes::StringShape.new(name: 'DeliveryStreamName')
-    DescribeAlarmModelRequest = Shapes::StructureShape.new(name: 'DescribeAlarmModelRequest')
-    DescribeAlarmModelResponse = Shapes::StructureShape.new(name: 'DescribeAlarmModelResponse')
     DescribeDetectorModelAnalysisRequest = Shapes::StructureShape.new(name: 'DescribeDetectorModelAnalysisRequest')
     DescribeDetectorModelAnalysisResponse = Shapes::StructureShape.new(name: 'DescribeDetectorModelAnalysisResponse')
     DescribeDetectorModelRequest = Shapes::StructureShape.new(name: 'DescribeDetectorModelRequest')
@@ -102,7 +77,6 @@ module Aws::IoTEvents
     DetectorModelVersionStatus = Shapes::StringShape.new(name: 'DetectorModelVersionStatus')
     DetectorModelVersionSummaries = Shapes::ListShape.new(name: 'DetectorModelVersionSummaries')
     DetectorModelVersionSummary = Shapes::StructureShape.new(name: 'DetectorModelVersionSummary')
-    DisabledOnInitialization = Shapes::BooleanShape.new(name: 'DisabledOnInitialization')
     DynamoDBAction = Shapes::StructureShape.new(name: 'DynamoDBAction')
     DynamoDBv2Action = Shapes::StructureShape.new(name: 'DynamoDBv2Action')
     DynamoKeyField = Shapes::StringShape.new(name: 'DynamoKeyField')
@@ -110,54 +84,35 @@ module Aws::IoTEvents
     DynamoKeyValue = Shapes::StringShape.new(name: 'DynamoKeyValue')
     DynamoOperation = Shapes::StringShape.new(name: 'DynamoOperation')
     DynamoTableName = Shapes::StringShape.new(name: 'DynamoTableName')
-    EmailConfiguration = Shapes::StructureShape.new(name: 'EmailConfiguration')
-    EmailConfigurations = Shapes::ListShape.new(name: 'EmailConfigurations')
-    EmailContent = Shapes::StructureShape.new(name: 'EmailContent')
-    EmailRecipients = Shapes::StructureShape.new(name: 'EmailRecipients')
-    EmailSubject = Shapes::StringShape.new(name: 'EmailSubject')
     EvaluationMethod = Shapes::StringShape.new(name: 'EvaluationMethod')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventName = Shapes::StringShape.new(name: 'EventName')
     Events = Shapes::ListShape.new(name: 'Events')
     FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
     FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
-    FromEmail = Shapes::StringShape.new(name: 'FromEmail')
     GetDetectorModelAnalysisResultsRequest = Shapes::StructureShape.new(name: 'GetDetectorModelAnalysisResultsRequest')
     GetDetectorModelAnalysisResultsResponse = Shapes::StructureShape.new(name: 'GetDetectorModelAnalysisResultsResponse')
-    IdentityStoreId = Shapes::StringShape.new(name: 'IdentityStoreId')
-    InitializationConfiguration = Shapes::StructureShape.new(name: 'InitializationConfiguration')
     Input = Shapes::StructureShape.new(name: 'Input')
     InputArn = Shapes::StringShape.new(name: 'InputArn')
     InputConfiguration = Shapes::StructureShape.new(name: 'InputConfiguration')
     InputDefinition = Shapes::StructureShape.new(name: 'InputDefinition')
     InputDescription = Shapes::StringShape.new(name: 'InputDescription')
-    InputIdentifier = Shapes::StructureShape.new(name: 'InputIdentifier')
     InputName = Shapes::StringShape.new(name: 'InputName')
-    InputProperty = Shapes::StringShape.new(name: 'InputProperty')
     InputStatus = Shapes::StringShape.new(name: 'InputStatus')
     InputSummaries = Shapes::ListShape.new(name: 'InputSummaries')
     InputSummary = Shapes::StructureShape.new(name: 'InputSummary')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IotEventsAction = Shapes::StructureShape.new(name: 'IotEventsAction')
-    IotEventsInputIdentifier = Shapes::StructureShape.new(name: 'IotEventsInputIdentifier')
     IotSiteWiseAction = Shapes::StructureShape.new(name: 'IotSiteWiseAction')
-    IotSiteWiseAssetModelPropertyIdentifier = Shapes::StructureShape.new(name: 'IotSiteWiseAssetModelPropertyIdentifier')
-    IotSiteWiseInputIdentifier = Shapes::StructureShape.new(name: 'IotSiteWiseInputIdentifier')
     IotTopicPublishAction = Shapes::StructureShape.new(name: 'IotTopicPublishAction')
     KeyValue = Shapes::StringShape.new(name: 'KeyValue')
     LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
-    ListAlarmModelVersionsRequest = Shapes::StructureShape.new(name: 'ListAlarmModelVersionsRequest')
-    ListAlarmModelVersionsResponse = Shapes::StructureShape.new(name: 'ListAlarmModelVersionsResponse')
-    ListAlarmModelsRequest = Shapes::StructureShape.new(name: 'ListAlarmModelsRequest')
-    ListAlarmModelsResponse = Shapes::StructureShape.new(name: 'ListAlarmModelsResponse')
     ListDetectorModelVersionsRequest = Shapes::StructureShape.new(name: 'ListDetectorModelVersionsRequest')
     ListDetectorModelVersionsResponse = Shapes::StructureShape.new(name: 'ListDetectorModelVersionsResponse')
     ListDetectorModelsRequest = Shapes::StructureShape.new(name: 'ListDetectorModelsRequest')
     ListDetectorModelsResponse = Shapes::StructureShape.new(name: 'ListDetectorModelsResponse')
-    ListInputRoutingsRequest = Shapes::StructureShape.new(name: 'ListInputRoutingsRequest')
-    ListInputRoutingsResponse = Shapes::StructureShape.new(name: 'ListInputRoutingsResponse')
     ListInputsRequest = Shapes::StructureShape.new(name: 'ListInputsRequest')
     ListInputsResponse = Shapes::StructureShape.new(name: 'ListInputsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -169,10 +124,6 @@ module Aws::IoTEvents
     MaxAnalysisResults = Shapes::IntegerShape.new(name: 'MaxAnalysisResults')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
-    NotificationAction = Shapes::StructureShape.new(name: 'NotificationAction')
-    NotificationActions = Shapes::ListShape.new(name: 'NotificationActions')
-    NotificationAdditionalMessage = Shapes::StringShape.new(name: 'NotificationAdditionalMessage')
-    NotificationTargetActions = Shapes::StructureShape.new(name: 'NotificationTargetActions')
     OnEnterLifecycle = Shapes::StructureShape.new(name: 'OnEnterLifecycle')
     OnExitLifecycle = Shapes::StructureShape.new(name: 'OnExitLifecycle')
     OnInputLifecycle = Shapes::StructureShape.new(name: 'OnInputLifecycle')
@@ -180,34 +131,21 @@ module Aws::IoTEvents
     PayloadType = Shapes::StringShape.new(name: 'PayloadType')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
     QueueUrl = Shapes::StringShape.new(name: 'QueueUrl')
-    RecipientDetail = Shapes::StructureShape.new(name: 'RecipientDetail')
-    RecipientDetails = Shapes::ListShape.new(name: 'RecipientDetails')
     ResetTimerAction = Shapes::StructureShape.new(name: 'ResetTimerAction')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
-    ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
-    RoutedResource = Shapes::StructureShape.new(name: 'RoutedResource')
-    RoutedResources = Shapes::ListShape.new(name: 'RoutedResources')
-    SMSConfiguration = Shapes::StructureShape.new(name: 'SMSConfiguration')
-    SMSConfigurations = Shapes::ListShape.new(name: 'SMSConfigurations')
-    SMSSenderId = Shapes::StringShape.new(name: 'SMSSenderId')
     SNSTopicPublishAction = Shapes::StructureShape.new(name: 'SNSTopicPublishAction')
-    SSOIdentity = Shapes::StructureShape.new(name: 'SSOIdentity')
-    SSOReferenceId = Shapes::StringShape.new(name: 'SSOReferenceId')
     Seconds = Shapes::IntegerShape.new(name: 'Seconds')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetTimerAction = Shapes::StructureShape.new(name: 'SetTimerAction')
     SetVariableAction = Shapes::StructureShape.new(name: 'SetVariableAction')
-    Severity = Shapes::IntegerShape.new(name: 'Severity')
-    SimpleRule = Shapes::StructureShape.new(name: 'SimpleRule')
     SqsAction = Shapes::StructureShape.new(name: 'SqsAction')
     StartDetectorModelAnalysisRequest = Shapes::StructureShape.new(name: 'StartDetectorModelAnalysisRequest')
     StartDetectorModelAnalysisResponse = Shapes::StructureShape.new(name: 'StartDetectorModelAnalysisResponse')
     State = Shapes::StructureShape.new(name: 'State')
     StateName = Shapes::StringShape.new(name: 'StateName')
     States = Shapes::ListShape.new(name: 'States')
-    StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -215,7 +153,6 @@ module Aws::IoTEvents
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
-    Threshold = Shapes::StringShape.new(name: 'Threshold')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimerName = Shapes::StringShape.new(name: 'TimerName')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -224,8 +161,6 @@ module Aws::IoTEvents
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
-    UpdateAlarmModelRequest = Shapes::StructureShape.new(name: 'UpdateAlarmModelRequest')
-    UpdateAlarmModelResponse = Shapes::StructureShape.new(name: 'UpdateAlarmModelResponse')
     UpdateDetectorModelRequest = Shapes::StructureShape.new(name: 'UpdateDetectorModelRequest')
     UpdateDetectorModelResponse = Shapes::StructureShape.new(name: 'UpdateDetectorModelResponse')
     UpdateInputRequest = Shapes::StructureShape.new(name: 'UpdateInputRequest')
@@ -236,9 +171,6 @@ module Aws::IoTEvents
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     resourceArn = Shapes::StringShape.new(name: 'resourceArn')
     resourceId = Shapes::StringShape.new(name: 'resourceId')
-
-    AcknowledgeFlow.add_member(:enabled, Shapes::ShapeRef.new(shape: AcknowledgeFlowEnabled, required: true, location_name: "enabled"))
-    AcknowledgeFlow.struct_class = Types::AcknowledgeFlow
 
     Action.add_member(:set_variable, Shapes::ShapeRef.new(shape: SetVariableAction, location_name: "setVariable"))
     Action.add_member(:sns, Shapes::ShapeRef.new(shape: SNSTopicPublishAction, location_name: "sns"))
@@ -257,51 +189,6 @@ module Aws::IoTEvents
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
 
-    AlarmAction.add_member(:sns, Shapes::ShapeRef.new(shape: SNSTopicPublishAction, location_name: "sns"))
-    AlarmAction.add_member(:iot_topic_publish, Shapes::ShapeRef.new(shape: IotTopicPublishAction, location_name: "iotTopicPublish"))
-    AlarmAction.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaAction, location_name: "lambda"))
-    AlarmAction.add_member(:iot_events, Shapes::ShapeRef.new(shape: IotEventsAction, location_name: "iotEvents"))
-    AlarmAction.add_member(:sqs, Shapes::ShapeRef.new(shape: SqsAction, location_name: "sqs"))
-    AlarmAction.add_member(:firehose, Shapes::ShapeRef.new(shape: FirehoseAction, location_name: "firehose"))
-    AlarmAction.add_member(:dynamo_db, Shapes::ShapeRef.new(shape: DynamoDBAction, location_name: "dynamoDB"))
-    AlarmAction.add_member(:dynamo_d_bv_2, Shapes::ShapeRef.new(shape: DynamoDBv2Action, location_name: "dynamoDBv2"))
-    AlarmAction.add_member(:iot_site_wise, Shapes::ShapeRef.new(shape: IotSiteWiseAction, location_name: "iotSiteWise"))
-    AlarmAction.struct_class = Types::AlarmAction
-
-    AlarmActions.member = Shapes::ShapeRef.new(shape: AlarmAction)
-
-    AlarmCapabilities.add_member(:initialization_configuration, Shapes::ShapeRef.new(shape: InitializationConfiguration, location_name: "initializationConfiguration"))
-    AlarmCapabilities.add_member(:acknowledge_flow, Shapes::ShapeRef.new(shape: AcknowledgeFlow, location_name: "acknowledgeFlow"))
-    AlarmCapabilities.struct_class = Types::AlarmCapabilities
-
-    AlarmEventActions.add_member(:alarm_actions, Shapes::ShapeRef.new(shape: AlarmActions, location_name: "alarmActions"))
-    AlarmEventActions.struct_class = Types::AlarmEventActions
-
-    AlarmModelSummaries.member = Shapes::ShapeRef.new(shape: AlarmModelSummary)
-
-    AlarmModelSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    AlarmModelSummary.add_member(:alarm_model_description, Shapes::ShapeRef.new(shape: AlarmModelDescription, location_name: "alarmModelDescription"))
-    AlarmModelSummary.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName"))
-    AlarmModelSummary.struct_class = Types::AlarmModelSummary
-
-    AlarmModelVersionSummaries.member = Shapes::ShapeRef.new(shape: AlarmModelVersionSummary)
-
-    AlarmModelVersionSummary.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName"))
-    AlarmModelVersionSummary.add_member(:alarm_model_arn, Shapes::ShapeRef.new(shape: AlarmModelArn, location_name: "alarmModelArn"))
-    AlarmModelVersionSummary.add_member(:alarm_model_version, Shapes::ShapeRef.new(shape: AlarmModelVersion, location_name: "alarmModelVersion"))
-    AlarmModelVersionSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "roleArn"))
-    AlarmModelVersionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    AlarmModelVersionSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    AlarmModelVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: AlarmModelVersionStatus, location_name: "status"))
-    AlarmModelVersionSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
-    AlarmModelVersionSummary.struct_class = Types::AlarmModelVersionSummary
-
-    AlarmNotification.add_member(:notification_actions, Shapes::ShapeRef.new(shape: NotificationActions, location_name: "notificationActions"))
-    AlarmNotification.struct_class = Types::AlarmNotification
-
-    AlarmRule.add_member(:simple_rule, Shapes::ShapeRef.new(shape: SimpleRule, location_name: "simpleRule"))
-    AlarmRule.struct_class = Types::AlarmRule
-
     AnalysisResult.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisType, location_name: "type"))
     AnalysisResult.add_member(:level, Shapes::ShapeRef.new(shape: AnalysisResultLevel, location_name: "level"))
     AnalysisResult.add_member(:message, Shapes::ShapeRef.new(shape: AnalysisMessage, location_name: "message"))
@@ -319,7 +206,7 @@ module Aws::IoTEvents
     AssetPropertyTimestamp.add_member(:offset_in_nanos, Shapes::ShapeRef.new(shape: AssetPropertyOffsetInNanos, location_name: "offsetInNanos"))
     AssetPropertyTimestamp.struct_class = Types::AssetPropertyTimestamp
 
-    AssetPropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: AssetPropertyVariant, location_name: "value"))
+    AssetPropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: AssetPropertyVariant, required: true, location_name: "value"))
     AssetPropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: AssetPropertyTimestamp, location_name: "timestamp"))
     AssetPropertyValue.add_member(:quality, Shapes::ShapeRef.new(shape: AssetPropertyQuality, location_name: "quality"))
     AssetPropertyValue.struct_class = Types::AssetPropertyValue
@@ -337,25 +224,6 @@ module Aws::IoTEvents
 
     ClearTimerAction.add_member(:timer_name, Shapes::ShapeRef.new(shape: TimerName, required: true, location_name: "timerName"))
     ClearTimerAction.struct_class = Types::ClearTimerAction
-
-    CreateAlarmModelRequest.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, required: true, location_name: "alarmModelName"))
-    CreateAlarmModelRequest.add_member(:alarm_model_description, Shapes::ShapeRef.new(shape: AlarmModelDescription, location_name: "alarmModelDescription"))
-    CreateAlarmModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "roleArn"))
-    CreateAlarmModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateAlarmModelRequest.add_member(:key, Shapes::ShapeRef.new(shape: AttributeJsonPath, location_name: "key"))
-    CreateAlarmModelRequest.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
-    CreateAlarmModelRequest.add_member(:alarm_rule, Shapes::ShapeRef.new(shape: AlarmRule, required: true, location_name: "alarmRule"))
-    CreateAlarmModelRequest.add_member(:alarm_notification, Shapes::ShapeRef.new(shape: AlarmNotification, location_name: "alarmNotification"))
-    CreateAlarmModelRequest.add_member(:alarm_event_actions, Shapes::ShapeRef.new(shape: AlarmEventActions, location_name: "alarmEventActions"))
-    CreateAlarmModelRequest.add_member(:alarm_capabilities, Shapes::ShapeRef.new(shape: AlarmCapabilities, location_name: "alarmCapabilities"))
-    CreateAlarmModelRequest.struct_class = Types::CreateAlarmModelRequest
-
-    CreateAlarmModelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    CreateAlarmModelResponse.add_member(:alarm_model_arn, Shapes::ShapeRef.new(shape: AlarmModelArn, location_name: "alarmModelArn"))
-    CreateAlarmModelResponse.add_member(:alarm_model_version, Shapes::ShapeRef.new(shape: AlarmModelVersion, location_name: "alarmModelVersion"))
-    CreateAlarmModelResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    CreateAlarmModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlarmModelVersionStatus, location_name: "status"))
-    CreateAlarmModelResponse.struct_class = Types::CreateAlarmModelResponse
 
     CreateDetectorModelRequest.add_member(:detector_model_name, Shapes::ShapeRef.new(shape: DetectorModelName, required: true, location_name: "detectorModelName"))
     CreateDetectorModelRequest.add_member(:detector_model_definition, Shapes::ShapeRef.new(shape: DetectorModelDefinition, required: true, location_name: "detectorModelDefinition"))
@@ -378,11 +246,6 @@ module Aws::IoTEvents
     CreateInputResponse.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InputConfiguration, location_name: "inputConfiguration"))
     CreateInputResponse.struct_class = Types::CreateInputResponse
 
-    DeleteAlarmModelRequest.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, required: true, location: "uri", location_name: "alarmModelName"))
-    DeleteAlarmModelRequest.struct_class = Types::DeleteAlarmModelRequest
-
-    DeleteAlarmModelResponse.struct_class = Types::DeleteAlarmModelResponse
-
     DeleteDetectorModelRequest.add_member(:detector_model_name, Shapes::ShapeRef.new(shape: DetectorModelName, required: true, location: "uri", location_name: "detectorModelName"))
     DeleteDetectorModelRequest.struct_class = Types::DeleteDetectorModelRequest
 
@@ -392,27 +255,6 @@ module Aws::IoTEvents
     DeleteInputRequest.struct_class = Types::DeleteInputRequest
 
     DeleteInputResponse.struct_class = Types::DeleteInputResponse
-
-    DescribeAlarmModelRequest.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, required: true, location: "uri", location_name: "alarmModelName"))
-    DescribeAlarmModelRequest.add_member(:alarm_model_version, Shapes::ShapeRef.new(shape: AlarmModelVersion, location: "querystring", location_name: "version"))
-    DescribeAlarmModelRequest.struct_class = Types::DescribeAlarmModelRequest
-
-    DescribeAlarmModelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    DescribeAlarmModelResponse.add_member(:alarm_model_arn, Shapes::ShapeRef.new(shape: AlarmModelArn, location_name: "alarmModelArn"))
-    DescribeAlarmModelResponse.add_member(:alarm_model_version, Shapes::ShapeRef.new(shape: AlarmModelVersion, location_name: "alarmModelVersion"))
-    DescribeAlarmModelResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    DescribeAlarmModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlarmModelVersionStatus, location_name: "status"))
-    DescribeAlarmModelResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
-    DescribeAlarmModelResponse.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, location_name: "alarmModelName"))
-    DescribeAlarmModelResponse.add_member(:alarm_model_description, Shapes::ShapeRef.new(shape: AlarmModelDescription, location_name: "alarmModelDescription"))
-    DescribeAlarmModelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "roleArn"))
-    DescribeAlarmModelResponse.add_member(:key, Shapes::ShapeRef.new(shape: AttributeJsonPath, location_name: "key"))
-    DescribeAlarmModelResponse.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
-    DescribeAlarmModelResponse.add_member(:alarm_rule, Shapes::ShapeRef.new(shape: AlarmRule, location_name: "alarmRule"))
-    DescribeAlarmModelResponse.add_member(:alarm_notification, Shapes::ShapeRef.new(shape: AlarmNotification, location_name: "alarmNotification"))
-    DescribeAlarmModelResponse.add_member(:alarm_event_actions, Shapes::ShapeRef.new(shape: AlarmEventActions, location_name: "alarmEventActions"))
-    DescribeAlarmModelResponse.add_member(:alarm_capabilities, Shapes::ShapeRef.new(shape: AlarmCapabilities, location_name: "alarmCapabilities"))
-    DescribeAlarmModelResponse.struct_class = Types::DescribeAlarmModelResponse
 
     DescribeDetectorModelAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: AnalysisId, required: true, location: "uri", location_name: "analysisId"))
     DescribeDetectorModelAnalysisRequest.struct_class = Types::DescribeDetectorModelAnalysisRequest
@@ -499,20 +341,6 @@ module Aws::IoTEvents
     DynamoDBv2Action.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     DynamoDBv2Action.struct_class = Types::DynamoDBv2Action
 
-    EmailConfiguration.add_member(:from, Shapes::ShapeRef.new(shape: FromEmail, required: true, location_name: "from"))
-    EmailConfiguration.add_member(:content, Shapes::ShapeRef.new(shape: EmailContent, location_name: "content"))
-    EmailConfiguration.add_member(:recipients, Shapes::ShapeRef.new(shape: EmailRecipients, required: true, location_name: "recipients"))
-    EmailConfiguration.struct_class = Types::EmailConfiguration
-
-    EmailConfigurations.member = Shapes::ShapeRef.new(shape: EmailConfiguration)
-
-    EmailContent.add_member(:subject, Shapes::ShapeRef.new(shape: EmailSubject, location_name: "subject"))
-    EmailContent.add_member(:additional_message, Shapes::ShapeRef.new(shape: NotificationAdditionalMessage, location_name: "additionalMessage"))
-    EmailContent.struct_class = Types::EmailContent
-
-    EmailRecipients.add_member(:to, Shapes::ShapeRef.new(shape: RecipientDetails, location_name: "to"))
-    EmailRecipients.struct_class = Types::EmailRecipients
-
     Event.add_member(:event_name, Shapes::ShapeRef.new(shape: EventName, required: true, location_name: "eventName"))
     Event.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "condition"))
     Event.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, location_name: "actions"))
@@ -534,9 +362,6 @@ module Aws::IoTEvents
     GetDetectorModelAnalysisResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetDetectorModelAnalysisResultsResponse.struct_class = Types::GetDetectorModelAnalysisResultsResponse
 
-    InitializationConfiguration.add_member(:disabled_on_initialization, Shapes::ShapeRef.new(shape: DisabledOnInitialization, required: true, location_name: "disabledOnInitialization"))
-    InitializationConfiguration.struct_class = Types::InitializationConfiguration
-
     Input.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InputConfiguration, location_name: "inputConfiguration"))
     Input.add_member(:input_definition, Shapes::ShapeRef.new(shape: InputDefinition, location_name: "inputDefinition"))
     Input.struct_class = Types::Input
@@ -551,10 +376,6 @@ module Aws::IoTEvents
 
     InputDefinition.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "attributes"))
     InputDefinition.struct_class = Types::InputDefinition
-
-    InputIdentifier.add_member(:iot_events_input_identifier, Shapes::ShapeRef.new(shape: IotEventsInputIdentifier, location_name: "iotEventsInputIdentifier"))
-    InputIdentifier.add_member(:iot_site_wise_input_identifier, Shapes::ShapeRef.new(shape: IotSiteWiseInputIdentifier, location_name: "iotSiteWiseInputIdentifier"))
-    InputIdentifier.struct_class = Types::InputIdentifier
 
     InputSummaries.member = Shapes::ShapeRef.new(shape: InputSummary)
 
@@ -576,22 +397,12 @@ module Aws::IoTEvents
     IotEventsAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     IotEventsAction.struct_class = Types::IotEventsAction
 
-    IotEventsInputIdentifier.add_member(:input_name, Shapes::ShapeRef.new(shape: InputName, required: true, location_name: "inputName"))
-    IotEventsInputIdentifier.struct_class = Types::IotEventsInputIdentifier
-
     IotSiteWiseAction.add_member(:entry_id, Shapes::ShapeRef.new(shape: AssetPropertyEntryId, location_name: "entryId"))
     IotSiteWiseAction.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "assetId"))
     IotSiteWiseAction.add_member(:property_id, Shapes::ShapeRef.new(shape: AssetPropertyId, location_name: "propertyId"))
     IotSiteWiseAction.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location_name: "propertyAlias"))
-    IotSiteWiseAction.add_member(:property_value, Shapes::ShapeRef.new(shape: AssetPropertyValue, location_name: "propertyValue"))
+    IotSiteWiseAction.add_member(:property_value, Shapes::ShapeRef.new(shape: AssetPropertyValue, required: true, location_name: "propertyValue"))
     IotSiteWiseAction.struct_class = Types::IotSiteWiseAction
-
-    IotSiteWiseAssetModelPropertyIdentifier.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: AssetModelId, required: true, location_name: "assetModelId"))
-    IotSiteWiseAssetModelPropertyIdentifier.add_member(:property_id, Shapes::ShapeRef.new(shape: AssetPropertyId, required: true, location_name: "propertyId"))
-    IotSiteWiseAssetModelPropertyIdentifier.struct_class = Types::IotSiteWiseAssetModelPropertyIdentifier
-
-    IotSiteWiseInputIdentifier.add_member(:iot_site_wise_asset_model_property_identifier, Shapes::ShapeRef.new(shape: IotSiteWiseAssetModelPropertyIdentifier, location_name: "iotSiteWiseAssetModelPropertyIdentifier"))
-    IotSiteWiseInputIdentifier.struct_class = Types::IotSiteWiseInputIdentifier
 
     IotTopicPublishAction.add_member(:mqtt_topic, Shapes::ShapeRef.new(shape: MQTTTopic, required: true, location_name: "mqttTopic"))
     IotTopicPublishAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
@@ -603,23 +414,6 @@ module Aws::IoTEvents
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
-
-    ListAlarmModelVersionsRequest.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, required: true, location: "uri", location_name: "alarmModelName"))
-    ListAlarmModelVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListAlarmModelVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListAlarmModelVersionsRequest.struct_class = Types::ListAlarmModelVersionsRequest
-
-    ListAlarmModelVersionsResponse.add_member(:alarm_model_version_summaries, Shapes::ShapeRef.new(shape: AlarmModelVersionSummaries, location_name: "alarmModelVersionSummaries"))
-    ListAlarmModelVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListAlarmModelVersionsResponse.struct_class = Types::ListAlarmModelVersionsResponse
-
-    ListAlarmModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListAlarmModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListAlarmModelsRequest.struct_class = Types::ListAlarmModelsRequest
-
-    ListAlarmModelsResponse.add_member(:alarm_model_summaries, Shapes::ShapeRef.new(shape: AlarmModelSummaries, location_name: "alarmModelSummaries"))
-    ListAlarmModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListAlarmModelsResponse.struct_class = Types::ListAlarmModelsResponse
 
     ListDetectorModelVersionsRequest.add_member(:detector_model_name, Shapes::ShapeRef.new(shape: DetectorModelName, required: true, location: "uri", location_name: "detectorModelName"))
     ListDetectorModelVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -637,15 +431,6 @@ module Aws::IoTEvents
     ListDetectorModelsResponse.add_member(:detector_model_summaries, Shapes::ShapeRef.new(shape: DetectorModelSummaries, location_name: "detectorModelSummaries"))
     ListDetectorModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDetectorModelsResponse.struct_class = Types::ListDetectorModelsResponse
-
-    ListInputRoutingsRequest.add_member(:input_identifier, Shapes::ShapeRef.new(shape: InputIdentifier, required: true, location_name: "inputIdentifier"))
-    ListInputRoutingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    ListInputRoutingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListInputRoutingsRequest.struct_class = Types::ListInputRoutingsRequest
-
-    ListInputRoutingsResponse.add_member(:routed_resources, Shapes::ShapeRef.new(shape: RoutedResources, location_name: "routedResources"))
-    ListInputRoutingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListInputRoutingsResponse.struct_class = Types::ListInputRoutingsResponse
 
     ListInputsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListInputsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -667,16 +452,6 @@ module Aws::IoTEvents
     LoggingOptions.add_member(:detector_debug_options, Shapes::ShapeRef.new(shape: DetectorDebugOptions, location_name: "detectorDebugOptions"))
     LoggingOptions.struct_class = Types::LoggingOptions
 
-    NotificationAction.add_member(:action, Shapes::ShapeRef.new(shape: NotificationTargetActions, required: true, location_name: "action"))
-    NotificationAction.add_member(:sms_configurations, Shapes::ShapeRef.new(shape: SMSConfigurations, location_name: "smsConfigurations"))
-    NotificationAction.add_member(:email_configurations, Shapes::ShapeRef.new(shape: EmailConfigurations, location_name: "emailConfigurations"))
-    NotificationAction.struct_class = Types::NotificationAction
-
-    NotificationActions.member = Shapes::ShapeRef.new(shape: NotificationAction)
-
-    NotificationTargetActions.add_member(:lambda_action, Shapes::ShapeRef.new(shape: LambdaAction, location_name: "lambdaAction"))
-    NotificationTargetActions.struct_class = Types::NotificationTargetActions
-
     OnEnterLifecycle.add_member(:events, Shapes::ShapeRef.new(shape: Events, location_name: "events"))
     OnEnterLifecycle.struct_class = Types::OnEnterLifecycle
 
@@ -694,11 +469,6 @@ module Aws::IoTEvents
     PutLoggingOptionsRequest.add_member(:logging_options, Shapes::ShapeRef.new(shape: LoggingOptions, required: true, location_name: "loggingOptions"))
     PutLoggingOptionsRequest.struct_class = Types::PutLoggingOptionsRequest
 
-    RecipientDetail.add_member(:sso_identity, Shapes::ShapeRef.new(shape: SSOIdentity, location_name: "ssoIdentity"))
-    RecipientDetail.struct_class = Types::RecipientDetail
-
-    RecipientDetails.member = Shapes::ShapeRef.new(shape: RecipientDetail)
-
     ResetTimerAction.add_member(:timer_name, Shapes::ShapeRef.new(shape: TimerName, required: true, location_name: "timerName"))
     ResetTimerAction.struct_class = Types::ResetTimerAction
 
@@ -713,26 +483,9 @@ module Aws::IoTEvents
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    RoutedResource.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    RoutedResource.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
-    RoutedResource.struct_class = Types::RoutedResource
-
-    RoutedResources.member = Shapes::ShapeRef.new(shape: RoutedResource)
-
-    SMSConfiguration.add_member(:sender_id, Shapes::ShapeRef.new(shape: SMSSenderId, location_name: "senderId"))
-    SMSConfiguration.add_member(:additional_message, Shapes::ShapeRef.new(shape: NotificationAdditionalMessage, location_name: "additionalMessage"))
-    SMSConfiguration.add_member(:recipients, Shapes::ShapeRef.new(shape: RecipientDetails, required: true, location_name: "recipients"))
-    SMSConfiguration.struct_class = Types::SMSConfiguration
-
-    SMSConfigurations.member = Shapes::ShapeRef.new(shape: SMSConfiguration)
-
     SNSTopicPublishAction.add_member(:target_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "targetArn"))
     SNSTopicPublishAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     SNSTopicPublishAction.struct_class = Types::SNSTopicPublishAction
-
-    SSOIdentity.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "identityStoreId"))
-    SSOIdentity.add_member(:user_id, Shapes::ShapeRef.new(shape: SSOReferenceId, location_name: "userId"))
-    SSOIdentity.struct_class = Types::SSOIdentity
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -745,11 +498,6 @@ module Aws::IoTEvents
     SetVariableAction.add_member(:variable_name, Shapes::ShapeRef.new(shape: VariableName, required: true, location_name: "variableName"))
     SetVariableAction.add_member(:value, Shapes::ShapeRef.new(shape: VariableValue, required: true, location_name: "value"))
     SetVariableAction.struct_class = Types::SetVariableAction
-
-    SimpleRule.add_member(:input_property, Shapes::ShapeRef.new(shape: InputProperty, required: true, location_name: "inputProperty"))
-    SimpleRule.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "comparisonOperator"))
-    SimpleRule.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, required: true, location_name: "threshold"))
-    SimpleRule.struct_class = Types::SimpleRule
 
     SqsAction.add_member(:queue_url, Shapes::ShapeRef.new(shape: QueueUrl, required: true, location_name: "queueUrl"))
     SqsAction.add_member(:use_base_64, Shapes::ShapeRef.new(shape: UseBase64, location_name: "useBase64"))
@@ -804,23 +552,6 @@ module Aws::IoTEvents
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateAlarmModelRequest.add_member(:alarm_model_name, Shapes::ShapeRef.new(shape: AlarmModelName, required: true, location: "uri", location_name: "alarmModelName"))
-    UpdateAlarmModelRequest.add_member(:alarm_model_description, Shapes::ShapeRef.new(shape: AlarmModelDescription, location_name: "alarmModelDescription"))
-    UpdateAlarmModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "roleArn"))
-    UpdateAlarmModelRequest.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
-    UpdateAlarmModelRequest.add_member(:alarm_rule, Shapes::ShapeRef.new(shape: AlarmRule, required: true, location_name: "alarmRule"))
-    UpdateAlarmModelRequest.add_member(:alarm_notification, Shapes::ShapeRef.new(shape: AlarmNotification, location_name: "alarmNotification"))
-    UpdateAlarmModelRequest.add_member(:alarm_event_actions, Shapes::ShapeRef.new(shape: AlarmEventActions, location_name: "alarmEventActions"))
-    UpdateAlarmModelRequest.add_member(:alarm_capabilities, Shapes::ShapeRef.new(shape: AlarmCapabilities, location_name: "alarmCapabilities"))
-    UpdateAlarmModelRequest.struct_class = Types::UpdateAlarmModelRequest
-
-    UpdateAlarmModelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    UpdateAlarmModelResponse.add_member(:alarm_model_arn, Shapes::ShapeRef.new(shape: AlarmModelArn, location_name: "alarmModelArn"))
-    UpdateAlarmModelResponse.add_member(:alarm_model_version, Shapes::ShapeRef.new(shape: AlarmModelVersion, location_name: "alarmModelVersion"))
-    UpdateAlarmModelResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
-    UpdateAlarmModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlarmModelVersionStatus, location_name: "status"))
-    UpdateAlarmModelResponse.struct_class = Types::UpdateAlarmModelResponse
-
     UpdateDetectorModelRequest.add_member(:detector_model_name, Shapes::ShapeRef.new(shape: DetectorModelName, required: true, location: "uri", location_name: "detectorModelName"))
     UpdateDetectorModelRequest.add_member(:detector_model_definition, Shapes::ShapeRef.new(shape: DetectorModelDefinition, required: true, location_name: "detectorModelDefinition"))
     UpdateDetectorModelRequest.add_member(:detector_model_description, Shapes::ShapeRef.new(shape: DetectorModelDescription, location_name: "detectorModelDescription"))
@@ -856,21 +587,6 @@ module Aws::IoTEvents
         "uid" => "iotevents-2018-07-27",
       }
 
-      api.add_operation(:create_alarm_model, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateAlarmModel"
-        o.http_method = "POST"
-        o.http_request_uri = "/alarm-models"
-        o.input = Shapes::ShapeRef.new(shape: CreateAlarmModelRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateAlarmModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-      end)
-
       api.add_operation(:create_detector_model, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDetectorModel"
         o.http_method = "POST"
@@ -899,20 +615,6 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
-      api.add_operation(:delete_alarm_model, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteAlarmModel"
-        o.http_method = "DELETE"
-        o.http_request_uri = "/alarm-models/{alarmModelName}"
-        o.input = Shapes::ShapeRef.new(shape: DeleteAlarmModelRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteAlarmModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-      end)
-
       api.add_operation(:delete_detector_model, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDetectorModel"
         o.http_method = "DELETE"
@@ -939,19 +641,6 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
-      end)
-
-      api.add_operation(:describe_alarm_model, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeAlarmModel"
-        o.http_method = "GET"
-        o.http_request_uri = "/alarm-models/{alarmModelName}"
-        o.input = Shapes::ShapeRef.new(shape: DescribeAlarmModelRequest)
-        o.output = Shapes::ShapeRef.new(shape: DescribeAlarmModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_detector_model, Seahorse::Model::Operation.new.tap do |o|
@@ -1020,31 +709,6 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
-      api.add_operation(:list_alarm_model_versions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListAlarmModelVersions"
-        o.http_method = "GET"
-        o.http_request_uri = "/alarm-models/{alarmModelName}/versions"
-        o.input = Shapes::ShapeRef.new(shape: ListAlarmModelVersionsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListAlarmModelVersionsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-      end)
-
-      api.add_operation(:list_alarm_models, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListAlarmModels"
-        o.http_method = "GET"
-        o.http_request_uri = "/alarm-models"
-        o.input = Shapes::ShapeRef.new(shape: ListAlarmModelsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListAlarmModelsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-      end)
-
       api.add_operation(:list_detector_model_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDetectorModelVersions"
         o.http_method = "GET"
@@ -1068,19 +732,6 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-      end)
-
-      api.add_operation(:list_input_routings, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListInputRoutings"
-        o.http_method = "POST"
-        o.http_request_uri = "/input-routings"
-        o.input = Shapes::ShapeRef.new(shape: ListInputRoutingsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListInputRoutingsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_inputs, Seahorse::Model::Operation.new.tap do |o|
@@ -1160,20 +811,6 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-      end)
-
-      api.add_operation(:update_alarm_model, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateAlarmModel"
-        o.http_method = "POST"
-        o.http_request_uri = "/alarm-models/{alarmModelName}"
-        o.input = Shapes::ShapeRef.new(shape: UpdateAlarmModelRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateAlarmModelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_detector_model, Seahorse::Model::Operation.new.tap do |o|

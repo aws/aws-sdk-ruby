@@ -19,7 +19,7 @@ require_relative 'aws-sdk-emr/waiters'
 require_relative 'aws-sdk-emr/resource'
 require_relative 'aws-sdk-emr/customizations'
 
-# This module provides support for Amazon EMR. This module is available in the
+# This module provides support for Amazon Elastic MapReduce. This module is available in the
 # `aws-sdk-emr` gem.
 #
 # # Client
@@ -35,13 +35,13 @@ require_relative 'aws-sdk-emr/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon EMR are defined in the
+# Errors returned from Amazon Elastic MapReduce are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::EMR::Errors::ServiceError
-#       # rescues all Amazon EMR API errors
+#       # rescues all Amazon Elastic MapReduce API errors
 #     end
 #
 # See {Errors} for more information.
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-emr/customizations'
 # @!group service
 module Aws::EMR
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.45.0'
 
 end

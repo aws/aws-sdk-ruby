@@ -111,8 +111,6 @@ module Aws::SSM
   # * {OpsItemInvalidParameterException}
   # * {OpsItemLimitExceededException}
   # * {OpsItemNotFoundException}
-  # * {OpsItemRelatedItemAlreadyExistsException}
-  # * {OpsItemRelatedItemAssociationNotFoundException}
   # * {OpsMetadataAlreadyExistsException}
   # * {OpsMetadataInvalidArgumentException}
   # * {OpsMetadataKeyLimitExceededException}
@@ -1386,46 +1384,6 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::OpsItemNotFoundException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class OpsItemRelatedItemAlreadyExistsException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsItemRelatedItemAlreadyExistsException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      # @return [String]
-      def resource_uri
-        @data[:resource_uri]
-      end
-
-      # @return [String]
-      def ops_item_id
-        @data[:ops_item_id]
-      end
-    end
-
-    class OpsItemRelatedItemAssociationNotFoundException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsItemRelatedItemAssociationNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

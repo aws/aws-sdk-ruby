@@ -346,8 +346,8 @@ module Aws::KMS
     # Service Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
@@ -363,10 +363,10 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Identifies the customer master key (CMK) whose deletion is being
-    #   canceled.
+    #   The unique identifier for the customer master key (CMK) for which to
+    #   cancel deletion.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -503,48 +503,42 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Creates a friendly name for a customer master key (CMK).
+    # Creates a friendly name for a customer master key (CMK). You can use
+    # an alias to identify a CMK in the AWS KMS console, in the DescribeKey
+    # operation and in [cryptographic operations][1], such as Encrypt and
+    # GenerateDataKey.
     #
-    # <note markdown="1"> Adding, deleting, or updating an alias can allow or deny permission to
-    # the CMK. For details, see [Using ABAC in AWS KMS][1] in the *AWS Key
-    # Management Service Developer Guide*.
-    #
-    #  </note>
-    #
-    # You can use an alias to identify a CMK in the AWS KMS console, in the
-    # DescribeKey operation and in [cryptographic operations][2], such as
-    # Encrypt and GenerateDataKey. You can also change the CMK that's
-    # associated with the alias (UpdateAlias) or delete the alias
-    # (DeleteAlias) at any time. These operations don't affect the
-    # underlying CMK.
+    # You can also change the CMK that's associated with the alias
+    # (UpdateAlias) or delete the alias (DeleteAlias) at any time. These
+    # operations don't affect the underlying CMK.
     #
     # You can associate the alias with any customer managed CMK in the same
-    # AWS Region. Each alias is associated with only one CMK at a time, but
-    # a CMK can have multiple aliases. A valid CMK is required. You can't
+    # AWS Region. Each alias is associated with only on CMK at a time, but a
+    # CMK can have multiple aliases. A valid CMK is required. You can't
     # create an alias without a CMK.
     #
     # The alias must be unique in the account and Region, but you can have
     # aliases with the same name in different Regions. For detailed
-    # information about aliases, see [Using aliases][3] in the *AWS Key
+    # information about aliases, see [Using aliases][2] in the *AWS Key
     # Management Service Developer Guide*.
     #
     # This operation does not return a response. To get the alias that you
     # created, use the ListAliases operation.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][4] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][3] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on an
     # alias in a different AWS account.
     #
     # **Required permissions**
     #
-    # * [kms:CreateAlias][5] on the alias (IAM policy).
+    # * [kms:CreateAlias][4] on the alias (IAM policy).
     #
-    # * [kms:CreateAlias][5] on the CMK (key policy).
+    # * [kms:CreateAlias][4] on the CMK (key policy).
     #
-    # For details, see [Controlling access to aliases][6] in the *AWS Key
+    # For details, see [Controlling access to aliases][5] in the *AWS Key
     # Management Service Developer Guide*.
     #
     # **Related operations:**
@@ -557,12 +551,11 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
     #
     # @option params [required, String] :alias_name
     #   Specifies the alias name. This value must begin with `alias/` followed
@@ -587,7 +580,7 @@ module Aws::KMS
     #   For help finding the key ID and ARN, see [Finding the Key ID and
     #   ARN][2] in the *AWS Key Management Service Developer Guide*.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -744,54 +737,54 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Adds a grant to a customer master key (CMK).
+    # Adds a grant to a customer master key (CMK). The grant allows the
+    # grantee principal to use the CMK when the conditions specified in the
+    # grant are met. When setting permissions, grants are an alternative to
+    # key policies.
     #
-    # A *grant* is a policy instrument that allows AWS principals to use AWS
-    # KMS customer master keys (CMKs) in cryptographic operations. It also
-    # can allow them to view a CMK (DescribeKey) and create and manage
-    # grants. When authorizing access to a CMK, grants are considered along
-    # with key policies and IAM policies. Grants are often used for
-    # temporary permissions because you can create one, use its permissions,
-    # and delete it without changing your key policies or IAM policies.
+    # To create a grant that allows a [cryptographic operation][1] only when
+    # the request includes a particular [encryption context][2], use the
+    # `Constraints` parameter. For details, see GrantConstraints.
     #
-    # For detailed information about grants, including grant terminology,
-    # see [Using grants][1] in the <i> <i>AWS Key Management Service
-    # Developer Guide</i> </i>. For examples of working with grants in
-    # several programming languages, see [Programming grants][2].
+    # You can create grants on symmetric and asymmetric CMKs. However, if
+    # the grant allows an operation that the CMK does not support,
+    # `CreateGrant` fails with a `ValidationException`.
     #
-    # The `CreateGrant` operation returns a `GrantToken` and a `GrantId`.
+    # * Grants for symmetric CMKs cannot allow operations that are not
+    #   supported for symmetric CMKs, including Sign, Verify, and
+    #   GetPublicKey. (There are limited exceptions to this rule for legacy
+    #   operations, but you should not create a grant for an operation that
+    #   AWS KMS does not support.)
     #
-    # * When you create, retire, or revoke a grant, there might be a brief
-    #   delay, usually less than five minutes, until the grant is available
-    #   throughout AWS KMS. This state is known as *eventual consistency*.
-    #   Once the grant has achieved eventual consistency, the grantee
-    #   principal can use the permissions in the grant without identifying
-    #   the grant.
+    # * Grants for asymmetric CMKs cannot allow operations that are not
+    #   supported for asymmetric CMKs, including operations that [generate
+    #   data keys][3] or [data key pairs][4], or operations related to
+    #   [automatic key rotation][5], [imported key material][6], or CMKs in
+    #   [custom key stores][7].
     #
-    #   However, to use the permissions in the grant immediately, use the
-    #   `GrantToken` that `CreateGrant` returns. For details, see [Using a
-    #   grant token][3] in the <i> <i>AWS Key Management Service Developer
-    #   Guide</i> </i>.
+    # * Grants for asymmetric CMKs with a `KeyUsage` of `ENCRYPT_DECRYPT`
+    #   cannot allow the Sign or Verify operations. Grants for asymmetric
+    #   CMKs with a `KeyUsage` of `SIGN_VERIFY` cannot allow the Encrypt or
+    #   Decrypt operations.
     #
-    # * The `CreateGrant` operation also returns a `GrantId`. You can use
-    #   the `GrantId` and a key identifier to identify the grant in the
-    #   RetireGrant and RevokeGrant operations. To find the grant ID, use
-    #   the ListGrants or ListRetirableGrants operations.
+    # * Grants for asymmetric CMKs cannot include an encryption context
+    #   grant constraint. An encryption context is not supported on
+    #   asymmetric CMKs.
     #
     # For information about symmetric and asymmetric CMKs, see [Using
-    # Symmetric and Asymmetric CMKs][4] in the *AWS Key Management Service
-    # Developer Guide*. For more information about grants, see [Grants][1]
+    # Symmetric and Asymmetric CMKs][8] in the *AWS Key Management Service
+    # Developer Guide*. For more information about grants, see [Grants][9]
     # in the <i> <i>AWS Key Management Service Developer Guide</i> </i>.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][5] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][10] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation on a CMK in a
     # different AWS account, specify the key ARN in the value of the `KeyId`
     # parameter.
     #
-    # **Required permissions**\: [kms:CreateGrant][6] (key policy)
+    # **Required permissions**\: [kms:CreateGrant][11] (key policy)
     #
     # **Related operations:**
     #
@@ -805,19 +798,24 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey
+    # [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKeyPair
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Identifies the customer master key (CMK) for the grant. The grant
-    #   gives principals permission to use this CMK.
+    #   The unique identifier for the customer master key (CMK) that the grant
+    #   applies to.
     #
-    #   Specify the key ID or key ARN of the CMK. To specify a CMK in a
-    #   different AWS account, you must use the key ARN.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
     #   For example:
     #
@@ -829,7 +827,8 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #
     # @option params [required, String] :grantee_principal
-    #   The identity that gets the permissions specified in the grant.
+    #   The principal that is given permission to perform the operations that
+    #   the grant permits.
     #
     #   To specify the principal, use the [Amazon Resource Name (ARN)][1] of
     #   an AWS principal. Valid AWS principals include AWS accounts (root),
@@ -862,52 +861,26 @@ module Aws::KMS
     # @option params [required, Array<String>] :operations
     #   A list of operations that the grant permits.
     #
-    #   The operation must be supported on the CMK. For example, you cannot
-    #   create a grant for a symmetric CMK that allows the Sign operation, or
-    #   a grant for an asymmetric CMK that allows the GenerateDataKey
-    #   operation. If you try, AWS KMS returns a `ValidationError` exception.
-    #   For details, see [Grant operations][1] in the *AWS Key Management
-    #   Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations
-    #
     # @option params [Types::GrantConstraints] :constraints
-    #   Specifies a grant constraint.
+    #   Allows a [cryptographic operation][1] only when the encryption context
+    #   matches or includes the encryption context specified in this
+    #   structure. For more information about encryption context, see
+    #   [Encryption Context][2] in the <i> <i>AWS Key Management Service
+    #   Developer Guide</i> </i>.
     #
-    #   AWS KMS supports the `EncryptionContextEquals` and
-    #   `EncryptionContextSubset` grant constraints. Each constraint value can
-    #   include up to 8 encryption context pairs. The encryption context value
-    #   in each constraint cannot exceed 384 characters.
-    #
-    #   These grant constraints allow a [cryptographic operation][1] only when
-    #   the encryption context in the request matches
-    #   (`EncryptionContextEquals`) or includes (`EncryptionContextSubset`)
-    #   the encryption context specified in this structure. For more
-    #   information about encryption context, see [Encryption Context][2] in
-    #   the <i> <i>AWS Key Management Service Developer Guide</i> </i>. For
-    #   information about grant constraints, see [Using grant constraints][3]
-    #   in the *AWS Key Management Service Developer Guide*.
-    #
-    #   The encryption context grant constraints are supported only on
-    #   operations that include an encryption context. You cannot use an
-    #   encryption context grant constraint for cryptographic operations with
-    #   asymmetric CMKs or for management operations, such as DescribeKey or
-    #   RetireGrant.
+    #   Grant constraints are not applied to operations that do not support an
+    #   encryption context, such as cryptographic operations with asymmetric
+    #   CMKs and management operations, such as DescribeKey or RetireGrant.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -1036,31 +1009,7 @@ module Aws::KMS
     #
     #
     #
-    # Multi-Region primary keys
-    # Imported key material
-    #
-    # : To create a multi-Region *primary key* in the local AWS Region, use
-    #   the `MultiRegion` parameter with a value of `True`. To create a
-    #   multi-Region *replica key*, that is, a CMK with the same key ID and
-    #   key material as a primary key, but in a different AWS Region, use
-    #   the ReplicateKey operation. To change a replica key to a primary
-    #   key, and its primary key to a replica key, use the
-    #   UpdatePrimaryRegion operation.
-    #
-    #   This operation supports *multi-Region keys*, an AWS KMS feature that
-    #   lets you create multiple interoperable CMKs in different AWS
-    #   Regions. Because these CMKs have the same key ID, key material, and
-    #   other metadata, you can use them to encrypt data in one AWS Region
-    #   and decrypt it in a different AWS Region without making a
-    #   cross-Region call or exposing the plaintext data. For more
-    #   information about multi-Region keys, see [Using multi-Region
-    #   keys][5] in the *AWS Key Management Service Developer Guide*.
-    #
-    #   You can create symmetric and asymmetric multi-Region keys and
-    #   multi-Region keys with imported key material. You cannot create
-    #   multi-Region keys in a custom key store.
-    #
-    #
+    # Imported Key Material
     #
     # : To import your own key material, begin by creating a symmetric CMK
     #   with no key material. To do this, use the `Origin` parameter of
@@ -1069,41 +1018,33 @@ module Aws::KMS
     #   token, and use the public key to encrypt your key material. Then,
     #   use ImportKeyMaterial with your import token to import the key
     #   material. For step-by-step instructions, see [Importing Key
-    #   Material][6] in the <i> <i>AWS Key Management Service Developer
+    #   Material][5] in the <i> <i>AWS Key Management Service Developer
     #   Guide</i> </i>. You cannot import the key material into an
     #   asymmetric CMK.
     #
-    #   To create a multi-Region primary key with imported key material, use
-    #   the `Origin` parameter of `CreateKey` with a value of `EXTERNAL` and
-    #   the `MultiRegion` parameter with a value of `True`. To create
-    #   replicas of the multi-Region primary key, use the ReplicateKey
-    #   operation. For more information about multi-Region keys, see [Using
-    #   multi-Region keys][5] in the *AWS Key Management Service Developer
-    #   Guide*.
     #
     #
+    # Custom Key Stores
     #
-    # Custom key store
-    #
-    # : To create a symmetric CMK in a [custom key store][7], use the
+    # : To create a symmetric CMK in a [custom key store][6], use the
     #   `CustomKeyStoreId` parameter to specify the custom key store. You
     #   must also use the `Origin` parameter with a value of `AWS_CLOUDHSM`.
     #   The AWS CloudHSM cluster that is associated with the custom key
     #   store must have at least two active HSMs in different Availability
     #   Zones in the AWS Region.
     #
-    #   You cannot create an asymmetric CMK or a multi-Region CMK in a
-    #   custom key store. For information about custom key stores in AWS KMS
-    #   see [Using Custom Key Stores][7] in the <i> <i>AWS Key Management
-    #   Service Developer Guide</i> </i>.
+    #   You cannot create an asymmetric CMK in a custom key store. For
+    #   information about custom key stores in AWS KMS see [Using Custom Key
+    #   Stores][6] in the <i> <i>AWS Key Management Service Developer
+    #   Guide</i> </i>.
     #
     # **Cross-account use**\: No. You cannot use this operation to create a
     # CMK in a different AWS account.
     #
-    # **Required permissions**\: [kms:CreateKey][8] (IAM policy). To use the
-    # `Tags` parameter, [kms:TagResource][8] (IAM policy). For examples and
+    # **Required permissions**\: [kms:CreateKey][7] (IAM policy). To use the
+    # `Tags` parameter, [kms:TagResource][7] (IAM policy). For examples and
     # information about related permissions, see [Allow a user to create
-    # CMKs][9] in the *AWS Key Management Service Developer Guide*.
+    # CMKs][8] in the *AWS Key Management Service Developer Guide*.
     #
     # **Related operations:**
     #
@@ -1119,11 +1060,10 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-key-pairs
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-create-key
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-create-key
     #
     # @option params [String] :policy
     #   The key policy to attach to the CMK.
@@ -1167,7 +1107,7 @@ module Aws::KMS
     #   A description of the CMK.
     #
     #   Use a description that helps you decide whether the CMK is appropriate
-    #   for a task. The default value is an empty string (no description).
+    #   for a task.
     #
     # @option params [String] :key_usage
     #   Determines the [cryptographic operations][1] for which you can use the
@@ -1251,19 +1191,20 @@ module Aws::KMS
     # @option params [String] :origin
     #   The source of the key material for the CMK. You cannot change the
     #   origin after you create the CMK. The default is `AWS_KMS`, which means
-    #   that AWS KMS creates the key material.
+    #   AWS KMS creates the key material.
     #
-    #   To create a CMK with no key material (for imported key material), set
-    #   the value to `EXTERNAL`. For more information about importing key
-    #   material into AWS KMS, see [Importing Key Material][1] in the *AWS Key
-    #   Management Service Developer Guide*. This value is valid only for
+    #   When the parameter value is `EXTERNAL`, AWS KMS creates a CMK without
+    #   key material so that you can import key material from your existing
+    #   key management infrastructure. For more information about importing
+    #   key material into AWS KMS, see [Importing Key Material][1] in the *AWS
+    #   Key Management Service Developer Guide*. This value is valid only for
     #   symmetric CMKs.
     #
-    #   To create a CMK in an AWS KMS [custom key store][2] and create its key
-    #   material in the associated AWS CloudHSM cluster, set this value to
-    #   `AWS_CLOUDHSM`. You must also use the `CustomKeyStoreId` parameter to
-    #   identify the custom key store. This value is valid only for symmetric
-    #   CMKs.
+    #   When the parameter value is `AWS_CLOUDHSM`, AWS KMS creates the CMK in
+    #   an AWS KMS [custom key store][2] and creates its key material in the
+    #   associated AWS CloudHSM cluster. You must also use the
+    #   `CustomKeyStoreId` parameter to identify the custom key store. This
+    #   value is valid only for symmetric CMKs.
     #
     #
     #
@@ -1278,9 +1219,8 @@ module Aws::KMS
     #   with the custom key store must have at least two active HSMs, each in
     #   a different Availability Zone in the Region.
     #
-    #   This parameter is valid only for symmetric CMKs and regional CMKs. You
-    #   cannot create an asymmetric CMK or a multi-Region CMK in a custom key
-    #   store.
+    #   This parameter is valid only for symmetric CMKs. You cannot create an
+    #   asymmetric CMK in a custom key store.
     #
     #   To find the ID of a custom key store, use the DescribeCustomKeyStores
     #   operation.
@@ -1318,63 +1258,25 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Assigns one or more tags to the CMK. Use this parameter to tag the CMK
-    #   when it is created. To tag an existing CMK, use the TagResource
-    #   operation.
+    #   One or more tags. Each tag consists of a tag key and a tag value. Both
+    #   the tag key and the tag value are required, but the tag value can be
+    #   an empty (null) string.
     #
-    #   <note markdown="1"> Tagging or untagging a CMK can allow or deny permission to the CMK.
-    #   For details, see [Using ABAC in AWS KMS][1] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   When you add tags to an AWS resource, AWS generates a cost allocation
+    #   report with usage and costs aggregated by tags. For information about
+    #   adding, changing, deleting and listing tags for CMKs, see [Tagging
+    #   Keys][1].
     #
-    #    </note>
+    #   Use this parameter to tag the CMK when it is created. To add tags to
+    #   an existing CMK, use the TagResource operation.
     #
     #   To use this parameter, you must have [kms:TagResource][2] permission
     #   in an IAM policy.
     #
-    #   Each tag consists of a tag key and a tag value. Both the tag key and
-    #   the tag value are required, but the tag value can be an empty (null)
-    #   string. You cannot have more than one tag on a CMK with the same tag
-    #   key. If you specify an existing tag key with a different tag value,
-    #   AWS KMS replaces the current tag value with the specified one.
-    #
-    #   When you assign tags to an AWS resource, AWS generates a cost
-    #   allocation report with usage and costs aggregated by tags. Tags can
-    #   also be used to control access to a CMK. For details, see [Tagging
-    #   Keys][3].
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
-    #
-    # @option params [Boolean] :multi_region
-    #   Creates a multi-Region primary key that you can replicate into other
-    #   AWS Regions. You cannot change this value after you create the CMK.
-    #
-    #   For a multi-Region key, set this parameter to `True`. For a
-    #   single-Region CMK, omit this parameter or set it to `False`. The
-    #   default value is `False`.
-    #
-    #   This operation supports *multi-Region keys*, an AWS KMS feature that
-    #   lets you create multiple interoperable CMKs in different AWS Regions.
-    #   Because these CMKs have the same key ID, key material, and other
-    #   metadata, you can use them to encrypt data in one AWS Region and
-    #   decrypt it in a different AWS Region without making a cross-Region
-    #   call or exposing the plaintext data. For more information about
-    #   multi-Region keys, see [Using multi-Region keys][1] in the *AWS Key
-    #   Management Service Developer Guide*.
-    #
-    #   This value creates a *primary key*, not a replica. To create a
-    #   *replica key*, use the ReplicateKey operation.
-    #
-    #   You can create a symmetric or asymmetric multi-Region CMK, and you can
-    #   create a multi-Region CMK with imported key material. However, you
-    #   cannot create a multi-Region CMK in a custom key store.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #
     # @return [Types::CreateKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1426,7 +1328,6 @@ module Aws::KMS
     #         tag_value: "TagValueType", # required
     #       },
     #     ],
-    #     multi_region: false,
     #   })
     #
     # @example Response structure
@@ -1438,7 +1339,7 @@ module Aws::KMS
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
     #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT"
-    #   resp.key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
+    #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport", "Unavailable"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
     #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL", "AWS_CLOUDHSM"
@@ -1451,14 +1352,6 @@ module Aws::KMS
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256"
     #   resp.key_metadata.signing_algorithms #=> Array
     #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512"
-    #   resp.key_metadata.multi_region #=> Boolean
-    #   resp.key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
-    #   resp.key_metadata.multi_region_configuration.primary_key.arn #=> String
-    #   resp.key_metadata.multi_region_configuration.primary_key.region #=> String
-    #   resp.key_metadata.multi_region_configuration.replica_keys #=> Array
-    #   resp.key_metadata.multi_region_configuration.replica_keys[0].arn #=> String
-    #   resp.key_metadata.multi_region_configuration.replica_keys[0].region #=> String
-    #   resp.key_metadata.pending_deletion_window_in_days #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey AWS API Documentation
     #
@@ -1519,8 +1412,8 @@ module Aws::KMS
     # policies][4] in the *AWS Key Management Service Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][5] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][5] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. You can decrypt a ciphertext using a CMK
     # in a different AWS account.
@@ -1573,12 +1466,8 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a newly created grant that has not yet achieved eventual
-    #   consistency. Use a grant token when your permission to call this
-    #   operation comes from a new grant that has not yet achieved *eventual
-    #   consistency*. For more information, see [Grant token][1] in the *AWS
-    #   Key Management Service Developer Guide*.
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
+    #   Service Developer Guide*.
     #
     #
     #
@@ -1595,9 +1484,10 @@ module Aws::KMS
     #   However, it is always recommended as a best practice. This practice
     #   ensures that you use the CMK that you intend.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -1675,12 +1565,6 @@ module Aws::KMS
 
     # Deletes the specified alias.
     #
-    # <note markdown="1"> Adding, deleting, or updating an alias can allow or deny permission to
-    # the CMK. For details, see [Using ABAC in AWS KMS][1] in the *AWS Key
-    # Management Service Developer Guide*.
-    #
-    #  </note>
-    #
     # Because an alias is not a property of a CMK, you can delete and change
     # the aliases of a CMK without affecting the CMK. Also, aliases do not
     # appear in the response from the DescribeKey operation. To get the
@@ -1696,11 +1580,11 @@ module Aws::KMS
     #
     # **Required permissions**
     #
-    # * [kms:DeleteAlias][2] on the alias (IAM policy).
+    # * [kms:DeleteAlias][1] on the alias (IAM policy).
     #
-    # * [kms:DeleteAlias][2] on the CMK (key policy).
+    # * [kms:DeleteAlias][1] on the CMK (key policy).
     #
-    # For details, see [Controlling access to aliases][3] in the *AWS Key
+    # For details, see [Controlling access to aliases][2] in the *AWS Key
     # Management Service Developer Guide*.
     #
     # **Related operations:**
@@ -1713,9 +1597,8 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
     #
     # @option params [required, String] :alias_name
     #   The alias to be deleted. The alias name must begin with `alias/`
@@ -1838,8 +1721,8 @@ module Aws::KMS
     # reimport the same key material into the CMK.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
@@ -1863,7 +1746,7 @@ module Aws::KMS
     #   Identifies the CMK from which you are deleting imported key material.
     #   The `Origin` of the CMK must be `EXTERNAL`.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -1901,14 +1784,14 @@ module Aws::KMS
     end
 
     # Gets information about [custom key stores][1] in the account and
-    # Region.
+    # region.
     #
     # This operation is part of the [Custom Key Store feature][1] feature in
     # AWS KMS, which combines the convenience and extensive integration of
     # AWS KMS with the isolation and control of a single-tenant key store.
     #
     # By default, this operation returns information about all custom key
-    # stores in the account and Region. To get only information about a
+    # stores in the account and region. To get only information about a
     # particular custom key store, use either the `CustomKeyStoreName` or
     # `CustomKeyStoreId` parameter (but not both).
     #
@@ -1959,7 +1842,7 @@ module Aws::KMS
     #   key store ID.
     #
     #   By default, this operation gets information about all custom key
-    #   stores in the account and Region. To limit the output to a particular
+    #   stores in the account and region. To limit the output to a particular
     #   custom key store, you can use either the `CustomKeyStoreId` or
     #   `CustomKeyStoreName` parameter, but not both.
     #
@@ -1968,7 +1851,7 @@ module Aws::KMS
     #   friendly name of the custom key store.
     #
     #   By default, this operation gets information about all custom key
-    #   stores in the account and Region. To limit the output to a particular
+    #   stores in the account and region. To limit the output to a particular
     #   custom key store, you can use either the `CustomKeyStoreId` or
     #   `CustomKeyStoreName` parameter, but not both.
     #
@@ -2091,9 +1974,10 @@ module Aws::KMS
     #   KMS associates the alias with an [AWS managed CMK][1] and returns its
     #   `KeyId` and `Arn` in the response.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -2116,9 +2000,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -2130,9 +2012,9 @@ module Aws::KMS
     #   * {Types::DescribeKeyResponse#key_metadata #key_metadata} => Types::KeyMetadata
     #
     #
-    # @example Example: To get details about a customer master key (CMK)
+    # @example Example: To obtain information about a customer master key (CMK)
     #
-    #   # The following example gets metadata about a symmetric CMK.
+    #   # The following example returns information (metadata) about the specified CMK.
     #
     #   resp = client.describe_key({
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the CMK that you want information about. You can use the key ID or the Amazon Resource Name (ARN) of the CMK.
@@ -2144,17 +2026,12 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
     #       creation_date: Time.parse("2017-07-05T14:04:55-07:00"), 
-    #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
-    #       encryption_algorithms: [
-    #         "SYMMETRIC_DEFAULT", 
-    #       ], 
     #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
     #       key_manager: "CUSTOMER", 
     #       key_state: "Enabled", 
     #       key_usage: "ENCRYPT_DECRYPT", 
-    #       multi_region: false, 
     #       origin: "AWS_KMS", 
     #     }, # An object that contains information about the specified CMK.
     #   }
@@ -2175,7 +2052,7 @@ module Aws::KMS
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
     #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT"
-    #   resp.key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
+    #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport", "Unavailable"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
     #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL", "AWS_CLOUDHSM"
@@ -2188,14 +2065,6 @@ module Aws::KMS
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256"
     #   resp.key_metadata.signing_algorithms #=> Array
     #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512"
-    #   resp.key_metadata.multi_region #=> Boolean
-    #   resp.key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
-    #   resp.key_metadata.multi_region_configuration.primary_key.arn #=> String
-    #   resp.key_metadata.multi_region_configuration.primary_key.region #=> String
-    #   resp.key_metadata.multi_region_configuration.replica_keys #=> Array
-    #   resp.key_metadata.multi_region_configuration.replica_keys[0].arn #=> String
-    #   resp.key_metadata.multi_region_configuration.replica_keys[0].region #=> String
-    #   resp.key_metadata.pending_deletion_window_in_days #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKey AWS API Documentation
     #
@@ -2210,12 +2079,12 @@ module Aws::KMS
     # temporarily prevents use of the CMK for [cryptographic operations][1].
     #
     # For more information about how key state affects the use of a CMK, see
-    # [Key state: Effect on your CMK][2] in the <i> <i>AWS Key Management
-    # Service Developer Guide</i> </i>.
+    # [How Key State Affects the Use of a Customer Master Key][2] in the <i>
+    # <i>AWS Key Management Service Developer Guide</i> </i>.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
@@ -2231,9 +2100,9 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Identifies the customer master key (CMK) to disable.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -2273,19 +2142,17 @@ module Aws::KMS
     # Disables [automatic rotation of the key material][1] for the specified
     # symmetric customer master key (CMK).
     #
-    # You cannot enable automatic rotation of [asymmetric CMKs][2], CMKs
-    # with [imported key material][3], or CMKs in a [custom key store][4].
-    # To enable or disable automatic rotation of a set of related
-    # [multi-Region keys][5], set the property on the primary key.
+    # You cannot enable automatic rotation of asymmetric CMKs, CMKs with
+    # imported key material, or CMKs in a [custom key store][2].
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][6] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][3] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
     #
-    # **Required permissions**\: [kms:DisableKeyRotation][7] (key policy)
+    # **Required permissions**\: [kms:DisableKeyRotation][4] (key policy)
     #
     # **Related operations:**
     #
@@ -2296,19 +2163,16 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
     #   Identifies a symmetric customer master key (CMK). You cannot enable or
     #   disable automatic rotation of [asymmetric CMKs][1], CMKs with
     #   [imported key material][2], or CMKs in a [custom key store][3].
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -2427,8 +2291,8 @@ module Aws::KMS
     # allows you to use the CMK for [cryptographic operations][1].
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
@@ -2444,9 +2308,9 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Identifies the customer master key (CMK) to enable.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -2486,19 +2350,17 @@ module Aws::KMS
     # Enables [automatic rotation of the key material][1] for the specified
     # symmetric customer master key (CMK).
     #
-    # You cannot enable automatic rotation of [asymmetric CMKs][2], CMKs
-    # with [imported key material][3], or CMKs in a [custom key store][4].
-    # To enable or disable automatic rotation of a set of related
-    # [multi-Region keys][5], set the property on the primary key.
+    # You cannot enable automatic rotation of asymmetric CMKs, CMKs with
+    # imported key material, or CMKs in a [custom key store][2].
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][6] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][3] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
     #
-    # **Required permissions**\: [kms:EnableKeyRotation][7] (key policy)
+    # **Required permissions**\: [kms:EnableKeyRotation][4] (key policy)
     #
     # **Related operations:**
     #
@@ -2509,21 +2371,16 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
     #   Identifies a symmetric customer master key (CMK). You cannot enable
-    #   automatic rotation of [asymmetric CMKs][1], CMKs with [imported key
-    #   material][2], or CMKs in a [custom key store][3]. To enable or disable
-    #   automatic rotation of a set of related [multi-Region keys][4], set the
-    #   property on the primary key.
+    #   automatic rotation of asymmetric CMKs, CMKs with imported key
+    #   material, or CMKs in a [custom key store][1].
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -2536,10 +2393,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2642,8 +2496,8 @@ module Aws::KMS
     #   * `RSAES_OAEP_SHA_256`\: 446 bytes
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation with a CMK in a
     # different AWS account, specify the key ARN or alias ARN in the value
@@ -2666,12 +2520,12 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Identifies the customer master key (CMK) to use in the encryption
-    #   operation.
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -2715,9 +2569,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -2814,8 +2666,8 @@ module Aws::KMS
     # Service Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **How to use your data key**
     #
@@ -2874,9 +2726,10 @@ module Aws::KMS
     # @option params [required, String] :key_id
     #   Identifies the symmetric CMK that encrypts the data key.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -2930,9 +2783,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -3029,8 +2880,8 @@ module Aws::KMS
     # Service Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation with a CMK in a
     # different AWS account, specify the key ARN or alias ARN in the value
@@ -3080,9 +2931,10 @@ module Aws::KMS
     #   key store. To get the type and origin of your CMK, use the DescribeKey
     #   operation.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -3109,9 +2961,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -3185,8 +3035,8 @@ module Aws::KMS
     # Service Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation with a CMK in a
     # different AWS account, specify the key ARN or alias ARN in the value
@@ -3237,9 +3087,10 @@ module Aws::KMS
     #   a CMK in a custom key store. To get the type and origin of your CMK,
     #   use the DescribeKey operation.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -3266,9 +3117,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -3351,8 +3200,8 @@ module Aws::KMS
     # Service Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation with a CMK in a
     # different AWS account, specify the key ARN or alias ARN in the value
@@ -3383,9 +3232,10 @@ module Aws::KMS
     #   The identifier of the symmetric customer master key (CMK) that
     #   encrypts the data key.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -3432,9 +3282,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -3497,14 +3345,14 @@ module Aws::KMS
     # ID.
     #
     # For more information about entropy and random number generation, see
-    # [AWS Key Management Service Cryptographic Details][2].
+    # the [AWS Key Management Service Cryptographic Details][2] whitepaper.
     #
     # **Required permissions**\: [kms:GenerateRandom][3] (IAM policy)
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/cryptographic-details/
+    # [2]: https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [Integer] :number_of_bytes
@@ -3571,9 +3419,9 @@ module Aws::KMS
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Gets the key policy for the specified customer master key (CMK).
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -3631,15 +3479,13 @@ module Aws::KMS
     # key material][1] is enabled for the specified customer master key
     # (CMK).
     #
-    # You cannot enable automatic rotation of [asymmetric CMKs][2], CMKs
-    # with [imported key material][3], or CMKs in a [custom key store][4].
-    # To enable or disable automatic rotation of a set of related
-    # [multi-Region keys][5], set the property on the primary key. The key
+    # You cannot enable automatic rotation of asymmetric CMKs, CMKs with
+    # imported key material, or CMKs in a [custom key store][2]. The key
     # rotation status for these CMKs is always `false`.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][6] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][3] in the *AWS Key Management Service Developer Guide*.
     #
     # * Disabled: The key rotation status does not change when you disable a
     #   CMK. However, while the CMK is disabled, AWS KMS does not rotate the
@@ -3654,7 +3500,7 @@ module Aws::KMS
     # different AWS account, specify the key ARN in the value of the `KeyId`
     # parameter.
     #
-    # **Required permissions**\: [kms:GetKeyRotationStatus][7] (key policy)
+    # **Required permissions**\: [kms:GetKeyRotationStatus][4] (key policy)
     #
     # **Related operations:**
     #
@@ -3665,18 +3511,15 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Gets the rotation status for the specified customer master key (CMK).
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK. To specify a CMK in a
-    #   different AWS account, you must use the key ARN.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
     #   For example:
     #
@@ -3748,8 +3591,8 @@ module Aws::KMS
     # `GetParametersForImport` request.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
@@ -3773,7 +3616,7 @@ module Aws::KMS
     #   The identifier of the symmetric CMK into which you will import key
     #   material. The `Origin` of the CMK must be `EXTERNAL`.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -3887,8 +3730,8 @@ module Aws::KMS
     # algorithm in a verification operation.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][7] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][7] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation with a CMK in a
     # different AWS account, specify the key ARN or alias ARN in the value
@@ -3912,9 +3755,10 @@ module Aws::KMS
     # @option params [required, String] :key_id
     #   Identifies the asymmetric CMK that includes the public key.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -3933,9 +3777,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -4028,8 +3870,8 @@ module Aws::KMS
     # Service Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][4] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][4] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
@@ -4056,7 +3898,7 @@ module Aws::KMS
     #   same CMK specified in the `KeyID` parameter of the corresponding
     #   GetParametersForImport request.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -4172,7 +4014,7 @@ module Aws::KMS
     #   This parameter is optional. If you omit it, `ListAliases` returns all
     #   aliases in the account and Region.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -4339,8 +4181,8 @@ module Aws::KMS
     #   Returns only grants for the specified customer master key (CMK). This
     #   parameter is required.
     #
-    #   Specify the key ID or key ARN of the CMK. To specify a CMK in a
-    #   different AWS account, you must use the key ARN.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
     #   For example:
     #
@@ -4493,10 +4335,9 @@ module Aws::KMS
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Gets the names of key policies for the specified customer master key
-    #   (CMK).
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -4697,10 +4538,6 @@ module Aws::KMS
     #
     # **Related operations:**
     #
-    # * CreateKey
-    #
-    # * ReplicateKey
-    #
     # * TagResource
     #
     # * UntagResource
@@ -4712,9 +4549,9 @@ module Aws::KMS
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Gets tags on the specified customer master key (CMK).
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -4800,10 +4637,8 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Returns information about all grants in the AWS account and Region
-    # that have the specified retiring principal. For more information about
-    # grants, see [Grants][1] in the <i> <i>AWS Key Management Service
-    # Developer Guide</i> </i>.
+    # Returns all grants in which the specified principal is the
+    # `RetiringPrincipal` in the grant.
     #
     # You can specify any principal in your AWS account. The grants that are
     # returned include grants for CMKs in your AWS account and other AWS
@@ -4817,7 +4652,7 @@ module Aws::KMS
     # You do not need `kms:ListRetirableGrants` permission (or any other
     # additional permission) in any AWS account other than your own.
     #
-    # **Required permissions**\: [kms:ListRetirableGrants][2] (IAM policy)
+    # **Required permissions**\: [kms:ListRetirableGrants][1] (IAM policy)
     # in your AWS account.
     #
     # **Related operations:**
@@ -4832,8 +4667,7 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [Integer] :limit
     #   Use this parameter to specify the maximum number of items to return.
@@ -4958,9 +4792,9 @@ module Aws::KMS
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Sets the key policy on the specified customer master key (CMK).
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -5113,8 +4947,8 @@ module Aws::KMS
     #   asymmetric key ciphertext does not include configurable fields.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][6] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][6] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. The source CMK and destination CMK can be
     # in different AWS accounts. Either or both CMKs can be in a different
@@ -5187,9 +5021,10 @@ module Aws::KMS
     #   However, it is always recommended as a best practice. This practice
     #   ensures that you use the CMK that you intend.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -5211,9 +5046,10 @@ module Aws::KMS
     #   `ENCRYPT_DECRYPT`. To find the `KeyUsage` value of a CMK, use the
     #   DescribeKey operation.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -5274,9 +5110,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -5342,331 +5176,31 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Replicates a multi-Region key into the specified Region. This
-    # operation creates a multi-Region replica key based on a multi-Region
-    # primary key in a different Region of the same AWS partition. You can
-    # create multiple replicas of a primary key, but each must be in a
-    # different Region. To create a multi-Region primary key, use the
-    # CreateKey operation.
-    #
-    # This operation supports *multi-Region keys*, an AWS KMS feature that
-    # lets you create multiple interoperable CMKs in different AWS Regions.
-    # Because these CMKs have the same key ID, key material, and other
-    # metadata, you can use them to encrypt data in one AWS Region and
-    # decrypt it in a different AWS Region without making a cross-Region
-    # call or exposing the plaintext data. For more information about
-    # multi-Region keys, see [Using multi-Region keys][1] in the *AWS Key
-    # Management Service Developer Guide*.
-    #
-    # A *replica key* is a fully-functional CMK that can be used
-    # independently of its primary and peer replica keys. A primary key and
-    # its replica keys share properties that make them interoperable. They
-    # have the same [key ID][2] and key material. They also have the same
-    # [key spec][3], [key usage][4], [key material origin][5], and
-    # [automatic key rotation status][6]. AWS KMS automatically synchronizes
-    # these shared properties among related multi-Region keys. All other
-    # properties of a replica key can differ, including its [key policy][7],
-    # [tags][8], [aliases][9], and [key state][10]. AWS KMS pricing and
-    # quotas for CMKs apply to each primary key and replica key.
-    #
-    # When this operation completes, the new replica key has a transient key
-    # state of `Creating`. This key state changes to `Enabled` (or
-    # `PendingImport`) after a few seconds when the process of creating the
-    # new replica key is complete. While the key state is `Creating`, you
-    # can manage key, but you cannot yet use it in cryptographic operations.
-    # If you are creating and using the replica key programmatically, retry
-    # on `KMSInvalidStateException` or call `DescribeKey` to check its
-    # `KeyState` value before using it. For details about the `Creating` key
-    # state, see [Key state: Effect on your
-    # CMK](kms/latest/developerguide/key-state.html) in the *AWS Key
-    # Management Service Developer Guide*.
-    #
-    # The AWS CloudTrail log of a `ReplicateKey` operation records a
-    # `ReplicateKey` operation in the primary key's Region and a CreateKey
-    # operation in the replica key's Region.
-    #
-    # If you replicate a multi-Region primary key with imported key
-    # material, the replica key is created with no key material. You must
-    # import the same key material that you imported into the primary key.
-    # For details, see [Importing key material into multi-Region
-    # keys](kms/latest/developerguide/multi-region-keys-import.html) in the
-    # *AWS Key Management Service Developer Guide*.
-    #
-    # To convert a replica key to a primary key, use the UpdatePrimaryRegion
-    # operation.
-    #
-    # <note markdown="1"> `ReplicateKey` uses different default values for the `KeyPolicy` and
-    # `Tags` parameters than those used in the AWS KMS console. For details,
-    # see the parameter descriptions.
-    #
-    #  </note>
-    #
-    # **Cross-account use**\: No. You cannot use this operation to create a
-    # CMK in a different AWS account.
-    #
-    # **Required permissions**\:
-    #
-    # * `kms:ReplicateKey` on the primary CMK (in the primary CMK's
-    #   Region). Include this permission in the primary CMK's key policy.
-    #
-    # * `kms:CreateKey` in an IAM policy in the replica Region.
-    #
-    # * To use the `Tags` parameter, `kms:TagResource` in an IAM policy in
-    #   the replica Region.
-    #
-    # **Related operations**
-    #
-    # * CreateKey
-    #
-    # * UpdatePrimaryRegion
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-usage
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-origin
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    #
-    # @option params [required, String] :key_id
-    #   Identifies the multi-Region primary key that is being replicated. To
-    #   determine whether a CMK is a multi-Region primary key, use the
-    #   DescribeKey operation to check the value of the `MultiRegionKeyType`
-    #   property.
-    #
-    #   Specify the key ID or key ARN of a multi-Region primary key.
-    #
-    #   For example:
-    #
-    #   * Key ID: `mrk-1234abcd12ab34cd56ef1234567890ab`
-    #
-    #   * Key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab`
-    #
-    #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-    #
-    # @option params [required, String] :replica_region
-    #   The Region ID of the AWS Region for this replica key.
-    #
-    #   Enter the Region ID, such as `us-east-1` or `ap-southeast-2`. For a
-    #   list of AWS Regions in which AWS KMS is supported, see [AWS KMS
-    #   service endpoints][1] in the *Amazon Web Services General Reference*.
-    #
-    #   The replica must be in a different AWS Region than its primary key and
-    #   other replicas of that primary key, but in the same AWS partition. AWS
-    #   KMS must be available in the replica Region. If the Region is not
-    #   enabled by default, the AWS account must be enabled in the Region.
-    #
-    #   For information about AWS partitions, see [Amazon Resource Names
-    #   (ARNs) in the *Amazon Web Services General Reference*.][2] For
-    #   information about enabling and disabling Regions, see [Enabling a
-    #   Region][3] and [Disabling a Region][4] in the *Amazon Web Services
-    #   General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/kms.html#kms_region
-    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [3]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
-    #   [4]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-disable
-    #
-    # @option params [String] :policy
-    #   The key policy to attach to the CMK. This parameter is optional. If
-    #   you do not provide a key policy, AWS KMS attaches the [default key
-    #   policy][1] to the CMK.
-    #
-    #   The key policy is not a shared property of multi-Region keys. You can
-    #   specify the same key policy or a different key policy for each key in
-    #   a set of related multi-Region keys. AWS KMS does not synchronize this
-    #   property.
-    #
-    #   If you provide a key policy, it must meet the following criteria:
-    #
-    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to true, the key
-    #     policy must give the caller `kms:PutKeyPolicy` permission on the
-    #     replica CMK. This reduces the risk that the CMK becomes
-    #     unmanageable. For more information, refer to the scenario in the
-    #     [Default Key Policy][2] section of the <i> <i>AWS Key Management
-    #     Service Developer Guide</i> </i>.
-    #
-    #   * Each statement in the key policy must contain one or more
-    #     principals. The principals in the key policy must exist and be
-    #     visible to AWS KMS. When you create a new AWS principal (for
-    #     example, an IAM user or role), you might need to enforce a delay
-    #     before including the new principal in a key policy because the new
-    #     principal might not be immediately visible to AWS KMS. For more
-    #     information, see [Changes that I make are not always immediately
-    #     visible][3] in the *AWS Identity and Access Management User Guide*.
-    #
-    #   * The key policy size quota is 32 kilobytes (32768 bytes).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #
-    # @option params [Boolean] :bypass_policy_lockout_safety_check
-    #   A flag to indicate whether to bypass the key policy lockout safety
-    #   check.
-    #
-    #   Setting this value to true increases the risk that the CMK becomes
-    #   unmanageable. Do not set this value to true indiscriminately.
-    #
-    #    For more information, refer to the scenario in the [Default Key
-    #   Policy][1] section in the *AWS Key Management Service Developer
-    #   Guide*.
-    #
-    #   Use this parameter only when you intend to prevent the principal that
-    #   is making the request from making a subsequent `PutKeyPolicy` request
-    #   on the CMK.
-    #
-    #   The default value is false.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #
-    # @option params [String] :description
-    #   A description of the CMK. Use a description that helps you decide
-    #   whether the CMK is appropriate for a task. The default value is an
-    #   empty string (no description).
-    #
-    #   The description is not a shared property of multi-Region keys. You can
-    #   specify the same description or a different description for each key
-    #   in a set of related multi-Region keys. AWS KMS does not synchronize
-    #   this property.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   Assigns one or more tags to the replica key. Use this parameter to tag
-    #   the CMK when it is created. To tag an existing CMK, use the
-    #   TagResource operation.
-    #
-    #   <note markdown="1"> Tagging or untagging a CMK can allow or deny permission to the CMK.
-    #   For details, see [Using ABAC in AWS KMS][1] in the *AWS Key Management
-    #   Service Developer Guide*.
-    #
-    #    </note>
-    #
-    #   To use this parameter, you must have [kms:TagResource][2] permission
-    #   in an IAM policy.
-    #
-    #   Tags are not a shared property of multi-Region keys. You can specify
-    #   the same tags or different tags for each key in a set of related
-    #   multi-Region keys. AWS KMS does not synchronize this property.
-    #
-    #   Each tag consists of a tag key and a tag value. Both the tag key and
-    #   the tag value are required, but the tag value can be an empty (null)
-    #   string. You cannot have more than one tag on a CMK with the same tag
-    #   key. If you specify an existing tag key with a different tag value,
-    #   AWS KMS replaces the current tag value with the specified one.
-    #
-    #   When you assign tags to an AWS resource, AWS generates a cost
-    #   allocation report with usage and costs aggregated by tags. Tags can
-    #   also be used to control access to a CMK. For details, see [Tagging
-    #   Keys][3].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
-    #
-    # @return [Types::ReplicateKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ReplicateKeyResponse#replica_key_metadata #replica_key_metadata} => Types::KeyMetadata
-    #   * {Types::ReplicateKeyResponse#replica_policy #replica_policy} => String
-    #   * {Types::ReplicateKeyResponse#replica_tags #replica_tags} => Array&lt;Types::Tag&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.replicate_key({
-    #     key_id: "KeyIdType", # required
-    #     replica_region: "RegionType", # required
-    #     policy: "PolicyType",
-    #     bypass_policy_lockout_safety_check: false,
-    #     description: "DescriptionType",
-    #     tags: [
-    #       {
-    #         tag_key: "TagKeyType", # required
-    #         tag_value: "TagValueType", # required
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.replica_key_metadata.aws_account_id #=> String
-    #   resp.replica_key_metadata.key_id #=> String
-    #   resp.replica_key_metadata.arn #=> String
-    #   resp.replica_key_metadata.creation_date #=> Time
-    #   resp.replica_key_metadata.enabled #=> Boolean
-    #   resp.replica_key_metadata.description #=> String
-    #   resp.replica_key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT"
-    #   resp.replica_key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
-    #   resp.replica_key_metadata.deletion_date #=> Time
-    #   resp.replica_key_metadata.valid_to #=> Time
-    #   resp.replica_key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL", "AWS_CLOUDHSM"
-    #   resp.replica_key_metadata.custom_key_store_id #=> String
-    #   resp.replica_key_metadata.cloud_hsm_cluster_id #=> String
-    #   resp.replica_key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
-    #   resp.replica_key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
-    #   resp.replica_key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT"
-    #   resp.replica_key_metadata.encryption_algorithms #=> Array
-    #   resp.replica_key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256"
-    #   resp.replica_key_metadata.signing_algorithms #=> Array
-    #   resp.replica_key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512"
-    #   resp.replica_key_metadata.multi_region #=> Boolean
-    #   resp.replica_key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
-    #   resp.replica_key_metadata.multi_region_configuration.primary_key.arn #=> String
-    #   resp.replica_key_metadata.multi_region_configuration.primary_key.region #=> String
-    #   resp.replica_key_metadata.multi_region_configuration.replica_keys #=> Array
-    #   resp.replica_key_metadata.multi_region_configuration.replica_keys[0].arn #=> String
-    #   resp.replica_key_metadata.multi_region_configuration.replica_keys[0].region #=> String
-    #   resp.replica_key_metadata.pending_deletion_window_in_days #=> Integer
-    #   resp.replica_policy #=> String
-    #   resp.replica_tags #=> Array
-    #   resp.replica_tags[0].tag_key #=> String
-    #   resp.replica_tags[0].tag_value #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReplicateKey AWS API Documentation
-    #
-    # @overload replicate_key(params = {})
-    # @param [Hash] params ({})
-    def replicate_key(params = {}, options = {})
-      req = build_request(:replicate_key, params)
-      req.send_request(options)
-    end
-
-    # Deletes a grant. Typically, you retire a grant when you no longer need
-    # its permissions. To identify the grant to retire, use a [grant
-    # token][1], or both the grant ID and a key identifier (key ID or key
-    # ARN) of the customer master key (CMK). The CreateGrant operation
-    # returns both values.
-    #
-    # This operation can be called by the *retiring principal* for a grant,
-    # by the *grantee principal* if the grant allows the `RetireGrant`
-    # operation, and by the AWS account (root user) in which the grant is
-    # created. It can also be called by principals to whom permission for
-    # retiring a grant is delegated. For details, see [Retiring and revoking
-    # grants][2] in the *AWS Key Management Service Developer Guide*.
-    #
-    # For detailed information about grants, including grant terminology,
-    # see [Using grants][3] in the <i> <i>AWS Key Management Service
-    # Developer Guide</i> </i>. For examples of working with grants in
-    # several programming languages, see [Programming grants][4].
+    # Retires a grant. To clean up, you can retire a grant when you're done
+    # using it. You should revoke a grant when you intend to actively deny
+    # operations that depend on it. The following are permitted to call this
+    # API:
+    #
+    # * The AWS account (root user) under which the grant was created
+    #
+    # * The `RetiringPrincipal`, if present in the grant
+    #
+    # * The `GranteePrincipal`, if `RetireGrant` is an operation specified
+    #   in the grant
+    #
+    # You must identify the grant to retire by its grant token or by a
+    # combination of the grant ID and the Amazon Resource Name (ARN) of the
+    # customer master key (CMK). A grant token is a unique variable-length
+    # base64-encoded string. A grant ID is a 64 character unique identifier
+    # of a grant. The CreateGrant operation returns both.
     #
     # **Cross-account use**\: Yes. You can retire a grant on a CMK in a
     # different AWS account.
     #
-    # **Required permissions:**\:Permission to retire a grant is determined
-    # primarily by the grant. For details, see [Retiring and revoking
-    # grants][2] in the *AWS Key Management Service Developer Guide*.
+    # **Required permissions:**\: Permission to retire a grant is specified
+    # in the grant. You cannot control access to this operation in a policy.
+    # For more information, see [Using grants][1] in the *AWS Key Management
+    # Service Developer Guide*.
     #
     # **Related operations:**
     #
@@ -5680,34 +5214,20 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
     #
     # @option params [String] :grant_token
-    #   Identifies the grant to be retired. You can use a grant token to
-    #   identify a new grant even before it has achieved eventual consistency.
-    #
-    #   Only the CreateGrant operation returns a grant token. For details, see
-    #   [Grant token][1] and [Eventual consistency][2] in the *AWS Key
-    #   Management Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency
+    #   Token that identifies the grant to be retired.
     #
     # @option params [String] :key_id
-    #   The key ARN CMK associated with the grant. To find the key ARN, use
-    #   the ListKeys operation.
+    #   The Amazon Resource Name (ARN) of the CMK associated with the grant.
     #
     #   For example:
     #   `arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     # @option params [String] :grant_id
-    #   Identifies the grant to retire. To get the grant ID, use CreateGrant,
-    #   ListGrants, or ListRetirableGrants.
+    #   Unique identifier of the grant to retire. The grant ID is returned in
+    #   the response to a `CreateGrant` operation.
     #
     #   * Grant ID Example -
     #     0123456789012345678901234567890123456789012345678901234567890123
@@ -5743,22 +5263,15 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Deletes the specified grant. You revoke a grant to terminate the
-    # permissions that the grant allows. For more information, see [Retiring
-    # and revoking grants][1] in the <i> <i>AWS Key Management Service
-    # Developer Guide</i> </i>.
-    #
-    # When you create, retire, or revoke a grant, there might be a brief
-    # delay, usually less than five minutes, until the grant is available
-    # throughout AWS KMS. This state is known as *eventual consistency*. For
-    # details, see [Eventual consistency][2] in the <i> <i>AWS Key
-    # Management Service Developer Guide</i> </i>.
+    # Revokes the specified grant for the specified customer master key
+    # (CMK). You can revoke a grant to actively deny operations that depend
+    # on it.
     #
     # **Cross-account use**\: Yes. To perform this operation on a CMK in a
     # different AWS account, specify the key ARN in the value of the `KeyId`
     # parameter.
     #
-    # **Required permissions**\: [kms:RevokeGrant][3] (key policy).
+    # **Required permissions**\: [kms:RevokeGrant][1] (key policy)
     #
     # **Related operations:**
     #
@@ -5772,17 +5285,14 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/managing-grants.html#grant-delete
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   A unique identifier for the customer master key (CMK) associated with
-    #   the grant. To get the key ID and key ARN for a CMK, use ListKeys or
-    #   DescribeKey.
+    #   A unique identifier for the customer master key associated with the
+    #   grant.
     #
-    #   Specify the key ID or key ARN of the CMK. To specify a CMK in a
-    #   different AWS account, you must use the key ARN.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+    #   specify a CMK in a different AWS account, you must use the key ARN.
     #
     #   For example:
     #
@@ -5794,8 +5304,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #
     # @option params [required, String] :grant_id
-    #   Identifies the grant to revoke. To get the grant ID, use CreateGrant,
-    #   ListGrants, or ListRetirableGrants.
+    #   Identifier of the grant to be revoked.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5825,21 +5334,19 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Schedules the deletion of a customer master key (CMK). By default, AWS
-    # KMS applies a waiting period of 30 days, but you can specify a waiting
-    # period of 7-30 days. When this operation is successful, the key state
-    # of the CMK changes to `PendingDeletion` and the key can't be used in
-    # any cryptographic operations. It remains in this state for the
-    # duration of the waiting period. Before the waiting period ends, you
-    # can use CancelKeyDeletion to cancel the deletion of the CMK. After the
-    # waiting period ends, AWS KMS deletes the CMK, its key material, and
-    # all AWS KMS data associated with it, including all aliases that refer
-    # to it.
+    # Schedules the deletion of a customer master key (CMK). You may provide
+    # a waiting period, specified in days, before deletion occurs. If you do
+    # not provide a waiting period, the default period of 30 days is used.
+    # When this operation is successful, the key state of the CMK changes to
+    # `PendingDeletion`. Before the waiting period ends, you can use
+    # CancelKeyDeletion to cancel the deletion of the CMK. After the waiting
+    # period ends, AWS KMS deletes the CMK and all AWS KMS data associated
+    # with it, including all aliases that refer to it.
     #
     # Deleting a CMK is a destructive and potentially dangerous operation.
     # When a CMK is deleted, all data that was encrypted under the CMK is
-    # unrecoverable. (The only exception is a multi-Region replica key.) To
-    # prevent the use of a CMK without deleting it, use DisableKey.
+    # unrecoverable. To prevent the use of a CMK without deleting it, use
+    # DisableKey.
     #
     # If you schedule deletion of a CMK from a [custom key store][1], when
     # the waiting period expires, `ScheduleKeyDeletion` deletes the CMK from
@@ -5848,30 +5355,18 @@ module Aws::KMS
     # manually [delete the orphaned key material][2] from the cluster and
     # its backups.
     #
-    # You can schedule the deletion of a multi-Region primary key and its
-    # replica keys at any time. However, AWS KMS will not delete a
-    # multi-Region primary key with existing replica keys. If you schedule
-    # the deletion of a primary key with replicas, its key state changes to
-    # `PendingReplicaDeletion` and it cannot be replicated or used in
-    # cryptographic operations. This status can continue indefinitely. When
-    # the last of its replicas keys is deleted (not just scheduled), the key
-    # state of the primary key changes to `PendingDeletion` and its waiting
-    # period (`PendingWindowInDays`) begins. For details, see [Deleting
-    # multi-Region keys][3] in the *AWS Key Management Service Developer
-    # Guide*.
-    #
     # For more information about scheduling a CMK for deletion, see
-    # [Deleting Customer Master Keys][4] in the *AWS Key Management Service
+    # [Deleting Customer Master Keys][3] in the *AWS Key Management Service
     # Developer Guide*.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][5] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][4] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
     #
-    # **Required permissions**\: kms:ScheduleKeyDeletion (key policy)
+    # **Required permissions**\: [kms:ScheduleKeyDeletion][5] (key policy)
     #
     # **Related operations**
     #
@@ -5883,14 +5378,14 @@ module Aws::KMS
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
     #   The unique identifier of the customer master key (CMK) to delete.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -5905,10 +5400,6 @@ module Aws::KMS
     #   The waiting period, specified in number of days. After the waiting
     #   period ends, AWS KMS deletes the customer master key (CMK).
     #
-    #   If the CMK is a multi-Region primary key with replicas, the waiting
-    #   period begins when the last of its replica keys is deleted. Otherwise,
-    #   the waiting period begins immediately.
-    #
     #   This value is optional. If you include a value, it must be between 7
     #   and 30, inclusive. If you do not include a value, it defaults to 30.
     #
@@ -5916,8 +5407,6 @@ module Aws::KMS
     #
     #   * {Types::ScheduleKeyDeletionResponse#key_id #key_id} => String
     #   * {Types::ScheduleKeyDeletionResponse#deletion_date #deletion_date} => Time
-    #   * {Types::ScheduleKeyDeletionResponse#key_state #key_state} => String
-    #   * {Types::ScheduleKeyDeletionResponse#pending_window_in_days #pending_window_in_days} => Integer
     #
     #
     # @example Example: To schedule a customer master key (CMK) for deletion
@@ -5946,8 +5435,6 @@ module Aws::KMS
     #
     #   resp.key_id #=> String
     #   resp.deletion_date #=> Time
-    #   resp.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
-    #   resp.pending_window_in_days #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletion AWS API Documentation
     #
@@ -5997,8 +5484,8 @@ module Aws::KMS
     # KMS.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][3] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][3] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation with a CMK in a
     # different AWS account, specify the key ARN or alias ARN in the value
@@ -6021,9 +5508,10 @@ module Aws::KMS
     #   must be `SIGN_VERIFY`. To find the `KeyUsage` of a CMK, use the
     #   DescribeKey operation.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -6054,9 +5542,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -6102,65 +5588,50 @@ module Aws::KMS
 
     # Adds or edits tags on a [customer managed CMK][1].
     #
-    # <note markdown="1"> Tagging or untagging a CMK can allow or deny permission to the CMK.
-    # For details, see [Using ABAC in AWS KMS][2] in the *AWS Key Management
-    # Service Developer Guide*.
-    #
-    #  </note>
-    #
     # Each tag consists of a tag key and a tag value, both of which are
     # case-sensitive strings. The tag value can be an empty (null) string.
+    #
     # To add a tag, specify a new tag key and a tag value. To edit a tag,
     # specify an existing tag key and a new tag value.
     #
     # You can use this operation to tag a [customer managed CMK][1], but you
-    # cannot tag an [AWS managed CMK][3], an [AWS owned CMK][4], a [custom
-    # key store][5], or an [alias][6].
+    # cannot tag an [AWS managed CMK][2], an [AWS owned CMK][3], or an
+    # alias.
     #
-    # You can also add tags to a CMK while creating it (CreateKey) or
-    # replicating it (ReplicateKey).
-    #
-    # For information about using tags in AWS KMS, see [Tagging keys][7].
     # For general information about tags, including the format and syntax,
-    # see [Tagging AWS resources][8] in the *Amazon Web Services General
-    # Reference*.
+    # see [Tagging AWS resources][4] in the *Amazon Web Services General
+    # Reference*. For information about using tags in AWS KMS, see [Tagging
+    # keys][5].
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][9] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][6] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
     #
-    # **Required permissions**\: [kms:TagResource][10] (key policy)
+    # **Required permissions**\: [kms:TagResource][7] (key policy)
     #
     # **Related operations**
     #
-    # * CreateKey
+    # * UntagResource
     #
     # * ListResourceTags
-    #
-    # * ReplicateKey
-    #
-    # * UntagResource
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#keystore-concept
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#alias-concept
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
-    # [8]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
     #   Identifies a customer managed CMK in the account and Region.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -6222,54 +5693,43 @@ module Aws::KMS
     # Deletes tags from a [customer managed CMK][1]. To delete a tag,
     # specify the tag key and the CMK.
     #
-    # <note markdown="1"> Tagging or untagging a CMK can allow or deny permission to the CMK.
-    # For details, see [Using ABAC in AWS KMS][2] in the *AWS Key Management
-    # Service Developer Guide*.
-    #
-    #  </note>
-    #
     # When it succeeds, the `UntagResource` operation doesn't return any
     # output. Also, if the specified tag key isn't found on the CMK, it
     # doesn't throw an exception or return a response. To confirm that the
     # operation worked, use the ListResourceTags operation.
     #
-    # For information about using tags in AWS KMS, see [Tagging keys][3].
     # For general information about tags, including the format and syntax,
-    # see [Tagging AWS resources][4] in the *Amazon Web Services General
-    # Reference*.
+    # see [Tagging AWS resources][2] in the *Amazon Web Services General
+    # Reference*. For information about using tags in AWS KMS, see [Tagging
+    # keys][3].
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][5] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][4] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
     #
-    # **Required permissions**\: [kms:UntagResource][6] (key policy)
+    # **Required permissions**\: [kms:UntagResource][5] (key policy)
     #
     # **Related operations**
     #
-    # * CreateKey
+    # * TagResource
     #
     # * ListResourceTags
-    #
-    # * ReplicateKey
-    #
-    # * TagResource
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
-    # [4]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
     #   Identifies the CMK from which you are removing tags.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -6317,13 +5777,7 @@ module Aws::KMS
     # Associates an existing AWS KMS alias with a different customer master
     # key (CMK). Each alias is associated with only one CMK at a time,
     # although a CMK can have multiple aliases. The alias and the CMK must
-    # be in the same AWS account and Region.
-    #
-    # <note markdown="1"> Adding, deleting, or updating an alias can allow or deny permission to
-    # the CMK. For details, see [Using ABAC in AWS KMS][1] in the *AWS Key
-    # Management Service Developer Guide*.
-    #
-    #  </note>
+    # be in the same AWS account and region.
     #
     # The current and new CMK must be the same type (both symmetric or both
     # asymmetric), and they must have the same key usage (`ENCRYPT_DECRYPT`
@@ -6343,21 +5797,21 @@ module Aws::KMS
     # operation.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][1] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
     #
     # **Required permissions**
     #
-    # * [kms:UpdateAlias][3] on the alias (IAM policy).
+    # * [kms:UpdateAlias][2] on the alias (IAM policy).
     #
-    # * [kms:UpdateAlias][3] on the current CMK (key policy).
+    # * [kms:UpdateAlias][2] on the current CMK (key policy).
     #
-    # * [kms:UpdateAlias][3] on the new CMK (key policy).
+    # * [kms:UpdateAlias][2] on the new CMK (key policy).
     #
-    # For details, see [Controlling access to aliases][4] in the *AWS Key
+    # For details, see [Controlling access to aliases][3] in the *AWS Key
     # Management Service Developer Guide*.
     #
     # **Related operations:**
@@ -6370,10 +5824,9 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/abac.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access
     #
     # @option params [required, String] :alias_name
     #   Identifies the alias that is changing its CMK. This value must begin
@@ -6391,7 +5844,7 @@ module Aws::KMS
     #   (both symmetric or both asymmetric) and they must have the same key
     #   usage.
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -6562,8 +6015,8 @@ module Aws::KMS
     # description of a CMK, use DescribeKey.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][1] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][1] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a CMK
     # in a different AWS account.
@@ -6582,9 +6035,9 @@ module Aws::KMS
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Updates the description of the specified customer master key (CMK).
+    #   A unique identifier for the customer master key (CMK).
     #
-    #   Specify the key ID or key ARN of the CMK.
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
     #   For example:
     #
@@ -6626,128 +6079,6 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Changes the primary key of a multi-Region key.
-    #
-    # This operation changes the replica key in the specified Region to a
-    # primary key and changes the former primary key to a replica key. For
-    # example, suppose you have a primary key in `us-east-1` and a replica
-    # key in `eu-west-2`. If you run `UpdatePrimaryRegion` with a
-    # `PrimaryRegion` value of `eu-west-2`, the primary key is now the key
-    # in `eu-west-2`, and the key in `us-east-1` becomes a replica key. For
-    # details, see
-    #
-    # This operation supports *multi-Region keys*, an AWS KMS feature that
-    # lets you create multiple interoperable CMKs in different AWS Regions.
-    # Because these CMKs have the same key ID, key material, and other
-    # metadata, you can use them to encrypt data in one AWS Region and
-    # decrypt it in a different AWS Region without making a cross-Region
-    # call or exposing the plaintext data. For more information about
-    # multi-Region keys, see [Using multi-Region keys][1] in the *AWS Key
-    # Management Service Developer Guide*.
-    #
-    # The *primary key* of a multi-Region key is the source for properties
-    # that are always shared by primary and replica keys, including the key
-    # material, [key ID][2], [key spec][3], [key usage][4], [key material
-    # origin][5], and [automatic key rotation][6]. It's the only key that
-    # can be replicated. You cannot [delete the primary key][7] until all
-    # replicas are deleted.
-    #
-    # The key ID and primary Region that you specify uniquely identify the
-    # replica key that will become the primary key. The primary Region must
-    # already have a replica key. This operation does not create a CMK in
-    # the specified Region. To find the replica keys, use the DescribeKey
-    # operation on the primary key or any replica key. To create a replica
-    # key, use the ReplicateKey operation.
-    #
-    # You can run this operation while using the affected multi-Region keys
-    # in cryptographic operations. This operation should not delay,
-    # interrupt, or cause failures in cryptographic operations.
-    #
-    # Even after this operation completes, the process of updating the
-    # primary Region might still be in progress for a few more seconds.
-    # Operations such as `DescribeKey` might display both the old and new
-    # primary keys as replicas. The old and new primary keys have a
-    # transient key state of `Updating`. The original key state is restored
-    # when the update is complete. While the key state is `Updating`, you
-    # can use the keys in cryptographic operations, but you cannot replicate
-    # the new primary key or perform certain management operations, such as
-    # enabling or disabling these keys. For details about the `Updating` key
-    # state, see [Key state: Effect on your
-    # CMK](kms/latest/developerguide/key-state.html) in the *AWS Key
-    # Management Service Developer Guide*.
-    #
-    # This operation does not return any output. To verify that primary key
-    # is changed, use the DescribeKey operation.
-    #
-    # **Cross-account use**\: No. You cannot use this operation in a
-    # different AWS account.
-    #
-    # **Required permissions**\:
-    #
-    # * `kms:UpdatePrimaryRegion` on the current primary CMK (in the primary
-    #   CMK's Region). Include this permission primary CMK's key policy.
-    #
-    # * `kms:UpdatePrimaryRegion` on the current replica CMK (in the replica
-    #   CMK's Region). Include this permission in the replica CMK's key
-    #   policy.
-    #
-    # **Related operations**
-    #
-    # * CreateKey
-    #
-    # * ReplicateKey
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-usage
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-origin
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [7]: https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html
-    #
-    # @option params [required, String] :key_id
-    #   Identifies the current primary key. When the operation completes, this
-    #   CMK will be a replica key.
-    #
-    #   Specify the key ID or key ARN of a multi-Region primary key.
-    #
-    #   For example:
-    #
-    #   * Key ID: `mrk-1234abcd12ab34cd56ef1234567890ab`
-    #
-    #   * Key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab`
-    #
-    #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-    #
-    # @option params [required, String] :primary_region
-    #   The AWS Region of the new primary key. Enter the Region ID, such as
-    #   `us-east-1` or `ap-southeast-2`. There must be an existing replica key
-    #   in this Region.
-    #
-    #   When the operation completes, the multi-Region key in this Region will
-    #   be the primary key.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_primary_region({
-    #     key_id: "KeyIdType", # required
-    #     primary_region: "RegionType", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdatePrimaryRegion AWS API Documentation
-    #
-    # @overload update_primary_region(params = {})
-    # @param [Hash] params ({})
-    def update_primary_region(params = {}, options = {})
-      req = build_request(:update_primary_region, params)
-      req.send_request(options)
-    end
-
     # Verifies a digital signature that was generated by the Sign operation.
     #
     #
@@ -6780,8 +6111,8 @@ module Aws::KMS
     # signatures.
     #
     # The CMK that you use for this operation must be in a compatible key
-    # state. For details, see [Key state: Effect on your CMK][2] in the *AWS
-    # Key Management Service Developer Guide*.
+    # state. For details, see [How Key State Affects Use of a Customer
+    # Master Key][2] in the *AWS Key Management Service Developer Guide*.
     #
     # **Cross-account use**\: Yes. To perform this operation with a CMK in a
     # different AWS account, specify the key ARN or alias ARN in the value
@@ -6803,9 +6134,10 @@ module Aws::KMS
     #   signature. If you specify a different CMK, the signature verification
     #   fails.
     #
-    #   To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-    #   When using an alias name, prefix it with `"alias/"`. To specify a CMK
-    #   in a different AWS account, you must use the key ARN or alias ARN.
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must use
+    #   the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -6849,9 +6181,7 @@ module Aws::KMS
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
     #
-    #   Use a grant token when your permission to call this operation comes
-    #   from a new grant that has not yet achieved *eventual consistency*. For
-    #   more information, see [Grant token][1] in the *AWS Key Management
+    #   For more information, see [Grant Tokens][1] in the *AWS Key Management
     #   Service Developer Guide*.
     #
     #
@@ -6903,7 +6233,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

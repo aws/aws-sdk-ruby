@@ -16,8 +16,6 @@ module Aws::Textract
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AnalyzeDocumentRequest = Shapes::StructureShape.new(name: 'AnalyzeDocumentRequest')
     AnalyzeDocumentResponse = Shapes::StructureShape.new(name: 'AnalyzeDocumentResponse')
-    AnalyzeExpenseRequest = Shapes::StructureShape.new(name: 'AnalyzeExpenseRequest')
-    AnalyzeExpenseResponse = Shapes::StructureShape.new(name: 'AnalyzeExpenseResponse')
     BadDocumentException = Shapes::StructureShape.new(name: 'BadDocumentException')
     Block = Shapes::StructureShape.new(name: 'Block')
     BlockList = Shapes::ListShape.new(name: 'BlockList')
@@ -35,12 +33,6 @@ module Aws::Textract
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypes = Shapes::ListShape.new(name: 'EntityTypes')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
-    ExpenseDetection = Shapes::StructureShape.new(name: 'ExpenseDetection')
-    ExpenseDocument = Shapes::StructureShape.new(name: 'ExpenseDocument')
-    ExpenseDocumentList = Shapes::ListShape.new(name: 'ExpenseDocumentList')
-    ExpenseField = Shapes::StructureShape.new(name: 'ExpenseField')
-    ExpenseFieldList = Shapes::ListShape.new(name: 'ExpenseFieldList')
-    ExpenseType = Shapes::StructureShape.new(name: 'ExpenseType')
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FeatureTypes = Shapes::ListShape.new(name: 'FeatureTypes')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -72,10 +64,6 @@ module Aws::Textract
     JobTag = Shapes::StringShape.new(name: 'JobTag')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
-    LineItemFields = Shapes::StructureShape.new(name: 'LineItemFields')
-    LineItemGroup = Shapes::StructureShape.new(name: 'LineItemGroup')
-    LineItemGroupList = Shapes::ListShape.new(name: 'LineItemGroupList')
-    LineItemList = Shapes::ListShape.new(name: 'LineItemList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
@@ -121,13 +109,6 @@ module Aws::Textract
     AnalyzeDocumentResponse.add_member(:human_loop_activation_output, Shapes::ShapeRef.new(shape: HumanLoopActivationOutput, location_name: "HumanLoopActivationOutput"))
     AnalyzeDocumentResponse.add_member(:analyze_document_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeDocumentModelVersion"))
     AnalyzeDocumentResponse.struct_class = Types::AnalyzeDocumentResponse
-
-    AnalyzeExpenseRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
-    AnalyzeExpenseRequest.struct_class = Types::AnalyzeExpenseRequest
-
-    AnalyzeExpenseResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
-    AnalyzeExpenseResponse.add_member(:expense_documents, Shapes::ShapeRef.new(shape: ExpenseDocumentList, location_name: "ExpenseDocuments"))
-    AnalyzeExpenseResponse.struct_class = Types::AnalyzeExpenseResponse
 
     BadDocumentException.struct_class = Types::BadDocumentException
 
@@ -178,30 +159,6 @@ module Aws::Textract
     DocumentTooLargeException.struct_class = Types::DocumentTooLargeException
 
     EntityTypes.member = Shapes::ShapeRef.new(shape: EntityType)
-
-    ExpenseDetection.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
-    ExpenseDetection.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
-    ExpenseDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
-    ExpenseDetection.struct_class = Types::ExpenseDetection
-
-    ExpenseDocument.add_member(:expense_index, Shapes::ShapeRef.new(shape: UInteger, location_name: "ExpenseIndex"))
-    ExpenseDocument.add_member(:summary_fields, Shapes::ShapeRef.new(shape: ExpenseFieldList, location_name: "SummaryFields"))
-    ExpenseDocument.add_member(:line_item_groups, Shapes::ShapeRef.new(shape: LineItemGroupList, location_name: "LineItemGroups"))
-    ExpenseDocument.struct_class = Types::ExpenseDocument
-
-    ExpenseDocumentList.member = Shapes::ShapeRef.new(shape: ExpenseDocument)
-
-    ExpenseField.add_member(:type, Shapes::ShapeRef.new(shape: ExpenseType, location_name: "Type"))
-    ExpenseField.add_member(:label_detection, Shapes::ShapeRef.new(shape: ExpenseDetection, location_name: "LabelDetection"))
-    ExpenseField.add_member(:value_detection, Shapes::ShapeRef.new(shape: ExpenseDetection, location_name: "ValueDetection"))
-    ExpenseField.add_member(:page_number, Shapes::ShapeRef.new(shape: UInteger, location_name: "PageNumber"))
-    ExpenseField.struct_class = Types::ExpenseField
-
-    ExpenseFieldList.member = Shapes::ShapeRef.new(shape: ExpenseField)
-
-    ExpenseType.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
-    ExpenseType.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
-    ExpenseType.struct_class = Types::ExpenseType
 
     FeatureTypes.member = Shapes::ShapeRef.new(shape: FeatureType)
 
@@ -272,17 +229,6 @@ module Aws::Textract
     InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
 
     LimitExceededException.struct_class = Types::LimitExceededException
-
-    LineItemFields.add_member(:line_item_expense_fields, Shapes::ShapeRef.new(shape: ExpenseFieldList, location_name: "LineItemExpenseFields"))
-    LineItemFields.struct_class = Types::LineItemFields
-
-    LineItemGroup.add_member(:line_item_group_index, Shapes::ShapeRef.new(shape: UInteger, location_name: "LineItemGroupIndex"))
-    LineItemGroup.add_member(:line_items, Shapes::ShapeRef.new(shape: LineItemList, location_name: "LineItems"))
-    LineItemGroup.struct_class = Types::LineItemGroup
-
-    LineItemGroupList.member = Shapes::ShapeRef.new(shape: LineItemGroup)
-
-    LineItemList.member = Shapes::ShapeRef.new(shape: LineItemFields)
 
     NotificationChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SNSTopicArn, required: true, location_name: "SNSTopicArn"))
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
@@ -382,23 +328,6 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: HumanLoopQuotaExceededException)
       end)
 
-      api.add_operation(:analyze_expense, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "AnalyzeExpense"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: AnalyzeExpenseRequest)
-        o.output = Shapes::ShapeRef.new(shape: AnalyzeExpenseResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentException)
-        o.errors << Shapes::ShapeRef.new(shape: DocumentTooLargeException)
-        o.errors << Shapes::ShapeRef.new(shape: BadDocumentException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-      end)
-
       api.add_operation(:detect_document_text, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetectDocumentText"
         o.http_method = "POST"
@@ -429,7 +358,6 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
       end)
 
       api.add_operation(:get_document_text_detection, Seahorse::Model::Operation.new.tap do |o|
@@ -445,7 +373,6 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
       end)
 
       api.add_operation(:start_document_analysis, Seahorse::Model::Operation.new.tap do |o|

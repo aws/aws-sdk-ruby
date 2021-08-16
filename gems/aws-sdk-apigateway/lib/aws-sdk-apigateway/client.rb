@@ -843,12 +843,6 @@ module Aws::APIGateway
     #   client and the server. Clients must present a trusted certificate to
     #   access your custom domain name.
     #
-    # @option params [String] :ownership_verification_certificate_arn
-    #   The ARN of the public certificate issued by ACM to validate ownership
-    #   of your custom domain. Only required when configuring mutual TLS and
-    #   using an ACM imported or private CA certificate ARN as the
-    #   regionalCertificateArn.
-    #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
@@ -867,7 +861,6 @@ module Aws::APIGateway
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
-    #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -892,7 +885,6 @@ module Aws::APIGateway
     #       truststore_uri: "String",
     #       truststore_version: "String",
     #     },
-    #     ownership_verification_certificate_arn: "String",
     #   })
     #
     # @example Response structure
@@ -911,7 +903,7 @@ module Aws::APIGateway
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
@@ -920,7 +912,6 @@ module Aws::APIGateway
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
-    #   resp.ownership_verification_certificate_arn #=> String
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2913,7 +2904,6 @@ module Aws::APIGateway
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
-    #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2937,7 +2927,7 @@ module Aws::APIGateway
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
@@ -2946,7 +2936,6 @@ module Aws::APIGateway
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
-    #   resp.ownership_verification_certificate_arn #=> String
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2996,7 +2985,7 @@ module Aws::APIGateway
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.items[0].domain_name_status_message #=> String
     #   resp.items[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.items[0].tags #=> Hash
@@ -3005,7 +2994,6 @@ module Aws::APIGateway
     #   resp.items[0].mutual_tls_authentication.truststore_version #=> String
     #   resp.items[0].mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.items[0].mutual_tls_authentication.truststore_warnings[0] #=> String
-    #   resp.items[0].ownership_verification_certificate_arn #=> String
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -6136,7 +6124,6 @@ module Aws::APIGateway
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
-    #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6168,7 +6155,7 @@ module Aws::APIGateway
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
@@ -6177,7 +6164,6 @@ module Aws::APIGateway
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
-    #   resp.ownership_verification_certificate_arn #=> String
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -7095,7 +7081,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

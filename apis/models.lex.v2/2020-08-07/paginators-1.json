@@ -30,16 +30,6 @@
       "output_token": "nextToken",
       "limit_key": "maxResults"
     },
-    "ListExports": {
-      "input_token": "nextToken",
-      "output_token": "nextToken",
-      "limit_key": "maxResults"
-    },
-    "ListImports": {
-      "input_token": "nextToken",
-      "output_token": "nextToken",
-      "limit_key": "maxResults"
-    },
     "ListIntents": {
       "input_token": "nextToken",
       "output_token": "nextToken",

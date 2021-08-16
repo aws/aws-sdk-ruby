@@ -780,11 +780,6 @@ module Aws::IoTWireless
     #     lo_ra_wan: { # required
     #       gateway_eui: "GatewayEui",
     #       rf_region: "RfRegion",
-    #       join_eui_filters: [
-    #         ["JoinEui"],
-    #       ],
-    #       net_id_filters: ["NetId"],
-    #       sub_bands: [1],
     #     },
     #     tags: [
     #       {
@@ -1229,39 +1224,6 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Returns current default log levels or log levels by resource types.
-    # Based on resource types, log levels can be for wireless device log
-    # options or wireless gateway log options.
-    #
-    # @return [Types::GetLogLevelsByResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetLogLevelsByResourceTypesResponse#default_log_level #default_log_level} => String
-    #   * {Types::GetLogLevelsByResourceTypesResponse#wireless_gateway_log_options #wireless_gateway_log_options} => Array&lt;Types::WirelessGatewayLogOption&gt;
-    #   * {Types::GetLogLevelsByResourceTypesResponse#wireless_device_log_options #wireless_device_log_options} => Array&lt;Types::WirelessDeviceLogOption&gt;
-    #
-    # @example Response structure
-    #
-    #   resp.default_log_level #=> String, one of "INFO", "ERROR", "DISABLED"
-    #   resp.wireless_gateway_log_options #=> Array
-    #   resp.wireless_gateway_log_options[0].type #=> String, one of "LoRaWAN"
-    #   resp.wireless_gateway_log_options[0].log_level #=> String, one of "INFO", "ERROR", "DISABLED"
-    #   resp.wireless_gateway_log_options[0].events #=> Array
-    #   resp.wireless_gateway_log_options[0].events[0].event #=> String, one of "CUPS_Request", "Certificate"
-    #   resp.wireless_gateway_log_options[0].events[0].log_level #=> String, one of "INFO", "ERROR", "DISABLED"
-    #   resp.wireless_device_log_options #=> Array
-    #   resp.wireless_device_log_options[0].type #=> String, one of "Sidewalk", "LoRaWAN"
-    #   resp.wireless_device_log_options[0].log_level #=> String, one of "INFO", "ERROR", "DISABLED"
-    #   resp.wireless_device_log_options[0].events #=> Array
-    #   resp.wireless_device_log_options[0].events[0].event #=> String, one of "Join", "Rejoin", "Uplink_Data", "Downlink_Data", "Registration"
-    #   resp.wireless_device_log_options[0].events[0].log_level #=> String, one of "INFO", "ERROR", "DISABLED"
-    #
-    # @overload get_log_levels_by_resource_types(params = {})
-    # @param [Hash] params ({})
-    def get_log_levels_by_resource_types(params = {}, options = {})
-      req = build_request(:get_log_levels_by_resource_types, params)
-      req.send_request(options)
-    end
-
     # Gets information about a partner account. If `PartnerAccountId` and
     # `PartnerType` are `null`, returns all partner accounts.
     #
@@ -1294,41 +1256,6 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def get_partner_account(params = {}, options = {})
       req = build_request(:get_partner_account, params)
-      req.send_request(options)
-    end
-
-    # Fetches the log-level override, if any, for a given resource-ID and
-    # resource-type. It can be used for a wireless device or a wireless
-    # gateway.
-    #
-    # @option params [required, String] :resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless gateway
-    #   ID.
-    #
-    # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
-    #
-    # @return [Types::GetResourceLogLevelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetResourceLogLevelResponse#log_level #log_level} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_resource_log_level({
-    #     resource_identifier: "ResourceIdentifier", # required
-    #     resource_type: "ResourceType", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.log_level #=> String, one of "INFO", "ERROR", "DISABLED"
-    #
-    # @overload get_resource_log_level(params = {})
-    # @param [Hash] params ({})
-    def get_resource_log_level(params = {}, options = {})
-      req = build_request(:get_resource_log_level, params)
       req.send_request(options)
     end
 
@@ -1440,7 +1367,7 @@ module Aws::IoTWireless
     #
     #   resp = client.get_wireless_device({
     #     identifier: "Identifier", # required
-    #     identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName, SidewalkManufacturingSn
+    #     identifier_type: "WirelessDeviceId", # required, accepts WirelessDeviceId, DevEui, ThingName
     #   })
     #
     # @example Response structure
@@ -1469,7 +1396,6 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.abp_v1_0_x.dev_addr #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.nwk_s_key #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.app_s_key #=> String
-    #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.sidewalk_id #=> String
     #   resp.sidewalk.sidewalk_manufacturing_sn #=> String
     #   resp.sidewalk.device_certificates #=> Array
@@ -1558,13 +1484,6 @@ module Aws::IoTWireless
     #   resp.description #=> String
     #   resp.lo_ra_wan.gateway_eui #=> String
     #   resp.lo_ra_wan.rf_region #=> String
-    #   resp.lo_ra_wan.join_eui_filters #=> Array
-    #   resp.lo_ra_wan.join_eui_filters[0] #=> Array
-    #   resp.lo_ra_wan.join_eui_filters[0][0] #=> String
-    #   resp.lo_ra_wan.net_id_filters #=> Array
-    #   resp.lo_ra_wan.net_id_filters[0] #=> String
-    #   resp.lo_ra_wan.sub_bands #=> Array
-    #   resp.lo_ra_wan.sub_bands[0] #=> Integer
     #   resp.arn #=> String
     #   resp.thing_name #=> String
     #   resp.thing_arn #=> String
@@ -2074,93 +1993,12 @@ module Aws::IoTWireless
     #   resp.wireless_gateway_list[0].description #=> String
     #   resp.wireless_gateway_list[0].lo_ra_wan.gateway_eui #=> String
     #   resp.wireless_gateway_list[0].lo_ra_wan.rf_region #=> String
-    #   resp.wireless_gateway_list[0].lo_ra_wan.join_eui_filters #=> Array
-    #   resp.wireless_gateway_list[0].lo_ra_wan.join_eui_filters[0] #=> Array
-    #   resp.wireless_gateway_list[0].lo_ra_wan.join_eui_filters[0][0] #=> String
-    #   resp.wireless_gateway_list[0].lo_ra_wan.net_id_filters #=> Array
-    #   resp.wireless_gateway_list[0].lo_ra_wan.net_id_filters[0] #=> String
-    #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands #=> Array
-    #   resp.wireless_gateway_list[0].lo_ra_wan.sub_bands[0] #=> Integer
     #   resp.wireless_gateway_list[0].last_uplink_received_at #=> String
     #
     # @overload list_wireless_gateways(params = {})
     # @param [Hash] params ({})
     def list_wireless_gateways(params = {}, options = {})
       req = build_request(:list_wireless_gateways, params)
-      req.send_request(options)
-    end
-
-    # Sets the log-level override for a resource-ID and resource-type. This
-    # option can be specified for a wireless gateway or a wireless device. A
-    # limit of 200 log level override can be set per account.
-    #
-    # @option params [required, String] :resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless gateway
-    #   ID.
-    #
-    # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
-    #
-    # @option params [required, String] :log_level
-    #   The log level for a log message.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.put_resource_log_level({
-    #     resource_identifier: "ResourceIdentifier", # required
-    #     resource_type: "ResourceType", # required
-    #     log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #   })
-    #
-    # @overload put_resource_log_level(params = {})
-    # @param [Hash] params ({})
-    def put_resource_log_level(params = {}, options = {})
-      req = build_request(:put_resource_log_level, params)
-      req.send_request(options)
-    end
-
-    # Removes the log-level overrides for all resources; both wireless
-    # devices and wireless gateways.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @overload reset_all_resource_log_levels(params = {})
-    # @param [Hash] params ({})
-    def reset_all_resource_log_levels(params = {}, options = {})
-      req = build_request(:reset_all_resource_log_levels, params)
-      req.send_request(options)
-    end
-
-    # Removes the log-level override, if any, for a specific resource-ID and
-    # resource-type. It can be used for a wireless device or a wireless
-    # gateway.
-    #
-    # @option params [required, String] :resource_identifier
-    #   The identifier of the resource. For a Wireless Device, it is the
-    #   wireless device ID. For a wireless gateway, it is the wireless gateway
-    #   ID.
-    #
-    # @option params [required, String] :resource_type
-    #   The type of the resource, which can be `WirelessDevice` or
-    #   `WirelessGateway`.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.reset_resource_log_level({
-    #     resource_identifier: "ResourceIdentifier", # required
-    #     resource_type: "ResourceType", # required
-    #   })
-    #
-    # @overload reset_resource_log_level(params = {})
-    # @param [Hash] params ({})
-    def reset_resource_log_level(params = {}, options = {})
-      req = build_request(:reset_resource_log_level, params)
       req.send_request(options)
     end
 
@@ -2174,7 +2012,7 @@ module Aws::IoTWireless
     #   `0` for UM (unacknowledge mode) or `1` for AM (acknowledge mode).
     #
     # @option params [required, String] :payload_data
-    #   The binary to be sent to the end device, encoded in base64.
+    #   The message payload to send.
     #
     # @option params [Types::WirelessMetadata] :wireless_metadata
     #   Metadata about the message request.
@@ -2328,59 +2166,6 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
-    # Set default log level, or log levels by resource types. This can be
-    # for wireless device log options or wireless gateways log options and
-    # is used to control the log messages that'll be displayed in
-    # CloudWatch.
-    #
-    # @option params [String] :default_log_level
-    #   The log level for a log message.
-    #
-    # @option params [Array<Types::WirelessDeviceLogOption>] :wireless_device_log_options
-    #   The list of wireless device log options.
-    #
-    # @option params [Array<Types::WirelessGatewayLogOption>] :wireless_gateway_log_options
-    #   The list of wireless gateway log options.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_log_levels_by_resource_types({
-    #     default_log_level: "INFO", # accepts INFO, ERROR, DISABLED
-    #     wireless_device_log_options: [
-    #       {
-    #         type: "Sidewalk", # required, accepts Sidewalk, LoRaWAN
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #         events: [
-    #           {
-    #             event: "Join", # required, accepts Join, Rejoin, Uplink_Data, Downlink_Data, Registration
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #           },
-    #         ],
-    #       },
-    #     ],
-    #     wireless_gateway_log_options: [
-    #       {
-    #         type: "LoRaWAN", # required, accepts LoRaWAN
-    #         log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #         events: [
-    #           {
-    #             event: "CUPS_Request", # required, accepts CUPS_Request, Certificate
-    #             log_level: "INFO", # required, accepts INFO, ERROR, DISABLED
-    #           },
-    #         ],
-    #       },
-    #     ],
-    #   })
-    #
-    # @overload update_log_levels_by_resource_types(params = {})
-    # @param [Hash] params ({})
-    def update_log_levels_by_resource_types(params = {}, options = {})
-      req = build_request(:update_log_levels_by_resource_types, params)
-      req.send_request(options)
-    end
-
     # Updates properties of a partner account.
     #
     # @option params [required, Types::SidewalkUpdateAccount] :sidewalk
@@ -2461,13 +2246,6 @@ module Aws::IoTWireless
     # @option params [String] :description
     #   A new description of the resource.
     #
-    # @option params [Array<Array>] :join_eui_filters
-    #   A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
-    #
-    # @option params [Array<String>] :net_id_filters
-    #   A list of NetId values that are used by LoRa gateways to filter the
-    #   uplink frames.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2476,10 +2254,6 @@ module Aws::IoTWireless
     #     id: "WirelessGatewayId", # required
     #     name: "WirelessGatewayName",
     #     description: "Description",
-    #     join_eui_filters: [
-    #       ["JoinEui"],
-    #     ],
-    #     net_id_filters: ["NetId"],
     #   })
     #
     # @overload update_wireless_gateway(params = {})
@@ -2502,7 +2276,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

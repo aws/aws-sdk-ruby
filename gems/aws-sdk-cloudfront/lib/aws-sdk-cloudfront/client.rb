@@ -327,50 +327,6 @@ module Aws::CloudFront
 
     # @!group API Operations
 
-    # Associates an alias (also known as a CNAME or an alternate domain
-    # name) with a CloudFront distribution.
-    #
-    # With this operation you can move an alias that’s already in use on a
-    # CloudFront distribution to a different distribution in one step. This
-    # prevents the downtime that could occur if you first remove the alias
-    # from one distribution and then separately add the alias to another
-    # distribution.
-    #
-    # To use this operation to associate an alias with a distribution, you
-    # provide the alias and the ID of the target distribution for the alias.
-    # For more information, including how to set up the target distribution,
-    # prerequisites that you must complete, and other restrictions, see
-    # [Moving an alternate domain name to a different distribution][1] in
-    # the *Amazon CloudFront Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
-    #
-    # @option params [required, String] :target_distribution_id
-    #   The ID of the distribution that you’re associating the alias with.
-    #
-    # @option params [required, String] :alias
-    #   The alias (also known as a CNAME) to add to the target distribution.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.associate_alias({
-    #     target_distribution_id: "string", # required
-    #     alias: "string", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateAlias2020_05_31 AWS API Documentation
-    #
-    # @overload associate_alias(params = {})
-    # @param [Hash] params ({})
-    def associate_alias(params = {}, options = {})
-      req = build_request(:associate_alias, params)
-      req.send_request(options)
-    end
-
     # Creates a cache policy.
     #
     # After you create a cache policy, you can attach it to one or more
@@ -794,7 +750,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #       },
@@ -979,7 +935,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -1254,7 +1210,7 @@ module Aws::CloudFront
     #           iam_certificate_id: "string",
     #           acm_certificate_arn: "string",
     #           ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
+    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #           certificate: "string",
     #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #         },
@@ -1448,7 +1404,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -3072,7 +3028,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -3266,7 +3222,7 @@ module Aws::CloudFront
     #   resp.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -3995,8 +3951,8 @@ module Aws::CloudFront
     # Gets a list of cache policies.
     #
     # You can optionally apply a filter to return only the managed policies
-    # created by Amazon Web Services, or only the custom policies created in
-    # your account.
+    # created by AWS, or only the custom policies created in your AWS
+    # account.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -4009,10 +3965,10 @@ module Aws::CloudFront
     #   A filter to return only the specified kinds of cache policies. Valid
     #   values are:
     #
-    #   * `managed` – Returns only the managed policies created by Amazon Web
-    #     Services.
+    #   * `managed` – Returns only the managed policies created by AWS.
     #
-    #   * `custom` – Returns only the custom policies created in your account.
+    #   * `custom` – Returns only the custom policies created in your AWS
+    #     account.
     #
     # @option params [String] :marker
     #   Use this field when paginating results to indicate where to begin in
@@ -4119,91 +4075,6 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_cloud_front_origin_access_identities(params = {}, options = {})
       req = build_request(:list_cloud_front_origin_access_identities, params)
-      req.send_request(options)
-    end
-
-    # Gets a list of aliases (also called CNAMEs or alternate domain names)
-    # that conflict or overlap with the provided alias, and the associated
-    # CloudFront distributions and Amazon Web Services accounts for each
-    # conflicting alias. In the returned list, the distribution and account
-    # IDs are partially hidden, which allows you to identify the
-    # distributions and accounts that you own, but helps to protect the
-    # information of ones that you don’t own.
-    #
-    # Use this operation to find aliases that are in use in CloudFront that
-    # conflict or overlap with the provided alias. For example, if you
-    # provide `www.example.com` as input, the returned list can include
-    # `www.example.com` and the overlapping wildcard alternate domain name
-    # (`*.example.com`), if they exist. If you provide `*.example.com` as
-    # input, the returned list can include `*.example.com` and any alternate
-    # domain names covered by that wildcard (for example, `www.example.com`,
-    # `test.example.com`, `dev.example.com`, and so on), if they exist.
-    #
-    # To list conflicting aliases, you provide the alias to search and the
-    # ID of a distribution in your account that has an attached SSL/TLS
-    # certificate that includes the provided alias. For more information,
-    # including how to set up the distribution and certificate, see [Moving
-    # an alternate domain name to a different distribution][1] in the
-    # *Amazon CloudFront Developer Guide*.
-    #
-    # You can optionally specify the maximum number of items to receive in
-    # the response. If the total number of items in the list exceeds the
-    # maximum that you specify, or the default maximum, the response is
-    # paginated. To get the next page of items, send a subsequent request
-    # that specifies the `NextMarker` value from the current response as the
-    # `Marker` value in the subsequent request.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
-    #
-    # @option params [required, String] :distribution_id
-    #   The ID of a distribution in your account that has an attached SSL/TLS
-    #   certificate that includes the provided alias.
-    #
-    # @option params [required, String] :alias
-    #   The alias (also called a CNAME) to search for conflicting aliases.
-    #
-    # @option params [String] :marker
-    #   Use this field when paginating results to indicate where to begin in
-    #   the list of conflicting aliases. The response includes conflicting
-    #   aliases in the list that occur after the marker. To get the next page
-    #   of the list, set this field’s value to the value of `NextMarker` from
-    #   the current page’s response.
-    #
-    # @option params [Integer] :max_items
-    #   The maximum number of conflicting aliases that you want in the
-    #   response.
-    #
-    # @return [Types::ListConflictingAliasesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListConflictingAliasesResult#conflicting_aliases_list #conflicting_aliases_list} => Types::ConflictingAliasesList
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_conflicting_aliases({
-    #     distribution_id: "distributionIdString", # required
-    #     alias: "aliasString", # required
-    #     marker: "string",
-    #     max_items: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.conflicting_aliases_list.next_marker #=> String
-    #   resp.conflicting_aliases_list.max_items #=> Integer
-    #   resp.conflicting_aliases_list.quantity #=> Integer
-    #   resp.conflicting_aliases_list.items #=> Array
-    #   resp.conflicting_aliases_list.items[0].alias #=> String
-    #   resp.conflicting_aliases_list.items[0].distribution_id #=> String
-    #   resp.conflicting_aliases_list.items[0].account_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConflictingAliases2020_05_31 AWS API Documentation
-    #
-    # @overload list_conflicting_aliases(params = {})
-    # @param [Hash] params ({})
-    def list_conflicting_aliases(params = {}, options = {})
-      req = build_request(:list_conflicting_aliases, params)
       req.send_request(options)
     end
 
@@ -4385,7 +4256,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
     #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution_list.items[0].restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -4772,7 +4643,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
     #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution_list.items[0].restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -4795,8 +4666,8 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # List the distributions that are associated with a specified WAF web
-    # ACL.
+    # List the distributions that are associated with a specified AWS WAF
+    # web ACL.
     #
     # @option params [String] :marker
     #   Use `Marker` and `MaxItems` to control pagination of results. If you
@@ -4811,7 +4682,7 @@ module Aws::CloudFront
     #   in the response body. The maximum and default values are both 100.
     #
     # @option params [required, String] :web_acl_id
-    #   The ID of the WAF web ACL that you want to list the associated
+    #   The ID of the AWS WAF web ACL that you want to list the associated
     #   distributions. If you specify "null" for the ID, the request returns
     #   a list of the distributions that aren't associated with a web ACL.
     #
@@ -4980,7 +4851,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution_list.items[0].viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution_list.items[0].viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution_list.items[0].viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution_list.items[0].viewer_certificate.certificate #=> String
     #   resp.distribution_list.items[0].viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution_list.items[0].restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -5111,7 +4982,7 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a list of all CloudFront functions in your account.
+    # Gets a list of all CloudFront functions in your AWS account.
     #
     # You can optionally apply a filter to return only the functions that
     # are in the specified stage, either `DEVELOPMENT` or `LIVE`.
@@ -5282,8 +5153,8 @@ module Aws::CloudFront
     # Gets a list of origin request policies.
     #
     # You can optionally apply a filter to return only the managed policies
-    # created by Amazon Web Services, or only the custom policies created in
-    # your account.
+    # created by AWS, or only the custom policies created in your AWS
+    # account.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -5296,10 +5167,10 @@ module Aws::CloudFront
     #   A filter to return only the specified kinds of origin request
     #   policies. Valid values are:
     #
-    #   * `managed` – Returns only the managed policies created by Amazon Web
-    #     Services.
+    #   * `managed` – Returns only the managed policies created by AWS.
     #
-    #   * `custom` – Returns only the custom policies created in your account.
+    #   * `custom` – Returns only the custom policies created in your AWS
+    #     account.
     #
     # @option params [String] :marker
     #   Use this field when paginating results to indicate where to begin in
@@ -6216,7 +6087,7 @@ module Aws::CloudFront
     #         iam_certificate_id: "string",
     #         acm_certificate_arn: "string",
     #         ssl_support_method: "sni-only", # accepts sni-only, vip, static-ip
-    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019
     #         certificate: "string",
     #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
     #       },
@@ -6403,7 +6274,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
     #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
     #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
-    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019"
     #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
     #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
     #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
@@ -7040,7 +6911,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

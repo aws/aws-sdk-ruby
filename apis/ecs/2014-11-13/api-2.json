@@ -1103,8 +1103,7 @@
       "type":"string",
       "enum":[
         "EC2",
-        "FARGATE",
-        "EXTERNAL"
+        "FARGATE"
       ]
     },
     "CompatibilityList":{
@@ -2024,8 +2023,7 @@
       "type":"string",
       "enum":[
         "EC2",
-        "FARGATE",
-        "EXTERNAL"
+        "FARGATE"
       ]
     },
     "LimitExceededException":{

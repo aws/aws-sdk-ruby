@@ -14,20 +14,8 @@ module Aws::GreengrassV2
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
-    AssociateClientDeviceWithCoreDeviceEntry = Shapes::StructureShape.new(name: 'AssociateClientDeviceWithCoreDeviceEntry')
-    AssociateClientDeviceWithCoreDeviceEntryList = Shapes::ListShape.new(name: 'AssociateClientDeviceWithCoreDeviceEntryList')
-    AssociateClientDeviceWithCoreDeviceErrorEntry = Shapes::StructureShape.new(name: 'AssociateClientDeviceWithCoreDeviceErrorEntry')
-    AssociateClientDeviceWithCoreDeviceErrorList = Shapes::ListShape.new(name: 'AssociateClientDeviceWithCoreDeviceErrorList')
-    AssociatedClientDevice = Shapes::StructureShape.new(name: 'AssociatedClientDevice')
-    AssociatedClientDeviceList = Shapes::ListShape.new(name: 'AssociatedClientDeviceList')
-    BatchAssociateClientDeviceWithCoreDeviceRequest = Shapes::StructureShape.new(name: 'BatchAssociateClientDeviceWithCoreDeviceRequest')
-    BatchAssociateClientDeviceWithCoreDeviceResponse = Shapes::StructureShape.new(name: 'BatchAssociateClientDeviceWithCoreDeviceResponse')
-    BatchDisassociateClientDeviceFromCoreDeviceRequest = Shapes::StructureShape.new(name: 'BatchDisassociateClientDeviceFromCoreDeviceRequest')
-    BatchDisassociateClientDeviceFromCoreDeviceResponse = Shapes::StructureShape.new(name: 'BatchDisassociateClientDeviceFromCoreDeviceResponse')
-    CPU = Shapes::FloatShape.new(name: 'CPU')
     CancelDeploymentRequest = Shapes::StructureShape.new(name: 'CancelDeploymentRequest')
     CancelDeploymentResponse = Shapes::StructureShape.new(name: 'CancelDeploymentResponse')
-    ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
     CloudComponentState = Shapes::StringShape.new(name: 'CloudComponentState')
     CloudComponentStatus = Shapes::StructureShape.new(name: 'CloudComponentStatus')
     Component = Shapes::StructureShape.new(name: 'Component')
@@ -85,10 +73,6 @@ module Aws::GreengrassV2
     DescribeComponentResponse = Shapes::StructureShape.new(name: 'DescribeComponentResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
-    DisassociateClientDeviceFromCoreDeviceEntry = Shapes::StructureShape.new(name: 'DisassociateClientDeviceFromCoreDeviceEntry')
-    DisassociateClientDeviceFromCoreDeviceEntryList = Shapes::ListShape.new(name: 'DisassociateClientDeviceFromCoreDeviceEntryList')
-    DisassociateClientDeviceFromCoreDeviceErrorEntry = Shapes::StructureShape.new(name: 'DisassociateClientDeviceFromCoreDeviceErrorEntry')
-    DisassociateClientDeviceFromCoreDeviceErrorList = Shapes::ListShape.new(name: 'DisassociateClientDeviceFromCoreDeviceErrorList')
     EffectiveDeployment = Shapes::StructureShape.new(name: 'EffectiveDeployment')
     EffectiveDeploymentExecutionStatus = Shapes::StringShape.new(name: 'EffectiveDeploymentExecutionStatus')
     EffectiveDeploymentsList = Shapes::ListShape.new(name: 'EffectiveDeploymentsList')
@@ -125,7 +109,6 @@ module Aws::GreengrassV2
     IoTJobRolloutBaseRatePerMinute = Shapes::IntegerShape.new(name: 'IoTJobRolloutBaseRatePerMinute')
     IoTJobRolloutIncrementFactor = Shapes::FloatShape.new(name: 'IoTJobRolloutIncrementFactor')
     IoTJobTimeoutConfig = Shapes::StructureShape.new(name: 'IoTJobTimeoutConfig')
-    IoTThingName = Shapes::StringShape.new(name: 'IoTThingName')
     IsLatestForTarget = Shapes::BooleanShape.new(name: 'IsLatestForTarget')
     IsRoot = Shapes::BooleanShape.new(name: 'IsRoot')
     LambdaContainerParams = Shapes::StructureShape.new(name: 'LambdaContainerParams')
@@ -147,8 +130,6 @@ module Aws::GreengrassV2
     LambdaVolumeList = Shapes::ListShape.new(name: 'LambdaVolumeList')
     LambdaVolumeMount = Shapes::StructureShape.new(name: 'LambdaVolumeMount')
     LifecycleStateDetails = Shapes::StringShape.new(name: 'LifecycleStateDetails')
-    ListClientDevicesAssociatedWithCoreDeviceRequest = Shapes::StructureShape.new(name: 'ListClientDevicesAssociatedWithCoreDeviceRequest')
-    ListClientDevicesAssociatedWithCoreDeviceResponse = Shapes::StructureShape.new(name: 'ListClientDevicesAssociatedWithCoreDeviceResponse')
     ListComponentVersionsRequest = Shapes::StructureShape.new(name: 'ListComponentVersionsRequest')
     ListComponentVersionsResponse = Shapes::StructureShape.new(name: 'ListComponentVersionsResponse')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
@@ -163,7 +144,6 @@ module Aws::GreengrassV2
     ListInstalledComponentsResponse = Shapes::StructureShape.new(name: 'ListInstalledComponentsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
-    Memory = Shapes::IntegerShape.new(name: 'Memory')
     NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NullableString = Shapes::StringShape.new(name: 'NullableString')
@@ -174,7 +154,6 @@ module Aws::GreengrassV2
     Reason = Shapes::StringShape.new(name: 'Reason')
     RecipeBlob = Shapes::BlobShape.new(name: 'RecipeBlob')
     RecipeOutputFormat = Shapes::StringShape.new(name: 'RecipeOutputFormat')
-    RequestAlreadyInProgressException = Shapes::StructureShape.new(name: 'RequestAlreadyInProgressException')
     ResolveComponentCandidatesRequest = Shapes::StructureShape.new(name: 'ResolveComponentCandidatesRequest')
     ResolveComponentCandidatesResponse = Shapes::StructureShape.new(name: 'ResolveComponentCandidatesResponse')
     ResolvedComponentVersion = Shapes::StructureShape.new(name: 'ResolvedComponentVersion')
@@ -184,7 +163,6 @@ module Aws::GreengrassV2
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
-    SystemResourceLimits = Shapes::StructureShape.new(name: 'SystemResourceLimits')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -205,38 +183,6 @@ module Aws::GreengrassV2
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
-
-    AssociateClientDeviceWithCoreDeviceEntry.add_member(:thing_name, Shapes::ShapeRef.new(shape: IoTThingName, required: true, location_name: "thingName"))
-    AssociateClientDeviceWithCoreDeviceEntry.struct_class = Types::AssociateClientDeviceWithCoreDeviceEntry
-
-    AssociateClientDeviceWithCoreDeviceEntryList.member = Shapes::ShapeRef.new(shape: AssociateClientDeviceWithCoreDeviceEntry)
-
-    AssociateClientDeviceWithCoreDeviceErrorEntry.add_member(:thing_name, Shapes::ShapeRef.new(shape: IoTThingName, location_name: "thingName"))
-    AssociateClientDeviceWithCoreDeviceErrorEntry.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "code"))
-    AssociateClientDeviceWithCoreDeviceErrorEntry.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "message"))
-    AssociateClientDeviceWithCoreDeviceErrorEntry.struct_class = Types::AssociateClientDeviceWithCoreDeviceErrorEntry
-
-    AssociateClientDeviceWithCoreDeviceErrorList.member = Shapes::ShapeRef.new(shape: AssociateClientDeviceWithCoreDeviceErrorEntry)
-
-    AssociatedClientDevice.add_member(:thing_name, Shapes::ShapeRef.new(shape: IoTThingName, location_name: "thingName"))
-    AssociatedClientDevice.add_member(:association_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associationTimestamp"))
-    AssociatedClientDevice.struct_class = Types::AssociatedClientDevice
-
-    AssociatedClientDeviceList.member = Shapes::ShapeRef.new(shape: AssociatedClientDevice)
-
-    BatchAssociateClientDeviceWithCoreDeviceRequest.add_member(:entries, Shapes::ShapeRef.new(shape: AssociateClientDeviceWithCoreDeviceEntryList, location_name: "entries"))
-    BatchAssociateClientDeviceWithCoreDeviceRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: IoTThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
-    BatchAssociateClientDeviceWithCoreDeviceRequest.struct_class = Types::BatchAssociateClientDeviceWithCoreDeviceRequest
-
-    BatchAssociateClientDeviceWithCoreDeviceResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: AssociateClientDeviceWithCoreDeviceErrorList, location_name: "errorEntries"))
-    BatchAssociateClientDeviceWithCoreDeviceResponse.struct_class = Types::BatchAssociateClientDeviceWithCoreDeviceResponse
-
-    BatchDisassociateClientDeviceFromCoreDeviceRequest.add_member(:entries, Shapes::ShapeRef.new(shape: DisassociateClientDeviceFromCoreDeviceEntryList, location_name: "entries"))
-    BatchDisassociateClientDeviceFromCoreDeviceRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: IoTThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
-    BatchDisassociateClientDeviceFromCoreDeviceRequest.struct_class = Types::BatchDisassociateClientDeviceFromCoreDeviceRequest
-
-    BatchDisassociateClientDeviceFromCoreDeviceResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: DisassociateClientDeviceFromCoreDeviceErrorList, location_name: "errorEntries"))
-    BatchDisassociateClientDeviceFromCoreDeviceResponse.struct_class = Types::BatchDisassociateClientDeviceFromCoreDeviceResponse
 
     CancelDeploymentRequest.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "deploymentId"))
     CancelDeploymentRequest.struct_class = Types::CancelDeploymentRequest
@@ -299,7 +245,6 @@ module Aws::GreengrassV2
     ComponentPlatformList.member = Shapes::ShapeRef.new(shape: ComponentPlatform)
 
     ComponentRunWith.add_member(:posix_user, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "posixUser"))
-    ComponentRunWith.add_member(:system_resource_limits, Shapes::ShapeRef.new(shape: SystemResourceLimits, location_name: "systemResourceLimits"))
     ComponentRunWith.struct_class = Types::ComponentRunWith
 
     ComponentVersionList.member = Shapes::ShapeRef.new(shape: ComponentVersionListItem)
@@ -327,7 +272,6 @@ module Aws::GreengrassV2
     CreateComponentVersionRequest.add_member(:inline_recipe, Shapes::ShapeRef.new(shape: RecipeBlob, location_name: "inlineRecipe"))
     CreateComponentVersionRequest.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunctionRecipeSource, location_name: "lambdaFunction"))
     CreateComponentVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateComponentVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateComponentVersionRequest.struct_class = Types::CreateComponentVersionRequest
 
     CreateComponentVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentVersionARN, location_name: "arn"))
@@ -343,7 +287,6 @@ module Aws::GreengrassV2
     CreateDeploymentRequest.add_member(:iot_job_configuration, Shapes::ShapeRef.new(shape: DeploymentIoTJobConfiguration, location_name: "iotJobConfiguration"))
     CreateDeploymentRequest.add_member(:deployment_policies, Shapes::ShapeRef.new(shape: DeploymentPolicies, location_name: "deploymentPolicies"))
     CreateDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
     CreateDeploymentResponse.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "deploymentId"))
@@ -398,18 +341,6 @@ module Aws::GreengrassV2
     DescribeComponentResponse.add_member(:platforms, Shapes::ShapeRef.new(shape: ComponentPlatformList, location_name: "platforms"))
     DescribeComponentResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     DescribeComponentResponse.struct_class = Types::DescribeComponentResponse
-
-    DisassociateClientDeviceFromCoreDeviceEntry.add_member(:thing_name, Shapes::ShapeRef.new(shape: IoTThingName, required: true, location_name: "thingName"))
-    DisassociateClientDeviceFromCoreDeviceEntry.struct_class = Types::DisassociateClientDeviceFromCoreDeviceEntry
-
-    DisassociateClientDeviceFromCoreDeviceEntryList.member = Shapes::ShapeRef.new(shape: DisassociateClientDeviceFromCoreDeviceEntry)
-
-    DisassociateClientDeviceFromCoreDeviceErrorEntry.add_member(:thing_name, Shapes::ShapeRef.new(shape: IoTThingName, location_name: "thingName"))
-    DisassociateClientDeviceFromCoreDeviceErrorEntry.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "code"))
-    DisassociateClientDeviceFromCoreDeviceErrorEntry.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "message"))
-    DisassociateClientDeviceFromCoreDeviceErrorEntry.struct_class = Types::DisassociateClientDeviceFromCoreDeviceErrorEntry
-
-    DisassociateClientDeviceFromCoreDeviceErrorList.member = Shapes::ShapeRef.new(shape: DisassociateClientDeviceFromCoreDeviceErrorEntry)
 
     EffectiveDeployment.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentID, required: true, location_name: "deploymentId"))
     EffectiveDeployment.add_member(:deployment_name, Shapes::ShapeRef.new(shape: DeploymentName, required: true, location_name: "deploymentName"))
@@ -568,15 +499,6 @@ module Aws::GreengrassV2
     LambdaVolumeMount.add_member(:add_group_owner, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "addGroupOwner", metadata: {"box"=>true}))
     LambdaVolumeMount.struct_class = Types::LambdaVolumeMount
 
-    ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: IoTThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
-    ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
-    ListClientDevicesAssociatedWithCoreDeviceRequest.struct_class = Types::ListClientDevicesAssociatedWithCoreDeviceRequest
-
-    ListClientDevicesAssociatedWithCoreDeviceResponse.add_member(:associated_client_devices, Shapes::ShapeRef.new(shape: AssociatedClientDeviceList, location_name: "associatedClientDevices"))
-    ListClientDevicesAssociatedWithCoreDeviceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "nextToken", metadata: {"box"=>true}))
-    ListClientDevicesAssociatedWithCoreDeviceResponse.struct_class = Types::ListClientDevicesAssociatedWithCoreDeviceResponse
-
     ListComponentVersionsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentARN, required: true, location: "uri", location_name: "arn"))
     ListComponentVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListComponentVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
@@ -642,9 +564,6 @@ module Aws::GreengrassV2
     PlatformAttributesMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     PlatformAttributesMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
 
-    RequestAlreadyInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    RequestAlreadyInProgressException.struct_class = Types::RequestAlreadyInProgressException
-
     ResolveComponentCandidatesRequest.add_member(:platform, Shapes::ShapeRef.new(shape: ComponentPlatform, required: true, location_name: "platform"))
     ResolveComponentCandidatesRequest.add_member(:component_candidates, Shapes::ShapeRef.new(shape: ComponentCandidateList, required: true, location_name: "componentCandidates"))
     ResolveComponentCandidatesRequest.struct_class = Types::ResolveComponentCandidatesRequest
@@ -674,10 +593,6 @@ module Aws::GreengrassV2
 
     StringMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     StringMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
-
-    SystemResourceLimits.add_member(:memory, Shapes::ShapeRef.new(shape: Memory, location_name: "memory"))
-    SystemResourceLimits.add_member(:cpus, Shapes::ShapeRef.new(shape: CPU, location_name: "cpus"))
-    SystemResourceLimits.struct_class = Types::SystemResourceLimits
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -731,32 +646,6 @@ module Aws::GreengrassV2
         "uid" => "greengrassv2-2020-11-30",
       }
 
-      api.add_operation(:batch_associate_client_device_with_core_device, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "BatchAssociateClientDeviceWithCoreDevice"
-        o.http_method = "POST"
-        o.http_request_uri = "/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices"
-        o.input = Shapes::ShapeRef.new(shape: BatchAssociateClientDeviceWithCoreDeviceRequest)
-        o.output = Shapes::ShapeRef.new(shape: BatchAssociateClientDeviceWithCoreDeviceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-      end)
-
-      api.add_operation(:batch_disassociate_client_device_from_core_device, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "BatchDisassociateClientDeviceFromCoreDevice"
-        o.http_method = "POST"
-        o.http_request_uri = "/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices"
-        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateClientDeviceFromCoreDeviceRequest)
-        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateClientDeviceFromCoreDeviceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-      end)
-
       api.add_operation(:cancel_deployment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelDeployment"
         o.http_method = "POST"
@@ -783,7 +672,6 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestAlreadyInProgressException)
       end)
 
       api.add_operation(:create_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -797,7 +685,6 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: RequestAlreadyInProgressException)
       end)
 
       api.add_operation(:delete_component, Seahorse::Model::Operation.new.tap do |o|
@@ -891,25 +778,6 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-      end)
-
-      api.add_operation(:list_client_devices_associated_with_core_device, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListClientDevicesAssociatedWithCoreDevice"
-        o.http_method = "GET"
-        o.http_request_uri = "/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices"
-        o.input = Shapes::ShapeRef.new(shape: ListClientDevicesAssociatedWithCoreDeviceRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListClientDevicesAssociatedWithCoreDeviceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
       end)
 
       api.add_operation(:list_component_versions, Seahorse::Model::Operation.new.tap do |o|

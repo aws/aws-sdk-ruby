@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.50.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.49.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.48.0 (2021-07-27)
-------------------
-
-* Feature - Add support for ListJob filters
-
 1.47.0 (2021-03-31)
 ------------------
 

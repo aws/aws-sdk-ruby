@@ -300,7 +300,6 @@ module Aws::Route53
     ResourceURI = Shapes::StringShape.new(name: 'ResourceURI')
     ReusableDelegationSetLimit = Shapes::StructureShape.new(name: 'ReusableDelegationSetLimit')
     ReusableDelegationSetLimitType = Shapes::StringShape.new(name: 'ReusableDelegationSetLimitType')
-    RoutingControlArn = Shapes::StringShape.new(name: 'RoutingControlArn')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
     ServeSignature = Shapes::StringShape.new(name: 'ServeSignature')
     ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
@@ -808,7 +807,6 @@ module Aws::Route53
     HealthCheckConfig.add_member(:regions, Shapes::ShapeRef.new(shape: HealthCheckRegionList, location_name: "Regions"))
     HealthCheckConfig.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: AlarmIdentifier, location_name: "AlarmIdentifier"))
     HealthCheckConfig.add_member(:insufficient_data_health_status, Shapes::ShapeRef.new(shape: InsufficientDataHealthStatus, location_name: "InsufficientDataHealthStatus"))
-    HealthCheckConfig.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: RoutingControlArn, location_name: "RoutingControlArn"))
     HealthCheckConfig.struct_class = Types::HealthCheckConfig
 
     HealthCheckInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1407,7 +1405,6 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSigningStatus)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:associate_vpc_with_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
@@ -1650,7 +1647,6 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidSigningStatus)
         o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyInUse)
         o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyInParentDSRecord)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:delete_health_check, Seahorse::Model::Operation.new.tap do |o|
@@ -1688,7 +1684,6 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSigningStatus)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:delete_query_logging_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1768,7 +1763,6 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: DNSSECNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:disassociate_vpc_from_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
@@ -1803,7 +1797,6 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: HostedZonePartiallyDelegated)
         o.errors << Shapes::ShapeRef.new(shape: DNSSECNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:get_account_limit, Seahorse::Model::Operation.new.tap do |o|
@@ -1841,7 +1834,6 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: GetDNSSECResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:get_geo_location, Seahorse::Model::Operation.new.tap do |o|

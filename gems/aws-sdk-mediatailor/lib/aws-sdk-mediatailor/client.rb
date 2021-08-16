@@ -525,12 +525,7 @@ module Aws::MediaTailor
     #
     #   resp = client.create_source_location({
     #     access_configuration: {
-    #       access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
-    #       secrets_manager_access_token_configuration: {
-    #         header_name: "__string",
-    #         secret_arn: "__string",
-    #         secret_string_key: "__string",
-    #       },
+    #       access_type: "S3_SIGV4", # accepts S3_SIGV4
     #     },
     #     default_segment_delivery_configuration: {
     #       base_url: "__string",
@@ -546,10 +541,7 @@ module Aws::MediaTailor
     #
     # @example Response structure
     #
-    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4", "SECRETS_MANAGER_ACCESS_TOKEN"
-    #   resp.access_configuration.secrets_manager_access_token_configuration.header_name #=> String
-    #   resp.access_configuration.secrets_manager_access_token_configuration.secret_arn #=> String
-    #   resp.access_configuration.secrets_manager_access_token_configuration.secret_string_key #=> String
+    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4"
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
     #   resp.default_segment_delivery_configuration.base_url #=> String
@@ -885,10 +877,7 @@ module Aws::MediaTailor
     #
     # @example Response structure
     #
-    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4", "SECRETS_MANAGER_ACCESS_TOKEN"
-    #   resp.access_configuration.secrets_manager_access_token_configuration.header_name #=> String
-    #   resp.access_configuration.secrets_manager_access_token_configuration.secret_arn #=> String
-    #   resp.access_configuration.secrets_manager_access_token_configuration.secret_string_key #=> String
+    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4"
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
     #   resp.default_segment_delivery_configuration.base_url #=> String
@@ -1015,11 +1004,6 @@ module Aws::MediaTailor
     #   resp.items[0].arn #=> String
     #   resp.items[0].channel_name #=> String
     #   resp.items[0].program_name #=> String
-    #   resp.items[0].schedule_ad_breaks #=> Array
-    #   resp.items[0].schedule_ad_breaks[0].approximate_duration_seconds #=> Integer
-    #   resp.items[0].schedule_ad_breaks[0].approximate_start_time #=> Time
-    #   resp.items[0].schedule_ad_breaks[0].source_location_name #=> String
-    #   resp.items[0].schedule_ad_breaks[0].vod_source_name #=> String
     #   resp.items[0].source_location_name #=> String
     #   resp.items[0].vod_source_name #=> String
     #   resp.next_token #=> String
@@ -1100,49 +1084,6 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def get_playback_configuration(params = {}, options = {})
       req = build_request(:get_playback_configuration, params)
-      req.send_request(options)
-    end
-
-    # Returns a list of alerts for the given resource.
-    #
-    # @option params [Integer] :max_results
-    #
-    # @option params [String] :next_token
-    #
-    # @option params [required, String] :resource_arn
-    #
-    # @return [Types::ListAlertsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListAlertsResponse#items #items} => Array&lt;Types::Alert&gt;
-    #   * {Types::ListAlertsResponse#next_token #next_token} => String
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_alerts({
-    #     max_results: 1,
-    #     next_token: "__string",
-    #     resource_arn: "__string", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.items #=> Array
-    #   resp.items[0].alert_code #=> String
-    #   resp.items[0].alert_message #=> String
-    #   resp.items[0].last_modified_time #=> Time
-    #   resp.items[0].related_resource_arns #=> Array
-    #   resp.items[0].related_resource_arns[0] #=> String
-    #   resp.items[0].resource_arn #=> String
-    #   resp.next_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListAlerts AWS API Documentation
-    #
-    # @overload list_alerts(params = {})
-    # @param [Hash] params ({})
-    def list_alerts(params = {}, options = {})
-      req = build_request(:list_alerts, params)
       req.send_request(options)
     end
 
@@ -1286,10 +1227,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].access_configuration.access_type #=> String, one of "S3_SIGV4", "SECRETS_MANAGER_ACCESS_TOKEN"
-    #   resp.items[0].access_configuration.secrets_manager_access_token_configuration.header_name #=> String
-    #   resp.items[0].access_configuration.secrets_manager_access_token_configuration.secret_arn #=> String
-    #   resp.items[0].access_configuration.secrets_manager_access_token_configuration.secret_string_key #=> String
+    #   resp.items[0].access_configuration.access_type #=> String, one of "S3_SIGV4"
     #   resp.items[0].arn #=> String
     #   resp.items[0].creation_time #=> Time
     #   resp.items[0].default_segment_delivery_configuration.base_url #=> String
@@ -1796,12 +1734,7 @@ module Aws::MediaTailor
     #
     #   resp = client.update_source_location({
     #     access_configuration: {
-    #       access_type: "S3_SIGV4", # accepts S3_SIGV4, SECRETS_MANAGER_ACCESS_TOKEN
-    #       secrets_manager_access_token_configuration: {
-    #         header_name: "__string",
-    #         secret_arn: "__string",
-    #         secret_string_key: "__string",
-    #       },
+    #       access_type: "S3_SIGV4", # accepts S3_SIGV4
     #     },
     #     default_segment_delivery_configuration: {
     #       base_url: "__string",
@@ -1814,10 +1747,7 @@ module Aws::MediaTailor
     #
     # @example Response structure
     #
-    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4", "SECRETS_MANAGER_ACCESS_TOKEN"
-    #   resp.access_configuration.secrets_manager_access_token_configuration.header_name #=> String
-    #   resp.access_configuration.secrets_manager_access_token_configuration.secret_arn #=> String
-    #   resp.access_configuration.secrets_manager_access_token_configuration.secret_string_key #=> String
+    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4"
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
     #   resp.default_segment_delivery_configuration.base_url #=> String
@@ -1906,7 +1836,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

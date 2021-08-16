@@ -40,8 +40,7 @@
       "output":{"shape":"ReplicationConfigurationTemplate"},
       "errors":[
         {"shape":"UninitializedAccountException"},
-        {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"ValidationException"}
       ]
     },
     "DeleteJob":{
@@ -378,7 +377,6 @@
         {"shape":"UninitializedAccountException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"},
         {"shape":"ConflictException"}
       ],
       "idempotent":true
@@ -395,8 +393,7 @@
       "errors":[
         {"shape":"UninitializedAccountException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"ValidationException"}
       ]
     }
   },
@@ -1176,6 +1173,7 @@
     "ReplicationConfigurationEbsEncryption":{
       "type":"string",
       "enum":[
+        "NONE",
         "DEFAULT",
         "CUSTOM"
       ]

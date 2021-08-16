@@ -6,7 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceAbbreviation":"Amazon EMR",
-    "serviceFullName":"Amazon EMR",
+    "serviceFullName":"Amazon Elastic MapReduce",
     "serviceId":"EMR",
     "signatureVersion":"v4",
     "targetPrefix":"ElasticMapReduce",
@@ -190,19 +190,6 @@
         {"shape":"InvalidRequestException"}
       ]
     },
-    "DescribeReleaseLabel":{
-      "name":"DescribeReleaseLabel",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DescribeReleaseLabelInput"},
-      "output":{"shape":"DescribeReleaseLabelOutput"},
-      "errors":[
-        {"shape":"InternalServerException"},
-        {"shape":"InvalidRequestException"}
-      ]
-    },
     "DescribeSecurityConfiguration":{
       "name":"DescribeSecurityConfiguration",
       "http":{
@@ -352,19 +339,6 @@
       "output":{"shape":"ListNotebookExecutionsOutput"},
       "errors":[
         {"shape":"InternalServerError"},
-        {"shape":"InvalidRequestException"}
-      ]
-    },
-    "ListReleaseLabels":{
-      "name":"ListReleaseLabels",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"ListReleaseLabelsInput"},
-      "output":{"shape":"ListReleaseLabelsOutput"},
-      "errors":[
-        {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
       ]
     },
@@ -1186,22 +1160,6 @@
         "NotebookExecution":{"shape":"NotebookExecution"}
       }
     },
-    "DescribeReleaseLabelInput":{
-      "type":"structure",
-      "members":{
-        "ReleaseLabel":{"shape":"String"},
-        "NextToken":{"shape":"String"},
-        "MaxResults":{"shape":"MaxResultsNumber"}
-      }
-    },
-    "DescribeReleaseLabelOutput":{
-      "type":"structure",
-      "members":{
-        "ReleaseLabel":{"shape":"String"},
-        "Applications":{"shape":"SimplifiedApplicationList"},
-        "NextToken":{"shape":"String"}
-      }
-    },
     "DescribeSecurityConfigurationInput":{
       "type":"structure",
       "required":["Name"],
@@ -1560,8 +1518,7 @@
         "EbsBlockDevices":{"shape":"EbsBlockDeviceList"},
         "EbsOptimized":{"shape":"BooleanObject"},
         "ShrinkPolicy":{"shape":"ShrinkPolicy"},
-        "AutoScalingPolicy":{"shape":"AutoScalingPolicyDescription"},
-        "CustomAmiId":{"shape":"XmlStringMaxLen256"}
+        "AutoScalingPolicy":{"shape":"AutoScalingPolicyDescription"}
       }
     },
     "InstanceGroupConfig":{
@@ -1580,8 +1537,7 @@
         "InstanceCount":{"shape":"Integer"},
         "Configurations":{"shape":"ConfigurationList"},
         "EbsConfiguration":{"shape":"EbsConfiguration"},
-        "AutoScalingPolicy":{"shape":"AutoScalingPolicy"},
-        "CustomAmiId":{"shape":"XmlStringMaxLen256"}
+        "AutoScalingPolicy":{"shape":"AutoScalingPolicy"}
       }
     },
     "InstanceGroupConfigList":{
@@ -1613,8 +1569,7 @@
         "CreationDateTime":{"shape":"Date"},
         "StartDateTime":{"shape":"Date"},
         "ReadyDateTime":{"shape":"Date"},
-        "EndDateTime":{"shape":"Date"},
-        "CustomAmiId":{"shape":"XmlStringMaxLen256"}
+        "EndDateTime":{"shape":"Date"}
       }
     },
     "InstanceGroupDetailList":{
@@ -1788,8 +1743,7 @@
         "BidPrice":{"shape":"XmlStringMaxLen256"},
         "BidPriceAsPercentageOfOnDemandPrice":{"shape":"NonNegativeDouble"},
         "EbsConfiguration":{"shape":"EbsConfiguration"},
-        "Configurations":{"shape":"ConfigurationList"},
-        "CustomAmiId":{"shape":"XmlStringMaxLen256"}
+        "Configurations":{"shape":"ConfigurationList"}
       }
     },
     "InstanceTypeConfigList":{
@@ -1805,8 +1759,7 @@
         "BidPriceAsPercentageOfOnDemandPrice":{"shape":"NonNegativeDouble"},
         "Configurations":{"shape":"ConfigurationList"},
         "EbsBlockDevices":{"shape":"EbsBlockDeviceList"},
-        "EbsOptimized":{"shape":"BooleanObject"},
-        "CustomAmiId":{"shape":"XmlStringMaxLen256"}
+        "EbsOptimized":{"shape":"BooleanObject"}
       }
     },
     "InstanceTypeSpecificationList":{
@@ -2066,21 +2019,6 @@
         "Marker":{"shape":"Marker"}
       }
     },
-    "ListReleaseLabelsInput":{
-      "type":"structure",
-      "members":{
-        "Filters":{"shape":"ReleaseLabelFilter"},
-        "NextToken":{"shape":"String"},
-        "MaxResults":{"shape":"MaxResultsNumber"}
-      }
-    },
-    "ListReleaseLabelsOutput":{
-      "type":"structure",
-      "members":{
-        "ReleaseLabels":{"shape":"StringList"},
-        "NextToken":{"shape":"String"}
-      }
-    },
     "ListSecurityConfigurationsInput":{
       "type":"structure",
       "members":{
@@ -2153,11 +2091,6 @@
         "ON_DEMAND",
         "SPOT"
       ]
-    },
-    "MaxResultsNumber":{
-      "type":"integer",
-      "max":100,
-      "min":1
     },
     "MetricDimension":{
       "type":"structure",
@@ -2387,13 +2320,6 @@
     "PutManagedScalingPolicyOutput":{
       "type":"structure",
       "members":{
-      }
-    },
-    "ReleaseLabelFilter":{
-      "type":"structure",
-      "members":{
-        "Prefix":{"shape":"String"},
-        "Application":{"shape":"String"}
       }
     },
     "RemoveAutoScalingPolicyInput":{
@@ -2629,17 +2555,6 @@
         "ScalingAdjustment":{"shape":"Integer"},
         "CoolDown":{"shape":"Integer"}
       }
-    },
-    "SimplifiedApplication":{
-      "type":"structure",
-      "members":{
-        "Name":{"shape":"String"},
-        "Version":{"shape":"String"}
-      }
-    },
-    "SimplifiedApplicationList":{
-      "type":"list",
-      "member":{"shape":"SimplifiedApplication"}
     },
     "SpotProvisioningAllocationStrategy":{
       "type":"string",

@@ -85,8 +85,7 @@
     "ListTypes": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
-      "output_token": "NextToken",
-      "result_key": "TypeSummaries"
+      "output_token": "NextToken"
     }
   }
 }

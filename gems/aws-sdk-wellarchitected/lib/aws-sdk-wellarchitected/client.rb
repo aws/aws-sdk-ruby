@@ -777,7 +777,7 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # Get the answer to a specific question in a workload review.
+    # Get lens review.
     #
     # @option params [required, String] :workload_id
     #   The ID assigned to the workload. This ID is unique within an AWS
@@ -829,15 +829,9 @@ module Aws::WellArchitected
     #   resp.answer.choices[0].description #=> String
     #   resp.answer.selected_choices #=> Array
     #   resp.answer.selected_choices[0] #=> String
-    #   resp.answer.choice_answers #=> Array
-    #   resp.answer.choice_answers[0].choice_id #=> String
-    #   resp.answer.choice_answers[0].status #=> String, one of "SELECTED", "NOT_APPLICABLE", "UNSELECTED"
-    #   resp.answer.choice_answers[0].reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
-    #   resp.answer.choice_answers[0].notes #=> String
     #   resp.answer.is_applicable #=> Boolean
     #   resp.answer.risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer.notes #=> String
-    #   resp.answer.reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAnswer AWS API Documentation
     #
@@ -1189,13 +1183,8 @@ module Aws::WellArchitected
     #   resp.answer_summaries[0].choices[0].description #=> String
     #   resp.answer_summaries[0].selected_choices #=> Array
     #   resp.answer_summaries[0].selected_choices[0] #=> String
-    #   resp.answer_summaries[0].choice_answer_summaries #=> Array
-    #   resp.answer_summaries[0].choice_answer_summaries[0].choice_id #=> String
-    #   resp.answer_summaries[0].choice_answer_summaries[0].status #=> String, one of "SELECTED", "NOT_APPLICABLE", "UNSELECTED"
-    #   resp.answer_summaries[0].choice_answer_summaries[0].reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
     #   resp.answer_summaries[0].is_applicable #=> Boolean
     #   resp.answer_summaries[0].risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
-    #   resp.answer_summaries[0].reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAnswers AWS API Documentation
@@ -1686,17 +1675,11 @@ module Aws::WellArchitected
 
     # Deletes specified tags from a resource.
     #
-    # To specify multiple tags, use separate **tagKeys** parameters, for
-    # example:
-    #
-    # `DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2`
-    #
     # @option params [required, String] :workload_arn
     #   The ARN for the workload.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of tag keys. Existing tags of the resource whose keys are
-    #   members of this list are removed from the resource.
+    #   The keys of the tags to be removed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1735,18 +1718,11 @@ module Aws::WellArchitected
     #
     #   The values entered replace the previously selected choices.
     #
-    # @option params [Hash<String,Types::ChoiceUpdate>] :choice_updates
-    #   A list of choices to update on a question in your workload. The String
-    #   key corresponds to the choice ID to be updated.
-    #
     # @option params [String] :notes
     #   The notes associated with the workload.
     #
     # @option params [Boolean] :is_applicable
     #   Defines whether this question is applicable to a lens review.
-    #
-    # @option params [String] :reason
-    #   The reason why a question is not applicable to your workload.
     #
     # @return [Types::UpdateAnswerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1761,16 +1737,8 @@ module Aws::WellArchitected
     #     lens_alias: "LensAlias", # required
     #     question_id: "QuestionId", # required
     #     selected_choices: ["ChoiceId"],
-    #     choice_updates: {
-    #       "ChoiceId" => {
-    #         status: "SELECTED", # required, accepts SELECTED, NOT_APPLICABLE, UNSELECTED
-    #         reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
-    #         notes: "ChoiceNotes",
-    #       },
-    #     },
     #     notes: "Notes",
     #     is_applicable: false,
-    #     reason: "OUT_OF_SCOPE", # accepts OUT_OF_SCOPE, BUSINESS_PRIORITIES, ARCHITECTURE_CONSTRAINTS, OTHER, NONE
     #   })
     #
     # @example Response structure
@@ -1789,15 +1757,9 @@ module Aws::WellArchitected
     #   resp.answer.choices[0].description #=> String
     #   resp.answer.selected_choices #=> Array
     #   resp.answer.selected_choices[0] #=> String
-    #   resp.answer.choice_answers #=> Array
-    #   resp.answer.choice_answers[0].choice_id #=> String
-    #   resp.answer.choice_answers[0].status #=> String, one of "SELECTED", "NOT_APPLICABLE", "UNSELECTED"
-    #   resp.answer.choice_answers[0].reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
-    #   resp.answer.choice_answers[0].notes #=> String
     #   resp.answer.is_applicable #=> Boolean
     #   resp.answer.risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer.notes #=> String
-    #   resp.answer.reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAnswer AWS API Documentation
     #
@@ -2193,7 +2155,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

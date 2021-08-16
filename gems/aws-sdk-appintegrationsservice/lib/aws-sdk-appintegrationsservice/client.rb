@@ -327,10 +327,13 @@ module Aws::AppIntegrationsService
 
     # @!group API Operations
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Creates an EventIntegration, given a specified name, description, and
-    # a reference to an Amazon EventBridge bus in your account and a partner
-    # event source that pushes events to that bus. No objects are created in
-    # the your account, only metadata that is persisted on the
+    # a reference to an Amazon Eventbridge bus in your account and a partner
+    # event source that will push events to that bus. No objects are created
+    # in the your account, only metadata that is persisted on the
     # EventIntegration control plane.
     #
     # @option params [required, String] :name
@@ -343,7 +346,7 @@ module Aws::AppIntegrationsService
     #   The event filter.
     #
     # @option params [required, String] :event_bridge_bus
-    #   The EventBridge bus.
+    #   The Eventbridge bus.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -387,6 +390,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Deletes the specified existing event integration. If the event
     # integration is associated with clients, the request is rejected.
     #
@@ -410,6 +416,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Return information about the event integration.
     #
     # @option params [required, String] :name
@@ -449,6 +458,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Returns a paginated list of event integration associations in the
     # account.
     #
@@ -497,6 +509,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Returns a paginated list of event integrations in the account.
     #
     # @option params [String] :next_token
@@ -540,6 +555,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Lists the tags for the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -569,6 +587,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Adds the specified tags to the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -597,6 +618,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Removes the specified tags from the specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -623,6 +647,9 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # The Amazon AppIntegrations APIs are in preview release and are subject
+    # to change.
+    #
     # Updates the description of an event integration.
     #
     # @option params [required, String] :name
@@ -662,7 +689,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

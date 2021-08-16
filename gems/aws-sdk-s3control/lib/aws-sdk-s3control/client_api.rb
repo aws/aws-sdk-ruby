@@ -20,7 +20,6 @@ module Aws::S3Control
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountLevel = Shapes::StructureShape.new(name: 'AccountLevel')
     ActivityMetrics = Shapes::StructureShape.new(name: 'ActivityMetrics')
-    Alias = Shapes::StringShape.new(name: 'Alias')
     AwsLambdaTransformation = Shapes::StructureShape.new(name: 'AwsLambdaTransformation')
     AwsLambdaTransformationPayload = Shapes::StringShape.new(name: 'AwsLambdaTransformationPayload')
     AwsOrgArn = Shapes::StringShape.new(name: 'AwsOrgArn')
@@ -66,7 +65,6 @@ module Aws::S3Control
     DeleteStorageLensConfigurationTaggingResult = Shapes::StructureShape.new(name: 'DeleteStorageLensConfigurationTaggingResult')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
-    Endpoints = Shapes::MapShape.new(name: 'Endpoints')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Exclude = Shapes::StructureShape.new(name: 'Exclude')
     ExpirationStatus = Shapes::StringShape.new(name: 'ExpirationStatus')
@@ -188,7 +186,7 @@ module Aws::S3Control
     ObjectLambdaAllowedFeature = Shapes::StringShape.new(name: 'ObjectLambdaAllowedFeature')
     ObjectLambdaAllowedFeaturesList = Shapes::ListShape.new(name: 'ObjectLambdaAllowedFeaturesList')
     ObjectLambdaConfiguration = Shapes::StructureShape.new(name: 'ObjectLambdaConfiguration')
-    ObjectLambdaContentTransformation = Shapes::UnionShape.new(name: 'ObjectLambdaContentTransformation')
+    ObjectLambdaContentTransformation = Shapes::StructureShape.new(name: 'ObjectLambdaContentTransformation')
     ObjectLambdaPolicy = Shapes::StringShape.new(name: 'ObjectLambdaPolicy')
     ObjectLambdaSupportingAccessPointArn = Shapes::StringShape.new(name: 'ObjectLambdaSupportingAccessPointArn')
     ObjectLambdaTransformationConfiguration = Shapes::StructureShape.new(name: 'ObjectLambdaTransformationConfiguration')
@@ -302,7 +300,6 @@ module Aws::S3Control
     AccessPoint.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     AccessPoint.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
     AccessPoint.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
-    AccessPoint.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     AccessPoint.struct_class = Types::AccessPoint
 
     AccessPointList.member = Shapes::ShapeRef.new(shape: AccessPoint, location_name: "AccessPoint")
@@ -347,7 +344,6 @@ module Aws::S3Control
     CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
 
     CreateAccessPointResult.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
-    CreateAccessPointResult.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     CreateAccessPointResult.struct_class = Types::CreateAccessPointResult
 
     CreateBucketConfiguration.add_member(:location_constraint, Shapes::ShapeRef.new(shape: BucketLocationConstraint, location_name: "LocationConstraint"))
@@ -444,9 +440,6 @@ module Aws::S3Control
     DescribeJobResult.add_member(:job, Shapes::ShapeRef.new(shape: JobDescriptor, location_name: "Job"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
 
-    Endpoints.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String)
-    Endpoints.value = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
-
     Exclude.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     Exclude.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "Regions"))
     Exclude.struct_class = Types::Exclude
@@ -505,9 +498,6 @@ module Aws::S3Control
     GetAccessPointResult.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     GetAccessPointResult.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     GetAccessPointResult.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    GetAccessPointResult.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
-    GetAccessPointResult.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
-    GetAccessPointResult.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
     GetAccessPointResult.struct_class = Types::GetAccessPointResult
 
     GetBucketLifecycleConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
@@ -781,9 +771,6 @@ module Aws::S3Control
     ObjectLambdaConfiguration.struct_class = Types::ObjectLambdaConfiguration
 
     ObjectLambdaContentTransformation.add_member(:aws_lambda, Shapes::ShapeRef.new(shape: AwsLambdaTransformation, location_name: "AwsLambda"))
-    ObjectLambdaContentTransformation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ObjectLambdaContentTransformation.add_member_subclass(:aws_lambda, Types::ObjectLambdaContentTransformation::AwsLambda)
-    ObjectLambdaContentTransformation.add_member_subclass(:unknown, Types::ObjectLambdaContentTransformation::Unknown)
     ObjectLambdaContentTransformation.struct_class = Types::ObjectLambdaContentTransformation
 
     ObjectLambdaTransformationConfiguration.add_member(:actions, Shapes::ShapeRef.new(shape: ObjectLambdaTransformationConfigurationActionsList, required: true, location_name: "Actions"))
@@ -914,7 +901,6 @@ module Aws::S3Control
     S3CopyObjectOperation.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: S3ObjectLockLegalHoldStatus, location_name: "ObjectLockLegalHoldStatus"))
     S3CopyObjectOperation.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: S3ObjectLockMode, location_name: "ObjectLockMode"))
     S3CopyObjectOperation.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "ObjectLockRetainUntilDate"))
-    S3CopyObjectOperation.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "BucketKeyEnabled"))
     S3CopyObjectOperation.struct_class = Types::S3CopyObjectOperation
 
     S3DeleteObjectTaggingOperation.struct_class = Types::S3DeleteObjectTaggingOperation

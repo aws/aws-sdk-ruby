@@ -1,31 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.32.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.31.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.30.0 (2021-07-06)
-------------------
-
-* Feature - Sensitive data findings in Amazon Macie now include enhanced location data for JSON and JSON Lines files
-
-1.29.0 (2021-06-08)
-------------------
-
-* Feature - This release of the Amazon Macie API introduces stricter validation of S3 object criteria for classification jobs.
-
-1.28.0 (2021-05-14)
-------------------
-
-* Feature - This release of the Amazon Macie API adds support for defining run-time, S3 bucket criteria for classification jobs. It also adds resources for querying data about AWS resources that Macie monitors.
-
 1.27.0 (2021-04-29)
 ------------------
 

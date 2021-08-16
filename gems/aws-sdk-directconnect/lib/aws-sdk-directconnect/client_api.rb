@@ -35,7 +35,6 @@ module Aws::DirectConnect
     AvailablePortSpeeds = Shapes::ListShape.new(name: 'AvailablePortSpeeds')
     AwsDevice = Shapes::StringShape.new(name: 'AwsDevice')
     AwsDeviceV2 = Shapes::StringShape.new(name: 'AwsDeviceV2')
-    AwsLogicalDeviceId = Shapes::StringShape.new(name: 'AwsLogicalDeviceId')
     BGPAuthKey = Shapes::StringShape.new(name: 'BGPAuthKey')
     BGPPeer = Shapes::StructureShape.new(name: 'BGPPeer')
     BGPPeerId = Shapes::StringShape.new(name: 'BGPPeerId')
@@ -325,7 +324,6 @@ module Aws::DirectConnect
     BGPPeer.add_member(:bgp_peer_state, Shapes::ShapeRef.new(shape: BGPPeerState, location_name: "bgpPeerState"))
     BGPPeer.add_member(:bgp_status, Shapes::ShapeRef.new(shape: BGPStatus, location_name: "bgpStatus"))
     BGPPeer.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
-    BGPPeer.add_member(:aws_logical_device_id, Shapes::ShapeRef.new(shape: AwsLogicalDeviceId, location_name: "awsLogicalDeviceId"))
     BGPPeer.struct_class = Types::BGPPeer
 
     BGPPeerIdList.member = Shapes::ShapeRef.new(shape: BGPPeerId)
@@ -373,7 +371,6 @@ module Aws::DirectConnect
     Connection.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
     Connection.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Connection.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
-    Connection.add_member(:aws_logical_device_id, Shapes::ShapeRef.new(shape: AwsLogicalDeviceId, location_name: "awsLogicalDeviceId"))
     Connection.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Connection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Connection.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
@@ -676,7 +673,6 @@ module Aws::DirectConnect
     Interconnect.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
     Interconnect.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
     Interconnect.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
-    Interconnect.add_member(:aws_logical_device_id, Shapes::ShapeRef.new(shape: AwsLogicalDeviceId, location_name: "awsLogicalDeviceId"))
     Interconnect.add_member(:has_logical_redundancy, Shapes::ShapeRef.new(shape: HasLogicalRedundancy, location_name: "hasLogicalRedundancy"))
     Interconnect.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Interconnect.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
@@ -698,7 +694,6 @@ module Aws::DirectConnect
     Lag.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
     Lag.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, deprecated: true, location_name: "awsDevice"))
     Lag.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
-    Lag.add_member(:aws_logical_device_id, Shapes::ShapeRef.new(shape: AwsLogicalDeviceId, location_name: "awsLogicalDeviceId"))
     Lag.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
     Lag.add_member(:allows_hosted_connections, Shapes::ShapeRef.new(shape: BooleanFlag, location_name: "allowsHostedConnections"))
     Lag.add_member(:jumbo_frame_capable, Shapes::ShapeRef.new(shape: JumboFrameCapable, location_name: "jumboFrameCapable"))
@@ -934,7 +929,6 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerList, location_name: "bgpPeers"))
     VirtualInterface.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     VirtualInterface.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
-    VirtualInterface.add_member(:aws_logical_device_id, Shapes::ShapeRef.new(shape: AwsLogicalDeviceId, location_name: "awsLogicalDeviceId"))
     VirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     VirtualInterface.struct_class = Types::VirtualInterface
 

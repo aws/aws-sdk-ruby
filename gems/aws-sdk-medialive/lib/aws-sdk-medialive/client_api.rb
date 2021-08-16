@@ -46,7 +46,6 @@ module Aws::MediaLive
     AudioDescription = Shapes::StructureShape.new(name: 'AudioDescription')
     AudioDescriptionAudioTypeControl = Shapes::StringShape.new(name: 'AudioDescriptionAudioTypeControl')
     AudioDescriptionLanguageCodeControl = Shapes::StringShape.new(name: 'AudioDescriptionLanguageCodeControl')
-    AudioHlsRenditionSelection = Shapes::StructureShape.new(name: 'AudioHlsRenditionSelection')
     AudioLanguageSelection = Shapes::StructureShape.new(name: 'AudioLanguageSelection')
     AudioLanguageSelectionPolicy = Shapes::StringShape.new(name: 'AudioLanguageSelectionPolicy')
     AudioNormalizationAlgorithm = Shapes::StringShape.new(name: 'AudioNormalizationAlgorithm')
@@ -191,7 +190,6 @@ module Aws::MediaLive
     DvbSubDestinationSettings = Shapes::StructureShape.new(name: 'DvbSubDestinationSettings')
     DvbSubDestinationShadowColor = Shapes::StringShape.new(name: 'DvbSubDestinationShadowColor')
     DvbSubDestinationTeletextGridControl = Shapes::StringShape.new(name: 'DvbSubDestinationTeletextGridControl')
-    DvbSubOcrLanguage = Shapes::StringShape.new(name: 'DvbSubOcrLanguage')
     DvbSubSourceSettings = Shapes::StructureShape.new(name: 'DvbSubSourceSettings')
     DvbTdtSettings = Shapes::StructureShape.new(name: 'DvbTdtSettings')
     Eac3AttenuationControl = Shapes::StringShape.new(name: 'Eac3AttenuationControl')
@@ -318,7 +316,6 @@ module Aws::MediaLive
     HlsRedundantManifest = Shapes::StringShape.new(name: 'HlsRedundantManifest')
     HlsS3LogUploads = Shapes::StringShape.new(name: 'HlsS3LogUploads')
     HlsS3Settings = Shapes::StructureShape.new(name: 'HlsS3Settings')
-    HlsScte35SourceType = Shapes::StringShape.new(name: 'HlsScte35SourceType')
     HlsSegmentationMode = Shapes::StringShape.new(name: 'HlsSegmentationMode')
     HlsSettings = Shapes::StructureShape.new(name: 'HlsSettings')
     HlsStreamInfResolution = Shapes::StringShape.new(name: 'HlsStreamInfResolution')
@@ -554,7 +551,6 @@ module Aws::MediaLive
     Scte20PlusEmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'Scte20PlusEmbeddedDestinationSettings')
     Scte20SourceSettings = Shapes::StructureShape.new(name: 'Scte20SourceSettings')
     Scte27DestinationSettings = Shapes::StructureShape.new(name: 'Scte27DestinationSettings')
-    Scte27OcrLanguage = Shapes::StringShape.new(name: 'Scte27OcrLanguage')
     Scte27SourceSettings = Shapes::StructureShape.new(name: 'Scte27SourceSettings')
     Scte35AposNoRegionalBlackoutBehavior = Shapes::StringShape.new(name: 'Scte35AposNoRegionalBlackoutBehavior')
     Scte35AposWebDeliveryAllowedBehavior = Shapes::StringShape.new(name: 'Scte35AposWebDeliveryAllowedBehavior')
@@ -667,7 +663,6 @@ module Aws::MediaLive
     WavCodingMode = Shapes::StringShape.new(name: 'WavCodingMode')
     WavSettings = Shapes::StructureShape.new(name: 'WavSettings')
     WebvttDestinationSettings = Shapes::StructureShape.new(name: 'WebvttDestinationSettings')
-    WebvttDestinationStyleControl = Shapes::StringShape.new(name: 'WebvttDestinationStyleControl')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
@@ -875,10 +870,6 @@ module Aws::MediaLive
     AudioDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     AudioDescription.struct_class = Types::AudioDescription
 
-    AudioHlsRenditionSelection.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "groupId"))
-    AudioHlsRenditionSelection.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "name"))
-    AudioHlsRenditionSelection.struct_class = Types::AudioHlsRenditionSelection
-
     AudioLanguageSelection.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "languageCode"))
     AudioLanguageSelection.add_member(:language_selection_policy, Shapes::ShapeRef.new(shape: AudioLanguageSelectionPolicy, location_name: "languageSelectionPolicy"))
     AudioLanguageSelection.struct_class = Types::AudioLanguageSelection
@@ -901,7 +892,6 @@ module Aws::MediaLive
     AudioSelector.add_member(:selector_settings, Shapes::ShapeRef.new(shape: AudioSelectorSettings, location_name: "selectorSettings"))
     AudioSelector.struct_class = Types::AudioSelector
 
-    AudioSelectorSettings.add_member(:audio_hls_rendition_selection, Shapes::ShapeRef.new(shape: AudioHlsRenditionSelection, location_name: "audioHlsRenditionSelection"))
     AudioSelectorSettings.add_member(:audio_language_selection, Shapes::ShapeRef.new(shape: AudioLanguageSelection, location_name: "audioLanguageSelection"))
     AudioSelectorSettings.add_member(:audio_pid_selection, Shapes::ShapeRef.new(shape: AudioPidSelection, location_name: "audioPidSelection"))
     AudioSelectorSettings.add_member(:audio_track_selection, Shapes::ShapeRef.new(shape: AudioTrackSelection, location_name: "audioTrackSelection"))
@@ -1569,7 +1559,6 @@ module Aws::MediaLive
     DvbSubDestinationSettings.add_member(:y_position, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "yPosition"))
     DvbSubDestinationSettings.struct_class = Types::DvbSubDestinationSettings
 
-    DvbSubSourceSettings.add_member(:ocr_language, Shapes::ShapeRef.new(shape: DvbSubOcrLanguage, location_name: "ocrLanguage"))
     DvbSubSourceSettings.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "pid"))
     DvbSubSourceSettings.struct_class = Types::DvbSubSourceSettings
 
@@ -1859,7 +1848,6 @@ module Aws::MediaLive
     HlsInputSettings.add_member(:buffer_segments, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "bufferSegments"))
     HlsInputSettings.add_member(:retries, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "retries"))
     HlsInputSettings.add_member(:retry_interval, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "retryInterval"))
-    HlsInputSettings.add_member(:scte_35_source, Shapes::ShapeRef.new(shape: HlsScte35SourceType, location_name: "scte35Source"))
     HlsInputSettings.struct_class = Types::HlsInputSettings
 
     HlsMediaStoreSettings.add_member(:connection_retry_interval, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "connectionRetryInterval"))
@@ -2698,7 +2686,6 @@ module Aws::MediaLive
 
     Scte27DestinationSettings.struct_class = Types::Scte27DestinationSettings
 
-    Scte27SourceSettings.add_member(:ocr_language, Shapes::ShapeRef.new(shape: Scte27OcrLanguage, location_name: "ocrLanguage"))
     Scte27SourceSettings.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "pid"))
     Scte27SourceSettings.struct_class = Types::Scte27SourceSettings
 
@@ -2896,6 +2883,7 @@ module Aws::MediaLive
     TransferringInputDeviceSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     TransferringInputDeviceSummary.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TransferringInputDeviceSummary.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferringInputDeviceSummary.add_member(:target_region, Shapes::ShapeRef.new(shape: __string, location_name: "targetRegion"))
     TransferringInputDeviceSummary.add_member(:transfer_type, Shapes::ShapeRef.new(shape: InputDeviceTransferType, location_name: "transferType"))
     TransferringInputDeviceSummary.struct_class = Types::TransferringInputDeviceSummary
 
@@ -3120,7 +3108,6 @@ module Aws::MediaLive
     WavSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __double, location_name: "sampleRate"))
     WavSettings.struct_class = Types::WavSettings
 
-    WebvttDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: WebvttDestinationStyleControl, location_name: "styleControl"))
     WebvttDestinationSettings.struct_class = Types::WebvttDestinationSettings
 
     __listOfAudioChannelMapping.member = Shapes::ShapeRef.new(shape: AudioChannelMapping)

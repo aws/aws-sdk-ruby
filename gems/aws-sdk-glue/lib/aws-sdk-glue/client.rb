@@ -341,7 +341,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the catalog in which the partition is to be created.
-    #   Currently, this should be the Amazon Web Services account ID.
+    #   Currently, this should be the AWS account ID.
     #
     # @option params [required, String] :database_name
     #   The name of the metadata database in which the partition is to be
@@ -449,7 +449,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, Array<String>] :connection_name_list
     #   A list of names of the connections to delete.
@@ -487,8 +487,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be deleted resides.
-    #   If none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
@@ -538,8 +537,8 @@ module Aws::Glue
     # Deletes multiple tables at once.
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
-    # table versions and partitions that belong to the deleted table. Glue
-    # deletes these "orphaned" resources asynchronously in a timely
+    # table versions and partitions that belong to the deleted table. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
     #  To ensure the immediate deletion of all related resources, before
@@ -552,7 +551,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the tables to delete reside.
@@ -593,7 +592,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -668,7 +667,6 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
-    #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -851,8 +849,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -968,7 +965,7 @@ module Aws::Glue
     #   resp.triggers[0].name #=> String
     #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
-    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.triggers[0].description #=> String
     #   resp.triggers[0].schedule #=> String
@@ -987,8 +984,6 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
-    #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.triggers_not_found #=> Array
     #   resp.triggers_not_found[0] #=> String
     #
@@ -1058,7 +1053,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -1077,8 +1072,6 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -1115,8 +1108,6 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.edges #=> Array
     #   resp.workflows[0].last_run.graph.edges[0].source_id #=> String
     #   resp.workflows[0].last_run.graph.edges[0].destination_id #=> String
-    #   resp.workflows[0].last_run.starting_event_batch_condition.batch_size #=> Integer
-    #   resp.workflows[0].last_run.starting_event_batch_condition.batch_window #=> Integer
     #   resp.workflows[0].graph.nodes #=> Array
     #   resp.workflows[0].graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflows[0].graph.nodes[0].name #=> String
@@ -1124,7 +1115,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -1143,8 +1134,6 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -1239,7 +1228,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the catalog in which the partition is to be updated.
-    #   Currently, this should be the Amazon Web Services account ID.
+    #   Currently, this should be the AWS account ID.
     #
     # @option params [required, String] :database_name
     #   The name of the metadata database in which the partition is to be
@@ -1347,10 +1336,10 @@ module Aws::Glue
     end
 
     # Cancels (stops) a task run. Machine learning task runs are
-    # asynchronous tasks that Glue runs on your behalf as part of various
-    # machine learning workflows. You can cancel a machine learning task run
-    # at any time by calling `CancelMLTaskRun` with a task run's parent
-    # transform's `TransformID` and the task run's `TaskRunId`.
+    # asynchronous tasks that AWS Glue runs on your behalf as part of
+    # various machine learning workflows. You can cancel a machine learning
+    # task run at any time by calling `CancelMLTaskRun` with a task run's
+    # parent transform's `TransformID` and the task run's `TaskRunId`.
     #
     # @option params [required, String] :transform_id
     #   The unique identifier of the machine learning transform.
@@ -1392,8 +1381,8 @@ module Aws::Glue
     # checks are performed.
     #
     # @option params [required, String] :data_format
-    #   The data format of the schema definition. Currently `AVRO` and `JSON`
-    #   are supported.
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
     #
     # @option params [required, String] :schema_definition
     #   The definition of the schema that has to be validated.
@@ -1406,7 +1395,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.check_schema_version_validity({
-    #     data_format: "AVRO", # required, accepts AVRO, JSON
+    #     data_format: "AVRO", # required, accepts AVRO
     #     schema_definition: "SchemaDefinitionString", # required
     #   })
     #
@@ -1484,7 +1473,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the connection. If none
-    #   is provided, the Amazon Web Services account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #
     # @option params [required, Types::ConnectionInput] :connection_input
     #   A `ConnectionInput` object defining the connection to create.
@@ -1533,7 +1522,7 @@ module Aws::Glue
     #   new crawler to access customer resources.
     #
     # @option params [String] :database_name
-    #   The Glue database where results are written, such as:
+    #   The AWS Glue database where results are written, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #
     # @option params [String] :description
@@ -1585,8 +1574,8 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this crawler request. You may use tags to limit
-    #   access to the crawler. For more information about tags in Glue, see
-    #   [Amazon Web Services Tags in Glue][1] in the developer guide.
+    #   access to the crawler. For more information about tags in AWS Glue,
+    #   see [AWS Tags in AWS Glue][1] in the developer guide.
     #
     #
     #
@@ -1607,7 +1596,6 @@ module Aws::Glue
     #           path: "Path",
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
-    #           sample_size: 1,
     #         },
     #       ],
     #       jdbc_targets: [
@@ -1671,7 +1659,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the database. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, Types::DatabaseInput] :database_input
     #   The metadata for the database.
@@ -1748,8 +1736,8 @@ module Aws::Glue
     #    </note>
     #
     # @option params [Integer] :number_of_nodes
-    #   The number of Glue Data Processing Units (DPUs) to allocate to this
-    #   `DevEndpoint`.
+    #   The number of AWS Glue Data Processing Units (DPUs) to allocate to
+    #   this `DevEndpoint`.
     #
     # @option params [String] :worker_type
     #   The type of predefined worker that is allocated to the development
@@ -1772,10 +1760,10 @@ module Aws::Glue
     #
     # @option params [String] :glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   Glue supports. The Python version indicates the version supported for
-    #   running your ETL scripts on development endpoints.
+    #   AWS Glue supports. The Python version indicates the version supported
+    #   for running your ETL scripts on development endpoints.
     #
-    #   For more information about the available Glue versions and
+    #   For more information about the available AWS Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in the
     #   developer guide.
     #
@@ -1823,8 +1811,8 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this DevEndpoint. You may use tags to limit
-    #   access to the DevEndpoint. For more information about tags in Glue,
-    #   see [Amazon Web Services Tags in Glue][1] in the developer guide.
+    #   access to the DevEndpoint. For more information about tags in AWS
+    #   Glue, see [AWS Tags in AWS Glue][1] in the developer guide.
     #
     #
     #
@@ -1933,21 +1921,21 @@ module Aws::Glue
     #   runs allowed for this job.
     #
     # @option params [required, Types::JobCommand] :command
-    #   The `JobCommand` that runs this job.
+    #   The `JobCommand` that executes this job.
     #
     # @option params [Hash<String,String>] :default_arguments
     #   The default arguments for this job.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that Glue itself consumes.
+    #   consumes, as well as arguments that AWS Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set up
-    #   your job, see the [Special Parameters Used by Glue][2] topic in the
-    #   developer guide.
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
     #
     #
     #
@@ -1966,11 +1954,11 @@ module Aws::Glue
     # @option params [Integer] :allocated_capacity
     #   This parameter is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of Glue data processing units (DPUs) to allocate to this
-    #   Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is
-    #   a relative measure of processing power that consists of 4 vCPUs of
-    #   compute capacity and 16 GB of memory. For more information, see the
-    #   [Glue pricing page][1].
+    #   The number of AWS Glue data processing units (DPUs) to allocate to
+    #   this Job. You can allocate from 2 to 100 DPUs; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4 vCPUs
+    #   of compute capacity and 16 GB of memory. For more information, see the
+    #   [AWS Glue pricing page][1].
     #
     #
     #
@@ -1982,11 +1970,11 @@ module Aws::Glue
     #   status. The default is 2,880 minutes (48 hours).
     #
     # @option params [Float] :max_capacity
-    #   For Glue version 1.0 or earlier jobs, using the standard worker type,
-    #   the number of Glue data processing units (DPUs) that can be allocated
-    #   when this job runs. A DPU is a relative measure of processing power
-    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
-    #   more information, see the [Glue pricing page][1].
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
     #
@@ -2003,10 +1991,6 @@ module Aws::Glue
     #     100 DPUs. The default is 10 DPUs. This job type cannot have a
     #     fractional DPU allocation.
     #
-    #   For Glue version 2.0 jobs, you cannot instead specify a `Maximum
-    #   capacity`. Instead, you should specify a `Worker type` and the `Number
-    #   of workers`.
-    #
     #
     #
     #   [1]: https://aws.amazon.com/glue/pricing/
@@ -2017,8 +2001,8 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this job. You may use tags to limit access to the
-    #   job. For more information about tags in Glue, see [Amazon Web Services
-    #   Tags in Glue][1] in the developer guide.
+    #   job. For more information about tags in AWS Glue, see [AWS Tags in AWS
+    #   Glue][1] in the developer guide.
     #
     #
     #
@@ -2029,10 +2013,10 @@ module Aws::Glue
     #
     # @option params [String] :glue_version
     #   Glue version determines the versions of Apache Spark and Python that
-    #   Glue supports. The Python version indicates the version supported for
-    #   jobs of type Spark.
+    #   AWS Glue supports. The Python version indicates the version supported
+    #   for jobs of type Spark.
     #
-    #   For more information about the available Glue versions and
+    #   For more information about the available AWS Glue versions and
     #   corresponding Spark and Python versions, see [Glue version][1] in the
     #   developer guide.
     #
@@ -2122,16 +2106,16 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates an Glue machine learning transform. This operation creates the
-    # transform and all the necessary parameters to train it.
+    # Creates an AWS Glue machine learning transform. This operation creates
+    # the transform and all the necessary parameters to train it.
     #
     # Call this operation as the first step in the process of using a
     # machine learning transform (such as the `FindMatches` transform) for
     # deduplicating data. You can provide an optional `Description`, in
     # addition to the parameters that you want to use for your algorithm.
     #
-    # You must also specify certain parameters for the tasks that Glue runs
-    # on your behalf as part of learning from your data and creating a
+    # You must also specify certain parameters for the tasks that AWS Glue
+    # runs on your behalf as part of learning from your data and creating a
     # high-quality machine learning transform. These parameters include
     # `Role`, and optionally, `AllocatedCapacity`, `Timeout`, and
     # `MaxRetries`. For more information, see [Jobs][1].
@@ -2148,7 +2132,7 @@ module Aws::Glue
     #   The default is an empty string.
     #
     # @option params [required, Array<Types::GlueTable>] :input_record_tables
-    #   A list of Glue table definitions used by the transform.
+    #   A list of AWS Glue table definitions used by the transform.
     #
     # @option params [required, Types::TransformParameters] :parameters
     #   The algorithmic parameters that are specific to the transform type
@@ -2156,13 +2140,13 @@ module Aws::Glue
     #
     # @option params [required, String] :role
     #   The name or Amazon Resource Name (ARN) of the IAM role with the
-    #   required permissions. The required permissions include both Glue
-    #   service role permissions to Glue resources, and Amazon S3 permissions
-    #   required by the transform.
+    #   required permissions. The required permissions include both AWS Glue
+    #   service role permissions to AWS Glue resources, and Amazon S3
+    #   permissions required by the transform.
     #
-    #   * This role needs Glue service role permissions to allow access to
-    #     resources in Glue. See [Attach a Policy to IAM Users That Access
-    #     Glue][1].
+    #   * This role needs AWS Glue service role permissions to allow access to
+    #     resources in AWS Glue. See [Attach a Policy to IAM Users That Access
+    #     AWS Glue][1].
     #
     #   * This role needs permission to your Amazon Simple Storage Service
     #     (Amazon S3) sources, targets, temporary directory, scripts, and any
@@ -2173,10 +2157,10 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html
     #
     # @option params [String] :glue_version
-    #   This value determines which version of Glue this machine learning
+    #   This value determines which version of AWS Glue this machine learning
     #   transform is compatible with. Glue 1.0 is recommended for most
     #   customers. If the value is not set, the Glue compatibility defaults to
-    #   Glue 0.9. For more information, see [Glue Versions][1] in the
+    #   Glue 0.9. For more information, see [AWS Glue Versions][1] in the
     #   developer guide.
     #
     #
@@ -2184,11 +2168,11 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #
     # @option params [Float] :max_capacity
-    #   The number of Glue data processing units (DPUs) that are allocated to
-    #   task runs for this transform. You can allocate from 2 to 100 DPUs; the
-    #   default is 10. A DPU is a relative measure of processing power that
-    #   consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-    #   information, see the [Glue pricing page][1].
+    #   The number of AWS Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100 DPUs;
+    #   the default is 10. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
+    #   more information, see the [AWS Glue pricing page][1].
     #
     #   `MaxCapacity` is a mutually exclusive option with `NumberOfWorkers`
     #   and `WorkerType`.
@@ -2261,8 +2245,8 @@ module Aws::Glue
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this machine learning transform. You may use tags
     #   to limit access to the machine learning transform. For more
-    #   information about tags in Glue, see [Amazon Web Services Tags in
-    #   Glue][1] in the developer guide.
+    #   information about tags in AWS Glue, see [AWS Tags in AWS Glue][1] in
+    #   the developer guide.
     #
     #
     #
@@ -2334,8 +2318,8 @@ module Aws::Glue
     # Creates a new partition.
     #
     # @option params [String] :catalog_id
-    #   The Amazon Web Services account ID of the catalog in which the
-    #   partition is to be created.
+    #   The AWS account ID of the catalog in which the partition is to be
+    #   created.
     #
     # @option params [required, String] :database_name
     #   The name of the metadata database in which the partition is to be
@@ -2479,8 +2463,8 @@ module Aws::Glue
     #   will not be any default value for this.
     #
     # @option params [Hash<String,String>] :tags
-    #   Amazon Web Services tags that contain a key value pair and may be
-    #   searched by console, command line, or API.
+    #   AWS tags that contain a key value pair and may be searched by console,
+    #   command line, or API.
     #
     # @return [Types::CreateRegistryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2543,8 +2527,8 @@ module Aws::Glue
     #   mark. No whitespace.
     #
     # @option params [required, String] :data_format
-    #   The data format of the schema definition. Currently `AVRO` and `JSON`
-    #   are supported.
+    #   The data format of the schema definition. Currently only `AVRO` is
+    #   supported.
     #
     # @option params [String] :compatibility
     #   The compatibility mode of the schema. The possible values are:
@@ -2597,9 +2581,9 @@ module Aws::Glue
     #   there will not be any automatic default value for this.
     #
     # @option params [Hash<String,String>] :tags
-    #   Amazon Web Services tags that contain a key value pair and may be
-    #   searched by console, command line, or API. If specified, follows the
-    #   Amazon Web Services tags-on-create pattern.
+    #   AWS tags that contain a key value pair and may be searched by console,
+    #   command line, or API. If specified, follows the AWS tags-on-create
+    #   pattern.
     #
     # @option params [String] :schema_definition
     #   The schema definition using the `DataFormat` setting for `SchemaName`.
@@ -2629,7 +2613,7 @@ module Aws::Glue
     #       registry_arn: "GlueResourceArn",
     #     },
     #     schema_name: "SchemaRegistryNameString", # required
-    #     data_format: "AVRO", # required, accepts AVRO, JSON
+    #     data_format: "AVRO", # required, accepts AVRO
     #     compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
     #     description: "DescriptionString",
     #     tags: {
@@ -2645,7 +2629,7 @@ module Aws::Glue
     #   resp.schema_name #=> String
     #   resp.schema_arn #=> String
     #   resp.description #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO"
     #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
     #   resp.schema_checkpoint #=> Integer
     #   resp.latest_schema_version #=> Integer
@@ -2723,10 +2707,10 @@ module Aws::Glue
     end
 
     # Creates a new security configuration. A security configuration is a
-    # set of security properties that can be used by Glue. You can use a
+    # set of security properties that can be used by AWS Glue. You can use a
     # security configuration to encrypt data at rest. For information about
-    # using security configurations in Glue, see [Encrypting Data Written by
-    # Crawlers, Jobs, and Development Endpoints][1].
+    # using security configurations in AWS Glue, see [Encrypting Data
+    # Written by Crawlers, Jobs, and Development Endpoints][1].
     #
     #
     #
@@ -2783,7 +2767,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the `Table`. If none is
-    #   supplied, the Amazon Web Services account ID is used by default.
+    #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The catalog database in which to create the new table. For Hive
@@ -2940,16 +2924,12 @@ module Aws::Glue
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to use with this trigger. You may use tags to limit access to
-    #   the trigger. For more information about tags in Glue, see [Amazon Web
-    #   Services Tags in Glue][1] in the developer guide.
+    #   the trigger. For more information about tags in AWS Glue, see [AWS
+    #   Tags in AWS Glue][1] in the developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
-    #
-    # @option params [Types::EventBatchingCondition] :event_batching_condition
-    #   Batch condition that must be met (specified number of events received
-    #   or batch time window expired) before EventBridge event trigger fires.
     #
     # @return [Types::CreateTriggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2960,7 +2940,7 @@ module Aws::Glue
     #   resp = client.create_trigger({
     #     name: "NameString", # required
     #     workflow_name: "NameString",
-    #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND, EVENT
+    #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
     #     schedule: "GenericString",
     #     predicate: {
     #       logical: "AND", # accepts AND, ANY
@@ -2993,10 +2973,6 @@ module Aws::Glue
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     event_batching_condition: {
-    #       batch_size: 1, # required
-    #       batch_window: 1,
-    #     },
     #   })
     #
     # @example Response structure
@@ -3016,7 +2992,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the function. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which to create the function.
@@ -3138,8 +3114,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -3181,8 +3156,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -3217,7 +3191,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :connection_name
     #   The name of the connection to delete.
@@ -3240,7 +3214,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Removes a specified crawler from the Glue Data Catalog, unless the
+    # Removes a specified crawler from the AWS Glue Data Catalog, unless the
     # crawler state is `RUNNING`.
     #
     # @option params [required, String] :name
@@ -3267,8 +3241,8 @@ module Aws::Glue
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
     # tables (and all table versions and partitions that might belong to the
-    # tables) and the user-defined functions in the deleted database. Glue
-    # deletes these "orphaned" resources asynchronously in a timely
+    # tables) and the user-defined functions in the deleted database. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
     #  To ensure the immediate deletion of all related resources, before
@@ -3282,7 +3256,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the database to delete. For Hive compatibility, this must
@@ -3357,12 +3331,12 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes an Glue machine learning transform. Machine learning
+    # Deletes an AWS Glue machine learning transform. Machine learning
     # transforms are a special type of transform that use machine learning
     # to learn the details of the transformation to be performed by learning
     # from examples provided by humans. These transformations are then saved
-    # by Glue. If you no longer need a transform, you can delete it by
-    # calling `DeleteMLTransforms`. However, any Glue jobs that still
+    # by AWS Glue. If you no longer need a transform, you can delete it by
+    # calling `DeleteMLTransforms`. However, any AWS Glue jobs that still
     # reference the deleted transform will no longer succeed.
     #
     # @option params [required, String] :transform_id
@@ -3395,8 +3369,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be deleted resides.
-    #   If none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
@@ -3467,7 +3440,7 @@ module Aws::Glue
     # Delete the entire registry including schema and all of its versions.
     # To get the status of the delete operation, you can call the
     # `GetRegistry` API after the asynchronous call. Deleting a registry
-    # will deactivate all online operations for the registry such as the
+    # will disable all online operations for the registry such as the
     # `UpdateRegistry`, `CreateSchema`, `UpdateSchema`, and
     # `RegisterSchemaVersion` APIs.
     #
@@ -3511,7 +3484,8 @@ module Aws::Glue
     #   The hash value returned when this policy was set.
     #
     # @option params [String] :resource_arn
-    #   The ARN of the Glue resource for the resource policy to be deleted.
+    #   The ARN of the AWS Glue resource for the resource policy to be
+    #   deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3534,7 +3508,7 @@ module Aws::Glue
     # Deletes the entire schema set, including the schema set and all of its
     # versions. To get the status of the delete operation, you can call
     # `GetSchema` API after the asynchronous call. Deleting a registry will
-    # deactivate all online operations for the schema, such as the
+    # disable all online operations for the schema, such as the
     # `GetSchemaByDefinition`, and `RegisterSchemaVersion` APIs.
     #
     # @option params [required, Types::SchemaId] :schema_id
@@ -3659,8 +3633,8 @@ module Aws::Glue
     # Removes a table definition from the Data Catalog.
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
-    # table versions and partitions that belong to the deleted table. Glue
-    # deletes these "orphaned" resources asynchronously in a timely
+    # table versions and partitions that belong to the deleted table. AWS
+    # Glue deletes these "orphaned" resources asynchronously in a timely
     # manner, at the discretion of the service.
     #
     #  To ensure the immediate deletion of all related resources, before
@@ -3673,7 +3647,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table resides. For Hive
@@ -3706,7 +3680,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -3773,8 +3747,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be deleted is
-    #   located. If none is supplied, the Amazon Web Services account ID is
-    #   used by default.
+    #   located. If none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function is located.
@@ -3832,8 +3805,8 @@ module Aws::Glue
     # Retrieves the status of a migration operation.
     #
     # @option params [String] :catalog_id
-    #   The ID of the catalog to migrate. Currently, this should be the Amazon
-    #   Web Services account ID.
+    #   The ID of the catalog to migrate. Currently, this should be the AWS
+    #   account ID.
     #
     # @return [Types::GetCatalogImportStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3988,8 +3961,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -4074,8 +4046,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -4153,7 +4124,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the connection definition to retrieve.
@@ -4162,8 +4133,8 @@ module Aws::Glue
     #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the KMS key
-    #   to decrypt the password, but it does have permission to access the
+    #   parameter when the caller might not have permission to use the AWS KMS
+    #   key to decrypt the password, but it does have permission to access the
     #   rest of the connection properties.
     #
     # @return [Types::GetConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4208,7 +4179,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connections reside. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [Types::GetConnectionsFilter] :filter
     #   A filter that controls which connections are returned.
@@ -4217,8 +4188,8 @@ module Aws::Glue
     #   Allows you to retrieve the connection metadata without returning the
     #   password. For instance, the AWS Glue console uses this flag to
     #   retrieve the connection, and does not display the password. Set this
-    #   parameter when the caller might not have permission to use the KMS key
-    #   to decrypt the password, but it does have permission to access the
+    #   parameter when the caller might not have permission to use the AWS KMS
+    #   key to decrypt the password, but it does have permission to access the
     #   rest of the connection properties.
     #
     # @option params [String] :next_token
@@ -4299,7 +4270,6 @@ module Aws::Glue
     #   resp.crawler.targets.s3_targets[0].exclusions #=> Array
     #   resp.crawler.targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawler.targets.s3_targets[0].connection_name #=> String
-    #   resp.crawler.targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawler.targets.jdbc_targets #=> Array
     #   resp.crawler.targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
@@ -4431,7 +4401,6 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
-    #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -4488,8 +4457,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog to retrieve the security configuration for.
-    #   If none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @return [Types::GetDataCatalogEncryptionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4521,7 +4489,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the database resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the database to retrieve. For Hive compatibility, this
@@ -4567,7 +4535,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog from which to retrieve `Databases`. If none
-    #   is provided, the Amazon Web Services account ID is used by default.
+    #   is provided, the AWS account ID is used by default.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -4671,9 +4639,9 @@ module Aws::Glue
     # Retrieves information about a specified development endpoint.
     #
     # <note markdown="1"> When you create a development endpoint in a virtual private cloud
-    # (VPC), Glue returns only a private IP address, and the public IP
+    # (VPC), AWS Glue returns only a private IP address, and the public IP
     # address field is not populated. When you create a non-VPC development
-    # endpoint, Glue returns only a public IP address.
+    # endpoint, AWS Glue returns only a public IP address.
     #
     #  </note>
     #
@@ -4733,9 +4701,9 @@ module Aws::Glue
     # Retrieves all the development endpoints in this AWS account.
     #
     # <note markdown="1"> When you create a development endpoint in a virtual private cloud
-    # (VPC), Glue returns only a private IP address and the public IP
+    # (VPC), AWS Glue returns only a private IP address and the public IP
     # address field is not populated. When you create a non-VPC development
-    # endpoint, Glue returns only a public IP address.
+    # endpoint, AWS Glue returns only a public IP address.
     #
     #  </note>
     #
@@ -5078,8 +5046,8 @@ module Aws::Glue
     end
 
     # Gets details for a specific task run on a machine learning transform.
-    # Machine learning task runs are asynchronous tasks that Glue runs on
-    # your behalf as part of various machine learning workflows. You can
+    # Machine learning task runs are asynchronous tasks that AWS Glue runs
+    # on your behalf as part of various machine learning workflows. You can
     # check the stats of any task run by calling `GetMLTaskRun` with the
     # `TaskRunID` and its parent transform's `TransformID`.
     #
@@ -5139,8 +5107,8 @@ module Aws::Glue
     end
 
     # Gets a list of runs for a machine learning transform. Machine learning
-    # task runs are asynchronous tasks that Glue runs on your behalf as part
-    # of various machine learning workflows. You can get a sortable,
+    # task runs are asynchronous tasks that AWS Glue runs on your behalf as
+    # part of various machine learning workflows. You can get a sortable,
     # filterable list of machine learning task runs by calling
     # `GetMLTaskRuns` with their parent transform's `TransformID` and other
     # optional parameters as documented in this section.
@@ -5220,12 +5188,12 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Gets an Glue machine learning transform artifact and all its
+    # Gets an AWS Glue machine learning transform artifact and all its
     # corresponding metadata. Machine learning transforms are a special type
     # of transform that use machine learning to learn the details of the
     # transformation to be performed by learning from examples provided by
-    # humans. These transformations are then saved by Glue. You can retrieve
-    # their metadata by calling `GetMLTransform`.
+    # humans. These transformations are then saved by AWS Glue. You can
+    # retrieve their metadata by calling `GetMLTransform`.
     #
     # @option params [required, String] :transform_id
     #   The unique identifier of the transform, generated at the time that the
@@ -5313,11 +5281,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Gets a sortable, filterable list of existing Glue machine learning
+    # Gets a sortable, filterable list of existing AWS Glue machine learning
     # transforms. Machine learning transforms are a special type of
     # transform that use machine learning to learn the details of the
     # transformation to be performed by learning from examples provided by
-    # humans. These transformations are then saved by Glue, and you can
+    # humans. These transformations are then saved by AWS Glue, and you can
     # retrieve their metadata by calling `GetMLTransforms`.
     #
     # @option params [String] :next_token
@@ -5498,8 +5466,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition in question resides. If
-    #   none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partition resides.
@@ -5512,7 +5479,7 @@ module Aws::Glue
     #
     # @return [Types::GetPartitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetPartitionResponse#partition #data.partition} => Types::Partition (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::GetPartitionResponse#partition #partition} => Types::Partition
     #
     # @example Request syntax with placeholder values
     #
@@ -5525,50 +5492,50 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.data.partition.values #=> Array
-    #   resp.data.partition.values[0] #=> String
-    #   resp.data.partition.database_name #=> String
-    #   resp.data.partition.table_name #=> String
-    #   resp.data.partition.creation_time #=> Time
-    #   resp.data.partition.last_access_time #=> Time
-    #   resp.data.partition.storage_descriptor.columns #=> Array
-    #   resp.data.partition.storage_descriptor.columns[0].name #=> String
-    #   resp.data.partition.storage_descriptor.columns[0].type #=> String
-    #   resp.data.partition.storage_descriptor.columns[0].comment #=> String
-    #   resp.data.partition.storage_descriptor.columns[0].parameters #=> Hash
-    #   resp.data.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
-    #   resp.data.partition.storage_descriptor.location #=> String
-    #   resp.data.partition.storage_descriptor.input_format #=> String
-    #   resp.data.partition.storage_descriptor.output_format #=> String
-    #   resp.data.partition.storage_descriptor.compressed #=> Boolean
-    #   resp.data.partition.storage_descriptor.number_of_buckets #=> Integer
-    #   resp.data.partition.storage_descriptor.serde_info.name #=> String
-    #   resp.data.partition.storage_descriptor.serde_info.serialization_library #=> String
-    #   resp.data.partition.storage_descriptor.serde_info.parameters #=> Hash
-    #   resp.data.partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
-    #   resp.data.partition.storage_descriptor.bucket_columns #=> Array
-    #   resp.data.partition.storage_descriptor.bucket_columns[0] #=> String
-    #   resp.data.partition.storage_descriptor.sort_columns #=> Array
-    #   resp.data.partition.storage_descriptor.sort_columns[0].column #=> String
-    #   resp.data.partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
-    #   resp.data.partition.storage_descriptor.parameters #=> Hash
-    #   resp.data.partition.storage_descriptor.parameters["KeyString"] #=> String
-    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
-    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
-    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
-    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
-    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
-    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
-    #   resp.data.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
-    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
-    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
-    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
-    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_id #=> String
-    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
-    #   resp.data.partition.parameters #=> Hash
-    #   resp.data.partition.parameters["KeyString"] #=> String
-    #   resp.data.partition.last_analyzed_time #=> Time
-    #   resp.data.partition.catalog_id #=> String
+    #   resp.partition.values #=> Array
+    #   resp.partition.values[0] #=> String
+    #   resp.partition.database_name #=> String
+    #   resp.partition.table_name #=> String
+    #   resp.partition.creation_time #=> Time
+    #   resp.partition.last_access_time #=> Time
+    #   resp.partition.storage_descriptor.columns #=> Array
+    #   resp.partition.storage_descriptor.columns[0].name #=> String
+    #   resp.partition.storage_descriptor.columns[0].type #=> String
+    #   resp.partition.storage_descriptor.columns[0].comment #=> String
+    #   resp.partition.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
+    #   resp.partition.storage_descriptor.location #=> String
+    #   resp.partition.storage_descriptor.input_format #=> String
+    #   resp.partition.storage_descriptor.output_format #=> String
+    #   resp.partition.storage_descriptor.compressed #=> Boolean
+    #   resp.partition.storage_descriptor.number_of_buckets #=> Integer
+    #   resp.partition.storage_descriptor.serde_info.name #=> String
+    #   resp.partition.storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.partition.storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.partition.storage_descriptor.bucket_columns #=> Array
+    #   resp.partition.storage_descriptor.bucket_columns[0] #=> String
+    #   resp.partition.storage_descriptor.sort_columns #=> Array
+    #   resp.partition.storage_descriptor.sort_columns[0].column #=> String
+    #   resp.partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.partition.storage_descriptor.parameters #=> Hash
+    #   resp.partition.storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
+    #   resp.partition.parameters #=> Hash
+    #   resp.partition.parameters["KeyString"] #=> String
+    #   resp.partition.last_analyzed_time #=> Time
+    #   resp.partition.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartition AWS API Documentation
     #
@@ -5639,8 +5606,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -5729,7 +5695,7 @@ module Aws::Glue
     #
     #   * `decimal`
     #
-    #   If an type is encountered that is not valid, an exception is thrown.
+    #   If an invalid type is encountered, an exception is thrown.
     #
     #   The following list shows the valid operators on each type. When you
     #   define a crawler, the `partitionKey` type is created as a `STRING`, to
@@ -5857,8 +5823,9 @@ module Aws::Glue
     #   Currently, these key-value pairs are supported:
     #
     #   * `inferSchema`  —  Specifies whether to set `inferSchema` to true or
-    #     false for the default script generated by an Glue job. For example,
-    #     to set `inferSchema` to true, pass the following key value pair:
+    #     false for the default script generated by an AWS Glue job. For
+    #     example, to set `inferSchema` to true, pass the following key value
+    #     pair:
     #
     #     `--additional-plan-options-map '\{"inferSchema":"true"\}'`
     #
@@ -5975,13 +5942,13 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the resource policies set on individual resources by
+    # Retrieves the resource policies set on individual resources by AWS
     # Resource Access Manager during cross-account permission grants. Also
     # retrieves the Data Catalog resource policy.
     #
     # If you enabled metadata encryption in Data Catalog settings, and you
-    # do not have permission on the KMS key, the operation can't return the
-    # Data Catalog resource policy.
+    # do not have permission on the AWS KMS key, the operation can't return
+    # the Data Catalog resource policy.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
@@ -6024,10 +5991,10 @@ module Aws::Glue
     # Retrieves a specified resource policy.
     #
     # @option params [String] :resource_arn
-    #   The ARN of the Glue resource for which to retrieve the resource
+    #   The ARN of the AWS Glue resource for which to retrieve the resource
     #   policy. If not supplied, the Data Catalog resource policy is returned.
     #   Use `GetResourcePolicies` to view all existing resource policies. For
-    #   more information see [Specifying Glue Resource ARNs][1].
+    #   more information see [Specifying AWS Glue Resource ARNs][1].
     #
     #
     #
@@ -6108,7 +6075,7 @@ module Aws::Glue
     #   resp.schema_name #=> String
     #   resp.schema_arn #=> String
     #   resp.description #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO"
     #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
     #   resp.schema_checkpoint #=> Integer
     #   resp.latest_schema_version #=> Integer
@@ -6169,7 +6136,7 @@ module Aws::Glue
     #
     #   resp.schema_version_id #=> String
     #   resp.schema_arn #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO"
     #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
     #   resp.created_time #=> String
     #
@@ -6234,7 +6201,7 @@ module Aws::Glue
     #
     #   resp.schema_version_id #=> String
     #   resp.schema_definition #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO"
     #   resp.schema_arn #=> String
     #   resp.version_number #=> Integer
     #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
@@ -6396,7 +6363,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the database in the catalog in which the table resides.
@@ -6494,7 +6461,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -6599,7 +6566,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog in which the table resides. For Hive
@@ -6712,7 +6679,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the tables reside. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The database in the catalog whose tables to list. For Hive
@@ -6869,7 +6836,7 @@ module Aws::Glue
     #   resp.trigger.name #=> String
     #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
-    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.trigger.description #=> String
     #   resp.trigger.schedule #=> String
@@ -6888,8 +6855,6 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger AWS API Documentation
     #
@@ -6934,7 +6899,7 @@ module Aws::Glue
     #   resp.triggers[0].name #=> String
     #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
-    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.triggers[0].description #=> String
     #   resp.triggers[0].schedule #=> String
@@ -6953,8 +6918,6 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
-    #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers AWS API Documentation
@@ -6970,8 +6933,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be retrieved is
-    #   located. If none is provided, the Amazon Web Services account ID is
-    #   used by default.
+    #   located. If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function is located.
@@ -7017,8 +6979,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the functions to be retrieved are
-    #   located. If none is provided, the Amazon Web Services account ID is
-    #   used by default.
+    #   located. If none is provided, the AWS account ID is used by default.
     #
     # @option params [String] :database_name
     #   The name of the catalog database where the functions are located. If
@@ -7126,7 +7087,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7145,8 +7106,6 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7183,8 +7142,6 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.edges #=> Array
     #   resp.workflow.last_run.graph.edges[0].source_id #=> String
     #   resp.workflow.last_run.graph.edges[0].destination_id #=> String
-    #   resp.workflow.last_run.starting_event_batch_condition.batch_size #=> Integer
-    #   resp.workflow.last_run.starting_event_batch_condition.batch_window #=> Integer
     #   resp.workflow.graph.nodes #=> Array
     #   resp.workflow.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflow.graph.nodes[0].name #=> String
@@ -7192,7 +7149,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7211,8 +7168,6 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7307,7 +7262,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7326,8 +7281,6 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7364,8 +7317,6 @@ module Aws::Glue
     #   resp.run.graph.edges #=> Array
     #   resp.run.graph.edges[0].source_id #=> String
     #   resp.run.graph.edges[0].destination_id #=> String
-    #   resp.run.starting_event_batch_condition.batch_size #=> Integer
-    #   resp.run.starting_event_batch_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRun AWS API Documentation
     #
@@ -7464,7 +7415,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7483,8 +7434,6 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs #=> Array
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7521,8 +7470,6 @@ module Aws::Glue
     #   resp.runs[0].graph.edges #=> Array
     #   resp.runs[0].graph.edges[0].source_id #=> String
     #   resp.runs[0].graph.edges[0].destination_id #=> String
-    #   resp.runs[0].starting_event_batch_condition.batch_size #=> Integer
-    #   resp.runs[0].starting_event_batch_condition.batch_window #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRuns AWS API Documentation
@@ -7534,11 +7481,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Imports an existing Amazon Athena Data Catalog to Glue.
+    # Imports an existing Amazon Athena Data Catalog to AWS Glue
     #
     # @option params [String] :catalog_id
-    #   The ID of the catalog to import. Currently, this should be the Amazon
-    #   Web Services account ID.
+    #   The ID of the catalog to import. Currently, this should be the AWS
+    #   account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7557,10 +7504,9 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all crawler resources in this Amazon Web
-    # Services account, or the resources with the specified tag. This
-    # operation allows you to see which resources are available in your
-    # account, and their names.
+    # Retrieves the names of all crawler resources in this AWS account, or
+    # the resources with the specified tag. This operation allows you to see
+    # which resources are available in your account, and their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -7608,10 +7554,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all `DevEndpoint` resources in this Amazon Web
-    # Services account, or the resources with the specified tag. This
-    # operation allows you to see which resources are available in your
-    # account, and their names.
+    # Retrieves the names of all `DevEndpoint` resources in this AWS
+    # account, or the resources with the specified tag. This operation
+    # allows you to see which resources are available in your account, and
+    # their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -7659,10 +7605,9 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all job resources in this Amazon Web Services
-    # account, or the resources with the specified tag. This operation
-    # allows you to see which resources are available in your account, and
-    # their names.
+    # Retrieves the names of all job resources in this AWS account, or the
+    # resources with the specified tag. This operation allows you to see
+    # which resources are available in your account, and their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -7710,12 +7655,12 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves a sortable, filterable list of existing Glue machine
-    # learning transforms in this Amazon Web Services account, or the
-    # resources with the specified tag. This operation takes the optional
-    # `Tags` field, which you can use as a filter of the responses so that
-    # tagged resources can be retrieved as a group. If you choose to use tag
-    # filtering, only resources with the tags are retrieved.
+    # Retrieves a sortable, filterable list of existing AWS Glue machine
+    # learning transforms in this AWS account, or the resources with the
+    # specified tag. This operation takes the optional `Tags` field, which
+    # you can use as a filter of the responses so that tagged resources can
+    # be retrieved as a group. If you choose to use tag filtering, only
+    # resources with the tags are retrieved.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation request.
@@ -7950,10 +7895,9 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the names of all trigger resources in this Amazon Web
-    # Services account, or the resources with the specified tag. This
-    # operation allows you to see which resources are available in your
-    # account, and their names.
+    # Retrieves the names of all trigger resources in this AWS account, or
+    # the resources with the specified tag. This operation allows you to see
+    # which resources are available in your account, and their names.
     #
     # This operation takes the optional `Tags` field, which you can use as a
     # filter on the response so that tagged resources can be retrieved as a
@@ -8050,8 +7994,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog to set the security configuration for. If
-    #   none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, Types::DataCatalogEncryptionSettings] :data_catalog_encryption_settings
     #   The security configuration to set.
@@ -8109,8 +8052,8 @@ module Aws::Glue
     #
     #   * By directly updating the resource policy with `PutResourePolicy`
     #
-    #   * By using the **Grant permissions** command on the Amazon Web
-    #     Services Management Console.
+    #   * By using the **Grant permissions** command on the AWS Management
+    #     Console.
     #
     #   Must be set to `'TRUE'` if you have already used the Management
     #   Console to grant cross-account access, otherwise the call fails.
@@ -8786,10 +8729,10 @@ module Aws::Glue
     # call and that ultimately results in improving the quality of your
     # machine learning transform.
     #
-    # After the `StartMLLabelingSetGenerationTaskRun` finishes, Glue machine
-    # learning will have generated a series of questions for humans to
-    # answer. (Answering these questions is often called 'labeling' in the
-    # machine learning workflows). In the case of the `FindMatches`
+    # After the `StartMLLabelingSetGenerationTaskRun` finishes, AWS Glue
+    # machine learning will have generated a series of questions for humans
+    # to answer. (Answering these questions is often called 'labeling' in
+    # the machine learning workflows). In the case of the `FindMatches`
     # transform, these questions are of the form, “What is the correct way
     # to group these rows together into groups composed entirely of matching
     # records?” After the labeling process is finished, users upload their
@@ -8858,15 +8801,15 @@ module Aws::Glue
     #   replace the default arguments set in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
-    #   consumes, as well as arguments that Glue itself consumes.
+    #   consumes, as well as arguments that AWS Glue itself consumes.
     #
     #   For information about how to specify and consume your own Job
-    #   arguments, see the [Calling Glue APIs in Python][1] topic in the
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
     #   developer guide.
     #
-    #   For information about the key-value pairs that Glue consumes to set up
-    #   your job, see the [Special Parameters Used by Glue][2] topic in the
-    #   developer guide.
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
     #
     #
     #
@@ -8876,15 +8819,15 @@ module Aws::Glue
     # @option params [Integer] :allocated_capacity
     #   This field is deprecated. Use `MaxCapacity` instead.
     #
-    #   The number of Glue data processing units (DPUs) to allocate to this
-    #   JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU
-    #   is a relative measure of processing power that consists of 4 vCPUs of
-    #   compute capacity and 16 GB of memory. For more information, see the
-    #   [Glue pricing page][1].
+    #   The number of AWS Glue data processing units (DPUs) to allocate to
+    #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4 vCPUs
+    #   of compute capacity and 16 GB of memory. For more information, see the
+    #   [AWS Glue pricing page][1].
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #
     # @option params [Integer] :timeout
     #   The `JobRun` timeout in minutes. This is the maximum time that a job
@@ -8893,10 +8836,11 @@ module Aws::Glue
     #   timeout value set in the parent job.
     #
     # @option params [Float] :max_capacity
-    #   The number of Glue data processing units (DPUs) that can be allocated
-    #   when this job runs. A DPU is a relative measure of processing power
-    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
-    #   more information, see the [Glue pricing page][1].
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when this job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB of memory. For more information, see the [AWS Glue pricing
+    #   page][1].
     #
     #   Do not set `Max Capacity` if using `WorkerType` and `NumberOfWorkers`.
     #
@@ -8914,7 +8858,7 @@ module Aws::Glue
     #
     #
     #
-    #   [1]: https://aws.amazon.com/glue/pricing/
+    #   [1]: https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/
     #
     # @option params [String] :security_configuration
     #   The name of the `SecurityConfiguration` structure to be used with this
@@ -8981,7 +8925,7 @@ module Aws::Glue
 
     # Starts a task to estimate the quality of the transform.
     #
-    # When you provide label sets as examples of truth, Glue machine
+    # When you provide label sets as examples of truth, AWS Glue machine
     # learning uses some of those examples to learn from them. The rest of
     # the labels are used as a test to estimate quality.
     #
@@ -9018,7 +8962,7 @@ module Aws::Glue
     # transform to improve the transform's quality by generating label sets
     # and adding labels.
     #
-    # When the `StartMLLabelingSetGenerationTaskRun` finishes, Glue will
+    # When the `StartMLLabelingSetGenerationTaskRun` finishes, AWS Glue will
     # have generated a "labeling set" or a set of questions for humans to
     # answer.
     #
@@ -9223,18 +9167,18 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Adds tags to a resource. A tag is a label you can assign to an Amazon
-    # Web Services resource. In Glue, you can tag only certain resources.
-    # For information about what resources you can tag, see [Amazon Web
-    # Services Tags in Glue][1].
+    # Adds tags to a resource. A tag is a label you can assign to an AWS
+    # resource. In AWS Glue, you can tag only certain resources. For
+    # information about what resources you can tag, see [AWS Tags in AWS
+    # Glue][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the Glue resource to which to add the tags. For more
-    #   information about Glue resource ARNs, see the [Glue ARN string
+    #   The ARN of the AWS Glue resource to which to add the tags. For more
+    #   information about AWS Glue resource ARNs, see the [AWS Glue ARN string
     #   pattern][1].
     #
     #
@@ -9354,8 +9298,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -9492,8 +9435,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
-    #   none is supplied, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the partitions reside.
@@ -9623,7 +9565,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the connection resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the connection definition to update.
@@ -9674,7 +9616,7 @@ module Aws::Glue
     #   by the new crawler to access customer resources.
     #
     # @option params [String] :database_name
-    #   The Glue database where results are stored, such as:
+    #   The AWS Glue database where results are stored, such as:
     #   `arn:aws:daylight:us-east-1::database/sometable/*`.
     #
     # @option params [String] :description
@@ -9739,7 +9681,6 @@ module Aws::Glue
     #           path: "Path",
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
-    #           sample_size: 1,
     #         },
     #       ],
     #       jdbc_targets: [
@@ -9833,8 +9774,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which the metadata database resides. If
-    #   none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
     #   The name of the database to update in the catalog. For Hive
@@ -9915,7 +9855,9 @@ module Aws::Glue
     #
     #   * `"--enable-glue-datacatalog": ""`
     #
-    #   ^
+    #   * `"GLUE_PYTHON_VERSION": "3"`
+    #
+    #   * `"GLUE_PYTHON_VERSION": "2"`
     #
     #   You can specify a version of Python support for development endpoints
     #   by using the `Arguments` parameter in the `CreateDevEndpoint` or
@@ -10041,10 +9983,10 @@ module Aws::Glue
     #   required permissions.
     #
     # @option params [String] :glue_version
-    #   This value determines which version of Glue this machine learning
+    #   This value determines which version of AWS Glue this machine learning
     #   transform is compatible with. Glue 1.0 is recommended for most
     #   customers. If the value is not set, the Glue compatibility defaults to
-    #   Glue 0.9. For more information, see [Glue Versions][1] in the
+    #   Glue 0.9. For more information, see [AWS Glue Versions][1] in the
     #   developer guide.
     #
     #
@@ -10052,11 +9994,11 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
     #
     # @option params [Float] :max_capacity
-    #   The number of Glue data processing units (DPUs) that are allocated to
-    #   task runs for this transform. You can allocate from 2 to 100 DPUs; the
-    #   default is 10. A DPU is a relative measure of processing power that
-    #   consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-    #   information, see the [Glue pricing page][1].
+    #   The number of AWS Glue data processing units (DPUs) that are allocated
+    #   to task runs for this transform. You can allocate from 2 to 100 DPUs;
+    #   the default is 10. A DPU is a relative measure of processing power
+    #   that consists of 4 vCPUs of compute capacity and 16 GB of memory. For
+    #   more information, see the [AWS Glue pricing page][1].
     #
     #   When the `WorkerType` field is set to a value other than `Standard`,
     #   the `MaxCapacity` field is set automatically and becomes read-only.
@@ -10137,8 +10079,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the partition to be updated resides.
-    #   If none is provided, the Amazon Web Services account ID is used by
-    #   default.
+    #   If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table in question
@@ -10353,7 +10294,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the table resides. If none is
-    #   provided, the Amazon Web Services account ID is used by default.
+    #   provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database in which the table resides. For Hive
@@ -10513,10 +10454,6 @@ module Aws::Glue
     #           },
     #         ],
     #       },
-    #       event_batching_condition: {
-    #         batch_size: 1, # required
-    #         batch_window: 1,
-    #       },
     #     },
     #   })
     #
@@ -10525,7 +10462,7 @@ module Aws::Glue
     #   resp.trigger.name #=> String
     #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
-    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
+    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.trigger.description #=> String
     #   resp.trigger.schedule #=> String
@@ -10544,8 +10481,6 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
-    #   resp.trigger.event_batching_condition.batch_size #=> Integer
-    #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger AWS API Documentation
     #
@@ -10560,8 +10495,7 @@ module Aws::Glue
     #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog where the function to be updated is
-    #   located. If none is provided, the Amazon Web Services account ID is
-    #   used by default.
+    #   located. If none is provided, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the function to be updated is
@@ -10665,7 +10599,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

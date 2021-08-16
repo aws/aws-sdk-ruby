@@ -1,41 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.67.0 (2021-08-05)
-------------------
-
-* Feature - EC2 Auto Scaling adds configuration checks and Launch Template validation to Instance Refresh.
-
-1.66.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.65.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.64.0 (2021-06-30)
-------------------
-
-* Feature - Amazon EC2 Auto Scaling infrastructure improvements and optimizations.
-
-1.63.0 (2021-06-04)
-------------------
-
-* Feature - Documentation updates for Amazon EC2 Auto Scaling
-
-1.62.0 (2021-06-02)
-------------------
-
-* Feature - You can now launch EC2 instances with GP3 volumes when using Auto Scaling groups with Launch Configurations
-
-1.61.0 (2021-05-19)
-------------------
-
-* Feature - With this release, customers can easily use Predictive Scaling as a policy directly through Amazon EC2 Auto Scaling configurations to proactively scale their applications ahead of predicted demand.
-
 1.60.0 (2021-04-08)
 ------------------
 

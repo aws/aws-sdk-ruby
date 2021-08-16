@@ -1307,8 +1307,7 @@
           "locationName":"DomainName"
         },
         "ObjectTypeName":{"shape":"typeName"},
-        "ProfileId":{"shape":"uuid"},
-        "ObjectFilter":{"shape":"ObjectFilter"}
+        "ProfileId":{"shape":"uuid"}
       }
     },
     "ListProfileObjectsResponse":{
@@ -1415,17 +1414,6 @@
       "type":"string",
       "max":512,
       "pattern":"\\S+"
-    },
-    "ObjectFilter":{
-      "type":"structure",
-      "required":[
-        "KeyName",
-        "Values"
-      ],
-      "members":{
-        "KeyName":{"shape":"name"},
-        "Values":{"shape":"requestValueList"}
-      }
     },
     "ObjectTypeField":{
       "type":"structure",
@@ -1848,8 +1836,6 @@
       "type":"string",
       "enum":[
         "PROFILE",
-        "ASSET",
-        "CASE",
         "UNIQUE",
         "SECONDARY",
         "LOOKUP_ONLY",

@@ -102,7 +102,6 @@ module Aws::AppSync
     GraphqlApis = Shapes::ListShape.new(name: 'GraphqlApis')
     HttpDataSourceConfig = Shapes::StructureShape.new(name: 'HttpDataSourceConfig')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
-    LambdaAuthorizerConfig = Shapes::StructureShape.new(name: 'LambdaAuthorizerConfig')
     LambdaConflictHandlerConfig = Shapes::StructureShape.new(name: 'LambdaConflictHandlerConfig')
     LambdaDataSourceConfig = Shapes::StructureShape.new(name: 'LambdaDataSourceConfig')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -145,7 +144,6 @@ module Aws::AppSync
     StartSchemaCreationResponse = Shapes::StructureShape.new(name: 'StartSchemaCreationResponse')
     String = Shapes::StringShape.new(name: 'String')
     SyncConfig = Shapes::StructureShape.new(name: 'SyncConfig')
-    TTL = Shapes::IntegerShape.new(name: 'TTL')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -180,7 +178,6 @@ module Aws::AppSync
     AdditionalAuthenticationProvider.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     AdditionalAuthenticationProvider.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     AdditionalAuthenticationProvider.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: CognitoUserPoolConfig, location_name: "userPoolConfig"))
-    AdditionalAuthenticationProvider.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
     AdditionalAuthenticationProvider.struct_class = Types::AdditionalAuthenticationProvider
 
     AdditionalAuthenticationProviders.member = Shapes::ShapeRef.new(shape: AdditionalAuthenticationProvider)
@@ -290,7 +287,6 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
     CreateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
-    CreateGraphqlApiRequest.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
 
     CreateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -484,7 +480,6 @@ module Aws::AppSync
     GraphqlApi.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
     GraphqlApi.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     GraphqlApi.add_member(:waf_web_acl_arn, Shapes::ShapeRef.new(shape: String, location_name: "wafWebAclArn"))
-    GraphqlApi.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
@@ -495,11 +490,6 @@ module Aws::AppSync
 
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalFailureException.struct_class = Types::InternalFailureException
-
-    LambdaAuthorizerConfig.add_member(:authorizer_result_ttl_in_seconds, Shapes::ShapeRef.new(shape: TTL, location_name: "authorizerResultTtlInSeconds"))
-    LambdaAuthorizerConfig.add_member(:authorizer_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "authorizerUri"))
-    LambdaAuthorizerConfig.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: String, location_name: "identityValidationExpression"))
-    LambdaAuthorizerConfig.struct_class = Types::LambdaAuthorizerConfig
 
     LambdaConflictHandlerConfig.add_member(:lambda_conflict_handler_arn, Shapes::ShapeRef.new(shape: String, location_name: "lambdaConflictHandlerArn"))
     LambdaConflictHandlerConfig.struct_class = Types::LambdaConflictHandlerConfig
@@ -722,7 +712,6 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     UpdateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
     UpdateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
-    UpdateGraphqlApiRequest.add_member(:lambda_authorizer_config, Shapes::ShapeRef.new(shape: LambdaAuthorizerConfig, location_name: "lambdaAuthorizerConfig"))
     UpdateGraphqlApiRequest.struct_class = Types::UpdateGraphqlApiRequest
 
     UpdateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))

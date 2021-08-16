@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.55.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.54.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.53.0 (2021-05-25)
-------------------
-
-* Feature - Adds support for Linux device types in WorkspaceAccessProperties
-
 1.52.0 (2021-03-12)
 ------------------
 

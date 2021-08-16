@@ -68,8 +68,7 @@ module ApiHelper
             'Long' => { 'shape' => 'LongShape' },
             'String' => { 'shape' => 'StringShape' },
             'Timestamp' => { 'shape' => 'TimestampShape' },
-            'EventStream' => { 'shape' => 'EventStream' },
-            'DocumentType' => { 'shape' => 'DocumentShape' }
+            'EventStream' => { 'shape' => 'EventStream' }
           }
         },
         'PayloadStructureShape' => {
@@ -124,7 +123,6 @@ module ApiHelper
         'StringShape' => { 'type' => 'string' },
         'SensitiveStringShape' => { 'type' => 'string', 'sensitive' => true },
         'TimestampShape' => { 'type' => 'timestamp' },
-        'DocumentShape' => { 'type' => 'structure', 'document' => true }
       }
     end
 

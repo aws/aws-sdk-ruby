@@ -118,7 +118,6 @@ module Aws::CloudSearch
     PartitionCount = Shapes::IntegerShape.new(name: 'PartitionCount')
     PartitionInstanceType = Shapes::StringShape.new(name: 'PartitionInstanceType')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
-    ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ScalingParameters = Shapes::StructureShape.new(name: 'ScalingParameters')
     ScalingParametersStatus = Shapes::StructureShape.new(name: 'ScalingParametersStatus')
@@ -483,8 +482,6 @@ module Aws::CloudSearch
     OptionStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     OptionStatus.struct_class = Types::OptionStatus
 
-    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
-
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ScalingParameters.add_member(:desired_instance_type, Shapes::ShapeRef.new(shape: PartitionInstanceType, location_name: "DesiredInstanceType"))
@@ -593,8 +590,6 @@ module Aws::CloudSearch
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:define_analysis_scheme, Seahorse::Model::Operation.new.tap do |o|

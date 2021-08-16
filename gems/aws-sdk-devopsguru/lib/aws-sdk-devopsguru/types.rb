@@ -67,28 +67,6 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # A time range that specifies when DevOps Guru opens and then closes an
-    # anomaly. This is different from `AnomalyTimeRange`, which specifies
-    # the time range when DevOps Guru actually observes the anomalous
-    # behavior.
-    #
-    # @!attribute [rw] open_time
-    #   The time when an anomaly is opened.
-    #   @return [Time]
-    #
-    # @!attribute [rw] close_time
-    #   The time when an anomaly is closed.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalyReportedTimeRange AWS API Documentation
-    #
-    class AnomalyReportedTimeRange < Struct.new(
-      :open_time,
-      :close_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Details about the source of the anomalous operational data that
     # triggered the anomaly. The one supported source is Amazon CloudWatch
     # metrics.
@@ -108,9 +86,7 @@ module Aws::DevOpsGuru
     end
 
     # A time range that specifies when the observed unusual behavior in an
-    # anomaly started and ended. This is different from
-    # `AnomalyReportedTimeRange`, which specifies the time range when DevOps
-    # Guru opens and then closes an anomaly.
+    # anomaly started and ended.
     #
     # @!attribute [rw] start_time
     #   The time when the anomalous behavior started.
@@ -1662,15 +1638,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] anomaly_time_range
     #   A time range that specifies when the observed unusual behavior in an
-    #   anomaly started and ended. This is different from
-    #   `AnomalyReportedTimeRange`, which specifies the time range when
-    #   DevOps Guru opens and then closes an anomaly.
+    #   anomaly started and ended.
     #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
-    #   between when the anomaly is opened and the time when it is closed.
-    #   @return [Types::AnomalyReportedTimeRange]
     #
     # @!attribute [rw] prediction_time_range
     #   The time range during which anomalous behavior in a proactive
@@ -1710,7 +1679,6 @@ module Aws::DevOpsGuru
       :status,
       :update_time,
       :anomaly_time_range,
-      :anomaly_reported_time_range,
       :prediction_time_range,
       :source_details,
       :associated_insight_id,
@@ -1741,15 +1709,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] anomaly_time_range
     #   A time range that specifies when the observed unusual behavior in an
-    #   anomaly started and ended. This is different from
-    #   `AnomalyReportedTimeRange`, which specifies the time range when
-    #   DevOps Guru opens and then closes an anomaly.
+    #   anomaly started and ended.
     #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
-    #   between when the anomaly is opened and the time when it is closed.
-    #   @return [Types::AnomalyReportedTimeRange]
     #
     # @!attribute [rw] prediction_time_range
     #   The time range during which anomalous behavior in a proactive
@@ -1789,7 +1750,6 @@ module Aws::DevOpsGuru
       :status,
       :update_time,
       :anomaly_time_range,
-      :anomaly_reported_time_range,
       :prediction_time_range,
       :source_details,
       :associated_insight_id,
@@ -1957,15 +1917,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] anomaly_time_range
     #   A time range that specifies when the observed unusual behavior in an
-    #   anomaly started and ended. This is different from
-    #   `AnomalyReportedTimeRange`, which specifies the time range when
-    #   DevOps Guru opens and then closes an anomaly.
+    #   anomaly started and ended.
     #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
-    #   between when the anomaly is opened and the time when it is closed.
-    #   @return [Types::AnomalyReportedTimeRange]
     #
     # @!attribute [rw] source_details
     #   Details about the source of the analyzed operational data that
@@ -1993,7 +1946,6 @@ module Aws::DevOpsGuru
       :severity,
       :status,
       :anomaly_time_range,
-      :anomaly_reported_time_range,
       :source_details,
       :associated_insight_id,
       :resource_collection)
@@ -2018,15 +1970,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] anomaly_time_range
     #   A time range that specifies when the observed unusual behavior in an
-    #   anomaly started and ended. This is different from
-    #   `AnomalyReportedTimeRange`, which specifies the time range when
-    #   DevOps Guru opens and then closes an anomaly.
+    #   anomaly started and ended.
     #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
-    #   between when the anomaly is opened and the time when it is closed.
-    #   @return [Types::AnomalyReportedTimeRange]
     #
     # @!attribute [rw] source_details
     #   Details about the source of the analyzed operational data that
@@ -2054,7 +1999,6 @@ module Aws::DevOpsGuru
       :severity,
       :status,
       :anomaly_time_range,
-      :anomaly_reported_time_range,
       :source_details,
       :associated_insight_id,
       :resource_collection)

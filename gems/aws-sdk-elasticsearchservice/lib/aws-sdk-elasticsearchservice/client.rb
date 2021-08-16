@@ -587,9 +587,6 @@ module Aws::ElasticsearchService
     #       warm_enabled: false,
     #       warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
     #       warm_count: 1,
-    #       cold_storage_options: {
-    #         enabled: false, # required
-    #       },
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -699,7 +696,6 @@ module Aws::ElasticsearchService
     #   resp.domain_status.elasticsearch_cluster_config.warm_enabled #=> Boolean
     #   resp.domain_status.elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.warm_count #=> Integer
-    #   resp.domain_status.elasticsearch_cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -904,7 +900,6 @@ module Aws::ElasticsearchService
     #   resp.domain_status.elasticsearch_cluster_config.warm_enabled #=> Boolean
     #   resp.domain_status.elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.warm_count #=> Integer
-    #   resp.domain_status.elasticsearch_cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1175,7 +1170,6 @@ module Aws::ElasticsearchService
     #   resp.domain_status.elasticsearch_cluster_config.warm_enabled #=> Boolean
     #   resp.domain_status.elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
     #   resp.domain_status.elasticsearch_cluster_config.warm_count #=> Integer
-    #   resp.domain_status.elasticsearch_cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status.ebs_options.volume_size #=> Integer
@@ -1267,7 +1261,6 @@ module Aws::ElasticsearchService
     #   resp.domain_config.elasticsearch_cluster_config.options.warm_enabled #=> Boolean
     #   resp.domain_config.elasticsearch_cluster_config.options.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
     #   resp.domain_config.elasticsearch_cluster_config.options.warm_count #=> Integer
-    #   resp.domain_config.elasticsearch_cluster_config.options.cold_storage_options.enabled #=> Boolean
     #   resp.domain_config.elasticsearch_cluster_config.status.creation_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_version #=> Integer
@@ -1428,7 +1421,6 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].elasticsearch_cluster_config.warm_enabled #=> Boolean
     #   resp.domain_status_list[0].elasticsearch_cluster_config.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
     #   resp.domain_status_list[0].elasticsearch_cluster_config.warm_count #=> Integer
-    #   resp.domain_status_list[0].elasticsearch_cluster_config.cold_storage_options.enabled #=> Boolean
     #   resp.domain_status_list[0].ebs_options.ebs_enabled #=> Boolean
     #   resp.domain_status_list[0].ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
     #   resp.domain_status_list[0].ebs_options.volume_size #=> Integer
@@ -2491,9 +2483,6 @@ module Aws::ElasticsearchService
     #       warm_enabled: false,
     #       warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
     #       warm_count: 1,
-    #       cold_storage_options: {
-    #         enabled: false, # required
-    #       },
     #     },
     #     ebs_options: {
     #       ebs_enabled: false,
@@ -2593,7 +2582,6 @@ module Aws::ElasticsearchService
     #   resp.domain_config.elasticsearch_cluster_config.options.warm_enabled #=> Boolean
     #   resp.domain_config.elasticsearch_cluster_config.options.warm_type #=> String, one of "ultrawarm1.medium.elasticsearch", "ultrawarm1.large.elasticsearch"
     #   resp.domain_config.elasticsearch_cluster_config.options.warm_count #=> Integer
-    #   resp.domain_config.elasticsearch_cluster_config.options.cold_storage_options.enabled #=> Boolean
     #   resp.domain_config.elasticsearch_cluster_config.status.creation_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_date #=> Time
     #   resp.domain_config.elasticsearch_cluster_config.status.update_version #=> Integer
@@ -2822,7 +2810,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

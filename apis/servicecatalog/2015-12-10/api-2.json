@@ -2419,7 +2419,7 @@
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSizeMax100"},
+        "PageSize":{"shape":"PageSize"},
         "PortfolioShareType":{"shape":"PortfolioShareType"}
       }
     },
@@ -2528,7 +2528,7 @@
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "ProductId":{"shape":"Id"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSizeMax100"}
+        "PageSize":{"shape":"PageSize"}
       }
     },
     "ListPortfoliosForProductOutput":{
@@ -2543,7 +2543,7 @@
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSizeMax100"}
+        "PageSize":{"shape":"PageSize"}
       }
     },
     "ListPortfoliosOutput":{
@@ -3634,7 +3634,7 @@
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "Filters":{"shape":"ProductViewFilters"},
-        "PageSize":{"shape":"PageSizeMax100"},
+        "PageSize":{"shape":"PageSize"},
         "SortBy":{"shape":"ProductViewSortBy"},
         "SortOrder":{"shape":"SortOrder"},
         "PageToken":{"shape":"PageToken"}

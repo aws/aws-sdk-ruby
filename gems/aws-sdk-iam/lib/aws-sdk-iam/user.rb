@@ -85,13 +85,12 @@ module Aws::IAM
     end
 
     # The date and time, in [ISO 8601 date-time format][1], when the user's
-    # password was last used to sign in to an Amazon Web Services website.
-    # For a list of Amazon Web Services websites that capture a user's last
-    # sign-in time, see the [Credential reports][2] topic in the *IAM User
-    # Guide*. If a password is used more than once in a five-minute span,
-    # only the first use is returned in this field. If the field is null (no
-    # value), then it indicates that they never signed in with a password.
-    # This can be because:
+    # password was last used to sign in to an AWS website. For a list of AWS
+    # websites that capture a user's last sign-in time, see the [Credential
+    # reports][2] topic in the *IAM User Guide*. If a password is used more
+    # than once in a five-minute span, only the first use is returned in
+    # this field. If the field is null (no value), then it indicates that
+    # they never signed in with a password. This can be because:
     #
     # * The user never had a password.
     #
@@ -335,7 +334,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
-    #   in the *Amazon Web Services General Reference*.
+    #   in the *AWS General Reference*.
     #
     #
     #
@@ -439,8 +438,8 @@ module Aws::IAM
     #   character range (`\u00FF`). You can also include the tab (`\u0009`),
     #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
     #   of these characters are valid in a password. However, many tools, such
-    #   as the Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   as the AWS Management Console, might restrict the ability to type
+    #   certain characters because they have special meaning within that tool.
     #
     #
     #
@@ -480,10 +479,10 @@ module Aws::IAM
     # @option options [required, String] :policy_document
     #   The policy document.
     #
-    #   You must provide policies in JSON format in IAM. However, for
+    #   You must provide policies in JSON format in IAM. However, for AWS
     #   CloudFormation templates formatted in YAML, you can provide the policy
-    #   in JSON or YAML format. CloudFormation always converts a YAML policy
-    #   to JSON format before submitting it to IAM.
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
@@ -532,7 +531,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
-    #   in the *Amazon Web Services General Reference*.
+    #   in the *AWS General Reference*.
     #
     #
     #

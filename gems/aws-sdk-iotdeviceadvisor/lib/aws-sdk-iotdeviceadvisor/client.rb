@@ -380,7 +380,7 @@ module Aws::IoTDeviceAdvisor
     # Deletes a Device Advisor test suite.
     #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite to be deleted.
+    #   Deletes a Device Advisor test suite with defined suite Id.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -400,10 +400,10 @@ module Aws::IoTDeviceAdvisor
     # Gets information about a Device Advisor test suite.
     #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite to get.
+    #   Requests suite definition Id with GetSuiteDefinition API call.
     #
     # @option params [String] :suite_definition_version
-    #   Suite definition version of the test suite to get.
+    #   Requests the suite definition version of a test suite.
     #
     # @return [Types::GetSuiteDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -451,10 +451,12 @@ module Aws::IoTDeviceAdvisor
     # Gets information about a Device Advisor test suite run.
     #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id for the test suite run.
+    #   Requests the information about Device Advisor test suite run based on
+    #   suite definition Id.
     #
     # @option params [required, String] :suite_run_id
-    #   Suite run Id for the test suite run.
+    #   Requests the information about Device Advisor test suite run based on
+    #   suite run Id.
     #
     # @return [Types::GetSuiteRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -485,6 +487,8 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_run_arn #=> String
     #   resp.suite_run_configuration.primary_device.thing_arn #=> String
     #   resp.suite_run_configuration.primary_device.certificate_arn #=> String
+    #   resp.suite_run_configuration.secondary_device.thing_arn #=> String
+    #   resp.suite_run_configuration.secondary_device.certificate_arn #=> String
     #   resp.suite_run_configuration.selected_test_list #=> Array
     #   resp.suite_run_configuration.selected_test_list[0] #=> String
     #   resp.test_result.groups #=> Array
@@ -494,7 +498,7 @@ module Aws::IoTDeviceAdvisor
     #   resp.test_result.groups[0].tests[0].test_case_run_id #=> String
     #   resp.test_result.groups[0].tests[0].test_case_definition_id #=> String
     #   resp.test_result.groups[0].tests[0].test_case_definition_name #=> String
-    #   resp.test_result.groups[0].tests[0].status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "STOPPING", "STOPPED", "PASS_WITH_WARNINGS", "ERROR"
+    #   resp.test_result.groups[0].tests[0].status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "PASS_WITH_WARNINGS", "ERROR"
     #   resp.test_result.groups[0].tests[0].start_time #=> Time
     #   resp.test_result.groups[0].tests[0].end_time #=> Time
     #   resp.test_result.groups[0].tests[0].log_url #=> String
@@ -502,7 +506,7 @@ module Aws::IoTDeviceAdvisor
     #   resp.test_result.groups[0].tests[0].failure #=> String
     #   resp.start_time #=> Time
     #   resp.end_time #=> Time
-    #   resp.status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "STOPPING", "STOPPED", "PASS_WITH_WARNINGS", "ERROR"
+    #   resp.status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "PASS_WITH_WARNINGS", "ERROR"
     #   resp.error_reason #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String128"] #=> String
@@ -518,10 +522,10 @@ module Aws::IoTDeviceAdvisor
     # test suite run.
     #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite.
+    #   Device Advisor suite definition Id.
     #
     # @option params [required, String] :suite_run_id
-    #   Suite run Id of the test suite run.
+    #   Device Advisor suite run Id.
     #
     # @return [Types::GetSuiteRunReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -548,10 +552,10 @@ module Aws::IoTDeviceAdvisor
     # Lists the Device Advisor test suites you have created.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at once.
+    #   Request the list of all the Device Advisor test suites.
     #
     # @option params [String] :next_token
-    #   A token used to get the next set of results.
+    #   Requests the Device Advisor test suites next token.
     #
     # @return [Types::ListSuiteDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -591,18 +595,18 @@ module Aws::IoTDeviceAdvisor
     # the test suite.
     #
     # @option params [String] :suite_definition_id
-    #   Lists the test suite runs of the specified test suite based on suite
-    #   definition Id.
+    #   Lists the runs of the specified Device Advisor test suite based on
+    #   suite definition Id.
     #
     # @option params [String] :suite_definition_version
-    #   Must be passed along with suiteDefinitionId. Lists the test suite runs
-    #   of the specified test suite based on suite definition version.
+    #   Lists the runs of the specified Device Advisor test suite based on
+    #   suite definition version.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at once.
+    #   MaxResults for list suite run API request.
     #
     # @option params [String] :next_token
-    #   A token to retrieve the next set of results.
+    #   Next pagination token for list suite run request.
     #
     # @return [Types::ListSuiteRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -630,7 +634,7 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_runs_list[0].created_at #=> Time
     #   resp.suite_runs_list[0].started_at #=> Time
     #   resp.suite_runs_list[0].end_at #=> Time
-    #   resp.suite_runs_list[0].status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "STOPPING", "STOPPED", "PASS_WITH_WARNINGS", "ERROR"
+    #   resp.suite_runs_list[0].status #=> String, one of "PASS", "FAIL", "CANCELED", "PENDING", "RUNNING", "PASS_WITH_WARNINGS", "ERROR"
     #   resp.suite_runs_list[0].passed #=> Integer
     #   resp.suite_runs_list[0].failed #=> Integer
     #   resp.next_token #=> String
@@ -669,16 +673,67 @@ module Aws::IoTDeviceAdvisor
       req.send_request(options)
     end
 
+    # Lists all the test cases in the test suite.
+    #
+    # @option params [Boolean] :intended_for_qualification
+    #   Lists all the qualification test cases in the test suite.
+    #
+    # @option params [Integer] :max_results
+    #   Requests the test cases max results.
+    #
+    # @option params [String] :next_token
+    #   Requests the test cases next token.
+    #
+    # @return [Types::ListTestCasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestCasesResponse#categories #categories} => Array&lt;Types::TestCaseCategory&gt;
+    #   * {Types::ListTestCasesResponse#root_group_configuration #root_group_configuration} => Hash&lt;String,String&gt;
+    #   * {Types::ListTestCasesResponse#group_configuration #group_configuration} => Hash&lt;String,String&gt;
+    #   * {Types::ListTestCasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_cases({
+    #     intended_for_qualification: false,
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.categories #=> Array
+    #   resp.categories[0].name #=> String
+    #   resp.categories[0].tests #=> Array
+    #   resp.categories[0].tests[0].name #=> String
+    #   resp.categories[0].tests[0].configuration #=> Hash
+    #   resp.categories[0].tests[0].configuration["ConfigString"] #=> String
+    #   resp.categories[0].tests[0].test.id #=> String
+    #   resp.categories[0].tests[0].test.test_case_version #=> String
+    #   resp.root_group_configuration #=> Hash
+    #   resp.root_group_configuration["ConfigString"] #=> String
+    #   resp.group_configuration #=> Hash
+    #   resp.group_configuration["ConfigString"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_test_cases(params = {})
+    # @param [Hash] params ({})
+    def list_test_cases(params = {}, options = {})
+      req = build_request(:list_test_cases, params)
+      req.send_request(options)
+    end
+
     # Starts a Device Advisor test suite run.
     #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite.
+    #   Request to start suite run based on suite definition Id.
     #
     # @option params [String] :suite_definition_version
-    #   Suite definition version of the test suite.
+    #   Request to start suite run based on suite definition version.
     #
     # @option params [Types::SuiteRunConfiguration] :suite_run_configuration
-    #   Suite run configuration.
+    #   Request to start suite run based on suite configuration.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to be attached to the suite run.
@@ -699,6 +754,10 @@ module Aws::IoTDeviceAdvisor
     #         thing_arn: "AmazonResourceName",
     #         certificate_arn: "AmazonResourceName",
     #       },
+    #       secondary_device: {
+    #         thing_arn: "AmazonResourceName",
+    #         certificate_arn: "AmazonResourceName",
+    #       },
     #       selected_test_list: ["UUID"],
     #     },
     #     tags: {
@@ -716,30 +775,6 @@ module Aws::IoTDeviceAdvisor
     # @param [Hash] params ({})
     def start_suite_run(params = {}, options = {})
       req = build_request(:start_suite_run, params)
-      req.send_request(options)
-    end
-
-    # Stops a Device Advisor test suite run that is currently running.
-    #
-    # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite run to be stopped.
-    #
-    # @option params [required, String] :suite_run_id
-    #   Suite run Id of the test suite run to be stopped.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.stop_suite_run({
-    #     suite_definition_id: "UUID", # required
-    #     suite_run_id: "UUID", # required
-    #   })
-    #
-    # @overload stop_suite_run(params = {})
-    # @param [Hash] params ({})
-    def stop_suite_run(params = {}, options = {})
-      req = build_request(:stop_suite_run, params)
       req.send_request(options)
     end
 
@@ -796,7 +831,7 @@ module Aws::IoTDeviceAdvisor
     # Updates a Device Advisor test suite.
     #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite to be updated.
+    #   Updates a Device Advisor test suite with suite definition id.
     #
     # @option params [Types::SuiteDefinitionConfiguration] :suite_definition_configuration
     #   Updates a Device Advisor test suite with suite definition
@@ -858,7 +893,7 @@ module Aws::IoTDeviceAdvisor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -184,7 +184,6 @@ module Aws::DatabaseMigrationService
     PendingMaintenanceAction = Shapes::StructureShape.new(name: 'PendingMaintenanceAction')
     PendingMaintenanceActionDetails = Shapes::ListShape.new(name: 'PendingMaintenanceActionDetails')
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
-    PluginNameValue = Shapes::StringShape.new(name: 'PluginNameValue')
     PostgreSQLSettings = Shapes::StructureShape.new(name: 'PostgreSQLSettings')
     RebootReplicationInstanceMessage = Shapes::StructureShape.new(name: 'RebootReplicationInstanceMessage')
     RebootReplicationInstanceResponse = Shapes::StructureShape.new(name: 'RebootReplicationInstanceResponse')
@@ -748,7 +747,6 @@ module Aws::DatabaseMigrationService
     EndpointSetting.add_member(:applicability, Shapes::ShapeRef.new(shape: String, location_name: "Applicability"))
     EndpointSetting.add_member(:int_value_min, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IntValueMin"))
     EndpointSetting.add_member(:int_value_max, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IntValueMax"))
-    EndpointSetting.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "DefaultValue"))
     EndpointSetting.struct_class = Types::EndpointSetting
 
     EndpointSettingEnumValues.member = Shapes::ShapeRef.new(shape: String)
@@ -870,7 +868,6 @@ module Aws::DatabaseMigrationService
     KafkaSettings.add_member(:ssl_ca_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "SslCaCertificateArn"))
     KafkaSettings.add_member(:sasl_username, Shapes::ShapeRef.new(shape: String, location_name: "SaslUsername"))
     KafkaSettings.add_member(:sasl_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "SaslPassword"))
-    KafkaSettings.add_member(:no_hex_prefix, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoHexPrefix"))
     KafkaSettings.struct_class = Types::KafkaSettings
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
@@ -884,7 +881,6 @@ module Aws::DatabaseMigrationService
     KinesisSettings.add_member(:include_table_alter_operations, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeTableAlterOperations"))
     KinesisSettings.add_member(:include_control_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeControlDetails"))
     KinesisSettings.add_member(:include_null_and_empty, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeNullAndEmpty"))
-    KinesisSettings.add_member(:no_hex_prefix, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoHexPrefix"))
     KinesisSettings.struct_class = Types::KinesisSettings
 
     ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
@@ -939,7 +935,6 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
     ModifyEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     ModifyEndpointMessage.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
-    ModifyEndpointMessage.add_member(:exact_settings, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExactSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
     ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -1071,11 +1066,7 @@ module Aws::DatabaseMigrationService
     OracleSettings.add_member(:security_db_encryption_name, Shapes::ShapeRef.new(shape: String, location_name: "SecurityDbEncryptionName"))
     OracleSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     OracleSettings.add_member(:spatial_data_option_to_geo_json_function_name, Shapes::ShapeRef.new(shape: String, location_name: "SpatialDataOptionToGeoJsonFunctionName"))
-    OracleSettings.add_member(:standby_delay_time, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StandbyDelayTime"))
     OracleSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
-    OracleSettings.add_member(:use_b_file, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseBFile"))
-    OracleSettings.add_member(:use_direct_path_full_load, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseDirectPathFullLoad"))
-    OracleSettings.add_member(:use_logminer_reader, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseLogminerReader"))
     OracleSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     OracleSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     OracleSettings.add_member(:secrets_manager_oracle_asm_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerOracleAsmAccessRoleArn"))
@@ -1114,15 +1105,11 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings.add_member(:ddl_artifacts_schema, Shapes::ShapeRef.new(shape: String, location_name: "DdlArtifactsSchema"))
     PostgreSQLSettings.add_member(:execute_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ExecuteTimeout"))
     PostgreSQLSettings.add_member(:fail_tasks_on_lob_truncation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "FailTasksOnLobTruncation"))
-    PostgreSQLSettings.add_member(:heartbeat_enable, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "HeartbeatEnable"))
-    PostgreSQLSettings.add_member(:heartbeat_schema, Shapes::ShapeRef.new(shape: String, location_name: "HeartbeatSchema"))
-    PostgreSQLSettings.add_member(:heartbeat_frequency, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "HeartbeatFrequency"))
     PostgreSQLSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
     PostgreSQLSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     PostgreSQLSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     PostgreSQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     PostgreSQLSettings.add_member(:slot_name, Shapes::ShapeRef.new(shape: String, location_name: "SlotName"))
-    PostgreSQLSettings.add_member(:plugin_name, Shapes::ShapeRef.new(shape: PluginNameValue, location_name: "PluginName"))
     PostgreSQLSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     PostgreSQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     PostgreSQLSettings.struct_class = Types::PostgreSQLSettings

@@ -507,7 +507,7 @@ module Aws::Mgn
     #     create_public_ip: false, # required
     #     data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
     #     default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1
-    #     ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
+    #     ebs_encryption: "NONE", # required, accepts NONE, DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     replication_server_instance_type: "EC2InstanceType", # required
     #     replication_servers_security_groups_i_ds: ["SecurityGroupID"], # required
@@ -529,7 +529,7 @@ module Aws::Mgn
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "NONE", "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.replication_configuration_template_id #=> String
     #   resp.replication_server_instance_type #=> String
@@ -763,7 +763,7 @@ module Aws::Mgn
     #   resp.items[0].create_public_ip #=> Boolean
     #   resp.items[0].data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.items[0].default_large_staging_disk_type #=> String, one of "GP2", "ST1"
-    #   resp.items[0].ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.items[0].ebs_encryption #=> String, one of "NONE", "DEFAULT", "CUSTOM"
     #   resp.items[0].ebs_encryption_key_arn #=> String
     #   resp.items[0].replication_configuration_template_id #=> String
     #   resp.items[0].replication_server_instance_type #=> String
@@ -1169,7 +1169,7 @@ module Aws::Mgn
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "NONE", "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
     #   resp.replicated_disks #=> Array
@@ -1770,7 +1770,7 @@ module Aws::Mgn
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
     #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1
-    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
+    #     ebs_encryption: "NONE", # accepts NONE, DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     name: "SmallBoundedString",
     #     replicated_disks: [
@@ -1798,7 +1798,7 @@ module Aws::Mgn
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "NONE", "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.name #=> String
     #   resp.replicated_disks #=> Array
@@ -1903,7 +1903,7 @@ module Aws::Mgn
     #     create_public_ip: false,
     #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
     #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1
-    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
+    #     ebs_encryption: "NONE", # accepts NONE, DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
     #     replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
     #     replication_server_instance_type: "EC2InstanceType",
@@ -1923,7 +1923,7 @@ module Aws::Mgn
     #   resp.create_public_ip #=> Boolean
     #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption #=> String, one of "NONE", "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
     #   resp.replication_configuration_template_id #=> String
     #   resp.replication_server_instance_type #=> String
@@ -1958,7 +1958,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.0.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

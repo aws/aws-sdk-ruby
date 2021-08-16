@@ -782,7 +782,6 @@ module Aws::ForecastService
     #         forecast_horizon: 1, # required
     #         forecast_types: ["ForecastType"],
     #         perform_auto_ml: false,
-    #         auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized
     #         perform_hpo: false,
     #         training_parameters: {
     #           "ParameterKey" => "ParameterValue",
@@ -914,14 +913,6 @@ module Aws::ForecastService
     #   false.
     #   @return [Boolean]
     #
-    # @!attribute [rw] auto_ml_override_strategy
-    #   Used to overide the default AutoML strategy, which is to optimize
-    #   predictor accuracy. To apply an AutoML strategy that minimizes
-    #   training time, use `LatencyOptimized`.
-    #
-    #   This parameter is only valid for predictors trained using AutoML.
-    #   @return [String]
-    #
     # @!attribute [rw] perform_hpo
     #   Whether to perform hyperparameter optimization (HPO). HPO finds
     #   optimal hyperparameter values for your training data. The process of
@@ -1026,7 +1017,6 @@ module Aws::ForecastService
       :forecast_horizon,
       :forecast_types,
       :perform_auto_ml,
-      :auto_ml_override_strategy,
       :perform_hpo,
       :training_parameters,
       :evaluation_parameters,
@@ -2074,14 +2064,6 @@ module Aws::ForecastService
     #   Whether the predictor is set to perform AutoML.
     #   @return [Boolean]
     #
-    # @!attribute [rw] auto_ml_override_strategy
-    #   The AutoML strategy used to train the predictor. Unless
-    #   `LatencyOptimized` is specified, the AutoML strategy optimizes
-    #   predictor accuracy.
-    #
-    #   This parameter is only valid for predictors trained using AutoML.
-    #   @return [String]
-    #
     # @!attribute [rw] perform_hpo
     #   Whether the predictor is set to perform hyperparameter optimization
     #   (HPO).
@@ -2190,7 +2172,6 @@ module Aws::ForecastService
       :forecast_horizon,
       :forecast_types,
       :perform_auto_ml,
-      :auto_ml_override_strategy,
       :perform_hpo,
       :training_parameters,
       :evaluation_parameters,
@@ -2759,19 +2740,10 @@ module Aws::ForecastService
     #   An array of results from evaluating the predictor.
     #   @return [Array<Types::EvaluationResult>]
     #
-    # @!attribute [rw] auto_ml_override_strategy
-    #   The AutoML strategy used to train the predictor. Unless
-    #   `LatencyOptimized` is specified, the AutoML strategy optimizes
-    #   predictor accuracy.
-    #
-    #   This parameter is only valid for predictors trained using AutoML.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetricsResponse AWS API Documentation
     #
     class GetAccuracyMetricsResponse < Struct.new(
-      :predictor_evaluation_results,
-      :auto_ml_override_strategy)
+      :predictor_evaluation_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3912,23 +3884,19 @@ module Aws::ForecastService
     # Forecast dataset with the CreateDatasetImportJob operation.
     #
     # @!attribute [rw] count
-    #   The number of values in the field. If the response value is -1,
-    #   refer to `CountLong`.
+    #   The number of values in the field.
     #   @return [Integer]
     #
     # @!attribute [rw] count_distinct
-    #   The number of distinct values in the field. If the response value is
-    #   -1, refer to `CountDistinctLong`.
+    #   The number of distinct values in the field.
     #   @return [Integer]
     #
     # @!attribute [rw] count_null
-    #   The number of null values in the field. If the response value is -1,
-    #   refer to `CountNullLong`.
+    #   The number of null values in the field.
     #   @return [Integer]
     #
     # @!attribute [rw] count_nan
-    #   The number of NAN (not a number) values in the field. If the
-    #   response value is -1, refer to `CountNanLong`.
+    #   The number of NAN (not a number) values in the field.
     #   @return [Integer]
     #
     # @!attribute [rw] min
@@ -3947,28 +3915,6 @@ module Aws::ForecastService
     #   For a numeric field, the standard deviation.
     #   @return [Float]
     #
-    # @!attribute [rw] count_long
-    #   The number of values in the field. `CountLong` is used instead of
-    #   `Count` if the value is greater than 2,147,483,647.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] count_distinct_long
-    #   The number of distinct values in the field. `CountDistinctLong` is
-    #   used instead of `CountDistinct` if the value is greater than
-    #   2,147,483,647.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] count_null_long
-    #   The number of null values in the field. `CountNullLong` is used
-    #   instead of `CountNull` if the value is greater than 2,147,483,647.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] count_nan_long
-    #   The number of NAN (not a number) values in the field. `CountNanLong`
-    #   is used instead of `CountNan` if the value is greater than
-    #   2,147,483,647.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Statistics AWS API Documentation
     #
     class Statistics < Struct.new(
@@ -3979,11 +3925,7 @@ module Aws::ForecastService
       :min,
       :max,
       :avg,
-      :stddev,
-      :count_long,
-      :count_distinct_long,
-      :count_null_long,
-      :count_nan_long)
+      :stddev)
       SENSITIVE = []
       include Aws::Structure
     end

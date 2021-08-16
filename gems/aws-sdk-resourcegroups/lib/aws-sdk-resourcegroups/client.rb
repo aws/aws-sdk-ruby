@@ -744,11 +744,7 @@ module Aws::ResourceGroups
     #
     # * `resource-groups:ListGroupResources`
     #
-    # * `cloudformation:DescribeStacks`
-    #
-    # * `cloudformation:ListStackResources`
-    #
-    # * `tag:GetResources`
+    # ^
     #
     # @option params [String] :group_name
     #   <i> <b>Deprecated - don't use this parameter. Use the
@@ -1012,11 +1008,7 @@ module Aws::ResourceGroups
     #
     # * `resource-groups:SearchResources`
     #
-    # * `cloudformation:DescribeStacks`
-    #
-    # * `cloudformation:ListStackResources`
-    #
-    # * `tag:GetResources`
+    # ^
     #
     # @option params [required, Types::ResourceQuery] :resource_query
     #   The search query, using the same formats that are supported for
@@ -1350,7 +1342,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

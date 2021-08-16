@@ -706,8 +706,7 @@
         "DailyAutomaticBackupStartTime":{"shape":"DailyTime"},
         "AutomaticBackupRetentionDays":{"shape":"AutomaticBackupRetentionDays"},
         "CopyTagsToBackups":{"shape":"Flag"},
-        "DriveCacheType":{"shape":"DriveCacheType"},
-        "DataCompressionType":{"shape":"DataCompressionType"}
+        "DriveCacheType":{"shape":"DriveCacheType"}
       }
     },
     "CreateFileSystemRequest":{
@@ -752,8 +751,7 @@
         "DailyAutomaticBackupStartTime":{"shape":"DailyTime"},
         "AutomaticBackupRetentionDays":{"shape":"AutomaticBackupRetentionDays"},
         "CopyTagsToBackups":{"shape":"Flag"},
-        "Aliases":{"shape":"AlternateDNSNames"},
-        "AuditLogConfiguration":{"shape":"WindowsAuditLogCreateConfiguration"}
+        "Aliases":{"shape":"AlternateDNSNames"}
       }
     },
     "CreationTime":{"type":"timestamp"},
@@ -768,13 +766,6 @@
       "max":5,
       "min":5,
       "pattern":"^([01]\\d|2[0-3]):?([0-5]\\d)$"
-    },
-    "DataCompressionType":{
-      "type":"string",
-      "enum":[
-        "NONE",
-        "LZ4"
-      ]
     },
     "DataRepositoryConfiguration":{
       "type":"structure",
@@ -1240,12 +1231,6 @@
       "max":10
     },
     "Flag":{"type":"boolean"},
-    "GeneralARN":{
-      "type":"string",
-      "max":1024,
-      "min":8,
-      "pattern":"^arn:[^:]{1,63}:[^:]{0,63}:[^:]{0,63}:(?:|\\d{12}):[^/].{0,1023}$"
-    },
     "IncompatibleParameterError":{
       "type":"structure",
       "required":["Parameter"],
@@ -1369,8 +1354,7 @@
         "DailyAutomaticBackupStartTime":{"shape":"DailyTime"},
         "AutomaticBackupRetentionDays":{"shape":"AutomaticBackupRetentionDays"},
         "CopyTagsToBackups":{"shape":"Flag"},
-        "DriveCacheType":{"shape":"DriveCacheType"},
-        "DataCompressionType":{"shape":"DataCompressionType"}
+        "DriveCacheType":{"shape":"DriveCacheType"}
       }
     },
     "LustreFileSystemMountName":{
@@ -1693,8 +1677,7 @@
         "WeeklyMaintenanceStartTime":{"shape":"WeeklyTime"},
         "DailyAutomaticBackupStartTime":{"shape":"DailyTime"},
         "AutomaticBackupRetentionDays":{"shape":"AutomaticBackupRetentionDays"},
-        "AutoImportPolicy":{"shape":"AutoImportPolicyType"},
-        "DataCompressionType":{"shape":"DataCompressionType"}
+        "AutoImportPolicy":{"shape":"AutoImportPolicyType"}
       }
     },
     "UpdateFileSystemRequest":{
@@ -1724,8 +1707,7 @@
         "DailyAutomaticBackupStartTime":{"shape":"DailyTime"},
         "AutomaticBackupRetentionDays":{"shape":"AutomaticBackupRetentionDays"},
         "ThroughputCapacity":{"shape":"MegabytesPerSecond"},
-        "SelfManagedActiveDirectoryConfiguration":{"shape":"SelfManagedActiveDirectoryConfigurationUpdates"},
-        "AuditLogConfiguration":{"shape":"WindowsAuditLogCreateConfiguration"}
+        "SelfManagedActiveDirectoryConfiguration":{"shape":"SelfManagedActiveDirectoryConfigurationUpdates"}
       }
     },
     "VpcId":{
@@ -1739,39 +1721,6 @@
       "max":7,
       "min":7,
       "pattern":"^[1-7]:([01]\\d|2[0-3]):?([0-5]\\d)$"
-    },
-    "WindowsAccessAuditLogLevel":{
-      "type":"string",
-      "enum":[
-        "DISABLED",
-        "SUCCESS_ONLY",
-        "FAILURE_ONLY",
-        "SUCCESS_AND_FAILURE"
-      ]
-    },
-    "WindowsAuditLogConfiguration":{
-      "type":"structure",
-      "required":[
-        "FileAccessAuditLogLevel",
-        "FileShareAccessAuditLogLevel"
-      ],
-      "members":{
-        "FileAccessAuditLogLevel":{"shape":"WindowsAccessAuditLogLevel"},
-        "FileShareAccessAuditLogLevel":{"shape":"WindowsAccessAuditLogLevel"},
-        "AuditLogDestination":{"shape":"GeneralARN"}
-      }
-    },
-    "WindowsAuditLogCreateConfiguration":{
-      "type":"structure",
-      "required":[
-        "FileAccessAuditLogLevel",
-        "FileShareAccessAuditLogLevel"
-      ],
-      "members":{
-        "FileAccessAuditLogLevel":{"shape":"WindowsAccessAuditLogLevel"},
-        "FileShareAccessAuditLogLevel":{"shape":"WindowsAccessAuditLogLevel"},
-        "AuditLogDestination":{"shape":"GeneralARN"}
-      }
     },
     "WindowsDeploymentType":{
       "type":"string",
@@ -1796,8 +1745,7 @@
         "DailyAutomaticBackupStartTime":{"shape":"DailyTime"},
         "AutomaticBackupRetentionDays":{"shape":"AutomaticBackupRetentionDays"},
         "CopyTagsToBackups":{"shape":"Flag"},
-        "Aliases":{"shape":"Aliases"},
-        "AuditLogConfiguration":{"shape":"WindowsAuditLogConfiguration"}
+        "Aliases":{"shape":"Aliases"}
       }
     }
   }

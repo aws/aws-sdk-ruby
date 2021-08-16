@@ -1,36 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.72.0 (2021-08-03)
-------------------
-
-* Feature - AWS Elemental MediaConvert SDK has added control over the passthrough of XDS captions metadata to outputs.
-
-1.71.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.70.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.69.0 (2021-07-09)
-------------------
-
-* Feature - MediaConvert now supports color, style and position information passthrough from 608 and Teletext to SRT and WebVTT subtitles. MediaConvert now also supports Automatic QVBR quality levels for QVBR RateControlMode.
-
-1.68.0 (2021-06-28)
-------------------
-
-* Feature - MediaConvert adds support for HDR10+, ProRes 4444,  and XAVC outputs, ADM/DAMF support for Dolby Atmos ingest, and alternative audio and WebVTT caption ingest via HLS inputs. MediaConvert also now supports creating trickplay outputs for Roku devices for HLS, CMAF, and DASH output groups.
-
-1.67.0 (2021-05-10)
-------------------
-
-* Feature - AWS Elemental MediaConvert SDK has added support for Kantar SNAP File Audio Watermarking with a Kantar Watermarking account, and Display Definition Segment(DDS) segment data controls for DVB-Sub caption outputs.
-
 1.66.0 (2021-04-26)
 ------------------
 

@@ -1,41 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.55.0 (2021-08-06)
-------------------
-
-* Feature - This release adds support to track when a bucket access key was last used.
-
-1.54.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.53.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.52.0 (2021-07-14)
-------------------
-
-* Feature - This release adds support for the Amazon Lightsail object storage service, which allows you to create buckets and store objects.
-
-1.51.0 (2021-06-02)
-------------------
-
-* Feature - Documentation updates for Lightsail
-
-1.50.0 (2021-05-27)
-------------------
-
-* Feature - Documentation updates for Lightsail
-
-1.49.0 (2021-05-19)
-------------------
-
-* Feature - Documentation updates for Amazon Lightsail.
-
 1.48.0 (2021-04-13)
 ------------------
 

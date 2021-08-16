@@ -15,12 +15,6 @@ module Aws::Lightsail
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDirection = Shapes::StringShape.new(name: 'AccessDirection')
-    AccessKey = Shapes::StructureShape.new(name: 'AccessKey')
-    AccessKeyLastUsed = Shapes::StructureShape.new(name: 'AccessKeyLastUsed')
-    AccessKeyList = Shapes::ListShape.new(name: 'AccessKeyList')
-    AccessReceiverList = Shapes::ListShape.new(name: 'AccessReceiverList')
-    AccessRules = Shapes::StructureShape.new(name: 'AccessRules')
-    AccessType = Shapes::StringShape.new(name: 'AccessType')
     AccountSetupInProgressException = Shapes::StructureShape.new(name: 'AccountSetupInProgressException')
     AddOn = Shapes::StructureShape.new(name: 'AddOn')
     AddOnList = Shapes::ListShape.new(name: 'AddOnList')
@@ -57,13 +51,6 @@ module Aws::Lightsail
     Blueprint = Shapes::StructureShape.new(name: 'Blueprint')
     BlueprintList = Shapes::ListShape.new(name: 'BlueprintList')
     BlueprintType = Shapes::StringShape.new(name: 'BlueprintType')
-    Bucket = Shapes::StructureShape.new(name: 'Bucket')
-    BucketBundle = Shapes::StructureShape.new(name: 'BucketBundle')
-    BucketBundleList = Shapes::ListShape.new(name: 'BucketBundleList')
-    BucketList = Shapes::ListShape.new(name: 'BucketList')
-    BucketMetricName = Shapes::StringShape.new(name: 'BucketMetricName')
-    BucketName = Shapes::StringShape.new(name: 'BucketName')
-    BucketState = Shapes::StructureShape.new(name: 'BucketState')
     Bundle = Shapes::StructureShape.new(name: 'Bundle')
     BundleList = Shapes::ListShape.new(name: 'BundleList')
     CacheBehavior = Shapes::StructureShape.new(name: 'CacheBehavior')
@@ -125,10 +112,6 @@ module Aws::Lightsail
     CookieObject = Shapes::StructureShape.new(name: 'CookieObject')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
-    CreateBucketAccessKeyRequest = Shapes::StructureShape.new(name: 'CreateBucketAccessKeyRequest')
-    CreateBucketAccessKeyResult = Shapes::StructureShape.new(name: 'CreateBucketAccessKeyResult')
-    CreateBucketRequest = Shapes::StructureShape.new(name: 'CreateBucketRequest')
-    CreateBucketResult = Shapes::StructureShape.new(name: 'CreateBucketResult')
     CreateCertificateRequest = Shapes::StructureShape.new(name: 'CreateCertificateRequest')
     CreateCertificateResult = Shapes::StructureShape.new(name: 'CreateCertificateResult')
     CreateCloudFormationStackRequest = Shapes::StructureShape.new(name: 'CreateCloudFormationStackRequest')
@@ -175,10 +158,6 @@ module Aws::Lightsail
     DeleteAlarmResult = Shapes::StructureShape.new(name: 'DeleteAlarmResult')
     DeleteAutoSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteAutoSnapshotRequest')
     DeleteAutoSnapshotResult = Shapes::StructureShape.new(name: 'DeleteAutoSnapshotResult')
-    DeleteBucketAccessKeyRequest = Shapes::StructureShape.new(name: 'DeleteBucketAccessKeyRequest')
-    DeleteBucketAccessKeyResult = Shapes::StructureShape.new(name: 'DeleteBucketAccessKeyResult')
-    DeleteBucketRequest = Shapes::StructureShape.new(name: 'DeleteBucketRequest')
-    DeleteBucketResult = Shapes::StructureShape.new(name: 'DeleteBucketResult')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DeleteCertificateResult = Shapes::StructureShape.new(name: 'DeleteCertificateResult')
     DeleteContactMethodRequest = Shapes::StructureShape.new(name: 'DeleteContactMethodRequest')
@@ -272,14 +251,6 @@ module Aws::Lightsail
     GetAutoSnapshotsResult = Shapes::StructureShape.new(name: 'GetAutoSnapshotsResult')
     GetBlueprintsRequest = Shapes::StructureShape.new(name: 'GetBlueprintsRequest')
     GetBlueprintsResult = Shapes::StructureShape.new(name: 'GetBlueprintsResult')
-    GetBucketAccessKeysRequest = Shapes::StructureShape.new(name: 'GetBucketAccessKeysRequest')
-    GetBucketAccessKeysResult = Shapes::StructureShape.new(name: 'GetBucketAccessKeysResult')
-    GetBucketBundlesRequest = Shapes::StructureShape.new(name: 'GetBucketBundlesRequest')
-    GetBucketBundlesResult = Shapes::StructureShape.new(name: 'GetBucketBundlesResult')
-    GetBucketMetricDataRequest = Shapes::StructureShape.new(name: 'GetBucketMetricDataRequest')
-    GetBucketMetricDataResult = Shapes::StructureShape.new(name: 'GetBucketMetricDataResult')
-    GetBucketsRequest = Shapes::StructureShape.new(name: 'GetBucketsRequest')
-    GetBucketsResult = Shapes::StructureShape.new(name: 'GetBucketsResult')
     GetBundlesRequest = Shapes::StructureShape.new(name: 'GetBundlesRequest')
     GetBundlesResult = Shapes::StructureShape.new(name: 'GetBundlesResult')
     GetCertificatesRequest = Shapes::StructureShape.new(name: 'GetCertificatesRequest')
@@ -392,7 +363,6 @@ module Aws::Lightsail
     HeaderObject = Shapes::StructureShape.new(name: 'HeaderObject')
     HostKeyAttributes = Shapes::StructureShape.new(name: 'HostKeyAttributes')
     HostKeysList = Shapes::ListShape.new(name: 'HostKeysList')
-    IAMAccessKeyId = Shapes::StringShape.new(name: 'IAMAccessKeyId')
     ImportKeyPairRequest = Shapes::StructureShape.new(name: 'ImportKeyPairRequest')
     ImportKeyPairResult = Shapes::StructureShape.new(name: 'ImportKeyPairResult')
     InUseResourceCount = Shapes::IntegerShape.new(name: 'InUseResourceCount')
@@ -480,7 +450,6 @@ module Aws::Lightsail
     OperationType = Shapes::StringShape.new(name: 'OperationType')
     Origin = Shapes::StructureShape.new(name: 'Origin')
     OriginProtocolPolicyEnum = Shapes::StringShape.new(name: 'OriginProtocolPolicyEnum')
-    PartnerIdList = Shapes::ListShape.new(name: 'PartnerIdList')
     PasswordData = Shapes::StructureShape.new(name: 'PasswordData')
     PeerVpcRequest = Shapes::StructureShape.new(name: 'PeerVpcRequest')
     PeerVpcResult = Shapes::StructureShape.new(name: 'PeerVpcResult')
@@ -536,11 +505,9 @@ module Aws::Lightsail
     ResetDistributionCacheRequest = Shapes::StructureShape.new(name: 'ResetDistributionCacheRequest')
     ResetDistributionCacheResult = Shapes::StructureShape.new(name: 'ResetDistributionCacheResult')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
-    ResourceBucketAccess = Shapes::StringShape.new(name: 'ResourceBucketAccess')
     ResourceLocation = Shapes::StructureShape.new(name: 'ResourceLocation')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
-    ResourceReceivingAccess = Shapes::StructureShape.new(name: 'ResourceReceivingAccess')
     ResourceRecord = Shapes::StructureShape.new(name: 'ResourceRecord')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
@@ -551,15 +518,12 @@ module Aws::Lightsail
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     SetIpAddressTypeRequest = Shapes::StructureShape.new(name: 'SetIpAddressTypeRequest')
     SetIpAddressTypeResult = Shapes::StructureShape.new(name: 'SetIpAddressTypeResult')
-    SetResourceAccessForBucketRequest = Shapes::StructureShape.new(name: 'SetResourceAccessForBucketRequest')
-    SetResourceAccessForBucketResult = Shapes::StructureShape.new(name: 'SetResourceAccessForBucketResult')
     StartInstanceRequest = Shapes::StructureShape.new(name: 'StartInstanceRequest')
     StartInstanceResult = Shapes::StructureShape.new(name: 'StartInstanceResult')
     StartRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'StartRelationalDatabaseRequest')
     StartRelationalDatabaseResult = Shapes::StructureShape.new(name: 'StartRelationalDatabaseResult')
     StaticIp = Shapes::StructureShape.new(name: 'StaticIp')
     StaticIpList = Shapes::ListShape.new(name: 'StaticIpList')
-    StatusType = Shapes::StringShape.new(name: 'StatusType')
     StopInstanceRequest = Shapes::StructureShape.new(name: 'StopInstanceRequest')
     StopInstanceResult = Shapes::StructureShape.new(name: 'StopInstanceResult')
     StopRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'StopRelationalDatabaseRequest')
@@ -583,10 +547,6 @@ module Aws::Lightsail
     UnpeerVpcResult = Shapes::StructureShape.new(name: 'UnpeerVpcResult')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
-    UpdateBucketBundleRequest = Shapes::StructureShape.new(name: 'UpdateBucketBundleRequest')
-    UpdateBucketBundleResult = Shapes::StructureShape.new(name: 'UpdateBucketBundleResult')
-    UpdateBucketRequest = Shapes::StructureShape.new(name: 'UpdateBucketRequest')
-    UpdateBucketResult = Shapes::StructureShape.new(name: 'UpdateBucketResult')
     UpdateContainerServiceRequest = Shapes::StructureShape.new(name: 'UpdateContainerServiceRequest')
     UpdateContainerServiceResult = Shapes::StructureShape.new(name: 'UpdateContainerServiceResult')
     UpdateDistributionBundleRequest = Shapes::StructureShape.new(name: 'UpdateDistributionBundleRequest')
@@ -614,26 +574,6 @@ module Aws::Lightsail
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     AccessDeniedException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
-
-    AccessKey.add_member(:access_key_id, Shapes::ShapeRef.new(shape: IAMAccessKeyId, location_name: "accessKeyId"))
-    AccessKey.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secretAccessKey"))
-    AccessKey.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "status"))
-    AccessKey.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
-    AccessKey.add_member(:last_used, Shapes::ShapeRef.new(shape: AccessKeyLastUsed, location_name: "lastUsed"))
-    AccessKey.struct_class = Types::AccessKey
-
-    AccessKeyLastUsed.add_member(:last_used_date, Shapes::ShapeRef.new(shape: IsoDate, location_name: "lastUsedDate"))
-    AccessKeyLastUsed.add_member(:region, Shapes::ShapeRef.new(shape: string, location_name: "region"))
-    AccessKeyLastUsed.add_member(:service_name, Shapes::ShapeRef.new(shape: string, location_name: "serviceName"))
-    AccessKeyLastUsed.struct_class = Types::AccessKeyLastUsed
-
-    AccessKeyList.member = Shapes::ShapeRef.new(shape: AccessKey)
-
-    AccessReceiverList.member = Shapes::ShapeRef.new(shape: ResourceReceivingAccess)
-
-    AccessRules.add_member(:get_object, Shapes::ShapeRef.new(shape: AccessType, location_name: "getObject"))
-    AccessRules.add_member(:allow_public_overrides, Shapes::ShapeRef.new(shape: boolean, location_name: "allowPublicOverrides"))
-    AccessRules.struct_class = Types::AccessRules
 
     AccountSetupInProgressException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
     AccountSetupInProgressException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
@@ -762,39 +702,6 @@ module Aws::Lightsail
     Blueprint.struct_class = Types::Blueprint
 
     BlueprintList.member = Shapes::ShapeRef.new(shape: Blueprint)
-
-    Bucket.add_member(:resource_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resourceType"))
-    Bucket.add_member(:access_rules, Shapes::ShapeRef.new(shape: AccessRules, location_name: "accessRules"))
-    Bucket.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
-    Bucket.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bundleId"))
-    Bucket.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
-    Bucket.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "url"))
-    Bucket.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
-    Bucket.add_member(:name, Shapes::ShapeRef.new(shape: BucketName, location_name: "name"))
-    Bucket.add_member(:support_code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "supportCode"))
-    Bucket.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    Bucket.add_member(:object_versioning, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "objectVersioning"))
-    Bucket.add_member(:able_to_update_bundle, Shapes::ShapeRef.new(shape: boolean, location_name: "ableToUpdateBundle"))
-    Bucket.add_member(:readonly_access_accounts, Shapes::ShapeRef.new(shape: PartnerIdList, location_name: "readonlyAccessAccounts"))
-    Bucket.add_member(:resources_receiving_access, Shapes::ShapeRef.new(shape: AccessReceiverList, location_name: "resourcesReceivingAccess"))
-    Bucket.add_member(:state, Shapes::ShapeRef.new(shape: BucketState, location_name: "state"))
-    Bucket.struct_class = Types::Bucket
-
-    BucketBundle.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bundleId"))
-    BucketBundle.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
-    BucketBundle.add_member(:price, Shapes::ShapeRef.new(shape: float, location_name: "price"))
-    BucketBundle.add_member(:storage_per_month_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "storagePerMonthInGb"))
-    BucketBundle.add_member(:transfer_per_month_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "transferPerMonthInGb"))
-    BucketBundle.add_member(:is_active, Shapes::ShapeRef.new(shape: boolean, location_name: "isActive"))
-    BucketBundle.struct_class = Types::BucketBundle
-
-    BucketBundleList.member = Shapes::ShapeRef.new(shape: BucketBundle)
-
-    BucketList.member = Shapes::ShapeRef.new(shape: Bucket)
-
-    BucketState.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "code"))
-    BucketState.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
-    BucketState.struct_class = Types::BucketState
 
     Bundle.add_member(:price, Shapes::ShapeRef.new(shape: float, location_name: "price"))
     Bundle.add_member(:cpu_count, Shapes::ShapeRef.new(shape: integer, location_name: "cpuCount"))
@@ -1022,23 +929,6 @@ module Aws::Lightsail
 
     CopySnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     CopySnapshotResult.struct_class = Types::CopySnapshotResult
-
-    CreateBucketAccessKeyRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    CreateBucketAccessKeyRequest.struct_class = Types::CreateBucketAccessKeyRequest
-
-    CreateBucketAccessKeyResult.add_member(:access_key, Shapes::ShapeRef.new(shape: AccessKey, location_name: "accessKey"))
-    CreateBucketAccessKeyResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    CreateBucketAccessKeyResult.struct_class = Types::CreateBucketAccessKeyResult
-
-    CreateBucketRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    CreateBucketRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "bundleId"))
-    CreateBucketRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateBucketRequest.add_member(:enable_object_versioning, Shapes::ShapeRef.new(shape: boolean, location_name: "enableObjectVersioning"))
-    CreateBucketRequest.struct_class = Types::CreateBucketRequest
-
-    CreateBucketResult.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, location_name: "bucket"))
-    CreateBucketResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    CreateBucketResult.struct_class = Types::CreateBucketResult
 
     CreateCertificateRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: CertificateName, required: true, location_name: "certificateName"))
     CreateCertificateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
@@ -1272,20 +1162,6 @@ module Aws::Lightsail
 
     DeleteAutoSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     DeleteAutoSnapshotResult.struct_class = Types::DeleteAutoSnapshotResult
-
-    DeleteBucketAccessKeyRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    DeleteBucketAccessKeyRequest.add_member(:access_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "accessKeyId"))
-    DeleteBucketAccessKeyRequest.struct_class = Types::DeleteBucketAccessKeyRequest
-
-    DeleteBucketAccessKeyResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    DeleteBucketAccessKeyResult.struct_class = Types::DeleteBucketAccessKeyResult
-
-    DeleteBucketRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    DeleteBucketRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: boolean, location_name: "forceDelete"))
-    DeleteBucketRequest.struct_class = Types::DeleteBucketRequest
-
-    DeleteBucketResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    DeleteBucketResult.struct_class = Types::DeleteBucketResult
 
     DeleteCertificateRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: CertificateName, required: true, location_name: "certificateName"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
@@ -1612,40 +1488,6 @@ module Aws::Lightsail
     GetBlueprintsResult.add_member(:blueprints, Shapes::ShapeRef.new(shape: BlueprintList, location_name: "blueprints"))
     GetBlueprintsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetBlueprintsResult.struct_class = Types::GetBlueprintsResult
-
-    GetBucketAccessKeysRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    GetBucketAccessKeysRequest.struct_class = Types::GetBucketAccessKeysRequest
-
-    GetBucketAccessKeysResult.add_member(:access_keys, Shapes::ShapeRef.new(shape: AccessKeyList, location_name: "accessKeys"))
-    GetBucketAccessKeysResult.struct_class = Types::GetBucketAccessKeysResult
-
-    GetBucketBundlesRequest.add_member(:include_inactive, Shapes::ShapeRef.new(shape: boolean, location_name: "includeInactive"))
-    GetBucketBundlesRequest.struct_class = Types::GetBucketBundlesRequest
-
-    GetBucketBundlesResult.add_member(:bundles, Shapes::ShapeRef.new(shape: BucketBundleList, location_name: "bundles"))
-    GetBucketBundlesResult.struct_class = Types::GetBucketBundlesResult
-
-    GetBucketMetricDataRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    GetBucketMetricDataRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: BucketMetricName, required: true, location_name: "metricName"))
-    GetBucketMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "startTime"))
-    GetBucketMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "endTime"))
-    GetBucketMetricDataRequest.add_member(:period, Shapes::ShapeRef.new(shape: MetricPeriod, required: true, location_name: "period"))
-    GetBucketMetricDataRequest.add_member(:statistics, Shapes::ShapeRef.new(shape: MetricStatisticList, required: true, location_name: "statistics"))
-    GetBucketMetricDataRequest.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, required: true, location_name: "unit"))
-    GetBucketMetricDataRequest.struct_class = Types::GetBucketMetricDataRequest
-
-    GetBucketMetricDataResult.add_member(:metric_name, Shapes::ShapeRef.new(shape: BucketMetricName, location_name: "metricName"))
-    GetBucketMetricDataResult.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricDatapointList, location_name: "metricData"))
-    GetBucketMetricDataResult.struct_class = Types::GetBucketMetricDataResult
-
-    GetBucketsRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
-    GetBucketsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
-    GetBucketsRequest.add_member(:include_connected_resources, Shapes::ShapeRef.new(shape: boolean, location_name: "includeConnectedResources"))
-    GetBucketsRequest.struct_class = Types::GetBucketsRequest
-
-    GetBucketsResult.add_member(:buckets, Shapes::ShapeRef.new(shape: BucketList, location_name: "buckets"))
-    GetBucketsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
-    GetBucketsResult.struct_class = Types::GetBucketsResult
 
     GetBundlesRequest.add_member(:include_inactive, Shapes::ShapeRef.new(shape: boolean, location_name: "includeInactive"))
     GetBundlesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
@@ -2388,8 +2230,6 @@ module Aws::Lightsail
     Origin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
     Origin.struct_class = Types::Origin
 
-    PartnerIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
-
     PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: string, location_name: "ciphertext"))
     PasswordData.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
     PasswordData.struct_class = Types::PasswordData
@@ -2610,10 +2450,6 @@ module Aws::Lightsail
 
     ResourceNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
-    ResourceReceivingAccess.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
-    ResourceReceivingAccess.add_member(:resource_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resourceType"))
-    ResourceReceivingAccess.struct_class = Types::ResourceReceivingAccess
-
     ResourceRecord.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     ResourceRecord.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
     ResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: string, location_name: "value"))
@@ -2638,14 +2474,6 @@ module Aws::Lightsail
 
     SetIpAddressTypeResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     SetIpAddressTypeResult.struct_class = Types::SetIpAddressTypeResult
-
-    SetResourceAccessForBucketRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
-    SetResourceAccessForBucketRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    SetResourceAccessForBucketRequest.add_member(:access, Shapes::ShapeRef.new(shape: ResourceBucketAccess, required: true, location_name: "access"))
-    SetResourceAccessForBucketRequest.struct_class = Types::SetResourceAccessForBucketRequest
-
-    SetResourceAccessForBucketResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    SetResourceAccessForBucketResult.struct_class = Types::SetResourceAccessForBucketResult
 
     StartInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     StartInstanceRequest.struct_class = Types::StartInstanceRequest
@@ -2731,23 +2559,6 @@ module Aws::Lightsail
 
     UntagResourceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UntagResourceResult.struct_class = Types::UntagResourceResult
-
-    UpdateBucketBundleRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    UpdateBucketBundleRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "bundleId"))
-    UpdateBucketBundleRequest.struct_class = Types::UpdateBucketBundleRequest
-
-    UpdateBucketBundleResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    UpdateBucketBundleResult.struct_class = Types::UpdateBucketBundleResult
-
-    UpdateBucketRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
-    UpdateBucketRequest.add_member(:access_rules, Shapes::ShapeRef.new(shape: AccessRules, location_name: "accessRules"))
-    UpdateBucketRequest.add_member(:versioning, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "versioning"))
-    UpdateBucketRequest.add_member(:readonly_access_accounts, Shapes::ShapeRef.new(shape: PartnerIdList, location_name: "readonlyAccessAccounts"))
-    UpdateBucketRequest.struct_class = Types::UpdateBucketRequest
-
-    UpdateBucketResult.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, location_name: "bucket"))
-    UpdateBucketResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
-    UpdateBucketResult.struct_class = Types::UpdateBucketResult
 
     UpdateContainerServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
     UpdateContainerServiceRequest.add_member(:power, Shapes::ShapeRef.new(shape: ContainerServicePowerName, location_name: "power"))
@@ -2948,31 +2759,6 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:create_bucket, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateBucket"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: CreateBucketRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateBucketResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:create_bucket_access_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateBucketAccessKey"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: CreateBucketAccessKeyRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateBucketAccessKeyResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3306,32 +3092,6 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:delete_bucket, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteBucket"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DeleteBucketRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteBucketResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:delete_bucket_access_key, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteBucketAccessKey"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DeleteBucketAccessKeyRequest)
-        o.output = Shapes::ShapeRef.new(shape: DeleteBucketAccessKeyResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3754,57 +3514,6 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:get_bucket_access_keys, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetBucketAccessKeys"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetBucketAccessKeysRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetBucketAccessKeysResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:get_bucket_bundles, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetBucketBundles"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetBucketBundlesRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetBucketBundlesResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:get_bucket_metric_data, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetBucketMetricData"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetBucketMetricDataRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetBucketMetricDataResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:get_buckets, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetBuckets"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetBucketsRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetBucketsResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -4785,19 +4494,6 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
-      api.add_operation(:set_resource_access_for_bucket, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "SetResourceAccessForBucket"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: SetResourceAccessForBucketRequest)
-        o.output = Shapes::ShapeRef.new(shape: SetResourceAccessForBucketResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
       api.add_operation(:start_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartInstance"
         o.http_method = "POST"
@@ -4914,32 +4610,6 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:update_bucket, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateBucket"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: UpdateBucketRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateBucketResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
-      end)
-
-      api.add_operation(:update_bucket_bundle, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateBucketBundle"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: UpdateBucketBundleRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateBucketBundleResult)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 

@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.45.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.44.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.43.0 (2021-05-21)
-------------------
-
-* Feature - New PUPPET_API_CRL attribute returned by DescribeServers API; new EngineVersion of 2019 available for Puppet Enterprise servers.
-
 1.42.0 (2021-03-10)
 ------------------
 

@@ -1324,7 +1324,6 @@
         "AvailabilityZones":{"shape":"AvailabilityZones"},
         "BackupRetentionPeriod":{"shape":"IntegerOptional"},
         "CharacterSetName":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
         "DatabaseName":{"shape":"String"},
         "DBClusterIdentifier":{"shape":"String"},
         "DBClusterParameterGroupName":{"shape":"String"},
@@ -1554,11 +1553,8 @@
         "IAMDatabaseAuthenticationEnabled":{"shape":"Boolean"},
         "CloneGroupId":{"shape":"String"},
         "ClusterCreateTime":{"shape":"TStamp"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
         "EnabledCloudwatchLogsExports":{"shape":"LogTypeList"},
-        "DeletionProtection":{"shape":"BooleanOptional"},
-        "CrossAccountClone":{"shape":"BooleanOptional"},
-        "AutomaticRestartTime":{"shape":"TStamp"}
+        "DeletionProtection":{"shape":"BooleanOptional"}
       },
       "wrapper":true
     },
@@ -3022,8 +3018,7 @@
         "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
         "CloudwatchLogsExportConfiguration":{"shape":"CloudwatchLogsExportConfiguration"},
         "EngineVersion":{"shape":"String"},
-        "DeletionProtection":{"shape":"BooleanOptional"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "ModifyDBClusterParameterGroupMessage":{
@@ -3479,8 +3474,7 @@
         "EnableIAMDatabaseAuthentication":{"shape":"BooleanOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "DBClusterParameterGroupName":{"shape":"String"},
-        "DeletionProtection":{"shape":"BooleanOptional"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "DeletionProtection":{"shape":"BooleanOptional"}
       }
     },
     "RestoreDBClusterFromSnapshotResult":{

@@ -32,8 +32,6 @@ module Aws::SSM
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     ApplyOnlyAtCronInterval = Shapes::BooleanShape.new(name: 'ApplyOnlyAtCronInterval')
     ApproveAfterDays = Shapes::IntegerShape.new(name: 'ApproveAfterDays')
-    AssociateOpsItemRelatedItemRequest = Shapes::StructureShape.new(name: 'AssociateOpsItemRelatedItemRequest')
-    AssociateOpsItemRelatedItemResponse = Shapes::StructureShape.new(name: 'AssociateOpsItemRelatedItemResponse')
     AssociatedInstances = Shapes::StructureShape.new(name: 'AssociatedInstances')
     Association = Shapes::StructureShape.new(name: 'Association')
     AssociationAlreadyExists = Shapes::StructureShape.new(name: 'AssociationAlreadyExists')
@@ -309,15 +307,12 @@ module Aws::SSM
     DescribeSessionsRequest = Shapes::StructureShape.new(name: 'DescribeSessionsRequest')
     DescribeSessionsResponse = Shapes::StructureShape.new(name: 'DescribeSessionsResponse')
     DescriptionInDocument = Shapes::StringShape.new(name: 'DescriptionInDocument')
-    DisassociateOpsItemRelatedItemRequest = Shapes::StructureShape.new(name: 'DisassociateOpsItemRelatedItemRequest')
-    DisassociateOpsItemRelatedItemResponse = Shapes::StructureShape.new(name: 'DisassociateOpsItemRelatedItemResponse')
     DocumentARN = Shapes::StringShape.new(name: 'DocumentARN')
     DocumentAlreadyExists = Shapes::StructureShape.new(name: 'DocumentAlreadyExists')
     DocumentAuthor = Shapes::StringShape.new(name: 'DocumentAuthor')
     DocumentContent = Shapes::StringShape.new(name: 'DocumentContent')
     DocumentDefaultVersionDescription = Shapes::StructureShape.new(name: 'DocumentDefaultVersionDescription')
     DocumentDescription = Shapes::StructureShape.new(name: 'DocumentDescription')
-    DocumentDisplayName = Shapes::StringShape.new(name: 'DocumentDisplayName')
     DocumentFilter = Shapes::StructureShape.new(name: 'DocumentFilter')
     DocumentFilterKey = Shapes::StringShape.new(name: 'DocumentFilterKey')
     DocumentFilterList = Shapes::ListShape.new(name: 'DocumentFilterList')
@@ -605,8 +600,6 @@ module Aws::SSM
     ListInventoryEntriesResult = Shapes::StructureShape.new(name: 'ListInventoryEntriesResult')
     ListOpsItemEventsRequest = Shapes::StructureShape.new(name: 'ListOpsItemEventsRequest')
     ListOpsItemEventsResponse = Shapes::StructureShape.new(name: 'ListOpsItemEventsResponse')
-    ListOpsItemRelatedItemsRequest = Shapes::StructureShape.new(name: 'ListOpsItemRelatedItemsRequest')
-    ListOpsItemRelatedItemsResponse = Shapes::StructureShape.new(name: 'ListOpsItemRelatedItemsResponse')
     ListOpsMetadataMaxResults = Shapes::IntegerShape.new(name: 'ListOpsMetadataMaxResults')
     ListOpsMetadataRequest = Shapes::StructureShape.new(name: 'ListOpsMetadataRequest')
     ListOpsMetadataResult = Shapes::StructureShape.new(name: 'ListOpsMetadataResult')
@@ -761,21 +754,6 @@ module Aws::SSM
     OpsItemOpsDataKeysList = Shapes::ListShape.new(name: 'OpsItemOpsDataKeysList')
     OpsItemParameterNamesList = Shapes::ListShape.new(name: 'OpsItemParameterNamesList')
     OpsItemPriority = Shapes::IntegerShape.new(name: 'OpsItemPriority')
-    OpsItemRelatedItemAlreadyExistsException = Shapes::StructureShape.new(name: 'OpsItemRelatedItemAlreadyExistsException')
-    OpsItemRelatedItemAssociationId = Shapes::StringShape.new(name: 'OpsItemRelatedItemAssociationId')
-    OpsItemRelatedItemAssociationNotFoundException = Shapes::StructureShape.new(name: 'OpsItemRelatedItemAssociationNotFoundException')
-    OpsItemRelatedItemAssociationResourceType = Shapes::StringShape.new(name: 'OpsItemRelatedItemAssociationResourceType')
-    OpsItemRelatedItemAssociationResourceUri = Shapes::StringShape.new(name: 'OpsItemRelatedItemAssociationResourceUri')
-    OpsItemRelatedItemAssociationType = Shapes::StringShape.new(name: 'OpsItemRelatedItemAssociationType')
-    OpsItemRelatedItemSummaries = Shapes::ListShape.new(name: 'OpsItemRelatedItemSummaries')
-    OpsItemRelatedItemSummary = Shapes::StructureShape.new(name: 'OpsItemRelatedItemSummary')
-    OpsItemRelatedItemsFilter = Shapes::StructureShape.new(name: 'OpsItemRelatedItemsFilter')
-    OpsItemRelatedItemsFilterKey = Shapes::StringShape.new(name: 'OpsItemRelatedItemsFilterKey')
-    OpsItemRelatedItemsFilterOperator = Shapes::StringShape.new(name: 'OpsItemRelatedItemsFilterOperator')
-    OpsItemRelatedItemsFilterValue = Shapes::StringShape.new(name: 'OpsItemRelatedItemsFilterValue')
-    OpsItemRelatedItemsFilterValues = Shapes::ListShape.new(name: 'OpsItemRelatedItemsFilterValues')
-    OpsItemRelatedItemsFilters = Shapes::ListShape.new(name: 'OpsItemRelatedItemsFilters')
-    OpsItemRelatedItemsMaxResults = Shapes::IntegerShape.new(name: 'OpsItemRelatedItemsMaxResults')
     OpsItemSeverity = Shapes::StringShape.new(name: 'OpsItemSeverity')
     OpsItemSource = Shapes::StringShape.new(name: 'OpsItemSource')
     OpsItemStatus = Shapes::StringShape.new(name: 'OpsItemStatus')
@@ -1192,15 +1170,6 @@ module Aws::SSM
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
-    AssociateOpsItemRelatedItemRequest.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, required: true, location_name: "OpsItemId"))
-    AssociateOpsItemRelatedItemRequest.add_member(:association_type, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationType, required: true, location_name: "AssociationType"))
-    AssociateOpsItemRelatedItemRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationResourceType, required: true, location_name: "ResourceType"))
-    AssociateOpsItemRelatedItemRequest.add_member(:resource_uri, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationResourceUri, required: true, location_name: "ResourceUri"))
-    AssociateOpsItemRelatedItemRequest.struct_class = Types::AssociateOpsItemRelatedItemRequest
-
-    AssociateOpsItemRelatedItemResponse.add_member(:association_id, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationId, location_name: "AssociationId"))
-    AssociateOpsItemRelatedItemResponse.struct_class = Types::AssociateOpsItemRelatedItemResponse
-
     AssociatedInstances.struct_class = Types::AssociatedInstances
 
     Association.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
@@ -1239,7 +1208,6 @@ module Aws::SSM
     AssociationDescription.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationDescription.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     AssociationDescription.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
-    AssociationDescription.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     AssociationDescription.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
@@ -1330,7 +1298,6 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     AssociationVersionInfo.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     AssociationVersionInfo.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
-    AssociationVersionInfo.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     AssociationVersionInfo.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
 
@@ -1645,7 +1612,6 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationBatchRequestEntry.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     CreateAssociationBatchRequestEntry.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
-    CreateAssociationBatchRequestEntry.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     CreateAssociationBatchRequestEntry.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
@@ -1667,7 +1633,6 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     CreateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     CreateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
-    CreateAssociationRequest.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     CreateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
@@ -1678,7 +1643,6 @@ module Aws::SSM
     CreateDocumentRequest.add_member(:requires, Shapes::ShapeRef.new(shape: DocumentRequiresList, location_name: "Requires"))
     CreateDocumentRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentsSourceList, location_name: "Attachments"))
     CreateDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
-    CreateDocumentRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DocumentDisplayName, location_name: "DisplayName"))
     CreateDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     CreateDocumentRequest.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     CreateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
@@ -2184,12 +2148,6 @@ module Aws::SSM
     DescribeSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeSessionsResponse.struct_class = Types::DescribeSessionsResponse
 
-    DisassociateOpsItemRelatedItemRequest.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, required: true, location_name: "OpsItemId"))
-    DisassociateOpsItemRelatedItemRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationId, required: true, location_name: "AssociationId"))
-    DisassociateOpsItemRelatedItemRequest.struct_class = Types::DisassociateOpsItemRelatedItemRequest
-
-    DisassociateOpsItemRelatedItemResponse.struct_class = Types::DisassociateOpsItemRelatedItemResponse
-
     DocumentAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DocumentAlreadyExists.struct_class = Types::DocumentAlreadyExists
 
@@ -2202,7 +2160,6 @@ module Aws::SSM
     DocumentDescription.add_member(:hash, Shapes::ShapeRef.new(shape: DocumentHash, location_name: "Hash"))
     DocumentDescription.add_member(:hash_type, Shapes::ShapeRef.new(shape: DocumentHashType, location_name: "HashType"))
     DocumentDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
-    DocumentDescription.add_member(:display_name, Shapes::ShapeRef.new(shape: DocumentDisplayName, location_name: "DisplayName"))
     DocumentDescription.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DocumentDescription.add_member(:owner, Shapes::ShapeRef.new(shape: DocumentOwner, location_name: "Owner"))
     DocumentDescription.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
@@ -2235,8 +2192,6 @@ module Aws::SSM
     DocumentFilterList.member = Shapes::ShapeRef.new(shape: DocumentFilter)
 
     DocumentIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
-    DocumentIdentifier.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
-    DocumentIdentifier.add_member(:display_name, Shapes::ShapeRef.new(shape: DocumentDisplayName, location_name: "DisplayName"))
     DocumentIdentifier.add_member(:owner, Shapes::ShapeRef.new(shape: DocumentOwner, location_name: "Owner"))
     DocumentIdentifier.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DocumentIdentifier.add_member(:platform_types, Shapes::ShapeRef.new(shape: PlatformTypeList, location_name: "PlatformTypes"))
@@ -2304,7 +2259,6 @@ module Aws::SSM
     DocumentReviews.struct_class = Types::DocumentReviews
 
     DocumentVersionInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
-    DocumentVersionInfo.add_member(:display_name, Shapes::ShapeRef.new(shape: DocumentDisplayName, location_name: "DisplayName"))
     DocumentVersionInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     DocumentVersionInfo.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     DocumentVersionInfo.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
@@ -2423,8 +2377,6 @@ module Aws::SSM
     GetDocumentRequest.struct_class = Types::GetDocumentRequest
 
     GetDocumentResult.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
-    GetDocumentResult.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
-    GetDocumentResult.add_member(:display_name, Shapes::ShapeRef.new(shape: DocumentDisplayName, location_name: "DisplayName"))
     GetDocumentResult.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     GetDocumentResult.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     GetDocumentResult.add_member(:status, Shapes::ShapeRef.new(shape: DocumentStatus, location_name: "Status"))
@@ -3143,16 +3095,6 @@ module Aws::SSM
     ListOpsItemEventsResponse.add_member(:summaries, Shapes::ShapeRef.new(shape: OpsItemEventSummaries, location_name: "Summaries"))
     ListOpsItemEventsResponse.struct_class = Types::ListOpsItemEventsResponse
 
-    ListOpsItemRelatedItemsRequest.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, location_name: "OpsItemId"))
-    ListOpsItemRelatedItemsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: OpsItemRelatedItemsFilters, location_name: "Filters"))
-    ListOpsItemRelatedItemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OpsItemRelatedItemsMaxResults, location_name: "MaxResults"))
-    ListOpsItemRelatedItemsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListOpsItemRelatedItemsRequest.struct_class = Types::ListOpsItemRelatedItemsRequest
-
-    ListOpsItemRelatedItemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    ListOpsItemRelatedItemsResponse.add_member(:summaries, Shapes::ShapeRef.new(shape: OpsItemRelatedItemSummaries, location_name: "Summaries"))
-    ListOpsItemRelatedItemsResponse.struct_class = Types::ListOpsItemRelatedItemsResponse
-
     ListOpsMetadataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: OpsMetadataFilterList, location_name: "Filters"))
     ListOpsMetadataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOpsMetadataMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListOpsMetadataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -3493,36 +3435,6 @@ module Aws::SSM
     OpsItemOpsDataKeysList.member = Shapes::ShapeRef.new(shape: String)
 
     OpsItemParameterNamesList.member = Shapes::ShapeRef.new(shape: String)
-
-    OpsItemRelatedItemAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    OpsItemRelatedItemAlreadyExistsException.add_member(:resource_uri, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationResourceUri, location_name: "ResourceUri"))
-    OpsItemRelatedItemAlreadyExistsException.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, location_name: "OpsItemId"))
-    OpsItemRelatedItemAlreadyExistsException.struct_class = Types::OpsItemRelatedItemAlreadyExistsException
-
-    OpsItemRelatedItemAssociationNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    OpsItemRelatedItemAssociationNotFoundException.struct_class = Types::OpsItemRelatedItemAssociationNotFoundException
-
-    OpsItemRelatedItemSummaries.member = Shapes::ShapeRef.new(shape: OpsItemRelatedItemSummary)
-
-    OpsItemRelatedItemSummary.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, location_name: "OpsItemId"))
-    OpsItemRelatedItemSummary.add_member(:association_id, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationId, location_name: "AssociationId"))
-    OpsItemRelatedItemSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationResourceType, location_name: "ResourceType"))
-    OpsItemRelatedItemSummary.add_member(:association_type, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationType, location_name: "AssociationType"))
-    OpsItemRelatedItemSummary.add_member(:resource_uri, Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationResourceUri, location_name: "ResourceUri"))
-    OpsItemRelatedItemSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: OpsItemIdentity, location_name: "CreatedBy"))
-    OpsItemRelatedItemSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedTime"))
-    OpsItemRelatedItemSummary.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: OpsItemIdentity, location_name: "LastModifiedBy"))
-    OpsItemRelatedItemSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
-    OpsItemRelatedItemSummary.struct_class = Types::OpsItemRelatedItemSummary
-
-    OpsItemRelatedItemsFilter.add_member(:key, Shapes::ShapeRef.new(shape: OpsItemRelatedItemsFilterKey, required: true, location_name: "Key"))
-    OpsItemRelatedItemsFilter.add_member(:values, Shapes::ShapeRef.new(shape: OpsItemRelatedItemsFilterValues, required: true, location_name: "Values"))
-    OpsItemRelatedItemsFilter.add_member(:operator, Shapes::ShapeRef.new(shape: OpsItemRelatedItemsFilterOperator, required: true, location_name: "Operator"))
-    OpsItemRelatedItemsFilter.struct_class = Types::OpsItemRelatedItemsFilter
-
-    OpsItemRelatedItemsFilterValues.member = Shapes::ShapeRef.new(shape: OpsItemRelatedItemsFilterValue)
-
-    OpsItemRelatedItemsFilters.member = Shapes::ShapeRef.new(shape: OpsItemRelatedItemsFilter)
 
     OpsItemSummaries.member = Shapes::ShapeRef.new(shape: OpsItemSummary)
 
@@ -4318,7 +4230,6 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
     UpdateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     UpdateAssociationRequest.add_member(:apply_only_at_cron_interval, Shapes::ShapeRef.new(shape: ApplyOnlyAtCronInterval, location_name: "ApplyOnlyAtCronInterval"))
-    UpdateAssociationRequest.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, location_name: "CalendarNames"))
     UpdateAssociationRequest.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
@@ -4350,7 +4261,6 @@ module Aws::SSM
     UpdateDocumentRequest.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, required: true, location_name: "Content"))
     UpdateDocumentRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentsSourceList, location_name: "Attachments"))
     UpdateDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
-    UpdateDocumentRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DocumentDisplayName, location_name: "DisplayName"))
     UpdateDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
     UpdateDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     UpdateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
@@ -4545,19 +4455,6 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsError)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
-      end)
-
-      api.add_operation(:associate_ops_item_related_item, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "AssociateOpsItemRelatedItem"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: AssociateOpsItemRelatedItemRequest)
-        o.output = Shapes::ShapeRef.new(shape: AssociateOpsItemRelatedItemResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemRelatedItemAlreadyExistsException)
       end)
 
       api.add_operation(:cancel_command, Seahorse::Model::Operation.new.tap do |o|
@@ -5364,18 +5261,6 @@ module Aws::SSM
         )
       end)
 
-      api.add_operation(:disassociate_ops_item_related_item, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DisassociateOpsItemRelatedItem"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DisassociateOpsItemRelatedItemRequest)
-        o.output = Shapes::ShapeRef.new(shape: DisassociateOpsItemRelatedItemResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemRelatedItemAssociationNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
-      end)
-
       api.add_operation(:get_automation_execution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAutomationExecution"
         o.http_method = "POST"
@@ -5858,22 +5743,6 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemLimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
-      api.add_operation(:list_ops_item_related_items, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListOpsItemRelatedItems"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListOpsItemRelatedItemsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListOpsItemRelatedItemsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

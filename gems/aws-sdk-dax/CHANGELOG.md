@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.32.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.31.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.30.0 (2021-06-24)
-------------------
-
-* Feature - Add support for encryption in transit to DAX clusters.
-
 1.29.0 (2021-03-10)
 ------------------
 

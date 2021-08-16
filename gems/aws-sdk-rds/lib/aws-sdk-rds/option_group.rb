@@ -245,11 +245,11 @@ module Aws::RDS
     #
     #   * `oracle-ee`
     #
-    #   * `oracle-ee-cdb`
-    #
     #   * `oracle-se2`
     #
-    #   * `oracle-se2-cdb`
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
     #
     #   * `postgres`
     #

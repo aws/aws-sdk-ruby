@@ -501,9 +501,8 @@ module Aws::LookoutMetrics
     #   A list of metrics that the dataset will contain.
     #
     # @option params [Integer] :offset
-    #   After an interval ends, the amount of seconds that the detector waits
-    #   before importing data. Offset is only supported for S3 and Redshift
-    #   datasources.
+    #   After an interval ends, the amount of time that the detector waits
+    #   before importing data.
     #
     # @option params [Types::TimestampColumn] :timestamp_column
     #   Contains information about the column used for tracking time in your
@@ -674,11 +673,6 @@ module Aws::LookoutMetrics
 
     # Describes an alert.
     #
-    # Amazon Lookout for Metrics API actions are eventually consistent. If
-    # you do a read operation on a resource immediately after creating or
-    # modifying it, use retries to allow time for the write operation to
-    # complete.
-    #
     # @option params [required, String] :alert_arn
     #   The ARN of the alert to describe.
     #
@@ -768,11 +762,6 @@ module Aws::LookoutMetrics
 
     # Describes a detector.
     #
-    # Amazon Lookout for Metrics API actions are eventually consistent. If
-    # you do a read operation on a resource immediately after creating or
-    # modifying it, use retries to allow time for the write operation to
-    # complete.
-    #
     # @option params [required, String] :anomaly_detector_arn
     #   The ARN of the detector to describe.
     #
@@ -802,7 +791,7 @@ module Aws::LookoutMetrics
     #   resp.anomaly_detector_config.anomaly_detector_frequency #=> String, one of "P1D", "PT1H", "PT10M", "PT5M"
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
-    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
+    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
     #   resp.failure_reason #=> String
     #   resp.kms_key_arn #=> String
     #
@@ -816,11 +805,6 @@ module Aws::LookoutMetrics
     end
 
     # Describes a dataset.
-    #
-    # Amazon Lookout for Metrics API actions are eventually consistent. If
-    # you do a read operation on a resource immediately after creating or
-    # modifying it, use retries to allow time for the write operation to
-    # complete.
     #
     # @option params [required, String] :metric_set_arn
     #   The ARN of the dataset.
@@ -1062,11 +1046,6 @@ module Aws::LookoutMetrics
 
     # Lists the alerts attached to a detector.
     #
-    # Amazon Lookout for Metrics API actions are eventually consistent. If
-    # you do a read operation on a resource immediately after creating or
-    # modifying it, use retries to allow time for the write operation to
-    # complete.
-    #
     # @option params [String] :anomaly_detector_arn
     #   The ARN of the alert's detector.
     #
@@ -1119,11 +1098,6 @@ module Aws::LookoutMetrics
 
     # Lists the detectors in the current AWS Region.
     #
-    # Amazon Lookout for Metrics API actions are eventually consistent. If
-    # you do a read operation on a resource immediately after creating or
-    # modifying it, use retries to allow time for the write operation to
-    # complete.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
@@ -1154,7 +1128,7 @@ module Aws::LookoutMetrics
     #   resp.anomaly_detector_summary_list[0].anomaly_detector_description #=> String
     #   resp.anomaly_detector_summary_list[0].creation_time #=> Time
     #   resp.anomaly_detector_summary_list[0].last_modification_time #=> Time
-    #   resp.anomaly_detector_summary_list[0].status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
+    #   resp.anomaly_detector_summary_list[0].status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
     #   resp.anomaly_detector_summary_list[0].tags #=> Hash
     #   resp.anomaly_detector_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1287,11 +1261,6 @@ module Aws::LookoutMetrics
     end
 
     # Lists the datasets in the current AWS Region.
-    #
-    # Amazon Lookout for Metrics API actions are eventually consistent. If
-    # you do a read operation on a resource immediately after creating or
-    # modifying it, use retries to allow time for the write operation to
-    # complete.
     #
     # @option params [String] :anomaly_detector_arn
     #   The ARN of the anomaly detector containing the metrics sets to list.
@@ -1523,9 +1492,8 @@ module Aws::LookoutMetrics
     #   The metric list.
     #
     # @option params [Integer] :offset
-    #   After an interval ends, the amount of seconds that the detector waits
-    #   before importing data. Offset is only supported for S3 and Redshift
-    #   datasources.
+    #   After an interval ends, the amount of time that the detector waits
+    #   before importing data.
     #
     # @option params [Types::TimestampColumn] :timestamp_column
     #   The timestamp column.
@@ -1644,7 +1612,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

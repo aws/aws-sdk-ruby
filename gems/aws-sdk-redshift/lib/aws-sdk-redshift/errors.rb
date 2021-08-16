@@ -29,9 +29,6 @@ module Aws::Redshift
   # ## Error Classes
   # * {AccessToClusterDeniedFault}
   # * {AccessToSnapshotDeniedFault}
-  # * {AuthenticationProfileAlreadyExistsFault}
-  # * {AuthenticationProfileNotFoundFault}
-  # * {AuthenticationProfileQuotaExceededFault}
   # * {AuthorizationAlreadyExistsFault}
   # * {AuthorizationNotFoundFault}
   # * {AuthorizationQuotaExceededFault}
@@ -76,7 +73,6 @@ module Aws::Redshift
   # * {IncompatibleOrderableOptions}
   # * {InsufficientClusterCapacityFault}
   # * {InsufficientS3BucketPolicyFault}
-  # * {InvalidAuthenticationProfileRequestFault}
   # * {InvalidAuthorizationStateFault}
   # * {InvalidClusterParameterGroupStateFault}
   # * {InvalidClusterSecurityGroupStateFault}
@@ -86,12 +82,10 @@ module Aws::Redshift
   # * {InvalidClusterSubnetGroupStateFault}
   # * {InvalidClusterSubnetStateFault}
   # * {InvalidClusterTrackFault}
-  # * {InvalidDataShareFault}
   # * {InvalidElasticIpFault}
   # * {InvalidEndpointStateFault}
   # * {InvalidHsmClientCertificateStateFault}
   # * {InvalidHsmConfigurationStateFault}
-  # * {InvalidNamespaceFault}
   # * {InvalidReservedNodeStateFault}
   # * {InvalidRestoreFault}
   # * {InvalidRetentionPeriodFault}
@@ -174,36 +168,6 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::AccessToSnapshotDeniedFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class AuthenticationProfileAlreadyExistsFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Redshift::Types::AuthenticationProfileAlreadyExistsFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class AuthenticationProfileNotFoundFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Redshift::Types::AuthenticationProfileNotFoundFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class AuthenticationProfileQuotaExceededFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Redshift::Types::AuthenticationProfileQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -649,16 +613,6 @@ module Aws::Redshift
       end
     end
 
-    class InvalidAuthenticationProfileRequestFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Redshift::Types::InvalidAuthenticationProfileRequestFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
     class InvalidAuthorizationStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -749,16 +703,6 @@ module Aws::Redshift
       end
     end
 
-    class InvalidDataShareFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Redshift::Types::InvalidDataShareFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
     class InvalidElasticIpFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -794,16 +738,6 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::InvalidHsmConfigurationStateFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class InvalidNamespaceFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::Redshift::Types::InvalidNamespaceFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

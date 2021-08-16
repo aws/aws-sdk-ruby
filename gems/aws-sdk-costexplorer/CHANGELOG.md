@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.64.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.63.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.62.0 (2021-05-24)
-------------------
-
-* Feature - Introduced FindingReasonCodes, PlatformDifferences, DiskResourceUtilization and NetworkResourceUtilization to GetRightsizingRecommendation action
-
 1.61.0 (2021-04-19)
 ------------------
 

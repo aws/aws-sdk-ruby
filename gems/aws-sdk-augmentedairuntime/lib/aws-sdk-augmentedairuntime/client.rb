@@ -329,9 +329,6 @@ module Aws::AugmentedAIRuntime
 
     # Deletes the specified human loop for a flow definition.
     #
-    # If the human loop was deleted, this operation will return a
-    # `ResourceNotFoundException`.
-    #
     # @option params [required, String] :human_loop_name
     #   The name of the human loop that you want to delete.
     #
@@ -352,9 +349,7 @@ module Aws::AugmentedAIRuntime
       req.send_request(options)
     end
 
-    # Returns information about the specified human loop. If the human loop
-    # was deleted, this operation will return a `ResourceNotFoundException`
-    # error.
+    # Returns information about the specified human loop.
     #
     # @option params [required, String] :human_loop_name
     #   The name of the human loop that you want information about.
@@ -543,7 +538,7 @@ module Aws::AugmentedAIRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-augmentedairuntime'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

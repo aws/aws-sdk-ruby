@@ -26,7 +26,6 @@ module Aws::Braket
     CreateQuantumTaskResponse = Shapes::StructureShape.new(name: 'CreateQuantumTaskResponse')
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
     DeviceOfflineException = Shapes::StructureShape.new(name: 'DeviceOfflineException')
-    DeviceRetiredException = Shapes::StructureShape.new(name: 'DeviceRetiredException')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
     DeviceSummaryList = Shapes::ListShape.new(name: 'DeviceSummaryList')
@@ -102,9 +101,6 @@ module Aws::Braket
 
     DeviceOfflineException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     DeviceOfflineException.struct_class = Types::DeviceOfflineException
-
-    DeviceRetiredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
-    DeviceRetiredException.struct_class = Types::DeviceRetiredException
 
     DeviceSummary.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
     DeviceSummary.add_member(:device_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "deviceName"))
@@ -283,8 +279,6 @@ module Aws::Braket
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: DeviceOfflineException)
-        o.errors << Shapes::ShapeRef.new(shape: DeviceRetiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

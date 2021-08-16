@@ -329,85 +329,36 @@ module Aws::MQ
 
     # Creates a broker. Note: This API is asynchronous.
     #
-    # To create a broker, you must either use the AmazonMQFullAccess IAM
-    # policy or include the following EC2 permissions in your IAM policy.
-    #
-    # * ec2:CreateNetworkInterface
-    #
-    #   This permission is required to allow Amazon MQ to create an elastic
-    #   network interface (ENI) on behalf of your account.
-    #
-    # * ec2:CreateNetworkInterfacePermission
-    #
-    #   This permission is required to attach the ENI to the broker
-    #   instance.
-    #
-    # * ec2:DeleteNetworkInterface
-    #
-    # * ec2:DeleteNetworkInterfacePermission
-    #
-    # * ec2:DetachNetworkInterface
-    #
-    # * ec2:DescribeInternetGateways
-    #
-    # * ec2:DescribeNetworkInterfaces
-    #
-    # * ec2:DescribeNetworkInterfacePermissions
-    #
-    # * ec2:DescribeRouteTables
-    #
-    # * ec2:DescribeSecurityGroups
-    #
-    # * ec2:DescribeSubnets
-    #
-    # * ec2:DescribeVpcs
-    #
-    # For more information, see [Create an IAM User and Get Your AWS
-    # Credentials][1] and [Never Modify or Delete the Amazon MQ Elastic
-    # Network Interface][2] in the *Amazon MQ Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user
-    # [2]: https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface
-    #
     # @option params [String] :authentication_strategy
-    #   Optional. The authentication strategy used to secure the broker. The
-    #   default is SIMPLE.
+    #   The authentication strategy used to secure the broker.
     #
-    # @option params [required, Boolean] :auto_minor_version_upgrade
+    # @option params [Boolean] :auto_minor_version_upgrade
     #
-    # @option params [required, String] :broker_name
+    # @option params [String] :broker_name
     #
     # @option params [Types::ConfigurationId] :configuration
-    #   A list of information about the configuration.
-    #
-    #   Does not apply to RabbitMQ brokers.
+    #   A list of information about the configuration. Does not apply to RabbitMQ brokers.
     #
     # @option params [String] :creator_request_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :deployment_mode
-    #   The broker's deployment mode.
+    # @option params [String] :deployment_mode
+    #   The deployment mode of the broker.
     #
     # @option params [Types::EncryptionOptions] :encryption_options
-    #   Does not apply to RabbitMQ brokers.
-    #
     #   Encryption options for the broker.
     #
-    # @option params [required, String] :engine_type
-    #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
+    # @option params [String] :engine_type
+    #   The type of broker engine. Note: Currently, Amazon MQ supports
+    #   ActiveMQ and RabbitMQ.
     #
-    # @option params [required, String] :engine_version
+    # @option params [String] :engine_version
     #
-    # @option params [required, String] :host_instance_type
+    # @option params [String] :host_instance_type
     #
     # @option params [Types::LdapServerMetadataInput] :ldap_server_metadata
-    #   Optional. The metadata of the LDAP server used to authenticate and
-    #   authorize connections to the broker.
-    #
-    #   Does not apply to RabbitMQ brokers.
+    #   The metadata of the LDAP server used to authenticate and authorize connections to the broker. Currently not supported for RabbitMQ engine type.
     #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
@@ -417,20 +368,18 @@ module Aws::MQ
     #   The scheduled time period relative to UTC during which Amazon MQ
     #   begins to apply pending updates or patches to the broker.
     #
-    # @option params [required, Boolean] :publicly_accessible
+    # @option params [Boolean] :publicly_accessible
     #
     # @option params [Array<String>] :security_groups
     #
     # @option params [String] :storage_type
-    #   The broker's storage type.
-    #
-    #   EFS is not supported for RabbitMQ engine type.
+    #   The storage type of the broker. EFS is currently not Supported for RabbitMQ engine type.
     #
     # @option params [Array<String>] :subnet_ids
     #
     # @option params [Hash<String,String>] :tags
     #
-    # @option params [required, Array<Types::User>] :users
+    # @option params [Array<Types::User>] :users
     #
     # @return [Types::CreateBrokerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -441,32 +390,32 @@ module Aws::MQ
     #
     #   resp = client.create_broker({
     #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #     auto_minor_version_upgrade: false, # required
-    #     broker_name: "__string", # required
+    #     auto_minor_version_upgrade: false,
+    #     broker_name: "__string",
     #     configuration: {
-    #       id: "__string", # required
+    #       id: "__string",
     #       revision: 1,
     #     },
     #     creator_request_id: "__string",
-    #     deployment_mode: "SINGLE_INSTANCE", # required, accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, CLUSTER_MULTI_AZ
+    #     deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, CLUSTER_MULTI_AZ
     #     encryption_options: {
     #       kms_key_id: "__string",
     #       use_aws_owned_key: false, # required
     #     },
-    #     engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
-    #     engine_version: "__string", # required
-    #     host_instance_type: "__string", # required
+    #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ, RABBITMQ
+    #     engine_version: "__string",
+    #     host_instance_type: "__string",
     #     ldap_server_metadata: {
-    #       hosts: ["__string"], # required
-    #       role_base: "__string", # required
+    #       hosts: ["__string"],
+    #       role_base: "__string",
     #       role_name: "__string",
-    #       role_search_matching: "__string", # required
+    #       role_search_matching: "__string",
     #       role_search_subtree: false,
-    #       service_account_password: "__string", # required
-    #       service_account_username: "__string", # required
-    #       user_base: "__string", # required
+    #       service_account_password: "__string",
+    #       service_account_username: "__string",
+    #       user_base: "__string",
     #       user_role_name: "__string",
-    #       user_search_matching: "__string", # required
+    #       user_search_matching: "__string",
     #       user_search_subtree: false,
     #     },
     #     logs: {
@@ -474,23 +423,23 @@ module Aws::MQ
     #       general: false,
     #     },
     #     maintenance_window_start_time: {
-    #       day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #       time_of_day: "__string", # required
+    #       day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #       time_of_day: "__string",
     #       time_zone: "__string",
     #     },
-    #     publicly_accessible: false, # required
+    #     publicly_accessible: false,
     #     security_groups: ["__string"],
     #     storage_type: "EBS", # accepts EBS, EFS
     #     subnet_ids: ["__string"],
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     users: [ # required
+    #     users: [
     #       {
     #         console_access: false,
     #         groups: ["__string"],
-    #         password: "__string", # required
-    #         username: "__string", # required
+    #         password: "__string",
+    #         username: "__string",
     #       },
     #     ],
     #   })
@@ -514,15 +463,15 @@ module Aws::MQ
     # version).
     #
     # @option params [String] :authentication_strategy
-    #   Optional. The authentication strategy used to secure the broker. The
-    #   default is SIMPLE.
+    #   The authentication strategy used to secure the broker.
     #
-    # @option params [required, String] :engine_type
-    #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
+    # @option params [String] :engine_type
+    #   The type of broker engine. Note: Currently, Amazon MQ supports
+    #   ActiveMQ and RabbitMQ.
     #
-    # @option params [required, String] :engine_version
+    # @option params [String] :engine_version
     #
-    # @option params [required, String] :name
+    # @option params [String] :name
     #
     # @option params [Hash<String,String>] :tags
     #
@@ -539,9 +488,9 @@ module Aws::MQ
     #
     #   resp = client.create_configuration({
     #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #     engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
-    #     engine_version: "__string", # required
-    #     name: "__string", # required
+    #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ, RABBITMQ
+    #     engine_version: "__string",
+    #     name: "__string",
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -601,7 +550,7 @@ module Aws::MQ
     #
     # @option params [Array<String>] :groups
     #
-    # @option params [required, String] :password
+    # @option params [String] :password
     #
     # @option params [required, String] :username
     #
@@ -613,7 +562,7 @@ module Aws::MQ
     #     broker_id: "__string", # required
     #     console_access: false,
     #     groups: ["__string"],
-    #     password: "__string", # required
+    #     password: "__string",
     #     username: "__string", # required
     #   })
     #
@@ -1269,35 +1218,25 @@ module Aws::MQ
     # Adds a pending configuration change to a broker.
     #
     # @option params [String] :authentication_strategy
-    #   Optional. The authentication strategy used to secure the broker. The
-    #   default is SIMPLE.
+    #   The authentication strategy used to secure the broker.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #
     # @option params [required, String] :broker_id
     #
     # @option params [Types::ConfigurationId] :configuration
-    #   A list of information about the configuration.
-    #
-    #   Does not apply to RabbitMQ brokers.
+    #   A list of information about the configuration. Does not apply to RabbitMQ brokers.
     #
     # @option params [String] :engine_version
     #
     # @option params [String] :host_instance_type
     #
     # @option params [Types::LdapServerMetadataInput] :ldap_server_metadata
-    #   Optional. The metadata of the LDAP server used to authenticate and
-    #   authorize connections to the broker.
-    #
-    #   Does not apply to RabbitMQ brokers.
+    #   The metadata of the LDAP server used to authenticate and authorize connections to the broker. Currently not supported for RabbitMQ engine type.
     #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
     #   broker.
-    #
-    # @option params [Types::WeeklyStartTime] :maintenance_window_start_time
-    #   The scheduled time period relative to UTC during which Amazon MQ
-    #   begins to apply pending updates or patches to the broker.
     #
     # @option params [Array<String>] :security_groups
     #
@@ -1311,7 +1250,6 @@ module Aws::MQ
     #   * {Types::UpdateBrokerResponse#host_instance_type #host_instance_type} => String
     #   * {Types::UpdateBrokerResponse#ldap_server_metadata #ldap_server_metadata} => Types::LdapServerMetadataOutput
     #   * {Types::UpdateBrokerResponse#logs #logs} => Types::Logs
-    #   * {Types::UpdateBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
     #   * {Types::UpdateBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1321,32 +1259,27 @@ module Aws::MQ
     #     auto_minor_version_upgrade: false,
     #     broker_id: "__string", # required
     #     configuration: {
-    #       id: "__string", # required
+    #       id: "__string",
     #       revision: 1,
     #     },
     #     engine_version: "__string",
     #     host_instance_type: "__string",
     #     ldap_server_metadata: {
-    #       hosts: ["__string"], # required
-    #       role_base: "__string", # required
+    #       hosts: ["__string"],
+    #       role_base: "__string",
     #       role_name: "__string",
-    #       role_search_matching: "__string", # required
+    #       role_search_matching: "__string",
     #       role_search_subtree: false,
-    #       service_account_password: "__string", # required
-    #       service_account_username: "__string", # required
-    #       user_base: "__string", # required
+    #       service_account_password: "__string",
+    #       service_account_username: "__string",
+    #       user_base: "__string",
     #       user_role_name: "__string",
-    #       user_search_matching: "__string", # required
+    #       user_search_matching: "__string",
     #       user_search_subtree: false,
     #     },
     #     logs: {
     #       audit: false,
     #       general: false,
-    #     },
-    #     maintenance_window_start_time: {
-    #       day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    #       time_of_day: "__string", # required
-    #       time_zone: "__string",
     #     },
     #     security_groups: ["__string"],
     #   })
@@ -1373,9 +1306,6 @@ module Aws::MQ
     #   resp.ldap_server_metadata.user_search_subtree #=> Boolean
     #   resp.logs.audit #=> Boolean
     #   resp.logs.general #=> Boolean
-    #   resp.maintenance_window_start_time.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
-    #   resp.maintenance_window_start_time.time_of_day #=> String
-    #   resp.maintenance_window_start_time.time_zone #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
     #
@@ -1392,7 +1322,7 @@ module Aws::MQ
     #
     # @option params [required, String] :configuration_id
     #
-    # @option params [required, String] :data
+    # @option params [String] :data
     #
     # @option params [String] :description
     #
@@ -1409,7 +1339,7 @@ module Aws::MQ
     #
     #   resp = client.update_configuration({
     #     configuration_id: "__string", # required
-    #     data: "__string", # required
+    #     data: "__string",
     #     description: "__string",
     #   })
     #
@@ -1482,7 +1412,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

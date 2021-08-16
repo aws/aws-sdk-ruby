@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.37.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.36.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.35.0 (2021-05-17)
-------------------
-
-* Feature - Neptune support for CopyTagsToSnapshots
-
 1.34.0 (2021-03-10)
 ------------------
 

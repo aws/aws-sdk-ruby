@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.30.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.29.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.28.0 (2021-07-13)
-------------------
-
-* Feature - Documentation updates for api.pricing
-
 1.27.0 (2021-03-31)
 ------------------
 

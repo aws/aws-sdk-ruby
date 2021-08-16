@@ -328,7 +328,7 @@ module Aws::AuditManager
     # @!group API Operations
 
     # Associates an evidence folder to the specified assessment report in
-    # Audit Manager.
+    # AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -354,7 +354,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Associates a list of evidence to an assessment report in an Audit
+    # Associates a list of evidence to an assessment report in an AWS Audit
     # Manager assessment.
     #
     # @option params [required, String] :assessment_id
@@ -397,11 +397,11 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Create a batch of delegations for a specified assessment in Audit
+    # Create a batch of delegations for a specified assessment in AWS Audit
     # Manager.
     #
     # @option params [required, Array<Types::CreateDelegationRequest>] :create_delegation_requests
-    #   The API request to batch create delegations in Audit Manager.
+    #   The API request to batch create delegations in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -456,7 +456,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deletes the delegations in the specified Audit Manager assessment.
+    # Deletes the delegations in the specified AWS Audit Manager assessment.
     #
     # @option params [required, Array<String>] :delegation_ids
     #   The identifiers for the specified delegations.
@@ -492,7 +492,7 @@ module Aws::AuditManager
     end
 
     # Disassociates a list of evidence from the specified assessment report
-    # in Audit Manager.
+    # in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -535,7 +535,7 @@ module Aws::AuditManager
     end
 
     # Uploads one or more pieces of evidence to the specified control in the
-    # assessment in Audit Manager.
+    # assessment in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -582,7 +582,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Creates an assessment in Audit Manager.
+    # Creates an assessment in AWS Audit Manager.
     #
     # @option params [required, String] :name
     #   The name of the assessment to be created.
@@ -595,8 +595,8 @@ module Aws::AuditManager
     #   that is being created.
     #
     # @option params [required, Types::Scope] :scope
-    #   The wrapper that contains the accounts and services in scope for the
-    #   assessment.
+    #   The wrapper that contains the AWS accounts and AWS services in scope
+    #   for the assessment.
     #
     # @option params [required, Array<Types::Role>] :roles
     #   The list of roles for the specified assessment.
@@ -735,7 +735,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Creates a custom framework in Audit Manager.
+    # Creates a custom framework in AWS Audit Manager.
     #
     # @option params [required, String] :name
     #   The name of the new custom framework.
@@ -877,7 +877,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Creates a new custom control in Audit Manager.
+    # Creates a new custom control in AWS Audit Manager.
     #
     # @option params [required, String] :name
     #   The name of the control.
@@ -968,7 +968,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deletes an assessment in Audit Manager.
+    # Deletes an assessment in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -990,7 +990,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deletes a custom framework in Audit Manager.
+    # Deletes a custom framework in AWS Audit Manager.
     #
     # @option params [required, String] :framework_id
     #   The identifier for the specified framework.
@@ -1012,7 +1012,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deletes an assessment report from an assessment in Audit Manager.
+    # Deletes an assessment report from an assessment in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -1038,7 +1038,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deletes a custom control in Audit Manager.
+    # Deletes a custom control in AWS Audit Manager.
     #
     # @option params [required, String] :control_id
     #   The identifier for the specified control.
@@ -1060,7 +1060,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deregisters an account in Audit Manager.
+    # Deregisters an account in AWS Audit Manager.
     #
     # @return [Types::DeregisterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1079,15 +1079,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Removes the specified member account as a delegated administrator for
-    # Audit Manager.
-    #
-    # When you remove a delegated administrator from your Audit Manager
-    # settings, or when you deregister a delegated administrator from
-    # Organizations, you continue to have access to the evidence that you
-    # previously collected under that account. However, Audit Manager will
-    # stop collecting and attaching evidence to that delegated administrator
-    # account moving forward.
+    # Deregisters the delegated AWS administrator account from the AWS
+    # organization.
     #
     # @option params [String] :admin_account_id
     #   The identifier for the specified administrator account.
@@ -1110,7 +1103,7 @@ module Aws::AuditManager
     end
 
     # Disassociates an evidence folder from the specified assessment report
-    # in Audit Manager.
+    # in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -1136,7 +1129,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns the registration status of an account in Audit Manager.
+    # Returns the registration status of an account in AWS Audit Manager.
     #
     # @return [Types::GetAccountStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1155,7 +1148,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns an assessment from Audit Manager.
+    # Returns an assessment from AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -1262,7 +1255,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a framework from Audit Manager.
+    # Returns a framework from AWS Audit Manager.
     #
     # @option params [required, String] :framework_id
     #   The identifier for the specified framework.
@@ -1332,7 +1325,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns the URL of a specified assessment report in Audit Manager.
+    # Returns the URL of a specified assessment report in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_report_id
     #   The identifier for the assessment report.
@@ -1365,7 +1358,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of changelogs from Audit Manager.
+    # Returns a list of changelogs from AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -1419,7 +1412,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a control from Audit Manager.
+    # Returns a control from AWS Audit Manager.
     #
     # @option params [required, String] :control_id
     #   The identifier for the specified control.
@@ -1515,7 +1508,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns evidence from Audit Manager.
+    # Returns evidence from AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -1572,7 +1565,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns all evidence from a specified evidence folder in Audit
+    # Returns all evidence from a specified evidence folder in AWS Audit
     # Manager.
     #
     # @option params [required, String] :assessment_id
@@ -1640,7 +1633,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns an evidence folder from the specified assessment in Audit
+    # Returns an evidence folder from the specified assessment in AWS Audit
     # Manager.
     #
     # @option params [required, String] :assessment_id
@@ -1694,7 +1687,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns the evidence folders from a specified assessment in Audit
+    # Returns the evidence folders from a specified assessment in AWS Audit
     # Manager.
     #
     # @option params [required, String] :assessment_id
@@ -1755,7 +1748,7 @@ module Aws::AuditManager
     end
 
     # Returns a list of evidence folders associated with a specified control
-    # of an assessment in Audit Manager.
+    # of an assessment in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -1822,8 +1815,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns the name of the delegated Amazon Web Services administrator
-    # account for the organization.
+    # Returns the name of the delegated AWS administrator account for the
+    # AWS organization.
     #
     # @return [Types::GetOrganizationAdminAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1844,8 +1837,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of the in-scope Amazon Web Services services for the
-    # specified assessment.
+    # Returns a list of the in-scope AWS services for the specified
+    # assessment.
     #
     # @return [Types::GetServicesInScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1868,7 +1861,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns the settings for the specified account.
+    # Returns the settings for the specified AWS account.
     #
     # @option params [required, String] :attribute
     #   The list of `SettingAttribute` enum values.
@@ -1903,7 +1896,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of the frameworks available in the Audit Manager
+    # Returns a list of the frameworks available in the AWS Audit Manager
     # framework library.
     #
     # @option params [required, String] :framework_type
@@ -1956,7 +1949,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of assessment reports created in Audit Manager.
+    # Returns a list of assessment reports created in AWS Audit Manager.
     #
     # @option params [String] :next_token
     #   The pagination token used to fetch the next set of results.
@@ -2001,7 +1994,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of current and past assessments from Audit Manager.
+    # Returns a list of current and past assessments from AWS Audit Manager.
     #
     # @option params [String] :next_token
     #   The pagination token used to fetch the next set of results.
@@ -2059,7 +2052,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of controls from Audit Manager.
+    # Returns a list of controls from AWS Audit Manager.
     #
     # @option params [required, String] :control_type
     #   The type of control, such as standard or custom.
@@ -2149,7 +2142,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of all Audit Manager notifications.
+    # Returns a list of all AWS Audit Manager notifications.
     #
     # @option params [String] :next_token
     #   The pagination token used to fetch the next set of results.
@@ -2194,7 +2187,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of tags for the specified resource in Audit Manager.
+    # Returns a list of tags for the specified resource in AWS Audit
+    # Manager.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the specified resource.
@@ -2223,13 +2217,13 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Enables Audit Manager for the specified account.
+    # Enables AWS Audit Manager for the specified AWS account.
     #
     # @option params [String] :kms_key
-    #   The KMS key details.
+    #   The AWS KMS key details.
     #
     # @option params [String] :delegated_admin_account
-    #   The delegated administrator account for Audit Manager.
+    #   The delegated administrator account for AWS Audit Manager.
     #
     # @return [Types::RegisterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2255,8 +2249,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Enables an account within the organization as the delegated
-    # administrator for Audit Manager.
+    # Enables an AWS account within the organization as the delegated
+    # administrator for AWS Audit Manager.
     #
     # @option params [required, String] :admin_account_id
     #   The identifier for the specified delegated administrator account.
@@ -2286,7 +2280,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Tags the specified resource in Audit Manager.
+    # Tags the specified resource in AWS Audit Manager.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the specified resource.
@@ -2314,7 +2308,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Removes a tag from a resource in Audit Manager.
+    # Removes a tag from a resource in AWS Audit Manager.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the specified resource.
@@ -2340,7 +2334,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Edits an Audit Manager assessment.
+    # Edits an AWS Audit Manager assessment.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -2486,7 +2480,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Updates a control within an assessment in Audit Manager.
+    # Updates a control within an assessment in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -2542,7 +2536,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Updates the status of a control set in an Audit Manager assessment.
+    # Updates the status of a control set in an AWS Audit Manager
+    # assessment.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -2615,7 +2610,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Updates a custom framework in Audit Manager.
+    # Updates a custom framework in AWS Audit Manager.
     #
     # @option params [required, String] :framework_id
     #   The identifier for the specified framework.
@@ -2712,7 +2707,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Updates the status of an assessment in Audit Manager.
+    # Updates the status of an assessment in AWS Audit Manager.
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the specified assessment.
@@ -2820,7 +2815,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Updates a custom control in Audit Manager.
+    # Updates a custom control in AWS Audit Manager.
     #
     # @option params [required, String] :control_id
     #   The identifier for the specified control.
@@ -2911,10 +2906,10 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Updates Audit Manager settings for the current user account.
+    # Updates AWS Audit Manager settings for the current user account.
     #
     # @option params [String] :sns_topic
-    #   The Amazon Simple Notification Service (Amazon SNS) topic to which
+    #   The Amazon Simple Notification Service (Amazon SNS) topic to which AWS
     #   Audit Manager sends notifications.
     #
     # @option params [Types::AssessmentReportsDestination] :default_assessment_reports_destination
@@ -2924,7 +2919,7 @@ module Aws::AuditManager
     #   A list of the default audit owners.
     #
     # @option params [String] :kms_key
-    #   The KMS key details.
+    #   The AWS KMS key details.
     #
     # @return [Types::UpdateSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2967,7 +2962,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Validates the integrity of an assessment report in Audit Manager.
+    # Validates the integrity of an assessment report in AWS Audit Manager.
     #
     # @option params [required, String] :s3_relative_path
     #   The relative path of the specified Amazon S3 bucket in which the
@@ -3018,7 +3013,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

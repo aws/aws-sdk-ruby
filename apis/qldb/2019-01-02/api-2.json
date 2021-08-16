@@ -256,19 +256,6 @@
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"}
       ]
-    },
-    "UpdateLedgerPermissionsMode":{
-      "name":"UpdateLedgerPermissionsMode",
-      "http":{
-        "method":"PATCH",
-        "requestUri":"/ledgers/{name}/permissions-mode"
-      },
-      "input":{"shape":"UpdateLedgerPermissionsModeRequest"},
-      "output":{"shape":"UpdateLedgerPermissionsModeResponse"},
-      "errors":[
-        {"shape":"InvalidParameterException"},
-        {"shape":"ResourceNotFoundException"}
-      ]
     }
   },
   "shapes":{
@@ -313,8 +300,7 @@
         "Name":{"shape":"LedgerName"},
         "Tags":{"shape":"Tags"},
         "PermissionsMode":{"shape":"PermissionsMode"},
-        "DeletionProtection":{"shape":"DeletionProtection"},
-        "KmsKey":{"shape":"KmsKey"}
+        "DeletionProtection":{"shape":"DeletionProtection"}
       }
     },
     "CreateLedgerResponse":{
@@ -324,9 +310,7 @@
         "Arn":{"shape":"Arn"},
         "State":{"shape":"LedgerState"},
         "CreationDateTime":{"shape":"Timestamp"},
-        "PermissionsMode":{"shape":"PermissionsMode"},
-        "DeletionProtection":{"shape":"DeletionProtection"},
-        "KmsKeyArn":{"shape":"Arn"}
+        "DeletionProtection":{"shape":"DeletionProtection"}
       }
     },
     "DeleteLedgerRequest":{
@@ -410,23 +394,13 @@
         "Arn":{"shape":"Arn"},
         "State":{"shape":"LedgerState"},
         "CreationDateTime":{"shape":"Timestamp"},
-        "PermissionsMode":{"shape":"PermissionsMode"},
-        "DeletionProtection":{"shape":"DeletionProtection"},
-        "EncryptionDescription":{"shape":"LedgerEncryptionDescription"}
+        "DeletionProtection":{"shape":"DeletionProtection"}
       }
     },
     "Digest":{
       "type":"blob",
       "max":32,
       "min":32
-    },
-    "EncryptionStatus":{
-      "type":"string",
-      "enum":[
-        "ENABLED",
-        "UPDATING",
-        "KMS_KEY_INACCESSIBLE"
-      ]
     },
     "ErrorCause":{
       "type":"string",
@@ -622,22 +596,6 @@
         "AggregationEnabled":{"shape":"Boolean"}
       }
     },
-    "KmsKey":{
-      "type":"string",
-      "max":1600
-    },
-    "LedgerEncryptionDescription":{
-      "type":"structure",
-      "required":[
-        "KmsKeyArn",
-        "EncryptionStatus"
-      ],
-      "members":{
-        "KmsKeyArn":{"shape":"Arn"},
-        "EncryptionStatus":{"shape":"EncryptionStatus"},
-        "InaccessibleKmsKeyDateTime":{"shape":"Timestamp"}
-      }
-    },
     "LedgerList":{
       "type":"list",
       "member":{"shape":"LedgerSummary"}
@@ -805,10 +763,7 @@
     "ParameterName":{"type":"string"},
     "PermissionsMode":{
       "type":"string",
-      "enum":[
-        "ALLOW_ALL",
-        "STANDARD"
-      ]
+      "enum":["ALLOW_ALL"]
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",
@@ -1011,29 +966,6 @@
       "members":{
       }
     },
-    "UpdateLedgerPermissionsModeRequest":{
-      "type":"structure",
-      "required":[
-        "Name",
-        "PermissionsMode"
-      ],
-      "members":{
-        "Name":{
-          "shape":"LedgerName",
-          "location":"uri",
-          "locationName":"name"
-        },
-        "PermissionsMode":{"shape":"PermissionsMode"}
-      }
-    },
-    "UpdateLedgerPermissionsModeResponse":{
-      "type":"structure",
-      "members":{
-        "Name":{"shape":"LedgerName"},
-        "Arn":{"shape":"Arn"},
-        "PermissionsMode":{"shape":"PermissionsMode"}
-      }
-    },
     "UpdateLedgerRequest":{
       "type":"structure",
       "required":["Name"],
@@ -1043,8 +975,7 @@
           "location":"uri",
           "locationName":"name"
         },
-        "DeletionProtection":{"shape":"DeletionProtection"},
-        "KmsKey":{"shape":"KmsKey"}
+        "DeletionProtection":{"shape":"DeletionProtection"}
       }
     },
     "UpdateLedgerResponse":{
@@ -1054,8 +985,7 @@
         "Arn":{"shape":"Arn"},
         "State":{"shape":"LedgerState"},
         "CreationDateTime":{"shape":"Timestamp"},
-        "DeletionProtection":{"shape":"DeletionProtection"},
-        "EncryptionDescription":{"shape":"LedgerEncryptionDescription"}
+        "DeletionProtection":{"shape":"DeletionProtection"}
       }
     },
     "ValueHolder":{

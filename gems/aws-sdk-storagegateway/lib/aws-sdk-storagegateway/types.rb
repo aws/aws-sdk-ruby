@@ -55,8 +55,8 @@ module Aws::StorageGateway
     #   the arguments you pass to the `ActivateGateway` API call determine
     #   the actual configuration of your gateway.
     #
-    #   For more information, see [Getting activation key][1] in the
-    #   *Storage Gateway User Guide*.
+    #   For more information, see [Getting activation key][1] in the *AWS
+    #   Storage Gateway User Guide*.
     #
     #
     #
@@ -77,15 +77,15 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] gateway_region
-    #   A value that indicates the Region where you want to store your data.
-    #   The gateway Region specified must be the same Region as the Region
-    #   in your `Host` header in the request. For more information about
-    #   available Regions and endpoints for Storage Gateway, see [ Storage
-    #   Gateway endpoints and quotas][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   A value that indicates the AWS Region where you want to store your
+    #   data. The gateway AWS Region specified must be the same AWS Region
+    #   as the AWS Region in your `Host` header in the request. For more
+    #   information about available AWS Regions and endpoints for AWS
+    #   Storage Gateway, see [AWS Storage Gateway endpoints and quotas][1]
+    #   in the *AWS General Reference*.
     #
-    #   Valid Values: See [ Storage Gateway endpoints and quotas][1] in the
-    #   *Amazon Web Services General Reference*.
+    #   Valid Values: See [AWS Storage Gateway endpoints and quotas][1] in
+    #   the *AWS General Reference*.
     #
     #
     #
@@ -97,8 +97,7 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and
     #   cannot be changed after activation. The default value is `CACHED`.
     #
-    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3` \|
-    #   `FILE_FSX_SMB|`
+    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3`
     #   @return [String]
     #
     # @!attribute [rw] tape_drive_type
@@ -143,10 +142,10 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # Storage Gateway returns the Amazon Resource Name (ARN) of the
+    # AWS Storage Gateway returns the Amazon Resource Name (ARN) of the
     # activated gateway. It is a string made of information such as your
-    # account, gateway name, and Region. This ARN is used to reference the
-    # gateway in other API operations as well as resource-based
+    # account, gateway name, and AWS Region. This ARN is used to reference
+    # the gateway in other API operations as well as resource-based
     # authorization.
     #
     # <note markdown="1"> For gateways activated prior to September 02, 2015, the gateway ARN
@@ -157,7 +156,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGatewayOutput AWS API Documentation
@@ -178,7 +178,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
@@ -198,7 +199,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCacheOutput AWS API Documentation
@@ -275,7 +277,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
@@ -295,7 +298,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBufferOutput AWS API Documentation
@@ -322,7 +326,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
@@ -345,7 +350,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorageOutput AWS API Documentation
@@ -434,9 +440,6 @@ module Aws::StorageGateway
     #         cache_attributes: {
     #           cache_stale_timeout_in_seconds: 1,
     #         },
-    #         endpoint_network_configuration: {
-    #           ip_addresses: ["IPV4Address"],
-    #         },
     #       }
     #
     # @!attribute [rw] user_name
@@ -450,18 +453,19 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique string value that you supply that is used by the FSx File
-    #   Gateway to ensure idempotent file system association creation.
+    #   A unique string value that you supply that is used by the file
+    #   gateway to ensure idempotent file system association creation.
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the Amazon FSx file system to
-    #   associate with the FSx File Gateway.
+    #   associate with the Amazon FSx file gateway.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -475,19 +479,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   The refresh cache information for the file share or FSx file
-    #   systems.
+    #   The refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
-    #
-    # @!attribute [rw] endpoint_network_configuration
-    #   Specifies the network configuration information for the gateway
-    #   associated with the Amazon FSx file system.
-    #
-    #   <note markdown="1"> If multiple file systems are associated with this gateway, this
-    #   parameter's `IpAddresses` field is required.
-    #
-    #    </note>
-    #   @return [Types::EndpointNetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AssociateFileSystemInput AWS API Documentation
     #
@@ -499,8 +492,7 @@ module Aws::StorageGateway
       :location_arn,
       :tags,
       :audit_destination_arn,
-      :cache_attributes,
-      :endpoint_network_configuration)
+      :cache_attributes)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -612,7 +604,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AutomaticTapeCreationPolicyInfo AWS API Documentation
@@ -772,7 +765,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # The refresh cache information for the file share or FSx file systems.
+    # The refresh cache information for the file share.
     #
     # @note When making an API call, you may pass CacheAttributes
     #   data as a hash:
@@ -788,7 +781,7 @@ module Aws::StorageGateway
     #   directory's contents from the Amazon S3 bucket or Amazon FSx file
     #   system. The TTL duration is in seconds.
     #
-    #   Valid Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)
+    #   Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CacheAttributes AWS API Documentation
@@ -921,7 +914,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] tape_arn
@@ -965,7 +959,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] tape_arn
@@ -1056,7 +1051,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
@@ -1112,7 +1108,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -1208,13 +1204,11 @@ module Aws::StorageGateway
     #           cache_stale_timeout_in_seconds: 1,
     #         },
     #         notification_policy: "NotificationPolicy",
-    #         vpc_endpoint_dns_name: "DNSHostName",
-    #         bucket_region: "RegionId",
     #       }
     #
     # @!attribute [rw] client_token
-    #   A unique string value that you supply that is used by S3 File
-    #   Gateway to ensure idempotent file share creation.
+    #   A unique string value that you supply that is used by file gateway
+    #   to ensure idempotent file share creation.
     #   @return [String]
     #
     # @!attribute [rw] nfs_file_share_defaults
@@ -1222,13 +1216,13 @@ module Aws::StorageGateway
     #   @return [Types::NFSFileShareDefaults]
     #
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the S3 File Gateway on which you
-    #   want to create a file share.
+    #   The Amazon Resource Name (ARN) of the file gateway on which you want
+    #   to create a file share.
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -1241,35 +1235,19 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The ARN of the Identity and Access Management (IAM) role that an S3
-    #   File Gateway assumes when it accesses the underlying storage.
+    #   The ARN of the AWS Identity and Access Management (IAM) role that a
+    #   file gateway assumes when it accesses the underlying storage.
     #   @return [String]
     #
     # @!attribute [rw] location_arn
     #   The ARN of the backend storage used for storing file data. A prefix
     #   name can be added to the S3 bucket name. It must end with a "/".
-    #
-    #   <note markdown="1"> You can specify a bucket attached to an access point using a
-    #   complete ARN that includes the bucket region as shown:
-    #
-    #    `arn:aws:s3:region:account-id:accesspoint/access-point-name `
-    #
-    #    If you specify a bucket attached to an access point, the bucket
-    #   policy must be configured to delegate access control to the access
-    #   point. For information, see [Delegating access control to access
-    #   points][1] in the *Amazon S3 User Guide*.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -1277,14 +1255,13 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] object_acl
     #   A value that sets the access control list (ACL) permission for
-    #   objects in the S3 bucket that a S3 File Gateway puts objects into.
-    #   The default value is `private`.
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] client_list
-    #   The list of clients that are allowed to access the S3 File Gateway.
-    #   The list must contain either valid IP addresses or valid CIDR
-    #   blocks.
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
@@ -1381,28 +1358,6 @@ module Aws::StorageGateway
     #   `\{\}`
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoint_dns_name
-    #   Specifies the DNS name for the VPC endpoint that the NFS file share
-    #   uses to connect to Amazon S3.
-    #
-    #   <note markdown="1"> This parameter is required for NFS file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] bucket_region
-    #   Specifies the Region of the S3 bucket where the NFS file share
-    #   stores files.
-    #
-    #   <note markdown="1"> This parameter is required for NFS file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
     #
     class CreateNFSFileShareInput < Struct.new(
@@ -1423,9 +1378,7 @@ module Aws::StorageGateway
       :tags,
       :file_share_name,
       :cache_attributes,
-      :notification_policy,
-      :vpc_endpoint_dns_name,
-      :bucket_region)
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1480,24 +1433,21 @@ module Aws::StorageGateway
     #           cache_stale_timeout_in_seconds: 1,
     #         },
     #         notification_policy: "NotificationPolicy",
-    #         vpc_endpoint_dns_name: "DNSHostName",
-    #         bucket_region: "RegionId",
-    #         oplocks_enabled: false,
     #       }
     #
     # @!attribute [rw] client_token
-    #   A unique string value that you supply that is used by S3 File
-    #   Gateway to ensure idempotent file share creation.
+    #   A unique string value that you supply that is used by file gateway
+    #   to ensure idempotent file share creation.
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
-    #   The ARN of the S3 File Gateway on which you want to create a file
+    #   The ARN of the file gateway on which you want to create a file
     #   share.
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -1510,35 +1460,19 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The ARN of the Identity and Access Management (IAM) role that an S3
-    #   File Gateway assumes when it accesses the underlying storage.
+    #   The ARN of the AWS Identity and Access Management (IAM) role that a
+    #   file gateway assumes when it accesses the underlying storage.
     #   @return [String]
     #
     # @!attribute [rw] location_arn
     #   The ARN of the backend storage used for storing file data. A prefix
     #   name can be added to the S3 bucket name. It must end with a "/".
-    #
-    #   <note markdown="1"> You can specify a bucket attached to an access point using a
-    #   complete ARN that includes the bucket region as shown:
-    #
-    #    `arn:aws:s3:region:account-id:accesspoint/access-point-name `
-    #
-    #    If you specify a bucket attached to an access point, the bucket
-    #   policy must be configured to delegate access control to the access
-    #   point. For information, see [Delegating access control to access
-    #   points][1] in the *Amazon S3 User Guide*.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control
     #   @return [String]
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -1546,8 +1480,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] object_acl
     #   A value that sets the access control list (ACL) permission for
-    #   objects in the S3 bucket that a S3 File Gateway puts objects into.
-    #   The default value is `private`.
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] read_only
@@ -1589,7 +1523,8 @@ module Aws::StorageGateway
     #   permissions to the POSIX permissions.
     #
     #   For more information, see [Using Microsoft Windows ACLs to control
-    #   access to an SMB file share][1] in the *Storage Gateway User Guide*.
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
     #
     #   Valid Values: `true` \| `false`
     #
@@ -1697,41 +1632,6 @@ module Aws::StorageGateway
     #   `\{\}`
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoint_dns_name
-    #   Specifies the DNS name for the VPC endpoint that the SMB file share
-    #   uses to connect to Amazon S3.
-    #
-    #   <note markdown="1"> This parameter is required for SMB file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] bucket_region
-    #   Specifies the Region of the S3 bucket where the SMB file share
-    #   stores files.
-    #
-    #   <note markdown="1"> This parameter is required for SMB file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] oplocks_enabled
-    #   Specifies whether opportunistic locking is enabled for the SMB file
-    #   share.
-    #
-    #   <note markdown="1"> Enabling opportunistic locking on case-sensitive shares is not
-    #   recommended for workloads that involve access to files with the same
-    #   name in different case.
-    #
-    #    </note>
-    #
-    #   Valid Values: `true` \| `false`
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput AWS API Documentation
     #
     class CreateSMBFileShareInput < Struct.new(
@@ -1757,10 +1657,7 @@ module Aws::StorageGateway
       :tags,
       :file_share_name,
       :cache_attributes,
-      :notification_policy,
-      :vpc_endpoint_dns_name,
-      :bucket_region,
-      :oplocks_enabled)
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1802,7 +1699,7 @@ module Aws::StorageGateway
     # @!attribute [rw] snapshot_description
     #   Textual description of the snapshot that appears in the Amazon EC2
     #   console, Elastic Block Store snapshots panel in the **Description**
-    #   field, and in the Storage Gateway snapshot **Details** pane,
+    #   field, and in the AWS Storage Gateway snapshot **Details** pane,
     #   **Description** field.
     #   @return [String]
     #
@@ -1880,7 +1777,7 @@ module Aws::StorageGateway
     # @!attribute [rw] snapshot_description
     #   Textual description of the snapshot that appears in the Amazon EC2
     #   console, Elastic Block Store snapshots panel in the **Description**
-    #   field, and in the Storage Gateway snapshot **Details** pane,
+    #   field, and in the AWS Storage Gateway snapshot **Details** pane,
     #   **Description** field.
     #   @return [String]
     #
@@ -1963,7 +1860,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disk_id
@@ -2018,7 +1916,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -2112,10 +2010,10 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] retention_lock_type
     #   Tape retention lock can be configured in two modes. When configured
-    #   in governance mode, accounts with specific IAM permissions are
+    #   in governance mode, AWS accounts with specific IAM permissions are
     #   authorized to remove the tape retention lock from archived virtual
     #   tapes. When configured in compliance mode, the tape retention lock
-    #   cannot be removed by any user, including the root account.
+    #   cannot be removed by any user, including the root AWS account.
     #   @return [String]
     #
     # @!attribute [rw] retention_lock_time_in_days
@@ -2150,7 +2048,7 @@ module Aws::StorageGateway
     # @!attribute [rw] pool_arn
     #   The unique Amazon Resource Name (ARN) that represents the custom
     #   tape pool. Use the ListTapePools operation to return a list of tape
-    #   pools for your account and Region.
+    #   pools for your account and AWS Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapePoolOutput AWS API Documentation
@@ -2185,7 +2083,7 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_arn
     #   The unique Amazon Resource Name (ARN) that represents the gateway to
     #   associate the virtual tape with. Use the ListGateways operation to
-    #   return a list of gateways for your account and Region.
+    #   return a list of gateways for your account and AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] tape_size_in_bytes
@@ -2207,7 +2105,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -2302,7 +2200,7 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_arn
     #   The unique Amazon Resource Name (ARN) that represents the gateway to
     #   associate the virtual tapes with. Use the ListGateways operation to
-    #   return a list of gateways for your account and Region.
+    #   return a list of gateways for your account and AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] tape_size_in_bytes
@@ -2340,7 +2238,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -2421,7 +2319,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteAutomaticTapeCreationPolicyInput AWS API Documentation
@@ -2434,7 +2333,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteAutomaticTapeCreationPolicyOutput AWS API Documentation
@@ -2461,7 +2361,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] bandwidth_type
@@ -2485,7 +2386,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimitOutput AWS API Documentation
@@ -2564,10 +2466,10 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] force_delete
     #   If this value is set to `true`, the operation deletes a file share
-    #   immediately and aborts all data uploads to Amazon Web Services.
-    #   Otherwise, the file share is not deleted until all data is uploaded
-    #   to Amazon Web Services. This process aborts the data upload process,
-    #   and the file share enters the `FORCE_DELETING` status.
+    #   immediately and aborts all data uploads to AWS. Otherwise, the file
+    #   share is not deleted until all data is uploaded to AWS. This process
+    #   aborts the data upload process, and the file share enters the
+    #   `FORCE_DELETING` status.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -2606,7 +2508,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGatewayInput AWS API Documentation
@@ -2621,7 +2524,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGatewayOutput AWS API Documentation
@@ -2723,7 +2627,8 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_arn
     #   The unique Amazon Resource Name (ARN) of the gateway that the
     #   virtual tape to delete is associated with. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] tape_arn
@@ -2840,7 +2745,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeAvailabilityMonitorTestInput AWS API Documentation
@@ -2853,7 +2759,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2888,7 +2795,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitInput AWS API Documentation
@@ -2903,7 +2811,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] average_upload_rate_limit_in_bits_per_sec
@@ -2937,7 +2846,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitScheduleInput AWS API Documentation
@@ -2950,7 +2860,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] bandwidth_rate_limit_intervals
@@ -2976,7 +2887,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCacheInput AWS API Documentation
@@ -2989,7 +2901,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
@@ -3010,8 +2923,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] cache_dirty_percentage
     #   The file share's contribution to the overall percentage of the
-    #   gateway's cache that has not been persisted to Amazon Web Services.
-    #   The sample is taken at the end of the reporting period.
+    #   gateway's cache that has not been persisted to AWS. The sample is
+    #   taken at the end of the reporting period.
     #   @return [Float]
     #
     # @!attribute [rw] cache_hit_percentage
@@ -3177,7 +3090,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationInput AWS API Documentation
@@ -3192,7 +3106,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
@@ -3240,7 +3155,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_region
-    #   The Region where the Amazon EC2 instance is located.
+    #   The AWS Region where the Amazon EC2 instance is located.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3280,15 +3195,6 @@ module Aws::StorageGateway
     #   new features and bug fixes.
     #   @return [String]
     #
-    # @!attribute [rw] gateway_capacity
-    #   Specifies the size of the gateway's metadata cache.
-    #   @return [String]
-    #
-    # @!attribute [rw] supported_gateway_capacities
-    #   A list of the metadata cache sizes that the gateway can support
-    #   based on its current hardware specifications.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -3309,9 +3215,7 @@ module Aws::StorageGateway
       :host_environment,
       :endpoint_type,
       :software_updates_end_date,
-      :deprecation_date,
-      :gateway_capacity,
-      :supported_gateway_capacities)
+      :deprecation_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3328,7 +3232,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeInput AWS API Documentation
@@ -3353,7 +3258,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] hour_of_day
@@ -3481,7 +3387,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsInput AWS API Documentation
@@ -3494,7 +3401,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -3528,7 +3436,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] smb_guest_password_set
     #   This value is `true` if a password for the guest user `smbguest` is
-    #   set, otherwise `false`. Only supported for S3 File Gateways.
+    #   set, otherwise `false`.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -3539,8 +3447,7 @@ module Aws::StorageGateway
     #   * `ClientSpecified`\: If you use this option, requests are
     #     established based on what is negotiated by the client. This option
     #     is recommended when you want to maximize compatibility across
-    #     different clients in your environment. Only supported for S3 File
-    #     Gateways.
+    #     different clients in your environment.
     #
     #   * `MandatorySigning`\: If you use this option, file gateway only
     #     allows connections from SMBv2 or SMBv3 clients that have signing
@@ -3555,8 +3462,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] file_shares_visible
-    #   The shares on this gateway appear when listing shares. Only
-    #   supported for S3 File Gateways.
+    #   The shares on this gateway appear when listing shares.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput AWS API Documentation
@@ -3800,7 +3706,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -3827,7 +3734,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] tape_recovery_point_infos
@@ -3868,7 +3776,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] tape_arns
@@ -3938,7 +3847,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBufferInput AWS API Documentation
@@ -3951,7 +3861,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
@@ -3996,7 +3907,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] vtl_device_arns
@@ -4035,7 +3947,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] vtl_devices
@@ -4073,7 +3986,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorageInput AWS API Documentation
@@ -4088,7 +4002,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disk_ids
@@ -4207,7 +4122,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGatewayInput AWS API Documentation
@@ -4332,35 +4248,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # Specifies network configuration information for the gateway associated
-    # with the Amazon FSx file system.
-    #
-    # @note When making an API call, you may pass EndpointNetworkConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         ip_addresses: ["IPV4Address"],
-    #       }
-    #
-    # @!attribute [rw] ip_addresses
-    #   A list of gateway IP addresses on which the associated Amazon FSx
-    #   file system is available.
-    #
-    #   <note markdown="1"> If multiple file systems are associated with this gateway, this
-    #   field is required.
-    #
-    #    </note>
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/EndpointNetworkConfiguration AWS API Documentation
-    #
-    class EndpointNetworkConfiguration < Struct.new(
-      :ip_addresses)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Describes a file share. Only supported S3 File Gateway.
+    # Describes a file share.
     #
     # @!attribute [rw] file_share_type
     #   The type of the file share.
@@ -4382,7 +4270,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileShareInfo AWS API Documentation
@@ -4416,8 +4305,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] file_system_association_status
     #   The status of the file system association. Valid Values: `AVAILABLE`
-    #   \| `CREATING` \| `DELETING` \| `FORCE_DELETING` \| `UPDATING` \|
-    #   `ERROR`
+    #   \| `CREATING` \| `DELETING` \| `FORCE_DELETING` \| `MISCONFIGURED`
+    #   \| `UPDATING` \| `UNAVAILABLE`
     #   @return [String]
     #
     # @!attribute [rw] audit_destination_arn
@@ -4427,7 +4316,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4436,19 +4326,8 @@ module Aws::StorageGateway
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] cache_attributes
-    #   The refresh cache information for the file share or FSx file
-    #   systems.
+    #   The refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
-    #
-    # @!attribute [rw] endpoint_network_configuration
-    #   Specifies network configuration information for the gateway
-    #   associated with the Amazon FSx file system.
-    #
-    #   <note markdown="1"> If multiple file systems are associated with this gateway, this
-    #   parameter's `IpAddresses` field is required.
-    #
-    #    </note>
-    #   @return [Types::EndpointNetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileSystemAssociationInfo AWS API Documentation
     #
@@ -4459,8 +4338,7 @@ module Aws::StorageGateway
       :audit_destination_arn,
       :gateway_arn,
       :tags,
-      :cache_attributes,
-      :endpoint_network_configuration)
+      :cache_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4478,13 +4356,14 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] file_system_association_status
     #   The status of the file share. Valid Values: `AVAILABLE` \|
-    #   `CREATING` \| `DELETING` \| `FORCE_DELETING` \| `UPDATING` \|
-    #   `ERROR`
+    #   `CREATING` \| `DELETING` \| `FORCE_DELETING` \| `MISCONFIGURED` \|
+    #   `UPDATING` \| `UNAVAILABLE`
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileSystemAssociationSummary AWS API Documentation
@@ -4508,7 +4387,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] gateway_type
@@ -4531,7 +4411,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] ec2_instance_region
-    #   The Region where the Amazon EC2 instance is located.
+    #   The AWS Region where the Amazon EC2 instance is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/GatewayInfo AWS API Documentation
@@ -4608,7 +4488,7 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the
     #   `ListGateways` operation to return a list of gateways for your
-    #   account and Region.
+    #   account and AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -4710,7 +4590,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListAutomaticTapeCreationPoliciesInput AWS API Documentation
@@ -4787,7 +4668,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] file_share_info_list
-    #   An array of information about the S3 File Gateway's file shares.
+    #   An array of information about the file gateway's file shares.
     #   @return [Array<Types::FileShareInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileSharesOutput AWS API Documentation
@@ -4811,7 +4692,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -4927,7 +4809,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisksInput AWS API Documentation
@@ -4940,7 +4823,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] disks
@@ -5196,7 +5080,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPointsInput AWS API Documentation
@@ -5209,7 +5094,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] volume_recovery_point_infos
@@ -5242,7 +5128,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -5274,7 +5161,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -5304,7 +5192,7 @@ module Aws::StorageGateway
     # default, have Unix file permissions assigned to them. Upon discovery
     # in an S3 bucket by Storage Gateway, the S3 objects that represent
     # files and folders are assigned these default Unix permissions. This
-    # operation is only supported for S3 File Gateways.
+    # operation is only supported for file gateways.
     #
     # @note When making an API call, you may pass NFSFileShareDefaults
     #   data as a hash:
@@ -5350,8 +5238,8 @@ module Aws::StorageGateway
     end
 
     # The Unix file permissions and ownership information assigned, by
-    # default, to native S3 objects when an S3 File Gateway discovers them
-    # in S3 buckets. This operation is only supported in S3 File Gateways.
+    # default, to native S3 objects when file gateway discovers them in S3
+    # buckets. This operation is only supported in file gateways.
     #
     # @!attribute [rw] nfs_file_share_defaults
     #   Describes Network File System (NFS) file share default values. Files
@@ -5359,7 +5247,7 @@ module Aws::StorageGateway
     #   default, have Unix file permissions assigned to them. Upon discovery
     #   in an S3 bucket by Storage Gateway, the S3 objects that represent
     #   files and folders are assigned these default Unix permissions. This
-    #   operation is only supported for S3 File Gateways.
+    #   operation is only supported for file gateways.
     #   @return [Types::NFSFileShareDefaults]
     #
     # @!attribute [rw] file_share_arn
@@ -5378,12 +5266,13 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -5401,8 +5290,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The ARN of the IAM role that an S3 File Gateway assumes when it
-    #   accesses the underlying storage.
+    #   The ARN of the IAM role that file gateway assumes when it accesses
+    #   the underlying storage.
     #   @return [String]
     #
     # @!attribute [rw] location_arn
@@ -5412,8 +5301,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -5421,14 +5310,13 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] object_acl
     #   A value that sets the access control list (ACL) permission for
-    #   objects in the S3 bucket that an S3 File Gateway puts objects into.
-    #   The default value is `private`.
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] client_list
-    #   The list of clients that are allowed to access the S3 File Gateway.
-    #   The list must contain either valid IP addresses or valid CIDR
-    #   blocks.
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
@@ -5518,28 +5406,6 @@ module Aws::StorageGateway
     #   `\{\}`
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoint_dns_name
-    #   Specifies the DNS name for the VPC endpoint that the NFS file share
-    #   uses to connect to Amazon S3.
-    #
-    #   <note markdown="1"> This parameter is required for NFS file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] bucket_region
-    #   Specifies the Region of the S3 bucket where the NFS file share
-    #   stores files.
-    #
-    #   <note markdown="1"> This parameter is required for NFS file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
     #
     class NFSFileShareInfo < Struct.new(
@@ -5563,9 +5429,7 @@ module Aws::StorageGateway
       :tags,
       :file_share_name,
       :cache_attributes,
-      :notification_policy,
-      :vpc_endpoint_dns_name,
-      :bucket_region)
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5641,7 +5505,7 @@ module Aws::StorageGateway
     # @!attribute [rw] pool_arn
     #   The Amazon Resource Name (ARN) of the custom tape pool. Use the
     #   ListTapePools operation to return a list of custom tape pools for
-    #   your account and Region.
+    #   your account and AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] pool_name
@@ -5658,10 +5522,10 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] retention_lock_type
     #   Tape retention lock type, which can be configured in two modes. When
-    #   configured in governance mode, accounts with specific IAM
+    #   configured in governance mode, AWS accounts with specific IAM
     #   permissions are authorized to remove the tape retention lock from
     #   archived virtual tapes. When configured in compliance mode, the tape
-    #   retention lock cannot be removed by any user, including the root
+    #   retention lock cannot be removed by any user, including the root AWS
     #   account.
     #   @return [String]
     #
@@ -5807,7 +5671,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCacheInput AWS API Documentation
@@ -5820,7 +5685,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCacheOutput AWS API Documentation
@@ -5849,7 +5715,7 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway you want to retrieve
     #   the virtual tape to. Use the ListGateways operation to return a list
-    #   of gateways for your account and Region.
+    #   of gateways for your account and AWS Region.
     #
     #   You retrieve archived virtual tapes to only one gateway and the
     #   gateway must be a tape gateway.
@@ -5895,7 +5761,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPointInput AWS API Documentation
@@ -5923,8 +5790,8 @@ module Aws::StorageGateway
     end
 
     # The Windows file permissions and ownership information assigned, by
-    # default, to native S3 objects when S3 File Gateway discovers them in
-    # S3 buckets. This operation is only supported for S3 File Gateways.
+    # default, to native S3 objects when file gateway discovers them in S3
+    # buckets. This operation is only supported for file gateways.
     #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
@@ -5942,12 +5809,13 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -5965,8 +5833,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The ARN of the IAM role that an S3 File Gateway assumes when it
-    #   accesses the underlying storage.
+    #   The ARN of the IAM role that file gateway assumes when it accesses
+    #   the underlying storage.
     #   @return [String]
     #
     # @!attribute [rw] location_arn
@@ -5976,8 +5844,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -5985,8 +5853,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] object_acl
     #   A value that sets the access control list (ACL) permission for
-    #   objects in the S3 bucket that an S3 File Gateway puts objects into.
-    #   The default value is `private`.
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] read_only
@@ -6029,7 +5897,8 @@ module Aws::StorageGateway
     #   to the POSIX permission.
     #
     #   For more information, see [Using Microsoft Windows ACLs to control
-    #   access to an SMB file share][1] in the *Storage Gateway User Guide*.
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
     #
     #
     #
@@ -6126,41 +5995,6 @@ module Aws::StorageGateway
     #   `\{\}`
     #   @return [String]
     #
-    # @!attribute [rw] vpc_endpoint_dns_name
-    #   Specifies the DNS name for the VPC endpoint that the SMB file share
-    #   uses to connect to Amazon S3.
-    #
-    #   <note markdown="1"> This parameter is required for SMB file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] bucket_region
-    #   Specifies the Region of the S3 bucket where the SMB file share
-    #   stores files.
-    #
-    #   <note markdown="1"> This parameter is required for SMB file shares that connect to
-    #   Amazon S3 through a VPC endpoint, a VPC access point, or an access
-    #   point alias that points to a VPC access point.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] oplocks_enabled
-    #   Specifies whether opportunistic locking is enabled for the SMB file
-    #   share.
-    #
-    #   <note markdown="1"> Enabling opportunistic locking on case-sensitive shares is not
-    #   recommended for workloads that involve access to files with the same
-    #   name in different case.
-    #
-    #    </note>
-    #
-    #   Valid Values: `true` \| `false`
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo AWS API Documentation
     #
     class SMBFileShareInfo < Struct.new(
@@ -6189,10 +6023,7 @@ module Aws::StorageGateway
       :tags,
       :file_share_name,
       :cache_attributes,
-      :notification_policy,
-      :vpc_endpoint_dns_name,
-      :bucket_region,
-      :oplocks_enabled)
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6230,7 +6061,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] local_console_password
@@ -6248,7 +6080,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordOutput AWS API Documentation
@@ -6270,7 +6103,7 @@ module Aws::StorageGateway
     #       }
     #
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the S3 File Gateway the SMB file
+    #   The Amazon Resource Name (ARN) of the file gateway the SMB file
     #   share is associated with.
     #   @return [String]
     #
@@ -6289,7 +6122,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordOutput AWS API Documentation
@@ -6312,7 +6146,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayInput AWS API Documentation
@@ -6328,7 +6163,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayOutput AWS API Documentation
@@ -6348,7 +6184,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartAvailabilityMonitorTestInput AWS API Documentation
@@ -6361,7 +6198,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartAvailabilityMonitorTestOutput AWS API Documentation
@@ -6384,7 +6222,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGatewayInput AWS API Documentation
@@ -6400,7 +6239,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGatewayOutput AWS API Documentation
@@ -6798,7 +6638,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] pool_id
@@ -6893,7 +6734,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateAutomaticTapeCreationPolicyInput AWS API Documentation
@@ -6907,7 +6749,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateAutomaticTapeCreationPolicyOutput AWS API Documentation
@@ -6935,7 +6778,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] average_upload_rate_limit_in_bits_per_sec
@@ -6961,7 +6805,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitOutput AWS API Documentation
@@ -6992,7 +6837,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] bandwidth_rate_limit_intervals
@@ -7012,7 +6858,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitScheduleOutput AWS API Documentation
@@ -7141,8 +6988,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_attributes
-    #   The refresh cache information for the file share or FSx file
-    #   systems.
+    #   The refresh cache information for the file share.
     #   @return [Types::CacheAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateFileSystemAssociationInput AWS API Documentation
@@ -7177,12 +7023,12 @@ module Aws::StorageGateway
     #         gateway_name: "GatewayName",
     #         gateway_timezone: "GatewayTimezone",
     #         cloud_watch_log_group_arn: "CloudWatchLogGroupARN",
-    #         gateway_capacity: "Small", # accepts Small, Medium, Large
     #       }
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
@@ -7204,18 +7050,13 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #   @return [String]
     #
-    # @!attribute [rw] gateway_capacity
-    #   Specifies the size of the gateway's metadata cache.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationInput AWS API Documentation
     #
     class UpdateGatewayInformationInput < Struct.new(
       :gateway_arn,
       :gateway_name,
       :gateway_timezone,
-      :cloud_watch_log_group_arn,
-      :gateway_capacity)
+      :cloud_watch_log_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7225,7 +7066,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
@@ -7253,7 +7095,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNowInput AWS API Documentation
@@ -7269,7 +7112,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNowOutput AWS API Documentation
@@ -7303,7 +7147,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] hour_of_day
@@ -7348,7 +7193,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTimeOutput AWS API Documentation
@@ -7394,7 +7240,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -7412,8 +7258,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -7421,14 +7267,13 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] object_acl
     #   A value that sets the access control list (ACL) permission for
-    #   objects in the S3 bucket that a S3 File Gateway puts objects into.
-    #   The default value is `private`.
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] client_list
-    #   The list of clients that are allowed to access the S3 File Gateway.
-    #   The list must contain either valid IP addresses or valid CIDR
-    #   blocks.
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
     #   @return [Array<String>]
     #
     # @!attribute [rw] squash
@@ -7574,7 +7419,6 @@ module Aws::StorageGateway
     #           cache_stale_timeout_in_seconds: 1,
     #         },
     #         notification_policy: "NotificationPolicy",
-    #         oplocks_enabled: false,
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -7584,7 +7428,7 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] kms_encrypted
     #   Set to `true` to use Amazon S3 server-side encryption with your own
-    #   KMS key, or `false` to use a key managed by Amazon S3. Optional.
+    #   AWS KMS key, or `false` to use a key managed by Amazon S3. Optional.
     #
     #   Valid Values: `true` \| `false`
     #   @return [Boolean]
@@ -7598,8 +7442,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by the S3 File Gateway. The default value is
-    #   `S3_INTELLIGENT_TIERING`. Optional.
+    #   by the file gateway. The default value is `S3_INTELLIGENT_TIERING`.
+    #   Optional.
     #
     #   Valid Values: `S3_STANDARD` \| `S3_INTELLIGENT_TIERING` \|
     #   `S3_STANDARD_IA` \| `S3_ONEZONE_IA`
@@ -7607,8 +7451,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] object_acl
     #   A value that sets the access control list (ACL) permission for
-    #   objects in the S3 bucket that a S3 File Gateway puts objects into.
-    #   The default value is `private`.
+    #   objects in the S3 bucket that a file gateway puts objects into. The
+    #   default value is `private`.
     #   @return [String]
     #
     # @!attribute [rw] read_only
@@ -7650,7 +7494,8 @@ module Aws::StorageGateway
     #   permissions to the POSIX permissions.
     #
     #   For more information, see [Using Microsoft Windows ACLs to control
-    #   access to an SMB file share][1] in the *Storage Gateway User Guide*.
+    #   access to an SMB file share][1] in the *AWS Storage Gateway User
+    #   Guide*.
     #
     #   Valid Values: `true` \| `false`
     #
@@ -7736,19 +7581,6 @@ module Aws::StorageGateway
     #   `\{\}`
     #   @return [String]
     #
-    # @!attribute [rw] oplocks_enabled
-    #   Specifies whether opportunistic locking is enabled for the SMB file
-    #   share.
-    #
-    #   <note markdown="1"> Enabling opportunistic locking on case-sensitive shares is not
-    #   recommended for workloads that involve access to files with the same
-    #   name in different case.
-    #
-    #    </note>
-    #
-    #   Valid Values: `true` \| `false`
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput AWS API Documentation
     #
     class UpdateSMBFileShareInput < Struct.new(
@@ -7769,8 +7601,7 @@ module Aws::StorageGateway
       :case_sensitivity,
       :file_share_name,
       :cache_attributes,
-      :notification_policy,
-      :oplocks_enabled)
+      :notification_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7799,7 +7630,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] file_shares_visible
@@ -7817,7 +7649,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareVisibilityOutput AWS API Documentation
@@ -7838,7 +7671,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] smb_security_strategy
@@ -7847,7 +7681,7 @@ module Aws::StorageGateway
     #   ClientSpecified: if you use this option, requests are established
     #   based on what is negotiated by the client. This option is
     #   recommended when you want to maximize compatibility across different
-    #   clients in your environment. Supported only in S3 File Gateway.
+    #   clients in your environment.
     #
     #   MandatorySigning: if you use this option, file gateway only allows
     #   connections from SMBv2 or SMBv3 clients that have signing enabled.
@@ -7872,7 +7706,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategyOutput AWS API Documentation
@@ -8072,7 +7907,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id

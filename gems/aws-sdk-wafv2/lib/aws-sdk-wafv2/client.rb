@@ -337,15 +337,14 @@ module Aws::WAFV2
 
     # @!group API Operations
 
-    # Associates a web ACL with a regional application resource, to protect
+    # Associates a Web ACL with a regional application resource, to protect
     # the resource. A regional application can be an Application Load
-    # Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL
-    # API.
+    # Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL API.
     #
-    # For Amazon CloudFront, don't use this call. Instead, use your
-    # CloudFront distribution configuration. To associate a web ACL, in the
-    # CloudFront call `UpdateDistribution`, set the web ACL ID to the Amazon
-    # Resource Name (ARN) of the web ACL. For information, see
+    # For AWS CloudFront, don't use this call. Instead, use your CloudFront
+    # distribution configuration. To associate a Web ACL, in the CloudFront
+    # call `UpdateDistribution`, set the web ACL ID to the Amazon Resource
+    # Name (ARN) of the Web ACL. For information, see
     # [UpdateDistribution][1].
     #
     #
@@ -353,7 +352,7 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
     #
     # @option params [required, String] :web_acl_arn
-    #   The Amazon Resource Name (ARN) of the web ACL that you want to
+    #   The Amazon Resource Name (ARN) of the Web ACL that you want to
     #   associate with the resource.
     #
     # @option params [required, String] :resource_arn
@@ -366,7 +365,7 @@ module Aws::WAFV2
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
-    #   * For an Amazon API Gateway REST API:
+    #   * For an API Gateway REST API:
     #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     #   * For an AppSync GraphQL API:
@@ -394,19 +393,20 @@ module Aws::WAFV2
     # scope and set of rules. You can use this to check the capacity
     # requirements for the rules you want to use in a RuleGroup or WebACL.
     #
-    # WAF uses WCUs to calculate and control the operating resources that
-    # are used to run your rules, rule groups, and web ACLs. WAF calculates
-    # capacity differently for each rule type, to reflect the relative cost
-    # of each rule. Simple rules that cost little to run use fewer WCUs than
-    # more complex rules that use more processing power. Rule group capacity
-    # is fixed at creation, which helps users plan their web ACL WCU usage
-    # when they use a rule group. The WCU limit for web ACLs is 1,500.
+    # AWS WAF uses WCUs to calculate and control the operating resources
+    # that are used to run your rules, rule groups, and web ACLs. AWS WAF
+    # calculates capacity differently for each rule type, to reflect the
+    # relative cost of each rule. Simple rules that cost little to run use
+    # fewer WCUs than more complex rules that use more processing power.
+    # Rule group capacity is fixed at creation, which helps users plan their
+    # web ACL WCU usage when they use a rule group. The WCU limit for web
+    # ACLs is 1,500.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -465,7 +465,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -501,7 +501,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -536,7 +536,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -573,7 +573,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -632,7 +632,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -669,7 +669,6 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
-    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -762,7 +761,7 @@ module Aws::WAFV2
     # Creates an IPSet, which you use to identify web requests that
     # originate from specific IP addresses or ranges of IP addresses. For
     # example, if you're receiving a lot of requests from a ranges of IP
-    # addresses, you can configure WAF to block them using an IPSet that
+    # addresses, you can configure AWS WAF to block them using an IPSet that
     # lists those IP addresses.
     #
     # @option params [required, String] :name
@@ -770,10 +769,10 @@ module Aws::WAFV2
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -787,29 +786,31 @@ module Aws::WAFV2
     #   A description of the IP set that helps with identification.
     #
     # @option params [required, String] :ip_address_version
-    #   The version of the IP addresses, either `IPV4` or `IPV6`.
+    #   Specify IPV4 or IPV6.
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specify one or more IP addresses or
     #   blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
+    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
+    #   /0.
     #
     #   Examples:
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from the IP address 192.0.2.44, specify `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses from 192.0.2.0 to 192.0.2.255, specify
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
     #     `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to
-    #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000
+    #     to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
     #   For more information about CIDR notation, see the Wikipedia entry
@@ -860,18 +861,18 @@ module Aws::WAFV2
     end
 
     # Creates a RegexPatternSet, which you reference in a
-    # RegexPatternSetReferenceStatement, to have WAF inspect a web request
-    # component for the specified patterns.
+    # RegexPatternSetReferenceStatement, to have AWS WAF inspect a web
+    # request component for the specified patterns.
     #
     # @option params [required, String] :name
     #   The name of the set. You cannot change the name after you create the
     #   set.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -943,10 +944,10 @@ module Aws::WAFV2
     #   after you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -961,16 +962,17 @@ module Aws::WAFV2
     #
     #   When you create your own rule group, you define this, and you cannot
     #   change it after creation. When you add or modify the rules in a rule
-    #   group, WAF enforces this limit. You can check the capacity for a set
-    #   of rules using CheckCapacity.
+    #   group, AWS WAF enforces this limit. You can check the capacity for a
+    #   set of rules using CheckCapacity.
     #
-    #   WAF uses WCUs to calculate and control the operating resources that
-    #   are used to run your rules, rule groups, and web ACLs. WAF calculates
-    #   capacity differently for each rule type, to reflect the relative cost
-    #   of each rule. Simple rules that cost little to run use fewer WCUs than
-    #   more complex rules that use more processing power. Rule group capacity
-    #   is fixed at creation, which helps users plan their web ACL WCU usage
-    #   when they use a rule group. The WCU limit for web ACLs is 1,500.
+    #   AWS WAF uses WCUs to calculate and control the operating resources
+    #   that are used to run your rules, rule groups, and web ACLs. AWS WAF
+    #   calculates capacity differently for each rule type, to reflect the
+    #   relative cost of each rule. Simple rules that cost little to run use
+    #   fewer WCUs than more complex rules that use more processing power.
+    #   Rule group capacity is fixed at creation, which helps users plan their
+    #   web ACL WCU usage when they use a rule group. The WCU limit for web
+    #   ACLs is 1,500.
     #
     # @option params [String] :description
     #   A description of the rule group that helps with identification.
@@ -978,8 +980,8 @@ module Aws::WAFV2
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
     #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   that AWS WAF uses to identify matching web requests, and parameters
+    #   that govern how AWS WAF handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -995,12 +997,12 @@ module Aws::WAFV2
     #   rules that you define in the rule group.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
     #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom request
-    #   and response settings, see [WAF quotas][3] in the [WAF Developer
-    #   Guide][2].
+    #   and response settings, see [AWS WAF quotas][3] in the [AWS WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -1056,7 +1058,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -1092,7 +1094,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1127,7 +1129,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1164,7 +1166,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1223,7 +1225,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1260,7 +1262,6 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
-    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -1373,26 +1374,25 @@ module Aws::WAFV2
 
     # Creates a WebACL per the specifications provided.
     #
-    # A web ACL defines a collection of rules to use to inspect and control
+    # A Web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the web ACL, you
+    # for requests that match the statement of the rule. In the Web ACL, you
     # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a web ACL can be a
+    # does not match any of the rules. The rules in a Web ACL can be a
     # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a web ACL with one or more Amazon Web Services resources
-    # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, or an
-    # AppSync GraphQL API.
+    # can associate a Web ACL with one or more AWS resources to protect. The
+    # resources can be Amazon CloudFront, an Amazon API Gateway REST API, an
+    # Application Load Balancer, or an AWS AppSync GraphQL API.
     #
     # @option params [required, String] :name
-    #   The name of the web ACL. You cannot change the name of a web ACL after
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -1407,13 +1407,13 @@ module Aws::WAFV2
     #   match.
     #
     # @option params [String] :description
-    #   A description of the web ACL that helps with identification.
+    #   A description of the Web ACL that helps with identification.
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
     #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   that AWS WAF uses to identify matching web requests, and parameters
+    #   that govern how AWS WAF handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
@@ -1429,12 +1429,12 @@ module Aws::WAFV2
     #   rules and default actions that you define in the web ACL.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
     #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom request
-    #   and response settings, see [WAF quotas][3] in the [WAF Developer
-    #   Guide][2].
+    #   and response settings, see [AWS WAF quotas][3] in the [AWS WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -1513,7 +1513,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -1549,7 +1549,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1584,7 +1584,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1621,7 +1621,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1680,7 +1680,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -1717,7 +1717,6 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
-    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -1828,8 +1827,8 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Deletes all rule groups that are managed by Firewall Manager for the
-    # specified web ACL.
+    # Deletes all rule groups that are managed by AWS Firewall Manager for
+    # the specified web ACL.
     #
     # You can only use this if `ManagedByFirewallManager` is false in the
     # specified WebACL.
@@ -1838,14 +1837,14 @@ module Aws::WAFV2
     #   The Amazon Resource Name (ARN) of the web ACL.
     #
     # @option params [required, String] :web_acl_lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @return [Types::DeleteFirewallManagerRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1878,10 +1877,10 @@ module Aws::WAFV2
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -1897,14 +1896,14 @@ module Aws::WAFV2
     #   and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1983,10 +1982,10 @@ module Aws::WAFV2
     #   set.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2002,14 +2001,14 @@ module Aws::WAFV2
     #   and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2038,10 +2037,10 @@ module Aws::WAFV2
     #   after you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2057,14 +2056,14 @@ module Aws::WAFV2
     #   like update and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2092,14 +2091,14 @@ module Aws::WAFV2
     # specified WebACL.
     #
     # @option params [required, String] :name
-    #   The name of the web ACL. You cannot change the name of a web ACL after
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2110,19 +2109,19 @@ module Aws::WAFV2
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
     # @option params [required, String] :id
-    #   The unique identifier for the web ACL. This ID is returned in the
+    #   The unique identifier for the Web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2156,10 +2155,10 @@ module Aws::WAFV2
     #   vendor name, to identify the rule group.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2169,15 +2168,8 @@ module Aws::WAFV2
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
-    # @option params [String] :version_name
-    #   The version of the rule group. You can only use a version that is not
-    #   scheduled for expiration. If you don't provide this, WAF uses the
-    #   vendor's default version.
-    #
     # @return [Types::DescribeManagedRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeManagedRuleGroupResponse#version_name #version_name} => String
-    #   * {Types::DescribeManagedRuleGroupResponse#sns_topic_arn #sns_topic_arn} => String
     #   * {Types::DescribeManagedRuleGroupResponse#capacity #capacity} => Integer
     #   * {Types::DescribeManagedRuleGroupResponse#rules #rules} => Array&lt;Types::RuleSummary&gt;
     #   * {Types::DescribeManagedRuleGroupResponse#label_namespace #label_namespace} => String
@@ -2190,13 +2182,10 @@ module Aws::WAFV2
     #     vendor_name: "VendorName", # required
     #     name: "EntityName", # required
     #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     version_name: "VersionKeyString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.version_name #=> String
-    #   resp.sns_topic_arn #=> String
     #   resp.capacity #=> Integer
     #   resp.rules #=> Array
     #   resp.rules[0].name #=> String
@@ -2226,14 +2215,14 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Disassociates a web ACL from a regional application resource. A
-    # regional application can be an Application Load Balancer (ALB), an
-    # Amazon API Gateway REST API, or an AppSync GraphQL API.
+    # Disassociates a Web ACL from a regional application resource. A
+    # regional application can be an Application Load Balancer (ALB), an API
+    # Gateway REST API, or an AppSync GraphQL API.
     #
-    # For Amazon CloudFront, don't use this call. Instead, use your
-    # CloudFront distribution configuration. To disassociate a web ACL,
-    # provide an empty web ACL ID in the CloudFront call
-    # `UpdateDistribution`. For information, see [UpdateDistribution][1].
+    # For AWS CloudFront, don't use this call. Instead, use your CloudFront
+    # distribution configuration. To disassociate a Web ACL, provide an
+    # empty web ACL ID in the CloudFront call `UpdateDistribution`. For
+    # information, see [UpdateDistribution][1].
     #
     #
     #
@@ -2249,7 +2238,7 @@ module Aws::WAFV2
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
-    #   * For an Amazon API Gateway REST API:
+    #   * For an API Gateway REST API:
     #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     #   * For an AppSync GraphQL API:
@@ -2279,10 +2268,10 @@ module Aws::WAFV2
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2376,84 +2365,6 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Retrieves the specified managed rule set.
-    #
-    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
-    #
-    #  Vendors, you can use the managed rule set APIs to provide controlled
-    # rollout of your versioned managed rule group offerings for your
-    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
-    # `PutManagedRuleSetVersions`, and
-    # `UpdateManagedRuleSetVersionExpiryDate`.
-    #
-    #  </note>
-    #
-    # @option params [required, String] :name
-    #   The name of the managed rule set. You use this, along with the rule
-    #   set ID, to identify the rule set.
-    #
-    #   This name is assigned to the corresponding managed rule group, which
-    #   your customers can access and use.
-    #
-    # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
-    #
-    #   To work with CloudFront, you must also specify the Region US East (N.
-    #   Virginia) as follows:
-    #
-    #   * CLI - Specify the Region when you use the CloudFront scope:
-    #     `--scope=CLOUDFRONT --region=us-east-1`.
-    #
-    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
-    #
-    # @option params [required, String] :id
-    #   A unique identifier for the managed rule set. The ID is returned in
-    #   the responses to commands like `list`. You provide it to operations
-    #   like `get` and `update`.
-    #
-    # @return [Types::GetManagedRuleSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetManagedRuleSetResponse#managed_rule_set #managed_rule_set} => Types::ManagedRuleSet
-    #   * {Types::GetManagedRuleSetResponse#lock_token #lock_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_managed_rule_set({
-    #     name: "EntityName", # required
-    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     id: "EntityId", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.managed_rule_set.name #=> String
-    #   resp.managed_rule_set.id #=> String
-    #   resp.managed_rule_set.arn #=> String
-    #   resp.managed_rule_set.description #=> String
-    #   resp.managed_rule_set.published_versions #=> Hash
-    #   resp.managed_rule_set.published_versions["VersionKeyString"].associated_rule_group_arn #=> String
-    #   resp.managed_rule_set.published_versions["VersionKeyString"].capacity #=> Integer
-    #   resp.managed_rule_set.published_versions["VersionKeyString"].forecasted_lifetime #=> Integer
-    #   resp.managed_rule_set.published_versions["VersionKeyString"].publish_timestamp #=> Time
-    #   resp.managed_rule_set.published_versions["VersionKeyString"].last_update_timestamp #=> Time
-    #   resp.managed_rule_set.published_versions["VersionKeyString"].expiry_timestamp #=> Time
-    #   resp.managed_rule_set.recommended_version #=> String
-    #   resp.managed_rule_set.label_namespace #=> String
-    #   resp.lock_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetManagedRuleSet AWS API Documentation
-    #
-    # @overload get_managed_rule_set(params = {})
-    # @param [Hash] params ({})
-    def get_managed_rule_set(params = {}, options = {})
-      req = build_request(:get_managed_rule_set, params)
-      req.send_request(options)
-    end
-
     # Returns the IAM policy that is attached to the specified rule group.
     #
     # You must be the owner of the rule group to perform this operation.
@@ -2491,10 +2402,10 @@ module Aws::WAFV2
     # rate limit, those with the highest rates are blocked.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2505,11 +2416,11 @@ module Aws::WAFV2
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
     # @option params [required, String] :web_acl_name
-    #   The name of the web ACL. You cannot change the name of a web ACL after
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
     #   you create it.
     #
     # @option params [required, String] :web_acl_id
-    #   The unique identifier for the web ACL. This ID is returned in the
+    #   The unique identifier for the Web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #
@@ -2555,10 +2466,10 @@ module Aws::WAFV2
     #   set.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2607,15 +2518,15 @@ module Aws::WAFV2
 
     # Retrieves the specified RuleGroup.
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #   The name of the rule group. You cannot change the name of a rule group
     #   after you create it.
     #
-    # @option params [String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2625,13 +2536,10 @@ module Aws::WAFV2
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
-    # @option params [String] :id
+    # @option params [required, String] :id
     #   A unique identifier for the rule group. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
-    #
-    # @option params [String] :arn
-    #   The Amazon Resource Name (ARN) of the entity.
     #
     # @return [Types::GetRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2641,10 +2549,9 @@ module Aws::WAFV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_rule_group({
-    #     name: "EntityName",
-    #     scope: "CLOUDFRONT", # accepts CLOUDFRONT, REGIONAL
-    #     id: "EntityId",
-    #     arn: "ResourceArn",
+    #     name: "EntityName", # required
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     id: "EntityId", # required
     #   })
     #
     # @example Response structure
@@ -2666,7 +2573,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.rule_group.rules[0].statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -2676,7 +2583,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -2685,7 +2592,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -2696,7 +2603,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes #=> Array
     #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.rule_group.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -2717,7 +2624,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.rule_group.rules[0].statement.rate_based_statement.limit #=> Integer
     #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.rule_group.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
@@ -2730,7 +2637,6 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.not_statement.statement #=> Types::Statement
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.name #=> String
-    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.version #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
@@ -2778,17 +2684,17 @@ module Aws::WAFV2
     end
 
     # Gets detailed information about a specified number of requests--a
-    # sample--that WAF randomly selects from among the first 5,000 requests
-    # that your Amazon Web Services resource received during a time range
-    # that you choose. You can specify a sample size of up to 500 requests,
-    # and you can specify any time range in the previous three hours.
+    # sample--that AWS WAF randomly selects from among the first 5,000
+    # requests that your AWS resource received during a time range that you
+    # choose. You can specify a sample size of up to 500 requests, and you
+    # can specify any time range in the previous three hours.
     #
     # `GetSampledRequests` returns a time range, which is usually the time
     # range that you specified. However, if your resource (such as a
     # CloudFront distribution) received 5,000 requests before the specified
     # time range elapsed, `GetSampledRequests` returns an updated time
     # range. This new time range indicates the actual period during which
-    # WAF selected the requests in the sample.
+    # AWS WAF selected the requests in the sample.
     #
     # @option params [required, String] :web_acl_arn
     #   The Amazon resource name (ARN) of the `WebACL` for which you want a
@@ -2799,10 +2705,10 @@ module Aws::WAFV2
     #   want a sample of requests.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2819,14 +2725,14 @@ module Aws::WAFV2
     #   UTC format includes the special designator, `Z`. For example,
     #   `"2016-09-27T14:50Z"`. You can specify any time range in the previous
     #   three hours. If you specify a start time that's earlier than three
-    #   hours ago, WAF sets it to three hours ago.
+    #   hours ago, AWS WAF sets it to three hours ago.
     #
     # @option params [required, Integer] :max_items
-    #   The number of requests that you want WAF to return from among the
-    #   first 5,000 requests that your Amazon Web Services resource received
-    #   during the time range. If your resource received fewer requests than
-    #   the value of `MaxItems`, `GetSampledRequests` returns information
-    #   about all of them.
+    #   The number of requests that you want AWS WAF to return from among the
+    #   first 5,000 requests that your AWS resource received during the time
+    #   range. If your resource received fewer requests than the value of
+    #   `MaxItems`, `GetSampledRequests` returns information about all of
+    #   them.
     #
     # @return [Types::GetSampledRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2884,14 +2790,14 @@ module Aws::WAFV2
     # Retrieves the specified WebACL.
     #
     # @option params [required, String] :name
-    #   The name of the web ACL. You cannot change the name of a web ACL after
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -2902,7 +2808,7 @@ module Aws::WAFV2
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
     # @option params [required, String] :id
-    #   The unique identifier for the web ACL. This ID is returned in the
+    #   The unique identifier for the Web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #
@@ -2945,7 +2851,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -2955,7 +2861,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -2964,7 +2870,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -2975,7 +2881,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -2996,7 +2902,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.rate_based_statement.limit #=> Integer
     #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
@@ -3009,7 +2915,6 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.not_statement.statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.name #=> String
-    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
@@ -3043,7 +2948,6 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3055,7 +2959,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -3065,7 +2969,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3074,7 +2978,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3085,7 +2989,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -3106,7 +3010,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
@@ -3134,7 +3038,6 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3146,7 +3049,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -3156,7 +3059,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3165,7 +3068,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3176,7 +3079,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -3197,7 +3100,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
@@ -3277,7 +3180,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -3287,7 +3190,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3296,7 +3199,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3307,7 +3210,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -3328,7 +3231,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.rules[0].statement.rate_based_statement.limit #=> Integer
     #   resp.web_acl.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
@@ -3341,7 +3244,6 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.not_statement.statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.name #=> String
-    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
@@ -3375,7 +3277,6 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3387,7 +3288,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -3397,7 +3298,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3406,7 +3307,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3417,7 +3318,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -3438,7 +3339,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
@@ -3466,7 +3367,6 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3478,7 +3378,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
@@ -3488,7 +3388,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3497,7 +3397,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
@@ -3508,7 +3408,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
@@ -3529,7 +3429,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.limit #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rate_based_statement.scope_down_statement #=> Types::Statement
@@ -3567,85 +3467,15 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Returns a list of the available versions for the specified managed
-    # rule group.
-    #
-    # @option params [required, String] :vendor_name
-    #   The name of the managed rule group vendor. You use this, along with
-    #   the rule group name, to identify the rule group.
-    #
-    # @option params [required, String] :name
-    #   The name of the managed rule group. You use this, along with the
-    #   vendor name, to identify the rule group.
-    #
-    # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
-    #
-    #   To work with CloudFront, you must also specify the Region US East (N.
-    #   Virginia) as follows:
-    #
-    #   * CLI - Specify the Region when you use the CloudFront scope:
-    #     `--scope=CLOUDFRONT --region=us-east-1`.
-    #
-    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
-    #
-    # @option params [String] :next_marker
-    #   When you request a list of objects with a `Limit` setting, if the
-    #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
-    #
-    # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
-    #
-    # @return [Types::ListAvailableManagedRuleGroupVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListAvailableManagedRuleGroupVersionsResponse#next_marker #next_marker} => String
-    #   * {Types::ListAvailableManagedRuleGroupVersionsResponse#versions #versions} => Array&lt;Types::ManagedRuleGroupVersion&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_available_managed_rule_group_versions({
-    #     vendor_name: "VendorName", # required
-    #     name: "EntityName", # required
-    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     next_marker: "NextMarker",
-    #     limit: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.next_marker #=> String
-    #   resp.versions #=> Array
-    #   resp.versions[0].name #=> String
-    #   resp.versions[0].last_update_timestamp #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupVersions AWS API Documentation
-    #
-    # @overload list_available_managed_rule_group_versions(params = {})
-    # @param [Hash] params ({})
-    def list_available_managed_rule_group_versions(params = {}, options = {})
-      req = build_request(:list_available_managed_rule_group_versions, params)
-      req.send_request(options)
-    end
-
     # Retrieves an array of managed rule groups that are available for you
-    # to use. This list includes all Amazon Web Services Managed Rules rule
-    # groups and all of the Marketplace managed rule groups that you're
-    # subscribed to.
+    # to use. This list includes all AWS Managed Rules rule groups and the
+    # AWS Marketplace managed rule groups that you're subscribed to.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3658,15 +3488,15 @@ module Aws::WAFV2
     # @option params [String] :next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
+    #   limit, AWS WAF returns a `NextMarker` value in the response. To
+    #   retrieve the next batch of objects, provide the marker from the prior
+    #   call in your next request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   The maximum number of objects that you want AWS WAF to return for this
+    #   request. If more objects are available, in the response, AWS WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call to
+    #   get the next batch of objects.
     #
     # @return [Types::ListAvailableManagedRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3702,10 +3532,10 @@ module Aws::WAFV2
     # manage.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3718,15 +3548,15 @@ module Aws::WAFV2
     # @option params [String] :next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
+    #   limit, AWS WAF returns a `NextMarker` value in the response. To
+    #   retrieve the next batch of objects, provide the marker from the prior
+    #   call in your next request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   The maximum number of objects that you want AWS WAF to return for this
+    #   request. If more objects are available, in the response, AWS WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call to
+    #   get the next batch of objects.
     #
     # @return [Types::ListIPSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3763,10 +3593,10 @@ module Aws::WAFV2
     # Retrieves an array of your LoggingConfiguration objects.
     #
     # @option params [String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3779,15 +3609,15 @@ module Aws::WAFV2
     # @option params [String] :next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
+    #   limit, AWS WAF returns a `NextMarker` value in the response. To
+    #   retrieve the next batch of objects, provide the marker from the prior
+    #   call in your next request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   The maximum number of objects that you want AWS WAF to return for this
+    #   request. If more objects are available, in the response, AWS WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call to
+    #   get the next batch of objects.
     #
     # @return [Types::ListLoggingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3834,87 +3664,14 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Retrieves the managed rule sets that you own.
-    #
-    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
-    #
-    #  Vendors, you can use the managed rule set APIs to provide controlled
-    # rollout of your versioned managed rule group offerings for your
-    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
-    # `PutManagedRuleSetVersions`, and
-    # `UpdateManagedRuleSetVersionExpiryDate`.
-    #
-    #  </note>
-    #
-    # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
-    #
-    #   To work with CloudFront, you must also specify the Region US East (N.
-    #   Virginia) as follows:
-    #
-    #   * CLI - Specify the Region when you use the CloudFront scope:
-    #     `--scope=CLOUDFRONT --region=us-east-1`.
-    #
-    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
-    #
-    # @option params [String] :next_marker
-    #   When you request a list of objects with a `Limit` setting, if the
-    #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
-    #
-    # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
-    #
-    # @return [Types::ListManagedRuleSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListManagedRuleSetsResponse#next_marker #next_marker} => String
-    #   * {Types::ListManagedRuleSetsResponse#managed_rule_sets #managed_rule_sets} => Array&lt;Types::ManagedRuleSetSummary&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_managed_rule_sets({
-    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     next_marker: "NextMarker",
-    #     limit: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.next_marker #=> String
-    #   resp.managed_rule_sets #=> Array
-    #   resp.managed_rule_sets[0].name #=> String
-    #   resp.managed_rule_sets[0].id #=> String
-    #   resp.managed_rule_sets[0].description #=> String
-    #   resp.managed_rule_sets[0].lock_token #=> String
-    #   resp.managed_rule_sets[0].arn #=> String
-    #   resp.managed_rule_sets[0].label_namespace #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListManagedRuleSets AWS API Documentation
-    #
-    # @overload list_managed_rule_sets(params = {})
-    # @param [Hash] params ({})
-    def list_managed_rule_sets(params = {}, options = {})
-      req = build_request(:list_managed_rule_sets, params)
-      req.send_request(options)
-    end
-
     # Retrieves an array of RegexPatternSetSummary objects for the regex
     # pattern sets that you manage.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -3927,15 +3684,15 @@ module Aws::WAFV2
     # @option params [String] :next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
+    #   limit, AWS WAF returns a `NextMarker` value in the response. To
+    #   retrieve the next batch of objects, provide the marker from the prior
+    #   call in your next request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   The maximum number of objects that you want AWS WAF to return for this
+    #   request. If more objects are available, in the response, AWS WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call to
+    #   get the next batch of objects.
     #
     # @return [Types::ListRegexPatternSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3971,16 +3728,16 @@ module Aws::WAFV2
 
     # Retrieves an array of the Amazon Resource Names (ARNs) for the
     # regional resources that are associated with the specified web ACL. If
-    # you want the list of Amazon CloudFront resources, use the CloudFront
+    # you want the list of AWS CloudFront resources, use the AWS CloudFront
     # call `ListDistributionsByWebACLId`.
     #
     # @option params [required, String] :web_acl_arn
-    #   The Amazon Resource Name (ARN) of the web ACL.
+    #   The Amazon Resource Name (ARN) of the Web ACL.
     #
     # @option params [String] :resource_type
     #   Used for web ACLs that are scoped for regional applications. A
-    #   regional application can be an Application Load Balancer (ALB), an
-    #   Amazon API Gateway REST API, or an AppSync GraphQL API.
+    #   regional application can be an Application Load Balancer (ALB), an API
+    #   Gateway REST API, or an AppSync GraphQL API.
     #
     # @return [Types::ListResourcesForWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4011,10 +3768,10 @@ module Aws::WAFV2
     # that you manage.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4027,15 +3784,15 @@ module Aws::WAFV2
     # @option params [String] :next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
+    #   limit, AWS WAF returns a `NextMarker` value in the response. To
+    #   retrieve the next batch of objects, provide the marker from the prior
+    #   call in your next request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   The maximum number of objects that you want AWS WAF to return for this
+    #   request. If more objects are available, in the response, AWS WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call to
+    #   get the next batch of objects.
     #
     # @return [Types::ListRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4073,25 +3830,25 @@ module Aws::WAFV2
     # key:value pairs that you can use to categorize and manage your
     # resources, for purposes like billing. For example, you might set the
     # tag key to "customer" and the value to the customer name or ID. You
-    # can specify one or more tags to add to each Amazon Web Services
-    # resource, up to 50 tags for a resource.
+    # can specify one or more tags to add to each AWS resource, up to 50
+    # tags for a resource.
     #
-    # You can tag the Amazon Web Services resources that you manage through
-    # WAF: web ACLs, rule groups, IP sets, and regex pattern sets. You
-    # can't manage or view tags through the WAF console.
+    # You can tag the AWS resources that you manage through AWS WAF: web
+    # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
+    # or view tags through the AWS WAF console.
     #
     # @option params [String] :next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
+    #   limit, AWS WAF returns a `NextMarker` value in the response. To
+    #   retrieve the next batch of objects, provide the marker from the prior
+    #   call in your next request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   The maximum number of objects that you want AWS WAF to return for this
+    #   request. If more objects are available, in the response, AWS WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call to
+    #   get the next batch of objects.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -4130,10 +3887,10 @@ module Aws::WAFV2
     # manage.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4146,15 +3903,15 @@ module Aws::WAFV2
     # @option params [String] :next_marker
     #   When you request a list of objects with a `Limit` setting, if the
     #   number of objects that are still available for retrieval exceeds the
-    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
-    #   the next batch of objects, provide the marker from the prior call in
-    #   your next request.
+    #   limit, AWS WAF returns a `NextMarker` value in the response. To
+    #   retrieve the next batch of objects, provide the marker from the prior
+    #   call in your next request.
     #
     # @option params [Integer] :limit
-    #   The maximum number of objects that you want WAF to return for this
-    #   request. If more objects are available, in the response, WAF provides
-    #   a `NextMarker` value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   The maximum number of objects that you want AWS WAF to return for this
+    #   request. If more objects are available, in the response, AWS WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call to
+    #   get the next batch of objects.
     #
     # @return [Types::ListWebACLsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4191,8 +3948,8 @@ module Aws::WAFV2
     # Enables the specified LoggingConfiguration, to start logging from a
     # web ACL, according to the configuration provided.
     #
-    # You can access information about all traffic that WAF inspects using
-    # the following steps:
+    # You can access information about all traffic that AWS WAF inspects
+    # using the following steps:
     #
     # 1.  Create an Amazon Kinesis Data Firehose.
     #
@@ -4212,19 +3969,10 @@ module Aws::WAFV2
     #     `PutLoggingConfiguration` request.
     #
     # When you successfully enable logging using a `PutLoggingConfiguration`
-    # request, WAF will create a service linked role with the necessary
+    # request, AWS WAF will create a service linked role with the necessary
     # permissions to write logs to the Amazon Kinesis Data Firehose. For
     # more information, see [Logging Web ACL Traffic Information][1] in the
-    # *WAF Developer Guide*.
-    #
-    # <note markdown="1"> This operation completely replaces the mutable specifications that you
-    # already have for the logging configuration with the ones that you
-    # provide to this call. To modify the logging configuration, retrieve it
-    # by calling GetLoggingConfiguration, update the settings as needed, and
-    # then provide the complete logging configuration specification to this
-    # call.
-    #
-    #  </note>
+    # *AWS WAF Developer Guide*.
     #
     #
     #
@@ -4324,110 +4072,6 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Defines the versions of your managed rule set that you are offering to
-    # the customers. Customers see your offerings as managed rule groups
-    # with versioning.
-    #
-    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
-    #
-    #  Vendors, you can use the managed rule set APIs to provide controlled
-    # rollout of your versioned managed rule group offerings for your
-    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
-    # `PutManagedRuleSetVersions`, and
-    # `UpdateManagedRuleSetVersionExpiryDate`.
-    #
-    #  </note>
-    #
-    # Customers retrieve their managed rule group list by calling
-    # ListAvailableManagedRuleGroups. The name that you provide here for
-    # your managed rule set is the name the customer sees for the
-    # corresponding managed rule group. Customers can retrieve the available
-    # versions for a managed rule group by calling
-    # ListAvailableManagedRuleGroupVersions. You provide a rule group
-    # specification for each version. For each managed rule set, you must
-    # specify a version that you recommend using.
-    #
-    # To initiate the expiration of a managed rule group version, use
-    # UpdateManagedRuleSetVersionExpiryDate.
-    #
-    # @option params [required, String] :name
-    #   The name of the managed rule set. You use this, along with the rule
-    #   set ID, to identify the rule set.
-    #
-    #   This name is assigned to the corresponding managed rule group, which
-    #   your customers can access and use.
-    #
-    # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
-    #
-    #   To work with CloudFront, you must also specify the Region US East (N.
-    #   Virginia) as follows:
-    #
-    #   * CLI - Specify the Region when you use the CloudFront scope:
-    #     `--scope=CLOUDFRONT --region=us-east-1`.
-    #
-    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
-    #
-    # @option params [required, String] :id
-    #   A unique identifier for the managed rule set. The ID is returned in
-    #   the responses to commands like `list`. You provide it to operations
-    #   like `get` and `update`.
-    #
-    # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
-    #   uses the token to ensure that no changes have been made to the entity
-    #   since you last retrieved it. If a change has been made, the update
-    #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
-    #
-    # @option params [String] :recommended_version
-    #   The version of the named managed rule group that you'd like your
-    #   customers to choose, from among your version offerings.
-    #
-    # @option params [Hash<String,Types::VersionToPublish>] :versions_to_publish
-    #   The versions of the named managed rule group that you want to offer to
-    #   your customers.
-    #
-    # @return [Types::PutManagedRuleSetVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::PutManagedRuleSetVersionsResponse#next_lock_token #next_lock_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.put_managed_rule_set_versions({
-    #     name: "EntityName", # required
-    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     id: "EntityId", # required
-    #     lock_token: "LockToken", # required
-    #     recommended_version: "VersionKeyString",
-    #     versions_to_publish: {
-    #       "VersionKeyString" => {
-    #         associated_rule_group_arn: "ResourceArn",
-    #         forecasted_lifetime: 1,
-    #       },
-    #     },
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.next_lock_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutManagedRuleSetVersions AWS API Documentation
-    #
-    # @overload put_managed_rule_set_versions(params = {})
-    # @param [Hash] params ({})
-    def put_managed_rule_set_versions(params = {}, options = {})
-      req = build_request(:put_managed_rule_set_versions, params)
-      req.send_request(options)
-    end
-
     # Attaches an IAM policy to the specified resource. Use this to share a
     # rule group across accounts.
     #
@@ -4439,7 +4083,7 @@ module Aws::WAFV2
     #   request.
     #
     # * The ARN in the request must be a valid WAF RuleGroup ARN and the
-    #   rule group must exist in the same Region.
+    #   rule group must exist in the same region.
     #
     # * The user making the request must be the owner of the rule group.
     #
@@ -4461,7 +4105,7 @@ module Aws::WAFV2
     #   * `Effect` must specify `Allow`.
     #
     #   * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
-    #     and `wafv2:PutFirewallManagerRuleGroups`. WAF rejects any extra
+    #     and `wafv2:PutFirewallManagerRuleGroups`. AWS WAF rejects any extra
     #     actions or wildcard actions in the policy.
     #
     #   * The policy must not include a `Resource` parameter.
@@ -4490,16 +4134,16 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Associates tags with the specified Amazon Web Services resource. Tags
-    # are key:value pairs that you can use to categorize and manage your
-    # resources, for purposes like billing. For example, you might set the
-    # tag key to "customer" and the value to the customer name or ID. You
-    # can specify one or more tags to add to each Amazon Web Services
-    # resource, up to 50 tags for a resource.
+    # Associates tags with the specified AWS resource. Tags are key:value
+    # pairs that you can use to categorize and manage your resources, for
+    # purposes like billing. For example, you might set the tag key to
+    # "customer" and the value to the customer name or ID. You can specify
+    # one or more tags to add to each AWS resource, up to 50 tags for a
+    # resource.
     #
-    # You can tag the Amazon Web Services resources that you manage through
-    # WAF: web ACLs, rule groups, IP sets, and regex pattern sets. You
-    # can't manage or view tags through the WAF console.
+    # You can tag the AWS resources that you manage through AWS WAF: web
+    # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
+    # or view tags through the AWS WAF console.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -4530,12 +4174,11 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Disassociates tags from an Amazon Web Services resource. Tags are
-    # key:value pairs that you can associate with Amazon Web Services
-    # resources. For example, the tag key might be "customer" and the tag
-    # value might be "companyA." You can specify one or more tags to add
-    # to each container. You can add up to 50 tags to each Amazon Web
-    # Services resource.
+    # Disassociates tags from an AWS resource. Tags are key:value pairs that
+    # you can associate with AWS resources. For example, the tag key might
+    # be "customer" and the tag value might be "companyA." You can
+    # specify one or more tags to add to each container. You can add up to
+    # 50 tags to each AWS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -4564,11 +4207,11 @@ module Aws::WAFV2
 
     # Updates the specified IPSet.
     #
-    # <note markdown="1"> This operation completely replaces the mutable specifications that you
-    # already have for the IP set with the ones that you provide to this
-    # call. To modify the IP set, retrieve it by calling GetIPSet, update
-    # the settings as needed, and then provide the complete IP set
-    # specification to this call.
+    # <note markdown="1"> This operation completely replaces any IP address specifications that
+    # you already have in the IP set with the ones that you provide to this
+    # call. If you want to add to or modify the addresses that are already
+    # in the IP set, retrieve those by calling GetIPSet, update them, and
+    # provide the complete updated array of IP addresses to this call.
     #
     #  </note>
     #
@@ -4577,10 +4220,10 @@ module Aws::WAFV2
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4601,24 +4244,26 @@ module Aws::WAFV2
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specify one or more IP addresses or
     #   blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
+    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
+    #   /0.
     #
     #   Examples:
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from the IP address 192.0.2.44, specify `192.0.2.44/32`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses from 192.0.2.0 to 192.0.2.255, specify
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
     #     `192.0.2.0/24`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from the IP address
+    #     1111:0000:0000:0000:0000:0000:0000:0111, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
     #
-    #   * To configure WAF to allow, block, or count requests that originated
-    #     from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to
-    #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
+    #   * To configure AWS WAF to allow, block, or count requests that
+    #     originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000
+    #     to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
     #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
     #
     #   For more information about CIDR notation, see the Wikipedia entry
@@ -4629,14 +4274,14 @@ module Aws::WAFV2
     #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @return [Types::UpdateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4666,120 +4311,17 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Updates the expiration information for your managed rule set. Use this
-    # to initiate the expiration of a managed rule group version. After you
-    # initiate expiration for a version, WAF excludes it from the reponse to
-    # ListAvailableManagedRuleGroupVersions for the managed rule group.
-    #
-    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
-    #
-    #  Vendors, you can use the managed rule set APIs to provide controlled
-    # rollout of your versioned managed rule group offerings for your
-    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
-    # `PutManagedRuleSetVersions`, and
-    # `UpdateManagedRuleSetVersionExpiryDate`.
-    #
-    #  </note>
-    #
-    # @option params [required, String] :name
-    #   The name of the managed rule set. You use this, along with the rule
-    #   set ID, to identify the rule set.
-    #
-    #   This name is assigned to the corresponding managed rule group, which
-    #   your customers can access and use.
-    #
-    # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
-    #
-    #   To work with CloudFront, you must also specify the Region US East (N.
-    #   Virginia) as follows:
-    #
-    #   * CLI - Specify the Region when you use the CloudFront scope:
-    #     `--scope=CLOUDFRONT --region=us-east-1`.
-    #
-    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
-    #
-    # @option params [required, String] :id
-    #   A unique identifier for the managed rule set. The ID is returned in
-    #   the responses to commands like `list`. You provide it to operations
-    #   like `get` and `update`.
-    #
-    # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
-    #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
-    #   uses the token to ensure that no changes have been made to the entity
-    #   since you last retrieved it. If a change has been made, the update
-    #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
-    #
-    # @option params [required, String] :version_to_expire
-    #   The version that you want to remove from your list of offerings for
-    #   the named managed rule group.
-    #
-    # @option params [required, Time,DateTime,Date,Integer,String] :expiry_timestamp
-    #   The time that you want the version to expire.
-    #
-    #   Times are in Coordinated Universal Time (UTC) format. UTC format
-    #   includes the special designator, Z. For example,
-    #   "2016-09-27T14:50Z".
-    #
-    # @return [Types::UpdateManagedRuleSetVersionExpiryDateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateManagedRuleSetVersionExpiryDateResponse#expiring_version #expiring_version} => String
-    #   * {Types::UpdateManagedRuleSetVersionExpiryDateResponse#expiry_timestamp #expiry_timestamp} => Time
-    #   * {Types::UpdateManagedRuleSetVersionExpiryDateResponse#next_lock_token #next_lock_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_managed_rule_set_version_expiry_date({
-    #     name: "EntityName", # required
-    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
-    #     id: "EntityId", # required
-    #     lock_token: "LockToken", # required
-    #     version_to_expire: "VersionKeyString", # required
-    #     expiry_timestamp: Time.now, # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.expiring_version #=> String
-    #   resp.expiry_timestamp #=> Time
-    #   resp.next_lock_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateManagedRuleSetVersionExpiryDate AWS API Documentation
-    #
-    # @overload update_managed_rule_set_version_expiry_date(params = {})
-    # @param [Hash] params ({})
-    def update_managed_rule_set_version_expiry_date(params = {}, options = {})
-      req = build_request(:update_managed_rule_set_version_expiry_date, params)
-      req.send_request(options)
-    end
-
     # Updates the specified RegexPatternSet.
-    #
-    # <note markdown="1"> This operation completely replaces the mutable specifications that you
-    # already have for the regex pattern set with the ones that you provide
-    # to this call. To modify the regex pattern set, retrieve it by calling
-    # GetRegexPatternSet, update the settings as needed, and then provide
-    # the complete regex pattern set specification to this call.
-    #
-    #  </note>
     #
     # @option params [required, String] :name
     #   The name of the set. You cannot change the name after you create the
     #   set.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4800,14 +4342,14 @@ module Aws::WAFV2
     # @option params [required, Array<Types::Regex>] :regular_expression_list
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @return [Types::UpdateRegexPatternSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4843,14 +4385,6 @@ module Aws::WAFV2
 
     # Updates the specified RuleGroup.
     #
-    # <note markdown="1"> This operation completely replaces the mutable specifications that you
-    # already have for the rule group with the ones that you provide to this
-    # call. To modify the rule group, retrieve it by calling GetRuleGroup,
-    # update the settings as needed, and then provide the complete rule
-    # group specification to this call.
-    #
-    #  </note>
-    #
     # A rule group defines a collection of rules to inspect and control web
     # requests that you can use in a WebACL. When you create a rule group,
     # you define an immutable capacity limit. If you update a rule group,
@@ -4862,10 +4396,10 @@ module Aws::WAFV2
     #   after you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -4886,22 +4420,22 @@ module Aws::WAFV2
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
     #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   that AWS WAF uses to identify matching web requests, and parameters
+    #   that govern how AWS WAF handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
     #   collection.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @option params [Hash<String,Types::CustomResponseBody>] :custom_response_bodies
     #   A map of custom response keys and content bodies. When you create a
@@ -4910,12 +4444,12 @@ module Aws::WAFV2
     #   rules that you define in the rule group.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
     #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom request
-    #   and response settings, see [WAF quotas][3] in the [WAF Developer
-    #   Guide][2].
+    #   and response settings, see [AWS WAF quotas][3] in the [AWS WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -4971,7 +4505,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -5007,7 +4541,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5042,7 +4576,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5079,7 +4613,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5138,7 +4672,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5175,7 +4709,6 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
-    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -5279,34 +4812,25 @@ module Aws::WAFV2
 
     # Updates the specified WebACL.
     #
-    # <note markdown="1"> This operation completely replaces the mutable specifications that you
-    # already have for the web ACL with the ones that you provide to this
-    # call. To modify the web ACL, retrieve it by calling GetWebACL, update
-    # the settings as needed, and then provide the complete web ACL
-    # specification to this call.
-    #
-    #  </note>
-    #
-    # A web ACL defines a collection of rules to use to inspect and control
+    # A Web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has an action defined (allow, block, or count)
-    # for requests that match the statement of the rule. In the web ACL, you
+    # for requests that match the statement of the rule. In the Web ACL, you
     # assign a default action to take (allow, block) for any request that
-    # does not match any of the rules. The rules in a web ACL can be a
+    # does not match any of the rules. The rules in a Web ACL can be a
     # combination of the types Rule, RuleGroup, and managed rule group. You
-    # can associate a web ACL with one or more Amazon Web Services resources
-    # to protect. The resources can be an Amazon CloudFront distribution, an
-    # Amazon API Gateway REST API, an Application Load Balancer, or an
-    # AppSync GraphQL API.
+    # can associate a Web ACL with one or more AWS resources to protect. The
+    # resources can be Amazon CloudFront, an Amazon API Gateway REST API, an
+    # Application Load Balancer, or an AWS AppSync GraphQL API.
     #
     # @option params [required, String] :name
-    #   The name of the web ACL. You cannot change the name of a web ACL after
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
     #   you create it.
     #
     # @option params [required, String] :scope
-    #   Specifies whether this is for an Amazon CloudFront distribution or for
-    #   a regional application. A regional application can be an Application
-    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
-    #   GraphQL API.
+    #   Specifies whether this is for an AWS CloudFront distribution or for a
+    #   regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL
+    #   API.
     #
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
@@ -5317,7 +4841,7 @@ module Aws::WAFV2
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
     # @option params [required, String] :id
-    #   The unique identifier for the web ACL. This ID is returned in the
+    #   The unique identifier for the Web ACL. This ID is returned in the
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #
@@ -5326,27 +4850,27 @@ module Aws::WAFV2
     #   match.
     #
     # @option params [String] :description
-    #   A description of the web ACL that helps with identification.
+    #   A description of the Web ACL that helps with identification.
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
     #   allow, block, or count. Each rule includes one top-level statement
-    #   that WAF uses to identify matching web requests, and parameters that
-    #   govern how WAF handles them.
+    #   that AWS WAF uses to identify matching web requests, and parameters
+    #   that govern how AWS WAF handles them.
     #
     # @option params [required, Types::VisibilityConfig] :visibility_config
     #   Defines and enables Amazon CloudWatch metrics and web request sample
     #   collection.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your `get`
-    #   and `list` requests, to mark the state of the entity at the time of
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
     #   the request. To make changes to the entity associated with the token,
-    #   you provide the token to operations like `update` and `delete`. WAF
+    #   you provide the token to operations like update and delete. AWS WAF
     #   uses the token to ensure that no changes have been made to the entity
     #   since you last retrieved it. If a change has been made, the update
     #   fails with a `WAFOptimisticLockException`. If this happens, perform
-    #   another `get`, and use the new token returned by that operation.
+    #   another get, and use the new token returned by that operation.
     #
     # @option params [Hash<String,Types::CustomResponseBody>] :custom_response_bodies
     #   A map of custom response keys and content bodies. When you create a
@@ -5355,12 +4879,12 @@ module Aws::WAFV2
     #   rules and default actions that you define in the web ACL.
     #
     #   For information about customizing web requests and responses, see
-    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   [Customizing web requests and responses in AWS WAF][1] in the [AWS WAF
     #   Developer Guide][2].
     #
     #   For information about the limits on count and size for custom request
-    #   and response settings, see [WAF quotas][3] in the [WAF Developer
-    #   Guide][2].
+    #   and response settings, see [AWS WAF quotas][3] in the [AWS WAF
+    #   Developer Guide][2].
     #
     #
     #
@@ -5440,7 +4964,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #             positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
@@ -5476,7 +5000,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5511,7 +5035,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5548,7 +5072,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5607,7 +5131,7 @@ module Aws::WAFV2
     #             text_transformations: [ # required
     #               {
     #                 priority: 1, # required
-    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
     #               },
     #             ],
     #           },
@@ -5644,7 +5168,6 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
-    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -5759,7 +5282,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

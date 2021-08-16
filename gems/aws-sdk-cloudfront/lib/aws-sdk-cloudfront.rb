@@ -29,7 +29,7 @@ require_relative 'aws-sdk-cloudfront/customizations'
 # structure.
 #
 #     cloud_front = Aws::CloudFront::Client.new
-#     resp = cloud_front.associate_alias(params)
+#     resp = cloud_front.create_cache_policy(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-cloudfront/customizations'
 # @!group service
 module Aws::CloudFront
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.50.0'
 
 end

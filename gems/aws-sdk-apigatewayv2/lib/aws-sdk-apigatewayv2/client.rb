@@ -706,12 +706,11 @@ module Aws::ApiGatewayV2
     #         certificate_arn: "Arn",
     #         certificate_name: "StringWithLengthBetween1And128",
     #         certificate_upload_date: Time.now,
-    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, PENDING_OWNERSHIP_VERIFICATION
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
     #         domain_name_status_message: "__string",
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #         ownership_verification_certificate_arn: "Arn",
     #       },
     #     ],
     #     mutual_tls_authentication: {
@@ -732,12 +731,11 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_arn #=> String
     #   resp.domain_name_configurations[0].certificate_name #=> String
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
-    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
-    #   resp.domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.mutual_tls_authentication.truststore_uri #=> String
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
@@ -2296,12 +2294,11 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_arn #=> String
     #   resp.domain_name_configurations[0].certificate_name #=> String
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
-    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
-    #   resp.domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.mutual_tls_authentication.truststore_uri #=> String
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
@@ -2344,12 +2341,11 @@ module Aws::ApiGatewayV2
     #   resp.items[0].domain_name_configurations[0].certificate_arn #=> String
     #   resp.items[0].domain_name_configurations[0].certificate_name #=> String
     #   resp.items[0].domain_name_configurations[0].certificate_upload_date #=> Time
-    #   resp.items[0].domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.items[0].domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.items[0].domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.items[0].domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.items[0].domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.items[0].domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
-    #   resp.items[0].domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.items[0].mutual_tls_authentication.truststore_uri #=> String
     #   resp.items[0].mutual_tls_authentication.truststore_version #=> String
     #   resp.items[0].mutual_tls_authentication.truststore_warnings #=> Array
@@ -3675,12 +3671,11 @@ module Aws::ApiGatewayV2
     #         certificate_arn: "Arn",
     #         certificate_name: "StringWithLengthBetween1And128",
     #         certificate_upload_date: Time.now,
-    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, PENDING_OWNERSHIP_VERIFICATION
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
     #         domain_name_status_message: "__string",
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #         ownership_verification_certificate_arn: "Arn",
     #       },
     #     ],
     #     mutual_tls_authentication: {
@@ -3698,12 +3693,11 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].certificate_arn #=> String
     #   resp.domain_name_configurations[0].certificate_name #=> String
     #   resp.domain_name_configurations[0].certificate_upload_date #=> Time
-    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
+    #   resp.domain_name_configurations[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING"
     #   resp.domain_name_configurations[0].domain_name_status_message #=> String
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
-    #   resp.domain_name_configurations[0].ownership_verification_certificate_arn #=> String
     #   resp.mutual_tls_authentication.truststore_uri #=> String
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
@@ -4457,7 +4451,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

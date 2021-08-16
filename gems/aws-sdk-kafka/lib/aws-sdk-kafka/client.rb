@@ -425,9 +425,6 @@ module Aws::Kafka
     #         scram: {
     #           enabled: false,
     #         },
-    #         iam: {
-    #           enabled: false,
-    #         },
     #       },
     #       tls: {
     #         certificate_authority_arn_list: ["__string"],
@@ -638,7 +635,6 @@ module Aws::Kafka
     #   resp.cluster_info.broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
     #   resp.cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
-    #   resp.cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
     #   resp.cluster_info.cluster_arn #=> String
@@ -876,7 +872,6 @@ module Aws::Kafka
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string #bootstrap_broker_string} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_tls #bootstrap_broker_string_tls} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_scram #bootstrap_broker_string_sasl_scram} => String
-    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_iam #bootstrap_broker_string_sasl_iam} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -889,7 +884,6 @@ module Aws::Kafka
     #   resp.bootstrap_broker_string #=> String
     #   resp.bootstrap_broker_string_tls #=> String
     #   resp.bootstrap_broker_string_sasl_scram #=> String
-    #   resp.bootstrap_broker_string_sasl_iam #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokers AWS API Documentation
     #
@@ -1052,7 +1046,6 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info_list[0].broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
     #   resp.cluster_info_list[0].client_authentication.sasl.scram.enabled #=> Boolean
-    #   resp.cluster_info_list[0].client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list[0] #=> String
     #   resp.cluster_info_list[0].cluster_arn #=> String
@@ -1761,7 +1754,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

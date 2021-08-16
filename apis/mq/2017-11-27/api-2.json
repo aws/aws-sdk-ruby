@@ -573,8 +573,7 @@
           "shape" : "__string",
           "locationName" : "nextToken"
         }
-      },
-      "required" : [ "MaxResults" ]
+      }
     },
     "BrokerInstance" : {
       "type" : "structure",
@@ -637,8 +636,7 @@
           "shape" : "__string",
           "locationName" : "nextToken"
         }
-      },
-      "required" : [ "MaxResults" ]
+      }
     },
     "BrokerState" : {
       "type" : "string",
@@ -683,8 +681,7 @@
           "shape" : "__string",
           "locationName" : "hostInstanceType"
         }
-      },
-      "required" : [ "DeploymentMode", "EngineType" ]
+      }
     },
     "ChangeType" : {
       "type" : "string",
@@ -733,8 +730,7 @@
           "shape" : "__mapOf__string",
           "locationName" : "tags"
         }
-      },
-      "required" : [ "Description", "EngineVersion", "LatestRevision", "AuthenticationStrategy", "EngineType", "Id", "Arn", "Name", "Created" ]
+      }
     },
     "ConfigurationId" : {
       "type" : "structure",
@@ -747,8 +743,7 @@
           "shape" : "__integer",
           "locationName" : "revision"
         }
-      },
-      "required" : [ "Id" ]
+      }
     },
     "ConfigurationRevision" : {
       "type" : "structure",
@@ -765,8 +760,7 @@
           "shape" : "__integer",
           "locationName" : "revision"
         }
-      },
-      "required" : [ "Revision", "Created" ]
+      }
     },
     "Configurations" : {
       "type" : "structure",
@@ -882,8 +876,7 @@
           "shape" : "__listOfUser",
           "locationName" : "users"
         }
-      },
-      "required" : [ "EngineVersion", "HostInstanceType", "AutoMinorVersionUpgrade", "Users", "BrokerName", "DeploymentMode", "EngineType", "PubliclyAccessible" ]
+      }
     },
     "CreateBrokerOutput" : {
       "type" : "structure",
@@ -978,8 +971,7 @@
           "shape" : "__listOfUser",
           "locationName" : "users"
         }
-      },
-      "required" : [ "EngineVersion", "HostInstanceType", "AutoMinorVersionUpgrade", "Users", "BrokerName", "DeploymentMode", "EngineType", "PubliclyAccessible" ]
+      }
     },
     "CreateBrokerResponse" : {
       "type" : "structure",
@@ -1017,8 +1009,7 @@
           "shape" : "__mapOf__string",
           "locationName" : "tags"
         }
-      },
-      "required" : [ "EngineVersion", "EngineType", "Name" ]
+      }
     },
     "CreateConfigurationOutput" : {
       "type" : "structure",
@@ -1047,8 +1038,7 @@
           "shape" : "__string",
           "locationName" : "name"
         }
-      },
-      "required" : [ "AuthenticationStrategy", "Id", "Arn", "Name", "Created" ]
+      }
     },
     "CreateConfigurationRequest" : {
       "type" : "structure",
@@ -1073,8 +1063,7 @@
           "shape" : "__mapOf__string",
           "locationName" : "tags"
         }
-      },
-      "required" : [ "EngineVersion", "EngineType", "Name" ]
+      }
     },
     "CreateConfigurationResponse" : {
       "type" : "structure",
@@ -1135,8 +1124,7 @@
           "shape" : "__string",
           "locationName" : "password"
         }
-      },
-      "required" : [ "Password" ]
+      }
     },
     "CreateUserRequest" : {
       "type" : "structure",
@@ -1164,7 +1152,7 @@
           "locationName" : "username"
         }
       },
-      "required" : [ "Username", "BrokerId", "Password" ]
+      "required" : [ "Username", "BrokerId" ]
     },
     "CreateUserResponse" : {
       "type" : "structure",
@@ -1442,8 +1430,7 @@
           "shape" : "__listOfUserSummary",
           "locationName" : "users"
         }
-      },
-      "required" : [ "DeploymentMode", "EngineType", "AutoMinorVersionUpgrade", "PubliclyAccessible" ]
+      }
     },
     "DescribeBrokerRequest" : {
       "type" : "structure",
@@ -1648,8 +1635,7 @@
           "shape" : "__string",
           "locationName" : "description"
         }
-      },
-      "required" : [ "Data", "ConfigurationId", "Created" ]
+      }
     },
     "DescribeConfigurationRevisionRequest" : {
       "type" : "structure",
@@ -1711,8 +1697,7 @@
           "shape" : "__string",
           "locationName" : "username"
         }
-      },
-      "required" : [ "Username", "BrokerId" ]
+      }
     },
     "DescribeUserRequest" : {
       "type" : "structure",
@@ -1876,8 +1861,7 @@
           "shape" : "__boolean",
           "locationName" : "userSearchSubtree"
         }
-      },
-      "required" : [ "Hosts", "UserSearchMatching", "UserBase", "RoleSearchMatching", "ServiceAccountUsername", "RoleBase", "ServiceAccountPassword" ]
+      }
     },
     "LdapServerMetadataOutput" : {
       "type" : "structure",
@@ -1922,8 +1906,7 @@
           "shape" : "__boolean",
           "locationName" : "userSearchSubtree"
         }
-      },
-      "required" : [ "Hosts", "UserSearchMatching", "UserBase", "RoleSearchMatching", "ServiceAccountUsername", "RoleBase" ]
+      }
     },
     "ListBrokersOutput" : {
       "type" : "structure",
@@ -2117,8 +2100,7 @@
           "shape" : "__listOfUserSummary",
           "locationName" : "users"
         }
-      },
-      "required" : [ "BrokerId", "MaxResults", "Users" ]
+      }
     },
     "ListUsersRequest" : {
       "type" : "structure",
@@ -2198,8 +2180,7 @@
           "shape" : "PendingLogs",
           "locationName" : "pending"
         }
-      },
-      "required" : [ "GeneralLogGroup", "General" ]
+      }
     },
     "MaxResults" : {
       "type" : "integer",
@@ -2266,8 +2247,7 @@
           "shape" : "SanitizationWarningReason",
           "locationName" : "reason"
         }
-      },
-      "required" : [ "Reason" ]
+      }
     },
     "SanitizationWarningReason" : {
       "type" : "string",
@@ -2330,10 +2310,6 @@
           "shape" : "Logs",
           "locationName" : "logs"
         },
-        "MaintenanceWindowStartTime" : {
-          "shape" : "WeeklyStartTime",
-          "locationName" : "maintenanceWindowStartTime"
-        },
         "SecurityGroups" : {
           "shape" : "__listOf__string",
           "locationName" : "securityGroups"
@@ -2375,16 +2351,11 @@
           "shape" : "Logs",
           "locationName" : "logs"
         },
-        "MaintenanceWindowStartTime" : {
-          "shape" : "WeeklyStartTime",
-          "locationName" : "maintenanceWindowStartTime"
-        },
         "SecurityGroups" : {
           "shape" : "__listOf__string",
           "locationName" : "securityGroups"
         }
-      },
-      "required" : [ "BrokerId" ]
+      }
     },
     "UpdateBrokerRequest" : {
       "type" : "structure",
@@ -2421,10 +2392,6 @@
         "Logs" : {
           "shape" : "Logs",
           "locationName" : "logs"
-        },
-        "MaintenanceWindowStartTime" : {
-          "shape" : "WeeklyStartTime",
-          "locationName" : "maintenanceWindowStartTime"
         },
         "SecurityGroups" : {
           "shape" : "__listOf__string",
@@ -2468,10 +2435,6 @@
           "shape" : "Logs",
           "locationName" : "logs"
         },
-        "MaintenanceWindowStartTime" : {
-          "shape" : "WeeklyStartTime",
-          "locationName" : "maintenanceWindowStartTime"
-        },
         "SecurityGroups" : {
           "shape" : "__listOf__string",
           "locationName" : "securityGroups"
@@ -2489,8 +2452,7 @@
           "shape" : "__string",
           "locationName" : "description"
         }
-      },
-      "required" : [ "Data" ]
+      }
     },
     "UpdateConfigurationOutput" : {
       "type" : "structure",
@@ -2519,8 +2481,7 @@
           "shape" : "__listOfSanitizationWarning",
           "locationName" : "warnings"
         }
-      },
-      "required" : [ "Id", "Arn", "Name", "Created" ]
+      }
     },
     "UpdateConfigurationRequest" : {
       "type" : "structure",
@@ -2539,7 +2500,7 @@
           "locationName" : "description"
         }
       },
-      "required" : [ "ConfigurationId", "Data" ]
+      "required" : [ "ConfigurationId" ]
     },
     "UpdateConfigurationResponse" : {
       "type" : "structure",
@@ -2638,8 +2599,7 @@
           "shape" : "__string",
           "locationName" : "username"
         }
-      },
-      "required" : [ "Username", "Password" ]
+      }
     },
     "UserPendingChanges" : {
       "type" : "structure",
@@ -2656,8 +2616,7 @@
           "shape" : "ChangeType",
           "locationName" : "pendingChange"
         }
-      },
-      "required" : [ "PendingChange" ]
+      }
     },
     "UserSummary" : {
       "type" : "structure",
@@ -2670,8 +2629,7 @@
           "shape" : "__string",
           "locationName" : "username"
         }
-      },
-      "required" : [ "Username" ]
+      }
     },
     "WeeklyStartTime" : {
       "type" : "structure",
@@ -2688,8 +2646,7 @@
           "shape" : "__string",
           "locationName" : "timeZone"
         }
-      },
-      "required" : [ "TimeOfDay", "DayOfWeek" ]
+      }
     },
     "__boolean" : {
       "type" : "boolean"

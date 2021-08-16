@@ -14,16 +14,10 @@ module Aws
       'aws_session_token' => 'session_token',
     }
 
-    # Constructs a new SharedCredentials object. This will load static
-    # (access_key_id, secret_access_key and session_token) AWS access
+    # Constructs a new SharedCredentials object. This will load AWS access
     # credentials from an ini file, which supports profiles. The default
     # profile name is 'default'. You can specify the profile name with the
     # `ENV['AWS_PROFILE']` or with the `:profile_name` option.
-    #
-    # To use credentials from the default credential resolution chain
-    # create a client without the credential option specified.
-    # You may access the resolved credentials through
-    # `client.config.credentials`.
     #
     # @option [String] :path Path to the shared file.  Defaults
     #   to "#{Dir.home}/.aws/credentials".

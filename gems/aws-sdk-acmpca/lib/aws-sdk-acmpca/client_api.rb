@@ -126,7 +126,6 @@ module Aws::ACMPCA
     RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
-    S3ObjectAcl = Shapes::StringShape.new(name: 'S3ObjectAcl')
     SigningAlgorithm = Shapes::StringShape.new(name: 'SigningAlgorithm')
     String = Shapes::StringShape.new(name: 'String')
     String128 = Shapes::StringShape.new(name: 'String128')
@@ -245,7 +244,6 @@ module Aws::ACMPCA
     CrlConfiguration.add_member(:expiration_in_days, Shapes::ShapeRef.new(shape: Integer1To5000, location_name: "ExpirationInDays", metadata: {"box"=>true}))
     CrlConfiguration.add_member(:custom_cname, Shapes::ShapeRef.new(shape: String253, location_name: "CustomCname"))
     CrlConfiguration.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String3To255, location_name: "S3BucketName"))
-    CrlConfiguration.add_member(:s3_object_acl, Shapes::ShapeRef.new(shape: S3ObjectAcl, location_name: "S3ObjectAcl"))
     CrlConfiguration.struct_class = Types::CrlConfiguration
 
     CsrExtensions.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsage, location_name: "KeyUsage"))

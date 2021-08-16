@@ -29,7 +29,7 @@ require_relative 'aws-sdk-mediaconnect/customizations'
 # structure.
 #
 #     media_connect = Aws::MediaConnect::Client.new
-#     resp = media_connect.add_flow_media_streams(params)
+#     resp = media_connect.add_flow_outputs(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-mediaconnect/customizations'
 # @!group service
 module Aws::MediaConnect
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.32.0'
 
 end

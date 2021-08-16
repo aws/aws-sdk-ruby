@@ -83,8 +83,7 @@ module Aws::EC2
       data[:outpost_arn]
     end
 
-    # The Amazon Web Services account ID of the owner of the network
-    # interface.
+    # The AWS account ID of the owner of the network interface.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -108,29 +107,14 @@ module Aws::EC2
       data[:private_ip_addresses]
     end
 
-    # The IPv4 Prefix Delegation prefixes that are assigned to the network
-    # interface.
-    # @return [Array<Types::Ipv4PrefixSpecification>]
-    def ipv_4_prefixes
-      data[:ipv_4_prefixes]
-    end
-
-    # The IPv6 Prefix Delegation prefixes that are assigned to the network
-    # interface.
-    # @return [Array<Types::Ipv6PrefixSpecification>]
-    def ipv_6_prefixes
-      data[:ipv_6_prefixes]
-    end
-
-    # The alias or Amazon Web Services account ID of the principal or
-    # service that created the network interface.
+    # The alias or AWS account ID of the principal or service that created
+    # the network interface.
     # @return [String]
     def requester_id
       data[:requester_id]
     end
 
-    # Indicates whether the network interface is being managed by Amazon Web
-    # Services.
+    # Indicates whether the network interface is being managed by AWS.
     # @return [Boolean]
     def requester_managed
       data[:requester_managed]
@@ -306,8 +290,6 @@ module Aws::EC2
     #     allow_reassignment: false,
     #     private_ip_addresses: ["String"],
     #     secondary_private_ip_address_count: 1,
-    #     ipv_4_prefixes: ["String"],
-    #     ipv_4_prefix_count: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :allow_reassignment
@@ -325,14 +307,6 @@ module Aws::EC2
     #   The number of secondary IP addresses to assign to the network
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
-    # @option options [Array<String>] :ipv_4_prefixes
-    #   One or more IPv4 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv4PrefixCount`
-    #   option.
-    # @option options [Integer] :ipv_4_prefix_count
-    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
-    #   assigns to the network interface. You cannot use this option if you
-    #   use the `Ipv4 Prefixes` option.
     # @return [Types::AssignPrivateIpAddressesResult]
     def assign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
@@ -431,8 +405,8 @@ module Aws::EC2
     #   if its value is an empty string.
     #
     #   If you omit this parameter, we delete all user-defined tags for the
-    #   specified resources. We do not delete Amazon Web Services-generated
-    #   tags (tags that have the `aws:` prefix).
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
     # @return [Tag::Collection]
     def delete_tags(options = {})
       batch = []
@@ -598,17 +572,13 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.unassign_private_ip_addresses({
-    #     private_ip_addresses: ["String"],
-    #     ipv_4_prefixes: ["String"],
+    #     private_ip_addresses: ["String"], # required
     #   })
     # @param [Hash] options ({})
-    # @option options [Array<String>] :private_ip_addresses
+    # @option options [required, Array<String>] :private_ip_addresses
     #   The secondary private IP addresses to unassign from the network
     #   interface. You can specify this option multiple times to unassign more
     #   than one IP address.
-    # @option options [Array<String>] :ipv_4_prefixes
-    #   The IPv4 Prefix Delegation prefixes to unassign from the network
-    #   interface.
     # @return [EmptyStructure]
     def unassign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)

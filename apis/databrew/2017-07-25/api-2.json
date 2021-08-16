@@ -619,31 +619,6 @@
       "max":20,
       "min":0
     },
-    "ColumnSelector":{
-      "type":"structure",
-      "members":{
-        "Regex":{"shape":"ColumnName"},
-        "Name":{"shape":"ColumnName"}
-      }
-    },
-    "ColumnSelectorList":{
-      "type":"list",
-      "member":{"shape":"ColumnSelector"},
-      "min":1
-    },
-    "ColumnStatisticsConfiguration":{
-      "type":"structure",
-      "required":["Statistics"],
-      "members":{
-        "Selectors":{"shape":"ColumnSelectorList"},
-        "Statistics":{"shape":"StatisticsConfiguration"}
-      }
-    },
-    "ColumnStatisticsConfigurationList":{
-      "type":"list",
-      "member":{"shape":"ColumnStatisticsConfiguration"},
-      "min":1
-    },
     "CompressionFormat":{
       "type":"string",
       "enum":[
@@ -732,7 +707,6 @@
         "MaxCapacity":{"shape":"MaxCapacity"},
         "MaxRetries":{"shape":"MaxRetries"},
         "OutputLocation":{"shape":"S3Location"},
-        "Configuration":{"shape":"ProfileConfiguration"},
         "RoleArn":{"shape":"Arn"},
         "Tags":{"shape":"TagMap"},
         "Timeout":{"shape":"Timeout"},
@@ -774,6 +748,7 @@
       "type":"structure",
       "required":[
         "Name",
+        "Outputs",
         "RoleArn"
       ],
       "members":{
@@ -785,8 +760,6 @@
         "MaxCapacity":{"shape":"MaxCapacity"},
         "MaxRetries":{"shape":"MaxRetries"},
         "Outputs":{"shape":"OutputList"},
-        "DataCatalogOutputs":{"shape":"DataCatalogOutputList"},
-        "DatabaseOutputs":{"shape":"DatabaseOutputList"},
         "ProjectName":{"shape":"ProjectName"},
         "RecipeReference":{"shape":"RecipeReference"},
         "RoleArn":{"shape":"Arn"},
@@ -873,26 +846,6 @@
         "TempDirectory":{"shape":"S3Location"}
       }
     },
-    "DataCatalogOutput":{
-      "type":"structure",
-      "required":[
-        "DatabaseName",
-        "TableName"
-      ],
-      "members":{
-        "CatalogId":{"shape":"CatalogId"},
-        "DatabaseName":{"shape":"DatabaseName"},
-        "TableName":{"shape":"TableName"},
-        "S3Options":{"shape":"S3TableOutputOptions"},
-        "DatabaseOptions":{"shape":"DatabaseTableOutputOptions"},
-        "Overwrite":{"shape":"OverwriteOutput"}
-      }
-    },
-    "DataCatalogOutputList":{
-      "type":"list",
-      "member":{"shape":"DataCatalogOutput"},
-      "min":1
-    },
     "DatabaseInputDefinition":{
       "type":"structure",
       "required":[
@@ -910,39 +863,10 @@
       "max":255,
       "min":1
     },
-    "DatabaseOutput":{
-      "type":"structure",
-      "required":[
-        "GlueConnectionName",
-        "DatabaseOptions"
-      ],
-      "members":{
-        "GlueConnectionName":{"shape":"GlueConnectionName"},
-        "DatabaseOptions":{"shape":"DatabaseTableOutputOptions"},
-        "DatabaseOutputMode":{"shape":"DatabaseOutputMode"}
-      }
-    },
-    "DatabaseOutputList":{
-      "type":"list",
-      "member":{"shape":"DatabaseOutput"},
-      "min":1
-    },
-    "DatabaseOutputMode":{
-      "type":"string",
-      "enum":["NEW_TABLE"]
-    },
     "DatabaseTableName":{
       "type":"string",
       "max":255,
       "min":1
-    },
-    "DatabaseTableOutputOptions":{
-      "type":"structure",
-      "required":["TableName"],
-      "members":{
-        "TempDirectory":{"shape":"S3Location"},
-        "TableName":{"shape":"DatabaseTableName"}
-      }
     },
     "Dataset":{
       "type":"structure",
@@ -1171,10 +1095,7 @@
         "MaxCapacity":{"shape":"MaxCapacity"},
         "MaxRetries":{"shape":"MaxRetries"},
         "Outputs":{"shape":"OutputList"},
-        "DataCatalogOutputs":{"shape":"DataCatalogOutputList"},
-        "DatabaseOutputs":{"shape":"DatabaseOutputList"},
         "ProjectName":{"shape":"ProjectName"},
-        "ProfileConfiguration":{"shape":"ProfileConfiguration"},
         "RecipeReference":{"shape":"RecipeReference"},
         "ResourceArn":{"shape":"Arn"},
         "RoleArn":{"shape":"Arn"},
@@ -1212,14 +1133,11 @@
         "ErrorMessage":{"shape":"JobRunErrorMessage"},
         "ExecutionTime":{"shape":"ExecutionTime"},
         "JobName":{"shape":"JobName"},
-        "ProfileConfiguration":{"shape":"ProfileConfiguration"},
         "RunId":{"shape":"JobRunId"},
         "State":{"shape":"JobRunState"},
         "LogSubscription":{"shape":"LogSubscription"},
         "LogGroupName":{"shape":"LogGroupName"},
         "Outputs":{"shape":"OutputList"},
-        "DataCatalogOutputs":{"shape":"DataCatalogOutputList"},
-        "DatabaseOutputs":{"shape":"DatabaseOutputList"},
         "RecipeReference":{"shape":"RecipeReference"},
         "StartedBy":{"shape":"StartedBy"},
         "StartedOn":{"shape":"Date"},
@@ -1430,8 +1348,6 @@
         "MaxCapacity":{"shape":"MaxCapacity"},
         "MaxRetries":{"shape":"MaxRetries"},
         "Outputs":{"shape":"OutputList"},
-        "DataCatalogOutputs":{"shape":"DataCatalogOutputList"},
-        "DatabaseOutputs":{"shape":"DatabaseOutputList"},
         "ProjectName":{"shape":"ProjectName"},
         "RecipeReference":{"shape":"RecipeReference"},
         "ResourceArn":{"shape":"Arn"},
@@ -1469,8 +1385,6 @@
         "LogSubscription":{"shape":"LogSubscription"},
         "LogGroupName":{"shape":"LogGroupName"},
         "Outputs":{"shape":"OutputList"},
-        "DataCatalogOutputs":{"shape":"DataCatalogOutputList"},
-        "DatabaseOutputs":{"shape":"DatabaseOutputList"},
         "RecipeReference":{"shape":"RecipeReference"},
         "StartedBy":{"shape":"StartedBy"},
         "StartedOn":{"shape":"Date"},
@@ -1814,8 +1728,7 @@
         "GLUEPARQUET",
         "AVRO",
         "ORC",
-        "XML",
-        "TABLEAUHYPER"
+        "XML"
       ]
     },
     "OutputFormatOptions":{
@@ -1851,7 +1764,7 @@
     },
     "ParameterValue":{
       "type":"string",
-      "max":32768,
+      "max":12288,
       "min":1
     },
     "PathOptions":{
@@ -1875,14 +1788,6 @@
       "min":1
     },
     "Preview":{"type":"boolean"},
-    "ProfileConfiguration":{
-      "type":"structure",
-      "members":{
-        "DatasetStatisticsConfiguration":{"shape":"StatisticsConfiguration"},
-        "ProfileColumns":{"shape":"ColumnSelectorList"},
-        "ColumnStatisticsConfigurations":{"shape":"ColumnStatisticsConfigurationList"}
-      }
-    },
     "Project":{
       "type":"structure",
       "required":[
@@ -2034,13 +1939,6 @@
       "members":{
         "Bucket":{"shape":"Bucket"},
         "Key":{"shape":"Key"}
-      }
-    },
-    "S3TableOutputOptions":{
-      "type":"structure",
-      "required":["Location"],
-      "members":{
-        "Location":{"shape":"S3Location"}
       }
     },
     "Sample":{
@@ -2217,40 +2115,6 @@
       }
     },
     "StartedBy":{"type":"string"},
-    "Statistic":{
-      "type":"string",
-      "max":128,
-      "min":1,
-      "pattern":"^[A-Z\\_]+$"
-    },
-    "StatisticList":{
-      "type":"list",
-      "member":{"shape":"Statistic"},
-      "min":1
-    },
-    "StatisticOverride":{
-      "type":"structure",
-      "required":[
-        "Statistic",
-        "Parameters"
-      ],
-      "members":{
-        "Statistic":{"shape":"Statistic"},
-        "Parameters":{"shape":"ParameterMap"}
-      }
-    },
-    "StatisticOverrideList":{
-      "type":"list",
-      "member":{"shape":"StatisticOverride"},
-      "min":1
-    },
-    "StatisticsConfiguration":{
-      "type":"structure",
-      "members":{
-        "IncludedStatistics":{"shape":"StatisticList"},
-        "Overrides":{"shape":"StatisticOverrideList"}
-      }
-    },
     "StepIndex":{
       "type":"integer",
       "min":0
@@ -2400,7 +2264,6 @@
         "RoleArn"
       ],
       "members":{
-        "Configuration":{"shape":"ProfileConfiguration"},
         "EncryptionKeyArn":{"shape":"EncryptionKeyArn"},
         "EncryptionMode":{"shape":"EncryptionMode"},
         "Name":{
@@ -2452,6 +2315,7 @@
       "type":"structure",
       "required":[
         "Name",
+        "Outputs",
         "RoleArn"
       ],
       "members":{
@@ -2466,8 +2330,6 @@
         "MaxCapacity":{"shape":"MaxCapacity"},
         "MaxRetries":{"shape":"MaxRetries"},
         "Outputs":{"shape":"OutputList"},
-        "DataCatalogOutputs":{"shape":"DataCatalogOutputList"},
-        "DatabaseOutputs":{"shape":"DatabaseOutputList"},
         "RoleArn":{"shape":"Arn"},
         "Timeout":{"shape":"Timeout"}
       }

@@ -97,8 +97,6 @@
       "input":{"shape":"CreateTestGridProjectRequest"},
       "output":{"shape":"CreateTestGridProjectResult"},
       "errors":[
-        {"shape":"ArgumentException"},
-        {"shape":"LimitExceededException"},
         {"shape":"InternalServiceException"}
       ]
     },
@@ -1127,7 +1125,6 @@
       "errors":[
         {"shape":"NotFoundException"},
         {"shape":"ArgumentException"},
-        {"shape":"LimitExceededException"},
         {"shape":"InternalServiceException"}
       ]
     },
@@ -1422,8 +1419,7 @@
       "required":["name"],
       "members":{
         "name":{"shape":"ResourceName"},
-        "description":{"shape":"ResourceDescription"},
-        "vpcConfig":{"shape":"TestGridVpcConfig"}
+        "description":{"shape":"ResourceDescription"}
       }
     },
     "CreateTestGridProjectResult":{
@@ -1446,7 +1442,7 @@
     "CreateTestGridUrlResult":{
       "type":"structure",
       "members":{
-        "url":{"shape":"SensitiveString"},
+        "url":{"shape":"String"},
         "expires":{"shape":"DateTime"}
       }
     },
@@ -1672,11 +1668,6 @@
     },
     "DeviceFilter":{
       "type":"structure",
-      "required":[
-        "attribute",
-        "operator",
-        "values"
-      ],
       "members":{
         "attribute":{"shape":"DeviceFilterAttribute"},
         "operator":{"shape":"RuleOperator"},
@@ -2659,12 +2650,6 @@
       "type":"list",
       "member":{"shape":"NetworkProfile"}
     },
-    "NonEmptyString":{
-      "type":"string",
-      "max":4096,
-      "min":1,
-      "pattern":".*\\S.*"
-    },
     "NotEligibleException":{
       "type":"structure",
       "members":{
@@ -2804,10 +2789,6 @@
     },
     "PurchaseOfferingRequest":{
       "type":"structure",
-      "required":[
-        "offeringId",
-        "quantity"
-      ],
       "members":{
         "offeringId":{"shape":"OfferingIdentifier"},
         "quantity":{"shape":"Integer"},
@@ -2881,10 +2862,6 @@
     },
     "RenewOfferingRequest":{
       "type":"structure",
-      "required":[
-        "offeringId",
-        "quantity"
-      ],
       "members":{
         "offeringId":{"shape":"OfferingIdentifier"},
         "quantity":{"shape":"Integer"}
@@ -3068,22 +3045,6 @@
         "parameters":{"shape":"TestParameters"}
       }
     },
-    "SecurityGroupIds":{
-      "type":"list",
-      "member":{"shape":"NonEmptyString"},
-      "max":5,
-      "min":1
-    },
-    "SensitiveString":{
-      "type":"string",
-      "sensitive":true
-    },
-    "SensitiveURL":{
-      "type":"string",
-      "max":2048,
-      "min":0,
-      "sensitive":true
-    },
     "ServiceAccountException":{
       "type":"structure",
       "members":{
@@ -3142,12 +3103,6 @@
       }
     },
     "String":{"type":"string"},
-    "SubnetIds":{
-      "type":"list",
-      "member":{"shape":"NonEmptyString"},
-      "max":8,
-      "min":1
-    },
     "Suite":{
       "type":"structure",
       "members":{
@@ -3253,7 +3208,6 @@
         "arn":{"shape":"DeviceFarmArn"},
         "name":{"shape":"String"},
         "description":{"shape":"String"},
-        "vpcConfig":{"shape":"TestGridVpcConfig"},
         "created":{"shape":"DateTime"}
       }
     },
@@ -3291,7 +3245,7 @@
       "members":{
         "filename":{"shape":"String"},
         "type":{"shape":"TestGridSessionArtifactType"},
-        "url":{"shape":"SensitiveString"}
+        "url":{"shape":"String"}
       }
     },
     "TestGridSessionArtifactCategory":{
@@ -3329,19 +3283,6 @@
       "type":"integer",
       "max":86400,
       "min":60
-    },
-    "TestGridVpcConfig":{
-      "type":"structure",
-      "required":[
-        "securityGroupIds",
-        "subnetIds",
-        "vpcId"
-      ],
-      "members":{
-        "securityGroupIds":{"shape":"SecurityGroupIds"},
-        "subnetIds":{"shape":"SubnetIds"},
-        "vpcId":{"shape":"NonEmptyString"}
-      }
     },
     "TestParameters":{
       "type":"map",
@@ -3530,8 +3471,7 @@
       "members":{
         "projectArn":{"shape":"DeviceFarmArn"},
         "name":{"shape":"ResourceName"},
-        "description":{"shape":"ResourceDescription"},
-        "vpcConfig":{"shape":"TestGridVpcConfig"}
+        "description":{"shape":"ResourceDescription"}
       }
     },
     "UpdateTestGridProjectResult":{
@@ -3581,7 +3521,7 @@
         "created":{"shape":"DateTime"},
         "type":{"shape":"UploadType"},
         "status":{"shape":"UploadStatus"},
-        "url":{"shape":"SensitiveURL"},
+        "url":{"shape":"URL"},
         "metadata":{"shape":"Metadata"},
         "contentType":{"shape":"ContentType"},
         "message":{"shape":"Message"},

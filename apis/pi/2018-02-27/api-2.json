@@ -28,20 +28,6 @@
         {"shape":"NotAuthorizedException"}
       ]
     },
-    "GetDimensionKeyDetails":{
-      "name":"GetDimensionKeyDetails",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"GetDimensionKeyDetailsRequest"},
-      "output":{"shape":"GetDimensionKeyDetailsResponse"},
-      "errors":[
-        {"shape":"InvalidArgumentException"},
-        {"shape":"InternalServiceError"},
-        {"shape":"NotAuthorizedException"}
-      ]
-    },
     "GetResourceMetrics":{
       "name":"GetResourceMetrics",
       "http":{
@@ -85,16 +71,16 @@
       ],
       "members":{
         "ServiceType":{"shape":"ServiceType"},
-        "Identifier":{"shape":"RequestString"},
+        "Identifier":{"shape":"String"},
         "StartTime":{"shape":"ISOTimestamp"},
         "EndTime":{"shape":"ISOTimestamp"},
-        "Metric":{"shape":"RequestString"},
+        "Metric":{"shape":"String"},
         "PeriodInSeconds":{"shape":"Integer"},
         "GroupBy":{"shape":"DimensionGroup"},
         "PartitionBy":{"shape":"DimensionGroup"},
         "Filter":{"shape":"MetricQueryFilterMap"},
         "MaxResults":{"shape":"MaxResults"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"String"}
       }
     },
     "DescribeDimensionKeysResponse":{
@@ -104,23 +90,15 @@
         "AlignedEndTime":{"shape":"ISOTimestamp"},
         "PartitionKeys":{"shape":"ResponsePartitionKeyList"},
         "Keys":{"shape":"DimensionKeyDescriptionList"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"String"}
       }
-    },
-    "DetailStatus":{
-      "type":"string",
-      "enum":[
-        "AVAILABLE",
-        "PROCESSING",
-        "UNAVAILABLE"
-      ]
     },
     "DimensionGroup":{
       "type":"structure",
       "required":["Group"],
       "members":{
-        "Group":{"shape":"RequestString"},
-        "Dimensions":{"shape":"RequestStringList"},
+        "Group":{"shape":"String"},
+        "Dimensions":{"shape":"StringList"},
         "Limit":{"shape":"Limit"}
       }
     },
@@ -136,47 +114,12 @@
       "type":"list",
       "member":{"shape":"DimensionKeyDescription"}
     },
-    "DimensionKeyDetail":{
-      "type":"structure",
-      "members":{
-        "Value":{"shape":"String"},
-        "Dimension":{"shape":"String"},
-        "Status":{"shape":"DetailStatus"}
-      }
-    },
-    "DimensionKeyDetailList":{
-      "type":"list",
-      "member":{"shape":"DimensionKeyDetail"}
-    },
     "DimensionMap":{
       "type":"map",
-      "key":{"shape":"RequestString"},
-      "value":{"shape":"RequestString"}
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
     },
     "Double":{"type":"double"},
-    "ErrorString":{"type":"string"},
-    "GetDimensionKeyDetailsRequest":{
-      "type":"structure",
-      "required":[
-        "ServiceType",
-        "Identifier",
-        "Group",
-        "GroupIdentifier"
-      ],
-      "members":{
-        "ServiceType":{"shape":"ServiceType"},
-        "Identifier":{"shape":"IdentifierString"},
-        "Group":{"shape":"RequestString"},
-        "GroupIdentifier":{"shape":"RequestString"},
-        "RequestedDimensions":{"shape":"RequestedDimensionList"}
-      }
-    },
-    "GetDimensionKeyDetailsResponse":{
-      "type":"structure",
-      "members":{
-        "Dimensions":{"shape":"DimensionKeyDetailList"}
-      }
-    },
     "GetResourceMetricsRequest":{
       "type":"structure",
       "required":[
@@ -188,13 +131,13 @@
       ],
       "members":{
         "ServiceType":{"shape":"ServiceType"},
-        "Identifier":{"shape":"RequestString"},
+        "Identifier":{"shape":"String"},
         "MetricQueries":{"shape":"MetricQueryList"},
         "StartTime":{"shape":"ISOTimestamp"},
         "EndTime":{"shape":"ISOTimestamp"},
         "PeriodInSeconds":{"shape":"Integer"},
         "MaxResults":{"shape":"MaxResults"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"String"}
       }
     },
     "GetResourceMetricsResponse":{
@@ -204,21 +147,15 @@
         "AlignedEndTime":{"shape":"ISOTimestamp"},
         "Identifier":{"shape":"String"},
         "MetricList":{"shape":"MetricKeyDataPointsList"},
-        "NextToken":{"shape":"NextToken"}
+        "NextToken":{"shape":"String"}
       }
     },
     "ISOTimestamp":{"type":"timestamp"},
-    "IdentifierString":{
-      "type":"string",
-      "max":256,
-      "min":0,
-      "pattern":"^db-[a-zA-Z0-9-]*$"
-    },
     "Integer":{"type":"integer"},
     "InternalServiceError":{
       "type":"structure",
       "members":{
-        "Message":{"shape":"ErrorString"}
+        "Message":{"shape":"String"}
       },
       "exception":true,
       "fault":true
@@ -226,7 +163,7 @@
     "InvalidArgumentException":{
       "type":"structure",
       "members":{
-        "Message":{"shape":"ErrorString"}
+        "Message":{"shape":"String"}
       },
       "exception":true
     },
@@ -255,15 +192,15 @@
       "type":"structure",
       "required":["Metric"],
       "members":{
-        "Metric":{"shape":"RequestString"},
+        "Metric":{"shape":"String"},
         "GroupBy":{"shape":"DimensionGroup"},
         "Filter":{"shape":"MetricQueryFilterMap"}
       }
     },
     "MetricQueryFilterMap":{
       "type":"map",
-      "key":{"shape":"RequestString"},
-      "value":{"shape":"RequestString"}
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
     },
     "MetricQueryList":{
       "type":"list",
@@ -275,36 +212,12 @@
       "type":"list",
       "member":{"shape":"Double"}
     },
-    "NextToken":{
-      "type":"string",
-      "max":8192,
-      "min":1,
-      "pattern":"[\\s\\S]*"
-    },
     "NotAuthorizedException":{
       "type":"structure",
       "members":{
-        "Message":{"shape":"ErrorString"}
+        "Message":{"shape":"String"}
       },
       "exception":true
-    },
-    "RequestString":{
-      "type":"string",
-      "max":256,
-      "min":0,
-      "pattern":".*\\S.*"
-    },
-    "RequestStringList":{
-      "type":"list",
-      "member":{"shape":"RequestString"},
-      "max":10,
-      "min":1
-    },
-    "RequestedDimensionList":{
-      "type":"list",
-      "member":{"shape":"RequestString"},
-      "max":10,
-      "min":1
     },
     "ResponsePartitionKey":{
       "type":"structure",
@@ -329,11 +242,12 @@
       "type":"string",
       "enum":["RDS"]
     },
-    "String":{
-      "type":"string",
-      "max":256,
-      "min":0,
-      "pattern":".*\\S.*"
+    "String":{"type":"string"},
+    "StringList":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "max":10,
+      "min":1
     }
   }
 }

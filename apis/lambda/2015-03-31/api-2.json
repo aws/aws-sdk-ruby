@@ -226,8 +226,7 @@
         {"shape":"ServiceException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
-        {"shape":"TooManyRequestsException"},
-        {"shape":"ResourceConflictException"}
+        {"shape":"TooManyRequestsException"}
       ]
     },
     "DeleteLayerVersion":{
@@ -790,8 +789,7 @@
         {"shape":"ServiceException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
-        {"shape":"TooManyRequestsException"},
-        {"shape":"ResourceConflictException"}
+        {"shape":"TooManyRequestsException"}
       ]
     },
     "PutProvisionedConcurrencyConfig":{
@@ -982,8 +980,7 @@
         {"shape":"ServiceException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
-        {"shape":"TooManyRequestsException"},
-        {"shape":"ResourceConflictException"}
+        {"shape":"TooManyRequestsException"}
       ]
     }
   },
@@ -2333,7 +2330,6 @@
     },
     "LayerPermissionAllowedAction":{
       "type":"string",
-      "max":22,
       "pattern":"lambda:GetLayerVersion"
     },
     "LayerPermissionAllowedPrincipal":{
@@ -2810,7 +2806,6 @@
     },
     "OrganizationId":{
       "type":"string",
-      "max":34,
       "pattern":"o-[a-z0-9]{10,32}"
     },
     "PackageType":{
@@ -2849,7 +2844,7 @@
     },
     "Principal":{
       "type":"string",
-      "pattern":"[^\\s]+"
+      "pattern":".*"
     },
     "ProvisionedConcurrencyConfigList":{
       "type":"list",
@@ -3172,7 +3167,6 @@
         "python3.6",
         "python3.7",
         "python3.8",
-        "python3.9",
         "dotnetcore1.0",
         "dotnetcore2.0",
         "dotnetcore2.1",
@@ -3252,13 +3246,11 @@
         "VPC_SUBNET",
         "VPC_SECURITY_GROUP",
         "SASL_SCRAM_512_AUTH",
-        "SASL_SCRAM_256_AUTH",
-        "VIRTUAL_HOST"
+        "SASL_SCRAM_256_AUTH"
       ]
     },
     "SourceOwner":{
       "type":"string",
-      "max":12,
       "pattern":"\\d{12}"
     },
     "State":{

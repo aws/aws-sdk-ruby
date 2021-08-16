@@ -93,7 +93,7 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the test suite to be deleted.
+    #   Deletes a Device Advisor test suite with defined suite Id.
     #   @return [String]
     #
     class DeleteSuiteDefinitionRequest < Struct.new(
@@ -138,11 +138,11 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the test suite to get.
+    #   Requests suite definition Id with GetSuiteDefinition API call.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Suite definition version of the test suite to get.
+    #   Requests the suite definition version of a test suite.
     #   @return [String]
     #
     class GetSuiteDefinitionRequest < Struct.new(
@@ -153,7 +153,7 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the suite definition.
+    #   Gets suite definition Id with GetSuiteDefinition API call.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_arn
@@ -161,24 +161,26 @@ module Aws::IoTDeviceAdvisor
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Suite definition version of the suite definition.
+    #   Gets suite definition version with GetSuiteDefinition API call.
     #   @return [String]
     #
     # @!attribute [rw] latest_version
-    #   Latest suite definition version of the suite definition.
+    #   Gets latest suite definition version with GetSuiteDefinition API
+    #   call.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_configuration
-    #   Suite configuration of the suite definition.
+    #   Gets the suite configuration with GetSuiteDefinition API call.
     #   @return [Types::SuiteDefinitionConfiguration]
     #
     # @!attribute [rw] created_at
-    #   Date (in Unix epoch time) when the suite definition was created.
+    #   Gets the timestamp of the time suite was created with
+    #   GetSuiteDefinition API call.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_at
-    #   Date (in Unix epoch time) when the suite definition was last
-    #   modified.
+    #   Gets the timestamp of the time suite was modified with
+    #   GetSuiteDefinition API call.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -207,11 +209,11 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the test suite.
+    #   Device Advisor suite definition Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_run_id
-    #   Suite run Id of the test suite run.
+    #   Device Advisor suite run Id.
     #   @return [String]
     #
     class GetSuiteRunReportRequest < Struct.new(
@@ -222,7 +224,7 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] qualification_report_download_url
-    #   Download URL of the qualification report.
+    #   Gets the download URL of the qualification report.
     #   @return [String]
     #
     class GetSuiteRunReportResponse < Struct.new(
@@ -240,11 +242,13 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id for the test suite run.
+    #   Requests the information about Device Advisor test suite run based
+    #   on suite definition Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_run_id
-    #   Suite run Id for the test suite run.
+    #   Requests the information about Device Advisor test suite run based
+    #   on suite run Id.
     #   @return [String]
     #
     class GetSuiteRunRequest < Struct.new(
@@ -255,15 +259,18 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id for the test suite run.
+    #   Gets the information about Device Advisor test suite run based on
+    #   suite definition Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Suite definition version for the test suite run.
+    #   Gets the information about Device Advisor test suite run based on
+    #   suite definition version.
     #   @return [String]
     #
     # @!attribute [rw] suite_run_id
-    #   Suite run Id for the test suite run.
+    #   Gets the information about Device Advisor test suite run based on
+    #   suite run Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_run_arn
@@ -271,27 +278,33 @@ module Aws::IoTDeviceAdvisor
     #   @return [String]
     #
     # @!attribute [rw] suite_run_configuration
-    #   Suite run configuration for the test suite run.
+    #   Gets the information about Device Advisor test suite run based on
+    #   suite configuration.
     #   @return [Types::SuiteRunConfiguration]
     #
     # @!attribute [rw] test_result
-    #   Test results for the test suite run.
+    #   Gets the information about Device Advisor test suite run based on
+    #   test case runs.
     #   @return [Types::TestResult]
     #
     # @!attribute [rw] start_time
-    #   Date (in Unix epoch time) when the test suite run was started.
+    #   Gets the information about Device Advisor test suite run based on
+    #   start time.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Date (in Unix epoch time) when the test suite run ended.
+    #   Gets the information about Device Advisor test suite run based on
+    #   end time.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Status for the test suite run.
+    #   Gets the information about Device Advisor test suite run based on
+    #   its status.
     #   @return [String]
     #
     # @!attribute [rw] error_reason
-    #   Error reason for any test suite run failure.
+    #   Gets the information about Device Advisor test suite run based on
+    #   error.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -317,15 +330,15 @@ module Aws::IoTDeviceAdvisor
     # Show Group Result.
     #
     # @!attribute [rw] group_id
-    #   Group result Id.
+    #   Show Group Result Id.
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   Group Result Name.
+    #   Show Group Result Name.
     #   @return [String]
     #
     # @!attribute [rw] tests
-    #   Tests under Group Result.
+    #   Show Group Result.
     #   @return [Array<Types::TestCaseRun>]
     #
     class GroupResult < Struct.new(
@@ -357,11 +370,11 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at once.
+    #   Request the list of all the Device Advisor test suites.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token used to get the next set of results.
+    #   Requests the Device Advisor test suites next token.
     #   @return [String]
     #
     class ListSuiteDefinitionsRequest < Struct.new(
@@ -372,12 +385,11 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] suite_definition_information_list
-    #   An array of objects that provide summaries of information about the
-    #   suite definitions in the list.
+    #   Lists test suite information using List suite definition.
     #   @return [Array<Types::SuiteDefinitionInformation>]
     #
     # @!attribute [rw] next_token
-    #   A token used to get the next set of results.
+    #   Creates a Device Advisor test suite.
     #   @return [String]
     #
     class ListSuiteDefinitionsResponse < Struct.new(
@@ -398,21 +410,21 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] suite_definition_id
-    #   Lists the test suite runs of the specified test suite based on suite
-    #   definition Id.
+    #   Lists the runs of the specified Device Advisor test suite based on
+    #   suite definition Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Must be passed along with suiteDefinitionId. Lists the test suite
-    #   runs of the specified test suite based on suite definition version.
+    #   Lists the runs of the specified Device Advisor test suite based on
+    #   suite definition version.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at once.
+    #   MaxResults for list suite run API request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next set of results.
+    #   Next pagination token for list suite run request.
     #   @return [String]
     #
     class ListSuiteRunsRequest < Struct.new(
@@ -425,12 +437,11 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] suite_runs_list
-    #   An array of objects that provide summaries of information about the
-    #   suite runs in the list.
+    #   Lists the runs of the specified Device Advisor test suite.
     #   @return [Array<Types::SuiteRunInformation>]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next set of results.
+    #   Next pagination token for list suite run response.
     #   @return [String]
     #
     class ListSuiteRunsResponse < Struct.new(
@@ -467,6 +478,60 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTestCasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         intended_for_qualification: false,
+    #         max_results: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] intended_for_qualification
+    #   Lists all the qualification test cases in the test suite.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   Requests the test cases max results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Requests the test cases next token.
+    #   @return [String]
+    #
+    class ListTestCasesRequest < Struct.new(
+      :intended_for_qualification,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] categories
+    #   Gets the category of test case.
+    #   @return [Array<Types::TestCaseCategory>]
+    #
+    # @!attribute [rw] root_group_configuration
+    #   Gets the configuration of root test group.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] group_configuration
+    #   Gets the configuration of test group.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] next_token
+    #   Test cases next token response.
+    #   @return [String]
+    #
+    class ListTestCasesResponse < Struct.new(
+      :categories,
+      :root_group_configuration,
+      :group_configuration,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sends Resource Not Found Exception.
     #
     # @!attribute [rw] message
@@ -490,6 +555,10 @@ module Aws::IoTDeviceAdvisor
     #             thing_arn: "AmazonResourceName",
     #             certificate_arn: "AmazonResourceName",
     #           },
+    #           secondary_device: {
+    #             thing_arn: "AmazonResourceName",
+    #             certificate_arn: "AmazonResourceName",
+    #           },
     #           selected_test_list: ["UUID"],
     #         },
     #         tags: {
@@ -498,15 +567,15 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the test suite.
+    #   Request to start suite run based on suite definition Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Suite definition version of the test suite.
+    #   Request to start suite run based on suite definition version.
     #   @return [String]
     #
     # @!attribute [rw] suite_run_configuration
-    #   Suite run configuration.
+    #   Request to start suite run based on suite configuration.
     #   @return [Types::SuiteRunConfiguration]
     #
     # @!attribute [rw] tags
@@ -523,15 +592,15 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] suite_run_id
-    #   Suite Run Id of the started suite run.
+    #   Starts a Device Advisor test suite run based on suite Run Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_run_arn
-    #   Amazon resource name of the started suite run.
+    #   Starts a Device Advisor test suite run based on suite run arn.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Date (in Unix epoch time) when the suite run was created.
+    #   Starts a Device Advisor test suite run based on suite create time.
     #   @return [Time]
     #
     class StartSuiteRunResponse < Struct.new(
@@ -541,31 +610,6 @@ module Aws::IoTDeviceAdvisor
       SENSITIVE = []
       include Aws::Structure
     end
-
-    # @note When making an API call, you may pass StopSuiteRunRequest
-    #   data as a hash:
-    #
-    #       {
-    #         suite_definition_id: "UUID", # required
-    #         suite_run_id: "UUID", # required
-    #       }
-    #
-    # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the test suite run to be stopped.
-    #   @return [String]
-    #
-    # @!attribute [rw] suite_run_id
-    #   Suite run Id of the test suite run to be stopped.
-    #   @return [String]
-    #
-    class StopSuiteRunRequest < Struct.new(
-      :suite_definition_id,
-      :suite_run_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    class StopSuiteRunResponse < Aws::EmptyStructure; end
 
     # Gets Suite Definition Configuration.
     #
@@ -615,26 +659,26 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # Information about the suite definition.
+    # Get suite definition information.
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the test suite.
+    #   Get suite definition Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_name
-    #   Suite name of the test suite.
+    #   Get test suite name.
     #   @return [String]
     #
     # @!attribute [rw] default_devices
-    #   Specifies the devices under test for the test suite.
+    #   Specifies the devices under test.
     #   @return [Array<Types::DeviceUnderTest>]
     #
     # @!attribute [rw] intended_for_qualification
-    #   Specifies if the test suite is intended for qualification.
+    #   Gets the test suites which will be used for qualification.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_at
-    #   Date (in Unix epoch time) when the test suite was created.
+    #   Gets the information of when the test suite was created.
     #   @return [Time]
     #
     class SuiteDefinitionInformation < Struct.new(
@@ -657,11 +701,19 @@ module Aws::IoTDeviceAdvisor
     #           thing_arn: "AmazonResourceName",
     #           certificate_arn: "AmazonResourceName",
     #         },
+    #         secondary_device: {
+    #           thing_arn: "AmazonResourceName",
+    #           certificate_arn: "AmazonResourceName",
+    #         },
     #         selected_test_list: ["UUID"],
     #       }
     #
     # @!attribute [rw] primary_device
     #   Gets the primary device for suite run.
+    #   @return [Types::DeviceUnderTest]
+    #
+    # @!attribute [rw] secondary_device
+    #   Gets the secondary device for suite run.
     #   @return [Types::DeviceUnderTest]
     #
     # @!attribute [rw] selected_test_list
@@ -670,51 +722,52 @@ module Aws::IoTDeviceAdvisor
     #
     class SuiteRunConfiguration < Struct.new(
       :primary_device,
+      :secondary_device,
       :selected_test_list)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Information about the suite run.
+    # Get suite run information.
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the suite run.
+    #   Get suite run information based on suite definition Id.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Suite definition version of the suite run.
+    #   Get suite run information based on suite definition version.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_name
-    #   Suite definition name of the suite run.
+    #   Get suite run information based on suite definition name.
     #   @return [String]
     #
     # @!attribute [rw] suite_run_id
-    #   Suite run Id of the suite run.
+    #   Get suite run information based on suite run Id.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Date (in Unix epoch time) when the suite run was created.
+    #   Get suite run information based on time suite was created.
     #   @return [Time]
     #
     # @!attribute [rw] started_at
-    #   Date (in Unix epoch time) when the suite run was started.
+    #   Get suite run information based on start time of the run.
     #   @return [Time]
     #
     # @!attribute [rw] end_at
-    #   Date (in Unix epoch time) when the suite run ended.
+    #   Get suite run information based on end time of the run.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Status of the suite run.
+    #   Get suite run information based on test run status.
     #   @return [String]
     #
     # @!attribute [rw] passed
-    #   Number of test cases that passed in the suite run.
+    #   Get suite run information based on result of the test suite run.
     #   @return [Integer]
     #
     # @!attribute [rw] failed
-    #   Number of test cases that failed in the suite run.
+    #   Get suite run information based on result of the test suite run.
     #   @return [Integer]
     #
     class SuiteRunInformation < Struct.new(
@@ -758,6 +811,62 @@ module Aws::IoTDeviceAdvisor
     end
 
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Shows tests in a test group.
+    #
+    # @!attribute [rw] name
+    #   Shows test case name.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Shows test case configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] test
+    #   Specifies a test.
+    #   @return [Types::TestCaseDefinition]
+    #
+    class TestCase < Struct.new(
+      :name,
+      :configuration,
+      :test)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets the test case category.
+    #
+    # @!attribute [rw] name
+    #   Lists all the tests name in the specified category.
+    #   @return [String]
+    #
+    # @!attribute [rw] tests
+    #   Lists all the tests in the specified category.
+    #   @return [Array<Types::TestCase>]
+    #
+    class TestCaseCategory < Struct.new(
+      :name,
+      :tests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides test case definition.
+    #
+    # @!attribute [rw] id
+    #   Provides test case definition Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_case_version
+    #   Provides test case definition version.
+    #   @return [String]
+    #
+    class TestCaseDefinition < Struct.new(
+      :id,
+      :test_case_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Provides test case run.
     #
@@ -868,7 +977,7 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the test suite to be updated.
+    #   Updates a Device Advisor test suite with suite definition id.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_configuration
@@ -884,27 +993,29 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] suite_definition_id
-    #   Suite definition Id of the updated test suite.
+    #   Updates a Device Advisor test suite with suite UUID.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_arn
-    #   Amazon Resource name of the updated test suite.
+    #   Updates a Device Advisor test suite with Amazon Resource name.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_name
-    #   Suite definition name of the updated test suite.
+    #   Updates a Device Advisor test suite with suite definition name.
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Suite definition version of the updated test suite.
+    #   Updates a Device Advisor test suite with suite definition version.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp of when the test suite was created.
+    #   Updates a Device Advisor test suite with TimeStamp of when it was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   Timestamp of when the test suite was updated.
+    #   Updates a Device Advisor test suite with TimeStamp of when it was
+    #   updated.
     #   @return [Time]
     #
     class UpdateSuiteDefinitionResponse < Struct.new(

@@ -17,21 +17,14 @@ module Aws::PI
     DataPointsList = Shapes::ListShape.new(name: 'DataPointsList')
     DescribeDimensionKeysRequest = Shapes::StructureShape.new(name: 'DescribeDimensionKeysRequest')
     DescribeDimensionKeysResponse = Shapes::StructureShape.new(name: 'DescribeDimensionKeysResponse')
-    DetailStatus = Shapes::StringShape.new(name: 'DetailStatus')
     DimensionGroup = Shapes::StructureShape.new(name: 'DimensionGroup')
     DimensionKeyDescription = Shapes::StructureShape.new(name: 'DimensionKeyDescription')
     DimensionKeyDescriptionList = Shapes::ListShape.new(name: 'DimensionKeyDescriptionList')
-    DimensionKeyDetail = Shapes::StructureShape.new(name: 'DimensionKeyDetail')
-    DimensionKeyDetailList = Shapes::ListShape.new(name: 'DimensionKeyDetailList')
     DimensionMap = Shapes::MapShape.new(name: 'DimensionMap')
     Double = Shapes::FloatShape.new(name: 'Double')
-    ErrorString = Shapes::StringShape.new(name: 'ErrorString')
-    GetDimensionKeyDetailsRequest = Shapes::StructureShape.new(name: 'GetDimensionKeyDetailsRequest')
-    GetDimensionKeyDetailsResponse = Shapes::StructureShape.new(name: 'GetDimensionKeyDetailsResponse')
     GetResourceMetricsRequest = Shapes::StructureShape.new(name: 'GetResourceMetricsRequest')
     GetResourceMetricsResponse = Shapes::StructureShape.new(name: 'GetResourceMetricsResponse')
     ISOTimestamp = Shapes::TimestampShape.new(name: 'ISOTimestamp')
-    IdentifierString = Shapes::StringShape.new(name: 'IdentifierString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
@@ -43,16 +36,13 @@ module Aws::PI
     MetricQueryFilterMap = Shapes::MapShape.new(name: 'MetricQueryFilterMap')
     MetricQueryList = Shapes::ListShape.new(name: 'MetricQueryList')
     MetricValuesList = Shapes::ListShape.new(name: 'MetricValuesList')
-    NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
-    RequestString = Shapes::StringShape.new(name: 'RequestString')
-    RequestStringList = Shapes::ListShape.new(name: 'RequestStringList')
-    RequestedDimensionList = Shapes::ListShape.new(name: 'RequestedDimensionList')
     ResponsePartitionKey = Shapes::StructureShape.new(name: 'ResponsePartitionKey')
     ResponsePartitionKeyList = Shapes::ListShape.new(name: 'ResponsePartitionKeyList')
     ResponseResourceMetricKey = Shapes::StructureShape.new(name: 'ResponseResourceMetricKey')
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
 
     DataPoint.add_member(:timestamp, Shapes::ShapeRef.new(shape: ISOTimestamp, required: true, location_name: "Timestamp"))
     DataPoint.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Value"))
@@ -61,27 +51,27 @@ module Aws::PI
     DataPointsList.member = Shapes::ShapeRef.new(shape: DataPoint)
 
     DescribeDimensionKeysRequest.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, required: true, location_name: "ServiceType"))
-    DescribeDimensionKeysRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Identifier"))
+    DescribeDimensionKeysRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Identifier"))
     DescribeDimensionKeysRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: ISOTimestamp, required: true, location_name: "StartTime"))
     DescribeDimensionKeysRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: ISOTimestamp, required: true, location_name: "EndTime"))
-    DescribeDimensionKeysRequest.add_member(:metric, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Metric"))
+    DescribeDimensionKeysRequest.add_member(:metric, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Metric"))
     DescribeDimensionKeysRequest.add_member(:period_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "PeriodInSeconds"))
     DescribeDimensionKeysRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: DimensionGroup, required: true, location_name: "GroupBy"))
     DescribeDimensionKeysRequest.add_member(:partition_by, Shapes::ShapeRef.new(shape: DimensionGroup, location_name: "PartitionBy"))
     DescribeDimensionKeysRequest.add_member(:filter, Shapes::ShapeRef.new(shape: MetricQueryFilterMap, location_name: "Filter"))
     DescribeDimensionKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    DescribeDimensionKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDimensionKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeDimensionKeysRequest.struct_class = Types::DescribeDimensionKeysRequest
 
     DescribeDimensionKeysResponse.add_member(:aligned_start_time, Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedStartTime"))
     DescribeDimensionKeysResponse.add_member(:aligned_end_time, Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedEndTime"))
     DescribeDimensionKeysResponse.add_member(:partition_keys, Shapes::ShapeRef.new(shape: ResponsePartitionKeyList, location_name: "PartitionKeys"))
     DescribeDimensionKeysResponse.add_member(:keys, Shapes::ShapeRef.new(shape: DimensionKeyDescriptionList, location_name: "Keys"))
-    DescribeDimensionKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDimensionKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeDimensionKeysResponse.struct_class = Types::DescribeDimensionKeysResponse
 
-    DimensionGroup.add_member(:group, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Group"))
-    DimensionGroup.add_member(:dimensions, Shapes::ShapeRef.new(shape: RequestStringList, location_name: "Dimensions"))
+    DimensionGroup.add_member(:group, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Group"))
+    DimensionGroup.add_member(:dimensions, Shapes::ShapeRef.new(shape: StringList, location_name: "Dimensions"))
     DimensionGroup.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DimensionGroup.struct_class = Types::DimensionGroup
 
@@ -92,47 +82,30 @@ module Aws::PI
 
     DimensionKeyDescriptionList.member = Shapes::ShapeRef.new(shape: DimensionKeyDescription)
 
-    DimensionKeyDetail.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
-    DimensionKeyDetail.add_member(:dimension, Shapes::ShapeRef.new(shape: String, location_name: "Dimension"))
-    DimensionKeyDetail.add_member(:status, Shapes::ShapeRef.new(shape: DetailStatus, location_name: "Status"))
-    DimensionKeyDetail.struct_class = Types::DimensionKeyDetail
-
-    DimensionKeyDetailList.member = Shapes::ShapeRef.new(shape: DimensionKeyDetail)
-
-    DimensionMap.key = Shapes::ShapeRef.new(shape: RequestString)
-    DimensionMap.value = Shapes::ShapeRef.new(shape: RequestString)
-
-    GetDimensionKeyDetailsRequest.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, required: true, location_name: "ServiceType"))
-    GetDimensionKeyDetailsRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "Identifier"))
-    GetDimensionKeyDetailsRequest.add_member(:group, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Group"))
-    GetDimensionKeyDetailsRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "GroupIdentifier"))
-    GetDimensionKeyDetailsRequest.add_member(:requested_dimensions, Shapes::ShapeRef.new(shape: RequestedDimensionList, location_name: "RequestedDimensions"))
-    GetDimensionKeyDetailsRequest.struct_class = Types::GetDimensionKeyDetailsRequest
-
-    GetDimensionKeyDetailsResponse.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionKeyDetailList, location_name: "Dimensions"))
-    GetDimensionKeyDetailsResponse.struct_class = Types::GetDimensionKeyDetailsResponse
+    DimensionMap.key = Shapes::ShapeRef.new(shape: String)
+    DimensionMap.value = Shapes::ShapeRef.new(shape: String)
 
     GetResourceMetricsRequest.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, required: true, location_name: "ServiceType"))
-    GetResourceMetricsRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Identifier"))
+    GetResourceMetricsRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Identifier"))
     GetResourceMetricsRequest.add_member(:metric_queries, Shapes::ShapeRef.new(shape: MetricQueryList, required: true, location_name: "MetricQueries"))
     GetResourceMetricsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: ISOTimestamp, required: true, location_name: "StartTime"))
     GetResourceMetricsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: ISOTimestamp, required: true, location_name: "EndTime"))
     GetResourceMetricsRequest.add_member(:period_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "PeriodInSeconds"))
     GetResourceMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
-    GetResourceMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetResourceMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetResourceMetricsRequest.struct_class = Types::GetResourceMetricsRequest
 
     GetResourceMetricsResponse.add_member(:aligned_start_time, Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedStartTime"))
     GetResourceMetricsResponse.add_member(:aligned_end_time, Shapes::ShapeRef.new(shape: ISOTimestamp, location_name: "AlignedEndTime"))
     GetResourceMetricsResponse.add_member(:identifier, Shapes::ShapeRef.new(shape: String, location_name: "Identifier"))
     GetResourceMetricsResponse.add_member(:metric_list, Shapes::ShapeRef.new(shape: MetricKeyDataPointsList, location_name: "MetricList"))
-    GetResourceMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetResourceMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetResourceMetricsResponse.struct_class = Types::GetResourceMetricsResponse
 
-    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorString, location_name: "Message"))
+    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServiceError.struct_class = Types::InternalServiceError
 
-    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorString, location_name: "Message"))
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidArgumentException.struct_class = Types::InvalidArgumentException
 
     MetricKeyDataPoints.add_member(:key, Shapes::ShapeRef.new(shape: ResponseResourceMetricKey, location_name: "Key"))
@@ -141,24 +114,20 @@ module Aws::PI
 
     MetricKeyDataPointsList.member = Shapes::ShapeRef.new(shape: MetricKeyDataPoints)
 
-    MetricQuery.add_member(:metric, Shapes::ShapeRef.new(shape: RequestString, required: true, location_name: "Metric"))
+    MetricQuery.add_member(:metric, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Metric"))
     MetricQuery.add_member(:group_by, Shapes::ShapeRef.new(shape: DimensionGroup, location_name: "GroupBy"))
     MetricQuery.add_member(:filter, Shapes::ShapeRef.new(shape: MetricQueryFilterMap, location_name: "Filter"))
     MetricQuery.struct_class = Types::MetricQuery
 
-    MetricQueryFilterMap.key = Shapes::ShapeRef.new(shape: RequestString)
-    MetricQueryFilterMap.value = Shapes::ShapeRef.new(shape: RequestString)
+    MetricQueryFilterMap.key = Shapes::ShapeRef.new(shape: String)
+    MetricQueryFilterMap.value = Shapes::ShapeRef.new(shape: String)
 
     MetricQueryList.member = Shapes::ShapeRef.new(shape: MetricQuery)
 
     MetricValuesList.member = Shapes::ShapeRef.new(shape: Double)
 
-    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorString, location_name: "Message"))
+    NotAuthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     NotAuthorizedException.struct_class = Types::NotAuthorizedException
-
-    RequestStringList.member = Shapes::ShapeRef.new(shape: RequestString)
-
-    RequestedDimensionList.member = Shapes::ShapeRef.new(shape: RequestString)
 
     ResponsePartitionKey.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionMap, required: true, location_name: "Dimensions"))
     ResponsePartitionKey.struct_class = Types::ResponsePartitionKey
@@ -168,6 +137,8 @@ module Aws::PI
     ResponseResourceMetricKey.add_member(:metric, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Metric"))
     ResponseResourceMetricKey.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionMap, location_name: "Dimensions"))
     ResponseResourceMetricKey.struct_class = Types::ResponseResourceMetricKey
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
 
     # @api private
@@ -195,17 +166,6 @@ module Aws::PI
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeDimensionKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDimensionKeysResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
-      end)
-
-      api.add_operation(:get_dimension_key_details, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetDimensionKeyDetails"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetDimensionKeyDetailsRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetDimensionKeyDetailsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)

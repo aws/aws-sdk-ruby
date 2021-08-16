@@ -351,7 +351,6 @@ module Aws::CloudWatch
     #         label: "MetricLabel",
     #         return_data: false,
     #         period: 1,
-    #         account_id: "AccountId",
     #       },
     #     ],
     #     tags: [
@@ -402,8 +401,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity ` \|
-    #   `arn:aws:ssm-incidents::account-id:response-plan:response-plan-name `
+    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity `
     #
     #   Valid Values (for use with IAM roles):
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
@@ -411,8 +409,6 @@ module Aws::CloudWatch
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0`
     #   \|
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0`
-    #   \|
-    #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0`
     # @option options [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
     #   `INSUFFICIENT_DATA` state from any other state. Each action is

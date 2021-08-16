@@ -102,7 +102,6 @@ module Aws::ManagedBlockchain
     #           tags: {
     #             "TagKey" => "TagValue",
     #           },
-    #           kms_key_arn: "ArnString",
     #         },
     #       }
     #
@@ -195,7 +194,6 @@ module Aws::ManagedBlockchain
     #           tags: {
     #             "TagKey" => "TagValue",
     #           },
-    #           kms_key_arn: "ArnString",
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -906,7 +904,7 @@ module Aws::ManagedBlockchain
     #       {
     #         network_id: "ResourceIdString", # required
     #         name: "String",
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED, INACCESSIBLE_ENCRYPTION_KEY
+    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED
     #         is_owned: false,
     #         max_results: 1,
     #         next_token: "PaginationToken",
@@ -1046,7 +1044,7 @@ module Aws::ManagedBlockchain
     #       {
     #         network_id: "ResourceIdString", # required
     #         member_id: "ResourceIdString",
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, UNHEALTHY, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED, INACCESSIBLE_ENCRYPTION_KEY
+    #         status: "CREATING", # accepts CREATING, AVAILABLE, UNHEALTHY, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
     #         max_results: 1,
     #         next_token: "PaginationToken",
     #       }
@@ -1336,8 +1334,6 @@ module Aws::ManagedBlockchain
     #   * `CREATE_FAILED` - The AWS account attempted to create a member and
     #     creation failed.
     #
-    #   * `UPDATING` - The member is in the process of being updated.
-    #
     #   * `DELETING` - The member and all associated resources are in the
     #     process of being deleted. Either the AWS account that owns the
     #     member deleted it, or the member is being deleted as the result of
@@ -1347,17 +1343,6 @@ module Aws::ManagedBlockchain
     #     and all associated resources are deleted. Either the AWS account
     #     that owns the member deleted it, or the member is being deleted as
     #     the result of an `APPROVED` `PROPOSAL` to remove the member.
-    #
-    #   * `INACCESSIBLE_ENCRYPTION_KEY` - The member is impaired and might
-    #     not function as expected because it cannot access the specified
-    #     customer managed key in AWS KMS for encryption at rest. Either the
-    #     KMS key was disabled or deleted, or the grants on the key were
-    #     revoked.
-    #
-    #     The effect of disabling or deleting a key, or revoking a grant is
-    #     not immediate. The member resource might take some time to find
-    #     that the key is inaccessible. When a resource is in this state, we
-    #     recommend deleting and recreating the resource.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1385,14 +1370,6 @@ module Aws::ManagedBlockchain
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the customer managed key in AWS
-    #   Key Management Service (AWS KMS) that the member uses for encryption
-    #   at rest. If the value of this parameter is `"AWS Owned KMS Key"`,
-    #   the member uses an AWS owned KMS key for encryption. This parameter
-    #   is inherited by the nodes that this member owns.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Member AWS API Documentation
     #
     class Member < Struct.new(
@@ -1405,8 +1382,7 @@ module Aws::ManagedBlockchain
       :status,
       :creation_date,
       :tags,
-      :arn,
-      :kms_key_arn)
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1439,7 +1415,6 @@ module Aws::ManagedBlockchain
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
-    #         kms_key_arn: "ArnString",
     #       }
     #
     # @!attribute [rw] name
@@ -1475,32 +1450,6 @@ module Aws::ManagedBlockchain
     #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the customer managed key in AWS
-    #   Key Management Service (AWS KMS) to use for encryption at rest in
-    #   the member. This parameter is inherited by any nodes that this
-    #   member creates.
-    #
-    #   Use one of the following options to specify this parameter:
-    #
-    #   * **Undefined or empty string** - The member uses an AWS owned KMS
-    #     key for encryption by default.
-    #
-    #   * **A valid symmetric customer managed KMS key** - The member uses
-    #     the specified key for encryption.
-    #
-    #     Amazon Managed Blockchain doesn't support asymmetric keys. For
-    #     more information, see [Using symmetric and asymmetric keys][1] in
-    #     the *AWS Key Management Service Developer Guide*.
-    #
-    #     The following is an example of a KMS key ARN:
-    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberConfiguration AWS API Documentation
     #
     class MemberConfiguration < Struct.new(
@@ -1508,8 +1457,7 @@ module Aws::ManagedBlockchain
       :description,
       :framework_configuration,
       :log_publishing_configuration,
-      :tags,
-      :kms_key_arn)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1697,8 +1645,6 @@ module Aws::ManagedBlockchain
     #   * `CREATE_FAILED` - The AWS account attempted to create a member and
     #     creation failed.
     #
-    #   * `UPDATING` - The member is in the process of being updated.
-    #
     #   * `DELETING` - The member and all associated resources are in the
     #     process of being deleted. Either the AWS account that owns the
     #     member deleted it, or the member is being deleted as the result of
@@ -1708,17 +1654,6 @@ module Aws::ManagedBlockchain
     #     and all associated resources are deleted. Either the AWS account
     #     that owns the member deleted it, or the member is being deleted as
     #     the result of an `APPROVED` `PROPOSAL` to remove the member.
-    #
-    #   * `INACCESSIBLE_ENCRYPTION_KEY` - The member is impaired and might
-    #     not function as expected because it cannot access the specified
-    #     customer managed key in AWS Key Management Service (AWS KMS) for
-    #     encryption at rest. Either the KMS key was disabled or deleted, or
-    #     the grants on the key were revoked.
-    #
-    #     The effect of disabling or deleting a key, or revoking a grant is
-    #     not immediate. The member resource might take some time to find
-    #     that the key is inaccessible. When a resource is in this state, we
-    #     recommend deleting and recreating the resource.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -2060,39 +1995,6 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] status
     #   The status of the node.
-    #
-    #   * `CREATING` - The AWS account is in the process of creating a node.
-    #
-    #   * `AVAILABLE` - The node has been created and can participate in the
-    #     network.
-    #
-    #   * `UNHEALTHY` - The node is impaired and might not function as
-    #     expected. Amazon Managed Blockchain automatically finds nodes in
-    #     this state and tries to recover them. If a node is recoverable, it
-    #     returns to `AVAILABLE`. Otherwise, it moves to `FAILED` status.
-    #
-    #   * `CREATE_FAILED` - The AWS account attempted to create a node and
-    #     creation failed.
-    #
-    #   * `UPDATING` - The node is in the process of being updated.
-    #
-    #   * `DELETING` - The node is in the process of being deleted.
-    #
-    #   * `DELETED` - The node can no longer participate on the network.
-    #
-    #   * `FAILED` - The node is no longer functional, cannot be recovered,
-    #     and must be deleted.
-    #
-    #   * `INACCESSIBLE_ENCRYPTION_KEY` - The node is impaired and might not
-    #     function as expected because it cannot access the specified
-    #     customer managed key in AWS KMS for encryption at rest. Either the
-    #     KMS key was disabled or deleted, or the grants on the key were
-    #     revoked.
-    #
-    #     The effect of disabling or deleting a key, or revoking a grant is
-    #     not immediate. The node resource might take some time to find that
-    #     the key is inaccessible. When a resource is in this state, we
-    #     recommend deleting and recreating the resource.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -2124,16 +2026,6 @@ module Aws::ManagedBlockchain
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
-    # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the customer managed key in AWS
-    #   Key Management Service (AWS KMS) that the node uses for encryption
-    #   at rest. If the value of this parameter is `"AWS Owned KMS Key"`,
-    #   the node uses an AWS owned KMS key for encryption. The node inherits
-    #   this parameter from the member that it belongs to.
-    #
-    #   Applies only to Hyperledger Fabric.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Node AWS API Documentation
     #
     class Node < Struct.new(
@@ -2148,8 +2040,7 @@ module Aws::ManagedBlockchain
       :status,
       :creation_date,
       :tags,
-      :arn,
-      :kms_key_arn)
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

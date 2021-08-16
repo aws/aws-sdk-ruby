@@ -43,34 +43,18 @@ module Aws::S3Outposts
     #         outpost_id: "OutpostId", # required
     #         subnet_id: "SubnetId", # required
     #         security_group_id: "SecurityGroupId", # required
-    #         access_type: "Private", # accepts Private, CustomerOwnedIp
-    #         customer_owned_ipv_4_pool: "CustomerOwnedIpv4Pool",
     #       }
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the AWS Outpost.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet in the selected VPC. The endpoint subnet must
-    #   belong to the Outpost that has the Amazon S3 on Outposts
-    #   provisioned.
+    #   The ID of the subnet in the selected VPC.
     #   @return [String]
     #
     # @!attribute [rw] security_group_id
     #   The ID of the security group to use with the endpoint.
-    #   @return [String]
-    #
-    # @!attribute [rw] access_type
-    #   The type of access for the on-premise network connectivity for the
-    #   Outpost endpoint. To access the endpoint from an on-premises
-    #   network, you must specify the access type and provide the customer
-    #   owned IPv4 pool.
-    #   @return [String]
-    #
-    # @!attribute [rw] customer_owned_ipv_4_pool
-    #   The ID of the customer-owned IPv4 pool for the endpoint. IP
-    #   addresses will be allocated from this pool for the endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/CreateEndpointRequest AWS API Documentation
@@ -78,9 +62,7 @@ module Aws::S3Outposts
     class CreateEndpointRequest < Struct.new(
       :outpost_id,
       :subnet_id,
-      :security_group_id,
-      :access_type,
-      :customer_owned_ipv_4_pool)
+      :security_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -106,11 +88,11 @@ module Aws::S3Outposts
     #       }
     #
     # @!attribute [rw] endpoint_id
-    #   The ID of the endpoint.
+    #   The ID of the end point.
     #   @return [String]
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the AWS Outpost.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/DeleteEndpointRequest AWS API Documentation
@@ -122,22 +104,17 @@ module Aws::S3Outposts
       include Aws::Structure
     end
 
-    # Amazon S3 on Outposts Access Points simplify managing data access at
-    # scale for shared datasets in S3 on Outposts. S3 on Outposts uses
+    # S3 on Outposts access points simplify managing data access at scale
+    # for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses
     # endpoints to connect to Outposts buckets so that you can perform
-    # actions within your virtual private cloud (VPC). For more information,
-    # see [ Accessing S3 on Outposts using VPC only access points][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html
+    # actions within your virtual private cloud (VPC).
     #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) of the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] outposts_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the AWS Outpost.
     #   @return [String]
     #
     # @!attribute [rw] cidr_block
@@ -156,25 +133,6 @@ module Aws::S3Outposts
     #   The network interface of the endpoint.
     #   @return [Array<Types::NetworkInterface>]
     #
-    # @!attribute [rw] vpc_id
-    #   The ID of the VPC used for the endpoint.
-    #   @return [String]
-    #
-    # @!attribute [rw] subnet_id
-    #   The ID of the subnet used for the endpoint.
-    #   @return [String]
-    #
-    # @!attribute [rw] security_group_id
-    #   The ID of the security group used for the endpoint.
-    #   @return [String]
-    #
-    # @!attribute [rw] access_type
-    #   @return [String]
-    #
-    # @!attribute [rw] customer_owned_ipv_4_pool
-    #   The ID of the customer-owned IPv4 pool used for the endpoint.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -183,12 +141,7 @@ module Aws::S3Outposts
       :cidr_block,
       :status,
       :creation_time,
-      :network_interfaces,
-      :vpc_id,
-      :subnet_id,
-      :security_group_id,
-      :access_type,
-      :customer_owned_ipv_4_pool)
+      :network_interfaces)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -232,7 +185,7 @@ module Aws::S3Outposts
     end
 
     # @!attribute [rw] endpoints
-    #   Returns an array of endpoints associated with AWS Outposts.
+    #   Returns an array of endpoints associated with AWS Outpost.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] next_token

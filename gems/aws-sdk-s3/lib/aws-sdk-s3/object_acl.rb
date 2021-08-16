@@ -267,10 +267,8 @@ module Aws::S3
     #
     #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write
-    #   Allows grantee to create new objects in the bucket.
-    #
-    #   For the bucket and object owners of existing objects, also allows
-    #   deletions and overwrites of those objects.
+    #   Allows grantee to create, overwrite, and delete any object in the
+    #   bucket.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     #
@@ -280,7 +278,7 @@ module Aws::S3
     #   request. Bucket owners need not specify this parameter in their
     #   requests. For information about downloading objects from requester
     #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
-    #   in the *Amazon S3 User Guide*.
+    #   in the *Amazon S3 Developer Guide*.
     #
     #
     #

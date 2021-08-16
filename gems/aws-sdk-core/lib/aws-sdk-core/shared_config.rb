@@ -163,8 +163,6 @@ module Aws
       :ca_bundle,
       :credential_process,
       :endpoint_discovery_enabled,
-      :ec2_metadata_service_endpoint,
-      :ec2_metadata_service_endpoint_mode,
       :max_attempts,
       :retry_mode,
       :adaptive_retry_wait_to_fill,
@@ -207,7 +205,6 @@ module Aws
             'a credential_source. For assume role credentials, must '\
             'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
-          opts[:visited_profiles] ||= Set.new
           opts[:credentials] = resolve_source_profile(opts[:source_profile], opts)
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
@@ -217,7 +214,6 @@ module Aws
             opts[:external_id] ||= prof_cfg['external_id']
             opts[:serial_number] ||= prof_cfg['mfa_serial']
             opts[:profile] = opts.delete(:source_profile)
-            opts.delete(:visited_profiles)
             AssumeRoleCredentials.new(opts)
           else
             raise Errors::NoSourceProfileError,
@@ -250,21 +246,8 @@ module Aws
     end
 
     def resolve_source_profile(profile, opts = {})
-      if opts[:visited_profiles] && opts[:visited_profiles].include?(profile)
-        raise Errors::SourceProfileCircularReferenceError
-      end
-      opts[:visited_profiles].add(profile) if opts[:visited_profiles]
-
-      profile_config = @parsed_credentials[profile]
-      if @config_enabled
-        profile_config ||= @parsed_config[profile]
-      end
-
       if (creds = credentials(profile: profile))
         creds # static credentials
-      elsif profile_config && profile_config['source_profile']
-        opts.delete(:source_profile)
-        assume_role_credentials_from_config(opts.merge(profile: profile))
       elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         provider.credentials if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
@@ -291,10 +274,7 @@ module Aws
 
     def assume_role_process_credentials_from_config(profile)
       validate_profile_exists(profile)
-      credential_process = @parsed_credentials.fetch(profile, {})['credential_process']
-      if @parsed_config
-        credential_process ||= @parsed_config.fetch(profile, {})['credential_process']
-      end
+      credential_process = @parsed_config[profile]['credential_process']
       ProcessCredentials.new(credential_process) if credential_process
     end
 

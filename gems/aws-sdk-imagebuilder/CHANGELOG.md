@@ -1,41 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.28.0 (2021-08-04)
-------------------
-
-* Feature - Updated list actions to include a list of valid filters that can be used in the request.
-
-1.27.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.26.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.25.0 (2021-07-23)
-------------------
-
-* Feature - Update to documentation to reapply missing change to SSM uninstall switch default value and improve description.
-
-1.24.0 (2021-07-19)
-------------------
-
-* Feature - Documentation updates for reversal of default value for additional instance configuration SSM switch, plus improved descriptions for semantic versioning.
-
-1.23.0 (2021-07-06)
-------------------
-
-* Feature - Adds support for specifying parameters to customize components for recipes. Expands configuration of the Amazon EC2 instances that are used for building and testing images, including the ability to specify commands to run on launch, and more control over installation and removal of the SSM agent.
-
-1.22.0 (2021-05-14)
-------------------
-
-* Feature - Text-only updates for bundled documentation feedback tickets - spring 2021.
-
 1.21.0 (2021-04-02)
 ------------------
 

@@ -39,11 +39,7 @@ module Aws
     #   defaulting to 6 hours.
     # @option options [Integer] :retries (3) The number of retries for failed
     #   requests.
-    # @option options [String] :endpoint ('http://169.254.169.254') The IMDS
-    #   endpoint. This option has precedence over the :endpoint_mode.
-    # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
-    #   the instance metadata service. This is either 'IPv4'
-    #   ('http://169.254.169.254') or 'IPv6' ('http://[fd00:ec2::254]').
+    # @option options [String] :endpoint (169.254.169.254) The IMDS endpoint.
     # @option options [Integer] :port (80) The IMDS endpoint port.
     # @option options [Integer] :http_open_timeout (1) The number of seconds to
     #   wait for the connection to open.
@@ -59,8 +55,7 @@ module Aws
       @retries = options[:retries] || 3
       @backoff = backoff(options[:backoff])
 
-      endpoint_mode = options[:endpoint_mode] || 'IPv4'
-      @endpoint = resolve_endpoint(options[:endpoint], endpoint_mode)
+      @endpoint = options[:endpoint] || '169.254.169.254'
       @port = options[:port] || 80
 
       @http_open_timeout = options[:http_open_timeout] || 1
@@ -81,7 +76,7 @@ module Aws
     #   ec2_metadata.get('/latest/meta-data/instance-id')
     #   => "i-023a25f10a73a0f79"
     #
-    # @note This implementation always returns a String and will not parse any
+    # @Note This implementation always returns a String and will not parse any
     #   responses. Parsable responses may include JSON objects or directory
     #   listings, which are strings separated by line feeds (ASCII 10).
     #
@@ -98,7 +93,7 @@ module Aws
     #   listing.split(10.chr)
     #   => ["ami-id", "ami-launch-index", ...]
     #
-    # @note Unlike other services, IMDS does not have a service API model. This
+    # @Note Unlike other services, IMDS does not have a service API model. This
     #   means that we cannot confidently generate code with methods and
     #   response structures. This implementation ensures that new IMDS features
     #   are always supported by being deployed to the instance and does not
@@ -120,19 +115,6 @@ module Aws
     end
 
     private
-
-    def resolve_endpoint(endpoint, endpoint_mode)
-      return endpoint if endpoint
-
-      case endpoint_mode.downcase
-      when 'ipv4' then 'http://169.254.169.254'
-      when 'ipv6' then 'http://[fd00:ec2::254]'
-      else
-        raise ArgumentError,
-              ':endpoint_mode is not valid, expected IPv4 or IPv6, '\
-              "got: #{endpoint_mode}"
-      end
-    end
 
     def fetch_token
       open_connection do |conn|
@@ -181,8 +163,7 @@ module Aws
     end
 
     def open_connection
-      uri = URI.parse(@endpoint)
-      http = Net::HTTP.new(uri.hostname || @endpoint, @port || uri.port)
+      http = Net::HTTP.new(@endpoint, @port, nil)
       http.open_timeout = @http_open_timeout
       http.read_timeout = @http_read_timeout
       http.set_debug_output(@http_debug_output) if @http_debug_output

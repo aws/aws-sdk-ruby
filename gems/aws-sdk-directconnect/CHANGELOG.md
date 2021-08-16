@@ -1,26 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.45.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.44.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.43.0 (2021-07-19)
-------------------
-
-* Feature - Documentation updates for directconnect
-
-1.42.0 (2021-07-13)
-------------------
-
-* Feature - This release adds a new filed named awsLogicalDeviceId that it displays the AWS Direct Connect endpoint which terminates a physical connection's BGP Sessions.
-
 1.41.0 (2021-03-31)
 ------------------
 

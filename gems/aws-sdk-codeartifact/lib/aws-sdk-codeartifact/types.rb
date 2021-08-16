@@ -1169,8 +1169,8 @@ module Aws::CodeArtifact
     end
 
     # Information about a domain, including its name, Amazon Resource Name
-    # (ARN), and status. The [ListDomains][1] operation returns a list of
-    # `DomainSummary` objects.
+    # (ARN), and status. The [ `ListDomains` ][1] operation returns a list
+    # of `DomainSummary` objects.
     #
     #
     #
@@ -1863,7 +1863,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] assets
-    #   The returned list of [AssetSummary][1] objects.
+    #   The returned list of [ `AssetSummary` ][1] objects.
     #
     #
     #
@@ -2009,7 +2009,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] dependencies
-    #   The returned list of [PackageDependency][1] objects.
+    #   The returned list of [ `PackageDependency` ][1] objects.
     #
     #
     #
@@ -2173,7 +2173,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] versions
-    #   The returned list of [PackageVersionSummary][1] objects.
+    #   The returned list of [ `PackageVersionSummary` ][1] objects.
     #
     #
     #
@@ -2280,7 +2280,7 @@ module Aws::CodeArtifact
     end
 
     # @!attribute [rw] packages
-    #   The list of returned [PackageSummary][1] objects.
+    #   The list of returned [ `PackageSummary` ][1] objects.
     #
     #
     #
@@ -2409,7 +2409,7 @@ module Aws::CodeArtifact
     end
 
     # @!attribute [rw] repositories
-    #   The returned list of [RepositorySummary][1] objects.
+    #   The returned list of [ `RepositorySummary` ][1] objects.
     #
     #
     #
@@ -2505,7 +2505,7 @@ module Aws::CodeArtifact
     end
 
     # Details about a package, including its format, namespace, and name.
-    # The [ListPackages][1] operation returns a list of `PackageSummary`
+    # The [ `ListPackages` ][1] operation returns a list of `PackageSummary`
     # objects.
     #
     #
@@ -2682,7 +2682,7 @@ module Aws::CodeArtifact
     end
 
     # Details about a package version, including its status, version, and
-    # revision. The [ListPackageVersions][1] operation returns a list of
+    # revision. The [ `ListPackageVersions` ][1] operation returns a list of
     # `PackageVersionSummary` objects.
     #
     #
@@ -2935,7 +2935,7 @@ module Aws::CodeArtifact
     end
 
     # Details about a repository, including its Amazon Resource Name (ARN),
-    # description, and domain information. The [ListRepositories][1]
+    # description, and domain information. The [ `ListRepositories` ][1]
     # operation returns a list of `RepositorySummary` objects.
     #
     #
@@ -3381,8 +3381,8 @@ module Aws::CodeArtifact
     end
 
     # Information about an upstream repository. A list of
-    # `UpstreamRepository` objects is an input parameter to
-    # [CreateRepository][1] and [UpdateRepository][2].
+    # `UpstreamRepository` objects is an input parameter to [
+    # `CreateRepository` ][1] and [ `UpdateRepository` ][2].
     #
     #
     #

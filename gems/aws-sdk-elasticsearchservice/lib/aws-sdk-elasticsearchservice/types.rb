@@ -669,25 +669,6 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
-    # Specifies settings for cold storage.
-    #
-    # @note When making an API call, you may pass ColdStorageOptions
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #       }
-    #
-    # @!attribute [rw] enabled
-    #   True to enable cold storage for an Elasticsearch domain.
-    #   @return [Boolean]
-    #
-    class ColdStorageOptions < Struct.new(
-      :enabled)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # A map from an ` ElasticsearchVersion ` to a list of compatible `
     # ElasticsearchVersion ` s to which the domain can be upgraded.
     #
@@ -730,9 +711,6 @@ module Aws::ElasticsearchService
     #           warm_enabled: false,
     #           warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
     #           warm_count: 1,
-    #           cold_storage_options: {
-    #             enabled: false, # required
-    #           },
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,
@@ -2088,9 +2066,6 @@ module Aws::ElasticsearchService
     #         warm_enabled: false,
     #         warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
     #         warm_count: 1,
-    #         cold_storage_options: {
-    #           enabled: false, # required
-    #         },
     #       }
     #
     # @!attribute [rw] instance_type
@@ -2146,11 +2121,6 @@ module Aws::ElasticsearchService
     #   The number of warm nodes in the cluster.
     #   @return [Integer]
     #
-    # @!attribute [rw] cold_storage_options
-    #   Specifies the `ColdStorageOptions` configuration for an
-    #   Elasticsearch domain.
-    #   @return [Types::ColdStorageOptions]
-    #
     class ElasticsearchClusterConfig < Struct.new(
       :instance_type,
       :instance_count,
@@ -2161,8 +2131,7 @@ module Aws::ElasticsearchService
       :dedicated_master_count,
       :warm_enabled,
       :warm_type,
-      :warm_count,
-      :cold_storage_options)
+      :warm_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4153,9 +4122,6 @@ module Aws::ElasticsearchService
     #           warm_enabled: false,
     #           warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
     #           warm_count: 1,
-    #           cold_storage_options: {
-    #             enabled: false, # required
-    #           },
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,

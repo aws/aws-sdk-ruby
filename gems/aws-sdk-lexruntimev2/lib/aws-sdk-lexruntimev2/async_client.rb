@@ -12,6 +12,7 @@ if RUBY_VERSION >= '2.1'
     require 'http/2'
   rescue LoadError; end
 end
+require 'seahorse/client/plugins/content_length.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
@@ -41,6 +42,7 @@ module Aws::LexRuntimeV2
 
     set_api(ClientApi::API)
 
+    add_plugin(Seahorse::Client::Plugins::ContentLength)
     add_plugin(Aws::Plugins::CredentialsConfiguration)
     add_plugin(Aws::Plugins::Logging)
     add_plugin(Aws::Plugins::ParamConverter)
@@ -237,28 +239,9 @@ module Aws::LexRuntimeV2
 
     # Starts an HTTP/2 bidirectional event stream that enables you to send
     # audio, text, or DTMF input in real time. After your application starts
-    # a conversation, users send input to Amazon Lex V2 as a stream of
-    # events. Amazon Lex V2 processes the incoming events and responds with
-    # streaming text or audio events.
-    #
-    # Audio input must be in the following format: `audio/lpcm
-    # sample-rate=8000 sample-size-bits=16 channel-count=1;
-    # is-big-endian=false`.
-    #
-    # The `StartConversation` operation is supported only in the following
-    # SDKs:
-    #
-    # * [AWS SDK for C++][1]
-    #
-    # * [AWS SDK for Java V2][2]
-    #
-    # * [AWS SDK for Ruby V3][3]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/goto/SdkForCpp/runtime.lex.v2-2020-08-07/StartConversation
-    # [2]: https://docs.aws.amazon.com/goto/SdkForJavaV2/runtime.lex.v2-2020-08-07/StartConversation
-    # [3]: https://docs.aws.amazon.com/goto/SdkForRubyV3/runtime.lex.v2-2020-08-07/StartConversation
+    # a conversation, users send input to Amazon Lex as a stream of events.
+    # Amazon Lex processes the incoming events and responds with streaming
+    # text or audio events.
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot to process the request.
@@ -273,7 +256,7 @@ module Aws::LexRuntimeV2
     #   The identifier of the user session that is having the conversation.
     #
     # @option params [String] :conversation_mode
-    #   The conversation type that you are using the Amazon Lex V2. If the
+    #   The conversation type that you are using the Amazon Lex. If the
     #   conversation mode is `AUDIO` you can send both audio and DTMF
     #   information. If the mode is `TEXT` you can only send text.
     #
@@ -471,9 +454,6 @@ module Aws::LexRuntimeV2
     #   event.interpretations[0].intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   event.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   event.interpretations[0].intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   event.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
-    #   event.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
-    #   event.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
     #   event.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
     #   event.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   event.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot"
@@ -484,9 +464,6 @@ module Aws::LexRuntimeV2
     #   event.session_state.intent.slots["NonEmptyString"].value.interpreted_value #=> String
     #   event.session_state.intent.slots["NonEmptyString"].value.resolved_values #=> Array
     #   event.session_state.intent.slots["NonEmptyString"].value.resolved_values[0] #=> String
-    #   event.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
-    #   event.session_state.intent.slots["NonEmptyString"].values #=> Array
-    #   event.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
     #   event.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
     #   event.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   event.session_state.active_contexts #=> Array
@@ -590,7 +567,7 @@ module Aws::LexRuntimeV2
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

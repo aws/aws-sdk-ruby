@@ -48,6 +48,6 @@ require_relative 'aws-sdk-imagebuilder/customizations'
 # @!group service
 module Aws::Imagebuilder
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.21.0'
 
 end

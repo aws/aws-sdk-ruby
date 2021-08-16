@@ -62,8 +62,6 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ThrottlingException"},
-        {"shape":"DeviceOfflineException"},
-        {"shape":"DeviceRetiredException"},
         {"shape":"InternalServiceException"},
         {"shape":"ValidationException"}
       ]
@@ -255,7 +253,7 @@
     },
     "CreateQuantumTaskRequestDeviceParametersString":{
       "type":"string",
-      "max":48000,
+      "max":2048,
       "min":1
     },
     "CreateQuantumTaskRequestOutputS3BucketString":{
@@ -296,23 +294,11 @@
       },
       "exception":true
     },
-    "DeviceRetiredException":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"String"}
-      },
-      "error":{
-        "httpStatusCode":410,
-        "senderFault":true
-      },
-      "exception":true
-    },
     "DeviceStatus":{
       "type":"string",
       "enum":[
         "ONLINE",
-        "OFFLINE",
-        "RETIRED"
+        "OFFLINE"
       ]
     },
     "DeviceSummary":{

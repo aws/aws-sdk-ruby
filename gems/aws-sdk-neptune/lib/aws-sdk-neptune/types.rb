@@ -301,12 +301,12 @@ module Aws::Neptune
     #
     #   * Must specify a valid DB cluster parameter group.
     #
-    #   * If the source DB cluster parameter group is in the same Amazon
-    #     Region as the copy, specify a valid DB parameter group identifier,
-    #     for example `my-db-cluster-param-group`, or a valid ARN.
+    #   * If the source DB cluster parameter group is in the same AWS Region
+    #     as the copy, specify a valid DB parameter group identifier, for
+    #     example `my-db-cluster-param-group`, or a valid ARN.
     #
-    #   * If the source DB parameter group is in a different Amazon Region
-    #     than the copy, specify a valid DB cluster parameter group ARN, for
+    #   * If the source DB parameter group is in a different AWS Region than
+    #     the copy, specify a valid DB cluster parameter group ARN, for
     #     example
     #     `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
     #
@@ -388,6 +388,8 @@ module Aws::Neptune
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
     #
+    #   You can't copy from one AWS Region to another.
+    #
     #   Constraints:
     #
     #   * Must specify a valid system snapshot in the "available" state.
@@ -413,23 +415,22 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot.
-    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
+    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
+    #   KMS key alias for the KMS encryption key.
     #
-    #   If you copy an encrypted DB cluster snapshot from your Amazon
-    #   account, you can specify a value for `KmsKeyId` to encrypt the copy
-    #   with a new KMS encryption key. If you don't specify a value for
+    #   If you copy an encrypted DB cluster snapshot from your AWS account,
+    #   you can specify a value for `KmsKeyId` to encrypt the copy with a
+    #   new KMS encryption key. If you don't specify a value for
     #   `KmsKeyId`, then the copy of the DB cluster snapshot is encrypted
     #   with the same KMS key as the source DB cluster snapshot.
     #
     #   If you copy an encrypted DB cluster snapshot that is shared from
-    #   another Amazon account, then you must specify a value for
-    #   `KmsKeyId`.
+    #   another AWS account, then you must specify a value for `KmsKeyId`.
     #
-    #   KMS encryption keys are specific to the Amazon Region that they are
-    #   created in, and you can't use encryption keys from one Amazon
-    #   Region in another Amazon Region.
+    #   KMS encryption keys are specific to the AWS Region that they are
+    #   created in, and you can't use encryption keys from one AWS Region
+    #   in another AWS Region.
     #
     #   You cannot encrypt an unencrypted DB cluster snapshot when you copy
     #   it. If you try to copy an unencrypted DB cluster snapshot and
@@ -717,7 +718,6 @@ module Aws::Neptune
     #         availability_zones: ["String"],
     #         backup_retention_period: 1,
     #         character_set_name: "String",
-    #         copy_tags_to_snapshot: false,
     #         database_name: "String",
     #         db_cluster_identifier: "String", # required
     #         db_cluster_parameter_group_name: "String",
@@ -768,11 +768,6 @@ module Aws::Neptune
     # @!attribute [rw] character_set_name
     #   *(Not supported by Neptune)*
     #   @return [String]
-    #
-    # @!attribute [rw] copy_tags_to_snapshot
-    #   *If set to `true`, tags are copied to any snapshot of the DB cluster
-    #   that is created.*
-    #   @return [Boolean]
     #
     # @!attribute [rw] database_name
     #   The name for your database of up to 64 alpha-numeric characters. If
@@ -841,11 +836,22 @@ module Aws::Neptune
     #   @return [Integer]
     #
     # @!attribute [rw] master_username
-    #   Not supported by Neptune.
+    #   The name of the master user for the DB cluster.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 16 letters or numbers.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot be a reserved word for the chosen database engine.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   Not supported by Neptune.
+    #   The password for the master database user. This password can contain
+    #   any printable ASCII character except "/", """, or "@".
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
     #   @return [String]
     #
     # @!attribute [rw] option_group_name
@@ -858,9 +864,9 @@ module Aws::Neptune
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each Amazon Region. To see the time blocks
-    #   available, see [ Adjusting the Preferred Maintenance Window][1] in
-    #   the *Amazon Neptune User Guide.*
+    #   block of time for each AWS Region. To see the time blocks available,
+    #   see [ Adjusting the Preferred Maintenance Window][1] in the *Amazon
+    #   Neptune User Guide.*
     #
     #   Constraints:
     #
@@ -884,8 +890,8 @@ module Aws::Neptune
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each Amazon Region, occurring on a random day of
-    #   the week. To see the time blocks available, see [ Adjusting the
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week. To see the time blocks available, see [ Adjusting the
     #   Preferred Maintenance Window][1] in the *Amazon Neptune User Guide.*
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
@@ -911,13 +917,13 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon KMS key identifier for an encrypted DB cluster.
+    #   The AWS KMS key identifier for an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB cluster with the same
-    #   Amazon account that owns the KMS encryption key used to encrypt the
-    #   new DB cluster, then you can use the KMS key alias instead of the
-    #   ARN for the KMS encryption key.
+    #   encryption key. If you are creating a DB cluster with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   cluster, then you can use the KMS key alias instead of the ARN for
+    #   the KMS encryption key.
     #
     #   If an encryption key is not specified in `KmsKeyId`\:
     #
@@ -930,14 +936,14 @@ module Aws::Neptune
     #     `ReplicationSourceIdentifier` is not specified, then Amazon
     #     Neptune will use your default encryption key.
     #
-    #   Amazon KMS creates the default encryption key for your Amazon
-    #   account. Your Amazon account has a different default encryption key
-    #   for each Amazon Region.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
     #
     #   If you create a Read Replica of an encrypted DB cluster in another
-    #   Amazon Region, you must set `KmsKeyId` to a KMS key ID that is valid
-    #   in the destination Amazon Region. This key is used to encrypt the
-    #   Read Replica in that Amazon Region.
+    #   AWS Region, you must set `KmsKeyId` to a KMS key ID that is valid in
+    #   the destination AWS Region. This key is used to encrypt the Read
+    #   Replica in that AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] pre_signed_url
@@ -945,11 +951,7 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
-    #   If set to `true`, enables Amazon Identity and Access Management
-    #   (IAM) authentication for the entire DB cluster (this cannot be set
-    #   at an instance level).
-    #
-    #   Default: `false`.
+    #   Not supported by Neptune.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
@@ -974,7 +976,6 @@ module Aws::Neptune
       :availability_zones,
       :backup_retention_period,
       :character_set_name,
-      :copy_tags_to_snapshot,
       :database_name,
       :db_cluster_identifier,
       :db_cluster_parameter_group_name,
@@ -1233,13 +1234,20 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   Not supported by Neptune.
+    #   The amount of storage (in gibibytes) to allocate for the DB
+    #   instance.
+    #
+    #   Type: Integer
+    #
+    #   Not applicable. Neptune cluster volumes automatically grow as the
+    #   amount of data in your database increases, though you are only
+    #   charged for the space that you use in a Neptune cluster volume.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_class
     #   The compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all
-    #   Amazon Regions.
+    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   Regions.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -1249,11 +1257,14 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] master_username
-    #   Not supported by Neptune.
+    #   The name for the master user. Not used.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   Not supported by Neptune.
+    #   The password for the master user. The password can include any
+    #   printable ASCII character except "/", """, or "@".
+    #
+    #   Not used.
     #   @return [String]
     #
     # @!attribute [rw] db_security_groups
@@ -1278,13 +1289,13 @@ module Aws::Neptune
     #   The EC2 Availability Zone that the DB instance is created in
     #
     #   Default: A random, system-chosen Availability Zone in the
-    #   endpoint's Amazon Region.
+    #   endpoint's AWS Region.
     #
     #   Example: `us-east-1d`
     #
     #   Constraint: The AvailabilityZone parameter can't be specified if
     #   the MultiAZ parameter is set to `true`. The specified Availability
-    #   Zone must be in the same Amazon Region as the current endpoint.
+    #   Zone must be in the same AWS Region as the current endpoint.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -1300,8 +1311,8 @@ module Aws::Neptune
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each Amazon Region, occurring on a random day of
-    #   the week.
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1437,22 +1448,22 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon KMS key identifier for an encrypted DB instance.
+    #   The AWS KMS key identifier for an encrypted DB instance.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB instance with the same
-    #   Amazon account that owns the KMS encryption key used to encrypt the
-    #   new DB instance, then you can use the KMS key alias instead of the
-    #   ARN for the KM encryption key.
+    #   encryption key. If you are creating a DB instance with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   instance, then you can use the KMS key alias instead of the ARN for
+    #   the KM encryption key.
     #
     #   Not applicable. The KMS key identifier is managed by the DB cluster.
     #   For more information, see CreateDBCluster.
     #
     #   If the `StorageEncrypted` parameter is true, and you do not specify
     #   a value for the `KmsKeyId` parameter, then Amazon Neptune will use
-    #   your default encryption key. Amazon KMS creates the default
-    #   encryption key for your Amazon account. Your Amazon account has a
-    #   different default encryption key for each Amazon Region.
+    #   your default encryption key. AWS KMS creates the default encryption
+    #   key for your AWS account. Your AWS account has a different default
+    #   encryption key for each AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -1504,7 +1515,10 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
-    #   Not supported by Neptune (ignored).
+    #   True to enable AWS Identity and Access Management (IAM)
+    #   authentication for Neptune.
+    #
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_performance_insights
@@ -1862,7 +1876,7 @@ module Aws::Neptune
     #   @return [Integer]
     #
     # @!attribute [rw] character_set_name
-    #   Not supported by Neptune.
+    #   *(Not supported by Neptune)*
     #   @return [String]
     #
     # @!attribute [rw] database_name
@@ -1945,11 +1959,11 @@ module Aws::Neptune
     #   @return [Integer]
     #
     # @!attribute [rw] master_username
-    #   Not supported by Neptune.
+    #   Contains the master username for the DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_option_group_memberships
-    #   Not supported by Neptune.
+    #   *(Not supported by Neptune)*
     #   @return [Array<Types::DBClusterOptionGroupStatus>]
     #
     # @!attribute [rw] preferred_backup_window
@@ -1991,14 +2005,14 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   If `StorageEncrypted` is true, the Amazon KMS key identifier for the
+    #   If `StorageEncrypted` is true, the AWS KMS key identifier for the
     #   encrypted DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_resource_id
-    #   The Amazon Region-unique, immutable identifier for the DB cluster.
-    #   This identifier is found in Amazon CloudTrail log entries whenever
-    #   the Amazon KMS key for the DB cluster is accessed.
+    #   The AWS Region-unique, immutable identifier for the DB cluster. This
+    #   identifier is found in AWS CloudTrail log entries whenever the AWS
+    #   KMS key for the DB cluster is accessed.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_arn
@@ -2006,15 +2020,15 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] associated_roles
-    #   Provides a list of the Amazon Identity and Access Management (IAM)
+    #   Provides a list of the AWS Identity and Access Management (IAM)
     #   roles that are associated with the DB cluster. IAM roles that are
     #   associated with a DB cluster grant permission for the DB cluster to
-    #   access other Amazon services on your behalf.
+    #   access other AWS services on your behalf.
     #   @return [Array<Types::DBClusterRole>]
     #
     # @!attribute [rw] iam_database_authentication_enabled
-    #   True if mapping of Amazon Identity and Access Management (IAM)
-    #   accounts to database accounts is enabled, and otherwise false.
+    #   True if mapping of AWS Identity and Access Management (IAM) accounts
+    #   to database accounts is enabled, and otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] clone_group_id
@@ -2026,11 +2040,6 @@ module Aws::Neptune
     #   Coordinated Time (UTC).
     #   @return [Time]
     #
-    # @!attribute [rw] copy_tags_to_snapshot
-    #   *If set to `true`, tags are copied to any snapshot of the DB cluster
-    #   that is created.*
-    #   @return [Boolean]
-    #
     # @!attribute [rw] enabled_cloudwatch_logs_exports
     #   A list of log types that this DB cluster is configured to export to
     #   CloudWatch Logs.
@@ -2041,14 +2050,6 @@ module Aws::Neptune
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] cross_account_clone
-    #   If set to `true`, the DB cluster can be cloned across accounts.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] automatic_restart_time
-    #   Time at which the DB cluster will be automatically restarted.
-    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster AWS API Documentation
     #
@@ -2088,11 +2089,8 @@ module Aws::Neptune
       :iam_database_authentication_enabled,
       :clone_group_id,
       :cluster_create_time,
-      :copy_tags_to_snapshot,
       :enabled_cloudwatch_logs_exports,
-      :deletion_protection,
-      :cross_account_clone,
-      :automatic_restart_time)
+      :deletion_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2284,14 +2282,14 @@ module Aws::Neptune
     #
     class DBClusterNotFoundFault < Aws::EmptyStructure; end
 
-    # Not supported by Neptune.
+    # Contains status information for a DB cluster option group.
     #
     # @!attribute [rw] db_cluster_option_group_name
-    #   Not supported by Neptune.
+    #   Specifies the name of the DB cluster option group.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Not supported by Neptune.
+    #   Specifies the status of the DB cluster option group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterOptionGroupStatus AWS API Documentation
@@ -2415,7 +2413,7 @@ module Aws::Neptune
     #
     class DBClusterQuotaExceededFault < Aws::EmptyStructure; end
 
-    # Describes an Amazon Identity and Access Management (IAM) role that is
+    # Describes an AWS Identity and Access Management (IAM) role that is
     # associated with a DB cluster.
     #
     # @!attribute [rw] role_arn
@@ -2428,20 +2426,20 @@ module Aws::Neptune
     #   cluster. The Status property returns one of the following values:
     #
     #   * `ACTIVE` - the IAM role ARN is associated with the DB cluster and
-    #     can be used to access other Amazon services on your behalf.
+    #     can be used to access other AWS services on your behalf.
     #
     #   * `PENDING` - the IAM role ARN is being associated with the DB
     #     cluster.
     #
     #   * `INVALID` - the IAM role ARN is associated with the DB cluster,
     #     but the DB cluster is unable to assume the IAM role in order to
-    #     access other Amazon services on your behalf.
+    #     access other AWS services on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] feature_name
-    #   The name of the feature associated with the Amazon Identity and
-    #   Access Management (IAM) role. For the list of supported feature
-    #   names, see DBEngineVersion.
+    #   The name of the feature associated with the AWS Identity and Access
+    #   Management (IAM) role. For the list of supported feature names, see
+    #   DBEngineVersion.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRole AWS API Documentation
@@ -2541,7 +2539,7 @@ module Aws::Neptune
     #   @return [Time]
     #
     # @!attribute [rw] master_username
-    #   Not supported by Neptune.
+    #   Provides the master username for the DB cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -2567,7 +2565,7 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   If `StorageEncrypted` is true, the Amazon KMS key identifier for the
+    #   If `StorageEncrypted` is true, the AWS KMS key identifier for the
     #   encrypted DB cluster snapshot.
     #   @return [String]
     #
@@ -2582,8 +2580,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
-    #   True if mapping of Amazon Identity and Access Management (IAM)
-    #   accounts to database accounts is enabled, and otherwise false.
+    #   True if mapping of AWS Identity and Access Management (IAM) accounts
+    #   to database accounts is enabled, and otherwise false.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshot AWS API Documentation
@@ -2622,14 +2620,14 @@ module Aws::Neptune
     # Contains the name and values of a manual DB cluster snapshot
     # attribute.
     #
-    # Manual DB cluster snapshot attributes are used to authorize other
-    # Amazon accounts to restore a manual DB cluster snapshot. For more
+    # Manual DB cluster snapshot attributes are used to authorize other AWS
+    # accounts to restore a manual DB cluster snapshot. For more
     # information, see the ModifyDBClusterSnapshotAttribute API action.
     #
     # @!attribute [rw] attribute_name
     #   The name of the manual DB cluster snapshot attribute.
     #
-    #   The attribute named `restore` refers to the list of Amazon accounts
+    #   The attribute named `restore` refers to the list of AWS accounts
     #   that have permission to copy or restore the manual DB cluster
     #   snapshot. For more information, see the
     #   ModifyDBClusterSnapshotAttribute API action.
@@ -2639,10 +2637,10 @@ module Aws::Neptune
     #   The value(s) for the manual DB cluster snapshot attribute.
     #
     #   If the `AttributeName` field is set to `restore`, then this element
-    #   returns a list of IDs of the Amazon accounts that are authorized to
+    #   returns a list of IDs of the AWS accounts that are authorized to
     #   copy or restore the manual DB cluster snapshot. If a value of `all`
     #   is in the list, then the manual DB cluster snapshot is public and
-    #   available for any Amazon account to copy or restore.
+    #   available for any AWS account to copy or restore.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshotAttribute AWS API Documentation
@@ -2657,9 +2655,9 @@ module Aws::Neptune
     # Contains the results of a successful call to the
     # DescribeDBClusterSnapshotAttributes API action.
     #
-    # Manual DB cluster snapshot attributes are used to authorize other
-    # Amazon accounts to copy or restore a manual DB cluster snapshot. For
-    # more information, see the ModifyDBClusterSnapshotAttribute API action.
+    # Manual DB cluster snapshot attributes are used to authorize other AWS
+    # accounts to copy or restore a manual DB cluster snapshot. For more
+    # information, see the ModifyDBClusterSnapshotAttribute API action.
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
     #   The identifier of the manual DB cluster snapshot that the attributes
@@ -2826,7 +2824,7 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] master_username
-    #   Not supported by Neptune.
+    #   Contains the master username for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] db_name
@@ -2838,7 +2836,7 @@ module Aws::Neptune
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] allocated_storage
-    #   Not supported by Neptune.
+    #   Specifies the allocated storage size specified in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_create_time
@@ -2986,9 +2984,9 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] dbi_resource_id
-    #   The Amazon Region-unique, immutable identifier for the DB instance.
-    #   This identifier is found in Amazon CloudTrail log entries whenever
-    #   the Amazon KMS key for the DB instance is accessed.
+    #   The AWS Region-unique, immutable identifier for the DB instance.
+    #   This identifier is found in AWS CloudTrail log entries whenever the
+    #   AWS KMS key for the DB instance is accessed.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
@@ -3035,8 +3033,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
-    #   True if Amazon Identity and Access Management (IAM) authentication
-    #   is enabled, and otherwise false.
+    #   True if AWS Identity and Access Management (IAM) authentication is
+    #   enabled, and otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_enabled
@@ -4100,7 +4098,7 @@ module Aws::Neptune
     #   DescribeDBClusterSnapshotAttributes API action.
     #
     #   Manual DB cluster snapshot attributes are used to authorize other
-    #   Amazon accounts to copy or restore a manual DB cluster snapshot. For
+    #   AWS accounts to copy or restore a manual DB cluster snapshot. For
     #   more information, see the ModifyDBClusterSnapshotAttribute API
     #   action.
     #   @return [Types::DBClusterSnapshotAttributesResult]
@@ -4165,13 +4163,13 @@ module Aws::Neptune
     #   of the following values:
     #
     #   * `automated` - Return all DB cluster snapshots that have been
-    #     automatically taken by Amazon Neptune for my Amazon account.
+    #     automatically taken by Amazon Neptune for my AWS account.
     #
     #   * `manual` - Return all DB cluster snapshots that have been taken by
     #     my AWS account.
     #
     #   * `shared` - Return all manual DB cluster snapshots that have been
-    #     shared to my Amazon account.
+    #     shared to my AWS account.
     #
     #   * `public` - Return all DB cluster snapshots that have been marked
     #     as public.
@@ -4213,19 +4211,19 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] include_shared
-    #   True to include shared manual DB cluster snapshots from other Amazon
+    #   True to include shared manual DB cluster snapshots from other AWS
     #   accounts that this AWS account has been given permission to copy or
     #   restore, and otherwise false. The default is `false`.
     #
-    #   You can give an Amazon account permission to restore a manual DB
-    #   cluster snapshot from another Amazon account by the
+    #   You can give an AWS account permission to restore a manual DB
+    #   cluster snapshot from another AWS account by the
     #   ModifyDBClusterSnapshotAttribute API action.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_public
     #   True to include manual DB cluster snapshots that are public and can
-    #   be copied or restored by any Amazon account, and otherwise false.
-    #   The default is `false`. The default is false.
+    #   be copied or restored by any AWS account, and otherwise false. The
+    #   default is `false`. The default is false.
     #
     #   You can share a manual DB cluster snapshot as public by using the
     #   ModifyDBClusterSnapshotAttribute API action.
@@ -4285,9 +4283,9 @@ module Aws::Neptune
     #   * `engine` - Accepts an engine name (such as `neptune`), and
     #     restricts the results list to DB clusters created by that engine.
     #
-    #   For example, to invoke this API from the Amazon CLI and filter so
-    #   that only Neptune DB clusters are returned, you could use the
-    #   following command:
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB clusters are returned, you could use the following
+    #   command:
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -4454,9 +4452,9 @@ module Aws::Neptune
     #   * `engine` - Accepts an engine name (such as `neptune`), and
     #     restricts the results list to DB instances created by that engine.
     #
-    #   For example, to invoke this API from the Amazon CLI and filter so
-    #   that only Neptune DB instances are returned, you could use the
-    #   following command:
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB instances are returned, you could use the following
+    #   command:
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -5374,7 +5372,7 @@ module Aws::Neptune
     # DescribeEventSubscriptions action.
     #
     # @!attribute [rw] customer_aws_id
-    #   The Amazon customer account associated with the event notification
+    #   The AWS customer account associated with the event notification
     #   subscription.
     #   @return [String]
     #
@@ -5866,7 +5864,6 @@ module Aws::Neptune
     #         },
     #         engine_version: "String",
     #         deletion_protection: false,
-    #         copy_tags_to_snapshot: false,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -5902,12 +5899,13 @@ module Aws::Neptune
     #   the DB cluster. If this parameter is set to `false`, changes to the
     #   DB cluster are applied during the next maintenance window.
     #
-    #   The `ApplyImmediately` parameter only affects
-    #   `NewDBClusterIdentifier` values. If you set the `ApplyImmediately`
-    #   parameter value to false, then changes to `NewDBClusterIdentifier`
-    #   values are applied during the next maintenance window. All other
-    #   changes are applied immediately, regardless of the value of the
-    #   `ApplyImmediately` parameter.
+    #   The `ApplyImmediately` parameter only affects the
+    #   `NewDBClusterIdentifier` and `MasterUserPassword` values. If you set
+    #   the `ApplyImmediately` parameter value to false, then changes to the
+    #   `NewDBClusterIdentifier` and `MasterUserPassword` values are applied
+    #   during the next maintenance window. All other changes are applied
+    #   immediately, regardless of the value of the `ApplyImmediately`
+    #   parameter.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -5943,11 +5941,15 @@ module Aws::Neptune
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
-    #   Not supported by Neptune.
+    #   The new password for the master database user. This password can
+    #   contain any printable ASCII character except "/", """, or
+    #   "@".
+    #
+    #   Constraints: Must contain from 8 to 41 characters.
     #   @return [String]
     #
     # @!attribute [rw] option_group_name
-    #   *Not supported by Neptune.*
+    #   *(Not supported by Neptune)*
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
@@ -5956,7 +5958,7 @@ module Aws::Neptune
     #   parameter.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each Amazon Region.
+    #   block of time for each AWS Region.
     #
     #   Constraints:
     #
@@ -5976,8 +5978,8 @@ module Aws::Neptune
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each Amazon Region, occurring on a random day of
-    #   the week.
+    #   block of time for each AWS Region, occurring on a random day of the
+    #   week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -5985,8 +5987,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
-    #   True to enable mapping of Amazon Identity and Access Management
-    #   (IAM) accounts to database accounts, and otherwise false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -6017,11 +6019,6 @@ module Aws::Neptune
     #   protection is enabled. By default, deletion protection is disabled.
     #   @return [Boolean]
     #
-    # @!attribute [rw] copy_tags_to_snapshot
-    #   *If set to `true`, tags are copied to any snapshot of the DB cluster
-    #   that is created.*
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -6039,8 +6036,7 @@ module Aws::Neptune
       :enable_iam_database_authentication,
       :cloudwatch_logs_export_configuration,
       :engine_version,
-      :deletion_protection,
-      :copy_tags_to_snapshot)
+      :deletion_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6116,33 +6112,33 @@ module Aws::Neptune
     # @!attribute [rw] attribute_name
     #   The name of the DB cluster snapshot attribute to modify.
     #
-    #   To manage authorization for other Amazon accounts to copy or restore
-    #   a manual DB cluster snapshot, set this value to `restore`.
+    #   To manage authorization for other AWS accounts to copy or restore a
+    #   manual DB cluster snapshot, set this value to `restore`.
     #   @return [String]
     #
     # @!attribute [rw] values_to_add
     #   A list of DB cluster snapshot attributes to add to the attribute
     #   specified by `AttributeName`.
     #
-    #   To authorize other Amazon accounts to copy or restore a manual DB
-    #   cluster snapshot, set this list to include one or more Amazon
-    #   account IDs, or `all` to make the manual DB cluster snapshot
-    #   restorable by any Amazon account. Do not add the `all` value for any
-    #   manual DB cluster snapshots that contain private information that
-    #   you don't want available to all AWS accounts.
+    #   To authorize other AWS accounts to copy or restore a manual DB
+    #   cluster snapshot, set this list to include one or more AWS account
+    #   IDs, or `all` to make the manual DB cluster snapshot restorable by
+    #   any AWS account. Do not add the `all` value for any manual DB
+    #   cluster snapshots that contain private information that you don't
+    #   want available to all AWS accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] values_to_remove
     #   A list of DB cluster snapshot attributes to remove from the
     #   attribute specified by `AttributeName`.
     #
-    #   To remove authorization for other Amazon accounts to copy or restore
-    #   a manual DB cluster snapshot, set this list to include one or more
-    #   Amazon account identifiers, or `all` to remove authorization for any
-    #   Amazon account to copy or restore the DB cluster snapshot. If you
-    #   specify `all`, an Amazon account whose account ID is explicitly
-    #   added to the `restore` attribute can still copy or restore a manual
-    #   DB cluster snapshot.
+    #   To remove authorization for other AWS accounts to copy or restore a
+    #   manual DB cluster snapshot, set this list to include one or more AWS
+    #   account identifiers, or `all` to remove authorization for any AWS
+    #   account to copy or restore the DB cluster snapshot. If you specify
+    #   `all`, an AWS account whose account ID is explicitly added to the
+    #   `restore` attribute can still copy or restore a manual DB cluster
+    #   snapshot.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterSnapshotAttributeMessage AWS API Documentation
@@ -6161,7 +6157,7 @@ module Aws::Neptune
     #   DescribeDBClusterSnapshotAttributes API action.
     #
     #   Manual DB cluster snapshot attributes are used to authorize other
-    #   Amazon accounts to copy or restore a manual DB cluster snapshot. For
+    #   AWS accounts to copy or restore a manual DB cluster snapshot. For
     #   more information, see the ModifyDBClusterSnapshotAttribute API
     #   action.
     #   @return [Types::DBClusterSnapshotAttributesResult]
@@ -6232,7 +6228,10 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   Not supported by Neptune.
+    #   The new amount of storage (in gibibytes) to allocate for the DB
+    #   instance.
+    #
+    #   Not applicable. Storage is managed by the DB Cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_class
@@ -6303,7 +6302,7 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] master_user_password
-    #   Not supported by Neptune.
+    #   Not applicable.
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_name
@@ -6399,7 +6398,7 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] license_model
-    #   Not supported by Neptune.
+    #   Not supported.
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -6515,13 +6514,13 @@ module Aws::Neptune
     #   @return [Integer]
     #
     # @!attribute [rw] enable_iam_database_authentication
-    #   True to enable mapping of Amazon Identity and Access Management
-    #   (IAM) accounts to database accounts, and otherwise false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   You can enable IAM database authentication for the following
     #   database engines
     #
-    #   Not applicable. Mapping Amazon IAM accounts to database accounts is
+    #   Not applicable. Mapping AWS IAM accounts to database accounts is
     #   managed by the DB cluster. For more information, see
     #   ModifyDBCluster.
     #
@@ -6786,14 +6785,18 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # Not supported by Neptune.
+    # Provides information on the option groups the DB instance is a member
+    # of.
     #
     # @!attribute [rw] option_group_name
-    #   Not supported by Neptune.
+    #   The name of the option group that the instance belongs to.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Not supported by Neptune.
+    #   The status of the DB instance's option group membership. Valid
+    #   values are: `in-sync`, `pending-apply`, `pending-removal`,
+    #   `pending-maintenance-apply`, `pending-maintenance-removal`,
+    #   `applying`, `removing`, and `failed`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/OptionGroupMembership AWS API Documentation
@@ -7134,7 +7137,8 @@ module Aws::Neptune
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
-    #   Not supported by Neptune.
+    #   Contains the pending or currently-in-progress change of the master
+    #   credentials for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -7156,7 +7160,10 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] license_model
-    #   Not supported by Neptune.
+    #   The license model for the DB instance.
+    #
+    #   Valid values: `license-included` \| `bring-your-own-license` \|
+    #   `general-public-license`
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -7592,7 +7599,6 @@ module Aws::Neptune
     #         enable_cloudwatch_logs_exports: ["String"],
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
-    #         copy_tags_to_snapshot: false,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -7677,14 +7683,14 @@ module Aws::Neptune
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon KMS key identifier to use when restoring an encrypted DB
+    #   The AWS KMS key identifier to use when restoring an encrypted DB
     #   cluster from a DB snapshot or DB cluster snapshot.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are restoring a DB cluster with the same
-    #   Amazon account that owns the KMS encryption key used to encrypt the
-    #   new DB cluster, then you can use the KMS key alias instead of the
-    #   ARN for the KMS encryption key.
+    #   encryption key. If you are restoring a DB cluster with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   cluster, then you can use the KMS key alias instead of the ARN for
+    #   the KMS encryption key.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following will occur:
@@ -7699,8 +7705,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
-    #   True to enable mapping of Amazon Identity and Access Management
-    #   (IAM) accounts to database accounts, and otherwise false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -7728,11 +7734,6 @@ module Aws::Neptune
     #   protection is enabled. By default, deletion protection is disabled.
     #   @return [Boolean]
     #
-    # @!attribute [rw] copy_tags_to_snapshot
-    #   *If set to `true`, tags are copied to any snapshot of the restored
-    #   DB cluster that is created.*
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -7751,8 +7752,7 @@ module Aws::Neptune
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
-      :deletion_protection,
-      :copy_tags_to_snapshot)
+      :deletion_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7894,14 +7894,14 @@ module Aws::Neptune
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon KMS key identifier to use when restoring an encrypted DB
+    #   The AWS KMS key identifier to use when restoring an encrypted DB
     #   cluster from an encrypted DB cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are restoring a DB cluster with the same
-    #   Amazon account that owns the KMS encryption key used to encrypt the
-    #   new DB cluster, then you can use the KMS key alias instead of the
-    #   ARN for the KMS encryption key.
+    #   encryption key. If you are restoring a DB cluster with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   cluster, then you can use the KMS key alias instead of the ARN for
+    #   the KMS encryption key.
     #
     #   You can restore to a new DB cluster and encrypt the new DB cluster
     #   with a KMS key that is different than the KMS key used to encrypt
@@ -7923,8 +7923,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
-    #   True to enable mapping of Amazon Identity and Access Management
-    #   (IAM) accounts to database accounts, and otherwise false.
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
     #   @return [Boolean]

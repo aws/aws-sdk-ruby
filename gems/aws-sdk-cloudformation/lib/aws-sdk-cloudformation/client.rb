@@ -327,193 +327,6 @@ module Aws::CloudFormation
 
     # @!group API Operations
 
-    # Activates a public third-party extension, making it available for use
-    # in stack templates. For more information, see [Using public
-    # extensions][1] in the *CloudFormation User Guide*.
-    #
-    # Once you have activated a public third-party extension in your account
-    # and region, use
-    # [SetTypeConfiguration](AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
-    # to specify configuration properties for the extension. For more
-    # information, see [Configuring extensions at the account level][2] in
-    # the *CloudFormation User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
-    #
-    # @option params [String] :type
-    #   The extension type.
-    #
-    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
-    #   and `PublisherId`.
-    #
-    # @option params [String] :public_type_arn
-    #   The Amazon Resource Number (ARN) of the public extension.
-    #
-    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
-    #   and `PublisherId`.
-    #
-    # @option params [String] :publisher_id
-    #   The ID of the extension publisher.
-    #
-    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
-    #   and `PublisherId`.
-    #
-    # @option params [String] :type_name
-    #   The name of the extension.
-    #
-    #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
-    #   and `PublisherId`.
-    #
-    # @option params [String] :type_name_alias
-    #   An alias to assign to the public extension, in this account and
-    #   region. If you specify an alias for the extension, CloudFormation
-    #   treats the alias as the extension type name within this account and
-    #   region. You must use the alias to refer to the extension in your
-    #   templates, API calls, and CloudFormation console.
-    #
-    #   An extension alias must be unique within a given account and region.
-    #   You can activate the same public resource multiple times in the same
-    #   account and region, using different type name aliases.
-    #
-    # @option params [Boolean] :auto_update
-    #   Whether to automatically update the extension in this account and
-    #   region when a new *minor* version is published by the extension
-    #   publisher. Major versions released by the publisher must be manually
-    #   updated.
-    #
-    #   The default is `true`.
-    #
-    # @option params [Types::LoggingConfig] :logging_config
-    #   Contains logging configuration information for an extension.
-    #
-    # @option params [String] :execution_role_arn
-    #   The name of the IAM execution role to use to activate the extension.
-    #
-    # @option params [String] :version_bump
-    #   Manually updates a previously-activated type to a new major or minor
-    #   version, if available. You can also use this parameter to update the
-    #   value of `AutoUpdate`.
-    #
-    #   * `MAJOR`\: CloudFormation updates the extension to the newest major
-    #     version, if one is available.
-    #
-    #   * `MINOR`\: CloudFormation updates the extension to the newest minor
-    #     version, if one is available.
-    #
-    # @option params [Integer] :major_version
-    #   The major version of this extension you want to activate, if multiple
-    #   major versions are available. The default is the latest major version.
-    #   CloudFormation uses the latest available *minor* version of the major
-    #   version selected.
-    #
-    #   You can specify `MajorVersion` or `VersionBump`, but not both.
-    #
-    # @return [Types::ActivateTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ActivateTypeOutput#arn #arn} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.activate_type({
-    #     type: "RESOURCE", # accepts RESOURCE, MODULE
-    #     public_type_arn: "ThirdPartyTypeArn",
-    #     publisher_id: "PublisherId",
-    #     type_name: "TypeName",
-    #     type_name_alias: "TypeName",
-    #     auto_update: false,
-    #     logging_config: {
-    #       log_role_arn: "RoleArn", # required
-    #       log_group_name: "LogGroupName", # required
-    #     },
-    #     execution_role_arn: "RoleArn",
-    #     version_bump: "MAJOR", # accepts MAJOR, MINOR
-    #     major_version: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.arn #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ActivateType AWS API Documentation
-    #
-    # @overload activate_type(params = {})
-    # @param [Hash] params ({})
-    def activate_type(params = {}, options = {})
-      req = build_request(:activate_type, params)
-      req.send_request(options)
-    end
-
-    # Returns configuration data for the specified CloudFormation
-    # extensions, from the CloudFormation registry for the account and
-    # region.
-    #
-    # For more information, see [Configuring extensions at the account
-    # level][1] in the *CloudFormation User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
-    #
-    # @option params [required, Array<Types::TypeConfigurationIdentifier>] :type_configuration_identifiers
-    #   The list of identifiers for the desired extension configurations.
-    #
-    # @return [Types::BatchDescribeTypeConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::BatchDescribeTypeConfigurationsOutput#errors #errors} => Array&lt;Types::BatchDescribeTypeConfigurationsError&gt;
-    #   * {Types::BatchDescribeTypeConfigurationsOutput#unprocessed_type_configurations #unprocessed_type_configurations} => Array&lt;Types::TypeConfigurationIdentifier&gt;
-    #   * {Types::BatchDescribeTypeConfigurationsOutput#type_configurations #type_configurations} => Array&lt;Types::TypeConfigurationDetails&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.batch_describe_type_configurations({
-    #     type_configuration_identifiers: [ # required
-    #       {
-    #         type_arn: "TypeArn",
-    #         type_configuration_alias: "TypeConfigurationAlias",
-    #         type_configuration_arn: "TypeConfigurationArn",
-    #         type: "RESOURCE", # accepts RESOURCE, MODULE
-    #         type_name: "TypeName",
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.errors #=> Array
-    #   resp.errors[0].error_code #=> String
-    #   resp.errors[0].error_message #=> String
-    #   resp.errors[0].type_configuration_identifier.type_arn #=> String
-    #   resp.errors[0].type_configuration_identifier.type_configuration_alias #=> String
-    #   resp.errors[0].type_configuration_identifier.type_configuration_arn #=> String
-    #   resp.errors[0].type_configuration_identifier.type #=> String, one of "RESOURCE", "MODULE"
-    #   resp.errors[0].type_configuration_identifier.type_name #=> String
-    #   resp.unprocessed_type_configurations #=> Array
-    #   resp.unprocessed_type_configurations[0].type_arn #=> String
-    #   resp.unprocessed_type_configurations[0].type_configuration_alias #=> String
-    #   resp.unprocessed_type_configurations[0].type_configuration_arn #=> String
-    #   resp.unprocessed_type_configurations[0].type #=> String, one of "RESOURCE", "MODULE"
-    #   resp.unprocessed_type_configurations[0].type_name #=> String
-    #   resp.type_configurations #=> Array
-    #   resp.type_configurations[0].arn #=> String
-    #   resp.type_configurations[0].alias #=> String
-    #   resp.type_configurations[0].configuration #=> String
-    #   resp.type_configurations[0].last_updated #=> Time
-    #   resp.type_configurations[0].type_arn #=> String
-    #   resp.type_configurations[0].type_name #=> String
-    #   resp.type_configurations[0].is_default_configuration #=> Boolean
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/BatchDescribeTypeConfigurations AWS API Documentation
-    #
-    # @overload batch_describe_type_configurations(params = {})
-    # @param [Hash] params ({})
-    def batch_describe_type_configurations(params = {}, options = {})
-      req = build_request(:batch_describe_type_configurations, params)
-      req.send_request(options)
-    end
-
     # Cancels an update on the specified stack. If the call completes
     # successfully, the stack rolls back the update and reverts to the
     # previous stack configuration.
@@ -527,10 +340,10 @@ module Aws::CloudFormation
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `CancelUpdateStack` request. Specify this
-    #   token if you plan to retry requests so that CloudFormation knows that
-    #   you're not attempting to cancel an update on a stack with the same
-    #   name. You might retry `CancelUpdateStack` requests to ensure that
-    #   CloudFormation successfully received them.
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to cancel an update on a stack with the
+    #   same name. You might retry `CancelUpdateStack` requests to ensure that
+    #   AWS CloudFormation successfully received them.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -558,11 +371,11 @@ module Aws::CloudFormation
     # `UPDATE_ROLLBACK_COMPLETE` state), and then try to update the stack
     # again.
     #
-    # A stack goes into the `UPDATE_ROLLBACK_FAILED` state when
+    # A stack goes into the `UPDATE_ROLLBACK_FAILED` state when AWS
     # CloudFormation cannot roll back all changes after a failed stack
     # update. For example, you might have a stack that is rolling back to an
-    # old database instance that was deleted outside of CloudFormation.
-    # Because CloudFormation doesn't know the database was deleted, it
+    # old database instance that was deleted outside of AWS CloudFormation.
+    # Because AWS CloudFormation doesn't know the database was deleted, it
     # assumes that the database instance still exists and attempts to roll
     # back to it, causing the update rollback to fail.
     #
@@ -582,32 +395,33 @@ module Aws::CloudFormation
     #    </note>
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to roll back the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation always uses this role for all future operations
-    #   on the stack. As long as users have permission to operate on the
-    #   stack, CloudFormation uses this role even if the users don't have
-    #   permission to pass it. Ensure that the role grants least privilege.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that AWS CloudFormation assumes to roll back the
+    #   stack. AWS CloudFormation uses the role's credentials to make calls
+    #   on your behalf. AWS CloudFormation always uses this role for all
+    #   future operations on the stack. As long as users have permission to
+    #   operate on the stack, AWS CloudFormation uses this role even if the
+    #   users don't have permission to pass it. Ensure that the role grants
+    #   least privilege.
     #
-    #   If you don't specify a value, CloudFormation uses the role that was
-    #   previously associated with the stack. If no role is available,
+    #   If you don't specify a value, AWS CloudFormation uses the role that
+    #   was previously associated with the stack. If no role is available, AWS
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
     # @option params [Array<String>] :resources_to_skip
-    #   A list of the logical IDs of the resources that CloudFormation skips
-    #   during the continue update rollback operation. You can specify only
-    #   resources that are in the `UPDATE_FAILED` state because a rollback
-    #   failed. You can't specify resources that are in the `UPDATE_FAILED`
-    #   state for other reasons, for example, because an update was cancelled.
-    #   To check why a resource update failed, use the DescribeStackResources
-    #   action, and view the resource status reason.
+    #   A list of the logical IDs of the resources that AWS CloudFormation
+    #   skips during the continue update rollback operation. You can specify
+    #   only resources that are in the `UPDATE_FAILED` state because a
+    #   rollback failed. You can't specify resources that are in the
+    #   `UPDATE_FAILED` state for other reasons, for example, because an
+    #   update was cancelled. To check why a resource update failed, use the
+    #   DescribeStackResources action, and view the resource status reason.
     #
-    #   Specify this property to skip rolling back resources that
+    #   Specify this property to skip rolling back resources that AWS
     #   CloudFormation can't successfully roll back. We recommend that you [
-    #   troubleshoot][1] resources before skipping them. CloudFormation sets
-    #   the status of the specified resources to `UPDATE_COMPLETE` and
+    #   troubleshoot][1] resources before skipping them. AWS CloudFormation
+    #   sets the status of the specified resources to `UPDATE_COMPLETE` and
     #   continues to roll back the stack. After the rollback is complete, the
     #   state of the skipped resources will be inconsistent with the state of
     #   the resources in the stack template. Before performing another stack
@@ -641,10 +455,10 @@ module Aws::CloudFormation
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `ContinueUpdateRollback` request. Specify
-    #   this token if you plan to retry requests so that CloudFormationknows
-    #   that you're not attempting to continue the rollback to a stack with
-    #   the same name. You might retry `ContinueUpdateRollback` requests to
-    #   ensure that CloudFormation successfully received them.
+    #   this token if you plan to retry requests so that AWS CloudFormation
+    #   knows that you're not attempting to continue the rollback to a stack
+    #   with the same name. You might retry `ContinueUpdateRollback` requests
+    #   to ensure that AWS CloudFormation successfully received them.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -670,25 +484,25 @@ module Aws::CloudFormation
     # can review the changes before executing them. You can create a change
     # set for a stack that doesn't exist or an existing stack. If you
     # create a change set for a stack that doesn't exist, the change set
-    # shows all of the resources that CloudFormation will create. If you
-    # create a change set for an existing stack, CloudFormation compares the
-    # stack's information with the information that you submit in the
+    # shows all of the resources that AWS CloudFormation will create. If you
+    # create a change set for an existing stack, AWS CloudFormation compares
+    # the stack's information with the information that you submit in the
     # change set and lists the differences. Use change sets to understand
-    # which resources CloudFormation will create or change, and how it will
-    # change resources in an existing stack, before you create or update a
-    # stack.
+    # which resources AWS CloudFormation will create or change, and how it
+    # will change resources in an existing stack, before you create or
+    # update a stack.
     #
     # To create a change set for a stack that doesn't exist, for the
     # `ChangeSetType` parameter, specify `CREATE`. To create a change set
     # for an existing stack, specify `UPDATE` for the `ChangeSetType`
     # parameter. To create a change set for an import operation, specify
     # `IMPORT` for the `ChangeSetType` parameter. After the
-    # `CreateChangeSet` call successfully completes, CloudFormation starts
-    # creating the change set. To check the status of the change set or to
-    # review it, use the DescribeChangeSet action.
+    # `CreateChangeSet` call successfully completes, AWS CloudFormation
+    # starts creating the change set. To check the status of the change set
+    # or to review it, use the DescribeChangeSet action.
     #
     # When you are satisfied with the changes the change set will make,
-    # execute the change set by using the ExecuteChangeSet action.
+    # execute the change set by using the ExecuteChangeSet action. AWS
     # CloudFormation doesn't make changes until you execute the change set.
     #
     # To create a change set for the entire stack hierachy, set
@@ -696,13 +510,13 @@ module Aws::CloudFormation
     #
     # @option params [required, String] :stack_name
     #   The name or the unique ID of the stack for which you are creating a
-    #   change set. CloudFormation generates the change set by comparing this
-    #   stack's information with the information that you submit, such as a
-    #   modified template or different parameter input values.
+    #   change set. AWS CloudFormation generates the change set by comparing
+    #   this stack's information with the information that you submit, such
+    #   as a modified template or different parameter input values.
     #
     # @option params [String] :template_body
     #   A structure that contains the body of the revised template, with a
-    #   minimum length of 1 byte and a maximum length of 51,200 bytes.
+    #   minimum length of 1 byte and a maximum length of 51,200 bytes. AWS
     #   CloudFormation generates the change set by comparing this template
     #   with the template of the stack that you specified.
     #
@@ -711,9 +525,9 @@ module Aws::CloudFormation
     # @option params [String] :template_url
     #   The location of the file that contains the revised template. The URL
     #   must point to a template (max size: 460,800 bytes) that is located in
-    #   an S3 bucket or a Systems Manager document. CloudFormation generates
-    #   the change set by comparing this template with the stack that you
-    #   specified.
+    #   an S3 bucket or a Systems Manager document. AWS CloudFormation
+    #   generates the change set by comparing this template with the stack
+    #   that you specified.
     #
     #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
     #
@@ -727,15 +541,16 @@ module Aws::CloudFormation
     #
     # @option params [Array<String>] :capabilities
     #   In some cases, you must explicitly acknowledge that your stack
-    #   template contains certain capabilities in order for CloudFormation to
-    #   create the stack.
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to create the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your AWS account; for example, by creating new AWS
+    #     Identity and Access Management (IAM) users. For those stacks, you
+    #     must explicitly acknowledge this by specifying one of these
+    #     capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -745,8 +560,8 @@ module Aws::CloudFormation
     #     * If you have IAM resources with custom names, you *must* specify
     #       `CAPABILITY_NAMED_IAM`.
     #
-    #     * If you don't specify either of these capabilities, CloudFormation
-    #       returns an `InsufficientCapabilities` error.
+    #     * If you don't specify either of these capabilities, AWS
+    #       CloudFormation returns an `InsufficientCapabilities` error.
     #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
@@ -766,7 +581,7 @@ module Aws::CloudFormation
     #
     #     * [ AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
+    #     For more information, see [Acknowledging IAM Resources in AWS
     #     CloudFormation Templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
@@ -781,7 +596,7 @@ module Aws::CloudFormation
     #     create a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
     #     acknowledge this capability. This includes the [AWS::Include][9] and
-    #     [AWS::Serverless][10] transforms, which are macros hosted by
+    #     [AWS::Serverless][10] transforms, which are macros hosted by AWS
     #     CloudFormation.
     #
     #     <note markdown="1"> This capacity does not apply to creating change sets, and specifying
@@ -794,8 +609,8 @@ module Aws::CloudFormation
     #
     #      </note>
     #
-    #     For more information on macros, see [Using CloudFormation Macros to
-    #     Perform Custom Processing on Templates][11].
+    #     For more information on macros, see [Using AWS CloudFormation Macros
+    #     to Perform Custom Processing on Templates][11].
     #
     #
     #
@@ -817,43 +632,44 @@ module Aws::CloudFormation
     #   `AWS::EC2::*`, or `Custom::MyCustomInstance`.
     #
     #   If the list of resource types doesn't include a resource type that
-    #   you're updating, the stack update fails. By default, CloudFormation
-    #   grants permissions to all resource types. Identity and Access
-    #   Management (IAM) uses this parameter for condition keys in IAM
-    #   policies for CloudFormation. For more information, see [Controlling
-    #   Access with Identity and Access Management][1] in the CloudFormation
-    #   User Guide.
+    #   you're updating, the stack update fails. By default, AWS
+    #   CloudFormation grants permissions to all resource types. AWS Identity
+    #   and Access Management (IAM) uses this parameter for condition keys in
+    #   IAM policies for AWS CloudFormation. For more information, see
+    #   [Controlling Access with AWS Identity and Access Management][1] in the
+    #   AWS CloudFormation User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes when executing the change set.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation uses this role for all future operations on the
-    #   stack. As long as users have permission to operate on the stack,
-    #   CloudFormation uses this role even if the users don't have permission
-    #   to pass it. Ensure that the role grants least privilege.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that AWS CloudFormation assumes when executing
+    #   the change set. AWS CloudFormation uses the role's credentials to
+    #   make calls on your behalf. AWS CloudFormation uses this role for all
+    #   future operations on the stack. As long as users have permission to
+    #   operate on the stack, AWS CloudFormation uses this role even if the
+    #   users don't have permission to pass it. Ensure that the role grants
+    #   least privilege.
     #
-    #   If you don't specify a value, CloudFormation uses the role that was
-    #   previously associated with the stack. If no role is available,
+    #   If you don't specify a value, AWS CloudFormation uses the role that
+    #   was previously associated with the stack. If no role is available, AWS
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
     # @option params [Types::RollbackConfiguration] :rollback_configuration
-    #   The rollback triggers for CloudFormation to monitor during stack
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
     #   creation and updating operations, and for the specified monitoring
     #   period afterwards.
     #
     # @option params [Array<String>] :notification_arns
     #   The Amazon Resource Names (ARNs) of Amazon Simple Notification Service
-    #   (Amazon SNS) topics that CloudFormation associates with the stack. To
-    #   remove all associated notification topics, specify an empty list.
+    #   (Amazon SNS) topics that AWS CloudFormation associates with the stack.
+    #   To remove all associated notification topics, specify an empty list.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Key-value pairs to associate with this stack. CloudFormation also
+    #   Key-value pairs to associate with this stack. AWS CloudFormation also
     #   propagates these tags to resources in the stack. You can specify a
     #   maximum of 50 tags.
     #
@@ -867,9 +683,9 @@ module Aws::CloudFormation
     #
     # @option params [String] :client_token
     #   A unique identifier for this `CreateChangeSet` request. Specify this
-    #   token if you plan to retry requests so that CloudFormation knows that
-    #   you're not attempting to create another change set with the same
-    #   name. You might retry `CreateChangeSet` requests to ensure that
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to create another change set with the same
+    #   name. You might retry `CreateChangeSet` requests to ensure that AWS
     #   CloudFormation successfully received them.
     #
     # @option params [String] :description
@@ -881,12 +697,12 @@ module Aws::CloudFormation
     #   specify `UPDATE`. To create a change set for an import operation,
     #   specify `IMPORT`.
     #
-    #   If you create a change set for a new stack, CloudFormation creates a
-    #   stack with a unique stack ID, but no template or resources. The stack
-    #   will be in the [ `REVIEW_IN_PROGRESS` ][1] state until you execute the
-    #   change set.
+    #   If you create a change set for a new stack, AWS Cloudformation creates
+    #   a stack with a unique stack ID, but no template or resources. The
+    #   stack will be in the [ `REVIEW_IN_PROGRESS` ][1] state until you
+    #   execute the change set.
     #
-    #   By default, CloudFormation specifies `UPDATE`. You can't use the
+    #   By default, AWS CloudFormation specifies `UPDATE`. You can't use the
     #   `UPDATE` type to create a change set for a new stack or the `CREATE`
     #   type to create a change set for an existing stack.
     #
@@ -988,7 +804,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1001,7 +817,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to the
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1026,7 +842,7 @@ module Aws::CloudFormation
     #   Default: `false`
     #
     # @option params [Types::RollbackConfiguration] :rollback_configuration
-    #   The rollback triggers for CloudFormation to monitor during stack
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
     #   creation and updating operations, and for the specified monitoring
     #   period afterwards.
     #
@@ -1042,15 +858,16 @@ module Aws::CloudFormation
     #
     # @option params [Array<String>] :capabilities
     #   In some cases, you must explicitly acknowledge that your stack
-    #   template contains certain capabilities in order for CloudFormation to
-    #   create the stack.
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to create the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your AWS account; for example, by creating new AWS
+    #     Identity and Access Management (IAM) users. For those stacks, you
+    #     must explicitly acknowledge this by specifying one of these
+    #     capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1060,8 +877,8 @@ module Aws::CloudFormation
     #     * If you have IAM resources with custom names, you *must* specify
     #       `CAPABILITY_NAMED_IAM`.
     #
-    #     * If you don't specify either of these capabilities, CloudFormation
-    #       returns an `InsufficientCapabilities` error.
+    #     * If you don't specify either of these capabilities, AWS
+    #       CloudFormation returns an `InsufficientCapabilities` error.
     #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
@@ -1081,7 +898,7 @@ module Aws::CloudFormation
     #
     #     * [ AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
+    #     For more information, see [Acknowledging IAM Resources in AWS
     #     CloudFormation Templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
@@ -1096,7 +913,7 @@ module Aws::CloudFormation
     #     create a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
     #     acknowledge this capability. This includes the [AWS::Include][9] and
-    #     [AWS::Serverless][10] transforms, which are macros hosted by
+    #     [AWS::Serverless][10] transforms, which are macros hosted by AWS
     #     CloudFormation.
     #
     #     If you want to create a stack from a stack template that contains
@@ -1108,11 +925,11 @@ module Aws::CloudFormation
     #
     #      Each macro relies on an underlying Lambda service function for
     #     processing stack templates. Be aware that the Lambda function owner
-    #     can update the function operation without CloudFormation being
+    #     can update the function operation without AWS CloudFormation being
     #     notified.
     #
-    #     For more information, see [Using CloudFormation Macros to Perform
-    #     Custom Processing on Templates][11].
+    #     For more information, see [Using AWS CloudFormation Macros to
+    #     Perform Custom Processing on Templates][11].
     #
     #
     #
@@ -1132,35 +949,35 @@ module Aws::CloudFormation
     #   The template resource types that you have permissions to work with for
     #   this create stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
     #   or `Custom::MyCustomInstance`. Use the following syntax to describe
-    #   template resource types: `AWS::*` (for all Amazon Web Services
-    #   resources), `Custom::*` (for all custom resources),
-    #   `Custom::logical_ID ` (for a specific custom resource),
-    #   `AWS::service_name::*` (for all resources of a particular Amazon Web
-    #   Services service), and `AWS::service_name::resource_logical_ID ` (for
-    #   a specific Amazon Web Services resource).
+    #   template resource types: `AWS::*` (for all AWS resource), `Custom::*`
+    #   (for all custom resources), `Custom::logical_ID ` (for a specific
+    #   custom resource), `AWS::service_name::*` (for all resources of a
+    #   particular AWS service), and `AWS::service_name::resource_logical_ID `
+    #   (for a specific AWS resource).
     #
     #   If the list of resource types doesn't include a resource that you're
-    #   creating, the stack creation fails. By default, CloudFormation grants
-    #   permissions to all resource types. Identity and Access Management
-    #   (IAM) uses this parameter for CloudFormation-specific condition keys
-    #   in IAM policies. For more information, see [Controlling Access with
-    #   Identity and Access Management][1].
+    #   creating, the stack creation fails. By default, AWS CloudFormation
+    #   grants permissions to all resource types. AWS Identity and Access
+    #   Management (IAM) uses this parameter for AWS CloudFormation-specific
+    #   condition keys in IAM policies. For more information, see [Controlling
+    #   Access with AWS Identity and Access Management][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to create the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation always uses this role for all future operations
-    #   on the stack. As long as users have permission to operate on the
-    #   stack, CloudFormation uses this role even if the users don't have
-    #   permission to pass it. Ensure that the role grants least privilege.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that AWS CloudFormation assumes to create the
+    #   stack. AWS CloudFormation uses the role's credentials to make calls
+    #   on your behalf. AWS CloudFormation always uses this role for all
+    #   future operations on the stack. As long as users have permission to
+    #   operate on the stack, AWS CloudFormation uses this role even if the
+    #   users don't have permission to pass it. Ensure that the role grants
+    #   least privilege.
     #
-    #   If you don't specify a value, CloudFormation uses the role that was
-    #   previously associated with the stack. If no role is available,
+    #   If you don't specify a value, AWS CloudFormation uses the role that
+    #   was previously associated with the stack. If no role is available, AWS
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
@@ -1173,7 +990,7 @@ module Aws::CloudFormation
     #
     # @option params [String] :stack_policy_body
     #   Structure containing the stack policy body. For more information, go
-    #   to [ Prevent Updates to Stack Resources][1] in the *CloudFormation
+    #   to [ Prevent Updates to Stack Resources][1] in the *AWS CloudFormation
     #   User Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
@@ -1188,15 +1005,15 @@ module Aws::CloudFormation
     #   the `StackPolicyURL` parameter, but not both.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Key-value pairs to associate with this stack. CloudFormation also
+    #   Key-value pairs to associate with this stack. AWS CloudFormation also
     #   propagates these tags to the resources created in the stack. A maximum
     #   number of 50 tags can be specified.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `CreateStack` request. Specify this token
-    #   if you plan to retry requests so that CloudFormation knows that
+    #   if you plan to retry requests so that AWS CloudFormation knows that
     #   you're not attempting to create a stack with the same name. You might
-    #   retry `CreateStack` requests to ensure that CloudFormation
+    #   retry `CreateStack` requests to ensure that AWS CloudFormation
     #   successfully received them.
     #
     #   All events triggered by a given stack operation are assigned the same
@@ -1218,7 +1035,7 @@ module Aws::CloudFormation
     #   user attempts to delete a stack with termination protection enabled,
     #   the operation fails and the stack remains unchanged. For more
     #   information, see [Protecting a Stack From Being Deleted][1] in the
-    #   *CloudFormation User Guide*. Termination protection is disabled on
+    #   *AWS CloudFormation User Guide*. Termination protection is disabled on
     #   stacks by default.
     #
     #   For [nested stacks][2], termination protection is set on the root
@@ -1299,20 +1116,21 @@ module Aws::CloudFormation
     #   instances from.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more accounts that
-    #   you want to create stack instances in the specified Region(s) for.
+    #   \[Self-managed permissions\] The names of one or more AWS accounts
+    #   that you want to create stack instances in the specified Region(s)
+    #   for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [Types::DeploymentTargets] :deployment_targets
-    #   \[Service-managed permissions\] The Organizations accounts for which
-    #   to create stack instances in the specified Regions.
+    #   \[Service-managed permissions\] The AWS Organizations accounts for
+    #   which to create stack instances in the specified Regions.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
     #   The names of one or more Regions where you want to create stack
-    #   instances using the specified accounts.
+    #   instances using the specified AWS account(s).
     #
     # @option params [Array<Types::Parameter>] :parameter_overrides
     #   A list of stack set parameters whose values you want to override in
@@ -1320,19 +1138,24 @@ module Aws::CloudFormation
     #
     #   Any overridden parameter values will be applied to all stack instances
     #   in the specified accounts and Regions. When specifying parameters and
-    #   their values, be aware of how CloudFormation sets parameter values
+    #   their values, be aware of how AWS CloudFormation sets parameter values
     #   during stack instance operations:
     #
     #   * To override the current value for a parameter, include the parameter
     #     and specify its value.
     #
-    #   * To leave an overridden parameter set to its present value, include
-    #     the parameter and specify `UsePreviousValue` as `true`. (You cannot
-    #     specify both a value and set `UsePreviousValue` to `true`.)
+    #   * To leave a parameter set to its present value, you can do one of the
+    #     following:
     #
-    #   * To set an overridden parameter back to the value specified in the
-    #     stack set, specify a parameter list but do not include the parameter
-    #     in the list.
+    #     * Do not include the parameter in the list.
+    #
+    #     * Include the parameter and specify `UsePreviousValue` as `true`.
+    #       (You cannot specify both a value and set `UsePreviousValue` to
+    #       `true`.)
+    #
+    #   * To set all overridden parameter back to the values specified in the
+    #     stack set, specify a parameter list but do not include any
+    #     parameters.
     #
     #   * To leave all parameters set to their present values, do not specify
     #     this property at all.
@@ -1349,16 +1172,17 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
-    #   Preferences for how CloudFormation performs this stack set operation.
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
     #
     # @option params [String] :operation_id
     #   The unique identifier for this stack set operation.
     #
     #   The operation ID also functions as an idempotency token, to ensure
-    #   that CloudFormation performs the stack set operation only once, even
-    #   if you retry the request multiple times. You might retry stack set
-    #   operation requests to ensure that CloudFormation successfully received
-    #   them.
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You might retry stack
+    #   set operation requests to ensure that AWS CloudFormation successfully
+    #   received them.
     #
     #   If you don't specify an operation ID, the SDK generates one
     #   automatically.
@@ -1382,9 +1206,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -1457,7 +1281,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more information,
-    #   see [Template Anatomy][1] in the CloudFormation User Guide.
+    #   see [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
@@ -1470,7 +1294,7 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL must
     #   point to a template (maximum size: 460,800 bytes) that's located in
     #   an Amazon S3 bucket or a Systems Manager document. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
+    #   information, see [Template Anatomy][1] in the AWS CloudFormation User
     #   Guide.
     #
     #   Conditional: You must specify either the TemplateBody or the
@@ -1480,24 +1304,21 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #
-    # @option params [String] :stack_id
-    #   The stack ID you are importing into a new stack set. Specify the
-    #   Amazon Resource Number (ARN) of the stack.
-    #
     # @option params [Array<Types::Parameter>] :parameters
     #   The input parameters for the stack set template.
     #
     # @option params [Array<String>] :capabilities
     #   In some cases, you must explicitly acknowledge that your stack set
-    #   template contains certain capabilities in order for CloudFormation to
-    #   create the stack set and related stack instances.
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to create the stack set and related stack instances.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stack sets, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your AWS account; for example, by creating new AWS
+    #     Identity and Access Management (IAM) users. For those stack sets,
+    #     you must explicitly acknowledge this by specifying one of these
+    #     capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1507,8 +1328,8 @@ module Aws::CloudFormation
     #     * If you have IAM resources with custom names, you *must* specify
     #       `CAPABILITY_NAMED_IAM`.
     #
-    #     * If you don't specify either of these capabilities, CloudFormation
-    #       returns an `InsufficientCapabilities` error.
+    #     * If you don't specify either of these capabilities, AWS
+    #       CloudFormation returns an `InsufficientCapabilities` error.
     #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
@@ -1528,7 +1349,7 @@ module Aws::CloudFormation
     #
     #     * [ AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
+    #     For more information, see [Acknowledging IAM Resources in AWS
     #     CloudFormation Templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
@@ -1538,13 +1359,13 @@ module Aws::CloudFormation
     #     directly from the processed template, without first reviewing the
     #     resulting changes in a change set. To create the stack set directly,
     #     you must acknowledge this capability. For more information, see
-    #     [Using CloudFormation Macros to Perform Custom Processing on
+    #     [Using AWS CloudFormation Macros to Perform Custom Processing on
     #     Templates][9].
     #
     #     Stack sets with service-managed permissions do not currently support
     #     the use of macros in templates. (This includes the
     #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
-    #     macros hosted by CloudFormation.) Even if you specify this
+    #     macros hosted by AWS CloudFormation.) Even if you specify this
     #     capability for a stack set with service-managed permissions, if you
     #     reference a macro in your template the stack set operation will
     #     fail.
@@ -1565,11 +1386,11 @@ module Aws::CloudFormation
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key-value pairs to associate with this stack set and the stacks
-    #   created from it. CloudFormation also propagates these tags to
+    #   created from it. AWS CloudFormation also propagates these tags to
     #   supported resources that are created in the stacks. A maximum number
     #   of 50 tags can be specified.
     #
-    #   If you specify tags as part of a `CreateStackSet` action,
+    #   If you specify tags as part of a `CreateStackSet` action, AWS
     #   CloudFormation checks to see if you have the required IAM permission
     #   to tag resources. If you don't, the entire `CreateStackSet` action
     #   fails with an `access denied` error, and the stack set is not created.
@@ -1582,7 +1403,7 @@ module Aws::CloudFormation
     #   roles to control which users or groups can manage specific stack sets
     #   within the same administrator account. For more information, see
     #   [Prerequisites: Granting Permissions for Stack Set Operations][1] in
-    #   the *CloudFormation User Guide*.
+    #   the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -1590,7 +1411,7 @@ module Aws::CloudFormation
     #
     # @option params [String] :execution_role_name
     #   The name of the IAM execution role to use to create the stack set. If
-    #   you do not specify an execution role, CloudFormation uses the
+    #   you do not specify an execution role, AWS CloudFormation uses the
     #   `AWSCloudFormationStackSetExecutionRole` role for the stack set
     #   operation.
     #
@@ -1607,7 +1428,7 @@ module Aws::CloudFormation
     #     information, see [Grant Self-Managed Stack Set Permissions][1].
     #
     #   * With `service-managed` permissions, StackSets automatically creates
-    #     the IAM roles required to deploy to accounts managed by
+    #     the IAM roles required to deploy to accounts managed by AWS
     #     Organizations. For more information, see [Grant Service-Managed
     #     Stack Set Permissions][2].
     #
@@ -1617,7 +1438,7 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
     #
     # @option params [Types::AutoDeployment] :auto_deployment
-    #   Describes whether StackSets automatically deploys to Organizations
+    #   Describes whether StackSets automatically deploys to AWS Organizations
     #   accounts that are added to the target organization or organizational
     #   unit (OU). Specify only if `PermissionModel` is `SERVICE_MANAGED`.
     #
@@ -1635,9 +1456,9 @@ module Aws::CloudFormation
     #   * To create a stack set with service-managed permissions while signed
     #     in to a delegated administrator account, specify `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated admin in the
+    #     Your AWS account must be registered as a delegated admin in the
     #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #   Stack sets with service-managed permissions are created in the
     #   management account, including stack sets that are created by delegated
@@ -1649,9 +1470,9 @@ module Aws::CloudFormation
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
-    #   token if you plan to retry requests so that CloudFormation knows that
-    #   you're not attempting to create another stack set with the same name.
-    #   You might retry `CreateStackSet` requests to ensure that
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to create another stack set with the same
+    #   name. You might retry `CreateStackSet` requests to ensure that AWS
     #   CloudFormation successfully received them.
     #
     #   If you don't specify an operation ID, the SDK generates one
@@ -1671,7 +1492,6 @@ module Aws::CloudFormation
     #     description: "Description",
     #     template_body: "TemplateBody",
     #     template_url: "TemplateURL",
-    #     stack_id: "StackId",
     #     parameters: [
     #       {
     #         parameter_key: "ParameterKey",
@@ -1711,56 +1531,10 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Deactivates a public extension that was previously activated in this
-    # account and region.
-    #
-    # Once deactivated, an extension cannot be used in any CloudFormation
-    # operation. This includes stack update operations where the stack
-    # template includes the extension, even if no updates are being made to
-    # the extension. In addition, deactivated extensions are not
-    # automatically updated if a new version of the extension is released.
-    #
-    # @option params [String] :type_name
-    #   The type name of the extension, in this account and region. If you
-    #   specified a type name alias when enabling the extension, use the type
-    #   name alias.
-    #
-    #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :type
-    #   The extension type.
-    #
-    #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account and
-    #   region.
-    #
-    #   Conditional: You must specify either `Arn`, or `TypeName` and `Type`.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.deactivate_type({
-    #     type_name: "TypeName",
-    #     type: "RESOURCE", # accepts RESOURCE, MODULE
-    #     arn: "PrivateTypeArn",
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeactivateType AWS API Documentation
-    #
-    # @overload deactivate_type(params = {})
-    # @param [Hash] params ({})
-    def deactivate_type(params = {}, options = {})
-      req = build_request(:deactivate_type, params)
-      req.send_request(options)
-    end
-
     # Deletes the specified change set. Deleting change sets ensures that no
     # one executes the wrong change set.
     #
-    # If the call successfully completes, CloudFormation successfully
+    # If the call successfully completes, AWS CloudFormation successfully
     # deleted the change set.
     #
     # If `IncludeNestedStacks` specifies `True` during the creation of the
@@ -1804,28 +1578,28 @@ module Aws::CloudFormation
     # @option params [Array<String>] :retain_resources
     #   For stacks in the `DELETE_FAILED` state, a list of resource logical
     #   IDs that are associated with the resources you want to retain. During
-    #   deletion, CloudFormation deletes the stack but does not delete the
+    #   deletion, AWS CloudFormation deletes the stack but does not delete the
     #   retained resources.
     #
     #   Retaining resources is useful when you cannot delete a resource, such
     #   as a non-empty S3 bucket, but you want to delete the stack.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to delete the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that AWS CloudFormation assumes to delete the
+    #   stack. AWS CloudFormation uses the role's credentials to make calls
+    #   on your behalf.
     #
-    #   If you don't specify a value, CloudFormation uses the role that was
-    #   previously associated with the stack. If no role is available,
+    #   If you don't specify a value, AWS CloudFormation uses the role that
+    #   was previously associated with the stack. If no role is available, AWS
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `DeleteStack` request. Specify this token
-    #   if you plan to retry requests so that CloudFormation knows that
+    #   if you plan to retry requests so that AWS CloudFormation knows that
     #   you're not attempting to delete a stack with the same name. You might
-    #   retry `DeleteStack` requests to ensure that CloudFormation
+    #   retry `DeleteStack` requests to ensure that AWS CloudFormation
     #   successfully received them.
     #
     #   All events triggered by a given stack operation are assigned the same
@@ -1870,14 +1644,14 @@ module Aws::CloudFormation
     #   instances for.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of the accounts that you want
-    #   to delete stack instances for.
+    #   \[Self-managed permissions\] The names of the AWS accounts that you
+    #   want to delete stack instances for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [Types::DeploymentTargets] :deployment_targets
-    #   \[Service-managed permissions\] The Organizations accounts from which
-    #   to delete stack instances.
+    #   \[Service-managed permissions\] The AWS Organizations accounts from
+    #   which to delete stack instances.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
@@ -1885,7 +1659,8 @@ module Aws::CloudFormation
     #   The Regions where you want to delete stack set instances.
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
-    #   Preferences for how CloudFormation performs this stack set operation.
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
     #
     # @option params [required, Boolean] :retain_stacks
     #   Removes the stack instances from the specified stack set, but doesn't
@@ -1905,10 +1680,10 @@ module Aws::CloudFormation
     #   automatically.
     #
     #   The operation ID also functions as an idempotency token, to ensure
-    #   that CloudFormation performs the stack set operation only once, even
-    #   if you retry the request multiple times. You can retry stack set
-    #   operation requests to ensure that CloudFormation successfully received
-    #   them.
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You can retry stack set
+    #   operation requests to ensure that AWS CloudFormation successfully
+    #   received them.
     #
     #   Repeating this stack set operation with a new operation ID retries all
     #   stack instances whose status is `OUTDATED`.
@@ -1929,9 +1704,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -1999,9 +1774,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -2088,10 +1863,10 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Retrieves your account's CloudFormation limits, such as the maximum
-    # number of stacks that you can create in your account. For more
-    # information about account limits, see [CloudFormation Limits][1] in
-    # the *CloudFormation User Guide*.
+    # Retrieves your account's AWS CloudFormation limits, such as the
+    # maximum number of stacks that you can create in your account. For more
+    # information about account limits, see [AWS CloudFormation Limits][1]
+    # in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -2130,9 +1905,9 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Returns the inputs for the change set and a list of changes that
+    # Returns the inputs for the change set and a list of changes that AWS
     # CloudFormation will make if you execute the change set. For more
-    # information, see [Updating Stacks Using Change Sets][1] in the
+    # information, see [Updating Stacks Using Change Sets][1] in the AWS
     # CloudFormation User Guide.
     #
     #
@@ -2246,60 +2021,6 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Returns information about a CloudFormation extension publisher.
-    #
-    # If you do not supply a `PublisherId`, and you have registered as an
-    # extension publisher, `DescribePublisher` returns information about
-    # your own publisher account.
-    #
-    # For more information on registering as a publisher, see:
-    #
-    # * [RegisterPublisher][1]
-    #
-    # * [Publishing extensions to make them available for public use][2] in
-    #   the *CloudFormation CLI User Guide*
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html
-    # [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html
-    #
-    # @option params [String] :publisher_id
-    #   The ID of the extension publisher.
-    #
-    #   If you do not supply a `PublisherId`, and you have registered as an
-    #   extension publisher, `DescribePublisher` returns information about
-    #   your own publisher account.
-    #
-    # @return [Types::DescribePublisherOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribePublisherOutput#publisher_id #publisher_id} => String
-    #   * {Types::DescribePublisherOutput#publisher_status #publisher_status} => String
-    #   * {Types::DescribePublisherOutput#identity_provider #identity_provider} => String
-    #   * {Types::DescribePublisherOutput#publisher_profile #publisher_profile} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_publisher({
-    #     publisher_id: "PublisherId",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.publisher_id #=> String
-    #   resp.publisher_status #=> String, one of "VERIFIED", "UNVERIFIED"
-    #   resp.identity_provider #=> String, one of "AWS_Marketplace", "GitHub", "Bitbucket"
-    #   resp.publisher_profile #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribePublisher AWS API Documentation
-    #
-    # @overload describe_publisher(params = {})
-    # @param [Hash] params ({})
-    def describe_publisher(params = {}, options = {})
-      req = build_request(:describe_publisher, params)
-      req.send_request(options)
-    end
-
     # Returns information about a stack drift detection operation. A stack
     # drift detection operation detects whether a stack's actual
     # configuration differs, or has *drifted*, from it's expected
@@ -2323,10 +2044,10 @@ module Aws::CloudFormation
     # @option params [required, String] :stack_drift_detection_id
     #   The ID of the drift detection results of this operation.
     #
-    #   CloudFormation generates new results, with a new drift detection ID,
-    #   each time this operation is run. However, the number of drift results
-    #   CloudFormation retains for any given stack, and for how long, may
-    #   vary.
+    #   AWS CloudFormation generates new results, with a new drift detection
+    #   ID, each time this operation is run. However, the number of drift
+    #   results AWS CloudFormation retains for any given stack, and for how
+    #   long, may vary.
     #
     # @return [Types::DescribeStackDriftDetectionStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2365,7 +2086,7 @@ module Aws::CloudFormation
 
     # Returns all stack related events for a specified stack in reverse
     # chronological order. For more information about a stack's event
-    # history, go to [Stacks][1] in the CloudFormation User Guide.
+    # history, go to [Stacks][1] in the AWS CloudFormation User Guide.
     #
     # <note markdown="1"> You can list events for stacks that have failed to create or have been
     # deleted by specifying the unique stack identifier (stack ID).
@@ -2431,7 +2152,7 @@ module Aws::CloudFormation
     end
 
     # Returns the stack instance that's associated with the specified stack
-    # set, account, and Region.
+    # set, AWS account, and Region.
     #
     # For a list of stack instances that are associated with a specific
     # stack set, use ListStackInstances.
@@ -2441,7 +2162,7 @@ module Aws::CloudFormation
     #   stack instance information for.
     #
     # @option params [required, String] :stack_instance_account
-    #   The ID of an account that's associated with this stack instance.
+    #   The ID of an AWS account that's associated with this stack instance.
     #
     # @option params [required, String] :stack_instance_region
     #   The name of a Region that's associated with this stack instance.
@@ -2459,9 +2180,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -2568,7 +2289,7 @@ module Aws::CloudFormation
 
     # Returns drift information for the resources that have been checked for
     # drift in the specified stack. This includes actual and expected
-    # configuration values for resources where CloudFormation detects
+    # configuration values for resources where AWS CloudFormation detects
     # configuration drift.
     #
     # For a given stack, there will be one `StackResourceDrift` for each
@@ -2602,7 +2323,8 @@ module Aws::CloudFormation
     #   * `IN_SYNC`\: The resources's actual configuration matches its
     #     expected template configuration.
     #
-    #   * `NOT_CHECKED`\: CloudFormation does not currently return this value.
+    #   * `NOT_CHECKED`\: AWS CloudFormation does not currently return this
+    #     value.
     #
     # @option params [String] :next_token
     #   A string that identifies the next page of stack resource drift
@@ -2662,11 +2384,11 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Returns Amazon Web Services resource descriptions for running and
-    # deleted stacks. If `StackName` is specified, all the associated
-    # resources that are part of the stack are returned. If
-    # `PhysicalResourceId` is specified, the associated resources of the
-    # stack that the resource belongs to are returned.
+    # Returns AWS resource descriptions for running and deleted stacks. If
+    # `StackName` is specified, all the associated resources that are part
+    # of the stack are returned. If `PhysicalResourceId` is specified, the
+    # associated resources of the stack that the resource belongs to are
+    # returned.
     #
     # <note markdown="1"> Only the first 100 resources will be returned. If your stack has more
     # resources than this, you should use `ListStackResources` instead.
@@ -2679,8 +2401,8 @@ module Aws::CloudFormation
     # You must specify either `StackName` or `PhysicalResourceId`, but not
     # both. In addition, you can specify `LogicalResourceId` to filter the
     # returned result. For more information about resources, the
-    # `LogicalResourceId` and `PhysicalResourceId`, go to the
-    # [CloudFormation User Guide][1].
+    # `LogicalResourceId` and `PhysicalResourceId`, go to the [AWS
+    # CloudFormation User Guide][1].
     #
     # <note markdown="1"> A `ValidationError` is returned if you specify both `StackName` and
     # `PhysicalResourceId` in the same request.
@@ -2712,7 +2434,7 @@ module Aws::CloudFormation
     #
     # @option params [String] :physical_resource_id
     #   The name or unique identifier that corresponds to a physical instance
-    #   ID of a resource supported by CloudFormation.
+    #   ID of a resource supported by AWS CloudFormation.
     #
     #   For example, for an Amazon Elastic Compute Cloud (EC2) instance,
     #   `PhysicalResourceId` corresponds to the `InstanceId`. You can pass the
@@ -2780,9 +2502,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -2864,9 +2586,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -3055,14 +2777,6 @@ module Aws::CloudFormation
     #   that specific extension version. Otherwise, it returns information
     #   about the default extension version.
     #
-    # @option params [String] :publisher_id
-    #   The publisher ID of the extension publisher.
-    #
-    #   Extensions provided by Amazon are not assigned a publisher ID.
-    #
-    # @option params [String] :public_version_number
-    #   The version number of a public third-party extension.
-    #
     # @return [Types::DescribeTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTypeOutput#arn #arn} => String
@@ -3070,28 +2784,17 @@ module Aws::CloudFormation
     #   * {Types::DescribeTypeOutput#type_name #type_name} => String
     #   * {Types::DescribeTypeOutput#default_version_id #default_version_id} => String
     #   * {Types::DescribeTypeOutput#is_default_version #is_default_version} => Boolean
-    #   * {Types::DescribeTypeOutput#type_tests_status #type_tests_status} => String
-    #   * {Types::DescribeTypeOutput#type_tests_status_description #type_tests_status_description} => String
     #   * {Types::DescribeTypeOutput#description #description} => String
     #   * {Types::DescribeTypeOutput#schema #schema} => String
     #   * {Types::DescribeTypeOutput#provisioning_type #provisioning_type} => String
     #   * {Types::DescribeTypeOutput#deprecated_status #deprecated_status} => String
     #   * {Types::DescribeTypeOutput#logging_config #logging_config} => Types::LoggingConfig
-    #   * {Types::DescribeTypeOutput#required_activated_types #required_activated_types} => Array&lt;Types::RequiredActivatedType&gt;
     #   * {Types::DescribeTypeOutput#execution_role_arn #execution_role_arn} => String
     #   * {Types::DescribeTypeOutput#visibility #visibility} => String
     #   * {Types::DescribeTypeOutput#source_url #source_url} => String
     #   * {Types::DescribeTypeOutput#documentation_url #documentation_url} => String
     #   * {Types::DescribeTypeOutput#last_updated #last_updated} => Time
     #   * {Types::DescribeTypeOutput#time_created #time_created} => Time
-    #   * {Types::DescribeTypeOutput#configuration_schema #configuration_schema} => String
-    #   * {Types::DescribeTypeOutput#publisher_id #publisher_id} => String
-    #   * {Types::DescribeTypeOutput#original_type_name #original_type_name} => String
-    #   * {Types::DescribeTypeOutput#original_type_arn #original_type_arn} => String
-    #   * {Types::DescribeTypeOutput#public_version_number #public_version_number} => String
-    #   * {Types::DescribeTypeOutput#latest_public_version #latest_public_version} => String
-    #   * {Types::DescribeTypeOutput#is_activated #is_activated} => Boolean
-    #   * {Types::DescribeTypeOutput#auto_update #auto_update} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3100,8 +2803,6 @@ module Aws::CloudFormation
     #     type_name: "TypeName",
     #     arn: "TypeArn",
     #     version_id: "TypeVersionId",
-    #     publisher_id: "PublisherId",
-    #     public_version_number: "PublicVersionNumber",
     #   })
     #
     # @example Response structure
@@ -3111,34 +2812,18 @@ module Aws::CloudFormation
     #   resp.type_name #=> String
     #   resp.default_version_id #=> String
     #   resp.is_default_version #=> Boolean
-    #   resp.type_tests_status #=> String, one of "PASSED", "FAILED", "IN_PROGRESS", "NOT_TESTED"
-    #   resp.type_tests_status_description #=> String
     #   resp.description #=> String
     #   resp.schema #=> String
     #   resp.provisioning_type #=> String, one of "NON_PROVISIONABLE", "IMMUTABLE", "FULLY_MUTABLE"
     #   resp.deprecated_status #=> String, one of "LIVE", "DEPRECATED"
     #   resp.logging_config.log_role_arn #=> String
     #   resp.logging_config.log_group_name #=> String
-    #   resp.required_activated_types #=> Array
-    #   resp.required_activated_types[0].type_name_alias #=> String
-    #   resp.required_activated_types[0].original_type_name #=> String
-    #   resp.required_activated_types[0].publisher_id #=> String
-    #   resp.required_activated_types[0].supported_major_versions #=> Array
-    #   resp.required_activated_types[0].supported_major_versions[0] #=> Integer
     #   resp.execution_role_arn #=> String
     #   resp.visibility #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.source_url #=> String
     #   resp.documentation_url #=> String
     #   resp.last_updated #=> Time
     #   resp.time_created #=> Time
-    #   resp.configuration_schema #=> String
-    #   resp.publisher_id #=> String
-    #   resp.original_type_name #=> String
-    #   resp.original_type_arn #=> String
-    #   resp.public_version_number #=> String
-    #   resp.latest_public_version #=> String
-    #   resp.is_activated #=> Boolean
-    #   resp.auto_update #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeType AWS API Documentation
     #
@@ -3202,13 +2887,14 @@ module Aws::CloudFormation
     # Detects whether a stack's actual configuration differs, or has
     # *drifted*, from it's expected configuration, as defined in the stack
     # template and any values specified as template parameters. For each
-    # resource in the stack that supports drift detection, CloudFormation
-    # compares the actual configuration of the resource with its expected
-    # template configuration. Only resource properties explicitly defined in
-    # the stack template are checked for drift. A stack is considered to
-    # have drifted if one or more of its resources differ from their
-    # expected template configurations. For more information, see [Detecting
-    # Unregulated Configuration Changes to Stacks and Resources][1].
+    # resource in the stack that supports drift detection, AWS
+    # CloudFormation compares the actual configuration of the resource with
+    # its expected template configuration. Only resource properties
+    # explicitly defined in the stack template are checked for drift. A
+    # stack is considered to have drifted if one or more of its resources
+    # differ from their expected template configurations. For more
+    # information, see [Detecting Unregulated Configuration Changes to
+    # Stacks and Resources][1].
     #
     # Use `DetectStackDrift` to detect drift on all supported resources for
     # a given stack, or DetectStackResourceDrift to detect drift on
@@ -3224,8 +2910,8 @@ module Aws::CloudFormation
     # completed, use DescribeStackResourceDrifts to return drift information
     # about the stack and its resources.
     #
-    # When detecting drift on a stack, CloudFormation does not detect drift
-    # on any nested stacks belonging to that stack. Perform
+    # When detecting drift on a stack, AWS CloudFormation does not detect
+    # drift on any nested stacks belonging to that stack. Perform
     # `DetectStackDrift` directly on the nested stack itself.
     #
     #
@@ -3267,7 +2953,7 @@ module Aws::CloudFormation
     # differs, or has *drifted*, from it's expected configuration, as
     # defined in the stack template and any values specified as template
     # parameters. This information includes actual and expected property
-    # values for resources in which CloudFormation detects drift. Only
+    # values for resources in which AWS CloudFormation detects drift. Only
     # resource properties explicitly defined in the stack template are
     # checked for drift. For more information about stack and resource
     # drift, see [Detecting Unregulated Configuration Changes to Stacks and
@@ -3381,8 +3067,8 @@ module Aws::CloudFormation
     #   operation.
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
-    #   The user-specified preferences for how CloudFormation performs a stack
-    #   set operation.
+    #   The user-specified preferences for how AWS CloudFormation performs a
+    #   stack set operation.
     #
     #   For more information on maximum concurrent accounts and failure
     #   tolerance, see [Stack set operation options][1].
@@ -3410,9 +3096,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -3452,13 +3138,13 @@ module Aws::CloudFormation
     end
 
     # Returns the estimated monthly cost of a template. The return value is
-    # an Amazon Web Services Simple Monthly Calculator URL with a query
-    # string that describes the resources required to run the template.
+    # an AWS Simple Monthly Calculator URL with a query string that
+    # describes the resources required to run the template.
     #
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. (For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   [Template Anatomy][1] in the AWS CloudFormation User Guide.)
     #
     #   Conditional: You must pass `TemplateBody` or `TemplateURL`. If both
     #   are passed, only `TemplateBody` is used.
@@ -3470,7 +3156,7 @@ module Aws::CloudFormation
     # @option params [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template that is located in an Amazon S3 bucket or a Systems Manager
-    #   document. For more information, go to [Template Anatomy][1] in the
+    #   document. For more information, go to [Template Anatomy][1] in the AWS
     #   CloudFormation User Guide.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
@@ -3517,14 +3203,14 @@ module Aws::CloudFormation
 
     # Updates a stack using the input information that was provided when the
     # specified change set was created. After the call successfully
-    # completes, CloudFormation starts updating the stack. Use the
+    # completes, AWS CloudFormation starts updating the stack. Use the
     # DescribeStacks action to view the status of the update.
     #
-    # When you execute a change set, CloudFormation deletes all other change
-    # sets associated with the stack because they aren't valid for the
-    # updated stack.
+    # When you execute a change set, AWS CloudFormation deletes all other
+    # change sets associated with the stack because they aren't valid for
+    # the updated stack.
     #
-    # If a stack policy is associated with the stack, CloudFormation
+    # If a stack policy is associated with the stack, AWS CloudFormation
     # enforces the policy during the update. You can't specify a temporary
     # stack policy that overrides the current policy.
     #
@@ -3541,10 +3227,10 @@ module Aws::CloudFormation
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `ExecuteChangeSet` request. Specify this
-    #   token if you plan to retry requests so that CloudFormation knows that
-    #   you're not attempting to execute a change set to update a stack with
-    #   the same name. You might retry `ExecuteChangeSet` requests to ensure
-    #   that CloudFormation successfully received them.
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to execute a change set to update a stack
+    #   with the same name. You might retry `ExecuteChangeSet` requests to
+    #   ensure that AWS CloudFormation successfully received them.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3617,19 +3303,19 @@ module Aws::CloudFormation
     #   Default: There is no default value.
     #
     # @option params [String] :change_set_name
-    #   The name or Amazon Resource Name (ARN) of a change set for which
+    #   The name or Amazon Resource Name (ARN) of a change set for which AWS
     #   CloudFormation returns the associated template. If you specify a name,
     #   you must also specify the `StackName`.
     #
     # @option params [String] :template_stage
     #   For templates that include transforms, the stage of the template that
-    #   CloudFormation returns. To get the user-submitted template, specify
-    #   `Original`. To get the template after CloudFormation has processed all
-    #   transforms, specify `Processed`.
+    #   AWS CloudFormation returns. To get the user-submitted template,
+    #   specify `Original`. To get the template after AWS CloudFormation has
+    #   processed all transforms, specify `Processed`.
     #
     #   If the template doesn't include transforms, `Original` and
-    #   `Processed` return the same template. By default, CloudFormation
-    #   specifies `Processed`.
+    #   `Processed` return the same template. By default, AWS CloudFormation
+    #   specifies `Original`.
     #
     # @return [Types::GetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3675,7 +3361,8 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information about
-    #   templates, see [Template Anatomy][1] in the CloudFormation User Guide.
+    #   templates, see [Template Anatomy][1] in the AWS CloudFormation User
+    #   Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -3688,7 +3375,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
     #   bucket or a Systems Manager document. For more information about
-    #   templates, see [Template Anatomy][1] in the CloudFormation User Guide.
+    #   templates, see [Template Anatomy][1] in the AWS CloudFormation User
+    #   Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -3726,9 +3414,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -3792,86 +3480,8 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Import existing stacks into a new stack sets. Use the stack import
-    # operation to import up to 10 stacks into a new stack set in the same
-    # account as the source stack or in a different administrator account
-    # and Region, by specifying the stack ID of the stack you intend to
-    # import.
-    #
-    # <note markdown="1"> `ImportStacksToStackSet` is only supported by self-managed
-    # permissions.
-    #
-    #  </note>
-    #
-    # @option params [required, String] :stack_set_name
-    #   The name of the stack set. The name must be unique in the Region where
-    #   you create your stack set.
-    #
-    # @option params [required, Array<String>] :stack_ids
-    #   The IDs of the stacks you are importing into a stack set. You import
-    #   up to 10 stacks per stack set at a time.
-    #
-    # @option params [Types::StackSetOperationPreferences] :operation_preferences
-    #   The user-specified preferences for how CloudFormation performs a stack
-    #   set operation.
-    #
-    #   For more information on maximum concurrent accounts and failure
-    #   tolerance, see [Stack set operation options][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
-    #
-    # @option params [String] :operation_id
-    #   A unique, user defined, identifier for the stack set operation.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @option params [String] :call_as
-    #   By default, `SELF` is specified. Use `SELF` for stack sets with
-    #   self-managed permissions.
-    #
-    #   * If you are signed in to the management account, specify `SELF`.
-    #
-    #   * For service managed stack sets, specify `DELEGATED_ADMIN`.
-    #
-    # @return [Types::ImportStacksToStackSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ImportStacksToStackSetOutput#operation_id #operation_id} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.import_stacks_to_stack_set({
-    #     stack_set_name: "StackSetNameOrId", # required
-    #     stack_ids: ["StackId"], # required
-    #     operation_preferences: {
-    #       region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
-    #       region_order: ["Region"],
-    #       failure_tolerance_count: 1,
-    #       failure_tolerance_percentage: 1,
-    #       max_concurrent_count: 1,
-    #       max_concurrent_percentage: 1,
-    #     },
-    #     operation_id: "ClientRequestToken",
-    #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.operation_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ImportStacksToStackSet AWS API Documentation
-    #
-    # @overload import_stacks_to_stack_set(params = {})
-    # @param [Hash] params ({})
-    def import_stacks_to_stack_set(params = {}, options = {})
-      req = build_request(:import_stacks_to_stack_set, params)
-      req.send_request(options)
-    end
-
     # Returns the ID and status of each active change set for a stack. For
-    # example, CloudFormation lists change sets that are in the
+    # example, AWS CloudFormation lists change sets that are in the
     # `CREATE_IN_PROGRESS` or `CREATE_PENDING` state.
     #
     # @option params [required, String] :stack_name
@@ -3927,7 +3537,7 @@ module Aws::CloudFormation
     # values that you can import into other stacks. To import values, use
     # the [ `Fn::ImportValue` ][1] function.
     #
-    # For more information, see [ CloudFormation Export Stack Output
+    # For more information, see [ AWS CloudFormation Export Stack Output
     # Values][2].
     #
     #
@@ -3982,7 +3592,7 @@ module Aws::CloudFormation
     # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html
     #
     # @option params [required, String] :export_name
-    #   The name of the exported output value. CloudFormation returns the
+    #   The name of the exported output value. AWS CloudFormation returns the
     #   stack names that are importing this value.
     #
     # @option params [String] :next_token
@@ -4021,8 +3631,8 @@ module Aws::CloudFormation
 
     # Returns summary information about stack instances that are associated
     # with the specified stack set. You can filter for stack instances that
-    # are associated with a specific account name or Region, or that have a
-    # specific status.
+    # are associated with a specific AWS account name or Region, or that
+    # have a specific status.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to list stack
@@ -4046,7 +3656,7 @@ module Aws::CloudFormation
     #   The status that stack instances are filtered by.
     #
     # @option params [String] :stack_instance_account
-    #   The name of the account that you want to list stack instances for.
+    #   The name of the AWS account that you want to list stack instances for.
     #
     # @option params [String] :stack_instance_region
     #   The name of the Region where you want to list stack instances.
@@ -4064,9 +3674,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -4216,9 +3826,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -4296,9 +3906,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -4343,8 +3953,8 @@ module Aws::CloudFormation
     # the user.
     #
     # * \[Self-managed permissions\] If you set the `CallAs` parameter to
-    #   `SELF` while signed in to your account, `ListStackSets` returns all
-    #   self-managed stack sets in your account.
+    #   `SELF` while signed in to your AWS account, `ListStackSets` returns
+    #   all self-managed stack sets in your AWS account.
     #
     # * \[Service-managed permissions\] If you set the `CallAs` parameter to
     #   `SELF` while signed in to the organization's management account,
@@ -4386,9 +3996,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -4607,11 +4217,6 @@ module Aws::CloudFormation
     #
     #   The default is `LIVE`.
     #
-    # @option params [String] :publisher_id
-    #   The publisher ID of the extension publisher.
-    #
-    #   Extensions published by Amazon are not assigned a publisher ID.
-    #
     # @return [Types::ListTypeVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTypeVersionsOutput#type_version_summaries #type_version_summaries} => Array&lt;Types::TypeVersionSummary&gt;
@@ -4624,11 +4229,10 @@ module Aws::CloudFormation
     #   resp = client.list_type_versions({
     #     type: "RESOURCE", # accepts RESOURCE, MODULE
     #     type_name: "TypeName",
-    #     arn: "TypeArn",
+    #     arn: "PrivateTypeArn",
     #     max_results: 1,
     #     next_token: "NextToken",
     #     deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
-    #     publisher_id: "PublisherId",
     #   })
     #
     # @example Response structure
@@ -4641,7 +4245,6 @@ module Aws::CloudFormation
     #   resp.type_version_summaries[0].arn #=> String
     #   resp.type_version_summaries[0].time_created #=> Time
     #   resp.type_version_summaries[0].description #=> String
-    #   resp.type_version_summaries[0].public_version_number #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersions AWS API Documentation
@@ -4657,45 +4260,36 @@ module Aws::CloudFormation
     # with CloudFormation.
     #
     # @option params [String] :visibility
-    #   The scope at which the extensions are visible and usable in
+    #   The scope at which the extension is visible and usable in
     #   CloudFormation operations.
     #
     #   Valid values include:
     #
-    #   * `PRIVATE`\: Extensions that are visible and usable within this
-    #     account and region. This includes:
+    #   * `PRIVATE`\: The extension is only visible and usable within the
+    #     account in which it is registered. Currently, AWS CloudFormation
+    #     marks any extension you create as `PRIVATE`.
     #
-    #     * Private extensions you have registered in this account and region.
-    #
-    #     * Public extensions that you have activated in this account and
-    #       region.
-    #
-    #   * `PUBLIC`\: Extensions that are publicly visible and available to be
-    #     activated within any Amazon account. This includes extensions from
-    #     Amazon, as well as third-party publishers.
+    #   * `PUBLIC`\: The extension is publically visible and usable within any
+    #     Amazon account.
     #
     #   The default is `PRIVATE`.
     #
     # @option params [String] :provisioning_type
-    #   For resource types, the provisioning behavior of the resource type.
-    #   CloudFormation determines the provisioning type during registration,
-    #   based on the types of handlers in the schema handler package
-    #   submitted.
+    #   The provisioning behavior of the type. AWS CloudFormation determines
+    #   the provisioning type during registration, based on the types of
+    #   handlers in the schema handler package submitted.
     #
     #   Valid values include:
     #
-    #   * `FULLY_MUTABLE`\: The resource type includes an update handler to
-    #     process updates to the type during stack update operations.
+    #   * `FULLY_MUTABLE`\: The extension includes an update handler to
+    #     process updates to the extension during stack update operations.
     #
-    #   * `IMMUTABLE`\: The resource type does not include an update handler,
-    #     so the type cannot be updated and must instead be replaced during
+    #   * `IMMUTABLE`\: The extension does not include an update handler, so
+    #     the extension cannot be updated and must instead be replaced during
     #     stack update operations.
     #
-    #   * `NON_PROVISIONABLE`\: The resource type does not include create,
-    #     read, and delete handlers, and therefore cannot actually be
-    #     provisioned.
-    #
-    #   The default is `FULLY_MUTABLE`.
+    #   * `NON_PROVISIONABLE`\: The extension does not include create, read,
+    #     and delete handlers, and therefore cannot actually be provisioned.
     #
     # @option params [String] :deprecated_status
     #   The deprecation status of the extension that you want to get summary
@@ -4711,12 +4305,6 @@ module Aws::CloudFormation
     #
     # @option params [String] :type
     #   The type of extension.
-    #
-    # @option params [Types::TypeFilters] :filters
-    #   Filter criteria to use in determining which extensions to return.
-    #
-    #   If you specify a filter, CloudFormation ignores any specified
-    #   `Visibility` value when returning the list of types.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
@@ -4746,11 +4334,6 @@ module Aws::CloudFormation
     #     provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
     #     deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
     #     type: "RESOURCE", # accepts RESOURCE, MODULE
-    #     filters: {
-    #       category: "REGISTERED", # accepts REGISTERED, ACTIVATED, THIRD_PARTY, AWS_TYPES
-    #       publisher_id: "PublisherId",
-    #       type_name_prefix: "TypeNamePrefix",
-    #     },
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4764,13 +4347,6 @@ module Aws::CloudFormation
     #   resp.type_summaries[0].type_arn #=> String
     #   resp.type_summaries[0].last_updated #=> Time
     #   resp.type_summaries[0].description #=> String
-    #   resp.type_summaries[0].publisher_id #=> String
-    #   resp.type_summaries[0].original_type_name #=> String
-    #   resp.type_summaries[0].public_version_number #=> String
-    #   resp.type_summaries[0].latest_public_version #=> String
-    #   resp.type_summaries[0].publisher_identity #=> String, one of "AWS_Marketplace", "GitHub", "Bitbucket"
-    #   resp.type_summaries[0].publisher_name #=> String
-    #   resp.type_summaries[0].is_activated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypes AWS API Documentation
@@ -4779,81 +4355,6 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def list_types(params = {}, options = {})
       req = build_request(:list_types, params)
-      req.send_request(options)
-    end
-
-    # Publishes the specified extension to the CloudFormation registry as a
-    # public extension in this region. Public extensions are available for
-    # use by all CloudFormation users. For more information on publishing
-    # extensions, see [Publishing extensions to make them available for
-    # public use][1] in the *CloudFormation CLI User Guide*.
-    #
-    # To publish an extension, you must be registered as a publisher with
-    # CloudFormation. For more information, see [RegisterPublisher][2].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html
-    #
-    # @option params [String] :type
-    #   The type of the extension.
-    #
-    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :arn
-    #   The Amazon Resource Number (ARN) of the extension.
-    #
-    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :type_name
-    #   The name of the extension.
-    #
-    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :public_version_number
-    #   The version number to assign to this version of the extension.
-    #
-    #   Use the following format, and adhere to semantic versioning when
-    #   assigning a version number to your extension:
-    #
-    #   `MAJOR.MINOR.PATCH`
-    #
-    #   For more information, see [Semantic Versioning 2.0.0][1].
-    #
-    #   If you do not specify a version number, CloudFormation increments the
-    #   version number by one minor version release.
-    #
-    #   The first time you publish a type, CloudFormation sets the version
-    #   number to `1.0.0`, regardless of the value you specify.
-    #
-    #
-    #
-    #   [1]: https://semver.org/
-    #
-    # @return [Types::PublishTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::PublishTypeOutput#public_type_arn #public_type_arn} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.publish_type({
-    #     type: "RESOURCE", # accepts RESOURCE, MODULE
-    #     arn: "PrivateTypeArn",
-    #     type_name: "TypeName",
-    #     public_version_number: "PublicVersionNumber",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.public_type_arn #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PublishType AWS API Documentation
-    #
-    # @overload publish_type(params = {})
-    # @param [Hash] params ({})
-    def publish_type(params = {}, options = {})
-      req = build_request(:publish_type, params)
       req.send_request(options)
     end
 
@@ -4924,7 +4425,7 @@ module Aws::CloudFormation
     #     operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #     current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #     status_message: "StatusMessage",
-    #     error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure, InvalidTypeConfiguration
+    #     error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure
     #     resource_model: "ResourceModel",
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -4938,72 +4439,9 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Registers your account as a publisher of public extensions in the
-    # CloudFormation registry. Public extensions are available for use by
-    # all CloudFormation users. This publisher ID applies to your account in
-    # all Regions.
-    #
-    # For information on requirements for registering as a public extension
-    # publisher, see [Registering your account to publish CloudFormation
-    # extensions][1] in the *CloudFormation CLI User Guide*.
-    #
-    #
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs
-    #
-    # @option params [Boolean] :accept_terms_and_conditions
-    #   Whether you accept the [Terms and Conditions][1] for publishing
-    #   extensions in the CloudFormation registry. You must accept the terms
-    #   and conditions in order to register to publish public extensions to
-    #   the CloudFormation registry.
-    #
-    #   The default is `false`.
-    #
-    #
-    #
-    #   [1]: https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf
-    #
-    # @option params [String] :connection_arn
-    #   If you are using a Bitbucket or GitHub account for identity
-    #   verification, the Amazon Resource Name (ARN) for your connection to
-    #   that account.
-    #
-    #   For more information, see [Registering your account to publish
-    #   CloudFormation extensions][1] in the *CloudFormation CLI User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs
-    #
-    # @return [Types::RegisterPublisherOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::RegisterPublisherOutput#publisher_id #publisher_id} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.register_publisher({
-    #     accept_terms_and_conditions: false,
-    #     connection_arn: "ConnectionArn",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.publisher_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RegisterPublisher AWS API Documentation
-    #
-    # @overload register_publisher(params = {})
-    # @param [Hash] params ({})
-    def register_publisher(params = {}, options = {})
-      req = build_request(:register_publisher, params)
-      req.send_request(options)
-    end
-
     # Registers an extension with the CloudFormation service. Registering an
     # extension makes it available for use in CloudFormation templates in
-    # your account, and includes:
+    # your AWS account, and includes:
     #
     # * Validating the extension schema
     #
@@ -5025,17 +4463,9 @@ module Aws::CloudFormation
     # you can use ` DescribeTypeRegistration ` to monitor the progress of
     # the registration request.
     #
-    # Once you have registered a private extension in your account and
-    # region, use
-    # [SetTypeConfiguration](AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
-    # to specify configuration properties for the extension. For more
-    # information, see [Configuring extensions at the account level][2] in
-    # the *CloudFormation User Guide*.
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
     #
     # @option params [String] :type
     #   The kind of extension.
@@ -5043,13 +4473,8 @@ module Aws::CloudFormation
     # @option params [required, String] :type_name
     #   The name of the extension being registered.
     #
-    #   We recommend that extension names adhere to the following patterns:
-    #
-    #   * For resource types,
-    #     *company\_or\_organization*\::*service*\::*type*.
-    #
-    #   * For modules,
-    #     *company\_or\_organization*\::*service*\::*type*\::MODULE.
+    #   We recommend that extension names adhere to the following pattern:
+    #   *company\_or\_organization*\::*service*\::*type*.
     #
     #   <note markdown="1"> The following organization namespaces are reserved and cannot be used
     #   in your extension names:
@@ -5079,8 +4504,8 @@ module Aws::CloudFormation
     #   <note markdown="1"> The user registering the extension must be able to access the package
     #   in the S3 bucket. That is, the user needs to have [GetObject][2]
     #   permissions for the schema handler package. For more information, see
-    #   [Actions, Resources, and Condition Keys for Amazon S3][3] in the
-    #   *Identity and Access Management User Guide*.
+    #   [Actions, Resources, and Condition Keys for Amazon S3][3] in the *AWS
+    #   Identity and Access Management User Guide*.
     #
     #    </note>
     #
@@ -5095,25 +4520,15 @@ module Aws::CloudFormation
     #
     # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role for CloudFormation to
-    #   assume when invoking the extension.
-    #
-    #   For CloudFormation to assume the specified execution role, the role
-    #   must contain a trust relationship with the CloudFormation service
-    #   principle (`resources.cloudformation.amazonaws.com`). For more
-    #   information on adding trust relationships, see [Modifying a role trust
-    #   policy](IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
-    #   in the *Identity and Access Management User Guide*.
-    #
-    #   If your extension calls Amazon Web Services APIs in any of its
-    #   handlers, you must create an <i> <a
+    #   assume when invoking the extension. If your extension calls AWS APIs
+    #   in any of its handlers, you must create an <i> <a
     #   href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
     #   execution role</a> </i> that includes the necessary permissions to
-    #   call those Amazon Web Services APIs, and provision that execution role
-    #   in your account. When CloudFormation needs to invoke the resource type
-    #   handler, CloudFormation assumes this execution role to create a
-    #   temporary session token, which it then passes to the resource type
-    #   handler, thereby supplying your resource type with the appropriate
-    #   credentials.
+    #   call those AWS APIs, and provision that execution role in your
+    #   account. When CloudFormation needs to invoke the extension handler,
+    #   CloudFormation assumes this execution role to create a temporary
+    #   session token, which it then passes to the extension handler, thereby
+    #   supplying your extension with the appropriate credentials.
     #
     # @option params [String] :client_request_token
     #   A unique identifier that acts as an idempotency key for this
@@ -5160,8 +4575,8 @@ module Aws::CloudFormation
     #
     # @option params [String] :stack_policy_body
     #   Structure containing the stack policy body. For more information, go
-    #   to [ Prevent Updates to Stack Resources][1] in the CloudFormation User
-    #   Guide. You can specify either the `StackPolicyBody` or the
+    #   to [ Prevent Updates to Stack Resources][1] in the AWS CloudFormation
+    #   User Guide. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -5190,101 +4605,6 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def set_stack_policy(params = {}, options = {})
       req = build_request(:set_stack_policy, params)
-      req.send_request(options)
-    end
-
-    # Specifies the configuration data for a registered CloudFormation
-    # extension, in the given account and region.
-    #
-    # To view the current configuration data for an extension, refer to the
-    # `ConfigurationSchema` element of
-    # [DescribeType](AWSCloudFormation/latest/APIReference/API_DescribeType.html).
-    # For more information, see [Configuring extensions at the account
-    # level][1] in the *CloudFormation User Guide*.
-    #
-    # It is strongly recommended that you use dynamic references to restrict
-    # sensitive configuration definitions, such as third-party credentials.
-    # For more details on dynamic references, see [Using dynamic references
-    # to specify template values][2] in the *CloudFormation User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
-    # [2]: https://docs.aws.amazon.com/
-    #
-    # @option params [String] :type_arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account and
-    #   region.
-    #
-    #   For public extensions, this will be the ARN assigned when you
-    #   [activate the type][1] in this account and region. For private
-    #   extensions, this will be the ARN assigned when you [register the
-    #   type][2] in this account and region.
-    #
-    #   Do not include the extension versions suffix at the end of the ARN.
-    #   You can set the configuration for an extension, but not for a specific
-    #   extension version.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html
-    #
-    # @option params [required, String] :configuration
-    #   The configuration data for the extension, in this account and region.
-    #
-    #   The configuration data must be formatted as JSON, and validate against
-    #   the schema returned in the `ConfigurationSchema` response element of
-    #   [API\_DescribeType](AWSCloudFormation/latest/APIReference/API_DescribeType.html).
-    #   For more information, see [Defining account-level configuration data
-    #   for an extension][1] in the *CloudFormation CLI User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
-    #
-    # @option params [String] :configuration_alias
-    #   An alias by which to refer to this extension configuration data.
-    #
-    #   Conditional: Specifying a configuration alias is required when setting
-    #   a configuration for a resource type extension.
-    #
-    # @option params [String] :type_name
-    #   The name of the extension.
-    #
-    #   Conditional: You must specify `ConfigurationArn`, or `Type` and
-    #   `TypeName`.
-    #
-    # @option params [String] :type
-    #   The type of extension.
-    #
-    #   Conditional: You must specify `ConfigurationArn`, or `Type` and
-    #   `TypeName`.
-    #
-    # @return [Types::SetTypeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::SetTypeConfigurationOutput#configuration_arn #configuration_arn} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.set_type_configuration({
-    #     type_arn: "TypeArn",
-    #     configuration: "TypeConfiguration", # required
-    #     configuration_alias: "TypeConfigurationAlias",
-    #     type_name: "TypeName",
-    #     type: "RESOURCE", # accepts RESOURCE, MODULE
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.configuration_arn #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetTypeConfiguration AWS API Documentation
-    #
-    # @overload set_type_configuration(params = {})
-    # @param [Hash] params ({})
-    def set_type_configuration(params = {}, options = {})
-      req = build_request(:set_type_configuration, params)
       req.send_request(options)
     end
 
@@ -5334,11 +4654,11 @@ module Aws::CloudFormation
 
     # Sends a signal to the specified resource with a success or failure
     # status. You can use the SignalResource API in conjunction with a
-    # creation policy or update policy. CloudFormation doesn't proceed with
-    # a stack creation or update until resources receive the required number
-    # of signals or the timeout period is exceeded. The SignalResource API
-    # is useful in cases where you want to send signals from anywhere other
-    # than an Amazon EC2 instance.
+    # creation policy or update policy. AWS CloudFormation doesn't proceed
+    # with a stack creation or update until resources receive the required
+    # number of signals or the timeout period is exceeded. The
+    # SignalResource API is useful in cases where you want to send signals
+    # from anywhere other than an Amazon EC2 instance.
     #
     # @option params [required, String] :stack_name
     #   The stack name or unique stack ID that includes the resource that you
@@ -5357,7 +4677,7 @@ module Aws::CloudFormation
     #
     # @option params [required, String] :status
     #   The status of the signal, which is either success or failure. A
-    #   failure signal causes CloudFormation to immediately fail the stack
+    #   failure signal causes AWS CloudFormation to immediately fail the stack
     #   creation or update.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -5403,9 +4723,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -5430,115 +4750,6 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Tests a registered extension to make sure it meets all necessary
-    # requirements for being published in the CloudFormation registry.
-    #
-    # * For resource types, this includes passing all contracts tests
-    #   defined for the type.
-    #
-    # * For modules, this includes determining if the module's model meets
-    #   all necessary requirements.
-    #
-    # For more information, see [Testing your public extension prior to
-    # publishing][1] in the *CloudFormation CLI User Guide*.
-    #
-    # If you do not specify a version, CloudFormation uses the default
-    # version of the extension in your account and region for testing.
-    #
-    # To perform testing, CloudFormation assumes the execution role
-    # specified when the type was registered. For more information, see
-    # [RegisterType](AWSCloudFormation/latest/APIReference/API_RegisterType.html).
-    #
-    # Once you've initiated testing on an extension using `TestType`, you
-    # can use [DescribeType][2] to monitor the current test status and test
-    # status description for the extension.
-    #
-    # An extension must have a test status of `PASSED` before it can be
-    # published. For more information, see [Publishing extensions to make
-    # them available for public use][3] in the *CloudFormation CLI User
-    # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing
-    # [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    # [3]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html
-    #
-    # @option params [String] :arn
-    #   The Amazon Resource Number (ARN) of the extension.
-    #
-    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :type
-    #   The type of the extension to test.
-    #
-    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :type_name
-    #   The name of the extension to test.
-    #
-    #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
-    #
-    # @option params [String] :version_id
-    #   The version of the extension to test.
-    #
-    #   You can specify the version id with either `Arn`, or with `TypeName`
-    #   and `Type`.
-    #
-    #   If you do not specify a version, CloudFormation uses the default
-    #   version of the extension in this account and region for testing.
-    #
-    # @option params [String] :log_delivery_bucket
-    #   The S3 bucket to which CloudFormation delivers the contract test
-    #   execution logs.
-    #
-    #   CloudFormation delivers the logs by the time contract testing has
-    #   completed and the extension has been assigned a test type status of
-    #   `PASSED` or `FAILED`.
-    #
-    #   The user calling `TestType` must be able to access items in the
-    #   specified S3 bucket. Specifically, the user needs the following
-    #   permissions:
-    #
-    #   * GetObject
-    #
-    #   * PutObject
-    #
-    #   For more information, see [Actions, Resources, and Condition Keys for
-    #   Amazon S3][1] in the *Amazon Web Services Identity and Access
-    #   Management User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html
-    #
-    # @return [Types::TestTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::TestTypeOutput#type_version_arn #type_version_arn} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.test_type({
-    #     arn: "TypeArn",
-    #     type: "RESOURCE", # accepts RESOURCE, MODULE
-    #     type_name: "TypeName",
-    #     version_id: "TypeVersionId",
-    #     log_delivery_bucket: "S3Bucket",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.type_version_arn #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TestType AWS API Documentation
-    #
-    # @overload test_type(params = {})
-    # @param [Hash] params ({})
-    def test_type(params = {}, options = {})
-      req = build_request(:test_type, params)
-      req.send_request(options)
-    end
-
     # Updates a stack as specified in the template. After the call completes
     # successfully, the stack update starts. You can check the status of the
     # stack via the DescribeStacks action.
@@ -5560,7 +4771,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. (For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   [Template Anatomy][1] in the AWS CloudFormation User Guide.)
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -5573,7 +4784,7 @@ module Aws::CloudFormation
     # @option params [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template that is located in an Amazon S3 bucket or a Systems Manager
-    #   document. For more information, go to [Template Anatomy][1] in the
+    #   document. For more information, go to [Template Anatomy][1] in the AWS
     #   CloudFormation User Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
@@ -5624,15 +4835,16 @@ module Aws::CloudFormation
     #
     # @option params [Array<String>] :capabilities
     #   In some cases, you must explicitly acknowledge that your stack
-    #   template contains certain capabilities in order for CloudFormation to
-    #   update the stack.
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to update the stack.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your AWS account; for example, by creating new AWS
+    #     Identity and Access Management (IAM) users. For those stacks, you
+    #     must explicitly acknowledge this by specifying one of these
+    #     capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -5642,8 +4854,8 @@ module Aws::CloudFormation
     #     * If you have IAM resources with custom names, you *must* specify
     #       `CAPABILITY_NAMED_IAM`.
     #
-    #     * If you don't specify either of these capabilities, CloudFormation
-    #       returns an `InsufficientCapabilities` error.
+    #     * If you don't specify either of these capabilities, AWS
+    #       CloudFormation returns an `InsufficientCapabilities` error.
     #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
@@ -5663,7 +4875,7 @@ module Aws::CloudFormation
     #
     #     * [ AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
+    #     For more information, see [Acknowledging IAM Resources in AWS
     #     CloudFormation Templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
@@ -5678,7 +4890,7 @@ module Aws::CloudFormation
     #     update a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
     #     acknowledge this capability. This includes the [AWS::Include][9] and
-    #     [AWS::Serverless][10] transforms, which are macros hosted by
+    #     [AWS::Serverless][10] transforms, which are macros hosted by AWS
     #     CloudFormation.
     #
     #     If you want to update a stack from a stack template that contains
@@ -5690,11 +4902,11 @@ module Aws::CloudFormation
     #
     #      Each macro relies on an underlying Lambda service function for
     #     processing stack templates. Be aware that the Lambda function owner
-    #     can update the function operation without CloudFormation being
+    #     can update the function operation without AWS CloudFormation being
     #     notified.
     #
-    #     For more information, see [Using CloudFormation Macros to Perform
-    #     Custom Processing on Templates][11].
+    #     For more information, see [Using AWS CloudFormation Macros to
+    #     Perform Custom Processing on Templates][11].
     #
     #
     #
@@ -5716,32 +4928,33 @@ module Aws::CloudFormation
     #   or `Custom::MyCustomInstance`.
     #
     #   If the list of resource types doesn't include a resource that you're
-    #   updating, the stack update fails. By default, CloudFormation grants
-    #   permissions to all resource types. Identity and Access Management
-    #   (IAM) uses this parameter for CloudFormation-specific condition keys
-    #   in IAM policies. For more information, see [Controlling Access with
-    #   Identity and Access Management][1].
+    #   updating, the stack update fails. By default, AWS CloudFormation
+    #   grants permissions to all resource types. AWS Identity and Access
+    #   Management (IAM) uses this parameter for AWS CloudFormation-specific
+    #   condition keys in IAM policies. For more information, see [Controlling
+    #   Access with AWS Identity and Access Management][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an Identity and Access Management
-    #   (IAM) role that CloudFormation assumes to update the stack.
-    #   CloudFormation uses the role's credentials to make calls on your
-    #   behalf. CloudFormation always uses this role for all future operations
-    #   on the stack. As long as users have permission to operate on the
-    #   stack, CloudFormation uses this role even if the users don't have
-    #   permission to pass it. Ensure that the role grants least privilege.
+    #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+    #   Management (IAM) role that AWS CloudFormation assumes to update the
+    #   stack. AWS CloudFormation uses the role's credentials to make calls
+    #   on your behalf. AWS CloudFormation always uses this role for all
+    #   future operations on the stack. As long as users have permission to
+    #   operate on the stack, AWS CloudFormation uses this role even if the
+    #   users don't have permission to pass it. Ensure that the role grants
+    #   least privilege.
     #
-    #   If you don't specify a value, CloudFormation uses the role that was
-    #   previously associated with the stack. If no role is available,
+    #   If you don't specify a value, AWS CloudFormation uses the role that
+    #   was previously associated with the stack. If no role is available, AWS
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
     # @option params [Types::RollbackConfiguration] :rollback_configuration
-    #   The rollback triggers for CloudFormation to monitor during stack
+    #   The rollback triggers for AWS CloudFormation to monitor during stack
     #   creation and updating operations, and for the specified monitoring
     #   period afterwards.
     #
@@ -5767,23 +4980,23 @@ module Aws::CloudFormation
     #
     # @option params [Array<String>] :notification_arns
     #   Amazon Simple Notification Service topic Amazon Resource Names (ARNs)
-    #   that CloudFormation associates with the stack. Specify an empty list
-    #   to remove all notification topics.
+    #   that AWS CloudFormation associates with the stack. Specify an empty
+    #   list to remove all notification topics.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Key-value pairs to associate with this stack. CloudFormation also
+    #   Key-value pairs to associate with this stack. AWS CloudFormation also
     #   propagates these tags to supported resources in the stack. You can
     #   specify a maximum number of 50 tags.
     #
-    #   If you don't specify this parameter, CloudFormation doesn't modify
-    #   the stack's tags. If you specify an empty value, CloudFormation
-    #   removes all associated tags.
+    #   If you don't specify this parameter, AWS CloudFormation doesn't
+    #   modify the stack's tags. If you specify an empty value, AWS
+    #   CloudFormation removes all associated tags.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for this `UpdateStack` request. Specify this token
-    #   if you plan to retry requests so that CloudFormation knows that
+    #   if you plan to retry requests so that AWS CloudFormation knows that
     #   you're not attempting to update a stack with the same name. You might
-    #   retry `UpdateStack` requests to ensure that CloudFormation
+    #   retry `UpdateStack` requests to ensure that AWS CloudFormation
     #   successfully received them.
     #
     #   All events triggered by a given stack operation are assigned the same
@@ -5889,7 +5102,7 @@ module Aws::CloudFormation
     #   instances.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more accounts for
+    #   \[Self-managed permissions\] The names of one or more AWS accounts for
     #   which you want to update parameter values for stack instances. The
     #   overridden parameter values will be applied to all stack instances in
     #   the specified accounts and Regions.
@@ -5897,8 +5110,8 @@ module Aws::CloudFormation
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [Types::DeploymentTargets] :deployment_targets
-    #   \[Service-managed permissions\] The Organizations accounts for which
-    #   you want to update parameter values for stack instances. If your
+    #   \[Service-managed permissions\] The AWS Organizations accounts for
+    #   which you want to update parameter values for stack instances. If your
     #   update targets OUs, the overridden parameter values only apply to the
     #   accounts that are currently in the target OUs and their child OUs.
     #   Accounts added to the target OUs and their child OUs in the future
@@ -5917,19 +5130,24 @@ module Aws::CloudFormation
     #
     #   Any overridden parameter values will be applied to all stack instances
     #   in the specified accounts and Regions. When specifying parameters and
-    #   their values, be aware of how CloudFormation sets parameter values
+    #   their values, be aware of how AWS CloudFormation sets parameter values
     #   during stack instance update operations:
     #
     #   * To override the current value for a parameter, include the parameter
     #     and specify its value.
     #
-    #   * To leave an overridden parameter set to its present value, include
-    #     the parameter and specify `UsePreviousValue` as `true`. (You cannot
-    #     specify both a value and set `UsePreviousValue` to `true`.)
+    #   * To leave a parameter set to its present value, you can do one of the
+    #     following:
     #
-    #   * To set an overridden parameter back to the value specified in the
-    #     stack set, specify a parameter list but do not include the parameter
-    #     in the list.
+    #     * Do not include the parameter in the list.
+    #
+    #     * Include the parameter and specify `UsePreviousValue` as `true`.
+    #       (You cannot specify both a value and set `UsePreviousValue` to
+    #       `true`.)
+    #
+    #   * To set all overridden parameter back to the values specified in the
+    #     stack set, specify a parameter list but do not include any
+    #     parameters.
     #
     #   * To leave all parameters set to their present values, do not specify
     #     this property at all.
@@ -5952,16 +5170,17 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
-    #   Preferences for how CloudFormation performs this stack set operation.
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
     #
     # @option params [String] :operation_id
     #   The unique identifier for this stack set operation.
     #
     #   The operation ID also functions as an idempotency token, to ensure
-    #   that CloudFormation performs the stack set operation only once, even
-    #   if you retry the request multiple times. You might retry stack set
-    #   operation requests to ensure that CloudFormation successfully received
-    #   them.
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You might retry stack
+    #   set operation requests to ensure that AWS CloudFormation successfully
+    #   received them.
     #
     #   If you don't specify an operation ID, the SDK generates one
     #   automatically.
@@ -5982,9 +5201,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -6056,7 +5275,7 @@ module Aws::CloudFormation
     # @option params [String] :template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more information,
-    #   see [Template Anatomy][1] in the CloudFormation User Guide.
+    #   see [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to true.
@@ -6069,7 +5288,7 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL must
     #   point to a template (maximum size: 460,800 bytes) that is located in
     #   an Amazon S3 bucket or a Systems Manager document. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
+    #   information, see [Template Anatomy][1] in the AWS CloudFormation User
     #   Guide.
     #
     #   Conditional: You must specify only one of the following parameters:
@@ -6091,15 +5310,16 @@ module Aws::CloudFormation
     #
     # @option params [Array<String>] :capabilities
     #   In some cases, you must explicitly acknowledge that your stack
-    #   template contains certain capabilities in order for CloudFormation to
-    #   update the stack set and its associated stack instances.
+    #   template contains certain capabilities in order for AWS CloudFormation
+    #   to update the stack set and its associated stack instances.
     #
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks sets, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your AWS account; for example, by creating new AWS
+    #     Identity and Access Management (IAM) users. For those stacks sets,
+    #     you must explicitly acknowledge this by specifying one of these
+    #     capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -6109,8 +5329,8 @@ module Aws::CloudFormation
     #     * If you have IAM resources with custom names, you *must* specify
     #       `CAPABILITY_NAMED_IAM`.
     #
-    #     * If you don't specify either of these capabilities, CloudFormation
-    #       returns an `InsufficientCapabilities` error.
+    #     * If you don't specify either of these capabilities, AWS
+    #       CloudFormation returns an `InsufficientCapabilities` error.
     #
     #     If your stack template contains these resources, we recommend that
     #     you review all permissions associated with them and edit their
@@ -6130,7 +5350,7 @@ module Aws::CloudFormation
     #
     #     * [ AWS::IAM::UserToGroupAddition][7]
     #
-    #     For more information, see [Acknowledging IAM Resources in
+    #     For more information, see [Acknowledging IAM Resources in AWS
     #     CloudFormation Templates][8].
     #
     #   * `CAPABILITY_AUTO_EXPAND`
@@ -6140,13 +5360,13 @@ module Aws::CloudFormation
     #     directly from the processed template, without first reviewing the
     #     resulting changes in a change set. To update the stack set directly,
     #     you must acknowledge this capability. For more information, see
-    #     [Using CloudFormation Macros to Perform Custom Processing on
+    #     [Using AWS CloudFormation Macros to Perform Custom Processing on
     #     Templates][9].
     #
     #     Stack sets with service-managed permissions do not currently support
     #     the use of macros in templates. (This includes the
     #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
-    #     macros hosted by CloudFormation.) Even if you specify this
+    #     macros hosted by AWS CloudFormation.) Even if you specify this
     #     capability for a stack set with service-managed permissions, if you
     #     reference a macro in your template the stack set operation will
     #     fail.
@@ -6167,15 +5387,15 @@ module Aws::CloudFormation
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key-value pairs to associate with this stack set and the stacks
-    #   created from it. CloudFormation also propagates these tags to
+    #   created from it. AWS CloudFormation also propagates these tags to
     #   supported resources that are created in the stacks. You can specify a
     #   maximum number of 50 tags.
     #
     #   If you specify tags for this parameter, those tags replace any list of
     #   tags that are currently associated with this stack set. This means:
     #
-    #   * If you don't specify this parameter, CloudFormation doesn't modify
-    #     the stack's tags.
+    #   * If you don't specify this parameter, AWS CloudFormation doesn't
+    #     modify the stack's tags.
     #
     #   * If you specify *any* tags using this parameter, you must specify
     #     *all* the tags that you want associated with this stack set, even
@@ -6184,20 +5404,21 @@ module Aws::CloudFormation
     #     you don't include in the updated list of tags are removed from the
     #     stack set, and therefore from the stacks and resources as well.
     #
-    #   * If you specify an empty value, CloudFormation removes all currently
-    #     associated tags.
+    #   * If you specify an empty value, AWS CloudFormation removes all
+    #     currently associated tags.
     #
-    #   If you specify new tags as part of an `UpdateStackSet` action,
+    #   If you specify new tags as part of an `UpdateStackSet` action, AWS
     #   CloudFormation checks to see if you have the required IAM permission
     #   to tag resources. If you omit tags that are currently associated with
-    #   the stack set from the list of tags you specify, CloudFormation
+    #   the stack set from the list of tags you specify, AWS CloudFormation
     #   assumes that you want to remove those tags from the stack set, and
     #   checks to see if you have permission to untag resources. If you don't
     #   have the necessary permission(s), the entire `UpdateStackSet` action
     #   fails with an `access denied` error, and the stack set is not updated.
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
-    #   Preferences for how CloudFormation performs this stack set operation.
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
     #
     # @option params [String] :administration_role_arn
     #   The Amazon Resource Number (ARN) of the IAM role to use to update this
@@ -6206,8 +5427,8 @@ module Aws::CloudFormation
     #   Specify an IAM role only if you are using customized administrator
     #   roles to control which users or groups can manage specific stack sets
     #   within the same administrator account. For more information, see
-    #   [Granting Permissions for Stack Set Operations][1] in the
-    #   *CloudFormation User Guide*.
+    #   [Granting Permissions for Stack Set Operations][1] in the *AWS
+    #   CloudFormation User Guide*.
     #
     #   If you specified a customized administrator role when you created the
     #   stack set, you must specify a customized administrator role, even if
@@ -6220,7 +5441,7 @@ module Aws::CloudFormation
     #
     # @option params [String] :execution_role_name
     #   The name of the IAM execution role to use to update the stack set. If
-    #   you do not specify an execution role, CloudFormation uses the
+    #   you do not specify an execution role, AWS CloudFormation uses the
     #   `AWSCloudFormationStackSetExecutionRole` role for the stack set
     #   operation.
     #
@@ -6228,27 +5449,27 @@ module Aws::CloudFormation
     #   to control which stack resources users and groups can include in their
     #   stack sets.
     #
-    #   If you specify a customized execution role, CloudFormation uses that
-    #   role to update the stack. If you do not specify a customized execution
-    #   role, CloudFormation performs the update using the role previously
-    #   associated with the stack set, so long as you have permissions to
-    #   perform operations on the stack set.
+    #   If you specify a customized execution role, AWS CloudFormation uses
+    #   that role to update the stack. If you do not specify a customized
+    #   execution role, AWS CloudFormation performs the update using the role
+    #   previously associated with the stack set, so long as you have
+    #   permissions to perform operations on the stack set.
     #
     # @option params [Types::DeploymentTargets] :deployment_targets
-    #   \[Service-managed permissions\] The Organizations accounts in which to
-    #   update associated stack instances.
+    #   \[Service-managed permissions\] The AWS Organizations accounts in
+    #   which to update associated stack instances.
     #
     #   To update all the stack instances associated with this stack set, do
     #   not specify `DeploymentTargets` or `Regions`.
     #
     #   If the stack set update includes changes to the template (that is, if
     #   `TemplateBody` or `TemplateURL` is specified), or the `Parameters`,
-    #   CloudFormation marks all stack instances with a status of `OUTDATED`
-    #   prior to updating the stack instances in the specified accounts and
-    #   Regions. If the stack set update does not include changes to the
-    #   template or parameters, CloudFormation updates the stack instances in
-    #   the specified accounts and Regions, while leaving all other stack
-    #   instances with their existing stack instance status.
+    #   AWS CloudFormation marks all stack instances with a status of
+    #   `OUTDATED` prior to updating the stack instances in the specified
+    #   accounts and Regions. If the stack set update does not include changes
+    #   to the template or parameters, AWS CloudFormation updates the stack
+    #   instances in the specified accounts and Regions, while leaving all
+    #   other stack instances with their existing stack instance status.
     #
     # @option params [String] :permission_model
     #   Describes how the IAM roles required for stack set operations are
@@ -6260,7 +5481,7 @@ module Aws::CloudFormation
     #     information, see [Grant Self-Managed Stack Set Permissions][1].
     #
     #   * With `service-managed` permissions, StackSets automatically creates
-    #     the IAM roles required to deploy to accounts managed by
+    #     the IAM roles required to deploy to accounts managed by AWS
     #     Organizations. For more information, see [Grant Service-Managed
     #     Stack Set Permissions][2].
     #
@@ -6271,8 +5492,8 @@ module Aws::CloudFormation
     #
     # @option params [Types::AutoDeployment] :auto_deployment
     #   \[Service-managed permissions\] Describes whether StackSets
-    #   automatically deploys to Organizations accounts that are added to a
-    #   target organization or organizational unit (OU).
+    #   automatically deploys to AWS Organizations accounts that are added to
+    #   a target organization or organizational unit (OU).
     #
     #   If you specify `AutoDeployment`, do not specify `DeploymentTargets` or
     #   `Regions`.
@@ -6281,13 +5502,13 @@ module Aws::CloudFormation
     #   The unique ID for this stack set operation.
     #
     #   The operation ID also functions as an idempotency token, to ensure
-    #   that CloudFormation performs the stack set operation only once, even
-    #   if you retry the request multiple times. You might retry stack set
-    #   operation requests to ensure that CloudFormation successfully received
-    #   them.
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You might retry stack
+    #   set operation requests to ensure that AWS CloudFormation successfully
+    #   received them.
     #
-    #   If you don't specify an operation ID, CloudFormation generates one
-    #   automatically.
+    #   If you don't specify an operation ID, AWS CloudFormation generates
+    #   one automatically.
     #
     #   Repeating this stack set operation with a new operation ID retries all
     #   stack instances whose status is `OUTDATED`.
@@ -6305,13 +5526,13 @@ module Aws::CloudFormation
     #
     #   If the stack set update includes changes to the template (that is, if
     #   the `TemplateBody` or `TemplateURL` properties are specified), or the
-    #   `Parameters` property, CloudFormation marks all stack instances with a
-    #   status of `OUTDATED` prior to updating the stack instances in the
-    #   specified accounts and Regions. If the stack set update does not
-    #   include changes to the template or parameters, CloudFormation updates
-    #   the stack instances in the specified accounts and Regions, while
-    #   leaving all other stack instances with their existing stack instance
-    #   status.
+    #   `Parameters` property, AWS CloudFormation marks all stack instances
+    #   with a status of `OUTDATED` prior to updating the stack instances in
+    #   the specified accounts and Regions. If the stack set update does not
+    #   include changes to the template or parameters, AWS CloudFormation
+    #   updates the stack instances in the specified accounts and Regions,
+    #   while leaving all other stack instances with their existing stack
+    #   instance status.
     #
     # @option params [Array<String>] :regions
     #   The Regions in which to update associated stack instances. If you
@@ -6323,13 +5544,13 @@ module Aws::CloudFormation
     #
     #   If the stack set update includes changes to the template (that is, if
     #   the `TemplateBody` or `TemplateURL` properties are specified), or the
-    #   `Parameters` property, CloudFormation marks all stack instances with a
-    #   status of `OUTDATED` prior to updating the stack instances in the
-    #   specified accounts and Regions. If the stack set update does not
-    #   include changes to the template or parameters, CloudFormation updates
-    #   the stack instances in the specified accounts and Regions, while
-    #   leaving all other stack instances with their existing stack instance
-    #   status.
+    #   `Parameters` property, AWS CloudFormation marks all stack instances
+    #   with a status of `OUTDATED` prior to updating the stack instances in
+    #   the specified accounts and Regions. If the stack set update does not
+    #   include changes to the template or parameters, AWS CloudFormation
+    #   updates the stack instances in the specified accounts and Regions,
+    #   while leaving all other stack instances with their existing stack
+    #   instance status.
     #
     # @option params [String] :call_as
     #   \[Service-managed permissions\] Specifies whether you are acting as an
@@ -6344,9 +5565,9 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your AWS account must be registered as a delegated administrator in
+    #     the management account. For more information, see [Register a
+    #     delegated administrator][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -6421,8 +5642,8 @@ module Aws::CloudFormation
     # Updates termination protection for the specified stack. If a user
     # attempts to delete a stack with termination protection enabled, the
     # operation fails and the stack remains unchanged. For more information,
-    # see [Protecting a Stack From Being Deleted][1] in the *CloudFormation
-    # User Guide*.
+    # see [Protecting a Stack From Being Deleted][1] in the *AWS
+    # CloudFormation User Guide*.
     #
     # For [nested stacks][2], termination protection is set on the root
     # stack and cannot be changed directly on the nested stack.
@@ -6463,15 +5684,15 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Validates a specified template. CloudFormation first checks if the
-    # template is valid JSON. If it isn't, CloudFormation checks if the
-    # template is valid YAML. If both these checks fail, CloudFormation
+    # Validates a specified template. AWS CloudFormation first checks if the
+    # template is valid JSON. If it isn't, AWS CloudFormation checks if the
+    # template is valid YAML. If both these checks fail, AWS CloudFormation
     # returns a template validation error.
     #
     # @option params [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -6484,7 +5705,7 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -6544,7 +5765,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

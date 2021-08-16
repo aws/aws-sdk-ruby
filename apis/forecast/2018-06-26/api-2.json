@@ -534,10 +534,6 @@
         "geolocation"
       ]
     },
-    "AutoMLOverrideStrategy":{
-      "type":"string",
-      "enum":["LatencyOptimized"]
-    },
     "Boolean":{"type":"boolean"},
     "CategoricalParameterRange":{
       "type":"structure",
@@ -716,7 +712,6 @@
         "ForecastHorizon":{"shape":"Integer"},
         "ForecastTypes":{"shape":"ForecastTypes"},
         "PerformAutoML":{"shape":"Boolean"},
-        "AutoMLOverrideStrategy":{"shape":"AutoMLOverrideStrategy"},
         "PerformHPO":{"shape":"Boolean"},
         "TrainingParameters":{"shape":"TrainingParameters"},
         "EvaluationParameters":{"shape":"EvaluationParameters"},
@@ -1001,7 +996,6 @@
         "ForecastHorizon":{"shape":"Integer"},
         "ForecastTypes":{"shape":"ForecastTypes"},
         "PerformAutoML":{"shape":"Boolean"},
-        "AutoMLOverrideStrategy":{"shape":"AutoMLOverrideStrategy"},
         "PerformHPO":{"shape":"Boolean"},
         "TrainingParameters":{"shape":"TrainingParameters"},
         "EvaluationParameters":{"shape":"EvaluationParameters"},
@@ -1222,8 +1216,7 @@
     "GetAccuracyMetricsResponse":{
       "type":"structure",
       "members":{
-        "PredictorEvaluationResults":{"shape":"PredictorEvaluationResults"},
-        "AutoMLOverrideStrategy":{"shape":"AutoMLOverrideStrategy"}
+        "PredictorEvaluationResults":{"shape":"PredictorEvaluationResults"}
       }
     },
     "HyperParameterTuningJobConfig":{
@@ -1581,11 +1574,7 @@
         "Min":{"shape":"String"},
         "Max":{"shape":"String"},
         "Avg":{"shape":"Double"},
-        "Stddev":{"shape":"Double"},
-        "CountLong":{"shape":"Long"},
-        "CountDistinctLong":{"shape":"Long"},
-        "CountNullLong":{"shape":"Long"},
-        "CountNanLong":{"shape":"Long"}
+        "Stddev":{"shape":"Double"}
       }
     },
     "Status":{

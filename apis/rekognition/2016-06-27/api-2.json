@@ -1023,13 +1023,6 @@
         "Confidence":{"shape":"Percent"}
       }
     },
-    "BlackFrame":{
-      "type":"structure",
-      "members":{
-        "MaxPixelThreshold":{"shape":"MaxPixelThreshold"},
-        "MinCoveragePercentage":{"shape":"MinCoveragePercentage"}
-      }
-    },
     "BodyPart":{
       "type":"string",
       "enum":[
@@ -1262,8 +1255,7 @@
         "OutputConfig":{"shape":"OutputConfig"},
         "TrainingData":{"shape":"TrainingData"},
         "TestingData":{"shape":"TestingData"},
-        "Tags":{"shape":"TagMap"},
-        "KmsKeyId":{"shape":"KmsKeyId"}
+        "Tags":{"shape":"TagMap"}
       }
     },
     "CreateProjectVersionResponse":{
@@ -2143,12 +2135,6 @@
         "Arn":{"shape":"KinesisVideoArn"}
       }
     },
-    "KmsKeyId":{
-      "type":"string",
-      "max":2048,
-      "min":1,
-      "pattern":"^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
-    },
     "Label":{
       "type":"structure",
       "members":{
@@ -2301,19 +2287,9 @@
       "type":"integer",
       "min":1
     },
-    "MaxPixelThreshold":{
-      "type":"float",
-      "max":1,
-      "min":0
-    },
     "MaxResults":{
       "type":"integer",
       "min":1
-    },
-    "MinCoveragePercentage":{
-      "type":"float",
-      "max":100,
-      "min":0
     },
     "ModerationLabel":{
       "type":"structure",
@@ -2502,8 +2478,7 @@
         "TrainingDataResult":{"shape":"TrainingDataResult"},
         "TestingDataResult":{"shape":"TestingDataResult"},
         "EvaluationResult":{"shape":"EvaluationResult"},
-        "ManifestSummary":{"shape":"GroundTruthManifest"},
-        "KmsKeyId":{"shape":"KmsKeyId"}
+        "ManifestSummary":{"shape":"GroundTruthManifest"}
       }
     },
     "ProjectVersionDescriptions":{
@@ -2778,10 +2753,7 @@
         "EndTimecodeSMPTE":{"shape":"Timecode"},
         "DurationSMPTE":{"shape":"Timecode"},
         "TechnicalCueSegment":{"shape":"TechnicalCueSegment"},
-        "ShotSegment":{"shape":"ShotSegment"},
-        "StartFrameNumber":{"shape":"ULong"},
-        "EndFrameNumber":{"shape":"ULong"},
-        "DurationFrames":{"shape":"ULong"}
+        "ShotSegment":{"shape":"ShotSegment"}
       }
     },
     "SegmentDetections":{
@@ -3001,8 +2973,7 @@
     "StartTechnicalCueDetectionFilter":{
       "type":"structure",
       "members":{
-        "MinSegmentConfidence":{"shape":"SegmentConfidence"},
-        "BlackFrame":{"shape":"BlackFrame"}
+        "MinSegmentConfidence":{"shape":"SegmentConfidence"}
       }
     },
     "StartTextDetectionFilters":{
@@ -3171,11 +3142,7 @@
       "enum":[
         "ColorBars",
         "EndCredits",
-        "BlackFrames",
-        "OpeningCredits",
-        "StudioLogo",
-        "Slate",
-        "Content"
+        "BlackFrames"
       ]
     },
     "TestingData":{
@@ -3313,13 +3280,6 @@
         "S3Object":{"shape":"S3Object"}
       }
     },
-    "VideoColorRange":{
-      "type":"string",
-      "enum":[
-        "FULL",
-        "LIMITED"
-      ]
-    },
     "VideoJobStatus":{
       "type":"string",
       "enum":[
@@ -3336,8 +3296,7 @@
         "Format":{"shape":"String"},
         "FrameRate":{"shape":"Float"},
         "FrameHeight":{"shape":"ULong"},
-        "FrameWidth":{"shape":"ULong"},
-        "ColorRange":{"shape":"VideoColorRange"}
+        "FrameWidth":{"shape":"ULong"}
       }
     },
     "VideoMetadataList":{

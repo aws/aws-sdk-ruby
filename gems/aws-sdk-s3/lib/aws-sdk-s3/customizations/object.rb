@@ -337,10 +337,10 @@ module Aws
       #   using an open Tempfile, rewind it before uploading or else the object
       #   will be empty.
       #
-      # @option options [Integer] :multipart_threshold (104857600) Files larger
+      # @option options [Integer] :multipart_threshold (15728640) Files larger
       #   than or equal to `:multipart_threshold` are uploaded using the S3
       #   multipart APIs.
-      #   Default threshold is 100MB.
+      #   Default threshold is 15MB.
       #
       # @option options [Integer] :thread_count (10) The number of parallel
       #   multipart uploads. This option is not used if the file is smaller than

@@ -1,21 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.58.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.57.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.56.0 (2021-07-07)
-------------------
-
-* Feature - Adding support for oplocks for SMB file shares,  S3 Access Point and S3 Private Link for all file shares and IP address support for file system associations
-
 1.55.0 (2021-04-07)
 ------------------
 

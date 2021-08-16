@@ -1304,8 +1304,7 @@
         "BytesPerSecond":{"shape":"BytesPerSecond"},
         "TaskQueueing":{"shape":"TaskQueueing"},
         "LogLevel":{"shape":"LogLevel"},
-        "TransferMode":{"shape":"TransferMode"},
-        "SecurityDescriptorCopyFlags":{"shape":"SmbSecurityDescriptorCopyFlags"}
+        "TransferMode":{"shape":"TransferMode"}
       }
     },
     "OutputTagList":{
@@ -1426,14 +1425,6 @@
       "max":104,
       "pattern":"^.{0,104}$",
       "sensitive":true
-    },
-    "SmbSecurityDescriptorCopyFlags":{
-      "type":"string",
-      "enum":[
-        "NONE",
-        "OWNER_DACL",
-        "OWNER_DACL_SACL"
-      ]
     },
     "SmbSubdirectory":{
       "type":"string",

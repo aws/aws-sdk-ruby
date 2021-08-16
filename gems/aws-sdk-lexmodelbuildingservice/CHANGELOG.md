@@ -1,26 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.49.0 (2021-07-30)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.48.0 (2021-07-28)
-------------------
-
-* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
-
-1.47.0 (2021-07-15)
-------------------
-
-* Feature - Lex now supports the en-IN locale
-
-1.46.0 (2021-07-13)
-------------------
-
-* Feature - Customers can now migrate bots built with Lex V1 APIs to V2 APIs. This release adds APIs to initiate and manage the migration of a bot.
-
 1.45.0 (2021-04-01)
 ------------------
 

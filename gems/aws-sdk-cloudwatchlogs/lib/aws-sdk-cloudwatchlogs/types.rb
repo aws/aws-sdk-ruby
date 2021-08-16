@@ -95,9 +95,9 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] to
-    #   The end time of the range for the request, expreswatchlogsdocused as
-    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events
-    #   with a timestamp later than this time are not exported.
+    #   The end time of the range for the request, expressed as the number
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   timestamp later than this time are not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] destination
@@ -597,10 +597,10 @@ module Aws::CloudWatchLogs
     #   If you order the results by event time, you cannot specify the
     #   `logStreamNamePrefix` parameter.
     #
-    #   `lastEventTimestamp` represents the time of the most recent log
+    #   `lastEventTimeStamp` represents the time of the most recent log
     #   event in the log stream in CloudWatch Logs. This number is expressed
     #   as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
-    #   `lastEventTimestamp` updates on an eventual consistency basis. It
+    #   `lastEventTimeStamp` updates on an eventual consistency basis. It
     #   typically updates in less than an hour from ingestion, but in rare
     #   situations might take longer.
     #   @return [String]
@@ -732,7 +732,7 @@ module Aws::CloudWatchLogs
     #
     #       {
     #         log_group_name: "LogGroupName",
-    #         status: "Scheduled", # accepts Scheduled, Running, Complete, Failed, Cancelled, Timeout, Unknown
+    #         status: "Scheduled", # accepts Scheduled, Running, Complete, Failed, Cancelled
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -1144,6 +1144,9 @@ module Aws::CloudWatchLogs
     #   The start of the time range, expressed as the number of milliseconds
     #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
     #   time are not returned.
+    #
+    #   If you omit `startTime` and `endTime` the most recent log events are
+    #   retrieved, to up 1 MB or 10,000 log events.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
@@ -1379,8 +1382,8 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] time
     #   The time to set as the center of the query. If you specify `time`,
-    #   the 15 minutes before this time are queries. If you omit `time` the
-    #   8 minutes before and 8 minutes after this time are searched.
+    #   the 8 minutes before and 8 minutes after this time are searched. If
+    #   you omit `time`, the past 15 minutes are queried.
     #
     #   The `time` value is specified as epoch time, the number of seconds
     #   since January 1, 1970, 00:00:00 UTC.
@@ -1826,10 +1829,6 @@ module Aws::CloudWatchLogs
     #         metric_namespace: "MetricNamespace", # required
     #         metric_value: "MetricValue", # required
     #         default_value: 1.0,
-    #         dimensions: {
-    #           "DimensionsKey" => "DimensionsValue",
-    #         },
-    #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #       }
     #
     # @!attribute [rw] metric_name
@@ -1856,44 +1855,13 @@ module Aws::CloudWatchLogs
     #   log event. This value can be null.
     #   @return [Float]
     #
-    # @!attribute [rw] dimensions
-    #   The fields to use as dimensions for the metric. One metric filter
-    #   can include as many as three dimensions.
-    #
-    #   Metrics extracted from log events are charged as custom metrics. To
-    #   prevent unexpected high charges, do not specify high-cardinality
-    #   fields such as `IPAddress` or `requestID` as dimensions. Each
-    #   different value found for a dimension is treated as a separate
-    #   metric and accrues charges as a separate custom metric.
-    #
-    #    To help prevent accidental high charges, Amazon disables a metric
-    #   filter if it generates 1000 different name/value pairs for the
-    #   dimensions that you have specified within a certain amount of time.
-    #
-    #    You can also set up a billing alarm to alert you if your charges
-    #   are
-    #   higher than expected. For more information, see [ Creating a Billing
-    #   Alarm to Monitor Your Estimated AWS Charges][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] unit
-    #   The unit to assign to the metric. If you omit this, the unit is set
-    #   as `None`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricTransformation AWS API Documentation
     #
     class MetricTransformation < Struct.new(
       :metric_name,
       :metric_namespace,
       :metric_value,
-      :default_value,
-      :dimensions,
-      :unit)
+      :default_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2085,10 +2053,6 @@ module Aws::CloudWatchLogs
     #             metric_namespace: "MetricNamespace", # required
     #             metric_value: "MetricValue", # required
     #             default_value: 1.0,
-    #             dimensions: {
-    #               "DimensionsKey" => "DimensionsValue",
-    #             },
-    #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #           },
     #         ],
     #       }
@@ -2296,9 +2260,10 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_name
     #   A name for the subscription filter. If you are updating an existing
-    #   filter, you must specify the correct name in `filterName`. To find
-    #   the name of the filter currently associated with a log group, use
-    #   [DescribeSubscriptionFilters][1].
+    #   filter, you must specify the correct name in `filterName`.
+    #   Otherwise, the call fails because you cannot associate a second
+    #   filter with a log group. To find the name of the filter currently
+    #   associated with a log group, use [DescribeSubscriptionFilters][1].
     #
     #
     #
@@ -2319,20 +2284,11 @@ module Aws::CloudWatchLogs
     #   * A logical destination (specified using an ARN) belonging to a
     #     different account, for cross-account delivery.
     #
-    #     If you are setting up a cross-account subscription, the
-    #     destination must have an IAM policy associated with it that allows
-    #     the sender to send logs to the destination. For more information,
-    #     see [PutDestinationPolicy][1].
-    #
     #   * An Amazon Kinesis Firehose delivery stream belonging to the same
     #     account as the subscription filter, for same-account delivery.
     #
     #   * An AWS Lambda function belonging to the same account as the
     #     subscription filter, for same-account delivery.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn

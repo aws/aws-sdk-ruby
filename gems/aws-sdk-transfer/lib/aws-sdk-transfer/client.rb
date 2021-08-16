@@ -337,195 +337,26 @@ module Aws::Transfer
 
     # @!group API Operations
 
-    # Used by administrators to choose which groups in the directory should
-    # have access to upload and download files over the enabled protocols
-    # using Amazon Web Services Transfer Family. For example, a Microsoft
-    # Active Directory might contain 50,000 users, but only a small fraction
-    # might need the ability to transfer files to the server. An
-    # administrator can use `CreateAccess` to limit the access to the
-    # correct set of users who need this ability.
-    #
-    # @option params [String] :home_directory
-    #   The landing directory (folder) for a user when they log in to the
-    #   server using the client.
-    #
-    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
-    #
-    # @option params [String] :home_directory_type
-    #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
-    #
-    # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
-    #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
-    #   paths and keys should be visible to your user and how you want to make
-    #   them visible. You must specify the `Entry` and `Target` pair, where
-    #   `Entry` shows how the path is made visible and `Target` is the actual
-    #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
-    #
-    #   The following is an `Entry` and `Target` pair example.
-    #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
-    #
-    #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock down your user to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to `/` and set
-    #   `Target` to the `HomeDirectory` parameter value.
-    #
-    #   The following is an `Entry` and `Target` pair example for `chroot`.
-    #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
-    #
-    # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
-    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
-    #
-    #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does not
-    #   use scope-down policies.
-    #
-    #    For scope-down policies, Amazon Web Services Transfer Family stores
-    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
-    #   of the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
-    #
-    #    For an example of a scope-down policy, see [Example scope-down
-    #   policy][1].
-    #
-    #    For more information, see [AssumeRole][2] in the *Amazon Web Services
-    #   Security Token Service API Reference*.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html
-    #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
-    #
-    # @option params [Types::PosixProfile] :posix_profile
-    #   The full POSIX identity, including user ID (`Uid`), group ID (`Gid`),
-    #   and any secondary groups IDs (`SecondaryGids`), that controls your
-    #   users' access to your Amazon EFS file systems. The POSIX permissions
-    #   that are set on files and directories in your file system determine
-    #   the level of access your users get when transferring files into and
-    #   out of your Amazon EFS file systems.
-    #
-    # @option params [required, String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
-    #   contain a trust relationship that allows the server to access your
-    #   resources when servicing your users' transfer requests.
-    #
-    # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a server instance. This is the
-    #   specific server that you added your user to.
-    #
-    # @option params [required, String] :external_id
-    #   A unique identifier that is required to identify specific groups
-    #   within your directory. The users of the group that you associate have
-    #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
-    #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamAccountName,ObjectSid`
-    #
-    #   In that command, replace *YourGroupName* with the name of your Active
-    #   Directory group.
-    #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
-    #
-    # @return [Types::CreateAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateAccessResponse#server_id #server_id} => String
-    #   * {Types::CreateAccessResponse#external_id #external_id} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_access({
-    #     home_directory: "HomeDirectory",
-    #     home_directory_type: "PATH", # accepts PATH, LOGICAL
-    #     home_directory_mappings: [
-    #       {
-    #         entry: "MapEntry", # required
-    #         target: "MapTarget", # required
-    #       },
-    #     ],
-    #     policy: "Policy",
-    #     posix_profile: {
-    #       uid: 1, # required
-    #       gid: 1, # required
-    #       secondary_gids: [1],
-    #     },
-    #     role: "Role", # required
-    #     server_id: "ServerId", # required
-    #     external_id: "ExternalId", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.server_id #=> String
-    #   resp.external_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateAccess AWS API Documentation
-    #
-    # @overload create_access(params = {})
-    # @param [Hash] params ({})
-    def create_access(params = {}, options = {})
-      req = build_request(:create_access, params)
-      req.send_request(options)
-    end
-
-    # Instantiates an auto-scaling virtual server based on the selected file
-    # transfer protocol in Amazon Web Services. When you make updates to
-    # your file transfer protocol-enabled server or when you work with
-    # users, use the service-generated `ServerId` property that is assigned
-    # to the newly created server.
+    # Instantiates an autoscaling virtual server based on the selected file
+    # transfer protocol in AWS. When you make updates to your file transfer
+    # protocol-enabled server or when you work with users, use the
+    # service-generated `ServerId` property that is assigned to the newly
+    # created server.
     #
     # @option params [String] :certificate
-    #   The Amazon Resource Name (ARN) of the Amazon Web Services Certificate
-    #   Manager (ACM) certificate. Required when `Protocols` is set to `FTPS`.
+    #   The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM)
+    #   certificate. Required when `Protocols` is set to `FTPS`.
     #
     #   To request a new public certificate, see [Request a public
-    #   certificate][1] in the <i> Amazon Web Services Certificate Manager
-    #   User Guide</i>.
+    #   certificate][1] in the <i> AWS Certificate Manager User Guide</i>.
     #
     #   To import an existing certificate into ACM, see [Importing
-    #   certificates into ACM][2] in the <i> Amazon Web Services Certificate
-    #   Manager User Guide</i>.
+    #   certificates into ACM][2] in the <i> AWS Certificate Manager User
+    #   Guide</i>.
     #
     #   To request a private certificate to use FTPS through private IP
-    #   addresses, see [Request a private certificate][3] in the <i> Amazon
-    #   Web Services Certificate Manager User Guide</i>.
+    #   addresses, see [Request a private certificate][3] in the <i> AWS
+    #   Certificate Manager User Guide</i>.
     #
     #   Certificates with the following cryptographic algorithms and key sizes
     #   are supported:
@@ -552,42 +383,22 @@ module Aws::Transfer
     #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html
     #
     # @option params [String] :domain
-    #   The domain of the storage system that is used for file transfers.
-    #   There are two domains available: Amazon Simple Storage Service (Amazon
-    #   S3) and Amazon Elastic File System (Amazon EFS). The default value is
-    #   S3.
-    #
-    #   <note markdown="1"> After the server is created, the domain cannot be changed.
-    #
-    #    </note>
     #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
     #   for your server. When you host your endpoint within your VPC, you can
     #   make it accessible only to resources within your VPC, or you can
-    #   attach Elastic IP addresses and make it accessible to clients over the
+    #   attach Elastic IPs and make it accessible to clients over the
     #   internet. Your VPC's default security groups are automatically
     #   assigned to your endpoint.
     #
     # @option params [String] :endpoint_type
-    #   The type of endpoint that you want your server to use. You can choose
-    #   to make your server's endpoint publicly accessible (PUBLIC) or host
-    #   it inside your VPC. With an endpoint that is hosted in a VPC, you can
-    #   restrict access to your server and resources only within your VPC or
-    #   choose to make it internet facing by attaching Elastic IP addresses
-    #   directly to it.
+    #   The type of VPC endpoint that you want your server to connect to. You
+    #   can choose to connect to the public internet or a VPC endpoint. With a
+    #   VPC endpoint, you can restrict access to your server and resources
+    #   only within your VPC.
     #
-    #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Services account if
-    #   your account hasn't already done so before May 19, 2021. If you have
-    #   already created servers with `EndpointType=VPC_ENDPOINT` in your
-    #   Amazon Web Services account on or before May 19, 2021, you will not be
-    #   affected. After this date, use `EndpointType`=`VPC`.
-    #
-    #    For more information, see
-    #   https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
-    #
-    #    It is recommended that you use `VPC` as the `EndpointType`. With this
+    #   <note markdown="1"> It is recommended that you use `VPC` as the `EndpointType`. With this
     #   endpoint type, you have the option to directly associate up to three
     #   Elastic IPv4 addresses (BYO IP included) with your server's endpoint
     #   and use VPC security groups to restrict traffic by the client's
@@ -605,40 +416,30 @@ module Aws::Transfer
     #   Accidentally changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
-    #   server][1] in the *Amazon Web Services Transfer Family User Guide*.
+    #   server][1] in the *AWS Transfer Family User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key
     #
     # @option params [Types::IdentityProviderDetails] :identity_provider_details
-    #   Required when `IdentityProviderType` is set to `AWS_DIRECTORY_SERVICE`
-    #   or `API_GATEWAY`. Accepts an array containing all of the information
-    #   required to use a directory in `AWS_DIRECTORY_SERVICE` or invoke a
+    #   Required when `IdentityProviderType` is set to `API_GATEWAY`. Accepts
+    #   an array containing all of the information required to call a
     #   customer-supplied authentication API, including the API Gateway URL.
     #   Not required when `IdentityProviderType` is set to `SERVICE_MANAGED`.
     #
     # @option params [String] :identity_provider_type
     #   Specifies the mode of authentication for a server. The default value
     #   is `SERVICE_MANAGED`, which allows you to store and access user
-    #   credentials within the Amazon Web Services Transfer Family service.
-    #
-    #   Use `AWS_DIRECTORY_SERVICE` to provide access to Active Directory
-    #   groups in Amazon Web Services Managed Active Directory or Microsoft
-    #   Active Directory in your on-premises environment or in Amazon Web
-    #   Services using AD Connectors. This option also requires you to provide
-    #   a Directory ID using the `IdentityProviderDetails` parameter.
-    #
-    #   Use the `API_GATEWAY` value to integrate with an identity provider of
-    #   your choosing. The `API_GATEWAY` setting requires you to provide an
-    #   API Gateway endpoint URL to call for authentication using the
+    #   credentials within the AWS Transfer Family service. Use the
+    #   `API_GATEWAY` value to integrate with an identity provider of your
+    #   choosing. The `API_GATEWAY` setting requires you to provide an API
+    #   Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
     #
     # @option params [String] :logging_role
-    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
-    #   Identity and Access Management (IAM) role that allows a server to turn
-    #   on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
-    #   set, user activity can be viewed in your CloudWatch logs.
+    #   Allows the service to write your users' activity to your Amazon
+    #   CloudWatch logs for monitoring and auditing purposes.
     #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
@@ -653,13 +454,12 @@ module Aws::Transfer
     #
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
-    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in Amazon
-    #   Web Services Certificate Manager (ACM) which is used to identify your
-    #   server when clients connect to it over FTPS.
+    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
+    #   Certificate Manager (ACM) which will be used to identify your server
+    #   when clients connect to it over FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the `EndpointType`
-    #   must be `VPC` and the `IdentityProviderType` must be
-    #   `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #   must be `VPC` and the `IdentityProviderType` must be `API_GATEWAY`.
     #
     #    If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
     #   associated.
@@ -698,9 +498,8 @@ module Aws::Transfer
     #     identity_provider_details: {
     #       url: "Url",
     #       invocation_role: "Role",
-    #       directory_id: "DirectoryId",
     #     },
-    #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE
+    #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY
     #     logging_role: "Role",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #     security_policy_name: "SecurityPolicyName",
@@ -730,103 +529,86 @@ module Aws::Transfer
     # servers that have the `IdentityProviderType` set to `SERVICE_MANAGED`.
     # Using parameters for `CreateUser`, you can specify the user name, set
     # the home directory, store the user's public key, and assign the
-    # user's Amazon Web Services Identity and Access Management (IAM) role.
-    # You can also optionally add a scope-down policy, and assign metadata
-    # with tags that can be used to group and search for users.
+    # user's AWS Identity and Access Management (IAM) role. You can also
+    # optionally add a scope-down policy, and assign metadata with tags that
+    # can be used to group and search for users.
     #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
     #   server using the client.
     #
-    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #   An example is <i>
+    #   <code>your-Amazon-S3-bucket-name&gt;/home/username</code> </i>.
     #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) you want your users' home
     #   directory to be when they log into the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is in
+    #   their file transfer protocol clients. If you set it `LOGICAL`, you
+    #   will need to provide mappings in the `HomeDirectoryMappings` for how
+    #   you want to make Amazon S3 paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
-    #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
-    #   paths and keys should be visible to your user and how you want to make
-    #   them visible. You must specify the `Entry` and `Target` pair, where
+    #   Logical directory mappings that specify what Amazon S3 paths and keys
+    #   should be visible to your user and how you want to make them visible.
+    #   You will need to specify the "`Entry`" and "`Target`" pair, where
     #   `Entry` shows how the path is made visible and `Target` is the actual
-    #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
+    #   Amazon S3 path. If you only specify a target, it will be displayed as
+    #   is. You will need to also make sure that your IAM role provides access
+    #   to paths in `Target`. The following is an example.
     #
-    #   The following is an `Entry` and `Target` pair example.
-    #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `'[ "/bucket2/documentation", \{ "Entry": "your-personal-report.pdf",
+    #   "Target": "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \}
+    #   ]'`
     #
     #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock your user down to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to `/` and set
-    #   `Target` to the HomeDirectory parameter value.
+    #   to lock your user down to the designated home directory ("chroot").
+    #   To do this, you can set `Entry` to '/' and set `Target` to the
+    #   HomeDirectory parameter value.
     #
-    #   The following is an `Entry` and `Target` pair example for `chroot`.
-    #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
+    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
+    #   S3, the entry will be ignored. As a workaround, you can use the Amazon
+    #   S3 API to create 0 byte objects as place holders for your directory.
+    #   If using the CLI, use the `s3api` call instead of `s3` so you can use
+    #   the put-object operation. For example, you use the following: `aws
+    #   s3api put-object --bucket bucketname --key path/to/folder/`. Make sure
+    #   that the end of the key name ends in a '/' for it to be considered a
+    #   folder.
     #
     #    </note>
     #
     # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
+    #   A scope-down policy for your user so you can use the same IAM role
+    #   across multiple users. This policy scopes down user access to portions
+    #   of their Amazon S3 bucket. Variables that you can use inside this
+    #   policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when domain of ServerId is S3. EFS does not use
-    #   scope down policy.
+    #   <note markdown="1"> For scope-down policies, AWS Transfer Family stores the policy as a
+    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+    #   You save the policy as a JSON blob and pass it in the `Policy`
+    #   argument.
     #
-    #    For scope-down policies, Amazon Web Services Transfer Family stores
-    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
-    #   of the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
-    #
-    #    For an example of a scope-down policy, see [Example scope-down
+    #    For an example of a scope-down policy, see [Creating a scope-down
     #   policy][1].
     #
-    #    For more information, see [AssumeRole][2] in the *Amazon Web Services
-    #   Security Token Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *AWS Security Token
+    #   Service API Reference*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
     # @option params [Types::PosixProfile] :posix_profile
-    #   Specifies the full POSIX identity, including user ID (`Uid`), group ID
-    #   (`Gid`), and any secondary groups IDs (`SecondaryGids`), that controls
-    #   your users' access to your Amazon EFS file systems. The POSIX
-    #   permissions that are set on files and directories in Amazon EFS
-    #   determine the level of access your users get when transferring files
-    #   into and out of your Amazon EFS file systems.
     #
     # @option params [required, String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
+    #   The IAM role that controls your users' access to your Amazon S3
+    #   bucket. The policies attached to this role will determine the level of
+    #   access you want to provide your users when transferring files into and
+    #   out of your Amazon S3 bucket or buckets. The IAM role should also
     #   contain a trust relationship that allows the server to access your
     #   resources when servicing your users' transfer requests.
     #
@@ -895,50 +677,6 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def create_user(params = {}, options = {})
       req = build_request(:create_user, params)
-      req.send_request(options)
-    end
-
-    # Allows you to delete the access specified in the `ServerID` and
-    # `ExternalID` parameters.
-    #
-    # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a server that has this user
-    #   assigned.
-    #
-    # @option params [required, String] :external_id
-    #   A unique identifier that is required to identify specific groups
-    #   within your directory. The users of the group that you associate have
-    #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
-    #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamAccountName,ObjectSid`
-    #
-    #   In that command, replace *YourGroupName* with the name of your Active
-    #   Directory group.
-    #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_access({
-    #     server_id: "ServerId", # required
-    #     external_id: "ExternalId", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteAccess AWS API Documentation
-    #
-    # @overload delete_access(params = {})
-    # @param [Hash] params ({})
-    def delete_access(params = {}, options = {})
-      req = build_request(:delete_access, params)
       req.send_request(options)
     end
 
@@ -1035,73 +773,6 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Describes the access that is assigned to the specific file transfer
-    # protocol-enabled server, as identified by its `ServerId` property and
-    # its `ExternalID`.
-    #
-    # The response from this call returns the properties of the access that
-    # is associated with the `ServerId` value that was specified.
-    #
-    # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a server that has this access
-    #   assigned.
-    #
-    # @option params [required, String] :external_id
-    #   A unique identifier that is required to identify specific groups
-    #   within your directory. The users of the group that you associate have
-    #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
-    #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamAccountName,ObjectSid`
-    #
-    #   In that command, replace *YourGroupName* with the name of your Active
-    #   Directory group.
-    #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
-    #
-    # @return [Types::DescribeAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeAccessResponse#server_id #server_id} => String
-    #   * {Types::DescribeAccessResponse#access #access} => Types::DescribedAccess
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_access({
-    #     server_id: "ServerId", # required
-    #     external_id: "ExternalId", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.server_id #=> String
-    #   resp.access.home_directory #=> String
-    #   resp.access.home_directory_mappings #=> Array
-    #   resp.access.home_directory_mappings[0].entry #=> String
-    #   resp.access.home_directory_mappings[0].target #=> String
-    #   resp.access.home_directory_type #=> String, one of "PATH", "LOGICAL"
-    #   resp.access.policy #=> String
-    #   resp.access.posix_profile.uid #=> Integer
-    #   resp.access.posix_profile.gid #=> Integer
-    #   resp.access.posix_profile.secondary_gids #=> Array
-    #   resp.access.posix_profile.secondary_gids[0] #=> Integer
-    #   resp.access.role #=> String
-    #   resp.access.external_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeAccess AWS API Documentation
-    #
-    # @overload describe_access(params = {})
-    # @param [Hash] params ({})
-    def describe_access(params = {}, options = {})
-      req = build_request(:describe_access, params)
-      req.send_request(options)
-    end
-
     # Describes the security policy that is attached to your file transfer
     # protocol-enabled server. The response contains a description of the
     # security policy's properties. For more information about security
@@ -1171,7 +842,6 @@ module Aws::Transfer
     #
     #   resp.server.arn #=> String
     #   resp.server.certificate #=> String
-    #   resp.server.protocol_details.passive_ip #=> String
     #   resp.server.domain #=> String, one of "S3", "EFS"
     #   resp.server.endpoint_details.address_allocation_ids #=> Array
     #   resp.server.endpoint_details.address_allocation_ids[0] #=> String
@@ -1185,8 +855,7 @@ module Aws::Transfer
     #   resp.server.host_key_fingerprint #=> String
     #   resp.server.identity_provider_details.url #=> String
     #   resp.server.identity_provider_details.invocation_role #=> String
-    #   resp.server.identity_provider_details.directory_id #=> String
-    #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE"
+    #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY"
     #   resp.server.logging_role #=> String
     #   resp.server.protocols #=> Array
     #   resp.server.protocols[0] #=> String, one of "SFTP", "FTP", "FTPS"
@@ -1219,8 +888,8 @@ module Aws::Transfer
     #
     # @option params [required, String] :user_name
     #   The name of the user assigned to one or more servers. User names are
-    #   part of the sign-in credentials to use the Amazon Web Services
-    #   Transfer Family service and perform file transfer tasks.
+    #   part of the sign-in credentials to use the AWS Transfer Family service
+    #   and perform file transfer tasks.
     #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1312,56 +981,6 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Lists the details for all the accesses you have on your server.
-    #
-    # @option params [Integer] :max_results
-    #   Specifies the maximum number of access SIDs to return.
-    #
-    # @option params [String] :next_token
-    #   When you can get additional results from the `ListAccesses` call, a
-    #   `NextToken` parameter is returned in the output. You can then pass in
-    #   a subsequent command to the `NextToken` parameter to continue listing
-    #   additional accesses.
-    #
-    # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a server that has users
-    #   assigned to it.
-    #
-    # @return [Types::ListAccessesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListAccessesResponse#next_token #next_token} => String
-    #   * {Types::ListAccessesResponse#server_id #server_id} => String
-    #   * {Types::ListAccessesResponse#accesses #accesses} => Array&lt;Types::ListedAccess&gt;
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_accesses({
-    #     max_results: 1,
-    #     next_token: "NextToken",
-    #     server_id: "ServerId", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.next_token #=> String
-    #   resp.server_id #=> String
-    #   resp.accesses #=> Array
-    #   resp.accesses[0].home_directory #=> String
-    #   resp.accesses[0].home_directory_type #=> String, one of "PATH", "LOGICAL"
-    #   resp.accesses[0].role #=> String
-    #   resp.accesses[0].external_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListAccesses AWS API Documentation
-    #
-    # @overload list_accesses(params = {})
-    # @param [Hash] params ({})
-    def list_accesses(params = {}, options = {})
-      req = build_request(:list_accesses, params)
-      req.send_request(options)
-    end
-
     # Lists the security policies that are attached to your file transfer
     # protocol-enabled servers.
     #
@@ -1405,7 +1024,7 @@ module Aws::Transfer
     end
 
     # Lists the file transfer protocol-enabled servers that are associated
-    # with your Amazon Web Services account.
+    # with your AWS account.
     #
     # @option params [Integer] :max_results
     #   Specifies the number of servers to return as a response to the
@@ -1437,7 +1056,7 @@ module Aws::Transfer
     #   resp.servers #=> Array
     #   resp.servers[0].arn #=> String
     #   resp.servers[0].domain #=> String, one of "S3", "EFS"
-    #   resp.servers[0].identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE"
+    #   resp.servers[0].identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY"
     #   resp.servers[0].endpoint_type #=> String, one of "PUBLIC", "VPC", "VPC_ENDPOINT"
     #   resp.servers[0].logging_role #=> String
     #   resp.servers[0].server_id #=> String
@@ -1453,13 +1072,13 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Lists all of the tags associated with the Amazon Resource Name (ARN)
-    # that you specify. The resource can be a user, server, or role.
+    # Lists all of the tags associated with the Amazon Resource Number (ARN)
+    # you specify. The resource can be a user, server, or role.
     #
     # @option params [required, String] :arn
     #   Requests the tags associated with a particular Amazon Resource Name
-    #   (ARN). An ARN is an identifier for a specific Amazon Web Services
-    #   resource, such as a server, user, or role.
+    #   (ARN). An ARN is an identifier for a specific AWS resource, such as a
+    #   server, user, or role.
     #
     # @option params [Integer] :max_results
     #   Specifies the number of tags to return as a response to the
@@ -1633,8 +1252,8 @@ module Aws::Transfer
     # There is no response returned from this call.
     #
     # @option params [required, String] :arn
-    #   An Amazon Resource Name (ARN) for a specific Amazon Web Services
-    #   resource, such as a server, user, or role.
+    #   An Amazon Resource Name (ARN) for a specific AWS resource, such as a
+    #   server, user, or role.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   Key-value pairs assigned to ARNs that you can use to group and search
@@ -1665,12 +1284,11 @@ module Aws::Transfer
     end
 
     # If the `IdentityProviderType` of a file transfer protocol-enabled
-    # server is `AWS_DIRECTORY_SERVICE` or `API_Gateway`, tests whether your
-    # identity provider is set up successfully. We highly recommend that you
-    # call this operation to test your authentication method as soon as you
-    # create your server. By doing so, you can troubleshoot issues with the
-    # identity provider integration to ensure that your users can
-    # successfully use the service.
+    # server is `API_Gateway`, tests whether your API Gateway is set up
+    # successfully. We highly recommend that you call this operation to test
+    # your authentication method as soon as you create your server. By doing
+    # so, you can troubleshoot issues with the API Gateway integration to
+    # ensure that your users can successfully use the service.
     #
     # @option params [required, String] :server_id
     #   A system-assigned identifier for a specific server. That server's
@@ -1737,8 +1355,8 @@ module Aws::Transfer
     #
     # @option params [required, String] :arn
     #   The value of the resource that will have the tag removed. An Amazon
-    #   Resource Name (ARN) is an identifier for a specific Amazon Web
-    #   Services resource, such as a server, user, or role.
+    #   Resource Name (ARN) is an identifier for a specific AWS resource, such
+    #   as a server, user, or role.
     #
     # @option params [required, Array<String>] :tag_keys
     #   TagKeys are key-value pairs assigned to ARNs that can be used to group
@@ -1763,169 +1381,6 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Allows you to update parameters for the access specified in the
-    # `ServerID` and `ExternalID` parameters.
-    #
-    # @option params [String] :home_directory
-    #   The landing directory (folder) for a user when they log in to the
-    #   server using the client.
-    #
-    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
-    #
-    # @option params [String] :home_directory_type
-    #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
-    #
-    # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
-    #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
-    #   paths and keys should be visible to your user and how you want to make
-    #   them visible. You must specify the `Entry` and `Target` pair, where
-    #   `Entry` shows how the path is made visible and `Target` is the actual
-    #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
-    #
-    #   The following is an `Entry` and `Target` pair example.
-    #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
-    #
-    #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock down your user to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to `/` and set
-    #   `Target` to the `HomeDirectory` parameter value.
-    #
-    #   The following is an `Entry` and `Target` pair example for `chroot`.
-    #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
-    #
-    # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
-    #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
-    #
-    #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does not
-    #   use scope down policy.
-    #
-    #    For scope-down policies, Amazon Web ServicesTransfer Family stores the
-    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
-    #   the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
-    #
-    #    For an example of a scope-down policy, see [Example scope-down
-    #   policy][1].
-    #
-    #    For more information, see [AssumeRole][2] in the *Amazon Web
-    #   ServicesSecurity Token Service API Reference*.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html
-    #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
-    #
-    # @option params [Types::PosixProfile] :posix_profile
-    #   The full POSIX identity, including user ID (`Uid`), group ID (`Gid`),
-    #   and any secondary groups IDs (`SecondaryGids`), that controls your
-    #   users' access to your Amazon EFS file systems. The POSIX permissions
-    #   that are set on files and directories in your file system determine
-    #   the level of access your users get when transferring files into and
-    #   out of your Amazon EFS file systems.
-    #
-    # @option params [String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
-    #   contain a trust relationship that allows the server to access your
-    #   resources when servicing your users' transfer requests.
-    #
-    # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a server instance. This is the
-    #   specific server that you added your user to.
-    #
-    # @option params [required, String] :external_id
-    #   A unique identifier that is required to identify specific groups
-    #   within your directory. The users of the group that you associate have
-    #   access to your Amazon S3 or Amazon EFS resources over the enabled
-    #   protocols using Amazon Web Services Transfer Family. If you know the
-    #   group name, you can view the SID values by running the following
-    #   command using Windows PowerShell.
-    #
-    #   `Get-ADGroup -Filter \{samAccountName -like "YourGroupName*"\}
-    #   -Properties * | Select SamAccountName,ObjectSid`
-    #
-    #   In that command, replace *YourGroupName* with the name of your Active
-    #   Directory group.
-    #
-    #   The regex used to validate this parameter is a string of characters
-    #   consisting of uppercase and lowercase alphanumeric characters with no
-    #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
-    #
-    # @return [Types::UpdateAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateAccessResponse#server_id #server_id} => String
-    #   * {Types::UpdateAccessResponse#external_id #external_id} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_access({
-    #     home_directory: "HomeDirectory",
-    #     home_directory_type: "PATH", # accepts PATH, LOGICAL
-    #     home_directory_mappings: [
-    #       {
-    #         entry: "MapEntry", # required
-    #         target: "MapTarget", # required
-    #       },
-    #     ],
-    #     policy: "Policy",
-    #     posix_profile: {
-    #       uid: 1, # required
-    #       gid: 1, # required
-    #       secondary_gids: [1],
-    #     },
-    #     role: "Role",
-    #     server_id: "ServerId", # required
-    #     external_id: "ExternalId", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.server_id #=> String
-    #   resp.external_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateAccess AWS API Documentation
-    #
-    # @overload update_access(params = {})
-    # @param [Hash] params ({})
-    def update_access(params = {}, options = {})
-      req = build_request(:update_access, params)
-      req.send_request(options)
-    end
-
     # Updates the file transfer protocol-enabled server's properties after
     # that server has been created.
     #
@@ -1933,20 +1388,19 @@ module Aws::Transfer
     # updated.
     #
     # @option params [String] :certificate
-    #   The Amazon Resource Name (ARN) of the Amazon Web ServicesCertificate
-    #   Manager (ACM) certificate. Required when `Protocols` is set to `FTPS`.
+    #   The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM)
+    #   certificate. Required when `Protocols` is set to `FTPS`.
     #
     #   To request a new public certificate, see [Request a public
-    #   certificate][1] in the <i> Amazon Web ServicesCertificate Manager User
-    #   Guide</i>.
+    #   certificate][1] in the <i> AWS Certificate Manager User Guide</i>.
     #
     #   To import an existing certificate into ACM, see [Importing
-    #   certificates into ACM][2] in the <i> Amazon Web ServicesCertificate
-    #   Manager User Guide</i>.
+    #   certificates into ACM][2] in the <i> AWS Certificate Manager User
+    #   Guide</i>.
     #
     #   To request a private certificate to use FTPS through private IP
-    #   addresses, see [Request a private certificate][3] in the <i> Amazon
-    #   Web ServicesCertificate Manager User Guide</i>.
+    #   addresses, see [Request a private certificate][3] in the <i> AWS
+    #   Certificate Manager User Guide</i>.
     #
     #   Certificates with the following cryptographic algorithms and key sizes
     #   are supported:
@@ -1972,40 +1426,20 @@ module Aws::Transfer
     #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
     #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html
     #
-    # @option params [Types::ProtocolDetails] :protocol_details
-    #   The protocol settings that are configured for your server.
-    #
-    #   Use the `PassiveIp` parameter to indicate passive mode (for FTP and
-    #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as the
-    #   external IP address of a firewall, router, or load balancer.
-    #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
-    #   for your server. When you host your endpoint within your VPC, you can
-    #   make it accessible only to resources within your VPC, or you can
-    #   attach Elastic IP addresses and make it accessible to clients over the
-    #   internet. Your VPC's default security groups are automatically
-    #   assigned to your endpoint.
+    #   for your server. With a VPC endpoint, you can restrict access to your
+    #   server to resources only within your VPC. To control incoming internet
+    #   traffic, you will need to associate one or more Elastic IP addresses
+    #   with your server's endpoint.
     #
     # @option params [String] :endpoint_type
-    #   The type of endpoint that you want your server to use. You can choose
-    #   to make your server's endpoint publicly accessible (PUBLIC) or host
-    #   it inside your VPC. With an endpoint that is hosted in a VPC, you can
-    #   restrict access to your server and resources only within your VPC or
-    #   choose to make it internet facing by attaching Elastic IP addresses
-    #   directly to it.
+    #   The type of endpoint that you want your server to connect to. You can
+    #   choose to connect to the public internet or a VPC endpoint. With a VPC
+    #   endpoint, you can restrict access to your server and resources only
+    #   within your VPC.
     #
-    #   <note markdown="1"> After May 19, 2021, you won't be able to create a server using
-    #   `EndpointType=VPC_ENDPOINT` in your Amazon Web Servicesaccount if your
-    #   account hasn't already done so before May 19, 2021. If you have
-    #   already created servers with `EndpointType=VPC_ENDPOINT` in your
-    #   Amazon Web Servicesaccount on or before May 19, 2021, you will not be
-    #   affected. After this date, use `EndpointType`=`VPC`.
-    #
-    #    For more information, see
-    #   https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
-    #
-    #    It is recommended that you use `VPC` as the `EndpointType`. With this
+    #   <note markdown="1"> It is recommended that you use `VPC` as the `EndpointType`. With this
     #   endpoint type, you have the option to directly associate up to three
     #   Elastic IPv4 addresses (BYO IP included) with your server's endpoint
     #   and use VPC security groups to restrict traffic by the client's
@@ -2023,7 +1457,7 @@ module Aws::Transfer
     #   changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
-    #   server][1] in the *Amazon Web ServicesTransfer Family User Guide*.
+    #   server][1] in the *AWS Transfer Family User Guide*.
     #
     #
     #
@@ -2034,10 +1468,9 @@ module Aws::Transfer
     #   customer's authentication API method.
     #
     # @option params [String] :logging_role
-    #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
-    #   Identity and Access Management (IAM) role that allows a server to turn
-    #   on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
-    #   set, user activity can be viewed in your CloudWatch logs.
+    #   Changes the AWS Identity and Access Management (IAM) role that allows
+    #   Amazon S3 events to be logged in Amazon CloudWatch, turning logging on
+    #   or off.
     #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
@@ -2052,13 +1485,12 @@ module Aws::Transfer
     #
     #   * File Transfer Protocol (FTP): Unencrypted file transfer
     #
-    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in Amazon
-    #   Web ServicesCertificate Manager (ACM) which will be used to identify
-    #   your server when clients connect to it over FTPS.
+    #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
+    #   Certificate Manager (ACM) which will be used to identify your server
+    #   when clients connect to it over FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the `EndpointType`
-    #   must be `VPC` and the `IdentityProviderType` must be
-    #   `AWS_DIRECTORY_SERVICE` or `API_GATEWAY`.
+    #   must be `VPC` and the `IdentityProviderType` must be `API_GATEWAY`.
     #
     #    If `Protocol` includes `FTP`, then `AddressAllocationIds` cannot be
     #   associated.
@@ -2085,9 +1517,6 @@ module Aws::Transfer
     #
     #   resp = client.update_server({
     #     certificate: "Certificate",
-    #     protocol_details: {
-    #       passive_ip: "PassiveIp",
-    #     },
     #     endpoint_details: {
     #       address_allocation_ids: ["AddressAllocationId"],
     #       subnet_ids: ["SubnetId"],
@@ -2100,7 +1529,6 @@ module Aws::Transfer
     #     identity_provider_details: {
     #       url: "Url",
     #       invocation_role: "Role",
-    #       directory_id: "DirectoryId",
     #     },
     #     logging_role: "NullableRole",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
@@ -2129,76 +1557,65 @@ module Aws::Transfer
     # user.
     #
     # @option params [String] :home_directory
-    #   The landing directory (folder) for a user when they log in to the
-    #   server using the client.
+    #   Specifies the landing directory (folder) for a user when they log in
+    #   to the server using their file transfer protocol client.
     #
-    #   A `HomeDirectory` example is `/bucket_name/home/mydirectory`.
+    #   An example is `your-Amazon-S3-bucket-name>/home/username`.
     #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) you want your users' home
     #   directory to be when they log into the server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
-    #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is in
+    #   their file transfer protocol clients. If you set it `LOGICAL`, you
+    #   will need to provide mappings in the `HomeDirectoryMappings` for how
+    #   you want to make Amazon S3 paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
-    #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
-    #   paths and keys should be visible to your user and how you want to make
-    #   them visible. You must specify the `Entry` and `Target` pair, where
+    #   Logical directory mappings that specify what Amazon S3 paths and keys
+    #   should be visible to your user and how you want to make them visible.
+    #   You will need to specify the "`Entry`" and "`Target`" pair, where
     #   `Entry` shows how the path is made visible and `Target` is the actual
-    #   Amazon S3 or Amazon EFS path. If you only specify a target, it is
-    #   displayed as is. You also must ensure that your Amazon Web Services
-    #   Identity and Access Management (IAM) role provides access to paths in
-    #   `Target`. This value can only be set when `HomeDirectoryType` is set
-    #   to *LOGICAL*.
+    #   Amazon S3 path. If you only specify a target, it will be displayed as
+    #   is. You will need to also make sure that your IAM role provides access
+    #   to paths in `Target`. The following is an example.
     #
-    #   The following is an `Entry` and `Target` pair example.
-    #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `'[ "/bucket2/documentation", \{ "Entry": "your-personal-report.pdf",
+    #   "Target": "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \}
+    #   ]'`
     #
     #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock down your user to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to '/' and set
-    #   `Target` to the HomeDirectory parameter value.
+    #   to lock your user down to the designated home directory ("chroot").
+    #   To do this, you can set `Entry` to '/' and set `Target` to the
+    #   HomeDirectory parameter value.
     #
-    #   The following is an `Entry` and `Target` pair example for `chroot`.
-    #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
+    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
+    #   S3, the entry will be ignored. As a workaround, you can use the Amazon
+    #   S3 API to create 0 byte objects as place holders for your directory.
+    #   If using the CLI, use the `s3api` call instead of `s3` so you can use
+    #   the put-object operation. For example, you use the following: `aws
+    #   s3api put-object --bucket bucketname --key path/to/folder/`. Make sure
+    #   that the end of the key name ends in a / for it to be considered a
+    #   folder.
     #
     #    </note>
     #
     # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
+    #   Allows you to supply a scope-down policy for your user so you can use
+    #   the same IAM role across multiple users. The policy scopes down user
+    #   access to portions of your Amazon S3 bucket. Variables you can use
+    #   inside this policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does not
-    #   use scope-down policies.
-    #
-    #    For scope-down policies, Amazon Web ServicesTransfer Family stores the
-    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
-    #   the policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
+    #   <note markdown="1"> For scope-down policies, AWS Transfer Family stores the policy as a
+    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+    #   You save the policy as a JSON blob and pass it in the `Policy`
+    #   argument.
     #
     #    For an example of a scope-down policy, see [Creating a scope-down
     #   policy][1].
     #
-    #    For more information, see [AssumeRole][2] in the *Amazon Web Services
-    #   Security Token Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *AWS Security Token
+    #   Service API Reference*.
     #
     #    </note>
     #
@@ -2208,19 +1625,12 @@ module Aws::Transfer
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
     # @option params [Types::PosixProfile] :posix_profile
-    #   Specifies the full POSIX identity, including user ID (`Uid`), group ID
-    #   (`Gid`), and any secondary groups IDs (`SecondaryGids`), that controls
-    #   your users' access to your Amazon Elastic File Systems (Amazon EFS).
-    #   The POSIX permissions that are set on files and directories in your
-    #   file system determines the level of access your users get when
-    #   transferring files into and out of your Amazon EFS file systems.
     #
     # @option params [String] :role
-    #   Specifies the Amazon Resource Name (ARN) of the IAM role that controls
-    #   your users' access to your Amazon S3 bucket or EFS file system. The
-    #   policies attached to this role determine the level of access that you
-    #   want to provide your users when transferring files into and out of
-    #   your Amazon S3 bucket or EFS file system. The IAM role should also
+    #   The IAM role that controls your users' access to your Amazon S3
+    #   bucket. The policies attached to this role will determine the level of
+    #   access you want to provide your users when transferring files into and
+    #   out of your Amazon S3 bucket or buckets. The IAM role should also
     #   contain a trust relationship that allows the server to access your
     #   resources when servicing your users' transfer requests.
     #
@@ -2290,7 +1700,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

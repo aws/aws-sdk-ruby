@@ -382,10 +382,8 @@ module Aws::Detective
     # graph ARN. It does not create a new behavior graph.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to assign to the new behavior graph. You can add up to 50
-    #   tags. For each tag, you provide the tag key and the tag value. Each
-    #   tag key can contain up to 128 characters. Each tag value can contain
-    #   up to 256 characters.
+    #   The tags to assign to the new behavior graph. For each tag, you
+    #   provide the tag key and the tag value.
     #
     # @return [Types::CreateGraphResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -450,9 +448,8 @@ module Aws::Detective
     #
     # @option params [required, Array<Types::Account>] :accounts
     #   The list of AWS accounts to invite to become member accounts in the
-    #   behavior graph. You can invite up to 50 accounts at a time. For each
-    #   invited account, the account list contains the account identifier and
-    #   the AWS account root user email address.
+    #   behavior graph. For each invited account, the account list contains
+    #   the account identifier and the AWS account root user email address.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -541,8 +538,7 @@ module Aws::Detective
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of AWS account identifiers for the member accounts to delete
-    #   from the behavior graph. You can delete up to 50 member accounts at a
-    #   time.
+    #   from the behavior graph.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -608,8 +604,7 @@ module Aws::Detective
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of AWS account identifiers for the member account for which
-    #   to return member details. You can request details for up to 50 member
-    #   accounts at a time.
+    #   to return member details.
     #
     #   You cannot use `GetMembers` to retrieve information about member
     #   accounts that were removed from the behavior graph.
@@ -925,10 +920,7 @@ module Aws::Detective
     #   The ARN of the behavior graph to assign the tags to.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to assign to the behavior graph. You can add up to 50 tags.
-    #   For each tag, you provide the tag key and the tag value. Each tag key
-    #   can contain up to 128 characters. Each tag value can contain up to 256
-    #   characters.
+    #   The tag values to assign to the behavior graph.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -956,8 +948,7 @@ module Aws::Detective
     #   The ARN of the behavior graph to remove the tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys of the tags to remove from the behavior graph. You can
-    #   remove up to 50 tags at a time.
+    #   The tag keys of the tags to remove from the behavior graph.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -990,7 +981,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

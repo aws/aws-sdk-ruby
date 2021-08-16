@@ -68,8 +68,7 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"InternalServerException"},
-        {"shape":"AccessDeniedException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"AccessDeniedException"}
       ]
     },
     "CreateDetectorVersion":{
@@ -1814,10 +1813,6 @@
       "type":"string",
       "enum":["DETECTORPL"]
     },
-    "ListOfLogitMetrics":{
-      "type":"list",
-      "member":{"shape":"LogitMetric"}
-    },
     "ListOfModelScores":{
       "type":"list",
       "member":{"shape":"ModelScores"}
@@ -1848,19 +1843,6 @@
       "members":{
         "tags":{"shape":"tagList"},
         "nextToken":{"shape":"string"}
-      }
-    },
-    "LogitMetric":{
-      "type":"structure",
-      "required":[
-        "variableName",
-        "variableType",
-        "variableImportance"
-      ],
-      "members":{
-        "variableName":{"shape":"string"},
-        "variableType":{"shape":"string"},
-        "variableImportance":{"shape":"float"}
       }
     },
     "MetricDataPoint":{
@@ -2270,8 +2252,7 @@
       "type":"structure",
       "members":{
         "dataValidationMetrics":{"shape":"DataValidationMetrics"},
-        "trainingMetrics":{"shape":"TrainingMetrics"},
-        "variableImportanceMetrics":{"shape":"VariableImportanceMetrics"}
+        "trainingMetrics":{"shape":"TrainingMetrics"}
       }
     },
     "UntagResourceRequest":{
@@ -2503,12 +2484,6 @@
       "member":{"shape":"VariableEntry"},
       "max":25,
       "min":1
-    },
-    "VariableImportanceMetrics":{
-      "type":"structure",
-      "members":{
-        "LogitMetrics":{"shape":"ListOfLogitMetrics"}
-      }
     },
     "VariableList":{
       "type":"list",

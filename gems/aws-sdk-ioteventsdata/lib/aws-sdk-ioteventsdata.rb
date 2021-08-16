@@ -28,7 +28,7 @@ require_relative 'aws-sdk-ioteventsdata/customizations'
 # structure.
 #
 #     io_t_events_data = Aws::IoTEventsData::Client.new
-#     resp = io_t_events_data.batch_acknowledge_alarm(params)
+#     resp = io_t_events_data.batch_put_message(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-ioteventsdata/customizations'
 # @!group service
 module Aws::IoTEventsData
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.15.0'
 
 end

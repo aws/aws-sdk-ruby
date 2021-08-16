@@ -10,30 +10,6 @@
 module Aws::IoTEvents
   module Types
 
-    # Specifies whether to get notified for alarm state changes.
-    #
-    # @note When making an API call, you may pass AcknowledgeFlow
-    #   data as a hash:
-    #
-    #       {
-    #         enabled: false, # required
-    #       }
-    #
-    # @!attribute [rw] enabled
-    #   The value must be `TRUE` or `FALSE`. If `TRUE`, you receive a
-    #   notification when the alarm state changes. You must choose to
-    #   acknowledge the notification before the alarm state can return to
-    #   `NORMAL`. If `FALSE`, you won't receive notifications. The alarm
-    #   automatically changes to the `NORMAL` state when the input property
-    #   value returns to the specified range.
-    #   @return [Boolean]
-    #
-    class AcknowledgeFlow < Struct.new(
-      :enabled)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # An action to be performed when the `condition` is TRUE.
     #
     # @note When making an API call, you may pass Action
@@ -126,8 +102,8 @@ module Aws::IoTEvents
     #           asset_id: "AssetId",
     #           property_id: "AssetPropertyId",
     #           property_alias: "AssetPropertyAlias",
-    #           property_value: {
-    #             value: {
+    #           property_value: { # required
+    #             value: { # required
     #               string_value: "AssetPropertyStringValue",
     #               integer_value: "AssetPropertyIntegerValue",
     #               double_value: "AssetPropertyDoubleValue",
@@ -241,617 +217,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Specifies one of the following actions to receive notifications when
-    # the alarm state changes.
-    #
-    # @note When making an API call, you may pass AlarmAction
-    #   data as a hash:
-    #
-    #       {
-    #         sns: {
-    #           target_arn: "AmazonResourceName", # required
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         iot_topic_publish: {
-    #           mqtt_topic: "MQTTTopic", # required
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         lambda: {
-    #           function_arn: "AmazonResourceName", # required
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         iot_events: {
-    #           input_name: "InputName", # required
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         sqs: {
-    #           queue_url: "QueueUrl", # required
-    #           use_base_64: false,
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         firehose: {
-    #           delivery_stream_name: "DeliveryStreamName", # required
-    #           separator: "FirehoseSeparator",
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         dynamo_db: {
-    #           hash_key_type: "DynamoKeyType",
-    #           hash_key_field: "DynamoKeyField", # required
-    #           hash_key_value: "DynamoKeyValue", # required
-    #           range_key_type: "DynamoKeyType",
-    #           range_key_field: "DynamoKeyField",
-    #           range_key_value: "DynamoKeyValue",
-    #           operation: "DynamoOperation",
-    #           payload_field: "DynamoKeyField",
-    #           table_name: "DynamoTableName", # required
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         dynamo_d_bv_2: {
-    #           table_name: "DynamoTableName", # required
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #         iot_site_wise: {
-    #           entry_id: "AssetPropertyEntryId",
-    #           asset_id: "AssetId",
-    #           property_id: "AssetPropertyId",
-    #           property_alias: "AssetPropertyAlias",
-    #           property_value: {
-    #             value: {
-    #               string_value: "AssetPropertyStringValue",
-    #               integer_value: "AssetPropertyIntegerValue",
-    #               double_value: "AssetPropertyDoubleValue",
-    #               boolean_value: "AssetPropertyBooleanValue",
-    #             },
-    #             timestamp: {
-    #               time_in_seconds: "AssetPropertyTimeInSeconds", # required
-    #               offset_in_nanos: "AssetPropertyOffsetInNanos",
-    #             },
-    #             quality: "AssetPropertyQuality",
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] sns
-    #   Information required to publish the Amazon SNS message.
-    #   @return [Types::SNSTopicPublishAction]
-    #
-    # @!attribute [rw] iot_topic_publish
-    #   Information required to publish the MQTT message through the AWS IoT
-    #   message broker.
-    #   @return [Types::IotTopicPublishAction]
-    #
-    # @!attribute [rw] lambda
-    #   Calls a Lambda function, passing in information about the detector
-    #   model instance and the event that triggered the action.
-    #   @return [Types::LambdaAction]
-    #
-    # @!attribute [rw] iot_events
-    #   Sends an AWS IoT Events input, passing in information about the
-    #   detector model instance and the event that triggered the action.
-    #   @return [Types::IotEventsAction]
-    #
-    # @!attribute [rw] sqs
-    #   Sends information about the detector model instance and the event
-    #   that triggered the action to an Amazon SQS queue.
-    #   @return [Types::SqsAction]
-    #
-    # @!attribute [rw] firehose
-    #   Sends information about the detector model instance and the event
-    #   that triggered the action to an Amazon Kinesis Data Firehose
-    #   delivery stream.
-    #   @return [Types::FirehoseAction]
-    #
-    # @!attribute [rw] dynamo_db
-    #   Defines an action to write to the Amazon DynamoDB table that you
-    #   created. The standard action payload contains all the information
-    #   about the detector model instance and the event that triggered the
-    #   action. You can customize the [payload][1]. One column of the
-    #   DynamoDB table receives all attribute-value pairs in the payload
-    #   that you specify.
-    #
-    #   You must use expressions for all parameters in `DynamoDBAction`. The
-    #   expressions accept literals, operators, functions, references, and
-    #   substitution templates.
-    #
-    #   **Examples**
-    #
-    #   * For literal values, the expressions must contain single quotes.
-    #     For example, the value for the `hashKeyType` parameter can be
-    #     `'STRING'`.
-    #
-    #   * For references, you must specify either variables or input values.
-    #     For example, the value for the `hashKeyField` parameter can be
-    #     `$input.GreenhouseInput.name`.
-    #
-    #   * For a substitution template, you must use `$\{\}`, and the
-    #     template must be in single quotes. A substitution template can
-    #     also contain a combination of literals, operators, functions,
-    #     references, and substitution templates.
-    #
-    #     In the following example, the value for the `hashKeyValue`
-    #     parameter uses a substitution template.
-    #
-    #     `'$\{$input.GreenhouseInput.temperature * 6 / 5 + 32\} in
-    #     Fahrenheit'`
-    #
-    #   * For a string concatenation, you must use `+`. A string
-    #     concatenation can also contain a combination of literals,
-    #     operators, functions, references, and substitution templates.
-    #
-    #     In the following example, the value for the `tableName` parameter
-    #     uses a string concatenation.
-    #
-    #     `'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date`
-    #
-    #   For more information, see [Expressions][2] in the *AWS IoT Events
-    #   Developer Guide*.
-    #
-    #   If the defined payload type is a string, `DynamoDBAction` writes
-    #   non-JSON data to the DynamoDB table as binary data. The DynamoDB
-    #   console displays the data as Base64-encoded text. The value for the
-    #   `payloadField` parameter is `<payload-field>_raw`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html
-    #   [2]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
-    #   @return [Types::DynamoDBAction]
-    #
-    # @!attribute [rw] dynamo_d_bv_2
-    #   Defines an action to write to the Amazon DynamoDB table that you
-    #   created. The default action payload contains all the information
-    #   about the detector model instance and the event that triggered the
-    #   action. You can customize the [payload][1]. A separate column of the
-    #   DynamoDB table receives one attribute-value pair in the payload that
-    #   you specify.
-    #
-    #   You must use expressions for all parameters in `DynamoDBv2Action`.
-    #   The expressions accept literals, operators, functions, references,
-    #   and substitution templates.
-    #
-    #   **Examples**
-    #
-    #   * For literal values, the expressions must contain single quotes.
-    #     For example, the value for the `tableName` parameter can be
-    #     `'GreenhouseTemperatureTable'`.
-    #
-    #   * For references, you must specify either variables or input values.
-    #     For example, the value for the `tableName` parameter can be
-    #     `$variable.ddbtableName`.
-    #
-    #   * For a substitution template, you must use `$\{\}`, and the
-    #     template must be in single quotes. A substitution template can
-    #     also contain a combination of literals, operators, functions,
-    #     references, and substitution templates.
-    #
-    #     In the following example, the value for the `contentExpression`
-    #     parameter in `Payload` uses a substitution template.
-    #
-    #     `'\{"sensorID": "$\{$input.GreenhouseInput.sensor_id\}",
-    #     "temperature": "$\{$input.GreenhouseInput.temperature * 9 / 5 +
-    #     32\}"\}'`
-    #
-    #   * For a string concatenation, you must use `+`. A string
-    #     concatenation can also contain a combination of literals,
-    #     operators, functions, references, and substitution templates.
-    #
-    #     In the following example, the value for the `tableName` parameter
-    #     uses a string concatenation.
-    #
-    #     `'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date`
-    #
-    #   For more information, see [Expressions][2] in the *AWS IoT Events
-    #   Developer Guide*.
-    #
-    #   The value for the `type` parameter in `Payload` must be `JSON`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html
-    #   [2]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
-    #   @return [Types::DynamoDBv2Action]
-    #
-    # @!attribute [rw] iot_site_wise
-    #   Sends information about the detector model instance and the event
-    #   that triggered the action to a specified asset property in AWS IoT
-    #   SiteWise.
-    #
-    #   You must use expressions for all parameters in `IotSiteWiseAction`.
-    #   The expressions accept literals, operators, functions, references,
-    #   and substitutions templates.
-    #
-    #   **Examples**
-    #
-    #   * For literal values, the expressions must contain single quotes.
-    #     For example, the value for the `propertyAlias` parameter can be
-    #     `'/company/windfarm/3/turbine/7/temperature'`.
-    #
-    #   * For references, you must specify either variables or input values.
-    #     For example, the value for the `assetId` parameter can be
-    #     `$input.TurbineInput.assetId1`.
-    #
-    #   * For a substitution template, you must use `$\{\}`, and the
-    #     template must be in single quotes. A substitution template can
-    #     also contain a combination of literals, operators, functions,
-    #     references, and substitution templates.
-    #
-    #     In the following example, the value for the `propertyAlias`
-    #     parameter uses a substitution template.
-    #
-    #     `'company/windfarm/$\{$input.TemperatureInput.sensorData.windfarmID\}/turbine/
-    #     $\{$input.TemperatureInput.sensorData.turbineID\}/temperature'`
-    #
-    #   You must specify either `propertyAlias` or both `assetId` and
-    #   `propertyId` to identify the target asset property in AWS IoT
-    #   SiteWise.
-    #
-    #   For more information, see [Expressions][1] in the *AWS IoT Events
-    #   Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
-    #   @return [Types::IotSiteWiseAction]
-    #
-    class AlarmAction < Struct.new(
-      :sns,
-      :iot_topic_publish,
-      :lambda,
-      :iot_events,
-      :sqs,
-      :firehose,
-      :dynamo_db,
-      :dynamo_d_bv_2,
-      :iot_site_wise)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains the configuration information of alarm state changes.
-    #
-    # @note When making an API call, you may pass AlarmCapabilities
-    #   data as a hash:
-    #
-    #       {
-    #         initialization_configuration: {
-    #           disabled_on_initialization: false, # required
-    #         },
-    #         acknowledge_flow: {
-    #           enabled: false, # required
-    #         },
-    #       }
-    #
-    # @!attribute [rw] initialization_configuration
-    #   Specifies the default alarm state. The configuration applies to all
-    #   alarms that were created based on this alarm model.
-    #   @return [Types::InitializationConfiguration]
-    #
-    # @!attribute [rw] acknowledge_flow
-    #   Specifies whether to get notified for alarm state changes.
-    #   @return [Types::AcknowledgeFlow]
-    #
-    class AlarmCapabilities < Struct.new(
-      :initialization_configuration,
-      :acknowledge_flow)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains information about one or more alarm actions.
-    #
-    # @note When making an API call, you may pass AlarmEventActions
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_actions: [
-    #           {
-    #             sns: {
-    #               target_arn: "AmazonResourceName", # required
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             iot_topic_publish: {
-    #               mqtt_topic: "MQTTTopic", # required
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             lambda: {
-    #               function_arn: "AmazonResourceName", # required
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             iot_events: {
-    #               input_name: "InputName", # required
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             sqs: {
-    #               queue_url: "QueueUrl", # required
-    #               use_base_64: false,
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             firehose: {
-    #               delivery_stream_name: "DeliveryStreamName", # required
-    #               separator: "FirehoseSeparator",
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             dynamo_db: {
-    #               hash_key_type: "DynamoKeyType",
-    #               hash_key_field: "DynamoKeyField", # required
-    #               hash_key_value: "DynamoKeyValue", # required
-    #               range_key_type: "DynamoKeyType",
-    #               range_key_field: "DynamoKeyField",
-    #               range_key_value: "DynamoKeyValue",
-    #               operation: "DynamoOperation",
-    #               payload_field: "DynamoKeyField",
-    #               table_name: "DynamoTableName", # required
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             dynamo_d_bv_2: {
-    #               table_name: "DynamoTableName", # required
-    #               payload: {
-    #                 content_expression: "ContentExpression", # required
-    #                 type: "STRING", # required, accepts STRING, JSON
-    #               },
-    #             },
-    #             iot_site_wise: {
-    #               entry_id: "AssetPropertyEntryId",
-    #               asset_id: "AssetId",
-    #               property_id: "AssetPropertyId",
-    #               property_alias: "AssetPropertyAlias",
-    #               property_value: {
-    #                 value: {
-    #                   string_value: "AssetPropertyStringValue",
-    #                   integer_value: "AssetPropertyIntegerValue",
-    #                   double_value: "AssetPropertyDoubleValue",
-    #                   boolean_value: "AssetPropertyBooleanValue",
-    #                 },
-    #                 timestamp: {
-    #                   time_in_seconds: "AssetPropertyTimeInSeconds", # required
-    #                   offset_in_nanos: "AssetPropertyOffsetInNanos",
-    #                 },
-    #                 quality: "AssetPropertyQuality",
-    #               },
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] alarm_actions
-    #   Specifies one or more supported actions to receive notifications
-    #   when the alarm state changes.
-    #   @return [Array<Types::AlarmAction>]
-    #
-    class AlarmEventActions < Struct.new(
-      :alarm_actions)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains a summary of an alarm model.
-    #
-    # @!attribute [rw] creation_time
-    #   The time the alarm model was created, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] alarm_model_description
-    #   The description of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_name
-    #   The name of the alarm model.
-    #   @return [String]
-    #
-    class AlarmModelSummary < Struct.new(
-      :creation_time,
-      :alarm_model_description,
-      :alarm_model_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains a summary of an alarm model version.
-    #
-    # @!attribute [rw] alarm_model_name
-    #   The name of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_arn
-    #   The ARN of the alarm model. For more information, see [Amazon
-    #   Resource Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_version
-    #   The version of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that allows the alarm to perform actions and
-    #   access AWS resources. For more information, see [Amazon Resource
-    #   Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   The time the alarm model was created, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_update_time
-    #   The time the alarm model was last updated, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] status
-    #   The status of the alarm model. The status can be one of the
-    #   following values:
-    #
-    #   * `ACTIVE` - The alarm model is active and it's ready to evaluate
-    #     data.
-    #
-    #   * `ACTIVATING` - AWS IoT Events is activating your alarm model.
-    #     Activating an alarm model can take up to a few minutes.
-    #
-    #   * `INACTIVE` - The alarm model is inactive, so it isn't ready to
-    #     evaluate data. Check your alarm model information and update the
-    #     alarm model.
-    #
-    #   * `FAILED` - You couldn't create or update the alarm model. Check
-    #     your alarm model information and try again.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_message
-    #   Contains information about the status of the alarm model version.
-    #   @return [String]
-    #
-    class AlarmModelVersionSummary < Struct.new(
-      :alarm_model_name,
-      :alarm_model_arn,
-      :alarm_model_version,
-      :role_arn,
-      :creation_time,
-      :last_update_time,
-      :status,
-      :status_message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains information about one or more notification actions.
-    #
-    # @note When making an API call, you may pass AlarmNotification
-    #   data as a hash:
-    #
-    #       {
-    #         notification_actions: [
-    #           {
-    #             action: { # required
-    #               lambda_action: {
-    #                 function_arn: "AmazonResourceName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #             },
-    #             sms_configurations: [
-    #               {
-    #                 sender_id: "SMSSenderId",
-    #                 additional_message: "NotificationAdditionalMessage",
-    #                 recipients: [ # required
-    #                   {
-    #                     sso_identity: {
-    #                       identity_store_id: "IdentityStoreId", # required
-    #                       user_id: "SSOReferenceId",
-    #                     },
-    #                   },
-    #                 ],
-    #               },
-    #             ],
-    #             email_configurations: [
-    #               {
-    #                 from: "FromEmail", # required
-    #                 content: {
-    #                   subject: "EmailSubject",
-    #                   additional_message: "NotificationAdditionalMessage",
-    #                 },
-    #                 recipients: { # required
-    #                   to: [
-    #                     {
-    #                       sso_identity: {
-    #                         identity_store_id: "IdentityStoreId", # required
-    #                         user_id: "SSOReferenceId",
-    #                       },
-    #                     },
-    #                   ],
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] notification_actions
-    #   Contains the notification settings of an alarm model. The settings
-    #   apply to all alarms that were created based on this alarm model.
-    #   @return [Array<Types::NotificationAction>]
-    #
-    class AlarmNotification < Struct.new(
-      :notification_actions)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Defines when your alarm is invoked.
-    #
-    # @note When making an API call, you may pass AlarmRule
-    #   data as a hash:
-    #
-    #       {
-    #         simple_rule: {
-    #           input_property: "InputProperty", # required
-    #           comparison_operator: "GREATER", # required, accepts GREATER, GREATER_OR_EQUAL, LESS, LESS_OR_EQUAL, EQUAL, NOT_EQUAL
-    #           threshold: "Threshold", # required
-    #         },
-    #       }
-    #
-    # @!attribute [rw] simple_rule
-    #   A rule that compares an input property value to a threshold value
-    #   with a comparison operator.
-    #   @return [Types::SimpleRule]
-    #
-    class AlarmRule < Struct.new(
-      :simple_rule)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Contains the result of the analysis.
     #
     # @!attribute [rw] type
@@ -862,9 +227,8 @@ module Aws::IoTEvents
     #     actions that work with other AWS services in a supported AWS
     #     Region.
     #
-    #   * `service-limits` - Resources or API operations can't exceed
-    #     service quotas (also known as limits). Update your detector model
-    #     or request a quota increase.
+    #   * `service-limits` - Resources or operations can't exceed service
+    #     limits. Update your detector model or request a limit adjust.
     #
     #   * `structure` - The detector model must follow a structure that AWS
     #     IoT Events supports.
@@ -890,18 +254,18 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] level
-    #   The severity level of the analysis result. Based on the severity
-    #   level, analysis results fall into three general categories:
+    #   The severity level of the analysis result. Analysis results fall
+    #   into three general categories based on the severity level:
     #
-    #   * `INFO` - An information result tells you about a significant field
-    #     in your detector model. This type of result usually doesn't
+    #   * `INFO` - An information result informs you about a significant
+    #     field in your detector model. This type of result usually doesn't
     #     require immediate action.
     #
     #   * `WARNING` - A warning result draws special attention to fields
-    #     that might cause issues for your detector model. We recommend that
-    #     you review warnings and take necessary actions before you use your
-    #     detector model in production environments. Otherwise, the detector
-    #     model might not work as expected.
+    #     that are potentially damaging to your detector model. We recommend
+    #     that you review warnings and take necessary actions before you use
+    #     your detetor model in production environments. Otherwise, the
+    #     detector model may not fully function as expected.
     #
     #   * `ERROR` - An error result notifies you about a problem found in
     #     your detector model. You must fix all errors before you can
@@ -1032,7 +396,7 @@ module Aws::IoTEvents
     #   data as a hash:
     #
     #       {
-    #         value: {
+    #         value: { # required
     #           string_value: "AssetPropertyStringValue",
     #           integer_value: "AssetPropertyIntegerValue",
     #           double_value: "AssetPropertyDoubleValue",
@@ -1196,303 +560,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateAlarmModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_model_name: "AlarmModelName", # required
-    #         alarm_model_description: "AlarmModelDescription",
-    #         role_arn: "AmazonResourceName", # required
-    #         tags: [
-    #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue", # required
-    #           },
-    #         ],
-    #         key: "AttributeJsonPath",
-    #         severity: 1,
-    #         alarm_rule: { # required
-    #           simple_rule: {
-    #             input_property: "InputProperty", # required
-    #             comparison_operator: "GREATER", # required, accepts GREATER, GREATER_OR_EQUAL, LESS, LESS_OR_EQUAL, EQUAL, NOT_EQUAL
-    #             threshold: "Threshold", # required
-    #           },
-    #         },
-    #         alarm_notification: {
-    #           notification_actions: [
-    #             {
-    #               action: { # required
-    #                 lambda_action: {
-    #                   function_arn: "AmazonResourceName", # required
-    #                   payload: {
-    #                     content_expression: "ContentExpression", # required
-    #                     type: "STRING", # required, accepts STRING, JSON
-    #                   },
-    #                 },
-    #               },
-    #               sms_configurations: [
-    #                 {
-    #                   sender_id: "SMSSenderId",
-    #                   additional_message: "NotificationAdditionalMessage",
-    #                   recipients: [ # required
-    #                     {
-    #                       sso_identity: {
-    #                         identity_store_id: "IdentityStoreId", # required
-    #                         user_id: "SSOReferenceId",
-    #                       },
-    #                     },
-    #                   ],
-    #                 },
-    #               ],
-    #               email_configurations: [
-    #                 {
-    #                   from: "FromEmail", # required
-    #                   content: {
-    #                     subject: "EmailSubject",
-    #                     additional_message: "NotificationAdditionalMessage",
-    #                   },
-    #                   recipients: { # required
-    #                     to: [
-    #                       {
-    #                         sso_identity: {
-    #                           identity_store_id: "IdentityStoreId", # required
-    #                           user_id: "SSOReferenceId",
-    #                         },
-    #                       },
-    #                     ],
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         alarm_event_actions: {
-    #           alarm_actions: [
-    #             {
-    #               sns: {
-    #                 target_arn: "AmazonResourceName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               iot_topic_publish: {
-    #                 mqtt_topic: "MQTTTopic", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               lambda: {
-    #                 function_arn: "AmazonResourceName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               iot_events: {
-    #                 input_name: "InputName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               sqs: {
-    #                 queue_url: "QueueUrl", # required
-    #                 use_base_64: false,
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               firehose: {
-    #                 delivery_stream_name: "DeliveryStreamName", # required
-    #                 separator: "FirehoseSeparator",
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               dynamo_db: {
-    #                 hash_key_type: "DynamoKeyType",
-    #                 hash_key_field: "DynamoKeyField", # required
-    #                 hash_key_value: "DynamoKeyValue", # required
-    #                 range_key_type: "DynamoKeyType",
-    #                 range_key_field: "DynamoKeyField",
-    #                 range_key_value: "DynamoKeyValue",
-    #                 operation: "DynamoOperation",
-    #                 payload_field: "DynamoKeyField",
-    #                 table_name: "DynamoTableName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               dynamo_d_bv_2: {
-    #                 table_name: "DynamoTableName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               iot_site_wise: {
-    #                 entry_id: "AssetPropertyEntryId",
-    #                 asset_id: "AssetId",
-    #                 property_id: "AssetPropertyId",
-    #                 property_alias: "AssetPropertyAlias",
-    #                 property_value: {
-    #                   value: {
-    #                     string_value: "AssetPropertyStringValue",
-    #                     integer_value: "AssetPropertyIntegerValue",
-    #                     double_value: "AssetPropertyDoubleValue",
-    #                     boolean_value: "AssetPropertyBooleanValue",
-    #                   },
-    #                   timestamp: {
-    #                     time_in_seconds: "AssetPropertyTimeInSeconds", # required
-    #                     offset_in_nanos: "AssetPropertyOffsetInNanos",
-    #                   },
-    #                   quality: "AssetPropertyQuality",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         alarm_capabilities: {
-    #           initialization_configuration: {
-    #             disabled_on_initialization: false, # required
-    #           },
-    #           acknowledge_flow: {
-    #             enabled: false, # required
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] alarm_model_name
-    #   A unique name that helps you identify the alarm model. You can't
-    #   change this name after you create the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_description
-    #   A description that tells you what the alarm model detects.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that allows the alarm to perform actions and
-    #   access AWS resources. For more information, see [Amazon Resource
-    #   Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   A list of key-value pairs that contain metadata for the alarm model.
-    #   The tags help you manage the alarm model. For more information, see
-    #   [Tagging your AWS IoT Events resources][1] in the *AWS IoT Events
-    #   Developer Guide*.
-    #
-    #   You can create up to 50 tags for one alarm model.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html
-    #   @return [Array<Types::Tag>]
-    #
-    # @!attribute [rw] key
-    #   An input attribute used as a key to create an alarm. AWS IoT Events
-    #   routes [inputs][1] associated with this key to the alarm.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html
-    #   @return [String]
-    #
-    # @!attribute [rw] severity
-    #   A non-negative integer that reflects the severity level of the
-    #   alarm.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] alarm_rule
-    #   Defines when your alarm is invoked.
-    #   @return [Types::AlarmRule]
-    #
-    # @!attribute [rw] alarm_notification
-    #   Contains information about one or more notification actions.
-    #   @return [Types::AlarmNotification]
-    #
-    # @!attribute [rw] alarm_event_actions
-    #   Contains information about one or more alarm actions.
-    #   @return [Types::AlarmEventActions]
-    #
-    # @!attribute [rw] alarm_capabilities
-    #   Contains the configuration information of alarm state changes.
-    #   @return [Types::AlarmCapabilities]
-    #
-    class CreateAlarmModelRequest < Struct.new(
-      :alarm_model_name,
-      :alarm_model_description,
-      :role_arn,
-      :tags,
-      :key,
-      :severity,
-      :alarm_rule,
-      :alarm_notification,
-      :alarm_event_actions,
-      :alarm_capabilities)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] creation_time
-    #   The time the alarm model was created, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] alarm_model_arn
-    #   The ARN of the alarm model. For more information, see [Amazon
-    #   Resource Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_version
-    #   The version of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] last_update_time
-    #   The time the alarm model was last updated, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] status
-    #   The status of the alarm model. The status can be one of the
-    #   following values:
-    #
-    #   * `ACTIVE` - The alarm model is active and it's ready to evaluate
-    #     data.
-    #
-    #   * `ACTIVATING` - AWS IoT Events is activating your alarm model.
-    #     Activating an alarm model can take up to a few minutes.
-    #
-    #   * `INACTIVE` - The alarm model is inactive, so it isn't ready to
-    #     evaluate data. Check your alarm model information and update the
-    #     alarm model.
-    #
-    #   * `FAILED` - You couldn't create or update the alarm model. Check
-    #     your alarm model information and try again.
-    #   @return [String]
-    #
-    class CreateAlarmModelResponse < Struct.new(
-      :creation_time,
-      :alarm_model_arn,
-      :alarm_model_version,
-      :last_update_time,
-      :status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass CreateDetectorModelRequest
     #   data as a hash:
     #
@@ -1595,8 +662,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -1705,8 +772,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -1818,8 +885,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -1930,8 +997,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -2078,25 +1145,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteAlarmModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_model_name: "AlarmModelName", # required
-    #       }
-    #
-    # @!attribute [rw] alarm_model_name
-    #   The name of the alarm model.
-    #   @return [String]
-    #
-    class DeleteAlarmModelRequest < Struct.new(
-      :alarm_model_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    class DeleteAlarmModelResponse < Aws::EmptyStructure; end
-
     # @note When making an API call, you may pass DeleteDetectorModelRequest
     #   data as a hash:
     #
@@ -2135,140 +1183,6 @@ module Aws::IoTEvents
 
     class DeleteInputResponse < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DescribeAlarmModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_model_name: "AlarmModelName", # required
-    #         alarm_model_version: "AlarmModelVersion",
-    #       }
-    #
-    # @!attribute [rw] alarm_model_name
-    #   The name of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_version
-    #   The version of the alarm model.
-    #   @return [String]
-    #
-    class DescribeAlarmModelRequest < Struct.new(
-      :alarm_model_name,
-      :alarm_model_version)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] creation_time
-    #   The time the alarm model was created, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] alarm_model_arn
-    #   The ARN of the alarm model. For more information, see [Amazon
-    #   Resource Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_version
-    #   The version of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] last_update_time
-    #   The time the alarm model was last updated, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] status
-    #   The status of the alarm model. The status can be one of the
-    #   following values:
-    #
-    #   * `ACTIVE` - The alarm model is active and it's ready to evaluate
-    #     data.
-    #
-    #   * `ACTIVATING` - AWS IoT Events is activating your alarm model.
-    #     Activating an alarm model can take up to a few minutes.
-    #
-    #   * `INACTIVE` - The alarm model is inactive, so it isn't ready to
-    #     evaluate data. Check your alarm model information and update the
-    #     alarm model.
-    #
-    #   * `FAILED` - You couldn't create or update the alarm model. Check
-    #     your alarm model information and try again.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_message
-    #   Contains information about the status of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_name
-    #   The name of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_description
-    #   The description of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that allows the alarm to perform actions and
-    #   access AWS resources. For more information, see [Amazon Resource
-    #   Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] key
-    #   An input attribute used as a key to create an alarm. AWS IoT Events
-    #   routes [inputs][1] associated with this key to the alarm.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html
-    #   @return [String]
-    #
-    # @!attribute [rw] severity
-    #   A non-negative integer that reflects the severity level of the
-    #   alarm.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] alarm_rule
-    #   Defines when your alarm is invoked.
-    #   @return [Types::AlarmRule]
-    #
-    # @!attribute [rw] alarm_notification
-    #   Contains information about one or more notification actions.
-    #   @return [Types::AlarmNotification]
-    #
-    # @!attribute [rw] alarm_event_actions
-    #   Contains information about one or more alarm actions.
-    #   @return [Types::AlarmEventActions]
-    #
-    # @!attribute [rw] alarm_capabilities
-    #   Contains the configuration information of alarm state changes.
-    #   @return [Types::AlarmCapabilities]
-    #
-    class DescribeAlarmModelResponse < Struct.new(
-      :creation_time,
-      :alarm_model_arn,
-      :alarm_model_version,
-      :last_update_time,
-      :status,
-      :status_message,
-      :alarm_model_name,
-      :alarm_model_description,
-      :role_arn,
-      :key,
-      :severity,
-      :alarm_rule,
-      :alarm_notification,
-      :alarm_event_actions,
-      :alarm_capabilities)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass DescribeDetectorModelAnalysisRequest
     #   data as a hash:
     #
@@ -2293,8 +1207,8 @@ module Aws::IoTEvents
     #   * `RUNNING` - AWS IoT Events is analyzing your detector model. This
     #     process can take several minutes to complete.
     #
-    #   * `COMPLETE` - AWS IoT Events finished analyzing your detector
-    #     model.
+    #   * `COMPLETE` - AWS IoT Events finished analyzing your detector model
+    #     .
     #
     #   * `FAILED` - AWS IoT Events couldn't analyze your detector model.
     #     Try again later.
@@ -2595,8 +1509,8 @@ module Aws::IoTEvents
     #                         asset_id: "AssetId",
     #                         property_id: "AssetPropertyId",
     #                         property_alias: "AssetPropertyAlias",
-    #                         property_value: {
-    #                           value: {
+    #                         property_value: { # required
+    #                           value: { # required
     #                             string_value: "AssetPropertyStringValue",
     #                             integer_value: "AssetPropertyIntegerValue",
     #                             double_value: "AssetPropertyDoubleValue",
@@ -2705,8 +1619,8 @@ module Aws::IoTEvents
     #                         asset_id: "AssetId",
     #                         property_id: "AssetPropertyId",
     #                         property_alias: "AssetPropertyAlias",
-    #                         property_value: {
-    #                           value: {
+    #                         property_value: { # required
+    #                           value: { # required
     #                             string_value: "AssetPropertyStringValue",
     #                             integer_value: "AssetPropertyIntegerValue",
     #                             double_value: "AssetPropertyDoubleValue",
@@ -2818,8 +1732,8 @@ module Aws::IoTEvents
     #                         asset_id: "AssetId",
     #                         property_id: "AssetPropertyId",
     #                         property_alias: "AssetPropertyAlias",
-    #                         property_value: {
-    #                           value: {
+    #                         property_value: { # required
+    #                           value: { # required
     #                             string_value: "AssetPropertyStringValue",
     #                             integer_value: "AssetPropertyIntegerValue",
     #                             double_value: "AssetPropertyDoubleValue",
@@ -2930,8 +1844,8 @@ module Aws::IoTEvents
     #                         asset_id: "AssetId",
     #                         property_id: "AssetPropertyId",
     #                         property_alias: "AssetPropertyAlias",
-    #                         property_value: {
-    #                           value: {
+    #                         property_value: { # required
+    #                           value: { # required
     #                             string_value: "AssetPropertyStringValue",
     #                             integer_value: "AssetPropertyIntegerValue",
     #                             double_value: "AssetPropertyDoubleValue",
@@ -3301,124 +2215,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Contains the configuration information of email notifications.
-    #
-    # @note When making an API call, you may pass EmailConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         from: "FromEmail", # required
-    #         content: {
-    #           subject: "EmailSubject",
-    #           additional_message: "NotificationAdditionalMessage",
-    #         },
-    #         recipients: { # required
-    #           to: [
-    #             {
-    #               sso_identity: {
-    #                 identity_store_id: "IdentityStoreId", # required
-    #                 user_id: "SSOReferenceId",
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       }
-    #
-    # @!attribute [rw] from
-    #   The email address that sends emails.
-    #
-    #   If you use the AWS IoT Events managed AWS Lambda function to manage
-    #   your emails, you must [verify the email address that sends emails in
-    #   Amazon SES][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html
-    #   @return [String]
-    #
-    # @!attribute [rw] content
-    #   Contains the subject and message of an email.
-    #   @return [Types::EmailContent]
-    #
-    # @!attribute [rw] recipients
-    #   Contains the information of one or more recipients who receive the
-    #   emails.
-    #
-    #   You must [add the users that receive emails to your AWS SSO
-    #   store][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html
-    #   @return [Types::EmailRecipients]
-    #
-    class EmailConfiguration < Struct.new(
-      :from,
-      :content,
-      :recipients)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains the subject and message of an email.
-    #
-    # @note When making an API call, you may pass EmailContent
-    #   data as a hash:
-    #
-    #       {
-    #         subject: "EmailSubject",
-    #         additional_message: "NotificationAdditionalMessage",
-    #       }
-    #
-    # @!attribute [rw] subject
-    #   The subject of the email.
-    #   @return [String]
-    #
-    # @!attribute [rw] additional_message
-    #   The message that you want to send. The message can be up to 200
-    #   characters.
-    #   @return [String]
-    #
-    class EmailContent < Struct.new(
-      :subject,
-      :additional_message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains the information of one or more recipients who receive the
-    # emails.
-    #
-    # You must [add the users that receive emails to your AWS SSO store][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html
-    #
-    # @note When making an API call, you may pass EmailRecipients
-    #   data as a hash:
-    #
-    #       {
-    #         to: [
-    #           {
-    #             sso_identity: {
-    #               identity_store_id: "IdentityStoreId", # required
-    #               user_id: "SSOReferenceId",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] to
-    #   Specifies one or more recipients who receive the email.
-    #   @return [Array<Types::RecipientDetail>]
-    #
-    class EmailRecipients < Struct.new(
-      :to)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Specifies the `actions` to be performed when the `condition` evaluates
     # to TRUE.
     #
@@ -3516,8 +2312,8 @@ module Aws::IoTEvents
     #               asset_id: "AssetId",
     #               property_id: "AssetPropertyId",
     #               property_alias: "AssetPropertyAlias",
-    #               property_value: {
-    #                 value: {
+    #               property_value: { # required
+    #                 value: { # required
     #                   string_value: "AssetPropertyStringValue",
     #                   integer_value: "AssetPropertyIntegerValue",
     #                   double_value: "AssetPropertyDoubleValue",
@@ -3643,28 +2439,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Specifies the default alarm state. The configuration applies to all
-    # alarms that were created based on this alarm model.
-    #
-    # @note When making an API call, you may pass InitializationConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         disabled_on_initialization: false, # required
-    #       }
-    #
-    # @!attribute [rw] disabled_on_initialization
-    #   The value must be `TRUE` or `FALSE`. If `FALSE`, all alarm instances
-    #   created based on the alarm model are activated. The default value is
-    #   `TRUE`.
-    #   @return [Boolean]
-    #
-    class InitializationConfiguration < Struct.new(
-      :disabled_on_initialization)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information about the input.
     #
     # @!attribute [rw] input_configuration
@@ -3743,38 +2517,6 @@ module Aws::IoTEvents
     #
     class InputDefinition < Struct.new(
       :attributes)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The identifer of the input.
-    #
-    # @note When making an API call, you may pass InputIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         iot_events_input_identifier: {
-    #           input_name: "InputName", # required
-    #         },
-    #         iot_site_wise_input_identifier: {
-    #           iot_site_wise_asset_model_property_identifier: {
-    #             asset_model_id: "AssetModelId", # required
-    #             property_id: "AssetPropertyId", # required
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] iot_events_input_identifier
-    #   The identifier of the input routed to AWS IoT Events.
-    #   @return [Types::IotEventsInputIdentifier]
-    #
-    # @!attribute [rw] iot_site_wise_input_identifier
-    #   The identifer of the input routed from AWS IoT SiteWise.
-    #   @return [Types::IotSiteWiseInputIdentifier]
-    #
-    class InputIdentifier < Struct.new(
-      :iot_events_input_identifier,
-      :iot_site_wise_input_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3870,25 +2612,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # The identifier of the input routed to AWS IoT Events.
-    #
-    # @note When making an API call, you may pass IotEventsInputIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         input_name: "InputName", # required
-    #       }
-    #
-    # @!attribute [rw] input_name
-    #   The name of the input routed to AWS IoT Events.
-    #   @return [String]
-    #
-    class IotEventsInputIdentifier < Struct.new(
-      :input_name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Sends information about the detector model instance and the event that
     # triggered the action to a specified asset property in AWS IoT
     # SiteWise.
@@ -3937,8 +2660,8 @@ module Aws::IoTEvents
     #         asset_id: "AssetId",
     #         property_id: "AssetPropertyId",
     #         property_alias: "AssetPropertyAlias",
-    #         property_value: {
-    #           value: {
+    #         property_value: { # required
+    #           value: { # required
     #             string_value: "AssetPropertyStringValue",
     #             integer_value: "AssetPropertyIntegerValue",
     #             double_value: "AssetPropertyDoubleValue",
@@ -3981,54 +2704,6 @@ module Aws::IoTEvents
       :property_id,
       :property_alias,
       :property_value)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The asset model property identifer of the input routed from AWS IoT
-    # SiteWise.
-    #
-    # @note When making an API call, you may pass IotSiteWiseAssetModelPropertyIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         asset_model_id: "AssetModelId", # required
-    #         property_id: "AssetPropertyId", # required
-    #       }
-    #
-    # @!attribute [rw] asset_model_id
-    #   The ID of the AWS IoT SiteWise asset model.
-    #   @return [String]
-    #
-    # @!attribute [rw] property_id
-    #   The ID of the AWS IoT SiteWise asset property.
-    #   @return [String]
-    #
-    class IotSiteWiseAssetModelPropertyIdentifier < Struct.new(
-      :asset_model_id,
-      :property_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The identifer of the input routed from AWS IoT SiteWise.
-    #
-    # @note When making an API call, you may pass IotSiteWiseInputIdentifier
-    #   data as a hash:
-    #
-    #       {
-    #         iot_site_wise_asset_model_property_identifier: {
-    #           asset_model_id: "AssetModelId", # required
-    #           property_id: "AssetPropertyId", # required
-    #         },
-    #       }
-    #
-    # @!attribute [rw] iot_site_wise_asset_model_property_identifier
-    #   The identifier of the AWS IoT SiteWise asset model property.
-    #   @return [Types::IotSiteWiseAssetModelPropertyIdentifier]
-    #
-    class IotSiteWiseInputIdentifier < Struct.new(
-      :iot_site_wise_asset_model_property_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4103,90 +2778,6 @@ module Aws::IoTEvents
     #
     class LimitExceededException < Struct.new(
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListAlarmModelVersionsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_model_name: "AlarmModelName", # required
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
-    # @!attribute [rw] alarm_model_name
-    #   The name of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] next_token
-    #   The token that you can use to return the next set of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to be returned per request.
-    #   @return [Integer]
-    #
-    class ListAlarmModelVersionsRequest < Struct.new(
-      :alarm_model_name,
-      :next_token,
-      :max_results)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] alarm_model_version_summaries
-    #   A list that summarizes each alarm model version.
-    #   @return [Array<Types::AlarmModelVersionSummary>]
-    #
-    # @!attribute [rw] next_token
-    #   The token that you can use to return the next set of results, or
-    #   `null` if there are no more results.
-    #   @return [String]
-    #
-    class ListAlarmModelVersionsResponse < Struct.new(
-      :alarm_model_version_summaries,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListAlarmModelsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
-    # @!attribute [rw] next_token
-    #   The token that you can use to return the next set of results.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to be returned per request.
-    #   @return [Integer]
-    #
-    class ListAlarmModelsRequest < Struct.new(
-      :next_token,
-      :max_results)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] alarm_model_summaries
-    #   A list that summarizes each alarm model.
-    #   @return [Array<Types::AlarmModelSummary>]
-    #
-    # @!attribute [rw] next_token
-    #   The token that you can use to return the next set of results, or
-    #   `null` if there are no more results.
-    #   @return [String]
-    #
-    class ListAlarmModelsResponse < Struct.new(
-      :alarm_model_summaries,
-      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4270,61 +2861,6 @@ module Aws::IoTEvents
     #
     class ListDetectorModelsResponse < Struct.new(
       :detector_model_summaries,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListInputRoutingsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         input_identifier: { # required
-    #           iot_events_input_identifier: {
-    #             input_name: "InputName", # required
-    #           },
-    #           iot_site_wise_input_identifier: {
-    #             iot_site_wise_asset_model_property_identifier: {
-    #               asset_model_id: "AssetModelId", # required
-    #               property_id: "AssetPropertyId", # required
-    #             },
-    #           },
-    #         },
-    #         max_results: 1,
-    #         next_token: "NextToken",
-    #       }
-    #
-    # @!attribute [rw] input_identifier
-    #   The identifer of the routed input.
-    #   @return [Types::InputIdentifier]
-    #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to be returned per request.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The token that you can use to return the next set of results.
-    #   @return [String]
-    #
-    class ListInputRoutingsRequest < Struct.new(
-      :input_identifier,
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] routed_resources
-    #   Summary information about the routed resources.
-    #   @return [Array<Types::RoutedResource>]
-    #
-    # @!attribute [rw] next_token
-    #   The token that you can use to return the next set of results, or
-    #   `null` if there are no more results.
-    #   @return [String]
-    #
-    class ListInputRoutingsResponse < Struct.new(
-      :routed_resources,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4440,115 +2976,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Contains the notification settings of an alarm model. The settings
-    # apply to all alarms that were created based on this alarm model.
-    #
-    # @note When making an API call, you may pass NotificationAction
-    #   data as a hash:
-    #
-    #       {
-    #         action: { # required
-    #           lambda_action: {
-    #             function_arn: "AmazonResourceName", # required
-    #             payload: {
-    #               content_expression: "ContentExpression", # required
-    #               type: "STRING", # required, accepts STRING, JSON
-    #             },
-    #           },
-    #         },
-    #         sms_configurations: [
-    #           {
-    #             sender_id: "SMSSenderId",
-    #             additional_message: "NotificationAdditionalMessage",
-    #             recipients: [ # required
-    #               {
-    #                 sso_identity: {
-    #                   identity_store_id: "IdentityStoreId", # required
-    #                   user_id: "SSOReferenceId",
-    #                 },
-    #               },
-    #             ],
-    #           },
-    #         ],
-    #         email_configurations: [
-    #           {
-    #             from: "FromEmail", # required
-    #             content: {
-    #               subject: "EmailSubject",
-    #               additional_message: "NotificationAdditionalMessage",
-    #             },
-    #             recipients: { # required
-    #               to: [
-    #                 {
-    #                   sso_identity: {
-    #                     identity_store_id: "IdentityStoreId", # required
-    #                     user_id: "SSOReferenceId",
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] action
-    #   Specifies an AWS Lambda function to manage alarm notifications. You
-    #   can create one or use the [AWS Lambda function provided by AWS IoT
-    #   Events][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html
-    #   @return [Types::NotificationTargetActions]
-    #
-    # @!attribute [rw] sms_configurations
-    #   Contains the configuration information of SMS notifications.
-    #   @return [Array<Types::SMSConfiguration>]
-    #
-    # @!attribute [rw] email_configurations
-    #   Contains the configuration information of email notifications.
-    #   @return [Array<Types::EmailConfiguration>]
-    #
-    class NotificationAction < Struct.new(
-      :action,
-      :sms_configurations,
-      :email_configurations)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Specifies an AWS Lambda function to manage alarm notifications. You
-    # can create one or use the [AWS Lambda function provided by AWS IoT
-    # Events][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html
-    #
-    # @note When making an API call, you may pass NotificationTargetActions
-    #   data as a hash:
-    #
-    #       {
-    #         lambda_action: {
-    #           function_arn: "AmazonResourceName", # required
-    #           payload: {
-    #             content_expression: "ContentExpression", # required
-    #             type: "STRING", # required, accepts STRING, JSON
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] lambda_action
-    #   Calls a Lambda function, passing in information about the detector
-    #   model instance and the event that triggered the action.
-    #   @return [Types::LambdaAction]
-    #
-    class NotificationTargetActions < Struct.new(
-      :lambda_action)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # When entering this state, perform these `actions` if the `condition`
     # is TRUE.
     #
@@ -4648,8 +3075,8 @@ module Aws::IoTEvents
     #                   asset_id: "AssetId",
     #                   property_id: "AssetPropertyId",
     #                   property_alias: "AssetPropertyAlias",
-    #                   property_value: {
-    #                     value: {
+    #                   property_value: { # required
+    #                     value: { # required
     #                       string_value: "AssetPropertyStringValue",
     #                       integer_value: "AssetPropertyIntegerValue",
     #                       double_value: "AssetPropertyDoubleValue",
@@ -4778,8 +3205,8 @@ module Aws::IoTEvents
     #                   asset_id: "AssetId",
     #                   property_id: "AssetPropertyId",
     #                   property_alias: "AssetPropertyAlias",
-    #                   property_value: {
-    #                     value: {
+    #                   property_value: { # required
+    #                     value: { # required
     #                       string_value: "AssetPropertyStringValue",
     #                       integer_value: "AssetPropertyIntegerValue",
     #                       double_value: "AssetPropertyDoubleValue",
@@ -4908,8 +3335,8 @@ module Aws::IoTEvents
     #                   asset_id: "AssetId",
     #                   property_id: "AssetPropertyId",
     #                   property_alias: "AssetPropertyAlias",
-    #                   property_value: {
-    #                     value: {
+    #                   property_value: { # required
+    #                     value: { # required
     #                       string_value: "AssetPropertyStringValue",
     #                       integer_value: "AssetPropertyIntegerValue",
     #                       double_value: "AssetPropertyDoubleValue",
@@ -5018,8 +3445,8 @@ module Aws::IoTEvents
     #                   asset_id: "AssetId",
     #                   property_id: "AssetPropertyId",
     #                   property_alias: "AssetPropertyAlias",
-    #                   property_value: {
-    #                     value: {
+    #                   property_value: { # required
+    #                     value: { # required
     #                       string_value: "AssetPropertyStringValue",
     #                       integer_value: "AssetPropertyIntegerValue",
     #                       double_value: "AssetPropertyDoubleValue",
@@ -5119,28 +3546,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # The information that identifies the recipient.
-    #
-    # @note When making an API call, you may pass RecipientDetail
-    #   data as a hash:
-    #
-    #       {
-    #         sso_identity: {
-    #           identity_store_id: "IdentityStoreId", # required
-    #           user_id: "SSOReferenceId",
-    #         },
-    #       }
-    #
-    # @!attribute [rw] sso_identity
-    #   The AWS Single Sign-On (AWS SSO) authentication information.
-    #   @return [Types::SSOIdentity]
-    #
-    class RecipientDetail < Struct.new(
-      :sso_identity)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information required to reset the timer. The timer is reset to the
     # previously evaluated result of the duration. The duration expression
     # isn't reevaluated when you reset the timer.
@@ -5208,74 +3613,6 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Contains information about the routed resource.
-    #
-    # @!attribute [rw] name
-    #   The name of the routed resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The ARN of the routed resource. For more information, see [Amazon
-    #   Resource Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    class RoutedResource < Struct.new(
-      :name,
-      :arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains the configuration information of SMS notifications.
-    #
-    # @note When making an API call, you may pass SMSConfiguration
-    #   data as a hash:
-    #
-    #       {
-    #         sender_id: "SMSSenderId",
-    #         additional_message: "NotificationAdditionalMessage",
-    #         recipients: [ # required
-    #           {
-    #             sso_identity: {
-    #               identity_store_id: "IdentityStoreId", # required
-    #               user_id: "SSOReferenceId",
-    #             },
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] sender_id
-    #   The sender ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] additional_message
-    #   The message that you want to send. The message can be up to 200
-    #   characters.
-    #   @return [String]
-    #
-    # @!attribute [rw] recipients
-    #   Specifies one or more recipients who receive the message.
-    #
-    #   You must [add the users that receive SMS messages to your AWS SSO
-    #   store][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html
-    #   @return [Array<Types::RecipientDetail>]
-    #
-    class SMSConfiguration < Struct.new(
-      :sender_id,
-      :additional_message,
-      :recipients)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information required to publish the Amazon SNS message.
     #
     # @note When making an API call, you may pass SNSTopicPublishAction
@@ -5301,36 +3638,6 @@ module Aws::IoTEvents
     class SNSTopicPublishAction < Struct.new(
       :target_arn,
       :payload)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains information about your identity source in AWS Single Sign-On.
-    # For more information, see the [AWS Single Sign-On User Guide][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
-    #
-    # @note When making an API call, you may pass SSOIdentity
-    #   data as a hash:
-    #
-    #       {
-    #         identity_store_id: "IdentityStoreId", # required
-    #         user_id: "SSOReferenceId",
-    #       }
-    #
-    # @!attribute [rw] identity_store_id
-    #   The ID of the AWS SSO identity store.
-    #   @return [String]
-    #
-    # @!attribute [rw] user_id
-    #   The user ID.
-    #   @return [String]
-    #
-    class SSOIdentity < Struct.new(
-      :identity_store_id,
-      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5407,40 +3714,6 @@ module Aws::IoTEvents
     class SetVariableAction < Struct.new(
       :variable_name,
       :value)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A rule that compares an input property value to a threshold value with
-    # a comparison operator.
-    #
-    # @note When making an API call, you may pass SimpleRule
-    #   data as a hash:
-    #
-    #       {
-    #         input_property: "InputProperty", # required
-    #         comparison_operator: "GREATER", # required, accepts GREATER, GREATER_OR_EQUAL, LESS, LESS_OR_EQUAL, EQUAL, NOT_EQUAL
-    #         threshold: "Threshold", # required
-    #       }
-    #
-    # @!attribute [rw] input_property
-    #   The value on the left side of the comparison operator. You can
-    #   specify an AWS IoT Events input attribute as an input property.
-    #   @return [String]
-    #
-    # @!attribute [rw] comparison_operator
-    #   The comparison operator.
-    #   @return [String]
-    #
-    # @!attribute [rw] threshold
-    #   The value on the right side of the comparison operator. You can
-    #   enter a number or specify an AWS IoT Events input attribute.
-    #   @return [String]
-    #
-    class SimpleRule < Struct.new(
-      :input_property,
-      :comparison_operator,
-      :threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5583,8 +3856,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -5693,8 +3966,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -5806,8 +4079,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -5918,8 +4191,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -6063,8 +4336,8 @@ module Aws::IoTEvents
     #                     asset_id: "AssetId",
     #                     property_id: "AssetPropertyId",
     #                     property_alias: "AssetPropertyAlias",
-    #                     property_value: {
-    #                       value: {
+    #                     property_value: { # required
+    #                       value: { # required
     #                         string_value: "AssetPropertyStringValue",
     #                         integer_value: "AssetPropertyIntegerValue",
     #                         double_value: "AssetPropertyDoubleValue",
@@ -6173,8 +4446,8 @@ module Aws::IoTEvents
     #                     asset_id: "AssetId",
     #                     property_id: "AssetPropertyId",
     #                     property_alias: "AssetPropertyAlias",
-    #                     property_value: {
-    #                       value: {
+    #                     property_value: { # required
+    #                       value: { # required
     #                         string_value: "AssetPropertyStringValue",
     #                         integer_value: "AssetPropertyIntegerValue",
     #                         double_value: "AssetPropertyDoubleValue",
@@ -6286,8 +4559,8 @@ module Aws::IoTEvents
     #                     asset_id: "AssetId",
     #                     property_id: "AssetPropertyId",
     #                     property_alias: "AssetPropertyAlias",
-    #                     property_value: {
-    #                       value: {
+    #                     property_value: { # required
+    #                       value: { # required
     #                         string_value: "AssetPropertyStringValue",
     #                         integer_value: "AssetPropertyIntegerValue",
     #                         double_value: "AssetPropertyDoubleValue",
@@ -6398,8 +4671,8 @@ module Aws::IoTEvents
     #                     asset_id: "AssetId",
     #                     property_id: "AssetPropertyId",
     #                     property_alias: "AssetPropertyAlias",
-    #                     property_value: {
-    #                       value: {
+    #                     property_value: { # required
+    #                       value: { # required
     #                         string_value: "AssetPropertyStringValue",
     #                         integer_value: "AssetPropertyIntegerValue",
     #                         double_value: "AssetPropertyDoubleValue",
@@ -6611,8 +4884,8 @@ module Aws::IoTEvents
     #               asset_id: "AssetId",
     #               property_id: "AssetPropertyId",
     #               property_alias: "AssetPropertyAlias",
-    #               property_value: {
-    #                 value: {
+    #               property_value: { # required
+    #                 value: { # required
     #                   string_value: "AssetPropertyStringValue",
     #                   integer_value: "AssetPropertyIntegerValue",
     #                   double_value: "AssetPropertyDoubleValue",
@@ -6692,271 +4965,6 @@ module Aws::IoTEvents
     end
 
     class UntagResourceResponse < Aws::EmptyStructure; end
-
-    # @note When making an API call, you may pass UpdateAlarmModelRequest
-    #   data as a hash:
-    #
-    #       {
-    #         alarm_model_name: "AlarmModelName", # required
-    #         alarm_model_description: "AlarmModelDescription",
-    #         role_arn: "AmazonResourceName", # required
-    #         severity: 1,
-    #         alarm_rule: { # required
-    #           simple_rule: {
-    #             input_property: "InputProperty", # required
-    #             comparison_operator: "GREATER", # required, accepts GREATER, GREATER_OR_EQUAL, LESS, LESS_OR_EQUAL, EQUAL, NOT_EQUAL
-    #             threshold: "Threshold", # required
-    #           },
-    #         },
-    #         alarm_notification: {
-    #           notification_actions: [
-    #             {
-    #               action: { # required
-    #                 lambda_action: {
-    #                   function_arn: "AmazonResourceName", # required
-    #                   payload: {
-    #                     content_expression: "ContentExpression", # required
-    #                     type: "STRING", # required, accepts STRING, JSON
-    #                   },
-    #                 },
-    #               },
-    #               sms_configurations: [
-    #                 {
-    #                   sender_id: "SMSSenderId",
-    #                   additional_message: "NotificationAdditionalMessage",
-    #                   recipients: [ # required
-    #                     {
-    #                       sso_identity: {
-    #                         identity_store_id: "IdentityStoreId", # required
-    #                         user_id: "SSOReferenceId",
-    #                       },
-    #                     },
-    #                   ],
-    #                 },
-    #               ],
-    #               email_configurations: [
-    #                 {
-    #                   from: "FromEmail", # required
-    #                   content: {
-    #                     subject: "EmailSubject",
-    #                     additional_message: "NotificationAdditionalMessage",
-    #                   },
-    #                   recipients: { # required
-    #                     to: [
-    #                       {
-    #                         sso_identity: {
-    #                           identity_store_id: "IdentityStoreId", # required
-    #                           user_id: "SSOReferenceId",
-    #                         },
-    #                       },
-    #                     ],
-    #                   },
-    #                 },
-    #               ],
-    #             },
-    #           ],
-    #         },
-    #         alarm_event_actions: {
-    #           alarm_actions: [
-    #             {
-    #               sns: {
-    #                 target_arn: "AmazonResourceName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               iot_topic_publish: {
-    #                 mqtt_topic: "MQTTTopic", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               lambda: {
-    #                 function_arn: "AmazonResourceName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               iot_events: {
-    #                 input_name: "InputName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               sqs: {
-    #                 queue_url: "QueueUrl", # required
-    #                 use_base_64: false,
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               firehose: {
-    #                 delivery_stream_name: "DeliveryStreamName", # required
-    #                 separator: "FirehoseSeparator",
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               dynamo_db: {
-    #                 hash_key_type: "DynamoKeyType",
-    #                 hash_key_field: "DynamoKeyField", # required
-    #                 hash_key_value: "DynamoKeyValue", # required
-    #                 range_key_type: "DynamoKeyType",
-    #                 range_key_field: "DynamoKeyField",
-    #                 range_key_value: "DynamoKeyValue",
-    #                 operation: "DynamoOperation",
-    #                 payload_field: "DynamoKeyField",
-    #                 table_name: "DynamoTableName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               dynamo_d_bv_2: {
-    #                 table_name: "DynamoTableName", # required
-    #                 payload: {
-    #                   content_expression: "ContentExpression", # required
-    #                   type: "STRING", # required, accepts STRING, JSON
-    #                 },
-    #               },
-    #               iot_site_wise: {
-    #                 entry_id: "AssetPropertyEntryId",
-    #                 asset_id: "AssetId",
-    #                 property_id: "AssetPropertyId",
-    #                 property_alias: "AssetPropertyAlias",
-    #                 property_value: {
-    #                   value: {
-    #                     string_value: "AssetPropertyStringValue",
-    #                     integer_value: "AssetPropertyIntegerValue",
-    #                     double_value: "AssetPropertyDoubleValue",
-    #                     boolean_value: "AssetPropertyBooleanValue",
-    #                   },
-    #                   timestamp: {
-    #                     time_in_seconds: "AssetPropertyTimeInSeconds", # required
-    #                     offset_in_nanos: "AssetPropertyOffsetInNanos",
-    #                   },
-    #                   quality: "AssetPropertyQuality",
-    #                 },
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         alarm_capabilities: {
-    #           initialization_configuration: {
-    #             disabled_on_initialization: false, # required
-    #           },
-    #           acknowledge_flow: {
-    #             enabled: false, # required
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] alarm_model_name
-    #   The name of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_description
-    #   The description of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that allows the alarm to perform actions and
-    #   access AWS resources. For more information, see [Amazon Resource
-    #   Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] severity
-    #   A non-negative integer that reflects the severity level of the
-    #   alarm.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] alarm_rule
-    #   Defines when your alarm is invoked.
-    #   @return [Types::AlarmRule]
-    #
-    # @!attribute [rw] alarm_notification
-    #   Contains information about one or more notification actions.
-    #   @return [Types::AlarmNotification]
-    #
-    # @!attribute [rw] alarm_event_actions
-    #   Contains information about one or more alarm actions.
-    #   @return [Types::AlarmEventActions]
-    #
-    # @!attribute [rw] alarm_capabilities
-    #   Contains the configuration information of alarm state changes.
-    #   @return [Types::AlarmCapabilities]
-    #
-    class UpdateAlarmModelRequest < Struct.new(
-      :alarm_model_name,
-      :alarm_model_description,
-      :role_arn,
-      :severity,
-      :alarm_rule,
-      :alarm_notification,
-      :alarm_event_actions,
-      :alarm_capabilities)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] creation_time
-    #   The time the alarm model was created, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] alarm_model_arn
-    #   The ARN of the alarm model. For more information, see [Amazon
-    #   Resource Names (ARNs)][1] in the *AWS General Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [String]
-    #
-    # @!attribute [rw] alarm_model_version
-    #   The version of the alarm model.
-    #   @return [String]
-    #
-    # @!attribute [rw] last_update_time
-    #   The time the alarm model was last updated, in the Unix epoch format.
-    #   @return [Time]
-    #
-    # @!attribute [rw] status
-    #   The status of the alarm model. The status can be one of the
-    #   following values:
-    #
-    #   * `ACTIVE` - The alarm model is active and it's ready to evaluate
-    #     data.
-    #
-    #   * `ACTIVATING` - AWS IoT Events is activating your alarm model.
-    #     Activating an alarm model can take up to a few minutes.
-    #
-    #   * `INACTIVE` - The alarm model is inactive, so it isn't ready to
-    #     evaluate data. Check your alarm model information and update the
-    #     alarm model.
-    #
-    #   * `FAILED` - You couldn't create or update the alarm model. Check
-    #     your alarm model information and try again.
-    #   @return [String]
-    #
-    class UpdateAlarmModelResponse < Struct.new(
-      :creation_time,
-      :alarm_model_arn,
-      :alarm_model_version,
-      :last_update_time,
-      :status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
 
     # @note When making an API call, you may pass UpdateDetectorModelRequest
     #   data as a hash:
@@ -7060,8 +5068,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -7170,8 +5178,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -7283,8 +5291,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",
@@ -7395,8 +5403,8 @@ module Aws::IoTEvents
     #                           asset_id: "AssetId",
     #                           property_id: "AssetPropertyId",
     #                           property_alias: "AssetPropertyAlias",
-    #                           property_value: {
-    #                             value: {
+    #                           property_value: { # required
+    #                             value: { # required
     #                               string_value: "AssetPropertyStringValue",
     #                               integer_value: "AssetPropertyIntegerValue",
     #                               double_value: "AssetPropertyDoubleValue",

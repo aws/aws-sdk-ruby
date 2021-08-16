@@ -3555,10 +3555,6 @@
         "SecurityPolicy" : {
           "shape" : "SecurityPolicy",
           "locationName" : "securityPolicy"
-        },
-        "OwnershipVerificationCertificateArn" : {
-          "shape" : "Arn",
-          "locationName" : "ownershipVerificationCertificateArn"
         }
       }
     },
@@ -3570,7 +3566,7 @@
     },
     "DomainNameStatus" : {
       "type" : "string",
-      "enum" : [ "AVAILABLE", "UPDATING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION" ]
+      "enum" : [ "AVAILABLE", "UPDATING" ]
     },
     "DomainNames" : {
       "type" : "structure",

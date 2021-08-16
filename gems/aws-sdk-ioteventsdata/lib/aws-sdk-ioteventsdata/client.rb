@@ -327,120 +327,6 @@ module Aws::IoTEventsData
 
     # @!group API Operations
 
-    # Acknowledges one or more alarms. The alarms change to the
-    # `ACKNOWLEDGED` state after you acknowledge them.
-    #
-    # @option params [required, Array<Types::AcknowledgeAlarmActionRequest>] :acknowledge_action_requests
-    #   The list of acknowledge action requests. You can specify up to 10
-    #   requests per operation.
-    #
-    # @return [Types::BatchAcknowledgeAlarmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::BatchAcknowledgeAlarmResponse#error_entries #error_entries} => Array&lt;Types::BatchAlarmActionErrorEntry&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.batch_acknowledge_alarm({
-    #     acknowledge_action_requests: [ # required
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.error_entries #=> Array
-    #   resp.error_entries[0].request_id #=> String
-    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "InternalFailureException", "ServiceUnavailableException", "ThrottlingException"
-    #   resp.error_entries[0].error_message #=> String
-    #
-    # @overload batch_acknowledge_alarm(params = {})
-    # @param [Hash] params ({})
-    def batch_acknowledge_alarm(params = {}, options = {})
-      req = build_request(:batch_acknowledge_alarm, params)
-      req.send_request(options)
-    end
-
-    # Disables one or more alarms. The alarms change to the `DISABLED` state
-    # after you disable them.
-    #
-    # @option params [required, Array<Types::DisableAlarmActionRequest>] :disable_action_requests
-    #   The list of disable action requests. You can specify up to 10 requests
-    #   per operation.
-    #
-    # @return [Types::BatchDisableAlarmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::BatchDisableAlarmResponse#error_entries #error_entries} => Array&lt;Types::BatchAlarmActionErrorEntry&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.batch_disable_alarm({
-    #     disable_action_requests: [ # required
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.error_entries #=> Array
-    #   resp.error_entries[0].request_id #=> String
-    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "InternalFailureException", "ServiceUnavailableException", "ThrottlingException"
-    #   resp.error_entries[0].error_message #=> String
-    #
-    # @overload batch_disable_alarm(params = {})
-    # @param [Hash] params ({})
-    def batch_disable_alarm(params = {}, options = {})
-      req = build_request(:batch_disable_alarm, params)
-      req.send_request(options)
-    end
-
-    # Enables one or more alarms. The alarms change to the `NORMAL` state
-    # after you enable them.
-    #
-    # @option params [required, Array<Types::EnableAlarmActionRequest>] :enable_action_requests
-    #   The list of enable action requests. You can specify up to 10 requests
-    #   per operation.
-    #
-    # @return [Types::BatchEnableAlarmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::BatchEnableAlarmResponse#error_entries #error_entries} => Array&lt;Types::BatchAlarmActionErrorEntry&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.batch_enable_alarm({
-    #     enable_action_requests: [ # required
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.error_entries #=> Array
-    #   resp.error_entries[0].request_id #=> String
-    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "InternalFailureException", "ServiceUnavailableException", "ThrottlingException"
-    #   resp.error_entries[0].error_message #=> String
-    #
-    # @overload batch_enable_alarm(params = {})
-    # @param [Hash] params ({})
-    def batch_enable_alarm(params = {}, options = {})
-      req = build_request(:batch_enable_alarm, params)
-      req.send_request(options)
-    end
-
     # Sends a set of messages to the AWS IoT Events system. Each message
     # payload is transformed into the input you specify (`"inputName"`) and
     # ingested into any detectors that monitor that input. If multiple
@@ -463,11 +349,8 @@ module Aws::IoTEventsData
     #     messages: [ # required
     #       {
     #         message_id: "MessageId", # required
-    #         input_name: "EphemeralInputName", # required
+    #         input_name: "InputName", # required
     #         payload: "data", # required
-    #         timestamp: {
-    #           time_in_millis: 1,
-    #         },
     #       },
     #     ],
     #   })
@@ -483,83 +366,6 @@ module Aws::IoTEventsData
     # @param [Hash] params ({})
     def batch_put_message(params = {}, options = {})
       req = build_request(:batch_put_message, params)
-      req.send_request(options)
-    end
-
-    # Resets one or more alarms. The alarms return to the `NORMAL` state
-    # after you reset them.
-    #
-    # @option params [required, Array<Types::ResetAlarmActionRequest>] :reset_action_requests
-    #   The list of reset action requests. You can specify up to 10 requests
-    #   per operation.
-    #
-    # @return [Types::BatchResetAlarmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::BatchResetAlarmResponse#error_entries #error_entries} => Array&lt;Types::BatchAlarmActionErrorEntry&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.batch_reset_alarm({
-    #     reset_action_requests: [ # required
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.error_entries #=> Array
-    #   resp.error_entries[0].request_id #=> String
-    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "InternalFailureException", "ServiceUnavailableException", "ThrottlingException"
-    #   resp.error_entries[0].error_message #=> String
-    #
-    # @overload batch_reset_alarm(params = {})
-    # @param [Hash] params ({})
-    def batch_reset_alarm(params = {}, options = {})
-      req = build_request(:batch_reset_alarm, params)
-      req.send_request(options)
-    end
-
-    # Changes one or more alarms to the snooze mode. The alarms change to
-    # the `SNOOZE_DISABLED` state after you set them to the snooze mode.
-    #
-    # @option params [required, Array<Types::SnoozeAlarmActionRequest>] :snooze_action_requests
-    #   The list of snooze action requests. You can specify up to 10 requests
-    #   per operation.
-    #
-    # @return [Types::BatchSnoozeAlarmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::BatchSnoozeAlarmResponse#error_entries #error_entries} => Array&lt;Types::BatchAlarmActionErrorEntry&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.batch_snooze_alarm({
-    #     snooze_action_requests: [ # required
-    #       {
-    #         request_id: "RequestId", # required
-    #         alarm_model_name: "AlarmModelName", # required
-    #         key_value: "KeyValue",
-    #         note: "Note",
-    #         snooze_duration: 1, # required
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.error_entries #=> Array
-    #   resp.error_entries[0].request_id #=> String
-    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "InternalFailureException", "ServiceUnavailableException", "ThrottlingException"
-    #   resp.error_entries[0].error_message #=> String
-    #
-    # @overload batch_snooze_alarm(params = {})
-    # @param [Hash] params ({})
-    def batch_snooze_alarm(params = {}, options = {})
-      req = build_request(:batch_snooze_alarm, params)
       req.send_request(options)
     end
 
@@ -615,59 +421,6 @@ module Aws::IoTEventsData
       req.send_request(options)
     end
 
-    # Retrieves information about an alarm.
-    #
-    # @option params [required, String] :alarm_model_name
-    #   The name of the alarm model.
-    #
-    # @option params [String] :key_value
-    #   The value of the key used as a filter to select only the alarms
-    #   associated with the [key][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key
-    #
-    # @return [Types::DescribeAlarmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeAlarmResponse#alarm #alarm} => Types::Alarm
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_alarm({
-    #     alarm_model_name: "AlarmModelName", # required
-    #     key_value: "KeyValue",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.alarm.alarm_model_name #=> String
-    #   resp.alarm.alarm_model_version #=> String
-    #   resp.alarm.key_value #=> String
-    #   resp.alarm.alarm_state.state_name #=> String, one of "DISABLED", "NORMAL", "ACTIVE", "ACKNOWLEDGED", "SNOOZE_DISABLED", "LATCHED"
-    #   resp.alarm.alarm_state.rule_evaluation.simple_rule_evaluation.input_property_value #=> String
-    #   resp.alarm.alarm_state.rule_evaluation.simple_rule_evaluation.operator #=> String, one of "GREATER", "GREATER_OR_EQUAL", "LESS", "LESS_OR_EQUAL", "EQUAL", "NOT_EQUAL"
-    #   resp.alarm.alarm_state.rule_evaluation.simple_rule_evaluation.threshold_value #=> String
-    #   resp.alarm.alarm_state.customer_action.action_name #=> String, one of "SNOOZE", "ENABLE", "DISABLE", "ACKNOWLEDGE", "RESET"
-    #   resp.alarm.alarm_state.customer_action.snooze_action_configuration.snooze_duration #=> Integer
-    #   resp.alarm.alarm_state.customer_action.snooze_action_configuration.note #=> String
-    #   resp.alarm.alarm_state.customer_action.enable_action_configuration.note #=> String
-    #   resp.alarm.alarm_state.customer_action.disable_action_configuration.note #=> String
-    #   resp.alarm.alarm_state.customer_action.acknowledge_action_configuration.note #=> String
-    #   resp.alarm.alarm_state.customer_action.reset_action_configuration.note #=> String
-    #   resp.alarm.alarm_state.system_event.event_type #=> String, one of "STATE_CHANGE"
-    #   resp.alarm.alarm_state.system_event.state_change_configuration.trigger_type #=> String, one of "SNOOZE_TIMEOUT"
-    #   resp.alarm.severity #=> Integer
-    #   resp.alarm.creation_time #=> Time
-    #   resp.alarm.last_update_time #=> Time
-    #
-    # @overload describe_alarm(params = {})
-    # @param [Hash] params ({})
-    def describe_alarm(params = {}, options = {})
-      req = build_request(:describe_alarm, params)
-      req.send_request(options)
-    end
-
     # Returns information about the specified detector (instance).
     #
     # @option params [required, String] :detector_model_name
@@ -711,49 +464,6 @@ module Aws::IoTEventsData
       req.send_request(options)
     end
 
-    # Lists one or more alarms. The operation returns only the metadata
-    # associated with each alarm.
-    #
-    # @option params [required, String] :alarm_model_name
-    #   The name of the alarm model.
-    #
-    # @option params [String] :next_token
-    #   The token that you can use to return the next set of results.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to be returned per request.
-    #
-    # @return [Types::ListAlarmsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListAlarmsResponse#alarm_summaries #alarm_summaries} => Array&lt;Types::AlarmSummary&gt;
-    #   * {Types::ListAlarmsResponse#next_token #next_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_alarms({
-    #     alarm_model_name: "AlarmModelName", # required
-    #     next_token: "NextToken",
-    #     max_results: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.alarm_summaries #=> Array
-    #   resp.alarm_summaries[0].alarm_model_name #=> String
-    #   resp.alarm_summaries[0].alarm_model_version #=> String
-    #   resp.alarm_summaries[0].key_value #=> String
-    #   resp.alarm_summaries[0].state_name #=> String, one of "DISABLED", "NORMAL", "ACTIVE", "ACKNOWLEDGED", "SNOOZE_DISABLED", "LATCHED"
-    #   resp.alarm_summaries[0].creation_time #=> Time
-    #   resp.alarm_summaries[0].last_update_time #=> Time
-    #   resp.next_token #=> String
-    #
-    # @overload list_alarms(params = {})
-    # @param [Hash] params ({})
-    def list_alarms(params = {}, options = {})
-      req = build_request(:list_alarms, params)
-      req.send_request(options)
-    end
-
     # Lists detectors (the instances of a detector model).
     #
     # @option params [required, String] :detector_model_name
@@ -764,10 +474,10 @@ module Aws::IoTEventsData
     #   given state.
     #
     # @option params [String] :next_token
-    #   The token that you can use to return the next set of results.
+    #   The token for the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to be returned per request.
+    #   The maximum number of results to return at one time.
     #
     # @return [Types::ListDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -814,7 +524,7 @@ module Aws::IoTEventsData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ioteventsdata'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

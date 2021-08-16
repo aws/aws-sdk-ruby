@@ -183,9 +183,14 @@ module Aws::EMRContainers
     # The information about the container used for a job run or a managed
     # endpoint.
     #
-    # @note ContainerInfo is a union - when making an API calls you must set exactly one of the members.
+    # @note When making an API call, you may pass ContainerInfo
+    #   data as a hash:
     #
-    # @note ContainerInfo is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContainerInfo corresponding to the set member.
+    #       {
+    #         eks_info: {
+    #           namespace: "String256",
+    #         },
+    #       }
     #
     # @!attribute [rw] eks_info
     #   The information about the EKS cluster.
@@ -194,14 +199,9 @@ module Aws::EMRContainers
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ContainerInfo AWS API Documentation
     #
     class ContainerInfo < Struct.new(
-      :eks_info,
-      :unknown)
+      :eks_info)
       SENSITIVE = []
       include Aws::Structure
-      include Aws::Structure::Union
-
-      class EksInfo < ContainerInfo; end
-      class Unknown < ContainerInfo; end
     end
 
     # The information about the container provider.
@@ -211,10 +211,10 @@ module Aws::EMRContainers
     #
     #       {
     #         type: "EKS", # required, accepts EKS
-    #         id: "ClusterId", # required
+    #         id: "String256", # required
     #         info: {
     #           eks_info: {
-    #             namespace: "KubernetesNamespace",
+    #             namespace: "String256",
     #           },
     #         },
     #       }
@@ -372,10 +372,10 @@ module Aws::EMRContainers
     #         name: "ResourceNameString", # required
     #         container_provider: { # required
     #           type: "EKS", # required, accepts EKS
-    #           id: "ClusterId", # required
+    #           id: "String256", # required
     #           info: {
     #             eks_info: {
-    #               namespace: "KubernetesNamespace",
+    #               namespace: "String256",
     #             },
     #           },
     #         },
@@ -623,7 +623,7 @@ module Aws::EMRContainers
     #   data as a hash:
     #
     #       {
-    #         namespace: "KubernetesNamespace",
+    #         namespace: "String256",
     #       }
     #
     # @!attribute [rw] namespace
@@ -698,14 +698,6 @@ module Aws::EMRContainers
     #   The subnet IDs of the endpoint.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] state_details
-    #   Additional details of the endpoint state.
-    #   @return [String]
-    #
-    # @!attribute [rw] failure_reason
-    #   The reasons why the endpoint has failed.
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   The tags of the endpoint.
     #   @return [Hash<String,String>]
@@ -727,8 +719,6 @@ module Aws::EMRContainers
       :created_at,
       :security_group,
       :subnet_ids,
-      :state_details,
-      :failure_reason,
       :tags)
       SENSITIVE = []
       include Aws::Structure

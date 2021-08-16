@@ -48,6 +48,6 @@ require_relative 'aws-sdk-licensemanager/customizations'
 # @!group service
 module Aws::LicenseManager
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.26.0'
 
 end

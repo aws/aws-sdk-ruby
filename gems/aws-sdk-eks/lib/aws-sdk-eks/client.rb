@@ -332,7 +332,7 @@ module Aws::EKS
     # You can use this API to enable encryption on existing clusters which
     # do not have encryption already enabled. This allows you to implement a
     # defense-in-depth security strategy without migrating applications to
-    # new Amazon EKS clusters.
+    # new EKS clusters.
     #
     # @option params [required, String] :cluster_name
     #   The name of the cluster that you are associating with encryption
@@ -373,11 +373,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -457,11 +457,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -491,11 +491,11 @@ module Aws::EKS
     #
     # @option params [required, String] :addon_name
     #   The name of the add-on. The name must match one of the names returned
-    #   by [ `DescribeAddonVersions` ][1].
+    #   by [ `ListAddons` ][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
     #
     # @option params [String] :addon_version
     #   The version of the add-on. The version must match one of the versions
@@ -566,7 +566,7 @@ module Aws::EKS
     #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
-    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.addon.health.issues[0].message #=> String
     #   resp.addon.health.issues[0].resource_ids #=> Array
     #   resp.addon.health.issues[0].resource_ids[0] #=> String
@@ -590,10 +590,10 @@ module Aws::EKS
     #
     # The Amazon EKS control plane consists of control plane instances that
     # run the Kubernetes software, such as `etcd` and the API server. The
-    # control plane runs in an account managed by Amazon Web Services, and
-    # the Kubernetes API is exposed via the Amazon EKS API server endpoint.
-    # Each Amazon EKS cluster control plane is single-tenant and unique and
-    # runs on its own set of Amazon EC2 instances.
+    # control plane runs in an account managed by AWS, and the Kubernetes
+    # API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS
+    # cluster control plane is single-tenant and unique and runs on its own
+    # set of Amazon EC2 instances.
     #
     # The cluster control plane is provisioned across multiple Availability
     # Zones and fronted by an Elastic Load Balancing Network Load Balancer.
@@ -602,9 +602,9 @@ module Aws::EKS
     # the nodes (for example, to support `kubectl exec`, `logs`, and `proxy`
     # data flows).
     #
-    # Amazon EKS nodes run in your Amazon Web Services account and connect
-    # to your cluster's control plane via the Kubernetes API server
-    # endpoint and a certificate file that is created for your cluster.
+    # Amazon EKS nodes run in your AWS account and connect to your
+    # cluster's control plane via the Kubernetes API server endpoint and a
+    # certificate file that is created for your cluster.
     #
     # Cluster creation typically takes several minutes. After you create an
     # Amazon EKS cluster, you must configure your Kubernetes tooling to
@@ -626,10 +626,9 @@ module Aws::EKS
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that provides
-    #   permissions for the Kubernetes control plane to make calls to Amazon
-    #   Web Services API operations on your behalf. For more information, see
-    #   [Amazon EKS Service IAM Role][1] in the <i> <i>Amazon EKS User
-    #   Guide</i> </i>.
+    #   permissions for the Kubernetes control plane to make calls to AWS API
+    #   operations on your behalf. For more information, see [Amazon EKS
+    #   Service IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -656,12 +655,12 @@ module Aws::EKS
     #   Enable or disable exporting the Kubernetes control plane logs for your
     #   cluster to CloudWatch Logs. By default, cluster control plane logs
     #   aren't exported to CloudWatch Logs. For more information, see [Amazon
-    #   EKS Cluster control plane logs][1] in the <i> <i>Amazon EKS User
+    #   EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User
     #   Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
-    #   [CloudWatch Pricing][2].
+    #   [Amazon CloudWatch Pricing][2].
     #
     #    </note>
     #
@@ -796,9 +795,9 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Creates an Fargate profile for your Amazon EKS cluster. You must have
-    # at least one Fargate profile in a cluster to be able to run pods on
-    # Fargate.
+    # Creates an AWS Fargate profile for your Amazon EKS cluster. You must
+    # have at least one Fargate profile in a cluster to be able to run pods
+    # on Fargate.
     #
     # The Fargate profile allows an administrator to declare which pods run
     # on Fargate and specify which pods run on which Fargate profile. This
@@ -828,8 +827,8 @@ module Aws::EKS
     # must wait for that Fargate profile to finish deleting before you can
     # create any other profiles in that cluster.
     #
-    # For more information, see [Fargate Profile][3] in the *Amazon EKS User
-    # Guide*.
+    # For more information, see [AWS Fargate Profile][3] in the *Amazon EKS
+    # User Guide*.
     #
     #
     #
@@ -941,10 +940,10 @@ module Aws::EKS
     # [Launch template support][1].
     #
     # An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group
-    # and associated Amazon EC2 instances that are managed by Amazon Web
-    # Services for an Amazon EKS cluster. Each node group uses a version of
-    # the Amazon EKS optimized Amazon Linux 2 AMI. For more information, see
-    # [Managed Node Groups][2] in the *Amazon EKS User Guide*.
+    # and associated Amazon EC2 instances that are managed by AWS for an
+    # Amazon EKS cluster. Each node group uses a version of the Amazon EKS
+    # optimized Amazon Linux 2 AMI. For more information, see [Managed Node
+    # Groups][2] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -974,11 +973,13 @@ module Aws::EKS
     #
     # @option params [required, Array<String>] :subnets
     #   The subnets to use for the Auto Scaling group that is created for your
-    #   node group. If you specify `launchTemplate`, then don't specify [
-    #   `SubnetId` ][1] in your launch template, or the node group deployment
-    #   will fail. For more information about using launch templates with
-    #   Amazon EKS, see [Launch template support][2] in the Amazon EKS User
-    #   Guide.
+    #   node group. These subnets must have the tag key
+    #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
+    #   `CLUSTER_NAME` is replaced with the name of your cluster. If you
+    #   specify `launchTemplate`, then don't specify [ `SubnetId` ][1] in
+    #   your launch template, or the node group deployment will fail. For more
+    #   information about using launch templates with Amazon EKS, see [Launch
+    #   template support][2] in the Amazon EKS User Guide.
     #
     #
     #
@@ -1033,16 +1034,16 @@ module Aws::EKS
     # @option params [required, String] :node_role
     #   The Amazon Resource Name (ARN) of the IAM role to associate with your
     #   node group. The Amazon EKS worker node `kubelet` daemon makes calls to
-    #   Amazon Web Services APIs on your behalf. Nodes receive permissions for
-    #   these API calls through an IAM instance profile and associated
-    #   policies. Before you can launch nodes and register them into a
-    #   cluster, you must create an IAM role for those nodes to use when they
-    #   are launched. For more information, see [Amazon EKS node IAM role][1]
-    #   in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify
-    #   `launchTemplate`, then don't specify [ `IamInstanceProfile` ][2] in
-    #   your launch template, or the node group deployment will fail. For more
-    #   information about using launch templates with Amazon EKS, see [Launch
-    #   template support][3] in the Amazon EKS User Guide.
+    #   AWS APIs on your behalf. Nodes receive permissions for these API calls
+    #   through an IAM instance profile and associated policies. Before you
+    #   can launch nodes and register them into a cluster, you must create an
+    #   IAM role for those nodes to use when they are launched. For more
+    #   information, see [Amazon EKS node IAM role][1] in the <i> <i>Amazon
+    #   EKS User Guide</i> </i>. If you specify `launchTemplate`, then don't
+    #   specify [ `IamInstanceProfile` ][2] in your launch template, or the
+    #   node group deployment will fail. For more information about using
+    #   launch templates with Amazon EKS, see [Launch template support][3] in
+    #   the Amazon EKS User Guide.
     #
     #
     #
@@ -1053,9 +1054,6 @@ module Aws::EKS
     # @option params [Hash<String,String>] :labels
     #   The Kubernetes labels to be applied to the nodes in the node group
     #   when they are created.
-    #
-    # @option params [Array<Types::Taint>] :taints
-    #   The Kubernetes taints to be applied to the nodes in the node group.
     #
     # @option params [Hash<String,String>] :tags
     #   The metadata to apply to the node group to assist with categorization
@@ -1076,9 +1074,6 @@ module Aws::EKS
     #   If specified, then do not specify `instanceTypes`, `diskSize`, or
     #   `remoteAccess` and make sure that the launch template meets the
     #   requirements in `launchTemplateSpecification`.
-    #
-    # @option params [Types::NodegroupUpdateConfig] :update_config
-    #   The node group update configuration.
     #
     # @option params [String] :capacity_type
     #   The capacity type for your node group.
@@ -1138,13 +1133,6 @@ module Aws::EKS
     #     labels: {
     #       "labelKey" => "labelValue",
     #     },
-    #     taints: [
-    #       {
-    #         key: "taintKey",
-    #         value: "taintValue",
-    #         effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #       },
-    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1153,10 +1141,6 @@ module Aws::EKS
     #       name: "String",
     #       version: "String",
     #       id: "String",
-    #     },
-    #     update_config: {
-    #       max_unavailable: 1,
-    #       max_unavailable_percentage: 1,
     #     },
     #     capacity_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #     version: "String",
@@ -1188,10 +1172,6 @@ module Aws::EKS
     #   resp.nodegroup.node_role #=> String
     #   resp.nodegroup.labels #=> Hash
     #   resp.nodegroup.labels["labelKey"] #=> String
-    #   resp.nodegroup.taints #=> Array
-    #   resp.nodegroup.taints[0].key #=> String
-    #   resp.nodegroup.taints[0].value #=> String
-    #   resp.nodegroup.taints[0].effect #=> String, one of "NO_SCHEDULE", "NO_EXECUTE", "PREFER_NO_SCHEDULE"
     #   resp.nodegroup.resources.auto_scaling_groups #=> Array
     #   resp.nodegroup.resources.auto_scaling_groups[0].name #=> String
     #   resp.nodegroup.resources.remote_access_security_group #=> String
@@ -1201,8 +1181,6 @@ module Aws::EKS
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
-    #   resp.nodegroup.update_config.max_unavailable #=> Integer
-    #   resp.nodegroup.update_config.max_unavailable_percentage #=> Integer
     #   resp.nodegroup.launch_template.name #=> String
     #   resp.nodegroup.launch_template.version #=> String
     #   resp.nodegroup.launch_template.id #=> String
@@ -1253,7 +1231,7 @@ module Aws::EKS
     #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
-    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.addon.health.issues[0].message #=> String
     #   resp.addon.health.issues[0].resource_ids #=> Array
     #   resp.addon.health.issues[0].resource_ids[0] #=> String
@@ -1360,7 +1338,7 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Deletes an Fargate profile.
+    # Deletes an AWS Fargate profile.
     #
     # When you delete a Fargate profile, any pods running on Fargate that
     # were created with the profile are deleted. If those pods match another
@@ -1461,10 +1439,6 @@ module Aws::EKS
     #   resp.nodegroup.node_role #=> String
     #   resp.nodegroup.labels #=> Hash
     #   resp.nodegroup.labels["labelKey"] #=> String
-    #   resp.nodegroup.taints #=> Array
-    #   resp.nodegroup.taints[0].key #=> String
-    #   resp.nodegroup.taints[0].value #=> String
-    #   resp.nodegroup.taints[0].effect #=> String, one of "NO_SCHEDULE", "NO_EXECUTE", "PREFER_NO_SCHEDULE"
     #   resp.nodegroup.resources.auto_scaling_groups #=> Array
     #   resp.nodegroup.resources.auto_scaling_groups[0].name #=> String
     #   resp.nodegroup.resources.remote_access_security_group #=> String
@@ -1474,8 +1448,6 @@ module Aws::EKS
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
-    #   resp.nodegroup.update_config.max_unavailable #=> Integer
-    #   resp.nodegroup.update_config.max_unavailable_percentage #=> Integer
     #   resp.nodegroup.launch_template.name #=> String
     #   resp.nodegroup.launch_template.version #=> String
     #   resp.nodegroup.launch_template.id #=> String
@@ -1522,7 +1494,7 @@ module Aws::EKS
     #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
-    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.addon.health.issues[0].message #=> String
     #   resp.addon.health.issues[0].resource_ids #=> Array
     #   resp.addon.health.issues[0].resource_ids[0] #=> String
@@ -1732,7 +1704,7 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Returns descriptive information about an Fargate profile.
+    # Returns descriptive information about an AWS Fargate profile.
     #
     # @option params [required, String] :cluster_name
     #   The name of the Amazon EKS cluster associated with the Fargate
@@ -1768,12 +1740,6 @@ module Aws::EKS
     #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
-    #
-    #
-    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
-    #
-    #   * fargate_profile_active
-    #   * fargate_profile_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeFargateProfile AWS API Documentation
     #
@@ -1878,10 +1844,6 @@ module Aws::EKS
     #   resp.nodegroup.node_role #=> String
     #   resp.nodegroup.labels #=> Hash
     #   resp.nodegroup.labels["labelKey"] #=> String
-    #   resp.nodegroup.taints #=> Array
-    #   resp.nodegroup.taints[0].key #=> String
-    #   resp.nodegroup.taints[0].value #=> String
-    #   resp.nodegroup.taints[0].effect #=> String, one of "NO_SCHEDULE", "NO_EXECUTE", "PREFER_NO_SCHEDULE"
     #   resp.nodegroup.resources.auto_scaling_groups #=> Array
     #   resp.nodegroup.resources.auto_scaling_groups[0].name #=> String
     #   resp.nodegroup.resources.remote_access_security_group #=> String
@@ -1891,8 +1853,6 @@ module Aws::EKS
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
-    #   resp.nodegroup.update_config.max_unavailable #=> Integer
-    #   resp.nodegroup.update_config.max_unavailable_percentage #=> Integer
     #   resp.nodegroup.launch_template.name #=> String
     #   resp.nodegroup.launch_template.version #=> String
     #   resp.nodegroup.launch_template.id #=> String
@@ -1957,11 +1917,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -1978,7 +1938,7 @@ module Aws::EKS
     # Disassociates an identity provider configuration from a cluster. If
     # you disassociate an identity provider from your cluster, users
     # included in the provider can no longer access the cluster. However,
-    # you can still access the cluster with Amazon Web Services IAM users.
+    # you can still access the cluster with AWS IAM users.
     #
     # @option params [required, String] :cluster_name
     #   The name of the cluster to disassociate an identity provider from.
@@ -2014,11 +1974,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -2089,8 +2049,8 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the Amazon EKS clusters in your Amazon Web Services account in
-    # the specified Region.
+    # Lists the Amazon EKS clusters in your AWS account in the specified
+    # Region.
     #
     # @option params [Integer] :max_results
     #   The maximum number of cluster results returned by `ListClusters` in
@@ -2159,11 +2119,11 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the Fargate profiles associated with the specified cluster in
-    # your Amazon Web Services account in the specified Region.
+    # Lists the AWS Fargate profiles associated with the specified cluster
+    # in your AWS account in the specified Region.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Amazon EKS cluster that you would like to list Fargate
+    #   The name of the Amazon EKS cluster that you would like to listFargate
     #   profiles in.
     #
     # @option params [Integer] :max_results
@@ -2270,8 +2230,8 @@ module Aws::EKS
     end
 
     # Lists the Amazon EKS managed node groups associated with the specified
-    # cluster in your Amazon Web Services account in the specified Region.
-    # Self-managed node groups are not listed.
+    # cluster in your AWS account in the specified Region. Self-managed node
+    # groups are not listed.
     #
     # @option params [required, String] :cluster_name
     #   The name of the Amazon EKS cluster that you would like to list node
@@ -2371,8 +2331,7 @@ module Aws::EKS
     end
 
     # Lists the updates associated with an Amazon EKS cluster or managed
-    # node group in your Amazon Web Services account, in the specified
-    # Region.
+    # node group in your AWS account, in the specified Region.
     #
     # @option params [required, String] :name
     #   The name of the Amazon EKS cluster to list updates for.
@@ -2569,11 +2528,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -2600,18 +2559,18 @@ module Aws::EKS
     #
     # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     # apply to exported control plane logs. For more information, see
-    # [CloudWatch Pricing][2].
+    # [Amazon CloudWatch Pricing][2].
     #
     #  </note>
     #
     # You can also use this API operation to enable or disable public and
     # private access to your cluster's Kubernetes API server endpoint. By
     # default, public access is enabled, and private access is disabled. For
-    # more information, see [Amazon EKS cluster endpoint access control][3]
+    # more information, see [Amazon EKS Cluster Endpoint Access Control][3]
     # in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
-    # You can't update the subnets or security group IDs for an existing
-    # cluster.
+    # At this time, you can not update the subnets or security group IDs for
+    # an existing cluster.
     #
     # Cluster updates are asynchronous, and they should finish within a few
     # minutes. During an update, the cluster status moves to `UPDATING`
@@ -2636,12 +2595,12 @@ module Aws::EKS
     #   Enable or disable exporting the Kubernetes control plane logs for your
     #   cluster to CloudWatch Logs. By default, cluster control plane logs
     #   aren't exported to CloudWatch Logs. For more information, see [Amazon
-    #   EKS cluster control plane logs][1] in the <i> <i>Amazon EKS User
+    #   EKS Cluster Control Plane Logs][1] in the <i> <i>Amazon EKS User
     #   Guide</i> </i>.
     #
     #   <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
     #   apply to exported control plane logs. For more information, see
-    #   [CloudWatch Pricing][2].
+    #   [Amazon CloudWatch Pricing][2].
     #
     #    </note>
     #
@@ -2689,11 +2648,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -2753,11 +2712,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -2789,16 +2748,9 @@ module Aws::EKS
     #   The Kubernetes labels to be applied to the nodes in the node group
     #   after the update.
     #
-    # @option params [Types::UpdateTaintsPayload] :taints
-    #   The Kubernetes taints to be applied to the nodes in the node group
-    #   after the update.
-    #
     # @option params [Types::NodegroupScalingConfig] :scaling_config
     #   The scaling configuration details for the Auto Scaling group after the
     #   update.
-    #
-    # @option params [Types::NodegroupUpdateConfig] :update_config
-    #   The node group update configuration.
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -2822,30 +2774,10 @@ module Aws::EKS
     #       },
     #       remove_labels: ["String"],
     #     },
-    #     taints: {
-    #       add_or_update_taints: [
-    #         {
-    #           key: "taintKey",
-    #           value: "taintValue",
-    #           effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #         },
-    #       ],
-    #       remove_taints: [
-    #         {
-    #           key: "taintKey",
-    #           value: "taintValue",
-    #           effect: "NO_SCHEDULE", # accepts NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE
-    #         },
-    #       ],
-    #     },
     #     scaling_config: {
     #       min_size: 1,
     #       max_size: 1,
     #       desired_size: 1,
-    #     },
-    #     update_config: {
-    #       max_unavailable: 1,
-    #       max_unavailable_percentage: 1,
     #     },
     #     client_request_token: "String",
     #   })
@@ -2856,11 +2788,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -2987,11 +2919,11 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
-    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification"
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied"
     #   resp.update.errors[0].error_message #=> String
     #   resp.update.errors[0].resource_ids #=> Array
     #   resp.update.errors[0].resource_ids[0] #=> String
@@ -3018,7 +2950,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3084,16 +3016,14 @@ module Aws::EKS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name             | params                            | :delay   | :max_attempts |
-    # | ----------------------- | --------------------------------- | -------- | ------------- |
-    # | addon_active            | {Client#describe_addon}           | 10       | 60            |
-    # | addon_deleted           | {Client#describe_addon}           | 10       | 60            |
-    # | cluster_active          | {Client#describe_cluster}         | 30       | 40            |
-    # | cluster_deleted         | {Client#describe_cluster}         | 30       | 40            |
-    # | fargate_profile_active  | {Client#describe_fargate_profile} | 10       | 60            |
-    # | fargate_profile_deleted | {Client#describe_fargate_profile} | 30       | 60            |
-    # | nodegroup_active        | {Client#describe_nodegroup}       | 30       | 80            |
-    # | nodegroup_deleted       | {Client#describe_nodegroup}       | 30       | 40            |
+    # | waiter_name       | params                      | :delay   | :max_attempts |
+    # | ----------------- | --------------------------- | -------- | ------------- |
+    # | addon_active      | {Client#describe_addon}     | 10       | 60            |
+    # | addon_deleted     | {Client#describe_addon}     | 10       | 60            |
+    # | cluster_active    | {Client#describe_cluster}   | 30       | 40            |
+    # | cluster_deleted   | {Client#describe_cluster}   | 30       | 40            |
+    # | nodegroup_active  | {Client#describe_nodegroup} | 30       | 80            |
+    # | nodegroup_deleted | {Client#describe_nodegroup} | 30       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3148,8 +3078,6 @@ module Aws::EKS
         addon_deleted: Waiters::AddonDeleted,
         cluster_active: Waiters::ClusterActive,
         cluster_deleted: Waiters::ClusterDeleted,
-        fargate_profile_active: Waiters::FargateProfileActive,
-        fargate_profile_deleted: Waiters::FargateProfileDeleted,
         nodegroup_active: Waiters::NodegroupActive,
         nodegroup_deleted: Waiters::NodegroupDeleted
       }
