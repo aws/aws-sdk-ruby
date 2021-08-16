@@ -16,7 +16,7 @@
           "name": "OperationName"
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/2014-01-01/jobs",
           "headers": {}
         }
@@ -59,7 +59,7 @@
           "PipelineId": "foo"
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/foo",
           "headers": {}
         }
@@ -103,7 +103,7 @@
           "Foo": "bar"
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/bar",
           "headers": {}
         }
@@ -153,7 +153,7 @@
           "Items": ["value1", "value2"]
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/path?item=value1&item=value2",
           "headers": {}
         }
@@ -213,7 +213,7 @@
           }
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/foo?bar=baz&fizz=buzz",
           "headers": {}
         }
@@ -279,7 +279,7 @@
           }
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/id?foo=bar&foo=baz&fizz=buzz&fizz=pop",
           "headers": {}
         }
@@ -323,7 +323,7 @@
           "BoolQuery": true
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/path?bool-query=true",
           "headers": {}
         }
@@ -343,7 +343,7 @@
           "BoolQuery": false
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/path?bool-query=false",
           "headers": {}
         }
@@ -399,7 +399,7 @@
           "PageToken": "bar"
         },
         "serialized": {
-          "body": "{}",
+          "body": "",
           "uri": "/2014-01-01/jobsByPipeline/foo?Ascending=true&PageToken=bar",
           "headers": {}
         }
@@ -711,7 +711,7 @@
         "params": { "foo": null },
         "serialized": {
           "method": "POST",
-          "body": "{}",
+          "body": "",
           "uri": "/path"
         }
       },
@@ -727,7 +727,7 @@
         "params": { "foo": "" },
         "serialized": {
           "method": "POST",
-          "body": "{}",
+          "body": "",
           "uri": "/path?abc=mno&param-name="
         }
       }
@@ -1066,7 +1066,7 @@
         "serialized": {
           "uri": "/path",
           "headers": {"x-amz-timearg": "Sun, 25 Jan 2015 08:00:00 GMT"},
-          "body": "{}"
+          "body": ""
         }
       }
     ]
@@ -1153,8 +1153,8 @@
         },
         "serialized": {
           "uri": "/",
-          "headers": {"X-Amz-Foo": "eyJGb28iOiJCYXIifQ=="},
-          "body": "{}"
+          "headers": {"X-Amz-Foo": "IntcIkZvb1wiOlwiQmFyXCJ9Ig=="},
+          "body": ""
         }
       },
       {
@@ -1173,7 +1173,7 @@
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "{}"
+          "body": ""
         }
       }
     ]
@@ -1587,9 +1587,8 @@
           "uri": "/payload",
           "body": "{\"timeout\": 10}",
           "headers": {
-            "x-amz-test-id": "t-12345",
             "Content-Type": "application/json",
-            "Content-Length": 30
+            "Content-Length": 14
           },
           "host": "rest-json-test.amazonaws.com"
         }
@@ -1612,7 +1611,6 @@
           "uri": "/payload",
           "body": "{}",
           "headers": {
-            "x-amz-test-id": "t-12345",
             "Content-Type": "application/json",
             "Content-Length": 2
           },
@@ -1623,7 +1621,7 @@
         "given": {
           "name": "NoModeledBody",
           "input": {
-            "shape": "TestBodyRequest"
+            "shape": "NoPayloadRequest"
           },
           "http": {
             "method": "GET",
@@ -1633,6 +1631,7 @@
         "params": {},
         "serialized": {
           "uri": "/no-payload",
+          "body": "",
           "headers": {
             "Content-Length": 0
           },
@@ -1643,7 +1642,7 @@
         "given": {
           "name": "NoModeledBodyWithHeader",
           "input": {
-            "shape": "TestBodyRequest"
+            "shape": "NoPayloadRequest"
           },
           "http": {
             "method": "GET",
@@ -1655,8 +1654,9 @@
         },
         "serialized": {
           "uri": "/no-payload",
+          "body": "",
           "headers": {
-            "x-amz-test-id": "t-12345"
+            "Content-Length": 0
           },
           "host": "rest-json-test.amazonaws.com"
         }

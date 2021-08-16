@@ -18,8 +18,8 @@ module Aws
         # @param [Hash] params
         def apply(http_req, params)
           body = build_body(params)
-          # for rest-json, ensure we send at least an empty object
-          if body.nil? && @serializer_class == Json::Builder
+          # for rest-json, ensure we send at least an empty object for
+          if body.nil? && @serializer_class == Json::Builder && @rules[:payload]
             body = Json.dump({})
           end
           http_req.body = body
