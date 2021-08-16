@@ -6,12 +6,17 @@ module Aws
       class RestJson < Seahorse::Client::Plugin
 
         class ContentTypeHandler < Seahorse::Client::Handler
-          CONTENT_TYPE = 'application/x-amz-json-%s'
-
           def call(context)
-            content_type = CONTENT_TYPE % [context.config.api.metadata['jsonVersion']]
-            context.http_request.headers['Content-Type'] = content_type
+            if modeled_body?(context)
+              context.http_request.headers['Content-Type'] = 'application/json'
+            end
             @handler.call(context)
+          end
+
+          private
+
+          def modeled_body?(context)
+            context.operation.input.shape.members.any?
           end
         end
 

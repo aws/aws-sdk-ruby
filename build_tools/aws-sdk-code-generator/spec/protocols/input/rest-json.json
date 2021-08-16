@@ -16,7 +16,7 @@
           "name": "OperationName"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/2014-01-01/jobs",
           "headers": {}
         }
@@ -59,7 +59,7 @@
           "PipelineId": "foo"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/2014-01-01/jobsByPipeline/foo",
           "headers": {}
         }
@@ -103,7 +103,7 @@
           "Foo": "bar"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/2014-01-01/jobsByPipeline/bar",
           "headers": {}
         }
@@ -153,7 +153,7 @@
           "Items": ["value1", "value2"]
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/path?item=value1&item=value2",
           "headers": {}
         }
@@ -213,7 +213,7 @@
           }
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/2014-01-01/jobsByPipeline/foo?bar=baz&fizz=buzz",
           "headers": {}
         }
@@ -279,7 +279,7 @@
           }
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/2014-01-01/jobsByPipeline/id?foo=bar&foo=baz&fizz=buzz&fizz=pop",
           "headers": {}
         }
@@ -323,7 +323,7 @@
           "BoolQuery": true
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/path?bool-query=true",
           "headers": {}
         }
@@ -343,7 +343,7 @@
           "BoolQuery": false
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/path?bool-query=false",
           "headers": {}
         }
@@ -399,7 +399,7 @@
           "PageToken": "bar"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/2014-01-01/jobsByPipeline/foo?Ascending=true&PageToken=bar",
           "headers": {}
         }
@@ -711,7 +711,7 @@
         "params": { "foo": null },
         "serialized": {
           "method": "POST",
-          "body": "",
+          "body": "{}",
           "uri": "/path"
         }
       },
@@ -727,7 +727,7 @@
         "params": { "foo": "" },
         "serialized": {
           "method": "POST",
-          "body": "",
+          "body": "{}",
           "uri": "/path?abc=mno&param-name="
         }
       }
@@ -1066,7 +1066,7 @@
         "serialized": {
           "uri": "/path",
           "headers": {"x-amz-timearg": "Sun, 25 Jan 2015 08:00:00 GMT"},
-          "body": ""
+          "body": "{}"
         }
       }
     ]
@@ -1154,7 +1154,7 @@
         "serialized": {
           "uri": "/",
           "headers": {"X-Amz-Foo": "eyJGb28iOiJCYXIifQ=="},
-          "body": ""
+          "body": "{}"
         }
       },
       {
@@ -1173,7 +1173,7 @@
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": ""
+          "body": "{}"
         }
       }
     ]
@@ -1344,6 +1344,182 @@
           "uri": "/path",
           "body": "{\"Name\": \"myname\"}",
           "host": "foo-myname.service.region.amazonaws.com"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Content Type",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "clientEndpoint": "https://rest-json-test.amazonaws.com",
+    "shapes": {
+      "TestId": {
+        "type": "string"
+      },
+      "TestConfig": {
+        "type": "structure",
+        "required": [],
+        "members": {
+          "timeout": {
+            "shape": "Integer",
+            "documentation": "<p> Timeout in seconds </p>"
+          }
+        }
+      },
+      "Integer": {
+        "type": "integer"
+      },
+      "TestBodyRequest": {
+        "type": "structure",
+        "required": [],
+        "members": {
+          "testConfig": {
+            "shape": "TestConfig",
+            "documentation": "<p> Content to post </p>"
+          },
+          "testId": {
+            "shape": "TestId",
+            "documentation": "<p> Optional test identifier </p>",
+            "location": "header",
+            "locationName": "x-amz-test-id"
+          }
+        },
+        "documentation": "<p> The request structure for a payload request. </p>",
+        "payload": "testConfig"
+      },
+      "NoPayloadRequest": {
+        "type": "structure",
+        "required": [],
+        "members": {
+          "testId": {
+            "shape": "TestId",
+            "documentation": "<p> The unique ID for a test. </p>",
+            "location": "header",
+            "locationName": "x-amz-test-id"
+          }
+        },
+        "documentation":"<p> The request structure for a no payload request. </p>"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "name": "ModeledPayloadNoBodyNoParams",
+          "input": {
+            "shape": "TestBodyRequest"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/payload"
+          }
+        },
+        "params": {},
+        "serialized": {
+          "uri": "/payload",
+          "body": "{}",
+          "headers": {
+            "Content-Type": "application/json",
+            "Content-Length": 2
+          },
+          "host": "rest-json-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
+          "name": "ModeledPayloadWithBodyAndParams",
+          "input": {
+            "shape": "TestBodyRequest"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/payload"
+          }
+        },
+        "params": {
+          "testConfig": {
+            "timeout": 10
+          },
+          "testId": "t-12345"
+        },
+        "serialized": {
+          "uri": "/payload",
+          "body": "{\"timeout\": 10}",
+          "headers": {
+            "x-amz-test-id": "t-12345",
+            "Content-Type": "application/json",
+            "Content-Length": 30
+          },
+          "host": "rest-json-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
+          "name": "ModeledPayloadNoBodyWithHeader",
+          "input": {
+            "shape": "TestBodyRequest"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/payload"
+          }
+        },
+        "params": {
+          "testId": "t-12345"
+        },
+        "serialized": {
+          "uri": "/payload",
+          "body": "{}",
+          "headers": {
+            "x-amz-test-id": "t-12345",
+            "Content-Type": "application/json",
+            "Content-Length": 2
+          },
+          "host": "rest-json-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
+          "name": "NoModeledBody",
+          "input": {
+            "shape": "TestBodyRequest"
+          },
+          "http": {
+            "method": "GET",
+            "requestUri": "/no-payload"
+          }
+        },
+        "params": {},
+        "serialized": {
+          "uri": "/no-payload",
+          "headers": {
+            "Content-Length": 0
+          },
+          "host": "rest-json-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
+          "name": "NoModeledBodyWithHeader",
+          "input": {
+            "shape": "TestBodyRequest"
+          },
+          "http": {
+            "method": "GET",
+            "requestUri": "/no-payload"
+          }
+        },
+        "params": {
+          "testId": "t-12345"
+        },
+        "serialized": {
+          "uri": "/no-payload",
+          "headers": {
+            "x-amz-test-id": "t-12345"
+          },
+          "host": "rest-json-test.amazonaws.com"
         }
       }
     ]

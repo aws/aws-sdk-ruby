@@ -153,7 +153,7 @@ def match_req_body(group, suite, test_case, http_req, it)
       body = body.split('&').sort.join('&')
       expected_body = expected_body.split('&').sort.join('&')
     when 'json'
-      body = Aws::Json.load(body) unless body == ''
+      body = Aws::Json.load(body)
       expected_body = Aws::Json.load(expected_body)
     when 'rest-json'
       if body[0] == '{'

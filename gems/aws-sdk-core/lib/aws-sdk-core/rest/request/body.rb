@@ -17,7 +17,12 @@ module Aws
         # @param [Seahorse::Client::Http::Request] http_req
         # @param [Hash] params
         def apply(http_req, params)
-          http_req.body = build_body(params)
+          body = build_body(params)
+          # for rest-json, ensure we send at least an empty object
+          if body.nil? && @serializer_class == Json::Builder
+            body = Json.dump({})
+          end
+          http_req.body = body
         end
 
         private

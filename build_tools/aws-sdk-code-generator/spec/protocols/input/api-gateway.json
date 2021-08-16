@@ -16,7 +16,7 @@
           "name": "OperationName"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/test/noauth/scalars",
           "headers": {}
         }
@@ -273,7 +273,7 @@
           }
         },
         "serialized": {
-          "body": "{\"RecursiveStructure\": {\"RecursiveMember\": {\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}}}", 
+          "body": "{\"RecursiveStructure\": {\"RecursiveMember\": {\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}}}",
           "uri": "/test/noauth/enums/simple",
           "headers": {}
         }
@@ -329,7 +329,7 @@
           "HeaderMember": "headerVal"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/test/noauth/scalars?Qsa=querya&Qsb=queryb",
           "headers": {
             "x-amz-header-member": "headerVal"
@@ -374,7 +374,7 @@
           "PathMember": "foo"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/test/noauth/foo",
           "headers": {}
         }
@@ -424,7 +424,7 @@
           "MultiLocation": "bar"
         },
         "serialized": {
-          "body": "",
+          "body": "{}",
           "uri": "/test/noauth/foo/bar",
           "headers": {}
         }
