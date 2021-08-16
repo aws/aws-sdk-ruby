@@ -520,7 +520,7 @@ module Aws::LicenseManager
     #
     #   resp = client.checkout_license({
     #     product_sku: "String", # required
-    #     checkout_type: "PROVISIONAL", # required, accepts PROVISIONAL
+    #     checkout_type: "PROVISIONAL", # required, accepts PROVISIONAL, PERPETUAL
     #     key_fingerprint: "String", # required
     #     entitlements: [ # required
     #       {
@@ -536,7 +536,7 @@ module Aws::LicenseManager
     #
     # @example Response structure
     #
-    #   resp.checkout_type #=> String, one of "PROVISIONAL"
+    #   resp.checkout_type #=> String, one of "PROVISIONAL", "PERPETUAL"
     #   resp.license_consumption_token #=> String
     #   resp.entitlements_allowed #=> Array
     #   resp.entitlements_allowed[0].name #=> String
@@ -2820,7 +2820,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

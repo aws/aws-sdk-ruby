@@ -3778,6 +3778,7 @@ module Aws::IoTSiteWise
     #         next_token: "NextToken",
     #         max_results: 1,
     #         type: "InterpolationType", # required
+    #         interval_window_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] asset_id
@@ -3841,8 +3842,47 @@ module Aws::IoTSiteWise
     # @!attribute [rw] type
     #   The interpolation type.
     #
-    #   Valid values: `LINEAR_INTERPOLATION`
+    #   Valid values: `LINEAR_INTERPOLATION | LOCF_INTERPOLATION`
+    #
+    #   For the `LOCF_INTERPOLATION` interpolation, if no data point is
+    #   found for an interval, IoT SiteWise returns the same interpolated
+    #   value calculated for the previous interval and carries forward this
+    #   interpolated value until a new data point is found.
+    #
+    #   For example, you can get the interpolated temperature values for a
+    #   wind turbine every 24 hours over a duration of 7 days. If the
+    #   `LOCF_INTERPOLATION` interpolation starts on July 1, 2021, at 9 AM,
+    #   IoT SiteWise uses the data points from July 1, 2021, at 9 AM to July
+    #   2, 2021, at 9 AM to compute the first interpolated value. If no data
+    #   points is found after 9 A.M. on July 2, 2021, IoT SiteWise uses the
+    #   same interpolated value for the rest of the days.
     #   @return [String]
+    #
+    # @!attribute [rw] interval_window_in_seconds
+    #   The query interval for the window in seconds. IoT SiteWise computes
+    #   each interpolated value by using data points from the timestamp of
+    #   each interval minus the window to the timestamp of each interval
+    #   plus the window. If not specified, the window is between the start
+    #   time minus the interval and the end time plus the interval.
+    #
+    #   <note markdown="1"> * If you specify a value for the `intervalWindowInSeconds`
+    #     parameter, the `type` parameter must be `LINEAR_INTERPOLATION`.
+    #
+    #   * If no data point is found during the specified query window, IoT
+    #     SiteWise won't return an interpolated value for the interval.
+    #     This indicates that there's a gap in the ingested data points.
+    #
+    #    </note>
+    #
+    #   For example, you can get the interpolated temperature values for a
+    #   wind turbine every 24 hours over a duration of 7 days. If the
+    #   interpolation starts on July 1, 2021, at 9 AM with a window of 2
+    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours)
+    #   to 11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first
+    #   interpolated value, uses the data points from 7 AM (9 AM - 2 hours)
+    #   to 11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second
+    #   interpolated value, and so on.
+    #   @return [Integer]
     #
     class GetInterpolatedAssetPropertyValuesRequest < Struct.new(
       :asset_id,
@@ -3856,7 +3896,8 @@ module Aws::IoTSiteWise
       :interval_in_seconds,
       :next_token,
       :max_results,
-      :type)
+      :type,
+      :interval_window_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5897,12 +5938,12 @@ module Aws::IoTSiteWise
     #     `interval`, IoT SiteWise aggregates data in one of the following
     #     ways:
     #
-    #     * If you create the metric before or at 6:00 p.m. (UTC), you get
-    #       the first aggregation result at 6 p.m. (UTC) on the day when you
+    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #       first aggregation result at 6 PM (UTC) on the day when you
     #       create the metric.
     #
-    #     * If you create the metric after 6:00 p.m. (UTC), you get the
-    #       first aggregation result at 6 p.m. (UTC) the next day.
+    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #       aggregation result at 6 PM (UTC) the next day.
     #
     #   * The ISO 8601 format.
     #
@@ -5910,19 +5951,19 @@ module Aws::IoTSiteWise
     #     `interval`, IoT SiteWise aggregates data in one of the following
     #     ways:
     #
-    #     * If you create the metric before or at 6:00 p.m. (UTC), you get
-    #       the first aggregation result at 6 p.m. (UTC) on the day when you
+    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #       first aggregation result at 6 PM (UTC) on the day when you
     #       create the metric.
     #
-    #     * If you create the metric after 6:00 p.m. (UTC), you get the
-    #       first aggregation result at 6 p.m. (UTC) the next day.
+    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #       aggregation result at 6 PM (UTC) the next day.
     #
     #   * The 24-hour clock.
     #
     #     For example, if you specify `00:03:00` for `offset` and `5m` for
-    #     `interval`, and you create the metric at 2 p.m. (UTC), you get the
-    #     first aggregation result at 2:03 p.m. (UTC). You get the second
-    #     aggregation result at 2:08 p.m. (UTC).
+    #     `interval`, and you create the metric at 2 PM (UTC), you get the
+    #     first aggregation result at 2:03 PM (UTC). You get the second
+    #     aggregation result at 2:08 PM (UTC).
     #
     #   * The offset time zone.
     #
@@ -5930,12 +5971,12 @@ module Aws::IoTSiteWise
     #     `1d` for `interval`, IoT SiteWise aggregates data in one of the
     #     following ways:
     #
-    #     * If you create the metric before or at 6:00 p.m. (PST), you get
-    #       the first aggregation result at 6 p.m. (PST) on the day when you
+    #     * If you create the metric before or at 6:00 PM (PST), you get the
+    #       first aggregation result at 6 PM (PST) on the day when you
     #       create the metric.
     #
-    #     * If you create the metric after 6:00 p.m. (PST), you get the
-    #       first aggregation result at 6 p.m. (PST) the next day.
+    #     * If you create the metric after 6:00 PM (PST), you get the first
+    #       aggregation result at 6 PM (PST) the next day.
     #   @return [String]
     #
     class TumblingWindow < Struct.new(

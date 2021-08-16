@@ -2522,7 +2522,45 @@ module Aws::IoTSiteWise
     # @option params [required, String] :type
     #   The interpolation type.
     #
-    #   Valid values: `LINEAR_INTERPOLATION`
+    #   Valid values: `LINEAR_INTERPOLATION | LOCF_INTERPOLATION`
+    #
+    #   For the `LOCF_INTERPOLATION` interpolation, if no data point is found
+    #   for an interval, IoT SiteWise returns the same interpolated value
+    #   calculated for the previous interval and carries forward this
+    #   interpolated value until a new data point is found.
+    #
+    #   For example, you can get the interpolated temperature values for a
+    #   wind turbine every 24 hours over a duration of 7 days. If the
+    #   `LOCF_INTERPOLATION` interpolation starts on July 1, 2021, at 9 AM,
+    #   IoT SiteWise uses the data points from July 1, 2021, at 9 AM to July
+    #   2, 2021, at 9 AM to compute the first interpolated value. If no data
+    #   points is found after 9 A.M. on July 2, 2021, IoT SiteWise uses the
+    #   same interpolated value for the rest of the days.
+    #
+    # @option params [Integer] :interval_window_in_seconds
+    #   The query interval for the window in seconds. IoT SiteWise computes
+    #   each interpolated value by using data points from the timestamp of
+    #   each interval minus the window to the timestamp of each interval plus
+    #   the window. If not specified, the window is between the start time
+    #   minus the interval and the end time plus the interval.
+    #
+    #   <note markdown="1"> * If you specify a value for the `intervalWindowInSeconds` parameter,
+    #     the `type` parameter must be `LINEAR_INTERPOLATION`.
+    #
+    #   * If no data point is found during the specified query window, IoT
+    #     SiteWise won't return an interpolated value for the interval. This
+    #     indicates that there's a gap in the ingested data points.
+    #
+    #    </note>
+    #
+    #   For example, you can get the interpolated temperature values for a
+    #   wind turbine every 24 hours over a duration of 7 days. If the
+    #   interpolation starts on July 1, 2021, at 9 AM with a window of 2
+    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours) to
+    #   11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first
+    #   interpolated value, uses the data points from 7 AM (9 AM - 2 hours) to
+    #   11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second
+    #   interpolated value, and so on.
     #
     # @return [Types::GetInterpolatedAssetPropertyValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2546,6 +2584,7 @@ module Aws::IoTSiteWise
     #     next_token: "NextToken",
     #     max_results: 1,
     #     type: "InterpolationType", # required
+    #     interval_window_in_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -4056,7 +4095,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

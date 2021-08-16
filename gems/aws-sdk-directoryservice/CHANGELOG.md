@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-08-16)
+------------------
+
+* Feature - This release adds support for describing client authentication settings.
+
 1.41.0 (2021-07-30)
 ------------------
 
