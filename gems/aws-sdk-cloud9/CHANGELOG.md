@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-08-17)
+------------------
+
+* Feature - Added DryRun parameter to CreateEnvironmentEC2 API. Added ManagedCredentialsActions parameter to UpdateEnvironment API
+
 1.37.0 (2021-07-30)
 ------------------
 

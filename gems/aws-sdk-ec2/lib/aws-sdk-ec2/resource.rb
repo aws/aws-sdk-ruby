@@ -597,6 +597,7 @@ module Aws::EC2
     #   keypair = ec2.create_key_pair({
     #     key_name: "String", # required
     #     dry_run: false,
+    #     key_type: "rsa", # accepts rsa, ed25519
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -619,6 +620,11 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [String] :key_type
+    #   The type of key pair. Note that ED25519 keys are not supported for
+    #   Windows instances, EC2 Instance Connect, and EC2 Serial Console.
+    #
+    #   Default: `rsa`
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new key pair.
     # @return [KeyPair]

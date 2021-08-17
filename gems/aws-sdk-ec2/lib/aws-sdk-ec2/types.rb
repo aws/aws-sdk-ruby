@@ -7471,6 +7471,7 @@ module Aws::EC2
     #       {
     #         key_name: "String", # required
     #         dry_run: false,
+    #         key_type: "rsa", # accepts rsa, ed25519
     #         tag_specifications: [
     #           {
     #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -7497,6 +7498,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] key_type
+    #   The type of key pair. Note that ED25519 keys are not supported for
+    #   Windows instances, EC2 Instance Connect, and EC2 Serial Console.
+    #
+    #   Default: `rsa`
+    #   @return [String]
+    #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the new key pair.
     #   @return [Array<Types::TagSpecification>]
@@ -7506,6 +7514,7 @@ module Aws::EC2
     class CreateKeyPairRequest < Struct.new(
       :key_name,
       :dry_run,
+      :key_type,
       :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
@@ -36796,7 +36805,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] key_material
-    #   An unencrypted PEM encoded RSA private key.
+    #   An unencrypted PEM encoded RSA or ED25519 private key.
     #   @return [String]
     #
     # @!attribute [rw] key_name
@@ -36830,14 +36839,36 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] key_fingerprint
-    #   If you used CreateKeyPair to create the key pair, this is the SHA-1
-    #   digest of the DER encoded private key. If you used ImportKeyPair to
-    #   provide Amazon Web Services the public key, this is the MD5 public
-    #   key fingerprint as specified in section 4 of RFC4716.
+    #   If you used CreateKeyPair to create the key pair:
+    #
+    #   * For RSA key pairs, the key fingerprint is the SHA-1 digest of the
+    #     DER encoded private key.
+    #
+    #   * For ED25519 key pairs, the key fingerprint is the base64-encoded
+    #     SHA-256 digest, which is the default for OpenSSH, starting with
+    #     [OpenSSH 6.8][1].
+    #
+    #   If you used ImportKeyPair to provide Amazon Web Services the public
+    #   key:
+    #
+    #   * For RSA key pairs, the key fingerprint is the MD5 public key
+    #     fingerprint as specified in section 4 of RFC4716.
+    #
+    #   * For ED25519 key pairs, the key fingerprint is the base64-encoded
+    #     SHA-256 digest, which is the default for OpenSSH, starting with
+    #     [OpenSSH 6.8][1].
+    #
+    #
+    #
+    #   [1]: http://www.openssh.com/txt/release-6.8
     #   @return [String]
     #
     # @!attribute [rw] key_name
     #   The name of the key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The type of key pair.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -36850,6 +36881,7 @@ module Aws::EC2
       :key_pair_id,
       :key_fingerprint,
       :key_name,
+      :key_type,
       :tags)
       SENSITIVE = []
       include Aws::Structure

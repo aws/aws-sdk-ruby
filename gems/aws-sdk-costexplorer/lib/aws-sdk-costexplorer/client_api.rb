@@ -46,6 +46,14 @@ module Aws::CostExplorer
     CostCategoryRuleType = Shapes::StringShape.new(name: 'CostCategoryRuleType')
     CostCategoryRuleVersion = Shapes::StringShape.new(name: 'CostCategoryRuleVersion')
     CostCategoryRulesList = Shapes::ListShape.new(name: 'CostCategoryRulesList')
+    CostCategorySplitChargeMethod = Shapes::StringShape.new(name: 'CostCategorySplitChargeMethod')
+    CostCategorySplitChargeRule = Shapes::StructureShape.new(name: 'CostCategorySplitChargeRule')
+    CostCategorySplitChargeRuleParameter = Shapes::StructureShape.new(name: 'CostCategorySplitChargeRuleParameter')
+    CostCategorySplitChargeRuleParameterType = Shapes::StringShape.new(name: 'CostCategorySplitChargeRuleParameterType')
+    CostCategorySplitChargeRuleParameterValuesList = Shapes::ListShape.new(name: 'CostCategorySplitChargeRuleParameterValuesList')
+    CostCategorySplitChargeRuleParametersList = Shapes::ListShape.new(name: 'CostCategorySplitChargeRuleParametersList')
+    CostCategorySplitChargeRuleTargetsList = Shapes::ListShape.new(name: 'CostCategorySplitChargeRuleTargetsList')
+    CostCategorySplitChargeRulesList = Shapes::ListShape.new(name: 'CostCategorySplitChargeRulesList')
     CostCategoryStatus = Shapes::StringShape.new(name: 'CostCategoryStatus')
     CostCategoryStatusComponent = Shapes::StringShape.new(name: 'CostCategoryStatusComponent')
     CostCategoryValue = Shapes::StringShape.new(name: 'CostCategoryValue')
@@ -346,6 +354,7 @@ module Aws::CostExplorer
     CostCategory.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "Name"))
     CostCategory.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     CostCategory.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
+    CostCategory.add_member(:split_charge_rules, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRulesList, location_name: "SplitChargeRules"))
     CostCategory.add_member(:processing_status, Shapes::ShapeRef.new(shape: CostCategoryProcessingStatusList, location_name: "ProcessingStatus"))
     CostCategory.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
     CostCategory.struct_class = Types::CostCategory
@@ -381,6 +390,24 @@ module Aws::CostExplorer
     CostCategoryRule.struct_class = Types::CostCategoryRule
 
     CostCategoryRulesList.member = Shapes::ShapeRef.new(shape: CostCategoryRule)
+
+    CostCategorySplitChargeRule.add_member(:source, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Source"))
+    CostCategorySplitChargeRule.add_member(:targets, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRuleTargetsList, required: true, location_name: "Targets"))
+    CostCategorySplitChargeRule.add_member(:method, Shapes::ShapeRef.new(shape: CostCategorySplitChargeMethod, required: true, location_name: "Method"))
+    CostCategorySplitChargeRule.add_member(:parameters, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRuleParametersList, location_name: "Parameters"))
+    CostCategorySplitChargeRule.struct_class = Types::CostCategorySplitChargeRule
+
+    CostCategorySplitChargeRuleParameter.add_member(:type, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRuleParameterType, required: true, location_name: "Type"))
+    CostCategorySplitChargeRuleParameter.add_member(:values, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRuleParameterValuesList, required: true, location_name: "Values"))
+    CostCategorySplitChargeRuleParameter.struct_class = Types::CostCategorySplitChargeRuleParameter
+
+    CostCategorySplitChargeRuleParameterValuesList.member = Shapes::ShapeRef.new(shape: GenericString)
+
+    CostCategorySplitChargeRuleParametersList.member = Shapes::ShapeRef.new(shape: CostCategorySplitChargeRuleParameter)
+
+    CostCategorySplitChargeRuleTargetsList.member = Shapes::ShapeRef.new(shape: GenericString)
+
+    CostCategorySplitChargeRulesList.member = Shapes::ShapeRef.new(shape: CostCategorySplitChargeRule)
 
     CostCategoryValues.add_member(:key, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "Key"))
     CostCategoryValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
@@ -432,6 +459,7 @@ module Aws::CostExplorer
     CreateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     CreateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
     CreateCostCategoryDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
+    CreateCostCategoryDefinitionRequest.add_member(:split_charge_rules, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRulesList, location_name: "SplitChargeRules"))
     CreateCostCategoryDefinitionRequest.struct_class = Types::CreateCostCategoryDefinitionRequest
 
     CreateCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
@@ -1215,6 +1243,7 @@ module Aws::CostExplorer
     UpdateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
     UpdateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
     UpdateCostCategoryDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
+    UpdateCostCategoryDefinitionRequest.add_member(:split_charge_rules, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRulesList, location_name: "SplitChargeRules"))
     UpdateCostCategoryDefinitionRequest.struct_class = Types::UpdateCostCategoryDefinitionRequest
 
     UpdateCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2021-08-17)
+------------------
+
+* Feature - This release adds support for EC2 ED25519 key pairs for authentication
+
 1.254.0 (2021-07-30)
 ------------------
 

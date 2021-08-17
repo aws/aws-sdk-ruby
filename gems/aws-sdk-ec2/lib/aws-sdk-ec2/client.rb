@@ -6021,20 +6021,21 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a 2048-bit RSA key pair with the specified name. Amazon EC2
-    # stores the public key and displays the private key for you to save to
-    # a file. The private key is returned as an unencrypted PEM encoded
-    # PKCS#1 private key. If a key with the specified name already exists,
-    # Amazon EC2 returns an error.
+    # Creates an ED25519 or 2048-bit RSA key pair with the specified name.
+    # Amazon EC2 stores the public key and displays the private key for you
+    # to save to a file. The private key is returned as an unencrypted PEM
+    # encoded PKCS#1 private key. If a key with the specified name already
+    # exists, Amazon EC2 returns an error.
     #
-    # You can have up to five thousand key pairs per Region.
+    # The key pair returned to you is available only in the Amazon Web
+    # Services Region in which you create it. If you prefer, you can create
+    # your own key pair using a third-party tool and upload it to any Region
+    # using ImportKeyPair.
     #
-    # The key pair returned to you is available only in the Region in which
-    # you create it. If you prefer, you can create your own key pair using a
-    # third-party tool and upload it to any Region using ImportKeyPair.
+    # You can have up to 5,000 key pairs per Amazon Web Services Region.
     #
-    # For more information, see [Key Pairs][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Amazon EC2 key pairs][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -6050,6 +6051,12 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :key_type
+    #   The type of key pair. Note that ED25519 keys are not supported for
+    #   Windows instances, EC2 Instance Connect, and EC2 Serial Console.
+    #
+    #   Default: `rsa`
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new key pair.
@@ -6076,6 +6083,7 @@ module Aws::EC2
     #   resp = client.create_key_pair({
     #     key_name: "String", # required
     #     dry_run: false,
+    #     key_type: "rsa", # accepts rsa, ed25519
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -8434,8 +8442,8 @@ module Aws::EC2
     #
     # A security group acts as a virtual firewall for your instance to
     # control inbound and outbound traffic. For more information, see
-    # [Amazon EC2 Security Groups][1] in the *Amazon Elastic Compute Cloud
-    # User Guide* and [Security Groups for Your VPC][2] in the *Amazon
+    # [Amazon EC2 security groups][1] in the *Amazon Elastic Compute Cloud
+    # User Guide* and [Security groups for your VPC][2] in the *Amazon
     # Virtual Private Cloud User Guide*.
     #
     # When you create a security group, you specify a friendly name of your
@@ -20178,8 +20186,8 @@ module Aws::EC2
 
     # Describes the specified key pairs or all of your key pairs.
     #
-    # For more information about key pairs, see [Key Pairs][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # For more information about key pairs, see [Amazon EC2 key pairs][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -20263,6 +20271,7 @@ module Aws::EC2
     #   resp.key_pairs[0].key_pair_id #=> String
     #   resp.key_pairs[0].key_fingerprint #=> String
     #   resp.key_pairs[0].key_name #=> String
+    #   resp.key_pairs[0].key_type #=> String, one of "rsa", "ed25519"
     #   resp.key_pairs[0].tags #=> Array
     #   resp.key_pairs[0].tags[0].key #=> String
     #   resp.key_pairs[0].tags[0].value #=> String
@@ -24254,8 +24263,8 @@ module Aws::EC2
     #
     # A security group is for use with instances either in the EC2-Classic
     # platform or in a specific VPC. For more information, see [Amazon EC2
-    # Security Groups][1] in the *Amazon Elastic Compute Cloud User Guide*
-    # and [Security Groups for Your VPC][2] in the *Amazon Virtual Private
+    # security groups][1] in the *Amazon Elastic Compute Cloud User Guide*
+    # and [Security groups for your VPC][2] in the *Amazon Virtual Private
     # Cloud User Guide*.
     #
     #
@@ -33241,16 +33250,16 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Imports the public key from an RSA key pair that you created with a
-    # third-party tool. Compare this with CreateKeyPair, in which Amazon Web
-    # Services creates the key pair and gives the keys to you (Amazon Web
-    # Services keeps a copy of the public key). With ImportKeyPair, you
-    # create the key pair and give Amazon Web Services just the public key.
-    # The private key is never transferred between you and Amazon Web
-    # Services.
+    # Imports the public key from an RSA or ED25519 key pair that you
+    # created with a third-party tool. Compare this with CreateKeyPair, in
+    # which Amazon Web Services creates the key pair and gives the keys to
+    # you (Amazon Web Services keeps a copy of the public key). With
+    # ImportKeyPair, you create the key pair and give Amazon Web Services
+    # just the public key. The private key is never transferred between you
+    # and Amazon Web Services.
     #
-    # For more information about key pairs, see [Key Pairs][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # For more information about key pairs, see [Amazon EC2 key pairs][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -43553,7 +43562,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.254.0'
+      context[:gem_version] = '1.255.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

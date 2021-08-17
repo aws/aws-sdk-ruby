@@ -41,7 +41,7 @@ module Aws::EC2
       data[:key_fingerprint]
     end
 
-    # An unencrypted PEM encoded RSA private key.
+    # An unencrypted PEM encoded RSA or ED25519 private key.
     # @return [String]
     def key_material
       data[:key_material]

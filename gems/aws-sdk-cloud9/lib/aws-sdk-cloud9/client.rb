@@ -425,6 +425,12 @@ module Aws::Cloud9
     #
     #   [1]: https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html
     #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
     # @return [Types::CreateEnvironmentEC2Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentEC2Result#environment_id #environment_id} => String
@@ -464,6 +470,7 @@ module Aws::Cloud9
     #       },
     #     ],
     #     connection_type: "CONNECT_SSH", # accepts CONNECT_SSH, CONNECT_SSM
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -1051,6 +1058,22 @@ module Aws::Cloud9
     # @option params [String] :description
     #   Any new or replacement description for the environment.
     #
+    # @option params [String] :managed_credentials_action
+    #   Allows the environment owner to turn on or turn off the Amazon Web
+    #   Services managed temporary credentials for an Cloud9 environment by
+    #   using one of the following values:
+    #
+    #   * `ENABLE`
+    #
+    #   * `DISABLE`
+    #
+    #   <note markdown="1"> Only the environment owner can change the status of managed temporary
+    #   credentials. An `AccessDeniedException` is thrown if an attempt to
+    #   turn on or turn off managed temporary credentials is made by an
+    #   account that's not the environment owner.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1072,6 +1095,7 @@ module Aws::Cloud9
     #     environment_id: "EnvironmentId", # required
     #     name: "EnvironmentName",
     #     description: "EnvironmentDescription",
+    #     managed_credentials_action: "ENABLE", # accepts ENABLE, DISABLE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironment AWS API Documentation
@@ -1163,7 +1187,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

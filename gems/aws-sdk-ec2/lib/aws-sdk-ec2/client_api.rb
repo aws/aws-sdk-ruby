@@ -1380,6 +1380,7 @@ module Aws::EC2
     KeyPairInfo = Shapes::StructureShape.new(name: 'KeyPairInfo')
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
     KeyPairName = Shapes::StringShape.new(name: 'KeyPairName')
+    KeyType = Shapes::StringShape.new(name: 'KeyType')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastError = Shapes::StructureShape.new(name: 'LastError')
     LaunchPermission = Shapes::StructureShape.new(name: 'LaunchPermission')
@@ -3545,6 +3546,7 @@ module Aws::EC2
 
     CreateKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KeyName"))
     CreateKeyPairRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CreateKeyPairRequest.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "KeyType"))
     CreateKeyPairRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateKeyPairRequest.struct_class = Types::CreateKeyPairRequest
 
@@ -7803,6 +7805,7 @@ module Aws::EC2
     KeyPairInfo.add_member(:key_pair_id, Shapes::ShapeRef.new(shape: String, location_name: "keyPairId"))
     KeyPairInfo.add_member(:key_fingerprint, Shapes::ShapeRef.new(shape: String, location_name: "keyFingerprint"))
     KeyPairInfo.add_member(:key_name, Shapes::ShapeRef.new(shape: String, location_name: "keyName"))
+    KeyPairInfo.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "keyType"))
     KeyPairInfo.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     KeyPairInfo.struct_class = Types::KeyPairInfo
 
