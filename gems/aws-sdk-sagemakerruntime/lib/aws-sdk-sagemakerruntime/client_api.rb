@@ -18,12 +18,16 @@ module Aws::SageMakerRuntime
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
     Header = Shapes::StringShape.new(name: 'Header')
     InferenceId = Shapes::StringShape.new(name: 'InferenceId')
+    InputLocationHeader = Shapes::StringShape.new(name: 'InputLocationHeader')
     InternalFailure = Shapes::StructureShape.new(name: 'InternalFailure')
+    InvokeEndpointAsyncInput = Shapes::StructureShape.new(name: 'InvokeEndpointAsyncInput')
+    InvokeEndpointAsyncOutput = Shapes::StructureShape.new(name: 'InvokeEndpointAsyncOutput')
     InvokeEndpointInput = Shapes::StructureShape.new(name: 'InvokeEndpointInput')
     InvokeEndpointOutput = Shapes::StructureShape.new(name: 'InvokeEndpointOutput')
     LogStreamArn = Shapes::StringShape.new(name: 'LogStreamArn')
     Message = Shapes::StringShape.new(name: 'Message')
     ModelError = Shapes::StructureShape.new(name: 'ModelError')
+    RequestTTLSecondsHeader = Shapes::IntegerShape.new(name: 'RequestTTLSecondsHeader')
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     TargetContainerHostnameHeader = Shapes::StringShape.new(name: 'TargetContainerHostnameHeader')
@@ -33,6 +37,19 @@ module Aws::SageMakerRuntime
 
     InternalFailure.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalFailure.struct_class = Types::InternalFailure
+
+    InvokeEndpointAsyncInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "EndpointName"))
+    InvokeEndpointAsyncInput.add_member(:content_type, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "X-Amzn-SageMaker-Content-Type"))
+    InvokeEndpointAsyncInput.add_member(:accept, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "X-Amzn-SageMaker-Accept"))
+    InvokeEndpointAsyncInput.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesHeader, location: "header", location_name: "X-Amzn-SageMaker-Custom-Attributes"))
+    InvokeEndpointAsyncInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
+    InvokeEndpointAsyncInput.add_member(:input_location, Shapes::ShapeRef.new(shape: InputLocationHeader, required: true, location: "header", location_name: "X-Amzn-SageMaker-InputLocation"))
+    InvokeEndpointAsyncInput.add_member(:request_ttl_seconds, Shapes::ShapeRef.new(shape: RequestTTLSecondsHeader, location: "header", location_name: "X-Amzn-SageMaker-RequestTTLSeconds"))
+    InvokeEndpointAsyncInput.struct_class = Types::InvokeEndpointAsyncInput
+
+    InvokeEndpointAsyncOutput.add_member(:inference_id, Shapes::ShapeRef.new(shape: Header, location_name: "InferenceId"))
+    InvokeEndpointAsyncOutput.add_member(:output_location, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "X-Amzn-SageMaker-OutputLocation"))
+    InvokeEndpointAsyncOutput.struct_class = Types::InvokeEndpointAsyncOutput
 
     InvokeEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "EndpointName"))
     InvokeEndpointInput.add_member(:body, Shapes::ShapeRef.new(shape: BodyBlob, required: true, location_name: "Body"))
@@ -95,6 +112,17 @@ module Aws::SageMakerRuntime
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
         o.errors << Shapes::ShapeRef.new(shape: ValidationError)
         o.errors << Shapes::ShapeRef.new(shape: ModelError)
+      end)
+
+      api.add_operation(:invoke_endpoint_async, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InvokeEndpointAsync"
+        o.http_method = "POST"
+        o.http_request_uri = "/endpoints/{EndpointName}/async-invocations"
+        o.input = Shapes::ShapeRef.new(shape: InvokeEndpointAsyncInput)
+        o.output = Shapes::ShapeRef.new(shape: InvokeEndpointAsyncOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailure)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationError)
       end)
     end
 

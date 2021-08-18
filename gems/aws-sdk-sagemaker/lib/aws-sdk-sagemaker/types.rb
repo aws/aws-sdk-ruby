@@ -1641,6 +1641,140 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configures the behavior of the client used by Amazon SageMaker to
+    # interact with the model container during asynchronous inference.
+    #
+    # @note When making an API call, you may pass AsyncInferenceClientConfig
+    #   data as a hash:
+    #
+    #       {
+    #         max_concurrent_invocations_per_instance: 1,
+    #       }
+    #
+    # @!attribute [rw] max_concurrent_invocations_per_instance
+    #   The maximum number of concurrent requests sent by the SageMaker
+    #   client to the model container. If no value is provided, Amazon
+    #   SageMaker will choose an optimal value for you.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceClientConfig AWS API Documentation
+    #
+    class AsyncInferenceClientConfig < Struct.new(
+      :max_concurrent_invocations_per_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies configuration for how an endpoint performs asynchronous
+    # inference.
+    #
+    # @note When making an API call, you may pass AsyncInferenceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         client_config: {
+    #           max_concurrent_invocations_per_instance: 1,
+    #         },
+    #         output_config: { # required
+    #           kms_key_id: "KmsKeyId",
+    #           s3_output_path: "DestinationS3Uri", # required
+    #           notification_config: {
+    #             success_topic: "SnsTopicArn",
+    #             error_topic: "SnsTopicArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_config
+    #   Configures the behavior of the client used by Amazon SageMaker to
+    #   interact with the model container during asynchronous inference.
+    #   @return [Types::AsyncInferenceClientConfig]
+    #
+    # @!attribute [rw] output_config
+    #   Specifies the configuration for asynchronous inference invocation
+    #   outputs.
+    #   @return [Types::AsyncInferenceOutputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceConfig AWS API Documentation
+    #
+    class AsyncInferenceConfig < Struct.new(
+      :client_config,
+      :output_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for notifications of inference results for
+    # asynchronous inference.
+    #
+    # @note When making an API call, you may pass AsyncInferenceNotificationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         success_topic: "SnsTopicArn",
+    #         error_topic: "SnsTopicArn",
+    #       }
+    #
+    # @!attribute [rw] success_topic
+    #   Amazon SNS topic to post a notification to when inference completes
+    #   successfully. If no topic is provided, no notification is sent on
+    #   success.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_topic
+    #   Amazon SNS topic to post a notification to when inference fails. If
+    #   no topic is provided, no notification is sent on failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceNotificationConfig AWS API Documentation
+    #
+    class AsyncInferenceNotificationConfig < Struct.new(
+      :success_topic,
+      :error_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for asynchronous inference invocation
+    # outputs.
+    #
+    # @note When making an API call, you may pass AsyncInferenceOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "KmsKeyId",
+    #         s3_output_path: "DestinationS3Uri", # required
+    #         notification_config: {
+    #           success_topic: "SnsTopicArn",
+    #           error_topic: "SnsTopicArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services Key Management Service (Amazon Web Services
+    #   KMS) key that Amazon SageMaker uses to encrypt the asynchronous
+    #   inference output in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_path
+    #   The Amazon S3 location to upload inference responses to.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_config
+    #   Specifies the configuration for notifications of inference results
+    #   for asynchronous inference.
+    #   @return [Types::AsyncInferenceNotificationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceOutputConfig AWS API Documentation
+    #
+    class AsyncInferenceOutputConfig < Struct.new(
+      :kms_key_id,
+      :s3_output_path,
+      :notification_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for Athena Dataset Definition input.
     #
     # @note When making an API call, you may pass AthenaDatasetDefinition
@@ -4753,6 +4887,19 @@ module Aws::SageMaker
     #           },
     #         ],
     #         kms_key_id: "KmsKeyId",
+    #         async_inference_config: {
+    #           client_config: {
+    #             max_concurrent_invocations_per_instance: 1,
+    #           },
+    #           output_config: { # required
+    #             kms_key_id: "KmsKeyId",
+    #             s3_output_path: "DestinationS3Uri", # required
+    #             notification_config: {
+    #               success_topic: "SnsTopicArn",
+    #               error_topic: "SnsTopicArn",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_config_name
@@ -4827,6 +4974,16 @@ module Aws::SageMaker
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
+    # @!attribute [rw] async_inference_config
+    #   Specifies configuration for how an endpoint performs asynchronous
+    #   inference. This is a required field in order for your Endpoint to be
+    #   invoked using [ `InvokeEndpointAsync` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html
+    #   @return [Types::AsyncInferenceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
     #
     class CreateEndpointConfigInput < Struct.new(
@@ -4834,7 +4991,8 @@ module Aws::SageMaker
       :production_variants,
       :data_capture_config,
       :tags,
-      :kms_key_id)
+      :kms_key_id,
+      :async_inference_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7108,7 +7266,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
     #         subnet_id: "SubnetId",
     #         security_group_ids: ["SecurityGroupId"],
     #         role_arn: "RoleArn", # required
@@ -7126,6 +7284,7 @@ module Aws::SageMaker
     #         default_code_repository: "CodeRepositoryNameOrUrl",
     #         additional_code_repositories: ["CodeRepositoryNameOrUrl"],
     #         root_access: "Enabled", # accepts Enabled, Disabled
+    #         platform_identifier: "PlatformIdentifier",
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -7275,6 +7434,11 @@ module Aws::SageMaker
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] platform_identifier
+    #   The platform identifier of the notebook instance runtime
+    #   environment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
     #
     class CreateNotebookInstanceInput < Struct.new(
@@ -7291,7 +7455,8 @@ module Aws::SageMaker
       :accelerator_types,
       :default_code_repository,
       :additional_code_repositories,
-      :root_access)
+      :root_access,
+      :platform_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11956,6 +12121,15 @@ module Aws::SageMaker
     #   A timestamp that shows when the endpoint configuration was created.
     #   @return [Time]
     #
+    # @!attribute [rw] async_inference_config
+    #   Returns the description of an endpoint configuration created using
+    #   the [ `CreateEndpointConfig` ][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
+    #   @return [Types::AsyncInferenceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput AWS API Documentation
     #
     class DescribeEndpointConfigOutput < Struct.new(
@@ -11964,7 +12138,8 @@ module Aws::SageMaker
       :production_variants,
       :data_capture_config,
       :kms_key_id,
-      :creation_time)
+      :creation_time,
+      :async_inference_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12061,6 +12236,15 @@ module Aws::SageMaker
     #   The most recent deployment configuration for the endpoint.
     #   @return [Types::DeploymentConfig]
     #
+    # @!attribute [rw] async_inference_config
+    #   Returns the description of an endpoint configuration created using
+    #   the [ `CreateEndpointConfig` ][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
+    #   @return [Types::AsyncInferenceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput AWS API Documentation
     #
     class DescribeEndpointOutput < Struct.new(
@@ -12073,7 +12257,8 @@ module Aws::SageMaker
       :failure_reason,
       :creation_time,
       :last_modified_time,
-      :last_deployment_config)
+      :last_deployment_config,
+      :async_inference_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13699,6 +13884,11 @@ module Aws::SageMaker
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] platform_identifier
+    #   The platform identifier of the notebook instance runtime
+    #   environment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput AWS API Documentation
     #
     class DescribeNotebookInstanceOutput < Struct.new(
@@ -13721,7 +13911,8 @@ module Aws::SageMaker
       :accelerator_types,
       :default_code_repository,
       :additional_code_repositories,
-      :root_access)
+      :root_access,
+      :platform_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27291,8 +27482,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configures SNS notifications of available or expiring work items for
-    # work teams.
+    # Configures Amazon SNS notifications of available or expiring work
+    # items for work teams.
     #
     # @note When making an API call, you may pass NotificationConfiguration
     #   data as a hash:
@@ -27302,7 +27493,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] notification_topic_arn
-    #   The ARN for the SNS topic to which notifications should be
+    #   The ARN for the Amazon SNS topic to which notifications should be
     #   published.
     #   @return [String]
     #
@@ -35085,7 +35276,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
     #         role_arn: "RoleArn",
     #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
     #         disassociate_lifecycle_config: false,

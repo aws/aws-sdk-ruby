@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2021-08-18)
+------------------
+
+* Feature - Amazon SageMaker now supports Asynchronous Inference endpoints. Adds PlatformIdentifier field that allows Notebook Instance creation with different platform selections. Increases the maximum number of containers in multi-container endpoints to 15. Adds more instance types to InstanceType field.
+
 1.96.0 (2021-08-12)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2021-08-18)
+------------------
+
+* Feature - CodeBuild now allows you to make the build results for your build projects available to the public without requiring access to an AWS account.
+
 1.78.0 (2021-08-16)
 ------------------
 

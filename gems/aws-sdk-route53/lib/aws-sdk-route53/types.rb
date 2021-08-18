@@ -3518,7 +3518,7 @@ module Aws::Route53
     #   53 substitutes the value of `IPAddress` in the `Host` header in each
     #   of the preceding cases.
     #
-    #   <b>If you don't specify a value for <code>IPAddress</code> </b>\:
+    #   **If you don't specify a value for** `IPAddress`\:
     #
     #   Route 53 sends a DNS request to the domain that you specify for
     #   `FullyQualifiedDomainName` at the interval that you specify for
