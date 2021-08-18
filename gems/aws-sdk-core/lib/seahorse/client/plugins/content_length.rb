@@ -12,7 +12,9 @@ module Seahorse
             # If it's an IO object and not a File / String / String IO
             if context.http_request.body.respond_to?(:size)
               length = context.http_request.body.size
-              context.http_request.headers['Content-Length'] = length
+              if length > 0
+                context.http_request.headers['Content-Length'] = length
+              end
             end
             @handler.call(context)
           end

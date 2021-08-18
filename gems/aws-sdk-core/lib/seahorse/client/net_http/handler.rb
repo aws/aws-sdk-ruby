@@ -147,7 +147,12 @@ module Seahorse
         def build_net_request(request)
           request_class = net_http_request_class(request)
           req = request_class.new(request.endpoint.request_uri, headers(request))
-          req.body_stream = request.body
+          # Net::HTTP adds a default Content-Type when a body is present.
+          # Set the body stream when it has an unknown size or when it is > 0.
+          if !request.body.respond_to?(:size) ||
+             (request.body.respond_to?(:size) && request.body.size > 0)
+            req.body_stream = request.body
+          end
           req
         end
 
@@ -166,14 +171,13 @@ module Seahorse
         # @return [Hash] Returns a vanilla hash of headers to send with the
         #   HTTP request.
         def headers(request)
-          # Net::HTTP adds default headers for content-type to POSTs (1.8.7+)
-          # and accept-encoding (2.0.0+). Setting a default empty value defeats
-          # this.
+          # Net::HTTP adds a default header for accept-encoding (2.0.0+).
+          # Setting a default empty value defeats this.
           #
-          # Removing these are necessary for most services to not break request
+          # Removing this is necessary for most services to not break request
           # signatures as well as dynamodb crc32 checks (these fail if the
           # response is gzipped).
-          headers = { 'content-type' => '', 'accept-encoding' => '' }
+          headers = { 'accept-encoding' => '' }
           request.headers.each_pair do |key, value|
             headers[key] = value
           end

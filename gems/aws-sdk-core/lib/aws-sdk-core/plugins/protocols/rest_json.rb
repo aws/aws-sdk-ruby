@@ -15,8 +15,16 @@ module Aws
 
           private
 
+          # operation is modeled for body when it is modeled for a payload
+          # either with payload trait or normal members.
           def modeled_body?(context)
-            context.operation.input.shape.members.any?
+            rules = context.operation.input
+            return true if rules[:payload]
+            rules.shape.members.each do |member|
+              _name, shape = member
+              return true if shape.location.nil?
+            end
+            false
           end
         end
 

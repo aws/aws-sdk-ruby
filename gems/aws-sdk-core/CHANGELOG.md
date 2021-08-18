@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Issue - Fix an issue where Rest JSON services do not have a `Content-Type` header.
 
+* Issue - Only send `Content-Length` when the body size is greater than 0.
+
 3.119.0 (2021-07-30)
 ------------------
 

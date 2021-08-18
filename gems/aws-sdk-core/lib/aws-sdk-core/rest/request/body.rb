@@ -18,14 +18,25 @@ module Aws
         # @param [Hash] params
         def apply(http_req, params)
           body = build_body(params)
-          # for rest-json, ensure we send at least an empty object for
-          if body.nil? && @serializer_class == Json::Builder && @rules[:payload]
-            body = Json.dump({})
+          # for rest-json, ensure we send at least an empty object
+          if body.nil? && @serializer_class == Json::Builder && modeled_body?
+            body = '{}'
           end
           http_req.body = body
         end
 
         private
+
+        # operation is modeled for body when it is modeled for a payload
+        # either with payload trait or normal members.
+        def modeled_body?
+          return true if @rules[:payload]
+          @rules.shape.members.each do |member|
+            _name, shape = member
+            return true if shape.location.nil?
+          end
+          false
+        end
 
         def build_body(params)
           if streaming?
