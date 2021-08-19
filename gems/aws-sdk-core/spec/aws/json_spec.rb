@@ -33,19 +33,20 @@ module Aws
         end
       end
 
-      context 'when using oj gem' do
-        include_examples 'loads JSON correctly'
+      if defined?(Oj)
+        context 'when using oj gem' do
+          it 'uses the oj engine adapter' do
+            expect(Aws::Json::ENGINE).to be(Aws::Json::OjEngine)
+          end
+
+          include_examples 'loads JSON correctly'
+        end
       end
 
       context 'when using bundled json' do
         before do
-          engine, load_options, dump_options, errors =
-            described_class.send(:json_engine)
-
+          engine = Aws::Json::JSONEngine
           stub_const('Aws::Json::ENGINE', engine)
-          stub_const('Aws::Json::ENGINE_LOAD_OPTIONS', load_options)
-          stub_const('Aws::Json::ENGINE_DUMP_OPTIONS', dump_options)
-          stub_const('Aws::Json::ENGINE_ERRORS', errors)
         end
 
         include_examples 'loads JSON correctly'
