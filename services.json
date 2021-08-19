@@ -601,6 +601,9 @@
   "MediaTailor": {
     "models": "mediatailor/2018-04-23"
   },
+  "MemoryDB": {
+    "models": "memorydb/2021-01-01"
+  },
   "Mgn": {
     "models": "mgn/2020-02-26"
   },

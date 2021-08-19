@@ -405,6 +405,7 @@ module Aws
             'MediaStore' => 'mediastore',
             'MediaStoreData' => 'data.mediastore',
             'MediaTailor' => 'api.mediatailor',
+            'MemoryDB' => 'memory-db',
             'Mgn' => 'mgn',
             'MigrationHub' => 'mgh',
             'MigrationHubConfig' => 'migrationhub-config',

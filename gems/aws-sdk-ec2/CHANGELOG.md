@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.256.0 (2021-08-19)
+------------------
+
+* Feature - The ImportImage API now supports the ability to create AMIs with AWS-managed licenses for Microsoft SQL Server for both Windows and Linux.
+
 1.255.0 (2021-08-17)
 ------------------
 

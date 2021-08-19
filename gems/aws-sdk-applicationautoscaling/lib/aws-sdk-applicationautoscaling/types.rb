@@ -47,9 +47,9 @@ module Aws::ApplicationAutoScaling
     # Represents a CloudWatch metric of your choosing for a target tracking
     # scaling policy to use with Application Auto Scaling.
     #
-    # For information about the available metrics for a service, see [AWS
-    # Services That Publish CloudWatch Metrics][1] in the *Amazon CloudWatch
-    # User Guide*.
+    # For information about the available metrics for a service, see [Amazon
+    # Web Services Services That Publish CloudWatch Metrics][1] in the
+    # *Amazon CloudWatch User Guide*.
     #
     # To create your customized metric specification:
     #
@@ -130,9 +130,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #       }
     #
     # @!attribute [rw] policy_name
@@ -140,9 +140,9 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -207,6 +207,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -219,11 +223,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -269,6 +273,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -290,16 +300,16 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] scheduled_action_name
@@ -368,6 +378,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -380,11 +394,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -430,6 +444,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -451,15 +471,15 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -524,6 +544,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -537,11 +561,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -587,6 +611,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -607,17 +637,17 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_ids
@@ -682,6 +712,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -696,11 +730,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -746,6 +780,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -797,17 +837,17 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -872,6 +912,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -885,11 +929,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -935,6 +979,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -987,9 +1037,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -999,9 +1049,9 @@ module Aws::ApplicationAutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1066,6 +1116,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1079,11 +1133,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -1129,6 +1183,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1182,9 +1242,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -1194,9 +1254,9 @@ module Aws::ApplicationAutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1261,6 +1321,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1274,11 +1338,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -1324,6 +1388,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1485,7 +1555,7 @@ module Aws::ApplicationAutoScaling
     # Represents a predefined metric for a target tracking scaling policy to
     # use with Application Auto Scaling.
     #
-    # Only the AWS services that you're using send metrics to Amazon
+    # Only the Amazon Web Services that you're using send metrics to Amazon
     # CloudWatch. To determine whether a desired metric already exists by
     # looking up its namespace and dimension using the CloudWatch metrics
     # dashboard in the console, follow the procedure in [Building dashboards
@@ -1499,7 +1569,7 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage
     #         resource_label: "ResourceLabel",
     #       }
     #
@@ -1516,18 +1586,18 @@ module Aws::ApplicationAutoScaling
     #
     #   You create the resource label by appending the final portion of the
     #   load balancer ARN and the final portion of the target group ARN into
-    #   a single value, separated by a forward slash (/). The format is
-    #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
-    #   where:
+    #   a single value, separated by a forward slash (/). The format of the
+    #   resource label is:
+    #
+    #   `app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff`.
+    #
+    #   Where:
     #
     #   * app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the
     #     final portion of the load balancer ARN
     #
     #   * targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is
     #     the final portion of the target group ARN.
-    #
-    #   This is an example:
-    #   app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
     #
     #   To find the ARN for an Application Load Balancer, use the
     #   [DescribeLoadBalancers][1] API operation. To find the ARN for the
@@ -1553,9 +1623,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -1573,7 +1643,7 @@ module Aws::ApplicationAutoScaling
     #         target_tracking_scaling_policy_configuration: {
     #           target_value: 1.0, # required
     #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization
+    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage
     #             resource_label: "ResourceLabel",
     #           },
     #           customized_metric_specification: {
@@ -1599,9 +1669,9 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -1666,6 +1736,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1678,11 +1752,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -1728,6 +1802,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1739,7 +1819,8 @@ module Aws::ApplicationAutoScaling
     #   `TargetTrackingScaling`—Not supported for Amazon EMR
     #
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
-    #   Amazon Keyspaces (for Apache Cassandra), or Amazon MSK.
+    #   Amazon Keyspaces (for Apache Cassandra), Amazon MSK, or Amazon
+    #   ElastiCache for Redis.
     #
     #   For more information, see [Target tracking scaling policies][1] and
     #   [Step scaling policies][2] in the *Application Auto Scaling User
@@ -1802,12 +1883,12 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         schedule: "ResourceIdMaxLen1600",
     #         timezone: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1817,9 +1898,9 @@ module Aws::ApplicationAutoScaling
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -1937,6 +2018,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1949,11 +2034,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -1999,6 +2084,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2042,9 +2133,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
@@ -2056,9 +2147,9 @@ module Aws::ApplicationAutoScaling
     #       }
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource. For a
-    #   resource provided by your own application or service, use
-    #   `custom-resource` instead.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource. For a resource provided by your own application or
+    #   service, use `custom-resource` instead.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2124,6 +2215,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2137,11 +2232,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2187,6 +2282,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2289,8 +2390,8 @@ module Aws::ApplicationAutoScaling
     # Represents a scalable target.
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource, or a
-    #   `custom-resource`.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource, or a `custom-resource`.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2355,6 +2456,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2368,11 +2473,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2418,6 +2523,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2509,8 +2620,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource, or a
-    #   `custom-resource`.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource, or a `custom-resource`.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2575,6 +2686,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2587,11 +2702,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2637,6 +2752,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2705,8 +2826,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource, or a
-    #   `custom-resource`.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource, or a `custom-resource`.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2771,6 +2892,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2783,11 +2908,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2833,6 +2958,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -2883,8 +3014,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] service_namespace
-    #   The namespace of the AWS service that provides the resource, or a
-    #   `custom-resource`.
+    #   The namespace of the Amazon Web Services service that provides the
+    #   resource, or a `custom-resource`.
     #   @return [String]
     #
     # @!attribute [rw] schedule
@@ -2988,6 +3119,10 @@ module Aws::ApplicationAutoScaling
     #     specified using the cluster ARN. Example:
     #     `arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5`.
     #
+    #   * Amazon ElastiCache replication group - The resource type is
+    #     `replication-group` and the unique identifier is the replication
+    #     group name. Example: `replication-group/mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -3000,11 +3135,11 @@ module Aws::ApplicationAutoScaling
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
     #     service.
     #
-    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
-    #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
+    #     Spot Fleet request.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -3050,6 +3185,12 @@ module Aws::ApplicationAutoScaling
     #
     #   * `kafka:broker-storage:VolumeSize` - The provisioned volume size
     #     (in GiB) for brokers in an Amazon MSK cluster.
+    #
+    #   * `elasticache:replication-group:NodeGroups` - The number of node
+    #     groups for an Amazon ElastiCache replication group.
+    #
+    #   * `elasticache:replication-group:Replicas` - The number of replicas
+    #     per node group for an Amazon ElastiCache replication group.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3251,7 +3392,8 @@ module Aws::ApplicationAutoScaling
     #   out the target immediately. In this case, the cooldown period for
     #   the scale-in activity stops and doesn't complete.
     #
-    #   Application Auto Scaling provides a default value of 300 for the
+    #   Application Auto Scaling provides a default value of 600 for Amazon
+    #   ElastiCache replication groups and a default value of 300 for the
     #   following scalable targets:
     #
     #   * ECS services
@@ -3353,7 +3495,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         target_value: 1.0, # required
     #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization
+    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage
     #           resource_label: "ResourceLabel",
     #         },
     #         customized_metric_specification: {
@@ -3407,7 +3549,8 @@ module Aws::ApplicationAutoScaling
     #   scale-out activity is calculated as part of the desired capacity for
     #   the next scale-out activity.
     #
-    #   Application Auto Scaling provides a default value of 300 for the
+    #   Application Auto Scaling provides a default value of 600 for Amazon
+    #   ElastiCache replication groups and a default value of 300 for the
     #   following scalable targets:
     #
     #   * ECS services
@@ -3452,7 +3595,8 @@ module Aws::ApplicationAutoScaling
     #   out the target immediately. In this case, the scale-in cooldown
     #   period stops and doesn't complete.
     #
-    #   Application Auto Scaling provides a default value of 300 for the
+    #   Application Auto Scaling provides a default value of 600 for Amazon
+    #   ElastiCache replication groups and a default value of 300 for the
     #   following scalable targets:
     #
     #   * ECS services

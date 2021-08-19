@@ -11,15 +11,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-appflow/types'
-require_relative 'aws-sdk-appflow/client_api'
-require_relative 'aws-sdk-appflow/client'
-require_relative 'aws-sdk-appflow/errors'
-require_relative 'aws-sdk-appflow/resource'
-require_relative 'aws-sdk-appflow/customizations'
+require_relative 'aws-sdk-memorydb/types'
+require_relative 'aws-sdk-memorydb/client_api'
+require_relative 'aws-sdk-memorydb/client'
+require_relative 'aws-sdk-memorydb/errors'
+require_relative 'aws-sdk-memorydb/resource'
+require_relative 'aws-sdk-memorydb/customizations'
 
-# This module provides support for Amazon Appflow. This module is available in the
-# `aws-sdk-appflow` gem.
+# This module provides support for Amazon MemoryDB. This module is available in the
+# `aws-sdk-memorydb` gem.
 #
 # # Client
 #
@@ -27,27 +27,27 @@ require_relative 'aws-sdk-appflow/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
-#     appflow = Aws::Appflow::Client.new
-#     resp = appflow.create_connector_profile(params)
+#     memory_db = Aws::MemoryDB::Client.new
+#     resp = memory_db.batch_update_cluster(params)
 #
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Appflow are defined in the
+# Errors returned from Amazon MemoryDB are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::Appflow::Errors::ServiceError
-#       # rescues all Amazon Appflow API errors
+#     rescue Aws::MemoryDB::Errors::ServiceError
+#       # rescues all Amazon MemoryDB API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @!group service
-module Aws::Appflow
+module Aws::MemoryDB
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.0.0'
 
 end

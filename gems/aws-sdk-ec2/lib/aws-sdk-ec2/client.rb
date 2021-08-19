@@ -18372,6 +18372,7 @@ module Aws::EC2
     #   resp.import_image_tasks[0].tags[0].value #=> String
     #   resp.import_image_tasks[0].license_specifications #=> Array
     #   resp.import_image_tasks[0].license_specifications[0].license_configuration_arn #=> String
+    #   resp.import_image_tasks[0].usage_operation #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasks AWS API Documentation
@@ -31061,8 +31062,8 @@ module Aws::EC2
     #
     # @option params [required, Types::ExportTaskS3LocationRequest] :s3_export_location
     #   Information about the destination Amazon S3 bucket. The bucket must
-    #   exist and grant WRITE and READ\_ACP permissions to the AWS account
-    #   vm-import-export@amazon.com.
+    #   exist and grant WRITE and READ\_ACP permissions to the Amazon Web
+    #   Services account vm-import-export@amazon.com.
     #
     # @option params [String] :role_name
     #   The name of the role that grants VM Import/Export permission to export
@@ -32929,10 +32930,10 @@ module Aws::EC2
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination AMI of the imported image should be
-    #   encrypted. The default CMK for EBS is used unless you specify a
-    #   non-default AWS Key Management Service (AWS KMS) CMK using `KmsKeyId`.
-    #   For more information, see [Amazon EBS Encryption][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   encrypted. The default KMS key for EBS is used unless you specify a
+    #   non-default KMS key using `KmsKeyId`. For more information, see
+    #   [Amazon EBS Encryption][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
     #
     #
     #
@@ -32944,40 +32945,43 @@ module Aws::EC2
     #   Valid values: `xen`
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the symmetric AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK) to use when creating the encrypted AMI. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   An identifier for the symmetric KMS key to use when creating the
+    #   encrypted AMI. This parameter is only required if you want to use a
+    #   non-default KMS key; if this parameter is not specified, the default
+    #   KMS key for EBS is used. If a `KmsKeyId` is specified, the `Encrypted`
+    #   flag must also be set.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   The KMS key identifier may be provided in any of the following
+    #   formats:
     #
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     followed by the Region of the key, the Amazon Web Services account
+    #     ID of the key owner, the `alias` namespace, and then the key alias.
+    #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     followed by the Region of the key, the Amazon Web Services account
+    #     ID of the key owner, the `key` namespace, and then the key ID. For
+    #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
+    #     namespace, followed by the Region of the key, the Amazon Web
+    #     Services account ID of the key owner, the `alias` namespace, and
+    #     then the key alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   This action will eventually report failure.
+    #   Amazon Web Services parses `KmsKeyId` asynchronously, meaning that the
+    #   action you call may appear to complete even though you provided an
+    #   invalid identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the Region that the AMI is being
+    #   The specified KMS key must exist in the Region that the AMI is being
     #   copied to.
     #
-    #   Amazon EBS does not support asymmetric CMKs.
+    #   Amazon EBS does not support asymmetric KMS keys.
     #
     # @option params [String] :license_type
     #   The license type to be used for the Amazon Machine Image (AMI) after
@@ -32985,13 +32989,14 @@ module Aws::EC2
     #
     #   By default, we detect the source-system operating system (OS) and
     #   apply the appropriate license. Specify `AWS` to replace the
-    #   source-system license with an AWS license, if appropriate. Specify
-    #   `BYOL` to retain the source-system license, if appropriate.
+    #   source-system license with an Amazon Web Services license, if
+    #   appropriate. Specify `BYOL` to retain the source-system license, if
+    #   appropriate.
     #
     #   To use `BYOL`, you must have existing licenses with rights to use
-    #   these licenses in a third party cloud, such as AWS. For more
-    #   information, see [Prerequisites][1] in the VM Import/Export User
-    #   Guide.
+    #   these licenses in a third party cloud, such as Amazon Web Services.
+    #   For more information, see [Prerequisites][1] in the VM Import/Export
+    #   User Guide.
     #
     #
     #
@@ -33012,6 +33017,15 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the import image task during creation.
     #
+    # @option params [String] :usage_operation
+    #   The usage operation value. For more information, see [AMI billing
+    #   information fields][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
+    #
     # @return [Types::ImportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportImageResult#architecture #architecture} => String
@@ -33029,6 +33043,7 @@ module Aws::EC2
     #   * {Types::ImportImageResult#status_message #status_message} => String
     #   * {Types::ImportImageResult#license_specifications #license_specifications} => Array&lt;Types::ImportImageLicenseConfigurationResponse&gt;
     #   * {Types::ImportImageResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ImportImageResult#usage_operation #usage_operation} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -33078,6 +33093,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     usage_operation: "String",
     #   })
     #
     # @example Response structure
@@ -33111,6 +33127,7 @@ module Aws::EC2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.usage_operation #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImage AWS API Documentation
     #
@@ -33127,10 +33144,10 @@ module Aws::EC2
     # This API action supports only single-volume VMs. To import
     # multi-volume VMs, use ImportImage instead.
     #
-    # This API action is not supported by the AWS Command Line Interface
-    # (AWS CLI). For information about using the Amazon EC2 CLI, which is
-    # deprecated, see [Importing a VM to Amazon EC2][1] in the *Amazon EC2
-    # CLI Reference* PDF file.
+    # This API action is not supported by the Command Line Interface (CLI).
+    # For information about using the Amazon EC2 CLI, which is deprecated,
+    # see [Importing a VM to Amazon EC2][1] in the *Amazon EC2 CLI
+    # Reference* PDF file.
     #
     # For information about the import manifest referenced by this API
     # action, see [VM Import Manifest][2].
@@ -33354,50 +33371,53 @@ module Aws::EC2
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshot of the imported image
-    #   should be encrypted. The default CMK for EBS is used unless you
-    #   specify a non-default AWS Key Management Service (AWS KMS) CMK using
-    #   `KmsKeyId`. For more information, see [Amazon EBS Encryption][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   should be encrypted. The default KMS key for EBS is used unless you
+    #   specify a non-default KMS key using `KmsKeyId`. For more information,
+    #   see [Amazon EBS Encryption][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   An identifier for the symmetric AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK) to use when creating the encrypted snapshot.
-    #   This parameter is only required if you want to use a non-default CMK;
-    #   if this parameter is not specified, the default CMK for EBS is used.
-    #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   An identifier for the symmetric KMS key to use when creating the
+    #   encrypted snapshot. This parameter is only required if you want to use
+    #   a non-default KMS key; if this parameter is not specified, the default
+    #   KMS key for EBS is used. If a `KmsKeyId` is specified, the `Encrypted`
+    #   flag must also be set.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   The KMS key identifier may be provided in any of the following
+    #   formats:
     #
     #   * Key ID
     #
     #   * Key alias. The alias ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `alias` namespace, and then the CMK alias. For example,
+    #     followed by the Region of the key, the Amazon Web Services account
+    #     ID of the key owner, the `alias` namespace, and then the key alias.
+    #     For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the Region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     followed by the Region of the key, the Amazon Web Services account
+    #     ID of the key owner, the `key` namespace, and then the key ID. For
+    #     example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
     #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the Region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
+    #     namespace, followed by the Region of the key, the Amazon Web
+    #     Services account ID of the key owner, the `alias` namespace, and
+    #     then the key alias. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   This action will eventually report failure.
+    #   Amazon Web Services parses `KmsKeyId` asynchronously, meaning that the
+    #   action you call may appear to complete even though you provided an
+    #   invalid identifier. This action will eventually report failure.
     #
-    #   The specified CMK must exist in the Region that the snapshot is being
-    #   copied to.
+    #   The specified KMS key must exist in the Region that the snapshot is
+    #   being copied to.
     #
-    #   Amazon EBS does not support asymmetric CMKs.
+    #   Amazon EBS does not support asymmetric KMS keys.
     #
     # @option params [String] :role_name
     #   The name of the role to use when not using the default role,
@@ -33486,10 +33506,10 @@ module Aws::EC2
     # multi-volume VMs, use ImportImage instead. To import a disk to a
     # snapshot, use ImportSnapshot instead.
     #
-    # This API action is not supported by the AWS Command Line Interface
-    # (AWS CLI). For information about using the Amazon EC2 CLI, which is
-    # deprecated, see [Importing Disks to Amazon EBS][1] in the *Amazon EC2
-    # CLI Reference* PDF file.
+    # This API action is not supported by the Command Line Interface (CLI).
+    # For information about using the Amazon EC2 CLI, which is deprecated,
+    # see [Importing Disks to Amazon EBS][1] in the *Amazon EC2 CLI
+    # Reference* PDF file.
     #
     # For information about the import manifest referenced by this API
     # action, see [VM Import Manifest][2].
@@ -43562,7 +43582,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.255.0'
+      context[:gem_version] = '1.256.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

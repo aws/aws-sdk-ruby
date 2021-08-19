@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.109.0 (2021-08-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-memorydb` gem.
+
 3.108.0 (2021-08-11)
 ------------------
 
