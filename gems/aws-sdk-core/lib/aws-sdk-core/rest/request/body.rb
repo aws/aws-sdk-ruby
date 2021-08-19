@@ -19,7 +19,9 @@ module Aws
         def apply(http_req, params)
           body = build_body(params)
           # for rest-json, ensure we send at least an empty object
-          if body.nil? && @serializer_class == Json::Builder && modeled_body?
+          # don't send an empty object for streaming? case.
+          if body.nil? && @serializer_class == Json::Builder &&
+             modeled_body? && !streaming?
             body = '{}'
           end
           http_req.body = body

@@ -7,32 +7,21 @@ module Aws
 
         class ContentTypeHandler < Seahorse::Client::Handler
           def call(context)
-            if modeled_body?(context)
+            body = context.http_request.body
+            # Rest::Handler will set a default JSON body, so size can be checked
+            # if this handler is run after serialization.
+            if body.respond_to?(:size) && body.size > 0
               context.http_request.headers['Content-Type'] = 'application/json'
             end
             @handler.call(context)
           end
-
-          private
-
-          # operation is modeled for body when it is modeled for a payload
-          # either with payload trait or normal members.
-          def modeled_body?(context)
-            rules = context.operation.input
-            return true if rules[:payload]
-            rules.shape.members.each do |member|
-              _name, shape = member
-              return true if shape.location.nil?
-            end
-            false
-          end
         end
 
         handler(Rest::Handler)
-        handler(ContentTypeHandler)
+        handler(ContentTypeHandler, priority: 30)
         handler(Json::ErrorHandler, step: :sign)
-
       end
+
     end
   end
 end
