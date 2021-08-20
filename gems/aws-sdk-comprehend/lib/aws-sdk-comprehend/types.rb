@@ -1841,6 +1841,19 @@ module Aws::Comprehend
     #   The identifier assigned to the document classification job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the document classification job.
+    #   It is a unique, fully qualified identifier for the job. It includes
+    #   the AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:document-classification-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name that you assigned to the document classification job.
     #   @return [String]
@@ -1910,6 +1923,7 @@ module Aws::Comprehend
     #
     class DocumentClassificationJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,
@@ -2331,6 +2345,19 @@ module Aws::Comprehend
     #   The identifier assigned to the dominant language detection job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the dominant language detection
+    #   job. It is a unique, fully qualified identifier for the job. It
+    #   includes the AWS account, Region, and the job ID. The format of the
+    #   ARN is as follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:dominant-language-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name that you assigned to the dominant language detection job.
     #   @return [String]
@@ -2395,6 +2422,7 @@ module Aws::Comprehend
     #
     class DominantLanguageDetectionJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,
@@ -2570,6 +2598,19 @@ module Aws::Comprehend
     #   The identifier assigned to the entities detection job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the entities detection job. It is
+    #   a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:entities-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name that you assigned the entities detection job.
     #   @return [String]
@@ -2642,6 +2683,7 @@ module Aws::Comprehend
     #
     class EntitiesDetectionJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,
@@ -3250,6 +3292,19 @@ module Aws::Comprehend
     #   The identifier assigned to the events detection job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the events detection job. It is a
+    #   unique, fully qualified identifier for the job. It includes the AWS
+    #   account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:events-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name you assigned the events detection job.
     #   @return [String]
@@ -3298,6 +3353,7 @@ module Aws::Comprehend
     #
     class EventsDetectionJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,
@@ -3500,6 +3556,19 @@ module Aws::Comprehend
     #   The identifier assigned to the key phrases detection job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the key phrases detection job. It
+    #   is a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:key-phrases-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name that you assigned the key phrases detection job.
     #   @return [String]
@@ -3567,6 +3636,7 @@ module Aws::Comprehend
     #
     class KeyPhrasesDetectionJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,
@@ -4376,6 +4446,19 @@ module Aws::Comprehend
     #   The identifier assigned to the PII entities detection job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the PII entities detection job. It
+    #   is a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:pii-entities-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name that you assigned the PII entities detection job.
     #   @return [String]
@@ -4433,6 +4516,7 @@ module Aws::Comprehend
     #
     class PiiEntitiesDetectionJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,
@@ -4654,6 +4738,19 @@ module Aws::Comprehend
     #   The identifier assigned to the sentiment detection job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the sentiment detection job. It is
+    #   a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:sentiment-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name that you assigned to the sentiment detection job
     #   @return [String]
@@ -4721,6 +4818,7 @@ module Aws::Comprehend
     #
     class SentimentDetectionJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,
@@ -4791,6 +4889,12 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] job_name
@@ -4846,6 +4950,13 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the document classification job. A tag is
+    #   a key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJobRequest AWS API Documentation
     #
     class StartDocumentClassificationJobRequest < Struct.new(
@@ -4856,7 +4967,8 @@ module Aws::Comprehend
       :data_access_role_arn,
       :client_request_token,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4864,6 +4976,19 @@ module Aws::Comprehend
     # @!attribute [rw] job_id
     #   The identifier generated for the job. To get the status of the job,
     #   use this identifier with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the document classification job.
+    #   It is a unique, fully qualified identifier for the job. It includes
+    #   the AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:document-classification-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -4888,6 +5013,7 @@ module Aws::Comprehend
     #
     class StartDocumentClassificationJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -4913,6 +5039,12 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -4968,6 +5100,14 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the dominant language detection job. A
+    #   tag is a key-value pair that adds metadata to a resource used by
+    #   Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDominantLanguageDetectionJobRequest AWS API Documentation
     #
     class StartDominantLanguageDetectionJobRequest < Struct.new(
@@ -4977,7 +5117,8 @@ module Aws::Comprehend
       :job_name,
       :client_request_token,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4985,6 +5126,19 @@ module Aws::Comprehend
     # @!attribute [rw] job_id
     #   The identifier generated for the job. To get the status of a job,
     #   use this identifier with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the dominant language detection
+    #   job. It is a unique, fully qualified identifier for the job. It
+    #   includes the AWS account, Region, and the job ID. The format of the
+    #   ARN is as follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:dominant-language-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -5006,6 +5160,7 @@ module Aws::Comprehend
     #
     class StartDominantLanguageDetectionJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -5033,6 +5188,12 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -5102,6 +5263,13 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the entities detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJobRequest AWS API Documentation
     #
     class StartEntitiesDetectionJobRequest < Struct.new(
@@ -5113,7 +5281,8 @@ module Aws::Comprehend
       :language_code,
       :client_request_token,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5121,6 +5290,19 @@ module Aws::Comprehend
     # @!attribute [rw] job_id
     #   The identifier generated for the job. To get the status of job, use
     #   this identifier with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the entities detection job. It is
+    #   a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:entities-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -5147,6 +5329,7 @@ module Aws::Comprehend
     #
     class StartEntitiesDetectionJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -5169,6 +5352,12 @@ module Aws::Comprehend
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
     #         target_event_types: ["EventTypeString"], # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -5205,6 +5394,13 @@ module Aws::Comprehend
     #   The types of events to detect in the input documents.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the events detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEventsDetectionJobRequest AWS API Documentation
     #
     class StartEventsDetectionJobRequest < Struct.new(
@@ -5214,7 +5410,8 @@ module Aws::Comprehend
       :job_name,
       :language_code,
       :client_request_token,
-      :target_event_types)
+      :target_event_types,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5222,6 +5419,19 @@ module Aws::Comprehend
     # @!attribute [rw] job_id
     #   An unique identifier for the request. If you don't set the client
     #   request token, Amazon Comprehend generates one.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the events detection job. It is a
+    #   unique, fully qualified identifier for the job. It includes the AWS
+    #   account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:events-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -5232,6 +5442,7 @@ module Aws::Comprehend
     #
     class StartEventsDetectionJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -5258,6 +5469,12 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -5319,6 +5536,13 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the key phrases detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartKeyPhrasesDetectionJobRequest AWS API Documentation
     #
     class StartKeyPhrasesDetectionJobRequest < Struct.new(
@@ -5329,7 +5553,8 @@ module Aws::Comprehend
       :language_code,
       :client_request_token,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5337,6 +5562,19 @@ module Aws::Comprehend
     # @!attribute [rw] job_id
     #   The identifier generated for the job. To get the status of a job,
     #   use this identifier with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the key phrase detection job. It
+    #   is a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:key-phrases-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -5358,6 +5596,7 @@ module Aws::Comprehend
     #
     class StartKeyPhrasesDetectionJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -5385,6 +5624,12 @@ module Aws::Comprehend
     #         job_name: "JobName",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #         client_request_token: "ClientRequestTokenString",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -5431,6 +5676,13 @@ module Aws::Comprehend
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the PII entities detection job. A tag is
+    #   a key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartPiiEntitiesDetectionJobRequest AWS API Documentation
     #
     class StartPiiEntitiesDetectionJobRequest < Struct.new(
@@ -5441,13 +5693,27 @@ module Aws::Comprehend
       :data_access_role_arn,
       :job_name,
       :language_code,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] job_id
     #   The identifier generated for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the PII entity detection job. It
+    #   is a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:pii-entities-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -5458,6 +5724,7 @@ module Aws::Comprehend
     #
     class StartPiiEntitiesDetectionJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -5484,6 +5751,12 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -5545,6 +5818,13 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the sentiment detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJobRequest AWS API Documentation
     #
     class StartSentimentDetectionJobRequest < Struct.new(
@@ -5555,7 +5835,8 @@ module Aws::Comprehend
       :language_code,
       :client_request_token,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5563,6 +5844,19 @@ module Aws::Comprehend
     # @!attribute [rw] job_id
     #   The identifier generated for the job. To get the status of a job,
     #   use this identifier with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the sentiment detection job. It is
+    #   a unique, fully qualified identifier for the job. It includes the
+    #   AWS account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:sentiment-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -5584,6 +5878,7 @@ module Aws::Comprehend
     #
     class StartSentimentDetectionJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -5610,6 +5905,12 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] input_data_config
@@ -5672,6 +5973,13 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the topics detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJobRequest AWS API Documentation
     #
     class StartTopicsDetectionJobRequest < Struct.new(
@@ -5682,7 +5990,8 @@ module Aws::Comprehend
       :number_of_topics,
       :client_request_token,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5690,6 +5999,19 @@ module Aws::Comprehend
     # @!attribute [rw] job_id
     #   The identifier generated for the job. To get the status of the job,
     #   use this identifier with the `DescribeTopicDetectionJob` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the topics detection job. It is a
+    #   unique, fully qualified identifier for the job. It includes the AWS
+    #   account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:topics-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -5711,6 +6033,7 @@ module Aws::Comprehend
     #
     class StartTopicsDetectionJobResponse < Struct.new(
       :job_id,
+      :job_arn,
       :job_status)
       SENSITIVE = []
       include Aws::Structure
@@ -6210,6 +6533,19 @@ module Aws::Comprehend
     #   The identifier assigned to the topic detection job.
     #   @return [String]
     #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the topics detection job. It is a
+    #   unique, fully qualified identifier for the job. It includes the AWS
+    #   account, Region, and the job ID. The format of the ARN is as
+    #   follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:topics-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
     # @!attribute [rw] job_name
     #   The name of the topic detection job.
     #   @return [String]
@@ -6279,6 +6615,7 @@ module Aws::Comprehend
     #
     class TopicsDetectionJobProperties < Struct.new(
       :job_id,
+      :job_arn,
       :job_name,
       :job_status,
       :message,

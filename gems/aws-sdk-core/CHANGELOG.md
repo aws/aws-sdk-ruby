@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.119.1 (2021-08-20)
+------------------
+
 * Issue - Refactored `Aws::Json::Engine` to remove dead code and replaced usage of `JSON.load` with `JSON.parse`.
 
 3.119.0 (2021-07-30)

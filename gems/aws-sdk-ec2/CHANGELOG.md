@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.257.0 (2021-08-20)
+------------------
+
+* Feature - encryptionInTransitSupported added to DescribeInstanceTypes API
+
 1.256.0 (2021-08-19)
 ------------------
 

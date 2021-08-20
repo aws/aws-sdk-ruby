@@ -350,6 +350,7 @@ module Aws::EKS
 
     DeleteAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     DeleteAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "addonName"))
+    DeleteAddonRequest.add_member(:preserve, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "preserve"))
     DeleteAddonRequest.struct_class = Types::DeleteAddonRequest
 
     DeleteAddonResponse.add_member(:addon, Shapes::ShapeRef.new(shape: Addon, location_name: "addon"))
