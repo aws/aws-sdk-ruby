@@ -15,20 +15,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [1.9, '2.0', 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, '3.0', jruby-9.1, jruby-9.2]
+        ruby: [2.3, 2.4, 2.5, 2.6, 2.7, '3.0', jruby-9.1, jruby-9.2]
         env: [PURE_RUBY, KITCHEN_SINK]
         exclude:
           - ruby: jruby-9.1
             env: KITCHEN_SINK
           - ruby: jruby-9.2
             env: KITCHEN_SINK
-        include:
-          - ruby: 2.3
-            env: OLD_OJ=1
-          - ruby: 2.3
-            env: OLD_OX=1
-          - ruby: 2.3
-            env: NO_H2=1
 
     steps:
       - name: Setup Ruby
