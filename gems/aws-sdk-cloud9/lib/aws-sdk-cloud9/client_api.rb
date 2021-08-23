@@ -56,10 +56,12 @@ module Aws::Cloud9
     ListEnvironmentsResult = Shapes::StructureShape.new(name: 'ListEnvironmentsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ManagedCredentialsAction = Shapes::StringShape.new(name: 'ManagedCredentialsAction')
     ManagedCredentialsStatus = Shapes::StringShape.new(name: 'ManagedCredentialsStatus')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberPermissions = Shapes::StringShape.new(name: 'MemberPermissions')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     Permissions = Shapes::StringShape.new(name: 'Permissions')
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
     String = Shapes::StringShape.new(name: 'String')
@@ -99,6 +101,7 @@ module Aws::Cloud9
     CreateEnvironmentEC2Request.add_member(:owner_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "ownerArn"))
     CreateEnvironmentEC2Request.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateEnvironmentEC2Request.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
+    CreateEnvironmentEC2Request.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "dryRun"))
     CreateEnvironmentEC2Request.struct_class = Types::CreateEnvironmentEC2Request
 
     CreateEnvironmentEC2Result.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
@@ -233,6 +236,7 @@ module Aws::Cloud9
     UpdateEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentId"))
     UpdateEnvironmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name"))
     UpdateEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: EnvironmentDescription, location_name: "description"))
+    UpdateEnvironmentRequest.add_member(:managed_credentials_action, Shapes::ShapeRef.new(shape: ManagedCredentialsAction, location_name: "managedCredentialsAction"))
     UpdateEnvironmentRequest.struct_class = Types::UpdateEnvironmentRequest
 
     UpdateEnvironmentResult.struct_class = Types::UpdateEnvironmentResult

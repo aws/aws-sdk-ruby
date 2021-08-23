@@ -10,7 +10,9 @@
 module Aws::CloudDirectory
   module Types
 
-    # Access denied. Check your permissions.
+    # Access denied or directory not found. Either you don't have
+    # permissions for this directory or the directory does not exist. Try
+    # calling ListDirectories and check your permissions.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1707,6 +1709,9 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Lists parent objects that are associated with a given object in
+    # pagination fashion.
+    #
     # @note When making an API call, you may pass BatchListObjectParents
     #   data as a hash:
     #
@@ -1723,9 +1728,12 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of items to be retrieved in a single call. This
+    #   is an approximate number.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParents AWS API Documentation
@@ -1738,10 +1746,14 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Represents the output of a ListObjectParents response operation.
+    #
     # @!attribute [rw] parent_links
+    #   Returns a list of parent reference and LinkName Tuples.
     #   @return [Array<Types::ObjectIdentifierAndLinkNameTuple>]
     #
     # @!attribute [rw] next_token
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParentsResponse AWS API Documentation
@@ -2295,6 +2307,8 @@ module Aws::CloudDirectory
     #   @return [Types::BatchGetObjectAttributes]
     #
     # @!attribute [rw] list_object_parents
+    #   Lists parent objects that are associated with a given object in
+    #   pagination fashion.
     #   @return [Types::BatchListObjectParents]
     #
     # @!attribute [rw] list_object_policies
@@ -2733,6 +2747,7 @@ module Aws::CloudDirectory
     #   @return [Types::BatchGetLinkAttributesResponse]
     #
     # @!attribute [rw] list_object_parents
+    #   The list of parent objects to retrieve.
     #   @return [Types::BatchListObjectParentsResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadSuccessfulResponse AWS API Documentation
@@ -7157,7 +7172,9 @@ module Aws::CloudDirectory
     #     provided by Amazon Cloud Directory. When creating objects, the
     #     system will provide you with the identifier of the created object.
     #     An object’s identifier is immutable and no two objects will ever
-    #     share the same object identifier
+    #     share the same object identifier. To identify an object with
+    #     ObjectIdentifier, the ObjectIdentifier must be wrapped in double
+    #     quotes.
     #
     #   * */some/path* - Identifies the object based on path
     #
@@ -7483,7 +7500,8 @@ module Aws::CloudDirectory
     # @!attribute [rw] schema_arn
     #   The ARN of the schema that contains the facet with no minor
     #   component. See arns and [In-Place Schema Upgrade][1] for a
-    #   description of when to provide minor versions.
+    #   description of when to provide minor versions. If this value is set,
+    #   FacetName must also be set.
     #
     #
     #
@@ -7491,7 +7509,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] facet_name
-    #   The name of the facet.
+    #   The name of the facet. If this value is set, SchemaArn must also be
+    #   set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/SchemaFacet AWS API Documentation

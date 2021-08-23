@@ -47,6 +47,7 @@ module Aws::Cloud9
     #           },
     #         ],
     #         connection_type: "CONNECT_SSH", # accepts CONNECT_SSH, CONNECT_SSM
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] name
@@ -143,6 +144,13 @@ module Aws::Cloud9
     #   [1]: https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Request AWS API Documentation
     #
     class CreateEnvironmentEC2Request < Struct.new(
@@ -155,7 +163,8 @@ module Aws::Cloud9
       :automatic_stop_time_minutes,
       :owner_arn,
       :tags,
-      :connection_type)
+      :connection_type,
+      :dry_run)
       SENSITIVE = [:description, :tags]
       include Aws::Structure
     end
@@ -869,6 +878,7 @@ module Aws::Cloud9
     #         environment_id: "EnvironmentId", # required
     #         name: "EnvironmentName",
     #         description: "EnvironmentDescription",
+    #         managed_credentials_action: "ENABLE", # accepts ENABLE, DISABLE
     #       }
     #
     # @!attribute [rw] environment_id
@@ -883,12 +893,30 @@ module Aws::Cloud9
     #   Any new or replacement description for the environment.
     #   @return [String]
     #
+    # @!attribute [rw] managed_credentials_action
+    #   Allows the environment owner to turn on or turn off the Amazon Web
+    #   Services managed temporary credentials for an Cloud9 environment by
+    #   using one of the following values:
+    #
+    #   * `ENABLE`
+    #
+    #   * `DISABLE`
+    #
+    #   <note markdown="1"> Only the environment owner can change the status of managed
+    #   temporary credentials. An `AccessDeniedException` is thrown if an
+    #   attempt to turn on or turn off managed temporary credentials is made
+    #   by an account that's not the environment owner.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentRequest AWS API Documentation
     #
     class UpdateEnvironmentRequest < Struct.new(
       :environment_id,
       :name,
-      :description)
+      :description,
+      :managed_credentials_action)
       SENSITIVE = [:description]
       include Aws::Structure
     end

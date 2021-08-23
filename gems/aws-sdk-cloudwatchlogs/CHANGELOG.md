@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-08-17)
+------------------
+
+* Feature - Documentation-only update for CloudWatch Logs
+
 1.43.0 (2021-07-30)
 ------------------
 

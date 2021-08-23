@@ -1586,7 +1586,6 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
-    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         concurrent_build_limit: 1,
     #       }
@@ -4120,7 +4119,6 @@ module Aws::CodeBuild
     #           compute_types_allowed: ["NonEmptyString"],
     #         },
     #         timeout_in_mins: 1,
-    #         batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #       }
     #
     # @!attribute [rw] service_role
@@ -4142,31 +4140,13 @@ module Aws::CodeBuild
     #   build must be completed in.
     #   @return [Integer]
     #
-    # @!attribute [rw] batch_report_mode
-    #   Specifies how build status reports are sent to the source provider
-    #   for the batch build. This property is only used when the source
-    #   provider for your project is Bitbucket, GitHub, or GitHub
-    #   Enterprise, and your project is configured to report build statuses
-    #   to the source provider.
-    #
-    #   REPORT\_AGGREGATED\_BATCH
-    #
-    #   : (Default) Aggregate all of the build statuses into a single status
-    #     report.
-    #
-    #   REPORT\_INDIVIDUAL\_BUILDS
-    #
-    #   : Send a separate status report for each individual build.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectBuildBatchConfig AWS API Documentation
     #
     class ProjectBuildBatchConfig < Struct.new(
       :service_role,
       :combine_artifacts,
       :restrictions,
-      :timeout_in_mins,
-      :batch_report_mode)
+      :timeout_in_mins)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4687,10 +4667,12 @@ module Aws::CodeBuild
     #   cannot be updated. For more information, see [Source provider
     #   access][1] in the *CodeBuild User Guide*.
     #
-    #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
+    #   The status of a build triggered by a webhook is always reported to
     #   your source provider.
     #
-    #    </note>
+    #   If your project's builds are triggered by a webhook, you must push
+    #   a new commit to the repo for a change to this property to take
+    #   effect.
     #
     #
     #
@@ -5614,7 +5596,6 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
-    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         debug_session_enabled: false,
     #       }
@@ -6714,7 +6695,6 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
-    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         concurrent_build_limit: 1,
     #       }

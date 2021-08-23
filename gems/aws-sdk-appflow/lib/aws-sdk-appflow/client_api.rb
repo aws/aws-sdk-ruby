@@ -27,13 +27,18 @@ module Aws::Appflow
     ApiKey = Shapes::StringShape.new(name: 'ApiKey')
     ApiSecretKey = Shapes::StringShape.new(name: 'ApiSecretKey')
     ApiToken = Shapes::StringShape.new(name: 'ApiToken')
+    ApplicationHostUrl = Shapes::StringShape.new(name: 'ApplicationHostUrl')
     ApplicationKey = Shapes::StringShape.new(name: 'ApplicationKey')
+    ApplicationServicePath = Shapes::StringShape.new(name: 'ApplicationServicePath')
     AuthCode = Shapes::StringShape.new(name: 'AuthCode')
+    AuthCodeUrl = Shapes::StringShape.new(name: 'AuthCodeUrl')
+    BasicAuthCredentials = Shapes::StructureShape.new(name: 'BasicAuthCredentials')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
     ClientCredentialsArn = Shapes::StringShape.new(name: 'ClientCredentialsArn')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
+    ClientNumber = Shapes::StringShape.new(name: 'ClientNumber')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionMode = Shapes::StringShape.new(name: 'ConnectionMode')
@@ -95,6 +100,7 @@ module Aws::Appflow
     DestinationFieldProperties = Shapes::StructureShape.new(name: 'DestinationFieldProperties')
     DestinationFlowConfig = Shapes::StructureShape.new(name: 'DestinationFlowConfig')
     DestinationFlowConfigList = Shapes::ListShape.new(name: 'DestinationFlowConfigList')
+    DocumentType = Shapes::StringShape.new(name: 'DocumentType')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DynatraceConnectorOperator = Shapes::StringShape.new(name: 'DynatraceConnectorOperator')
     DynatraceConnectorProfileCredentials = Shapes::StructureShape.new(name: 'DynatraceConnectorProfileCredentials')
@@ -154,6 +160,7 @@ module Aws::Appflow
     ListFlowsResponse = Shapes::StructureShape.new(name: 'ListFlowsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LogonLanguage = Shapes::StringShape.new(name: 'LogonLanguage')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LookoutMetricsDestinationProperties = Shapes::StructureShape.new(name: 'LookoutMetricsDestinationProperties')
     MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
@@ -165,6 +172,8 @@ module Aws::Appflow
     MostRecentExecutionMessage = Shapes::StringShape.new(name: 'MostRecentExecutionMessage')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OAuthCredentials = Shapes::StructureShape.new(name: 'OAuthCredentials')
+    OAuthProperties = Shapes::StructureShape.new(name: 'OAuthProperties')
     OAuthScope = Shapes::StringShape.new(name: 'OAuthScope')
     OAuthScopeList = Shapes::ListShape.new(name: 'OAuthScopeList')
     Object = Shapes::StringShape.new(name: 'Object')
@@ -172,9 +181,14 @@ module Aws::Appflow
     Operator = Shapes::StringShape.new(name: 'Operator')
     OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     Password = Shapes::StringShape.new(name: 'Password')
+    PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PrefixConfig = Shapes::StructureShape.new(name: 'PrefixConfig')
     PrefixFormat = Shapes::StringShape.new(name: 'PrefixFormat')
     PrefixType = Shapes::StringShape.new(name: 'PrefixType')
+    PrivateConnectionProvisioningFailureCause = Shapes::StringShape.new(name: 'PrivateConnectionProvisioningFailureCause')
+    PrivateConnectionProvisioningFailureMessage = Shapes::StringShape.new(name: 'PrivateConnectionProvisioningFailureMessage')
+    PrivateConnectionProvisioningState = Shapes::StructureShape.new(name: 'PrivateConnectionProvisioningState')
+    PrivateConnectionProvisioningStatus = Shapes::StringShape.new(name: 'PrivateConnectionProvisioningStatus')
     PrivateLinkServiceName = Shapes::StringShape.new(name: 'PrivateLinkServiceName')
     Property = Shapes::StringShape.new(name: 'Property')
     RedirectUri = Shapes::StringShape.new(name: 'RedirectUri')
@@ -192,6 +206,11 @@ module Aws::Appflow
     S3Metadata = Shapes::StructureShape.new(name: 'S3Metadata')
     S3OutputFormatConfig = Shapes::StructureShape.new(name: 'S3OutputFormatConfig')
     S3SourceProperties = Shapes::StructureShape.new(name: 'S3SourceProperties')
+    SAPODataConnectorOperator = Shapes::StringShape.new(name: 'SAPODataConnectorOperator')
+    SAPODataConnectorProfileCredentials = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileCredentials')
+    SAPODataConnectorProfileProperties = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileProperties')
+    SAPODataMetadata = Shapes::StructureShape.new(name: 'SAPODataMetadata')
+    SAPODataSourceProperties = Shapes::StructureShape.new(name: 'SAPODataSourceProperties')
     SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
     SalesforceConnectorProfileCredentials = Shapes::StructureShape.new(name: 'SalesforceConnectorProfileCredentials')
     SalesforceConnectorProfileProperties = Shapes::StructureShape.new(name: 'SalesforceConnectorProfileProperties')
@@ -248,6 +267,7 @@ module Aws::Appflow
     TaskType = Shapes::StringShape.new(name: 'TaskType')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
+    TokenUrl = Shapes::StringShape.new(name: 'TokenUrl')
     TrendmicroConnectorOperator = Shapes::StringShape.new(name: 'TrendmicroConnectorOperator')
     TrendmicroConnectorProfileCredentials = Shapes::StructureShape.new(name: 'TrendmicroConnectorProfileCredentials')
     TrendmicroConnectorProfileProperties = Shapes::StructureShape.new(name: 'TrendmicroConnectorProfileProperties')
@@ -299,6 +319,10 @@ module Aws::Appflow
 
     AmplitudeSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
     AmplitudeSourceProperties.struct_class = Types::AmplitudeSourceProperties
+
+    BasicAuthCredentials.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "username"))
+    BasicAuthCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "password"))
+    BasicAuthCredentials.struct_class = Types::BasicAuthCredentials
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -359,6 +383,7 @@ module Aws::Appflow
     ConnectorMetadata.add_member(:upsolver, Shapes::ShapeRef.new(shape: UpsolverMetadata, location_name: "Upsolver"))
     ConnectorMetadata.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesMetadata, location_name: "CustomerProfiles"))
     ConnectorMetadata.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeMetadata, location_name: "Honeycode"))
+    ConnectorMetadata.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataMetadata, location_name: "SAPOData"))
     ConnectorMetadata.struct_class = Types::ConnectorMetadata
 
     ConnectorOAuthRequest.add_member(:auth_code, Shapes::ShapeRef.new(shape: AuthCode, location_name: "authCode"))
@@ -379,6 +404,7 @@ module Aws::Appflow
     ConnectorOperator.add_member(:trendmicro, Shapes::ShapeRef.new(shape: TrendmicroConnectorOperator, location_name: "Trendmicro"))
     ConnectorOperator.add_member(:veeva, Shapes::ShapeRef.new(shape: VeevaConnectorOperator, location_name: "Veeva"))
     ConnectorOperator.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorOperator, location_name: "Zendesk"))
+    ConnectorOperator.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataConnectorOperator, location_name: "SAPOData"))
     ConnectorOperator.struct_class = Types::ConnectorOperator
 
     ConnectorProfile.add_member(:connector_profile_arn, Shapes::ShapeRef.new(shape: ConnectorProfileArn, location_name: "connectorProfileArn"))
@@ -389,6 +415,7 @@ module Aws::Appflow
     ConnectorProfile.add_member(:connector_profile_properties, Shapes::ShapeRef.new(shape: ConnectorProfileProperties, location_name: "connectorProfileProperties"))
     ConnectorProfile.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
     ConnectorProfile.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedAt"))
+    ConnectorProfile.add_member(:private_connection_provisioning_state, Shapes::ShapeRef.new(shape: PrivateConnectionProvisioningState, location_name: "privateConnectionProvisioningState"))
     ConnectorProfile.struct_class = Types::ConnectorProfile
 
     ConnectorProfileConfig.add_member(:connector_profile_properties, Shapes::ShapeRef.new(shape: ConnectorProfileProperties, required: true, location_name: "connectorProfileProperties"))
@@ -411,6 +438,7 @@ module Aws::Appflow
     ConnectorProfileCredentials.add_member(:trendmicro, Shapes::ShapeRef.new(shape: TrendmicroConnectorProfileCredentials, location_name: "Trendmicro"))
     ConnectorProfileCredentials.add_member(:veeva, Shapes::ShapeRef.new(shape: VeevaConnectorProfileCredentials, location_name: "Veeva"))
     ConnectorProfileCredentials.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorProfileCredentials, location_name: "Zendesk"))
+    ConnectorProfileCredentials.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataConnectorProfileCredentials, location_name: "SAPOData"))
     ConnectorProfileCredentials.struct_class = Types::ConnectorProfileCredentials
 
     ConnectorProfileDetailList.member = Shapes::ShapeRef.new(shape: ConnectorProfile)
@@ -433,6 +461,7 @@ module Aws::Appflow
     ConnectorProfileProperties.add_member(:trendmicro, Shapes::ShapeRef.new(shape: TrendmicroConnectorProfileProperties, location_name: "Trendmicro"))
     ConnectorProfileProperties.add_member(:veeva, Shapes::ShapeRef.new(shape: VeevaConnectorProfileProperties, location_name: "Veeva"))
     ConnectorProfileProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorProfileProperties, location_name: "Zendesk"))
+    ConnectorProfileProperties.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataConnectorProfileProperties, location_name: "SAPOData"))
     ConnectorProfileProperties.struct_class = Types::ConnectorProfileProperties
 
     ConnectorServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -737,11 +766,28 @@ module Aws::Appflow
     MarketoSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
     MarketoSourceProperties.struct_class = Types::MarketoSourceProperties
 
+    OAuthCredentials.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
+    OAuthCredentials.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, required: true, location_name: "clientSecret"))
+    OAuthCredentials.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
+    OAuthCredentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
+    OAuthCredentials.add_member(:o_auth_request, Shapes::ShapeRef.new(shape: ConnectorOAuthRequest, location_name: "oAuthRequest"))
+    OAuthCredentials.struct_class = Types::OAuthCredentials
+
+    OAuthProperties.add_member(:token_url, Shapes::ShapeRef.new(shape: TokenUrl, required: true, location_name: "tokenUrl"))
+    OAuthProperties.add_member(:auth_code_url, Shapes::ShapeRef.new(shape: AuthCodeUrl, required: true, location_name: "authCodeUrl"))
+    OAuthProperties.add_member(:o_auth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, required: true, location_name: "oAuthScopes"))
+    OAuthProperties.struct_class = Types::OAuthProperties
+
     OAuthScopeList.member = Shapes::ShapeRef.new(shape: OAuthScope)
 
     PrefixConfig.add_member(:prefix_type, Shapes::ShapeRef.new(shape: PrefixType, location_name: "prefixType"))
     PrefixConfig.add_member(:prefix_format, Shapes::ShapeRef.new(shape: PrefixFormat, location_name: "prefixFormat"))
     PrefixConfig.struct_class = Types::PrefixConfig
+
+    PrivateConnectionProvisioningState.add_member(:status, Shapes::ShapeRef.new(shape: PrivateConnectionProvisioningStatus, location_name: "status"))
+    PrivateConnectionProvisioningState.add_member(:failure_message, Shapes::ShapeRef.new(shape: PrivateConnectionProvisioningFailureMessage, location_name: "failureMessage"))
+    PrivateConnectionProvisioningState.add_member(:failure_cause, Shapes::ShapeRef.new(shape: PrivateConnectionProvisioningFailureCause, location_name: "failureCause"))
+    PrivateConnectionProvisioningState.struct_class = Types::PrivateConnectionProvisioningState
 
     RedshiftConnectorProfileCredentials.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "username"))
     RedshiftConnectorProfileCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "password"))
@@ -781,6 +827,24 @@ module Aws::Appflow
     S3SourceProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
     S3SourceProperties.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "bucketPrefix"))
     S3SourceProperties.struct_class = Types::S3SourceProperties
+
+    SAPODataConnectorProfileCredentials.add_member(:basic_auth_credentials, Shapes::ShapeRef.new(shape: BasicAuthCredentials, location_name: "basicAuthCredentials"))
+    SAPODataConnectorProfileCredentials.add_member(:o_auth_credentials, Shapes::ShapeRef.new(shape: OAuthCredentials, location_name: "oAuthCredentials"))
+    SAPODataConnectorProfileCredentials.struct_class = Types::SAPODataConnectorProfileCredentials
+
+    SAPODataConnectorProfileProperties.add_member(:application_host_url, Shapes::ShapeRef.new(shape: ApplicationHostUrl, required: true, location_name: "applicationHostUrl"))
+    SAPODataConnectorProfileProperties.add_member(:application_service_path, Shapes::ShapeRef.new(shape: ApplicationServicePath, required: true, location_name: "applicationServicePath"))
+    SAPODataConnectorProfileProperties.add_member(:port_number, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "portNumber", metadata: {"box"=>true}))
+    SAPODataConnectorProfileProperties.add_member(:client_number, Shapes::ShapeRef.new(shape: ClientNumber, required: true, location_name: "clientNumber"))
+    SAPODataConnectorProfileProperties.add_member(:logon_language, Shapes::ShapeRef.new(shape: LogonLanguage, location_name: "logonLanguage"))
+    SAPODataConnectorProfileProperties.add_member(:private_link_service_name, Shapes::ShapeRef.new(shape: PrivateLinkServiceName, location_name: "privateLinkServiceName"))
+    SAPODataConnectorProfileProperties.add_member(:o_auth_properties, Shapes::ShapeRef.new(shape: OAuthProperties, location_name: "oAuthProperties"))
+    SAPODataConnectorProfileProperties.struct_class = Types::SAPODataConnectorProfileProperties
+
+    SAPODataMetadata.struct_class = Types::SAPODataMetadata
+
+    SAPODataSourceProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, location_name: "objectPath"))
+    SAPODataSourceProperties.struct_class = Types::SAPODataSourceProperties
 
     SalesforceConnectorProfileCredentials.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
     SalesforceConnectorProfileCredentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
@@ -893,6 +957,7 @@ module Aws::Appflow
     SourceConnectorProperties.add_member(:trendmicro, Shapes::ShapeRef.new(shape: TrendmicroSourceProperties, location_name: "Trendmicro"))
     SourceConnectorProperties.add_member(:veeva, Shapes::ShapeRef.new(shape: VeevaSourceProperties, location_name: "Veeva"))
     SourceConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskSourceProperties, location_name: "Zendesk"))
+    SourceConnectorProperties.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataSourceProperties, location_name: "SAPOData"))
     SourceConnectorProperties.struct_class = Types::SourceConnectorProperties
 
     SourceFieldProperties.add_member(:is_retrievable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRetrievable"))
@@ -991,7 +1056,7 @@ module Aws::Appflow
     UpdateFlowRequest.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "flowName"))
     UpdateFlowRequest.add_member(:description, Shapes::ShapeRef.new(shape: FlowDescription, location_name: "description"))
     UpdateFlowRequest.add_member(:trigger_config, Shapes::ShapeRef.new(shape: TriggerConfig, required: true, location_name: "triggerConfig"))
-    UpdateFlowRequest.add_member(:source_flow_config, Shapes::ShapeRef.new(shape: SourceFlowConfig, location_name: "sourceFlowConfig"))
+    UpdateFlowRequest.add_member(:source_flow_config, Shapes::ShapeRef.new(shape: SourceFlowConfig, required: true, location_name: "sourceFlowConfig"))
     UpdateFlowRequest.add_member(:destination_flow_config_list, Shapes::ShapeRef.new(shape: DestinationFlowConfigList, required: true, location_name: "destinationFlowConfigList"))
     UpdateFlowRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "tasks"))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
@@ -1024,6 +1089,10 @@ module Aws::Appflow
     VeevaMetadata.struct_class = Types::VeevaMetadata
 
     VeevaSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    VeevaSourceProperties.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "documentType"))
+    VeevaSourceProperties.add_member(:include_source_files, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeSourceFiles"))
+    VeevaSourceProperties.add_member(:include_renditions, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeRenditions"))
+    VeevaSourceProperties.add_member(:include_all_versions, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeAllVersions"))
     VeevaSourceProperties.struct_class = Types::VeevaSourceProperties
 
     ZendeskConnectorProfileCredentials.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))

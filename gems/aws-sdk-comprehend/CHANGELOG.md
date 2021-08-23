@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-08-20)
+------------------
+
+* Feature - Add tagging support for Comprehend async inference job.
+
 1.48.0 (2021-07-30)
 ------------------
 

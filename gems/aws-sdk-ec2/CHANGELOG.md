@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.257.0 (2021-08-20)
+------------------
+
+* Feature - encryptionInTransitSupported added to DescribeInstanceTypes API
+
+1.256.0 (2021-08-19)
+------------------
+
+* Feature - The ImportImage API now supports the ability to create AMIs with AWS-managed licenses for Microsoft SQL Server for both Windows and Linux.
+
+1.255.0 (2021-08-17)
+------------------
+
+* Feature - This release adds support for EC2 ED25519 key pairs for authentication
+
 1.254.0 (2021-07-30)
 ------------------
 

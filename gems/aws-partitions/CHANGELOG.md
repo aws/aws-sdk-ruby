@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.489.0 (2021-08-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MemoryDB`.
+
 1.488.0 (2021-08-16)
 ------------------
 

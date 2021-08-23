@@ -1121,6 +1121,7 @@ module Aws::EKS
     #       {
     #         cluster_name: "ClusterName", # required
     #         addon_name: "String", # required
+    #         preserve: false,
     #       }
     #
     # @!attribute [rw] cluster_name
@@ -1136,11 +1137,18 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
     #   @return [String]
     #
+    # @!attribute [rw] preserve
+    #   Specifying this option preserves the add-on software on your cluster
+    #   but Amazon EKS stops managing any settings for the add-on. If an IAM
+    #   account is associated with the add-on, it is not removed.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddonRequest AWS API Documentation
     #
     class DeleteAddonRequest < Struct.new(
       :cluster_name,
-      :addon_name)
+      :addon_name,
+      :preserve)
       SENSITIVE = []
       include Aws::Structure
     end

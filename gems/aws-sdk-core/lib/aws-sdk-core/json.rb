@@ -5,6 +5,8 @@ require_relative 'json/builder'
 require_relative 'json/error_handler'
 require_relative 'json/handler'
 require_relative 'json/parser'
+require_relative 'json/json_engine'
+require_relative 'json/oj_engine'
 
 module Aws
   # @api private
@@ -20,9 +22,7 @@ module Aws
 
     class << self
       def load(json)
-        ENGINE.load(json, *ENGINE_LOAD_OPTIONS)
-      rescue *ENGINE_ERRORS => e
-        raise ParseError, e
+        ENGINE.load(json)
       end
 
       def load_file(path)
@@ -30,38 +30,20 @@ module Aws
       end
 
       def dump(value)
-        ENGINE.dump(value, *ENGINE_DUMP_OPTIONS)
+        ENGINE.dump(value)
       end
 
       private
 
-      def oj_engine
+      def select_engine
         require 'oj'
-        [
-          Oj,
-          [{ mode: :compat, symbol_keys: false, empty_string: false }],
-          [{ mode: :compat }],
-          oj_parse_error
-        ]
+        OjEngine
       rescue LoadError
-        false
-      end
-
-      def json_engine
-        [JSON, [], [], [JSON::ParserError]]
-      end
-
-      def oj_parse_error
-        if Oj.const_defined?('ParseError')
-          [Oj::ParseError, EncodingError, JSON::ParserError]
-        else
-          [SyntaxError]
-        end
+        JSONEngine
       end
     end
 
     # @api private
-    ENGINE, ENGINE_LOAD_OPTIONS, ENGINE_DUMP_OPTIONS, ENGINE_ERRORS =
-      oj_engine || json_engine
+    ENGINE = select_engine
   end
 end

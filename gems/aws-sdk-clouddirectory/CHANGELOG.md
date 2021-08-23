@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-08-17)
+------------------
+
+* Feature - Documentation updates for clouddirectory
+
 1.33.0 (2021-07-30)
 ------------------
 
