@@ -127,14 +127,14 @@ module Aws::FraudDetector
     Label = Shapes::StructureShape.new(name: 'Label')
     LabelSchema = Shapes::StructureShape.new(name: 'LabelSchema')
     Language = Shapes::StringShape.new(name: 'Language')
-    ListOfLogitMetrics = Shapes::ListShape.new(name: 'ListOfLogitMetrics')
+    ListOfLogOddsMetrics = Shapes::ListShape.new(name: 'ListOfLogOddsMetrics')
     ListOfModelScores = Shapes::ListShape.new(name: 'ListOfModelScores')
     ListOfModelVersions = Shapes::ListShape.new(name: 'ListOfModelVersions')
     ListOfRuleResults = Shapes::ListShape.new(name: 'ListOfRuleResults')
     ListOfStrings = Shapes::ListShape.new(name: 'ListOfStrings')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
-    LogitMetric = Shapes::StructureShape.new(name: 'LogitMetric')
+    LogOddsMetric = Shapes::StructureShape.new(name: 'LogOddsMetric')
     MetricDataPoint = Shapes::StructureShape.new(name: 'MetricDataPoint')
     Model = Shapes::StructureShape.new(name: 'Model')
     ModelEndpointDataBlob = Shapes::StructureShape.new(name: 'ModelEndpointDataBlob')
@@ -170,6 +170,7 @@ module Aws::FraudDetector
     PutOutcomeRequest = Shapes::StructureShape.new(name: 'PutOutcomeRequest')
     PutOutcomeResult = Shapes::StructureShape.new(name: 'PutOutcomeResult')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleDetail = Shapes::StructureShape.new(name: 'RuleDetail')
     RuleDetailList = Shapes::ListShape.new(name: 'RuleDetailList')
@@ -249,6 +250,7 @@ module Aws::FraudDetector
     tagList = Shapes::ListShape.new(name: 'tagList')
     tagValue = Shapes::StringShape.new(name: 'tagValue')
     time = Shapes::StringShape.new(name: 'time')
+    utcTimestampISO8601 = Shapes::StringShape.new(name: 'utcTimestampISO8601')
     variableName = Shapes::StringShape.new(name: 'variableName')
     variableValue = Shapes::StringShape.new(name: 'variableValue')
     wholeNumberVersionString = Shapes::StringShape.new(name: 'wholeNumberVersionString')
@@ -605,7 +607,7 @@ module Aws::FraudDetector
     GetEventPredictionRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventId"))
     GetEventPredictionRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventTypeName"))
     GetEventPredictionRequest.add_member(:entities, Shapes::ShapeRef.new(shape: listOfEntities, required: true, location_name: "entities"))
-    GetEventPredictionRequest.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventTimestamp"))
+    GetEventPredictionRequest.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: utcTimestampISO8601, required: true, location_name: "eventTimestamp"))
     GetEventPredictionRequest.add_member(:event_variables, Shapes::ShapeRef.new(shape: EventVariableMap, required: true, location_name: "eventVariables"))
     GetEventPredictionRequest.add_member(:external_model_endpoint_data_blobs, Shapes::ShapeRef.new(shape: ExternalModelEndpointDataBlobMap, location_name: "externalModelEndpointDataBlobs"))
     GetEventPredictionRequest.struct_class = Types::GetEventPredictionRequest
@@ -717,7 +719,7 @@ module Aws::FraudDetector
     LabelSchema.add_member(:label_mapper, Shapes::ShapeRef.new(shape: labelMapper, required: true, location_name: "labelMapper"))
     LabelSchema.struct_class = Types::LabelSchema
 
-    ListOfLogitMetrics.member = Shapes::ShapeRef.new(shape: LogitMetric)
+    ListOfLogOddsMetrics.member = Shapes::ShapeRef.new(shape: LogOddsMetric)
 
     ListOfModelScores.member = Shapes::ShapeRef.new(shape: ModelScores)
 
@@ -736,10 +738,10 @@ module Aws::FraudDetector
     ListTagsForResourceResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
 
-    LogitMetric.add_member(:variable_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "variableName"))
-    LogitMetric.add_member(:variable_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "variableType"))
-    LogitMetric.add_member(:variable_importance, Shapes::ShapeRef.new(shape: float, required: true, location_name: "variableImportance"))
-    LogitMetric.struct_class = Types::LogitMetric
+    LogOddsMetric.add_member(:variable_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "variableName"))
+    LogOddsMetric.add_member(:variable_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "variableType"))
+    LogOddsMetric.add_member(:variable_importance, Shapes::ShapeRef.new(shape: float, required: true, location_name: "variableImportance"))
+    LogOddsMetric.struct_class = Types::LogOddsMetric
 
     MetricDataPoint.add_member(:fpr, Shapes::ShapeRef.new(shape: float, location_name: "fpr"))
     MetricDataPoint.add_member(:precision, Shapes::ShapeRef.new(shape: float, location_name: "precision"))
@@ -868,6 +870,9 @@ module Aws::FraudDetector
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
 
     Rule.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     Rule.add_member(:rule_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "ruleId"))
@@ -1028,7 +1033,7 @@ module Aws::FraudDetector
 
     VariableEntryList.member = Shapes::ShapeRef.new(shape: VariableEntry)
 
-    VariableImportanceMetrics.add_member(:logit_metrics, Shapes::ShapeRef.new(shape: ListOfLogitMetrics, location_name: "LogitMetrics"))
+    VariableImportanceMetrics.add_member(:log_odds_metrics, Shapes::ShapeRef.new(shape: ListOfLogOddsMetrics, location_name: "logOddsMetrics"))
     VariableImportanceMetrics.struct_class = Types::VariableImportanceMetrics
 
     VariableList.member = Shapes::ShapeRef.new(shape: Variable)
@@ -1044,7 +1049,7 @@ module Aws::FraudDetector
     labelList.member = Shapes::ShapeRef.new(shape: Label)
 
     labelMapper.key = Shapes::ShapeRef.new(shape: string)
-    labelMapper.value = Shapes::ShapeRef.new(shape: ListOfStrings)
+    labelMapper.value = Shapes::ShapeRef.new(shape: NonEmptyListOfStrings)
 
     listOfEntities.member = Shapes::ShapeRef.new(shape: Entity)
 
@@ -1109,6 +1114,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1120,6 +1126,7 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: CreateBatchPredictionJobResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1145,6 +1152,7 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: CreateModelResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1157,6 +1165,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1193,6 +1202,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1232,6 +1242,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1256,6 +1267,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1280,6 +1292,7 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: DeleteLabelResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1292,6 +1305,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1304,6 +1318,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1368,6 +1383,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1386,6 +1402,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1436,6 +1453,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1457,6 +1475,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:get_event_types, Seahorse::Model::Operation.new.tap do |o|
@@ -1468,6 +1487,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1504,6 +1524,7 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: GetKMSEncryptionKeyResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1516,6 +1537,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1534,6 +1556,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1546,6 +1569,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1620,6 +1644,7 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1639,6 +1664,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_entity_type, Seahorse::Model::Operation.new.tap do |o|
@@ -1649,7 +1675,9 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: PutEntityTypeResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_event_type, Seahorse::Model::Operation.new.tap do |o|
@@ -1660,7 +1688,9 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: PutEventTypeResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_external_model, Seahorse::Model::Operation.new.tap do |o|
@@ -1673,6 +1703,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_kms_encryption_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1684,7 +1715,9 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_label, Seahorse::Model::Operation.new.tap do |o|
@@ -1695,7 +1728,9 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: PutLabelResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_outcome, Seahorse::Model::Operation.new.tap do |o|
@@ -1708,6 +1743,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1718,6 +1754,7 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: TagResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1729,6 +1766,7 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -1743,6 +1781,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_detector_version_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -1755,6 +1794,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_detector_version_status, Seahorse::Model::Operation.new.tap do |o|
@@ -1768,6 +1808,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_model, Seahorse::Model::Operation.new.tap do |o|
@@ -1779,7 +1820,9 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_model_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1791,7 +1834,9 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_model_version_status, Seahorse::Model::Operation.new.tap do |o|
@@ -1803,7 +1848,9 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_rule_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -1817,6 +1864,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_rule_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1830,6 +1878,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_variable, Seahorse::Model::Operation.new.tap do |o|
@@ -1843,6 +1892,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

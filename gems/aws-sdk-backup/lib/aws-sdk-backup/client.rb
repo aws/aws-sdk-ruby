@@ -328,11 +328,11 @@ module Aws::Backup
     # @!group API Operations
 
     # Creates a backup plan using a backup plan name and backup rules. A
-    # backup plan is a document that contains information that AWS Backup
-    # uses to schedule tasks that create recovery points for resources.
+    # backup plan is a document that contains information that Backup uses
+    # to schedule tasks that create recovery points for resources.
     #
-    # If you call `CreateBackupPlan` with a plan that already exists, an
-    # `AlreadyExistsException` is returned.
+    # If you call `CreateBackupPlan` with a plan that already exists, you
+    # receive an `AlreadyExistsException` exception.
     #
     # @option params [required, Types::BackupPlanInput] :backup_plan
     #   Specifies the body of a backup plan. Includes a `BackupPlanName` and
@@ -510,16 +510,16 @@ module Aws::Backup
     # `CreateBackupVault` request includes a name, optionally one or more
     # resource tags, an encryption key, and a request ID.
     #
-    # <note markdown="1"> Sensitive data, such as passport numbers, should not be included the
-    # name of a backup vault.
+    # <note markdown="1"> Do not include sensitive data, such as passport numbers, in the name
+    # of a backup vault.
     #
     #  </note>
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of letters, numbers, and hyphens.
     #
     # @option params [Hash<String,String>] :backup_vault_tags
     #   Metadata that you can assign to help organize the resources that you
@@ -563,6 +563,165 @@ module Aws::Backup
     # @param [Hash] params ({})
     def create_backup_vault(params = {}, options = {})
       req = build_request(:create_backup_vault, params)
+      req.send_request(options)
+    end
+
+    # Creates a framework with one or more controls. A framework is a
+    # collection of controls that you can use to evaluate your backup
+    # practices. By using pre-built customizable controls to define your
+    # policies, you can evaluate whether your backup practices comply with
+    # your policies. To get insights into the compliance status of your
+    # frameworks, you can set up automatic daily reports.
+    #
+    # @option params [required, String] :framework_name
+    #   The unique name of the framework. The name must be between 1 and 256
+    #   characters, starting with a letter, and consisting of letters (a-z,
+    #   A-Z), numbers (0-9), and underscores (\_).
+    #
+    # @option params [String] :framework_description
+    #   An optional description of the framework with a maximum of 1,024
+    #   characters.
+    #
+    # @option params [required, Array<Types::FrameworkControl>] :framework_controls
+    #   A list of the controls that make up the framework. Each control in the
+    #   list has a name, input parameters, and scope.
+    #
+    # @option params [String] :idempotency_token
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `CreateFrameworkInput`. Retrying a
+    #   successful request with the same idempotency token results in a
+    #   success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :framework_tags
+    #   Metadata that you can assign to help organize the frameworks that you
+    #   create. Each tag is a key-value pair.
+    #
+    # @return [Types::CreateFrameworkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFrameworkOutput#framework_name #framework_name} => String
+    #   * {Types::CreateFrameworkOutput#framework_arn #framework_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_framework({
+    #     framework_name: "FrameworkName", # required
+    #     framework_description: "FrameworkDescription",
+    #     framework_controls: [ # required
+    #       {
+    #         control_name: "ControlName", # required
+    #         control_input_parameters: [
+    #           {
+    #             parameter_name: "ParameterName",
+    #             parameter_value: "ParameterValue",
+    #           },
+    #         ],
+    #         control_scope: {
+    #           compliance_resource_ids: ["string"],
+    #           compliance_resource_types: ["ARN"],
+    #           tags: {
+    #             "string" => "string",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     idempotency_token: "string",
+    #     framework_tags: {
+    #       "string" => "string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.framework_name #=> String
+    #   resp.framework_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateFramework AWS API Documentation
+    #
+    # @overload create_framework(params = {})
+    # @param [Hash] params ({})
+    def create_framework(params = {}, options = {})
+      req = build_request(:create_framework, params)
+      req.send_request(options)
+    end
+
+    # Creates a report plan. A report plan is a document that contains
+    # information about the contents of the report and where Backup will
+    # deliver it.
+    #
+    # If you call `CreateReportPlan` with a plan that already exists, you
+    # receive an `AlreadyExistsException` exception.
+    #
+    # @option params [required, String] :report_plan_name
+    #   The unique name of the report plan. The name must be between 1 and 256
+    #   characters, starting with a letter, and consisting of letters (a-z,
+    #   A-Z), numbers (0-9), and underscores (\_).
+    #
+    # @option params [String] :report_plan_description
+    #   An optional description of the report plan with a maximum of 1,024
+    #   characters.
+    #
+    # @option params [required, Types::ReportDeliveryChannel] :report_delivery_channel
+    #   A structure that contains information about where and how to deliver
+    #   your reports, specifically your Amazon S3 bucket name, S3 key prefix,
+    #   and the formats of your reports.
+    #
+    # @option params [required, Types::ReportSetting] :report_setting
+    #   Identifies the report template for the report. Reports are built using
+    #   a report template. The report templates are:
+    #
+    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    # @option params [Hash<String,String>] :report_plan_tags
+    #   Metadata that you can assign to help organize the frameworks that you
+    #   create. Each tag is a key-value pair.
+    #
+    # @option params [String] :idempotency_token
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `CreateReportPlanInput`. Retrying a
+    #   successful request with the same idempotency token results in a
+    #   success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateReportPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReportPlanOutput#report_plan_name #report_plan_name} => String
+    #   * {Types::CreateReportPlanOutput#report_plan_arn #report_plan_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_report_plan({
+    #     report_plan_name: "ReportPlanName", # required
+    #     report_plan_description: "ReportPlanDescription",
+    #     report_delivery_channel: { # required
+    #       s3_bucket_name: "string", # required
+    #       s3_key_prefix: "string",
+    #       formats: ["string"],
+    #     },
+    #     report_setting: { # required
+    #       report_template: "string", # required
+    #     },
+    #     report_plan_tags: {
+    #       "string" => "string",
+    #     },
+    #     idempotency_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_plan_name #=> String
+    #   resp.report_plan_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateReportPlan AWS API Documentation
+    #
+    # @overload create_report_plan(params = {})
+    # @param [Hash] params ({})
+    def create_report_plan(params = {}, options = {})
+      req = build_request(:create_report_plan, params)
       req.send_request(options)
     end
 
@@ -637,8 +796,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -663,8 +822,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -708,6 +867,28 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Deletes the framework specified by a framework name.
+    #
+    # @option params [required, String] :framework_name
+    #   The unique name of a framework.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_framework({
+    #     framework_name: "FrameworkName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteFramework AWS API Documentation
+    #
+    # @overload delete_framework(params = {})
+    # @param [Hash] params ({})
+    def delete_framework(params = {}, options = {})
+      req = build_request(:delete_framework, params)
+      req.send_request(options)
+    end
+
     # Deletes the recovery point specified by a recovery point ID.
     #
     # If the recovery point ID belongs to a continuous backup, calling this
@@ -717,8 +898,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -743,10 +924,32 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Deletes the report plan specified by a report plan name.
+    #
+    # @option params [required, String] :report_plan_name
+    #   The unique name of a report plan.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_report_plan({
+    #     report_plan_name: "ReportPlanName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteReportPlan AWS API Documentation
+    #
+    # @overload delete_report_plan(params = {})
+    # @param [Hash] params ({})
+    def delete_report_plan(params = {}, options = {})
+      req = build_request(:delete_report_plan, params)
+      req.send_request(options)
+    end
+
     # Returns backup job details for the specified `BackupJobId`.
     #
     # @option params [required, String] :backup_job_id
-    #   Uniquely identifies a request to AWS Backup to back up a resource.
+    #   Uniquely identifies a request to Backup to back up a resource.
     #
     # @return [Types::DescribeBackupJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -818,8 +1021,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Types::DescribeBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -899,8 +1102,62 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Describes the global settings of the AWS account, including whether it
-    # is opted in to cross-account backup.
+    # Returns the framework details for the specified `FrameworkName`.
+    #
+    # @option params [required, String] :framework_name
+    #   The unique name of a framework.
+    #
+    # @return [Types::DescribeFrameworkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFrameworkOutput#framework_name #framework_name} => String
+    #   * {Types::DescribeFrameworkOutput#framework_arn #framework_arn} => String
+    #   * {Types::DescribeFrameworkOutput#framework_description #framework_description} => String
+    #   * {Types::DescribeFrameworkOutput#framework_controls #framework_controls} => Array&lt;Types::FrameworkControl&gt;
+    #   * {Types::DescribeFrameworkOutput#creation_time #creation_time} => Time
+    #   * {Types::DescribeFrameworkOutput#deployment_status #deployment_status} => String
+    #   * {Types::DescribeFrameworkOutput#framework_status #framework_status} => String
+    #   * {Types::DescribeFrameworkOutput#idempotency_token #idempotency_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_framework({
+    #     framework_name: "FrameworkName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.framework_name #=> String
+    #   resp.framework_arn #=> String
+    #   resp.framework_description #=> String
+    #   resp.framework_controls #=> Array
+    #   resp.framework_controls[0].control_name #=> String
+    #   resp.framework_controls[0].control_input_parameters #=> Array
+    #   resp.framework_controls[0].control_input_parameters[0].parameter_name #=> String
+    #   resp.framework_controls[0].control_input_parameters[0].parameter_value #=> String
+    #   resp.framework_controls[0].control_scope.compliance_resource_ids #=> Array
+    #   resp.framework_controls[0].control_scope.compliance_resource_ids[0] #=> String
+    #   resp.framework_controls[0].control_scope.compliance_resource_types #=> Array
+    #   resp.framework_controls[0].control_scope.compliance_resource_types[0] #=> String
+    #   resp.framework_controls[0].control_scope.tags #=> Hash
+    #   resp.framework_controls[0].control_scope.tags["string"] #=> String
+    #   resp.creation_time #=> Time
+    #   resp.deployment_status #=> String
+    #   resp.framework_status #=> String
+    #   resp.idempotency_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeFramework AWS API Documentation
+    #
+    # @overload describe_framework(params = {})
+    # @param [Hash] params ({})
+    def describe_framework(params = {}, options = {})
+      req = build_request(:describe_framework, params)
+      req.send_request(options)
+    end
+
+    # Describes whether the Amazon Web Services account is opted in to
+    # cross-account backup. Returns an error if the account is not a member
+    # of an Organizations organization. Example: `describe-global-settings
+    # --region us-west-2`
     #
     # @return [Types::DescribeGlobalSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -923,8 +1180,8 @@ module Aws::Backup
     end
 
     # Returns information about a saved resource, including the last time it
-    # was backed up, its Amazon Resource Name (ARN), and the AWS service
-    # type of the saved resource.
+    # was backed up, its Amazon Resource Name (ARN), and the Amazon Web
+    # Services service type of the saved resource.
     #
     # @option params [required, String] :resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource. The
@@ -963,8 +1220,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -982,6 +1239,7 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#created_by #created_by} => Types::RecoveryPointCreator
     #   * {Types::DescribeRecoveryPointOutput#iam_role_arn #iam_role_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#status #status} => String
+    #   * {Types::DescribeRecoveryPointOutput#status_message #status_message} => String
     #   * {Types::DescribeRecoveryPointOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeRecoveryPointOutput#completion_date #completion_date} => Time
     #   * {Types::DescribeRecoveryPointOutput#backup_size_in_bytes #backup_size_in_bytes} => Integer
@@ -1013,6 +1271,7 @@ module Aws::Backup
     #   resp.created_by.backup_rule_id #=> String
     #   resp.iam_role_arn #=> String
     #   resp.status #=> String, one of "COMPLETED", "PARTIAL", "DELETING", "EXPIRED"
+    #   resp.status_message #=> String
     #   resp.creation_date #=> Time
     #   resp.completion_date #=> Time
     #   resp.backup_size_in_bytes #=> Integer
@@ -1034,13 +1293,11 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns the current service opt-in settings for the Region. If
-    # service-opt-in is enabled for a service, AWS Backup tries to protect
-    # that service's resources in this Region, when the resource is
-    # included in an on-demand backup or scheduled backup plan. Otherwise,
-    # AWS Backup does not try to protect that service's resources in this
-    # Region, AWS Backup does not try to protect that service's resources
-    # in this Region.
+    # Returns the current service opt-in settings for the Region. If service
+    # opt-in is enabled for a service, Backup tries to protect that
+    # service's resources in this Region, when the resource is included in
+    # an on-demand backup or scheduled backup plan. Otherwise, Backup does
+    # not try to protect that service's resources in this Region.
     #
     # @return [Types::DescribeRegionSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1057,6 +1314,86 @@ module Aws::Backup
     # @param [Hash] params ({})
     def describe_region_settings(params = {}, options = {})
       req = build_request(:describe_region_settings, params)
+      req.send_request(options)
+    end
+
+    # Returns the details associated with creating a report as specified by
+    # its `ReportJobId`.
+    #
+    # @option params [required, String] :report_job_id
+    #   The identifier of the report job. A unique, randomly generated,
+    #   Unicode, UTF-8 encoded string that is at most 1,024 bytes long. The
+    #   report job ID cannot be edited.
+    #
+    # @return [Types::DescribeReportJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReportJobOutput#report_job #report_job} => Types::ReportJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_report_job({
+    #     report_job_id: "ReportJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_job.report_job_id #=> String
+    #   resp.report_job.report_plan_arn #=> String
+    #   resp.report_job.report_template #=> String
+    #   resp.report_job.creation_time #=> Time
+    #   resp.report_job.completion_time #=> Time
+    #   resp.report_job.status #=> String
+    #   resp.report_job.status_message #=> String
+    #   resp.report_job.report_destination.s3_bucket_name #=> String
+    #   resp.report_job.report_destination.s3_keys #=> Array
+    #   resp.report_job.report_destination.s3_keys[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeReportJob AWS API Documentation
+    #
+    # @overload describe_report_job(params = {})
+    # @param [Hash] params ({})
+    def describe_report_job(params = {}, options = {})
+      req = build_request(:describe_report_job, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all report plans for an Amazon Web Services account
+    # and Amazon Web Services Region.
+    #
+    # @option params [required, String] :report_plan_name
+    #   The unique name of a report plan.
+    #
+    # @return [Types::DescribeReportPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReportPlanOutput#report_plan #report_plan} => Types::ReportPlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_report_plan({
+    #     report_plan_name: "ReportPlanName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_plan.report_plan_arn #=> String
+    #   resp.report_plan.report_plan_name #=> String
+    #   resp.report_plan.report_plan_description #=> String
+    #   resp.report_plan.report_setting.report_template #=> String
+    #   resp.report_plan.report_delivery_channel.s3_bucket_name #=> String
+    #   resp.report_plan.report_delivery_channel.s3_key_prefix #=> String
+    #   resp.report_plan.report_delivery_channel.formats #=> Array
+    #   resp.report_plan.report_delivery_channel.formats[0] #=> String
+    #   resp.report_plan.deployment_status #=> String
+    #   resp.report_plan.creation_time #=> Time
+    #   resp.report_plan.last_attempted_execution_time #=> Time
+    #   resp.report_plan.last_successful_execution_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeReportPlan AWS API Documentation
+    #
+    # @overload describe_report_plan(params = {})
+    # @param [Hash] params ({})
+    def describe_report_plan(params = {}, options = {})
+      req = build_request(:describe_report_plan, params)
       req.send_request(options)
     end
 
@@ -1113,20 +1450,20 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Deletes the specified continuous backup recovery point from AWS Backup
-    # and releases control of that continuous backup to the source service,
-    # such as Amazon RDS. The source service will continue to create and
-    # retain continuous backups using the lifecycle that you specified in
-    # your original backup plan.
+    # Deletes the specified continuous backup recovery point from Backup and
+    # releases control of that continuous backup to the source service, such
+    # as Amazon RDS. The source service will continue to create and retain
+    # continuous backups using the lifecycle that you specified in your
+    # original backup plan.
     #
     # Does not support snapshot backup recovery points.
     #
     # @option params [required, String] :backup_vault_name
-    #   The unique name of an AWS Backup vault. Required.
+    #   The unique name of an Backup vault.
     #
     # @option params [required, String] :recovery_point_arn
-    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup
-    #   recovery point. Required.
+    #   An Amazon Resource Name (ARN) that uniquely identifies an Backup
+    #   recovery point.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1400,8 +1737,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Types::GetBackupVaultAccessPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1435,8 +1772,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Types::GetBackupVaultNotificationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1474,8 +1811,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -1511,7 +1848,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns the AWS resource types supported by AWS Backup.
+    # Returns the Amazon Web Services resource types supported by Backup.
     #
     # @return [Types::GetSupportedResourceTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1558,8 +1895,9 @@ module Aws::Backup
     # @option params [String] :by_backup_vault_name
     #   Returns only backup jobs that will be stored in the specified backup
     #   vault. Backup vaults are identified by names that are unique to the
-    #   account used to create them and the AWS Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
+    #   account used to create them and the Amazon Web Services Region where
+    #   they are created. They consist of lowercase letters, numbers, and
+    #   hyphens.
     #
     # @option params [Time,DateTime,Date,Integer,String] :by_created_before
     #   Returns only backup jobs that were created before the specified date.
@@ -1582,14 +1920,14 @@ module Aws::Backup
     #
     #   * `Aurora` for Amazon Aurora
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `Storage Gateway` for Storage Gateway
     #
     # @option params [String] :by_account_id
     #   The account ID to list the jobs from. Returns only backup jobs
     #   associated with the specified account ID.
     #
-    #   If used from an AWS Organizations management account, passing `*`
-    #   returns all jobs across the organization.
+    #   If used from an Organizations management account, passing `*` returns
+    #   all jobs across the organization.
     #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1749,10 +2087,9 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns a list of existing backup plans for an authenticated account.
-    # The list is populated only if the advanced option is set for the
-    # backup plan. The list contains information such as Amazon Resource
-    # Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan
+    # Returns a list of all active backup plans for an authenticated
+    # account. The list contains information such as Amazon Resource Names
+    # (ARNs), plan IDs, creation and deletion dates, version IDs, plan
     # names, and creator request IDs.
     #
     # @option params [String] :next_token
@@ -1944,7 +2281,7 @@ module Aws::Backup
     #
     #   * `Aurora` for Amazon Aurora
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `Storage Gateway` for Storage Gateway
     #
     # @option params [String] :by_destination_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a source backup
@@ -2008,7 +2345,53 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns an array of resources successfully backed up by AWS Backup,
+    # Returns a list of all frameworks for an Amazon Web Services account
+    # and Amazon Web Services Region.
+    #
+    # @option params [Integer] :max_results
+    #   The number of desired results from 1 to 1000. Optional. If
+    #   unspecified, the query will return 1 MB of data.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListFrameworksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFrameworksOutput#frameworks #frameworks} => Array&lt;Types::Framework&gt;
+    #   * {Types::ListFrameworksOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_frameworks({
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.frameworks #=> Array
+    #   resp.frameworks[0].framework_name #=> String
+    #   resp.frameworks[0].framework_arn #=> String
+    #   resp.frameworks[0].framework_description #=> String
+    #   resp.frameworks[0].number_of_controls #=> Integer
+    #   resp.frameworks[0].creation_time #=> Time
+    #   resp.frameworks[0].deployment_status #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListFrameworks AWS API Documentation
+    #
+    # @overload list_frameworks(params = {})
+    # @param [Hash] params ({})
+    def list_frameworks(params = {}, options = {})
+      req = build_request(:list_frameworks, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of resources successfully backed up by Backup,
     # including the time the resource was saved, an Amazon Resource Name
     # (ARN) of the resource, and a resource type.
     #
@@ -2058,8 +2441,13 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
+    #
+    #   <note markdown="1"> Backup vault name might not be available when a supported service
+    #   creates the backup.
+    #
+    #    </note>
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -2124,6 +2512,7 @@ module Aws::Backup
     #   resp.recovery_points[0].created_by.backup_rule_id #=> String
     #   resp.recovery_points[0].iam_role_arn #=> String
     #   resp.recovery_points[0].status #=> String, one of "COMPLETED", "PARTIAL", "DELETING", "EXPIRED"
+    #   resp.recovery_points[0].status_message #=> String
     #   resp.recovery_points[0].creation_date #=> Time
     #   resp.recovery_points[0].completion_date #=> Time
     #   resp.recovery_points[0].backup_size_in_bytes #=> Integer
@@ -2144,8 +2533,13 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns detailed information about recovery points of the type
+    # Returns detailed information about all the recovery points of the type
     # specified by a resource Amazon Resource Name (ARN).
+    #
+    # <note markdown="1"> For Amazon EFS and Amazon EC2, this action only lists recovery points
+    # created by Backup.
+    #
+    #  </note>
     #
     # @option params [required, String] :resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
@@ -2159,6 +2553,10 @@ module Aws::Backup
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to be returned.
+    #
+    #   <note markdown="1"> Amazon RDS requires a value of at least 20.
+    #
+    #    </note>
     #
     # @return [Types::ListRecoveryPointsByResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2182,6 +2580,7 @@ module Aws::Backup
     #   resp.recovery_points[0].recovery_point_arn #=> String
     #   resp.recovery_points[0].creation_date #=> Time
     #   resp.recovery_points[0].status #=> String, one of "COMPLETED", "PARTIAL", "DELETING", "EXPIRED"
+    #   resp.recovery_points[0].status_message #=> String
     #   resp.recovery_points[0].encryption_key_arn #=> String
     #   resp.recovery_points[0].backup_size_bytes #=> Integer
     #   resp.recovery_points[0].backup_vault_name #=> String
@@ -2195,8 +2594,134 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns a list of jobs that AWS Backup initiated to restore a saved
-    # resource, including metadata about the recovery process.
+    # Returns details about your report jobs.
+    #
+    # @option params [String] :by_report_plan_name
+    #   Returns only report jobs with the specified report plan name.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_creation_before
+    #   Returns only report jobs that were created before the date and time
+    #   specified in Unix format and Coordinated Universal Time (UTC). For
+    #   example, the value 1516925490 represents Friday, January 26, 2018
+    #   12:11:30 AM.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_creation_after
+    #   Returns only report jobs that were created after the date and time
+    #   specified in Unix format and Coordinated Universal Time (UTC). For
+    #   example, the value 1516925490 represents Friday, January 26, 2018
+    #   12:11:30 AM.
+    #
+    # @option params [String] :by_status
+    #   Returns only report jobs that are in the specified status. The
+    #   statuses are:
+    #
+    #   `CREATED | RUNNING | COMPLETED | FAILED`
+    #
+    # @option params [Integer] :max_results
+    #   The number of desired results from 1 to 1000. Optional. If
+    #   unspecified, the query will return 1 MB of data.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListReportJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReportJobsOutput#report_jobs #report_jobs} => Array&lt;Types::ReportJob&gt;
+    #   * {Types::ListReportJobsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_report_jobs({
+    #     by_report_plan_name: "ReportPlanName",
+    #     by_creation_before: Time.now,
+    #     by_creation_after: Time.now,
+    #     by_status: "string",
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_jobs #=> Array
+    #   resp.report_jobs[0].report_job_id #=> String
+    #   resp.report_jobs[0].report_plan_arn #=> String
+    #   resp.report_jobs[0].report_template #=> String
+    #   resp.report_jobs[0].creation_time #=> Time
+    #   resp.report_jobs[0].completion_time #=> Time
+    #   resp.report_jobs[0].status #=> String
+    #   resp.report_jobs[0].status_message #=> String
+    #   resp.report_jobs[0].report_destination.s3_bucket_name #=> String
+    #   resp.report_jobs[0].report_destination.s3_keys #=> Array
+    #   resp.report_jobs[0].report_destination.s3_keys[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListReportJobs AWS API Documentation
+    #
+    # @overload list_report_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_report_jobs(params = {}, options = {})
+      req = build_request(:list_report_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of your report plans. For detailed information about a
+    # single report plan, use `DescribeReportPlan`.
+    #
+    # @option params [Integer] :max_results
+    #   The number of desired results from 1 to 1000. Optional. If
+    #   unspecified, the query will return 1 MB of data.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListReportPlansOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReportPlansOutput#report_plans #report_plans} => Array&lt;Types::ReportPlan&gt;
+    #   * {Types::ListReportPlansOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_report_plans({
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_plans #=> Array
+    #   resp.report_plans[0].report_plan_arn #=> String
+    #   resp.report_plans[0].report_plan_name #=> String
+    #   resp.report_plans[0].report_plan_description #=> String
+    #   resp.report_plans[0].report_setting.report_template #=> String
+    #   resp.report_plans[0].report_delivery_channel.s3_bucket_name #=> String
+    #   resp.report_plans[0].report_delivery_channel.s3_key_prefix #=> String
+    #   resp.report_plans[0].report_delivery_channel.formats #=> Array
+    #   resp.report_plans[0].report_delivery_channel.formats[0] #=> String
+    #   resp.report_plans[0].deployment_status #=> String
+    #   resp.report_plans[0].creation_time #=> Time
+    #   resp.report_plans[0].last_attempted_execution_time #=> Time
+    #   resp.report_plans[0].last_successful_execution_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListReportPlans AWS API Documentation
+    #
+    # @overload list_report_plans(params = {})
+    # @param [Hash] params ({})
+    def list_report_plans(params = {}, options = {})
+      req = build_request(:list_report_plans, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of jobs that Backup initiated to restore a saved
+    # resource, including details about the recovery process.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -2323,8 +2848,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [String] :policy
     #   The backup vault access policy document in JSON format.
@@ -2353,8 +2878,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) that specifies the topic for a backup
@@ -2364,6 +2889,22 @@ module Aws::Backup
     # @option params [required, Array<String>] :backup_vault_events
     #   An array of events that indicate the status of jobs to back up
     #   resources to the backup vault.
+    #
+    #   <note markdown="1"> The following events are supported:
+    #
+    #    `BACKUP_JOB_STARTED`, `BACKUP_JOB_COMPLETED`,
+    #
+    #    `COPY_JOB_STARTED`, `COPY_JOB_SUCCESSFUL`, `COPY_JOB_FAILED`,
+    #
+    #    `RESTORE_JOB_STARTED`, `RESTORE_JOB_COMPLETED`, and
+    #   `RECOVERY_POINT_MODIFIED`.
+    #
+    #    To find failed backup jobs, use `BACKUP_JOB_COMPLETED` and filter
+    #   using event metadata.
+    #
+    #    Other events in the following list are deprecated.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2389,8 +2930,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource. The
@@ -2401,8 +2942,10 @@ module Aws::Backup
     #   for example, `arn:aws:iam::123456789012:role/S3Access`.
     #
     # @option params [String] :idempotency_token
-    #   A customer chosen string that can be used to distinguish between calls
-    #   to `StartBackupJob`.
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `StartBackupJob`. Retrying a successful
+    #   request with the same idempotency token results in a success message
+    #   with no action taken.
     #
     # @option params [Integer] :start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
@@ -2418,9 +2961,8 @@ module Aws::Backup
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   The lifecycle defines when a protected resource is transitioned to
-    #   cold storage and when it expires. AWS Backup will transition and
-    #   expire backups automatically according to the lifecycle that you
-    #   define.
+    #   cold storage and when it expires. Backup will transition and expire
+    #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
     #   for a minimum of 90 days. Therefore, the “expire after days” setting
@@ -2437,11 +2979,12 @@ module Aws::Backup
     #
     # @option params [Hash<String,String>] :backup_options
     #   Specifies the backup option for a selected resource. This option is
-    #   only available for Windows VSS backup jobs.
+    #   only available for Windows Volume Shadow Copy Service (VSS) backup
+    #   jobs.
     #
-    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
-    #   backup option and create a VSS Windows backup. Set to
-    #   “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS
+    #   Valid values: Set to `"WindowsVSS":"enabled"` to enable the
+    #   `WindowsVSS` backup option and create a Windows VSS backup. Set to
+    #   `"WindowsVSS""disabled"` to create a regular backup. The `WindowsVSS`
     #   option is not enabled by default.
     #
     # @return [Types::StartBackupJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2498,8 +3041,8 @@ module Aws::Backup
     # @option params [required, String] :source_backup_vault_name
     #   The name of a logical source container where backups are stored.
     #   Backup vaults are identified by names that are unique to the account
-    #   used to create them and the AWS Region where they are created. They
-    #   consist of lowercase letters, numbers, and hyphens.
+    #   used to create them and the Amazon Web Services Region where they are
+    #   created. They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :destination_backup_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a destination
@@ -2511,8 +3054,10 @@ module Aws::Backup
     #   example, `arn:aws:iam::123456789012:role/S3Access`.
     #
     # @option params [String] :idempotency_token
-    #   A customer chosen string that can be used to distinguish between calls
-    #   to `StartCopyJob`.
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `StartCopyJob`. Retrying a successful
+    #   request with the same idempotency token results in a success message
+    #   with no action taken.
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   Contains an array of `Transition` objects specifying how long in days
@@ -2560,6 +3105,44 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Starts an on-demand report job for the specified report plan.
+    #
+    # @option params [required, String] :report_plan_name
+    #   The unique name of a report plan.
+    #
+    # @option params [String] :idempotency_token
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `StartReportJobInput`. Retrying a
+    #   successful request with the same idempotency token results in a
+    #   success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartReportJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReportJobOutput#report_job_id #report_job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_report_job({
+    #     report_plan_name: "ReportPlanName", # required
+    #     idempotency_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartReportJob AWS API Documentation
+    #
+    # @overload start_report_job(params = {})
+    # @param [Hash] params ({})
+    def start_report_job(params = {}, options = {})
+      req = build_request(:start_report_job, params)
+      req.send_request(options)
+    end
+
     # Recovers the saved resource identified by an Amazon Resource Name
     # (ARN).
     #
@@ -2582,17 +3165,16 @@ module Aws::Backup
     #   File System (Amazon EFS) instance:
     #
     #   * `file-system-id`\: The ID of the Amazon EFS file system that is
-    #     backed up by AWS Backup. Returned in
-    #     `GetRecoveryPointRestoreMetadata`.
+    #     backed up by Backup. Returned in `GetRecoveryPointRestoreMetadata`.
     #
     #   * `Encrypted`\: A Boolean value that, if true, specifies that the file
     #     system is encrypted. If `KmsKeyId` is specified, `Encrypted` must be
     #     set to `true`.
     #
-    #   * `KmsKeyId`\: Specifies the AWS KMS key that is used to encrypt the
-    #     restored file system. You can specify a key from another AWS account
-    #     provided that key it is properly shared with your account via AWS
-    #     KMS.
+    #   * `KmsKeyId`\: Specifies the Amazon Web Services KMS key that is used
+    #     to encrypt the restored file system. You can specify a key from
+    #     another Amazon Web Services account provided that key it is properly
+    #     shared with your account via Amazon Web Services KMS.
     #
     #   * `PerformanceMode`\: Specifies the throughput mode of the file
     #     system.
@@ -2603,20 +3185,21 @@ module Aws::Backup
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that the
     #     recovery point is restored to a new Amazon EFS file system.
     #
-    #   * `ItemsToRestore `\: An array of one to five strings where each
-    #     string is a file path. Use `ItemsToRestore` to restore specific
-    #     files or directories rather than the entire file system. This
-    #     parameter is optional. For example,
-    #     `"itemsToRestore":"["/my.test"]"`.
+    #   * `ItemsToRestore`\: An array of one to five strings where each string
+    #     is a file path. Use `ItemsToRestore` to restore specific files or
+    #     directories rather than the entire file system. This parameter is
+    #     optional. For example, `"itemsToRestore":"["/my.test"]"`.
     #
     # @option params [required, String] :iam_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to
+    #   The Amazon Resource Name (ARN) of the IAM role that Backup uses to
     #   create the target recovery point; for example,
     #   `arn:aws:iam::123456789012:role/S3Access`.
     #
     # @option params [String] :idempotency_token
-    #   A customer chosen string that can be used to distinguish between calls
-    #   to `StartRestoreJob`.
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `StartRestoreJob`. Retrying a successful
+    #   request with the same idempotency token results in a success message
+    #   with no action taken.
     #
     # @option params [String] :resource_type
     #   Starts a job to restore a recovery point for one of the following
@@ -2634,7 +3217,7 @@ module Aws::Backup
     #
     #   * `Aurora` for Amazon Aurora
     #
-    #   * `Storage Gateway` for AWS Storage Gateway
+    #   * `Storage Gateway` for Storage Gateway
     #
     # @return [Types::StartRestoreJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2668,7 +3251,7 @@ module Aws::Backup
     # Attempts to cancel a job to create a one-time backup of a resource.
     #
     # @option params [required, String] :backup_job_id
-    #   Uniquely identifies a request to AWS Backup to back up a resource.
+    #   Uniquely identifies a request to Backup to back up a resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2829,11 +3412,87 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates the current global settings for the AWS account. Use the
-    # `DescribeGlobalSettings` API to determine the current settings.
+    # Updates an existing framework identified by its `FrameworkName` with
+    # the input document in JSON format.
+    #
+    # @option params [required, String] :framework_name
+    #   The unique name of a framework. This name is between 1 and 256
+    #   characters, starting with a letter, and consisting of letters (a-z,
+    #   A-Z), numbers (0-9), and underscores (\_).
+    #
+    # @option params [String] :framework_description
+    #   An optional description of the framework with a maximum 1,024
+    #   characters.
+    #
+    # @option params [Array<Types::FrameworkControl>] :framework_controls
+    #   A list of the controls that make up the framework. Each control in the
+    #   list has a name, input parameters, and scope.
+    #
+    # @option params [String] :idempotency_token
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `UpdateFrameworkInput`. Retrying a
+    #   successful request with the same idempotency token results in a
+    #   success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateFrameworkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFrameworkOutput#framework_name #framework_name} => String
+    #   * {Types::UpdateFrameworkOutput#framework_arn #framework_arn} => String
+    #   * {Types::UpdateFrameworkOutput#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_framework({
+    #     framework_name: "FrameworkName", # required
+    #     framework_description: "FrameworkDescription",
+    #     framework_controls: [
+    #       {
+    #         control_name: "ControlName", # required
+    #         control_input_parameters: [
+    #           {
+    #             parameter_name: "ParameterName",
+    #             parameter_value: "ParameterValue",
+    #           },
+    #         ],
+    #         control_scope: {
+    #           compliance_resource_ids: ["string"],
+    #           compliance_resource_types: ["ARN"],
+    #           tags: {
+    #             "string" => "string",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     idempotency_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.framework_name #=> String
+    #   resp.framework_arn #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateFramework AWS API Documentation
+    #
+    # @overload update_framework(params = {})
+    # @param [Hash] params ({})
+    def update_framework(params = {}, options = {})
+      req = build_request(:update_framework, params)
+      req.send_request(options)
+    end
+
+    # Updates whether the Amazon Web Services account is opted in to
+    # cross-account backup. Returns an error if the account is not an
+    # Organizations management account. Use the `DescribeGlobalSettings` API
+    # to determine the current settings.
     #
     # @option params [Hash<String,String>] :global_settings
-    #   A list of resources along with the opt-in preferences for the account.
+    #   A value for `isCrossAccountBackupEnabled` and a Region. Example:
+    #   `update-global-settings --global-settings
+    #   isCrossAccountBackupEnabled=false --region us-west-2`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2857,7 +3516,7 @@ module Aws::Backup
     # Sets the transition lifecycle of a recovery point.
     #
     # The lifecycle defines when a protected resource is transitioned to
-    # cold storage and when it expires. AWS Backup transitions and expires
+    # cold storage and when it expires. Backup transitions and expires
     # backups automatically according to the lifecycle that you define.
     #
     # Backups transitioned to cold storage must be stored in cold storage
@@ -2874,8 +3533,8 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Amazon Web Services Region where they are created.
+    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -2884,7 +3543,7 @@ module Aws::Backup
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   The lifecycle defines when a protected resource is transitioned to
-    #   cold storage and when it expires. AWS Backup transitions and expires
+    #   cold storage and when it expires. Backup transitions and expires
     #   backups automatically according to the lifecycle that you define.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
@@ -2930,12 +3589,12 @@ module Aws::Backup
     end
 
     # Updates the current service opt-in settings for the Region. If
-    # service-opt-in is enabled for a service, AWS Backup tries to protect
-    # that service's resources in this Region, when the resource is
-    # included in an on-demand backup or scheduled backup plan. Otherwise,
-    # AWS Backup does not try to protect that service's resources in this
-    # Region. Use the `DescribeRegionSettings` API to determine the resource
-    # types that are supported.
+    # service-opt-in is enabled for a service, Backup tries to protect that
+    # service's resources in this Region, when the resource is included in
+    # an on-demand backup or scheduled backup plan. Otherwise, Backup does
+    # not try to protect that service's resources in this Region. Use the
+    # `DescribeRegionSettings` API to determine the resource types that are
+    # supported.
     #
     # @option params [Hash<String,Boolean>] :resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for the
@@ -2960,6 +3619,75 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Updates an existing report plan identified by its `ReportPlanName`
+    # with the input document in JSON format.
+    #
+    # @option params [required, String] :report_plan_name
+    #   The unique name of the report plan. This name is between 1 and 256
+    #   characters, starting with a letter, and consisting of letters (a-z,
+    #   A-Z), numbers (0-9), and underscores (\_).
+    #
+    # @option params [String] :report_plan_description
+    #   An optional description of the report plan with a maximum 1,024
+    #   characters.
+    #
+    # @option params [Types::ReportDeliveryChannel] :report_delivery_channel
+    #   A structure that contains information about where to deliver your
+    #   reports, specifically your Amazon S3 bucket name, S3 key prefix, and
+    #   the formats of your reports.
+    #
+    # @option params [Types::ReportSetting] :report_setting
+    #   Identifies the report template for the report. Reports are built using
+    #   a report template. The report templates are:
+    #
+    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    # @option params [String] :idempotency_token
+    #   A customer-chosen string that you can use to distinguish between
+    #   otherwise identical calls to `UpdateReportPlanInput`. Retrying a
+    #   successful request with the same idempotency token results in a
+    #   success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateReportPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateReportPlanOutput#report_plan_name #report_plan_name} => String
+    #   * {Types::UpdateReportPlanOutput#report_plan_arn #report_plan_arn} => String
+    #   * {Types::UpdateReportPlanOutput#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_report_plan({
+    #     report_plan_name: "ReportPlanName", # required
+    #     report_plan_description: "ReportPlanDescription",
+    #     report_delivery_channel: {
+    #       s3_bucket_name: "string", # required
+    #       s3_key_prefix: "string",
+    #       formats: ["string"],
+    #     },
+    #     report_setting: {
+    #       report_template: "string", # required
+    #     },
+    #     idempotency_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_plan_name #=> String
+    #   resp.report_plan_arn #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateReportPlan AWS API Documentation
+    #
+    # @overload update_report_plan(params = {})
+    # @param [Hash] params ({})
+    def update_report_plan(params = {}, options = {})
+      req = build_request(:update_report_plan, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2973,7 +3701,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

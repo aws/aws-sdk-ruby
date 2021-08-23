@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2021-08-23)
+------------------
+
+* Feature - Adding some of the pending releases (1) Adding WAF Filter to GatewayResponseType enum (2) Ensuring consistent error model for all operations (3) Add missing BRE to GetVpcLink operation
+
 1.65.0 (2021-08-12)
 ------------------
 

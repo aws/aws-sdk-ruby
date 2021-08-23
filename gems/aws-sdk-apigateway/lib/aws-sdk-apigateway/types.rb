@@ -1816,7 +1816,7 @@ module Aws::APIGateway
     #
     #       {
     #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -1825,27 +1825,6 @@ module Aws::APIGateway
     #
     # @!attribute [rw] response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values
-    #   are * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     class DeleteGatewayResponseRequest < Struct.new(
@@ -2898,27 +2877,7 @@ module Aws::APIGateway
     # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
     #
     # @!attribute [rw] response_type
-    #   The response type of the associated GatewayResponse. Valid values
-    #   are * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
+    #   The response type of the associated GatewayResponse.
     #   @return [String]
     #
     # @!attribute [rw] status_code
@@ -3610,7 +3569,7 @@ module Aws::APIGateway
     #
     #       {
     #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -3619,27 +3578,6 @@ module Aws::APIGateway
     #
     # @!attribute [rw] response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values
-    #   are * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     class GetGatewayResponseRequest < Struct.new(
@@ -5624,7 +5562,7 @@ module Aws::APIGateway
     #
     #       {
     #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #         status_code: "StatusCode",
     #         response_parameters: {
     #           "String" => "String",
@@ -5640,27 +5578,6 @@ module Aws::APIGateway
     #
     # @!attribute [rw] response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values
-    #   are * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     # @!attribute [rw] status_code
@@ -7592,7 +7509,7 @@ module Aws::APIGateway
     #
     #       {
     #         rest_api_id: "String", # required
-    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #         response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #         patch_operations: [
     #           {
     #             op: "add", # accepts add, remove, replace, move, copy, test
@@ -7609,27 +7526,6 @@ module Aws::APIGateway
     #
     # @!attribute [rw] response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values
-    #   are * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
