@@ -12,7 +12,8 @@ module Aws
             # if this handler is run after serialization.
             if !body.respond_to?(:size) ||
                (body.respond_to?(:size) && body.size > 0)
-              context.http_request.headers['Content-Type'] = 'application/json'
+              context.http_request.headers['Content-Type'] ||=
+                'application/json'
             end
             @handler.call(context)
           end
