@@ -10,7 +10,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.119.1"
+    MINIMUM_CORE_VERSION = "3.119.2"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
