@@ -10451,7 +10451,7 @@ module Aws::EC2
     #
     #   resp = client.describe_byoip_cidrs({
     #     dry_run: false,
-    #     max_results: 1, # required
+    #     max_results: 5, # required
     #     next_token: "NextToken",
     #   })
     #
@@ -10507,7 +10507,7 @@ module Aws::EC2
     #   resp = client.describe_capacity_reservations({
     #     capacity_reservation_ids: ["String"],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #     filters: [
     #       {
     #         name: "String",
@@ -10612,7 +10612,7 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     instance_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -10677,7 +10677,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -10741,7 +10741,7 @@ module Aws::EC2
     #       },
     #     ],
     #     next_token: "NextToken",
-    #     max_results: 1,
+    #     max_results: 5,
     #     dry_run: false,
     #   })
     #
@@ -10804,7 +10804,7 @@ module Aws::EC2
     #
     #   resp = client.describe_client_vpn_endpoints({
     #     client_vpn_endpoint_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "NextToken",
     #     filters: [
     #       {
@@ -10893,7 +10893,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "NextToken",
     #     dry_run: false,
     #   })
@@ -10956,7 +10956,7 @@ module Aws::EC2
     #   resp = client.describe_client_vpn_target_networks({
     #     client_vpn_endpoint_id: "String", # required
     #     association_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "NextToken",
     #     filters: [
     #       {
@@ -11316,7 +11316,7 @@ module Aws::EC2
     #   resp = client.describe_egress_only_internet_gateways({
     #     dry_run: false,
     #     egress_only_internet_gateway_ids: ["EgressOnlyInternetGatewayId"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -11398,7 +11398,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -11502,7 +11502,7 @@ module Aws::EC2
     #   resp = client.describe_fleet_history({
     #     dry_run: false,
     #     event_type: "instance-change", # accepts instance-change, fleet-change, service-error
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     fleet_id: "FleetIdentifier", # required
     #     start_time: Time.now, # required
@@ -11567,7 +11567,7 @@ module Aws::EC2
     #
     #   resp = client.describe_fleet_instances({
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     fleet_id: "FleetIdentifier", # required
     #     filters: [
@@ -11645,7 +11645,7 @@ module Aws::EC2
     #
     #   resp = client.describe_fleets({
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     fleet_ids: ["FleetIdentifier"],
     #     filters: [
@@ -11798,7 +11798,7 @@ module Aws::EC2
     #       },
     #     ],
     #     flow_log_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -11950,7 +11950,7 @@ module Aws::EC2
     #       },
     #     ],
     #     next_token: "NextToken",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -12056,7 +12056,7 @@ module Aws::EC2
     #       },
     #     ],
     #     max_duration: 1,
-    #     max_results: 1,
+    #     max_results: 5,
     #     min_duration: 1,
     #     next_token: "String",
     #     offering_id: "String",
@@ -12135,7 +12135,7 @@ module Aws::EC2
     #       },
     #     ],
     #     host_reservation_id_set: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -12232,7 +12232,7 @@ module Aws::EC2
     #       },
     #     ],
     #     host_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -12335,7 +12335,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "NextToken",
     #   })
     #
@@ -12864,7 +12864,7 @@ module Aws::EC2
     #       },
     #     ],
     #     import_task_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -12944,7 +12944,7 @@ module Aws::EC2
     #       },
     #     ],
     #     import_task_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -13203,7 +13203,7 @@ module Aws::EC2
     #       },
     #     ],
     #     instance_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -13388,7 +13388,7 @@ module Aws::EC2
     #       },
     #     ],
     #     instance_ids: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #     include_all_instances: false,
@@ -13809,7 +13809,7 @@ module Aws::EC2
     #     ],
     #     instance_ids: ["String"],
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -14035,7 +14035,7 @@ module Aws::EC2
     #     dry_run: false,
     #     internet_gateway_ids: ["String"],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -14272,7 +14272,7 @@ module Aws::EC2
     #     min_version: "String",
     #     max_version: "String",
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #     filters: [
     #       {
     #         name: "String",
@@ -14457,7 +14457,7 @@ module Aws::EC2
     #       },
     #     ],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -14550,7 +14550,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     public_ips: ["String"],
     #   })
@@ -14657,7 +14657,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     nat_gateway_ids: ["String"],
     #     next_token: "String",
     #   })
@@ -14843,7 +14843,7 @@ module Aws::EC2
     #     dry_run: false,
     #     network_acl_ids: ["String"],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -15062,7 +15062,7 @@ module Aws::EC2
     #       },
     #     ],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -15302,7 +15302,7 @@ module Aws::EC2
     #     dry_run: false,
     #     network_interface_ids: ["String"],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -15474,7 +15474,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     prefix_list_ids: ["String"],
     #   })
@@ -15554,7 +15554,7 @@ module Aws::EC2
     #   resp = client.describe_principal_id_format({
     #     dry_run: false,
     #     resources: ["String"],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -15600,7 +15600,7 @@ module Aws::EC2
     #   resp = client.describe_public_ipv_4_pools({
     #     pool_ids: ["String"],
     #     next_token: "NextToken",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -16239,7 +16239,7 @@ module Aws::EC2
     #     reserved_instances_offering_ids: ["String"],
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
     #   })
@@ -16438,7 +16438,7 @@ module Aws::EC2
     #     dry_run: false,
     #     route_table_ids: ["String"],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -16605,7 +16605,7 @@ module Aws::EC2
     #       earliest_time: Time.now, # required
     #       latest_time: Time.now, # required
     #     },
-    #     max_results: 1,
+    #     max_results: 5,
     #     max_slot_duration_in_hours: 1,
     #     min_slot_duration_in_hours: 1,
     #     next_token: "String",
@@ -16742,7 +16742,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     scheduled_instance_ids: ["String"],
     #     slot_start_time_range: {
@@ -17021,7 +17021,7 @@ module Aws::EC2
     #     group_names: ["String"],
     #     dry_run: false,
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -17366,7 +17366,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     owner_ids: ["String"],
     #     restorable_by_user_ids: ["String"],
@@ -17515,7 +17515,7 @@ module Aws::EC2
     #
     #   resp = client.describe_spot_fleet_instances({
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     spot_fleet_request_id: "String", # required
     #   })
@@ -17634,7 +17634,7 @@ module Aws::EC2
     #   resp = client.describe_spot_fleet_request_history({
     #     dry_run: false,
     #     event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     spot_fleet_request_id: "String", # required
     #     start_time: Time.now, # required
@@ -17750,7 +17750,7 @@ module Aws::EC2
     #
     #   resp = client.describe_spot_fleet_requests({
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     spot_fleet_request_ids: ["String"],
     #   })
@@ -18090,7 +18090,7 @@ module Aws::EC2
     #     dry_run: false,
     #     spot_instance_request_ids: ["String"],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -18299,7 +18299,7 @@ module Aws::EC2
     #     dry_run: false,
     #     end_time: Time.now,
     #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.12xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.12xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.12xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.12xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     product_descriptions: ["String"],
     #     start_time: Time.now,
@@ -18356,7 +18356,7 @@ module Aws::EC2
     #
     #   resp = client.describe_stale_security_groups({
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "NextToken",
     #     vpc_id: "String", # required
     #   })
@@ -18657,7 +18657,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -18743,7 +18743,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
@@ -18831,7 +18831,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
@@ -18907,7 +18907,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
@@ -19013,7 +19013,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
@@ -19303,7 +19303,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     volume_ids: ["String"],
     #     dry_run: false,
@@ -19531,7 +19531,7 @@ module Aws::EC2
     #     ],
     #     volume_ids: ["String"],
     #     dry_run: false,
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -19630,7 +19630,7 @@ module Aws::EC2
     #       },
     #     ],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -19835,7 +19835,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_classic_link_dns_support({
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "NextToken",
     #     vpc_ids: ["String"],
     #   })
@@ -19909,7 +19909,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -19983,7 +19983,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -20054,7 +20054,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -20131,7 +20131,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -20198,7 +20198,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -20280,7 +20280,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #   })
     #
@@ -20397,7 +20397,7 @@ module Aws::EC2
     #     dry_run: false,
     #     vpc_peering_connection_ids: ["String"],
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -20558,7 +20558,7 @@ module Aws::EC2
     #     vpc_ids: ["String"],
     #     dry_run: false,
     #     next_token: "String",
-    #     max_results: 1,
+    #     max_results: 5,
     #   })
     #
     # @example Response structure
@@ -22465,7 +22465,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
@@ -22530,7 +22530,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
@@ -22597,7 +22597,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
@@ -29190,7 +29190,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     dry_run: false,
     #   })
     #

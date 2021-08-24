@@ -400,7 +400,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
+    #     max_results: 5,
     #     next_token: "String",
     #     dry_run: false,
     #   })
