@@ -728,6 +728,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -761,6 +762,7 @@ module Aws::MediaConvert
     #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -784,6 +786,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -806,6 +809,7 @@ module Aws::MediaConvert
     #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
@@ -817,6 +821,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -851,6 +856,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -885,6 +891,7 @@ module Aws::MediaConvert
     #               program_date_time_period: 1,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               segments_per_subdirectory: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -908,6 +915,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -921,6 +929,7 @@ module Aws::MediaConvert
     #                 },
     #               },
     #               fragment_length: 1,
+    #               fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #             },
     #             type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -1162,6 +1171,7 @@ module Aws::MediaConvert
     #                   audio_pids: [1],
     #                   bitrate: 1,
     #                   buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                   data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                   dvb_nit_settings: {
     #                     network_id: 1,
     #                     network_name: "__stringMin1Max256",
@@ -1211,6 +1221,7 @@ module Aws::MediaConvert
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                   max_pcr_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
@@ -1321,7 +1332,7 @@ module Aws::MediaConvert
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -1876,6 +1887,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
@@ -1902,6 +1914,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -1916,6 +1929,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -1932,10 +1946,12 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -1956,6 +1972,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
@@ -1982,6 +1999,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
@@ -1996,6 +2014,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
@@ -2003,6 +2022,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.manifest_encoding #=> String, one of "UTF8", "UTF16"
     #   resp.job.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job.settings.output_groups[0].outputs #=> Array
@@ -2180,6 +2200,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -2221,6 +2242,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -2302,7 +2324,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -2905,6 +2927,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -2938,6 +2961,7 @@ module Aws::MediaConvert
     #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -2961,6 +2985,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -2983,6 +3008,7 @@ module Aws::MediaConvert
     #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
@@ -2994,6 +3020,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -3028,6 +3055,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -3062,6 +3090,7 @@ module Aws::MediaConvert
     #               program_date_time_period: 1,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               segments_per_subdirectory: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -3085,6 +3114,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -3098,6 +3128,7 @@ module Aws::MediaConvert
     #                 },
     #               },
     #               fragment_length: 1,
+    #               fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #             },
     #             type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -3339,6 +3370,7 @@ module Aws::MediaConvert
     #                   audio_pids: [1],
     #                   bitrate: 1,
     #                   buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                   data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                   dvb_nit_settings: {
     #                     network_id: 1,
     #                     network_name: "__stringMin1Max256",
@@ -3388,6 +3420,7 @@ module Aws::MediaConvert
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                   max_pcr_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
@@ -3498,7 +3531,7 @@ module Aws::MediaConvert
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -4023,6 +4056,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
@@ -4049,6 +4083,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -4063,6 +4098,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -4079,10 +4115,12 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -4103,6 +4141,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
@@ -4129,6 +4168,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
@@ -4143,6 +4183,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
@@ -4150,6 +4191,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.manifest_encoding #=> String, one of "UTF8", "UTF16"
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
@@ -4327,6 +4369,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -4368,6 +4411,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -4449,7 +4493,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -4994,6 +5038,7 @@ module Aws::MediaConvert
     #           audio_pids: [1],
     #           bitrate: 1,
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           dvb_nit_settings: {
     #             network_id: 1,
     #             network_name: "__stringMin1Max256",
@@ -5043,6 +5088,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
@@ -5139,7 +5185,7 @@ module Aws::MediaConvert
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -5655,6 +5701,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.preset.settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -5696,6 +5743,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -5767,7 +5815,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -6469,6 +6517,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
@@ -6495,6 +6544,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -6509,6 +6559,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -6525,10 +6576,12 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -6549,6 +6602,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
@@ -6575,6 +6629,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
@@ -6589,6 +6644,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
@@ -6596,6 +6652,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.manifest_encoding #=> String, one of "UTF8", "UTF16"
     #   resp.job.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job.settings.output_groups[0].outputs #=> Array
@@ -6773,6 +6830,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -6814,6 +6872,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -6895,7 +6954,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -7367,6 +7426,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
@@ -7393,6 +7453,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -7407,6 +7468,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -7423,10 +7485,12 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -7447,6 +7511,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
@@ -7473,6 +7538,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
@@ -7487,6 +7553,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
@@ -7494,6 +7561,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.manifest_encoding #=> String, one of "UTF8", "UTF16"
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
@@ -7671,6 +7739,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -7712,6 +7781,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -7793,7 +7863,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -8269,6 +8339,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.preset.settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -8310,6 +8381,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -8381,7 +8453,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -8912,6 +8984,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
@@ -8938,6 +9011,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -8952,6 +9026,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -8968,10 +9043,12 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -8992,6 +9069,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
@@ -9018,6 +9096,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
@@ -9032,6 +9111,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
@@ -9039,6 +9119,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.manifest_encoding #=> String, one of "UTF8", "UTF16"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_templates[0].settings.output_groups[0].outputs #=> Array
@@ -9216,6 +9297,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -9257,6 +9339,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -9338,7 +9421,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -9860,6 +9943,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
@@ -9886,6 +9970,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -9900,6 +9985,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -9916,10 +10002,12 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -9940,6 +10028,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
@@ -9966,6 +10055,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
@@ -9980,6 +10070,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
@@ -9987,6 +10078,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.ms_smooth_group_settings.manifest_encoding #=> String, one of "UTF8", "UTF16"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.jobs[0].settings.output_groups[0].outputs #=> Array
@@ -10164,6 +10256,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -10205,6 +10298,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -10286,7 +10380,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -10800,6 +10894,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.presets[0].settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.presets[0].settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.presets[0].settings.container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -10841,6 +10936,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.presets[0].settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -10912,7 +11008,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -11650,6 +11746,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -11683,6 +11780,7 @@ module Aws::MediaConvert
     #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -11706,6 +11804,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -11728,6 +11827,7 @@ module Aws::MediaConvert
     #               pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             file_group_settings: {
@@ -11739,6 +11839,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -11773,6 +11874,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -11807,6 +11909,7 @@ module Aws::MediaConvert
     #               program_date_time_period: 1,
     #               segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #               segment_length: 1,
+    #               segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               segments_per_subdirectory: 1,
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -11830,6 +11933,7 @@ module Aws::MediaConvert
     #                   },
     #                   encryption: {
     #                     encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                   },
     #                 },
@@ -11843,6 +11947,7 @@ module Aws::MediaConvert
     #                 },
     #               },
     #               fragment_length: 1,
+    #               fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #               manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #             },
     #             type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -12084,6 +12189,7 @@ module Aws::MediaConvert
     #                   audio_pids: [1],
     #                   bitrate: 1,
     #                   buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                   data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                   dvb_nit_settings: {
     #                     network_id: 1,
     #                     network_name: "__stringMin1Max256",
@@ -12133,6 +12239,7 @@ module Aws::MediaConvert
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                   max_pcr_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
@@ -12243,7 +12350,7 @@ module Aws::MediaConvert
     #                     codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                     dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                     entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                     field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                     flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -12765,6 +12872,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.constant_initialization_vector #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.encryption_method #=> String, one of "SAMPLE_AES", "AES_CTR"
@@ -12791,6 +12899,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
@@ -12805,6 +12914,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.playback_device_compatibility #=> String, one of "CENC_V1", "UNENCRYPTED_SEI"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.certificate_arn #=> String
@@ -12821,10 +12931,12 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.pts_offset_handling_for_b_frames #=> String, one of "ZERO_BASED", "MATCH_INITIAL_PTS"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.file_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ELEMENTAL", "ELEMENTAL_SCTE35"
@@ -12845,6 +12957,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.directory_structure #=> String, one of "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.constant_initialization_vector #=> String
@@ -12871,6 +12984,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_control #=> String, one of "SINGLE_FILE", "SEGMENTED_FILES"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.segments_per_subdirectory #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.target_duration_compatibility_mode #=> String, one of "LEGACY", "SPEC_COMPLIANT"
@@ -12885,6 +12999,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.access_control.canned_acl #=> String, one of "PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.encryption_type #=> String, one of "SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_encryption_context #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.destination_settings.s3_settings.encryption.kms_key_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.resource_id #=> String
@@ -12892,6 +13007,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.fragment_length_control #=> String, one of "EXACT", "GOP_MULTIPLE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.ms_smooth_group_settings.manifest_encoding #=> String, one of "UTF8", "UTF16"
     #   resp.job_template.settings.output_groups[0].output_group_settings.type #=> String, one of "HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"
     #   resp.job_template.settings.output_groups[0].outputs #=> Array
@@ -13069,6 +13185,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -13110,6 +13227,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -13191,7 +13309,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -13730,6 +13848,7 @@ module Aws::MediaConvert
     #           audio_pids: [1],
     #           bitrate: 1,
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           dvb_nit_settings: {
     #             network_id: 1,
     #             network_name: "__stringMin1Max256",
@@ -13779,6 +13898,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
@@ -13875,7 +13995,7 @@ module Aws::MediaConvert
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -14388,6 +14508,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.audio_pids[0] #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.bitrate #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.buffer_model #=> String, one of "MULTIPLEX", "NONE"
+    #   resp.preset.settings.container_settings.m2ts_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.network_id #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.network_name #=> String
     #   resp.preset.settings.container_settings.m2ts_settings.dvb_nit_settings.nit_interval #=> Integer
@@ -14429,6 +14550,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.data_pts_control #=> String, one of "AUTO", "ALIGN_TO_VIDEO"
     #   resp.preset.settings.container_settings.m3u_8_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
@@ -14500,7 +14622,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.codec_profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.dynamic_sub_gop #=> String, one of "ADAPTIVE", "STATIC"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.field_encoding #=> String, one of "PAFF", "FORCE_FIELD", "MBAFF"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER"
@@ -14852,7 +14974,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

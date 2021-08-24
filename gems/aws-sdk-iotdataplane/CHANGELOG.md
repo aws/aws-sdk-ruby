@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-08-24)
+------------------
+
+* Feature - Updated Publish with support for new Retain flag and added two new API operations: GetRetainedMessage, ListRetainedMessages.
+
 1.30.0 (2021-07-30)
 ------------------
 

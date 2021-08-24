@@ -511,10 +511,10 @@ module Aws::TranscribeService
     #   create your custom language model.
     #
     #   If you want to use your custom language model to transcribe audio with
-    #   a sample rate of 16 kHz or greater, choose `Wideband`.
+    #   a sample rate of 16,000 Hz or greater, choose `Wideband`.
     #
     #   If you want to use your custom language model to transcribe audio with
-    #   a sample rate that is less than 16 kHz, choose `Narrowband`.
+    #   a sample rate that is less than 16,000 Hz, choose `Narrowband`.
     #
     # @option params [required, String] :model_name
     #   The name you choose for your custom language model when you create it.
@@ -522,6 +522,10 @@ module Aws::TranscribeService
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   Contains the data access role and the Amazon S3 prefixes to read the
     #   required input files to create a custom language model.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   language model at the time you create this new model.
     #
     # @return [Types::CreateLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -542,6 +546,12 @@ module Aws::TranscribeService
     #       tuning_data_s3_uri: "Uri",
     #       data_access_role_arn: "DataAccessRoleArn", # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -563,7 +573,7 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Creates a new custom vocabulary that you can use to change how Amazon
+    # Creates a new custom vocabulary that you can use to modify how Amazon
     # Transcribe Medical transcribes your audio file.
     #
     # @option params [required, String] :vocabulary_name
@@ -604,6 +614,10 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
     #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   medical vocabulary at the time you create this new vocabulary.
+    #
     # @return [Types::CreateMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMedicalVocabularyResponse#vocabulary_name #vocabulary_name} => String
@@ -618,6 +632,12 @@ module Aws::TranscribeService
     #     vocabulary_name: "VocabularyName", # required
     #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     vocabulary_file_uri: "Uri", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -648,7 +668,7 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see what-is-transcribe.
+    #   and their corresponding language codes, see transcribe-whatis.
     #
     # @option params [Array<String>] :phrases
     #   An array of strings that contains the vocabulary entries.
@@ -656,18 +676,23 @@ module Aws::TranscribeService
     # @option params [String] :vocabulary_file_uri
     #   The S3 location of the text file that contains the definition of the
     #   custom vocabulary. The URI must be in the same region as the API
-    #   endpoint that you are calling. The general form is
+    #   endpoint that you are calling. The general form is:
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
     #
     #   For more information about custom vocabularies, see [Custom
-    #   Vocabularies][2].
+    #   vocabularies][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
     #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   Amazon Transcribe vocabulary at the time you create this new
+    #   vocabulary.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -684,6 +709,12 @@ module Aws::TranscribeService
     #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -745,6 +776,11 @@ module Aws::TranscribeService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   Amazon Transcribe vocabulary filter at the time you create this new
+    #   vocabulary filter.
+    #
     # @return [Types::CreateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVocabularyFilterResponse#vocabulary_filter_name #vocabulary_filter_name} => String
@@ -758,6 +794,12 @@ module Aws::TranscribeService
     #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1180,6 +1222,9 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.content_identification_type #=> String, one of "PHI"
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
+    #   resp.medical_transcription_job.tags #=> Array
+    #   resp.medical_transcription_job.tags[0].key #=> String
+    #   resp.medical_transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalTranscriptionJob AWS API Documentation
     #
@@ -1281,6 +1326,9 @@ module Aws::TranscribeService
     #   resp.transcription_job.language_options #=> Array
     #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.transcription_job.identified_language_score #=> Float
+    #   resp.transcription_job.tags #=> Array
+    #   resp.transcription_job.tags[0].key #=> String
+    #   resp.transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -1374,9 +1422,10 @@ module Aws::TranscribeService
     #   result of the previous request was truncated.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of categories to return in the response. If there
-    #   are fewer results in the list, the response contains only the actual
-    #   results.
+    #   The maximum number of categories to return in each page of results. If
+    #   there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
     #
     # @return [Types::ListCallAnalyticsCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1474,9 +1523,10 @@ module Aws::TranscribeService
     #   `NextToken` to fetch the next set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of call analytics jobs to return in the response.
-    #   If there are fewer results in the list, this response contains only
-    #   the actual results.
+    #   The maximum number of call analytics jobs to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #
     # @return [Types::ListCallAnalyticsJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1537,9 +1587,10 @@ module Aws::TranscribeService
     #   previous request was truncated.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of language models to return in the response. If
-    #   there are fewer results in the list, the response contains only the
-    #   actual results.
+    #   The maximum number of language models to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #
     # @return [Types::ListLanguageModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1601,9 +1652,10 @@ module Aws::TranscribeService
     #   set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of medical transcription jobs to return in the
-    #   response. IF there are fewer results in the list, this response
-    #   contains only the actual results.
+    #   The maximum number of medical transcription jobs to return in each
+    #   page of results. If there are fewer results than the value you
+    #   specify, only the actual results are returned. If you do not specify a
+    #   value, the default of 5 is used.
     #
     # @return [Types::ListMedicalTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1658,7 +1710,10 @@ module Aws::TranscribeService
     #   vocabularies.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of vocabularies to return in the response.
+    #   The maximum number of vocabularies to return in each page of results.
+    #   If there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
     #
     # @option params [String] :state_equals
     #   When specified, returns only vocabularies with the `VocabularyState`
@@ -1706,6 +1761,39 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Lists all tags associated with a given transcription job, vocabulary,
+    # or resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   Lists all tags associated with a given Amazon Resource Name (ARN).
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_arn #resource_arn} => String
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TranscribeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Lists transcription jobs with the specified status.
     #
     # @option params [String] :status
@@ -1723,9 +1811,9 @@ module Aws::TranscribeService
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of jobs to return in the response. If there are
-    #   fewer results in the list, this response contains only the actual
-    #   results.
+    #   The maximum number of jobs to return in each page of results. If there
+    #   are fewer results than the value you specify, only the actual results
+    #   are returned. If you do not specify a value, the default of 5 is used.
     #
     # @return [Types::ListTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1780,9 +1868,10 @@ module Aws::TranscribeService
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of vocabularies to return in the response. If there
-    #   are fewer results in the list, this response contains only the actual
-    #   results.
+    #   The maximum number of vocabularies to return in each page of results.
+    #   If there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
     #
     # @option params [String] :state_equals
     #   When specified, only returns vocabularies with the `VocabularyState`
@@ -1838,9 +1927,10 @@ module Aws::TranscribeService
     #   collections.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of filters to return in the response. If there are
-    #   fewer results in the list, this response contains only the actual
-    #   results.
+    #   The maximum number of filters to return in each page of results. If
+    #   there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
     #
     # @option params [String] :name_contains
     #   Filters the response so that it only contains vocabulary filters whose
@@ -1890,9 +1980,9 @@ module Aws::TranscribeService
     # @option params [required, String] :call_analytics_job_name
     #   The name of the call analytics job. You can't use the string "." or
     #   ".." by themselves as the job name. The name must also be unique
-    #   within an AWS account. If you try to create a call analytics job with
-    #   the same name as a previous call analytics job, you get a
-    #   `ConflictException` error.
+    #   within an Amazon Web Services account. If you try to create a call
+    #   analytics job with the same name as a previous call analytics job, you
+    #   get a `ConflictException` error.
     #
     # @option params [required, Types::Media] :media
     #   Describes the input media file in a transcription request.
@@ -1921,19 +2011,21 @@ module Aws::TranscribeService
     #     Transcribe saves the output of the analytics job as
     #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json
     #
-    #   You can specify an AWS Key Management Service key to encrypt the
-    #   output of our analytics job using the `OutputEncryptionKMSKeyId`
-    #   parameter. If you don't specify a KMS key, Amazon Transcribe uses the
-    #   default Amazon S3 key for server-side encryption of the analytics job
-    #   output that is placed in your S3 bucket.
+    #   You can specify an Amazon Web Services Key Management Service (KMS)
+    #   key to encrypt the output of our analytics job using the
+    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
+    #   Amazon Transcribe uses the default Amazon S3 key for server-side
+    #   encryption of the analytics job output that is placed in your S3
+    #   bucket.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service key
-    #   used to encrypt the output of the call analytics job. The user calling
-    #   the operation must have permission to use the specified KMS key.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service key used to encrypt the output of the call
+    #   analytics job. The user calling the operation must have permission to
+    #   use the specified KMS key.
     #
-    #   You use either of the following to identify an AWS KMS key in the
-    #   current account:
+    #   You use either of the following to identify an Amazon Web Services KMS
+    #   key in the current account:
     #
     #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
     #
@@ -2165,7 +2257,10 @@ module Aws::TranscribeService
     #   The type of speech in the input audio. `CONVERSATION` refers to
     #   conversations between two or more speakers, e.g., a conversations
     #   between doctors and patients. `DICTATION` refers to single-speaker
-    #   dictated speech, e.g., for clinical notes.
+    #   dictated speech, such as clinical notes.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Add tags to an Amazon Transcribe medical transcription job.
     #
     # @return [Types::StartMedicalTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2196,6 +2291,12 @@ module Aws::TranscribeService
     #     content_identification_type: "PHI", # accepts PHI
     #     specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
     #     type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2221,6 +2322,9 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.content_identification_type #=> String, one of "PHI"
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
+    #   resp.medical_transcription_job.tags #=> Array
+    #   resp.medical_transcription_job.tags[0].key #=> String
+    #   resp.medical_transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartMedicalTranscriptionJob AWS API Documentation
     #
@@ -2244,7 +2348,7 @@ module Aws::TranscribeService
     #   The language code for the language used in the input media file.
     #
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
-    #   video file must be encoded at a sample rate of 16000 Hz or higher.
+    #   video file must be encoded at a sample rate of 16,000 Hz or higher.
     #
     # @option params [Integer] :media_sample_rate_hertz
     #   The sample rate, in Hertz, of the audio track in the input media file.
@@ -2371,7 +2475,10 @@ module Aws::TranscribeService
     #   language that best matches the source audio from that list.
     #
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
-    #   video file must be encoded at a sample rate of 16000 Hz or higher.
+    #   video file must be encoded at a sample rate of 16,000 Hz or higher.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Add tags to an Amazon Transcribe transcription job.
     #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2414,6 +2521,12 @@ module Aws::TranscribeService
     #     },
     #     identify_language: false,
     #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2448,6 +2561,9 @@ module Aws::TranscribeService
     #   resp.transcription_job.language_options #=> Array
     #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
     #   resp.transcription_job.identified_language_score #=> Float
+    #   resp.transcription_job.tags #=> Array
+    #   resp.transcription_job.tags[0].key #=> String
+    #   resp.transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -2455,6 +2571,66 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def start_transcription_job(params = {}, options = {})
       req = build_request(:start_transcription_job, params)
+      req.send_request(options)
+    end
+
+    # Tags a Amazon Transcribe resource with the given list of tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
+    #   want to tag.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you are assigning to a given Amazon Transcribe resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TranscribeArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes specified tags from a specified Amazon Transcribe resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
+    #   want to remove tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys you want to remove from a specified Amazon
+    #   Transcribe resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TranscribeArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -2632,10 +2808,10 @@ module Aws::TranscribeService
     #   Amazon Transcribe Medical.
     #
     # @option params [String] :vocabulary_file_uri
-    #   The location in Amazon S3 of the text file that contains the you use
-    #   for your custom vocabulary. The URI must be in the same Amazon Web
-    #   Services Region as the resource that you are calling. The following is
-    #   the format for a URI:
+    #   The location in Amazon S3 of the text file that contains your custom
+    #   vocabulary. The URI must be in the same Amazon Web Services Region as
+    #   the resource that you are calling. The following is the format for a
+    #   URI:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -2698,7 +2874,7 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see what-is-transcribe.
+    #   and their corresponding language codes, see transcribe-whatis.
     #
     # @option params [Array<String>] :phrases
     #   An array of strings containing the vocabulary entries.
@@ -2830,7 +3006,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

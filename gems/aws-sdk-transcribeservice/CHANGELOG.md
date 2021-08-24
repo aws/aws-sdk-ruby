@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-08-24)
+------------------
+
+* Feature - This release adds support for feature tagging with Amazon Transcribe batch jobs.
+
 1.58.0 (2021-08-04)
 ------------------
 
