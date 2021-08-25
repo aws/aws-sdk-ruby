@@ -1044,13 +1044,14 @@ module Aws::EC2
     #
     # You can optionally use Prefix Delegation on the network interface. You
     # must specify either the IPV6 Prefix Delegation prefixes, or the IPv6
-    # Prefix Delegation count. For information, see [Prefix Delegation][2]
-    # in the *Amazon Elastic Compute Cloud User Guide*.
+    # Prefix Delegation count. For information, see [ Assigning prefixes to
+    # Amazon EC2 network interfaces][2] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
     # @option params [Integer] :ipv_6_address_count
     #   The number of additional IPv6 addresses to assign to the network
@@ -1066,14 +1067,13 @@ module Aws::EC2
     #   of IPv6 addresses.
     #
     # @option params [Integer] :ipv_6_prefix_count
-    #   The number of IPv6 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv6 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv6Prefixes` option.
     #
     # @option params [Array<String>] :ipv_6_prefixes
-    #   One or more IPv6 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv6PrefixCount`
-    #   option.
+    #   One or more IPv6 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv6PrefixCount` option.
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
@@ -1137,14 +1137,15 @@ module Aws::EC2
     #
     # You can optionally use Prefix Delegation on the network interface. You
     # must specify either the IPv4 Prefix Delegation prefixes, or the IPv4
-    # Prefix Delegation count. For information, see [Prefix Delegation][3]
-    # in the *Amazon Elastic Compute Cloud User Guide*.
+    # Prefix Delegation count. For information, see [ Assigning prefixes to
+    # Amazon EC2 network interfaces][3] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
     # @option params [Boolean] :allow_reassignment
     #   Indicates whether to allow an IP address that is already assigned to
@@ -1168,12 +1169,11 @@ module Aws::EC2
     #   private IP addresses.
     #
     # @option params [Array<String>] :ipv_4_prefixes
-    #   One or more IPv4 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv4PrefixCount`
-    #   option.
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     #
     # @option params [Integer] :ipv_4_prefix_count
-    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     #
@@ -1946,6 +1946,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API action is currently in **limited preview only**. If you are
+    # interested in using this feature, contact your account manager.
+    #
+    #  </note>
+    #
     # Associates a branch network interface with a trunk network interface.
     #
     # Before you create the association, run the
@@ -1954,13 +1959,9 @@ module Aws::EC2
     # network interface that you want to associate with the trunk network
     # interface.
     #
-    # For more information, see [ Network interface trunking][2] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html
     #
     # @option params [required, String] :branch_interface_id
     #   The ID of the branch network interface.
@@ -7547,22 +7548,20 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     #
     # @option params [Array<Types::Ipv4PrefixSpecificationRequest>] :ipv_4_prefixes
-    #   One or moreIPv4 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv4PrefixCount`
-    #   option.
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     #
     # @option params [Integer] :ipv_4_prefix_count
-    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     #
     # @option params [Array<Types::Ipv6PrefixSpecificationRequest>] :ipv_6_prefixes
-    #   One or moreIPv6 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv6PrefixCount`
-    #   option.
+    #   One or more IPv6 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv6PrefixCount` option.
     #
     # @option params [Integer] :ipv_6_prefix_count
-    #   The number of IPv6 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv6 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv6Prefixes` option.
     #
@@ -19971,6 +19970,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.reservations[0].instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.reservations[0].instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.reservations[0].instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.reservations[0].instances[0].enclave_options.enabled #=> Boolean
     #   resp.reservations[0].instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.reservations[0].owner_id #=> String
@@ -27297,6 +27297,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API action is currently in **limited preview only**. If you are
+    # interested in using this feature, contact your account manager.
+    #
+    #  </note>
+    #
     # Describes one or more network interface trunk associations.
     #
     # @option params [Array<String>] :association_ids
@@ -30432,6 +30437,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> This API action is currently in **limited preview only**. If you are
+    # interested in using this feature, contact your account manager.
+    #
+    #  </note>
+    #
     # Removes an association between a branch network interface with a trunk
     # network interface.
     #
@@ -35162,6 +35172,10 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :http_protocol_ipv_6
+    #   Enables or disables the IPv6 endpoint for the instance metadata
+    #   service.
+    #
     # @return [Types::ModifyInstanceMetadataOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyInstanceMetadataOptionsResult#instance_id #instance_id} => String
@@ -35175,6 +35189,7 @@ module Aws::EC2
     #     http_put_response_hop_limit: 1,
     #     http_endpoint: "disabled", # accepts disabled, enabled
     #     dry_run: false,
+    #     http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #   })
     #
     # @example Response structure
@@ -35184,6 +35199,7 @@ module Aws::EC2
     #   resp.instance_metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.instance_metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instance_metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.instance_metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptions AWS API Documentation
     #
@@ -41735,6 +41751,7 @@ module Aws::EC2
     #       http_tokens: "optional", # accepts optional, required
     #       http_put_response_hop_limit: 1,
     #       http_endpoint: "disabled", # accepts disabled, enabled
+    #       http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #     },
     #     enclave_options: {
     #       enabled: false,
@@ -41868,6 +41885,7 @@ module Aws::EC2
     #   resp.instances[0].metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.instances[0].enclave_options.enabled #=> Boolean
     #   resp.instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.owner_id #=> String
@@ -43167,8 +43185,7 @@ module Aws::EC2
     #   The IPv6 addresses to unassign from the network interface.
     #
     # @option params [Array<String>] :ipv_6_prefixes
-    #   One or moreIPv6 Prefix Delegation prefixes to unassign from the
-    #   network interface.
+    #   One or more IPv6 prefixes to unassign from the network interface.
     #
     # @option params [required, String] :network_interface_id
     #   The ID of the network interface.
@@ -43216,8 +43233,7 @@ module Aws::EC2
     #   than one IP address.
     #
     # @option params [Array<String>] :ipv_4_prefixes
-    #   The IPv4 Prefix Delegation prefixes to unassign from the network
-    #   interface.
+    #   The IPv4 prefixes to unassign from the network interface.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -43598,7 +43614,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.257.0'
+      context[:gem_version] = '1.258.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

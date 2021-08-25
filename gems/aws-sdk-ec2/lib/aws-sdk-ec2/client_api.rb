@@ -1292,6 +1292,7 @@ module Aws::EC2
     InstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsRequest')
     InstanceMetadataOptionsResponse = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsResponse')
     InstanceMetadataOptionsState = Shapes::StringShape.new(name: 'InstanceMetadataOptionsState')
+    InstanceMetadataProtocolState = Shapes::StringShape.new(name: 'InstanceMetadataProtocolState')
     InstanceMonitoring = Shapes::StructureShape.new(name: 'InstanceMonitoring')
     InstanceMonitoringList = Shapes::ListShape.new(name: 'InstanceMonitoringList')
     InstanceNetworkInterface = Shapes::StructureShape.new(name: 'InstanceNetworkInterface')
@@ -7512,12 +7513,14 @@ module Aws::EC2
     InstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
     InstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     InstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    InstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "HttpProtocolIpv6"))
     InstanceMetadataOptionsRequest.struct_class = Types::InstanceMetadataOptionsRequest
 
     InstanceMetadataOptionsResponse.add_member(:state, Shapes::ShapeRef.new(shape: InstanceMetadataOptionsState, location_name: "state"))
     InstanceMetadataOptionsResponse.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "httpTokens"))
     InstanceMetadataOptionsResponse.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "httpPutResponseHopLimit"))
     InstanceMetadataOptionsResponse.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "httpEndpoint"))
+    InstanceMetadataOptionsResponse.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "httpProtocolIpv6"))
     InstanceMetadataOptionsResponse.struct_class = Types::InstanceMetadataOptionsResponse
 
     InstanceMonitoring.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -8423,6 +8426,7 @@ module Aws::EC2
     ModifyInstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     ModifyInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
     ModifyInstanceMetadataOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "HttpProtocolIpv6"))
     ModifyInstanceMetadataOptionsRequest.struct_class = Types::ModifyInstanceMetadataOptionsRequest
 
     ModifyInstanceMetadataOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))

@@ -2084,7 +2084,7 @@ module Aws::EventBridge
     #   resp.targets[0].run_command_parameters.run_command_targets[0].values[0] #=> String
     #   resp.targets[0].ecs_parameters.task_definition_arn #=> String
     #   resp.targets[0].ecs_parameters.task_count #=> Integer
-    #   resp.targets[0].ecs_parameters.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.targets[0].ecs_parameters.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.targets[0].ecs_parameters.network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -2505,8 +2505,6 @@ module Aws::EventBridge
     #
     # * Amazon EC2 `CreateSnapshot` API call
     #
-    # * EC2 Image Builder
-    #
     # * Amazon EC2 `RebootInstances` API call
     #
     # * Amazon EC2 `StopInstances` API call
@@ -2678,7 +2676,7 @@ module Aws::EventBridge
     #         ecs_parameters: {
     #           task_definition_arn: "Arn", # required
     #           task_count: 1,
-    #           launch_type: "EC2", # accepts EC2, FARGATE
+    #           launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #           network_configuration: {
     #             awsvpc_configuration: {
     #               subnets: ["String"], # required
@@ -3315,7 +3313,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

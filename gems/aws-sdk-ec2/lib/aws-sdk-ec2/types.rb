@@ -1186,15 +1186,14 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_6_prefix_count
-    #   The number of IPv6 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv6 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv6Prefixes` option.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or more IPv6 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv6PrefixCount` option.
+    #   One or more IPv6 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv6PrefixCount` option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
@@ -1220,8 +1219,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] assigned_ipv_6_prefixes
-    #   The IPv6 Prefix Delegation prefixes that are assigned to the network
-    #   interface.
+    #   The IPv6 prefixes that are assigned to the network interface.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
@@ -1278,13 +1276,12 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   One or more IPv4 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv4PrefixCount` option.
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_4_prefix_count
-    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     #   @return [Integer]
@@ -1311,8 +1308,7 @@ module Aws::EC2
     #   @return [Array<Types::AssignedPrivateIpAddress>]
     #
     # @!attribute [rw] assigned_ipv_4_prefixes
-    #   The IPv4 Prefix Delegation prefixes that are assigned to the network
-    #   interface.
+    #   The IPv4 prefixes that are assigned to the network interface.
     #   @return [Array<Types::Ipv4PrefixSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesResult AWS API Documentation
@@ -8749,25 +8745,23 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   One or moreIPv4 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv4PrefixCount` option.
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     #   @return [Array<Types::Ipv4PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_4_prefix_count
-    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or moreIPv6 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv6PrefixCount` option.
+    #   One or more IPv6 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv6PrefixCount` option.
     #   @return [Array<Types::Ipv6PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_6_prefix_count
-    #   The number of IPv6 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv6 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv6Prefixes` option.
     #   @return [Integer]
@@ -35381,6 +35375,7 @@ module Aws::EC2
     #         http_tokens: "optional", # accepts optional, required
     #         http_put_response_hop_limit: 1,
     #         http_endpoint: "disabled", # accepts disabled, enabled
+    #         http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #       }
     #
     # @!attribute [rw] http_tokens
@@ -35422,12 +35417,18 @@ module Aws::EC2
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Enables or disables the IPv6 endpoint for the instance metadata
+    #   service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataOptionsRequest AWS API Documentation
     #
     class InstanceMetadataOptionsRequest < Struct.new(
       :http_tokens,
       :http_put_response_hop_limit,
-      :http_endpoint)
+      :http_endpoint,
+      :http_protocol_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35483,13 +35484,19 @@ module Aws::EC2
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Whether or not the IPv6 endpoint for the instance metadata service
+    #   is enabled or disabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataOptionsResponse AWS API Documentation
     #
     class InstanceMetadataOptionsResponse < Struct.new(
       :state,
       :http_tokens,
       :http_put_response_hop_limit,
-      :http_endpoint)
+      :http_endpoint,
+      :http_protocol_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35856,6 +35863,16 @@ module Aws::EC2
     #   The index of the network card. Some instance types support multiple
     #   network cards. The primary network interface must be assigned to
     #   network card index 0. The default is network card index 0.
+    #
+    #   If you are using [RequestSpotInstances][1] to create Spot Instances,
+    #   omit this parameter because you can’t specify the network card index
+    #   when using this API. To specify the network card index, use
+    #   [RunInstances][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_4_prefixes
@@ -36623,15 +36640,16 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an IPv4 Prefix Delegation.
+    # Describes an IPv4 prefix.
     #
     # @!attribute [rw] ipv_4_prefix
-    #   The IPv4 Prefix Delegation prefix. For information, see [Prefix
-    #   Delegation][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   The IPv4 prefix. For information, see [ Assigning prefixes to Amazon
+    #   EC2 network interfaces][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv4PrefixSpecification AWS API Documentation
@@ -36642,7 +36660,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the IPv4 Prefix Delegation option for a network interface.
+    # Describes the IPv4 prefix option for a network interface.
     #
     # @note When making an API call, you may pass Ipv4PrefixSpecificationRequest
     #   data as a hash:
@@ -36652,12 +36670,13 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] ipv_4_prefix
-    #   The IPv4 Prefix Delegation prefix. For information, see [Prefix
-    #   Delegation][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   The IPv4 prefix. For information, see [ Assigning prefixes to Amazon
+    #   EC2 network interfaces][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv4PrefixSpecificationRequest AWS API Documentation
@@ -36746,10 +36765,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the IPv6 Prefix Delegation.
+    # Describes the IPv6 prefix.
     #
     # @!attribute [rw] ipv_6_prefix
-    #   The IPv6 Prefix Delegation prefix.
+    #   The IPv6 prefix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6PrefixSpecification AWS API Documentation
@@ -36760,7 +36779,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the IPv4 Prefix Delegation option for a network interface.
+    # Describes the IPv4 prefix option for a network interface.
     #
     # @note When making an API call, you may pass Ipv6PrefixSpecificationRequest
     #   data as a hash:
@@ -36770,7 +36789,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] ipv_6_prefix
-    #   The IPv6 Prefix Delegation prefix.
+    #   The IPv6 prefix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6PrefixSpecificationRequest AWS API Documentation
@@ -40672,6 +40691,7 @@ module Aws::EC2
     #         http_put_response_hop_limit: 1,
     #         http_endpoint: "disabled", # accepts disabled, enabled
     #         dry_run: false,
+    #         http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #       }
     #
     # @!attribute [rw] instance_id
@@ -40723,6 +40743,11 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Enables or disables the IPv6 endpoint for the instance metadata
+    #   service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptionsRequest AWS API Documentation
     #
     class ModifyInstanceMetadataOptionsRequest < Struct.new(
@@ -40730,7 +40755,8 @@ module Aws::EC2
       :http_tokens,
       :http_put_response_hop_limit,
       :http_endpoint,
-      :dry_run)
+      :dry_run,
+      :http_protocol_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43782,13 +43808,11 @@ module Aws::EC2
     #   @return [Array<Types::NetworkInterfacePrivateIpAddress>]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   The IPv4 Prefix Delegation prefixes that are assigned to the network
-    #   interface.
+    #   The IPv4 prefixes that are assigned to the network interface.
     #   @return [Array<Types::Ipv4PrefixSpecification>]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   The IPv6 Prefix Delegation prefixes that are assigned to the network
-    #   interface.
+    #   The IPv6 prefixes that are assigned to the network interface.
     #   @return [Array<Types::Ipv6PrefixSpecification>]
     #
     # @!attribute [rw] requester_id
@@ -50084,6 +50108,7 @@ module Aws::EC2
     #           http_tokens: "optional", # accepts optional, required
     #           http_put_response_hop_limit: 1,
     #           http_endpoint: "disabled", # accepts disabled, enabled
+    #           http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #         },
     #         enclave_options: {
     #           enabled: false,
@@ -56878,6 +56903,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Currently available in **limited preview only**. If you are interested
+    # in using this feature, contact your account manager.
+    #
+    #  </note>
+    #
     # Information about an association between a branch network interface
     # with a trunk network interface.
     #
@@ -56906,7 +56936,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   The tags.
+    #   The tags for the trunk interface associaton.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrunkInterfaceAssociation AWS API Documentation
@@ -57053,8 +57083,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or moreIPv6 Prefix Delegation prefixes to unassign from the
-    #   network interface.
+    #   One or more IPv6 prefixes to unassign from the network interface.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
@@ -57081,8 +57110,8 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] unassigned_ipv_6_prefixes
-    #   The IPv4 Prefix Delegation prefixes that have been unassigned from
-    #   the network interface.
+    #   The IPv4 prefixes that have been unassigned from the network
+    #   interface.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesResult AWS API Documentation
@@ -57117,8 +57146,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   The IPv4 Prefix Delegation prefixes to unassign from the network
-    #   interface.
+    #   The IPv4 prefixes to unassign from the network interface.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateIpAddressesRequest AWS API Documentation

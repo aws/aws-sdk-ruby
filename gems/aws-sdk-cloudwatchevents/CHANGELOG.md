@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-08-25)
+------------------
+
+* Feature - AWS CWEvents adds an enum of EXTERNAL for EcsParameters LaunchType for PutTargets API
+
 1.49.0 (2021-07-30)
 ------------------
 

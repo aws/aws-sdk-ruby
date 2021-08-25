@@ -108,15 +108,13 @@ module Aws::EC2
       data[:private_ip_addresses]
     end
 
-    # The IPv4 Prefix Delegation prefixes that are assigned to the network
-    # interface.
+    # The IPv4 prefixes that are assigned to the network interface.
     # @return [Array<Types::Ipv4PrefixSpecification>]
     def ipv_4_prefixes
       data[:ipv_4_prefixes]
     end
 
-    # The IPv6 Prefix Delegation prefixes that are assigned to the network
-    # interface.
+    # The IPv6 prefixes that are assigned to the network interface.
     # @return [Array<Types::Ipv6PrefixSpecification>]
     def ipv_6_prefixes
       data[:ipv_6_prefixes]
@@ -326,11 +324,10 @@ module Aws::EC2
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
     # @option options [Array<String>] :ipv_4_prefixes
-    #   One or more IPv4 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv4PrefixCount`
-    #   option.
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     # @option options [Integer] :ipv_4_prefix_count
-    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     # @return [Types::AssignPrivateIpAddressesResult]
@@ -607,8 +604,7 @@ module Aws::EC2
     #   interface. You can specify this option multiple times to unassign more
     #   than one IP address.
     # @option options [Array<String>] :ipv_4_prefixes
-    #   The IPv4 Prefix Delegation prefixes to unassign from the network
-    #   interface.
+    #   The IPv4 prefixes to unassign from the network interface.
     # @return [EmptyStructure]
     def unassign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)

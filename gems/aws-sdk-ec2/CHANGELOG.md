@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.258.0 (2021-08-25)
+------------------
+
+* Feature - Support added for IMDS IPv6 endpoint
+
 1.257.0 (2021-08-20)
 ------------------
 

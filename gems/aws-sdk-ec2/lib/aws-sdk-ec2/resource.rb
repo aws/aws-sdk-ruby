@@ -242,6 +242,7 @@ module Aws::EC2
     #       http_tokens: "optional", # accepts optional, required
     #       http_put_response_hop_limit: 1,
     #       http_endpoint: "disabled", # accepts disabled, enabled
+    #       http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #     },
     #     enclave_options: {
     #       enabled: false,
@@ -829,19 +830,17 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     # @option options [Array<Types::Ipv4PrefixSpecificationRequest>] :ipv_4_prefixes
-    #   One or moreIPv4 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv4PrefixCount`
-    #   option.
+    #   One or more IPv4 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv4PrefixCount` option.
     # @option options [Integer] :ipv_4_prefix_count
-    #   The number of IPv4 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv4 Prefixes` option.
     # @option options [Array<Types::Ipv6PrefixSpecificationRequest>] :ipv_6_prefixes
-    #   One or moreIPv6 Prefix Delegation prefixes assigned to the network
-    #   interface. You cannot use this option if you use the `Ipv6PrefixCount`
-    #   option.
+    #   One or more IPv6 prefixes assigned to the network interface. You
+    #   cannot use this option if you use the `Ipv6PrefixCount` option.
     # @option options [Integer] :ipv_6_prefix_count
-    #   The number of IPv6 Prefix Delegation prefixes that AWS automatically
+    #   The number of IPv6 prefixes that Amazon Web Services automatically
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv6Prefixes` option.
     # @option options [String] :interface_type

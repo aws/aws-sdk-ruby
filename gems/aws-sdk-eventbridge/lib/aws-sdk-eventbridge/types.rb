@@ -2247,7 +2247,7 @@ module Aws::EventBridge
     #       {
     #         task_definition_arn: "Arn", # required
     #         task_count: 1,
-    #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #         network_configuration: {
     #           awsvpc_configuration: {
     #             subnets: ["String"], # required
@@ -4066,7 +4066,7 @@ module Aws::EventBridge
     #             ecs_parameters: {
     #               task_definition_arn: "Arn", # required
     #               task_count: 1,
-    #               launch_type: "EC2", # accepts EC2, FARGATE
+    #               launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #               network_configuration: {
     #                 awsvpc_configuration: {
     #                   subnets: ["String"], # required
@@ -4937,7 +4937,7 @@ module Aws::EventBridge
     #         ecs_parameters: {
     #           task_definition_arn: "Arn", # required
     #           task_count: 1,
-    #           launch_type: "EC2", # accepts EC2, FARGATE
+    #           launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
     #           network_configuration: {
     #             awsvpc_configuration: {
     #               subnets: ["String"], # required
