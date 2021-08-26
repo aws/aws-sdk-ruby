@@ -56,7 +56,7 @@ module BuildTools
     end
 
     def log(msg)
-      puts(msg)
+      puts(msg) if ENV['VERBOSE']
     end
 
     def gems_path(path)
