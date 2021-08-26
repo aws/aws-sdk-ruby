@@ -8461,6 +8461,7 @@ module Aws::EC2
     ModifyManagedPrefixListRequest.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, location_name: "PrefixListName"))
     ModifyManagedPrefixListRequest.add_member(:add_entries, Shapes::ShapeRef.new(shape: AddPrefixListEntries, location_name: "AddEntry"))
     ModifyManagedPrefixListRequest.add_member(:remove_entries, Shapes::ShapeRef.new(shape: RemovePrefixListEntries, location_name: "RemoveEntry"))
+    ModifyManagedPrefixListRequest.add_member(:max_entries, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxEntries"))
     ModifyManagedPrefixListRequest.struct_class = Types::ModifyManagedPrefixListRequest
 
     ModifyManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))

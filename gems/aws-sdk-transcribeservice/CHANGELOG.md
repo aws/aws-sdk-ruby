@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-08-26)
+------------------
+
+* Feature - This release adds support for batch transcription in six new languages - Afrikaans, Danish, Mandarin Chinese (Taiwan), New Zealand English, South African English, and Thai.
+
 1.59.0 (2021-08-24)
 ------------------
 

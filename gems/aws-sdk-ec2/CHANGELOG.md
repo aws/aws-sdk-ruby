@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.259.0 (2021-08-26)
+------------------
+
+* Feature - Support added for resizing VPC prefix lists
+
 1.258.0 (2021-08-25)
 ------------------
 

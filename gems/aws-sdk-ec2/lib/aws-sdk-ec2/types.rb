@@ -10514,7 +10514,7 @@ module Aws::EC2
     #
     # @!attribute [rw] transport_transit_gateway_attachment_id
     #   The ID of the transit gateway attachment. You can specify a VPC
-    #   attachment or a AWS Direct Connect attachment.
+    #   attachment or Amazon Web Services Direct Connect attachment.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -10711,7 +10711,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] peer_account_id
-    #   The AWS account ID of the owner of the peer transit gateway.
+    #   The ID of the Amazon Web Services account that owns the peer transit
+    #   gateway.
     #   @return [String]
     #
     # @!attribute [rw] peer_region
@@ -24044,8 +24045,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-owner-id` - The ID of the AWS account that owns the
-    #     resource.
+    #   * `resource-owner-id` - The ID of the Amazon Web Services account
+    #     that owns the resource.
     #
     #   * `resource-type` - The resource type. Valid values are `vpc` \|
     #     `vpn` \| `direct-connect-gateway` \| `peering` \| `connect`.
@@ -24059,8 +24060,8 @@ module Aws::EC2
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
-    #   * `transit-gateway-owner-id` - The ID of the AWS account that owns
-    #     the transit gateway.
+    #   * `transit-gateway-owner-id` - The ID of the Amazon Web Services
+    #     account that owns the transit gateway.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -24379,10 +24380,10 @@ module Aws::EC2
     #   * `transit-gateway-attachment-id` - The ID of the transit gateway
     #     attachment.
     #
-    #   * `local-owner-id` - The ID of your AWS account.
+    #   * `local-owner-id` - The ID of your Amazon Web Services account.
     #
-    #   * `remote-owner-id` - The ID of the AWS account in the remote Region
-    #     that owns the transit gateway.
+    #   * `remote-owner-id` - The ID of the Amazon Web Services account in
+    #     the remote Region that owns the transit gateway.
     #
     #   * `state` - The state of the peering attachment. Valid values are
     #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
@@ -24668,8 +24669,8 @@ module Aws::EC2
     #   * `options.vpn-ecmp-support` - Indicates whether Equal Cost
     #     Multipath Protocol support is enabled (`enable` \| `disable`).
     #
-    #   * `owner-id` - The ID of the AWS account that owns the transit
-    #     gateway.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the transit gateway.
     #
     #   * `state` - The state of the transit gateway (`available` \|
     #     `deleted` \| `deleting` \| `modifying` \| `pending`).
@@ -27493,7 +27494,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] association_id
-    #   The ID ofthe association
+    #   The ID of the association
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -40939,6 +40940,7 @@ module Aws::EC2
     #             cidr: "String", # required
     #           },
     #         ],
+    #         max_entries: 1,
     #       }
     #
     # @!attribute [rw] dry_run
@@ -40968,6 +40970,12 @@ module Aws::EC2
     #   One or more entries to remove from the prefix list.
     #   @return [Array<Types::RemovePrefixListEntry>]
     #
+    # @!attribute [rw] max_entries
+    #   The maximum number of entries for the prefix list. You cannot modify
+    #   the entries of a prefix list and modify the size of a prefix list at
+    #   the same time.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyManagedPrefixListRequest AWS API Documentation
     #
     class ModifyManagedPrefixListRequest < Struct.new(
@@ -40976,7 +40984,8 @@ module Aws::EC2
       :current_version,
       :prefix_list_name,
       :add_entries,
-      :remove_entries)
+      :remove_entries,
+      :max_entries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41897,10 +41906,6 @@ module Aws::EC2
     #
     # @!attribute [rw] options
     #   The new VPC attachment options.
-    #
-    #   <note markdown="1"> You cannot modify the IPv6 options.
-    #
-    #    </note>
     #   @return [Types::ModifyTransitGatewayVpcAttachmentRequestOptions]
     #
     # @!attribute [rw] dry_run
@@ -44438,7 +44443,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the owner of the transit gateway.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -51651,10 +51657,6 @@ module Aws::EC2
     #   * `source-type` - The source type. Valid values are `igmp` \|
     #     `static`.
     #
-    #   * `state` - The state of the subnet association. Valid values are
-    #     `associated` \| `associated` \| `disassociated` \|
-    #     `disassociating`.
-    #
     #   * `subnet-id` - The ID of the subnet.
     #
     #   * `transit-gateway-attachment-id` - The id of the transit gateway
@@ -55705,7 +55707,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account ID that owns the transit gateway.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -55786,11 +55789,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_owner_id
-    #   The ID of the AWS account that owns the transit gateway.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway.
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_id
-    #   The ID of the AWS account that owns the resource.
+    #   The ID of the Amazon Web Services account that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -56126,8 +56130,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that owns the transit gateway multiicast
-    #   domain.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway multicast domain.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -56177,8 +56181,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_id
-    #   The ID of the AWS account that owns the transit gateway multicast
-    #   domain association resource.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway multicast domain association resource.
     #   @return [String]
     #
     # @!attribute [rw] subnet
@@ -56216,7 +56220,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_id
-    #   The ID of the AWS account that owns the resource.
+    #   The ID of the Amazon Web Services account that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] subnets
@@ -56286,8 +56290,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_id
-    #   The ID of the AWS account that owns the transit gateway multicast
-    #   domain group resource.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway multicast domain group resource.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
@@ -56839,7 +56843,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_owner_id
-    #   The ID of the AWS account that owns the VPC.
+    #   The ID of the Amazon Web Services account that owns the VPC.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -56936,7 +56940,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   The tags for the trunk interface associaton.
+    #   The tags for the trunk interface association.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrunkInterfaceAssociation AWS API Documentation

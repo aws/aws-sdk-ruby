@@ -246,7 +246,7 @@ module Aws::TranscribeService
     #           redaction_type: "PII", # required, accepts PII
     #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #         },
-    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -678,7 +678,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         vocabulary_file_uri: "Uri", # required
     #         tags: [
     #           {
@@ -789,7 +789,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_filter_name: "VocabularyFilterName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         words: ["Word"],
     #         vocabulary_filter_file_uri: "Uri",
     #         tags: [
@@ -888,7 +888,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #         tags: [
@@ -2116,7 +2116,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the result of the previous request to `ListTranscriptionJobs` was
+    #   If the result of the previous request to `ListTranscriptionJobs` is
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #   @return [String]
     #
@@ -3073,7 +3073,7 @@ module Aws::TranscribeService
     #             redaction_type: "PII", # required, accepts PII
     #             redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #           },
-    #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         },
     #         channel_definitions: [
     #           {
@@ -3210,7 +3210,7 @@ module Aws::TranscribeService
     #
     #       {
     #         medical_transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #         media: { # required
@@ -3414,7 +3414,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #         media: { # required
@@ -3446,7 +3446,7 @@ module Aws::TranscribeService
     #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #         },
     #         identify_language: false,
-    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -3868,7 +3868,7 @@ module Aws::TranscribeService
     #   @return [Time]
     #
     # @!attribute [rw] completion_time
-    #   A timestamp that shows when the job was completed.
+    #   A timestamp that shows when the job completed.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -4216,7 +4216,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         vocabulary_file_uri: "Uri",
     #       }
     #
@@ -4381,7 +4381,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }

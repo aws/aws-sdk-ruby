@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-08-26)
+------------------
+
+* Feature - This release added new attributes to Rekognition RecognizeCelebities and GetCelebrityInfo API operations.
+
 1.54.0 (2021-08-09)
 ------------------
 

@@ -9885,12 +9885,12 @@ module Aws::EC2
     # you can use to establish a connection between a transit gateway and an
     # appliance.
     #
-    # A Connect attachment uses an existing VPC or AWS Direct Connect
-    # attachment as the underlying transport mechanism.
+    # A Connect attachment uses an existing VPC or Amazon Web Services
+    # Direct Connect attachment as the underlying transport mechanism.
     #
     # @option params [required, String] :transport_transit_gateway_attachment_id
     #   The ID of the transit gateway attachment. You can specify a VPC
-    #   attachment or a AWS Direct Connect attachment.
+    #   attachment or Amazon Web Services Direct Connect attachment.
     #
     # @option params [required, Types::CreateTransitGatewayConnectRequestOptions] :options
     #   The Connect attachment options.
@@ -10132,7 +10132,8 @@ module Aws::EC2
     # Requests a transit gateway peering attachment between the specified
     # transit gateway (requester) and a peer transit gateway (accepter). The
     # transit gateways must be in different Regions. The peer transit
-    # gateway can be in your account or a different AWS account.
+    # gateway can be in your account or a different Amazon Web Services
+    # account.
     #
     # After you create the peering attachment, the owner of the accepter
     # transit gateway must accept the attachment request.
@@ -10145,7 +10146,8 @@ module Aws::EC2
     #   attachment.
     #
     # @option params [required, String] :peer_account_id
-    #   The AWS account ID of the owner of the peer transit gateway.
+    #   The ID of the Amazon Web Services account that owns the peer transit
+    #   gateway.
     #
     # @option params [required, String] :peer_region
     #   The Region where the peer transit gateway is located.
@@ -26594,8 +26596,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-owner-id` - The ID of the AWS account that owns the
-    #     resource.
+    #   * `resource-owner-id` - The ID of the Amazon Web Services account that
+    #     owns the resource.
     #
     #   * `resource-type` - The resource type. Valid values are `vpc` \| `vpn`
     #     \| `direct-connect-gateway` \| `peering` \| `connect`.
@@ -26609,8 +26611,8 @@ module Aws::EC2
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
     #
-    #   * `transit-gateway-owner-id` - The ID of the AWS account that owns the
-    #     transit gateway.
+    #   * `transit-gateway-owner-id` - The ID of the Amazon Web Services
+    #     account that owns the transit gateway.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -26928,10 +26930,10 @@ module Aws::EC2
     #   * `transit-gateway-attachment-id` - The ID of the transit gateway
     #     attachment.
     #
-    #   * `local-owner-id` - The ID of your AWS account.
+    #   * `local-owner-id` - The ID of your Amazon Web Services account.
     #
-    #   * `remote-owner-id` - The ID of the AWS account in the remote Region
-    #     that owns the transit gateway.
+    #   * `remote-owner-id` - The ID of the Amazon Web Services account in the
+    #     remote Region that owns the transit gateway.
     #
     #   * `state` - The state of the peering attachment. Valid values are
     #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
@@ -27219,8 +27221,8 @@ module Aws::EC2
     #   * `options.vpn-ecmp-support` - Indicates whether Equal Cost Multipath
     #     Protocol support is enabled (`enable` \| `disable`).
     #
-    #   * `owner-id` - The ID of the AWS account that owns the transit
-    #     gateway.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     transit gateway.
     #
     #   * `state` - The state of the transit gateway (`available` \| `deleted`
     #     \| `deleting` \| `modifying` \| `pending`).
@@ -30446,7 +30448,7 @@ module Aws::EC2
     # network interface.
     #
     # @option params [required, String] :association_id
-    #   The ID ofthe association
+    #   The ID of the association
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -35416,6 +35418,11 @@ module Aws::EC2
     # @option params [Array<Types::RemovePrefixListEntry>] :remove_entries
     #   One or more entries to remove from the prefix list.
     #
+    # @option params [Integer] :max_entries
+    #   The maximum number of entries for the prefix list. You cannot modify
+    #   the entries of a prefix list and modify the size of a prefix list at
+    #   the same time.
+    #
     # @return [Types::ModifyManagedPrefixListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyManagedPrefixListResult#prefix_list #prefix_list} => Types::ManagedPrefixList
@@ -35438,6 +35445,7 @@ module Aws::EC2
     #         cidr: "String", # required
     #       },
     #     ],
+    #     max_entries: 1,
     #   })
     #
     # @example Response structure
@@ -36439,10 +36447,6 @@ module Aws::EC2
     #
     # @option params [Types::ModifyTransitGatewayVpcAttachmentRequestOptions] :options
     #   The new VPC attachment options.
-    #
-    #   <note markdown="1"> You cannot modify the IPv6 options.
-    #
-    #    </note>
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -42195,9 +42199,6 @@ module Aws::EC2
     #   * `source-type` - The source type. Valid values are `igmp` \|
     #     `static`.
     #
-    #   * `state` - The state of the subnet association. Valid values are
-    #     `associated` \| `associated` \| `disassociated` \| `disassociating`.
-    #
     #   * `subnet-id` - The ID of the subnet.
     #
     #   * `transit-gateway-attachment-id` - The id of the transit gateway
@@ -43614,7 +43615,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.258.0'
+      context[:gem_version] = '1.259.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

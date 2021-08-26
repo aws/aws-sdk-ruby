@@ -547,6 +547,11 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.pose.pitch #=> Float
     #   resp.face_matches[0].face.quality.brightness #=> Float
     #   resp.face_matches[0].face.quality.sharpness #=> Float
+    #   resp.face_matches[0].face.emotions #=> Array
+    #   resp.face_matches[0].face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
+    #   resp.face_matches[0].face.emotions[0].confidence #=> Float
+    #   resp.face_matches[0].face.smile.value #=> Boolean
+    #   resp.face_matches[0].face.smile.confidence #=> Float
     #   resp.unmatched_faces #=> Array
     #   resp.unmatched_faces[0].bounding_box.width #=> Float
     #   resp.unmatched_faces[0].bounding_box.height #=> Float
@@ -562,6 +567,11 @@ module Aws::Rekognition
     #   resp.unmatched_faces[0].pose.pitch #=> Float
     #   resp.unmatched_faces[0].quality.brightness #=> Float
     #   resp.unmatched_faces[0].quality.sharpness #=> Float
+    #   resp.unmatched_faces[0].emotions #=> Array
+    #   resp.unmatched_faces[0].emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
+    #   resp.unmatched_faces[0].emotions[0].confidence #=> Float
+    #   resp.unmatched_faces[0].smile.value #=> Boolean
+    #   resp.unmatched_faces[0].smile.confidence #=> Float
     #   resp.source_image_orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #   resp.target_image_orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #
@@ -1335,24 +1345,32 @@ module Aws::Rekognition
     # object location information, if it exists, for the label on the image
     # (`Geometry`).
     #
-    # During training model calculates a threshold value that determines if
-    # a prediction for a label is true. By default, `DetectCustomLabels`
-    # doesn't return labels whose confidence value is below the model's
-    # calculated threshold value. To filter labels that are returned,
-    # specify a value for `MinConfidence` that is higher than the model's
-    # calculated threshold. You can get the model's calculated threshold
-    # from the model's training results shown in the Amazon Rekognition
-    # Custom Labels console. To get all labels, regardless of confidence,
-    # specify a `MinConfidence` value of 0.
+    # To filter labels that are returned, specify a value for
+    # `MinConfidence`. `DetectCustomLabelsLabels` only returns labels with a
+    # confidence that's higher than the specified value. The value of
+    # `MinConfidence` maps to the assumed threshold values created during
+    # training. For more information, see *Assumed threshold* in the Amazon
+    # Rekognition Custom Labels Developer Guide. Amazon Rekognition Custom
+    # Labels metrics expresses an assumed threshold as a floating point
+    # value between 0-1. The range of `MinConfidence` normalizes the
+    # threshold value to a percentage value (0-100). Confidence responses
+    # from `DetectCustomLabels` are also returned as a percentage. You can
+    # use `MinConfidence` to change the precision and recall or your model.
+    # For more information, see *Analyzing an image* in the Amazon
+    # Rekognition Custom Labels Developer Guide.
     #
-    # You can also add the `MaxResults` parameter to limit the number of
-    # labels returned.
+    # If you don't specify a value for `MinConfidence`,
+    # `DetectCustomLabels` returns labels based on the assumed threshold of
+    # each label.
     #
     # This is a stateless API operation. That is, the operation does not
     # persist any data.
     #
     # This operation requires permissions to perform the
     # `rekognition:DetectCustomLabels` action.
+    #
+    # For more information, see *Analyzing an image* in the Amazon
+    # Rekognition Custom Labels Developer Guide.
     #
     # @option params [required, String] :project_version_arn
     #   The ARN of the model version that you want to use.
@@ -1393,10 +1411,12 @@ module Aws::Rekognition
     #
     # @option params [Float] :min_confidence
     #   Specifies the minimum confidence level for the labels to return.
-    #   Amazon Rekognition doesn't return any labels with a confidence lower
-    #   than this specified value. If you specify a value of 0, all labels are
-    #   return, regardless of the default thresholds that the model version
-    #   applies.
+    #   `DetectCustomLabels` doesn't return any labels with a confidence
+    #   value that's lower than this specified value. If you specify a value
+    #   of 0, `DetectCustomLabels` returns all labels, regardless of the
+    #   assumed threshold applied to each label. If you don't specify a value
+    #   for `MinConfidence`, `DetectCustomLabels` returns labels based on the
+    #   assumed threshold of each label.
     #
     # @return [Types::DetectCustomLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2099,9 +2119,9 @@ module Aws::Rekognition
     end
 
     # Gets the name and additional information about a celebrity based on
-    # his or her Amazon Rekognition ID. The additional information is
-    # returned as an array of URLs. If there is no additional information
-    # about the celebrity, this list is empty.
+    # their Amazon Rekognition ID. The additional information is returned as
+    # an array of URLs. If there is no additional information about the
+    # celebrity, this list is empty.
     #
     # For more information, see Recognizing Celebrities in an Image in the
     # Amazon Rekognition Developer Guide.
@@ -2118,6 +2138,7 @@ module Aws::Rekognition
     #
     #   * {Types::GetCelebrityInfoResponse#urls #urls} => Array&lt;String&gt;
     #   * {Types::GetCelebrityInfoResponse#name #name} => String
+    #   * {Types::GetCelebrityInfoResponse#known_gender #known_gender} => Types::KnownGender
     #
     # @example Request syntax with placeholder values
     #
@@ -2130,6 +2151,7 @@ module Aws::Rekognition
     #   resp.urls #=> Array
     #   resp.urls[0] #=> String
     #   resp.name #=> String
+    #   resp.known_gender.type #=> String, one of "Male", "Female"
     #
     # @overload get_celebrity_info(params = {})
     # @param [Hash] params ({})
@@ -3982,7 +4004,13 @@ module Aws::Rekognition
     #   resp.celebrity_faces[0].face.pose.pitch #=> Float
     #   resp.celebrity_faces[0].face.quality.brightness #=> Float
     #   resp.celebrity_faces[0].face.quality.sharpness #=> Float
+    #   resp.celebrity_faces[0].face.emotions #=> Array
+    #   resp.celebrity_faces[0].face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
+    #   resp.celebrity_faces[0].face.emotions[0].confidence #=> Float
+    #   resp.celebrity_faces[0].face.smile.value #=> Boolean
+    #   resp.celebrity_faces[0].face.smile.confidence #=> Float
     #   resp.celebrity_faces[0].match_confidence #=> Float
+    #   resp.celebrity_faces[0].known_gender.type #=> String, one of "Male", "Female"
     #   resp.unrecognized_faces #=> Array
     #   resp.unrecognized_faces[0].bounding_box.width #=> Float
     #   resp.unrecognized_faces[0].bounding_box.height #=> Float
@@ -3998,6 +4026,11 @@ module Aws::Rekognition
     #   resp.unrecognized_faces[0].pose.pitch #=> Float
     #   resp.unrecognized_faces[0].quality.brightness #=> Float
     #   resp.unrecognized_faces[0].quality.sharpness #=> Float
+    #   resp.unrecognized_faces[0].emotions #=> Array
+    #   resp.unrecognized_faces[0].emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN", "FEAR"
+    #   resp.unrecognized_faces[0].emotions[0].confidence #=> Float
+    #   resp.unrecognized_faces[0].smile.value #=> Boolean
+    #   resp.unrecognized_faces[0].smile.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #
     # @overload recognize_celebrities(params = {})
@@ -5216,7 +5249,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

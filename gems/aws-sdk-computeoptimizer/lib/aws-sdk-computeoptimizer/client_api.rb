@@ -14,6 +14,8 @@ module Aws::ComputeOptimizer
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountEnrollmentStatus = Shapes::StructureShape.new(name: 'AccountEnrollmentStatus')
+    AccountEnrollmentStatuses = Shapes::ListShape.new(name: 'AccountEnrollmentStatuses')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
     AutoScalingGroupArn = Shapes::StringShape.new(name: 'AutoScalingGroupArn')
@@ -25,6 +27,8 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendationOptions = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendationOptions')
     AutoScalingGroupRecommendations = Shapes::ListShape.new(name: 'AutoScalingGroupRecommendations')
     Code = Shapes::StringShape.new(name: 'Code')
+    CpuVendorArchitecture = Shapes::StringShape.new(name: 'CpuVendorArchitecture')
+    CpuVendorArchitectures = Shapes::ListShape.new(name: 'CpuVendorArchitectures')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
     CurrentInstanceType = Shapes::StringShape.new(name: 'CurrentInstanceType')
     DescribeRecommendationExportJobsRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationExportJobsRequest')
@@ -40,6 +44,9 @@ module Aws::ComputeOptimizer
     EBSMetricName = Shapes::StringShape.new(name: 'EBSMetricName')
     EBSUtilizationMetric = Shapes::StructureShape.new(name: 'EBSUtilizationMetric')
     EBSUtilizationMetrics = Shapes::ListShape.new(name: 'EBSUtilizationMetrics')
+    EnrollmentFilter = Shapes::StructureShape.new(name: 'EnrollmentFilter')
+    EnrollmentFilterName = Shapes::StringShape.new(name: 'EnrollmentFilterName')
+    EnrollmentFilters = Shapes::ListShape.new(name: 'EnrollmentFilters')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportAutoScalingGroupRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsRequest')
     ExportAutoScalingGroupRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportAutoScalingGroupRecommendationsResponse')
@@ -80,6 +87,8 @@ module Aws::ComputeOptimizer
     GetEC2RecommendationProjectedMetricsResponse = Shapes::StructureShape.new(name: 'GetEC2RecommendationProjectedMetricsResponse')
     GetEnrollmentStatusRequest = Shapes::StructureShape.new(name: 'GetEnrollmentStatusRequest')
     GetEnrollmentStatusResponse = Shapes::StructureShape.new(name: 'GetEnrollmentStatusResponse')
+    GetEnrollmentStatusesForOrganizationRequest = Shapes::StructureShape.new(name: 'GetEnrollmentStatusesForOrganizationRequest')
+    GetEnrollmentStatusesForOrganizationResponse = Shapes::StructureShape.new(name: 'GetEnrollmentStatusesForOrganizationResponse')
     GetLambdaFunctionRecommendationsRequest = Shapes::StructureShape.new(name: 'GetLambdaFunctionRecommendationsRequest')
     GetLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'GetLambdaFunctionRecommendationsResponse')
     GetRecommendationError = Shapes::StructureShape.new(name: 'GetRecommendationError')
@@ -141,6 +150,7 @@ module Aws::ComputeOptimizer
     MissingAuthenticationToken = Shapes::StructureShape.new(name: 'MissingAuthenticationToken')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumberOfInvocations = Shapes::IntegerShape.new(name: 'NumberOfInvocations')
+    NumberOfMemberAccountsOptedIn = Shapes::IntegerShape.new(name: 'NumberOfMemberAccountsOptedIn')
     OptInRequiredException = Shapes::StructureShape.new(name: 'OptInRequiredException')
     PerformanceRisk = Shapes::FloatShape.new(name: 'PerformanceRisk')
     Period = Shapes::IntegerShape.new(name: 'Period')
@@ -155,6 +165,7 @@ module Aws::ComputeOptimizer
     RecommendationExportJob = Shapes::StructureShape.new(name: 'RecommendationExportJob')
     RecommendationExportJobs = Shapes::ListShape.new(name: 'RecommendationExportJobs')
     RecommendationOptions = Shapes::ListShape.new(name: 'RecommendationOptions')
+    RecommendationPreferences = Shapes::StructureShape.new(name: 'RecommendationPreferences')
     RecommendationSource = Shapes::StructureShape.new(name: 'RecommendationSource')
     RecommendationSourceArn = Shapes::StringShape.new(name: 'RecommendationSourceArn')
     RecommendationSourceType = Shapes::StringShape.new(name: 'RecommendationSourceType')
@@ -198,6 +209,14 @@ module Aws::ComputeOptimizer
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AccountEnrollmentStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    AccountEnrollmentStatus.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    AccountEnrollmentStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    AccountEnrollmentStatus.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: LastUpdatedTimestamp, location_name: "lastUpdatedTimestamp"))
+    AccountEnrollmentStatus.struct_class = Types::AccountEnrollmentStatus
+
+    AccountEnrollmentStatuses.member = Shapes::ShapeRef.new(shape: AccountEnrollmentStatus)
+
     AccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
     AutoScalingGroupArns.member = Shapes::ShapeRef.new(shape: AutoScalingGroupArn)
@@ -229,6 +248,8 @@ module Aws::ComputeOptimizer
 
     AutoScalingGroupRecommendations.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendation)
 
+    CpuVendorArchitectures.member = Shapes::ShapeRef.new(shape: CpuVendorArchitecture)
+
     DescribeRecommendationExportJobsRequest.add_member(:job_ids, Shapes::ShapeRef.new(shape: JobIds, location_name: "jobIds"))
     DescribeRecommendationExportJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: JobFilters, location_name: "filters"))
     DescribeRecommendationExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -252,12 +273,19 @@ module Aws::ComputeOptimizer
 
     EBSUtilizationMetrics.member = Shapes::ShapeRef.new(shape: EBSUtilizationMetric)
 
+    EnrollmentFilter.add_member(:name, Shapes::ShapeRef.new(shape: EnrollmentFilterName, location_name: "name"))
+    EnrollmentFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
+    EnrollmentFilter.struct_class = Types::EnrollmentFilter
+
+    EnrollmentFilters.member = Shapes::ShapeRef.new(shape: EnrollmentFilter)
+
     ExportAutoScalingGroupRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     ExportAutoScalingGroupRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     ExportAutoScalingGroupRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableAutoScalingGroupFields, location_name: "fieldsToExport"))
     ExportAutoScalingGroupRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
     ExportAutoScalingGroupRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
     ExportAutoScalingGroupRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportAutoScalingGroupRecommendationsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
     ExportAutoScalingGroupRecommendationsRequest.struct_class = Types::ExportAutoScalingGroupRecommendationsRequest
 
     ExportAutoScalingGroupRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -285,6 +313,7 @@ module Aws::ComputeOptimizer
     ExportEC2InstanceRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
     ExportEC2InstanceRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
     ExportEC2InstanceRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportEC2InstanceRecommendationsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
     ExportEC2InstanceRecommendationsRequest.struct_class = Types::ExportEC2InstanceRecommendationsRequest
 
     ExportEC2InstanceRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -326,6 +355,7 @@ module Aws::ComputeOptimizer
     GetAutoScalingGroupRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetAutoScalingGroupRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     GetAutoScalingGroupRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
+    GetAutoScalingGroupRecommendationsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
     GetAutoScalingGroupRecommendationsRequest.struct_class = Types::GetAutoScalingGroupRecommendationsRequest
 
     GetAutoScalingGroupRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -350,6 +380,7 @@ module Aws::ComputeOptimizer
     GetEC2InstanceRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     GetEC2InstanceRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     GetEC2InstanceRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetEC2InstanceRecommendationsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
     GetEC2InstanceRecommendationsRequest.struct_class = Types::GetEC2InstanceRecommendationsRequest
 
     GetEC2InstanceRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -362,6 +393,7 @@ module Aws::ComputeOptimizer
     GetEC2RecommendationProjectedMetricsRequest.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "period"))
     GetEC2RecommendationProjectedMetricsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     GetEC2RecommendationProjectedMetricsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    GetEC2RecommendationProjectedMetricsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
     GetEC2RecommendationProjectedMetricsRequest.struct_class = Types::GetEC2RecommendationProjectedMetricsRequest
 
     GetEC2RecommendationProjectedMetricsResponse.add_member(:recommended_option_projected_metrics, Shapes::ShapeRef.new(shape: RecommendedOptionProjectedMetrics, location_name: "recommendedOptionProjectedMetrics"))
@@ -372,7 +404,18 @@ module Aws::ComputeOptimizer
     GetEnrollmentStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     GetEnrollmentStatusResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
     GetEnrollmentStatusResponse.add_member(:member_accounts_enrolled, Shapes::ShapeRef.new(shape: MemberAccountsEnrolled, location_name: "memberAccountsEnrolled"))
+    GetEnrollmentStatusResponse.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: LastUpdatedTimestamp, location_name: "lastUpdatedTimestamp"))
+    GetEnrollmentStatusResponse.add_member(:number_of_member_accounts_opted_in, Shapes::ShapeRef.new(shape: NumberOfMemberAccountsOptedIn, location_name: "numberOfMemberAccountsOptedIn"))
     GetEnrollmentStatusResponse.struct_class = Types::GetEnrollmentStatusResponse
+
+    GetEnrollmentStatusesForOrganizationRequest.add_member(:filters, Shapes::ShapeRef.new(shape: EnrollmentFilters, location_name: "filters"))
+    GetEnrollmentStatusesForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetEnrollmentStatusesForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetEnrollmentStatusesForOrganizationRequest.struct_class = Types::GetEnrollmentStatusesForOrganizationRequest
+
+    GetEnrollmentStatusesForOrganizationResponse.add_member(:account_enrollment_statuses, Shapes::ShapeRef.new(shape: AccountEnrollmentStatuses, location_name: "accountEnrollmentStatuses"))
+    GetEnrollmentStatusesForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetEnrollmentStatusesForOrganizationResponse.struct_class = Types::GetEnrollmentStatusesForOrganizationResponse
 
     GetLambdaFunctionRecommendationsRequest.add_member(:function_arns, Shapes::ShapeRef.new(shape: FunctionArns, location_name: "functionArns"))
     GetLambdaFunctionRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
@@ -525,6 +568,9 @@ module Aws::ComputeOptimizer
     RecommendationExportJobs.member = Shapes::ShapeRef.new(shape: RecommendationExportJob)
 
     RecommendationOptions.member = Shapes::ShapeRef.new(shape: InstanceRecommendationOption)
+
+    RecommendationPreferences.add_member(:cpu_vendor_architectures, Shapes::ShapeRef.new(shape: CpuVendorArchitectures, location_name: "cpuVendorArchitectures"))
+    RecommendationPreferences.struct_class = Types::RecommendationPreferences
 
     RecommendationSource.add_member(:recommendation_source_arn, Shapes::ShapeRef.new(shape: RecommendationSourceArn, location_name: "recommendationSourceArn"))
     RecommendationSource.add_member(:recommendation_source_type, Shapes::ShapeRef.new(shape: RecommendationSourceType, location_name: "recommendationSourceType"))
@@ -786,6 +832,20 @@ module Aws::ComputeOptimizer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetEnrollmentStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEnrollmentStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_enrollment_statuses_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEnrollmentStatusesForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEnrollmentStatusesForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEnrollmentStatusesForOrganizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
