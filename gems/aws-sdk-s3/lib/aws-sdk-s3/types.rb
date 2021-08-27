@@ -2861,7 +2861,8 @@ module Aws::S3
     #
     # @!attribute [rw] bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
-    #   restrictions to process this operation.
+    #   restrictions to process this operation. To use this header, you must
+    #   have the `s3:PutBucketPublicAccessBlock` permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] expected_bucket_owner
@@ -3057,8 +3058,8 @@ module Aws::S3
     #
     # @!attribute [rw] bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
-    #   Governance-type Object Lock in place. You must have sufficient
-    #   permissions to perform this operation.
+    #   Governance-type Object Lock in place. To use this header, you must
+    #   have the `s3:PutBucketPublicAccessBlock` permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] expected_bucket_owner

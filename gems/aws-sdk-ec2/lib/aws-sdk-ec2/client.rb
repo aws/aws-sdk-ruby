@@ -18376,6 +18376,7 @@ module Aws::EC2
     #   resp.import_image_tasks[0].license_specifications #=> Array
     #   resp.import_image_tasks[0].license_specifications[0].license_configuration_arn #=> String
     #   resp.import_image_tasks[0].usage_operation #=> String
+    #   resp.import_image_tasks[0].boot_mode #=> String, one of "legacy-bios", "uefi"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasks AWS API Documentation
@@ -33047,6 +33048,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
     #
+    # @option params [String] :boot_mode
+    #   The boot mode of the virtual machine.
+    #
     # @return [Types::ImportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportImageResult#architecture #architecture} => String
@@ -33115,6 +33119,7 @@ module Aws::EC2
     #       },
     #     ],
     #     usage_operation: "String",
+    #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #   })
     #
     # @example Response structure
@@ -43615,7 +43620,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.259.0'
+      context[:gem_version] = '1.260.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

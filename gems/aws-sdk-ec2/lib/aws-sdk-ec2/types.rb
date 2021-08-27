@@ -33413,6 +33413,7 @@ module Aws::EC2
     #           },
     #         ],
     #         usage_operation: "String",
+    #         boot_mode: "legacy-bios", # accepts legacy-bios, uefi
     #       }
     #
     # @!attribute [rw] architecture
@@ -33551,6 +33552,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
     #   @return [String]
     #
+    # @!attribute [rw] boot_mode
+    #   The boot mode of the virtual machine.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
     #
     class ImportImageRequest < Struct.new(
@@ -33568,7 +33573,8 @@ module Aws::EC2
       :role_name,
       :license_specifications,
       :tag_specifications,
-      :usage_operation)
+      :usage_operation,
+      :boot_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33734,6 +33740,10 @@ module Aws::EC2
     #   The usage operation value.
     #   @return [String]
     #
+    # @!attribute [rw] boot_mode
+    #   The boot mode of the virtual machine.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageTask AWS API Documentation
     #
     class ImportImageTask < Struct.new(
@@ -33752,7 +33762,8 @@ module Aws::EC2
       :status_message,
       :tags,
       :license_specifications,
-      :usage_operation)
+      :usage_operation,
+      :boot_mode)
       SENSITIVE = []
       include Aws::Structure
     end

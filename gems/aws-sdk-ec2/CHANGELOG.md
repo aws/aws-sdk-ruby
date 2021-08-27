@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.260.0 (2021-08-27)
+------------------
+
+* Feature - This release adds the BootMode flag to the ImportImage API and showing the detected BootMode of an ImportImage task.
+
 1.259.0 (2021-08-26)
 ------------------
 
