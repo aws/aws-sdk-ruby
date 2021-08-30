@@ -53,6 +53,7 @@ module Aws::Firehose
     DestinationDescription = Shapes::StructureShape.new(name: 'DestinationDescription')
     DestinationDescriptionList = Shapes::ListShape.new(name: 'DestinationDescriptionList')
     DestinationId = Shapes::StringShape.new(name: 'DestinationId')
+    DynamicPartitioningConfiguration = Shapes::StructureShape.new(name: 'DynamicPartitioningConfiguration')
     ElasticsearchBufferingHints = Shapes::StructureShape.new(name: 'ElasticsearchBufferingHints')
     ElasticsearchBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'ElasticsearchBufferingIntervalInSeconds')
     ElasticsearchBufferingSizeInMBs = Shapes::IntegerShape.new(name: 'ElasticsearchBufferingSizeInMBs')
@@ -163,6 +164,8 @@ module Aws::Firehose
     RedshiftS3BackupMode = Shapes::StringShape.new(name: 'RedshiftS3BackupMode')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetryDurationInSeconds = Shapes::IntegerShape.new(name: 'RetryDurationInSeconds')
+    RetryOptions = Shapes::StructureShape.new(name: 'RetryOptions')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     S3BackupMode = Shapes::StringShape.new(name: 'S3BackupMode')
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
@@ -298,6 +301,10 @@ module Aws::Firehose
 
     DestinationDescriptionList.member = Shapes::ShapeRef.new(shape: DestinationDescription)
 
+    DynamicPartitioningConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: RetryOptions, location_name: "RetryOptions"))
+    DynamicPartitioningConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
+    DynamicPartitioningConfiguration.struct_class = Types::DynamicPartitioningConfiguration
+
     ElasticsearchBufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: ElasticsearchBufferingIntervalInSeconds, location_name: "IntervalInSeconds"))
     ElasticsearchBufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: ElasticsearchBufferingSizeInMBs, location_name: "SizeInMBs"))
     ElasticsearchBufferingHints.struct_class = Types::ElasticsearchBufferingHints
@@ -364,6 +371,7 @@ module Aws::Firehose
     ExtendedS3DestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
     ExtendedS3DestinationConfiguration.add_member(:s3_backup_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3BackupConfiguration"))
     ExtendedS3DestinationConfiguration.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
+    ExtendedS3DestinationConfiguration.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
     ExtendedS3DestinationConfiguration.struct_class = Types::ExtendedS3DestinationConfiguration
 
     ExtendedS3DestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
@@ -378,6 +386,7 @@ module Aws::Firehose
     ExtendedS3DestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
     ExtendedS3DestinationDescription.add_member(:s3_backup_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3BackupDescription"))
     ExtendedS3DestinationDescription.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
+    ExtendedS3DestinationDescription.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
     ExtendedS3DestinationDescription.struct_class = Types::ExtendedS3DestinationDescription
 
     ExtendedS3DestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -392,6 +401,7 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
     ExtendedS3DestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
     ExtendedS3DestinationUpdate.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
+    ExtendedS3DestinationUpdate.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
     ExtendedS3DestinationUpdate.struct_class = Types::ExtendedS3DestinationUpdate
 
     FailureDescription.add_member(:type, Shapes::ShapeRef.new(shape: DeliveryStreamFailureType, required: true, location_name: "Type"))
@@ -628,6 +638,9 @@ module Aws::Firehose
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: RetryDurationInSeconds, location_name: "DurationInSeconds"))
+    RetryOptions.struct_class = Types::RetryOptions
 
     S3DestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     S3DestinationConfiguration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))

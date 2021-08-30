@@ -938,11 +938,6 @@ module Aws::CodeBuild
     #
     #   : The build phase is still in progress.
     #
-    #   QUEUED
-    #
-    #   : The build has been submitted and is queued behind other submitted
-    #     builds.
-    #
     #   STOPPED
     #
     #   : The build phase stopped.
@@ -1051,35 +1046,50 @@ module Aws::CodeBuild
     # @!attribute [rw] phase_type
     #   The name of the build phase. Valid values include:
     #
-    #   * `BUILD`\: Core build activities typically occur in this build
-    #     phase.
+    #   BUILD
     #
-    #   * `COMPLETED`\: The build has been completed.
+    #   : Core build activities typically occur in this build phase.
     #
-    #   * `DOWNLOAD_SOURCE`\: Source code is being downloaded in this build
-    #     phase.
+    #   COMPLETED
     #
-    #   * `FINALIZING`\: The build process is completing in this build
-    #     phase.
+    #   : The build has been completed.
     #
-    #   * `INSTALL`\: Installation activities typically occur in this build
-    #     phase.
+    #   DOWNLOAD\_SOURCE
     #
-    #   * `POST_BUILD`\: Post-build activities typically occur in this build
-    #     phase.
+    #   : Source code is being downloaded in this build phase.
     #
-    #   * `PRE_BUILD`\: Pre-build activities typically occur in this build
-    #     phase.
+    #   FINALIZING
     #
-    #   * `PROVISIONING`\: The build environment is being set up.
+    #   : The build process is completing in this build phase.
     #
-    #   * `QUEUED`\: The build has been submitted and is queued behind other
-    #     submitted builds.
+    #   INSTALL
     #
-    #   * `SUBMITTED`\: The build has been submitted.
+    #   : Installation activities typically occur in this build phase.
     #
-    #   * `UPLOAD_ARTIFACTS`\: Build output artifacts are being uploaded to
-    #     the output location.
+    #   POST\_BUILD
+    #
+    #   : Post-build activities typically occur in this build phase.
+    #
+    #   PRE\_BUILD
+    #
+    #   : Pre-build activities typically occur in this build phase.
+    #
+    #   PROVISIONING
+    #
+    #   : The build environment is being set up.
+    #
+    #   QUEUED
+    #
+    #   : The build has been submitted and is queued behind other submitted
+    #     builds.
+    #
+    #   SUBMITTED
+    #
+    #   : The build has been submitted.
+    #
+    #   UPLOAD\_ARTIFACTS
+    #
+    #   : Build output artifacts are being uploaded to the output location.
     #   @return [String]
     #
     # @!attribute [rw] phase_status
@@ -1096,11 +1106,6 @@ module Aws::CodeBuild
     #   IN\_PROGRESS
     #
     #   : The build phase is still in progress.
-    #
-    #   QUEUED
-    #
-    #   : The build has been submitted and is queued behind other submitted
-    #     builds.
     #
     #   STOPPED
     #
