@@ -61,7 +61,7 @@ module AwsSdkCodeGenerator
         : request_syntax_example(method_name, operation, api),
         response_structure_example(operation, api),
         waiters_tag(@waiters),
-        see_also_tag(operation, api),
+        see_also_tag(@name, api),
       ], block_comment: false)
     end
     alias to_s to_str
@@ -274,7 +274,7 @@ module AwsSdkCodeGenerator
     def see_also_tag(operation, api)
       uid = api['metadata']['uid']
       if api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
-        "# " + Crosslink.tag_string(uid, operation['name'])
+        "# " + Crosslink.tag_string(uid, operation)
       end
     end
 
