@@ -45,3 +45,7 @@ group :repl do
   gem 'byebug'
   gem 'pry'
 end
+
+group :development do
+  gem 'rubocop', '0.81.0'
+end
