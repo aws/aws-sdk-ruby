@@ -10,13 +10,6 @@ module Aws
       # The known answer tests are a shared set of test cases
       # to ensure interop between SDKs
       describe 'Client Side Encryption AES/GCM Known Answer Tests' do
-
-        before do
-          if RUBY_VERSION.match(/^1.9/)
-            skip('authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9')
-          end
-        end
-
         def self.from_h(s)
           [s].pack('H*')
         end

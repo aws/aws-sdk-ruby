@@ -7,13 +7,6 @@ module Aws
     module EncryptionV2
 
       describe Client do
-
-        before do
-          if RUBY_VERSION.match(/^1.9/)
-            skip('authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9')
-          end
-        end
-
         # Captures the data (metadata and body) put to an s3 object
         def stub_put(s3_client)
           data = {}
@@ -42,7 +35,7 @@ module Aws
             {body: auth_tag}
           )
         end
-        
+
         def stub_decrypt(kms_client, opts)
           kms_client.stub_responses(
             :decrypt, lambda do |context|

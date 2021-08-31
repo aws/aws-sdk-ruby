@@ -339,23 +339,23 @@ module Aws::ComputeOptimizer
 
     # Describes recommendation export jobs created in the last seven days.
     #
-    # Use the `ExportAutoScalingGroupRecommendations` or
-    # `ExportEC2InstanceRecommendations` actions to request an export of
-    # your recommendations. Then use the `DescribeRecommendationExportJobs`
-    # action to view your export jobs.
+    # Use the ExportAutoScalingGroupRecommendations or
+    # ExportEC2InstanceRecommendations actions to request an export of your
+    # recommendations. Then use the DescribeRecommendationExportJobs action
+    # to view your export jobs.
     #
     # @option params [Array<String>] :job_ids
     #   The identification numbers of the export jobs to return.
     #
     #   An export job ID is returned when you create an export using the
-    #   `ExportAutoScalingGroupRecommendations` or
-    #   `ExportEC2InstanceRecommendations` actions.
+    #   ExportAutoScalingGroupRecommendations or
+    #   ExportEC2InstanceRecommendations actions.
     #
     #   All export jobs created in the last seven days are returned if this
     #   parameter is omitted.
     #
     # @option params [Array<Types::JobFilter>] :filters
-    #   An array of objects that describe a filter to return a more specific
+    #   An array of objects to specify a filter that returns a more specific
     #   list of export jobs.
     #
     # @option params [String] :next_token
@@ -365,7 +365,7 @@ module Aws::ComputeOptimizer
     #   The maximum number of export jobs to return with a single request.
     #
     #   To retrieve the remaining results, make another request with the
-    #   returned `NextToken` value.
+    #   returned `nextToken` value.
     #
     # @return [Types::DescribeRecommendationExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -412,21 +412,21 @@ module Aws::ComputeOptimizer
     # Exports optimization recommendations for Auto Scaling groups.
     #
     # Recommendations are exported in a comma-separated values (.csv) file,
-    # and its metadata in a JavaScript Object Notation (.json) file, to an
-    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
-    # specify. For more information, see [Exporting Recommendations][1] in
-    # the *Compute Optimizer User Guide*.
+    # and its metadata in a JavaScript Object Notation (JSON) (.json) file,
+    # to an existing Amazon Simple Storage Service (Amazon S3) bucket that
+    # you specify. For more information, see [Exporting Recommendations][1]
+    # in the *Compute Optimizer User Guide*.
     #
     # You can have only one Auto Scaling group export job in progress per
-    # AWS Region.
+    # Amazon Web Services Region.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to export Auto Scaling group
-    #   recommendations.
+    #   The IDs of the Amazon Web Services accounts for which to export Auto
+    #   Scaling group recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to export
@@ -441,7 +441,7 @@ module Aws::ComputeOptimizer
     #   You can specify multiple account IDs per request.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   An array of objects that describe a filter to export a more specific
+    #   An array of objects to specify a filter that exports a more specific
     #   set of Auto Scaling group recommendations.
     #
     # @option params [Array<String>] :fields_to_export
@@ -460,12 +460,12 @@ module Aws::ComputeOptimizer
     #   You must create the destination Amazon S3 bucket for your
     #   recommendations export before you create the export job. Compute
     #   Optimizer does not create the S3 bucket for you. After you create the
-    #   S3 bucket, ensure that it has the required permission policy to allow
+    #   S3 bucket, ensure that it has the required permissions policy to allow
     #   Compute Optimizer to write the export file to it. If you plan to
     #   specify an object prefix when you create the export job, you must
     #   include the object prefix in the policy that you add to the S3 bucket.
     #   For more information, see [Amazon S3 Bucket Policy for Compute
-    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #   Optimizer][1] in the *Compute Optimizer User Guide*.
     #
     #
     #
@@ -484,8 +484,8 @@ module Aws::ComputeOptimizer
     #   The member accounts must also be opted in to Compute Optimizer, and
     #   trusted access for Compute Optimizer must be enabled in the
     #   organization account. For more information, see [Compute Optimizer and
-    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
-    #   User Guide*.
+    #   Amazon Web Services Organizations trusted access][1] in the *Compute
+    #   Optimizer User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
@@ -499,6 +499,10 @@ module Aws::ComputeOptimizer
     #
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #
+    # @option params [Types::RecommendationPreferences] :recommendation_preferences
+    #   An object to specify the preferences for the Auto Scaling group
+    #   recommendations to export.
     #
     # @return [Types::ExportAutoScalingGroupRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -522,6 +526,9 @@ module Aws::ComputeOptimizer
     #     },
     #     file_format: "Csv", # accepts Csv
     #     include_member_accounts: false,
+    #     recommendation_preferences: {
+    #       cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
+    #     },
     #   })
     #
     # @example Response structure
@@ -543,21 +550,21 @@ module Aws::ComputeOptimizer
     # Exports optimization recommendations for Amazon EBS volumes.
     #
     # Recommendations are exported in a comma-separated values (.csv) file,
-    # and its metadata in a JavaScript Object Notation (.json) file, to an
-    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
-    # specify. For more information, see [Exporting Recommendations][1] in
-    # the *Compute Optimizer User Guide*.
+    # and its metadata in a JavaScript Object Notation (JSON) (.json) file,
+    # to an existing Amazon Simple Storage Service (Amazon S3) bucket that
+    # you specify. For more information, see [Exporting Recommendations][1]
+    # in the *Compute Optimizer User Guide*.
     #
-    # You can have only one Amazon EBS volume export job in progress per AWS
-    # Region.
+    # You can have only one Amazon EBS volume export job in progress per
+    # Amazon Web Services Region.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to export Amazon EBS volume
-    #   recommendations.
+    #   The IDs of the Amazon Web Services accounts for which to export Amazon
+    #   EBS volume recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to export
@@ -572,7 +579,7 @@ module Aws::ComputeOptimizer
     #   You can specify multiple account IDs per request.
     #
     # @option params [Array<Types::EBSFilter>] :filters
-    #   An array of objects that describe a filter to export a more specific
+    #   An array of objects to specify a filter that exports a more specific
     #   set of Amazon EBS volume recommendations.
     #
     # @option params [Array<String>] :fields_to_export
@@ -596,7 +603,7 @@ module Aws::ComputeOptimizer
     #   specify an object prefix when you create the export job, you must
     #   include the object prefix in the policy that you add to the S3 bucket.
     #   For more information, see [Amazon S3 Bucket Policy for Compute
-    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #   Optimizer][1] in the *Compute Optimizer User Guide*.
     #
     #
     #
@@ -615,8 +622,8 @@ module Aws::ComputeOptimizer
     #   The member accounts must also be opted in to Compute Optimizer, and
     #   trusted access for Compute Optimizer must be enabled in the
     #   organization account. For more information, see [Compute Optimizer and
-    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
-    #   User Guide*.
+    #   Amazon Web Services Organizations trusted access][1] in the *Compute
+    #   Optimizer User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
@@ -674,21 +681,21 @@ module Aws::ComputeOptimizer
     # Exports optimization recommendations for Amazon EC2 instances.
     #
     # Recommendations are exported in a comma-separated values (.csv) file,
-    # and its metadata in a JavaScript Object Notation (.json) file, to an
-    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
-    # specify. For more information, see [Exporting Recommendations][1] in
-    # the *Compute Optimizer User Guide*.
+    # and its metadata in a JavaScript Object Notation (JSON) (.json) file,
+    # to an existing Amazon Simple Storage Service (Amazon S3) bucket that
+    # you specify. For more information, see [Exporting Recommendations][1]
+    # in the *Compute Optimizer User Guide*.
     #
     # You can have only one Amazon EC2 instance export job in progress per
-    # AWS Region.
+    # Amazon Web Services Region.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to export instance
-    #   recommendations.
+    #   The IDs of the Amazon Web Services accounts for which to export
+    #   instance recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to export
@@ -703,7 +710,7 @@ module Aws::ComputeOptimizer
     #   You can specify multiple account IDs per request.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   An array of objects that describe a filter to export a more specific
+    #   An array of objects to specify a filter that exports a more specific
     #   set of instance recommendations.
     #
     # @option params [Array<String>] :fields_to_export
@@ -722,12 +729,12 @@ module Aws::ComputeOptimizer
     #   You must create the destination Amazon S3 bucket for your
     #   recommendations export before you create the export job. Compute
     #   Optimizer does not create the S3 bucket for you. After you create the
-    #   S3 bucket, ensure that it has the required permission policy to allow
-    #   Compute Optimizer to write the export file to it. If you plan to
-    #   specify an object prefix when you create the export job, you must
-    #   include the object prefix in the policy that you add to the S3 bucket.
-    #   For more information, see [Amazon S3 Bucket Policy for Compute
-    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #   S3 bucket, ensure that it has the required permissions policy policy
+    #   to allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the that you add to the S3 bucket. For
+    #   more information, see [Amazon S3 Bucket Policy for Compute
+    #   Optimizer][1] in the *Compute Optimizer User Guide*.
     #
     #
     #
@@ -746,8 +753,8 @@ module Aws::ComputeOptimizer
     #   The member accounts must also be opted in to Compute Optimizer, and
     #   trusted access for Compute Optimizer must be enabled in the
     #   organization account. For more information, see [Compute Optimizer and
-    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
-    #   User Guide*.
+    #   Amazon Web Services Organizations trusted access][1] in the *Compute
+    #   Optimizer User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
@@ -758,6 +765,10 @@ module Aws::ComputeOptimizer
     #
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #
+    # @option params [Types::RecommendationPreferences] :recommendation_preferences
+    #   An object to specify the preferences for the Amazon EC2 instance
+    #   recommendations to export.
     #
     # @return [Types::ExportEC2InstanceRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -781,6 +792,9 @@ module Aws::ComputeOptimizer
     #     },
     #     file_format: "Csv", # accepts Csv
     #     include_member_accounts: false,
+    #     recommendation_preferences: {
+    #       cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
+    #     },
     #   })
     #
     # @example Response structure
@@ -799,24 +813,24 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Exports optimization recommendations for AWS Lambda functions.
+    # Exports optimization recommendations for Lambda functions.
     #
     # Recommendations are exported in a comma-separated values (.csv) file,
-    # and its metadata in a JavaScript Object Notation (.json) file, to an
-    # existing Amazon Simple Storage Service (Amazon S3) bucket that you
-    # specify. For more information, see [Exporting Recommendations][1] in
-    # the *Compute Optimizer User Guide*.
+    # and its metadata in a JavaScript Object Notation (JSON) (.json) file,
+    # to an existing Amazon Simple Storage Service (Amazon S3) bucket that
+    # you specify. For more information, see [Exporting Recommendations][1]
+    # in the *Compute Optimizer User Guide*.
     #
-    # You can have only one Lambda function export job in progress per AWS
-    # Region.
+    # You can have only one Lambda function export job in progress per
+    # Amazon Web Services Region.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to export Lambda function
-    #   recommendations.
+    #   The IDs of the Amazon Web Services accounts for which to export Lambda
+    #   function recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to export
@@ -831,7 +845,7 @@ module Aws::ComputeOptimizer
     #   You can specify multiple account IDs per request.
     #
     # @option params [Array<Types::LambdaFunctionRecommendationFilter>] :filters
-    #   An array of objects that describe a filter to export a more specific
+    #   An array of objects to specify a filter that exports a more specific
     #   set of Lambda function recommendations.
     #
     # @option params [Array<String>] :fields_to_export
@@ -855,7 +869,7 @@ module Aws::ComputeOptimizer
     #   specify an object prefix when you create the export job, you must
     #   include the object prefix in the policy that you add to the S3 bucket.
     #   For more information, see [Amazon S3 Bucket Policy for Compute
-    #   Optimizer][1] in the *Compute Optimizer user guide*.
+    #   Optimizer][1] in the *Compute Optimizer User Guide*.
     #
     #
     #
@@ -874,8 +888,8 @@ module Aws::ComputeOptimizer
     #   The member accounts must also be opted in to Compute Optimizer, and
     #   trusted access for Compute Optimizer must be enabled in the
     #   organization account. For more information, see [Compute Optimizer and
-    #   AWS Organizations trusted access][1] in the *AWS Compute Optimizer
-    #   User Guide*.
+    #   Amazon Web Services Organizations trusted access][1] in the *Compute
+    #   Optimizer User Guide*.
     #
     #   Recommendations for member accounts of the organization are not
     #   included in the export file if this parameter is omitted.
@@ -932,18 +946,18 @@ module Aws::ComputeOptimizer
 
     # Returns Auto Scaling group recommendations.
     #
-    # AWS Compute Optimizer generates recommendations for Amazon EC2 Auto
+    # Compute Optimizer generates recommendations for Amazon EC2 Auto
     # Scaling groups that meet a specific set of requirements. For more
     # information, see the [Supported resources and requirements][1] in the
-    # *AWS Compute Optimizer User Guide*.
+    # *Compute Optimizer User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
     #
     # @option params [Array<String>] :account_ids
-    #   The ID of the AWS account for which to return Auto Scaling group
-    #   recommendations.
+    #   The ID of the Amazon Web Services account for which to return Auto
+    #   Scaling group recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to return
@@ -964,11 +978,15 @@ module Aws::ComputeOptimizer
     #   with a single request.
     #
     #   To retrieve the remaining results, make another request with the
-    #   returned `NextToken` value.
+    #   returned `nextToken` value.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   An array of objects that describe a filter that returns a more
-    #   specific list of Auto Scaling group recommendations.
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of Auto Scaling group recommendations.
+    #
+    # @option params [Types::RecommendationPreferences] :recommendation_preferences
+    #   An object to specify the preferences for the Auto Scaling group
+    #   recommendations to return in the response.
     #
     # @return [Types::GetAutoScalingGroupRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -989,6 +1007,9 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
+    #     recommendation_preferences: {
+    #       cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
+    #     },
     #   })
     #
     # @example Response structure
@@ -1037,9 +1058,9 @@ module Aws::ComputeOptimizer
     # Returns Amazon Elastic Block Store (Amazon EBS) volume
     # recommendations.
     #
-    # AWS Compute Optimizer generates recommendations for Amazon EBS volumes
+    # Compute Optimizer generates recommendations for Amazon EBS volumes
     # that meet a specific set of requirements. For more information, see
-    # the [Supported resources and requirements][1] in the *AWS Compute
+    # the [Supported resources and requirements][1] in the *Compute
     # Optimizer User Guide*.
     #
     #
@@ -1058,14 +1079,15 @@ module Aws::ComputeOptimizer
     #   request.
     #
     #   To retrieve the remaining results, make another request with the
-    #   returned `NextToken` value.
+    #   returned `nextToken` value.
     #
     # @option params [Array<Types::EBSFilter>] :filters
-    #   An array of objects that describe a filter that returns a more
-    #   specific list of volume recommendations.
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of volume recommendations.
     #
     # @option params [Array<String>] :account_ids
-    #   The ID of the AWS account for which to return volume recommendations.
+    #   The ID of the Amazon Web Services account for which to return volume
+    #   recommendations.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to return
@@ -1138,10 +1160,10 @@ module Aws::ComputeOptimizer
 
     # Returns Amazon EC2 instance recommendations.
     #
-    # AWS Compute Optimizer generates recommendations for Amazon Elastic
-    # Compute Cloud (Amazon EC2) instances that meet a specific set of
-    # requirements. For more information, see the [Supported resources and
-    # requirements][1] in the *AWS Compute Optimizer User Guide*.
+    # Compute Optimizer generates recommendations for Amazon Elastic Compute
+    # Cloud (Amazon EC2) instances that meet a specific set of requirements.
+    # For more information, see the [Supported resources and
+    # requirements][1] in the *Compute Optimizer User Guide*.
     #
     #
     #
@@ -1159,14 +1181,14 @@ module Aws::ComputeOptimizer
     #   request.
     #
     #   To retrieve the remaining results, make another request with the
-    #   returned `NextToken` value.
+    #   returned `nextToken` value.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   An array of objects that describe a filter that returns a more
-    #   specific list of instance recommendations.
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of instance recommendations.
     #
     # @option params [Array<String>] :account_ids
-    #   The ID of the AWS account for which to return instance
+    #   The ID of the Amazon Web Services account for which to return instance
     #   recommendations.
     #
     #   If your account is the management account of an organization, use this
@@ -1174,6 +1196,10 @@ module Aws::ComputeOptimizer
     #   instance recommendations.
     #
     #   Only one account ID can be specified per request.
+    #
+    # @option params [Types::RecommendationPreferences] :recommendation_preferences
+    #   An object to specify the preferences for the Amazon EC2 instance
+    #   recommendations to return in the response.
     #
     # @return [Types::GetEC2InstanceRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1194,6 +1220,9 @@ module Aws::ComputeOptimizer
     #       },
     #     ],
     #     account_ids: ["AccountId"],
+    #     recommendation_preferences: {
+    #       cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
+    #     },
     #   })
     #
     # @example Response structure
@@ -1219,7 +1248,7 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
     #   resp.instance_recommendations[0].recommendation_options[0].projected_utilization_metrics[0].value #=> Float
     #   resp.instance_recommendations[0].recommendation_options[0].platform_differences #=> Array
-    #   resp.instance_recommendations[0].recommendation_options[0].platform_differences[0] #=> String, one of "Hypervisor", "NetworkInterface", "StorageInterface", "InstanceStoreAvailability", "VirtualizationType"
+    #   resp.instance_recommendations[0].recommendation_options[0].platform_differences[0] #=> String, one of "Hypervisor", "NetworkInterface", "StorageInterface", "InstanceStoreAvailability", "VirtualizationType", "Architecture"
     #   resp.instance_recommendations[0].recommendation_options[0].performance_risk #=> Float
     #   resp.instance_recommendations[0].recommendation_options[0].rank #=> Integer
     #   resp.instance_recommendations[0].recommendation_sources #=> Array
@@ -1266,10 +1295,14 @@ module Aws::ComputeOptimizer
     #   The granularity, in seconds, of the projected metrics data points.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The time stamp of the first projected metrics data point to return.
+    #   The timestamp of the first projected metrics data point to return.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   The time stamp of the last projected metrics data point to return.
+    #   The timestamp of the last projected metrics data point to return.
+    #
+    # @option params [Types::RecommendationPreferences] :recommendation_preferences
+    #   An object to specify the preferences for the Amazon EC2 recommendation
+    #   projected metrics to return in the response.
     #
     # @return [Types::GetEC2RecommendationProjectedMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1283,6 +1316,9 @@ module Aws::ComputeOptimizer
     #     period: 1, # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
+    #     recommendation_preferences: {
+    #       cpu_vendor_architectures: ["AWS_ARM64"], # accepts AWS_ARM64, CURRENT
+    #     },
     #   })
     #
     # @example Response structure
@@ -1306,24 +1342,30 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Returns the enrollment (opt in) status of an account to the AWS
-    # Compute Optimizer service.
+    # Returns the enrollment (opt in) status of an account to the Compute
+    # Optimizer service.
     #
     # If the account is the management account of an organization, this
-    # action also confirms the enrollment status of member accounts within
-    # the organization.
+    # action also confirms the enrollment status of member accounts of the
+    # organization. Use the GetEnrollmentStatusesForOrganization action to
+    # get detailed information about the enrollment status of member
+    # accounts of an organization.
     #
     # @return [Types::GetEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetEnrollmentStatusResponse#status #status} => String
     #   * {Types::GetEnrollmentStatusResponse#status_reason #status_reason} => String
     #   * {Types::GetEnrollmentStatusResponse#member_accounts_enrolled #member_accounts_enrolled} => Boolean
+    #   * {Types::GetEnrollmentStatusResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #   * {Types::GetEnrollmentStatusResponse#number_of_member_accounts_opted_in #number_of_member_accounts_opted_in} => Integer
     #
     # @example Response structure
     #
     #   resp.status #=> String, one of "Active", "Inactive", "Pending", "Failed"
     #   resp.status_reason #=> String
     #   resp.member_accounts_enrolled #=> Boolean
+    #   resp.last_updated_timestamp #=> Time
+    #   resp.number_of_member_accounts_opted_in #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEnrollmentStatus AWS API Documentation
     #
@@ -1334,12 +1376,69 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Returns AWS Lambda function recommendations.
+    # Returns the Compute Optimizer enrollment (opt-in) status of
+    # organization member accounts, if your account is an organization
+    # management account.
     #
-    # AWS Compute Optimizer generates recommendations for functions that
-    # meet a specific set of requirements. For more information, see the
-    # [Supported resources and requirements][1] in the *AWS Compute
-    # Optimizer User Guide*.
+    # To get the enrollment status of standalone accounts, use the
+    # GetEnrollmentStatus action.
+    #
+    # @option params [Array<Types::EnrollmentFilter>] :filters
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of account enrollment statuses.
+    #
+    # @option params [String] :next_token
+    #   The token to advance to the next page of account enrollment statuses.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of account enrollment statuses to return with a
+    #   single request. You can specify up to 100 statuses to return with each
+    #   request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `nextToken` value.
+    #
+    # @return [Types::GetEnrollmentStatusesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnrollmentStatusesForOrganizationResponse#account_enrollment_statuses #account_enrollment_statuses} => Array&lt;Types::AccountEnrollmentStatus&gt;
+    #   * {Types::GetEnrollmentStatusesForOrganizationResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_enrollment_statuses_for_organization({
+    #     filters: [
+    #       {
+    #         name: "Status", # accepts Status
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_enrollment_statuses #=> Array
+    #   resp.account_enrollment_statuses[0].account_id #=> String
+    #   resp.account_enrollment_statuses[0].status #=> String, one of "Active", "Inactive", "Pending", "Failed"
+    #   resp.account_enrollment_statuses[0].status_reason #=> String
+    #   resp.account_enrollment_statuses[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEnrollmentStatusesForOrganization AWS API Documentation
+    #
+    # @overload get_enrollment_statuses_for_organization(params = {})
+    # @param [Hash] params ({})
+    def get_enrollment_statuses_for_organization(params = {}, options = {})
+      req = build_request(:get_enrollment_statuses_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns Lambda function recommendations.
+    #
+    # Compute Optimizer generates recommendations for functions that meet a
+    # specific set of requirements. For more information, see the [Supported
+    # resources and requirements][1] in the *Compute Optimizer User Guide*.
     #
     #
     #
@@ -1355,14 +1454,14 @@ module Aws::ComputeOptimizer
     #   function. If you specify a qualified ARN with a version suffix,
     #   Compute Optimizer will return recommendations for the specified
     #   function version. For more information about using function versions,
-    #   see [Using versions][1] in the *AWS Lambda Developer Guide*.
+    #   see [Using versions][1] in the *Lambda Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using
     #
     # @option params [Array<String>] :account_ids
-    #   The ID of the AWS account for which to return function
+    #   The ID of the Amazon Web Services account for which to return function
     #   recommendations.
     #
     #   If your account is the management account of an organization, use this
@@ -1372,8 +1471,8 @@ module Aws::ComputeOptimizer
     #   Only one account ID can be specified per request.
     #
     # @option params [Array<Types::LambdaFunctionRecommendationFilter>] :filters
-    #   An array of objects that describe a filter that returns a more
-    #   specific list of function recommendations.
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of function recommendations.
     #
     # @option params [String] :next_token
     #   The token to advance to the next page of function recommendations.
@@ -1383,7 +1482,7 @@ module Aws::ComputeOptimizer
     #   request.
     #
     #   To retrieve the remaining results, make another request with the
-    #   returned `NextToken` value.
+    #   returned `nextToken` value.
     #
     # @return [Types::GetLambdaFunctionRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1457,8 +1556,8 @@ module Aws::ComputeOptimizer
     #   `Optimized`.
     #
     # @option params [Array<String>] :account_ids
-    #   The ID of the AWS account for which to return recommendation
-    #   summaries.
+    #   The ID of the Amazon Web Services account for which to return
+    #   recommendation summaries.
     #
     #   If your account is the management account of an organization, use this
     #   parameter to specify the member account for which you want to return
@@ -1474,7 +1573,7 @@ module Aws::ComputeOptimizer
     #   request.
     #
     #   To retrieve the remaining results, make another request with the
-    #   returned `NextToken` value.
+    #   returned `nextToken` value.
     #
     # @return [Types::GetRecommendationSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1512,20 +1611,20 @@ module Aws::ComputeOptimizer
     end
 
     # Updates the enrollment (opt in and opt out) status of an account to
-    # the AWS Compute Optimizer service.
+    # the Compute Optimizer service.
     #
     # If the account is a management account of an organization, this action
-    # can also be used to enroll member accounts within the organization.
+    # can also be used to enroll member accounts of the organization.
     #
     # You must have the appropriate permissions to opt in to Compute
     # Optimizer, to view its recommendations, and to opt out. For more
-    # information, see [Controlling access with AWS Identity and Access
-    # Management][1] in the *AWS Compute Optimizer User Guide*.
+    # information, see [Controlling access with Amazon Web Services Identity
+    # and Access Management][1] in the *Compute Optimizer User Guide*.
     #
     # When you opt in, Compute Optimizer automatically creates a
-    # Service-Linked Role in your account to access its data. For more
-    # information, see [Using Service-Linked Roles for AWS Compute
-    # Optimizer][2] in the *AWS Compute Optimizer User Guide*.
+    # service-linked role in your account to access its data. For more
+    # information, see [Using Service-Linked Roles for Compute Optimizer][2]
+    # in the *Compute Optimizer User Guide*.
     #
     #
     #
@@ -1539,9 +1638,9 @@ module Aws::ComputeOptimizer
     #
     #   * `Active` - Opts in your account to the Compute Optimizer service.
     #     Compute Optimizer begins analyzing the configuration and utilization
-    #     metrics of your AWS resources after you opt in. For more
-    #     information, see [Metrics analyzed by AWS Compute Optimizer][1] in
-    #     the *AWS Compute Optimizer User Guide*.
+    #     metrics of your Amazon Web Services resources after you opt in. For
+    #     more information, see [Metrics analyzed by Compute Optimizer][1] in
+    #     the *Compute Optimizer User Guide*.
     #
     #   * `Inactive` - Opts out your account from the Compute Optimizer
     #     service. Your account's recommendations and related metrics data
@@ -1600,7 +1699,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

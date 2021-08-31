@@ -19220,7 +19220,8 @@
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
         },
-        "UsageOperation":{"shape":"String"}
+        "UsageOperation":{"shape":"String"},
+        "BootMode":{"shape":"BootModeValues"}
       }
     },
     "ImportImageResult":{
@@ -19358,6 +19359,10 @@
         "UsageOperation":{
           "shape":"String",
           "locationName":"usageOperation"
+        },
+        "BootMode":{
+          "shape":"BootModeValues",
+          "locationName":"bootMode"
         }
       }
     },
@@ -20498,7 +20503,8 @@
       "members":{
         "HttpTokens":{"shape":"HttpTokensState"},
         "HttpPutResponseHopLimit":{"shape":"Integer"},
-        "HttpEndpoint":{"shape":"InstanceMetadataEndpointState"}
+        "HttpEndpoint":{"shape":"InstanceMetadataEndpointState"},
+        "HttpProtocolIpv6":{"shape":"InstanceMetadataProtocolState"}
       }
     },
     "InstanceMetadataOptionsResponse":{
@@ -20519,6 +20525,10 @@
         "HttpEndpoint":{
           "shape":"InstanceMetadataEndpointState",
           "locationName":"httpEndpoint"
+        },
+        "HttpProtocolIpv6":{
+          "shape":"InstanceMetadataProtocolState",
+          "locationName":"httpProtocolIpv6"
         }
       }
     },
@@ -20527,6 +20537,13 @@
       "enum":[
         "pending",
         "applied"
+      ]
+    },
+    "InstanceMetadataProtocolState":{
+      "type":"string",
+      "enum":[
+        "disabled",
+        "enabled"
       ]
     },
     "InstanceMonitoring":{
@@ -23924,7 +23941,8 @@
         "HttpTokens":{"shape":"HttpTokensState"},
         "HttpPutResponseHopLimit":{"shape":"Integer"},
         "HttpEndpoint":{"shape":"InstanceMetadataEndpointState"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "HttpProtocolIpv6":{"shape":"InstanceMetadataProtocolState"}
       }
     },
     "ModifyInstanceMetadataOptionsResult":{
@@ -24011,7 +24029,8 @@
         "RemoveEntries":{
           "shape":"RemovePrefixListEntries",
           "locationName":"RemoveEntry"
-        }
+        },
+        "MaxEntries":{"shape":"Integer"}
       }
     },
     "ModifyManagedPrefixListResult":{

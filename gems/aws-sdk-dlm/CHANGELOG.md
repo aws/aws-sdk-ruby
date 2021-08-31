@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-08-23)
+------------------
+
+* Feature - Added AMI deprecation support for Amazon Data Lifecycle Manager EBS-backed AMI policies.
+
 1.42.0 (2021-07-30)
 ------------------
 

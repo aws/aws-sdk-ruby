@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2021-08-23)
+------------------
+
+* Feature - Add support for Custom Blueprints
+
 1.93.0 (2021-08-03)
 ------------------
 

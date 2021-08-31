@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-08-23)
+------------------
+
+* Feature - AWS Backup - Features: Evaluate your backup activity and generate audit reports.
+
 1.30.0 (2021-07-30)
 ------------------
 

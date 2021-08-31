@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2021-08-24)
+------------------
+
+* Feature - Updated Parameter Store property for logging improvements.
+
 1.115.0 (2021-08-09)
 ------------------
 

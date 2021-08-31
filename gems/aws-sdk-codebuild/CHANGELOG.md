@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2021-08-30)
+------------------
+
+* Feature - Documentation updates for CodeBuild
+
 1.79.0 (2021-08-18)
 ------------------
 

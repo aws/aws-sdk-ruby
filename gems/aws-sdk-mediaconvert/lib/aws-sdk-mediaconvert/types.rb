@@ -2674,6 +2674,7 @@ module Aws::MediaConvert
     #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_encryption_context: "__stringPatternAZaZ0902",
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #             },
     #           },
@@ -2707,6 +2708,7 @@ module Aws::MediaConvert
     #         pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
+    #         segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #         write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -2760,12 +2762,10 @@ module Aws::MediaConvert
     #   @return [Types::CmafEncryptionSettings]
     #
     # @!attribute [rw] fragment_length
-    #   Length of fragments to generate (in seconds). Fragment length must
-    #   be compatible with GOP size and Framerate. Note that fragments will
-    #   end on the next keyframe after this number of seconds, so actual
-    #   fragment length may be longer. When Emit Single File is checked, the
-    #   fragmentation is internal to a single output file and it does not
-    #   cause the creation of many output files as in other output types.
+    #   Specify the length, in whole seconds, of the mp4 fragments. When you
+    #   don't specify a value, MediaConvert defaults to 2. Related setting:
+    #   Use Fragment length control (FragmentLengthControl) to specify
+    #   whether the encoder enforces this value strictly.
     #   @return [Integer]
     #
     # @!attribute [rw] image_based_trick_play
@@ -2847,17 +2847,23 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] segment_length
-    #   Use this setting to specify the length, in seconds, of each
-    #   individual CMAF segment. This value applies to the whole package;
-    #   that is, to every output in the output group. Note that segments end
-    #   on the first keyframe after this number of seconds, so the actual
-    #   segment length might be slightly longer. If you set Segment control
-    #   (CmafSegmentControl) to single file, the service puts the content of
-    #   each output in a single file that has metadata that marks these
-    #   segments. If you set it to segmented files, the service creates
-    #   multiple files for each output, each with the content of one
-    #   segment.
+    #   Specify the length, in whole seconds, of each segment. When you
+    #   don't specify a value, MediaConvert defaults to 10. Related
+    #   settings: Use Segment length control (SegmentLengthControl) to
+    #   specify whether the encoder enforces this value strictly. Use
+    #   Segment control (CmafSegmentControl) to specify whether MediaConvert
+    #   creates separate segment files or one content file that has metadata
+    #   to mark the segment boundaries.
     #   @return [Integer]
+    #
+    # @!attribute [rw] segment_length_control
+    #   Specify how you want MediaConvert to determine the segment length.
+    #   Choose Exact (EXACT) to have the encoder use the exact length that
+    #   you specify with the setting Segment length (SegmentLength). This
+    #   might result in extra I-frames. Choose Multiple of GOP
+    #   (GOP\_MULTIPLE) to have the encoder round up the segment lengths to
+    #   match the next GOP boundary.
+    #   @return [String]
     #
     # @!attribute [rw] stream_inf_resolution
     #   Include or exclude RESOLUTION attribute for video in
@@ -2918,6 +2924,7 @@ module Aws::MediaConvert
       :pts_offset_handling_for_b_frames,
       :segment_control,
       :segment_length,
+      :segment_length_control,
       :stream_inf_resolution,
       :target_duration_compatibility_mode,
       :write_dash_manifest,
@@ -3210,6 +3217,7 @@ module Aws::MediaConvert
     #           audio_pids: [1],
     #           bitrate: 1,
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           dvb_nit_settings: {
     #             network_id: 1,
     #             network_name: "__stringMin1Max256",
@@ -3259,6 +3267,7 @@ module Aws::MediaConvert
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #           max_pcr_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
@@ -3650,6 +3659,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -3683,6 +3693,7 @@ module Aws::MediaConvert
     #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -3706,6 +3717,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -3728,6 +3740,7 @@ module Aws::MediaConvert
     #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 file_group_settings: {
@@ -3739,6 +3752,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -3773,6 +3787,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -3807,6 +3822,7 @@ module Aws::MediaConvert
     #                   program_date_time_period: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -3830,6 +3846,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -3843,6 +3860,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   fragment_length: 1,
+    #                   fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #                 },
     #                 type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -4084,6 +4102,7 @@ module Aws::MediaConvert
     #                       audio_pids: [1],
     #                       bitrate: 1,
     #                       buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                       data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                       dvb_nit_settings: {
     #                         network_id: 1,
     #                         network_name: "__stringMin1Max256",
@@ -4133,6 +4152,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
@@ -4243,7 +4263,7 @@ module Aws::MediaConvert
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -4993,6 +5013,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -5026,6 +5047,7 @@ module Aws::MediaConvert
     #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -5049,6 +5071,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -5071,6 +5094,7 @@ module Aws::MediaConvert
     #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 file_group_settings: {
@@ -5082,6 +5106,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -5116,6 +5141,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -5150,6 +5176,7 @@ module Aws::MediaConvert
     #                   program_date_time_period: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -5173,6 +5200,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -5186,6 +5214,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   fragment_length: 1,
+    #                   fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #                 },
     #                 type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -5427,6 +5456,7 @@ module Aws::MediaConvert
     #                       audio_pids: [1],
     #                       bitrate: 1,
     #                       buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                       data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                       dvb_nit_settings: {
     #                         network_id: 1,
     #                         network_name: "__stringMin1Max256",
@@ -5476,6 +5506,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
@@ -5586,7 +5617,7 @@ module Aws::MediaConvert
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -6276,6 +6307,7 @@ module Aws::MediaConvert
     #               audio_pids: [1],
     #               bitrate: 1,
     #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #               data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #               dvb_nit_settings: {
     #                 network_id: 1,
     #                 network_name: "__stringMin1Max256",
@@ -6325,6 +6357,7 @@ module Aws::MediaConvert
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #               max_pcr_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
@@ -6421,7 +6454,7 @@ module Aws::MediaConvert
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -6997,6 +7030,7 @@ module Aws::MediaConvert
     #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_encryption_context: "__stringPatternAZaZ0902",
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #             },
     #           },
@@ -7019,6 +7053,7 @@ module Aws::MediaConvert
     #         pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
+    #         segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
@@ -7147,13 +7182,23 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] segment_length
-    #   Length of mpd segments to create (in seconds). Note that segments
-    #   will end on the next keyframe after this number of seconds, so
-    #   actual segment length may be longer. When Emit Single File is
-    #   checked, the segmentation is internal to a single output file and it
-    #   does not cause the creation of many output files as in other output
-    #   types.
+    #   Specify the length, in whole seconds, of each segment. When you
+    #   don't specify a value, MediaConvert defaults to 30. Related
+    #   settings: Use Segment length control (SegmentLengthControl) to
+    #   specify whether the encoder enforces this value strictly. Use
+    #   Segment control (DashIsoSegmentControl) to specify whether
+    #   MediaConvert creates separate segment files or one content file that
+    #   has metadata to mark the segment boundaries.
     #   @return [Integer]
+    #
+    # @!attribute [rw] segment_length_control
+    #   Specify how you want MediaConvert to determine the segment length.
+    #   Choose Exact (EXACT) to have the encoder use the exact length that
+    #   you specify with the setting Segment length (SegmentLength). This
+    #   might result in extra I-frames. Choose Multiple of GOP
+    #   (GOP\_MULTIPLE) to have the encoder round up the segment lengths to
+    #   match the next GOP boundary.
+    #   @return [String]
     #
     # @!attribute [rw] write_segment_timeline_in_representation
     #   If you get an HTTP error in the 400 range when you play back your
@@ -7184,6 +7229,7 @@ module Aws::MediaConvert
       :pts_offset_handling_for_b_frames,
       :segment_control,
       :segment_length,
+      :segment_length_control,
       :write_segment_timeline_in_representation)
       SENSITIVE = []
       include Aws::Structure
@@ -7399,6 +7445,7 @@ module Aws::MediaConvert
     #           },
     #           encryption: {
     #             encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #             kms_encryption_context: "__stringPatternAZaZ0902",
     #             kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #           },
     #         },
@@ -8649,6 +8696,7 @@ module Aws::MediaConvert
     #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_encryption_context: "__stringPatternAZaZ0902",
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #             },
     #           },
@@ -9026,7 +9074,7 @@ module Aws::MediaConvert
     #         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -9114,9 +9162,12 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] field_encoding
-    #   Keep the default value, PAFF, to have MediaConvert use PAFF encoding
-    #   for interlaced outputs. Choose Force field (FORCE\_FIELD) to disable
-    #   PAFF encoding and create separate interlaced fields.
+    #   The video encoding method for your MPEG-4 AVC output. Keep the
+    #   default value, PAFF, to have MediaConvert use PAFF encoding for
+    #   interlaced outputs. Choose Force field (FORCE\_FIELD) to disable
+    #   PAFF encoding and create separate interlaced fields. Choose MBAFF to
+    #   disable PAFF and have MediaConvert use MBAFF encoding for interlaced
+    #   outputs.
     #   @return [String]
     #
     # @!attribute [rw] flicker_adaptive_quantization
@@ -9255,7 +9306,10 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
-    #   Number of B-frames between reference frames.
+    #   Specify the number of B-frames that MediaConvert puts between
+    #   reference frames in this output. Valid values are whole numbers from
+    #   0 through 7. When you don't specify a value, MediaConvert defaults
+    #   to 2.
     #   @return [Integer]
     #
     # @!attribute [rw] number_reference_frames
@@ -9783,7 +9837,10 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
-    #   Number of B-frames between reference frames.
+    #   Specify the number of B-frames that MediaConvert puts between
+    #   reference frames in this output. Valid values are whole numbers from
+    #   0 through 7. When you don't specify a value, MediaConvert defaults
+    #   to 2.
     #   @return [Integer]
     #
     # @!attribute [rw] number_reference_frames
@@ -10375,6 +10432,7 @@ module Aws::MediaConvert
     #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_encryption_context: "__stringPatternAZaZ0902",
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #             },
     #           },
@@ -10409,6 +10467,7 @@ module Aws::MediaConvert
     #         program_date_time_period: 1,
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
+    #         segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #         segments_per_subdirectory: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -10564,10 +10623,23 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] segment_length
-    #   Length of MPEG-2 Transport Stream segments to create (in seconds).
-    #   Note that segments will end on the next keyframe after this number
-    #   of seconds, so actual segment length may be longer.
+    #   Specify the length, in whole seconds, of each segment. When you
+    #   don't specify a value, MediaConvert defaults to 10. Related
+    #   settings: Use Segment length control (SegmentLengthControl) to
+    #   specify whether the encoder enforces this value strictly. Use
+    #   Segment control (HlsSegmentControl) to specify whether MediaConvert
+    #   creates separate segment files or one content file that has metadata
+    #   to mark the segment boundaries.
     #   @return [Integer]
+    #
+    # @!attribute [rw] segment_length_control
+    #   Specify how you want MediaConvert to determine the segment length.
+    #   Choose Exact (EXACT) to have the encoder use the exact length that
+    #   you specify with the setting Segment length (SegmentLength). This
+    #   might result in extra I-frames. Choose Multiple of GOP
+    #   (GOP\_MULTIPLE) to have the encoder round up the segment lengths to
+    #   match the next GOP boundary.
+    #   @return [String]
     #
     # @!attribute [rw] segments_per_subdirectory
     #   Number of segments to write to a subdirectory before starting a new
@@ -10631,6 +10703,7 @@ module Aws::MediaConvert
       :program_date_time_period,
       :segment_control,
       :segment_length,
+      :segment_length_control,
       :segments_per_subdirectory,
       :stream_inf_resolution,
       :target_duration_compatibility_mode,
@@ -12278,6 +12351,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -12311,6 +12385,7 @@ module Aws::MediaConvert
     #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
+    #                 segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -12334,6 +12409,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -12356,6 +12432,7 @@ module Aws::MediaConvert
     #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
+    #                 segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               file_group_settings: {
@@ -12367,6 +12444,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -12401,6 +12479,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -12435,6 +12514,7 @@ module Aws::MediaConvert
     #                 program_date_time_period: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
+    #                 segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -12458,6 +12538,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -12471,6 +12552,7 @@ module Aws::MediaConvert
     #                   },
     #                 },
     #                 fragment_length: 1,
+    #                 fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #               },
     #               type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -12712,6 +12794,7 @@ module Aws::MediaConvert
     #                     audio_pids: [1],
     #                     bitrate: 1,
     #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                     data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                     dvb_nit_settings: {
     #                       network_id: 1,
     #                       network_name: "__stringMin1Max256",
@@ -12761,6 +12844,7 @@ module Aws::MediaConvert
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                     max_pcr_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
@@ -12871,7 +12955,7 @@ module Aws::MediaConvert
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -13667,6 +13751,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -13700,6 +13785,7 @@ module Aws::MediaConvert
     #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
+    #                 segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -13723,6 +13809,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -13745,6 +13832,7 @@ module Aws::MediaConvert
     #                 pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
+    #                 segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               file_group_settings: {
@@ -13756,6 +13844,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -13790,6 +13879,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -13824,6 +13914,7 @@ module Aws::MediaConvert
     #                 program_date_time_period: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
+    #                 segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -13847,6 +13938,7 @@ module Aws::MediaConvert
     #                     },
     #                     encryption: {
     #                       encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                     },
     #                   },
@@ -13860,6 +13952,7 @@ module Aws::MediaConvert
     #                   },
     #                 },
     #                 fragment_length: 1,
+    #                 fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                 manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #               },
     #               type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -14101,6 +14194,7 @@ module Aws::MediaConvert
     #                     audio_pids: [1],
     #                     bitrate: 1,
     #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                     data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                     dvb_nit_settings: {
     #                       network_id: 1,
     #                       network_name: "__stringMin1Max256",
@@ -14150,6 +14244,7 @@ module Aws::MediaConvert
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                     max_pcr_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
@@ -14260,7 +14355,7 @@ module Aws::MediaConvert
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -15229,6 +15324,7 @@ module Aws::MediaConvert
     #         audio_pids: [1],
     #         bitrate: 1,
     #         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #         data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #         dvb_nit_settings: {
     #           network_id: 1,
     #           network_name: "__stringMin1Max256",
@@ -15321,6 +15417,14 @@ module Aws::MediaConvert
     #   to MULTIPLEX, use multiplex buffer model. If set to NONE, this can
     #   lead to lower latency, but low-memory devices may not be able to
     #   play back the stream without interruptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_pts_control
+    #   If you select ALIGN\_TO\_VIDEO, MediaConvert writes captions and
+    #   data packets with Presentation Timestamp (PTS) values greater than
+    #   or equal to the first video packet PTS (MediaConvert drops captions
+    #   and data packets with lesser PTS values). Keep the default value
+    #   (AUTO) to allow all PTS values.
     #   @return [String]
     #
     # @!attribute [rw] dvb_nit_settings
@@ -15544,6 +15648,7 @@ module Aws::MediaConvert
       :audio_pids,
       :bitrate,
       :buffer_model,
+      :data_pts_control,
       :dvb_nit_settings,
       :dvb_sdt_settings,
       :dvb_sub_pids,
@@ -15589,6 +15694,7 @@ module Aws::MediaConvert
     #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
+    #         data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #         max_pcr_interval: 1,
     #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #         pat_interval: 1,
@@ -15634,6 +15740,14 @@ module Aws::MediaConvert
     #   transport stream. Multiple values are accepted, and can be entered
     #   in ranges and/or by comma separation.
     #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] data_pts_control
+    #   If you select ALIGN\_TO\_VIDEO, MediaConvert writes captions and
+    #   data packets with Presentation Timestamp (PTS) values greater than
+    #   or equal to the first video packet PTS (MediaConvert drops captions
+    #   and data packets with lesser PTS values). Keep the default value
+    #   (AUTO) to allow all PTS values.
+    #   @return [String]
     #
     # @!attribute [rw] max_pcr_interval
     #   Specify the maximum time, in milliseconds, between Program Clock
@@ -15726,6 +15840,7 @@ module Aws::MediaConvert
       :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
+      :data_pts_control,
       :max_pcr_interval,
       :nielsen_id_3,
       :pat_interval,
@@ -16340,14 +16455,16 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] gop_size
-    #   GOP Length (keyframe interval) in frames or seconds. Must be greater
-    #   than zero.
+    #   Specify the interval between keyframes, in seconds or frames, for
+    #   this output. Default: 12 Related settings: When you specify the GOP
+    #   size in seconds, set GOP mode control (GopSizeUnits) to Specified,
+    #   seconds (SECONDS). The default value for GOP mode control
+    #   (GopSizeUnits) is Frames (FRAMES).
     #   @return [Float]
     #
     # @!attribute [rw] gop_size_units
-    #   Indicates if the GOP Size in MPEG2 is specified in frames or
-    #   seconds. If seconds the system will convert the GOP Size into a
-    #   frame count at run time.
+    #   Specify the units for GOP size (GopSize). If you don't specify a
+    #   value here, by default the encoder measures GOP size in frames.
     #   @return [String]
     #
     # @!attribute [rw] hrd_buffer_initial_fill_percentage
@@ -16401,7 +16518,10 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
-    #   Number of B-frames between reference frames.
+    #   Specify the number of B-frames that MediaConvert puts between
+    #   reference frames in this output. Valid values are whole numbers from
+    #   0 through 7. When you don't specify a value, MediaConvert defaults
+    #   to 2.
     #   @return [Integer]
     #
     # @!attribute [rw] par_control
@@ -16683,6 +16803,7 @@ module Aws::MediaConvert
     #             },
     #             encryption: {
     #               encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #               kms_encryption_context: "__stringPatternAZaZ0902",
     #               kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #             },
     #           },
@@ -16696,6 +16817,7 @@ module Aws::MediaConvert
     #           },
     #         },
     #         fragment_length: 1,
+    #         fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #         manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #       }
     #
@@ -16732,10 +16854,22 @@ module Aws::MediaConvert
     #   @return [Types::MsSmoothEncryptionSettings]
     #
     # @!attribute [rw] fragment_length
-    #   Use Fragment length (FragmentLength) to specify the mp4 fragment
-    #   sizes in seconds. Fragment length must be compatible with GOP size
-    #   and frame rate.
+    #   Specify how you want MediaConvert to determine the fragment length.
+    #   Choose Exact (EXACT) to have the encoder use the exact length that
+    #   you specify with the setting Fragment length (FragmentLength). This
+    #   might result in extra I-frames. Choose Multiple of GOP
+    #   (GOP\_MULTIPLE) to have the encoder round up the segment lengths to
+    #   match the next GOP boundary.
     #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_length_control
+    #   Specify how you want MediaConvert to determine the fragment length.
+    #   Choose Exact (EXACT) to have the encoder use the exact length that
+    #   you specify with the setting Fragment length (FragmentLength). This
+    #   might result in extra I-frames. Choose Multiple of GOP
+    #   (GOP\_MULTIPLE) to have the encoder round up the segment lengths to
+    #   match the next GOP boundary.
+    #   @return [String]
     #
     # @!attribute [rw] manifest_encoding
     #   Use Manifest encoding (MsSmoothManifestEncoding) to specify the
@@ -16752,6 +16886,7 @@ module Aws::MediaConvert
       :destination_settings,
       :encryption,
       :fragment_length,
+      :fragment_length_control,
       :manifest_encoding)
       SENSITIVE = []
       include Aws::Structure
@@ -17546,6 +17681,7 @@ module Aws::MediaConvert
     #             audio_pids: [1],
     #             bitrate: 1,
     #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #             data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #             dvb_nit_settings: {
     #               network_id: 1,
     #               network_name: "__stringMin1Max256",
@@ -17595,6 +17731,7 @@ module Aws::MediaConvert
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #             max_pcr_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
@@ -17705,7 +17842,7 @@ module Aws::MediaConvert
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -18190,6 +18327,7 @@ module Aws::MediaConvert
     #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_encryption_context: "__stringPatternAZaZ0902",
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                 },
     #               },
@@ -18223,6 +18361,7 @@ module Aws::MediaConvert
     #             pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
+    #             segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #             write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -18246,6 +18385,7 @@ module Aws::MediaConvert
     #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_encryption_context: "__stringPatternAZaZ0902",
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                 },
     #               },
@@ -18268,6 +18408,7 @@ module Aws::MediaConvert
     #             pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
+    #             segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #             write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           file_group_settings: {
@@ -18279,6 +18420,7 @@ module Aws::MediaConvert
     #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_encryption_context: "__stringPatternAZaZ0902",
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                 },
     #               },
@@ -18313,6 +18455,7 @@ module Aws::MediaConvert
     #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_encryption_context: "__stringPatternAZaZ0902",
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                 },
     #               },
@@ -18347,6 +18490,7 @@ module Aws::MediaConvert
     #             program_date_time_period: 1,
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
+    #             segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #             segments_per_subdirectory: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -18370,6 +18514,7 @@ module Aws::MediaConvert
     #                 },
     #                 encryption: {
     #                   encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                   kms_encryption_context: "__stringPatternAZaZ0902",
     #                   kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                 },
     #               },
@@ -18383,6 +18528,7 @@ module Aws::MediaConvert
     #               },
     #             },
     #             fragment_length: 1,
+    #             fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #             manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #           },
     #           type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -18624,6 +18770,7 @@ module Aws::MediaConvert
     #                 audio_pids: [1],
     #                 bitrate: 1,
     #                 buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                 data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                 dvb_nit_settings: {
     #                   network_id: 1,
     #                   network_name: "__stringMin1Max256",
@@ -18673,6 +18820,7 @@ module Aws::MediaConvert
     #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
+    #                 data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                 max_pcr_interval: 1,
     #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                 pat_interval: 1,
@@ -18783,7 +18931,7 @@ module Aws::MediaConvert
     #                   codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                   dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                   field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                   field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -19193,6 +19341,7 @@ module Aws::MediaConvert
     #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_encryption_context: "__stringPatternAZaZ0902",
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #               },
     #             },
@@ -19226,6 +19375,7 @@ module Aws::MediaConvert
     #           pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
+    #           segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #           write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -19249,6 +19399,7 @@ module Aws::MediaConvert
     #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_encryption_context: "__stringPatternAZaZ0902",
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #               },
     #             },
@@ -19271,6 +19422,7 @@ module Aws::MediaConvert
     #           pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
+    #           segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #           write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         file_group_settings: {
@@ -19282,6 +19434,7 @@ module Aws::MediaConvert
     #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_encryption_context: "__stringPatternAZaZ0902",
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #               },
     #             },
@@ -19316,6 +19469,7 @@ module Aws::MediaConvert
     #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_encryption_context: "__stringPatternAZaZ0902",
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #               },
     #             },
@@ -19350,6 +19504,7 @@ module Aws::MediaConvert
     #           program_date_time_period: 1,
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
+    #           segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #           segments_per_subdirectory: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -19373,6 +19528,7 @@ module Aws::MediaConvert
     #               },
     #               encryption: {
     #                 encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                 kms_encryption_context: "__stringPatternAZaZ0902",
     #                 kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #               },
     #             },
@@ -19386,6 +19542,7 @@ module Aws::MediaConvert
     #             },
     #           },
     #           fragment_length: 1,
+    #           fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #           manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #         },
     #         type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -19805,6 +19962,7 @@ module Aws::MediaConvert
     #             audio_pids: [1],
     #             bitrate: 1,
     #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #             data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #             dvb_nit_settings: {
     #               network_id: 1,
     #               network_name: "__stringMin1Max256",
@@ -19854,6 +20012,7 @@ module Aws::MediaConvert
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #             max_pcr_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
@@ -19950,7 +20109,7 @@ module Aws::MediaConvert
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -20885,6 +21044,7 @@ module Aws::MediaConvert
     #         },
     #         encryption: {
     #           encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #           kms_encryption_context: "__stringPatternAZaZ0902",
     #           kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #         },
     #       }
@@ -20918,6 +21078,7 @@ module Aws::MediaConvert
     #
     #       {
     #         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #         kms_encryption_context: "__stringPatternAZaZ0902",
     #         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #       }
     #
@@ -20937,6 +21098,18 @@ module Aws::MediaConvert
     #   setting KMS ARN (kmsKeyArn).
     #   @return [String]
     #
+    # @!attribute [rw] kms_encryption_context
+    #   Optionally, specify the encryption context that you want to use
+    #   alongside your KMS key. AWS KMS uses this encryption context as
+    #   additional authenticated data (AAD) to support authenticated
+    #   encryption. This value must be a base64-encoded UTF-8 string holding
+    #   JSON which represents a string-string map. To use this setting, you
+    #   must also set Server-side encryption (S3ServerSideEncryptionType) to
+    #   AWS KMS (SERVER\_SIDE\_ENCRYPTION\_KMS). For more information about
+    #   encryption context, see:
+    #   https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt\_context.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_arn
     #   Optionally, specify the customer master key (CMK) that you want to
     #   use to encrypt the data key that AWS uses to encrypt your output
@@ -20952,6 +21125,7 @@ module Aws::MediaConvert
     #
     class S3EncryptionSettings < Struct.new(
       :encryption_type,
+      :kms_encryption_context,
       :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -21816,6 +21990,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -21849,6 +22024,7 @@ module Aws::MediaConvert
     #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
@@ -21872,6 +22048,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -21894,6 +22071,7 @@ module Aws::MediaConvert
     #                   pts_offset_handling_for_b_frames: "ZERO_BASED", # accepts ZERO_BASED, MATCH_INITIAL_PTS
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 file_group_settings: {
@@ -21905,6 +22083,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -21939,6 +22118,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -21973,6 +22153,7 @@ module Aws::MediaConvert
     #                   program_date_time_period: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
+    #                   segment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   target_duration_compatibility_mode: "LEGACY", # accepts LEGACY, SPEC_COMPLIANT
@@ -21996,6 +22177,7 @@ module Aws::MediaConvert
     #                       },
     #                       encryption: {
     #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3", # accepts SERVER_SIDE_ENCRYPTION_S3, SERVER_SIDE_ENCRYPTION_KMS
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
     #                       },
     #                     },
@@ -22009,6 +22191,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   fragment_length: 1,
+    #                   fragment_length_control: "EXACT", # accepts EXACT, GOP_MULTIPLE
     #                   manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #                 },
     #                 type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
@@ -22250,6 +22433,7 @@ module Aws::MediaConvert
     #                       audio_pids: [1],
     #                       bitrate: 1,
     #                       buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #                       data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                       dvb_nit_settings: {
     #                         network_id: 1,
     #                         network_name: "__stringMin1Max256",
@@ -22299,6 +22483,7 @@ module Aws::MediaConvert
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #                       max_pcr_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
@@ -22409,7 +22594,7 @@ module Aws::MediaConvert
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -23086,6 +23271,7 @@ module Aws::MediaConvert
     #               audio_pids: [1],
     #               bitrate: 1,
     #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
+    #               data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #               dvb_nit_settings: {
     #                 network_id: 1,
     #                 network_name: "__stringMin1Max256",
@@ -23135,6 +23321,7 @@ module Aws::MediaConvert
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               data_pts_control: "AUTO", # accepts AUTO, ALIGN_TO_VIDEO
     #               max_pcr_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
@@ -23231,7 +23418,7 @@ module Aws::MediaConvert
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -23876,7 +24063,7 @@ module Aws::MediaConvert
     #           codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #           dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #           entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #           field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #           field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
@@ -24235,7 +24422,7 @@ module Aws::MediaConvert
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
-    #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
+    #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD, MBAFF
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER

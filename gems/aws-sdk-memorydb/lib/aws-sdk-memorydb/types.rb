@@ -515,7 +515,7 @@ module Aws::MemoryDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/snapshots-exporting.html
+    #   [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -653,20 +653,13 @@ module Aws::MemoryDB
     #   @return [String]
     #
     # @!attribute [rw] num_shards
-    #   The number of shards the cluster will contain.
-    #
-    #   Clusters can have up to 500 shards, with your data partitioned
-    #   across the shards. For example, you can choose to configure a 500
-    #   node cluster that ranges between 83 shards (one primary and 5
-    #   replicas per shard) and 500 shards (single primary and no replicas).
-    #   Make sure there are enough available IP addresses to accommodate the
-    #   increase. Common pitfalls include the subnets in the subnet group
-    #   have too small a CIDR range or the subnets are shared and heavily
-    #   used by other clusters.
+    #   The number of shards the cluster will contain. The default value is
+    #   1.
     #   @return [Integer]
     #
     # @!attribute [rw] num_replicas_per_shard
-    #   The number of replicas to apply to each shard. The limit is 5.
+    #   The number of replicas to apply to each shard. The default value is
+    #   1. The maximum is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_group_name
@@ -2868,7 +2861,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging-Resources.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:

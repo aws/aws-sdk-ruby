@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-08-31)
+------------------
+
+* Feature - Amazon Polly adds new South African English voice - Ayanda. Ayanda is available as Neural voice only.
+
+1.44.0 (2021-08-24)
+------------------
+
+* Feature - Amazon Polly adds new New Zealand English voice - Aria. Aria is available as Neural voice only.
+
 1.43.0 (2021-07-30)
 ------------------
 

@@ -718,10 +718,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these
-    #     capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -994,7 +994,7 @@ module Aws::CloudFormation
     #   in the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case
-    #   sensitive) and hyphens. It must start with an alphabetic character
+    #   sensitive) and hyphens. It must start with an alphabetical character
     #   and cannot be longer than 128 characters.
     #
     #    </note>
@@ -1070,10 +1070,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these
-    #     capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1325,8 +1325,9 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   \[Self-managed permissions\] The names of one or more accounts that
-    #   you want to create stack instances in the specified Region(s) for.
+    #   \[Self-managed permissions\] The names of one or more Amazon Web
+    #   Services accounts that you want to create stack instances in the
+    #   specified Region(s) for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
@@ -1340,7 +1341,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] regions
     #   The names of one or more Regions where you want to create stack
-    #   instances using the specified accounts.
+    #   instances using the specified Amazon Web Services accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parameter_overrides
@@ -1415,9 +1416,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -1562,10 +1564,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stack sets, you must
-    #     explicitly acknowledge this by specifying one of these
-    #     capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stack sets, you must explicitly acknowledge this by specifying one
+    #     of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1712,9 +1714,10 @@ module Aws::CloudFormation
     #     signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated admin in the
-    #     management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     admin in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #   Stack sets with service-managed permissions are created in the
     #   management account, including stack sets that are created by
@@ -1962,8 +1965,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   \[Self-managed permissions\] The names of the accounts that you want
-    #   to delete stack instances for.
+    #   \[Self-managed permissions\] The names of the Amazon Web Services
+    #   accounts that you want to delete stack instances for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
@@ -2028,9 +2031,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -2090,9 +2094,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -2131,8 +2136,8 @@ module Aws::CloudFormation
     #       }
     #
     # @!attribute [rw] accounts
-    #   The names of one or more accounts for which you want to deploy stack
-    #   set updates.
+    #   The names of one or more Amazon Web Services accounts for which you
+    #   want to deploy stack set updates.
     #   @return [Array<String>]
     #
     # @!attribute [rw] accounts_url
@@ -2643,7 +2648,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_account
-    #   The ID of an account that's associated with this stack instance.
+    #   The ID of an Amazon Web Services account that's associated with
+    #   this stack instance.
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_region
@@ -2663,9 +2669,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -2933,9 +2940,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -2982,9 +2990,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -3678,9 +3687,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -3796,6 +3806,7 @@ module Aws::CloudFormation
     #         change_set_name: "ChangeSetNameOrId", # required
     #         stack_name: "StackNameOrId",
     #         client_request_token: "ClientRequestToken",
+    #         disable_rollback: false,
     #       }
     #
     # @!attribute [rw] change_set_name
@@ -3816,12 +3827,20 @@ module Aws::CloudFormation
     #   requests to ensure that CloudFormation successfully received them.
     #   @return [String]
     #
+    # @!attribute [rw] disable_rollback
+    #   Preserves the state of previously provisioned resources when an
+    #   operation fails.
+    #
+    #   Default: `True`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetInput AWS API Documentation
     #
     class ExecuteChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name,
-      :client_request_token)
+      :client_request_token,
+      :disable_rollback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4058,9 +4077,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -4461,7 +4481,8 @@ module Aws::CloudFormation
     #   @return [Array<Types::StackInstanceFilter>]
     #
     # @!attribute [rw] stack_instance_account
-    #   The name of the account that you want to list stack instances for.
+    #   The name of the Amazon Web Services account that you want to list
+    #   stack instances for.
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_region
@@ -4481,9 +4502,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -4633,9 +4655,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -4722,9 +4745,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -4808,9 +4832,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -4857,7 +4882,7 @@ module Aws::CloudFormation
     #
     #       {
     #         next_token: "NextToken",
-    #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
+    #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_FAILED, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
     #       }
     #
     # @!attribute [rw] next_token
@@ -5462,7 +5487,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] no_echo
     #   Flag that indicates whether the parameter value is shown as plain
-    #   text in logs and in the Management Console.
+    #   text in logs and in the Amazon Web Services Management Console.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -6323,6 +6348,50 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RollbackStackInput
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "StackNameOrId", # required
+    #         role_arn: "RoleARN",
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name that is associated with the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an Identity and Access Management
+    #   role that CloudFormation assumes to rollback the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `RollbackStack` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStackInput AWS API Documentation
+    #
+    class RollbackStackInput < Struct.new(
+      :stack_name,
+      :role_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_id
+    #   Unique identifier of the stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStackOutput AWS API Documentation
+    #
+    class RollbackStackOutput < Struct.new(
+      :stack_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A rollback trigger CloudFormation monitors during creation and
     # updating of stacks. If any of the alarms you specify goes to ALARM
     # state during the stack operation or within the specified monitoring
@@ -6942,12 +7011,13 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the Region that the stack instance is associated with.
+    #   The name of the Amazon Web Services Region that the stack instance
+    #   is associated with.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   \[Self-managed permissions\] The name of the account that the stack
-    #   instance is associated with.
+    #   \[Self-managed permissions\] The name of the Amazon Web Services
+    #   account that the stack instance is associated with.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -7125,12 +7195,13 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the Region that the stack instance is associated with.
+    #   The name of the Amazon Web Services Region that the stack instance
+    #   is associated with.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   \[Self-managed permissions\] The name of the account that the stack
-    #   instance is associated with.
+    #   \[Self-managed permissions\] The name of the Amazon Web Services
+    #   account that the stack instance is associated with.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -7671,10 +7742,10 @@ module Aws::CloudFormation
     end
 
     # A structure that contains information about a stack set. A stack set
-    # enables you to provision stacks into accounts and across Regions by
-    # using a single CloudFormation template. In the stack set, you specify
-    # the template to use, as well as any parameters and capabilities that
-    # the template requires.
+    # enables you to provision stacks into Amazon Web Services accounts and
+    # across Regions by using a single CloudFormation template. In the stack
+    # set, you specify the template to use, as well as any parameters and
+    # capabilities that the template requires.
     #
     # @!attribute [rw] stack_set_name
     #   The name that's associated with the stack set.
@@ -7705,9 +7776,9 @@ module Aws::CloudFormation
     # @!attribute [rw] capabilities
     #   The capabilities that are allowed in the stack set. Some stack set
     #   templates might include resources that can affect permissions in
-    #   your account—for example, by creating new Identity and Access
-    #   Management (IAM) users. For more information, see [Acknowledging IAM
-    #   Resources in CloudFormation Templates.][1]
+    #   your Amazon Web Services account—for example, by creating new
+    #   Identity and Access Management (IAM) users. For more information,
+    #   see [Acknowledging IAM Resources in CloudFormation Templates.][1]
     #
     #
     #
@@ -8193,12 +8264,13 @@ module Aws::CloudFormation
     # results for a given account in a given Region.
     #
     # @!attribute [rw] account
-    #   \[Self-managed permissions\] The name of the account for this
-    #   operation result.
+    #   \[Self-managed permissions\] The name of the Amazon Web Services
+    #   account for this operation result.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the Region for this operation result.
+    #   The name of the Amazon Web Services Region for this operation
+    #   result.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8554,9 +8626,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -9205,6 +9278,7 @@ module Aws::CloudFormation
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         disable_rollback: false,
     #         client_request_token: "ClientRequestToken",
     #       }
     #
@@ -9291,10 +9365,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these
-    #     capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -9451,6 +9525,13 @@ module Aws::CloudFormation
     #   removes all associated tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] disable_rollback
+    #   Preserve the state of previously provisioned resources when an
+    #   operation fails.
+    #
+    #   Default: `False`
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_request_token
     #   A unique identifier for this `UpdateStack` request. Specify this
     #   token if you plan to retry requests so that CloudFormation knows
@@ -9491,6 +9572,7 @@ module Aws::CloudFormation
       :stack_policy_url,
       :notification_arns,
       :tags,
+      :disable_rollback,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure
@@ -9534,10 +9616,10 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   \[Self-managed permissions\] The names of one or more accounts for
-    #   which you want to update parameter values for stack instances. The
-    #   overridden parameter values will be applied to all stack instances
-    #   in the specified accounts and Regions.
+    #   \[Self-managed permissions\] The names of one or more Amazon Web
+    #   Services accounts for which you want to update parameter values for
+    #   stack instances. The overridden parameter values will be applied to
+    #   all stack instances in the specified accounts and Regions.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
@@ -9635,9 +9717,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #
@@ -9795,10 +9878,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks sets, you must
-    #     explicitly acknowledge this by specifying one of these
-    #     capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks sets, you must explicitly acknowledge this by specifying
+    #     one of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -10059,9 +10142,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in
-    #     the management account. For more information, see [Register a
-    #     delegated administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
     #
     #
     #

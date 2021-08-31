@@ -225,10 +225,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -307,6 +307,12 @@ module Aws::Firehose
     #             },
     #             enabled: false,
     #           },
+    #           dynamic_partitioning_configuration: {
+    #             retry_options: {
+    #               duration_in_seconds: 1,
+    #             },
+    #             enabled: false,
+    #           },
     #         },
     #         redshift_destination_configuration: {
     #           role_arn: "RoleARN", # required
@@ -347,10 +353,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -427,10 +433,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -483,10 +489,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -527,10 +533,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -1161,6 +1167,45 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The configuration of the dynamic partitioning mechanism that creates
+    # smaller data sets from the streaming data by partitioning it based on
+    # partition keys. Currently, dynamic partitioning is only supported for
+    # Amazon S3 destinations. For more information, see
+    # [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    #
+    # @note When making an API call, you may pass DynamicPartitioningConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver data to an Amazon S3 prefix.
+    #   @return [Types::RetryOptions]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies that the dynamic partitioning is enabled for this Kinesis
+    #   Data Firehose delivery stream.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DynamicPartitioningConfiguration AWS API Documentation
+    #
+    class DynamicPartitioningConfiguration < Struct.new(
+      :retry_options,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the buffering to perform before delivering data to the
     # Amazon ES destination.
     #
@@ -1243,10 +1288,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -1524,10 +1569,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -1728,10 +1773,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -1807,6 +1852,12 @@ module Aws::Firehose
     #                 format_version: "V0_11", # accepts V0_11, V0_12
     #               },
     #             },
+    #           },
+    #           enabled: false,
+    #         },
+    #         dynamic_partitioning_configuration: {
+    #           retry_options: {
+    #             duration_in_seconds: 1,
     #           },
     #           enabled: false,
     #         },
@@ -1891,6 +1942,18 @@ module Aws::Firehose
     #   Amazon S3.
     #   @return [Types::DataFormatConversionConfiguration]
     #
+    # @!attribute [rw] dynamic_partitioning_configuration
+    #   The configuration of the dynamic partitioning mechanism that creates
+    #   smaller data sets from the streaming data by partitioning it based
+    #   on partition keys. Currently, dynamic partitioning is only supported
+    #   for Amazon S3 destinations. For more information, see
+    #   [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    #   @return [Types::DynamicPartitioningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationConfiguration AWS API Documentation
     #
     class ExtendedS3DestinationConfiguration < Struct.new(
@@ -1905,7 +1968,8 @@ module Aws::Firehose
       :processing_configuration,
       :s3_backup_mode,
       :s3_backup_configuration,
-      :data_format_conversion_configuration)
+      :data_format_conversion_configuration,
+      :dynamic_partitioning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1988,6 +2052,18 @@ module Aws::Firehose
     #   Amazon S3.
     #   @return [Types::DataFormatConversionConfiguration]
     #
+    # @!attribute [rw] dynamic_partitioning_configuration
+    #   The configuration of the dynamic partitioning mechanism that creates
+    #   smaller data sets from the streaming data by partitioning it based
+    #   on partition keys. Currently, dynamic partitioning is only supported
+    #   for Amazon S3 destinations. For more information, see
+    #   [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    #   @return [Types::DynamicPartitioningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationDescription AWS API Documentation
     #
     class ExtendedS3DestinationDescription < Struct.new(
@@ -2002,7 +2078,8 @@ module Aws::Firehose
       :processing_configuration,
       :s3_backup_mode,
       :s3_backup_description,
-      :data_format_conversion_configuration)
+      :data_format_conversion_configuration,
+      :dynamic_partitioning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2037,10 +2114,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -2116,6 +2193,12 @@ module Aws::Firehose
     #                 format_version: "V0_11", # accepts V0_11, V0_12
     #               },
     #             },
+    #           },
+    #           enabled: false,
+    #         },
+    #         dynamic_partitioning_configuration: {
+    #           retry_options: {
+    #             duration_in_seconds: 1,
     #           },
     #           enabled: false,
     #         },
@@ -2199,6 +2282,18 @@ module Aws::Firehose
     #   Amazon S3.
     #   @return [Types::DataFormatConversionConfiguration]
     #
+    # @!attribute [rw] dynamic_partitioning_configuration
+    #   The configuration of the dynamic partitioning mechanism that creates
+    #   smaller data sets from the streaming data by partitioning it based
+    #   on partition keys. Currently, dynamic partitioning is only supported
+    #   for Amazon S3 destinations. For more information, see
+    #   [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    #   @return [Types::DynamicPartitioningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationUpdate AWS API Documentation
     #
     class ExtendedS3DestinationUpdate < Struct.new(
@@ -2213,7 +2308,8 @@ module Aws::Firehose
       :processing_configuration,
       :s3_backup_mode,
       :s3_backup_update,
-      :data_format_conversion_configuration)
+      :data_format_conversion_configuration,
+      :dynamic_partitioning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2358,6 +2454,14 @@ module Aws::Firehose
     #
     # @!attribute [rw] url
     #   The URL of the HTTP endpoint selected as the destination.
+    #
+    #   If you choose an HTTP endpoint as your destination, review and
+    #   follow the instructions in the [Appendix - HTTP Endpoint Delivery
+    #   Request and Response Specifications][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2431,10 +2535,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -2639,10 +2743,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -3403,10 +3507,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -3437,10 +3541,10 @@ module Aws::Firehose
     #   data as a hash:
     #
     #       {
-    #         type: "Lambda", # required, accepts Lambda
+    #         type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #         parameters: [
     #           {
-    #             parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #             parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #             parameter_value: "ProcessorParameterValue", # required
     #           },
     #         ],
@@ -3469,7 +3573,7 @@ module Aws::Firehose
     #   data as a hash:
     #
     #       {
-    #         parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #         parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #         parameter_value: "ProcessorParameterValue", # required
     #       }
     #
@@ -3686,10 +3790,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -3917,10 +4021,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -4085,6 +4189,29 @@ module Aws::Firehose
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The retry behavior in case Kinesis Data Firehose is unable to deliver
+    # data to an Amazon S3 prefix.
+    #
+    # @note When making an API call, you may pass RetryOptions
+    #   data as a hash:
+    #
+    #       {
+    #         duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   The period of time during which Kinesis Data Firehose retries to
+    #   deliver data to the specified Amazon S3 prefix.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RetryOptions AWS API Documentation
+    #
+    class RetryOptions < Struct.new(
+      :duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4397,6 +4524,10 @@ module Aws::Firehose
     #   The role that Kinesis Data Firehose can use to access AWS Glue. This
     #   role must be in the same account you use for Kinesis Data Firehose.
     #   Cross-account roles aren't allowed.
+    #
+    #   If the `SchemaConfiguration` request parameter is used as part of
+    #   invoking the `CreateDeliveryStream` API, then the `RoleARN` property
+    #   is required and its value must be specified.
     #   @return [String]
     #
     # @!attribute [rw] catalog_id
@@ -4407,11 +4538,19 @@ module Aws::Firehose
     # @!attribute [rw] database_name
     #   Specifies the name of the AWS Glue database that contains the schema
     #   for the output data.
+    #
+    #   If the `SchemaConfiguration` request parameter is used as part of
+    #   invoking the `CreateDeliveryStream` API, then the `DatabaseName`
+    #   property is required and its value must be specified.
     #   @return [String]
     #
     # @!attribute [rw] table_name
     #   Specifies the AWS Glue table that contains the column information
     #   that constitutes your data schema.
+    #
+    #   If the `SchemaConfiguration` request parameter is used as part of
+    #   invoking the `CreateDeliveryStream` API, then the `TableName`
+    #   property is required and its value must be specified.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -4581,10 +4720,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -4772,10 +4911,10 @@ module Aws::Firehose
     #           enabled: false,
     #           processors: [
     #             {
-    #               type: "Lambda", # required, accepts Lambda
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #               parameters: [
     #                 {
-    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                   parameter_value: "ProcessorParameterValue", # required
     #                 },
     #               ],
@@ -5092,10 +5231,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -5174,6 +5313,12 @@ module Aws::Firehose
     #             },
     #             enabled: false,
     #           },
+    #           dynamic_partitioning_configuration: {
+    #             retry_options: {
+    #               duration_in_seconds: 1,
+    #             },
+    #             enabled: false,
+    #           },
     #         },
     #         redshift_destination_update: {
     #           role_arn: "RoleARN",
@@ -5214,10 +5359,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -5293,10 +5438,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -5344,10 +5489,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],
@@ -5388,10 +5533,10 @@ module Aws::Firehose
     #             enabled: false,
     #             processors: [
     #               {
-    #                 type: "Lambda", # required, accepts Lambda
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #                 parameters: [
     #                   {
-    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                     parameter_value: "ProcessorParameterValue", # required
     #                   },
     #                 ],

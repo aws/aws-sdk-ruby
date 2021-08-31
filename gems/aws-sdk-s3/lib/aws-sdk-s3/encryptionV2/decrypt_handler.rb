@@ -166,10 +166,6 @@ module Aws
         # to initialize the cipher, and the decrypter truncates the
         # auth tag from the body when writing the final bytes.
         def authenticated_decrypter(context, cipher, envelope)
-          if RUBY_VERSION.match(/^1.9/)
-            msg = 'authenticated decryption not supported by OpenSSL in Ruby version ~> 1.9'
-            raise Aws::Errors::NonSupportedRubyVersionError, msg
-          end
           http_resp = context.http_response
           content_length = http_resp.headers['content-length'].to_i
           auth_tag_length = auth_tag_length(envelope)

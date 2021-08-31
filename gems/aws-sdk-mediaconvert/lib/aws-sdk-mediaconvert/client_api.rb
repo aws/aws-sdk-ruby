@@ -111,6 +111,7 @@ module Aws::MediaConvert
     CmafMpdProfile = Shapes::StringShape.new(name: 'CmafMpdProfile')
     CmafPtsOffsetHandlingForBFrames = Shapes::StringShape.new(name: 'CmafPtsOffsetHandlingForBFrames')
     CmafSegmentControl = Shapes::StringShape.new(name: 'CmafSegmentControl')
+    CmafSegmentLengthControl = Shapes::StringShape.new(name: 'CmafSegmentLengthControl')
     CmafStreamInfResolution = Shapes::StringShape.new(name: 'CmafStreamInfResolution')
     CmafTargetDurationCompatibilityMode = Shapes::StringShape.new(name: 'CmafTargetDurationCompatibilityMode')
     CmafWriteDASHManifest = Shapes::StringShape.new(name: 'CmafWriteDASHManifest')
@@ -151,6 +152,7 @@ module Aws::MediaConvert
     DashIsoPlaybackDeviceCompatibility = Shapes::StringShape.new(name: 'DashIsoPlaybackDeviceCompatibility')
     DashIsoPtsOffsetHandlingForBFrames = Shapes::StringShape.new(name: 'DashIsoPtsOffsetHandlingForBFrames')
     DashIsoSegmentControl = Shapes::StringShape.new(name: 'DashIsoSegmentControl')
+    DashIsoSegmentLengthControl = Shapes::StringShape.new(name: 'DashIsoSegmentLengthControl')
     DashIsoWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'DashIsoWriteSegmentTimelineInRepresentation')
     DecryptionMode = Shapes::StringShape.new(name: 'DecryptionMode')
     DeinterlaceAlgorithm = Shapes::StringShape.new(name: 'DeinterlaceAlgorithm')
@@ -319,6 +321,7 @@ module Aws::MediaConvert
     HlsProgramDateTime = Shapes::StringShape.new(name: 'HlsProgramDateTime')
     HlsRenditionGroupSettings = Shapes::StructureShape.new(name: 'HlsRenditionGroupSettings')
     HlsSegmentControl = Shapes::StringShape.new(name: 'HlsSegmentControl')
+    HlsSegmentLengthControl = Shapes::StringShape.new(name: 'HlsSegmentLengthControl')
     HlsSettings = Shapes::StructureShape.new(name: 'HlsSettings')
     HlsStreamInfResolution = Shapes::StringShape.new(name: 'HlsStreamInfResolution')
     HlsTargetDurationCompatibilityMode = Shapes::StringShape.new(name: 'HlsTargetDurationCompatibilityMode')
@@ -365,6 +368,7 @@ module Aws::MediaConvert
     M2tsAudioBufferModel = Shapes::StringShape.new(name: 'M2tsAudioBufferModel')
     M2tsAudioDuration = Shapes::StringShape.new(name: 'M2tsAudioDuration')
     M2tsBufferModel = Shapes::StringShape.new(name: 'M2tsBufferModel')
+    M2tsDataPtsControl = Shapes::StringShape.new(name: 'M2tsDataPtsControl')
     M2tsEbpAudioInterval = Shapes::StringShape.new(name: 'M2tsEbpAudioInterval')
     M2tsEbpPlacement = Shapes::StringShape.new(name: 'M2tsEbpPlacement')
     M2tsEsRateInPes = Shapes::StringShape.new(name: 'M2tsEsRateInPes')
@@ -378,6 +382,7 @@ module Aws::MediaConvert
     M2tsSegmentationStyle = Shapes::StringShape.new(name: 'M2tsSegmentationStyle')
     M2tsSettings = Shapes::StructureShape.new(name: 'M2tsSettings')
     M3u8AudioDuration = Shapes::StringShape.new(name: 'M3u8AudioDuration')
+    M3u8DataPtsControl = Shapes::StringShape.new(name: 'M3u8DataPtsControl')
     M3u8NielsenId3 = Shapes::StringShape.new(name: 'M3u8NielsenId3')
     M3u8PcrControl = Shapes::StringShape.new(name: 'M3u8PcrControl')
     M3u8Scte35Source = Shapes::StringShape.new(name: 'M3u8Scte35Source')
@@ -429,6 +434,7 @@ module Aws::MediaConvert
     MsSmoothAdditionalManifest = Shapes::StructureShape.new(name: 'MsSmoothAdditionalManifest')
     MsSmoothAudioDeduplication = Shapes::StringShape.new(name: 'MsSmoothAudioDeduplication')
     MsSmoothEncryptionSettings = Shapes::StructureShape.new(name: 'MsSmoothEncryptionSettings')
+    MsSmoothFragmentLengthControl = Shapes::StringShape.new(name: 'MsSmoothFragmentLengthControl')
     MsSmoothGroupSettings = Shapes::StructureShape.new(name: 'MsSmoothGroupSettings')
     MsSmoothManifestEncoding = Shapes::StringShape.new(name: 'MsSmoothManifestEncoding')
     MxfAfdSignaling = Shapes::StringShape.new(name: 'MxfAfdSignaling')
@@ -1015,6 +1021,7 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:pts_offset_handling_for_b_frames, Shapes::ShapeRef.new(shape: CmafPtsOffsetHandlingForBFrames, location_name: "ptsOffsetHandlingForBFrames"))
     CmafGroupSettings.add_member(:segment_control, Shapes::ShapeRef.new(shape: CmafSegmentControl, location_name: "segmentControl"))
     CmafGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentLength"))
+    CmafGroupSettings.add_member(:segment_length_control, Shapes::ShapeRef.new(shape: CmafSegmentLengthControl, location_name: "segmentLengthControl"))
     CmafGroupSettings.add_member(:stream_inf_resolution, Shapes::ShapeRef.new(shape: CmafStreamInfResolution, location_name: "streamInfResolution"))
     CmafGroupSettings.add_member(:target_duration_compatibility_mode, Shapes::ShapeRef.new(shape: CmafTargetDurationCompatibilityMode, location_name: "targetDurationCompatibilityMode"))
     CmafGroupSettings.add_member(:write_dash_manifest, Shapes::ShapeRef.new(shape: CmafWriteDASHManifest, location_name: "writeDashManifest"))
@@ -1132,6 +1139,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:pts_offset_handling_for_b_frames, Shapes::ShapeRef.new(shape: DashIsoPtsOffsetHandlingForBFrames, location_name: "ptsOffsetHandlingForBFrames"))
     DashIsoGroupSettings.add_member(:segment_control, Shapes::ShapeRef.new(shape: DashIsoSegmentControl, location_name: "segmentControl"))
     DashIsoGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentLength"))
+    DashIsoGroupSettings.add_member(:segment_length_control, Shapes::ShapeRef.new(shape: DashIsoSegmentLengthControl, location_name: "segmentLengthControl"))
     DashIsoGroupSettings.add_member(:write_segment_timeline_in_representation, Shapes::ShapeRef.new(shape: DashIsoWriteSegmentTimelineInRepresentation, location_name: "writeSegmentTimelineInRepresentation"))
     DashIsoGroupSettings.struct_class = Types::DashIsoGroupSettings
 
@@ -1495,6 +1503,7 @@ module Aws::MediaConvert
     HlsGroupSettings.add_member(:program_date_time_period, Shapes::ShapeRef.new(shape: __integerMin0Max3600, location_name: "programDateTimePeriod"))
     HlsGroupSettings.add_member(:segment_control, Shapes::ShapeRef.new(shape: HlsSegmentControl, location_name: "segmentControl"))
     HlsGroupSettings.add_member(:segment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentLength"))
+    HlsGroupSettings.add_member(:segment_length_control, Shapes::ShapeRef.new(shape: HlsSegmentLengthControl, location_name: "segmentLengthControl"))
     HlsGroupSettings.add_member(:segments_per_subdirectory, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "segmentsPerSubdirectory"))
     HlsGroupSettings.add_member(:stream_inf_resolution, Shapes::ShapeRef.new(shape: HlsStreamInfResolution, location_name: "streamInfResolution"))
     HlsGroupSettings.add_member(:target_duration_compatibility_mode, Shapes::ShapeRef.new(shape: HlsTargetDurationCompatibilityMode, location_name: "targetDurationCompatibilityMode"))
@@ -1746,6 +1755,7 @@ module Aws::MediaConvert
     M2tsSettings.add_member(:audio_pids, Shapes::ShapeRef.new(shape: __listOf__integerMin32Max8182, location_name: "audioPids"))
     M2tsSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "bitrate"))
     M2tsSettings.add_member(:buffer_model, Shapes::ShapeRef.new(shape: M2tsBufferModel, location_name: "bufferModel"))
+    M2tsSettings.add_member(:data_pts_control, Shapes::ShapeRef.new(shape: M2tsDataPtsControl, location_name: "dataPTSControl"))
     M2tsSettings.add_member(:dvb_nit_settings, Shapes::ShapeRef.new(shape: DvbNitSettings, location_name: "dvbNitSettings"))
     M2tsSettings.add_member(:dvb_sdt_settings, Shapes::ShapeRef.new(shape: DvbSdtSettings, location_name: "dvbSdtSettings"))
     M2tsSettings.add_member(:dvb_sub_pids, Shapes::ShapeRef.new(shape: __listOf__integerMin32Max8182, location_name: "dvbSubPids"))
@@ -1782,6 +1792,7 @@ module Aws::MediaConvert
     M3u8Settings.add_member(:audio_duration, Shapes::ShapeRef.new(shape: M3u8AudioDuration, location_name: "audioDuration"))
     M3u8Settings.add_member(:audio_frames_per_pes, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "audioFramesPerPes"))
     M3u8Settings.add_member(:audio_pids, Shapes::ShapeRef.new(shape: __listOf__integerMin32Max8182, location_name: "audioPids"))
+    M3u8Settings.add_member(:data_pts_control, Shapes::ShapeRef.new(shape: M3u8DataPtsControl, location_name: "dataPTSControl"))
     M3u8Settings.add_member(:max_pcr_interval, Shapes::ShapeRef.new(shape: __integerMin0Max500, location_name: "maxPcrInterval"))
     M3u8Settings.add_member(:nielsen_id_3, Shapes::ShapeRef.new(shape: M3u8NielsenId3, location_name: "nielsenId3"))
     M3u8Settings.add_member(:pat_interval, Shapes::ShapeRef.new(shape: __integerMin0Max1000, location_name: "patInterval"))
@@ -1896,6 +1907,7 @@ module Aws::MediaConvert
     MsSmoothGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
     MsSmoothGroupSettings.add_member(:encryption, Shapes::ShapeRef.new(shape: MsSmoothEncryptionSettings, location_name: "encryption"))
     MsSmoothGroupSettings.add_member(:fragment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "fragmentLength"))
+    MsSmoothGroupSettings.add_member(:fragment_length_control, Shapes::ShapeRef.new(shape: MsSmoothFragmentLengthControl, location_name: "fragmentLengthControl"))
     MsSmoothGroupSettings.add_member(:manifest_encoding, Shapes::ShapeRef.new(shape: MsSmoothManifestEncoding, location_name: "manifestEncoding"))
     MsSmoothGroupSettings.struct_class = Types::MsSmoothGroupSettings
 
@@ -2086,6 +2098,7 @@ module Aws::MediaConvert
     S3DestinationSettings.struct_class = Types::S3DestinationSettings
 
     S3EncryptionSettings.add_member(:encryption_type, Shapes::ShapeRef.new(shape: S3ServerSideEncryptionType, location_name: "encryptionType"))
+    S3EncryptionSettings.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: __stringPatternAZaZ0902, location_name: "kmsEncryptionContext"))
     S3EncryptionSettings.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912, location_name: "kmsKeyArn"))
     S3EncryptionSettings.struct_class = Types::S3EncryptionSettings
 
