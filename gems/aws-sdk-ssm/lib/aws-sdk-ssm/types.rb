@@ -14968,7 +14968,7 @@ module Aws::SSM
       :last_modified_date,
       :arn,
       :data_type)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -15066,7 +15066,7 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -16432,7 +16432,7 @@ module Aws::SSM
       :tier,
       :policies,
       :data_type)
-      SENSITIVE = []
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 

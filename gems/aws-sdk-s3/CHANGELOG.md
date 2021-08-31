@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2021-08-27)
+------------------
+
+* Feature - Documentation updates for Amazon S3.
+
 1.99.0 (2021-08-16)
 ------------------
 

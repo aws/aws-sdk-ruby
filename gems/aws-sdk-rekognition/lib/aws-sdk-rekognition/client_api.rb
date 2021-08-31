@@ -178,6 +178,8 @@ module Aws::Rekognition
     KinesisVideoArn = Shapes::StringShape.new(name: 'KinesisVideoArn')
     KinesisVideoStream = Shapes::StructureShape.new(name: 'KinesisVideoStream')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    KnownGender = Shapes::StructureShape.new(name: 'KnownGender')
+    KnownGenderType = Shapes::StringShape.new(name: 'KnownGenderType')
     Label = Shapes::StructureShape.new(name: 'Label')
     LabelDetection = Shapes::StructureShape.new(name: 'LabelDetection')
     LabelDetectionSortBy = Shapes::StringShape.new(name: 'LabelDetectionSortBy')
@@ -396,6 +398,7 @@ module Aws::Rekognition
     Celebrity.add_member(:id, Shapes::ShapeRef.new(shape: RekognitionUniqueId, location_name: "Id"))
     Celebrity.add_member(:face, Shapes::ShapeRef.new(shape: ComparedFace, location_name: "Face"))
     Celebrity.add_member(:match_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MatchConfidence"))
+    Celebrity.add_member(:known_gender, Shapes::ShapeRef.new(shape: KnownGender, location_name: "KnownGender"))
     Celebrity.struct_class = Types::Celebrity
 
     CelebrityDetail.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, location_name: "Urls"))
@@ -442,6 +445,8 @@ module Aws::Rekognition
     ComparedFace.add_member(:landmarks, Shapes::ShapeRef.new(shape: Landmarks, location_name: "Landmarks"))
     ComparedFace.add_member(:pose, Shapes::ShapeRef.new(shape: Pose, location_name: "Pose"))
     ComparedFace.add_member(:quality, Shapes::ShapeRef.new(shape: ImageQuality, location_name: "Quality"))
+    ComparedFace.add_member(:emotions, Shapes::ShapeRef.new(shape: Emotions, location_name: "Emotions"))
+    ComparedFace.add_member(:smile, Shapes::ShapeRef.new(shape: Smile, location_name: "Smile"))
     ComparedFace.struct_class = Types::ComparedFace
 
     ComparedFaceList.member = Shapes::ShapeRef.new(shape: ComparedFace)
@@ -735,6 +740,7 @@ module Aws::Rekognition
 
     GetCelebrityInfoResponse.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, location_name: "Urls"))
     GetCelebrityInfoResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    GetCelebrityInfoResponse.add_member(:known_gender, Shapes::ShapeRef.new(shape: KnownGender, location_name: "KnownGender"))
     GetCelebrityInfoResponse.struct_class = Types::GetCelebrityInfoResponse
 
     GetCelebrityRecognitionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -913,6 +919,9 @@ module Aws::Rekognition
 
     KinesisVideoStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisVideoArn, location_name: "Arn"))
     KinesisVideoStream.struct_class = Types::KinesisVideoStream
+
+    KnownGender.add_member(:type, Shapes::ShapeRef.new(shape: KnownGenderType, location_name: "Type"))
+    KnownGender.struct_class = Types::KnownGender
 
     Label.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Label.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))

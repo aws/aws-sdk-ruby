@@ -250,12 +250,18 @@ module Aws::Rekognition
     #   recognized face is the celebrity.
     #   @return [Float]
     #
+    # @!attribute [rw] known_gender
+    #   The known gender identity for the celebrity that matches the
+    #   provided ID.
+    #   @return [Types::KnownGender]
+    #
     class Celebrity < Struct.new(
       :urls,
       :name,
       :id,
       :face,
-      :match_confidence)
+      :match_confidence,
+      :known_gender)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -501,12 +507,26 @@ module Aws::Rekognition
     #   Identifies face image brightness and sharpness.
     #   @return [Types::ImageQuality]
     #
+    # @!attribute [rw] emotions
+    #   The emotions that appear to be expressed on the face, and the
+    #   confidence level in the determination. Valid values include
+    #   "Happy", "Sad", "Angry", "Confused", "Disgusted",
+    #   "Surprised", "Calm", "Unknown", and "Fear".
+    #   @return [Array<Types::Emotion>]
+    #
+    # @!attribute [rw] smile
+    #   Indicates whether or not the face is smiling, and the confidence
+    #   level in the determination.
+    #   @return [Types::Smile]
+    #
     class ComparedFace < Struct.new(
       :bounding_box,
       :confidence,
       :landmarks,
       :pose,
-      :quality)
+      :quality,
+      :emotions,
+      :smile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1310,10 +1330,12 @@ module Aws::Rekognition
     #
     # @!attribute [rw] min_confidence
     #   Specifies the minimum confidence level for the labels to return.
-    #   Amazon Rekognition doesn't return any labels with a confidence
-    #   lower than this specified value. If you specify a value of 0, all
-    #   labels are return, regardless of the default thresholds that the
-    #   model version applies.
+    #   `DetectCustomLabels` doesn't return any labels with a confidence
+    #   value that's lower than this specified value. If you specify a
+    #   value of 0, `DetectCustomLabels` returns all labels, regardless of
+    #   the assumed threshold applied to each label. If you don't specify a
+    #   value for `MinConfidence`, `DetectCustomLabels` returns labels based
+    #   on the assumed threshold of each label.
     #   @return [Float]
     #
     class DetectCustomLabelsRequest < Struct.new(
@@ -2217,9 +2239,14 @@ module Aws::Rekognition
     #   The name of the celebrity.
     #   @return [String]
     #
+    # @!attribute [rw] known_gender
+    #   Retrieves the known gender for the celebrity.
+    #   @return [Types::KnownGender]
+    #
     class GetCelebrityInfoResponse < Struct.new(
       :urls,
-      :name)
+      :name,
+      :known_gender)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3368,6 +3395,19 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The known gender identity for the celebrity that matches the provided
+    # ID.
+    #
+    # @!attribute [rw] type
+    #   A string value of the KnownGender info about the Celebrity.
+    #   @return [String]
+    #
+    class KnownGender < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure containing details about the detected label, including the
     # name, detected instances, parent labels, and level of confidence.
     #
@@ -4189,7 +4229,10 @@ module Aws::Rekognition
 
     # @!attribute [rw] celebrity_faces
     #   Details about each celebrity found in the image. Amazon Rekognition
-    #   can detect a maximum of 64 celebrities in an image.
+    #   can detect a maximum of 64 celebrities in an image. Each celebrity
+    #   object includes the following attributes: `Face`, `Confidence`,
+    #   `Emotions`, `Landmarks`, `Pose`, `Quality`, `Smile`, `Id`,
+    #   `KnownGender`, `MatchConfidence`, `Name`, `Urls`.
     #   @return [Array<Types::Celebrity>]
     #
     # @!attribute [rw] unrecognized_faces
@@ -4197,6 +4240,13 @@ module Aws::Rekognition
     #   @return [Array<Types::ComparedFace>]
     #
     # @!attribute [rw] orientation_correction
+    #   <note markdown="1"> Support for estimating image orientation using the the
+    #   OrientationCorrection field has ceased as of August 2021. Any
+    #   returned values for this field included in an API response will
+    #   always be NULL.
+    #
+    #    </note>
+    #
     #   The orientation of the input image (counterclockwise direction). If
     #   your application displays the image, you can use this value to
     #   correct the orientation. The bounding box coordinates returned in

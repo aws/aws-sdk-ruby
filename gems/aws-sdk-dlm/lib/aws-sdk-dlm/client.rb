@@ -327,8 +327,8 @@ module Aws::DLM
 
     # @!group API Operations
 
-    # Creates a policy to manage the lifecycle of the specified AWS
-    # resources. You can create up to 100 lifecycle policies.
+    # Creates a policy to manage the lifecycle of the specified Amazon Web
+    # Services resources. You can create up to 100 lifecycle policies.
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used to run the
@@ -412,6 +412,10 @@ module Aws::DLM
     #                 interval: 1,
     #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #               },
+    #               deprecate_rule: {
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
     #             },
     #           ],
     #           share_rules: [
@@ -421,6 +425,11 @@ module Aws::DLM
     #               unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #             },
     #           ],
+    #           deprecate_rule: {
+    #             count: 1,
+    #             interval: 1,
+    #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #           },
     #         },
     #       ],
     #       parameters: {
@@ -519,8 +528,8 @@ module Aws::DLM
     #
     #   Tags are strings in the format `key=value`.
     #
-    #   These user-defined tags are added in addition to the AWS-added
-    #   lifecycle tags.
+    #   These user-defined tags are added in addition to the Amazon Web
+    #   Services-added lifecycle tags.
     #
     # @return [Types::GetLifecyclePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -618,11 +627,16 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].copy_tags #=> Boolean
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].deprecate_rule.interval #=> Integer
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].deprecate_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.schedules[0].share_rules #=> Array
     #   resp.policy.policy_details.schedules[0].share_rules[0].target_accounts #=> Array
     #   resp.policy.policy_details.schedules[0].share_rules[0].target_accounts[0] #=> String
     #   resp.policy.policy_details.schedules[0].share_rules[0].unshare_interval #=> Integer
     #   resp.policy.policy_details.schedules[0].share_rules[0].unshare_interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
+    #   resp.policy.policy_details.schedules[0].deprecate_rule.count #=> Integer
+    #   resp.policy.policy_details.schedules[0].deprecate_rule.interval #=> Integer
+    #   resp.policy.policy_details.schedules[0].deprecate_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
     #   resp.policy.policy_details.parameters.no_reboot #=> Boolean
     #   resp.policy.policy_details.event_source.type #=> String, one of "MANAGED_CWE"
@@ -817,6 +831,10 @@ module Aws::DLM
     #                 interval: 1,
     #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #               },
+    #               deprecate_rule: {
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
     #             },
     #           ],
     #           share_rules: [
@@ -826,6 +844,11 @@ module Aws::DLM
     #               unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #             },
     #           ],
+    #           deprecate_rule: {
+    #             count: 1,
+    #             interval: 1,
+    #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #           },
     #         },
     #       ],
     #       parameters: {
@@ -883,7 +906,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

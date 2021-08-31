@@ -29,11 +29,13 @@ module Aws::DLM
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     CrossRegionCopyAction = Shapes::StructureShape.new(name: 'CrossRegionCopyAction')
     CrossRegionCopyActionList = Shapes::ListShape.new(name: 'CrossRegionCopyActionList')
+    CrossRegionCopyDeprecateRule = Shapes::StructureShape.new(name: 'CrossRegionCopyDeprecateRule')
     CrossRegionCopyRetainRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRetainRule')
     CrossRegionCopyRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRule')
     CrossRegionCopyRules = Shapes::ListShape.new(name: 'CrossRegionCopyRules')
     DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
+    DeprecateRule = Shapes::StructureShape.new(name: 'DeprecateRule')
     DescriptionRegex = Shapes::StringShape.new(name: 'DescriptionRegex')
     Encrypted = Shapes::BooleanShape.new(name: 'Encrypted')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
@@ -144,6 +146,10 @@ module Aws::DLM
 
     CrossRegionCopyActionList.member = Shapes::ShapeRef.new(shape: CrossRegionCopyAction)
 
+    CrossRegionCopyDeprecateRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    CrossRegionCopyDeprecateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    CrossRegionCopyDeprecateRule.struct_class = Types::CrossRegionCopyDeprecateRule
+
     CrossRegionCopyRetainRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
     CrossRegionCopyRetainRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     CrossRegionCopyRetainRule.struct_class = Types::CrossRegionCopyRetainRule
@@ -154,6 +160,7 @@ module Aws::DLM
     CrossRegionCopyRule.add_member(:cmk_arn, Shapes::ShapeRef.new(shape: CmkArn, location_name: "CmkArn"))
     CrossRegionCopyRule.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
     CrossRegionCopyRule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: CrossRegionCopyRetainRule, location_name: "RetainRule"))
+    CrossRegionCopyRule.add_member(:deprecate_rule, Shapes::ShapeRef.new(shape: CrossRegionCopyDeprecateRule, location_name: "DeprecateRule"))
     CrossRegionCopyRule.struct_class = Types::CrossRegionCopyRule
 
     CrossRegionCopyRules.member = Shapes::ShapeRef.new(shape: CrossRegionCopyRule)
@@ -162,6 +169,11 @@ module Aws::DLM
     DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
 
     DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
+
+    DeprecateRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
+    DeprecateRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    DeprecateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    DeprecateRule.struct_class = Types::DeprecateRule
 
     EncryptionConfiguration.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, required: true, location_name: "Encrypted"))
     EncryptionConfiguration.add_member(:cmk_arn, Shapes::ShapeRef.new(shape: CmkArn, location_name: "CmkArn"))
@@ -282,6 +294,7 @@ module Aws::DLM
     Schedule.add_member(:fast_restore_rule, Shapes::ShapeRef.new(shape: FastRestoreRule, location_name: "FastRestoreRule"))
     Schedule.add_member(:cross_region_copy_rules, Shapes::ShapeRef.new(shape: CrossRegionCopyRules, location_name: "CrossRegionCopyRules"))
     Schedule.add_member(:share_rules, Shapes::ShapeRef.new(shape: ShareRules, location_name: "ShareRules"))
+    Schedule.add_member(:deprecate_rule, Shapes::ShapeRef.new(shape: DeprecateRule, location_name: "DeprecateRule"))
     Schedule.struct_class = Types::Schedule
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: Schedule)

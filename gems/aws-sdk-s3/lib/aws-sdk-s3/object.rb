@@ -805,7 +805,8 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
-    #   restrictions to process this operation.
+    #   restrictions to process this operation. To use this header, you must
+    #   have the `s3:PutBucketPublicAccessBlock` permission.
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -1668,8 +1669,8 @@ module Aws::S3
       #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
-      #   Governance-type Object Lock in place. You must have sufficient
-      #   permissions to perform this operation.
+      #   Governance-type Object Lock in place. To use this header, you must
+      #   have the `s3:PutBucketPublicAccessBlock` permission.
       # @option options [String] :expected_bucket_owner
       #   The account ID of the expected bucket owner. If the bucket is owned by
       #   a different account, the request will fail with an HTTP `403 (Access

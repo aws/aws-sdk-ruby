@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.260.0 (2021-08-27)
+------------------
+
+* Feature - This release adds the BootMode flag to the ImportImage API and showing the detected BootMode of an ImportImage task.
+
+1.259.0 (2021-08-26)
+------------------
+
+* Feature - Support added for resizing VPC prefix lists
+
+1.258.0 (2021-08-25)
+------------------
+
+* Feature - Support added for IMDS IPv6 endpoint
+
 1.257.0 (2021-08-20)
 ------------------
 

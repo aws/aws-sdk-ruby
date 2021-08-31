@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-08-30)
+------------------
+
+* Feature - This release adds the Dynamic Partitioning feature to Kinesis Data Firehose service for S3 destinations.
+
 1.39.0 (2021-07-30)
 ------------------
 

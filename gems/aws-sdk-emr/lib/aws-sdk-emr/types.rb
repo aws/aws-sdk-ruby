@@ -533,6 +533,36 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # An auto-termination policy for an Amazon EMR cluster. An
+    # auto-termination policy defines the amount of idle time in seconds
+    # after which a cluster automatically terminates. For alternative
+    # cluster termination options, see [Control cluster termination][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
+    #
+    # @note When making an API call, you may pass AutoTerminationPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         idle_timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] idle_timeout
+    #   Specifies the amount of idle time in seconds after which the cluster
+    #   automatically terminates. You can specify a minimum of 60 seconds
+    #   and a maximum of 604800 seconds (seven days).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoTerminationPolicy AWS API Documentation
+    #
+    class AutoTerminationPolicy < Struct.new(
+      :idle_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A configuration for Amazon EMR block public access. When
     # `BlockPublicSecurityGroupRules` is set to `true`, Amazon EMR prevents
     # cluster creation if one of the cluster's security groups has a rule
@@ -894,20 +924,22 @@ module Aws::EMR
     #
     # @!attribute [rw] visible_to_all_users
     #   Indicates whether the cluster is visible to IAM principals in the
-    #   account associated with the cluster. When `true`, IAM principals in
-    #   the account can perform EMR cluster actions on the cluster that
-    #   their IAM policies allow. When `false`, only the IAM principal that
-    #   created the cluster and the account root user can perform EMR
+    #   Amazon Web Services account associated with the cluster. When
+    #   `true`, IAM principals in the Amazon Web Services account can
+    #   perform EMR cluster actions on the cluster that their IAM policies
+    #   allow. When `false`, only the IAM principal that created the cluster
+    #   and the Amazon Web Services account root user can perform EMR
     #   actions, regardless of IAM permissions policies attached to other
     #   IAM principals.
     #
     #   The default value is `true` if a value is not provided when creating
     #   a cluster using the EMR API RunJobFlow command, the CLI
-    #   [create-cluster][1] command, or the Management Console. IAM
-    #   principals that are allowed to perform actions on the cluster can
-    #   use the SetVisibleToAllUsers action to change the value on a running
-    #   cluster. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
+    #   [create-cluster][1] command, or the Amazon Web Services Management
+    #   Console. IAM principals that are allowed to perform actions on the
+    #   cluster can use the SetVisibleToAllUsers action to change the value
+    #   on a running cluster. For more information, see [Understanding the
+    #   EMR Cluster VisibleToAllUsers Setting][2] in the *Amazon
+    #   EMRManagement Guide*.
     #
     #
     #
@@ -2221,6 +2253,39 @@ module Aws::EMR
       :reason,
       :message,
       :log_file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAutoTerminationPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the Amazon EMR cluster for which the
+    #   auto-termination policy will be fetched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetAutoTerminationPolicyInput AWS API Documentation
+    #
+    class GetAutoTerminationPolicyInput < Struct.new(
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_termination_policy
+    #   Specifies the auto-termination policy that is attached to an Amazon
+    #   EMR cluster.
+    #   @return [Types::AutoTerminationPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetAutoTerminationPolicyOutput AWS API Documentation
+    #
+    class GetAutoTerminationPolicyOutput < Struct.new(
+      :auto_termination_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3854,19 +3919,22 @@ module Aws::EMR
     #
     # @!attribute [rw] visible_to_all_users
     #   Indicates whether the cluster is visible to IAM principals in the
-    #   account associated with the cluster. When `true`, IAM principals in
-    #   the account can perform EMR cluster actions that their IAM policies
-    #   allow. When `false`, only the IAM principal that created the cluster
-    #   and the account root user can perform EMR actions, regardless of IAM
-    #   permissions policies attached to other IAM principals.
+    #   Amazon Web Services account associated with the cluster. When
+    #   `true`, IAM principals in the Amazon Web Services account can
+    #   perform EMR cluster actions that their IAM policies allow. When
+    #   `false`, only the IAM principal that created the cluster and the
+    #   Amazon Web Services account root user can perform EMR actions,
+    #   regardless of IAM permissions policies attached to other IAM
+    #   principals.
     #
     #   The default value is `true` if a value is not provided when creating
     #   a cluster using the EMR API RunJobFlow command, the CLI
-    #   [create-cluster][1] command, or the Management Console. IAM
-    #   principals that are authorized to perform actions on the cluster can
-    #   use the SetVisibleToAllUsers action to change the value on a running
-    #   cluster. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
+    #   [create-cluster][1] command, or the Amazon Web Services Management
+    #   Console. IAM principals that are authorized to perform actions on
+    #   the cluster can use the SetVisibleToAllUsers action to change the
+    #   value on a running cluster. For more information, see [Understanding
+    #   the EMR Cluster VisibleToAllUsers Setting][2] in the *Amazon
+    #   EMRManagement Guide*.
     #
     #
     #
@@ -4844,9 +4912,10 @@ module Aws::EMR
     #   which is usually the case for the first request of
     #   ListReleaseLabels, the first page of results are determined by other
     #   filtering parameters or by the latest version. The
-    #   `ListReleaseLabels` request fails if the identity (account ID) and
-    #   all filtering parameters are different from the original request, or
-    #   if the `NextToken` is expired or tampered with.
+    #   `ListReleaseLabels` request fails if the identity (Amazon Web
+    #   Services account ID) and all filtering parameters are different from
+    #   the original request, or if the `NextToken` is expired or tampered
+    #   with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5755,6 +5824,38 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutAutoTerminationPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #         auto_termination_policy: {
+    #           idle_timeout: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the Amazon EMR cluster to which the
+    #   auto-termination policy will be attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_termination_policy
+    #   Specifies the auto-termination policy to attach to the cluster.
+    #   @return [Types::AutoTerminationPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoTerminationPolicyInput AWS API Documentation
+    #
+    class PutAutoTerminationPolicyInput < Struct.new(
+      :cluster_id,
+      :auto_termination_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoTerminationPolicyOutput AWS API Documentation
+    #
+    class PutAutoTerminationPolicyOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutBlockPublicAccessConfigurationInput
     #   data as a hash:
     #
@@ -5901,6 +6002,30 @@ module Aws::EMR
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicyOutput AWS API Documentation
     #
     class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RemoveAutoTerminationPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the Amazon EMR cluster from which the
+    #   auto-termination policy will be removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoTerminationPolicyInput AWS API Documentation
+    #
+    class RemoveAutoTerminationPolicyInput < Struct.new(
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoTerminationPolicyOutput AWS API Documentation
+    #
+    class RemoveAutoTerminationPolicyOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveManagedScalingPolicyInput
     #   data as a hash:
@@ -6214,6 +6339,9 @@ module Aws::EMR
     #             placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
     #           },
     #         ],
+    #         auto_termination_policy: {
+    #           idle_timeout: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -6345,17 +6473,18 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Set this value to `true` so that IAM principals in the account
-    #   associated with the cluster can perform EMR actions on the cluster
-    #   that their IAM policies allow. This value defaults to `true` for
-    #   clusters created using the EMR API or the CLI [create-cluster][1]
-    #   command.
+    #   Set this value to `true` so that IAM principals in the Amazon Web
+    #   Services account associated with the cluster can perform EMR actions
+    #   on the cluster that their IAM policies allow. This value defaults to
+    #   `true` for clusters created using the EMR API or the CLI
+    #   [create-cluster][1] command.
     #
     #   When set to `false`, only the IAM principal that created the cluster
-    #   and the account root user can perform EMR actions for the cluster,
-    #   regardless of the IAM permissions policies attached to other IAM
-    #   principals. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
+    #   and the Amazon Web Services account root user can perform EMR
+    #   actions for the cluster, regardless of the IAM permissions policies
+    #   attached to other IAM principals. For more information, see
+    #   [Understanding the EMR Cluster VisibleToAllUsers Setting][2] in the
+    #   *Amazon EMRManagement Guide*.
     #
     #
     #
@@ -6470,6 +6599,17 @@ module Aws::EMR
     #   cluster.
     #   @return [Array<Types::PlacementGroupConfig>]
     #
+    # @!attribute [rw] auto_termination_policy
+    #   An auto-termination policy for an Amazon EMR cluster. An
+    #   auto-termination policy defines the amount of idle time in seconds
+    #   after which a cluster automatically terminates. For alternative
+    #   cluster termination options, see [Control cluster termination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
+    #   @return [Types::AutoTerminationPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -6499,7 +6639,8 @@ module Aws::EMR
       :kerberos_attributes,
       :step_concurrency_level,
       :managed_scaling_policy,
-      :placement_group_configs)
+      :placement_group_configs,
+      :auto_termination_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6896,11 +7037,12 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   A value of `true` indicates that an IAM principal in the account can
-    #   perform EMR actions on the cluster that the IAM policies attached to
-    #   the principal allow. A value of `false` indicates that only the IAM
-    #   principal that created the cluster and the Amazon Web Services root
-    #   user can perform EMR actions on the cluster.
+    #   A value of `true` indicates that an IAM principal in the Amazon Web
+    #   Services account can perform EMR actions on the cluster that the IAM
+    #   policies attached to the principal allow. A value of `false`
+    #   indicates that only the IAM principal that created the cluster and
+    #   the Amazon Web Services root user can perform EMR actions on the
+    #   cluster.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersInput AWS API Documentation

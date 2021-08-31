@@ -106,52 +106,13 @@ module Aws::TranscribeService
     #   Amazon Transcribe will use machine learning to automatically
     #   identify the language. To improve the accuracy of language
     #   identification, you can provide an array containing the possible
-    #   language codes for the language spoken in your audio.
+    #   language codes for the language spoken in your audio. Refer to
+    #   [Supported languages and language-specific features][1] for
+    #   additional information.
     #
-    #   The following list shows the supported languages and corresponding
-    #   language codes for call analytics jobs:
     #
-    #   * Gulf Arabic (ar-AE)
     #
-    #   * Mandarin Chinese, Mainland (zh-CN)
-    #
-    #   * Australian English (en-AU)
-    #
-    #   * British English (en-GB)
-    #
-    #   * Indian English (en-IN)
-    #
-    #   * Irish English (en-IE)
-    #
-    #   * Scottish English (en-AB)
-    #
-    #   * US English (en-US)
-    #
-    #   * Welsh English (en-WL)
-    #
-    #   * Spanish (es-ES)
-    #
-    #   * US Spanish (es-US)
-    #
-    #   * French (fr-FR)
-    #
-    #   * Canadian French (fr-CA)
-    #
-    #   * German (de-DE)
-    #
-    #   * Swiss German (de-CH)
-    #
-    #   * Indian Hindi (hi-IN)
-    #
-    #   * Italian (it-IT)
-    #
-    #   * Japanese (ja-JP)
-    #
-    #   * Korean (ko-KR)
-    #
-    #   * Portuguese (pt-PT)
-    #
-    #   * Brazilian Portuguese (pt-BR)
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
@@ -202,7 +163,7 @@ module Aws::TranscribeService
     #
     #   * `Invalid sample rate for audio file`\: The sample rate specified
     #     in the `MediaSampleRateHertz` of the request isn't valid. The
-    #     sample rate must be between 8000 and 48000 Hertz.
+    #     sample rate must be between 8,000 and 48,000 Hertz.
     #
     #   * `The sample rate provided does not match the detected sample
     #     rate`\: The sample rate in the audio file doesn't match the
@@ -213,7 +174,7 @@ module Aws::TranscribeService
     #   * `Invalid file size: file size too large`\: The size of your audio
     #     file is larger than what Amazon Transcribe Medical can process.
     #     For more information, see *Guidelines and Quotas* in the Amazon
-    #     Transcribe Medical Guide
+    #     Transcribe Medical Guide.
     #
     #   * `Invalid number of channels: number of channels too large`\: Your
     #     audio contains more channels than Amazon Transcribe Medical is
@@ -285,7 +246,7 @@ module Aws::TranscribeService
     #           redaction_type: "PII", # required, accepts PII
     #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #         },
-    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -327,52 +288,12 @@ module Aws::TranscribeService
     #   Amazon Transcribe will use machine learning to identify the language
     #   for you. To improve the ability of Amazon Transcribe to correctly
     #   identify the language, you can provide an array of the languages
-    #   that can be present in the audio.
+    #   that can be present in the audio. Refer to [Supported languages and
+    #   language-specific features][1] for additional information.
     #
-    #   The following list shows the supported languages and corresponding
-    #   language codes for call analytics jobs:
     #
-    #   * Gulf Arabic (ar-AE)
     #
-    #   * Mandarin Chinese, Mainland (zh-CN)
-    #
-    #   * Australian English (en-AU)
-    #
-    #   * British English (en-GB)
-    #
-    #   * Indian English (en-IN)
-    #
-    #   * Irish English (en-IE)
-    #
-    #   * Scottish English (en-AB)
-    #
-    #   * US English (en-US)
-    #
-    #   * Welsh English (en-WL)
-    #
-    #   * Spanish (es-ES)
-    #
-    #   * US Spanish (es-US)
-    #
-    #   * French (fr-FR)
-    #
-    #   * Canadian French (fr-CA)
-    #
-    #   * German (de-DE)
-    #
-    #   * Swiss German (de-CH)
-    #
-    #   * Indian Hindi (hi-IN)
-    #
-    #   * Italian (it-IT)
-    #
-    #   * Japanese (ja-JP)
-    #
-    #   * Korean (ko-KR)
-    #
-    #   * Portuguese (pt-PT)
-    #
-    #   * Brazilian Portuguese (pt-BR)
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJobSettings AWS API Documentation
@@ -665,6 +586,12 @@ module Aws::TranscribeService
     #           tuning_data_s3_uri: "Uri",
     #           data_access_role_arn: "DataAccessRoleArn", # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] language_code
@@ -677,10 +604,10 @@ module Aws::TranscribeService
     #   create your custom language model.
     #
     #   If you want to use your custom language model to transcribe audio
-    #   with a sample rate of 16 kHz or greater, choose `Wideband`.
+    #   with a sample rate of 16,000 Hz or greater, choose `Wideband`.
     #
     #   If you want to use your custom language model to transcribe audio
-    #   with a sample rate that is less than 16 kHz, choose `Narrowband`.
+    #   with a sample rate that is less than 16,000 Hz, choose `Narrowband`.
     #   @return [String]
     #
     # @!attribute [rw] model_name
@@ -693,13 +620,19 @@ module Aws::TranscribeService
     #   required input files to create a custom language model.
     #   @return [Types::InputDataConfig]
     #
+    # @!attribute [rw] tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a
+    #   new language model at the time you create this new model.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateLanguageModelRequest AWS API Documentation
     #
     class CreateLanguageModelRequest < Struct.new(
       :language_code,
       :base_model_name,
       :model_name,
-      :input_data_config)
+      :input_data_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -745,8 +678,14 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         vocabulary_file_uri: "Uri", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -791,12 +730,18 @@ module Aws::TranscribeService
     #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a
+    #   new medical vocabulary at the time you create this new vocabulary.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateMedicalVocabularyRequest AWS API Documentation
     #
     class CreateMedicalVocabularyRequest < Struct.new(
       :vocabulary_name,
       :language_code,
-      :vocabulary_file_uri)
+      :vocabulary_file_uri,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -844,9 +789,15 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_filter_name: "VocabularyFilterName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         words: ["Word"],
     #         vocabulary_filter_file_uri: "Uri",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] vocabulary_filter_name
@@ -892,13 +843,20 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a
+    #   new Amazon Transcribe vocabulary filter at the time you create this
+    #   new vocabulary filter.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilterRequest AWS API Documentation
     #
     class CreateVocabularyFilterRequest < Struct.new(
       :vocabulary_filter_name,
       :language_code,
       :words,
-      :vocabulary_filter_file_uri)
+      :vocabulary_filter_file_uri,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -930,9 +888,15 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -944,7 +908,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see what-is-transcribe.
+    #   and their corresponding language codes, see transcribe-whatis.
     #   @return [String]
     #
     # @!attribute [rw] phrases
@@ -954,13 +918,13 @@ module Aws::TranscribeService
     # @!attribute [rw] vocabulary_file_uri
     #   The S3 location of the text file that contains the definition of the
     #   custom vocabulary. The URI must be in the same region as the API
-    #   endpoint that you are calling. The general form is
+    #   endpoint that you are calling. The general form is:
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
     #
     #   For more information about custom vocabularies, see [Custom
-    #   Vocabularies][2].
+    #   vocabularies][2].
     #
     #
     #
@@ -968,13 +932,20 @@ module Aws::TranscribeService
     #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a
+    #   new Amazon Transcribe vocabulary at the time you create this new
+    #   vocabulary.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest AWS API Documentation
     #
     class CreateVocabularyRequest < Struct.new(
       :vocabulary_name,
       :language_code,
       :phrases,
-      :vocabulary_file_uri)
+      :vocabulary_file_uri,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1757,9 +1728,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of categories to return in the response. If there
-    #   are fewer results in the list, the response contains only the actual
-    #   results.
+    #   The maximum number of categories to return in each page of results.
+    #   If there are fewer results than the value you specify, only the
+    #   actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsCategoriesRequest AWS API Documentation
@@ -1820,9 +1792,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of call analytics jobs to return in the response.
-    #   If there are fewer results in the list, this response contains only
-    #   the actual results.
+    #   The maximum number of call analytics jobs to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsJobsRequest AWS API Documentation
@@ -1894,9 +1867,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of language models to return in the response. If
-    #   there are fewer results in the list, the response contains only the
-    #   actual results.
+    #   The maximum number of language models to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListLanguageModelsRequest AWS API Documentation
@@ -1962,9 +1936,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of medical transcription jobs to return in the
-    #   response. IF there are fewer results in the list, this response
-    #   contains only the actual results.
+    #   The maximum number of medical transcription jobs to return in each
+    #   page of results. If there are fewer results than the value you
+    #   specify, only the actual results are returned. If you do not specify
+    #   a value, the default of 5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalTranscriptionJobsRequest AWS API Documentation
@@ -2023,7 +1998,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of vocabularies to return in the response.
+    #   The maximum number of vocabularies to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #   @return [Integer]
     #
     # @!attribute [rw] state_equals
@@ -2078,6 +2056,43 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TranscribeArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Lists all tags associated with a given Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   Lists all tags associated with the given Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Lists all tags associated with the given transcription job,
+    #   vocabulary, or resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTranscriptionJobsRequest
     #   data as a hash:
     #
@@ -2101,14 +2116,15 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the result of the previous request to `ListTranscriptionJobs` was
+    #   If the result of the previous request to `ListTranscriptionJobs` is
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of jobs to return in the response. If there are
-    #   fewer results in the list, this response contains only the actual
-    #   results.
+    #   The maximum number of jobs to return in each page of results. If
+    #   there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of
+    #   5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobsRequest AWS API Documentation
@@ -2166,9 +2182,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of vocabularies to return in the response. If
-    #   there are fewer results in the list, this response contains only the
-    #   actual results.
+    #   The maximum number of vocabularies to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #   @return [Integer]
     #
     # @!attribute [rw] state_equals
@@ -2238,9 +2255,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of filters to return in the response. If there
-    #   are fewer results in the list, this response contains only the
-    #   actual results.
+    #   The maximum number of filters to return in each page of results. If
+    #   there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of
+    #   5 is used.
     #   @return [Integer]
     #
     # @!attribute [rw] name_contains
@@ -2412,7 +2430,7 @@ module Aws::TranscribeService
     #
     #   * `Invalid sample rate for audio file`- The sample rate specified in
     #     the `MediaSampleRateHertz` of the request isn't valid. The sample
-    #     rate must be between 8000 and 48000 Hertz.
+    #     rate must be between 8,000 and 48,000 Hertz.
     #
     #   * `The sample rate provided does not match the detected sample
     #     rate`- The sample rate in the audio file doesn't match the sample
@@ -2450,13 +2468,12 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] specialty
     #   The medical specialty of any clinicians providing a dictation or
-    #   having a conversation. `PRIMARYCARE` is the only available setting
-    #   for this object. This specialty enables you to generate
-    #   transcriptions for the following medical fields:
+    #   having a conversation. Refer to [Transcribing a medical
+    #   conversation][1]for a list of supported specialties.
     #
-    #   * Family Medicine
     #
-    #   ^
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-medical-conversation.html
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2469,6 +2486,10 @@ module Aws::TranscribeService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe-med.html
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A key:value pair assigned to a given medical transcription job.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscriptionJob AWS API Documentation
     #
@@ -2487,7 +2508,8 @@ module Aws::TranscribeService
       :settings,
       :content_identification_type,
       :specialty,
-      :type)
+      :type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2525,15 +2547,19 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] output_location_type
-    #   Indicates the location of the transcription job's output.
-    #
-    #   The `CUSTOMER_BUCKET` is the S3 location provided in the
-    #   `OutputBucketName` field when the
+    #   Indicates the location of the transcription job's output. This
+    #   field must be the path of an S3 bucket; if you don't already have
+    #   an S3 bucket, one is created based on the path you add.
     #   @return [String]
     #
     # @!attribute [rw] specialty
-    #   The medical specialty of the transcription job. `Primary care` is
-    #   the only valid value.
+    #   The medical specialty of the transcription job. Refer to
+    #   [Transcribing a medical conversation][1]for a list of supported
+    #   specialties.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-medical-conversation.html
     #   @return [String]
     #
     # @!attribute [rw] content_identification_type
@@ -3047,7 +3073,7 @@ module Aws::TranscribeService
     #             redaction_type: "PII", # required, accepts PII
     #             redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #           },
-    #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         },
     #         channel_definitions: [
     #           {
@@ -3060,9 +3086,9 @@ module Aws::TranscribeService
     # @!attribute [rw] call_analytics_job_name
     #   The name of the call analytics job. You can't use the string "."
     #   or ".." by themselves as the job name. The name must also be
-    #   unique within an AWS account. If you try to create a call analytics
-    #   job with the same name as a previous call analytics job, you get a
-    #   `ConflictException` error.
+    #   unique within an Amazon Web Services account. If you try to create a
+    #   call analytics job with the same name as a previous call analytics
+    #   job, you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] media
@@ -3093,21 +3119,22 @@ module Aws::TranscribeService
     #     Transcribe saves the output of the analytics job as
     #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json
     #
-    #   You can specify an AWS Key Management Service key to encrypt the
-    #   output of our analytics job using the `OutputEncryptionKMSKeyId`
-    #   parameter. If you don't specify a KMS key, Amazon Transcribe uses
-    #   the default Amazon S3 key for server-side encryption of the
-    #   analytics job output that is placed in your S3 bucket.
+    #   You can specify an Amazon Web Services Key Management Service (KMS)
+    #   key to encrypt the output of our analytics job using the
+    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS
+    #   key, Amazon Transcribe uses the default Amazon S3 key for
+    #   server-side encryption of the analytics job output that is placed in
+    #   your S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service key
-    #   used to encrypt the output of the call analytics job. The user
-    #   calling the operation must have permission to use the specified KMS
-    #   key.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service key used to encrypt the output of the call
+    #   analytics job. The user calling the operation must have permission
+    #   to use the specified KMS key.
     #
-    #   You use either of the following to identify an AWS KMS key in the
-    #   current account:
+    #   You use either of the following to identify an Amazon Web Services
+    #   KMS key in the current account:
     #
     #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
     #
@@ -3183,7 +3210,7 @@ module Aws::TranscribeService
     #
     #       {
     #         medical_transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #         media: { # required
@@ -3204,6 +3231,12 @@ module Aws::TranscribeService
     #         content_identification_type: "PHI", # accepts PHI
     #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
     #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] medical_transcription_job_name
@@ -3337,8 +3370,12 @@ module Aws::TranscribeService
     #   The type of speech in the input audio. `CONVERSATION` refers to
     #   conversations between two or more speakers, e.g., a conversations
     #   between doctors and patients. `DICTATION` refers to single-speaker
-    #   dictated speech, e.g., for clinical notes.
+    #   dictated speech, such as clinical notes.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Add tags to an Amazon Transcribe medical transcription job.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartMedicalTranscriptionJobRequest AWS API Documentation
     #
@@ -3354,7 +3391,8 @@ module Aws::TranscribeService
       :settings,
       :content_identification_type,
       :specialty,
-      :type)
+      :type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3376,7 +3414,7 @@ module Aws::TranscribeService
     #
     #       {
     #         transcription_job_name: "TranscriptionJobName", # required
-    #         language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         media_sample_rate_hertz: 1,
     #         media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #         media: { # required
@@ -3408,7 +3446,13 @@ module Aws::TranscribeService
     #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #         },
     #         identify_language: false,
-    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] transcription_job_name
@@ -3423,7 +3467,7 @@ module Aws::TranscribeService
     #   The language code for the language used in the input media file.
     #
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio
-    #   or video file must be encoded at a sample rate of 16000 Hz or
+    #   or video file must be encoded at a sample rate of 16,000 Hz or
     #   higher.
     #   @return [String]
     #
@@ -3568,9 +3612,13 @@ module Aws::TranscribeService
     #   list.
     #
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio
-    #   or video file must be encoded at a sample rate of 16000 Hz or
+    #   or video file must be encoded at a sample rate of 16,000 Hz or
     #   higher.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Add tags to an Amazon Transcribe transcription job.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobRequest AWS API Documentation
     #
@@ -3588,7 +3636,8 @@ module Aws::TranscribeService
       :job_execution_settings,
       :content_redaction,
       :identify_language,
-      :language_options)
+      :language_options,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3604,6 +3653,75 @@ module Aws::TranscribeService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A key:value pair that adds metadata to a resource used by Amazon
+    # Transcribe. For example, a tag with the key:value pair
+    # ‘Department’:’Sales’ might be added to a resource to indicate its use
+    # by your organization's sales department.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The first part of a key:value pair that forms a tag associated with
+    #   a given resource. For example, in the tag ‘Department’:’Sales’, the
+    #   key is 'Department'.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The second part of a key:value pair that forms a tag associated with
+    #   a given resource. For example, in the tag ‘Department’:’Sales’, the
+    #   value is 'Sales'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TranscribeArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
+    #   want to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags you are assigning to a given Amazon Transcribe resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # Identifies the location of a transcription.
     #
@@ -3742,7 +3860,7 @@ module Aws::TranscribeService
     #   @return [Types::Transcript]
     #
     # @!attribute [rw] start_time
-    #   A timestamp that shows with the job was started processing.
+    #   A timestamp that shows when the job started processing.
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
@@ -3750,7 +3868,7 @@ module Aws::TranscribeService
     #   @return [Time]
     #
     # @!attribute [rw] completion_time
-    #   A timestamp that shows when the job was completed.
+    #   A timestamp that shows when the job completed.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -3771,7 +3889,7 @@ module Aws::TranscribeService
     #
     #   * `Invalid sample rate for audio file` - The sample rate specified
     #     in the `MediaSampleRateHertz` of the request isn't valid. The
-    #     sample rate must be between 8000 and 48000 Hertz.
+    #     sample rate must be between 8,000 and 48,000 Hertz.
     #
     #   * `The sample rate provided does not match the detected sample rate`
     #     - The sample rate in the audio file doesn't match the sample rate
@@ -3832,6 +3950,10 @@ module Aws::TranscribeService
     #   language it identified.
     #   @return [Float]
     #
+    # @!attribute [rw] tags
+    #   A key:value pair assigned to a given transcription job.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
     #
     class TranscriptionJob < Struct.new(
@@ -3852,7 +3974,8 @@ module Aws::TranscribeService
       :content_redaction,
       :identify_language,
       :language_options,
-      :identified_language_score)
+      :identified_language_score,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3941,6 +4064,37 @@ module Aws::TranscribeService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TranscribeArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
+    #   want to remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys you want to remove from a specified Amazon
+    #   Transcribe resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateCallAnalyticsCategoryRequest
     #   data as a hash:
@@ -4062,7 +4216,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         vocabulary_file_uri: "Uri",
     #       }
     #
@@ -4079,10 +4233,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_file_uri
-    #   The location in Amazon S3 of the text file that contains the you use
-    #   for your custom vocabulary. The URI must be in the same Amazon Web
-    #   Services Region as the resource that you are calling. The following
-    #   is the format for a URI:
+    #   The location in Amazon S3 of the text file that contains your custom
+    #   vocabulary. The URI must be in the same Amazon Web Services Region
+    #   as the resource that you are calling. The following is the format
+    #   for a URI:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -4227,7 +4381,7 @@ module Aws::TranscribeService
     #
     #       {
     #         vocabulary_name: "VocabularyName", # required
-    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #         language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         phrases: ["Phrase"],
     #         vocabulary_file_uri: "Uri",
     #       }
@@ -4240,7 +4394,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see what-is-transcribe.
+    #   and their corresponding language codes, see transcribe-whatis.
     #   @return [String]
     #
     # @!attribute [rw] phrases

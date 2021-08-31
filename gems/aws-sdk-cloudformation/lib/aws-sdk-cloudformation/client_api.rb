@@ -301,6 +301,8 @@ module Aws::CloudFormation
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RollbackConfiguration = Shapes::StructureShape.new(name: 'RollbackConfiguration')
+    RollbackStackInput = Shapes::StructureShape.new(name: 'RollbackStackInput')
+    RollbackStackOutput = Shapes::StructureShape.new(name: 'RollbackStackOutput')
     RollbackTrigger = Shapes::StructureShape.new(name: 'RollbackTrigger')
     RollbackTriggers = Shapes::ListShape.new(name: 'RollbackTriggers')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
@@ -869,6 +871,7 @@ module Aws::CloudFormation
     ExecuteChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, required: true, location_name: "ChangeSetName"))
     ExecuteChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
     ExecuteChangeSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    ExecuteChangeSetInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
     ExecuteChangeSetInput.struct_class = Types::ExecuteChangeSetInput
 
     ExecuteChangeSetOutput.struct_class = Types::ExecuteChangeSetOutput
@@ -1225,6 +1228,14 @@ module Aws::CloudFormation
     RollbackConfiguration.add_member(:rollback_triggers, Shapes::ShapeRef.new(shape: RollbackTriggers, location_name: "RollbackTriggers"))
     RollbackConfiguration.add_member(:monitoring_time_in_minutes, Shapes::ShapeRef.new(shape: MonitoringTimeInMinutes, location_name: "MonitoringTimeInMinutes"))
     RollbackConfiguration.struct_class = Types::RollbackConfiguration
+
+    RollbackStackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
+    RollbackStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    RollbackStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    RollbackStackInput.struct_class = Types::RollbackStackInput
+
+    RollbackStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    RollbackStackOutput.struct_class = Types::RollbackStackOutput
 
     RollbackTrigger.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     RollbackTrigger.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
@@ -1637,6 +1648,7 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:stack_policy_url, Shapes::ShapeRef.new(shape: StackPolicyURL, location_name: "StackPolicyURL"))
     UpdateStackInput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))
     UpdateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    UpdateStackInput.add_member(:disable_rollback, Shapes::ShapeRef.new(shape: DisableRollback, location_name: "DisableRollback"))
     UpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     UpdateStackInput.struct_class = Types::UpdateStackInput
 
@@ -2298,6 +2310,15 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: RegisterTypeInput)
         o.output = Shapes::ShapeRef.new(shape: RegisterTypeOutput)
         o.errors << Shapes::ShapeRef.new(shape: CFNRegistryException)
+      end)
+
+      api.add_operation(:rollback_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RollbackStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RollbackStackInput)
+        o.output = Shapes::ShapeRef.new(shape: RollbackStackOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
       end)
 
       api.add_operation(:set_stack_policy, Seahorse::Model::Operation.new.tap do |o|

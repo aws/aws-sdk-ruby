@@ -3844,18 +3844,34 @@ module Aws::IoTSiteWise
     #
     #   Valid values: `LINEAR_INTERPOLATION | LOCF_INTERPOLATION`
     #
-    #   For the `LOCF_INTERPOLATION` interpolation, if no data point is
-    #   found for an interval, IoT SiteWise returns the same interpolated
-    #   value calculated for the previous interval and carries forward this
-    #   interpolated value until a new data point is found.
+    #   * `LINEAR_INTERPOLATION` – Estimates missing data using [linear
+    #     interpolation][1].
     #
-    #   For example, you can get the interpolated temperature values for a
-    #   wind turbine every 24 hours over a duration of 7 days. If the
-    #   `LOCF_INTERPOLATION` interpolation starts on July 1, 2021, at 9 AM,
-    #   IoT SiteWise uses the data points from July 1, 2021, at 9 AM to July
-    #   2, 2021, at 9 AM to compute the first interpolated value. If no data
-    #   points is found after 9 A.M. on July 2, 2021, IoT SiteWise uses the
-    #   same interpolated value for the rest of the days.
+    #     For example, you can use this operation to return the interpolated
+    #     temperature values for a wind turbine every 24 hours over a
+    #     duration of 7 days. If the interpolation starts on July 1, 2021,
+    #     at 9 AM, IoT SiteWise returns the first interpolated value on July
+    #     2, 2021, at 9 AM, the second interpolated value on July 3, 2021,
+    #     at 9 AM, and so on.
+    #
+    #   * `LOCF_INTERPOLATION` – Estimates missing data using last
+    #     observation carried forward interpolation
+    #
+    #     If no data point is found for an interval, IoT SiteWise returns
+    #     the last observed data point for the previous interval and carries
+    #     forward this interpolated value until a new data point is found.
+    #
+    #     For example, you can get the state of an on-off valve every 24
+    #     hours over a duration of 7 days. If the interpolation starts on
+    #     July 1, 2021, at 9 AM, IoT SiteWise returns the last observed data
+    #     point between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as
+    #     the first interpolated value. If no data point is found after 9 AM
+    #     on July 2, 2021, IoT SiteWise uses the same interpolated value for
+    #     the rest of the days.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Linear_interpolation
     #   @return [String]
     #
     # @!attribute [rw] interval_window_in_seconds

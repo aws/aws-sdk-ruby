@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-08-25)
+------------------
+
+* Feature - AWS EventBridge adds an enum of EXTERNAL for EcsParameters LaunchType for PutTargets API
+
 1.28.0 (2021-08-04)
 ------------------
 

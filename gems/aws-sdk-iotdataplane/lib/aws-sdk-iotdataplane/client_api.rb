@@ -16,6 +16,8 @@ module Aws::IoTDataPlane
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     DeleteThingShadowRequest = Shapes::StructureShape.new(name: 'DeleteThingShadowRequest')
     DeleteThingShadowResponse = Shapes::StructureShape.new(name: 'DeleteThingShadowResponse')
+    GetRetainedMessageRequest = Shapes::StructureShape.new(name: 'GetRetainedMessageRequest')
+    GetRetainedMessageResponse = Shapes::StructureShape.new(name: 'GetRetainedMessageResponse')
     GetThingShadowRequest = Shapes::StructureShape.new(name: 'GetThingShadowRequest')
     GetThingShadowResponse = Shapes::StructureShape.new(name: 'GetThingShadowResponse')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
@@ -23,15 +25,22 @@ module Aws::IoTDataPlane
     JsonDocument = Shapes::BlobShape.new(name: 'JsonDocument')
     ListNamedShadowsForThingRequest = Shapes::StructureShape.new(name: 'ListNamedShadowsForThingRequest')
     ListNamedShadowsForThingResponse = Shapes::StructureShape.new(name: 'ListNamedShadowsForThingResponse')
+    ListRetainedMessagesRequest = Shapes::StructureShape.new(name: 'ListRetainedMessagesRequest')
+    ListRetainedMessagesResponse = Shapes::StructureShape.new(name: 'ListRetainedMessagesResponse')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MethodNotAllowedException = Shapes::StructureShape.new(name: 'MethodNotAllowedException')
     NamedShadowList = Shapes::ListShape.new(name: 'NamedShadowList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Payload = Shapes::BlobShape.new(name: 'Payload')
+    PayloadSize = Shapes::IntegerShape.new(name: 'PayloadSize')
     PublishRequest = Shapes::StructureShape.new(name: 'PublishRequest')
     Qos = Shapes::IntegerShape.new(name: 'Qos')
     RequestEntityTooLargeException = Shapes::StructureShape.new(name: 'RequestEntityTooLargeException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    Retain = Shapes::BooleanShape.new(name: 'Retain')
+    RetainedMessageList = Shapes::ListShape.new(name: 'RetainedMessageList')
+    RetainedMessageSummary = Shapes::StructureShape.new(name: 'RetainedMessageSummary')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     ShadowName = Shapes::StringShape.new(name: 'ShadowName')
     ThingName = Shapes::StringShape.new(name: 'ThingName')
@@ -55,6 +64,15 @@ module Aws::IoTDataPlane
     DeleteThingShadowResponse.struct_class = Types::DeleteThingShadowResponse
     DeleteThingShadowResponse[:payload] = :payload
     DeleteThingShadowResponse[:payload_member] = DeleteThingShadowResponse.member(:payload)
+
+    GetRetainedMessageRequest.add_member(:topic, Shapes::ShapeRef.new(shape: Topic, required: true, location: "uri", location_name: "topic"))
+    GetRetainedMessageRequest.struct_class = Types::GetRetainedMessageRequest
+
+    GetRetainedMessageResponse.add_member(:topic, Shapes::ShapeRef.new(shape: Topic, location_name: "topic"))
+    GetRetainedMessageResponse.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
+    GetRetainedMessageResponse.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location_name: "qos"))
+    GetRetainedMessageResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    GetRetainedMessageResponse.struct_class = Types::GetRetainedMessageResponse
 
     GetThingShadowRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     GetThingShadowRequest.add_member(:shadow_name, Shapes::ShapeRef.new(shape: ShadowName, location: "querystring", location_name: "name"))
@@ -81,6 +99,14 @@ module Aws::IoTDataPlane
     ListNamedShadowsForThingResponse.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
     ListNamedShadowsForThingResponse.struct_class = Types::ListNamedShadowsForThingResponse
 
+    ListRetainedMessagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListRetainedMessagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRetainedMessagesRequest.struct_class = Types::ListRetainedMessagesRequest
+
+    ListRetainedMessagesResponse.add_member(:retained_topics, Shapes::ShapeRef.new(shape: RetainedMessageList, location_name: "retainedTopics"))
+    ListRetainedMessagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRetainedMessagesResponse.struct_class = Types::ListRetainedMessagesResponse
+
     MethodNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     MethodNotAllowedException.struct_class = Types::MethodNotAllowedException
 
@@ -88,6 +114,7 @@ module Aws::IoTDataPlane
 
     PublishRequest.add_member(:topic, Shapes::ShapeRef.new(shape: Topic, required: true, location: "uri", location_name: "topic"))
     PublishRequest.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location: "querystring", location_name: "qos"))
+    PublishRequest.add_member(:retain, Shapes::ShapeRef.new(shape: Retain, location: "querystring", location_name: "retain"))
     PublishRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     PublishRequest.struct_class = Types::PublishRequest
     PublishRequest[:payload] = :payload
@@ -98,6 +125,14 @@ module Aws::IoTDataPlane
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RetainedMessageList.member = Shapes::ShapeRef.new(shape: RetainedMessageSummary)
+
+    RetainedMessageSummary.add_member(:topic, Shapes::ShapeRef.new(shape: Topic, location_name: "topic"))
+    RetainedMessageSummary.add_member(:payload_size, Shapes::ShapeRef.new(shape: PayloadSize, location_name: "payloadSize"))
+    RetainedMessageSummary.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location_name: "qos"))
+    RetainedMessageSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    RetainedMessageSummary.struct_class = Types::RetainedMessageSummary
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -155,6 +190,21 @@ module Aws::IoTDataPlane
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentEncodingException)
       end)
 
+      api.add_operation(:get_retained_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRetainedMessage"
+        o.http_method = "GET"
+        o.http_request_uri = "/retainedMessage/{topic}"
+        o.input = Shapes::ShapeRef.new(shape: GetRetainedMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRetainedMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+      end)
+
       api.add_operation(:get_thing_shadow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetThingShadow"
         o.http_method = "GET"
@@ -184,6 +234,26 @@ module Aws::IoTDataPlane
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+      end)
+
+      api.add_operation(:list_retained_messages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRetainedMessages"
+        o.http_method = "GET"
+        o.http_request_uri = "/retainedMessage"
+        o.input = Shapes::ShapeRef.new(shape: ListRetainedMessagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRetainedMessagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:publish, Seahorse::Model::Operation.new.tap do |o|
