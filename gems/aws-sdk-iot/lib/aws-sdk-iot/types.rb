@@ -60,8 +60,8 @@ module Aws::IoT
     #   The minimum percentage of job execution failures that must occur to
     #   initiate the job abort.
     #
-    #   AWS IoT supports up to two digits after the decimal (for example,
-    #   10.9 and 10.99, but not 10.999).
+    #   Amazon Web Services IoT Core supports up to two digits after the
+    #   decimal (for example, 10.9 and 10.99, but not 10.999).
     #   @return [Float]
     #
     # @!attribute [rw] min_number_of_executed_things
@@ -337,15 +337,15 @@ module Aws::IoT
     #   @return [Types::SalesforceAction]
     #
     # @!attribute [rw] iot_analytics
-    #   Sends message data to an AWS IoT Analytics channel.
+    #   Sends message data to an IoT Analytics channel.
     #   @return [Types::IotAnalyticsAction]
     #
     # @!attribute [rw] iot_events
-    #   Sends an input to an AWS IoT Events detector.
+    #   Sends an input to an IoT Events detector.
     #   @return [Types::IotEventsAction]
     #
     # @!attribute [rw] iot_site_wise
-    #   Sends data from the MQTT message that triggered the rule to AWS IoT
+    #   Sends data from the MQTT message that triggered the rule to IoT
     #   SiteWise asset properties.
     #   @return [Types::IotSiteWiseAction]
     #
@@ -561,6 +561,31 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The type of aggregation queries.
+    #
+    # @note When making an API call, you may pass AggregationType
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Statistics", # required, accepts Statistics, Percentiles, Cardinality
+    #         values: ["AggregationTypeValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the aggregation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of the values of aggregation types.
+    #   @return [Array<String>]
+    #
+    class AggregationType < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing the alert target ARN and the role ARN.
     #
     # @note When making an API call, you may pass AlertTarget
@@ -735,9 +760,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
@@ -1396,7 +1421,7 @@ module Aws::IoT
     #   @return [Time]
     #
     # @!attribute [rw] signing_disabled
-    #   Specifies whether AWS IoT validates the token signature in an
+    #   Specifies whether IoT validates the token signature in an
     #   authorization request.
     #   @return [Boolean]
     #
@@ -1481,8 +1506,8 @@ module Aws::IoT
     #   The minimum percentage of job execution failures that must occur to
     #   initiate the job abort.
     #
-    #   AWS IoT supports up to two digits after the decimal (for example,
-    #   10.9 and 10.99, but not 10.999).
+    #   Amazon Web Services IoT Core supports up to two digits after the
+    #   decimal (for example, 10.9 and 10.99, but not 10.999).
     #   @return [Float]
     #
     # @!attribute [rw] min_number_of_executed_things
@@ -1561,8 +1586,8 @@ module Aws::IoT
     # @!attribute [rw] rate_increase_criteria
     #   The criteria to initiate the increase in rate of rollout for a job.
     #
-    #   AWS IoT supports up to one digit after the decimal (for example,
-    #   1.5, but not 1.55).
+    #   Amazon Web Services IoT Core supports up to one digit after the
+    #   decimal (for example, 1.5, but not 1.55).
     #   @return [Types::AwsJobRateIncreaseCriteria]
     #
     class AwsJobExponentialRolloutRate < Struct.new(
@@ -1875,6 +1900,47 @@ module Aws::IoT
     #
     class BillingGroupProperties < Struct.new(
       :billing_group_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A count of documents that meets a specific aggregation criteria.
+    #
+    # @!attribute [rw] key_value
+    #   The value counted for the particular bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of documents that have the value counted for the
+    #   particular bucket.
+    #   @return [Integer]
+    #
+    class Bucket < Struct.new(
+      :key_value,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of bucketed aggregation performed.
+    #
+    # @note When making an API call, you may pass BucketsAggregationType
+    #   data as a hash:
+    #
+    #       {
+    #         terms_aggregation: {
+    #           max_buckets: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] terms_aggregation
+    #   Performs an aggregation that will return a list of buckets. The list
+    #   of buckets is a ranked list of the number of occurrences of an
+    #   aggregation field value.
+    #   @return [Types::TermsAggregation]
+    #
+    class BucketsAggregationType < Struct.new(
+      :terms_aggregation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2249,11 +2315,12 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] owned_by
-    #   The ID of the AWS account that owns the certificate.
+    #   The ID of the Amazon Web Services account that owns the certificate.
     #   @return [String]
     #
     # @!attribute [rw] previous_owned_by
-    #   The ID of the AWS account of the previous owner of the certificate.
+    #   The ID of the Amazon Web Services account of the previous owner of
+    #   the certificate.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -2505,7 +2572,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] aws_signer_job_id
-    #   The ID of the AWSSignerJob which was created to sign the file.
+    #   The ID of the `AWSSignerJob` which was created to sign the file.
     #   @return [String]
     #
     # @!attribute [rw] start_signing_job_parameter
@@ -2759,7 +2826,7 @@ module Aws::IoT
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] signing_disabled
-    #   Specifies whether AWS IoT validates the token signature in an
+    #   Specifies whether IoT validates the token signature in an
     #   authorization request.
     #   @return [Boolean]
     #
@@ -2936,8 +3003,9 @@ module Aws::IoT
     # @!attribute [rw] client_request_token
     #   Each custom metric must have a unique client request token. If you
     #   try to create a new custom metric that already exists with a
-    #   different token, an exception occurs. If you omit this value, AWS
-    #   SDKs will automatically generate a unique client request.
+    #   different token, an exception occurs. If you omit this value, Amazon
+    #   Web Services SDKs will automatically generate a unique client
+    #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3008,8 +3076,9 @@ module Aws::IoT
     # @!attribute [rw] client_request_token
     #   Each dimension must have a unique client request token. If you try
     #   to create a new dimension with the same token as a dimension that
-    #   already exists, an exception occurs. If you omit this value, AWS
-    #   SDKs will automatically generate a unique client request.
+    #   already exists, an exception occurs. If you omit this value, Amazon
+    #   Web Services SDKs will automatically generate a unique client
+    #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3071,16 +3140,17 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] server_certificate_arns
-    #   The ARNs of the certificates that AWS IoT passes to the device
-    #   during the TLS handshake. Currently you can specify only one
-    #   certificate ARN. This value is not required for AWS-managed domains.
+    #   The ARNs of the certificates that IoT passes to the device during
+    #   the TLS handshake. Currently you can specify only one certificate
+    #   ARN. This value is not required for Amazon Web Services-managed
+    #   domains.
     #   @return [Array<String>]
     #
     # @!attribute [rw] validation_certificate_arn
     #   The certificate used to validate the server certificate and prove
     #   domain name ownership. This certificate must be signed by a public
-    #   certificate authority. This value is not required for AWS-managed
-    #   domains.
+    #   certificate authority. This value is not required for Amazon Web
+    #   Services-managed domains.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_config
@@ -3090,7 +3160,8 @@ module Aws::IoT
     # @!attribute [rw] service_type
     #   The type of service delivered by the endpoint.
     #
-    #   <note markdown="1"> AWS IoT Core currently supports only the `DATA` service type.
+    #   <note markdown="1"> Amazon Web Services IoT Core currently supports only the `DATA`
+    #   service type.
     #
     #    </note>
     #   @return [String]
@@ -3173,7 +3244,7 @@ module Aws::IoT
     # @!attribute [rw] index_name
     #   The dynamic thing group index name.
     #
-    #   <note markdown="1"> Currently one index is supported: "AWS\_Things".
+    #   <note markdown="1"> Currently one index is supported: `AWS_Things`.
     #
     #    </note>
     #   @return [String]
@@ -3247,6 +3318,106 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFleetMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "FleetMetricName", # required
+    #         query_string: "QueryString", # required
+    #         aggregation_type: { # required
+    #           name: "Statistics", # required, accepts Statistics, Percentiles, Cardinality
+    #           values: ["AggregationTypeValue"],
+    #         },
+    #         period: 1, # required
+    #         aggregation_field: "AggregationField", # required
+    #         description: "FleetMetricDescription",
+    #         query_version: "QueryVersion",
+    #         index_name: "IndexName",
+    #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the fleet metric to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The search query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_type
+    #   The type of the aggregation query.
+    #   @return [Types::AggregationType]
+    #
+    # @!attribute [rw] period
+    #   The time in seconds between fleet metric emissions. Range \[60(1
+    #   min), 86400(1 day)\] and must be multiple of 60.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aggregation_field
+    #   The field to aggregate.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The fleet metric description.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The query version.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   Used to support unit transformation such as milliseconds to seconds.
+    #   The unit must be supported by [CW metric][1]. Default to null.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata, which can be used to manage the fleet metric.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateFleetMetricRequest < Struct.new(
+      :metric_name,
+      :query_string,
+      :aggregation_type,
+      :period,
+      :aggregation_field,
+      :description,
+      :query_version,
+      :index_name,
+      :unit,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The name of the fleet metric to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_arn
+    #   The Amazon Resource Name (ARN) of the new fleet metric.
+    #   @return [String]
+    #
+    class CreateFleetMetricResponse < Struct.new(
+      :metric_name,
+      :metric_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateJobRequest
     #   data as a hash:
     #
@@ -3296,9 +3467,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] job_id
-    #   A job identifier which must be unique for your AWS account. We
-    #   recommend using a UUID. Alpha-numeric characters, "-" and "\_"
-    #   are valid for use here.
+    #   A job identifier which must be unique for your Amazon Web Services
+    #   account. We recommend using a UUID. Alpha-numeric characters, "-"
+    #   and "\_" are valid for use here.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -3367,9 +3538,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
@@ -3556,6 +3727,13 @@ module Aws::IoT
 
     # The input for the CreateKeysAndCertificate operation.
     #
+    # Requires permission to access the [CreateKeysAndCertificateRequest][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @note When making an API call, you may pass CreateKeysAndCertificateRequest
     #   data as a hash:
     #
@@ -3580,8 +3758,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate. AWS IoT issues a default subject name for
-    #   the certificate (for example, AWS IoT Certificate).
+    #   The ID of the certificate. IoT issues a default subject name for the
+    #   certificate (for example, IoT Certificate).
     #   @return [String]
     #
     # @!attribute [rw] certificate_pem
@@ -3829,8 +4007,9 @@ module Aws::IoT
     #   @return [Array<Types::OTAUpdateFile>]
     #
     # @!attribute [rw] role_arn
-    #   The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT
-    #   jobs and AWS Code Signing resources to create an OTA update job.
+    #   The IAM role that grants Amazon Web Services IoT Core access to the
+    #   Amazon S3, IoT jobs and Amazon Web Services Code Signing resources
+    #   to create an OTA update job.
     #   @return [String]
     #
     # @!attribute [rw] additional_parameters
@@ -3865,7 +4044,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] aws_iot_job_id
-    #   The AWS IoT job ID associated with the OTA update.
+    #   The IoT job ID associated with the OTA update.
     #   @return [String]
     #
     # @!attribute [rw] ota_update_arn
@@ -3873,7 +4052,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] aws_iot_job_arn
-    #   The AWS IoT job ARN associated with the OTA update.
+    #   The IoT job ARN associated with the OTA update.
     #   @return [String]
     #
     # @!attribute [rw] ota_update_status
@@ -4244,7 +4423,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] credential_duration_seconds
-    #   How long (in seconds) the credentials will be valid.
+    #   How long (in seconds) the credentials will be valid. The default
+    #   value is 3,600 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -5490,6 +5670,29 @@ module Aws::IoT
 
     class DeleteDynamicThingGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteFleetMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "FleetMetricName", # required
+    #         expected_version: 1,
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the fleet metric to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the fleet metric to delete.
+    #   @return [Integer]
+    #
+    class DeleteFleetMetricRequest < Struct.new(
+      :metric_name,
+      :expected_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteJobExecutionRequest
     #   data as a hash:
     #
@@ -5536,9 +5739,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
@@ -5593,9 +5796,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
@@ -5668,7 +5871,7 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] force_delete_aws_job
-    #   When true, deletes the AWS job created by the OTAUpdate process even
+    #   When true, deletes the IoT job created by the OTAUpdate process even
     #   if it is "IN\_PROGRESS". Otherwise, if the job is not in a
     #   terminal state ("COMPLETED" or "CANCELED") an exception will
     #   occur. The default is false.
@@ -6064,7 +6267,7 @@ module Aws::IoT
     class DescribeAccountAuditConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] role_arn
-    #   The ARN of the role that grants permission to AWS IoT to access
+    #   The ARN of the role that grants permission to IoT to access
     #   information about your devices, policies, certificates, and other
     #   items as required when performing an audit.
     #
@@ -6696,14 +6899,13 @@ module Aws::IoT
     #   ^
     #   ^
     #
-    #   * `iot:CredentialProvider` - Returns an AWS IoT credentials provider
-    #     API endpoint.
-    #
-    #   ^
-    #   ^
-    #
-    #   * `iot:Jobs` - Returns an AWS IoT device management Jobs API
+    #   * `iot:CredentialProvider` - Returns an IoT credentials provider API
     #     endpoint.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `iot:Jobs` - Returns an IoT device management Jobs API endpoint.
     #
     #   ^
     #
@@ -6751,6 +6953,99 @@ module Aws::IoT
       :event_configurations,
       :creation_date,
       :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "FleetMetricName", # required
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the fleet metric to describe.
+    #   @return [String]
+    #
+    class DescribeFleetMetricRequest < Struct.new(
+      :metric_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The name of the fleet metric to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The search query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_type
+    #   The type of the aggregation query.
+    #   @return [Types::AggregationType]
+    #
+    # @!attribute [rw] period
+    #   The time in seconds between fleet metric emissions. Range \[60(1
+    #   min), 86400(1 day)\] and must be multiple of 60.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aggregation_field
+    #   The field to aggregate.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The fleet metric description.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The query version.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the fleet metric is created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the fleet metric is last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] unit
+    #   Used to support unit transformation such as milliseconds to seconds.
+    #   The unit must be supported by [CW metric][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the fleet metric.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] metric_arn
+    #   The ARN of the fleet metric to describe.
+    #   @return [String]
+    #
+    class DescribeFleetMetricResponse < Struct.new(
+      :metric_name,
+      :query_string,
+      :aggregation_type,
+      :period,
+      :aggregation_field,
+      :description,
+      :query_version,
+      :index_name,
+      :creation_date,
+      :last_modified_date,
+      :unit,
+      :version,
+      :metric_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6997,8 +7292,8 @@ module Aws::IoT
     #   @return [Types::MitigationActionParams]
     #
     # @!attribute [rw] creation_date
-    #   The date and time when the mitigation action was added to your AWS
-    #   account.
+    #   The date and time when the mitigation action was added to your
+    #   Amazon Web Services accounts.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
@@ -7525,9 +7820,8 @@ module Aws::IoT
     #   thing name and use it as the MQTT client ID for the registry and the
     #   Device Shadow service.
     #
-    #   This lets you better organize your AWS IoT fleet without removing
-    #   the flexibility of the underlying device certificate model or
-    #   shadows.
+    #   This lets you better organize your IoT fleet without removing the
+    #   flexibility of the underlying device certificate model or shadows.
     #   @return [String]
     #
     # @!attribute [rw] thing_name
@@ -7951,9 +8245,9 @@ module Aws::IoT
 
     # The summary of a domain configuration. A domain configuration
     # specifies custom IoT-specific information about a domain. A domain
-    # configuration can be associated with an AWS-managed domain (for
-    # example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer
-    # managed domain, or a default endpoint.
+    # configuration can be associated with an Amazon Web Services-managed
+    # domain (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a
+    # customer managed domain, or a default endpoint.
     #
     # * Data
     #
@@ -8177,8 +8471,8 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Parameters used when defining a mitigation action that enable AWS IoT
-    # logging.
+    # Parameters used when defining a mitigation action that enable Amazon
+    # Web Services IoT Core logging.
     #
     # @note When making an API call, you may pass EnableIoTLoggingParams
     #   data as a hash:
@@ -8274,8 +8568,8 @@ module Aws::IoT
     # @!attribute [rw] increment_factor
     #   The exponential factor to increase the rate of rollout for a job.
     #
-    #   AWS IoT supports up to one digit after the decimal (for example,
-    #   1.5, but not 1.55).
+    #   Amazon Web Services IoT Core supports up to one digit after the
+    #   decimal (for example, 1.5, but not 1.55).
     #   @return [Float]
     #
     # @!attribute [rw] rate_increase_criteria
@@ -8305,7 +8599,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The datatype of the field.
+    #   The data type of the field.
     #   @return [String]
     #
     class Field < Struct.new(
@@ -8398,6 +8692,23 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The name and ARN of a fleet metric.
+    #
+    # @!attribute [rw] metric_name
+    #   The fleet metric name.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_arn
+    #   The fleet metric ARN.
+    #   @return [String]
+    #
+    class FleetMetricNameAndArn < Struct.new(
+      :metric_name,
+      :metric_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetBehaviorModelTrainingSummariesRequest
     #   data as a hash:
     #
@@ -8445,6 +8756,74 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetBucketsAggregationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName",
+    #         query_string: "QueryString", # required
+    #         aggregation_field: "AggregationField", # required
+    #         query_version: "QueryVersion",
+    #         buckets_aggregation_type: { # required
+    #           terms_aggregation: {
+    #             max_buckets: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The search query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_field
+    #   The aggregation field.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The version of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] buckets_aggregation_type
+    #   The basic control of the response shape and the bucket aggregation
+    #   type to perform.
+    #   @return [Types::BucketsAggregationType]
+    #
+    class GetBucketsAggregationRequest < Struct.new(
+      :index_name,
+      :query_string,
+      :aggregation_field,
+      :query_version,
+      :buckets_aggregation_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] total_count
+    #   The total number of documents that fit the query string criteria and
+    #   contain a value for the Aggregation field targeted in the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] buckets
+    #   The main part of the response with a list of buckets. Each bucket
+    #   contains a `keyValue` and a `count`.
+    #
+    #   `keyValue`\: The aggregation field value counted for the particular
+    #   bucket.
+    #
+    #   `count`\: The number of documents that have that value.
+    #   @return [Array<Types::Bucket>]
+    #
+    class GetBucketsAggregationResponse < Struct.new(
+      :total_count,
+      :buckets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCardinalityRequest
     #   data as a hash:
     #
@@ -8460,7 +8839,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] query_string
-    #   The search query.
+    #   The search query string.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_field
@@ -8645,7 +9024,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] query_string
-    #   The query string.
+    #   The search query string.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_field
@@ -8847,7 +9226,8 @@ module Aws::IoT
     #
     # @!attribute [rw] query_string
     #   The query used to search. You can specify "*" for the query
-    #   string to get the count of all indexed things in your AWS account.
+    #   string to get the count of all indexed things in your Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_field
@@ -8946,7 +9326,7 @@ module Aws::IoT
     class GetV2LoggingOptionsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] role_arn
-    #   The IAM role ARN AWS IoT uses to write to your CloudWatch logs.
+    #   The IAM role ARN IoT uses to write to your CloudWatch logs.
     #   @return [String]
     #
     # @!attribute [rw] default_log_level
@@ -9012,9 +9392,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] confirmation_url
-    #   The URL to which AWS IoT sends a confirmation message. The value of
-    #   the confirmation URL must be a prefix of the endpoint URL. If you do
-    #   not specify a confirmation URL AWS IoT uses the endpoint URL as the
+    #   The URL to which IoT sends a confirmation message. The value of the
+    #   confirmation URL must be a prefix of the endpoint URL. If you do not
+    #   specify a confirmation URL IoT uses the endpoint URL as the
     #   confirmation URL. If you use substitution templates in the
     #   confirmationUrl, you must create and enable topic rule destinations
     #   that match each possible value of the substitution template before
@@ -9130,8 +9510,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] confirmation_url
-    #   The URL AWS IoT uses to confirm ownership of or access to the topic
-    #   rule destination URL.
+    #   The URL IoT uses to confirm ownership of or access to the topic rule
+    #   destination URL.
     #   @return [String]
     #
     class HttpUrlDestinationConfiguration < Struct.new(
@@ -9277,7 +9657,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Sends message data to an AWS IoT Analytics channel.
+    # Sends message data to an IoT Analytics channel.
     #
     # @note When making an API call, you may pass IotAnalyticsAction
     #   data as a hash:
@@ -9305,8 +9685,8 @@ module Aws::IoT
     #
     #   When `batchMode` is `true` and the rule SQL statement evaluates to
     #   an Array, each Array element is delivered as a separate message when
-    #   passed by [ `BatchPutMessage` ][1] to the AWS IoT Analytics channel.
-    #   The resulting array can't have more than 100 messages.
+    #   passed by [ `BatchPutMessage` ][1] to the IoT Analytics channel. The
+    #   resulting array can't have more than 100 messages.
     #
     #
     #
@@ -9328,7 +9708,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Sends an input to an AWS IoT Events detector.
+    # Sends an input to an IoT Events detector.
     #
     # @note When making an API call, you may pass IotEventsAction
     #   data as a hash:
@@ -9341,7 +9721,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] input_name
-    #   The name of the AWS IoT Events input.
+    #   The name of the IoT Events input.
     #   @return [String]
     #
     # @!attribute [rw] message_id
@@ -9351,7 +9731,7 @@ module Aws::IoT
     #   UUID value will be assigned.
     #
     #   Assign a value to this property to ensure that only one input
-    #   (message) with a given `messageId` will be processed by an AWS IoT
+    #   (message) with a given `messageId` will be processed by an IoT
     #   Events detector.
     #   @return [String]
     #
@@ -9363,8 +9743,8 @@ module Aws::IoT
     #
     #   When `batchMode` is `true` and the rule SQL statement evaluates to
     #   an Array, each Array element is treated as a separate message when
-    #   it's sent to AWS IoT Events by calling [ `BatchPutMessage` ][1].
-    #   The resulting array can't have more than 10 messages.
+    #   it's sent to IoT Events by calling [ `BatchPutMessage` ][1]. The
+    #   resulting array can't have more than 10 messages.
     #
     #
     #
@@ -9372,9 +9752,8 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role that grants AWS IoT permission to send an input
-    #   to an AWS IoT Events detector.
-    #   ("Action":"iotevents:BatchPutMessage").
+    #   The ARN of the role that grants IoT permission to send an input to
+    #   an IoT Events detector. ("Action":"iotevents:BatchPutMessage").
     #   @return [String]
     #
     class IotEventsAction < Struct.new(
@@ -9387,7 +9766,7 @@ module Aws::IoT
     end
 
     # Describes an action to send data from an MQTT message that triggered
-    # the rule to AWS IoT SiteWise asset properties.
+    # the rule to IoT SiteWise asset properties.
     #
     # @note When making an API call, you may pass IotSiteWiseAction
     #   data as a hash:
@@ -9424,8 +9803,8 @@ module Aws::IoT
     #   @return [Array<Types::PutAssetPropertyValueEntry>]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role that grants AWS IoT permission to send an asset
-    #   property value to AWS IoTSiteWise. (`"Action":
+    #   The ARN of the role that grants IoT permission to send an asset
+    #   property value to IoT SiteWise. (`"Action":
     #   "iotsitewise:BatchPutAssetPropertyValue"`). The trust policy can
     #   restrict access to specific asset hierarchy paths.
     #   @return [String]
@@ -9524,9 +9903,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
@@ -10654,7 +11033,7 @@ module Aws::IoT
     # The output from the ListCACertificates operation.
     #
     # @!attribute [rw] certificates
-    #   The CA certificates registered in your AWS account.
+    #   The CA certificates registered in your Amazon Web Services account.
     #   @return [Array<Types::CACertificate>]
     #
     # @!attribute [rw] next_marker
@@ -11030,6 +11409,47 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListFleetMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise `null` to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    class ListFleetMetricsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet_metrics
+    #   The list of fleet metrics objects.
+    #   @return [Array<Types::FleetMetricNameAndArn>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Will not be returned if the
+    #   operation has returned all results.
+    #   @return [String]
+    #
+    class ListFleetMetricsResponse < Struct.new(
+      :fleet_metrics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListIndicesRequest
     #   data as a hash:
     #
@@ -11144,9 +11564,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
@@ -11276,9 +11696,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
@@ -13175,8 +13595,8 @@ module Aws::IoT
     #   @return [Types::ReplaceDefaultPolicyVersionParams]
     #
     # @!attribute [rw] enable_io_t_logging_params
-    #   Parameters to define a mitigation action that enables AWS IoT
-    #   logging at a specified level of detail.
+    #   Parameters to define a mitigation action that enables Amazon Web
+    #   Services IoT Core logging at a specified level of detail.
     #   @return [Types::EnableIoTLoggingParams]
     #
     # @!attribute [rw] publish_finding_to_sns_params
@@ -13411,11 +13831,11 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] aws_iot_job_id
-    #   The AWS IoT job ID associated with the OTA update.
+    #   The IoT job ID associated with the OTA update.
     #   @return [String]
     #
     # @!attribute [rw] aws_iot_job_arn
-    #   The AWS IoT job ARN associated with the OTA update.
+    #   The IoT job ARN associated with the OTA update.
     #   @return [String]
     #
     # @!attribute [rw] error_info
@@ -13480,7 +13900,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] transferred_to
-    #   The AWS account to which the transfer was made.
+    #   The Amazon Web Services account to which the transfer was made.
     #   @return [String]
     #
     # @!attribute [rw] transfer_date
@@ -13523,7 +13943,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Describes an AWS IoT policy.
+    # Describes an IoT policy.
     #
     # @!attribute [rw] policy_name
     #   The policy name.
@@ -13762,7 +14182,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] asset_id
-    #   The ID of the AWS IoT SiteWise asset. You must specify either a
+    #   The ID of the IoT SiteWise asset. You must specify either a
     #   `propertyAlias` or both an `aliasId` and a `propertyId`. Accepts
     #   substitution templates.
     #   @return [String]
@@ -15436,7 +15856,7 @@ module Aws::IoT
     #
     # @!attribute [rw] audit_check_to_actions_mapping
     #   For an audit check, specifies which mitigation actions to apply.
-    #   Those actions must be defined in your AWS account.
+    #   Those actions must be defined in your Amazon Web Services accounts.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] client_request_token
@@ -15518,8 +15938,9 @@ module Aws::IoT
     # @!attribute [rw] client_request_token
     #   Each mitigation action task must have a unique client request token.
     #   If you try to create a new task with the same token as a task that
-    #   already exists, an exception occurs. If you omit this value, AWS
-    #   SDKs will automatically generate a unique client request.
+    #   already exists, an exception occurs. If you omit this value, Amazon
+    #   Web Services SDKs will automatically generate a unique client
+    #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -15883,7 +16304,7 @@ module Aws::IoT
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
-    #   An IAM role AWS IoT assumes to access your S3 files.
+    #   An IAM role IoT assumes to access your S3 files.
     #   @return [String]
     #
     class StreamInfo < Struct.new(
@@ -16070,6 +16491,27 @@ module Aws::IoT
       :succeeded_findings_count,
       :skipped_findings_count,
       :canceled_findings_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Performs an aggregation that will return a list of buckets. The list
+    # of buckets is a ranked list of the number of occurrences of an
+    # aggregation field value.
+    #
+    # @note When making an API call, you may pass TermsAggregation
+    #   data as a hash:
+    #
+    #       {
+    #         max_buckets: 1,
+    #       }
+    #
+    # @!attribute [rw] max_buckets
+    #   The number of buckets to return in the response. Default to 10.
+    #   @return [Integer]
+    #
+    class TermsAggregation < Struct.new(
+      :max_buckets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16271,19 +16713,24 @@ module Aws::IoT
     # The connectivity status of the thing.
     #
     # @!attribute [rw] connected
-    #   True if the thing is connected to the AWS IoT service; false if it
-    #   is not connected.
+    #   True if the thing is connected to the Amazon Web Services IoT Core
+    #   service; false if it is not connected.
     #   @return [Boolean]
     #
     # @!attribute [rw] timestamp
     #   The epoch time (in milliseconds) when the thing last connected or
-    #   disconnected. If the thing has been disconnected for more than a few
-    #   weeks, the time value might be missing.
+    #   disconnected. If the thing has been disconnected for approximately
+    #   an hour, the time value might be missing.
     #   @return [Integer]
+    #
+    # @!attribute [rw] disconnect_reason
+    #   The reason why the client is disconnected.
+    #   @return [String]
     #
     class ThingConnectivity < Struct.new(
       :connected,
-      :timestamp)
+      :timestamp,
+      :disconnect_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16315,7 +16762,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] connectivity
-    #   Indicates whether the thing is connected to the AWS IoT service.
+    #   Indicates whether the thing is connected to the Amazon Web Services
+    #   IoT Core service.
     #   @return [Types::ThingConnectivity]
     #
     class ThingDocument < Struct.new(
@@ -16502,7 +16950,7 @@ module Aws::IoT
     #   Thing connectivity indexing mode. Valid values are:
     #
     #   * STATUS – Your thing index contains connectivity status. To enable
-    #     thing connectivity indexing, thingIndexMode must not be set to
+    #     thing connectivity indexing, *thingIndexMode* must not be set to
     #     OFF.
     #
     #   * OFF - Thing connectivity status indexing is disabled.
@@ -17407,7 +17855,7 @@ module Aws::IoT
     #
     # @!attribute [rw] sql
     #   The SQL statement used to query the topic. For more information, see
-    #   [AWS IoT SQL Reference][1] in the *AWS IoT Developer Guide*.
+    #   [IoT SQL Reference][1] in the *IoT Developer Guide*.
     #
     #
     #
@@ -17475,7 +17923,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] target_aws_account
-    #   The AWS account.
+    #   The Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] transfer_message
@@ -17515,7 +17963,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Data used to transfer a certificate to an AWS account.
+    # Data used to transfer a certificate to an Amazon Web Services account.
     #
     # @!attribute [rw] transfer_message
     #   The transfer message.
@@ -17605,7 +18053,7 @@ module Aws::IoT
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the role that grants permission to
-    #   AWS IoT to access information about your devices, policies,
+    #   IoT to access information about your devices, policies,
     #   certificates, and other items as required when performing an audit.
     #   @return [String]
     #
@@ -17894,7 +18342,7 @@ module Aws::IoT
     #   **Note:** Setting the status to PENDING\_TRANSFER or
     #   PENDING\_ACTIVATION will result in an exception being thrown.
     #   PENDING\_TRANSFER and PENDING\_ACTIVATION are statuses used
-    #   internally by AWS IoT. They are not intended for developer use.
+    #   internally by IoT. They are not intended for developer use.
     #
     #   **Note:** The status value REGISTER\_INACTIVE is deprecated and
     #   should not be used.
@@ -18144,7 +18592,7 @@ module Aws::IoT
     # @!attribute [rw] index_name
     #   The dynamic thing group index to update.
     #
-    #   <note markdown="1"> Currently one index is supported: 'AWS\_Things'.
+    #   <note markdown="1"> Currently one index is supported: `AWS_Things`.
     #
     #    </note>
     #   @return [String]
@@ -18205,6 +18653,86 @@ module Aws::IoT
     end
 
     class UpdateEventConfigurationsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateFleetMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "FleetMetricName", # required
+    #         query_string: "QueryString",
+    #         aggregation_type: {
+    #           name: "Statistics", # required, accepts Statistics, Percentiles, Cardinality
+    #           values: ["AggregationTypeValue"],
+    #         },
+    #         period: 1,
+    #         aggregation_field: "AggregationField",
+    #         description: "FleetMetricDescription",
+    #         query_version: "QueryVersion",
+    #         index_name: "IndexName", # required
+    #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         expected_version: 1,
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the fleet metric to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The search query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_type
+    #   The type of the aggregation query.
+    #   @return [Types::AggregationType]
+    #
+    # @!attribute [rw] period
+    #   The time in seconds between fleet metric emissions. Range \[60(1
+    #   min), 86400(1 day)\] and must be multiple of 60.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aggregation_field
+    #   The field to aggregate.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the fleet metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_version
+    #   The version of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   Used to support unit transformation such as milliseconds to seconds.
+    #   The unit must be supported by [CW metric][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_version
+    #   The expected version of the fleet metric record in the registry.
+    #   @return [Integer]
+    #
+    class UpdateFleetMetricRequest < Struct.new(
+      :metric_name,
+      :query_string,
+      :aggregation_type,
+      :period,
+      :aggregation_field,
+      :description,
+      :query_version,
+      :index_name,
+      :unit,
+      :expected_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateIndexingConfigurationRequest
     #   data as a hash:
@@ -18328,9 +18856,9 @@ module Aws::IoT
     # @!attribute [rw] namespace_id
     #   The namespace used to indicate that a job is a customer-managed job.
     #
-    #   When you specify a value for this parameter, AWS IoT Core sends jobs
-    #   notifications to MQTT topics that contain the value in the following
-    #   format.
+    #   When you specify a value for this parameter, Amazon Web Services IoT
+    #   Core sends jobs notifications to MQTT topics that contain the value
+    #   in the following format.
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #

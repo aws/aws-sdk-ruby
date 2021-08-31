@@ -34,6 +34,10 @@ module Aws::IoT
     AdditionalMetricsToRetainV2List = Shapes::ListShape.new(name: 'AdditionalMetricsToRetainV2List')
     AdditionalParameterMap = Shapes::MapShape.new(name: 'AdditionalParameterMap')
     AggregationField = Shapes::StringShape.new(name: 'AggregationField')
+    AggregationType = Shapes::StructureShape.new(name: 'AggregationType')
+    AggregationTypeName = Shapes::StringShape.new(name: 'AggregationTypeName')
+    AggregationTypeValue = Shapes::StringShape.new(name: 'AggregationTypeValue')
+    AggregationTypeValues = Shapes::ListShape.new(name: 'AggregationTypeValues')
     AlarmName = Shapes::StringShape.new(name: 'AlarmName')
     AlertTarget = Shapes::StructureShape.new(name: 'AlertTarget')
     AlertTargetArn = Shapes::StringShape.new(name: 'AlertTargetArn')
@@ -158,7 +162,11 @@ module Aws::IoT
     BillingGroupProperties = Shapes::StructureShape.new(name: 'BillingGroupProperties')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanKey = Shapes::BooleanShape.new(name: 'BooleanKey')
+    Bucket = Shapes::StructureShape.new(name: 'Bucket')
+    BucketKeyValue = Shapes::StringShape.new(name: 'BucketKeyValue')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    Buckets = Shapes::ListShape.new(name: 'Buckets')
+    BucketsAggregationType = Shapes::StructureShape.new(name: 'BucketsAggregationType')
     CACertificate = Shapes::StructureShape.new(name: 'CACertificate')
     CACertificateDescription = Shapes::StructureShape.new(name: 'CACertificateDescription')
     CACertificateStatus = Shapes::StringShape.new(name: 'CACertificateStatus')
@@ -240,6 +248,8 @@ module Aws::IoT
     CreateDomainConfigurationResponse = Shapes::StructureShape.new(name: 'CreateDomainConfigurationResponse')
     CreateDynamicThingGroupRequest = Shapes::StructureShape.new(name: 'CreateDynamicThingGroupRequest')
     CreateDynamicThingGroupResponse = Shapes::StructureShape.new(name: 'CreateDynamicThingGroupResponse')
+    CreateFleetMetricRequest = Shapes::StructureShape.new(name: 'CreateFleetMetricRequest')
+    CreateFleetMetricResponse = Shapes::StructureShape.new(name: 'CreateFleetMetricResponse')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
     CreateJobTemplateRequest = Shapes::StructureShape.new(name: 'CreateJobTemplateRequest')
@@ -312,6 +322,7 @@ module Aws::IoT
     DeleteDomainConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteDomainConfigurationResponse')
     DeleteDynamicThingGroupRequest = Shapes::StructureShape.new(name: 'DeleteDynamicThingGroupRequest')
     DeleteDynamicThingGroupResponse = Shapes::StructureShape.new(name: 'DeleteDynamicThingGroupResponse')
+    DeleteFleetMetricRequest = Shapes::StructureShape.new(name: 'DeleteFleetMetricRequest')
     DeleteJobExecutionRequest = Shapes::StructureShape.new(name: 'DeleteJobExecutionRequest')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteJobTemplateRequest = Shapes::StructureShape.new(name: 'DeleteJobTemplateRequest')
@@ -384,6 +395,8 @@ module Aws::IoT
     DescribeEndpointResponse = Shapes::StructureShape.new(name: 'DescribeEndpointResponse')
     DescribeEventConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeEventConfigurationsRequest')
     DescribeEventConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeEventConfigurationsResponse')
+    DescribeFleetMetricRequest = Shapes::StructureShape.new(name: 'DescribeFleetMetricRequest')
+    DescribeFleetMetricResponse = Shapes::StructureShape.new(name: 'DescribeFleetMetricResponse')
     DescribeIndexRequest = Shapes::StructureShape.new(name: 'DescribeIndexRequest')
     DescribeIndexResponse = Shapes::StructureShape.new(name: 'DescribeIndexResponse')
     DescribeJobExecutionRequest = Shapes::StructureShape.new(name: 'DescribeJobExecutionRequest')
@@ -446,6 +459,7 @@ module Aws::IoT
     DimensionValueOperator = Shapes::StringShape.new(name: 'DimensionValueOperator')
     DisableAllLogs = Shapes::BooleanShape.new(name: 'DisableAllLogs')
     DisableTopicRuleRequest = Shapes::StructureShape.new(name: 'DisableTopicRuleRequest')
+    DisconnectReason = Shapes::StringShape.new(name: 'DisconnectReason')
     DomainConfigurationArn = Shapes::StringShape.new(name: 'DomainConfigurationArn')
     DomainConfigurationName = Shapes::StringShape.new(name: 'DomainConfigurationName')
     DomainConfigurationStatus = Shapes::StringShape.new(name: 'DomainConfigurationStatus')
@@ -500,6 +514,13 @@ module Aws::IoT
     FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
     FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
     Flag = Shapes::BooleanShape.new(name: 'Flag')
+    FleetMetricArn = Shapes::StringShape.new(name: 'FleetMetricArn')
+    FleetMetricDescription = Shapes::StringShape.new(name: 'FleetMetricDescription')
+    FleetMetricName = Shapes::StringShape.new(name: 'FleetMetricName')
+    FleetMetricNameAndArn = Shapes::StructureShape.new(name: 'FleetMetricNameAndArn')
+    FleetMetricNameAndArnList = Shapes::ListShape.new(name: 'FleetMetricNameAndArnList')
+    FleetMetricPeriod = Shapes::IntegerShape.new(name: 'FleetMetricPeriod')
+    FleetMetricUnit = Shapes::StringShape.new(name: 'FleetMetricUnit')
     ForceDelete = Shapes::BooleanShape.new(name: 'ForceDelete')
     ForceDeleteAWSJob = Shapes::BooleanShape.new(name: 'ForceDeleteAWSJob')
     ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
@@ -509,6 +530,8 @@ module Aws::IoT
     GenericLongValue = Shapes::IntegerShape.new(name: 'GenericLongValue')
     GetBehaviorModelTrainingSummariesRequest = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesRequest')
     GetBehaviorModelTrainingSummariesResponse = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesResponse')
+    GetBucketsAggregationRequest = Shapes::StructureShape.new(name: 'GetBucketsAggregationRequest')
+    GetBucketsAggregationResponse = Shapes::StructureShape.new(name: 'GetBucketsAggregationResponse')
     GetCardinalityRequest = Shapes::StructureShape.new(name: 'GetCardinalityRequest')
     GetCardinalityResponse = Shapes::StructureShape.new(name: 'GetCardinalityResponse')
     GetEffectivePoliciesRequest = Shapes::StructureShape.new(name: 'GetEffectivePoliciesRequest')
@@ -652,6 +675,8 @@ module Aws::IoT
     ListDimensionsResponse = Shapes::StructureShape.new(name: 'ListDimensionsResponse')
     ListDomainConfigurationsRequest = Shapes::StructureShape.new(name: 'ListDomainConfigurationsRequest')
     ListDomainConfigurationsResponse = Shapes::StructureShape.new(name: 'ListDomainConfigurationsResponse')
+    ListFleetMetricsRequest = Shapes::StructureShape.new(name: 'ListFleetMetricsRequest')
+    ListFleetMetricsResponse = Shapes::StructureShape.new(name: 'ListFleetMetricsResponse')
     ListIndicesRequest = Shapes::StructureShape.new(name: 'ListIndicesRequest')
     ListIndicesResponse = Shapes::StructureShape.new(name: 'ListIndicesResponse')
     ListJobExecutionsForJobRequest = Shapes::StructureShape.new(name: 'ListJobExecutionsForJobRequest')
@@ -737,6 +762,7 @@ module Aws::IoT
     MachineLearningDetectionConfig = Shapes::StructureShape.new(name: 'MachineLearningDetectionConfig')
     MalformedPolicyException = Shapes::StructureShape.new(name: 'MalformedPolicyException')
     Marker = Shapes::StringShape.new(name: 'Marker')
+    MaxBuckets = Shapes::IntegerShape.new(name: 'MaxBuckets')
     MaxJobExecutionsPerMin = Shapes::IntegerShape.new(name: 'MaxJobExecutionsPerMin')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Maximum = Shapes::FloatShape.new(name: 'Maximum')
@@ -1040,6 +1066,7 @@ module Aws::IoT
     TemplateDescription = Shapes::StringShape.new(name: 'TemplateDescription')
     TemplateName = Shapes::StringShape.new(name: 'TemplateName')
     TemplateVersionId = Shapes::IntegerShape.new(name: 'TemplateVersionId')
+    TermsAggregation = Shapes::StructureShape.new(name: 'TermsAggregation')
     TestAuthorizationRequest = Shapes::StructureShape.new(name: 'TestAuthorizationRequest')
     TestAuthorizationResponse = Shapes::StructureShape.new(name: 'TestAuthorizationResponse')
     TestInvokeAuthorizerRequest = Shapes::StructureShape.new(name: 'TestInvokeAuthorizerRequest')
@@ -1145,6 +1172,7 @@ module Aws::IoT
     UpdateDynamicThingGroupResponse = Shapes::StructureShape.new(name: 'UpdateDynamicThingGroupResponse')
     UpdateEventConfigurationsRequest = Shapes::StructureShape.new(name: 'UpdateEventConfigurationsRequest')
     UpdateEventConfigurationsResponse = Shapes::StructureShape.new(name: 'UpdateEventConfigurationsResponse')
+    UpdateFleetMetricRequest = Shapes::StructureShape.new(name: 'UpdateFleetMetricRequest')
     UpdateIndexingConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateIndexingConfigurationRequest')
     UpdateIndexingConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateIndexingConfigurationResponse')
     UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
@@ -1277,6 +1305,12 @@ module Aws::IoT
 
     AdditionalParameterMap.key = Shapes::ShapeRef.new(shape: AttributeKey)
     AdditionalParameterMap.value = Shapes::ShapeRef.new(shape: Value)
+
+    AggregationType.add_member(:name, Shapes::ShapeRef.new(shape: AggregationTypeName, required: true, location_name: "name"))
+    AggregationType.add_member(:values, Shapes::ShapeRef.new(shape: AggregationTypeValues, location_name: "values"))
+    AggregationType.struct_class = Types::AggregationType
+
+    AggregationTypeValues.member = Shapes::ShapeRef.new(shape: AggregationTypeValue)
 
     AlertTarget.add_member(:alert_target_arn, Shapes::ShapeRef.new(shape: AlertTargetArn, required: true, location_name: "alertTargetArn"))
     AlertTarget.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
@@ -1539,6 +1573,15 @@ module Aws::IoT
     BillingGroupProperties.add_member(:billing_group_description, Shapes::ShapeRef.new(shape: BillingGroupDescription, location_name: "billingGroupDescription"))
     BillingGroupProperties.struct_class = Types::BillingGroupProperties
 
+    Bucket.add_member(:key_value, Shapes::ShapeRef.new(shape: BucketKeyValue, location_name: "keyValue"))
+    Bucket.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "count"))
+    Bucket.struct_class = Types::Bucket
+
+    Buckets.member = Shapes::ShapeRef.new(shape: Bucket)
+
+    BucketsAggregationType.add_member(:terms_aggregation, Shapes::ShapeRef.new(shape: TermsAggregation, location_name: "termsAggregation"))
+    BucketsAggregationType.struct_class = Types::BucketsAggregationType
+
     CACertificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     CACertificate.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "certificateId"))
     CACertificate.add_member(:status, Shapes::ShapeRef.new(shape: CACertificateStatus, location_name: "status"))
@@ -1779,6 +1822,22 @@ module Aws::IoT
     CreateDynamicThingGroupResponse.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "queryString"))
     CreateDynamicThingGroupResponse.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
     CreateDynamicThingGroupResponse.struct_class = Types::CreateDynamicThingGroupResponse
+
+    CreateFleetMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: FleetMetricName, required: true, location: "uri", location_name: "metricName"))
+    CreateFleetMetricRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
+    CreateFleetMetricRequest.add_member(:aggregation_type, Shapes::ShapeRef.new(shape: AggregationType, required: true, location_name: "aggregationType"))
+    CreateFleetMetricRequest.add_member(:period, Shapes::ShapeRef.new(shape: FleetMetricPeriod, required: true, location_name: "period"))
+    CreateFleetMetricRequest.add_member(:aggregation_field, Shapes::ShapeRef.new(shape: AggregationField, required: true, location_name: "aggregationField"))
+    CreateFleetMetricRequest.add_member(:description, Shapes::ShapeRef.new(shape: FleetMetricDescription, location_name: "description"))
+    CreateFleetMetricRequest.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
+    CreateFleetMetricRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    CreateFleetMetricRequest.add_member(:unit, Shapes::ShapeRef.new(shape: FleetMetricUnit, location_name: "unit"))
+    CreateFleetMetricRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateFleetMetricRequest.struct_class = Types::CreateFleetMetricRequest
+
+    CreateFleetMetricResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: FleetMetricName, location_name: "metricName"))
+    CreateFleetMetricResponse.add_member(:metric_arn, Shapes::ShapeRef.new(shape: FleetMetricArn, location_name: "metricArn"))
+    CreateFleetMetricResponse.struct_class = Types::CreateFleetMetricResponse
 
     CreateJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     CreateJobRequest.add_member(:targets, Shapes::ShapeRef.new(shape: JobTargets, required: true, location_name: "targets"))
@@ -2066,6 +2125,10 @@ module Aws::IoT
 
     DeleteDynamicThingGroupResponse.struct_class = Types::DeleteDynamicThingGroupResponse
 
+    DeleteFleetMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: FleetMetricName, required: true, location: "uri", location_name: "metricName"))
+    DeleteFleetMetricRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: OptionalVersion, location: "querystring", location_name: "expectedVersion"))
+    DeleteFleetMetricRequest.struct_class = Types::DeleteFleetMetricRequest
+
     DeleteJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     DeleteJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     DeleteJobExecutionRequest.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, required: true, location: "uri", location_name: "executionNumber"))
@@ -2311,6 +2374,24 @@ module Aws::IoT
     DescribeEventConfigurationsResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
     DescribeEventConfigurationsResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
     DescribeEventConfigurationsResponse.struct_class = Types::DescribeEventConfigurationsResponse
+
+    DescribeFleetMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: FleetMetricName, required: true, location: "uri", location_name: "metricName"))
+    DescribeFleetMetricRequest.struct_class = Types::DescribeFleetMetricRequest
+
+    DescribeFleetMetricResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: FleetMetricName, location_name: "metricName"))
+    DescribeFleetMetricResponse.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "queryString"))
+    DescribeFleetMetricResponse.add_member(:aggregation_type, Shapes::ShapeRef.new(shape: AggregationType, location_name: "aggregationType"))
+    DescribeFleetMetricResponse.add_member(:period, Shapes::ShapeRef.new(shape: FleetMetricPeriod, location_name: "period"))
+    DescribeFleetMetricResponse.add_member(:aggregation_field, Shapes::ShapeRef.new(shape: AggregationField, location_name: "aggregationField"))
+    DescribeFleetMetricResponse.add_member(:description, Shapes::ShapeRef.new(shape: FleetMetricDescription, location_name: "description"))
+    DescribeFleetMetricResponse.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
+    DescribeFleetMetricResponse.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    DescribeFleetMetricResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
+    DescribeFleetMetricResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
+    DescribeFleetMetricResponse.add_member(:unit, Shapes::ShapeRef.new(shape: FleetMetricUnit, location_name: "unit"))
+    DescribeFleetMetricResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    DescribeFleetMetricResponse.add_member(:metric_arn, Shapes::ShapeRef.new(shape: FleetMetricArn, location_name: "metricArn"))
+    DescribeFleetMetricResponse.struct_class = Types::DescribeFleetMetricResponse
 
     DescribeIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location: "uri", location_name: "indexName"))
     DescribeIndexRequest.struct_class = Types::DescribeIndexRequest
@@ -2630,6 +2711,12 @@ module Aws::IoT
     FirehoseAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     FirehoseAction.struct_class = Types::FirehoseAction
 
+    FleetMetricNameAndArn.add_member(:metric_name, Shapes::ShapeRef.new(shape: FleetMetricName, location_name: "metricName"))
+    FleetMetricNameAndArn.add_member(:metric_arn, Shapes::ShapeRef.new(shape: FleetMetricArn, location_name: "metricArn"))
+    FleetMetricNameAndArn.struct_class = Types::FleetMetricNameAndArn
+
+    FleetMetricNameAndArnList.member = Shapes::ShapeRef.new(shape: FleetMetricNameAndArn)
+
     GetBehaviorModelTrainingSummariesRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
     GetBehaviorModelTrainingSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TinyMaxResults, location: "querystring", location_name: "maxResults"))
     GetBehaviorModelTrainingSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -2638,6 +2725,17 @@ module Aws::IoT
     GetBehaviorModelTrainingSummariesResponse.add_member(:summaries, Shapes::ShapeRef.new(shape: BehaviorModelTrainingSummaries, location_name: "summaries"))
     GetBehaviorModelTrainingSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetBehaviorModelTrainingSummariesResponse.struct_class = Types::GetBehaviorModelTrainingSummariesResponse
+
+    GetBucketsAggregationRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    GetBucketsAggregationRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
+    GetBucketsAggregationRequest.add_member(:aggregation_field, Shapes::ShapeRef.new(shape: AggregationField, required: true, location_name: "aggregationField"))
+    GetBucketsAggregationRequest.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
+    GetBucketsAggregationRequest.add_member(:buckets_aggregation_type, Shapes::ShapeRef.new(shape: BucketsAggregationType, required: true, location_name: "bucketsAggregationType"))
+    GetBucketsAggregationRequest.struct_class = Types::GetBucketsAggregationRequest
+
+    GetBucketsAggregationResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: Count, location_name: "totalCount"))
+    GetBucketsAggregationResponse.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "buckets"))
+    GetBucketsAggregationResponse.struct_class = Types::GetBucketsAggregationResponse
 
     GetCardinalityRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
     GetCardinalityRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
@@ -3122,6 +3220,14 @@ module Aws::IoT
     ListDomainConfigurationsResponse.add_member(:domain_configurations, Shapes::ShapeRef.new(shape: DomainConfigurations, location_name: "domainConfigurations"))
     ListDomainConfigurationsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "nextMarker"))
     ListDomainConfigurationsResponse.struct_class = Types::ListDomainConfigurationsResponse
+
+    ListFleetMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListFleetMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListFleetMetricsRequest.struct_class = Types::ListFleetMetricsRequest
+
+    ListFleetMetricsResponse.add_member(:fleet_metrics, Shapes::ShapeRef.new(shape: FleetMetricNameAndArnList, location_name: "fleetMetrics"))
+    ListFleetMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFleetMetricsResponse.struct_class = Types::ListFleetMetricsResponse
 
     ListIndicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListIndicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryMaxResults, location: "querystring", location_name: "maxResults"))
@@ -4065,6 +4171,9 @@ module Aws::IoT
     TaskStatisticsForAuditCheck.add_member(:canceled_findings_count, Shapes::ShapeRef.new(shape: CanceledFindingsCount, location_name: "canceledFindingsCount"))
     TaskStatisticsForAuditCheck.struct_class = Types::TaskStatisticsForAuditCheck
 
+    TermsAggregation.add_member(:max_buckets, Shapes::ShapeRef.new(shape: MaxBuckets, location_name: "maxBuckets"))
+    TermsAggregation.struct_class = Types::TermsAggregation
+
     TestAuthorizationRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, location_name: "principal"))
     TestAuthorizationRequest.add_member(:cognito_identity_pool_id, Shapes::ShapeRef.new(shape: CognitoIdentityPoolId, location_name: "cognitoIdentityPoolId"))
     TestAuthorizationRequest.add_member(:auth_infos, Shapes::ShapeRef.new(shape: AuthInfos, required: true, location_name: "authInfos"))
@@ -4102,6 +4211,7 @@ module Aws::IoT
 
     ThingConnectivity.add_member(:connected, Shapes::ShapeRef.new(shape: Boolean, location_name: "connected"))
     ThingConnectivity.add_member(:timestamp, Shapes::ShapeRef.new(shape: ConnectivityTimestamp, location_name: "timestamp"))
+    ThingConnectivity.add_member(:disconnect_reason, Shapes::ShapeRef.new(shape: DisconnectReason, location_name: "disconnectReason"))
     ThingConnectivity.struct_class = Types::ThingConnectivity
 
     ThingDocument.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))
@@ -4379,6 +4489,18 @@ module Aws::IoT
     UpdateEventConfigurationsRequest.struct_class = Types::UpdateEventConfigurationsRequest
 
     UpdateEventConfigurationsResponse.struct_class = Types::UpdateEventConfigurationsResponse
+
+    UpdateFleetMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: FleetMetricName, required: true, location: "uri", location_name: "metricName"))
+    UpdateFleetMetricRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "queryString"))
+    UpdateFleetMetricRequest.add_member(:aggregation_type, Shapes::ShapeRef.new(shape: AggregationType, location_name: "aggregationType"))
+    UpdateFleetMetricRequest.add_member(:period, Shapes::ShapeRef.new(shape: FleetMetricPeriod, location_name: "period"))
+    UpdateFleetMetricRequest.add_member(:aggregation_field, Shapes::ShapeRef.new(shape: AggregationField, location_name: "aggregationField"))
+    UpdateFleetMetricRequest.add_member(:description, Shapes::ShapeRef.new(shape: FleetMetricDescription, location_name: "description"))
+    UpdateFleetMetricRequest.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
+    UpdateFleetMetricRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "indexName"))
+    UpdateFleetMetricRequest.add_member(:unit, Shapes::ShapeRef.new(shape: FleetMetricUnit, location_name: "unit"))
+    UpdateFleetMetricRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: OptionalVersion, location_name: "expectedVersion"))
+    UpdateFleetMetricRequest.struct_class = Types::UpdateFleetMetricRequest
 
     UpdateIndexingConfigurationRequest.add_member(:thing_indexing_configuration, Shapes::ShapeRef.new(shape: ThingIndexingConfiguration, location_name: "thingIndexingConfiguration"))
     UpdateIndexingConfigurationRequest.add_member(:thing_group_indexing_configuration, Shapes::ShapeRef.new(shape: ThingGroupIndexingConfiguration, location_name: "thingGroupIndexingConfiguration"))
@@ -4898,6 +5020,25 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_fleet_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFleetMetric"
+        o.http_method = "PUT"
+        o.http_request_uri = "/fleet-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateFleetMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFleetMetricResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAggregationException)
+        o.errors << Shapes::ShapeRef.new(shape: IndexNotReadyException)
+      end)
+
       api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateJob"
         o.http_method = "PUT"
@@ -5293,6 +5434,20 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: VersionConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_fleet_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFleetMetric"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/fleet-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFleetMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: VersionConflictException)
       end)
 
       api.add_operation(:delete_job, Seahorse::Model::Operation.new.tap do |o|
@@ -5777,6 +5932,20 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:describe_fleet_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFleetMetric"
+        o.http_method = "GET"
+        o.http_request_uri = "/fleet-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFleetMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFleetMetricResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_index, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIndex"
         o.http_method = "GET"
@@ -6067,6 +6236,23 @@ module Aws::IoT
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_buckets_aggregation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBucketsAggregation"
+        o.http_method = "POST"
+        o.http_request_uri = "/indices/buckets"
+        o.input = Shapes::ShapeRef.new(shape: GetBucketsAggregationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBucketsAggregationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAggregationException)
+        o.errors << Shapes::ShapeRef.new(shape: IndexNotReadyException)
       end)
 
       api.add_operation(:get_cardinality, Seahorse::Model::Operation.new.tap do |o|
@@ -6566,6 +6752,25 @@ module Aws::IoT
         )
       end)
 
+      api.add_operation(:list_fleet_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFleetMetrics"
+        o.http_method = "GET"
+        o.http_request_uri = "/fleet-metrics"
+        o.input = Shapes::ShapeRef.new(shape: ListFleetMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFleetMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_indices, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIndices"
         o.http_method = "GET"
@@ -6630,6 +6835,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -7694,6 +7905,24 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_fleet_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFleetMetric"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/fleet-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFleetMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidQueryException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAggregationException)
+        o.errors << Shapes::ShapeRef.new(shape: VersionConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: IndexNotReadyException)
       end)
 
       api.add_operation(:update_indexing_configuration, Seahorse::Model::Operation.new.tap do |o|
