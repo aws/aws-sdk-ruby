@@ -120,7 +120,7 @@ module Aws
     #       attr_reader :encryption_materials
     #
     #       def key_for(matdesc)
-    #         key_name = JSON.load(matdesc)['key']
+    #         key_name = JSON.parse(matdesc)['key']
     #         if key = @keys[key_name]
     #           key
     #         else

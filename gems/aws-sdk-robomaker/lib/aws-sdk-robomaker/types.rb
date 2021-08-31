@@ -1145,7 +1145,8 @@ module Aws::RoboMaker
     #
     #   Continue
     #
-    #   : Restart the simulation job in the same host instance.
+    #   : Leaves the instance running for its maximum timeout duration after
+    #     a `4XX` error code.
     #
     #   Fail
     #
@@ -3227,6 +3228,11 @@ module Aws::RoboMaker
     #   world.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] world_description_body
+    #   Returns the JSON formatted string that describes the contents of
+    #   your world.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldResponse AWS API Documentation
     #
     class DescribeWorldResponse < Struct.new(
@@ -3234,7 +3240,8 @@ module Aws::RoboMaker
       :generation_job,
       :template,
       :created_at,
-      :tags)
+      :tags,
+      :world_description_body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3287,6 +3294,10 @@ module Aws::RoboMaker
     #   world template.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] version
+    #   The version of the world template that you're using.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldTemplateResponse AWS API Documentation
     #
     class DescribeWorldTemplateResponse < Struct.new(
@@ -3295,7 +3306,8 @@ module Aws::RoboMaker
       :name,
       :created_at,
       :last_updated_at,
-      :tags)
+      :tags,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5237,7 +5249,8 @@ module Aws::RoboMaker
     #
     #   Continue
     #
-    #   : Restart the simulation job in the same host instance.
+    #   : Leaves the host running for its maximum timeout duration after a
+    #     `4XX` error code.
     #
     #   Fail
     #
@@ -5580,7 +5593,8 @@ module Aws::RoboMaker
     #
     #   Continue
     #
-    #   : Restart the simulation job in the same host instance.
+    #   : Leaves the host running for its maximum timeout duration after a
+    #     `4XX` error code.
     #
     #   Fail
     #
@@ -6282,13 +6296,18 @@ module Aws::RoboMaker
     #   The name of the template.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The version of the template that you're using.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/TemplateSummary AWS API Documentation
     #
     class TemplateSummary < Struct.new(
       :arn,
       :created_at,
       :last_updated_at,
-      :name)
+      :name,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end

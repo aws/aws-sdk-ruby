@@ -1663,6 +1663,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2388,6 +2389,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -2933,7 +2935,8 @@ module Aws::RDS
     #   Example: `mydbinstance`
     #
     # @option params [Integer] :allocated_storage
-    #   The amount of storage (in gibibytes) to allocate for the DB instance.
+    #   The amount of storage in gibibytes (GiB) to allocate for the DB
+    #   instance.
     #
     #   Type: Integer
     #
@@ -3699,8 +3702,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
     # @option params [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -3824,6 +3827,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -4397,8 +4401,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #
     # @option params [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -4497,6 +4501,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -5173,6 +5178,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -5796,6 +5802,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -6196,6 +6203,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -6651,6 +6659,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -7856,11 +7865,20 @@ module Aws::RDS
     #
     #   Supported filters:
     #
+    #   * `clone-group-id` - Accepts clone group identifiers. The results list
+    #     will only include information about the DB clusters associated with
+    #     these clone groups.
+    #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB clusters identified by these ARNs.
     #
-    #   ^
+    #   * `domain` - Accepts Active Directory directory IDs. The results list
+    #     will only include information about the DB clusters associated with
+    #     these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only include
+    #     information about the DB clusters for these engines.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -7932,6 +7950,7 @@ module Aws::RDS
     #   resp.db_clusters[0].db_cluster_parameter_group #=> String
     #   resp.db_clusters[0].db_subnet_group #=> String
     #   resp.db_clusters[0].status #=> String
+    #   resp.db_clusters[0].automatic_restart_time #=> Time
     #   resp.db_clusters[0].percent_progress #=> String
     #   resp.db_clusters[0].earliest_restorable_time #=> Time
     #   resp.db_clusters[0].endpoint #=> String
@@ -8435,6 +8454,7 @@ module Aws::RDS
     #   resp.db_instances[0].db_instance_class #=> String
     #   resp.db_instances[0].engine #=> String
     #   resp.db_instances[0].db_instance_status #=> String
+    #   resp.db_instances[0].automatic_restart_time #=> Time
     #   resp.db_instances[0].master_username #=> String
     #   resp.db_instances[0].db_name #=> String
     #   resp.db_instances[0].endpoint.address #=> String
@@ -9513,6 +9533,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].tag_list #=> Array
     #   resp.db_snapshots[0].tag_list[0].key #=> String
     #   resp.db_snapshots[0].tag_list[0].value #=> String
+    #   resp.db_snapshots[0].original_snapshot_create_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10233,15 +10254,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more global DB clusters to describe.
-    #
-    #   Supported filters:
-    #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     information about the DB clusters identified by these ARNs.
-    #
-    #   ^
+    #   This parameter isn't currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -11545,6 +11558,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -12429,6 +12443,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -12842,7 +12857,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [Integer] :allocated_storage
-    #   The new amount of storage (in gibibytes) to allocate for the DB
+    #   The new amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
     #
     #   For MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must be
@@ -13438,8 +13453,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
     # @option params [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -13612,6 +13627,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -14171,6 +14187,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -14814,6 +14831,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -14989,6 +15007,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -15232,6 +15251,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -16243,6 +16263,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -16646,6 +16667,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -17047,6 +17069,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -17607,6 +17630,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -18117,8 +18141,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
     # @option params [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -18197,6 +18221,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -18638,8 +18663,8 @@ module Aws::RDS
     #   The resource ID of the source DB instance from which to restore.
     #
     # @option params [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -18830,6 +18855,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -19166,6 +19192,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -19289,6 +19316,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -19733,6 +19761,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -19863,6 +19892,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -20075,7 +20105,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

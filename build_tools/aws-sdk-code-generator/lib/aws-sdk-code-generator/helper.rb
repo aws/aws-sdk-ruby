@@ -31,6 +31,15 @@ module AwsSdkCodeGenerator
       end.join('.')
     end
 
+    # convert a snake case to pascal case
+    def pascal_case(str)
+      str
+        .to_s
+        .split('_')
+        .collect(&:capitalize)
+        .join
+    end
+
     def structures
       Enumerator.new do |y|
         (@api['shapes'] || {}).each do |shape_name, shape|
@@ -167,7 +176,7 @@ module AwsSdkCodeGenerator
     end
 
     module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string, :apig_prefix,
-      :eventstream_output?, :eventstream_input?, :operation_eventstreaming?
+      :eventstream_output?, :eventstream_input?, :operation_eventstreaming?, :pascal_case
 
   end
 end

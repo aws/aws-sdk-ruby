@@ -27,7 +27,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "BatchAssociateProjectAssets":{
       "name":"BatchAssociateProjectAssets",
@@ -119,7 +119,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "CreateAssetModel":{
       "name":"CreateAssetModel",
@@ -139,7 +139,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "CreateDashboard":{
       "name":"CreateDashboard",
@@ -175,7 +175,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"LimitExceededException"}
       ],
-      "endpoint":{"hostPrefix":"edge."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "CreatePortal":{
       "name":"CreatePortal",
@@ -246,7 +246,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DeleteAssetModel":{
       "name":"DeleteAssetModel",
@@ -264,7 +264,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DeleteDashboard":{
       "name":"DeleteDashboard",
@@ -296,7 +296,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"edge."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DeletePortal":{
       "name":"DeletePortal",
@@ -364,7 +364,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DescribeAssetModel":{
       "name":"DescribeAssetModel",
@@ -380,7 +380,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DescribeAssetProperty":{
       "name":"DescribeAssetProperty",
@@ -396,7 +396,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DescribeDashboard":{
       "name":"DescribeDashboard",
@@ -427,7 +427,8 @@
         {"shape":"InvalidRequestException"},
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
-      ]
+      ],
+      "endpoint":{"hostPrefix":"api."}
     },
     "DescribeGateway":{
       "name":"DescribeGateway",
@@ -443,7 +444,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"edge."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DescribeGatewayCapabilityConfiguration":{
       "name":"DescribeGatewayCapabilityConfiguration",
@@ -459,7 +460,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"edge."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DescribeLoggingOptions":{
       "name":"DescribeLoggingOptions",
@@ -475,7 +476,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "DescribePortal":{
       "name":"DescribePortal",
@@ -526,7 +527,8 @@
         {"shape":"ThrottlingException"},
         {"shape":"LimitExceededException"},
         {"shape":"ConflictingOperationException"}
-      ]
+      ],
+      "endpoint":{"hostPrefix":"api."}
     },
     "DisassociateAssets":{
       "name":"DisassociateAssets",
@@ -542,7 +544,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "GetAssetPropertyAggregates":{
       "name":"GetAssetPropertyAggregates",
@@ -641,7 +643,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "ListAssetRelationships":{
       "name":"ListAssetRelationships",
@@ -657,7 +659,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "ListAssets":{
       "name":"ListAssets",
@@ -673,7 +675,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "ListAssociatedAssets":{
       "name":"ListAssociatedAssets",
@@ -689,7 +691,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "ListDashboards":{
       "name":"ListDashboards",
@@ -720,7 +722,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"edge."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "ListPortals":{
       "name":"ListPortals",
@@ -786,7 +788,8 @@
         {"shape":"ConflictingOperationException"},
         {"shape":"LimitExceededException"},
         {"shape":"UnauthorizedException"}
-      ]
+      ],
+      "endpoint":{"hostPrefix":"api."}
     },
     "PutDefaultEncryptionConfiguration":{
       "name":"PutDefaultEncryptionConfiguration",
@@ -802,7 +805,8 @@
         {"shape":"ThrottlingException"},
         {"shape":"LimitExceededException"},
         {"shape":"ConflictingOperationException"}
-      ]
+      ],
+      "endpoint":{"hostPrefix":"api."}
     },
     "PutLoggingOptions":{
       "name":"PutLoggingOptions",
@@ -819,7 +823,7 @@
         {"shape":"ConflictingOperationException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "PutStorageConfiguration":{
       "name":"PutStorageConfiguration",
@@ -837,7 +841,8 @@
         {"shape":"ThrottlingException"},
         {"shape":"LimitExceededException"},
         {"shape":"ConflictingOperationException"}
-      ]
+      ],
+      "endpoint":{"hostPrefix":"api."}
     },
     "TagResource":{
       "name":"TagResource",
@@ -856,7 +861,8 @@
         {"shape":"LimitExceededException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyTagsException"}
-      ]
+      ],
+      "endpoint":{"hostPrefix":"api."}
     },
     "UntagResource":{
       "name":"UntagResource",
@@ -874,7 +880,8 @@
         {"shape":"ConflictingOperationException"},
         {"shape":"LimitExceededException"},
         {"shape":"UnauthorizedException"}
-      ]
+      ],
+      "endpoint":{"hostPrefix":"api."}
     },
     "UpdateAccessPolicy":{
       "name":"UpdateAccessPolicy",
@@ -910,7 +917,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "UpdateAssetModel":{
       "name":"UpdateAssetModel",
@@ -930,7 +937,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "UpdateAssetProperty":{
       "name":"UpdateAssetProperty",
@@ -946,7 +953,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ConflictingOperationException"}
       ],
-      "endpoint":{"hostPrefix":"model."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "UpdateDashboard":{
       "name":"UpdateDashboard",
@@ -979,7 +986,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"}
       ],
-      "endpoint":{"hostPrefix":"edge."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "UpdateGatewayCapabilityConfiguration":{
       "name":"UpdateGatewayCapabilityConfiguration",
@@ -998,7 +1005,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"LimitExceededException"}
       ],
-      "endpoint":{"hostPrefix":"edge."}
+      "endpoint":{"hostPrefix":"api."}
     },
     "UpdatePortal":{
       "name":"UpdatePortal",
@@ -1631,7 +1638,8 @@
       "enum":[
         "IN_SYNC",
         "OUT_OF_SYNC",
-        "SYNC_FAILED"
+        "SYNC_FAILED",
+        "UNKNOWN"
       ]
     },
     "ClientToken":{
@@ -1652,6 +1660,13 @@
         "type":{"shape":"Name"},
         "assetProperty":{"shape":"Property"}
       }
+    },
+    "ComputeLocation":{
+      "type":"string",
+      "enum":[
+        "EDGE",
+        "CLOUD"
+      ]
     },
     "ConfigurationErrorDetails":{
       "type":"structure",
@@ -1694,6 +1709,11 @@
       },
       "error":{"httpStatusCode":409},
       "exception":true
+    },
+    "CoreDeviceThingName":{
+      "type":"string",
+      "max":128,
+      "min":1
     },
     "CreateAccessPolicyRequest":{
       "type":"structure",
@@ -2457,6 +2477,29 @@
       "min":1,
       "pattern":"[^\\u0000-\\u001F\\u007F]+"
     },
+    "DetailedError":{
+      "type":"structure",
+      "required":[
+        "code",
+        "message"
+      ],
+      "members":{
+        "code":{"shape":"DetailedErrorCode"},
+        "message":{"shape":"DetailedErrorMessage"}
+      }
+    },
+    "DetailedErrorCode":{
+      "type":"string",
+      "enum":[
+        "INCOMPATIBLE_COMPUTE_LOCATION",
+        "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+      ]
+    },
+    "DetailedErrorMessage":{"type":"string"},
+    "DetailedErrors":{
+      "type":"list",
+      "member":{"shape":"DetailedError"}
+    },
     "DisassociateAssetsRequest":{
       "type":"structure",
       "required":[
@@ -2512,7 +2555,8 @@
       ],
       "members":{
         "code":{"shape":"ErrorCode"},
-        "message":{"shape":"ErrorMessage"}
+        "message":{"shape":"ErrorMessage"},
+        "details":{"shape":"DetailedErrors"}
       }
     },
     "ErrorMessage":{"type":"string"},
@@ -2537,6 +2581,20 @@
       "type":"list",
       "member":{"shape":"ExpressionVariable"}
     },
+    "ForwardingConfig":{
+      "type":"structure",
+      "required":["state"],
+      "members":{
+        "state":{"shape":"ForwardingConfigState"}
+      }
+    },
+    "ForwardingConfigState":{
+      "type":"string",
+      "enum":[
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
     "GatewayCapabilitySummaries":{
       "type":"list",
       "member":{"shape":"GatewayCapabilitySummary"}
@@ -2554,9 +2612,9 @@
     },
     "GatewayPlatform":{
       "type":"structure",
-      "required":["greengrass"],
       "members":{
-        "greengrass":{"shape":"Greengrass"}
+        "greengrass":{"shape":"Greengrass"},
+        "greengrassV2":{"shape":"GreengrassV2"}
       }
     },
     "GatewaySummaries":{
@@ -2574,6 +2632,7 @@
       "members":{
         "gatewayId":{"shape":"ID"},
         "gatewayName":{"shape":"Name"},
+        "gatewayPlatform":{"shape":"GatewayPlatform"},
         "gatewayCapabilitySummaries":{"shape":"GatewayCapabilitySummaries"},
         "creationDate":{"shape":"Timestamp"},
         "lastUpdateDate":{"shape":"Timestamp"}
@@ -2806,6 +2865,11 @@
           "shape":"InterpolationType",
           "location":"querystring",
           "locationName":"type"
+        },
+        "intervalWindowInSeconds":{
+          "shape":"IntervalWindowInSeconds",
+          "location":"querystring",
+          "locationName":"intervalWindowInSeconds"
         }
       }
     },
@@ -2822,6 +2886,13 @@
       "required":["groupArn"],
       "members":{
         "groupArn":{"shape":"ARN"}
+      }
+    },
+    "GreengrassV2":{
+      "type":"structure",
+      "required":["coreDeviceThingName"],
+      "members":{
+        "coreDeviceThingName":{"shape":"CoreDeviceThingName"}
       }
     },
     "GroupIdentity":{
@@ -2950,11 +3021,15 @@
     },
     "Interval":{
       "type":"string",
-      "max":3,
-      "min":2,
-      "pattern":"1w|1d|1h|15m|5m|1m"
+      "max":23,
+      "min":2
     },
     "IntervalInSeconds":{
+      "type":"long",
+      "max":320000000,
+      "min":1
+    },
+    "IntervalWindowInSeconds":{
       "type":"long",
       "max":320000000,
       "min":1
@@ -3351,6 +3426,14 @@
     "Measurement":{
       "type":"structure",
       "members":{
+        "processingConfig":{"shape":"MeasurementProcessingConfig"}
+      }
+    },
+    "MeasurementProcessingConfig":{
+      "type":"structure",
+      "required":["forwardingConfig"],
+      "members":{
+        "forwardingConfig":{"shape":"ForwardingConfig"}
       }
     },
     "Metric":{
@@ -3363,7 +3446,15 @@
       "members":{
         "expression":{"shape":"Expression"},
         "variables":{"shape":"ExpressionVariables"},
-        "window":{"shape":"MetricWindow"}
+        "window":{"shape":"MetricWindow"},
+        "processingConfig":{"shape":"MetricProcessingConfig"}
+      }
+    },
+    "MetricProcessingConfig":{
+      "type":"structure",
+      "required":["computeLocation"],
+      "members":{
+        "computeLocation":{"shape":"ComputeLocation"}
       }
     },
     "MetricWindow":{
@@ -3406,6 +3497,11 @@
       "max":4096,
       "min":1,
       "pattern":"[A-Za-z0-9+/=]+"
+    },
+    "Offset":{
+      "type":"string",
+      "max":25,
+      "min":2
     },
     "OffsetInNanos":{
       "type":"integer",
@@ -3818,7 +3914,16 @@
       ],
       "members":{
         "expression":{"shape":"Expression"},
-        "variables":{"shape":"ExpressionVariables"}
+        "variables":{"shape":"ExpressionVariables"},
+        "processingConfig":{"shape":"TransformProcessingConfig"}
+      }
+    },
+    "TransformProcessingConfig":{
+      "type":"structure",
+      "required":["computeLocation"],
+      "members":{
+        "computeLocation":{"shape":"ComputeLocation"},
+        "forwardingConfig":{"shape":"ForwardingConfig"}
       }
     },
     "TraversalDirection":{
@@ -3836,7 +3941,8 @@
       "type":"structure",
       "required":["interval"],
       "members":{
-        "interval":{"shape":"Interval"}
+        "interval":{"shape":"Interval"},
+        "offset":{"shape":"Offset"}
       }
     },
     "UnauthorizedException":{

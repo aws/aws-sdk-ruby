@@ -368,7 +368,7 @@ module Aws::CloudFront
     #     alias: "string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateAlias2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/AssociateAlias AWS API Documentation
     #
     # @overload associate_alias(params = {})
     # @param [Hash] params ({})
@@ -477,7 +477,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCachePolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCachePolicy AWS API Documentation
     #
     # @overload create_cache_policy(params = {})
     # @param [Hash] params ({})
@@ -524,7 +524,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCloudFrontOriginAccessIdentity AWS API Documentation
     #
     # @overload create_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1001,7 +1001,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistribution AWS API Documentation
     #
     # @overload create_distribution(params = {})
     # @param [Hash] params ({})
@@ -1470,7 +1470,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionWithTags2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionWithTags AWS API Documentation
     #
     # @overload create_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -1544,7 +1544,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionConfig AWS API Documentation
     #
     # @overload create_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -1604,7 +1604,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionProfile AWS API Documentation
     #
     # @overload create_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -1674,7 +1674,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunction2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunction AWS API Documentation
     #
     # @overload create_function(params = {})
     # @param [Hash] params ({})
@@ -1720,7 +1720,7 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidation2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateInvalidation AWS API Documentation
     #
     # @overload create_invalidation(params = {})
     # @param [Hash] params ({})
@@ -1777,7 +1777,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyGroup2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyGroup AWS API Documentation
     #
     # @overload create_key_group(params = {})
     # @param [Hash] params ({})
@@ -1823,7 +1823,7 @@ module Aws::CloudFront
     #
     #   resp.monitoring_subscription.realtime_metrics_subscription_config.realtime_metrics_subscription_status #=> String, one of "Enabled", "Disabled"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateMonitoringSubscription2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateMonitoringSubscription AWS API Documentation
     #
     # @overload create_monitoring_subscription(params = {})
     # @param [Hash] params ({})
@@ -1922,7 +1922,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginRequestPolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateOriginRequestPolicy AWS API Documentation
     #
     # @overload create_origin_request_policy(params = {})
     # @param [Hash] params ({})
@@ -1970,7 +1970,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreatePublicKey2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreatePublicKey AWS API Documentation
     #
     # @overload create_public_key(params = {})
     # @param [Hash] params ({})
@@ -2048,7 +2048,7 @@ module Aws::CloudFront
     #   resp.realtime_log_config.fields #=> Array
     #   resp.realtime_log_config.fields[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateRealtimeLogConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateRealtimeLogConfig AWS API Documentation
     #
     # @overload create_realtime_log_config(params = {})
     # @param [Hash] params ({})
@@ -2137,7 +2137,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistribution AWS API Documentation
     #
     # @overload create_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -2236,7 +2236,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionWithTags2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionWithTags AWS API Documentation
     #
     # @overload create_streaming_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -2273,7 +2273,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCachePolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCachePolicy AWS API Documentation
     #
     # @overload delete_cache_policy(params = {})
     # @param [Hash] params ({})
@@ -2300,7 +2300,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCloudFrontOriginAccessIdentity AWS API Documentation
     #
     # @overload delete_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -2327,7 +2327,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistribution AWS API Documentation
     #
     # @overload delete_distribution(params = {})
     # @param [Hash] params ({})
@@ -2354,7 +2354,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionConfig AWS API Documentation
     #
     # @overload delete_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -2381,7 +2381,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionProfile AWS API Documentation
     #
     # @overload delete_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -2416,7 +2416,7 @@ module Aws::CloudFront
     #     if_match: "string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFunction2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFunction AWS API Documentation
     #
     # @overload delete_function(params = {})
     # @param [Hash] params ({})
@@ -2453,7 +2453,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyGroup2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyGroup AWS API Documentation
     #
     # @overload delete_key_group(params = {})
     # @param [Hash] params ({})
@@ -2476,7 +2476,7 @@ module Aws::CloudFront
     #     distribution_id: "string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteMonitoringSubscription2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteMonitoringSubscription AWS API Documentation
     #
     # @overload delete_monitoring_subscription(params = {})
     # @param [Hash] params ({})
@@ -2516,7 +2516,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteOriginRequestPolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteOriginRequestPolicy AWS API Documentation
     #
     # @overload delete_origin_request_policy(params = {})
     # @param [Hash] params ({})
@@ -2543,7 +2543,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeletePublicKey2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeletePublicKey AWS API Documentation
     #
     # @overload delete_public_key(params = {})
     # @param [Hash] params ({})
@@ -2580,7 +2580,7 @@ module Aws::CloudFront
     #     arn: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteRealtimeLogConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteRealtimeLogConfig AWS API Documentation
     #
     # @overload delete_realtime_log_config(params = {})
     # @param [Hash] params ({})
@@ -2650,7 +2650,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteStreamingDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteStreamingDistribution AWS API Documentation
     #
     # @overload delete_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -2697,7 +2697,7 @@ module Aws::CloudFront
     #   resp.function_summary.function_metadata.last_modified_time #=> Time
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunction2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeFunction AWS API Documentation
     #
     # @overload describe_function(params = {})
     # @param [Hash] params ({})
@@ -2761,7 +2761,7 @@ module Aws::CloudFront
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicy AWS API Documentation
     #
     # @overload get_cache_policy(params = {})
     # @param [Hash] params ({})
@@ -2820,7 +2820,7 @@ module Aws::CloudFront
     #   resp.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicyConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCachePolicyConfig AWS API Documentation
     #
     # @overload get_cache_policy_config(params = {})
     # @param [Hash] params ({})
@@ -2853,7 +2853,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentity AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -2884,7 +2884,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityConfig AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity_config(params = {})
     # @param [Hash] params ({})
@@ -3098,7 +3098,7 @@ module Aws::CloudFront
     #
     #   * distribution_deployed
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistribution AWS API Documentation
     #
     # @overload get_distribution(params = {})
     # @param [Hash] params ({})
@@ -3284,7 +3284,7 @@ module Aws::CloudFront
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfig AWS API Documentation
     #
     # @overload get_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -3329,7 +3329,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryption2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryption AWS API Documentation
     #
     # @overload get_field_level_encryption(params = {})
     # @param [Hash] params ({})
@@ -3372,7 +3372,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionConfig AWS API Documentation
     #
     # @overload get_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -3413,7 +3413,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfile AWS API Documentation
     #
     # @overload get_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -3453,7 +3453,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfileConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryptionProfileConfig AWS API Documentation
     #
     # @overload get_field_level_encryption_profile_config(params = {})
     # @param [Hash] params ({})
@@ -3493,7 +3493,7 @@ module Aws::CloudFront
     #   resp.etag #=> String
     #   resp.content_type #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunction2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFunction AWS API Documentation
     #
     # @overload get_function(params = {})
     # @param [Hash] params ({})
@@ -3537,7 +3537,7 @@ module Aws::CloudFront
     #
     #   * invalidation_completed
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidation2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidation AWS API Documentation
     #
     # @overload get_invalidation(params = {})
     # @param [Hash] params ({})
@@ -3580,7 +3580,7 @@ module Aws::CloudFront
     #   resp.key_group.key_group_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroup2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroup AWS API Documentation
     #
     # @overload get_key_group(params = {})
     # @param [Hash] params ({})
@@ -3621,7 +3621,7 @@ module Aws::CloudFront
     #   resp.key_group_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroupConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroupConfig AWS API Documentation
     #
     # @overload get_key_group_config(params = {})
     # @param [Hash] params ({})
@@ -3651,7 +3651,7 @@ module Aws::CloudFront
     #
     #   resp.monitoring_subscription.realtime_metrics_subscription_config.realtime_metrics_subscription_status #=> String, one of "Enabled", "Disabled"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetMonitoringSubscription2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetMonitoringSubscription AWS API Documentation
     #
     # @overload get_monitoring_subscription(params = {})
     # @param [Hash] params ({})
@@ -3712,7 +3712,7 @@ module Aws::CloudFront
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicy AWS API Documentation
     #
     # @overload get_origin_request_policy(params = {})
     # @param [Hash] params ({})
@@ -3767,7 +3767,7 @@ module Aws::CloudFront
     #   resp.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicyConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginRequestPolicyConfig AWS API Documentation
     #
     # @overload get_origin_request_policy_config(params = {})
     # @param [Hash] params ({})
@@ -3802,7 +3802,7 @@ module Aws::CloudFront
     #   resp.public_key.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKey2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKey AWS API Documentation
     #
     # @overload get_public_key(params = {})
     # @param [Hash] params ({})
@@ -3835,7 +3835,7 @@ module Aws::CloudFront
     #   resp.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfig AWS API Documentation
     #
     # @overload get_public_key_config(params = {})
     # @param [Hash] params ({})
@@ -3881,7 +3881,7 @@ module Aws::CloudFront
     #   resp.realtime_log_config.fields #=> Array
     #   resp.realtime_log_config.fields[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetRealtimeLogConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetRealtimeLogConfig AWS API Documentation
     #
     # @overload get_realtime_log_config(params = {})
     # @param [Hash] params ({})
@@ -3944,7 +3944,7 @@ module Aws::CloudFront
     #
     #   * streaming_distribution_deployed
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistribution AWS API Documentation
     #
     # @overload get_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -3989,7 +3989,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionConfig AWS API Documentation
     #
     # @overload get_streaming_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -4071,7 +4071,7 @@ module Aws::CloudFront
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items #=> Array
     #   resp.cache_policy_list.items[0].cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCachePolicies2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCachePolicies AWS API Documentation
     #
     # @overload list_cache_policies(params = {})
     # @param [Hash] params ({})
@@ -4119,7 +4119,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_list.items[0].s3_canonical_user_id #=> String
     #   resp.cloud_front_origin_access_identity_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCloudFrontOriginAccessIdentities2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCloudFrontOriginAccessIdentities AWS API Documentation
     #
     # @overload list_cloud_front_origin_access_identities(params = {})
     # @param [Hash] params ({})
@@ -4204,7 +4204,7 @@ module Aws::CloudFront
     #   resp.conflicting_aliases_list.items[0].distribution_id #=> String
     #   resp.conflicting_aliases_list.items[0].account_id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConflictingAliases2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListConflictingAliases AWS API Documentation
     #
     # @overload list_conflicting_aliases(params = {})
     # @param [Hash] params ({})
@@ -4405,7 +4405,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributions2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributions AWS API Documentation
     #
     # @overload list_distributions(params = {})
     # @param [Hash] params ({})
@@ -4460,7 +4460,7 @@ module Aws::CloudFront
     #   resp.distribution_id_list.items #=> Array
     #   resp.distribution_id_list.items[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByCachePolicyId2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByCachePolicyId AWS API Documentation
     #
     # @overload list_distributions_by_cache_policy_id(params = {})
     # @param [Hash] params ({})
@@ -4515,7 +4515,7 @@ module Aws::CloudFront
     #   resp.distribution_id_list.items #=> Array
     #   resp.distribution_id_list.items[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByKeyGroup2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByKeyGroup AWS API Documentation
     #
     # @overload list_distributions_by_key_group(params = {})
     # @param [Hash] params ({})
@@ -4570,7 +4570,7 @@ module Aws::CloudFront
     #   resp.distribution_id_list.items #=> Array
     #   resp.distribution_id_list.items[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByOriginRequestPolicyId2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByOriginRequestPolicyId AWS API Documentation
     #
     # @overload list_distributions_by_origin_request_policy_id(params = {})
     # @param [Hash] params ({})
@@ -4792,7 +4792,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByRealtimeLogConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByRealtimeLogConfig AWS API Documentation
     #
     # @overload list_distributions_by_realtime_log_config(params = {})
     # @param [Hash] params ({})
@@ -5000,7 +5000,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
     #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLId2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLId AWS API Documentation
     #
     # @overload list_distributions_by_web_acl_id(params = {})
     # @param [Hash] params ({})
@@ -5056,7 +5056,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
     #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionConfigs2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionConfigs AWS API Documentation
     #
     # @overload list_field_level_encryption_configs(params = {})
     # @param [Hash] params ({})
@@ -5108,7 +5108,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.field_level_encryption_profile_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionProfiles2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionProfiles AWS API Documentation
     #
     # @overload list_field_level_encryption_profiles(params = {})
     # @param [Hash] params ({})
@@ -5170,7 +5170,7 @@ module Aws::CloudFront
     #   resp.function_list.items[0].function_metadata.created_time #=> Time
     #   resp.function_list.items[0].function_metadata.last_modified_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFunctions2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFunctions AWS API Documentation
     #
     # @overload list_functions(params = {})
     # @param [Hash] params ({})
@@ -5224,7 +5224,7 @@ module Aws::CloudFront
     #   resp.invalidation_list.items[0].create_time #=> Time
     #   resp.invalidation_list.items[0].status #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidations2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidations AWS API Documentation
     #
     # @overload list_invalidations(params = {})
     # @param [Hash] params ({})
@@ -5276,7 +5276,7 @@ module Aws::CloudFront
     #   resp.key_group_list.items[0].key_group.key_group_config.items[0] #=> String
     #   resp.key_group_list.items[0].key_group.key_group_config.comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyGroups2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyGroups AWS API Documentation
     #
     # @overload list_key_groups(params = {})
     # @param [Hash] params ({})
@@ -5354,7 +5354,7 @@ module Aws::CloudFront
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items #=> Array
     #   resp.origin_request_policy_list.items[0].origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginRequestPolicies2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginRequestPolicies AWS API Documentation
     #
     # @overload list_origin_request_policies(params = {})
     # @param [Hash] params ({})
@@ -5399,7 +5399,7 @@ module Aws::CloudFront
     #   resp.public_key_list.items[0].encoded_key #=> String
     #   resp.public_key_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListPublicKeys2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListPublicKeys AWS API Documentation
     #
     # @overload list_public_keys(params = {})
     # @param [Hash] params ({})
@@ -5456,7 +5456,7 @@ module Aws::CloudFront
     #   resp.realtime_log_configs.marker #=> String
     #   resp.realtime_log_configs.next_marker #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListRealtimeLogConfigs2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListRealtimeLogConfigs AWS API Documentation
     #
     # @overload list_realtime_log_configs(params = {})
     # @param [Hash] params ({})
@@ -5512,7 +5512,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListStreamingDistributions2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListStreamingDistributions AWS API Documentation
     #
     # @overload list_streaming_distributions(params = {})
     # @param [Hash] params ({})
@@ -5542,7 +5542,7 @@ module Aws::CloudFront
     #   resp.tags.items[0].key #=> String
     #   resp.tags.items[0].value #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTagsForResource2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -5593,7 +5593,7 @@ module Aws::CloudFront
     #   resp.function_summary.function_metadata.created_time #=> Time
     #   resp.function_summary.function_metadata.last_modified_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishFunction2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/PublishFunction AWS API Documentation
     #
     # @overload publish_function(params = {})
     # @param [Hash] params ({})
@@ -5626,7 +5626,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TagResource2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TagResource AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -5703,7 +5703,7 @@ module Aws::CloudFront
     #   resp.test_result.function_error_message #=> String
     #   resp.test_result.function_output #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunction2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TestFunction AWS API Documentation
     #
     # @overload test_function(params = {})
     # @param [Hash] params ({})
@@ -5731,7 +5731,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UntagResource2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -5838,7 +5838,7 @@ module Aws::CloudFront
     #   resp.cache_policy.cache_policy_config.parameters_in_cache_key_and_forwarded_to_origin.query_strings_config.query_strings.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCachePolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCachePolicy AWS API Documentation
     #
     # @overload update_cache_policy(params = {})
     # @param [Hash] params ({})
@@ -5883,7 +5883,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCloudFrontOriginAccessIdentity2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCloudFrontOriginAccessIdentity AWS API Documentation
     #
     # @overload update_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -6424,7 +6424,7 @@ module Aws::CloudFront
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistribution AWS API Documentation
     #
     # @overload update_distribution(params = {})
     # @param [Hash] params ({})
@@ -6505,7 +6505,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionConfig AWS API Documentation
     #
     # @overload update_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -6572,7 +6572,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionProfile2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionProfile AWS API Documentation
     #
     # @overload update_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -6638,7 +6638,7 @@ module Aws::CloudFront
     #   resp.function_summary.function_metadata.last_modified_time #=> Time
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFunction2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFunction AWS API Documentation
     #
     # @overload update_function(params = {})
     # @param [Hash] params ({})
@@ -6699,7 +6699,7 @@ module Aws::CloudFront
     #   resp.key_group.key_group_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyGroup2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyGroup AWS API Documentation
     #
     # @overload update_key_group(params = {})
     # @param [Hash] params ({})
@@ -6796,7 +6796,7 @@ module Aws::CloudFront
     #   resp.origin_request_policy.origin_request_policy_config.query_strings_config.query_strings.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginRequestPolicy2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginRequestPolicy AWS API Documentation
     #
     # @overload update_origin_request_policy(params = {})
     # @param [Hash] params ({})
@@ -6846,7 +6846,7 @@ module Aws::CloudFront
     #   resp.public_key.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdatePublicKey2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdatePublicKey AWS API Documentation
     #
     # @overload update_public_key(params = {})
     # @param [Hash] params ({})
@@ -6934,7 +6934,7 @@ module Aws::CloudFront
     #   resp.realtime_log_config.fields #=> Array
     #   resp.realtime_log_config.fields[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateRealtimeLogConfig2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateRealtimeLogConfig AWS API Documentation
     #
     # @overload update_realtime_log_config(params = {})
     # @param [Hash] params ({})
@@ -7024,7 +7024,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateStreamingDistribution2020_05_31 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateStreamingDistribution AWS API Documentation
     #
     # @overload update_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -7046,7 +7046,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -441,6 +441,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].artifacts.override_artifact_name #=> Boolean
     #   resp.build_batches[0].artifacts.encryption_disabled #=> Boolean
     #   resp.build_batches[0].artifacts.artifact_identifier #=> String
+    #   resp.build_batches[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].secondary_artifacts #=> Array
     #   resp.build_batches[0].secondary_artifacts[0].location #=> String
     #   resp.build_batches[0].secondary_artifacts[0].sha256sum #=> String
@@ -448,6 +449,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batches[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batches[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batches[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batches[0].cache.location #=> String
     #   resp.build_batches[0].cache.modes #=> Array
@@ -471,6 +473,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batches[0].log_config.s3_logs.location #=> String
     #   resp.build_batches[0].log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batches[0].log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batches[0].build_timeout_in_minutes #=> Integer
     #   resp.build_batches[0].queued_timeout_in_minutes #=> Integer
     #   resp.build_batches[0].complete #=> Boolean
@@ -543,259 +546,6 @@ module Aws::CodeBuild
     #   * {Types::BatchGetBuildsOutput#builds #builds} => Array&lt;Types::Build&gt;
     #   * {Types::BatchGetBuildsOutput#builds_not_found #builds_not_found} => Array&lt;String&gt;
     #
-    #
-    # @example Example: To get information about builds
-    #
-    #   # The following example gets information about builds with the specified build IDs.
-    #
-    #   resp = client.batch_get_builds({
-    #     ids: [
-    #       "codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
-    #       "codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX", 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     builds: [
-    #       {
-    #         arn: "arn:aws:codebuild:us-east-1:123456789012:build/codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
-    #         artifacts: {
-    #           location: "arn:aws:s3:::codebuild-123456789012-output-bucket/codebuild-demo-project", 
-    #         }, 
-    #         build_complete: true, 
-    #         build_status: "SUCCEEDED", 
-    #         current_phase: "COMPLETED", 
-    #         end_time: Time.parse(1479832474.764), 
-    #         environment: {
-    #           type: "LINUX_CONTAINER", 
-    #           compute_type: "BUILD_GENERAL1_SMALL", 
-    #           environment_variables: [
-    #           ], 
-    #           image: "aws/codebuild/java:openjdk-8", 
-    #           privileged_mode: false, 
-    #         }, 
-    #         id: "codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
-    #         initiator: "MyDemoUser", 
-    #         logs: {
-    #           deep_link: "https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEvent:group=/aws/codebuild/codebuild-demo-project;stream=9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
-    #           group_name: "/aws/codebuild/codebuild-demo-project", 
-    #           stream_name: "9b0ac37f-d19e-4254-9079-f47e9a389eEX", 
-    #         }, 
-    #         phases: [
-    #           {
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479832342.23), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "SUBMITTED", 
-    #             start_time: Time.parse(1479832341.854), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 72, 
-    #             end_time: Time.parse(1479832415.064), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "PROVISIONING", 
-    #             start_time: Time.parse(1479832342.23), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 46, 
-    #             end_time: Time.parse(1479832461.261), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "DOWNLOAD_SOURCE", 
-    #             start_time: Time.parse(1479832415.064), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479832461.354), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "INSTALL", 
-    #             start_time: Time.parse(1479832461.261), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479832461.448), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "PRE_BUILD", 
-    #             start_time: Time.parse(1479832461.354), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 9, 
-    #             end_time: Time.parse(1479832471.115), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "BUILD", 
-    #             start_time: Time.parse(1479832461.448), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479832471.224), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "POST_BUILD", 
-    #             start_time: Time.parse(1479832471.115), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479832471.791), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "UPLOAD_ARTIFACTS", 
-    #             start_time: Time.parse(1479832471.224), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 2, 
-    #             end_time: Time.parse(1479832474.764), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "FINALIZING", 
-    #             start_time: Time.parse(1479832471.791), 
-    #           }, 
-    #           {
-    #             phase_type: "COMPLETED", 
-    #             start_time: Time.parse(1479832474.764), 
-    #           }, 
-    #         ], 
-    #         project_name: "codebuild-demo-project", 
-    #         source: {
-    #           type: "S3", 
-    #           buildspec: "", 
-    #           location: "arn:aws:s3:::codebuild-123456789012-input-bucket/MessageUtil.zip", 
-    #         }, 
-    #         start_time: Time.parse(1479832341.854), 
-    #         timeout_in_minutes: 60, 
-    #       }, 
-    #       {
-    #         arn: "arn:aws:codebuild:us-east-1:123456789012:build/codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX", 
-    #         artifacts: {
-    #           location: "arn:aws:s3:::codebuild-123456789012-output-bucket/codebuild-demo-project", 
-    #         }, 
-    #         build_complete: true, 
-    #         build_status: "SUCCEEDED", 
-    #         current_phase: "COMPLETED", 
-    #         end_time: Time.parse(1479401214.239), 
-    #         environment: {
-    #           type: "LINUX_CONTAINER", 
-    #           compute_type: "BUILD_GENERAL1_SMALL", 
-    #           environment_variables: [
-    #           ], 
-    #           image: "aws/codebuild/java:openjdk-8", 
-    #           privileged_mode: false, 
-    #         }, 
-    #         id: "codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX", 
-    #         initiator: "MyDemoUser", 
-    #         logs: {
-    #           deep_link: "https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#logEvent:group=/aws/codebuild/codebuild-demo-project;stream=b79a46f7-1473-4636-a23f-da9c45c208EX", 
-    #           group_name: "/aws/codebuild/codebuild-demo-project", 
-    #           stream_name: "b79a46f7-1473-4636-a23f-da9c45c208EX", 
-    #         }, 
-    #         phases: [
-    #           {
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479401082.342), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "SUBMITTED", 
-    #             start_time: Time.parse(1479401081.869), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 71, 
-    #             end_time: Time.parse(1479401154.129), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "PROVISIONING", 
-    #             start_time: Time.parse(1479401082.342), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 45, 
-    #             end_time: Time.parse(1479401199.136), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "DOWNLOAD_SOURCE", 
-    #             start_time: Time.parse(1479401154.129), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479401199.236), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "INSTALL", 
-    #             start_time: Time.parse(1479401199.136), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479401199.345), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "PRE_BUILD", 
-    #             start_time: Time.parse(1479401199.236), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 9, 
-    #             end_time: Time.parse(1479401208.68), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "BUILD", 
-    #             start_time: Time.parse(1479401199.345), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479401208.783), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "POST_BUILD", 
-    #             start_time: Time.parse(1479401208.68), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 0, 
-    #             end_time: Time.parse(1479401209.463), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "UPLOAD_ARTIFACTS", 
-    #             start_time: Time.parse(1479401208.783), 
-    #           }, 
-    #           {
-    #             contexts: [
-    #             ], 
-    #             duration_in_seconds: 4, 
-    #             end_time: Time.parse(1479401214.239), 
-    #             phase_status: "SUCCEEDED", 
-    #             phase_type: "FINALIZING", 
-    #             start_time: Time.parse(1479401209.463), 
-    #           }, 
-    #           {
-    #             phase_type: "COMPLETED", 
-    #             start_time: Time.parse(1479401214.239), 
-    #           }, 
-    #         ], 
-    #         project_name: "codebuild-demo-project", 
-    #         source: {
-    #           type: "S3", 
-    #           location: "arn:aws:s3:::codebuild-123456789012-input-bucket/MessageUtil.zip", 
-    #         }, 
-    #         start_time: Time.parse(1479401081.869), 
-    #         timeout_in_minutes: 60, 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_builds({
@@ -858,6 +608,7 @@ module Aws::CodeBuild
     #   resp.builds[0].artifacts.override_artifact_name #=> Boolean
     #   resp.builds[0].artifacts.encryption_disabled #=> Boolean
     #   resp.builds[0].artifacts.artifact_identifier #=> String
+    #   resp.builds[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].secondary_artifacts #=> Array
     #   resp.builds[0].secondary_artifacts[0].location #=> String
     #   resp.builds[0].secondary_artifacts[0].sha256sum #=> String
@@ -865,6 +616,7 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.builds[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.builds[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].cache.modes #=> Array
@@ -894,6 +646,7 @@ module Aws::CodeBuild
     #   resp.builds[0].logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.builds[0].logs.s3_logs.location #=> String
     #   resp.builds[0].logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.builds[0].logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].queued_timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
@@ -994,6 +747,7 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.override_artifact_name #=> Boolean
     #   resp.projects[0].artifacts.encryption_disabled #=> Boolean
     #   resp.projects[0].artifacts.artifact_identifier #=> String
+    #   resp.projects[0].artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].secondary_artifacts #=> Array
     #   resp.projects[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].secondary_artifacts[0].location #=> String
@@ -1004,6 +758,7 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.projects[0].secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.projects[0].secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].cache.modes #=> Array
@@ -1053,6 +808,7 @@ module Aws::CodeBuild
     #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.projects[0].logs_config.s3_logs.location #=> String
     #   resp.projects[0].logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.projects[0].logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.projects[0].file_system_locations #=> Array
     #   resp.projects[0].file_system_locations[0].type #=> String, one of "EFS"
     #   resp.projects[0].file_system_locations[0].location #=> String
@@ -1066,6 +822,9 @@ module Aws::CodeBuild
     #   resp.projects[0].build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.projects[0].build_batch_config.timeout_in_mins #=> Integer
     #   resp.projects[0].concurrent_build_limit #=> Integer
+    #   resp.projects[0].project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
+    #   resp.projects[0].public_project_alias #=> String
+    #   resp.projects[0].resource_access_role #=> String
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -1249,9 +1008,9 @@ module Aws::CodeBuild
     #   Information about the build environment for the build project.
     #
     # @option params [required, String] :service_role
-    #   The ARN of the Identity and Access Management role that enables
-    #   CodeBuild to interact with dependent Amazon Web Services services on
-    #   behalf of the Amazon Web Services account.
+    #   The ARN of the IAM role that enables CodeBuild to interact with
+    #   dependent Amazon Web Services services on behalf of the Amazon Web
+    #   Services account.
     #
     # @option params [Integer] :timeout_in_minutes
     #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
@@ -1378,6 +1137,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts: [
     #       {
@@ -1390,6 +1150,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     cache: {
@@ -1442,6 +1203,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     file_system_locations: [
@@ -1508,6 +1270,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.secondary_artifacts #=> Array
     #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.secondary_artifacts[0].location #=> String
@@ -1518,6 +1281,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.project.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
@@ -1567,6 +1331,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.file_system_locations #=> Array
     #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.project.file_system_locations[0].location #=> String
@@ -1580,6 +1345,9 @@ module Aws::CodeBuild
     #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.project.build_batch_config.timeout_in_mins #=> Integer
     #   resp.project.concurrent_build_limit #=> Integer
+    #   resp.project.project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
+    #   resp.project.public_project_alias #=> String
+    #   resp.project.resource_access_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -3054,6 +2822,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -3061,6 +2830,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -3090,6 +2860,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -3208,6 +2979,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -3215,6 +2987,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -3238,6 +3011,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -3391,12 +3165,12 @@ module Aws::CodeBuild
     #   If this value is set, it can be either an inline buildspec definition,
     #   the path to an alternate buildspec file relative to the value of the
     #   built-in `CODEBUILD_SRC_DIR` environment variable, or the path to an
-    #   S3 bucket. The bucket must be in the same Region as the build project.
-    #   Specify the buildspec file using its ARN (for example,
-    #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
-    #   not provided or is set to an empty string, the source code must
-    #   contain a buildspec file in its root directory. For more information,
-    #   see [Buildspec File Name and Storage Location][1].
+    #   S3 bucket. The bucket must be in the same Amazon Web Services Region
+    #   as the build project. Specify the buildspec file using its ARN (for
+    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
+    #   value is not provided or is set to an empty string, the source code
+    #   must contain a buildspec file in its root directory. For more
+    #   information, see [Buildspec File Name and Storage Location][1].
     #
     #
     #
@@ -3572,6 +3346,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts_override: [
     #       {
@@ -3584,6 +3359,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     environment_variables_override: [
@@ -3635,6 +3411,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     registry_credential_override: {
@@ -3700,6 +3477,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -3707,6 +3485,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -3736,6 +3515,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -3866,12 +3646,12 @@ module Aws::CodeBuild
     #   If this value is set, it can be either an inline buildspec definition,
     #   the path to an alternate buildspec file relative to the value of the
     #   built-in `CODEBUILD_SRC_DIR` environment variable, or the path to an
-    #   S3 bucket. The bucket must be in the same Region as the build project.
-    #   Specify the buildspec file using its ARN (for example,
-    #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
-    #   not provided or is set to an empty string, the source code must
-    #   contain a buildspec file in its root directory. For more information,
-    #   see [Buildspec File Name and Storage Location][1].
+    #   S3 bucket. The bucket must be in the same Amazon Web Services Region
+    #   as the build project. Specify the buildspec file using its ARN (for
+    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
+    #   value is not provided or is set to an empty string, the source code
+    #   must contain a buildspec file in its root directory. For more
+    #   information, see [Buildspec File Name and Storage Location][1].
     #
     #
     #
@@ -4036,6 +3816,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts_override: [
     #       {
@@ -4048,6 +3829,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     environment_variables_override: [
@@ -4095,6 +3877,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     registry_credential_override: {
@@ -4168,6 +3951,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -4175,6 +3959,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -4198,6 +3983,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -4328,6 +4114,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.override_artifact_name #=> Boolean
     #   resp.build.artifacts.encryption_disabled #=> Boolean
     #   resp.build.artifacts.artifact_identifier #=> String
+    #   resp.build.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.secondary_artifacts #=> Array
     #   resp.build.secondary_artifacts[0].location #=> String
     #   resp.build.secondary_artifacts[0].sha256sum #=> String
@@ -4335,6 +4122,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
@@ -4364,6 +4152,7 @@ module Aws::CodeBuild
     #   resp.build.logs.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build.logs.s3_logs.location #=> String
     #   resp.build.logs.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build.logs.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.queued_timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
@@ -4469,6 +4258,7 @@ module Aws::CodeBuild
     #   resp.build_batch.artifacts.override_artifact_name #=> Boolean
     #   resp.build_batch.artifacts.encryption_disabled #=> Boolean
     #   resp.build_batch.artifacts.artifact_identifier #=> String
+    #   resp.build_batch.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.secondary_artifacts #=> Array
     #   resp.build_batch.secondary_artifacts[0].location #=> String
     #   resp.build_batch.secondary_artifacts[0].sha256sum #=> String
@@ -4476,6 +4266,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.build_batch.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.build_batch.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
@@ -4499,6 +4290,7 @@ module Aws::CodeBuild
     #   resp.build_batch.log_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.s3_logs.location #=> String
     #   resp.build_batch.log_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.build_batch.log_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.build_batch.build_timeout_in_minutes #=> Integer
     #   resp.build_batch.queued_timeout_in_minutes #=> Integer
     #   resp.build_batch.complete #=> Boolean
@@ -4631,9 +4423,9 @@ module Aws::CodeBuild
     #   project.
     #
     # @option params [String] :service_role
-    #   The replacement ARN of the Identity and Access Management role that
-    #   enables CodeBuild to interact with dependent Amazon Web Services
-    #   services on behalf of the Amazon Web Services account.
+    #   The replacement ARN of the IAM role that enables CodeBuild to interact
+    #   with dependent Amazon Web Services services on behalf of the Amazon
+    #   Web Services account.
     #
     # @option params [Integer] :timeout_in_minutes
     #   The replacement value in minutes, from 5 to 480 (8 hours), for
@@ -4762,6 +4554,7 @@ module Aws::CodeBuild
     #       override_artifact_name: false,
     #       encryption_disabled: false,
     #       artifact_identifier: "String",
+    #       bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #     },
     #     secondary_artifacts: [
     #       {
@@ -4774,6 +4567,7 @@ module Aws::CodeBuild
     #         override_artifact_name: false,
     #         encryption_disabled: false,
     #         artifact_identifier: "String",
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     ],
     #     cache: {
@@ -4826,6 +4620,7 @@ module Aws::CodeBuild
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         location: "String",
     #         encryption_disabled: false,
+    #         bucket_owner_access: "NONE", # accepts NONE, READ_ONLY, FULL
     #       },
     #     },
     #     file_system_locations: [
@@ -4892,6 +4687,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.override_artifact_name #=> Boolean
     #   resp.project.artifacts.encryption_disabled #=> Boolean
     #   resp.project.artifacts.artifact_identifier #=> String
+    #   resp.project.artifacts.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.secondary_artifacts #=> Array
     #   resp.project.secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.secondary_artifacts[0].location #=> String
@@ -4902,6 +4698,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_artifacts[0].override_artifact_name #=> Boolean
     #   resp.project.secondary_artifacts[0].encryption_disabled #=> Boolean
     #   resp.project.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.project.secondary_artifacts[0].bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3", "LOCAL"
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
@@ -4951,6 +4748,7 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.logs_config.s3_logs.bucket_owner_access #=> String, one of "NONE", "READ_ONLY", "FULL"
     #   resp.project.file_system_locations #=> Array
     #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.project.file_system_locations[0].location #=> String
@@ -4964,6 +4762,9 @@ module Aws::CodeBuild
     #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.project.build_batch_config.timeout_in_mins #=> Integer
     #   resp.project.concurrent_build_limit #=> Integer
+    #   resp.project.project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
+    #   resp.project.public_project_alias #=> String
+    #   resp.project.resource_access_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -4971,6 +4772,92 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def update_project(params = {}, options = {})
       req = build_request(:update_project, params)
+      req.send_request(options)
+    end
+
+    # Changes the public visibility for a project. The project's build
+    # results, logs, and artifacts are available to the general public. For
+    # more information, see [Public build projects][1] in the *CodeBuild
+    # User Guide*.
+    #
+    # The following should be kept in mind when making your projects public:
+    #
+    #  * All of a project's build results, logs, and artifacts, including
+    #   builds that were run when the project was private, are available to
+    #   the general public.
+    #
+    # * All build logs and artifacts are available to the public.
+    #   Environment variables, source code, and other sensitive information
+    #   may have been output to the build logs and artifacts. You must be
+    #   careful about what information is output to the build logs. Some
+    #   best practice are:
+    #
+    #   * Do not store sensitive values, especially Amazon Web Services
+    #     access key IDs and secret access keys, in environment variables.
+    #     We recommend that you use an Amazon EC2 Systems Manager Parameter
+    #     Store or Secrets Manager to store sensitive values.
+    #
+    #   * Follow [Best practices for using webhooks][2] in the *CodeBuild
+    #     User Guide* to limit which entities can trigger a build, and do
+    #     not store the buildspec in the project itself, to ensure that your
+    #     webhooks are as secure as possible.
+    #
+    # * A malicious user can use public builds to distribute malicious
+    #   artifacts. We recommend that you review all pull requests to verify
+    #   that the pull request is a legitimate change. We also recommend that
+    #   you validate any artifacts with their checksums to make sure that
+    #   the correct artifacts are being downloaded.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/public-builds.html
+    # [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/webhooks.html#webhook-best-practices
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the build project.
+    #
+    # @option params [required, String] :project_visibility
+    #   Specifies the visibility of the project's builds. Possible values
+    #   are:
+    #
+    #   PUBLIC\_READ
+    #
+    #   : The project builds are visible to the public.
+    #
+    #   PRIVATE
+    #
+    #   : The project builds are not visible to the public.
+    #
+    # @option params [String] :resource_access_role
+    #   The ARN of the IAM role that enables CodeBuild to access the
+    #   CloudWatch Logs and Amazon S3 artifacts for the project's builds.
+    #
+    # @return [Types::UpdateProjectVisibilityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProjectVisibilityOutput#project_arn #project_arn} => String
+    #   * {Types::UpdateProjectVisibilityOutput#public_project_alias #public_project_alias} => String
+    #   * {Types::UpdateProjectVisibilityOutput#project_visibility #project_visibility} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_project_visibility({
+    #     project_arn: "NonEmptyString", # required
+    #     project_visibility: "PUBLIC_READ", # required, accepts PUBLIC_READ, PRIVATE
+    #     resource_access_role: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_arn #=> String
+    #   resp.public_project_alias #=> String
+    #   resp.project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectVisibility AWS API Documentation
+    #
+    # @overload update_project_visibility(params = {})
+    # @param [Hash] params ({})
+    def update_project_visibility(params = {}, options = {})
+      req = build_request(:update_project_visibility, params)
       req.send_request(options)
     end
 
@@ -5139,7 +5026,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

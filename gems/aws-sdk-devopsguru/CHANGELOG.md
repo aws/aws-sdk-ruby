@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2021-07-13)
+------------------
+
+* Feature - Add paginator for GetCostEstimation
+
 1.7.0 (2021-07-08)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-08-20)
+------------------
+
+* Feature - Documentation updates for RoboMaker
+
+1.39.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2021-07-19)
+------------------
+
+* Feature - This release allows customers to create a new version of WorldTemplates with support for Doors.
+
 1.36.0 (2021-04-30)
 ------------------
 

@@ -1201,7 +1201,7 @@ module Aws::Route53Resolver
     #     Resolver endpoints. If you specify `DIRECTION` for `Name`, specify
     #     `INBOUND` or `OUTBOUND` for `Values`.
     #
-    #   * `HostVpcId`\: The ID of the VPC that inbound DNS queries pass
+    #   * `HostVPCId`\: The ID of the VPC that inbound DNS queries pass
     #     through on the way from your network to your VPCs in a region, or
     #     the VPC that outbound queries pass through on the way from your
     #     VPCs to your network. In a [CreateResolverEndpoint][6] request,
@@ -1288,8 +1288,8 @@ module Aws::Route53Resolver
     #   * `CreatorRequestId`\: A unique string that identifies the request
     #     that created the query logging configuration.
     #
-    #   * `Destination`\: The AWS service that you want to forward query
-    #     logs to. Valid values include the following:
+    #   * `Destination`\: The Amazon Web Services service that you want to
+    #     forward query logs to. Valid values include the following:
     #
     #     * `S3`
     #
@@ -1306,13 +1306,14 @@ module Aws::Route53Resolver
     #
     #   * `Name`\: The name of the query logging configuration
     #
-    #   * `OwnerId`\: The AWS account ID for the account that created the
-    #     query logging configuration.
+    #   * `OwnerId`\: The Amazon Web Services account ID for the account
+    #     that created the query logging configuration.
     #
     #   * `ShareStatus`\: An indication of whether the query logging
-    #     configuration is shared with other AWS accounts, or was shared
-    #     with the current account by another AWS account. Valid values
-    #     include: `NOT_SHARED`, `SHARED_WITH_ME`, or `SHARED_BY_ME`.
+    #     configuration is shared with other Amazon Web Services accounts,
+    #     or was shared with the current account by another Amazon Web
+    #     Services account. Valid values include: `NOT_SHARED`,
+    #     `SHARED_WITH_ME`, or `SHARED_BY_ME`.
     #
     #   * `Status`\: The status of the query logging configuration. If you
     #     specify `Status` for `Name`, specify the applicable status code
@@ -1386,8 +1387,8 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the owner of the VPC that this firewall
-    #   configuration applies to.
+    #   The Amazon Web Services account ID of the owner of the VPC that this
+    #   firewall configuration applies to.
     #   @return [String]
     #
     # @!attribute [rw] firewall_fail_open
@@ -1668,9 +1669,9 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID for the account that created the rule group. When
-    #   a rule group is shared with your account, this is the account that
-    #   has shared the rule group with you.
+    #   The Amazon Web Services account ID for the account that created the
+    #   rule group. When a rule group is shared with your account, this is
+    #   the account that has shared the rule group with you.
     #   @return [String]
     #
     # @!attribute [rw] creator_request_id
@@ -1681,9 +1682,10 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] share_status
-    #   Whether the rule group is shared with other AWS accounts, or was
-    #   shared with the current account by another AWS account. Sharing is
-    #   configured through AWS Resource Access Manager (AWS RAM).
+    #   Whether the rule group is shared with other Amazon Web Services
+    #   accounts, or was shared with the current account by another Amazon
+    #   Web Services account. Sharing is configured through Resource Access
+    #   Manager (RAM).
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -1754,9 +1756,8 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] managed_owner_name
     #   The owner of the association, used only for associations that are
-    #   not managed by you. If you use AWS Firewall Manager to manage your
-    #   DNS Firewalls, then this reports Firewall Manager as the managed
-    #   owner.
+    #   not managed by you. If you use Firewall Manager to manage your DNS
+    #   Firewalls, then this reports Firewall Manager as the managed owner.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1824,9 +1825,9 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID for the account that created the rule group. When
-    #   a rule group is shared with your account, this is the account that
-    #   has shared the rule group with you.
+    #   The Amazon Web Services account ID for the account that created the
+    #   rule group. When a rule group is shared with your account, this is
+    #   the account that has shared the rule group with you.
     #   @return [String]
     #
     # @!attribute [rw] creator_request_id
@@ -1837,9 +1838,10 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] share_status
-    #   Whether the rule group is shared with other AWS accounts, or was
-    #   shared with the current account by another AWS account. Sharing is
-    #   configured through AWS Resource Access Manager (AWS RAM).
+    #   Whether the rule group is shared with other Amazon Web Services
+    #   accounts, or was shared with the current account by another Amazon
+    #   Web Services account. Sharing is configured through Resource Access
+    #   Manager (RAM).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRuleGroupMetadata AWS API Documentation
@@ -1969,9 +1971,9 @@ module Aws::Route53Resolver
     end
 
     # @!attribute [rw] firewall_rule_group_policy
-    #   The AWS Identity and Access Management (AWS IAM) policy for sharing
-    #   the specified rule group. You can use the policy to share the rule
-    #   group using AWS Resource Access Manager (AWS RAM).
+    #   The Identity and Access Management (Amazon Web Services IAM) policy
+    #   for sharing the specified rule group. You can use the policy to
+    #   share the rule group using Resource Access Manager (RAM).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallRuleGroupPolicyResponse AWS API Documentation
@@ -3031,9 +3033,9 @@ module Aws::Route53Resolver
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) If the current AWS account has more than `MaxResults`
-    #   DNSSEC configurations, use `NextToken` to get the second and
-    #   subsequent pages of results.
+    #   (Optional) If the current Amazon Web Services account has more than
+    #   `MaxResults` DNSSEC configurations, use `NextToken` to get the
+    #   second and subsequent pages of results.
     #
     #   For the first `ListResolverDnssecConfigs` request, omit this value.
     #
@@ -3058,8 +3060,8 @@ module Aws::Route53Resolver
 
     # @!attribute [rw] next_token
     #   If a response includes the last of the DNSSEC configurations that
-    #   are associated with the current AWS account, `NextToken` doesn't
-    #   appear in the response.
+    #   are associated with the current Amazon Web Services account,
+    #   `NextToken` doesn't appear in the response.
     #
     #   If a response doesn't include the last of the configurations, you
     #   can get more configurations by submitting another
@@ -3075,7 +3077,7 @@ module Aws::Route53Resolver
     # @!attribute [rw] resolver_dnssec_configs
     #   An array that contains one [ResolverDnssecConfig][1] element for
     #   each configuration for DNSSEC validation that is associated with the
-    #   current AWS account.
+    #   current Amazon Web Services account.
     #
     #
     #
@@ -3222,8 +3224,8 @@ module Aws::Route53Resolver
     #   @return [Integer]
     #
     # @!attribute [rw] resolver_endpoints
-    #   The Resolver endpoints that were created by using the current AWS
-    #   account, and that match the specified filters, if any.
+    #   The Resolver endpoints that were created by using the current Amazon
+    #   Web Services account, and that match the specified filters, if any.
     #   @return [Array<Types::ResolverEndpoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverEndpointsResponse AWS API Documentation
@@ -3477,13 +3479,13 @@ module Aws::Route53Resolver
     #
     #   * `Name`\: The name of the configuration
     #
-    #   * `OwnerId`\: The AWS account number of the account that created the
-    #     configuration
+    #   * `OwnerId`\: The Amazon Web Services account number of the account
+    #     that created the configuration
     #
-    #   * `ShareStatus`\: Whether the configuration is shared with other AWS
-    #     accounts or shared with the current account by another AWS
-    #     account. Sharing is configured through AWS Resource Access Manager
-    #     (AWS RAM).
+    #   * `ShareStatus`\: Whether the configuration is shared with other
+    #     Amazon Web Services accounts or shared with the current account by
+    #     another Amazon Web Services account. Sharing is configured through
+    #     Resource Access Manager (RAM).
     #
     #   * `Status`\: The current status of the configuration. Valid values
     #     include the following:
@@ -3636,8 +3638,8 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] resolver_rule_associations
     #   The associations that were created between Resolver rules and VPCs
-    #   using the current AWS account, and that match the specified filters,
-    #   if any.
+    #   using the current Amazon Web Services account, and that match the
+    #   specified filters, if any.
     #   @return [Array<Types::ResolverRuleAssociation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverRuleAssociationsResponse AWS API Documentation
@@ -3713,8 +3715,8 @@ module Aws::Route53Resolver
     #   @return [Integer]
     #
     # @!attribute [rw] resolver_rules
-    #   The Resolver rules that were created using the current AWS account
-    #   and that match the specified filters, if any.
+    #   The Resolver rules that were created using the current Amazon Web
+    #   Services account and that match the specified filters, if any.
     #   @return [Array<Types::ResolverRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverRulesResponse AWS API Documentation
@@ -3801,8 +3803,8 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] firewall_rule_group_policy
-    #   The AWS Identity and Access Management (AWS IAM) policy to attach to
-    #   the rule group.
+    #   The Identity and Access Management (Amazon Web Services IAM) policy
+    #   to attach to the rule group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutFirewallRuleGroupPolicyRequest AWS API Documentation
@@ -3839,11 +3841,11 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] resolver_query_log_config_policy
-    #   An AWS Identity and Access Management policy statement that lists
-    #   the query logging configurations that you want to share with another
-    #   AWS account and the operations that you want the account to be able
-    #   to perform. You can specify the following operations in the
-    #   `Actions` section of the statement:
+    #   An Identity and Access Management policy statement that lists the
+    #   query logging configurations that you want to share with another
+    #   Amazon Web Services account and the operations that you want the
+    #   account to be able to perform. You can specify the following
+    #   operations in the `Actions` section of the statement:
     #
     #   * `route53resolver:AssociateResolverQueryLogConfig`
     #
@@ -3896,11 +3898,11 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] resolver_rule_policy
-    #   An AWS Identity and Access Management policy statement that lists
-    #   the rules that you want to share with another AWS account and the
-    #   operations that you want the account to be able to perform. You can
-    #   specify the following operations in the `Action` section of the
-    #   statement:
+    #   An Identity and Access Management policy statement that lists the
+    #   rules that you want to share with another Amazon Web Services
+    #   account and the operations that you want the account to be able to
+    #   perform. You can specify the following operations in the `Action`
+    #   section of the statement:
     #
     #   * `route53resolver:GetResolverRule`
     #
@@ -4141,8 +4143,8 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID for the account that created the query logging
-    #   configuration.
+    #   The Amazon Web Services account ID for the account that created the
+    #   query logging configuration.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4170,9 +4172,9 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] share_status
     #   An indication of whether the query logging configuration is shared
-    #   with other AWS accounts, or was shared with the current account by
-    #   another AWS account. Sharing is configured through AWS Resource
-    #   Access Manager (AWS RAM).
+    #   with other Amazon Web Services accounts, or was shared with the
+    #   current account by another Amazon Web Services account. Sharing is
+    #   configured through Resource Access Manager (RAM).
     #   @return [String]
     #
     # @!attribute [rw] association_count
@@ -4389,8 +4391,8 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   When a rule is shared with another AWS account, the account ID of
-    #   the account that the rule is shared with.
+    #   When a rule is shared with another Amazon Web Services account, the
+    #   account ID of the account that the rule is shared with.
     #   @return [String]
     #
     # @!attribute [rw] share_status

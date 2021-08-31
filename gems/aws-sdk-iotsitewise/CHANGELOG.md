@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-08-23)
+------------------
+
+* Feature - Documentation updates for AWS IoT SiteWise
+
+1.30.0 (2021-08-16)
+------------------
+
+* Feature - AWS IoT SiteWise added query window for the interpolation interval. AWS IoT SiteWise computes each interpolated value by using data points from the timestamp of each interval minus the window to the timestamp of each interval plus the window.
+
+1.29.0 (2021-08-03)
+------------------
+
+* Feature - My AWS Service (placeholder) - This release introduces custom Intervals and offset for tumbling window in metric for AWS IoT SiteWise.
+
+1.28.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2021-07-29)
+------------------
+
+* Feature - Added support for AWS IoT SiteWise Edge. You can now create an AWS IoT SiteWise gateway that runs on AWS IoT Greengrass V2. With the gateway,  you can collect local server and equipment data, process the data, and export the selected data from the edge to the AWS Cloud.
+
+1.26.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2021-07-15)
+------------------
+
+* Feature - Update the default endpoint for the APIs used to manage asset models, assets, gateways, tags, and account configurations. If you have firewalls with strict egress rules, configure the rules to grant you access to api.iotsitewise.[region].amazonaws.com or api.iotsitewise.[cn-region].amazonaws.com.cn.
+
 1.24.0 (2021-07-07)
 ------------------
 

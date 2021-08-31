@@ -315,8 +315,8 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
-    #   Governance-type Object Lock in place. You must have sufficient
-    #   permissions to perform this operation.
+    #   Governance-type Object Lock in place. To use this header, you must
+    #   have the `s3:PutBucketPublicAccessBlock` permission.
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -515,18 +515,18 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
-    #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) symmetrical customer managed customer master key
-    #   (CMK) that was used for the object. If you specify
-    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
-    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
-    #   managed CMK in AWS to protect the data. If the KMS key does not exist
-    #   in the same account issuing the command, you must use the full ARN and
-    #   not just the ID.
+    #   `aws:kms`, this header specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetrical customer
+    #   managed customer master key (CMK) that was used for the object. If you
+    #   specify `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
+    #   Amazon Web Services managed CMK in Amazon Web Services to protect the
+    #   data. If the KMS key does not exist in the same account issuing the
+    #   command, you must use the full ARN and not just the ID.
     # @option options [String] :ssekms_encryption_context
-    #   Specifies the AWS KMS Encryption Context to use for object encryption.
-    #   The value of this header is a base64-encoded UTF-8 string holding JSON
-    #   with the encryption context key-value pairs.
+    #   Specifies the Amazon Web Services KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using AWS KMS (SSE-KMS).

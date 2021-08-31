@@ -60,8 +60,8 @@ module Aws::CloudFormation
       data[:physical_resource_id]
     end
 
-    # Type of resource. (For more information, go to [ AWS Resource Types
-    # Reference][1] in the AWS CloudFormation User Guide.)
+    # Type of resource. (For more information, go to [Amazon Web Services
+    # Resource Types Reference][1] in the CloudFormation User Guide.)
     #
     #
     #

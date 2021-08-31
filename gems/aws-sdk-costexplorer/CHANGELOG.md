@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-08-17)
+------------------
+
+* Feature - This release is a new feature for Cost Categories: Split charge rules. Split charge rules enable you to allocate shared costs between your cost category values.
+
+1.64.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.62.0 (2021-05-24)
 ------------------
 

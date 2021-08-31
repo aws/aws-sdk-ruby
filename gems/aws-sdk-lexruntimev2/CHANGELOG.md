@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.4.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.3.1 (2021-07-14)
+------------------
+
+* Issue - Remove `content-length` header from `AsyncClient`.
+
 1.3.0 (2021-06-15)
 ------------------
 
@@ -20,4 +35,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-lexruntimev2`.
-

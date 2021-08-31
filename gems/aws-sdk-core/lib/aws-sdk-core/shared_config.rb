@@ -164,6 +164,8 @@ module Aws
       :credential_process,
       :endpoint_discovery_enabled,
       :use_dualstack_endpoint,
+      :ec2_metadata_service_endpoint,
+      :ec2_metadata_service_endpoint_mode,
       :max_attempts,
       :retry_mode,
       :adaptive_retry_wait_to_fill,

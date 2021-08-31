@@ -48,6 +48,6 @@ require_relative 'aws-sdk-kendra/customizations'
 # @!group service
 module Aws::Kendra
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.33.0'
 
 end

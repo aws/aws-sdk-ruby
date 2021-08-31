@@ -182,7 +182,7 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Provided the identity of a the bot that was exported.
+    # Provides the identity of a the bot that was exported.
     #
     # @note When making an API call, you may pass BotExportSpecification
     #   data as a hash:
@@ -1773,6 +1773,7 @@ module Aws::LexModelsV2
     #             ],
     #             allow_interrupt: false,
     #           },
+    #           active: false,
     #         },
     #         intent_closing_setting: {
     #           closing_response: { # required
@@ -1828,6 +1829,7 @@ module Aws::LexModelsV2
     #             ],
     #             allow_interrupt: false,
     #           },
+    #           active: false,
     #         },
     #         input_contexts: [
     #           {
@@ -2496,6 +2498,7 @@ module Aws::LexModelsV2
     #               timeout_in_seconds: 1, # required
     #               allow_interrupt: false,
     #             },
+    #             active: false,
     #           },
     #         },
     #         obfuscation_setting: {
@@ -4923,6 +4926,7 @@ module Aws::LexModelsV2
     #           ],
     #           allow_interrupt: false,
     #         },
+    #         active: false,
     #       }
     #
     # @!attribute [rw] closing_response
@@ -4930,10 +4934,18 @@ module Aws::LexModelsV2
     #   complete.
     #   @return [Types::ResponseSpecification]
     #
+    # @!attribute [rw] active
+    #   Specifies whether an intent's closing response is used. When this
+    #   field is false, the closing response isn't sent to the user and no
+    #   closing input from the user is used. If the `active` field isn't
+    #   specified, the default is true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentClosingSetting AWS API Documentation
     #
     class IntentClosingSetting < Struct.new(
-      :closing_response)
+      :closing_response,
+      :active)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5052,6 +5064,7 @@ module Aws::LexModelsV2
     #           ],
     #           allow_interrupt: false,
     #         },
+    #         active: false,
     #       }
     #
     # @!attribute [rw] prompt_specification
@@ -5072,11 +5085,20 @@ module Aws::LexModelsV2
     #   acknowledge that the intent was canceled.
     #   @return [Types::ResponseSpecification]
     #
+    # @!attribute [rw] active
+    #   Specifies whether the intent's confirmation is sent to the user.
+    #   When this field is false, confirmation and declination responses
+    #   aren't sent and processing continues as if the responses aren't
+    #   present. If the `active` field isn't specified, the default is
+    #   true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentConfirmationSetting AWS API Documentation
     #
     class IntentConfirmationSetting < Struct.new(
       :prompt_specification,
-      :declination_response)
+      :declination_response,
+      :active)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7516,6 +7538,7 @@ module Aws::LexModelsV2
     #             timeout_in_seconds: 1, # required
     #             allow_interrupt: false,
     #           },
+    #           active: false,
     #         },
     #       }
     #
@@ -8581,6 +8604,7 @@ module Aws::LexModelsV2
     #             ],
     #             allow_interrupt: false,
     #           },
+    #           active: false,
     #         },
     #         intent_closing_setting: {
     #           closing_response: { # required
@@ -8636,6 +8660,7 @@ module Aws::LexModelsV2
     #             ],
     #             allow_interrupt: false,
     #           },
+    #           active: false,
     #         },
     #         input_contexts: [
     #           {
@@ -9173,6 +9198,7 @@ module Aws::LexModelsV2
     #               timeout_in_seconds: 1, # required
     #               allow_interrupt: false,
     #             },
+    #             active: false,
     #           },
     #         },
     #         obfuscation_setting: {
@@ -9700,6 +9726,7 @@ module Aws::LexModelsV2
     #           timeout_in_seconds: 1, # required
     #           allow_interrupt: false,
     #         },
+    #         active: false,
     #       }
     #
     # @!attribute [rw] waiting_response
@@ -9717,12 +9744,21 @@ module Aws::LexModelsV2
     #   indicate that the bot is still waiting for input from the user.
     #   @return [Types::StillWaitingResponseSpecification]
     #
+    # @!attribute [rw] active
+    #   Specifies whether the bot will wait for a user to respond. When this
+    #   field is false, wait and continue responses for a slot aren't used
+    #   and the bot expects an appropriate response within the configured
+    #   timeout. If the `active` field isn't specified, the default is
+    #   true.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/WaitAndContinueSpecification AWS API Documentation
     #
     class WaitAndContinueSpecification < Struct.new(
       :waiting_response,
       :continue_response,
-      :still_waiting_response)
+      :still_waiting_response,
+      :active)
       SENSITIVE = []
       include Aws::Structure
     end

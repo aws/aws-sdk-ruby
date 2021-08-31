@@ -335,12 +335,15 @@ module Aws::IoTDataPlane
 
     # Deletes the shadow for the specified thing.
     #
-    # For more information, see [DeleteThingShadow][1] in the AWS IoT
-    # Developer Guide.
+    # Requires permission to access the [DeleteThingShadow][1] action.
+    #
+    # For more information, see [DeleteThingShadow][2] in the IoT Developer
+    # Guide.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
@@ -370,14 +373,64 @@ module Aws::IoTDataPlane
       req.send_request(options)
     end
 
+    # Gets the details of a single retained message for the specified topic.
+    #
+    # This action returns the message payload of the retained message, which
+    # can incur messaging costs. To list only the topic names of the
+    # retained messages, call
+    # [ListRetainedMessages](/iot/latest/developerguide/API_iotdata_ListRetainedMessages.html).
+    #
+    # Requires permission to access the [GetRetainedMessage][1] action.
+    #
+    # For more information about messaging costs, see [IoT Core pricing -
+    # Messaging][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
+    # [2]: http://aws.amazon.com/iot-core/pricing/#Messaging
+    #
+    # @option params [required, String] :topic
+    #   The topic name of the retained message to retrieve.
+    #
+    # @return [Types::GetRetainedMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRetainedMessageResponse#topic #topic} => String
+    #   * {Types::GetRetainedMessageResponse#payload #payload} => String
+    #   * {Types::GetRetainedMessageResponse#qos #qos} => Integer
+    #   * {Types::GetRetainedMessageResponse#last_modified_time #last_modified_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_retained_message({
+    #     topic: "Topic", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic #=> String
+    #   resp.payload #=> String
+    #   resp.qos #=> Integer
+    #   resp.last_modified_time #=> Integer
+    #
+    # @overload get_retained_message(params = {})
+    # @param [Hash] params ({})
+    def get_retained_message(params = {}, options = {})
+      req = build_request(:get_retained_message, params)
+      req.send_request(options)
+    end
+
     # Gets the shadow for the specified thing.
     #
-    # For more information, see [GetThingShadow][1] in the AWS IoT Developer
+    # Requires permission to access the [GetThingShadow][1] action.
+    #
+    # For more information, see [GetThingShadow][2] in the IoT Developer
     # Guide.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
@@ -408,6 +461,13 @@ module Aws::IoTDataPlane
     end
 
     # Lists the shadows for the specified thing.
+    #
+    # Requires permission to access the [ListNamedShadowsForThing][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
@@ -446,14 +506,80 @@ module Aws::IoTDataPlane
       req.send_request(options)
     end
 
-    # Publishes state information.
+    # Lists summary information about the retained messages stored for the
+    # account.
     #
-    # For more information, see [HTTP Protocol][1] in the AWS IoT Developer
-    # Guide.
+    # This action returns only the topic names of the retained messages. It
+    # doesn't return any message payloads. Although this action doesn't
+    # return a message payload, it can still incur messaging costs.
+    #
+    # To get the message payload of a retained message, call
+    # [GetRetainedMessage][1] with the topic name of the retained message.
+    #
+    # Requires permission to access the [ListRetainedMessages][2] action.
+    #
+    # For more information about messaging costs, see [IoT Core pricing -
+    # Messaging][3].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
+    # [3]: http://aws.amazon.com/iot-core/pricing/#Messaging
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListRetainedMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRetainedMessagesResponse#retained_topics #retained_topics} => Array&lt;Types::RetainedMessageSummary&gt;
+    #   * {Types::ListRetainedMessagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_retained_messages({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retained_topics #=> Array
+    #   resp.retained_topics[0].topic #=> String
+    #   resp.retained_topics[0].payload_size #=> Integer
+    #   resp.retained_topics[0].qos #=> Integer
+    #   resp.retained_topics[0].last_modified_time #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @overload list_retained_messages(params = {})
+    # @param [Hash] params ({})
+    def list_retained_messages(params = {}, options = {})
+      req = build_request(:list_retained_messages, params)
+      req.send_request(options)
+    end
+
+    # Publishes an MQTT message.
+    #
+    # Requires permission to access the [Publish][1] action.
+    #
+    # For more information about MQTT messages, see [MQTT Protocol][2] in
+    # the IoT Developer Guide.
+    #
+    # For more information about messaging costs, see [IoT Core pricing -
+    # Messaging][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html
+    # [3]: http://aws.amazon.com/iot-core/pricing/#Messaging
     #
     # @option params [required, String] :topic
     #   The name of the MQTT topic.
@@ -461,8 +587,23 @@ module Aws::IoTDataPlane
     # @option params [Integer] :qos
     #   The Quality of Service (QoS) level.
     #
+    # @option params [Boolean] :retain
+    #   A Boolean value that determines whether to set the RETAIN flag when
+    #   the message is published.
+    #
+    #   Setting the RETAIN flag causes the message to be retained and sent to
+    #   new subscribers to the topic.
+    #
+    #   Valid values: `true` \| `false`
+    #
+    #   Default value: `false`
+    #
     # @option params [String, StringIO, File] :payload
-    #   The state information, in JSON format.
+    #   The message body. MQTT accepts text, binary, and empty (null) message
+    #   payloads.
+    #
+    #   Publishing an empty (null) payload with **retain** = `true` deletes
+    #   the retained message identified by **topic** from IoT Core.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -471,6 +612,7 @@ module Aws::IoTDataPlane
     #   resp = client.publish({
     #     topic: "Topic", # required
     #     qos: 1,
+    #     retain: false,
     #     payload: "data",
     #   })
     #
@@ -483,12 +625,15 @@ module Aws::IoTDataPlane
 
     # Updates the shadow for the specified thing.
     #
-    # For more information, see [UpdateThingShadow][1] in the AWS IoT
-    # Developer Guide.
+    # Requires permission to access the [UpdateThingShadow][1] action.
+    #
+    # For more information, see [UpdateThingShadow][2] in the IoT Developer
+    # Guide.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [2]: http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html
     #
     # @option params [required, String] :thing_name
     #   The name of the thing.
@@ -535,7 +680,7 @@ module Aws::IoTDataPlane
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdataplane'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

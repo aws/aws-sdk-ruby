@@ -111,6 +111,55 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A filter that allows you to control the black frame detection by
+    # specifying the black levels and pixel coverage of black pixels in a
+    # frame. As videos can come from multiple sources, formats, and time
+    # periods, they may contain different standards and varying noise levels
+    # for black frames that need to be accounted for. For more information,
+    # see StartSegmentDetection.
+    #
+    # @note When making an API call, you may pass BlackFrame
+    #   data as a hash:
+    #
+    #       {
+    #         max_pixel_threshold: 1.0,
+    #         min_coverage_percentage: 1.0,
+    #       }
+    #
+    # @!attribute [rw] max_pixel_threshold
+    #   A threshold used to determine the maximum luminance value for a
+    #   pixel to be considered black. In a full color range video, luminance
+    #   values range from 0-255. A pixel value of 0 is pure black, and the
+    #   most strict filter. The maximum black pixel value is computed as
+    #   follows: max\_black\_pixel\_value = minimum\_luminance +
+    #   MaxPixelThreshold *luminance\_range.
+    #
+    #   For example, for a full range video with BlackPixelThreshold = 0.1,
+    #   max\_black\_pixel\_value is 0 + 0.1 * (255-0) = 25.5.
+    #
+    #   The default value of MaxPixelThreshold is 0.2, which maps to a
+    #   max\_black\_pixel\_value of 51 for a full range video. You can lower
+    #   this threshold to be more strict on black levels.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_coverage_percentage
+    #   The minimum percentage of pixels in a frame that need to have a
+    #   luminance below the max\_black\_pixel\_value for a frame to be
+    #   considered a black frame. Luminance is calculated using the BT.709
+    #   matrix.
+    #
+    #   The default value is 99, which means at least 99% of all pixels in
+    #   the frame are black pixels as per the `MaxPixelThreshold` set. You
+    #   can reduce this value to allow more noise on the black frame.
+    #   @return [Float]
+    #
+    class BlackFrame < Struct.new(
+      :max_pixel_threshold,
+      :min_coverage_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Identifies the bounding box around the label, face, text or personal
     # protective equipment. The `left` (x-coordinate) and `top`
     # (y-coordinate) are coordinates representing the top and left sides of
@@ -201,12 +250,18 @@ module Aws::Rekognition
     #   recognized face is the celebrity.
     #   @return [Float]
     #
+    # @!attribute [rw] known_gender
+    #   The known gender identity for the celebrity that matches the
+    #   provided ID.
+    #   @return [Types::KnownGender]
+    #
     class Celebrity < Struct.new(
       :urls,
       :name,
       :id,
       :face,
-      :match_confidence)
+      :match_confidence,
+      :known_gender)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -452,12 +507,26 @@ module Aws::Rekognition
     #   Identifies face image brightness and sharpness.
     #   @return [Types::ImageQuality]
     #
+    # @!attribute [rw] emotions
+    #   The emotions that appear to be expressed on the face, and the
+    #   confidence level in the determination. Valid values include
+    #   "Happy", "Sad", "Angry", "Confused", "Disgusted",
+    #   "Surprised", "Calm", "Unknown", and "Fear".
+    #   @return [Array<Types::Emotion>]
+    #
+    # @!attribute [rw] smile
+    #   Indicates whether or not the face is smiling, and the confidence
+    #   level in the determination.
+    #   @return [Types::Smile]
+    #
     class ComparedFace < Struct.new(
       :bounding_box,
       :confidence,
       :landmarks,
       :pose,
-      :quality)
+      :quality,
+      :emotions,
+      :smile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -483,15 +552,16 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about an unsafe content label detection in a stored video.
+    # Information about an inappropriate, unwanted, or offensive content
+    # label detection in a stored video.
     #
     # @!attribute [rw] timestamp
     #   Time, in milliseconds from the beginning of the video, that the
-    #   unsafe content label was detected.
+    #   content moderation label was detected.
     #   @return [Integer]
     #
     # @!attribute [rw] moderation_label
-    #   The unsafe content label detected by in the stored video.
+    #   The content moderation label detected by in the stored video.
     #   @return [Types::ModerationLabel]
     #
     class ContentModerationDetection < Struct.new(
@@ -649,7 +719,9 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] output_config
-    #   The Amazon S3 location to store the results of training.
+    #   The Amazon S3 bucket location to store the results of training. The
+    #   S3 bucket can be in any AWS account as long as the caller has
+    #   `s3:PutObject` permissions on the S3 bucket.
     #   @return [Types::OutputConfig]
     #
     # @!attribute [rw] training_data
@@ -668,11 +740,23 @@ module Aws::Rekognition
     # @!attribute [rw] kms_key_id
     #   The identifier for your AWS Key Management Service (AWS KMS)
     #   customer master key (CMK). You can supply the Amazon Resource Name
-    #   (ARN) of your CMK, the ID of your CMK, or an alias for your CMK. The
-    #   key is used to encrypt training and test images copied into the
-    #   service for model training. Your source images are unaffected. The
-    #   key is also used to encrypt training results and manifest files
-    #   written to the output Amazon S3 bucket (`OutputConfig`).
+    #   (ARN) of your CMK, the ID of your CMK, an alias for your CMK, or an
+    #   alias ARN. The key is used to encrypt training and test images
+    #   copied into the service for model training. Your source images are
+    #   unaffected. The key is also used to encrypt training results and
+    #   manifest files written to the output Amazon S3 bucket
+    #   (`OutputConfig`).
+    #
+    #   If you choose to use your own CMK, you need the following
+    #   permissions on the CMK.
+    #
+    #   * kms:CreateGrant
+    #
+    #   * kms:DescribeKey
+    #
+    #   * kms:GenerateDataKey
+    #
+    #   * kms:Decrypt
     #
     #   If you don't specify a value for `KmsKeyId`, images copied into the
     #   service are encrypted using a key that AWS owns and manages.
@@ -1246,10 +1330,12 @@ module Aws::Rekognition
     #
     # @!attribute [rw] min_confidence
     #   Specifies the minimum confidence level for the labels to return.
-    #   Amazon Rekognition doesn't return any labels with a confidence
-    #   lower than this specified value. If you specify a value of 0, all
-    #   labels are return, regardless of the default thresholds that the
-    #   model version applies.
+    #   `DetectCustomLabels` doesn't return any labels with a confidence
+    #   value that's lower than this specified value. If you specify a
+    #   value of 0, `DetectCustomLabels` returns all labels, regardless of
+    #   the assumed threshold applied to each label. If you don't specify a
+    #   value for `MinConfidence`, `DetectCustomLabels` returns labels based
+    #   on the assumed threshold of each label.
     #   @return [Float]
     #
     class DetectCustomLabelsRequest < Struct.new(
@@ -2153,9 +2239,14 @@ module Aws::Rekognition
     #   The name of the celebrity.
     #   @return [String]
     #
+    # @!attribute [rw] known_gender
+    #   Retrieves the known gender for the celebrity.
+    #   @return [Types::KnownGender]
+    #
     class GetCelebrityInfoResponse < Struct.new(
       :urls,
-      :name)
+      :name,
+      :known_gender)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2251,8 +2342,9 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] job_id
-    #   The identifier for the unsafe content job. Use `JobId` to identify
-    #   the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the inappropriate, unwanted, or offensive content
+    #   moderation job. Use `JobId` to identify the job in a subsequent call
+    #   to `GetContentModeration`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2266,7 +2358,7 @@ module Aws::Rekognition
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Rekognition returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of unsafe content labels.
+    #   of content moderation labels.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -2287,7 +2379,7 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_status
-    #   The current status of the unsafe content analysis job.
+    #   The current status of the content moderation analysis job.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -2302,19 +2394,19 @@ module Aws::Rekognition
     #   @return [Types::VideoMetadata]
     #
     # @!attribute [rw] moderation_labels
-    #   The detected unsafe content labels and the time(s) they were
-    #   detected.
+    #   The detected inappropriate, unwanted, or offensive content
+    #   moderation labels and the time(s) they were detected.
     #   @return [Array<Types::ContentModerationDetection>]
     #
     # @!attribute [rw] next_token
     #   If the response is truncated, Amazon Rekognition Video returns this
     #   token that you can use in the subsequent request to retrieve the
-    #   next set of unsafe content labels.
+    #   next set of content moderation labels.
     #   @return [String]
     #
     # @!attribute [rw] moderation_model_version
     #   Version number of the moderation detection model that was used to
-    #   detect unsafe content.
+    #   detect inappropriate, unwanted, or offensive content.
     #   @return [String]
     #
     class GetContentModerationResponse < Struct.new(
@@ -3303,6 +3395,19 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The known gender identity for the celebrity that matches the provided
+    # ID.
+    #
+    # @!attribute [rw] type
+    #   A string value of the KnownGender info about the Celebrity.
+    #   @return [String]
+    #
+    class KnownGender < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure containing details about the detected label, including the
     # name, detected instances, parent labels, and level of confidence.
     #
@@ -3566,10 +3671,11 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provides information about a single type of unsafe content found in an
-    # image or video. Each type of moderated content has a label within a
-    # hierarchical taxonomy. For more information, see Detecting Unsafe
-    # Content in the Amazon Rekognition Developer Guide.
+    # Provides information about a single type of inappropriate, unwanted,
+    # or offensive content found in an image or video. Each type of
+    # moderated content has a label within a hierarchical taxonomy. For more
+    # information, see Content moderation in the Amazon Rekognition
+    # Developer Guide.
     #
     # @!attribute [rw] confidence
     #   Specifies the confidence that Amazon Rekognition has that the label
@@ -3636,7 +3742,15 @@ module Aws::Rekognition
 
     # The Amazon Simple Notification Service topic to which Amazon
     # Rekognition publishes the completion status of a video analysis
-    # operation. For more information, see api-video.
+    # operation. For more information, see api-video. Note that the Amazon
+    # SNS topic must have a topic name that begins with *AmazonRekognition*
+    # if you are using the AmazonRekognitionServiceRole permissions policy
+    # to access the topic. For more information, see [Giving access to
+    # multiple Amazon SNS topics][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #
     # @note When making an API call, you may pass NotificationChannel
     #   data as a hash:
@@ -4115,7 +4229,10 @@ module Aws::Rekognition
 
     # @!attribute [rw] celebrity_faces
     #   Details about each celebrity found in the image. Amazon Rekognition
-    #   can detect a maximum of 64 celebrities in an image.
+    #   can detect a maximum of 64 celebrities in an image. Each celebrity
+    #   object includes the following attributes: `Face`, `Confidence`,
+    #   `Emotions`, `Landmarks`, `Pose`, `Quality`, `Smile`, `Id`,
+    #   `KnownGender`, `MatchConfidence`, `Name`, `Urls`.
     #   @return [Array<Types::Celebrity>]
     #
     # @!attribute [rw] unrecognized_faces
@@ -4123,6 +4240,13 @@ module Aws::Rekognition
     #   @return [Array<Types::ComparedFace>]
     #
     # @!attribute [rw] orientation_correction
+    #   <note markdown="1"> Support for estimating image orientation using the the
+    #   OrientationCorrection field has ceased as of August 2021. Any
+    #   returned values for this field included in an API response will
+    #   always be NULL.
+    #
+    #    </note>
+    #
     #   The orientation of the input image (counterclockwise direction). If
     #   your application displays the image, you can use this value to
     #   correct the orientation. The bounding box coordinates returned in
@@ -4447,6 +4571,20 @@ module Aws::Rekognition
     #   shot detection.
     #   @return [Types::ShotSegment]
     #
+    # @!attribute [rw] start_frame_number
+    #   The frame number of the start of a video segment, using a frame
+    #   index that starts with 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_frame_number
+    #   The frame number at the end of a video segment, using a frame index
+    #   that starts with 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_frames
+    #   The duration of a video segment, expressed in frames.
+    #   @return [Integer]
+    #
     class SegmentDetection < Struct.new(
       :type,
       :start_timestamp_millis,
@@ -4456,7 +4594,10 @@ module Aws::Rekognition
       :end_timecode_smpte,
       :duration_smpte,
       :technical_cue_segment,
-      :shot_segment)
+      :shot_segment,
+      :start_frame_number,
+      :end_frame_number,
+      :duration_frames)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4557,7 +4698,9 @@ module Aws::Rekognition
     # @!attribute [rw] notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
     #   publish the completion status of the celebrity recognition analysis
-    #   to.
+    #   to. The Amazon SNS topic must have a topic name that begins with
+    #   *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -4609,8 +4752,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] video
-    #   The video in which you want to detect unsafe content. The video must
-    #   be stored in an Amazon S3 bucket.
+    #   The video in which you want to detect inappropriate, unwanted, or
+    #   offensive content. The video must be stored in an Amazon S3 bucket.
     #   @return [Types::Video]
     #
     # @!attribute [rw] min_confidence
@@ -4633,7 +4776,10 @@ module Aws::Rekognition
     #
     # @!attribute [rw] notification_channel
     #   The Amazon SNS topic ARN that you want Amazon Rekognition Video to
-    #   publish the completion status of the unsafe content analysis to.
+    #   publish the completion status of the content analysis to. The Amazon
+    #   SNS topic must have a topic name that begins with
+    #   *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy to access the topic.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -4654,8 +4800,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] job_id
-    #   The identifier for the unsafe content analysis job. Use `JobId` to
-    #   identify the job in a subsequent call to `GetContentModeration`.
+    #   The identifier for the content analysis job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetContentModeration`.
     #   @return [String]
     #
     class StartContentModerationResponse < Struct.new(
@@ -4699,7 +4845,9 @@ module Aws::Rekognition
     # @!attribute [rw] notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
     #   Video to publish the completion status of the face detection
-    #   operation.
+    #   operation. The Amazon SNS topic must have a topic name that begins
+    #   with *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] face_attributes
@@ -4784,7 +4932,10 @@ module Aws::Rekognition
     #
     # @!attribute [rw] notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
-    #   Video to publish the completion status of the search.
+    #   Video to publish the completion status of the search. The Amazon SNS
+    #   topic must have a topic name that begins with *AmazonRekognition* if
+    #   you are using the AmazonRekognitionServiceRole permissions policy to
+    #   access the topic.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -4863,6 +5014,9 @@ module Aws::Rekognition
     # @!attribute [rw] notification_channel
     #   The Amazon SNS topic ARN you want Amazon Rekognition Video to
     #   publish the completion status of the label detection operation to.
+    #   The Amazon SNS topic must have a topic name that begins with
+    #   *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -4927,6 +5081,9 @@ module Aws::Rekognition
     # @!attribute [rw] notification_channel
     #   The Amazon SNS topic ARN you want Amazon Rekognition Video to
     #   publish the completion status of the people detection operation to.
+    #   The Amazon SNS topic must have a topic name that begins with
+    #   *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -5003,6 +5160,10 @@ module Aws::Rekognition
     #       {
     #         technical_cue_filter: {
     #           min_segment_confidence: 1.0,
+    #           black_frame: {
+    #             max_pixel_threshold: 1.0,
+    #             min_coverage_percentage: 1.0,
+    #           },
     #         },
     #         shot_filter: {
     #           min_segment_confidence: 1.0,
@@ -5044,6 +5205,10 @@ module Aws::Rekognition
     #         filters: {
     #           technical_cue_filter: {
     #             min_segment_confidence: 1.0,
+    #             black_frame: {
+    #               max_pixel_threshold: 1.0,
+    #               min_coverage_percentage: 1.0,
+    #             },
     #           },
     #           shot_filter: {
     #             min_segment_confidence: 1.0,
@@ -5069,7 +5234,9 @@ module Aws::Rekognition
     # @!attribute [rw] notification_channel
     #   The ARN of the Amazon SNS topic to which you want Amazon Rekognition
     #   Video to publish the completion status of the segment detection
-    #   operation.
+    #   operation. Note that the Amazon SNS topic must have a topic name
+    #   that begins with *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy to access the topic.
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -5167,6 +5334,10 @@ module Aws::Rekognition
     #
     #       {
     #         min_segment_confidence: 1.0,
+    #         black_frame: {
+    #           max_pixel_threshold: 1.0,
+    #           min_coverage_percentage: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] min_segment_confidence
@@ -5182,8 +5353,17 @@ module Aws::Rekognition
     #   percent.
     #   @return [Float]
     #
+    # @!attribute [rw] black_frame
+    #   A filter that allows you to control the black frame detection by
+    #   specifying the black levels and pixel coverage of black pixels in a
+    #   frame. Videos can come from multiple sources, formats, and time
+    #   periods, with different standards and varying noise levels for black
+    #   frames that need to be accounted for.
+    #   @return [Types::BlackFrame]
+    #
     class StartTechnicalCueDetectionFilter < Struct.new(
-      :min_segment_confidence)
+      :min_segment_confidence,
+      :black_frame)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5284,7 +5464,16 @@ module Aws::Rekognition
     # @!attribute [rw] notification_channel
     #   The Amazon Simple Notification Service topic to which Amazon
     #   Rekognition publishes the completion status of a video analysis
-    #   operation. For more information, see api-video.
+    #   operation. For more information, see api-video. Note that the Amazon
+    #   SNS topic must have a topic name that begins with
+    #   *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy to access the topic.
+    #   For more information, see [Giving access to multiple Amazon SNS
+    #   topics][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -5892,13 +6081,19 @@ module Aws::Rekognition
     #   Horizontal pixel dimension of the video.
     #   @return [Integer]
     #
+    # @!attribute [rw] color_range
+    #   A description of the range of luminance values in a video, either
+    #   LIMITED (16 to 235) or FULL (0 to 255).
+    #   @return [String]
+    #
     class VideoMetadata < Struct.new(
       :codec,
       :duration_millis,
       :format,
       :frame_rate,
       :frame_height,
-      :frame_width)
+      :frame_width,
+      :color_range)
       SENSITIVE = []
       include Aws::Structure
     end

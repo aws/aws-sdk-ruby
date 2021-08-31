@@ -736,7 +736,8 @@ module Aws::RDS
     #
     #   Example: `mydbinstance`
     # @option options [Integer] :allocated_storage
-    #   The amount of storage (in gibibytes) to allocate for the DB instance.
+    #   The amount of storage in gibibytes (GiB) to allocate for the DB
+    #   instance.
     #
     #   Type: Integer
     #
@@ -1458,8 +1459,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     # @option options [Integer] :max_allocated_storage
-    #   The upper limit to which Amazon RDS can automatically scale the
-    #   storage of the DB instance.
+    #   The upper limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the DB instance.
     #
     #   For more information about this setting, including limitations that
     #   apply to it, see [ Managing capacity automatically with Amazon RDS
@@ -1997,11 +1998,20 @@ module Aws::RDS
     #
     #   Supported filters:
     #
+    #   * `clone-group-id` - Accepts clone group identifiers. The results list
+    #     will only include information about the DB clusters associated with
+    #     these clone groups.
+    #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB clusters identified by these ARNs.
     #
-    #   ^
+    #   * `domain` - Accepts Active Directory directory IDs. The results list
+    #     will only include information about the DB clusters associated with
+    #     these domains.
+    #
+    #   * `engine` - Accepts engine names. The results list will only include
+    #     information about the DB clusters for these engines.
     # @option options [Boolean] :include_shared
     #   Optional Boolean parameter that specifies whether the output includes
     #   information about clusters shared from other Amazon Web Services

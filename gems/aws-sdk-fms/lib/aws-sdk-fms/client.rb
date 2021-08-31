@@ -693,6 +693,7 @@ module Aws::FMS
     #   resp.policy.resource_tags[0].value #=> String
     #   resp.policy.exclude_resource_tags #=> Boolean
     #   resp.policy.remediation_enabled #=> Boolean
+    #   resp.policy.delete_unused_fm_managed_resources #=> Boolean
     #   resp.policy.include_map #=> Hash
     #   resp.policy.include_map["CustomerPolicyScopeIdType"] #=> Array
     #   resp.policy.include_map["CustomerPolicyScopeIdType"][0] #=> String
@@ -1349,6 +1350,7 @@ module Aws::FMS
     #   resp.policy_list[0].resource_type #=> String
     #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
+    #   resp.policy_list[0].delete_unused_fm_managed_resources #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListPolicies AWS API Documentation
@@ -1628,6 +1630,7 @@ module Aws::FMS
     #       ],
     #       exclude_resource_tags: false, # required
     #       remediation_enabled: false, # required
+    #       delete_unused_fm_managed_resources: false,
     #       include_map: {
     #         "ACCOUNT" => ["CustomerPolicyScopeId"],
     #       },
@@ -1658,6 +1661,7 @@ module Aws::FMS
     #   resp.policy.resource_tags[0].value #=> String
     #   resp.policy.exclude_resource_tags #=> Boolean
     #   resp.policy.remediation_enabled #=> Boolean
+    #   resp.policy.delete_unused_fm_managed_resources #=> Boolean
     #   resp.policy.include_map #=> Hash
     #   resp.policy.include_map["CustomerPolicyScopeIdType"] #=> Array
     #   resp.policy.include_map["CustomerPolicyScopeIdType"][0] #=> String
@@ -1807,7 +1811,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

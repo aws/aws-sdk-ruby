@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-08-03)
+------------------
+
+* Feature - API support for Redshift Data Sharing feature.
+
+1.67.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2021-07-13)
+------------------
+
+* Feature - Release new APIs to support new Redshift feature - Authentication Profile
+
 1.64.0 (2021-06-28)
 ------------------
 

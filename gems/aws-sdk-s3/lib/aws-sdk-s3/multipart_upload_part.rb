@@ -248,7 +248,8 @@ module Aws::S3
     #     The value must be URL encoded.
     #
     #     <note markdown="1"> Amazon S3 supports copy operations using access points only when the
-    #     source and destination buckets are in the same AWS Region.
+    #     source and destination buckets are in the same Amazon Web Services
+    #     Region.
     #
     #      </note>
     #

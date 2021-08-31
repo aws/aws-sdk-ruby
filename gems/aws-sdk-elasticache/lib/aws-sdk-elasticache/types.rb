@@ -39,7 +39,7 @@ module Aws::ElastiCache
     #   ElastiCache resources are *cluster* and *snapshot*.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   and Amazon Service Namespaces][1].
     #
     #
     #
@@ -145,9 +145,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] ec2_security_group_owner_id
-    #   The AWS account number of the Amazon EC2 security group owner. Note
-    #   that this is not the same thing as an AWS access key ID - you must
-    #   provide a valid AWS account number for this parameter.
+    #   The Amazon account number of the Amazon EC2 security group owner.
+    #   Note that this is not the same thing as an Amazon access key ID -
+    #   you must provide a valid Amazon account number for this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngressMessage AWS API Documentation
@@ -782,7 +782,7 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_node_id
     #   The cache node identifier. A node ID is a numeric identifier (0001,
     #   0002, etc.). The combination of cluster ID and node ID uniquely
-    #   identifies every cache node used in a customer's AWS account.
+    #   identifies every cache node used in a customer's Amazon account.
     #   @return [String]
     #
     # @!attribute [rw] cache_node_status
@@ -1126,7 +1126,7 @@ module Aws::ElastiCache
     # * `RevokeCacheSecurityGroupIngress`
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the cache security group owner.
+    #   The Amazon account ID of the cache security group owner.
     #   @return [String]
     #
     # @!attribute [rw] cache_security_group_name
@@ -2211,14 +2211,15 @@ module Aws::ElastiCache
     # @!attribute [rw] global_replication_group_id_suffix
     #   The suffix name of a Global datastore. Amazon ElastiCache
     #   automatically applies a prefix to the Global datastore ID when it is
-    #   created. Each AWS Region has its own prefix. For instance, a Global
-    #   datastore ID created in the US-West-1 region will begin with
+    #   created. Each Amazon Region has its own prefix. For instance, a
+    #   Global datastore ID created in the US-West-1 region will begin with
     #   "dsdfu" along with the suffix name you provide. The suffix,
     #   combined with the auto-generated prefix, guarantees uniqueness of
     #   the Global datastore name across multiple regions.
     #
-    #   For a full list of AWS Regions and their respective Global datastore
-    #   iD prefixes, see [Using the AWS CLI with Global datastores ][1].
+    #   For a full list of Amazon Regions and their respective Global
+    #   datastore iD prefixes, see [Using the Amazon CLI with Global
+    #   datastores ][1].
     #
     #
     #
@@ -2246,7 +2247,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -3105,7 +3106,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -3363,7 +3364,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -4835,7 +4836,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] replication_group_region
-    #   The AWS region of secondary cluster you wish to remove from the
+    #   The Amazon region of secondary cluster you wish to remove from the
     #   Global datastore
     #   @return [String]
     #
@@ -4851,7 +4852,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -4888,7 +4889,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] ec2_security_group_owner_id
-    #   The AWS account ID of the Amazon EC2 security group owner.
+    #   The Amazon account ID of the Amazon EC2 security group owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/EC2SecurityGroup AWS API Documentation
@@ -5026,7 +5027,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] primary_region
-    #   The AWS region of the primary cluster of the Global datastore
+    #   The Amazon region of the primary cluster of the Global datastore
     #   @return [String]
     #
     # @!attribute [rw] primary_replication_group_id
@@ -5045,7 +5046,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -5113,7 +5114,7 @@ module Aws::ElastiCache
     end
 
     # Consists of a primary cluster that accepts writes and an associated
-    # secondary cluster that resides in a different AWS region. The
+    # secondary cluster that resides in a different Amazon region. The
     # secondary cluster accepts only reads. The primary cluster
     # automatically replicates updates to the secondary cluster.
     #
@@ -5243,14 +5244,14 @@ module Aws::ElastiCache
     end
 
     # A member of a Global datastore. It contains the Replication Group Id,
-    # the AWS region and the role of the replication group.
+    # the Amazon region and the role of the replication group.
     #
     # @!attribute [rw] replication_group_id
     #   The replication group id of the Global datastore member.
     #   @return [String]
     #
     # @!attribute [rw] replication_group_region
-    #   The AWS region of the Global datastore member.
+    #   The Amazon region of the Global datastore member.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -5314,9 +5315,9 @@ module Aws::ElastiCache
     #   @return [Integer]
     #
     # @!attribute [rw] regional_configurations
-    #   Describes the replication group IDs, the AWS regions where they are
-    #   stored and the shard configuration for each that comprise the Global
-    #   datastore
+    #   Describes the replication group IDs, the Amazon regions where they
+    #   are stored and the shard configuration for each that comprise the
+    #   Global datastore
     #   @return [Array<Types::RegionalConfiguration>]
     #
     # @!attribute [rw] apply_immediately
@@ -5337,7 +5338,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -5615,7 +5616,7 @@ module Aws::ElastiCache
     #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -6301,7 +6302,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -6398,9 +6399,7 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_az_enabled
-    #   A list of tags to be added to this resource. A tag is a key-value
-    #   pair. A tag key must be accompanied by a tag value, although null is
-    #   accepted.
+    #   A flag to indicate MultiAZ is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] node_group_id
@@ -7443,7 +7442,7 @@ module Aws::ElastiCache
 
     # @!attribute [rw] global_replication_group
     #   Consists of a primary cluster that accepts writes and an associated
-    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster that resides in a different Amazon region. The
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
@@ -7545,7 +7544,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] replication_group_region
-    #   The AWS region where the cluster is stored
+    #   The Amazon region where the cluster is stored
     #   @return [String]
     #
     # @!attribute [rw] resharding_configuration
@@ -7580,7 +7579,7 @@ module Aws::ElastiCache
     #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   and Amazon Service Namespaces][1].
     #
     #
     #
@@ -7761,6 +7760,10 @@ module Aws::ElastiCache
     #   Returns the destination, format and type of the logs.
     #   @return [Array<Types::LogDeliveryConfiguration>]
     #
+    # @!attribute [rw] replication_group_create_time
+    #   The date and time when the cluster was created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -7787,7 +7790,8 @@ module Aws::ElastiCache
       :kms_key_id,
       :arn,
       :user_group_ids,
-      :log_delivery_configurations)
+      :log_delivery_configurations,
+      :replication_group_create_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8377,9 +8381,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] ec2_security_group_owner_id
-    #   The AWS account number of the Amazon EC2 security group owner. Note
-    #   that this is not the same thing as an AWS access key ID - you must
-    #   provide a valid AWS account number for this parameter.
+    #   The Amazon account number of the Amazon EC2 security group owner.
+    #   Note that this is not the same thing as an Amazon access key ID -
+    #   you must provide a valid Amazon account number for this parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngressMessage AWS API Documentation

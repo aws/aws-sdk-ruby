@@ -55,6 +55,7 @@ module Aws::SecretsManager
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    KmsKeyIdListType = Shapes::ListShape.new(name: 'KmsKeyIdListType')
     KmsKeyIdType = Shapes::StringShape.new(name: 'KmsKeyIdType')
     LastAccessedDateType = Shapes::TimestampShape.new(name: 'LastAccessedDateType')
     LastChangedDateType = Shapes::TimestampShape.new(name: 'LastChangedDateType')
@@ -260,6 +261,8 @@ module Aws::SecretsManager
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
+    KmsKeyIdListType.member = Shapes::ShapeRef.new(shape: KmsKeyIdType)
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -401,6 +404,7 @@ module Aws::SecretsManager
     SecretVersionsListEntry.add_member(:version_stages, Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
     SecretVersionsListEntry.add_member(:last_accessed_date, Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate", metadata: {"box"=>true}))
     SecretVersionsListEntry.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDateType, location_name: "CreatedDate", metadata: {"box"=>true}))
+    SecretVersionsListEntry.add_member(:kms_key_ids, Shapes::ShapeRef.new(shape: KmsKeyIdListType, location_name: "KmsKeyIds"))
     SecretVersionsListEntry.struct_class = Types::SecretVersionsListEntry
 
     SecretVersionsListType.member = Shapes::ShapeRef.new(shape: SecretVersionsListEntry)
@@ -547,6 +551,7 @@ module Aws::SecretsManager
         o.output = Shapes::ShapeRef.new(shape: DescribeSecretResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:get_random_password, Seahorse::Model::Operation.new.tap do |o|
@@ -569,6 +574,7 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:get_secret_value, Seahorse::Model::Operation.new.tap do |o|
@@ -593,6 +599,7 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

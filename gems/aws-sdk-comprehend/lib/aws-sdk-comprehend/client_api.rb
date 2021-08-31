@@ -584,6 +584,7 @@ module Aws::Comprehend
     DocumentClassificationJobFilter.struct_class = Types::DocumentClassificationJobFilter
 
     DocumentClassificationJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    DocumentClassificationJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     DocumentClassificationJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     DocumentClassificationJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     DocumentClassificationJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -651,6 +652,7 @@ module Aws::Comprehend
     DominantLanguageDetectionJobFilter.struct_class = Types::DominantLanguageDetectionJobFilter
 
     DominantLanguageDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    DominantLanguageDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     DominantLanguageDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     DominantLanguageDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     DominantLanguageDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -691,6 +693,7 @@ module Aws::Comprehend
     EntitiesDetectionJobFilter.struct_class = Types::EntitiesDetectionJobFilter
 
     EntitiesDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    EntitiesDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     EntitiesDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     EntitiesDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     EntitiesDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -795,6 +798,7 @@ module Aws::Comprehend
     EventsDetectionJobFilter.struct_class = Types::EventsDetectionJobFilter
 
     EventsDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    EventsDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     EventsDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     EventsDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     EventsDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -838,6 +842,7 @@ module Aws::Comprehend
     KeyPhrasesDetectionJobFilter.struct_class = Types::KeyPhrasesDetectionJobFilter
 
     KeyPhrasesDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    KeyPhrasesDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     KeyPhrasesDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     KeyPhrasesDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     KeyPhrasesDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -1005,6 +1010,7 @@ module Aws::Comprehend
     PiiEntitiesDetectionJobFilter.struct_class = Types::PiiEntitiesDetectionJobFilter
 
     PiiEntitiesDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    PiiEntitiesDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     PiiEntitiesDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     PiiEntitiesDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     PiiEntitiesDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -1056,6 +1062,7 @@ module Aws::Comprehend
     SentimentDetectionJobFilter.struct_class = Types::SentimentDetectionJobFilter
 
     SentimentDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    SentimentDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     SentimentDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     SentimentDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     SentimentDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -1085,9 +1092,11 @@ module Aws::Comprehend
     StartDocumentClassificationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartDocumentClassificationJobRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     StartDocumentClassificationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    StartDocumentClassificationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartDocumentClassificationJobRequest.struct_class = Types::StartDocumentClassificationJobRequest
 
     StartDocumentClassificationJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartDocumentClassificationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartDocumentClassificationJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartDocumentClassificationJobResponse.struct_class = Types::StartDocumentClassificationJobResponse
 
@@ -1098,9 +1107,11 @@ module Aws::Comprehend
     StartDominantLanguageDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartDominantLanguageDetectionJobRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     StartDominantLanguageDetectionJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    StartDominantLanguageDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartDominantLanguageDetectionJobRequest.struct_class = Types::StartDominantLanguageDetectionJobRequest
 
     StartDominantLanguageDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartDominantLanguageDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartDominantLanguageDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartDominantLanguageDetectionJobResponse.struct_class = Types::StartDominantLanguageDetectionJobResponse
 
@@ -1113,9 +1124,11 @@ module Aws::Comprehend
     StartEntitiesDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartEntitiesDetectionJobRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     StartEntitiesDetectionJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    StartEntitiesDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEntitiesDetectionJobRequest.struct_class = Types::StartEntitiesDetectionJobRequest
 
     StartEntitiesDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartEntitiesDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartEntitiesDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartEntitiesDetectionJobResponse.struct_class = Types::StartEntitiesDetectionJobResponse
 
@@ -1126,9 +1139,11 @@ module Aws::Comprehend
     StartEventsDetectionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     StartEventsDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartEventsDetectionJobRequest.add_member(:target_event_types, Shapes::ShapeRef.new(shape: TargetEventTypes, required: true, location_name: "TargetEventTypes"))
+    StartEventsDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartEventsDetectionJobRequest.struct_class = Types::StartEventsDetectionJobRequest
 
     StartEventsDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartEventsDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartEventsDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartEventsDetectionJobResponse.struct_class = Types::StartEventsDetectionJobResponse
 
@@ -1140,9 +1155,11 @@ module Aws::Comprehend
     StartKeyPhrasesDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartKeyPhrasesDetectionJobRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     StartKeyPhrasesDetectionJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    StartKeyPhrasesDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartKeyPhrasesDetectionJobRequest.struct_class = Types::StartKeyPhrasesDetectionJobRequest
 
     StartKeyPhrasesDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartKeyPhrasesDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartKeyPhrasesDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartKeyPhrasesDetectionJobResponse.struct_class = Types::StartKeyPhrasesDetectionJobResponse
 
@@ -1154,9 +1171,11 @@ module Aws::Comprehend
     StartPiiEntitiesDetectionJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     StartPiiEntitiesDetectionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     StartPiiEntitiesDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartPiiEntitiesDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartPiiEntitiesDetectionJobRequest.struct_class = Types::StartPiiEntitiesDetectionJobRequest
 
     StartPiiEntitiesDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartPiiEntitiesDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartPiiEntitiesDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartPiiEntitiesDetectionJobResponse.struct_class = Types::StartPiiEntitiesDetectionJobResponse
 
@@ -1168,9 +1187,11 @@ module Aws::Comprehend
     StartSentimentDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartSentimentDetectionJobRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     StartSentimentDetectionJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    StartSentimentDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartSentimentDetectionJobRequest.struct_class = Types::StartSentimentDetectionJobRequest
 
     StartSentimentDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartSentimentDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartSentimentDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartSentimentDetectionJobResponse.struct_class = Types::StartSentimentDetectionJobResponse
 
@@ -1182,9 +1203,11 @@ module Aws::Comprehend
     StartTopicsDetectionJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartTopicsDetectionJobRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     StartTopicsDetectionJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    StartTopicsDetectionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartTopicsDetectionJobRequest.struct_class = Types::StartTopicsDetectionJobRequest
 
     StartTopicsDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartTopicsDetectionJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     StartTopicsDetectionJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     StartTopicsDetectionJobResponse.struct_class = Types::StartTopicsDetectionJobResponse
 
@@ -1284,6 +1307,7 @@ module Aws::Comprehend
     TopicsDetectionJobFilter.struct_class = Types::TopicsDetectionJobFilter
 
     TopicsDetectionJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    TopicsDetectionJobProperties.add_member(:job_arn, Shapes::ShapeRef.new(shape: ComprehendArn, location_name: "JobArn"))
     TopicsDetectionJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     TopicsDetectionJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
     TopicsDetectionJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
@@ -1925,6 +1949,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1937,6 +1962,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1951,6 +1977,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1963,6 +1990,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1975,6 +2003,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1987,6 +2016,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1999,6 +2029,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2011,6 +2042,7 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

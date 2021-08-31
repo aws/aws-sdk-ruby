@@ -48,10 +48,16 @@ module Aws::Backup
     BackupVaultName = Shapes::StringShape.new(name: 'BackupVaultName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CalculatedLifecycle = Shapes::StructureShape.new(name: 'CalculatedLifecycle')
+    ComplianceResourceIdList = Shapes::ListShape.new(name: 'ComplianceResourceIdList')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
     ConditionType = Shapes::StringShape.new(name: 'ConditionType')
     ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ControlInputParameter = Shapes::StructureShape.new(name: 'ControlInputParameter')
+    ControlInputParameters = Shapes::ListShape.new(name: 'ControlInputParameters')
+    ControlName = Shapes::StringShape.new(name: 'ControlName')
+    ControlScope = Shapes::StructureShape.new(name: 'ControlScope')
     CopyAction = Shapes::StructureShape.new(name: 'CopyAction')
     CopyActions = Shapes::ListShape.new(name: 'CopyActions')
     CopyJob = Shapes::StructureShape.new(name: 'CopyJob')
@@ -63,6 +69,10 @@ module Aws::Backup
     CreateBackupSelectionOutput = Shapes::StructureShape.new(name: 'CreateBackupSelectionOutput')
     CreateBackupVaultInput = Shapes::StructureShape.new(name: 'CreateBackupVaultInput')
     CreateBackupVaultOutput = Shapes::StructureShape.new(name: 'CreateBackupVaultOutput')
+    CreateFrameworkInput = Shapes::StructureShape.new(name: 'CreateFrameworkInput')
+    CreateFrameworkOutput = Shapes::StructureShape.new(name: 'CreateFrameworkOutput')
+    CreateReportPlanInput = Shapes::StructureShape.new(name: 'CreateReportPlanInput')
+    CreateReportPlanOutput = Shapes::StructureShape.new(name: 'CreateReportPlanOutput')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     DeleteBackupPlanInput = Shapes::StructureShape.new(name: 'DeleteBackupPlanInput')
     DeleteBackupPlanOutput = Shapes::StructureShape.new(name: 'DeleteBackupPlanOutput')
@@ -70,7 +80,9 @@ module Aws::Backup
     DeleteBackupVaultAccessPolicyInput = Shapes::StructureShape.new(name: 'DeleteBackupVaultAccessPolicyInput')
     DeleteBackupVaultInput = Shapes::StructureShape.new(name: 'DeleteBackupVaultInput')
     DeleteBackupVaultNotificationsInput = Shapes::StructureShape.new(name: 'DeleteBackupVaultNotificationsInput')
+    DeleteFrameworkInput = Shapes::StructureShape.new(name: 'DeleteFrameworkInput')
     DeleteRecoveryPointInput = Shapes::StructureShape.new(name: 'DeleteRecoveryPointInput')
+    DeleteReportPlanInput = Shapes::StructureShape.new(name: 'DeleteReportPlanInput')
     DependencyFailureException = Shapes::StructureShape.new(name: 'DependencyFailureException')
     DescribeBackupJobInput = Shapes::StructureShape.new(name: 'DescribeBackupJobInput')
     DescribeBackupJobOutput = Shapes::StructureShape.new(name: 'DescribeBackupJobOutput')
@@ -78,6 +90,8 @@ module Aws::Backup
     DescribeBackupVaultOutput = Shapes::StructureShape.new(name: 'DescribeBackupVaultOutput')
     DescribeCopyJobInput = Shapes::StructureShape.new(name: 'DescribeCopyJobInput')
     DescribeCopyJobOutput = Shapes::StructureShape.new(name: 'DescribeCopyJobOutput')
+    DescribeFrameworkInput = Shapes::StructureShape.new(name: 'DescribeFrameworkInput')
+    DescribeFrameworkOutput = Shapes::StructureShape.new(name: 'DescribeFrameworkOutput')
     DescribeGlobalSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalSettingsInput')
     DescribeGlobalSettingsOutput = Shapes::StructureShape.new(name: 'DescribeGlobalSettingsOutput')
     DescribeProtectedResourceInput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceInput')
@@ -86,11 +100,22 @@ module Aws::Backup
     DescribeRecoveryPointOutput = Shapes::StructureShape.new(name: 'DescribeRecoveryPointOutput')
     DescribeRegionSettingsInput = Shapes::StructureShape.new(name: 'DescribeRegionSettingsInput')
     DescribeRegionSettingsOutput = Shapes::StructureShape.new(name: 'DescribeRegionSettingsOutput')
+    DescribeReportJobInput = Shapes::StructureShape.new(name: 'DescribeReportJobInput')
+    DescribeReportJobOutput = Shapes::StructureShape.new(name: 'DescribeReportJobOutput')
+    DescribeReportPlanInput = Shapes::StructureShape.new(name: 'DescribeReportPlanInput')
+    DescribeReportPlanOutput = Shapes::StructureShape.new(name: 'DescribeReportPlanOutput')
     DescribeRestoreJobInput = Shapes::StructureShape.new(name: 'DescribeRestoreJobInput')
     DescribeRestoreJobOutput = Shapes::StructureShape.new(name: 'DescribeRestoreJobOutput')
     DisassociateRecoveryPointInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointInput')
     ExportBackupPlanTemplateInput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateInput')
     ExportBackupPlanTemplateOutput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateOutput')
+    FormatList = Shapes::ListShape.new(name: 'FormatList')
+    Framework = Shapes::StructureShape.new(name: 'Framework')
+    FrameworkControl = Shapes::StructureShape.new(name: 'FrameworkControl')
+    FrameworkControls = Shapes::ListShape.new(name: 'FrameworkControls')
+    FrameworkDescription = Shapes::StringShape.new(name: 'FrameworkDescription')
+    FrameworkList = Shapes::ListShape.new(name: 'FrameworkList')
+    FrameworkName = Shapes::StringShape.new(name: 'FrameworkName')
     GetBackupPlanFromJSONInput = Shapes::StructureShape.new(name: 'GetBackupPlanFromJSONInput')
     GetBackupPlanFromJSONOutput = Shapes::StructureShape.new(name: 'GetBackupPlanFromJSONOutput')
     GetBackupPlanFromTemplateInput = Shapes::StructureShape.new(name: 'GetBackupPlanFromTemplateInput')
@@ -131,6 +156,8 @@ module Aws::Backup
     ListBackupVaultsOutput = Shapes::StructureShape.new(name: 'ListBackupVaultsOutput')
     ListCopyJobsInput = Shapes::StructureShape.new(name: 'ListCopyJobsInput')
     ListCopyJobsOutput = Shapes::StructureShape.new(name: 'ListCopyJobsOutput')
+    ListFrameworksInput = Shapes::StructureShape.new(name: 'ListFrameworksInput')
+    ListFrameworksOutput = Shapes::StructureShape.new(name: 'ListFrameworksOutput')
     ListOfTags = Shapes::ListShape.new(name: 'ListOfTags')
     ListProtectedResourcesInput = Shapes::StructureShape.new(name: 'ListProtectedResourcesInput')
     ListProtectedResourcesOutput = Shapes::StructureShape.new(name: 'ListProtectedResourcesOutput')
@@ -138,16 +165,23 @@ module Aws::Backup
     ListRecoveryPointsByBackupVaultOutput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByBackupVaultOutput')
     ListRecoveryPointsByResourceInput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByResourceInput')
     ListRecoveryPointsByResourceOutput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByResourceOutput')
+    ListReportJobsInput = Shapes::StructureShape.new(name: 'ListReportJobsInput')
+    ListReportJobsOutput = Shapes::StructureShape.new(name: 'ListReportJobsOutput')
+    ListReportPlansInput = Shapes::StructureShape.new(name: 'ListReportPlansInput')
+    ListReportPlansOutput = Shapes::StructureShape.new(name: 'ListReportPlansOutput')
     ListRestoreJobsInput = Shapes::StructureShape.new(name: 'ListRestoreJobsInput')
     ListRestoreJobsOutput = Shapes::StructureShape.new(name: 'ListRestoreJobsOutput')
     ListTagsInput = Shapes::StructureShape.new(name: 'ListTagsInput')
     ListTagsOutput = Shapes::StructureShape.new(name: 'ListTagsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxFrameworkInputs = Shapes::IntegerShape.new(name: 'MaxFrameworkInputs')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataValue = Shapes::StringShape.new(name: 'MetadataValue')
     MissingParameterValueException = Shapes::StructureShape.new(name: 'MissingParameterValueException')
+    ParameterName = Shapes::StringShape.new(name: 'ParameterName')
+    ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ProtectedResource = Shapes::StructureShape.new(name: 'ProtectedResource')
     ProtectedResourcesList = Shapes::ListShape.new(name: 'ProtectedResourcesList')
     PutBackupVaultAccessPolicyInput = Shapes::StructureShape.new(name: 'PutBackupVaultAccessPolicyInput')
@@ -158,9 +192,20 @@ module Aws::Backup
     RecoveryPointByResourceList = Shapes::ListShape.new(name: 'RecoveryPointByResourceList')
     RecoveryPointCreator = Shapes::StructureShape.new(name: 'RecoveryPointCreator')
     RecoveryPointStatus = Shapes::StringShape.new(name: 'RecoveryPointStatus')
+    ReportDeliveryChannel = Shapes::StructureShape.new(name: 'ReportDeliveryChannel')
+    ReportDestination = Shapes::StructureShape.new(name: 'ReportDestination')
+    ReportJob = Shapes::StructureShape.new(name: 'ReportJob')
+    ReportJobId = Shapes::StringShape.new(name: 'ReportJobId')
+    ReportJobList = Shapes::ListShape.new(name: 'ReportJobList')
+    ReportPlan = Shapes::StructureShape.new(name: 'ReportPlan')
+    ReportPlanDescription = Shapes::StringShape.new(name: 'ReportPlanDescription')
+    ReportPlanList = Shapes::ListShape.new(name: 'ReportPlanList')
+    ReportPlanName = Shapes::StringShape.new(name: 'ReportPlanName')
+    ReportSetting = Shapes::StructureShape.new(name: 'ReportSetting')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResourceTypeOptInPreference = Shapes::MapShape.new(name: 'ResourceTypeOptInPreference')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     RestoreJobId = Shapes::StringShape.new(name: 'RestoreJobId')
@@ -172,6 +217,8 @@ module Aws::Backup
     StartBackupJobOutput = Shapes::StructureShape.new(name: 'StartBackupJobOutput')
     StartCopyJobInput = Shapes::StructureShape.new(name: 'StartCopyJobInput')
     StartCopyJobOutput = Shapes::StructureShape.new(name: 'StartCopyJobOutput')
+    StartReportJobInput = Shapes::StructureShape.new(name: 'StartReportJobInput')
+    StartReportJobOutput = Shapes::StructureShape.new(name: 'StartReportJobOutput')
     StartRestoreJobInput = Shapes::StructureShape.new(name: 'StartRestoreJobInput')
     StartRestoreJobOutput = Shapes::StructureShape.new(name: 'StartRestoreJobOutput')
     StopBackupJobInput = Shapes::StructureShape.new(name: 'StopBackupJobInput')
@@ -184,14 +231,21 @@ module Aws::Backup
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateBackupPlanInput = Shapes::StructureShape.new(name: 'UpdateBackupPlanInput')
     UpdateBackupPlanOutput = Shapes::StructureShape.new(name: 'UpdateBackupPlanOutput')
+    UpdateFrameworkInput = Shapes::StructureShape.new(name: 'UpdateFrameworkInput')
+    UpdateFrameworkOutput = Shapes::StructureShape.new(name: 'UpdateFrameworkOutput')
     UpdateGlobalSettingsInput = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsInput')
     UpdateRecoveryPointLifecycleInput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleInput')
     UpdateRecoveryPointLifecycleOutput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleOutput')
     UpdateRegionSettingsInput = Shapes::StructureShape.new(name: 'UpdateRegionSettingsInput')
+    UpdateReportPlanInput = Shapes::StructureShape.new(name: 'UpdateReportPlanInput')
+    UpdateReportPlanOutput = Shapes::StructureShape.new(name: 'UpdateReportPlanOutput')
     WindowMinutes = Shapes::IntegerShape.new(name: 'WindowMinutes')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
+    integer = Shapes::IntegerShape.new(name: 'integer')
     long = Shapes::IntegerShape.new(name: 'long')
     string = Shapes::StringShape.new(name: 'string')
+    stringList = Shapes::ListShape.new(name: 'stringList')
+    stringMap = Shapes::MapShape.new(name: 'stringMap')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
     AdvancedBackupSetting.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
@@ -325,10 +379,29 @@ module Aws::Backup
     CalculatedLifecycle.add_member(:delete_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "DeleteAt"))
     CalculatedLifecycle.struct_class = Types::CalculatedLifecycle
 
+    ComplianceResourceIdList.member = Shapes::ShapeRef.new(shape: string)
+
     Condition.add_member(:condition_type, Shapes::ShapeRef.new(shape: ConditionType, required: true, location_name: "ConditionType"))
     Condition.add_member(:condition_key, Shapes::ShapeRef.new(shape: ConditionKey, required: true, location_name: "ConditionKey"))
     Condition.add_member(:condition_value, Shapes::ShapeRef.new(shape: ConditionValue, required: true, location_name: "ConditionValue"))
     Condition.struct_class = Types::Condition
+
+    ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ConflictException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    ConflictException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    ConflictException.struct_class = Types::ConflictException
+
+    ControlInputParameter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
+    ControlInputParameter.add_member(:parameter_value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "ParameterValue"))
+    ControlInputParameter.struct_class = Types::ControlInputParameter
+
+    ControlInputParameters.member = Shapes::ShapeRef.new(shape: ControlInputParameter)
+
+    ControlScope.add_member(:compliance_resource_ids, Shapes::ShapeRef.new(shape: ComplianceResourceIdList, location_name: "ComplianceResourceIds"))
+    ControlScope.add_member(:compliance_resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "ComplianceResourceTypes"))
+    ControlScope.add_member(:tags, Shapes::ShapeRef.new(shape: stringMap, location_name: "Tags"))
+    ControlScope.struct_class = Types::ControlScope
 
     CopyAction.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     CopyAction.add_member(:destination_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "DestinationBackupVaultArn"))
@@ -388,6 +461,29 @@ module Aws::Backup
     CreateBackupVaultOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     CreateBackupVaultOutput.struct_class = Types::CreateBackupVaultOutput
 
+    CreateFrameworkInput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, required: true, location_name: "FrameworkName"))
+    CreateFrameworkInput.add_member(:framework_description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "FrameworkDescription"))
+    CreateFrameworkInput.add_member(:framework_controls, Shapes::ShapeRef.new(shape: FrameworkControls, required: true, location_name: "FrameworkControls"))
+    CreateFrameworkInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateFrameworkInput.add_member(:framework_tags, Shapes::ShapeRef.new(shape: stringMap, location_name: "FrameworkTags"))
+    CreateFrameworkInput.struct_class = Types::CreateFrameworkInput
+
+    CreateFrameworkOutput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, location_name: "FrameworkName"))
+    CreateFrameworkOutput.add_member(:framework_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FrameworkArn"))
+    CreateFrameworkOutput.struct_class = Types::CreateFrameworkOutput
+
+    CreateReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location_name: "ReportPlanName"))
+    CreateReportPlanInput.add_member(:report_plan_description, Shapes::ShapeRef.new(shape: ReportPlanDescription, location_name: "ReportPlanDescription"))
+    CreateReportPlanInput.add_member(:report_delivery_channel, Shapes::ShapeRef.new(shape: ReportDeliveryChannel, required: true, location_name: "ReportDeliveryChannel"))
+    CreateReportPlanInput.add_member(:report_setting, Shapes::ShapeRef.new(shape: ReportSetting, required: true, location_name: "ReportSetting"))
+    CreateReportPlanInput.add_member(:report_plan_tags, Shapes::ShapeRef.new(shape: stringMap, location_name: "ReportPlanTags"))
+    CreateReportPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateReportPlanInput.struct_class = Types::CreateReportPlanInput
+
+    CreateReportPlanOutput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location_name: "ReportPlanName"))
+    CreateReportPlanOutput.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
+    CreateReportPlanOutput.struct_class = Types::CreateReportPlanOutput
+
     DeleteBackupPlanInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
     DeleteBackupPlanInput.struct_class = Types::DeleteBackupPlanInput
 
@@ -410,9 +506,15 @@ module Aws::Backup
     DeleteBackupVaultNotificationsInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     DeleteBackupVaultNotificationsInput.struct_class = Types::DeleteBackupVaultNotificationsInput
 
+    DeleteFrameworkInput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, required: true, location: "uri", location_name: "frameworkName"))
+    DeleteFrameworkInput.struct_class = Types::DeleteFrameworkInput
+
     DeleteRecoveryPointInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     DeleteRecoveryPointInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
     DeleteRecoveryPointInput.struct_class = Types::DeleteRecoveryPointInput
+
+    DeleteReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
+    DeleteReportPlanInput.struct_class = Types::DeleteReportPlanInput
 
     DependencyFailureException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     DependencyFailureException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
@@ -462,6 +564,19 @@ module Aws::Backup
     DescribeCopyJobOutput.add_member(:copy_job, Shapes::ShapeRef.new(shape: CopyJob, location_name: "CopyJob"))
     DescribeCopyJobOutput.struct_class = Types::DescribeCopyJobOutput
 
+    DescribeFrameworkInput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, required: true, location: "uri", location_name: "frameworkName"))
+    DescribeFrameworkInput.struct_class = Types::DescribeFrameworkInput
+
+    DescribeFrameworkOutput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, location_name: "FrameworkName"))
+    DescribeFrameworkOutput.add_member(:framework_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FrameworkArn"))
+    DescribeFrameworkOutput.add_member(:framework_description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "FrameworkDescription"))
+    DescribeFrameworkOutput.add_member(:framework_controls, Shapes::ShapeRef.new(shape: FrameworkControls, location_name: "FrameworkControls"))
+    DescribeFrameworkOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    DescribeFrameworkOutput.add_member(:deployment_status, Shapes::ShapeRef.new(shape: string, location_name: "DeploymentStatus"))
+    DescribeFrameworkOutput.add_member(:framework_status, Shapes::ShapeRef.new(shape: string, location_name: "FrameworkStatus"))
+    DescribeFrameworkOutput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
+    DescribeFrameworkOutput.struct_class = Types::DescribeFrameworkOutput
+
     DescribeGlobalSettingsInput.struct_class = Types::DescribeGlobalSettingsInput
 
     DescribeGlobalSettingsOutput.add_member(:global_settings, Shapes::ShapeRef.new(shape: GlobalSettings, location_name: "GlobalSettings"))
@@ -489,6 +604,7 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
     DescribeRecoveryPointOutput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     DescribeRecoveryPointOutput.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPointStatus, location_name: "Status"))
+    DescribeRecoveryPointOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
     DescribeRecoveryPointOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     DescribeRecoveryPointOutput.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
     DescribeRecoveryPointOutput.add_member(:backup_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeInBytes"))
@@ -504,6 +620,18 @@ module Aws::Backup
 
     DescribeRegionSettingsOutput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
     DescribeRegionSettingsOutput.struct_class = Types::DescribeRegionSettingsOutput
+
+    DescribeReportJobInput.add_member(:report_job_id, Shapes::ShapeRef.new(shape: ReportJobId, required: true, location: "uri", location_name: "reportJobId"))
+    DescribeReportJobInput.struct_class = Types::DescribeReportJobInput
+
+    DescribeReportJobOutput.add_member(:report_job, Shapes::ShapeRef.new(shape: ReportJob, location_name: "ReportJob"))
+    DescribeReportJobOutput.struct_class = Types::DescribeReportJobOutput
+
+    DescribeReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
+    DescribeReportPlanInput.struct_class = Types::DescribeReportPlanInput
+
+    DescribeReportPlanOutput.add_member(:report_plan, Shapes::ShapeRef.new(shape: ReportPlan, location_name: "ReportPlan"))
+    DescribeReportPlanOutput.struct_class = Types::DescribeReportPlanOutput
 
     DescribeRestoreJobInput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, required: true, location: "uri", location_name: "restoreJobId"))
     DescribeRestoreJobInput.struct_class = Types::DescribeRestoreJobInput
@@ -532,6 +660,25 @@ module Aws::Backup
 
     ExportBackupPlanTemplateOutput.add_member(:backup_plan_template_json, Shapes::ShapeRef.new(shape: string, location_name: "BackupPlanTemplateJson"))
     ExportBackupPlanTemplateOutput.struct_class = Types::ExportBackupPlanTemplateOutput
+
+    FormatList.member = Shapes::ShapeRef.new(shape: string)
+
+    Framework.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, location_name: "FrameworkName"))
+    Framework.add_member(:framework_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FrameworkArn"))
+    Framework.add_member(:framework_description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "FrameworkDescription"))
+    Framework.add_member(:number_of_controls, Shapes::ShapeRef.new(shape: integer, location_name: "NumberOfControls"))
+    Framework.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    Framework.add_member(:deployment_status, Shapes::ShapeRef.new(shape: string, location_name: "DeploymentStatus"))
+    Framework.struct_class = Types::Framework
+
+    FrameworkControl.add_member(:control_name, Shapes::ShapeRef.new(shape: ControlName, required: true, location_name: "ControlName"))
+    FrameworkControl.add_member(:control_input_parameters, Shapes::ShapeRef.new(shape: ControlInputParameters, location_name: "ControlInputParameters"))
+    FrameworkControl.add_member(:control_scope, Shapes::ShapeRef.new(shape: ControlScope, location_name: "ControlScope"))
+    FrameworkControl.struct_class = Types::FrameworkControl
+
+    FrameworkControls.member = Shapes::ShapeRef.new(shape: FrameworkControl)
+
+    FrameworkList.member = Shapes::ShapeRef.new(shape: Framework)
 
     GetBackupPlanFromJSONInput.add_member(:backup_plan_template_json, Shapes::ShapeRef.new(shape: string, required: true, location_name: "BackupPlanTemplateJson"))
     GetBackupPlanFromJSONInput.struct_class = Types::GetBackupPlanFromJSONInput
@@ -704,6 +851,14 @@ module Aws::Backup
     ListCopyJobsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListCopyJobsOutput.struct_class = Types::ListCopyJobsOutput
 
+    ListFrameworksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxFrameworkInputs, location: "querystring", location_name: "MaxResults"))
+    ListFrameworksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "NextToken"))
+    ListFrameworksInput.struct_class = Types::ListFrameworksInput
+
+    ListFrameworksOutput.add_member(:frameworks, Shapes::ShapeRef.new(shape: FrameworkList, location_name: "Frameworks"))
+    ListFrameworksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListFrameworksOutput.struct_class = Types::ListFrameworksOutput
+
     ListOfTags.member = Shapes::ShapeRef.new(shape: Condition)
 
     ListProtectedResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
@@ -736,6 +891,26 @@ module Aws::Backup
     ListRecoveryPointsByResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListRecoveryPointsByResourceOutput.add_member(:recovery_points, Shapes::ShapeRef.new(shape: RecoveryPointByResourceList, location_name: "RecoveryPoints"))
     ListRecoveryPointsByResourceOutput.struct_class = Types::ListRecoveryPointsByResourceOutput
+
+    ListReportJobsInput.add_member(:by_report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location: "querystring", location_name: "ReportPlanName"))
+    ListReportJobsInput.add_member(:by_creation_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "CreationBefore"))
+    ListReportJobsInput.add_member(:by_creation_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "CreationAfter"))
+    ListReportJobsInput.add_member(:by_status, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Status"))
+    ListReportJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListReportJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "NextToken"))
+    ListReportJobsInput.struct_class = Types::ListReportJobsInput
+
+    ListReportJobsOutput.add_member(:report_jobs, Shapes::ShapeRef.new(shape: ReportJobList, location_name: "ReportJobs"))
+    ListReportJobsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListReportJobsOutput.struct_class = Types::ListReportJobsOutput
+
+    ListReportPlansInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListReportPlansInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "NextToken"))
+    ListReportPlansInput.struct_class = Types::ListReportPlansInput
+
+    ListReportPlansOutput.add_member(:report_plans, Shapes::ShapeRef.new(shape: ReportPlanList, location_name: "ReportPlans"))
+    ListReportPlansOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListReportPlansOutput.struct_class = Types::ListReportPlansOutput
 
     ListRestoreJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListRestoreJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -792,6 +967,7 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
     RecoveryPointByBackupVault.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     RecoveryPointByBackupVault.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPointStatus, location_name: "Status"))
+    RecoveryPointByBackupVault.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
     RecoveryPointByBackupVault.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     RecoveryPointByBackupVault.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
     RecoveryPointByBackupVault.add_member(:backup_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeInBytes"))
@@ -807,6 +983,7 @@ module Aws::Backup
     RecoveryPointByResource.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     RecoveryPointByResource.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     RecoveryPointByResource.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPointStatus, location_name: "Status"))
+    RecoveryPointByResource.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
     RecoveryPointByResource.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     RecoveryPointByResource.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeBytes"))
     RecoveryPointByResource.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
@@ -820,6 +997,43 @@ module Aws::Backup
     RecoveryPointCreator.add_member(:backup_rule_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupRuleId"))
     RecoveryPointCreator.struct_class = Types::RecoveryPointCreator
 
+    ReportDeliveryChannel.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "S3BucketName"))
+    ReportDeliveryChannel.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: string, location_name: "S3KeyPrefix"))
+    ReportDeliveryChannel.add_member(:formats, Shapes::ShapeRef.new(shape: FormatList, location_name: "Formats"))
+    ReportDeliveryChannel.struct_class = Types::ReportDeliveryChannel
+
+    ReportDestination.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: string, location_name: "S3BucketName"))
+    ReportDestination.add_member(:s3_keys, Shapes::ShapeRef.new(shape: stringList, location_name: "S3Keys"))
+    ReportDestination.struct_class = Types::ReportDestination
+
+    ReportJob.add_member(:report_job_id, Shapes::ShapeRef.new(shape: ReportJobId, location_name: "ReportJobId"))
+    ReportJob.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
+    ReportJob.add_member(:report_template, Shapes::ShapeRef.new(shape: string, location_name: "ReportTemplate"))
+    ReportJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    ReportJob.add_member(:completion_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionTime"))
+    ReportJob.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "Status"))
+    ReportJob.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
+    ReportJob.add_member(:report_destination, Shapes::ShapeRef.new(shape: ReportDestination, location_name: "ReportDestination"))
+    ReportJob.struct_class = Types::ReportJob
+
+    ReportJobList.member = Shapes::ShapeRef.new(shape: ReportJob)
+
+    ReportPlan.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
+    ReportPlan.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location_name: "ReportPlanName"))
+    ReportPlan.add_member(:report_plan_description, Shapes::ShapeRef.new(shape: ReportPlanDescription, location_name: "ReportPlanDescription"))
+    ReportPlan.add_member(:report_setting, Shapes::ShapeRef.new(shape: ReportSetting, location_name: "ReportSetting"))
+    ReportPlan.add_member(:report_delivery_channel, Shapes::ShapeRef.new(shape: ReportDeliveryChannel, location_name: "ReportDeliveryChannel"))
+    ReportPlan.add_member(:deployment_status, Shapes::ShapeRef.new(shape: string, location_name: "DeploymentStatus"))
+    ReportPlan.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    ReportPlan.add_member(:last_attempted_execution_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastAttemptedExecutionTime"))
+    ReportPlan.add_member(:last_successful_execution_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastSuccessfulExecutionTime"))
+    ReportPlan.struct_class = Types::ReportPlan
+
+    ReportPlanList.member = Shapes::ShapeRef.new(shape: ReportPlan)
+
+    ReportSetting.add_member(:report_template, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ReportTemplate"))
+    ReportSetting.struct_class = Types::ReportSetting
+
     ResourceArns.member = Shapes::ShapeRef.new(shape: ARN)
 
     ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
@@ -827,6 +1041,8 @@ module Aws::Backup
     ResourceNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
     ResourceNotFoundException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceTypeList.member = Shapes::ShapeRef.new(shape: ARN)
 
     ResourceTypeOptInPreference.key = Shapes::ShapeRef.new(shape: ResourceType)
     ResourceTypeOptInPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
@@ -884,6 +1100,13 @@ module Aws::Backup
     StartCopyJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     StartCopyJobOutput.struct_class = Types::StartCopyJobOutput
 
+    StartReportJobInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
+    StartReportJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    StartReportJobInput.struct_class = Types::StartReportJobInput
+
+    StartReportJobOutput.add_member(:report_job_id, Shapes::ShapeRef.new(shape: ReportJobId, location_name: "ReportJobId"))
+    StartReportJobOutput.struct_class = Types::StartReportJobOutput
+
     StartRestoreJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RecoveryPointArn"))
     StartRestoreJobInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, required: true, location_name: "Metadata"))
     StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
@@ -921,6 +1144,17 @@ module Aws::Backup
     UpdateBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     UpdateBackupPlanOutput.struct_class = Types::UpdateBackupPlanOutput
 
+    UpdateFrameworkInput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, required: true, location: "uri", location_name: "frameworkName"))
+    UpdateFrameworkInput.add_member(:framework_description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "FrameworkDescription"))
+    UpdateFrameworkInput.add_member(:framework_controls, Shapes::ShapeRef.new(shape: FrameworkControls, location_name: "FrameworkControls"))
+    UpdateFrameworkInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFrameworkInput.struct_class = Types::UpdateFrameworkInput
+
+    UpdateFrameworkOutput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, location_name: "FrameworkName"))
+    UpdateFrameworkOutput.add_member(:framework_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FrameworkArn"))
+    UpdateFrameworkOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    UpdateFrameworkOutput.struct_class = Types::UpdateFrameworkOutput
+
     UpdateGlobalSettingsInput.add_member(:global_settings, Shapes::ShapeRef.new(shape: GlobalSettings, location_name: "GlobalSettings"))
     UpdateGlobalSettingsInput.struct_class = Types::UpdateGlobalSettingsInput
 
@@ -937,6 +1171,23 @@ module Aws::Backup
 
     UpdateRegionSettingsInput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
     UpdateRegionSettingsInput.struct_class = Types::UpdateRegionSettingsInput
+
+    UpdateReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
+    UpdateReportPlanInput.add_member(:report_plan_description, Shapes::ShapeRef.new(shape: ReportPlanDescription, location_name: "ReportPlanDescription"))
+    UpdateReportPlanInput.add_member(:report_delivery_channel, Shapes::ShapeRef.new(shape: ReportDeliveryChannel, location_name: "ReportDeliveryChannel"))
+    UpdateReportPlanInput.add_member(:report_setting, Shapes::ShapeRef.new(shape: ReportSetting, location_name: "ReportSetting"))
+    UpdateReportPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    UpdateReportPlanInput.struct_class = Types::UpdateReportPlanInput
+
+    UpdateReportPlanOutput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location_name: "ReportPlanName"))
+    UpdateReportPlanOutput.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
+    UpdateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    UpdateReportPlanOutput.struct_class = Types::UpdateReportPlanOutput
+
+    stringList.member = Shapes::ShapeRef.new(shape: string)
+
+    stringMap.key = Shapes::ShapeRef.new(shape: string)
+    stringMap.value = Shapes::ShapeRef.new(shape: string)
 
 
     # @api private
@@ -992,6 +1243,32 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+      end)
+
+      api.add_operation(:create_framework, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFramework"
+        o.http_method = "POST"
+        o.http_request_uri = "/audit/frameworks"
+        o.input = Shapes::ShapeRef.new(shape: CreateFrameworkInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateFrameworkOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:create_report_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateReportPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/audit/report-plans"
+        o.input = Shapes::ShapeRef.new(shape: CreateReportPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateReportPlanOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
       end)
 
       api.add_operation(:delete_backup_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -1056,6 +1333,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_framework, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFramework"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/audit/frameworks/{frameworkName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFrameworkInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_recovery_point, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRecoveryPoint"
         o.http_method = "DELETE"
@@ -1068,6 +1358,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:delete_report_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteReportPlan"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/audit/report-plans/{reportPlanName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteReportPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_backup_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1101,6 +1404,18 @@ module Aws::Backup
         o.http_request_uri = "/copy-jobs/{copyJobId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeCopyJobInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeCopyJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_framework, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFramework"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/frameworks/{frameworkName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFrameworkInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFrameworkOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
@@ -1147,6 +1462,29 @@ module Aws::Backup
         o.http_request_uri = "/account-settings"
         o.input = Shapes::ShapeRef.new(shape: DescribeRegionSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeRegionSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_report_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReportJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/report-jobs/{reportJobId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReportJobInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReportJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_report_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReportPlan"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/report-plans/{reportPlanName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReportPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReportPlanOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1405,6 +1743,22 @@ module Aws::Backup
         )
       end)
 
+      api.add_operation(:list_frameworks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFrameworks"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/frameworks"
+        o.input = Shapes::ShapeRef.new(shape: ListFrameworksInput)
+        o.output = Shapes::ShapeRef.new(shape: ListFrameworksOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_protected_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListProtectedResources"
         o.http_method = "GET"
@@ -1448,6 +1802,38 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_report_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/report-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListReportJobsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReportJobsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_report_plans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReportPlans"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/report-plans"
+        o.input = Shapes::ShapeRef.new(shape: ListReportPlansInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReportPlansOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1545,6 +1931,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:start_report_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartReportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/audit/report-jobs/{reportPlanName}"
+        o.input = Shapes::ShapeRef.new(shape: StartReportJobInput)
+        o.output = Shapes::ShapeRef.new(shape: StartReportJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_restore_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartRestoreJob"
         o.http_method = "PUT"
@@ -1607,6 +2005,20 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:update_framework, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFramework"
+        o.http_method = "PUT"
+        o.http_request_uri = "/audit/frameworks/{frameworkName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFrameworkInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFrameworkOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateGlobalSettings"
         o.http_method = "PUT"
@@ -1640,6 +2052,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:update_report_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReportPlan"
+        o.http_method = "PUT"
+        o.http_request_uri = "/audit/report-plans/{reportPlanName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReportPlanInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReportPlanOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

@@ -14,6 +14,7 @@ module Aws::SSMContacts
     include Seahorse::Model
 
     AcceptCode = Shapes::StringShape.new(name: 'AcceptCode')
+    AcceptCodeValidation = Shapes::StringShape.new(name: 'AcceptCodeValidation')
     AcceptPageRequest = Shapes::StructureShape.new(name: 'AcceptPageRequest')
     AcceptPageResult = Shapes::StructureShape.new(name: 'AcceptPageResult')
     AcceptType = Shapes::StringShape.new(name: 'AcceptType')
@@ -140,6 +141,7 @@ module Aws::SSMContacts
     AcceptPageRequest.add_member(:accept_type, Shapes::ShapeRef.new(shape: AcceptType, required: true, location_name: "AcceptType"))
     AcceptPageRequest.add_member(:note, Shapes::ShapeRef.new(shape: ReceiptInfo, location_name: "Note"))
     AcceptPageRequest.add_member(:accept_code, Shapes::ShapeRef.new(shape: AcceptCode, required: true, location_name: "AcceptCode"))
+    AcceptPageRequest.add_member(:accept_code_validation, Shapes::ShapeRef.new(shape: AcceptCodeValidation, location_name: "AcceptCodeValidation"))
     AcceptPageRequest.struct_class = Types::AcceptPageRequest
 
     AcceptPageResult.struct_class = Types::AcceptPageResult

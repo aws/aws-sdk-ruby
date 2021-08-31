@@ -14,8 +14,10 @@ module Aws::HealthLake
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
     ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
+    CmkType = Shapes::StringShape.new(name: 'CmkType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateFHIRDatastoreRequest = Shapes::StructureShape.new(name: 'CreateFHIRDatastoreRequest')
     CreateFHIRDatastoreResponse = Shapes::StructureShape.new(name: 'CreateFHIRDatastoreResponse')
@@ -34,32 +36,53 @@ module Aws::HealthLake
     DescribeFHIRExportJobResponse = Shapes::StructureShape.new(name: 'DescribeFHIRExportJobResponse')
     DescribeFHIRImportJobRequest = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobRequest')
     DescribeFHIRImportJobResponse = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobResponse')
+    EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
     ExportJobProperties = Shapes::StructureShape.new(name: 'ExportJobProperties')
+    ExportJobPropertiesList = Shapes::ListShape.new(name: 'ExportJobPropertiesList')
     FHIRVersion = Shapes::StringShape.new(name: 'FHIRVersion')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     ImportJobProperties = Shapes::StructureShape.new(name: 'ImportJobProperties')
-    InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
+    ImportJobPropertiesList = Shapes::ListShape.new(name: 'ImportJobPropertiesList')
+    InputDataConfig = Shapes::UnionShape.new(name: 'InputDataConfig')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    KmsEncryptionConfig = Shapes::StructureShape.new(name: 'KmsEncryptionConfig')
     ListFHIRDatastoresRequest = Shapes::StructureShape.new(name: 'ListFHIRDatastoresRequest')
     ListFHIRDatastoresResponse = Shapes::StructureShape.new(name: 'ListFHIRDatastoresResponse')
+    ListFHIRExportJobsRequest = Shapes::StructureShape.new(name: 'ListFHIRExportJobsRequest')
+    ListFHIRExportJobsResponse = Shapes::StructureShape.new(name: 'ListFHIRExportJobsResponse')
+    ListFHIRImportJobsRequest = Shapes::StructureShape.new(name: 'ListFHIRImportJobsRequest')
+    ListFHIRImportJobsResponse = Shapes::StructureShape.new(name: 'ListFHIRImportJobsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
-    OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    OutputDataConfig = Shapes::UnionShape.new(name: 'OutputDataConfig')
     PreloadDataConfig = Shapes::StructureShape.new(name: 'PreloadDataConfig')
     PreloadDataType = Shapes::StringShape.new(name: 'PreloadDataType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SseConfiguration = Shapes::StructureShape.new(name: 'SseConfiguration')
     StartFHIRExportJobRequest = Shapes::StructureShape.new(name: 'StartFHIRExportJobRequest')
     StartFHIRExportJobResponse = Shapes::StructureShape.new(name: 'StartFHIRExportJobResponse')
     StartFHIRImportJobRequest = Shapes::StructureShape.new(name: 'StartFHIRImportJobRequest')
     StartFHIRImportJobResponse = Shapes::StructureShape.new(name: 'StartFHIRImportJobResponse')
     String = Shapes::StringShape.new(name: 'String')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -70,8 +93,10 @@ module Aws::HealthLake
 
     CreateFHIRDatastoreRequest.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, location_name: "DatastoreName"))
     CreateFHIRDatastoreRequest.add_member(:datastore_type_version, Shapes::ShapeRef.new(shape: FHIRVersion, required: true, location_name: "DatastoreTypeVersion"))
+    CreateFHIRDatastoreRequest.add_member(:sse_configuration, Shapes::ShapeRef.new(shape: SseConfiguration, location_name: "SseConfiguration"))
     CreateFHIRDatastoreRequest.add_member(:preload_data_config, Shapes::ShapeRef.new(shape: PreloadDataConfig, location_name: "PreloadDataConfig"))
     CreateFHIRDatastoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFHIRDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateFHIRDatastoreRequest.struct_class = Types::CreateFHIRDatastoreRequest
 
     CreateFHIRDatastoreResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
@@ -93,6 +118,7 @@ module Aws::HealthLake
     DatastoreProperties.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DatastoreProperties.add_member(:datastore_type_version, Shapes::ShapeRef.new(shape: FHIRVersion, required: true, location_name: "DatastoreTypeVersion"))
     DatastoreProperties.add_member(:datastore_endpoint, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DatastoreEndpoint"))
+    DatastoreProperties.add_member(:sse_configuration, Shapes::ShapeRef.new(shape: SseConfiguration, location_name: "SseConfiguration"))
     DatastoreProperties.add_member(:preload_data_config, Shapes::ShapeRef.new(shape: PreloadDataConfig, location_name: "PreloadDataConfig"))
     DatastoreProperties.struct_class = Types::DatastoreProperties
 
@@ -138,6 +164,8 @@ module Aws::HealthLake
     ExportJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ExportJobProperties.struct_class = Types::ExportJobProperties
 
+    ExportJobPropertiesList.member = Shapes::ShapeRef.new(shape: ExportJobProperties)
+
     ImportJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     ImportJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     ImportJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "JobStatus"))
@@ -145,15 +173,25 @@ module Aws::HealthLake
     ImportJobProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     ImportJobProperties.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     ImportJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    ImportJobProperties.add_member(:job_output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "JobOutputDataConfig"))
     ImportJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     ImportJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ImportJobProperties.struct_class = Types::ImportJobProperties
 
+    ImportJobPropertiesList.member = Shapes::ShapeRef.new(shape: ImportJobProperties)
+
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    InputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    InputDataConfig.add_member_subclass(:s3_uri, Types::InputDataConfig::S3Uri)
+    InputDataConfig.add_member_subclass(:unknown, Types::InputDataConfig::Unknown)
     InputDataConfig.struct_class = Types::InputDataConfig
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    KmsEncryptionConfig.add_member(:cmk_type, Shapes::ShapeRef.new(shape: CmkType, required: true, location_name: "CmkType"))
+    KmsEncryptionConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EncryptionKeyID, location_name: "KmsKeyId"))
+    KmsEncryptionConfig.struct_class = Types::KmsEncryptionConfig
 
     ListFHIRDatastoresRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DatastoreFilter, location_name: "Filter"))
     ListFHIRDatastoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -164,7 +202,42 @@ module Aws::HealthLake
     ListFHIRDatastoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFHIRDatastoresResponse.struct_class = Types::ListFHIRDatastoresResponse
 
-    OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    ListFHIRExportJobsRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
+    ListFHIRExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFHIRExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListFHIRExportJobsRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    ListFHIRExportJobsRequest.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    ListFHIRExportJobsRequest.add_member(:submitted_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedBefore"))
+    ListFHIRExportJobsRequest.add_member(:submitted_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedAfter"))
+    ListFHIRExportJobsRequest.struct_class = Types::ListFHIRExportJobsRequest
+
+    ListFHIRExportJobsResponse.add_member(:export_job_properties_list, Shapes::ShapeRef.new(shape: ExportJobPropertiesList, required: true, location_name: "ExportJobPropertiesList"))
+    ListFHIRExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFHIRExportJobsResponse.struct_class = Types::ListFHIRExportJobsResponse
+
+    ListFHIRImportJobsRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
+    ListFHIRImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFHIRImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListFHIRImportJobsRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    ListFHIRImportJobsRequest.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    ListFHIRImportJobsRequest.add_member(:submitted_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedBefore"))
+    ListFHIRImportJobsRequest.add_member(:submitted_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedAfter"))
+    ListFHIRImportJobsRequest.struct_class = Types::ListFHIRImportJobsRequest
+
+    ListFHIRImportJobsResponse.add_member(:import_job_properties_list, Shapes::ShapeRef.new(shape: ImportJobPropertiesList, required: true, location_name: "ImportJobPropertiesList"))
+    ListFHIRImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFHIRImportJobsResponse.struct_class = Types::ListFHIRImportJobsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    OutputDataConfig.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, location_name: "S3Configuration"))
+    OutputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OutputDataConfig.add_member_subclass(:s3_configuration, Types::OutputDataConfig::S3Configuration)
+    OutputDataConfig.add_member_subclass(:unknown, Types::OutputDataConfig::Unknown)
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
     PreloadDataConfig.add_member(:preload_data_type, Shapes::ShapeRef.new(shape: PreloadDataType, required: true, location_name: "PreloadDataType"))
@@ -172,6 +245,13 @@ module Aws::HealthLake
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3Configuration.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    S3Configuration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EncryptionKeyID, required: true, location_name: "KmsKeyId"))
+    S3Configuration.struct_class = Types::S3Configuration
+
+    SseConfiguration.add_member(:kms_encryption_config, Shapes::ShapeRef.new(shape: KmsEncryptionConfig, required: true, location_name: "KmsEncryptionConfig"))
+    SseConfiguration.struct_class = Types::SseConfiguration
 
     StartFHIRExportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     StartFHIRExportJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
@@ -187,6 +267,7 @@ module Aws::HealthLake
 
     StartFHIRImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     StartFHIRImportJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    StartFHIRImportJobRequest.add_member(:job_output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "JobOutputDataConfig"))
     StartFHIRImportJobRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     StartFHIRImportJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
     StartFHIRImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -197,8 +278,28 @@ module Aws::HealthLake
     StartFHIRImportJobResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, location_name: "DatastoreId"))
     StartFHIRImportJobResponse.struct_class = Types::StartFHIRImportJobResponse
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -231,6 +332,7 @@ module Aws::HealthLake
         o.output = Shapes::ShapeRef.new(shape: CreateFHIRDatastoreResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -301,6 +403,54 @@ module Aws::HealthLake
         )
       end)
 
+      api.add_operation(:list_fhir_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFHIRExportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFHIRExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFHIRExportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_fhir_import_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFHIRImportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFHIRImportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFHIRImportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_fhir_export_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartFHIRExportJob"
         o.http_method = "POST"
@@ -325,6 +475,26 @@ module Aws::HealthLake
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

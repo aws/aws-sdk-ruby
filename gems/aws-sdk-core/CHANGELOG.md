@@ -3,6 +3,28 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack endpoints. It can be configured with shared configuration (`use_dualstack_endpoint`), an ENV variable (`AWS_USE_DUALSTACK_ENDPOINT`), and a constructor option (`:use_dualstack_endpoint`). Requests made to services without a dualstack endpoint will fail.
 
+3.119.1 (2021-08-20)
+------------------
+
+* Issue - Refactored `Aws::Json::Engine` to remove dead code and replaced usage of `JSON.load` with `JSON.parse`.
+
+3.119.0 (2021-07-30)
+------------------
+
+* Feature - Support Document Types. Document types are used to carry open content. A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.(#2523)
+
+3.118.0 (2021-07-28)
+------------------
+
+* Feature - Add support for Tagged Unions using a "sealed" classes like approach where each union member has a corresponding subclass.
+
+3.117.0 (2021-07-12)
+------------------
+
+* Feature - Support IPv6 endpoints for `Aws::InstanceProfileCredentials`. It supports two shared configuration options (`ec2_metadata_service_endpoint` & `ec2_metadata_service_endpoint_mode`), two ENV variables (`AWS_EC2_METADATA_SERVICE_ENDPOINT` & `AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE`), and two constructor options (`:endpoint` & `:endpoint_mode`).
+
+* Feature - Support IPv6 endpoint for `Aws::EC2Metadata` client. It can be configured with `:endpoint` or `:endpoint_mode`.
+
 3.116.0 (2021-07-07)
 ------------------
 

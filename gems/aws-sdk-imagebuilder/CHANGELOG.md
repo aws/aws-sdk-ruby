@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-08-04)
+------------------
+
+* Feature - Updated list actions to include a list of valid filters that can be used in the request.
+
+1.27.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2021-07-23)
+------------------
+
+* Feature - Update to documentation to reapply missing change to SSM uninstall switch default value and improve description.
+
+1.24.0 (2021-07-19)
+------------------
+
+* Feature - Documentation updates for reversal of default value for additional instance configuration SSM switch, plus improved descriptions for semantic versioning.
+
 1.23.0 (2021-07-06)
 ------------------
 

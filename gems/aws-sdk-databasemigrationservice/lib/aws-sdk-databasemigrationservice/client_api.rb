@@ -20,6 +20,7 @@ module Aws::DatabaseMigrationService
     AddTagsToResourceResponse = Shapes::StructureShape.new(name: 'AddTagsToResourceResponse')
     ApplyPendingMaintenanceActionMessage = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionMessage')
     ApplyPendingMaintenanceActionResponse = Shapes::StructureShape.new(name: 'ApplyPendingMaintenanceActionResponse')
+    ArnList = Shapes::ListShape.new(name: 'ArnList')
     AuthMechanismValue = Shapes::StringShape.new(name: 'AuthMechanismValue')
     AuthTypeValue = Shapes::StringShape.new(name: 'AuthTypeValue')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
@@ -28,6 +29,7 @@ module Aws::DatabaseMigrationService
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     CancelReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'CancelReplicationTaskAssessmentRunMessage')
     CancelReplicationTaskAssessmentRunResponse = Shapes::StructureShape.new(name: 'CancelReplicationTaskAssessmentRunResponse')
+    CannedAclForObjectsValue = Shapes::StringShape.new(name: 'CannedAclForObjectsValue')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
     CertificateWallet = Shapes::BlobShape.new(name: 'CertificateWallet')
@@ -140,6 +142,7 @@ module Aws::DatabaseMigrationService
     IndividualAssessmentNameList = Shapes::ListShape.new(name: 'IndividualAssessmentNameList')
     InsufficientResourceCapacityFault = Shapes::StructureShape.new(name: 'InsufficientResourceCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerList = Shapes::ListShape.new(name: 'IntegerList')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
     InvalidCertificateFault = Shapes::StructureShape.new(name: 'InvalidCertificateFault')
     InvalidResourceStateFault = Shapes::StructureShape.new(name: 'InvalidResourceStateFault')
@@ -184,9 +187,12 @@ module Aws::DatabaseMigrationService
     PendingMaintenanceAction = Shapes::StructureShape.new(name: 'PendingMaintenanceAction')
     PendingMaintenanceActionDetails = Shapes::ListShape.new(name: 'PendingMaintenanceActionDetails')
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
+    PluginNameValue = Shapes::StringShape.new(name: 'PluginNameValue')
     PostgreSQLSettings = Shapes::StructureShape.new(name: 'PostgreSQLSettings')
     RebootReplicationInstanceMessage = Shapes::StructureShape.new(name: 'RebootReplicationInstanceMessage')
     RebootReplicationInstanceResponse = Shapes::StructureShape.new(name: 'RebootReplicationInstanceResponse')
+    RedisAuthTypeValue = Shapes::StringShape.new(name: 'RedisAuthTypeValue')
+    RedisSettings = Shapes::StructureShape.new(name: 'RedisSettings')
     RedshiftSettings = Shapes::StructureShape.new(name: 'RedshiftSettings')
     RefreshSchemasMessage = Shapes::StructureShape.new(name: 'RefreshSchemasMessage')
     RefreshSchemasResponse = Shapes::StructureShape.new(name: 'RefreshSchemasResponse')
@@ -234,6 +240,7 @@ module Aws::DatabaseMigrationService
     SecretString = Shapes::StringShape.new(name: 'SecretString')
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    SslSecurityProtocolValue = Shapes::StringShape.new(name: 'SslSecurityProtocolValue')
     StartReplicationTaskAssessmentMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentMessage')
     StartReplicationTaskAssessmentResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentResponse')
     StartReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskAssessmentRunMessage')
@@ -290,6 +297,8 @@ module Aws::DatabaseMigrationService
 
     ApplyPendingMaintenanceActionResponse.add_member(:resource_pending_maintenance_actions, Shapes::ShapeRef.new(shape: ResourcePendingMaintenanceActions, location_name: "ResourcePendingMaintenanceActions"))
     ApplyPendingMaintenanceActionResponse.struct_class = Types::ApplyPendingMaintenanceActionResponse
+
+    ArnList.member = Shapes::ShapeRef.new(shape: String)
 
     AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
@@ -358,6 +367,7 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     CreateEndpointMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
     CreateEndpointMessage.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
+    CreateEndpointMessage.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
     CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -735,6 +745,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
     Endpoint.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     Endpoint.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
+    Endpoint.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -747,6 +758,7 @@ module Aws::DatabaseMigrationService
     EndpointSetting.add_member(:applicability, Shapes::ShapeRef.new(shape: String, location_name: "Applicability"))
     EndpointSetting.add_member(:int_value_min, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IntValueMin"))
     EndpointSetting.add_member(:int_value_max, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IntValueMax"))
+    EndpointSetting.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "DefaultValue"))
     EndpointSetting.struct_class = Types::EndpointSetting
 
     EndpointSettingEnumValues.member = Shapes::ShapeRef.new(shape: String)
@@ -821,6 +833,8 @@ module Aws::DatabaseMigrationService
     InsufficientResourceCapacityFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InsufficientResourceCapacityFault.struct_class = Types::InsufficientResourceCapacityFault
 
+    IntegerList.member = Shapes::ShapeRef.new(shape: Integer)
+
     InvalidCertificateFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidCertificateFault.struct_class = Types::InvalidCertificateFault
 
@@ -868,6 +882,7 @@ module Aws::DatabaseMigrationService
     KafkaSettings.add_member(:ssl_ca_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "SslCaCertificateArn"))
     KafkaSettings.add_member(:sasl_username, Shapes::ShapeRef.new(shape: String, location_name: "SaslUsername"))
     KafkaSettings.add_member(:sasl_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "SaslPassword"))
+    KafkaSettings.add_member(:no_hex_prefix, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoHexPrefix"))
     KafkaSettings.struct_class = Types::KafkaSettings
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
@@ -881,9 +896,11 @@ module Aws::DatabaseMigrationService
     KinesisSettings.add_member(:include_table_alter_operations, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeTableAlterOperations"))
     KinesisSettings.add_member(:include_control_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeControlDetails"))
     KinesisSettings.add_member(:include_null_and_empty, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeNullAndEmpty"))
+    KinesisSettings.add_member(:no_hex_prefix, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoHexPrefix"))
     KinesisSettings.struct_class = Types::KinesisSettings
 
-    ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    ListTagsForResourceMessage.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ArnList, location_name: "ResourceArnList"))
     ListTagsForResourceMessage.struct_class = Types::ListTagsForResourceMessage
 
     ListTagsForResourceResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
@@ -935,6 +952,8 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSQLServerSettings, location_name: "MicrosoftSQLServerSettings"))
     ModifyEndpointMessage.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     ModifyEndpointMessage.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
+    ModifyEndpointMessage.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
+    ModifyEndpointMessage.add_member(:exact_settings, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExactSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
     ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -1039,6 +1058,7 @@ module Aws::DatabaseMigrationService
     OracleSettings.add_member(:add_supplemental_logging, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AddSupplementalLogging"))
     OracleSettings.add_member(:archived_log_dest_id, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ArchivedLogDestId"))
     OracleSettings.add_member(:additional_archived_log_dest_id, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AdditionalArchivedLogDestId"))
+    OracleSettings.add_member(:extra_archived_log_dest_ids, Shapes::ShapeRef.new(shape: IntegerList, location_name: "ExtraArchivedLogDestIds"))
     OracleSettings.add_member(:allow_select_nested_tables, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowSelectNestedTables"))
     OracleSettings.add_member(:parallel_asm_read_threads, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ParallelAsmReadThreads"))
     OracleSettings.add_member(:read_ahead_blocks, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ReadAheadBlocks"))
@@ -1066,7 +1086,11 @@ module Aws::DatabaseMigrationService
     OracleSettings.add_member(:security_db_encryption_name, Shapes::ShapeRef.new(shape: String, location_name: "SecurityDbEncryptionName"))
     OracleSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     OracleSettings.add_member(:spatial_data_option_to_geo_json_function_name, Shapes::ShapeRef.new(shape: String, location_name: "SpatialDataOptionToGeoJsonFunctionName"))
+    OracleSettings.add_member(:standby_delay_time, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StandbyDelayTime"))
     OracleSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    OracleSettings.add_member(:use_b_file, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseBFile"))
+    OracleSettings.add_member(:use_direct_path_full_load, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseDirectPathFullLoad"))
+    OracleSettings.add_member(:use_logminer_reader, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseLogminerReader"))
     OracleSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     OracleSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     OracleSettings.add_member(:secrets_manager_oracle_asm_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerOracleAsmAccessRoleArn"))
@@ -1105,11 +1129,15 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings.add_member(:ddl_artifacts_schema, Shapes::ShapeRef.new(shape: String, location_name: "DdlArtifactsSchema"))
     PostgreSQLSettings.add_member(:execute_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ExecuteTimeout"))
     PostgreSQLSettings.add_member(:fail_tasks_on_lob_truncation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "FailTasksOnLobTruncation"))
+    PostgreSQLSettings.add_member(:heartbeat_enable, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "HeartbeatEnable"))
+    PostgreSQLSettings.add_member(:heartbeat_schema, Shapes::ShapeRef.new(shape: String, location_name: "HeartbeatSchema"))
+    PostgreSQLSettings.add_member(:heartbeat_frequency, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "HeartbeatFrequency"))
     PostgreSQLSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
     PostgreSQLSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     PostgreSQLSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     PostgreSQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     PostgreSQLSettings.add_member(:slot_name, Shapes::ShapeRef.new(shape: String, location_name: "SlotName"))
+    PostgreSQLSettings.add_member(:plugin_name, Shapes::ShapeRef.new(shape: PluginNameValue, location_name: "PluginName"))
     PostgreSQLSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
     PostgreSQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     PostgreSQLSettings.struct_class = Types::PostgreSQLSettings
@@ -1120,6 +1148,15 @@ module Aws::DatabaseMigrationService
 
     RebootReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))
     RebootReplicationInstanceResponse.struct_class = Types::RebootReplicationInstanceResponse
+
+    RedisSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerName"))
+    RedisSettings.add_member(:port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Port"))
+    RedisSettings.add_member(:ssl_security_protocol, Shapes::ShapeRef.new(shape: SslSecurityProtocolValue, location_name: "SslSecurityProtocol"))
+    RedisSettings.add_member(:auth_type, Shapes::ShapeRef.new(shape: RedisAuthTypeValue, location_name: "AuthType"))
+    RedisSettings.add_member(:auth_user_name, Shapes::ShapeRef.new(shape: String, location_name: "AuthUserName"))
+    RedisSettings.add_member(:auth_password, Shapes::ShapeRef.new(shape: SecretString, location_name: "AuthPassword"))
+    RedisSettings.add_member(:ssl_ca_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "SslCaCertificateArn"))
+    RedisSettings.struct_class = Types::RedisSettings
 
     RedshiftSettings.add_member(:accept_any_date, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AcceptAnyDate"))
     RedshiftSettings.add_member(:after_connect_script, Shapes::ShapeRef.new(shape: String, location_name: "AfterConnectScript"))
@@ -1361,6 +1398,14 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:csv_no_sup_value, Shapes::ShapeRef.new(shape: String, location_name: "CsvNoSupValue"))
     S3Settings.add_member(:preserve_transactions, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PreserveTransactions"))
     S3Settings.add_member(:cdc_path, Shapes::ShapeRef.new(shape: String, location_name: "CdcPath"))
+    S3Settings.add_member(:canned_acl_for_objects, Shapes::ShapeRef.new(shape: CannedAclForObjectsValue, location_name: "CannedAclForObjects"))
+    S3Settings.add_member(:add_column_name, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AddColumnName"))
+    S3Settings.add_member(:cdc_max_batch_interval, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "CdcMaxBatchInterval"))
+    S3Settings.add_member(:cdc_min_file_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "CdcMinFileSize"))
+    S3Settings.add_member(:csv_null_value, Shapes::ShapeRef.new(shape: String, location_name: "CsvNullValue"))
+    S3Settings.add_member(:ignore_header_rows, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "IgnoreHeaderRows"))
+    S3Settings.add_member(:max_file_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxFileSize"))
+    S3Settings.add_member(:rfc_4180, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Rfc4180"))
     S3Settings.struct_class = Types::S3Settings
 
     SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -1473,6 +1518,7 @@ module Aws::DatabaseMigrationService
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    Tag.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
     Tag.struct_class = Types::Tag
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
@@ -2116,6 +2162,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
       end)
 
       api.add_operation(:reboot_replication_instance, Seahorse::Model::Operation.new.tap do |o|

@@ -482,7 +482,7 @@ module Aws::Personalize
     # @option params [required, String] :solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version to deploy.
     #
-    # @option params [required, Integer] :min_provisioned_tps
+    # @option params [Integer] :min_provisioned_tps
     #   Specifies the requested minimum provisioned transactions
     #   (recommendations) per second that Amazon Personalize will support.
     #
@@ -498,7 +498,7 @@ module Aws::Personalize
     #   resp = client.create_campaign({
     #     name: "Name", # required
     #     solution_version_arn: "Arn", # required
-    #     min_provisioned_tps: 1, # required
+    #     min_provisioned_tps: 1,
     #     campaign_config: {
     #       item_exploration_config: {
     #         "ParameterName" => "ParameterValue",
@@ -603,10 +603,10 @@ module Aws::Personalize
 
     # Creates a job that exports data from your dataset to an Amazon S3
     # bucket. To allow Amazon Personalize to export the training data, you
-    # must specify an service-linked AWS Identity and Access Management
-    # (IAM) role that gives Amazon Personalize `PutObject` permissions for
-    # your Amazon S3 bucket. For information, see [Exporting a dataset][1]
-    # in the Amazon Personalize developer guide.
+    # must specify an service-linked IAM role that gives Amazon Personalize
+    # `PutObject` permissions for your Amazon S3 bucket. For information,
+    # see [Exporting a dataset][1] in the Amazon Personalize developer
+    # guide.
     #
     # **Status**
     #
@@ -642,9 +642,8 @@ module Aws::Personalize
     #   both types. The default value is `PUT`.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management service role that has permissions to add data to your
-    #   output Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the IAM service role that has
+    #   permissions to add data to your output Amazon S3 bucket.
     #
     # @option params [required, Types::DatasetExportJobOutput] :job_output
     #   The path to the Amazon S3 bucket where the job's output is stored.
@@ -711,10 +710,10 @@ module Aws::Personalize
     #
     #  </note>
     #
-    # You can specify an AWS Key Management Service (KMS) key to encrypt the
+    # You can specify an Key Management Service (KMS) key to encrypt the
     # datasets in the group. If you specify a KMS key, you must also include
-    # an AWS Identity and Access Management (IAM) role that has permission
-    # to access the key.
+    # an Identity and Access Management (IAM) role that has permission to
+    # access the key.
     #
     # **APIs that require a dataset group ARN in the request**
     #
@@ -736,12 +735,13 @@ module Aws::Personalize
     #   The name for the new dataset group.
     #
     # @option params [String] :role_arn
-    #   The ARN of the IAM role that has permissions to access the KMS key.
-    #   Supplying an IAM role is only valid when also specifying a KMS key.
+    #   The ARN of the Identity and Access Management (IAM) role that has
+    #   permissions to access the Key Management Service (KMS) key. Supplying
+    #   an IAM role is only valid when also specifying a KMS key.
     #
     # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) of a KMS key used to encrypt the
-    #   datasets.
+    #   The Amazon Resource Name (ARN) of a Key Management Service (KMS) key
+    #   used to encrypt the datasets.
     #
     # @return [Types::CreateDatasetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -770,12 +770,12 @@ module Aws::Personalize
 
     # Creates a job that imports training data from your data source (an
     # Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon
-    # Personalize to import the training data, you must specify an AWS
-    # Identity and Access Management (IAM) service role that has permission
-    # to read from the data source, as Amazon Personalize makes a copy of
-    # your data and processes it in an internal AWS system. For information
-    # on granting access to your Amazon S3 bucket, see [Giving Amazon
-    # Personalize Access to Amazon S3 Resources][1].
+    # Personalize to import the training data, you must specify an IAM
+    # service role that has permission to read from the data source, as
+    # Amazon Personalize makes a copy of your data and processes it
+    # internally. For information on granting access to your Amazon S3
+    # bucket, see [Giving Amazon Personalize Access to Amazon S3
+    # Resources][1].
     #
     # The dataset import job replaces any existing data in the dataset that
     # you imported in bulk.
@@ -2829,7 +2829,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

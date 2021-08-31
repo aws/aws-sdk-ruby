@@ -276,6 +276,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -288,6 +293,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -303,7 +314,11 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -359,6 +374,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -371,6 +391,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -386,7 +412,11 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -509,6 +539,11 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -521,6 +556,12 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -536,7 +577,11 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -594,6 +639,11 @@ module Aws::IoTSiteWise
     #             default_value: "DefaultValue",
     #           },
     #           measurement: {
+    #             processing_config: {
+    #               forwarding_config: { # required
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           transform: {
     #             expression: "Expression", # required
@@ -606,6 +656,12 @@ module Aws::IoTSiteWise
     #                 },
     #               },
     #             ],
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #               forwarding_config: {
+    #                 state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               },
+    #             },
     #           },
     #           metric: {
     #             expression: "Expression", # required
@@ -621,7 +677,11 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
+    #             },
+    #             processing_config: {
+    #               compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #             },
     #           },
     #         },
@@ -1446,6 +1506,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -1458,6 +1523,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -1473,7 +1544,11 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -1501,6 +1576,11 @@ module Aws::IoTSiteWise
     #                     default_value: "DefaultValue",
     #                   },
     #                   measurement: {
+    #                     processing_config: {
+    #                       forwarding_config: { # required
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   transform: {
     #                     expression: "Expression", # required
@@ -1513,6 +1593,12 @@ module Aws::IoTSiteWise
     #                         },
     #                       },
     #                     ],
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                       forwarding_config: {
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   metric: {
     #                     expression: "Expression", # required
@@ -1528,7 +1614,11 @@ module Aws::IoTSiteWise
     #                     window: { # required
     #                       tumbling: {
     #                         interval: "Interval", # required
+    #                         offset: "Offset",
     #                       },
+    #                     },
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                     },
     #                   },
     #                 },
@@ -1814,8 +1904,11 @@ module Aws::IoTSiteWise
     #       {
     #         gateway_name: "Name", # required
     #         gateway_platform: { # required
-    #           greengrass: { # required
+    #           greengrass: {
     #             group_arn: "ARN", # required
+    #           },
+    #           greengrass_v2: {
+    #             core_device_thing_name: "CoreDeviceThingName", # required
     #           },
     #         },
     #         tags: {
@@ -3182,6 +3275,23 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains detailed error information.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    class DetailedError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateAssetsRequest
     #   data as a hash:
     #
@@ -3241,9 +3351,14 @@ module Aws::IoTSiteWise
     #   The error message.
     #   @return [String]
     #
+    # @!attribute [rw] details
+    #   A list of detailed errors.
+    #   @return [Array<Types::DetailedError>]
+    #
     class ErrorDetails < Struct.new(
       :code,
-      :message)
+      :message,
+      :details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3273,6 +3388,25 @@ module Aws::IoTSiteWise
     class ExpressionVariable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The forwarding configuration for a given property.
+    #
+    # @note When making an API call, you may pass ForwardingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #       }
+    #
+    # @!attribute [rw] state
+    #   The forwarding state for the given property.
+    #   @return [String]
+    #
+    class ForwardingConfig < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3312,8 +3446,11 @@ module Aws::IoTSiteWise
     #   data as a hash:
     #
     #       {
-    #         greengrass: { # required
+    #         greengrass: {
     #           group_arn: "ARN", # required
+    #         },
+    #         greengrass_v2: {
+    #           core_device_thing_name: "CoreDeviceThingName", # required
     #         },
     #       }
     #
@@ -3321,8 +3458,13 @@ module Aws::IoTSiteWise
     #   A gateway that runs on IoT Greengrass.
     #   @return [Types::Greengrass]
     #
+    # @!attribute [rw] greengrass_v2
+    #   A gateway that runs on IoT Greengrass V2.
+    #   @return [Types::GreengrassV2]
+    #
     class GatewayPlatform < Struct.new(
-      :greengrass)
+      :greengrass,
+      :greengrass_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3336,6 +3478,10 @@ module Aws::IoTSiteWise
     # @!attribute [rw] gateway_name
     #   The name of the asset.
     #   @return [String]
+    #
+    # @!attribute [rw] gateway_platform
+    #   Contains a gateway's platform information.
+    #   @return [Types::GatewayPlatform]
     #
     # @!attribute [rw] gateway_capability_summaries
     #   A list of gateway capability summaries that each contain a namespace
@@ -3359,6 +3505,7 @@ module Aws::IoTSiteWise
     class GatewaySummary < Struct.new(
       :gateway_id,
       :gateway_name,
+      :gateway_platform,
       :gateway_capability_summaries,
       :creation_date,
       :last_update_date)
@@ -3631,6 +3778,7 @@ module Aws::IoTSiteWise
     #         next_token: "NextToken",
     #         max_results: 1,
     #         type: "InterpolationType", # required
+    #         interval_window_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] asset_id
@@ -3694,8 +3842,63 @@ module Aws::IoTSiteWise
     # @!attribute [rw] type
     #   The interpolation type.
     #
-    #   Valid values: `LINEAR_INTERPOLATION`
+    #   Valid values: `LINEAR_INTERPOLATION | LOCF_INTERPOLATION`
+    #
+    #   * `LINEAR_INTERPOLATION` – Estimates missing data using [linear
+    #     interpolation][1].
+    #
+    #     For example, you can use this operation to return the interpolated
+    #     temperature values for a wind turbine every 24 hours over a
+    #     duration of 7 days. If the interpolation starts on July 1, 2021,
+    #     at 9 AM, IoT SiteWise returns the first interpolated value on July
+    #     2, 2021, at 9 AM, the second interpolated value on July 3, 2021,
+    #     at 9 AM, and so on.
+    #
+    #   * `LOCF_INTERPOLATION` – Estimates missing data using last
+    #     observation carried forward interpolation
+    #
+    #     If no data point is found for an interval, IoT SiteWise returns
+    #     the last observed data point for the previous interval and carries
+    #     forward this interpolated value until a new data point is found.
+    #
+    #     For example, you can get the state of an on-off valve every 24
+    #     hours over a duration of 7 days. If the interpolation starts on
+    #     July 1, 2021, at 9 AM, IoT SiteWise returns the last observed data
+    #     point between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as
+    #     the first interpolated value. If no data point is found after 9 AM
+    #     on July 2, 2021, IoT SiteWise uses the same interpolated value for
+    #     the rest of the days.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Linear_interpolation
     #   @return [String]
+    #
+    # @!attribute [rw] interval_window_in_seconds
+    #   The query interval for the window in seconds. IoT SiteWise computes
+    #   each interpolated value by using data points from the timestamp of
+    #   each interval minus the window to the timestamp of each interval
+    #   plus the window. If not specified, the window is between the start
+    #   time minus the interval and the end time plus the interval.
+    #
+    #   <note markdown="1"> * If you specify a value for the `intervalWindowInSeconds`
+    #     parameter, the `type` parameter must be `LINEAR_INTERPOLATION`.
+    #
+    #   * If no data point is found during the specified query window, IoT
+    #     SiteWise won't return an interpolated value for the interval.
+    #     This indicates that there's a gap in the ingested data points.
+    #
+    #    </note>
+    #
+    #   For example, you can get the interpolated temperature values for a
+    #   wind turbine every 24 hours over a duration of 7 days. If the
+    #   interpolation starts on July 1, 2021, at 9 AM with a window of 2
+    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours)
+    #   to 11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first
+    #   interpolated value, uses the data points from 7 AM (9 AM - 2 hours)
+    #   to 11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second
+    #   interpolated value, and so on.
+    #   @return [Integer]
     #
     class GetInterpolatedAssetPropertyValuesRequest < Struct.new(
       :asset_id,
@@ -3709,7 +3912,8 @@ module Aws::IoTSiteWise
       :interval_in_seconds,
       :next_token,
       :max_results,
-      :type)
+      :type,
+      :interval_window_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3762,6 +3966,35 @@ module Aws::IoTSiteWise
     #
     class Greengrass < Struct.new(
       :group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details for a gateway that runs on IoT Greengrass V2. To
+    # create a gateway that runs on IoT Greengrass V2, you must deploy the
+    # IoT SiteWise Edge component to your gateway device. Your [Greengrass
+    # device role][1] must use the `AWSIoTSiteWiseEdgeAccess` policy. For
+    # more information, see [Using IoT SiteWise at the edge][2] in the *IoT
+    # SiteWise User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html
+    #
+    # @note When making an API call, you may pass GreengrassV2
+    #   data as a hash:
+    #
+    #       {
+    #         core_device_thing_name: "CoreDeviceThingName", # required
+    #       }
+    #
+    # @!attribute [rw] core_device_thing_name
+    #   The name of the IoT thing for your IoT Greengrass V2 core device.
+    #   @return [String]
+    #
+    class GreengrassV2 < Struct.new(
+      :core_device_thing_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4653,9 +4886,53 @@ module Aws::IoTSiteWise
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements
     #
-    # @api private
+    # @note When making an API call, you may pass Measurement
+    #   data as a hash:
     #
-    class Measurement < Aws::EmptyStructure; end
+    #       {
+    #         processing_config: {
+    #           forwarding_config: { # required
+    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] processing_config
+    #   The processing configuration for the given measurement property. You
+    #   can configure measurements to be kept at the edge or forwarded to
+    #   the Amazon Web Services Cloud. By default, measurements are
+    #   forwarded to the cloud.
+    #   @return [Types::MeasurementProcessingConfig]
+    #
+    class Measurement < Struct.new(
+      :processing_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processing configuration for the given measurement property. You
+    # can configure measurements to be kept at the edge or forwarded to the
+    # Amazon Web Services Cloud. By default, measurements are forwarded to
+    # the cloud.
+    #
+    # @note When making an API call, you may pass MeasurementProcessingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         forwarding_config: { # required
+    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] forwarding_config
+    #   The forwarding configuration for the given measurement property.
+    #   @return [Types::ForwardingConfig]
+    #
+    class MeasurementProcessingConfig < Struct.new(
+      :forwarding_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains an asset metric property. With metrics, you can calculate
     # aggregate functions, such as an average, maximum, or minimum, as
@@ -4692,7 +4969,11 @@ module Aws::IoTSiteWise
     #         window: { # required
     #           tumbling: {
     #             interval: "Interval", # required
+    #             offset: "Offset",
     #           },
+    #         },
+    #         processing_config: {
+    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #         },
     #       }
     #
@@ -4719,10 +5000,38 @@ module Aws::IoTSiteWise
     #   point per `window`.
     #   @return [Types::MetricWindow]
     #
+    # @!attribute [rw] processing_config
+    #   The processing configuration for the given metric property. You can
+    #   configure metrics to be computed at the edge or in the Amazon Web
+    #   Services Cloud. By default, metrics are forwarded to the cloud.
+    #   @return [Types::MetricProcessingConfig]
+    #
     class Metric < Struct.new(
       :expression,
       :variables,
-      :window)
+      :window,
+      :processing_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processing configuration for the given metric property. You can
+    # configure metrics to be computed at the edge or in the Amazon Web
+    # Services Cloud. By default, metrics are forwarded to the cloud.
+    #
+    # @note When making an API call, you may pass MetricProcessingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #       }
+    #
+    # @!attribute [rw] compute_location
+    #   The compute location for the given metric property.
+    #   @return [String]
+    #
+    class MetricProcessingConfig < Struct.new(
+      :compute_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4736,6 +5045,7 @@ module Aws::IoTSiteWise
     #       {
     #         tumbling: {
     #           interval: "Interval", # required
+    #           offset: "Offset",
     #         },
     #       }
     #
@@ -5025,6 +5335,11 @@ module Aws::IoTSiteWise
     #           default_value: "DefaultValue",
     #         },
     #         measurement: {
+    #           processing_config: {
+    #             forwarding_config: { # required
+    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #             },
+    #           },
     #         },
     #         transform: {
     #           expression: "Expression", # required
@@ -5037,6 +5352,12 @@ module Aws::IoTSiteWise
     #               },
     #             },
     #           ],
+    #           processing_config: {
+    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #             forwarding_config: {
+    #               state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #             },
+    #           },
     #         },
     #         metric: {
     #           expression: "Expression", # required
@@ -5052,7 +5373,11 @@ module Aws::IoTSiteWise
     #           window: { # required
     #             tumbling: {
     #               interval: "Interval", # required
+    #               offset: "Offset",
     #             },
+    #           },
+    #           processing_config: {
+    #             compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #           },
     #         },
     #       }
@@ -5510,6 +5835,12 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #         ],
+    #         processing_config: {
+    #           compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #           forwarding_config: {
+    #             state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] expression
@@ -5529,31 +5860,83 @@ module Aws::IoTSiteWise
     #   The list of variables used in the expression.
     #   @return [Array<Types::ExpressionVariable>]
     #
+    # @!attribute [rw] processing_config
+    #   The processing configuration for the given transform property. You
+    #   can configure transforms to be kept at the edge or forwarded to the
+    #   Amazon Web Services Cloud. You can also configure transforms to be
+    #   computed at the edge or in the cloud.
+    #   @return [Types::TransformProcessingConfig]
+    #
     class Transform < Struct.new(
       :expression,
-      :variables)
+      :variables,
+      :processing_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processing configuration for the given transform property. You can
+    # configure transforms to be kept at the edge or forwarded to the Amazon
+    # Web Services Cloud. You can also configure transforms to be computed
+    # at the edge or in the cloud.
+    #
+    # @note When making an API call, you may pass TransformProcessingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #         forwarding_config: {
+    #           state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] compute_location
+    #   The compute location for the given transform property.
+    #   @return [String]
+    #
+    # @!attribute [rw] forwarding_config
+    #   The forwarding configuration for a given property.
+    #   @return [Types::ForwardingConfig]
+    #
+    class TransformProcessingConfig < Struct.new(
+      :compute_location,
+      :forwarding_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains a tumbling window, which is a repeating fixed-sized,
-    # non-overlapping, and contiguous time interval. This window is used in
-    # metric and aggregation computations.
+    # non-overlapping, and contiguous time window. You use this window in
+    # metrics to aggregate data from properties and other assets.
+    #
+    # You can use `m`, `h`, `d`, and `w` when you specify an interval or
+    # offset. Note that `m` represents minutes, and `w` represents weeks.
+    # You can also use `s` to represent seconds in `offset`.
+    #
+    # The `interval` and `offset` parameters support the [ISO 8601
+    # format][1]. For example, `PT5S` represents five seconds, `PT5M`
+    # represents five minutes, and `PT5H` represents five hours.
+    #
+    #
+    #
+    # [1]: https://en.wikipedia.org/wiki/ISO_8601
     #
     # @note When making an API call, you may pass TumblingWindow
     #   data as a hash:
     #
     #       {
     #         interval: "Interval", # required
+    #         offset: "Offset",
     #       }
     #
     # @!attribute [rw] interval
-    #   The time interval for the tumbling window. Note that `w` represents
-    #   weeks, `d` represents days, `h` represents hours, and `m` represents
-    #   minutes. IoT SiteWise computes the `1w` interval the end of Sunday
-    #   at midnight each week (UTC), the `1d` interval at the end of each
-    #   day at midnight (UTC), the `1h` interval at the end of each hour,
-    #   and so on.
+    #   The time interval for the tumbling window. The interval time must be
+    #   between 1 minute and 1 week.
+    #
+    #   IoT SiteWise computes the `1w` interval the end of Sunday at
+    #   midnight each week (UTC), the `1d` interval at the end of each day
+    #   at midnight (UTC), the `1h` interval at the end of each hour, and so
+    #   on.
     #
     #   When IoT SiteWise aggregates data points for metric computations,
     #   the start of each interval is exclusive and the end of each interval
@@ -5561,8 +5944,60 @@ module Aws::IoTSiteWise
     #   of the interval.
     #   @return [String]
     #
+    # @!attribute [rw] offset
+    #   The offset for the tumbling window. The `offset` parameter accepts
+    #   the following:
+    #
+    #   * The offset time.
+    #
+    #     For example, if you specify `18h` for `offset` and `1d` for
+    #     `interval`, IoT SiteWise aggregates data in one of the following
+    #     ways:
+    #
+    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #       first aggregation result at 6 PM (UTC) on the day when you
+    #       create the metric.
+    #
+    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #       aggregation result at 6 PM (UTC) the next day.
+    #
+    #   * The ISO 8601 format.
+    #
+    #     For example, if you specify `PT18H` for `offset` and `1d` for
+    #     `interval`, IoT SiteWise aggregates data in one of the following
+    #     ways:
+    #
+    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #       first aggregation result at 6 PM (UTC) on the day when you
+    #       create the metric.
+    #
+    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #       aggregation result at 6 PM (UTC) the next day.
+    #
+    #   * The 24-hour clock.
+    #
+    #     For example, if you specify `00:03:00` for `offset` and `5m` for
+    #     `interval`, and you create the metric at 2 PM (UTC), you get the
+    #     first aggregation result at 2:03 PM (UTC). You get the second
+    #     aggregation result at 2:08 PM (UTC).
+    #
+    #   * The offset time zone.
+    #
+    #     For example, if you specify `2021-07-23T18:00-08` for `offset` and
+    #     `1d` for `interval`, IoT SiteWise aggregates data in one of the
+    #     following ways:
+    #
+    #     * If you create the metric before or at 6:00 PM (PST), you get the
+    #       first aggregation result at 6 PM (PST) on the day when you
+    #       create the metric.
+    #
+    #     * If you create the metric after 6:00 PM (PST), you get the first
+    #       aggregation result at 6 PM (PST) the next day.
+    #   @return [String]
+    #
     class TumblingWindow < Struct.new(
-      :interval)
+      :interval,
+      :offset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5697,6 +6132,11 @@ module Aws::IoTSiteWise
     #                 default_value: "DefaultValue",
     #               },
     #               measurement: {
+    #                 processing_config: {
+    #                   forwarding_config: { # required
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               transform: {
     #                 expression: "Expression", # required
@@ -5709,6 +6149,12 @@ module Aws::IoTSiteWise
     #                     },
     #                   },
     #                 ],
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                   forwarding_config: {
+    #                     state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   },
+    #                 },
     #               },
     #               metric: {
     #                 expression: "Expression", # required
@@ -5724,7 +6170,11 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
+    #                 },
+    #                 processing_config: {
+    #                   compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                 },
     #               },
     #             },
@@ -5754,6 +6204,11 @@ module Aws::IoTSiteWise
     #                     default_value: "DefaultValue",
     #                   },
     #                   measurement: {
+    #                     processing_config: {
+    #                       forwarding_config: { # required
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   transform: {
     #                     expression: "Expression", # required
@@ -5766,6 +6221,12 @@ module Aws::IoTSiteWise
     #                         },
     #                       },
     #                     ],
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
+    #                       forwarding_config: {
+    #                         state: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                       },
+    #                     },
     #                   },
     #                   metric: {
     #                     expression: "Expression", # required
@@ -5781,7 +6242,11 @@ module Aws::IoTSiteWise
     #                     window: { # required
     #                       tumbling: {
     #                         interval: "Interval", # required
+    #                         offset: "Offset",
     #                       },
+    #                     },
+    #                     processing_config: {
+    #                       compute_location: "EDGE", # required, accepts EDGE, CLOUD
     #                     },
     #                   },
     #                 },

@@ -3,6 +3,92 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack endpoints in `Aws::Partitions::EndpointProvider`.
 
+1.492.0 (2021-08-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.491.0 (2021-08-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.490.0 (2021-08-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.489.0 (2021-08-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MemoryDB`.
+
+1.488.0 (2021-08-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.487.0 (2021-08-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.486.0 (2021-08-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SnowDeviceManagement`.
+
+1.485.0 (2021-08-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.484.0 (2021-08-06)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKMessaging`.
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKIdentity`.
+
+1.483.0 (2021-08-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.482.0 (2021-07-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.481.0 (2021-07-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.480.0 (2021-07-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Route53RecoveryReadiness`.
+
+* Feature - Added support for enumerating regions for `Aws::Route53RecoveryControlConfig`.
+
+* Feature - Added support for enumerating regions for `Aws::Route53RecoveryCluster`.
+
+1.479.0 (2021-07-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.478.0 (2021-07-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.477.0 (2021-07-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.476.0 (2021-07-09)
 ------------------
 

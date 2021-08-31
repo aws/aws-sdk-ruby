@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-08-24)
+------------------
+
+* Feature - Amazon Polly adds new New Zealand English voice - Aria. Aria is available as Neural voice only.
+
+1.43.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.41.0 (2021-06-01)
 ------------------
 

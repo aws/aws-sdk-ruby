@@ -19,6 +19,7 @@ module Aws::SSMContacts
     #         accept_type: "DELIVERED", # required, accepts DELIVERED, READ
     #         note: "ReceiptInfo",
     #         accept_code: "AcceptCode", # required
+    #         accept_code_validation: "IGNORE", # accepts IGNORE, ENFORCE
     #       }
     #
     # @!attribute [rw] page_id
@@ -43,6 +44,19 @@ module Aws::SSMContacts
     #   The accept code is a 6-digit code used to acknowledge the page.
     #   @return [String]
     #
+    # @!attribute [rw] accept_code_validation
+    #   An optional field that Incident Manager uses to `ENFORCE`
+    #   `AcceptCode` validation when acknowledging an page. Acknowledgement
+    #   can occur by replying to a page, or when entering the AcceptCode in
+    #   the console. Enforcing AcceptCode validation causes Incident Manager
+    #   to verify that the code entered by the user matches the code sent by
+    #   Incident Manager with the page.
+    #
+    #   Incident Manager can also `IGNORE` `AcceptCode` validation. Ignoring
+    #   `AcceptCode` validation causes Incident Manager to accept any value
+    #   entered for the `AcceptCode`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/AcceptPageRequest AWS API Documentation
     #
     class AcceptPageRequest < Struct.new(
@@ -50,7 +64,8 @@ module Aws::SSMContacts
       :contact_channel_id,
       :accept_type,
       :note,
-      :accept_code)
+      :accept_code,
+      :accept_code_validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1527,7 +1542,8 @@ module Aws::SSMContacts
     #       }
     #
     # @!attribute [rw] duration_in_minutes
-    #   The time to wait until beginning the next stage.
+    #   The time to wait until beginning the next stage. The duration can
+    #   only be set to 0 if a target is specified.
     #   @return [Integer]
     #
     # @!attribute [rw] targets

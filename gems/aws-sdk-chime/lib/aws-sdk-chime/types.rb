@@ -64,6 +64,10 @@ module Aws::Chime
     #   Supported licenses for the Amazon Chime account.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] account_status
+    #   The status of the account.
+    #   @return [String]
+    #
     # @!attribute [rw] signin_delegate_groups
     #   The sign-in delegate groups associated with the account.
     #   @return [Array<Types::SigninDelegateGroup>]
@@ -78,6 +82,7 @@ module Aws::Chime
       :created_timestamp,
       :default_license,
       :supported_licenses,
+      :account_status,
       :signin_delegate_groups)
       SENSITIVE = []
       include Aws::Structure
@@ -596,7 +601,7 @@ module Aws::Chime
     # and membership types.
     #
     # @!attribute [rw] invited_by
-    #   The details of a user.
+    #   The identifier of the member who invited another member.
     #   @return [Types::Identity]
     #
     # @!attribute [rw] type
@@ -1232,7 +1237,7 @@ module Aws::Chime
     #   @return [Types::ChannelSummary]
     #
     # @!attribute [rw] app_instance_user_membership_summary
-    #   Returns the channel membership data for an `AppInstance`.
+    #   Summary of the membership details of an `AppInstanceUser`.
     #   @return [Types::AppInstanceUserMembershipSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChannelMembershipForAppInstanceUserSummary AWS API Documentation
@@ -4167,6 +4172,99 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # Settings specific to the Amazon Transcribe Medical engine.
+    #
+    # @note When making an API call, you may pass EngineTranscribeMedicalSettings
+    #   data as a hash:
+    #
+    #       {
+    #         language_code: "en-US", # required, accepts en-US
+    #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
+    #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #         vocabulary_name: "String",
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #       }
+    #
+    # @!attribute [rw] language_code
+    #   The language code specified for the Amazon Transcribe Medical
+    #   engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] specialty
+    #   The specialty specified for the Amazon Transcribe Medical engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary passed to Amazon Transcribe Medical.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region passed to Amazon Transcribe Medical. If you don't
+    #   specify a Region, Amazon Chime uses the meeting's Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EngineTranscribeMedicalSettings AWS API Documentation
+    #
+    class EngineTranscribeMedicalSettings < Struct.new(
+      :language_code,
+      :specialty,
+      :type,
+      :vocabulary_name,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings specific to the Amazon Transcribe engine.
+    #
+    # @note When making an API call, you may pass EngineTranscribeSettings
+    #   data as a hash:
+    #
+    #       {
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #         vocabulary_filter_name: "String",
+    #         vocabulary_name: "String",
+    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #       }
+    #
+    # @!attribute [rw] language_code
+    #   The language code specified for the Amazon Transcribe engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   The filtering method passed to Amazon Transcribe.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter passed to Amazon Transcribe.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary passed to Amazon Transcribe.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region passed to Amazon Transcribe. If you don't specify a
+    #   Region, Amazon Chime uses the meeting's Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EngineTranscribeSettings AWS API Documentation
+    #
+    class EngineTranscribeSettings < Struct.new(
+      :language_code,
+      :vocabulary_filter_method,
+      :vocabulary_filter_name,
+      :vocabulary_name,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration that allows a bot to receive outgoing events. Can be
     # either an HTTPS endpoint or a Lambda function ARN.
     #
@@ -6963,7 +7061,7 @@ module Aws::Chime
     end
 
     # A set of endpoints used by clients to connect to the media service
-    # group for a Amazon Chime SDK meeting.
+    # group for an Amazon Chime SDK meeting.
     #
     # @!attribute [rw] audio_host_url
     #   The audio host URL.
@@ -6994,7 +7092,7 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] event_ingestion_url
-    #   The event ingestion URL.
+    #   The URL of the S3 bucket used to store the captured media.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaPlacement AWS API Documentation
@@ -8972,6 +9070,75 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartMeetingTranscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         transcription_configuration: { # required
+    #           engine_transcribe_settings: {
+    #             language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #             vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #             vocabulary_filter_name: "String",
+    #             vocabulary_name: "String",
+    #             region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #           },
+    #           engine_transcribe_medical_settings: {
+    #             language_code: "en-US", # required, accepts en-US
+    #             specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
+    #             type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #             vocabulary_name: "String",
+    #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The unique ID of the meeting being transcribed.
+    #   @return [String]
+    #
+    # @!attribute [rw] transcription_configuration
+    #   The configuration for the current transcription operation. Must
+    #   contain `EngineTranscribeSettings` or
+    #   `EngineTranscribeMedicalSettings`.
+    #   @return [Types::TranscriptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StartMeetingTranscriptionRequest AWS API Documentation
+    #
+    class StartMeetingTranscriptionRequest < Struct.new(
+      :meeting_id,
+      :transcription_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StartMeetingTranscriptionResponse AWS API Documentation
+    #
+    class StartMeetingTranscriptionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopMeetingTranscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The unique ID of the meeting for which you stop transcription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StopMeetingTranscriptionRequest AWS API Documentation
+    #
+    class StopMeetingTranscriptionRequest < Struct.new(
+      :meeting_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StopMeetingTranscriptionResponse AWS API Documentation
+    #
+    class StopMeetingTranscriptionResponse < Aws::EmptyStructure; end
+
     # The streaming configuration associated with an Amazon Chime Voice
     # Connector. Specifies whether media streaming is enabled for sending to
     # Amazon Kinesis, and shows the retention period for the Amazon Kinesis
@@ -9273,6 +9440,49 @@ module Aws::Chime
     class ThrottledClientException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the current transcription operation. Must
+    # contain `EngineTranscribeSettings` or
+    # `EngineTranscribeMedicalSettings`.
+    #
+    # @note When making an API call, you may pass TranscriptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         engine_transcribe_settings: {
+    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #           vocabulary_filter_name: "String",
+    #           vocabulary_name: "String",
+    #           region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #         },
+    #         engine_transcribe_medical_settings: {
+    #           language_code: "en-US", # required, accepts en-US
+    #           specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
+    #           type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #           vocabulary_name: "String",
+    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #         },
+    #       }
+    #
+    # @!attribute [rw] engine_transcribe_settings
+    #   The transcription configuration settings passed to Amazon
+    #   Transcribe.
+    #   @return [Types::EngineTranscribeSettings]
+    #
+    # @!attribute [rw] engine_transcribe_medical_settings
+    #   The transcription configuration settings passed to Amazon
+    #   Transcribe.
+    #   @return [Types::EngineTranscribeMedicalSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TranscriptionConfiguration AWS API Documentation
+    #
+    class TranscriptionConfiguration < Struct.new(
+      :engine_transcribe_settings,
+      :engine_transcribe_medical_settings)
       SENSITIVE = []
       include Aws::Structure
     end

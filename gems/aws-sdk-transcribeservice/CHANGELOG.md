@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-08-26)
+------------------
+
+* Feature - This release adds support for batch transcription in six new languages - Afrikaans, Danish, Mandarin Chinese (Taiwan), New Zealand English, South African English, and Thai.
+
+1.59.0 (2021-08-24)
+------------------
+
+* Feature - This release adds support for feature tagging with Amazon Transcribe batch jobs.
+
+1.58.0 (2021-08-04)
+------------------
+
+* Feature - This release adds support for call analytics (batch) within Amazon Transcribe.
+
+1.57.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.55.0 (2021-05-14)
 ------------------
 

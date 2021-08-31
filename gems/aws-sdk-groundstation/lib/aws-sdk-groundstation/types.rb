@@ -167,6 +167,8 @@ module Aws::GroundStation
 
     # Details for certain `Config` object types in a contact.
     #
+    # @note ConfigDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigDetails corresponding to the set member.
+    #
     # @!attribute [rw] antenna_demod_decode_details
     #   Details for antenna demod decode `Config` in a contact.
     #   @return [Types::AntennaDemodDecodeDetails]
@@ -184,9 +186,16 @@ module Aws::GroundStation
     class ConfigDetails < Struct.new(
       :antenna_demod_decode_details,
       :endpoint_details,
-      :s3_recording_details)
+      :s3_recording_details,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class AntennaDemodDecodeDetails < ConfigDetails; end
+      class EndpointDetails < ConfigDetails; end
+      class S3RecordingDetails < ConfigDetails; end
+      class Unknown < ConfigDetails; end
     end
 
     # @!attribute [rw] config_arn
@@ -244,73 +253,9 @@ module Aws::GroundStation
     #
     # See the subtype definitions for what each type of `Config` contains.
     #
-    # @note When making an API call, you may pass ConfigTypeData
-    #   data as a hash:
+    # @note ConfigTypeData is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         antenna_downlink_config: {
-    #           spectrum_config: { # required
-    #             bandwidth: { # required
-    #               units: "GHz", # required, accepts GHz, MHz, kHz
-    #               value: 1.0, # required
-    #             },
-    #             center_frequency: { # required
-    #               units: "GHz", # required, accepts GHz, MHz, kHz
-    #               value: 1.0, # required
-    #             },
-    #             polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #           },
-    #         },
-    #         antenna_downlink_demod_decode_config: {
-    #           decode_config: { # required
-    #             unvalidated_json: "JsonString", # required
-    #           },
-    #           demodulation_config: { # required
-    #             unvalidated_json: "JsonString", # required
-    #           },
-    #           spectrum_config: { # required
-    #             bandwidth: { # required
-    #               units: "GHz", # required, accepts GHz, MHz, kHz
-    #               value: 1.0, # required
-    #             },
-    #             center_frequency: { # required
-    #               units: "GHz", # required, accepts GHz, MHz, kHz
-    #               value: 1.0, # required
-    #             },
-    #             polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #           },
-    #         },
-    #         antenna_uplink_config: {
-    #           spectrum_config: { # required
-    #             center_frequency: { # required
-    #               units: "GHz", # required, accepts GHz, MHz, kHz
-    #               value: 1.0, # required
-    #             },
-    #             polarization: "LEFT_HAND", # accepts LEFT_HAND, NONE, RIGHT_HAND
-    #           },
-    #           target_eirp: { # required
-    #             units: "dBW", # required, accepts dBW
-    #             value: 1.0, # required
-    #           },
-    #           transmit_disabled: false,
-    #         },
-    #         dataflow_endpoint_config: {
-    #           dataflow_endpoint_name: "String", # required
-    #           dataflow_endpoint_region: "String",
-    #         },
-    #         s3_recording_config: {
-    #           bucket_arn: "BucketArn", # required
-    #           prefix: "S3KeyPrefix",
-    #           role_arn: "RoleArn", # required
-    #         },
-    #         tracking_config: {
-    #           autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
-    #         },
-    #         uplink_echo_config: {
-    #           antenna_uplink_config_arn: "ConfigArn", # required
-    #           enabled: false, # required
-    #         },
-    #       }
+    # @note ConfigTypeData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigTypeData corresponding to the set member.
     #
     # @!attribute [rw] antenna_downlink_config
     #   Information about how AWS Ground Station should configure an antenna
@@ -357,9 +302,20 @@ module Aws::GroundStation
       :dataflow_endpoint_config,
       :s3_recording_config,
       :tracking_config,
-      :uplink_echo_config)
+      :uplink_echo_config,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class AntennaDownlinkConfig < ConfigTypeData; end
+      class AntennaDownlinkDemodDecodeConfig < ConfigTypeData; end
+      class AntennaUplinkConfig < ConfigTypeData; end
+      class DataflowEndpointConfig < ConfigTypeData; end
+      class S3RecordingConfig < ConfigTypeData; end
+      class TrackingConfig < ConfigTypeData; end
+      class UplinkEchoConfig < ConfigTypeData; end
+      class Unknown < ConfigTypeData; end
     end
 
     # Data describing a contact.

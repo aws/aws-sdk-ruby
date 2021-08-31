@@ -61,7 +61,7 @@ module AwsSdkCodeGenerator
         : request_syntax_example(method_name, operation, api),
         response_structure_example(operation, api),
         waiters_tag(@waiters),
-        see_also_tag(operation, api),
+        see_also_tag(@name, api),
       ], block_comment: false)
     end
     alias to_s to_str
@@ -103,6 +103,12 @@ module AwsSdkCodeGenerator
           end
           if member_ref['jsonvalue']
             docstring = docstring.to_s + "<p><b>SDK automatically handles json encoding and base64 encoding for you when the required value (Hash, Array, etc.) is provided according to the description.</b></p>"
+          end
+          if member_shape['document']
+            docstring = docstring.to_s + "<p>Document type used to carry open content (Hash,Array,String,Numeric,Boolean). A document type value is serialized using the same format as its surroundings and requires no additional encoding or escaping.</p>"
+          end
+          if member_ref['union']
+            docstring = docstring.to_s + "<p>This is a union type and you must set exactly one of the members.</p>"
           end
           YardOptionTag.new(
             name: Underscore.underscore(member_name),
@@ -268,7 +274,7 @@ module AwsSdkCodeGenerator
     def see_also_tag(operation, api)
       uid = api['metadata']['uid']
       if api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
-        "# " + Crosslink.tag_string(uid, operation['name'])
+        "# " + Crosslink.tag_string(uid, operation)
       end
     end
 

@@ -25,8 +25,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
     #   data. This must be a symmetric CMK. For more information, see
-    #   [Amazon Resource Names - AWS Key Management Service (AWS KMS)][1]
-    #   and [Using Symmetric and Asymmetric Keys][2].
+    #   [Amazon Resource Names - Key Management Service][1] and [Using
+    #   Symmetric and Asymmetric Keys][2].
     #
     #
     #
@@ -102,7 +102,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] destination
     #   The name of S3 bucket for the exported log data. The bucket must be
-    #   in the same AWS region.
+    #   in the same Amazon Web Services region.
     #   @return [String]
     #
     # @!attribute [rw] destination_prefix
@@ -153,8 +153,8 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. For more information, see [Amazon Resource Names - AWS Key
-    #   Management Service (AWS KMS)][1].
+    #   data. For more information, see [Amazon Resource Names - Key
+    #   Management Service][1].
     #
     #
     #
@@ -163,6 +163,16 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] tags
     #   The key-value pairs to use for the tags.
+    #
+    #   CloudWatch Logs doesn’t support IAM policies that prevent users from
+    #   assigning specified tags to log groups using the
+    #   `aws:Resource/key-name ` or `aws:TagKeys` condition keys. For more
+    #   information about using tags to control access, see [Controlling
+    #   access to Amazon Web Services resources using tags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroupRequest AWS API Documentation
@@ -959,8 +969,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] access_policy
-    #   An IAM policy document that governs which AWS accounts can create
-    #   subscription filters against this destination.
+    #   An IAM policy document that governs which Amazon Web Services
+    #   accounts can create subscription filters against this destination.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -1304,9 +1314,6 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
-    #
-    #   Using this token works only when you specify `true` for
-    #   `startFromHead`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1320,8 +1327,9 @@ module Aws::CloudWatchLogs
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
     #
-    #   If you are using `nextToken` in this operation, you must specify
-    #   `true` for `startFromHead`.
+    #   If you are using a previous `nextForwardToken` value as the
+    #   `nextToken` in this operation, you must specify `true` for
+    #   `startFromHead`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsRequest AWS API Documentation
@@ -1608,8 +1616,12 @@ module Aws::CloudWatchLogs
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
     #   180, 365, 400, 545, 731, 1827, and 3653.
     #
-    #   If you omit `retentionInDays` in a `PutRetentionPolicy` operation,
-    #   the events in the log group are always retained and never expire.
+    #   To set a log group to never have log events expire, use
+    #   [DeleteRetentionPolicy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html
     #   @return [Integer]
     #
     # @!attribute [rw] metric_filter_count
@@ -1873,7 +1885,7 @@ module Aws::CloudWatchLogs
     #    You can also set up a billing alarm to alert you if your charges
     #   are
     #   higher than expected. For more information, see [ Creating a Billing
-    #   Alarm to Monitor Your Estimated AWS Charges][1].
+    #   Alarm to Monitor Your Estimated Amazon Web Services Charges][1].
     #
     #
     #
@@ -2221,10 +2233,28 @@ module Aws::CloudWatchLogs
     #   Replace `"logArn"` with the ARN of your CloudWatch Logs resource,
     #   such as a log group or log stream.
     #
+    #   CloudWatch Logs also supports [aws:SourceArn][1] and
+    #   [aws:SourceAccount][2] condition context keys.
+    #
+    #   In the example resource policy, you would replace the value of
+    #   `SourceArn` with the resource making the call from Route 53 to
+    #   CloudWatch Logs and replace the value of `SourceAccount` with the
+    #   Amazon Web Services account ID making that call.
+    #
+    #
+    #
     #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
     #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
-    #   "Service": [ "route53.amazonaws.com" ] \},
-    #   "Action":"logs:PutLogEvents", "Resource": "logArn" \} ] \} `
+    #   "Service": [ "route53.amazonaws.com" ] \}, "Action":
+    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": \{
+    #   "ArnLike": \{ "aws:SourceArn": "myRoute53ResourceArn" \},
+    #   "StringEquals": \{ "aws:SourceAccount": "myAwsAccountId" \} \} \} ]
+    #   \}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyRequest AWS API Documentation
@@ -2265,8 +2295,12 @@ module Aws::CloudWatchLogs
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
     #   180, 365, 400, 545, 731, 1827, and 3653.
     #
-    #   If you omit `retentionInDays` in a `PutRetentionPolicy` operation,
-    #   the events in the log group are always retained and never expire.
+    #   To set a log group to never have log events expire, use
+    #   [DeleteRetentionPolicy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicyRequest AWS API Documentation
@@ -2327,7 +2361,7 @@ module Aws::CloudWatchLogs
     #   * An Amazon Kinesis Firehose delivery stream belonging to the same
     #     account as the subscription filter, for same-account delivery.
     #
-    #   * An AWS Lambda function belonging to the same account as the
+    #   * A Lambda function belonging to the same account as the
     #     subscription filter, for same-account delivery.
     #
     #
@@ -2845,7 +2879,8 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # The most likely cause is an invalid AWS access key ID or secret key.
+    # The most likely cause is an invalid Amazon Web Services access key ID
+    # or secret key.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UnrecognizedClientException AWS API Documentation
     #

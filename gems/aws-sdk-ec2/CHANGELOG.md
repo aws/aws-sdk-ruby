@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.260.0 (2021-08-27)
+------------------
+
+* Feature - This release adds the BootMode flag to the ImportImage API and showing the detected BootMode of an ImportImage task.
+
+1.259.0 (2021-08-26)
+------------------
+
+* Feature - Support added for resizing VPC prefix lists
+
+1.258.0 (2021-08-25)
+------------------
+
+* Feature - Support added for IMDS IPv6 endpoint
+
+1.257.0 (2021-08-20)
+------------------
+
+* Feature - encryptionInTransitSupported added to DescribeInstanceTypes API
+
+1.256.0 (2021-08-19)
+------------------
+
+* Feature - The ImportImage API now supports the ability to create AMIs with AWS-managed licenses for Microsoft SQL Server for both Windows and Linux.
+
+1.255.0 (2021-08-17)
+------------------
+
+* Feature - This release adds support for EC2 ED25519 key pairs for authentication
+
+1.254.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.253.0 (2021-07-29)
+------------------
+
+* Feature - This release adds support for G4ad xlarge and 2xlarge instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
+
+1.252.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.251.0 (2021-07-22)
+------------------
+
+* Feature - This release allows customers to assign prefixes to their elastic network interface and to reserve IP blocks in their subnet CIDRs. These reserved blocks can be used to assign prefixes to elastic network interfaces or be excluded from auto-assignment.
+
+1.250.0 (2021-07-20)
+------------------
+
+* Feature - Added idempotency to the CreateVolume API using the ClientToken request parameter
+
+1.249.0 (2021-07-15)
+------------------
+
+* Feature - This feature enables customers  to specify weekly recurring time window(s) for scheduled events that reboot, stop or terminate EC2 instances.
+
 1.248.0 (2021-07-07)
 ------------------
 

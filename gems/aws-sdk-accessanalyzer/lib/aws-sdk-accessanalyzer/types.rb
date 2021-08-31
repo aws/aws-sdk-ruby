@@ -258,13 +258,9 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html
     #
-    # @note When making an API call, you may pass AclGrantee
-    #   data as a hash:
+    # @note AclGrantee is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         id: "AclCanonicalId",
-    #         uri: "AclUri",
-    #       }
+    # @note AclGrantee is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AclGrantee corresponding to the set member.
     #
     # @!attribute [rw] id
     #   The value specified is the canonical user ID of an AWS account.
@@ -278,9 +274,15 @@ module Aws::AccessAnalyzer
     #
     class AclGrantee < Struct.new(
       :id,
-      :uri)
+      :uri,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Id < AclGrantee; end
+      class Uri < AclGrantee; end
+      class Unknown < AclGrantee; end
     end
 
     # Contains details about the analyzed resource.
@@ -617,74 +619,9 @@ module Aws::AccessAnalyzer
     # the configuration as a type-value pair. You can specify only one type
     # of access control configuration.
     #
-    # @note When making an API call, you may pass Configuration
-    #   data as a hash:
+    # @note Configuration is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         iam_role: {
-    #           trust_policy: "IamTrustPolicy",
-    #         },
-    #         kms_key: {
-    #           grants: [
-    #             {
-    #               constraints: {
-    #                 encryption_context_equals: {
-    #                   "KmsConstraintsKey" => "KmsConstraintsValue",
-    #                 },
-    #                 encryption_context_subset: {
-    #                   "KmsConstraintsKey" => "KmsConstraintsValue",
-    #                 },
-    #               },
-    #               grantee_principal: "GranteePrincipal", # required
-    #               issuing_account: "IssuingAccount", # required
-    #               operations: ["CreateGrant"], # required, accepts CreateGrant, Decrypt, DescribeKey, Encrypt, GenerateDataKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateDataKeyWithoutPlaintext, GetPublicKey, ReEncryptFrom, ReEncryptTo, RetireGrant, Sign, Verify
-    #               retiring_principal: "RetiringPrincipal",
-    #             },
-    #           ],
-    #           key_policies: {
-    #             "PolicyName" => "KmsKeyPolicy",
-    #           },
-    #         },
-    #         s3_bucket: {
-    #           access_points: {
-    #             "AccessPointArn" => {
-    #               access_point_policy: "AccessPointPolicy",
-    #               network_origin: {
-    #                 internet_configuration: {
-    #                 },
-    #                 vpc_configuration: {
-    #                   vpc_id: "VpcId", # required
-    #                 },
-    #               },
-    #               public_access_block: {
-    #                 ignore_public_acls: false, # required
-    #                 restrict_public_buckets: false, # required
-    #               },
-    #             },
-    #           },
-    #           bucket_acl_grants: [
-    #             {
-    #               grantee: { # required
-    #                 id: "AclCanonicalId",
-    #                 uri: "AclUri",
-    #               },
-    #               permission: "READ", # required, accepts READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL
-    #             },
-    #           ],
-    #           bucket_policy: "S3BucketPolicy",
-    #           bucket_public_access_block: {
-    #             ignore_public_acls: false, # required
-    #             restrict_public_buckets: false, # required
-    #           },
-    #         },
-    #         secrets_manager_secret: {
-    #           kms_key_id: "SecretsManagerSecretKmsId",
-    #           secret_policy: "SecretsManagerSecretPolicy",
-    #         },
-    #         sqs_queue: {
-    #           queue_policy: "SqsQueuePolicy",
-    #         },
-    #       }
+    # @note Configuration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Configuration corresponding to the set member.
     #
     # @!attribute [rw] iam_role
     #   The access control configuration is for an IAM role.
@@ -713,9 +650,18 @@ module Aws::AccessAnalyzer
       :kms_key,
       :s3_bucket,
       :secrets_manager_secret,
-      :sqs_queue)
+      :sqs_queue,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class IamRole < Configuration; end
+      class KmsKey < Configuration; end
+      class S3Bucket < Configuration; end
+      class SecretsManagerSecret < Configuration; end
+      class SqsQueue < Configuration; end
+      class Unknown < Configuration; end
     end
 
     # A conflict exception error.
@@ -2491,16 +2437,9 @@ module Aws::AccessAnalyzer
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html
     #
-    # @note When making an API call, you may pass NetworkOriginConfiguration
-    #   data as a hash:
+    # @note NetworkOriginConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
-    #       {
-    #         internet_configuration: {
-    #         },
-    #         vpc_configuration: {
-    #           vpc_id: "VpcId", # required
-    #         },
-    #       }
+    # @note NetworkOriginConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NetworkOriginConfiguration corresponding to the set member.
     #
     # @!attribute [rw] internet_configuration
     #   The configuration for the Amazon S3 access point with an `Internet`
@@ -2521,13 +2460,21 @@ module Aws::AccessAnalyzer
     #
     class NetworkOriginConfiguration < Struct.new(
       :internet_configuration,
-      :vpc_configuration)
+      :vpc_configuration,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class InternetConfiguration < NetworkOriginConfiguration; end
+      class VpcConfiguration < NetworkOriginConfiguration; end
+      class Unknown < NetworkOriginConfiguration; end
     end
 
     # A single element in a path through the JSON representation of a
     # policy.
+    #
+    # @note PathElement is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PathElement corresponding to the set member.
     #
     # @!attribute [rw] index
     #   Refers to an index in a JSON array.
@@ -2551,9 +2498,17 @@ module Aws::AccessAnalyzer
       :index,
       :key,
       :substring,
-      :value)
+      :value,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
+      include Aws::Structure::Union
+
+      class Index < PathElement; end
+      class Key < PathElement; end
+      class Substring < PathElement; end
+      class Value < PathElement; end
+      class Unknown < PathElement; end
     end
 
     # Contains details about the policy generation status and properties.

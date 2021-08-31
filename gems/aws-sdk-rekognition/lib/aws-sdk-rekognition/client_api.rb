@@ -22,6 +22,7 @@ module Aws::Rekognition
     AudioMetadata = Shapes::StructureShape.new(name: 'AudioMetadata')
     AudioMetadataList = Shapes::ListShape.new(name: 'AudioMetadataList')
     Beard = Shapes::StructureShape.new(name: 'Beard')
+    BlackFrame = Shapes::StructureShape.new(name: 'BlackFrame')
     BodyPart = Shapes::StringShape.new(name: 'BodyPart')
     BodyParts = Shapes::ListShape.new(name: 'BodyParts')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -177,6 +178,8 @@ module Aws::Rekognition
     KinesisVideoArn = Shapes::StringShape.new(name: 'KinesisVideoArn')
     KinesisVideoStream = Shapes::StructureShape.new(name: 'KinesisVideoStream')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    KnownGender = Shapes::StructureShape.new(name: 'KnownGender')
+    KnownGenderType = Shapes::StringShape.new(name: 'KnownGenderType')
     Label = Shapes::StructureShape.new(name: 'Label')
     LabelDetection = Shapes::StructureShape.new(name: 'LabelDetection')
     LabelDetectionSortBy = Shapes::StringShape.new(name: 'LabelDetectionSortBy')
@@ -196,7 +199,9 @@ module Aws::Rekognition
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxFaces = Shapes::IntegerShape.new(name: 'MaxFaces')
     MaxFacesToIndex = Shapes::IntegerShape.new(name: 'MaxFacesToIndex')
+    MaxPixelThreshold = Shapes::FloatShape.new(name: 'MaxPixelThreshold')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MinCoveragePercentage = Shapes::FloatShape.new(name: 'MinCoveragePercentage')
     ModerationLabel = Shapes::StructureShape.new(name: 'ModerationLabel')
     ModerationLabels = Shapes::ListShape.new(name: 'ModerationLabels')
     MouthOpen = Shapes::StructureShape.new(name: 'MouthOpen')
@@ -345,6 +350,7 @@ module Aws::Rekognition
     VersionName = Shapes::StringShape.new(name: 'VersionName')
     VersionNames = Shapes::ListShape.new(name: 'VersionNames')
     Video = Shapes::StructureShape.new(name: 'Video')
+    VideoColorRange = Shapes::StringShape.new(name: 'VideoColorRange')
     VideoJobStatus = Shapes::StringShape.new(name: 'VideoJobStatus')
     VideoMetadata = Shapes::StructureShape.new(name: 'VideoMetadata')
     VideoMetadataList = Shapes::ListShape.new(name: 'VideoMetadataList')
@@ -375,6 +381,10 @@ module Aws::Rekognition
     Beard.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Beard.struct_class = Types::Beard
 
+    BlackFrame.add_member(:max_pixel_threshold, Shapes::ShapeRef.new(shape: MaxPixelThreshold, location_name: "MaxPixelThreshold"))
+    BlackFrame.add_member(:min_coverage_percentage, Shapes::ShapeRef.new(shape: MinCoveragePercentage, location_name: "MinCoveragePercentage"))
+    BlackFrame.struct_class = Types::BlackFrame
+
     BodyParts.member = Shapes::ShapeRef.new(shape: ProtectiveEquipmentBodyPart)
 
     BoundingBox.add_member(:width, Shapes::ShapeRef.new(shape: Float, location_name: "Width"))
@@ -388,6 +398,7 @@ module Aws::Rekognition
     Celebrity.add_member(:id, Shapes::ShapeRef.new(shape: RekognitionUniqueId, location_name: "Id"))
     Celebrity.add_member(:face, Shapes::ShapeRef.new(shape: ComparedFace, location_name: "Face"))
     Celebrity.add_member(:match_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MatchConfidence"))
+    Celebrity.add_member(:known_gender, Shapes::ShapeRef.new(shape: KnownGender, location_name: "KnownGender"))
     Celebrity.struct_class = Types::Celebrity
 
     CelebrityDetail.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, location_name: "Urls"))
@@ -434,6 +445,8 @@ module Aws::Rekognition
     ComparedFace.add_member(:landmarks, Shapes::ShapeRef.new(shape: Landmarks, location_name: "Landmarks"))
     ComparedFace.add_member(:pose, Shapes::ShapeRef.new(shape: Pose, location_name: "Pose"))
     ComparedFace.add_member(:quality, Shapes::ShapeRef.new(shape: ImageQuality, location_name: "Quality"))
+    ComparedFace.add_member(:emotions, Shapes::ShapeRef.new(shape: Emotions, location_name: "Emotions"))
+    ComparedFace.add_member(:smile, Shapes::ShapeRef.new(shape: Smile, location_name: "Smile"))
     ComparedFace.struct_class = Types::ComparedFace
 
     ComparedFaceList.member = Shapes::ShapeRef.new(shape: ComparedFace)
@@ -727,6 +740,7 @@ module Aws::Rekognition
 
     GetCelebrityInfoResponse.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, location_name: "Urls"))
     GetCelebrityInfoResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    GetCelebrityInfoResponse.add_member(:known_gender, Shapes::ShapeRef.new(shape: KnownGender, location_name: "KnownGender"))
     GetCelebrityInfoResponse.struct_class = Types::GetCelebrityInfoResponse
 
     GetCelebrityRecognitionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -905,6 +919,9 @@ module Aws::Rekognition
 
     KinesisVideoStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisVideoArn, location_name: "Arn"))
     KinesisVideoStream.struct_class = Types::KinesisVideoStream
+
+    KnownGender.add_member(:type, Shapes::ShapeRef.new(shape: KnownGenderType, location_name: "Type"))
+    KnownGender.struct_class = Types::KnownGender
 
     Label.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Label.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -1132,6 +1149,9 @@ module Aws::Rekognition
     SegmentDetection.add_member(:duration_smpte, Shapes::ShapeRef.new(shape: Timecode, location_name: "DurationSMPTE"))
     SegmentDetection.add_member(:technical_cue_segment, Shapes::ShapeRef.new(shape: TechnicalCueSegment, location_name: "TechnicalCueSegment"))
     SegmentDetection.add_member(:shot_segment, Shapes::ShapeRef.new(shape: ShotSegment, location_name: "ShotSegment"))
+    SegmentDetection.add_member(:start_frame_number, Shapes::ShapeRef.new(shape: ULong, location_name: "StartFrameNumber"))
+    SegmentDetection.add_member(:end_frame_number, Shapes::ShapeRef.new(shape: ULong, location_name: "EndFrameNumber"))
+    SegmentDetection.add_member(:duration_frames, Shapes::ShapeRef.new(shape: ULong, location_name: "DurationFrames"))
     SegmentDetection.struct_class = Types::SegmentDetection
 
     SegmentDetections.member = Shapes::ShapeRef.new(shape: SegmentDetection)
@@ -1244,6 +1264,7 @@ module Aws::Rekognition
     StartStreamProcessorResponse.struct_class = Types::StartStreamProcessorResponse
 
     StartTechnicalCueDetectionFilter.add_member(:min_segment_confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "MinSegmentConfidence"))
+    StartTechnicalCueDetectionFilter.add_member(:black_frame, Shapes::ShapeRef.new(shape: BlackFrame, location_name: "BlackFrame"))
     StartTechnicalCueDetectionFilter.struct_class = Types::StartTechnicalCueDetectionFilter
 
     StartTextDetectionFilters.add_member(:word_filter, Shapes::ShapeRef.new(shape: DetectionFilter, location_name: "WordFilter"))
@@ -1371,6 +1392,7 @@ module Aws::Rekognition
     VideoMetadata.add_member(:frame_rate, Shapes::ShapeRef.new(shape: Float, location_name: "FrameRate"))
     VideoMetadata.add_member(:frame_height, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameHeight"))
     VideoMetadata.add_member(:frame_width, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameWidth"))
+    VideoMetadata.add_member(:color_range, Shapes::ShapeRef.new(shape: VideoColorRange, location_name: "ColorRange"))
     VideoMetadata.struct_class = Types::VideoMetadata
 
     VideoMetadataList.member = Shapes::ShapeRef.new(shape: VideoMetadata)

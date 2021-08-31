@@ -849,6 +849,12 @@ module Aws::APIGateway
     #   client and the server. Clients must present a trusted certificate to
     #   access your custom domain name.
     #
+    # @option params [String] :ownership_verification_certificate_arn
+    #   The ARN of the public certificate issued by ACM to validate ownership
+    #   of your custom domain. Only required when configuring mutual TLS and
+    #   using an ACM imported or private CA certificate ARN as the
+    #   regionalCertificateArn.
+    #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
@@ -867,6 +873,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
+    #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -891,6 +898,7 @@ module Aws::APIGateway
     #       truststore_uri: "String",
     #       truststore_version: "String",
     #     },
+    #     ownership_verification_certificate_arn: "String",
     #   })
     #
     # @example Response structure
@@ -909,7 +917,7 @@ module Aws::APIGateway
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
@@ -918,6 +926,7 @@ module Aws::APIGateway
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.ownership_verification_certificate_arn #=> String
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -1764,27 +1773,6 @@ module Aws::APIGateway
     #
     # @option params [required, String] :response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values are
-    #   * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1792,7 +1780,7 @@ module Aws::APIGateway
     #
     #   resp = client.delete_gateway_response({
     #     rest_api_id: "String", # required
-    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #   })
     #
     # @overload delete_gateway_response(params = {})
@@ -2910,6 +2898,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
+    #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2933,7 +2922,7 @@ module Aws::APIGateway
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
@@ -2942,6 +2931,7 @@ module Aws::APIGateway
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.ownership_verification_certificate_arn #=> String
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2991,7 +2981,7 @@ module Aws::APIGateway
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.items[0].endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.items[0].domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
     #   resp.items[0].domain_name_status_message #=> String
     #   resp.items[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.items[0].tags #=> Hash
@@ -3000,6 +2990,7 @@ module Aws::APIGateway
     #   resp.items[0].mutual_tls_authentication.truststore_version #=> String
     #   resp.items[0].mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.items[0].mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.items[0].ownership_verification_certificate_arn #=> String
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -3075,27 +3066,6 @@ module Aws::APIGateway
     #
     # @option params [required, String] :response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values are
-    #   * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @return [Types::GatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3109,12 +3079,12 @@ module Aws::APIGateway
     #
     #   resp = client.get_gateway_response({
     #     rest_api_id: "String", # required
-    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #   })
     #
     # @example Response structure
     #
-    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED", "WAF_FILTERED"
     #   resp.status_code #=> String
     #   resp.response_parameters #=> Hash
     #   resp.response_parameters["String"] #=> String
@@ -3164,7 +3134,7 @@ module Aws::APIGateway
     #
     #   resp.position #=> String
     #   resp.items #=> Array
-    #   resp.items[0].response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.items[0].response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED", "WAF_FILTERED"
     #   resp.items[0].status_code #=> String
     #   resp.items[0].response_parameters #=> Hash
     #   resp.items[0].response_parameters["String"] #=> String
@@ -4769,27 +4739,6 @@ module Aws::APIGateway
     #
     # @option params [required, String] :response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values are
-    #   * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @option params [String] :status_code
     #   The HTTP status code of the GatewayResponse.
@@ -4814,7 +4763,7 @@ module Aws::APIGateway
     #
     #   resp = client.put_gateway_response({
     #     rest_api_id: "String", # required
-    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #     status_code: "StatusCode",
     #     response_parameters: {
     #       "String" => "String",
@@ -4826,7 +4775,7 @@ module Aws::APIGateway
     #
     # @example Response structure
     #
-    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED", "WAF_FILTERED"
     #   resp.status_code #=> String
     #   resp.response_parameters #=> Hash
     #   resp.response_parameters["String"] #=> String
@@ -6130,6 +6079,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
+    #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6161,7 +6111,7 @@ module Aws::APIGateway
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.endpoint_configuration.vpc_endpoint_ids #=> Array
     #   resp.endpoint_configuration.vpc_endpoint_ids[0] #=> String
-    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING"
+    #   resp.domain_name_status #=> String, one of "AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"
     #   resp.domain_name_status_message #=> String
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
@@ -6170,6 +6120,7 @@ module Aws::APIGateway
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.ownership_verification_certificate_arn #=> String
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -6186,27 +6137,6 @@ module Aws::APIGateway
     #
     # @option params [required, String] :response_type
     #   \[Required\] The response type of the associated GatewayResponse.
-    #   Valid values are
-    #   * ACCESS\_DENIED
-    #   * API\_CONFIGURATION\_ERROR
-    #   * AUTHORIZER\_FAILURE
-    #   * AUTHORIZER\_CONFIGURATION\_ERROR
-    #   * BAD\_REQUEST\_PARAMETERS
-    #   * BAD\_REQUEST\_BODY
-    #   * DEFAULT\_4XX
-    #   * DEFAULT\_5XX
-    #   * EXPIRED\_TOKEN
-    #   * INVALID\_SIGNATURE
-    #   * INTEGRATION\_FAILURE
-    #   * INTEGRATION\_TIMEOUT
-    #   * INVALID\_API\_KEY
-    #   * MISSING\_AUTHENTICATION\_TOKEN
-    #   * QUOTA\_EXCEEDED
-    #   * REQUEST\_TOO\_LARGE
-    #   * RESOURCE\_NOT\_FOUND
-    #   * THROTTLED
-    #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6224,7 +6154,7 @@ module Aws::APIGateway
     #
     #   resp = client.update_gateway_response({
     #     rest_api_id: "String", # required
-    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED
+    #     response_type: "DEFAULT_4XX", # required, accepts DEFAULT_4XX, DEFAULT_5XX, RESOURCE_NOT_FOUND, UNAUTHORIZED, INVALID_API_KEY, ACCESS_DENIED, AUTHORIZER_FAILURE, AUTHORIZER_CONFIGURATION_ERROR, INVALID_SIGNATURE, EXPIRED_TOKEN, MISSING_AUTHENTICATION_TOKEN, INTEGRATION_FAILURE, INTEGRATION_TIMEOUT, API_CONFIGURATION_ERROR, UNSUPPORTED_MEDIA_TYPE, BAD_REQUEST_PARAMETERS, BAD_REQUEST_BODY, REQUEST_TOO_LARGE, THROTTLED, QUOTA_EXCEEDED, WAF_FILTERED
     #     patch_operations: [
     #       {
     #         op: "add", # accepts add, remove, replace, move, copy, test
@@ -6237,7 +6167,7 @@ module Aws::APIGateway
     #
     # @example Response structure
     #
-    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED"
+    #   resp.response_type #=> String, one of "DEFAULT_4XX", "DEFAULT_5XX", "RESOURCE_NOT_FOUND", "UNAUTHORIZED", "INVALID_API_KEY", "ACCESS_DENIED", "AUTHORIZER_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR", "INVALID_SIGNATURE", "EXPIRED_TOKEN", "MISSING_AUTHENTICATION_TOKEN", "INTEGRATION_FAILURE", "INTEGRATION_TIMEOUT", "API_CONFIGURATION_ERROR", "UNSUPPORTED_MEDIA_TYPE", "BAD_REQUEST_PARAMETERS", "BAD_REQUEST_BODY", "REQUEST_TOO_LARGE", "THROTTLED", "QUOTA_EXCEEDED", "WAF_FILTERED"
     #   resp.status_code #=> String
     #   resp.response_parameters #=> Hash
     #   resp.response_parameters["String"] #=> String
@@ -7087,7 +7017,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -18,6 +18,7 @@ module Aws::Chime
     AccountList = Shapes::ListShape.new(name: 'AccountList')
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
+    AccountStatus = Shapes::StringShape.new(name: 'AccountStatus')
     AccountType = Shapes::StringShape.new(name: 'AccountType')
     AlexaForBusinessMetadata = Shapes::StructureShape.new(name: 'AlexaForBusinessMetadata')
     Alpha2CountryCode = Shapes::StringShape.new(name: 'Alpha2CountryCode')
@@ -231,6 +232,8 @@ module Aws::Chime
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailStatus = Shapes::StringShape.new(name: 'EmailStatus')
     EmergencyCallingConfiguration = Shapes::StructureShape.new(name: 'EmergencyCallingConfiguration')
+    EngineTranscribeMedicalSettings = Shapes::StructureShape.new(name: 'EngineTranscribeMedicalSettings')
+    EngineTranscribeSettings = Shapes::StructureShape.new(name: 'EngineTranscribeSettings')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     EventsConfiguration = Shapes::StructureShape.new(name: 'EventsConfiguration')
     ExternalMeetingIdType = Shapes::StringShape.new(name: 'ExternalMeetingIdType')
@@ -522,6 +525,10 @@ module Aws::Chime
     SipRuleTargetApplicationList = Shapes::ListShape.new(name: 'SipRuleTargetApplicationList')
     SipRuleTriggerType = Shapes::StringShape.new(name: 'SipRuleTriggerType')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionRequest')
+    StartMeetingTranscriptionResponse = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionResponse')
+    StopMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionRequest')
+    StopMeetingTranscriptionResponse = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionResponse')
     StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
     StreamingNotificationTarget = Shapes::StructureShape.new(name: 'StreamingNotificationTarget')
     StreamingNotificationTargetList = Shapes::ListShape.new(name: 'StreamingNotificationTargetList')
@@ -542,6 +549,14 @@ module Aws::Chime
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TollFreePrefix = Shapes::StringShape.new(name: 'TollFreePrefix')
+    TranscribeLanguageCode = Shapes::StringShape.new(name: 'TranscribeLanguageCode')
+    TranscribeMedicalLanguageCode = Shapes::StringShape.new(name: 'TranscribeMedicalLanguageCode')
+    TranscribeMedicalRegion = Shapes::StringShape.new(name: 'TranscribeMedicalRegion')
+    TranscribeMedicalSpecialty = Shapes::StringShape.new(name: 'TranscribeMedicalSpecialty')
+    TranscribeMedicalType = Shapes::StringShape.new(name: 'TranscribeMedicalType')
+    TranscribeRegion = Shapes::StringShape.new(name: 'TranscribeRegion')
+    TranscribeVocabularyFilterMethod = Shapes::StringShape.new(name: 'TranscribeVocabularyFilterMethod')
+    TranscriptionConfiguration = Shapes::StructureShape.new(name: 'TranscriptionConfiguration')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
     UntagAttendeeRequest = Shapes::StructureShape.new(name: 'UntagAttendeeRequest')
@@ -625,6 +640,7 @@ module Aws::Chime
     Account.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     Account.add_member(:default_license, Shapes::ShapeRef.new(shape: License, location_name: "DefaultLicense"))
     Account.add_member(:supported_licenses, Shapes::ShapeRef.new(shape: LicenseList, location_name: "SupportedLicenses"))
+    Account.add_member(:account_status, Shapes::ShapeRef.new(shape: AccountStatus, location_name: "AccountStatus"))
     Account.add_member(:signin_delegate_groups, Shapes::ShapeRef.new(shape: SigninDelegateGroupList, location_name: "SigninDelegateGroups"))
     Account.struct_class = Types::Account
 
@@ -1379,6 +1395,20 @@ module Aws::Chime
 
     EmergencyCallingConfiguration.add_member(:dnis, Shapes::ShapeRef.new(shape: DNISEmergencyCallingConfigurationList, location_name: "DNIS"))
     EmergencyCallingConfiguration.struct_class = Types::EmergencyCallingConfiguration
+
+    EngineTranscribeMedicalSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeMedicalLanguageCode, required: true, location_name: "LanguageCode"))
+    EngineTranscribeMedicalSettings.add_member(:specialty, Shapes::ShapeRef.new(shape: TranscribeMedicalSpecialty, required: true, location_name: "Specialty"))
+    EngineTranscribeMedicalSettings.add_member(:type, Shapes::ShapeRef.new(shape: TranscribeMedicalType, required: true, location_name: "Type"))
+    EngineTranscribeMedicalSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
+    EngineTranscribeMedicalSettings.add_member(:region, Shapes::ShapeRef.new(shape: TranscribeMedicalRegion, location_name: "Region"))
+    EngineTranscribeMedicalSettings.struct_class = Types::EngineTranscribeMedicalSettings
+
+    EngineTranscribeSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, required: true, location_name: "LanguageCode"))
+    EngineTranscribeSettings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: TranscribeVocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
+    EngineTranscribeSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyFilterName"))
+    EngineTranscribeSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
+    EngineTranscribeSettings.add_member(:region, Shapes::ShapeRef.new(shape: TranscribeRegion, location_name: "Region"))
+    EngineTranscribeSettings.struct_class = Types::EngineTranscribeSettings
 
     EventsConfiguration.add_member(:bot_id, Shapes::ShapeRef.new(shape: String, location_name: "BotId"))
     EventsConfiguration.add_member(:outbound_events_https_endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "OutboundEventsHTTPSEndpoint"))
@@ -2322,6 +2352,17 @@ module Aws::Chime
 
     SipRuleTargetApplicationList.member = Shapes::ShapeRef.new(shape: SipRuleTargetApplication)
 
+    StartMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    StartMeetingTranscriptionRequest.add_member(:transcription_configuration, Shapes::ShapeRef.new(shape: TranscriptionConfiguration, required: true, location_name: "TranscriptionConfiguration"))
+    StartMeetingTranscriptionRequest.struct_class = Types::StartMeetingTranscriptionRequest
+
+    StartMeetingTranscriptionResponse.struct_class = Types::StartMeetingTranscriptionResponse
+
+    StopMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    StopMeetingTranscriptionRequest.struct_class = Types::StopMeetingTranscriptionRequest
+
+    StopMeetingTranscriptionResponse.struct_class = Types::StopMeetingTranscriptionResponse
+
     StreamingConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, required: true, location_name: "DataRetentionInHours"))
     StreamingConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
     StreamingConfiguration.add_member(:streaming_notification_targets, Shapes::ShapeRef.new(shape: StreamingNotificationTargetList, location_name: "StreamingNotificationTargets"))
@@ -2374,6 +2415,10 @@ module Aws::Chime
     ThrottledClientException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ThrottledClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottledClientException.struct_class = Types::ThrottledClientException
+
+    TranscriptionConfiguration.add_member(:engine_transcribe_settings, Shapes::ShapeRef.new(shape: EngineTranscribeSettings, location_name: "EngineTranscribeSettings"))
+    TranscriptionConfiguration.add_member(:engine_transcribe_medical_settings, Shapes::ShapeRef.new(shape: EngineTranscribeMedicalSettings, location_name: "EngineTranscribeMedicalSettings"))
+    TranscriptionConfiguration.struct_class = Types::TranscriptionConfiguration
 
     UnauthorizedClientException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     UnauthorizedClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -5337,6 +5382,39 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:start_meeting_transcription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMeetingTranscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/transcription?operation=start"
+        o.input = Shapes::ShapeRef.new(shape: StartMeetingTranscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMeetingTranscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:stop_meeting_transcription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopMeetingTranscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/transcription?operation=stop"
+        o.input = Shapes::ShapeRef.new(shape: StopMeetingTranscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopMeetingTranscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

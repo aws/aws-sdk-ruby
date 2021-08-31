@@ -11,7 +11,7 @@ module Aws
 
       # @param [Hash] options
       # @option options [Client] :client
-      # @option options [Integer] :multipart_threshold (15728640)
+      # @option options [Integer] :multipart_threshold (104857600)
       def initialize(options = {})
         @options = options
         @client = options[:client] || Client.new

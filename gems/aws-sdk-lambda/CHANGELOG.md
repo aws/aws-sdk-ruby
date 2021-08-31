@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-08-12)
+------------------
+
+* Feature - Lambda Python 3.9 runtime launch
+
+1.66.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2021-07-21)
+------------------
+
+* Feature - New ResourceConflictException error code for PutFunctionEventInvokeConfig, UpdateFunctionEventInvokeConfig, and DeleteFunctionEventInvokeConfig operations.
+
 1.63.0 (2021-07-06)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-08-20)
+------------------
+
+* Feature - Adds support for EKS add-ons "preserve" flag, which allows customers to maintain software on their EKS clusters after removing it from EKS add-ons management.
+
+1.60.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2021-07-12)
+------------------
+
+* Feature - Documentation updates for Wesley to support the parallel node upgrade feature.
+
 1.57.0 (2021-07-08)
 ------------------
 

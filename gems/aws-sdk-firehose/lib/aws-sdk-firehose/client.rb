@@ -542,10 +542,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -624,6 +624,12 @@ module Aws::Firehose
     #         },
     #         enabled: false,
     #       },
+    #       dynamic_partitioning_configuration: {
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         enabled: false,
+    #       },
     #     },
     #     redshift_destination_configuration: {
     #       role_arn: "RoleARN", # required
@@ -664,10 +670,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -744,10 +750,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -800,10 +806,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -844,10 +850,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1038,9 +1044,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_mode #=> String, one of "Disabled", "Enabled"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.role_arn #=> String
@@ -1085,6 +1091,8 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.dictionary_key_threshold #=> Float
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.format_version #=> String, one of "V0_11", "V0_12"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.dynamic_partitioning_configuration.retry_options.duration_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.dynamic_partitioning_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cluster_jdbc_url #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.copy_command.data_table_name #=> String
@@ -1106,9 +1114,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_mode #=> String, one of "Disabled", "Enabled"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.role_arn #=> String
@@ -1150,9 +1158,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_group_name #=> String
@@ -1183,9 +1191,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_group_name #=> String
@@ -1203,9 +1211,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.request_configuration.common_attributes[0].attribute_value #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors #=> Array
-    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].type #=> String, one of "Lambda"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters #=> Array
-    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds"
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter"
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.retry_options.duration_in_seconds #=> Integer
@@ -1354,7 +1362,7 @@ module Aws::Firehose
     #
     # You must specify the name of the delivery stream and the data record
     # when using PutRecord. The data record consists of a data blob that can
-    # be up to 1,000 KB in size, and any kind of data. For example, it can
+    # be up to 1,000 KiB in size, and any kind of data. For example, it can
     # be a segment from a log file, geographic location data, website
     # clickstream data, and so on.
     #
@@ -1430,7 +1438,7 @@ module Aws::Firehose
     # Quota][1].
     #
     # Each PutRecordBatch request supports up to 500 records. Each record in
-    # the request can be as large as 1,000 KB (before 64-bit encoding), up
+    # the request can be as large as 1,000 KB (before base64 encoding), up
     # to a limit of 4 MB for the entire request. These limits cannot be
     # changed.
     #
@@ -1865,10 +1873,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -1947,6 +1955,12 @@ module Aws::Firehose
     #         },
     #         enabled: false,
     #       },
+    #       dynamic_partitioning_configuration: {
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         enabled: false,
+    #       },
     #     },
     #     redshift_destination_update: {
     #       role_arn: "RoleARN",
@@ -1987,10 +2001,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2066,10 +2080,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2117,10 +2131,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2161,10 +2175,10 @@ module Aws::Firehose
     #         enabled: false,
     #         processors: [
     #           {
-    #             type: "Lambda", # required, accepts Lambda
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
     #             parameters: [
     #               {
-    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
     #                 parameter_value: "ProcessorParameterValue", # required
     #               },
     #             ],
@@ -2223,7 +2237,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

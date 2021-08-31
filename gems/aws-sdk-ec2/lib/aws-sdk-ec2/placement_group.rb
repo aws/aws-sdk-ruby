@@ -432,7 +432,8 @@ module Aws::EC2
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
-    #   * `owner-id` - The account ID of the instance owner.
+    #   * `owner-id` - The Amazon Web Services account ID of the instance
+    #     owner.
     #
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
@@ -460,8 +461,8 @@ module Aws::EC2
     #     terminate the instance). Similar to the state-reason-code filter.
     #
     #   * `requester-id` - The ID of the entity that launched the instance on
-    #     your behalf (for example, Management Console, Auto Scaling, and so
-    #     on).
+    #     your behalf (for example, Amazon Web Services Management Console,
+    #     Auto Scaling, and so on).
     #
     #   * `reservation-id` - The ID of the instance's reservation. A
     #     reservation ID is created any time you launch an instance. A
@@ -492,11 +493,11 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the instance.
     #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
-    #     the resource. Use the tag key in the filter name and the tag value
-    #     as the filter value. For example, to find all resources that have a
-    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
-    #     for the filter name and `TeamA` for the filter value.
+    #   * `tag:<key>` - The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a tag
+    #     with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+    #     the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources that have a tag with a specific key,

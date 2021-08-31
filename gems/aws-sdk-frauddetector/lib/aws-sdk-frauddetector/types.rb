@@ -1812,7 +1812,7 @@ module Aws::FraudDetector
     #             entity_id: "identifier", # required
     #           },
     #         ],
-    #         event_timestamp: "string", # required
+    #         event_timestamp: "utcTimestampISO8601", # required
     #         event_variables: { # required
     #           "variableName" => "variableValue",
     #         },
@@ -1910,7 +1910,7 @@ module Aws::FraudDetector
     #   @return [Array<Types::ModelScores>]
     #
     # @!attribute [rw] rule_results
-    #   The results.
+    #   The results from the rules.
     #   @return [Array<Types::RuleResult>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventPredictionResult AWS API Documentation
@@ -2526,7 +2526,7 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
-    # The logit metric details.
+    # The log odds metric details.
     #
     # @!attribute [rw] variable_name
     #   The name of the variable.
@@ -2537,12 +2537,17 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] variable_importance
-    #   The relative importance of the variable.
+    #   The relative importance of the variable. For more information, see
+    #   [Model variable importance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/frauddetector/latest/ug/model-variable-importance.html
     #   @return [Float]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/LogitMetric AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/LogOddsMetric AWS API Documentation
     #
-    class LogitMetric < Struct.new(
+    class LogOddsMetric < Struct.new(
       :variable_name,
       :variable_type,
       :variable_importance)
@@ -3232,7 +3237,9 @@ module Aws::FraudDetector
     #
     class PutOutcomeResult < Aws::EmptyStructure; end
 
-    # An exception indicating the specified resource was not found.
+    # An exception indicating the specified resource was not found. This can
+    # occur if you submit a request, such as `CreateBatchPredictionJob`, but
+    # the detector name or version does not exist.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3240,6 +3247,20 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An exception indicating that the attached customer-owned (external)
+    # model threw an exception when Amazon Fraud Detector invoked the model.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -4144,14 +4165,14 @@ module Aws::FraudDetector
 
     # The variable importance metrics details.
     #
-    # @!attribute [rw] logit_metrics
+    # @!attribute [rw] log_odds_metrics
     #   List of variable metrics.
-    #   @return [Array<Types::LogitMetric>]
+    #   @return [Array<Types::LogOddsMetric>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/VariableImportanceMetrics AWS API Documentation
     #
     class VariableImportanceMetrics < Struct.new(
-      :logit_metrics)
+      :log_odds_metrics)
       SENSITIVE = []
       include Aws::Structure
     end

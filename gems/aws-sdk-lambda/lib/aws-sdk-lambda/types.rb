@@ -769,7 +769,7 @@ module Aws::Lambda
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_access_configurations
-    #   An array of the authentication protocol, or the VPC components to
+    #   An array of authentication protocols or VPC components required to
     #   secure your event source.
     #   @return [Array<Types::SourceAccessConfiguration>]
     #
@@ -812,7 +812,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         role: "RoleArn", # required
     #         handler: "Handler",
     #         code: { # required
@@ -1607,8 +1607,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # A mapping between an Amazon Web Services resource and an Lambda
-    # function. See CreateEventSourceMapping for details.
+    # A mapping between an Amazon Web Services resource and a Lambda
+    # function. For details, see CreateEventSourceMapping.
     #
     # @!attribute [rw] uuid
     #   The identifier of the event source mapping.
@@ -1616,8 +1616,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] starting_position
     #   The position in a stream from which to start reading. Required for
-    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources.
-    #   `AT_TIMESTAMP` is only supported for Amazon Kinesis streams.
+    #   Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources.
+    #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
@@ -1630,14 +1630,14 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams and SQS standard queues) The maximum amount of time to
-    #   gather records before invoking the function, in seconds. The default
-    #   value is zero.
+    #   (Streams and Amazon SQS standard queues) The maximum amount of time
+    #   to gather records before invoking the function, in seconds. The
+    #   default value is zero.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
-    #   (Streams only) The number of batches to process from each shard
-    #   concurrently. The default value is 1.
+    #   (Streams only) The number of batches to process concurrently from
+    #   each shard. The default value is 1.
     #   @return [Integer]
     #
     # @!attribute [rw] event_source_arn
@@ -1649,12 +1649,12 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   The date that the event source mapping was last updated, or its
+    #   The date that the event source mapping was last updated or that its
     #   state changed.
     #   @return [Time]
     #
     # @!attribute [rw] last_processing_result
-    #   The result of the last Lambda invocation of your Lambda function.
+    #   The result of the last Lambda invocation of your function.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1664,8 +1664,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   Indicates whether the last change to the event source mapping was
-    #   made by a user, or by the Lambda service.
+    #   Indicates whether a user or Lambda made the last change to the event
+    #   source mapping.
     #   @return [String]
     #
     # @!attribute [rw] destination_config
@@ -1678,16 +1678,17 @@ module Aws::Lambda
     #   @return [Array<String>]
     #
     # @!attribute [rw] queues
-    #   (MQ) The name of the Amazon MQ broker destination queue to consume.
+    #   (Amazon MQ) The name of the Amazon MQ broker destination queue to
+    #   consume.
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_access_configurations
-    #   An array of the authentication protocol, or the VPC components to
-    #   secure your event source.
+    #   An array of the authentication protocol, VPC components, or virtual
+    #   host to secure and define your event source.
     #   @return [Array<Types::SourceAccessConfiguration>]
     #
     # @!attribute [rw] self_managed_event_source
-    #   The Self-Managed Apache Kafka cluster for your event source.
+    #   The self-managed Apache Kafka cluster for your event source.
     #   @return [Types::SelfManagedEventSource]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
@@ -1710,7 +1711,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] tumbling_window_in_seconds
     #   (Streams only) The duration in seconds of a processing window. The
-    #   range is between 1 second up to 900 seconds.
+    #   range is 1–900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
@@ -3541,7 +3542,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   The maximum number of event source mappings to return.
+    #   The maximum number of event source mappings to return. Note that
+    #   ListEventSourceMappings returns a maximum of 100 items in each
+    #   response, even if you set the number higher.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsRequest AWS API Documentation
@@ -3695,11 +3698,11 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] master_region
-    #   For Lambda@Edge functions, the Region of the master function. For
-    #   example, `us-east-1` filters the list of functions to only include
-    #   Lambda@Edge functions replicated from a master function in US East
-    #   (N. Virginia). If specified, you must set `FunctionVersion` to
-    #   `ALL`.
+    #   For Lambda@Edge functions, the Amazon Web Services Region of the
+    #   master function. For example, `us-east-1` filters the list of
+    #   functions to only include Lambda@Edge functions replicated from a
+    #   master function in US East (N. Virginia). If specified, you must set
+    #   `FunctionVersion` to `ALL`.
     #   @return [String]
     #
     # @!attribute [rw] function_version
@@ -3752,7 +3755,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         layer_name: "LayerName", # required
     #         marker: "String",
     #         max_items: 1,
@@ -3807,7 +3810,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         marker: "String",
     #         max_items: 1,
     #       }
@@ -4171,7 +4174,7 @@ module Aws::Lambda
     #           s3_object_version: "S3ObjectVersion",
     #           zip_file: "data",
     #         },
-    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         license_info: "LicenseInfo",
     #       }
     #
@@ -4792,7 +4795,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The Self-Managed Apache Kafka cluster for your event source.
+    # The self-managed Apache Kafka cluster for your event source.
     #
     # @note When making an API call, you may pass SelfManagedEventSource
     #   data as a hash:
@@ -4834,8 +4837,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # You can specify the authentication protocol, or the VPC components to
-    # secure access to your event source.
+    # To secure and define access to your event source, you can specify the
+    # authentication protocol, VPC components, or virtual host.
     #
     # @note When making an API call, you may pass SourceAccessConfiguration
     #   data as a hash:
@@ -4846,29 +4849,34 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] type
-    #   The type of authentication protocol or the VPC components for your
-    #   event source. For example: `"Type":"SASL_SCRAM_512_AUTH"`.
+    #   The type of authentication protocol, VPC components, or virtual host
+    #   for your event source. For example: `"Type":"SASL_SCRAM_512_AUTH"`.
     #
-    #   * `BASIC_AUTH` - (MQ) The Secrets Manager secret that stores your
-    #     broker credentials.
+    #   * `BASIC_AUTH` - (Amazon MQ) The Secrets Manager secret that stores
+    #     your broker credentials.
+    #
+    #   * `BASIC_AUTH` - (Self-managed Apache Kafka) The Secrets Manager ARN
+    #     of your secret key used for SASL/PLAIN authentication of your
+    #     Apache Kafka brokers.
     #
     #   * `VPC_SUBNET` - The subnets associated with your VPC. Lambda
-    #     connects to these subnets to fetch data from your Self-Managed
+    #     connects to these subnets to fetch data from your self-managed
     #     Apache Kafka cluster.
     #
     #   * `VPC_SECURITY_GROUP` - The VPC security group used to manage
-    #     access to your Self-Managed Apache Kafka brokers.
+    #     access to your self-managed Apache Kafka brokers.
     #
     #   * `SASL_SCRAM_256_AUTH` - The Secrets Manager ARN of your secret key
-    #     used for SASL SCRAM-256 authentication of your Self-Managed Apache
+    #     used for SASL SCRAM-256 authentication of your self-managed Apache
     #     Kafka brokers.
     #
     #   * `SASL_SCRAM_512_AUTH` - The Secrets Manager ARN of your secret key
-    #     used for SASL SCRAM-512 authentication of your Self-Managed Apache
+    #     used for SASL SCRAM-512 authentication of your self-managed Apache
     #     Kafka brokers.
     #
-    #   * `VIRTUAL_HOST` - The name of the virtual host in your RabbitMQ
-    #     broker. Lambda will use this host as the event source.
+    #   * `VIRTUAL_HOST` - (Amazon MQ) The name of the virtual host in your
+    #     RabbitMQ broker. Lambda uses this RabbitMQ host as the event
+    #     source.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -5271,7 +5279,7 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] source_access_configurations
-    #   An array of the authentication protocol, or the VPC components to
+    #   An array of authentication protocols or VPC components required to
     #   secure your event source.
     #   @return [Array<Types::SourceAccessConfiguration>]
     #
@@ -5413,7 +5421,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },

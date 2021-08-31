@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-08-23)
+------------------
+
+* Feature - AWS Backup - Features: Evaluate your backup activity and generate audit reports.
+
+1.30.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2021-03-10)
 ------------------
 

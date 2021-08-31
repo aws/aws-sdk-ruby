@@ -383,6 +383,14 @@ module Aws::CustomerProfiles
     # Each Amazon Connect instance can be associated with only one domain.
     # Multiple Amazon Connect instances can be associated with one domain.
     #
+    # Use this API or [UpdateDomain][1] to enable [identity resolution][2]\:
+    # set `Matching` to true.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html
+    # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
+    #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
     #
@@ -402,8 +410,15 @@ module Aws::CustomerProfiles
     #   to the DeadLetterQueue.
     #
     # @option params [Types::MatchingRequest] :matching
-    #   The process of matching duplicate profiles. This process runs every
-    #   Saturday at 12AM.
+    #   The process of matching duplicate profiles. If Matching = true, Amazon
+    #   Connect Customer Profiles starts a weekly batch process every Saturday
+    #   at 12AM UTC to detect duplicate profiles in your domains. After that
+    #   batch process completes, use the [GetMatches][1] API to return and
+    #   review the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -930,7 +945,7 @@ module Aws::CustomerProfiles
     # GetMatches returns potentially matching profiles, based on the results
     # of the latest run of a machine learning process.
     #
-    # Amazon Connect runs a batch process every Saturday at 12AM UTC to
+    # Amazon Connect starts a batch process every Saturday at 12AM UTC to
     # identify matching profiles. The results are returned up to seven days
     # after the Saturday run.
     #
@@ -954,6 +969,13 @@ module Aws::CustomerProfiles
     # * FullName
     #
     # * BusinessName
+    #
+    # For example, two or more profiles—with spelling mistakes such as
+    # **John Doe** and **Jhn Doe**, or different casing email addresses such
+    # as **JOHN\_DOE@ANYCOMPANY.COM** and **johndoe@anycompany.com**, or
+    # different phone number formats such as **555-010-0000** and
+    # **+1-555-010-0000**—can be detected as belonging to the same customer
+    # **John Doe** and merged into a unified profile.
     #
     #
     #
@@ -1049,7 +1071,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -1105,7 +1127,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #
@@ -1350,6 +1372,11 @@ module Aws::CustomerProfiles
     # @option params [required, String] :profile_id
     #   The unique identifier of a customer profile.
     #
+    # @option params [Types::ObjectFilter] :object_filter
+    #   Applies a filter to the response to include profile objects with the
+    #   specified index values. This filter is only supported for
+    #   ObjectTypeName \_asset and \_case.
+    #
     # @return [Types::ListProfileObjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListProfileObjectsResponse#items #items} => Array&lt;Types::ListProfileObjectsItem&gt;
@@ -1363,6 +1390,10 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     object_type_name: "typeName", # required
     #     profile_id: "uuid", # required
+    #     object_filter: {
+    #       key_name: "name", # required
+    #       values: ["string1To255"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1760,7 +1791,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
     #           field_names: ["name"],
     #         },
     #       ],
@@ -1785,7 +1816,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -1989,6 +2020,14 @@ module Aws::CustomerProfiles
     #
     # After a domain is created, the name can’t be changed.
     #
+    # Use this API or [CreateDomain][1] to enable [identity resolution][2]\:
+    # set `Matching` to true.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
+    # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
+    #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
     #
@@ -2010,8 +2049,15 @@ module Aws::CustomerProfiles
     #   to the DeadLetterQueue.
     #
     # @option params [Types::MatchingRequest] :matching
-    #   The process of matching duplicate profiles. This process runs every
-    #   Saturday at 12AM.
+    #   The process of matching duplicate profiles. If Matching = true, Amazon
+    #   Connect Customer Profiles starts a weekly batch process every Saturday
+    #   at 12AM UTC to detect duplicate profiles in your domains. After that
+    #   batch process completes, use the [GetMatches][1] API to return and
+    #   review the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -2246,7 +2292,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

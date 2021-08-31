@@ -23,6 +23,108 @@ module Aws::SageMakerRuntime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass InvokeEndpointAsyncInput
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_name: "EndpointName", # required
+    #         content_type: "Header",
+    #         accept: "Header",
+    #         custom_attributes: "CustomAttributesHeader",
+    #         inference_id: "InferenceId",
+    #         input_location: "InputLocationHeader", # required
+    #         request_ttl_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint that you specified when you created the
+    #   endpoint using the [ `CreateEndpoint` ][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The MIME type of the input data in the request body.
+    #   @return [String]
+    #
+    # @!attribute [rw] accept
+    #   The desired MIME type of the inference in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_attributes
+    #   Provides additional information about a request for an inference
+    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   information is an opaque value that is forwarded verbatim. You could
+    #   use this value, for example, to provide an ID that you can use to
+    #   track a request or to provide other metadata that a service endpoint
+    #   was programmed to process. The value must consist of no more than
+    #   1024 visible US-ASCII characters as specified in [Section 3.3.6.
+    #   Field Value Components][1] of the Hypertext Transfer Protocol
+    #   (HTTP/1.1).
+    #
+    #   The code in your model is responsible for setting or updating any
+    #   custom attributes in the response. If your code does not set this
+    #   value in the response, an empty value is returned. For example, if a
+    #   custom attribute represents the trace ID, your model can prepend the
+    #   custom attribute with `Trace ID`\: in your post-processing function.
+    #
+    #   This feature is currently supported in the AWS SDKs but not in the
+    #   Amazon SageMaker Python SDK.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_id
+    #   The identifier for the inference request. Amazon SageMaker will
+    #   generate an identifier for you if none is specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_location
+    #   The Amazon S3 URI where the inference request payload is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_ttl_seconds
+    #   Maximum age in seconds a request can be in the queue before it is
+    #   marked as expired.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointAsyncInput AWS API Documentation
+    #
+    class InvokeEndpointAsyncInput < Struct.new(
+      :endpoint_name,
+      :content_type,
+      :accept,
+      :custom_attributes,
+      :inference_id,
+      :input_location,
+      :request_ttl_seconds)
+      SENSITIVE = [:custom_attributes]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_id
+    #   Identifier for an inference request. This will be the same as the
+    #   `InferenceId` specified in the input. Amazon SageMaker will generate
+    #   an identifier for you if you do not specify one.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_location
+    #   The Amazon S3 URI where the inference response payload is stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointAsyncOutput AWS API Documentation
+    #
+    class InvokeEndpointAsyncOutput < Struct.new(
+      :inference_id,
+      :output_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InvokeEndpointInput
     #   data as a hash:
     #

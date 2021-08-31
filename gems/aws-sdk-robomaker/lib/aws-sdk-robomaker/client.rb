@@ -1108,7 +1108,8 @@ module Aws::RoboMaker
     #
     #   Continue
     #
-    #   : Restart the simulation job in the same host instance.
+    #   : Leaves the instance running for its maximum timeout duration after a
+    #     `4XX` error code.
     #
     #   Fail
     #
@@ -2363,6 +2364,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeWorldResponse#template #template} => String
     #   * {Types::DescribeWorldResponse#created_at #created_at} => Time
     #   * {Types::DescribeWorldResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeWorldResponse#world_description_body #world_description_body} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2378,6 +2380,7 @@ module Aws::RoboMaker
     #   resp.created_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.world_description_body #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorld AWS API Documentation
     #
@@ -2510,6 +2513,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeWorldTemplateResponse#created_at #created_at} => Time
     #   * {Types::DescribeWorldTemplateResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::DescribeWorldTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeWorldTemplateResponse#version #version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2526,6 +2530,7 @@ module Aws::RoboMaker
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldTemplate AWS API Documentation
     #
@@ -3271,6 +3276,7 @@ module Aws::RoboMaker
     #   resp.template_summaries[0].created_at #=> Time
     #   resp.template_summaries[0].last_updated_at #=> Time
     #   resp.template_summaries[0].name #=> String
+    #   resp.template_summaries[0].version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldTemplates AWS API Documentation
@@ -4098,7 +4104,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

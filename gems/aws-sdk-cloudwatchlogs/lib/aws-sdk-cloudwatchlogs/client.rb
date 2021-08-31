@@ -343,16 +343,15 @@ module Aws::CloudWatchLogs
 
     # @!group API Operations
 
-    # Associates the specified AWS Key Management Service (AWS KMS) customer
-    # master key (CMK) with the specified log group.
+    # Associates the specified Key Management Service customer master key
+    # (CMK) with the specified log group.
     #
-    # Associating an AWS KMS CMK with a log group overrides any existing
+    # Associating an KMS CMK with a log group overrides any existing
     # associations between the log group and a CMK. After a CMK is
     # associated with a log group, all newly ingested data for the log group
     # is encrypted using the CMK. This association is stored as long as the
-    # data encrypted with the CMK is still within Amazon CloudWatch Logs.
-    # This enables Amazon CloudWatch Logs to decrypt this data whenever it
-    # is requested.
+    # data encrypted with the CMK is still within CloudWatch Logs. This
+    # enables CloudWatch Logs to decrypt this data whenever it is requested.
     #
     # CloudWatch Logs supports only symmetric CMKs. Do not use an associate
     # an asymmetric CMK with your log group. For more information, see
@@ -374,8 +373,8 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
     #   data. This must be a symmetric CMK. For more information, see [Amazon
-    #   Resource Names - AWS Key Management Service (AWS KMS)][1] and [Using
-    #   Symmetric and Asymmetric Keys][2].
+    #   Resource Names - Key Management Service][1] and [Using Symmetric and
+    #   Asymmetric Keys][2].
     #
     #
     #
@@ -472,7 +471,7 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :destination
     #   The name of S3 bucket for the exported log data. The bucket must be in
-    #   the same AWS region.
+    #   the same Amazon Web Services region.
     #
     # @option params [String] :destination_prefix
     #   The prefix used as the start of the key for every object exported. If
@@ -512,7 +511,8 @@ module Aws::CloudWatchLogs
     #
     # You must use the following guidelines when naming a log group:
     #
-    # * Log group names must be unique within a region for an AWS account.
+    # * Log group names must be unique within a region for an Amazon Web
+    #   Services account.
     #
     # * Log group names can be between 1 and 512 characters long.
     #
@@ -524,11 +524,11 @@ module Aws::CloudWatchLogs
     # group never expire. To set a retention policy so that events expire
     # and are deleted after a specified time, use [PutRetentionPolicy][1].
     #
-    # If you associate a AWS Key Management Service (AWS KMS) customer
-    # master key (CMK) with the log group, ingested data is encrypted using
-    # the CMK. This association is stored as long as the data encrypted with
-    # the CMK is still within Amazon CloudWatch Logs. This enables Amazon
-    # CloudWatch Logs to decrypt this data whenever it is requested.
+    # If you associate a Key Management Service customer master key (CMK)
+    # with the log group, ingested data is encrypted using the CMK. This
+    # association is stored as long as the data encrypted with the CMK is
+    # still within CloudWatch Logs. This enables CloudWatch Logs to decrypt
+    # this data whenever it is requested.
     #
     # If you attempt to associate a CMK with the log group but the CMK does
     # not exist or the CMK is disabled, you receive an
@@ -548,8 +548,8 @@ module Aws::CloudWatchLogs
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. For more information, see [Amazon Resource Names - AWS Key
-    #   Management Service (AWS KMS)][1].
+    #   data. For more information, see [Amazon Resource Names - Key
+    #   Management Service][1].
     #
     #
     #
@@ -557,6 +557,16 @@ module Aws::CloudWatchLogs
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to use for the tags.
+    #
+    #   CloudWatch Logs doesn’t support IAM policies that prevent users from
+    #   assigning specified tags to log groups using the
+    #   `aws:Resource/key-name ` or `aws:TagKeys` condition keys. For more
+    #   information about using tags to control access, see [Controlling
+    #   access to Amazon Web Services resources using tags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -946,6 +956,17 @@ module Aws::CloudWatchLogs
     # Lists the specified log groups. You can list all your log groups or
     # filter the results by prefix. The results are ASCII-sorted by log
     # group name.
+    #
+    # CloudWatch Logs doesn’t support IAM policies that control access to
+    # the `DescribeLogGroups` action by using the `aws:ResourceTag/key-name
+    # ` condition key. Other CloudWatch Logs actions do support the use of
+    # the `aws:ResourceTag/key-name ` condition key to control access. For
+    # more information about using tags to control access, see [Controlling
+    # access to Amazon Web Services resources using tags][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
     #
     # @option params [String] :log_group_name_prefix
     #   The prefix to match.
@@ -1350,14 +1371,13 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Disassociates the associated AWS Key Management Service (AWS KMS)
-    # customer master key (CMK) from the specified log group.
+    # Disassociates the associated Key Management Service customer master
+    # key (CMK) from the specified log group.
     #
-    # After the AWS KMS CMK is disassociated from the log group, AWS
-    # CloudWatch Logs stops encrypting newly ingested data for the log
-    # group. All previously ingested data remains encrypted, and AWS
-    # CloudWatch Logs requires permissions for the CMK whenever the
-    # encrypted data is requested.
+    # After the KMS CMK is disassociated from the log group, CloudWatch Logs
+    # stops encrypting newly ingested data for the log group. All previously
+    # ingested data remains encrypted, and CloudWatch Logs requires
+    # permissions for the CMK whenever the encrypted data is requested.
     #
     # Note that it can take up to 5 minutes for this operation to take
     # effect.
@@ -1530,9 +1550,6 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
     #
-    #   Using this token works only when you specify `true` for
-    #   `startFromHead`.
-    #
     # @option params [Integer] :limit
     #   The maximum number of log events returned. If you don't specify a
     #   value, the maximum is as many log events as can fit in a response size
@@ -1543,8 +1560,9 @@ module Aws::CloudWatchLogs
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
     #
-    #   If you are using `nextToken` in this operation, you must specify
-    #   `true` for `startFromHead`.
+    #   If you are using a previous `nextForwardToken` value as the
+    #   `nextToken` in this operation, you must specify `true` for
+    #   `startFromHead`.
     #
     # @return [Types::GetLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1829,10 +1847,10 @@ module Aws::CloudWatchLogs
     # used to authorize claims to register a subscription filter against a
     # given destination.
     #
-    # If multiple AWS accounts are sending logs to this destination, each
-    # sender account must be listed separately in the policy. The policy
-    # does not support specifying `*` as the Principal or the use of the
-    # `aws:PrincipalOrgId` global key.
+    # If multiple Amazon Web Services accounts are sending logs to this
+    # destination, each sender account must be listed separately in the
+    # policy. The policy does not support specifying `*` as the Principal or
+    # the use of the `aws:PrincipalOrgId` global key.
     #
     #
     #
@@ -1889,9 +1907,9 @@ module Aws::CloudWatchLogs
     # * The log events in the batch must be in chronological order by their
     #   timestamp. The timestamp is the time the event occurred, expressed
     #   as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. (In
-    #   AWS Tools for PowerShell and the AWS SDK for .NET, the timestamp is
-    #   specified in .NET format: yyyy-mm-ddThh:mm:ss. For example,
-    #   2017-09-15T13:45:30.)
+    #   Amazon Web Services Tools for PowerShell and the Amazon Web Services
+    #   SDK for .NET, the timestamp is specified in .NET format:
+    #   yyyy-mm-ddThh:mm:ss. For example, 2017-09-15T13:45:30.)
     #
     # * A batch of log events in a single request cannot span more than 24
     #   hours. Otherwise, the operation fails.
@@ -1902,7 +1920,8 @@ module Aws::CloudWatchLogs
     #   requests are throttled. This quota can't be changed.
     #
     # If a call to `PutLogEvents` returns "UnrecognizedClientException"
-    # the most likely cause is an invalid AWS access key ID or secret key.
+    # the most likely cause is an invalid Amazon Web Services access key ID
+    # or secret key.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1983,7 +2002,7 @@ module Aws::CloudWatchLogs
     #
     #  You can also set up a billing alarm to alert you if your charges are
     # higher than expected. For more information, see [ Creating a Billing
-    # Alarm to Monitor Your Estimated AWS Charges][2].
+    # Alarm to Monitor Your Estimated Amazon Web Services Charges][2].
     #
     #
     #
@@ -2120,9 +2139,10 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Creates or updates a resource policy allowing other AWS services to
-    # put log events to this account, such as Amazon Route 53. An account
-    # can have up to 10 resource policies per AWS Region.
+    # Creates or updates a resource policy allowing other Amazon Web
+    # Services services to put log events to this account, such as Amazon
+    # Route 53. An account can have up to 10 resource policies per Amazon
+    # Web Services Region.
     #
     # @option params [String] :policy_name
     #   Name of the new policy. This parameter is required.
@@ -2137,10 +2157,27 @@ module Aws::CloudWatchLogs
     #   `"logArn"` with the ARN of your CloudWatch Logs resource, such as a
     #   log group or log stream.
     #
+    #   CloudWatch Logs also supports [aws:SourceArn][1] and
+    #   [aws:SourceAccount][2] condition context keys.
+    #
+    #   In the example resource policy, you would replace the value of
+    #   `SourceArn` with the resource making the call from Route 53 to
+    #   CloudWatch Logs and replace the value of `SourceAccount` with the
+    #   Amazon Web Services account ID making that call.
+    #
+    #
+    #
     #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
     #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
-    #   "Service": [ "route53.amazonaws.com" ] \},
-    #   "Action":"logs:PutLogEvents", "Resource": "logArn" \} ] \} `
+    #   "Service": [ "route53.amazonaws.com" ] \}, "Action":
+    #   "logs:PutLogEvents", "Resource": "logArn", "Condition": \{ "ArnLike":
+    #   \{ "aws:SourceArn": "myRoute53ResourceArn" \}, "StringEquals": \{
+    #   "aws:SourceAccount": "myAwsAccountId" \} \} \} ] \}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2180,8 +2217,12 @@ module Aws::CloudWatchLogs
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180,
     #   365, 400, 545, 731, 1827, and 3653.
     #
-    #   If you omit `retentionInDays` in a `PutRetentionPolicy` operation, the
-    #   events in the log group are always retained and never expire.
+    #   To set a log group to never have log events expire, use
+    #   [DeleteRetentionPolicy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2219,7 +2260,7 @@ module Aws::CloudWatchLogs
     # * An Amazon Kinesis Firehose delivery stream that belongs to the same
     #   account as the subscription filter, for same-account delivery.
     #
-    # * An AWS Lambda function that belongs to the same account as the
+    # * An Lambda function that belongs to the same account as the
     #   subscription filter, for same-account delivery.
     #
     # Each log group can have up to two subscription filters associated with
@@ -2267,8 +2308,8 @@ module Aws::CloudWatchLogs
     #   * An Amazon Kinesis Firehose delivery stream belonging to the same
     #     account as the subscription filter, for same-account delivery.
     #
-    #   * An AWS Lambda function belonging to the same account as the
-    #     subscription filter, for same-account delivery.
+    #   * A Lambda function belonging to the same account as the subscription
+    #     filter, for same-account delivery.
     #
     #
     #
@@ -2425,11 +2466,18 @@ module Aws::CloudWatchLogs
     # For more information about tags, see [Tag Log Groups in Amazon
     # CloudWatch Logs][3] in the *Amazon CloudWatch Logs User Guide*.
     #
+    # CloudWatch Logs doesn’t support IAM policies that prevent users from
+    # assigning specified tags to log groups using the
+    # `aws:Resource/key-name ` or `aws:TagKeys` condition keys. For more
+    # information about using tags to control access, see [Controlling
+    # access to Amazon Web Services resources using tags][4].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -2503,6 +2551,10 @@ module Aws::CloudWatchLogs
     # To list the tags for a log group, use [ListTagsLogGroup][1]. To add
     # tags, use [TagLogGroup][2].
     #
+    # CloudWatch Logs doesn’t support IAM policies that prevent users from
+    # assigning specified tags to log groups using the
+    # `aws:Resource/key-name ` or `aws:TagKeys` condition keys.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html
@@ -2545,7 +2597,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

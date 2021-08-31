@@ -493,10 +493,10 @@ module Aws::EMRContainers
     #     name: "ResourceNameString", # required
     #     container_provider: { # required
     #       type: "EKS", # required, accepts EKS
-    #       id: "String256", # required
+    #       id: "ClusterId", # required
     #       info: {
     #         eks_info: {
-    #           namespace: "String256",
+    #           namespace: "KubernetesNamespace",
     #         },
     #       },
     #     },
@@ -697,6 +697,8 @@ module Aws::EMRContainers
     #   resp.endpoint.security_group #=> String
     #   resp.endpoint.subnet_ids #=> Array
     #   resp.endpoint.subnet_ids[0] #=> String
+    #   resp.endpoint.state_details #=> String
+    #   resp.endpoint.failure_reason #=> String, one of "INTERNAL_ERROR", "USER_ERROR", "VALIDATION_ERROR", "CLUSTER_UNAVAILABLE"
     #   resp.endpoint.tags #=> Hash
     #   resp.endpoint.tags["String128"] #=> String
     #
@@ -908,6 +910,8 @@ module Aws::EMRContainers
     #   resp.endpoints[0].security_group #=> String
     #   resp.endpoints[0].subnet_ids #=> Array
     #   resp.endpoints[0].subnet_ids[0] #=> String
+    #   resp.endpoints[0].state_details #=> String
+    #   resp.endpoints[0].failure_reason #=> String, one of "INTERNAL_ERROR", "USER_ERROR", "VALIDATION_ERROR", "CLUSTER_UNAVAILABLE"
     #   resp.endpoints[0].tags #=> Hash
     #   resp.endpoints[0].tags["String128"] #=> String
     #   resp.next_token #=> String
@@ -1196,7 +1200,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -50,6 +50,7 @@ module Aws::EMR
     #                   },
     #                 },
     #               ],
+    #               custom_ami_id: "XmlStringMaxLen256",
     #             },
     #           ],
     #           launch_specifications: {
@@ -186,6 +187,7 @@ module Aws::EMR
     #                 },
     #               ],
     #             },
+    #             custom_ami_id: "XmlStringMaxLen256",
     #           },
     #         ],
     #         job_flow_id: "XmlStringMaxLen256", # required
@@ -531,6 +533,36 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # An auto-termination policy for an Amazon EMR cluster. An
+    # auto-termination policy defines the amount of idle time in seconds
+    # after which a cluster automatically terminates. For alternative
+    # cluster termination options, see [Control cluster termination][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
+    #
+    # @note When making an API call, you may pass AutoTerminationPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         idle_timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] idle_timeout
+    #   Specifies the amount of idle time in seconds after which the cluster
+    #   automatically terminates. You can specify a minimum of 60 seconds
+    #   and a maximum of 604800 seconds (seven days).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoTerminationPolicy AWS API Documentation
+    #
+    class AutoTerminationPolicy < Struct.new(
+      :idle_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A configuration for Amazon EMR block public access. When
     # `BlockPublicSecurityGroupRules` is set to `true`, Amazon EMR prevents
     # cluster creation if one of the cluster's security groups has a rule
@@ -581,8 +613,8 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Properties that describe the AWS principal that created the
-    # `BlockPublicAccessConfiguration` using the
+    # Properties that describe the Amazon Web Services principal that
+    # created the `BlockPublicAccessConfiguration` using the
     # `PutBlockPublicAccessConfiguration` action as well as the date and
     # time that the configuration was created. Each time a configuration for
     # block public access is updated, Amazon EMR updates this metadata.
@@ -851,9 +883,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] log_encryption_kms_key_id
-    #   The AWS KMS customer master key (CMK) used for encrypting log files.
-    #   This attribute is only available with EMR version 5.30.0 and later,
-    #   excluding EMR 6.0.0.
+    #   The KMS key used for encrypting log files. This attribute is only
+    #   available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
     #   @return [String]
     #
     # @!attribute [rw] requested_ami_version
@@ -892,15 +923,28 @@ module Aws::EMR
     #   @return [Boolean]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Indicates whether the cluster is visible to all IAM users of the AWS
-    #   account associated with the cluster. The default value, `true`,
-    #   indicates that all IAM users in the AWS account can perform cluster
-    #   actions if they have the proper IAM policy permissions. If this
-    #   value is `false`, only the IAM user that created the cluster can
-    #   perform actions. This value can be changed on a running cluster by
-    #   using the SetVisibleToAllUsers action. You can override the default
-    #   value of `true` when you create a cluster by using the
-    #   `VisibleToAllUsers` parameter of the `RunJobFlow` action.
+    #   Indicates whether the cluster is visible to IAM principals in the
+    #   Amazon Web Services account associated with the cluster. When
+    #   `true`, IAM principals in the Amazon Web Services account can
+    #   perform EMR cluster actions on the cluster that their IAM policies
+    #   allow. When `false`, only the IAM principal that created the cluster
+    #   and the Amazon Web Services account root user can perform EMR
+    #   actions, regardless of IAM permissions policies attached to other
+    #   IAM principals.
+    #
+    #   The default value is `true` if a value is not provided when creating
+    #   a cluster using the EMR API RunJobFlow command, the CLI
+    #   [create-cluster][1] command, or the Amazon Web Services Management
+    #   Console. IAM principals that are allowed to perform actions on the
+    #   cluster can use the SetVisibleToAllUsers action to change the value
+    #   on a running cluster. For more information, see [Understanding the
+    #   EMR Cluster VisibleToAllUsers Setting][2] in the *Amazon
+    #   EMRManagement Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html
+    #   [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #   @return [Boolean]
     #
     # @!attribute [rw] applications
@@ -913,7 +957,7 @@ module Aws::EMR
     #
     # @!attribute [rw] service_role
     #   The IAM role that will be assumed by the Amazon EMR service to
-    #   access AWS resources on your behalf.
+    #   access Amazon Web Services resources on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] normalized_instance_hours
@@ -1408,7 +1452,7 @@ module Aws::EMR
     # @!attribute [rw] service_role
     #   The IAM role that will be assumed by the Amazon EMR Studio. The
     #   service role provides a way for Amazon EMR Studio to interoperate
-    #   with other AWS services.
+    #   with other Amazon Web Services services.
     #   @return [String]
     #
     # @!attribute [rw] user_role
@@ -1495,9 +1539,10 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group from the
-    #   AWS SSO Identity Store. For more information, see [UserId][1] and
-    #   [GroupId][2] in the *AWS SSO Identity Store API Reference*. Either
-    #   `IdentityName` or `IdentityId` must be specified.
+    #   Amazon Web Services SSO Identity Store. For more information, see
+    #   [UserId][1] and [GroupId][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified, but not both.
     #
     #
     #
@@ -1507,9 +1552,9 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
-    #   API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified, but not both.
     #
     #
     #
@@ -1524,8 +1569,14 @@ module Aws::EMR
     #
     # @!attribute [rw] session_policy_arn
     #   The Amazon Resource Name (ARN) for the session policy that will be
-    #   applied to the user or group. Session policies refine Studio user
-    #   permissions without the need to use multiple IAM user roles.
+    #   applied to the user or group. You should specify the ARN for the
+    #   session policy that you want to apply, not the ARN of your user
+    #   role. For more information, see [Create an EMR Studio User Role with
+    #   Session Policies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateStudioSessionMappingInput AWS API Documentation
@@ -1599,8 +1650,8 @@ module Aws::EMR
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group to remove
     #   from the Amazon EMR Studio. For more information, see [UserId][1]
-    #   and [GroupId][2] in the *AWS SSO Identity Store API Reference*.
-    #   Either `IdentityName` or `IdentityId` must be specified.
+    #   and [GroupId][2] in the *Amazon Web Services SSO Identity Store API
+    #   Reference*. Either `IdentityName` or `IdentityId` must be specified.
     #
     #
     #
@@ -1611,8 +1662,8 @@ module Aws::EMR
     # @!attribute [rw] identity_name
     #   The name of the user name or group to remove from the Amazon EMR
     #   Studio. For more information, see [UserName][1] and [DisplayName][2]
-    #   in the *AWS SSO Identity Store API Reference*. Either `IdentityName`
-    #   or `IdentityId` must be specified.
+    #   in the *Amazon Web Services SSO Store API Reference*. Either
+    #   `IdentityName` or `IdentityId` must be specified.
     #
     #
     #
@@ -1751,6 +1802,63 @@ module Aws::EMR
     #
     class DescribeNotebookExecutionOutput < Struct.new(
       :notebook_execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeReleaseLabelInput
+    #   data as a hash:
+    #
+    #       {
+    #         release_label: "String",
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] release_label
+    #   The target release label to be described.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token. Reserved for future use. Currently set to
+    #   null.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Reserved for future use. Currently set to null.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeReleaseLabelInput AWS API Documentation
+    #
+    class DescribeReleaseLabelInput < Struct.new(
+      :release_label,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] release_label
+    #   The target release label described in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] applications
+    #   The list of applications available for the target release label.
+    #   `Name` is the name of the application. `Version` is the concise
+    #   version of the application.
+    #   @return [Array<Types::SimplifiedApplication>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token. Reserved for future use. Currently set to
+    #   null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeReleaseLabelOutput AWS API Documentation
+    #
+    class DescribeReleaseLabelOutput < Struct.new(
+      :release_label,
+      :applications,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2149,6 +2257,39 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAutoTerminationPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the Amazon EMR cluster for which the
+    #   auto-termination policy will be fetched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetAutoTerminationPolicyInput AWS API Documentation
+    #
+    class GetAutoTerminationPolicyInput < Struct.new(
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_termination_policy
+    #   Specifies the auto-termination policy that is attached to an Amazon
+    #   EMR cluster.
+    #   @return [Types::AutoTerminationPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetAutoTerminationPolicyOutput AWS API Documentation
+    #
+    class GetAutoTerminationPolicyOutput < Struct.new(
+      :auto_termination_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationInput AWS API Documentation
@@ -2179,8 +2320,8 @@ module Aws::EMR
     #   @return [Types::BlockPublicAccessConfiguration]
     #
     # @!attribute [rw] block_public_access_configuration_metadata
-    #   Properties that describe the AWS principal that created the
-    #   `BlockPublicAccessConfiguration` using the
+    #   Properties that describe the Amazon Web Services principal that
+    #   created the `BlockPublicAccessConfiguration` using the
     #   `PutBlockPublicAccessConfiguration` action as well as the date and
     #   time that the configuration was created. Each time a configuration
     #   for block public access is updated, Amazon EMR updates this
@@ -2245,9 +2386,9 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *AWS SSO
-    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
-    #   must be specified.
+    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
+    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   `IdentityId` must be specified.
     #
     #
     #
@@ -2257,9 +2398,9 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group to fetch. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
-    #   API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified.
     #
     #
     #
@@ -2429,7 +2570,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ebs_volumes
-    #   The list of EBS volumes that are attached to this instance.
+    #   The list of Amazon EBS volumes that are attached to this instance.
     #   @return [Array<Types::EbsVolume>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Instance AWS API Documentation
@@ -2545,9 +2686,8 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] instance_type_specifications
-    #   The specification for the instance types that comprise an instance
-    #   fleet. Up to five unique instance specifications may be defined for
-    #   each instance fleet.
+    #   An array of specifications for the instance types that comprise an
+    #   instance fleet.
     #   @return [Array<Types::InstanceTypeSpecification>]
     #
     # @!attribute [rw] launch_specifications
@@ -2616,6 +2756,7 @@ module Aws::EMR
     #                 },
     #               },
     #             ],
+    #             custom_ami_id: "XmlStringMaxLen256",
     #           },
     #         ],
     #         launch_specifications: {
@@ -2970,9 +3111,9 @@ module Aws::EMR
     #
     #    </note>
     #
-    #   The list of configurations supplied for an EMR cluster instance
-    #   group. You can specify a separate configuration for each instance
-    #   group (master, core, and task).
+    #   The list of configurations supplied for an Amazon EMR cluster
+    #   instance group. You can specify a separate configuration for each
+    #   instance group (master, core, and task).
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] configurations_version
@@ -3012,6 +3153,10 @@ module Aws::EMR
     #   PutAutoScalingPolicy.
     #   @return [Types::AutoScalingPolicyDescription]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the provisioned instance group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroup AWS API Documentation
     #
     class InstanceGroup < Struct.new(
@@ -3031,7 +3176,8 @@ module Aws::EMR
       :ebs_block_devices,
       :ebs_optimized,
       :shrink_policy,
-      :auto_scaling_policy)
+      :auto_scaling_policy,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3110,6 +3256,7 @@ module Aws::EMR
     #             },
     #           ],
     #         },
+    #         custom_ami_id: "XmlStringMaxLen256",
     #       }
     #
     # @!attribute [rw] name
@@ -3162,6 +3309,10 @@ module Aws::EMR
     #   PutAutoScalingPolicy.
     #   @return [Types::AutoScalingPolicy]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the provisioned instance group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupConfig AWS API Documentation
     #
     class InstanceGroupConfig < Struct.new(
@@ -3173,7 +3324,8 @@ module Aws::EMR
       :instance_count,
       :configurations,
       :ebs_configuration,
-      :auto_scaling_policy)
+      :auto_scaling_policy,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3240,6 +3392,10 @@ module Aws::EMR
     #   The date/time the instance group was terminated.
     #   @return [Time]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the provisioned instance group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupDetail AWS API Documentation
     #
     class InstanceGroupDetail < Struct.new(
@@ -3256,7 +3412,8 @@ module Aws::EMR
       :creation_date_time,
       :start_date_time,
       :ready_date_time,
-      :end_date_time)
+      :end_date_time,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3499,13 +3656,21 @@ module Aws::EMR
 
     # An instance type configuration for each instance type in an instance
     # fleet, which determines the EC2 instances Amazon EMR attempts to
-    # provision to fulfill On-Demand and Spot target capacities. There can
-    # be a maximum of five instance type configurations in a fleet.
+    # provision to fulfill On-Demand and Spot target capacities. When you
+    # use an allocation strategy, you can include a maximum of 30 instance
+    # type configurations for a fleet. For more information about how to use
+    # an allocation strategy, see [Configure Instance Fleets][1]. Without an
+    # allocation strategy, you may specify a maximum of five instance type
+    # configurations for a fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     # versions 4.8.0 and later, excluding 5.0.x versions.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html
     #
     # @note When making an API call, you may pass InstanceTypeConfig
     #   data as a hash:
@@ -3539,6 +3704,7 @@ module Aws::EMR
     #             },
     #           },
     #         ],
+    #         custom_ami_id: "XmlStringMaxLen256",
     #       }
     #
     # @!attribute [rw] instance_type
@@ -3569,7 +3735,7 @@ module Aws::EMR
     #   @return [Float]
     #
     # @!attribute [rw] ebs_configuration
-    #   The configuration of Amazon Elastic Block Storage (Amazon EBS)
+    #   The configuration of Amazon Elastic Block Store (Amazon EBS)
     #   attached to each instance as defined by `InstanceType`.
     #   @return [Types::EbsConfiguration]
     #
@@ -3579,6 +3745,10 @@ module Aws::EMR
     #   and software that run on the cluster.
     #   @return [Array<Types::Configuration>]
     #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the instance type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeConfig AWS API Documentation
     #
     class InstanceTypeConfig < Struct.new(
@@ -3587,7 +3757,8 @@ module Aws::EMR
       :bid_price,
       :bid_price_as_percentage_of_on_demand_price,
       :ebs_configuration,
-      :configurations)
+      :configurations,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3630,7 +3801,7 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] ebs_block_devices
-    #   The configuration of Amazon Elastic Block Storage (Amazon EBS)
+    #   The configuration of Amazon Elastic Block Store (Amazon EBS)
     #   attached to each instance as defined by `InstanceType`.
     #   @return [Array<Types::EbsBlockDevice>]
     #
@@ -3638,6 +3809,10 @@ module Aws::EMR
     #   Evaluates to `TRUE` when the specified `InstanceType` is
     #   EBS-optimized.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_ami_id
+    #   The custom AMI ID to use for the instance type.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeSpecification AWS API Documentation
     #
@@ -3648,7 +3823,8 @@ module Aws::EMR
       :bid_price_as_percentage_of_on_demand_price,
       :configurations,
       :ebs_block_devices,
-      :ebs_optimized)
+      :ebs_optimized,
+      :custom_ami_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3709,9 +3885,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] log_encryption_kms_key_id
-    #   The AWS KMS customer master key (CMK) used for encrypting log files.
-    #   This attribute is only available with EMR version 5.30.0 and later,
-    #   excluding EMR 6.0.0.
+    #   The KMS key used for encrypting log files. This attribute is only
+    #   available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
     #   @return [String]
     #
     # @!attribute [rw] ami_version
@@ -3743,15 +3918,28 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Indicates whether the cluster is visible to all IAM users of the AWS
-    #   account associated with the cluster. The default value, `true`,
-    #   indicates that all IAM users in the AWS account can perform cluster
-    #   actions if they have the proper IAM policy permissions. If this
-    #   value is `false`, only the IAM user that created the cluster can
-    #   perform actions. This value can be changed on a running cluster by
-    #   using the SetVisibleToAllUsers action. You can override the default
-    #   value of `true` when you create a cluster by using the
-    #   `VisibleToAllUsers` parameter of the `RunJobFlow` action.
+    #   Indicates whether the cluster is visible to IAM principals in the
+    #   Amazon Web Services account associated with the cluster. When
+    #   `true`, IAM principals in the Amazon Web Services account can
+    #   perform EMR cluster actions that their IAM policies allow. When
+    #   `false`, only the IAM principal that created the cluster and the
+    #   Amazon Web Services account root user can perform EMR actions,
+    #   regardless of IAM permissions policies attached to other IAM
+    #   principals.
+    #
+    #   The default value is `true` if a value is not provided when creating
+    #   a cluster using the EMR API RunJobFlow command, the CLI
+    #   [create-cluster][1] command, or the Amazon Web Services Management
+    #   Console. IAM principals that are authorized to perform actions on
+    #   the cluster can use the SetVisibleToAllUsers action to change the
+    #   value on a running cluster. For more information, see [Understanding
+    #   the EMR Cluster VisibleToAllUsers Setting][2] in the *Amazon
+    #   EMRManagement Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html
+    #   [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -3760,8 +3948,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] service_role
-    #   The IAM role that is assumed by the Amazon EMR service to access AWS
-    #   resources on your behalf.
+    #   The IAM role that is assumed by the Amazon EMR service to access
+    #   Amazon Web Services resources on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_role
@@ -3934,6 +4122,7 @@ module Aws::EMR
     #                 },
     #               ],
     #             },
+    #             custom_ami_id: "XmlStringMaxLen256",
     #           },
     #         ],
     #         instance_fleets: [
@@ -3972,6 +4161,7 @@ module Aws::EMR
     #                     },
     #                   },
     #                 ],
+    #                 custom_ami_id: "XmlStringMaxLen256",
     #               },
     #             ],
     #             launch_specifications: {
@@ -4046,7 +4236,13 @@ module Aws::EMR
     #
     # @!attribute [rw] keep_job_flow_alive_when_no_steps
     #   Specifies whether the cluster should remain available after
-    #   completing all steps.
+    #   completing all steps. Defaults to `true`. For more information about
+    #   configuring cluster termination, see [Control Cluster
+    #   Termination][1] in the *EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
     #   @return [Boolean]
     #
     # @!attribute [rw] termination_protected
@@ -4087,11 +4283,14 @@ module Aws::EMR
     #
     # @!attribute [rw] emr_managed_master_security_group
     #   The identifier of the Amazon EC2 security group for the master node.
+    #   If you specify `EmrManagedMasterSecurityGroup`, you must also
+    #   specify `EmrManagedSlaveSecurityGroup`.
     #   @return [String]
     #
     # @!attribute [rw] emr_managed_slave_security_group
     #   The identifier of the Amazon EC2 security group for the core and
-    #   task nodes.
+    #   task nodes. If you specify `EmrManagedSlaveSecurityGroup`, you must
+    #   also specify `EmrManagedMasterSecurityGroup`.
     #   @return [String]
     #
     # @!attribute [rw] service_access_security_group
@@ -4380,7 +4579,9 @@ module Aws::EMR
     #   @return [Time]
     #
     # @!attribute [rw] cluster_states
-    #   The cluster state filters to apply when listing clusters.
+    #   The cluster state filters to apply when listing clusters. Clusters
+    #   that change state while this action runs may be not be returned as
+    #   expected in the list of clusters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] marker
@@ -4688,6 +4889,68 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListReleaseLabelsInput
+    #   data as a hash:
+    #
+    #       {
+    #         filters: {
+    #           prefix: "String",
+    #           application: "String",
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters the results of the request. `Prefix` specifies the prefix of
+    #   release labels to return. `Application` specifies the application
+    #   (with/without version) of release labels to return.
+    #   @return [Types::ReleaseLabelFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies the next page of results. If `NextToken` is not specified,
+    #   which is usually the case for the first request of
+    #   ListReleaseLabels, the first page of results are determined by other
+    #   filtering parameters or by the latest version. The
+    #   `ListReleaseLabels` request fails if the identity (Amazon Web
+    #   Services account ID) and all filtering parameters are different from
+    #   the original request, or if the `NextToken` is expired or tampered
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Defines the maximum number of release labels to return in a single
+    #   response. The default is `100`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListReleaseLabelsInput AWS API Documentation
+    #
+    class ListReleaseLabelsInput < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] release_labels
+    #   The returned release labels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   Used to paginate the next page of results if specified in the next
+    #   `ListReleaseLabels` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListReleaseLabelsOutput AWS API Documentation
+    #
+    class ListReleaseLabelsOutput < Struct.new(
+      :release_labels,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSecurityConfigurationsInput
     #   data as a hash:
     #
@@ -4754,8 +5017,10 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] marker
-    #   The pagination token that indicates the next set of results to
-    #   retrieve.
+    #   The maximum number of steps that a single `ListSteps` action returns
+    #   is 50. To return a longer list of steps, use multiple `ListSteps`
+    #   actions along with the `Marker` parameter, which is a pagination
+    #   token that indicates the next set of results to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStepsInput AWS API Documentation
@@ -4777,8 +5042,10 @@ module Aws::EMR
     #   @return [Array<Types::StepSummary>]
     #
     # @!attribute [rw] marker
-    #   The pagination token that indicates the next set of results to
-    #   retrieve.
+    #   The maximum number of steps that a single `ListSteps` action returns
+    #   is 50. To return a longer list of steps, use multiple `ListSteps`
+    #   actions along with the `Marker` parameter, which is a pagination
+    #   token that indicates the next set of results to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStepsOutput AWS API Documentation
@@ -4958,7 +5225,10 @@ module Aws::EMR
     #
     # @!attribute [rw] step_concurrency_level
     #   The number of steps that can be executed concurrently. You can
-    #   specify a minimum of 1 step and a maximum of 256 steps.
+    #   specify a minimum of 1 step and a maximum of 256 steps. We recommend
+    #   that you do not change this parameter while steps are running or the
+    #   `ActionOnFailure` setting may not behave as expected. For more
+    #   information see Step$ActionOnFailure.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterInput AWS API Documentation
@@ -4999,7 +5269,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] instance_fleet
-    #   The unique identifier of the instance fleet.
+    #   The configuration parameters of the instance fleet.
     #   @return [Types::InstanceFleetModifyConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleetInput AWS API Documentation
@@ -5180,6 +5450,9 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Details for a notebook execution. The details include information such
+    # as the unique ID and status of the notebook execution.
+    #
     # @!attribute [rw] notebook_execution_id
     #   The unique identifier of the notebook execution.
     #   @return [String]
@@ -5273,7 +5546,7 @@ module Aws::EMR
     #   remaining On-Demand target capacity is launched according to the
     #   On-Demand allocation strategy (`lowest-price`).
     #
-    #   If you do not specify a value, the fleet fulfils the On-Demand
+    #   If you do not specify a value, the fleet fulfills the On-Demand
     #   capacity according to the chosen On-Demand allocation strategy.
     #   @return [String]
     #
@@ -5551,6 +5824,38 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutAutoTerminationPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #         auto_termination_policy: {
+    #           idle_timeout: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the Amazon EMR cluster to which the
+    #   auto-termination policy will be attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_termination_policy
+    #   Specifies the auto-termination policy to attach to the cluster.
+    #   @return [Types::AutoTerminationPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoTerminationPolicyInput AWS API Documentation
+    #
+    class PutAutoTerminationPolicyInput < Struct.new(
+      :cluster_id,
+      :auto_termination_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoTerminationPolicyOutput AWS API Documentation
+    #
+    class PutAutoTerminationPolicyOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutBlockPublicAccessConfigurationInput
     #   data as a hash:
     #
@@ -5639,6 +5944,34 @@ module Aws::EMR
     #
     class PutManagedScalingPolicyOutput < Aws::EmptyStructure; end
 
+    # The release label filters by application or version prefix.
+    #
+    # @note When making an API call, you may pass ReleaseLabelFilter
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "String",
+    #         application: "String",
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   Optional release label version prefix filter. For example, `emr-5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] application
+    #   Optional release label application filter. For example,
+    #   `spark@2.1.0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ReleaseLabelFilter AWS API Documentation
+    #
+    class ReleaseLabelFilter < Struct.new(
+      :prefix,
+      :application)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveAutoScalingPolicyInput
     #   data as a hash:
     #
@@ -5669,6 +6002,30 @@ module Aws::EMR
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicyOutput AWS API Documentation
     #
     class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RemoveAutoTerminationPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the Amazon EMR cluster from which the
+    #   auto-termination policy will be removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoTerminationPolicyInput AWS API Documentation
+    #
+    class RemoveAutoTerminationPolicyInput < Struct.new(
+      :cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoTerminationPolicyOutput AWS API Documentation
+    #
+    class RemoveAutoTerminationPolicyOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveManagedScalingPolicyInput
     #   data as a hash:
@@ -5814,6 +6171,7 @@ module Aws::EMR
     #                   },
     #                 ],
     #               },
+    #               custom_ami_id: "XmlStringMaxLen256",
     #             },
     #           ],
     #           instance_fleets: [
@@ -5852,6 +6210,7 @@ module Aws::EMR
     #                       },
     #                     },
     #                   ],
+    #                   custom_ami_id: "XmlStringMaxLen256",
     #                 },
     #               ],
     #               launch_specifications: {
@@ -5980,6 +6339,9 @@ module Aws::EMR
     #             placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
     #           },
     #         ],
+    #         auto_termination_policy: {
+    #           idle_timeout: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -5992,10 +6354,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] log_encryption_kms_key_id
-    #   The AWS KMS customer master key (CMK) used for encrypting log files.
-    #   If a value is not provided, the logs remain encrypted by AES-256.
-    #   This attribute is only available with Amazon EMR version 5.30.0 and
-    #   later, excluding Amazon EMR 6.0.0.
+    #   The KMS key used for encrypting log files. If a value is not
+    #   provided, the logs remain encrypted by AES-256. This attribute is
+    #   only available with Amazon EMR version 5.30.0 and later, excluding
+    #   Amazon EMR 6.0.0.
     #   @return [String]
     #
     # @!attribute [rw] additional_info
@@ -6111,10 +6473,23 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   A value of `true` indicates that all IAM users in the AWS account
-    #   can perform cluster actions if they have the proper IAM policy
-    #   permissions. This is the default. A value of `false` indicates that
-    #   only the IAM user who created the cluster can perform actions.
+    #   Set this value to `true` so that IAM principals in the Amazon Web
+    #   Services account associated with the cluster can perform EMR actions
+    #   on the cluster that their IAM policies allow. This value defaults to
+    #   `true` for clusters created using the EMR API or the CLI
+    #   [create-cluster][1] command.
+    #
+    #   When set to `false`, only the IAM principal that created the cluster
+    #   and the Amazon Web Services account root user can perform EMR
+    #   actions for the cluster, regardless of the IAM permissions policies
+    #   attached to other IAM principals. For more information, see
+    #   [Understanding the EMR Cluster VisibleToAllUsers Setting][2] in the
+    #   *Amazon EMRManagement Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html
+    #   [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -6126,7 +6501,7 @@ module Aws::EMR
     #
     # @!attribute [rw] service_role
     #   The IAM role that will be assumed by the Amazon EMR service to
-    #   access AWS resources on your behalf.
+    #   access Amazon Web Services resources on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6224,6 +6599,17 @@ module Aws::EMR
     #   cluster.
     #   @return [Array<Types::PlacementGroupConfig>]
     #
+    # @!attribute [rw] auto_termination_policy
+    #   An auto-termination policy for an Amazon EMR cluster. An
+    #   auto-termination policy defines the amount of idle time in seconds
+    #   after which a cluster automatically terminates. For alternative
+    #   cluster termination options, see [Control cluster termination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
+    #   @return [Types::AutoTerminationPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -6253,7 +6639,8 @@ module Aws::EMR
       :kerberos_attributes,
       :step_concurrency_level,
       :managed_scaling_policy,
-      :placement_group_configs)
+      :placement_group_configs,
+      :auto_termination_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6463,8 +6850,8 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] path
-    #   Location of the script to run during a bootstrap action. Can be
-    #   either a location in Amazon S3 or on a local file system.
+    #   Location in Amazon S3 of the script to run during a bootstrap
+    #   action.
     #   @return [String]
     #
     # @!attribute [rw] args
@@ -6513,8 +6900,8 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
-    #   API Reference*.
+    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*.
     #
     #
     #
@@ -6563,13 +6950,13 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group from the
-    #   AWS SSO Identity Store.
+    #   Amazon Web Services SSO Identity Store.
     #   @return [String]
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
-    #   API Reference*.
+    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*.
     #
     #
     #
@@ -6650,10 +7037,12 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   A value of `true` indicates that all IAM users in the AWS account
-    #   can perform cluster actions if they have the proper IAM policy
-    #   permissions. This is the default. A value of `false` indicates that
-    #   only the IAM user who created the cluster can perform actions.
+    #   A value of `true` indicates that an IAM principal in the Amazon Web
+    #   Services account can perform EMR actions on the cluster that the IAM
+    #   policies attached to the principal allow. A value of `false`
+    #   indicates that only the IAM principal that created the cluster and
+    #   the Amazon Web Services root user can perform EMR actions on the
+    #   cluster.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersInput AWS API Documentation
@@ -6752,6 +7141,26 @@ module Aws::EMR
       :adjustment_type,
       :scaling_adjustment,
       :cool_down)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The returned release label application names or versions.
+    #
+    # @!attribute [rw] name
+    #   The returned release label application name. For example, `hadoop`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The returned release label application version. For example,
+    #   `3.2.1`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SimplifiedApplication AWS API Documentation
+    #
+    class SimplifiedApplication < Struct.new(
+      :name,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6939,9 +7348,22 @@ module Aws::EMR
     #
     # @!attribute [rw] action_on_failure
     #   The action to take when the cluster step fails. Possible values are
-    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
-    #   TERMINATE\_JOB\_FLOW is provided for backward compatibility. We
-    #   recommend using TERMINATE\_CLUSTER instead.
+    #   `TERMINATE_CLUSTER`, `CANCEL_AND_WAIT`, and `CONTINUE`.
+    #   `TERMINATE_JOB_FLOW` is provided for backward compatibility. We
+    #   recommend using `TERMINATE_CLUSTER` instead.
+    #
+    #   If a cluster's `StepConcurrencyLevel` is greater than `1`, do not
+    #   use `AddJobFlowSteps` to submit a step with this parameter set to
+    #   `CANCEL_AND_WAIT` or `TERMINATE_CLUSTER`. The step is not submitted
+    #   and the action fails with a message that the `ActionOnFailure`
+    #   setting is not valid.
+    #
+    #   If you change a cluster's `StepConcurrencyLevel` to be greater than
+    #   1 while a step is running, the `ActionOnFailure` parameter may not
+    #   behave as you expect. In this case, for a step that fails with this
+    #   parameter set to `CANCEL_AND_WAIT`, pending steps and the running
+    #   step are not canceled; for a step that fails with this parameter set
+    #   to `TERMINATE_CLUSTER`, the cluster does not terminate.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -6960,7 +7382,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Specification of a cluster (job flow) step.
+    # Specification for a cluster (job flow) step.
     #
     # @note When making an API call, you may pass StepConfig
     #   data as a hash:
@@ -6986,10 +7408,32 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] action_on_failure
-    #   The action to take when the cluster step fails. Possible values are
-    #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
-    #   TERMINATE\_JOB\_FLOW is provided for backward compatibility. We
-    #   recommend using TERMINATE\_CLUSTER instead.
+    #   The action to take when the step fails. Use one of the following
+    #   values:
+    #
+    #   * `TERMINATE_CLUSTER` - Shuts down the cluster.
+    #
+    #   * `CANCEL_AND_WAIT` - Cancels any pending steps and returns the
+    #     cluster to the `WAITING` state.
+    #
+    #   * `CONTINUE` - Continues to the next step in the queue.
+    #
+    #   * `TERMINATE_JOB_FLOW` - Shuts down the cluster.
+    #     `TERMINATE_JOB_FLOW` is provided for backward compatibility. We
+    #     recommend using `TERMINATE_CLUSTER` instead.
+    #
+    #   If a cluster's `StepConcurrencyLevel` is greater than `1`, do not
+    #   use `AddJobFlowSteps` to submit a step with this parameter set to
+    #   `CANCEL_AND_WAIT` or `TERMINATE_CLUSTER`. The step is not submitted
+    #   and the action fails with a message that the `ActionOnFailure`
+    #   setting is not valid.
+    #
+    #   If you change a cluster's `StepConcurrencyLevel` to be greater than
+    #   1 while a step is running, the `ActionOnFailure` parameter may not
+    #   behave as you expect. In this case, for a step that fails with this
+    #   parameter set to `CANCEL_AND_WAIT`, pending steps and the running
+    #   step are not canceled; for a step that fails with this parameter set
+    #   to `TERMINATE_CLUSTER`, the cluster does not terminate.
     #   @return [String]
     #
     # @!attribute [rw] hadoop_jar_step
@@ -7126,8 +7570,7 @@ module Aws::EMR
     # @!attribute [rw] action_on_failure
     #   The action to take when the cluster step fails. Possible values are
     #   TERMINATE\_CLUSTER, CANCEL\_AND\_WAIT, and CONTINUE.
-    #   TERMINATE\_JOB\_FLOW is available for backward compatibility. We
-    #   recommend using TERMINATE\_CLUSTER instead.
+    #   TERMINATE\_JOB\_FLOW is available for backward compatibility.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -7486,9 +7929,9 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
-    #   information, see [UserId][1] and [GroupId][2] in the *AWS SSO
-    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
-    #   must be specified.
+    #   information, see [UserId][1] and [GroupId][2] in the *Amazon Web
+    #   Services SSO Identity Store API Reference*. Either `IdentityName` or
+    #   `IdentityId` must be specified.
     #
     #
     #
@@ -7498,9 +7941,9 @@ module Aws::EMR
     #
     # @!attribute [rw] identity_name
     #   The name of the user or group to update. For more information, see
-    #   [UserName][1] and [DisplayName][2] in the *AWS SSO Identity Store
-    #   API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   [UserName][1] and [DisplayName][2] in the *Amazon Web Services SSO
+    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
+    #   must be specified.
     #
     #
     #

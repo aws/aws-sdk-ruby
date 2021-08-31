@@ -423,6 +423,7 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateDomainNameRequest.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
     CreateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
+    CreateDomainNameRequest.add_member(:ownership_verification_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownershipVerificationCertificateArn"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -632,6 +633,7 @@ module Aws::APIGateway
     DomainName.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
     DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     DomainName.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
+    DomainName.add_member(:ownership_verification_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownershipVerificationCertificateArn"))
     DomainName.struct_class = Types::DomainName
 
     DomainNames.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -1492,12 +1494,12 @@ module Aws::APIGateway
         o.http_request_uri = "/apikeys"
         o.input = Shapes::ShapeRef.new(shape: CreateApiKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: ApiKey)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_authorizer, Seahorse::Model::Operation.new.tap do |o|
@@ -1507,9 +1509,10 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: CreateAuthorizerRequest)
         o.output = Shapes::ShapeRef.new(shape: Authorizer)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1519,10 +1522,11 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}/basepathmappings"
         o.input = Shapes::ShapeRef.new(shape: CreateBasePathMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: BasePathMapping)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1532,11 +1536,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/deployments"
         o.input = Shapes::ShapeRef.new(shape: CreateDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: Deployment)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
@@ -1549,9 +1553,9 @@ module Aws::APIGateway
         o.output = Shapes::ShapeRef.new(shape: DocumentationPart)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1563,9 +1567,9 @@ module Aws::APIGateway
         o.output = Shapes::ShapeRef.new(shape: DocumentationVersion)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1575,9 +1579,10 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames"
         o.input = Shapes::ShapeRef.new(shape: CreateDomainNameRequest)
         o.output = Shapes::ShapeRef.new(shape: DomainName)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1588,10 +1593,10 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: CreateModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Model)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1602,9 +1607,10 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: CreateRequestValidatorRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestValidator)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1628,9 +1634,10 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis"
         o.input = Shapes::ShapeRef.new(shape: CreateRestApiRequest)
         o.output = Shapes::ShapeRef.new(shape: RestApi)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1655,11 +1662,11 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: CreateUsagePlanRequest)
         o.output = Shapes::ShapeRef.new(shape: UsagePlan)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:create_usage_plan_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1670,8 +1677,9 @@ module Aws::APIGateway
         o.output = Shapes::ShapeRef.new(shape: UsagePlanKey)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1681,8 +1689,10 @@ module Aws::APIGateway
         o.http_request_uri = "/vpclinks"
         o.input = Shapes::ShapeRef.new(shape: CreateVpcLinkRequest)
         o.output = Shapes::ShapeRef.new(shape: VpcLink)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1692,8 +1702,10 @@ module Aws::APIGateway
         o.http_request_uri = "/apikeys/{api_Key}"
         o.input = Shapes::ShapeRef.new(shape: DeleteApiKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1703,11 +1715,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/authorizers/{authorizer_id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAuthorizerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_base_path_mapping, Seahorse::Model::Operation.new.tap do |o|
@@ -1716,10 +1728,10 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}/basepathmappings/{base_path}"
         o.input = Shapes::ShapeRef.new(shape: DeleteBasePathMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1729,10 +1741,11 @@ module Aws::APIGateway
         o.http_request_uri = "/clientcertificates/{clientcertificate_id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteClientCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:delete_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -1741,9 +1754,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/deployments/{deployment_id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1753,11 +1768,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/documentation/parts/{part_id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDocumentationPartRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_documentation_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1766,10 +1781,10 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/documentation/versions/{doc_version}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDocumentationVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1779,10 +1794,11 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDomainNameRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_gateway_response, Seahorse::Model::Operation.new.tap do |o|
@@ -1791,11 +1807,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses/{response_type}"
         o.input = Shapes::ShapeRef.new(shape: DeleteGatewayResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -1804,10 +1820,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration"
         o.input = Shapes::ShapeRef.new(shape: DeleteIntegrationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_integration_response, Seahorse::Model::Operation.new.tap do |o|
@@ -1816,11 +1833,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}"
         o.input = Shapes::ShapeRef.new(shape: DeleteIntegrationResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_method, Seahorse::Model::Operation.new.tap do |o|
@@ -1854,11 +1871,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/models/{model_name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_request_validator, Seahorse::Model::Operation.new.tap do |o|
@@ -1867,11 +1884,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteRequestValidatorRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1893,10 +1910,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteRestApiRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_stage, Seahorse::Model::Operation.new.tap do |o|
@@ -1905,10 +1923,12 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages/{stage_name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteStageRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_usage_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -1917,10 +1937,11 @@ module Aws::APIGateway
         o.http_request_uri = "/usageplans/{usageplanId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteUsagePlanRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:delete_usage_plan_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1931,8 +1952,8 @@ module Aws::APIGateway
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1942,10 +1963,11 @@ module Aws::APIGateway
         o.http_request_uri = "/vpclinks/{vpclink_id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteVpcLinkRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:flush_stage_authorizers_cache, Seahorse::Model::Operation.new.tap do |o|
@@ -1954,9 +1976,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages/{stage_name}/cache/authorizers"
         o.input = Shapes::ShapeRef.new(shape: FlushStageAuthorizersCacheRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1966,9 +1990,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages/{stage_name}/cache/data"
         o.input = Shapes::ShapeRef.new(shape: FlushStageCacheRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1978,9 +2004,11 @@ module Aws::APIGateway
         o.http_request_uri = "/clientcertificates"
         o.input = Shapes::ShapeRef.new(shape: GenerateClientCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ClientCertificate)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:get_account, Seahorse::Model::Operation.new.tap do |o|
@@ -1989,8 +2017,9 @@ module Aws::APIGateway
         o.http_request_uri = "/account"
         o.input = Shapes::ShapeRef.new(shape: GetAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: Account)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2000,8 +2029,9 @@ module Aws::APIGateway
         o.http_request_uri = "/apikeys/{api_Key}"
         o.input = Shapes::ShapeRef.new(shape: GetApiKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: ApiKey)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2012,6 +2042,7 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetApiKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ApiKeys)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
@@ -2028,8 +2059,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/authorizers/{authorizer_id}"
         o.input = Shapes::ShapeRef.new(shape: GetAuthorizerRequest)
         o.output = Shapes::ShapeRef.new(shape: Authorizer)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2040,8 +2072,8 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetAuthorizersRequest)
         o.output = Shapes::ShapeRef.new(shape: Authorizers)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2051,8 +2083,9 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}/basepathmappings/{base_path}"
         o.input = Shapes::ShapeRef.new(shape: GetBasePathMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: BasePathMapping)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2062,8 +2095,9 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}/basepathmappings"
         o.input = Shapes::ShapeRef.new(shape: GetBasePathMappingsRequest)
         o.output = Shapes::ShapeRef.new(shape: BasePathMappings)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
@@ -2079,8 +2113,9 @@ module Aws::APIGateway
         o.http_request_uri = "/clientcertificates/{clientcertificate_id}"
         o.input = Shapes::ShapeRef.new(shape: GetClientCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ClientCertificate)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2091,6 +2126,7 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetClientCertificatesRequest)
         o.output = Shapes::ShapeRef.new(shape: ClientCertificates)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
@@ -2107,8 +2143,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/deployments/{deployment_id}"
         o.input = Shapes::ShapeRef.new(shape: GetDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: Deployment)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
@@ -2138,8 +2175,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/documentation/parts/{part_id}"
         o.input = Shapes::ShapeRef.new(shape: GetDocumentationPartRequest)
         o.output = Shapes::ShapeRef.new(shape: DocumentationPart)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2150,8 +2188,8 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetDocumentationPartsRequest)
         o.output = Shapes::ShapeRef.new(shape: DocumentationParts)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2184,9 +2222,9 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}"
         o.input = Shapes::ShapeRef.new(shape: GetDomainNameRequest)
         o.output = Shapes::ShapeRef.new(shape: DomainName)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2197,6 +2235,7 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetDomainNamesRequest)
         o.output = Shapes::ShapeRef.new(shape: DomainNames)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
@@ -2213,10 +2252,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages/{stage_name}/exports/{export_type}"
         o.input = Shapes::ShapeRef.new(shape: GetExportRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2226,8 +2266,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses/{response_type}"
         o.input = Shapes::ShapeRef.new(shape: GetGatewayResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: GatewayResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2238,8 +2279,8 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetGatewayResponsesRequest)
         o.output = Shapes::ShapeRef.new(shape: GatewayResponses)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2249,8 +2290,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration"
         o.input = Shapes::ShapeRef.new(shape: GetIntegrationRequest)
         o.output = Shapes::ShapeRef.new(shape: Integration)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2260,8 +2302,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}"
         o.input = Shapes::ShapeRef.new(shape: GetIntegrationResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: IntegrationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2293,8 +2336,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/models/{model_name}"
         o.input = Shapes::ShapeRef.new(shape: GetModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Model)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2334,8 +2378,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}"
         o.input = Shapes::ShapeRef.new(shape: GetRequestValidatorRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestValidator)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2346,8 +2391,8 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetRequestValidatorsRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestValidators)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2386,8 +2431,9 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}"
         o.input = Shapes::ShapeRef.new(shape: GetRestApiRequest)
         o.output = Shapes::ShapeRef.new(shape: RestApi)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2398,6 +2444,7 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetRestApisRequest)
         o.output = Shapes::ShapeRef.new(shape: RestApis)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
@@ -2414,10 +2461,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages/{stage_name}/sdks/{sdk_type}"
         o.input = Shapes::ShapeRef.new(shape: GetSdkRequest)
         o.output = Shapes::ShapeRef.new(shape: SdkResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2427,8 +2475,9 @@ module Aws::APIGateway
         o.http_request_uri = "/sdktypes/{sdktype_id}"
         o.input = Shapes::ShapeRef.new(shape: GetSdkTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: SdkType)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2438,6 +2487,8 @@ module Aws::APIGateway
         o.http_request_uri = "/sdktypes"
         o.input = Shapes::ShapeRef.new(shape: GetSdkTypesRequest)
         o.output = Shapes::ShapeRef.new(shape: SdkTypes)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
@@ -2448,8 +2499,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages/{stage_name}"
         o.input = Shapes::ShapeRef.new(shape: GetStageRequest)
         o.output = Shapes::ShapeRef.new(shape: Stage)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2459,8 +2513,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages"
         o.input = Shapes::ShapeRef.new(shape: GetStagesRequest)
         o.output = Shapes::ShapeRef.new(shape: Stages)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2471,10 +2528,9 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: Tags)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:get_usage, Seahorse::Model::Operation.new.tap do |o|
@@ -2502,8 +2558,8 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetUsagePlanRequest)
         o.output = Shapes::ShapeRef.new(shape: UsagePlan)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2514,8 +2570,8 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetUsagePlanKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: UsagePlanKey)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2526,8 +2582,8 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetUsagePlanKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: UsagePlanKeys)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
@@ -2544,10 +2600,9 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetUsagePlansRequest)
         o.output = Shapes::ShapeRef.new(shape: UsagePlans)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2562,8 +2617,9 @@ module Aws::APIGateway
         o.http_request_uri = "/vpclinks/{vpclink_id}"
         o.input = Shapes::ShapeRef.new(shape: GetVpcLinkRequest)
         o.output = Shapes::ShapeRef.new(shape: VpcLink)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2574,6 +2630,7 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetVpcLinksRequest)
         o.output = Shapes::ShapeRef.new(shape: VpcLinks)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
@@ -2590,12 +2647,12 @@ module Aws::APIGateway
         o.http_request_uri = "/apikeys?mode=import"
         o.input = Shapes::ShapeRef.new(shape: ImportApiKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ApiKeyIds)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:import_documentation_parts, Seahorse::Model::Operation.new.tap do |o|
@@ -2604,10 +2661,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/documentation/parts"
         o.input = Shapes::ShapeRef.new(shape: ImportDocumentationPartsRequest)
         o.output = Shapes::ShapeRef.new(shape: DocumentationPartIds)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2617,11 +2675,12 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis?mode=import"
         o.input = Shapes::ShapeRef.new(shape: ImportRestApiRequest)
         o.output = Shapes::ShapeRef.new(shape: RestApi)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:put_gateway_response, Seahorse::Model::Operation.new.tap do |o|
@@ -2631,9 +2690,10 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: PutGatewayResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: GatewayResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2643,10 +2703,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration"
         o.input = Shapes::ShapeRef.new(shape: PutIntegrationRequest)
         o.output = Shapes::ShapeRef.new(shape: Integration)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2656,12 +2717,12 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}"
         o.input = Shapes::ShapeRef.new(shape: PutIntegrationResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: IntegrationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:put_method, Seahorse::Model::Operation.new.tap do |o|
@@ -2698,12 +2759,12 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}"
         o.input = Shapes::ShapeRef.new(shape: PutRestApiRequest)
         o.output = Shapes::ShapeRef.new(shape: RestApi)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2713,11 +2774,11 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:test_invoke_authorizer, Seahorse::Model::Operation.new.tap do |o|
@@ -2751,10 +2812,11 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_account, Seahorse::Model::Operation.new.tap do |o|
@@ -2763,9 +2825,11 @@ module Aws::APIGateway
         o.http_request_uri = "/account"
         o.input = Shapes::ShapeRef.new(shape: UpdateAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: Account)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2775,11 +2839,12 @@ module Aws::APIGateway
         o.http_request_uri = "/apikeys/{api_Key}"
         o.input = Shapes::ShapeRef.new(shape: UpdateApiKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: ApiKey)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_authorizer, Seahorse::Model::Operation.new.tap do |o|
@@ -2788,9 +2853,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/authorizers/{authorizer_id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateAuthorizerRequest)
         o.output = Shapes::ShapeRef.new(shape: Authorizer)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2800,10 +2867,11 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}/basepathmappings/{base_path}"
         o.input = Shapes::ShapeRef.new(shape: UpdateBasePathMappingRequest)
         o.output = Shapes::ShapeRef.new(shape: BasePathMapping)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2813,10 +2881,12 @@ module Aws::APIGateway
         o.http_request_uri = "/clientcertificates/{clientcertificate_id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateClientCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ClientCertificate)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:update_deployment, Seahorse::Model::Operation.new.tap do |o|
@@ -2825,9 +2895,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/deployments/{deployment_id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDeploymentRequest)
         o.output = Shapes::ShapeRef.new(shape: Deployment)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
@@ -2839,10 +2911,10 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: UpdateDocumentationPartRequest)
         o.output = Shapes::ShapeRef.new(shape: DocumentationPart)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2852,10 +2924,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/documentation/versions/{doc_version}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDocumentationVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: DocumentationVersion)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2865,10 +2938,11 @@ module Aws::APIGateway
         o.http_request_uri = "/domainnames/{domain_name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDomainNameRequest)
         o.output = Shapes::ShapeRef.new(shape: DomainName)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2878,9 +2952,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/gatewayresponses/{response_type}"
         o.input = Shapes::ShapeRef.new(shape: UpdateGatewayResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: GatewayResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2890,11 +2966,12 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration"
         o.input = Shapes::ShapeRef.new(shape: UpdateIntegrationRequest)
         o.output = Shapes::ShapeRef.new(shape: Integration)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_integration_response, Seahorse::Model::Operation.new.tap do |o|
@@ -2903,10 +2980,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}"
         o.input = Shapes::ShapeRef.new(shape: UpdateIntegrationResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: IntegrationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2943,10 +3021,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/models/{model_name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Model)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2956,9 +3035,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateRequestValidatorRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestValidator)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2981,10 +3062,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateRestApiRequest)
         o.output = Shapes::ShapeRef.new(shape: RestApi)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -2994,10 +3076,11 @@ module Aws::APIGateway
         o.http_request_uri = "/restapis/{restapi_id}/stages/{stage_name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateStageRequest)
         o.output = Shapes::ShapeRef.new(shape: Stage)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -3007,10 +3090,12 @@ module Aws::APIGateway
         o.http_request_uri = "/usageplans/{usageplanId}/keys/{keyId}/usage"
         o.input = Shapes::ShapeRef.new(shape: UpdateUsageRequest)
         o.output = Shapes::ShapeRef.new(shape: Usage)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:update_usage_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -3019,11 +3104,12 @@ module Aws::APIGateway
         o.http_request_uri = "/usageplans/{usageplanId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateUsagePlanRequest)
         o.output = Shapes::ShapeRef.new(shape: UsagePlan)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_vpc_link, Seahorse::Model::Operation.new.tap do |o|
@@ -3032,10 +3118,11 @@ module Aws::APIGateway
         o.http_request_uri = "/vpclinks/{vpclink_id}"
         o.input = Shapes::ShapeRef.new(shape: UpdateVpcLinkRequest)
         o.output = Shapes::ShapeRef.new(shape: VpcLink)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end

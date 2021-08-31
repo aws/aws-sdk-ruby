@@ -637,6 +637,60 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves information about a list of blueprints.
+    #
+    # @option params [required, Array<String>] :names
+    #   A list of blueprint names.
+    #
+    # @option params [Boolean] :include_blueprint
+    #   Specifies whether or not to include the blueprint in the response.
+    #
+    # @option params [Boolean] :include_parameter_spec
+    #   Specifies whether or not to include the parameters, as a JSON string,
+    #   for the blueprint in the response.
+    #
+    # @return [Types::BatchGetBlueprintsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetBlueprintsResponse#blueprints #blueprints} => Array&lt;Types::Blueprint&gt;
+    #   * {Types::BatchGetBlueprintsResponse#missing_blueprints #missing_blueprints} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_blueprints({
+    #     names: ["OrchestrationNameString"], # required
+    #     include_blueprint: false,
+    #     include_parameter_spec: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprints #=> Array
+    #   resp.blueprints[0].name #=> String
+    #   resp.blueprints[0].description #=> String
+    #   resp.blueprints[0].created_on #=> Time
+    #   resp.blueprints[0].last_modified_on #=> Time
+    #   resp.blueprints[0].parameter_spec #=> String
+    #   resp.blueprints[0].blueprint_location #=> String
+    #   resp.blueprints[0].blueprint_service_location #=> String
+    #   resp.blueprints[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED"
+    #   resp.blueprints[0].error_message #=> String
+    #   resp.blueprints[0].last_active_definition.description #=> String
+    #   resp.blueprints[0].last_active_definition.last_modified_on #=> Time
+    #   resp.blueprints[0].last_active_definition.parameter_spec #=> String
+    #   resp.blueprints[0].last_active_definition.blueprint_location #=> String
+    #   resp.blueprints[0].last_active_definition.blueprint_service_location #=> String
+    #   resp.missing_blueprints #=> Array
+    #   resp.missing_blueprints[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetBlueprints AWS API Documentation
+    #
+    # @overload batch_get_blueprints(params = {})
+    # @param [Hash] params ({})
+    def batch_get_blueprints(params = {}, options = {})
+      req = build_request(:batch_get_blueprints, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resource metadata for a given list of crawler names.
     # After calling the `ListCrawlers` operation, you can call this
     # operation to access the data to which you have been granted
@@ -968,7 +1022,7 @@ module Aws::Glue
     #   resp.triggers[0].name #=> String
     #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
-    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.triggers[0].description #=> String
     #   resp.triggers[0].schedule #=> String
@@ -987,6 +1041,8 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
+    #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.triggers_not_found #=> Array
     #   resp.triggers_not_found[0] #=> String
     #
@@ -1056,7 +1112,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -1075,6 +1131,8 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -1111,6 +1169,8 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.edges #=> Array
     #   resp.workflows[0].last_run.graph.edges[0].source_id #=> String
     #   resp.workflows[0].last_run.graph.edges[0].destination_id #=> String
+    #   resp.workflows[0].last_run.starting_event_batch_condition.batch_size #=> Integer
+    #   resp.workflows[0].last_run.starting_event_batch_condition.batch_window #=> Integer
     #   resp.workflows[0].graph.nodes #=> Array
     #   resp.workflows[0].graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflows[0].graph.nodes[0].name #=> String
@@ -1118,7 +1178,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -1137,6 +1197,8 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -1174,6 +1236,8 @@ module Aws::Glue
     #   resp.workflows[0].graph.edges[0].source_id #=> String
     #   resp.workflows[0].graph.edges[0].destination_id #=> String
     #   resp.workflows[0].max_concurrent_runs #=> Integer
+    #   resp.workflows[0].blueprint_details.blueprint_name #=> String
+    #   resp.workflows[0].blueprint_details.run_id #=> String
     #   resp.missing_workflows #=> Array
     #   resp.missing_workflows[0] #=> String
     #
@@ -1413,6 +1477,48 @@ module Aws::Glue
     # @param [Hash] params ({})
     def check_schema_version_validity(params = {}, options = {})
       req = build_request(:check_schema_version_validity, params)
+      req.send_request(options)
+    end
+
+    # Registers a blueprint with Glue.
+    #
+    # @option params [required, String] :name
+    #   The name of the blueprint.
+    #
+    # @option params [String] :description
+    #   A description of the blueprint.
+    #
+    # @option params [required, String] :blueprint_location
+    #   Specifies a path in Amazon S3 where the blueprint is published.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be applied to this blueprint.
+    #
+    # @return [Types::CreateBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBlueprintResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_blueprint({
+    #     name: "OrchestrationNameString", # required
+    #     description: "Generic512CharString",
+    #     blueprint_location: "OrchestrationS3Location", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateBlueprint AWS API Documentation
+    #
+    # @overload create_blueprint(params = {})
+    # @param [Hash] params ({})
+    def create_blueprint(params = {}, options = {})
+      req = build_request(:create_blueprint, params)
       req.send_request(options)
     end
 
@@ -2939,6 +3045,10 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #
+    # @option params [Types::EventBatchingCondition] :event_batching_condition
+    #   Batch condition that must be met (specified number of events received
+    #   or batch time window expired) before EventBridge event trigger fires.
+    #
     # @return [Types::CreateTriggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTriggerResponse#name #name} => String
@@ -2948,7 +3058,7 @@ module Aws::Glue
     #   resp = client.create_trigger({
     #     name: "NameString", # required
     #     workflow_name: "NameString",
-    #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
+    #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND, EVENT
     #     schedule: "GenericString",
     #     predicate: {
     #       logical: "AND", # accepts AND, ANY
@@ -2980,6 +3090,10 @@ module Aws::Glue
     #     start_on_creation: false,
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     event_batching_condition: {
+    #       batch_size: 1, # required
+    #       batch_window: 1,
     #     },
     #   })
     #
@@ -3090,6 +3204,34 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_workflow(params = {}, options = {})
       req = build_request(:create_workflow, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing blueprint.
+    #
+    # @option params [required, String] :name
+    #   The name of the blueprint to delete.
+    #
+    # @return [Types::DeleteBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBlueprintResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_blueprint({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteBlueprint AWS API Documentation
+    #
+    # @overload delete_blueprint(params = {})
+    # @param [Hash] params ({})
+    def delete_blueprint(params = {}, options = {})
+      req = build_request(:delete_blueprint, params)
       req.send_request(options)
     end
 
@@ -3810,6 +3952,146 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_workflow(params = {}, options = {})
       req = build_request(:delete_workflow, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a blueprint.
+    #
+    # @option params [required, String] :name
+    #   The name of the blueprint.
+    #
+    # @option params [Boolean] :include_blueprint
+    #   Specifies whether or not to include the blueprint in the response.
+    #
+    # @option params [Boolean] :include_parameter_spec
+    #   Specifies whether or not to include the parameter specification.
+    #
+    # @return [Types::GetBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlueprintResponse#blueprint #blueprint} => Types::Blueprint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blueprint({
+    #     name: "NameString", # required
+    #     include_blueprint: false,
+    #     include_parameter_spec: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprint.name #=> String
+    #   resp.blueprint.description #=> String
+    #   resp.blueprint.created_on #=> Time
+    #   resp.blueprint.last_modified_on #=> Time
+    #   resp.blueprint.parameter_spec #=> String
+    #   resp.blueprint.blueprint_location #=> String
+    #   resp.blueprint.blueprint_service_location #=> String
+    #   resp.blueprint.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "FAILED"
+    #   resp.blueprint.error_message #=> String
+    #   resp.blueprint.last_active_definition.description #=> String
+    #   resp.blueprint.last_active_definition.last_modified_on #=> Time
+    #   resp.blueprint.last_active_definition.parameter_spec #=> String
+    #   resp.blueprint.last_active_definition.blueprint_location #=> String
+    #   resp.blueprint.last_active_definition.blueprint_service_location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprint AWS API Documentation
+    #
+    # @overload get_blueprint(params = {})
+    # @param [Hash] params ({})
+    def get_blueprint(params = {}, options = {})
+      req = build_request(:get_blueprint, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a blueprint run.
+    #
+    # @option params [required, String] :blueprint_name
+    #   The name of the blueprint.
+    #
+    # @option params [required, String] :run_id
+    #   The run ID for the blueprint run you want to retrieve.
+    #
+    # @return [Types::GetBlueprintRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlueprintRunResponse#blueprint_run #blueprint_run} => Types::BlueprintRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blueprint_run({
+    #     blueprint_name: "OrchestrationNameString", # required
+    #     run_id: "IdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprint_run.blueprint_name #=> String
+    #   resp.blueprint_run.run_id #=> String
+    #   resp.blueprint_run.workflow_name #=> String
+    #   resp.blueprint_run.state #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "ROLLING_BACK"
+    #   resp.blueprint_run.started_on #=> Time
+    #   resp.blueprint_run.completed_on #=> Time
+    #   resp.blueprint_run.error_message #=> String
+    #   resp.blueprint_run.rollback_error_message #=> String
+    #   resp.blueprint_run.parameters #=> String
+    #   resp.blueprint_run.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintRun AWS API Documentation
+    #
+    # @overload get_blueprint_run(params = {})
+    # @param [Hash] params ({})
+    def get_blueprint_run(params = {}, options = {})
+      req = build_request(:get_blueprint_run, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of blueprint runs for a specified blueprint.
+    #
+    # @option params [required, String] :blueprint_name
+    #   The name of the blueprint.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @return [Types::GetBlueprintRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlueprintRunsResponse#blueprint_runs #blueprint_runs} => Array&lt;Types::BlueprintRun&gt;
+    #   * {Types::GetBlueprintRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blueprint_runs({
+    #     blueprint_name: "NameString", # required
+    #     next_token: "GenericString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprint_runs #=> Array
+    #   resp.blueprint_runs[0].blueprint_name #=> String
+    #   resp.blueprint_runs[0].run_id #=> String
+    #   resp.blueprint_runs[0].workflow_name #=> String
+    #   resp.blueprint_runs[0].state #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "ROLLING_BACK"
+    #   resp.blueprint_runs[0].started_on #=> Time
+    #   resp.blueprint_runs[0].completed_on #=> Time
+    #   resp.blueprint_runs[0].error_message #=> String
+    #   resp.blueprint_runs[0].rollback_error_message #=> String
+    #   resp.blueprint_runs[0].parameters #=> String
+    #   resp.blueprint_runs[0].role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintRuns AWS API Documentation
+    #
+    # @overload get_blueprint_runs(params = {})
+    # @param [Hash] params ({})
+    def get_blueprint_runs(params = {}, options = {})
+      req = build_request(:get_blueprint_runs, params)
       req.send_request(options)
     end
 
@@ -6853,7 +7135,7 @@ module Aws::Glue
     #   resp.trigger.name #=> String
     #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
-    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.trigger.description #=> String
     #   resp.trigger.schedule #=> String
@@ -6872,6 +7154,8 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger AWS API Documentation
     #
@@ -6916,7 +7200,7 @@ module Aws::Glue
     #   resp.triggers[0].name #=> String
     #   resp.triggers[0].workflow_name #=> String
     #   resp.triggers[0].id #=> String
-    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.triggers[0].type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.triggers[0].state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.triggers[0].description #=> String
     #   resp.triggers[0].schedule #=> String
@@ -6935,6 +7219,8 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
+    #   resp.triggers[0].event_batching_condition.batch_window #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers AWS API Documentation
@@ -7106,7 +7392,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7125,6 +7411,8 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7161,6 +7449,8 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.edges #=> Array
     #   resp.workflow.last_run.graph.edges[0].source_id #=> String
     #   resp.workflow.last_run.graph.edges[0].destination_id #=> String
+    #   resp.workflow.last_run.starting_event_batch_condition.batch_size #=> Integer
+    #   resp.workflow.last_run.starting_event_batch_condition.batch_window #=> Integer
     #   resp.workflow.graph.nodes #=> Array
     #   resp.workflow.graph.nodes[0].type #=> String, one of "CRAWLER", "JOB", "TRIGGER"
     #   resp.workflow.graph.nodes[0].name #=> String
@@ -7168,7 +7458,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7187,6 +7477,8 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7224,6 +7516,8 @@ module Aws::Glue
     #   resp.workflow.graph.edges[0].source_id #=> String
     #   resp.workflow.graph.edges[0].destination_id #=> String
     #   resp.workflow.max_concurrent_runs #=> Integer
+    #   resp.workflow.blueprint_details.blueprint_name #=> String
+    #   resp.workflow.blueprint_details.run_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflow AWS API Documentation
     #
@@ -7281,7 +7575,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.run.graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.run.graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7300,6 +7594,8 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs #=> Array
     #   resp.run.graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7336,6 +7632,8 @@ module Aws::Glue
     #   resp.run.graph.edges #=> Array
     #   resp.run.graph.edges[0].source_id #=> String
     #   resp.run.graph.edges[0].destination_id #=> String
+    #   resp.run.starting_event_batch_condition.batch_size #=> Integer
+    #   resp.run.starting_event_batch_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRun AWS API Documentation
     #
@@ -7434,7 +7732,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.workflow_name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.id #=> String
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.description #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.schedule #=> String
@@ -7453,6 +7751,8 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_window #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs #=> Array
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].id #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].attempt #=> Integer
@@ -7489,6 +7789,8 @@ module Aws::Glue
     #   resp.runs[0].graph.edges #=> Array
     #   resp.runs[0].graph.edges[0].source_id #=> String
     #   resp.runs[0].graph.edges[0].destination_id #=> String
+    #   resp.runs[0].starting_event_batch_condition.batch_size #=> Integer
+    #   resp.runs[0].starting_event_batch_condition.batch_window #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRuns AWS API Documentation
@@ -7520,6 +7822,49 @@ module Aws::Glue
     # @param [Hash] params ({})
     def import_catalog_to_glue(params = {}, options = {})
       req = build_request(:import_catalog_to_glue, params)
+      req.send_request(options)
+    end
+
+    # Lists all the blueprint names in an account.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Filters the list by an Amazon Web Services resource tag.
+    #
+    # @return [Types::ListBlueprintsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBlueprintsResponse#blueprints #blueprints} => Array&lt;String&gt;
+    #   * {Types::ListBlueprintsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_blueprints({
+    #     next_token: "GenericString",
+    #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blueprints #=> Array
+    #   resp.blueprints[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListBlueprints AWS API Documentation
+    #
+    # @overload list_blueprints(params = {})
+    # @param [Hash] params ({})
+    def list_blueprints(params = {}, options = {})
+      req = build_request(:list_blueprints, params)
       req.send_request(options)
     end
 
@@ -8075,8 +8420,8 @@ module Aws::Glue
     #
     #   * By directly updating the resource policy with `PutResourePolicy`
     #
-    #   * By using the **Grant permissions** command on the Management
-    #     Console.
+    #   * By using the **Grant permissions** command on the Amazon Web
+    #     Services Management Console.
     #
     #   Must be set to `'TRUE'` if you have already used the Management
     #   Console to grant cross-account access, otherwise the call fails.
@@ -8649,6 +8994,42 @@ module Aws::Glue
     # @param [Hash] params ({})
     def search_tables(params = {}, options = {})
       req = build_request(:search_tables, params)
+      req.send_request(options)
+    end
+
+    # Starts a new run of the specified blueprint.
+    #
+    # @option params [required, String] :blueprint_name
+    #   The name of the blueprint.
+    #
+    # @option params [String] :parameters
+    #   Specifies the parameters as a `BlueprintParameters` object.
+    #
+    # @option params [required, String] :role_arn
+    #   Specifies the IAM role used to create the workflow.
+    #
+    # @return [Types::StartBlueprintRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBlueprintRunResponse#run_id #run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_blueprint_run({
+    #     blueprint_name: "OrchestrationNameString", # required
+    #     parameters: "BlueprintParameters",
+    #     role_arn: "OrchestrationIAMRoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartBlueprintRun AWS API Documentation
+    #
+    # @overload start_blueprint_run(params = {})
+    # @param [Hash] params ({})
+    def start_blueprint_run(params = {}, options = {})
+      req = build_request(:start_blueprint_run, params)
       req.send_request(options)
     end
 
@@ -9254,6 +9635,42 @@ module Aws::Glue
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a registered blueprint.
+    #
+    # @option params [required, String] :name
+    #   The name of the blueprint.
+    #
+    # @option params [String] :description
+    #   A description of the blueprint.
+    #
+    # @option params [required, String] :blueprint_location
+    #   Specifies a path in Amazon S3 where the blueprint is published.
+    #
+    # @return [Types::UpdateBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBlueprintResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_blueprint({
+    #     name: "OrchestrationNameString", # required
+    #     description: "Generic512CharString",
+    #     blueprint_location: "OrchestrationS3Location", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateBlueprint AWS API Documentation
+    #
+    # @overload update_blueprint(params = {})
+    # @param [Hash] params ({})
+    def update_blueprint(params = {}, options = {})
+      req = build_request(:update_blueprint, params)
       req.send_request(options)
     end
 
@@ -10479,6 +10896,10 @@ module Aws::Glue
     #           },
     #         ],
     #       },
+    #       event_batching_condition: {
+    #         batch_size: 1, # required
+    #         batch_window: 1,
+    #       },
     #     },
     #   })
     #
@@ -10487,7 +10908,7 @@ module Aws::Glue
     #   resp.trigger.name #=> String
     #   resp.trigger.workflow_name #=> String
     #   resp.trigger.id #=> String
-    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND"
+    #   resp.trigger.type #=> String, one of "SCHEDULED", "CONDITIONAL", "ON_DEMAND", "EVENT"
     #   resp.trigger.state #=> String, one of "CREATING", "CREATED", "ACTIVATING", "ACTIVATED", "DEACTIVATING", "DEACTIVATED", "DELETING", "UPDATING"
     #   resp.trigger.description #=> String
     #   resp.trigger.schedule #=> String
@@ -10506,6 +10927,8 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.event_batching_condition.batch_size #=> Integer
+    #   resp.trigger.event_batching_condition.batch_window #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger AWS API Documentation
     #
@@ -10625,7 +11048,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

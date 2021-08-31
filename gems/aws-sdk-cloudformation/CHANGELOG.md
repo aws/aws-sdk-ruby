@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-08-30)
+------------------
+
+* Feature - AWS CloudFormation allows you to iteratively develop your applications when failures are encountered without rolling back successfully provisioned resources. By specifying stack failure options, you can troubleshoot resources in a CREATE_FAILED or UPDATE_FAILED status.
+
+1.55.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2021-07-28)
+------------------
+
+* Feature - SDK update to support Importing existing Stacks to new/existing Self Managed StackSet - Stack Import feature.
+
 1.53.0 (2021-06-21)
 ------------------
 

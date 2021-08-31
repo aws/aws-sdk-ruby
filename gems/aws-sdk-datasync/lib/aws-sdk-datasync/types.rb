@@ -88,7 +88,7 @@ module Aws::DataSync
     #   Your agent activation key. You can get the activation key either by
     #   sending an HTTP GET request with redirects that enable you to get
     #   the agent IP address (port 80). Alternatively, you can get it from
-    #   the AWS DataSync console.
+    #   the DataSync console.
     #
     #   The redirect URL returned in the response provides you the
     #   activation key for your agent in the query string parameter
@@ -97,8 +97,8 @@ module Aws::DataSync
     #   pass to this API call determine the actual configuration of your
     #   agent.
     #
-    #   For more information, see Activating an Agent in the *AWS DataSync
-    #   User Guide.*
+    #   For more information, see Activating an Agent in the *DataSync User
+    #   Guide.*
     #   @return [String]
     #
     # @!attribute [rw] agent_name
@@ -169,8 +169,8 @@ module Aws::DataSync
     #
     # @!attribute [rw] agent_arn
     #   The Amazon Resource Name (ARN) of the agent. Use the `ListAgents`
-    #   operation to return a list of agents for your account and AWS
-    #   Region.
+    #   operation to return a list of agents for your account and Amazon Web
+    #   Services Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateAgentResponse AWS API Documentation
@@ -204,7 +204,7 @@ module Aws::DataSync
     # @!attribute [rw] subdirectory
     #   A subdirectory in the location’s path. This subdirectory in the EFS
     #   file system is used to read data from the EFS source location or
-    #   write data to the EFS destination. By default, AWS DataSync uses the
+    #   write data to the EFS destination. By default, DataSync uses the
     #   root directory.
     #
     #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
@@ -406,8 +406,8 @@ module Aws::DataSync
     #   files. For the agent to access directories, you must additionally
     #   enable all execute access.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see
-    #   [NFS Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #   For information about NFS export configuration, see 18.7. The
     #   /etc/exports Configuration File in the Red Hat Enterprise Linux
@@ -424,8 +424,8 @@ module Aws::DataSync
     #   installed on-premises uses this host name to mount the NFS server in
     #   a network.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see
-    #   [NFS Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
     #   (IPv4) address.
@@ -441,8 +441,8 @@ module Aws::DataSync
     #   Contains a list of Amazon Resource Names (ARNs) of agents that are
     #   used to connect to an NFS server.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see
-    #   [NFS Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #
     #
@@ -623,15 +623,16 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
-    #   The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost,
-    #   this must be an access point ARN.
+    #   The ARN of the Amazon S3 bucket. If the bucket is on an Amazon Web
+    #   Services Outpost, this must be an access point ARN.
     #   @return [String]
     #
     # @!attribute [rw] s3_storage_class
     #   The Amazon S3 storage class that you want to store your files in
-    #   when this location is used as a task destination. For buckets in AWS
-    #   Regions, the storage class defaults to Standard. For buckets on AWS
-    #   Outposts, the storage class defaults to AWS S3 Outposts.
+    #   when this location is used as a task destination. For buckets in
+    #   Amazon Web Services Regions, the storage class defaults to Standard.
+    #   For buckets on Outposts, the storage class defaults to Amazon Web
+    #   Services S3 Outposts.
     #
     #   For more information about S3 storage classes, see [Amazon S3
     #   Storage Classes][1]. Some storage classes have behaviors that can
@@ -646,18 +647,19 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] s3_config
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that is used to access an Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that is used to access an Amazon S3 bucket.
     #
     #   For detailed information about using such a role, see Creating a
-    #   Location for Amazon S3 in the *AWS DataSync User Guide*.
+    #   Location for Amazon S3 in the *DataSync User Guide*.
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] agent_arns
-    #   If you are using DataSync on an AWS Outpost, specify the Amazon
-    #   Resource Names (ARNs) of the DataSync agents deployed on your
-    #   Outpost. For more information about launching a DataSync agent on an
-    #   AWS Outpost, see [Deploy your DataSync agent on AWS Outposts][1].
+    #   If you are using DataSync on an Amazon Web Services Outpost, specify
+    #   the Amazon Resource Names (ARNs) of the DataSync agents deployed on
+    #   your Outpost. For more information about launching a DataSync agent
+    #   on an Amazon Web Services Outpost, see [Deploy your DataSync agent
+    #   on Outposts][1].
     #
     #
     #
@@ -860,6 +862,12 @@ module Aws::DataSync
     #             value: "TagValue",
     #           },
     #         ],
+    #         includes: [
+    #           {
+    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #             value: "FilterValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] source_location_arn
@@ -867,8 +875,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] destination_location_arn
-    #   The Amazon Resource Name (ARN) of an AWS storage resource's
-    #   location.
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services storage
+    #   resource's location.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
@@ -920,6 +928,13 @@ module Aws::DataSync
     #   the resource. The value can be an empty string.
     #   @return [Array<Types::TagListEntry>]
     #
+    # @!attribute [rw] includes
+    #   A list of filter rules that determines which files to include when
+    #   running a task. The pattern should contain a single filter string
+    #   that consists of the patterns to include. The patterns are delimited
+    #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #   @return [Array<Types::FilterRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTaskRequest AWS API Documentation
     #
     class CreateTaskRequest < Struct.new(
@@ -930,7 +945,8 @@ module Aws::DataSync
       :options,
       :excludes,
       :schedule,
-      :tags)
+      :tags,
+      :includes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -961,7 +977,7 @@ module Aws::DataSync
     # @!attribute [rw] agent_arn
     #   The Amazon Resource Name (ARN) of the agent to delete. Use the
     #   `ListAgents` operation to return a list of agents for your account
-    #   and AWS Region.
+    #   and Amazon Web Services Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteAgentRequest AWS API Documentation
@@ -1399,18 +1415,19 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] s3_config
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that is used to access an Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that is used to access an Amazon S3 bucket.
     #
     #   For detailed information about using such a role, see Creating a
-    #   Location for Amazon S3 in the *AWS DataSync User Guide*.
+    #   Location for Amazon S3 in the *DataSync User Guide*.
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] agent_arns
-    #   If you are using DataSync on an AWS Outpost, the Amazon Resource
-    #   Name (ARNs) of the EC2 agents deployed on your Outpost. For more
-    #   information about launching a DataSync agent on an AWS Outpost, see
-    #   [Deploy your DataSync agent on AWS Outposts][1].
+    #   If you are using DataSync on an Amazon Web Services Outpost, the
+    #   Amazon Resource Name (ARNs) of the EC2 agents deployed on your
+    #   Outpost. For more information about launching a DataSync agent on an
+    #   Amazon Web Services Outpost, see [Deploy your DataSync agent on
+    #   Outposts][1].
     #
     #
     #
@@ -1541,7 +1558,7 @@ module Aws::DataSync
     #   The status of the task execution.
     #
     #   For detailed information about task execution statuses, see
-    #   Understanding Task Statuses in the *AWS DataSync User Guide.*
+    #   Understanding Task Statuses in the *DataSync User Guide.*
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -1609,8 +1626,8 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_written
-    #   The number of logical bytes written to the destination AWS storage
-    #   resource.
+    #   The number of logical bytes written to the destination Amazon Web
+    #   Services storage resource.
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_transferred
@@ -1671,7 +1688,7 @@ module Aws::DataSync
     #   The status of the task that was described.
     #
     #   For detailed information about task execution statuses, see
-    #   Understanding Task Statuses in the *AWS DataSync User Guide*.
+    #   Understanding Task Statuses in the *DataSync User Guide*.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1689,8 +1706,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] destination_location_arn
-    #   The Amazon Resource Name (ARN) of the AWS storage resource's
-    #   location.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services storage
+    #   resource's location.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
@@ -1740,8 +1757,8 @@ module Aws::DataSync
     #   @return [Types::TaskSchedule]
     #
     # @!attribute [rw] error_code
-    #   Errors that AWS DataSync encountered during execution of the task.
-    #   You can use this error code to help troubleshoot issues.
+    #   Errors that DataSync encountered during execution of the task. You
+    #   can use this error code to help troubleshoot issues.
     #   @return [String]
     #
     # @!attribute [rw] error_detail
@@ -1753,6 +1770,13 @@ module Aws::DataSync
     # @!attribute [rw] creation_time
     #   The time that the task was created.
     #   @return [Time]
+    #
+    # @!attribute [rw] includes
+    #   A list of filter rules that determines which files to include when
+    #   running a task. The pattern should contain a single filter string
+    #   that consists of the patterns to include. The patterns are delimited
+    #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskResponse AWS API Documentation
     #
@@ -1771,7 +1795,8 @@ module Aws::DataSync
       :schedule,
       :error_code,
       :error_detail,
-      :creation_time)
+      :creation_time,
+      :includes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1821,7 +1846,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] filter_type
-    #   The type of filter rule to apply. AWS DataSync only supports the
+    #   The type of filter rule to apply. DataSync only supports the
     #   SIMPLE\_PATTERN rule type.
     #   @return [String]
     #
@@ -1840,8 +1865,7 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # This exception is thrown when an error occurs in the AWS DataSync
-    # service.
+    # This exception is thrown when an error occurs in the DataSync service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2389,8 +2413,8 @@ module Aws::DataSync
     #
     #   Some storage classes have specific behaviors that can affect your S3
     #   storage cost. For detailed information, see [Considerations when
-    #   working with Amazon S3 storage classes in DataSync ][1] in the *AWS
-    #   DataSync User Guide*.
+    #   working with Amazon S3 storage classes in DataSync ][1] in the
+    #   *DataSync User Guide*.
     #
     #
     #
@@ -2403,7 +2427,7 @@ module Aws::DataSync
     #   to BEST\_EFFORT, DataSync attempts to preserve the original `Atime`
     #   attribute on all source files (that is, the version before the
     #   PREPARING phase). However, `Atime`'s behavior is not fully standard
-    #   across platforms, so AWS DataSync can only do this on a best-effort
+    #   across platforms, so DataSync can only do this on a best-effort
     #   basis.
     #
     #   Default value: BEST\_EFFORT.
@@ -2483,7 +2507,7 @@ module Aws::DataSync
     #   affect your storage cost. If your task deletes objects, you might
     #   incur minimum storage duration charges for certain storage classes.
     #   For detailed information, see [Considerations when working with
-    #   Amazon S3 storage classes in DataSync ][1] in the *AWS DataSync User
+    #   Amazon S3 storage classes in DataSync ][1] in the *DataSync User
     #   Guide*.
     #
     #   Default value: PRESERVE.
@@ -2498,15 +2522,14 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] preserve_devices
-    #   A value that determines whether AWS DataSync should preserve the
+    #   A value that determines whether DataSync should preserve the
     #   metadata of block and character devices in the source file system,
     #   and re-create the files with that device name and metadata on the
     #   destination. DataSync does not copy the contents of such devices,
     #   only the name and metadata.
     #
-    #   <note markdown="1"> AWS DataSync can't sync the actual contents of such devices,
-    #   because they are nonterminal and don't return an end-of-file (EOF)
-    #   marker.
+    #   <note markdown="1"> DataSync can't sync the actual contents of such devices, because
+    #   they are nonterminal and don't return an end-of-file (EOF) marker.
     #
     #    </note>
     #
@@ -2531,7 +2554,7 @@ module Aws::DataSync
     #
     #   NONE: Ignore permissions.
     #
-    #   <note markdown="1"> AWS DataSync can preserve extant permissions of a source location.
+    #   <note markdown="1"> DataSync can preserve extant permissions of a source location.
     #
     #    </note>
     #
@@ -2541,8 +2564,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] bytes_per_second
-    #   A value that limits the bandwidth used by AWS DataSync. For example,
-    #   if you want AWS DataSync to use a maximum of 1 MB, set this value to
+    #   A value that limits the bandwidth used by DataSync. For example, if
+    #   you want DataSync to use a maximum of 1 MB, set this value to
     #   `1048576` (`=1024*1024`).
     #   @return [Integer]
     #
@@ -2702,11 +2725,11 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The Amazon Resource Name (ARN) of the AWS Identity and Access
-    # Management (IAM) role that is used to access an Amazon S3 bucket.
+    # The Amazon Resource Name (ARN) of the Identity and Access Management
+    # (IAM) role that is used to access an Amazon S3 bucket.
     #
     # For detailed information about using such a role, see Creating a
-    # Location for Amazon S3 in the *AWS DataSync User Guide*.
+    # Location for Amazon S3 in the *DataSync User Guide*.
     #
     # @note When making an API call, you may pass S3Config
     #   data as a hash:
@@ -2786,6 +2809,12 @@ module Aws::DataSync
     #             value: "FilterValue",
     #           },
     #         ],
+    #         excludes: [
+    #           {
+    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #             value: "FilterValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] task_arn
@@ -2817,12 +2846,20 @@ module Aws::DataSync
     #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2"`
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] excludes
+    #   A list of filter rules that determines which files to exclude from a
+    #   task. The list should contain a single filter string that consists
+    #   of the patterns to exclude. The patterns are delimited by "\|"
+    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   @return [Array<Types::FilterRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionRequest AWS API Documentation
     #
     class StartTaskExecutionRequest < Struct.new(
       :task_arn,
       :override_options,
-      :includes)
+      :includes,
+      :excludes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2859,11 +2896,11 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] key
-    #   The key for an AWS resource tag.
+    #   The key for an Amazon Web Services resource tag.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for an AWS resource tag.
+    #   The value for an Amazon Web Services resource tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TagListEntry AWS API Documentation
@@ -2942,8 +2979,8 @@ module Aws::DataSync
     # status of the task execution, and the errors encountered.
     #
     # @!attribute [rw] prepare_duration
-    #   The total time in milliseconds that AWS DataSync spent in the
-    #   PREPARING phase.
+    #   The total time in milliseconds that DataSync spent in the PREPARING
+    #   phase.
     #   @return [Integer]
     #
     # @!attribute [rw] prepare_status
@@ -2951,12 +2988,12 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] total_duration
-    #   The total time in milliseconds that AWS DataSync took to transfer
-    #   the file from the source to the destination location.
+    #   The total time in milliseconds that DataSync took to transfer the
+    #   file from the source to the destination location.
     #   @return [Integer]
     #
     # @!attribute [rw] transfer_duration
-    #   The total time in milliseconds that AWS DataSync spent in the
+    #   The total time in milliseconds that DataSync spent in the
     #   TRANSFERRING phase.
     #   @return [Integer]
     #
@@ -2965,8 +3002,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] verify_duration
-    #   The total time in milliseconds that AWS DataSync spent in the
-    #   VERIFYING phase.
+    #   The total time in milliseconds that DataSync spent in the VERIFYING
+    #   phase.
     #   @return [Integer]
     #
     # @!attribute [rw] verify_status
@@ -2974,8 +3011,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   Errors that AWS DataSync encountered during execution of the task.
-    #   You can use this error code to help troubleshoot issues.
+    #   Errors that DataSync encountered during execution of the task. You
+    #   can use this error code to help troubleshoot issues.
     #   @return [String]
     #
     # @!attribute [rw] error_detail
@@ -3092,8 +3129,8 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] schedule_expression
-    #   A cron expression that specifies when AWS DataSync initiates a
-    #   scheduled transfer from a source to a destination location.
+    #   A cron expression that specifies when DataSync initiates a scheduled
+    #   transfer from a source to a destination location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskSchedule AWS API Documentation
@@ -3206,8 +3243,8 @@ module Aws::DataSync
     #   the files. For the agent to access directories, you must
     #   additionally enable all execute access.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see
-    #   [NFS Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #   For information about NFS export configuration, see 18.7. The
     #   /etc/exports Configuration File in the Red Hat Enterprise Linux
@@ -3499,6 +3536,12 @@ module Aws::DataSync
     #         },
     #         name: "TagValue",
     #         cloud_watch_log_group_arn: "LogGroupArn",
+    #         includes: [
+    #           {
+    #             filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #             value: "FilterValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] task_arn
@@ -3553,6 +3596,13 @@ module Aws::DataSync
     #   CloudWatch LogGroup.
     #   @return [String]
     #
+    # @!attribute [rw] includes
+    #   A list of filter rules that determines which files to include when
+    #   running a task. The pattern should contain a single filter string
+    #   that consists of the patterns to include. The patterns are delimited
+    #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #   @return [Array<Types::FilterRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskRequest AWS API Documentation
     #
     class UpdateTaskRequest < Struct.new(
@@ -3561,7 +3611,8 @@ module Aws::DataSync
       :excludes,
       :schedule,
       :name,
-      :cloud_watch_log_group_arn)
+      :cloud_watch_log_group_arn,
+      :includes)
       SENSITIVE = []
       include Aws::Structure
     end

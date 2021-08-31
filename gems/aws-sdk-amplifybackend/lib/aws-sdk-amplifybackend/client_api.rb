@@ -23,6 +23,7 @@ module Aws::AmplifyBackend
     BackendAPIReqObj = Shapes::StructureShape.new(name: 'BackendAPIReqObj')
     BackendAPIResourceConfig = Shapes::StructureShape.new(name: 'BackendAPIResourceConfig')
     BackendAPIRespObj = Shapes::StructureShape.new(name: 'BackendAPIRespObj')
+    BackendAuthAppleProviderConfig = Shapes::StructureShape.new(name: 'BackendAuthAppleProviderConfig')
     BackendAuthRespObj = Shapes::StructureShape.new(name: 'BackendAuthRespObj')
     BackendAuthSocialProviderConfig = Shapes::StructureShape.new(name: 'BackendAuthSocialProviderConfig')
     BackendConfigRespObj = Shapes::StructureShape.new(name: 'BackendConfigRespObj')
@@ -205,6 +206,12 @@ module Aws::AmplifyBackend
     BackendAPIRespObj.add_member(:operation, Shapes::ShapeRef.new(shape: __string, location_name: "operation"))
     BackendAPIRespObj.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     BackendAPIRespObj.struct_class = Types::BackendAPIRespObj
+
+    BackendAuthAppleProviderConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: __string, location_name: "client_id"))
+    BackendAuthAppleProviderConfig.add_member(:key_id, Shapes::ShapeRef.new(shape: __string, location_name: "key_id"))
+    BackendAuthAppleProviderConfig.add_member(:private_key, Shapes::ShapeRef.new(shape: __string, location_name: "private_key"))
+    BackendAuthAppleProviderConfig.add_member(:team_id, Shapes::ShapeRef.new(shape: __string, location_name: "team_id"))
+    BackendAuthAppleProviderConfig.struct_class = Types::BackendAuthAppleProviderConfig
 
     BackendAuthRespObj.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "appId"))
     BackendAuthRespObj.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "backendEnvironmentName"))
@@ -715,6 +722,7 @@ module Aws::AmplifyBackend
     SocialProviderSettings.add_member(:facebook, Shapes::ShapeRef.new(shape: BackendAuthSocialProviderConfig, location_name: "Facebook"))
     SocialProviderSettings.add_member(:google, Shapes::ShapeRef.new(shape: BackendAuthSocialProviderConfig, location_name: "Google"))
     SocialProviderSettings.add_member(:login_with_amazon, Shapes::ShapeRef.new(shape: BackendAuthSocialProviderConfig, location_name: "LoginWithAmazon"))
+    SocialProviderSettings.add_member(:sign_in_with_apple, Shapes::ShapeRef.new(shape: BackendAuthAppleProviderConfig, location_name: "SignInWithApple"))
     SocialProviderSettings.struct_class = Types::SocialProviderSettings
 
     TooManyRequestsException.add_member(:limit_type, Shapes::ShapeRef.new(shape: __string, location_name: "limitType"))

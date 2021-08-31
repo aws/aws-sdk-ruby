@@ -1329,10 +1329,10 @@ module Aws::FraudDetector
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].precision #=> Float
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].tpr #=> Float
     #   resp.model_version_details[0].training_result.training_metrics.metric_data_points[0].threshold #=> Float
-    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics #=> Array
-    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_name #=> String
-    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_type #=> String
-    #   resp.model_version_details[0].training_result.variable_importance_metrics.logit_metrics[0].variable_importance #=> Float
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.log_odds_metrics #=> Array
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.log_odds_metrics[0].variable_name #=> String
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.log_odds_metrics[0].variable_type #=> String
+    #   resp.model_version_details[0].training_result.variable_importance_metrics.log_odds_metrics[0].variable_importance #=> Float
     #   resp.model_version_details[0].last_updated_time #=> String
     #   resp.model_version_details[0].created_time #=> String
     #   resp.model_version_details[0].arn #=> String
@@ -1645,7 +1645,7 @@ module Aws::FraudDetector
     #         entity_id: "identifier", # required
     #       },
     #     ],
-    #     event_timestamp: "string", # required
+    #     event_timestamp: "utcTimestampISO8601", # required
     #     event_variables: { # required
     #       "variableName" => "variableValue",
     #     },
@@ -1927,11 +1927,11 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
-    # Gets one or more models. Gets all models for the AWS account if no
-    # model type and no model id provided. Gets all models for the AWS
-    # account and model type, if the model type is specified but model id is
-    # not provided. Gets a specific model if (model type, model id) tuple is
-    # specified.
+    # Gets one or more models. Gets all models for the Amazon Web Services
+    # account if no model type and no model id provided. Gets all models for
+    # the Amazon Web Services account and model type, if the model type is
+    # specified but model id is not provided. Gets a specific model if
+    # (model type, model id) tuple is specified.
     #
     # This is a paginated API. If you provide a null `maxResults`, this
     # action retrieves a maximum of 10 records per page. If you provide a
@@ -2970,7 +2970,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

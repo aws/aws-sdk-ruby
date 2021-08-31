@@ -801,6 +801,35 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Audio Hls Rendition Selection
+    #
+    # @note When making an API call, you may pass AudioHlsRenditionSelection
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "__stringMin1", # required
+    #         name: "__stringMin1", # required
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS
+    #   audio rendition.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio
+    #   rendition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioHlsRenditionSelection AWS API Documentation
+    #
+    class AudioHlsRenditionSelection < Struct.new(
+      :group_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Audio Language Selection
     #
     # @note When making an API call, you may pass AudioLanguageSelection
@@ -961,6 +990,10 @@ module Aws::MediaLive
     #       {
     #         name: "__stringMin1", # required
     #         selector_settings: {
+    #           audio_hls_rendition_selection: {
+    #             group_id: "__stringMin1", # required
+    #             name: "__stringMin1", # required
+    #           },
     #           audio_language_selection: {
     #             language_code: "__string", # required
     #             language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -1003,6 +1036,10 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         audio_hls_rendition_selection: {
+    #           group_id: "__stringMin1", # required
+    #           name: "__stringMin1", # required
+    #         },
     #         audio_language_selection: {
     #           language_code: "__string", # required
     #           language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -1019,6 +1056,10 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] audio_hls_rendition_selection
+    #   Audio Hls Rendition Selection
+    #   @return [Types::AudioHlsRenditionSelection]
+    #
     # @!attribute [rw] audio_language_selection
     #   Audio Language Selection
     #   @return [Types::AudioLanguageSelection]
@@ -1034,6 +1075,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelectorSettings AWS API Documentation
     #
     class AudioSelectorSettings < Struct.new(
+      :audio_hls_rendition_selection,
       :audio_language_selection,
       :audio_pid_selection,
       :audio_track_selection)
@@ -2322,6 +2364,7 @@ module Aws::MediaLive
     #             style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #           },
     #           webvtt_destination_settings: {
+    #             style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #           },
     #         },
     #         language_code: "__string",
@@ -2444,6 +2487,7 @@ module Aws::MediaLive
     #           style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #         },
     #         webvtt_destination_settings: {
+    #           style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #         },
     #       }
     #
@@ -3328,6 +3372,7 @@ module Aws::MediaLive
     #                   style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #                 },
     #                 webvtt_destination_settings: {
+    #                   style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #                 },
     #               },
     #               language_code: "__string",
@@ -3929,6 +3974,10 @@ module Aws::MediaLive
     #                 {
     #                   name: "__stringMin1", # required
     #                   selector_settings: {
+    #                     audio_hls_rendition_selection: {
+    #                       group_id: "__stringMin1", # required
+    #                       name: "__stringMin1", # required
+    #                     },
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
     #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -6609,6 +6658,7 @@ module Aws::MediaLive
     #                 style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #               },
     #               webvtt_destination_settings: {
+    #                 style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #               },
     #             },
     #             language_code: "__string",
@@ -9673,6 +9723,10 @@ module Aws::MediaLive
     #             {
     #               name: "__stringMin1", # required
     #               selector_settings: {
+    #                 audio_hls_rendition_selection: {
+    #                   group_id: "__stringMin1", # required
+    #                   name: "__stringMin1", # required
+    #                 },
     #                 audio_language_selection: {
     #                   language_code: "__string", # required
     #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -10554,6 +10608,10 @@ module Aws::MediaLive
     #           {
     #             name: "__stringMin1", # required
     #             selector_settings: {
+    #               audio_hls_rendition_selection: {
+    #                 group_id: "__stringMin1", # required
+    #                 name: "__stringMin1", # required
+    #               },
     #               audio_language_selection: {
     #                 language_code: "__string", # required
     #                 language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -17714,6 +17772,7 @@ module Aws::MediaLive
     #                   style_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED
     #                 },
     #                 webvtt_destination_settings: {
+    #                   style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
     #                 },
     #               },
     #               language_code: "__string",
@@ -18315,6 +18374,10 @@ module Aws::MediaLive
     #                 {
     #                   name: "__stringMin1", # required
     #                   selector_settings: {
+    #                     audio_hls_rendition_selection: {
+    #                       group_id: "__stringMin1", # required
+    #                       name: "__stringMin1", # required
+    #                     },
     #                     audio_language_selection: {
     #                       language_code: "__string", # required
     #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
@@ -19743,11 +19806,28 @@ module Aws::MediaLive
 
     # Webvtt Destination Settings
     #
-    # @api private
+    # @note When making an API call, you may pass WebvttDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         style_control: "NO_STYLE_DATA", # accepts NO_STYLE_DATA, PASSTHROUGH
+    #       }
+    #
+    # @!attribute [rw] style_control
+    #   Controls whether the color and position of the source captions is
+    #   passed through to the WebVTT output captions. PASSTHROUGH - Valid
+    #   only if the source captions are EMBEDDED or TELETEXT.
+    #   NO\_STYLE\_DATA - Don't pass through the style. The output captions
+    #   will not contain any font styling information.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/WebvttDestinationSettings AWS API Documentation
     #
-    class WebvttDestinationSettings < Aws::EmptyStructure; end
+    class WebvttDestinationSettings < Struct.new(
+      :style_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end

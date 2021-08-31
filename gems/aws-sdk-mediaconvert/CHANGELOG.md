@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-08-24)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added MBAFF encoding support for AVC video and the ability to pass encryption context from the job settings to S3.
+
+1.72.0 (2021-08-03)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added control over the passthrough of XDS captions metadata to outputs.
+
+1.71.0 (2021-07-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2021-07-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.69.0 (2021-07-09)
 ------------------
 
