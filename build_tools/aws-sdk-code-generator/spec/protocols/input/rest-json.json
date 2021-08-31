@@ -1498,6 +1498,8 @@
       "Integer":{
         "type":"integer"
       },
+      "String":{"type":"string"},
+      "Blob":{"type":"blob"},
       "NoPayloadRequest":{
         "type":"structure",
         "required":[],
@@ -1571,12 +1573,30 @@
         },
         "documentation":"<p> The request structure for a payload request. </p>",
         "payload":"payloadConfig"
+      },
+      "TestBlobPayloadRequest":{
+        "type":"structure",
+        "required":[],
+        "members":{
+          "data":{
+            "shape":"Blob",
+            "documentation":"<p> Blob payload to post </p>"
+          },
+          "contentType":{
+            "shape":"String",
+            "documentation":"<p> Optional content-type header </p>",
+            "location":"header",
+            "locationName":"Content-Type"
+          }
+        },
+        "documentation":"<p> The request structure for a blob payload request. </p>",
+        "payload":"data"
       }
     },
     "cases": [
       {
         "given": {
-          "name": "ModeledBody",
+          "name": "TestBody",
           "input": {
             "shape": "TestBodyRequest"
           },
@@ -1593,7 +1613,7 @@
         },
         "serialized": {
           "uri": "/body",
-          "body": "{\"testConfig\": {\"timeout\":10}}",
+          "body": "{\"testConfig\":{\"timeout\":10}}",
           "headers": {
             "Content-Type": "application/json",
             "Content-Length": 29
@@ -1603,7 +1623,7 @@
       },
       {
         "given": {
-          "name": "ModeledPayloadNoParams",
+          "name": "TestPayloadNoParams",
           "input": {
             "shape": "TestPayloadRequest"
           },
@@ -1625,7 +1645,7 @@
       },
       {
         "given": {
-          "name": "ModeledPayload",
+          "name": "TestPayload",
           "input": {
             "shape": "TestPayloadRequest"
           },
@@ -1652,7 +1672,7 @@
       },
       {
         "given": {
-          "name": "ModeledPayloadNoBody",
+          "name": "TestPayloadNoBody",
           "input": {
             "shape": "TestPayloadRequest"
           },
@@ -1676,21 +1696,48 @@
       },
       {
         "given": {
-          "name": "NoModeledBodyNoParams",
+          "name": "TestBlobPayload",
           "input": {
-            "shape": "NoPayloadRequest"
+            "shape": "TestBlobPayloadRequest"
           },
           "http": {
-            "method": "GET",
-            "requestUri": "/no-payload"
+            "method": "POST",
+            "requestUri": "/blob-payload"
+          }
+        },
+        "params": {
+          "data": "1234",
+          "contentType": "image/jpg"
+        },
+        "serialized": {
+          "uri": "/blob-payload",
+          "body": "1234",
+          "headers": {
+            "Content-Type": "image/jpg",
+            "Content-Length": 4
+          },
+          "host": "rest-json-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
+          "name": "TestBlobPayloadNoParams",
+          "input": {
+            "shape": "TestBlobPayloadRequest"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/blob-payload"
           }
         },
         "params": {},
         "serialized": {
-          "uri": "/no-payload",
+          "uri": "/blob-payload",
           "body": "",
-          "excludedHeaders": {
-            "Content-Length": null,
+          "headers": {
+            "Content-Length": 0
+          },
+          "excludeHeaders": {
             "Content-Type": null
           },
           "host": "rest-json-test.amazonaws.com"
@@ -1698,12 +1745,34 @@
       },
       {
         "given": {
-          "name": "NoModeledBody",
+          "name": "NoPayload",
           "input": {
             "shape": "NoPayloadRequest"
           },
           "http": {
-            "method": "GET",
+            "method": "POST",
+            "requestUri": "/no-payload"
+          }
+        },
+        "params": {},
+        "serialized": {
+          "uri": "/no-payload",
+          "body": "",
+          "excludeHeaders": {
+            "Content-Type": null,
+            "Content-Length": null
+          },
+          "host": "rest-json-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
+          "name": "NoPayloadWithHeader",
+          "input": {
+            "shape": "NoPayloadRequest"
+          },
+          "http": {
+            "method": "POST",
             "requestUri": "/no-payload"
           }
         },
@@ -1713,9 +1782,9 @@
         "serialized": {
           "uri": "/no-payload",
           "body": "",
-          "excludedHeaders": {
-            "Content-Length": null,
-            "Content-Type": null
+          "excludeHeaders": {
+            "Content-Type": null,
+            "Content-Length": null
           },
           "host": "rest-json-test.amazonaws.com"
         }
