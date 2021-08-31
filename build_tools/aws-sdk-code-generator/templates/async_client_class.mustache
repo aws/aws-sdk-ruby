@@ -3,11 +3,9 @@
 {{#generated_src_warning}}
 {{generated_src_warning}}
 {{/generated_src_warning}}
-if RUBY_VERSION >= '2.1'
-  begin
-    require 'http/2'
-  rescue LoadError; end
-end
+begin
+  require 'http/2'
+rescue LoadError; end
 {{#plugin_requires}}
 require '{{.}}'
 {{/plugin_requires}}

@@ -7,11 +7,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-if RUBY_VERSION >= '2.1'
-  begin
-    require 'http/2'
-  rescue LoadError; end
-end
+begin
+  require 'http/2'
+rescue LoadError; end
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
