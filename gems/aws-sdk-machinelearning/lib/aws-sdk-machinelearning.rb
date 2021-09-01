@@ -49,6 +49,6 @@ require_relative 'aws-sdk-machinelearning/customizations'
 # @!group service
 module Aws::MachineLearning
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end

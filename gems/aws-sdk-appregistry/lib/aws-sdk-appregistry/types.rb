@@ -10,8 +10,9 @@
 module Aws::AppRegistry
   module Types
 
-    # Represents a Service Catalog AppRegistry application that is the
-    # top-level node in a hierarchy of related cloud resource abstractions.
+    # Represents a Amazon Web Services Service Catalog AppRegistry
+    # application that is the top-level node in a hierarchy of related cloud
+    # resource abstractions.
     #
     # @!attribute [rw] id
     #   The identifier of the application.
@@ -59,7 +60,8 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # Summary of a Service Catalog AppRegistry application.
+    # Summary of a Amazon Web Services Service Catalog AppRegistry
+    # application.
     #
     # @!attribute [rw] id
     #   The identifier of the application.
@@ -197,8 +199,9 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # Represents a Service Catalog AppRegistry attribute group that is rich
-    # metadata which describes an application and its components.
+    # Represents a Amazon Web Services Service Catalog AppRegistry attribute
+    # group that is rich metadata which describes an application and its
+    # components.
     #
     # @!attribute [rw] id
     #   The globally unique attribute group identifier of the attribute
@@ -247,7 +250,8 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # Summary of a Service Catalog AppRegistry attribute group.
+    # Summary of a Amazon Web Services Service Catalog AppRegistry attribute
+    # group.
     #
     # @!attribute [rw] id
     #   The globally unique attribute group identifier of the attribute
@@ -642,6 +646,11 @@ module Aws::AppRegistry
     #   Key-value pairs associated with the application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] integrations
+    #   The information about the integration of the application with other
+    #   services, such as Resource Groups.
+    #   @return [Types::Integrations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -652,7 +661,51 @@ module Aws::AppRegistry
       :creation_time,
       :last_update_time,
       :associated_resource_count,
-      :tags)
+      :tags,
+      :integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAssociatedResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application: "ApplicationSpecifier", # required
+    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #         resource: "ResourceSpecifier", # required
+    #       }
+    #
+    # @!attribute [rw] application
+    #   The name or ID of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource associated with the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The name or ID of the resource associated with the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAssociatedResourceRequest AWS API Documentation
+    #
+    class GetAssociatedResourceRequest < Struct.new(
+      :application,
+      :resource_type,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource
+    #   The resource associated with the application.
+    #   @return [Types::Resource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAssociatedResourceResponse AWS API Documentation
+    #
+    class GetAssociatedResourceResponse < Struct.new(
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -726,6 +779,20 @@ module Aws::AppRegistry
       :creation_time,
       :last_update_time,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about the service integration.
+    #
+    # @!attribute [rw] resource_group
+    #   The information about the resource group integration.
+    #   @return [Types::ResourceGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/Integrations AWS API Documentation
+    #
+    class Integrations < Struct.new(
+      :resource_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -970,7 +1037,74 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
-    # Information about the resource.
+    # The information about the resource.
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon resource name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_time
+    #   The time the resource was associated with the application.
+    #   @return [Time]
+    #
+    # @!attribute [rw] integrations
+    #   The service integration information about the resource.
+    #   @return [Types::ResourceIntegrations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/Resource AWS API Documentation
+    #
+    class Resource < Struct.new(
+      :name,
+      :arn,
+      :association_time,
+      :integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about the resource group integration.
+    #
+    # @!attribute [rw] state
+    #   The state of the propagation process for the resource group. The
+    #   states includes:
+    #
+    #   `CREATING `if the resource group is in the process of being created.
+    #
+    #   `CREATE_COMPLETE` if the resource group was created successfully.
+    #
+    #   `CREATE_FAILED` if the resource group failed to be created.
+    #
+    #   `UPDATING` if the resource group is in the process of being updated.
+    #
+    #   `UPDATE_COMPLETE` if the resource group updated successfully.
+    #
+    #   `UPDATE_FAILED` if the resource group could not update successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon resource name (ARN) of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that generates when the propagation process for
+    #   the resource group fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ResourceGroup AWS API Documentation
+    #
+    class ResourceGroup < Struct.new(
+      :state,
+      :arn,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about the resource.
     #
     # @!attribute [rw] name
     #   The name of the resource.
@@ -986,6 +1120,20 @@ module Aws::AppRegistry
     class ResourceInfo < Struct.new(
       :name,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service integration information about the resource.
+    #
+    # @!attribute [rw] resource_group
+    #   The information about the integration of Resource Groups.
+    #   @return [Types::ResourceGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ResourceIntegrations AWS API Documentation
+    #
+    class ResourceIntegrations < Struct.new(
+      :resource_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1030,8 +1178,8 @@ module Aws::AppRegistry
     #
     # @!attribute [rw] resource
     #   An entity you can work with and specify with a name or ID. Examples
-    #   include an Amazon EC2 instance, an AWS CloudFormation stack, or an
-    #   Amazon S3 bucket.
+    #   include an Amazon EC2 instance, an Amazon Web Services
+    #   CloudFormation stack, or an Amazon S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/SyncResourceRequest AWS API Documentation

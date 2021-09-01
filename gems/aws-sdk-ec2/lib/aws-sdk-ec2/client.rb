@@ -6361,6 +6361,7 @@ module Aws::EC2
     #         http_tokens: "optional", # accepts optional, required
     #         http_put_response_hop_limit: 1,
     #         http_endpoint: "disabled", # accepts disabled, enabled
+    #         http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #       },
     #       enclave_options: {
     #         enabled: false,
@@ -6659,6 +6660,7 @@ module Aws::EC2
     #         http_tokens: "optional", # accepts optional, required
     #         http_put_response_hop_limit: 1,
     #         http_endpoint: "disabled", # accepts disabled, enabled
+    #         http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #       },
     #       enclave_options: {
     #         enabled: false,
@@ -6766,6 +6768,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.launch_template_version.launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.launch_template_version.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.launch_template_version.launch_template_data.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.launch_template_version.launch_template_data.enclave_options.enabled #=> Boolean
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
@@ -10812,12 +10815,6 @@ module Aws::EC2
     # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
     #
-    # @option params [required, String] :cidr_block
-    #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
-    #
     # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
     #   for the VPC. You cannot specify the range of IP addresses, or the size
@@ -10862,6 +10859,12 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the VPC.
     #
+    # @option params [required, String] :cidr_block
+    #   The IPv4 network range for the VPC, in CIDR notation. For example,
+    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
+    #
     # @return [Types::CreateVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcResult#vpc #vpc} => Types::Vpc
@@ -10889,7 +10892,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_vpc({
-    #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
     #     ipv_6_pool: "Ipv6PoolEc2Id",
     #     ipv_6_cidr_block: "String",
@@ -10907,6 +10909,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -20564,6 +20567,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.launch_template_versions[0].launch_template_data.enclave_options.enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -32099,6 +32103,7 @@ module Aws::EC2
     #   resp.launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.launch_template_data.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.launch_template_data.enclave_options.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
@@ -43620,7 +43625,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.260.0'
+      context[:gem_version] = '1.261.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
