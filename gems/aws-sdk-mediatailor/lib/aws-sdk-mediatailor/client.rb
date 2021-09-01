@@ -331,12 +331,22 @@ module Aws::MediaTailor
     #
     # @option params [required, String] :channel_name
     #
+    # @option params [Types::SlateSource] :filler_slate
+    #   The slate used to fill gaps between programs in the schedule. You must
+    #   configure filler slate if your channel uses an LINEAR PlaybackMode.
+    #
     # @option params [required, Array<Types::RequestOutputItem>] :outputs
     #   The channel's output properties.
     #
     # @option params [required, String] :playback_mode
-    #   The type of playback mode for this channel. The only supported value
-    #   is LOOP.
+    #   The type of playback mode to use for this channel.
+    #
+    #   LINEAR - The programs in the schedule play once back-to-back in the
+    #   schedule.
+    #
+    #   LOOP - The programs in the schedule play back-to-back in an endless
+    #   loop. When the last program in the schedule stops playing, playback
+    #   loops back to the first program in the schedule.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to assign to the channel.
@@ -347,6 +357,7 @@ module Aws::MediaTailor
     #   * {Types::CreateChannelResponse#channel_name #channel_name} => String
     #   * {Types::CreateChannelResponse#channel_state #channel_state} => String
     #   * {Types::CreateChannelResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateChannelResponse#filler_slate #filler_slate} => Types::SlateSource
     #   * {Types::CreateChannelResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::CreateChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
     #   * {Types::CreateChannelResponse#playback_mode #playback_mode} => String
@@ -356,6 +367,10 @@ module Aws::MediaTailor
     #
     #   resp = client.create_channel({
     #     channel_name: "__string", # required
+    #     filler_slate: {
+    #       source_location_name: "__string",
+    #       vod_source_name: "__string",
+    #     },
     #     outputs: [ # required
     #       {
     #         dash_playlist_settings: {
@@ -371,7 +386,7 @@ module Aws::MediaTailor
     #         source_group: "__string", # required
     #       },
     #     ],
-    #     playback_mode: "LOOP", # required, accepts LOOP
+    #     playback_mode: "LOOP", # required, accepts LOOP, LINEAR
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -383,6 +398,8 @@ module Aws::MediaTailor
     #   resp.channel_name #=> String
     #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.creation_time #=> Time
+    #   resp.filler_slate.source_location_name #=> String
+    #   resp.filler_slate.vod_source_name #=> String
     #   resp.last_modified_time #=> Time
     #   resp.outputs #=> Array
     #   resp.outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
@@ -431,6 +448,7 @@ module Aws::MediaTailor
     #   * {Types::CreateProgramResponse#channel_name #channel_name} => String
     #   * {Types::CreateProgramResponse#creation_time #creation_time} => Time
     #   * {Types::CreateProgramResponse#program_name #program_name} => String
+    #   * {Types::CreateProgramResponse#scheduled_start_time #scheduled_start_time} => Time
     #   * {Types::CreateProgramResponse#source_location_name #source_location_name} => String
     #   * {Types::CreateProgramResponse#vod_source_name #vod_source_name} => String
     #
@@ -459,6 +477,7 @@ module Aws::MediaTailor
     #       transition: { # required
     #         relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #         relative_program: "__string",
+    #         scheduled_start_time_millis: 1,
     #         type: "__string", # required
     #       },
     #     },
@@ -481,6 +500,7 @@ module Aws::MediaTailor
     #   resp.channel_name #=> String
     #   resp.creation_time #=> Time
     #   resp.program_name #=> String
+    #   resp.scheduled_start_time #=> Time
     #   resp.source_location_name #=> String
     #   resp.vod_source_name #=> String
     #
@@ -772,6 +792,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeChannelResponse#channel_name #channel_name} => String
     #   * {Types::DescribeChannelResponse#channel_state #channel_state} => String
     #   * {Types::DescribeChannelResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeChannelResponse#filler_slate #filler_slate} => Types::SlateSource
     #   * {Types::DescribeChannelResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
     #   * {Types::DescribeChannelResponse#playback_mode #playback_mode} => String
@@ -789,6 +810,8 @@ module Aws::MediaTailor
     #   resp.channel_name #=> String
     #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.creation_time #=> Time
+    #   resp.filler_slate.source_location_name #=> String
+    #   resp.filler_slate.vod_source_name #=> String
     #   resp.last_modified_time #=> Time
     #   resp.outputs #=> Array
     #   resp.outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
@@ -825,6 +848,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeProgramResponse#channel_name #channel_name} => String
     #   * {Types::DescribeProgramResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeProgramResponse#program_name #program_name} => String
+    #   * {Types::DescribeProgramResponse#scheduled_start_time #scheduled_start_time} => Time
     #   * {Types::DescribeProgramResponse#source_location_name #source_location_name} => String
     #   * {Types::DescribeProgramResponse#vod_source_name #vod_source_name} => String
     #
@@ -850,6 +874,7 @@ module Aws::MediaTailor
     #   resp.channel_name #=> String
     #   resp.creation_time #=> Time
     #   resp.program_name #=> String
+    #   resp.scheduled_start_time #=> Time
     #   resp.source_location_name #=> String
     #   resp.vod_source_name #=> String
     #
@@ -1020,6 +1045,7 @@ module Aws::MediaTailor
     #   resp.items[0].schedule_ad_breaks[0].approximate_start_time #=> Time
     #   resp.items[0].schedule_ad_breaks[0].source_location_name #=> String
     #   resp.items[0].schedule_ad_breaks[0].vod_source_name #=> String
+    #   resp.items[0].schedule_entry_type #=> String, one of "PROGRAM", "FILLER_SLATE"
     #   resp.items[0].source_location_name #=> String
     #   resp.items[0].vod_source_name #=> String
     #   resp.next_token #=> String
@@ -1173,6 +1199,8 @@ module Aws::MediaTailor
     #   resp.items[0].channel_name #=> String
     #   resp.items[0].channel_state #=> String
     #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].filler_slate.source_location_name #=> String
+    #   resp.items[0].filler_slate.vod_source_name #=> String
     #   resp.items[0].last_modified_time #=> Time
     #   resp.items[0].outputs #=> Array
     #   resp.items[0].outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
@@ -1712,6 +1740,7 @@ module Aws::MediaTailor
     #   * {Types::UpdateChannelResponse#channel_name #channel_name} => String
     #   * {Types::UpdateChannelResponse#channel_state #channel_state} => String
     #   * {Types::UpdateChannelResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateChannelResponse#filler_slate #filler_slate} => Types::SlateSource
     #   * {Types::UpdateChannelResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::UpdateChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
     #   * {Types::UpdateChannelResponse#playback_mode #playback_mode} => String
@@ -1744,6 +1773,8 @@ module Aws::MediaTailor
     #   resp.channel_name #=> String
     #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.creation_time #=> Time
+    #   resp.filler_slate.source_location_name #=> String
+    #   resp.filler_slate.vod_source_name #=> String
     #   resp.last_modified_time #=> Time
     #   resp.outputs #=> Array
     #   resp.outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
@@ -1906,7 +1937,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

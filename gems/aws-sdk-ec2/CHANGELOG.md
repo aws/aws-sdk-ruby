@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.261.0 (2021-09-01)
+------------------
+
+* Feature - Added LaunchTemplate support for the IMDS IPv6 endpoint
+
 1.260.0 (2021-08-27)
 ------------------
 

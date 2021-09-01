@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-09-01)
+------------------
+
+* Feature - Introduction of GetAssociatedResource API and GetApplication response extension for Resource Groups support.
+
 1.7.0 (2021-07-30)
 ------------------
 

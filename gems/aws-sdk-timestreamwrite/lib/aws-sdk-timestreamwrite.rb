@@ -48,6 +48,6 @@ require_relative 'aws-sdk-timestreamwrite/customizations'
 # @!group service
 module Aws::TimestreamWrite
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end
