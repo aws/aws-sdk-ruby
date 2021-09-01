@@ -447,23 +447,18 @@ module Aws::Athena
     end
 
     # Creates (registers) a data catalog with the specified name and
-    # properties. Catalogs created are visible to all users of the same AWS
-    # account.
+    # properties. Catalogs created are visible to all users of the same
+    # Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   The name of the data catalog to create. The catalog name must be
-    #   unique for the AWS account and can use a maximum of 128 alphanumeric,
-    #   underscore, at sign, or hyphen characters.
+    #   unique for the Amazon Web Services account and can use a maximum of
+    #   128 alphanumeric, underscore, at sign, or hyphen characters.
     #
     # @option params [required, String] :type
-    #   The type of data catalog to create: `LAMBDA` for a federated catalog
-    #   or `HIVE` for an external hive metastore.
-    #
-    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
-    #   already exists in your account, of which you can have only one.
-    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
-    #
-    #    </note>
+    #   The type of data catalog to create: `LAMBDA` for a federated catalog,
+    #   `HIVE` for an external hive metastore, or `GLUE` for an Glue Data
+    #   Catalog.
     #
     # @option params [String] :description
     #   A description of the data catalog to be created.
@@ -494,6 +489,23 @@ module Aws::Athena
     #       function.
     #
     #       `function=lambda_arn `
+    #
+    #   * The `GLUE` type takes a catalog ID parameter and is required. The `
+    #     catalog_id ` is the account ID of the Amazon Web Services account to
+    #     which the Glue Data Catalog belongs.
+    #
+    #     `catalog-id=catalog_id `
+    #
+    #     * The `GLUE` data catalog type also applies to the default
+    #       `AwsDataCatalog` that already exists in your account, of which you
+    #       can have only one and cannot modify.
+    #
+    #     * Queries that specify a Glue Data Catalog other than the default
+    #       `AwsDataCatalog` must be run on Athena engine version 2.
+    #
+    #     * In Regions where Athena engine version 2 is not available,
+    #       creating new Glue data catalogs results in an `INVALID_INPUT`
+    #       error.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of comma separated tags to add to the data catalog that is
@@ -530,8 +542,8 @@ module Aws::Athena
     # Creates a named query in the specified workgroup. Requires that you
     # have access to the workgroup.
     #
-    # For code samples using the AWS SDK for Java, see [Examples and Code
-    # Samples][1] in the *Amazon Athena User Guide*.
+    # For code samples using the Amazon Web Services SDK for Java, see
+    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
     #
     #
     #
@@ -556,10 +568,11 @@ module Aws::Athena
     #   and another query is not created. If a parameter has changed, for
     #   example, the `QueryString`, an error is returned.
     #
-    #   This token is listed as not required because AWS SDKs (for example the
-    #   AWS SDK for Java) auto-generate the token for users. If you are not
-    #   using the AWS SDK or the AWS CLI, you must provide this token or the
-    #   action will fail.
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for users. If you are not using the Amazon Web Services SDK or
+    #   the Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -641,8 +654,8 @@ module Aws::Athena
     #   Amazon CloudWatch Metrics are enabled for the workgroup, the limit for
     #   the amount of bytes scanned (cutoff) per query, if it is specified,
     #   and whether workgroup's settings (specified with
-    #   EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override
-    #   client-side settings. See
+    #   `EnforceWorkGroupConfiguration`) in the `WorkGroupConfiguration`
+    #   override client-side settings. See
     #   WorkGroupConfiguration$EnforceWorkGroupConfiguration.
     #
     # @option params [String] :description
@@ -718,8 +731,8 @@ module Aws::Athena
     # Deletes the named query if you have access to the workgroup in which
     # the query was saved.
     #
-    # For code samples using the AWS SDK for Java, see [Examples and Code
-    # Samples][1] in the *Amazon Athena User Guide*.
+    # For code samples using the Amazon Web Services SDK for Java, see
+    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
     #
     #
     #
@@ -1159,7 +1172,7 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Lists the data catalogs in the current AWS account.
+    # Lists the data catalogs in the current Amazon Web Services account.
     #
     # @option params [String] :next_token
     #   A token generated by the Athena service that specifies where to
@@ -1292,8 +1305,8 @@ module Aws::Athena
     # workgroup. If a workgroup is not specified, lists the saved queries
     # for the primary workgroup.
     #
-    # For code samples using the AWS SDK for Java, see [Examples and Code
-    # Samples][1] in the *Amazon Athena User Guide*.
+    # For code samples using the Amazon Web Services SDK for Java, see
+    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
     #
     #
     #
@@ -1393,8 +1406,8 @@ module Aws::Athena
     # list of query execution IDs for the primary workgroup. Requires you to
     # have access to the workgroup in which the queries ran.
     #
-    # For code samples using the AWS SDK for Java, see [Examples and Code
-    # Samples][1] in the *Amazon Athena User Guide*.
+    # For code samples using the Amazon Web Services SDK for Java, see
+    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
     #
     #
     #
@@ -1606,8 +1619,9 @@ module Aws::Athena
     # Runs the SQL query statements contained in the `Query`. Requires you
     # to have access to the workgroup in which the query ran. Running
     # queries against an external catalog requires GetDataCatalog permission
-    # to the catalog. For code samples using the AWS SDK for Java, see
-    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
+    # to the catalog. For code samples using the Amazon Web Services SDK for
+    # Java, see [Examples and Code Samples][1] in the *Amazon Athena User
+    # Guide*.
     #
     #
     #
@@ -1623,10 +1637,11 @@ module Aws::Athena
     #   returned and another query is not created. If a parameter has changed,
     #   for example, the `QueryString`, an error is returned.
     #
-    #   This token is listed as not required because AWS SDKs (for example the
-    #   AWS SDK for Java) auto-generate the token for users. If you are not
-    #   using the AWS SDK or the AWS CLI, you must provide this token or the
-    #   action will fail.
+    #   This token is listed as not required because Amazon Web Services SDKs
+    #   (for example the Amazon Web Services SDK for Java) auto-generate the
+    #   token for users. If you are not using the Amazon Web Services SDK or
+    #   the Amazon Web Services CLI, you must provide this token or the action
+    #   will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1685,8 +1700,8 @@ module Aws::Athena
     # Stops a query execution. Requires you to have access to the workgroup
     # in which the query ran.
     #
-    # For code samples using the AWS SDK for Java, see [Examples and Code
-    # Samples][1] in the *Amazon Athena User Guide*.
+    # For code samples using the Amazon Web Services SDK for Java, see
+    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
     #
     #
     #
@@ -1795,18 +1810,13 @@ module Aws::Athena
     #
     # @option params [required, String] :name
     #   The name of the data catalog to update. The catalog name must be
-    #   unique for the AWS account and can use a maximum of 128 alphanumeric,
-    #   underscore, at sign, or hyphen characters.
+    #   unique for the Amazon Web Services account and can use a maximum of
+    #   128 alphanumeric, underscore, at sign, or hyphen characters.
     #
     # @option params [required, String] :type
     #   Specifies the type of data catalog to update. Specify `LAMBDA` for a
-    #   federated catalog or `HIVE` for an external hive metastore.
-    #
-    #   <note markdown="1"> Do not use the `GLUE` type. This refers to the `AwsDataCatalog` that
-    #   already exists in your account, of which you can have only one.
-    #   Specifying the `GLUE` type will result in an `INVALID_INPUT` error.
-    #
-    #    </note>
+    #   federated catalog, `HIVE` for an external hive metastore, or `GLUE`
+    #   for an Glue Data Catalog.
     #
     # @option params [String] :description
     #   New or modified text that describes the data catalog.
@@ -1962,7 +1972,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

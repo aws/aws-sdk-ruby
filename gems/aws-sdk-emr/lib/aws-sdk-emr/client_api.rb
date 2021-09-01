@@ -33,6 +33,7 @@ module Aws::EMR
     AutoScalingPolicyStateChangeReason = Shapes::StructureShape.new(name: 'AutoScalingPolicyStateChangeReason')
     AutoScalingPolicyStateChangeReasonCode = Shapes::StringShape.new(name: 'AutoScalingPolicyStateChangeReasonCode')
     AutoScalingPolicyStatus = Shapes::StructureShape.new(name: 'AutoScalingPolicyStatus')
+    AutoTerminationPolicy = Shapes::StructureShape.new(name: 'AutoTerminationPolicy')
     BlockPublicAccessConfiguration = Shapes::StructureShape.new(name: 'BlockPublicAccessConfiguration')
     BlockPublicAccessConfigurationMetadata = Shapes::StructureShape.new(name: 'BlockPublicAccessConfigurationMetadata')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -103,6 +104,8 @@ module Aws::EMR
     ExecutionEngineConfig = Shapes::StructureShape.new(name: 'ExecutionEngineConfig')
     ExecutionEngineType = Shapes::StringShape.new(name: 'ExecutionEngineType')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
+    GetAutoTerminationPolicyInput = Shapes::StructureShape.new(name: 'GetAutoTerminationPolicyInput')
+    GetAutoTerminationPolicyOutput = Shapes::StructureShape.new(name: 'GetAutoTerminationPolicyOutput')
     GetBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationInput')
     GetBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationOutput')
     GetManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'GetManagedScalingPolicyInput')
@@ -227,6 +230,8 @@ module Aws::EMR
     PortRanges = Shapes::ListShape.new(name: 'PortRanges')
     PutAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyInput')
     PutAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyOutput')
+    PutAutoTerminationPolicyInput = Shapes::StructureShape.new(name: 'PutAutoTerminationPolicyInput')
+    PutAutoTerminationPolicyOutput = Shapes::StructureShape.new(name: 'PutAutoTerminationPolicyOutput')
     PutBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationInput')
     PutBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationOutput')
     PutManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'PutManagedScalingPolicyInput')
@@ -234,6 +239,8 @@ module Aws::EMR
     ReleaseLabelFilter = Shapes::StructureShape.new(name: 'ReleaseLabelFilter')
     RemoveAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyInput')
     RemoveAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyOutput')
+    RemoveAutoTerminationPolicyInput = Shapes::StructureShape.new(name: 'RemoveAutoTerminationPolicyInput')
+    RemoveAutoTerminationPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoTerminationPolicyOutput')
     RemoveManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveManagedScalingPolicyInput')
     RemoveManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveManagedScalingPolicyOutput')
     RemoveTagsInput = Shapes::StructureShape.new(name: 'RemoveTagsInput')
@@ -363,6 +370,9 @@ module Aws::EMR
     AutoScalingPolicyStatus.add_member(:state, Shapes::ShapeRef.new(shape: AutoScalingPolicyState, location_name: "State"))
     AutoScalingPolicyStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: AutoScalingPolicyStateChangeReason, location_name: "StateChangeReason"))
     AutoScalingPolicyStatus.struct_class = Types::AutoScalingPolicyStatus
+
+    AutoTerminationPolicy.add_member(:idle_timeout, Shapes::ShapeRef.new(shape: Long, location_name: "IdleTimeout"))
+    AutoTerminationPolicy.struct_class = Types::AutoTerminationPolicy
 
     BlockPublicAccessConfiguration.add_member(:block_public_security_group_rules, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "BlockPublicSecurityGroupRules"))
     BlockPublicAccessConfiguration.add_member(:permitted_public_security_group_rule_ranges, Shapes::ShapeRef.new(shape: PortRanges, location_name: "PermittedPublicSecurityGroupRuleRanges"))
@@ -635,6 +645,12 @@ module Aws::EMR
     FailureDetails.add_member(:log_file, Shapes::ShapeRef.new(shape: String, location_name: "LogFile"))
     FailureDetails.struct_class = Types::FailureDetails
 
+    GetAutoTerminationPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    GetAutoTerminationPolicyInput.struct_class = Types::GetAutoTerminationPolicyInput
+
+    GetAutoTerminationPolicyOutput.add_member(:auto_termination_policy, Shapes::ShapeRef.new(shape: AutoTerminationPolicy, location_name: "AutoTerminationPolicy"))
+    GetAutoTerminationPolicyOutput.struct_class = Types::GetAutoTerminationPolicyOutput
+
     GetBlockPublicAccessConfigurationInput.struct_class = Types::GetBlockPublicAccessConfigurationInput
 
     GetBlockPublicAccessConfigurationOutput.add_member(:block_public_access_configuration, Shapes::ShapeRef.new(shape: BlockPublicAccessConfiguration, required: true, location_name: "BlockPublicAccessConfiguration"))
@@ -746,6 +762,7 @@ module Aws::EMR
     InstanceGroup.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EbsOptimized"))
     InstanceGroup.add_member(:shrink_policy, Shapes::ShapeRef.new(shape: ShrinkPolicy, location_name: "ShrinkPolicy"))
     InstanceGroup.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicyDescription, location_name: "AutoScalingPolicy"))
+    InstanceGroup.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
     InstanceGroup.struct_class = Types::InstanceGroup
 
     InstanceGroupConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
@@ -757,6 +774,7 @@ module Aws::EMR
     InstanceGroupConfig.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
     InstanceGroupConfig.add_member(:ebs_configuration, Shapes::ShapeRef.new(shape: EbsConfiguration, location_name: "EbsConfiguration"))
     InstanceGroupConfig.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicy, location_name: "AutoScalingPolicy"))
+    InstanceGroupConfig.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
     InstanceGroupConfig.struct_class = Types::InstanceGroupConfig
 
     InstanceGroupConfigList.member = Shapes::ShapeRef.new(shape: InstanceGroupConfig)
@@ -775,6 +793,7 @@ module Aws::EMR
     InstanceGroupDetail.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartDateTime"))
     InstanceGroupDetail.add_member(:ready_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "ReadyDateTime"))
     InstanceGroupDetail.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndDateTime"))
+    InstanceGroupDetail.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
     InstanceGroupDetail.struct_class = Types::InstanceGroupDetail
 
     InstanceGroupDetailList.member = Shapes::ShapeRef.new(shape: InstanceGroupDetail)
@@ -837,6 +856,7 @@ module Aws::EMR
     InstanceTypeConfig.add_member(:bid_price_as_percentage_of_on_demand_price, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "BidPriceAsPercentageOfOnDemandPrice"))
     InstanceTypeConfig.add_member(:ebs_configuration, Shapes::ShapeRef.new(shape: EbsConfiguration, location_name: "EbsConfiguration"))
     InstanceTypeConfig.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
+    InstanceTypeConfig.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
     InstanceTypeConfig.struct_class = Types::InstanceTypeConfig
 
     InstanceTypeConfigList.member = Shapes::ShapeRef.new(shape: InstanceTypeConfig)
@@ -848,6 +868,7 @@ module Aws::EMR
     InstanceTypeSpecification.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
     InstanceTypeSpecification.add_member(:ebs_block_devices, Shapes::ShapeRef.new(shape: EbsBlockDeviceList, location_name: "EbsBlockDevices"))
     InstanceTypeSpecification.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EbsOptimized"))
+    InstanceTypeSpecification.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
     InstanceTypeSpecification.struct_class = Types::InstanceTypeSpecification
 
     InstanceTypeSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceTypeSpecification)
@@ -1124,6 +1145,12 @@ module Aws::EMR
     PutAutoScalingPolicyOutput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
     PutAutoScalingPolicyOutput.struct_class = Types::PutAutoScalingPolicyOutput
 
+    PutAutoTerminationPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    PutAutoTerminationPolicyInput.add_member(:auto_termination_policy, Shapes::ShapeRef.new(shape: AutoTerminationPolicy, location_name: "AutoTerminationPolicy"))
+    PutAutoTerminationPolicyInput.struct_class = Types::PutAutoTerminationPolicyInput
+
+    PutAutoTerminationPolicyOutput.struct_class = Types::PutAutoTerminationPolicyOutput
+
     PutBlockPublicAccessConfigurationInput.add_member(:block_public_access_configuration, Shapes::ShapeRef.new(shape: BlockPublicAccessConfiguration, required: true, location_name: "BlockPublicAccessConfiguration"))
     PutBlockPublicAccessConfigurationInput.struct_class = Types::PutBlockPublicAccessConfigurationInput
 
@@ -1144,6 +1171,11 @@ module Aws::EMR
     RemoveAutoScalingPolicyInput.struct_class = Types::RemoveAutoScalingPolicyInput
 
     RemoveAutoScalingPolicyOutput.struct_class = Types::RemoveAutoScalingPolicyOutput
+
+    RemoveAutoTerminationPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    RemoveAutoTerminationPolicyInput.struct_class = Types::RemoveAutoTerminationPolicyInput
+
+    RemoveAutoTerminationPolicyOutput.struct_class = Types::RemoveAutoTerminationPolicyOutput
 
     RemoveManagedScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     RemoveManagedScalingPolicyInput.struct_class = Types::RemoveManagedScalingPolicyInput
@@ -1183,6 +1215,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     RunJobFlowInput.add_member(:managed_scaling_policy, Shapes::ShapeRef.new(shape: ManagedScalingPolicy, location_name: "ManagedScalingPolicy"))
     RunJobFlowInput.add_member(:placement_group_configs, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroupConfigs"))
+    RunJobFlowInput.add_member(:auto_termination_policy, Shapes::ShapeRef.new(shape: AutoTerminationPolicy, location_name: "AutoTerminationPolicy"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
@@ -1423,7 +1456,7 @@ module Aws::EMR
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceAbbreviation" => "Amazon EMR",
-        "serviceFullName" => "Amazon Elastic MapReduce",
+        "serviceFullName" => "Amazon EMR",
         "serviceId" => "EMR",
         "signatureVersion" => "v4",
         "targetPrefix" => "ElasticMapReduce",
@@ -1606,6 +1639,14 @@ module Aws::EMR
         o.output = Shapes::ShapeRef.new(shape: DescribeStudioOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_auto_termination_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAutoTerminationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAutoTerminationPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAutoTerminationPolicyOutput)
       end)
 
       api.add_operation(:get_block_public_access_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1839,6 +1880,14 @@ module Aws::EMR
         o.output = Shapes::ShapeRef.new(shape: PutAutoScalingPolicyOutput)
       end)
 
+      api.add_operation(:put_auto_termination_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAutoTerminationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAutoTerminationPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutAutoTerminationPolicyOutput)
+      end)
+
       api.add_operation(:put_block_public_access_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBlockPublicAccessConfiguration"
         o.http_method = "POST"
@@ -1863,6 +1912,14 @@ module Aws::EMR
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemoveAutoScalingPolicyInput)
         o.output = Shapes::ShapeRef.new(shape: RemoveAutoScalingPolicyOutput)
+      end)
+
+      api.add_operation(:remove_auto_termination_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveAutoTerminationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveAutoTerminationPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: RemoveAutoTerminationPolicyOutput)
       end)
 
       api.add_operation(:remove_managed_scaling_policy, Seahorse::Model::Operation.new.tap do |o|

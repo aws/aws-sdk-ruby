@@ -55,7 +55,7 @@ module Aws::Imagebuilder
     # Details of an Amazon EC2 AMI.
     #
     # @!attribute [rw] region
-    #   The Region of the Amazon EC2 AMI.
+    #   The Amazon Web Services Region of the Amazon EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -133,8 +133,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] launch_permission
-    #   Launch permissions can be used to configure which accounts can use
-    #   the AMI to launch instances.
+    #   Launch permissions can be used to configure which Amazon Web
+    #   Services accounts can use the AMI to launch instances.
     #   @return [Types::LaunchPermissionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/AmiDistributionConfiguration AWS API Documentation
@@ -478,8 +478,8 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # The defining characteristics of a specific version of an TOE
-    # component.
+    # The defining characteristics of a specific version of an Amazon Web
+    # Services TOE component.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the component.
@@ -3804,7 +3804,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] user_ids
-    #   The account ID.
+    #   The Amazon Web Services account ID.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
@@ -3938,7 +3938,19 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `description`
+    #
+    #   * `name`
+    #
+    #   * `platform`
+    #
+    #   * `supportedOsVersion`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] by_name
@@ -4019,8 +4031,15 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Request filters that are used to narrow the list of container images
-    #   that are returned.
+    #   Use the following filters to streamline results:
+    #
+    #   * `containerType`
+    #
+    #   * `name`
+    #
+    #   * `parentImage`
+    #
+    #   * `platform`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -4084,11 +4103,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] filters
-    #   The filters.
-    #
-    #   * `name` - The name of this distribution configuration.
-    #
-    #   ^
+    #   You can filter on `name` to streamline results.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -4156,7 +4171,17 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `osVersion`
+    #
+    #   * `platform`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -4282,7 +4307,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `version`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -4345,7 +4374,19 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `description`
+    #
+    #   * `distributionConfigurationArn`
+    #
+    #   * `imageRecipeArn`
+    #
+    #   * `infrastructureConfigurationArn`
+    #
+    #   * `name`
+    #
+    #   * `status`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -4416,7 +4457,13 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `parentImage`
+    #
+    #   * `platform`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -4490,7 +4537,17 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `osVersion`
+    #
+    #   * `platform`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] by_name
@@ -4578,7 +4635,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] filters
-    #   The filters.
+    #   You can filter on `name` to streamline results.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results

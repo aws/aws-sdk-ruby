@@ -82,8 +82,8 @@ module Aws::CloudFormation
     #   the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case sensitive)
-    #   and hyphens. It must start with an alphabetic character and cannot be
-    #   longer than 128 characters.
+    #   and hyphens. It must start with an alphabetical character and cannot
+    #   be longer than 128 characters.
     #
     #    </note>
     # @option options [String] :template_body
@@ -142,9 +142,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.

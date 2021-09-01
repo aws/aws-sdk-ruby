@@ -24,11 +24,11 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # Describes a quota for an account, for example the number of
-    # replication instances allowed.
+    # Describes a quota for an Amazon Web Services account, for example the
+    # number of replication instances allowed.
     #
     # @!attribute [rw] account_quota_name
-    #   The name of the DMS quota for this account.
+    #   The name of the DMS quota for this Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] used
@@ -60,6 +60,7 @@ module Aws::DatabaseMigrationService
     #           {
     #             key: "String",
     #             value: "String",
+    #             resource_arn: "String",
     #           },
     #         ],
     #       }
@@ -149,9 +150,9 @@ module Aws::DatabaseMigrationService
     # The name of an Availability Zone for use during database migration.
     # `AvailabilityZone` is an optional parameter to the [
     # `CreateReplicationInstance` ][1] operation, and it’s value relates to
-    # the Region of an endpoint. For example, the availability zone of an
-    # endpoint in the us-east-1 region might be us-east-1a, us-east-1b,
-    # us-east-1c, or us-east-1d.
+    # the Amazon Web Services Region of an endpoint. For example, the
+    # availability zone of an endpoint in the us-east-1 region might be
+    # us-east-1a, us-east-1b, us-east-1c, or us-east-1d.
     #
     #
     #
@@ -337,6 +338,7 @@ module Aws::DatabaseMigrationService
     #           {
     #             key: "String",
     #             value: "String",
+    #             resource_arn: "String",
     #           },
     #         ],
     #         certificate_arn: "String",
@@ -375,6 +377,14 @@ module Aws::DatabaseMigrationService
     #           csv_no_sup_value: "String",
     #           preserve_transactions: false,
     #           cdc_path: "String",
+    #           canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #           add_column_name: false,
+    #           cdc_max_batch_interval: 1,
+    #           cdc_min_file_size: 1,
+    #           csv_null_value: "String",
+    #           ignore_header_rows: 1,
+    #           max_file_size: 1,
+    #           rfc_4180: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -515,6 +525,7 @@ module Aws::DatabaseMigrationService
     #           add_supplemental_logging: false,
     #           archived_log_dest_id: 1,
     #           additional_archived_log_dest_id: 1,
+    #           extra_archived_log_dest_ids: [1],
     #           allow_select_nested_tables: false,
     #           parallel_asm_read_threads: 1,
     #           read_ahead_blocks: 1,
@@ -603,6 +614,15 @@ module Aws::DatabaseMigrationService
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
     #         },
+    #         redis_settings: {
+    #           server_name: "String", # required
+    #           port: 1, # required
+    #           ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
+    #           auth_type: "none", # accepts none, auth-role, auth-token
+    #           auth_user_name: "String",
+    #           auth_password: "SecretString",
+    #           ssl_ca_certificate_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] endpoint_identifier
@@ -665,8 +685,9 @@ module Aws::DatabaseMigrationService
     #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
     #   uses your default encryption key.
     #
-    #   KMS creates the default encryption key for your account. Your
-    #   account has a different default encryption key for each Region.
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -888,6 +909,10 @@ module Aws::DatabaseMigrationService
     #   Provides information that defines a DocumentDB endpoint.
     #   @return [Types::DocDbSettings]
     #
+    # @!attribute [rw] redis_settings
+    #   Settings in JSON format for the target Redis endpoint.
+    #   @return [Types::RedisSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
     class CreateEndpointMessage < Struct.new(
@@ -922,7 +947,8 @@ module Aws::DatabaseMigrationService
       :microsoft_sql_server_settings,
       :ibm_db_2_settings,
       :resource_identifier,
-      :doc_db_settings)
+      :doc_db_settings,
+      :redis_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -953,6 +979,7 @@ module Aws::DatabaseMigrationService
     #           {
     #             key: "String",
     #             value: "String",
+    #             resource_arn: "String",
     #           },
     #         ],
     #       }
@@ -1051,6 +1078,7 @@ module Aws::DatabaseMigrationService
     #           {
     #             key: "String",
     #             value: "String",
+    #             resource_arn: "String",
     #           },
     #         ],
     #         kms_key_id: "String",
@@ -1103,7 +1131,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] availability_zone
     #   The Availability Zone where the replication instance will be
     #   created. The default value is a random, system-chosen Availability
-    #   Zone in the endpoint's Region, for example: `us-east-1d`
+    #   Zone in the endpoint's Amazon Web Services Region, for example:
+    #   `us-east-1d`
     #   @return [String]
     #
     # @!attribute [rw] replication_subnet_group_identifier
@@ -1117,7 +1146,8 @@ module Aws::DatabaseMigrationService
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   Default: A 30-minute window selected at random from an 8-hour block
-    #   of time per Region, occurring on a random day of the week.
+    #   of time per Amazon Web Services Region, occurring on a random day of
+    #   the week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
@@ -1157,8 +1187,9 @@ module Aws::DatabaseMigrationService
     #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
     #   uses your default encryption key.
     #
-    #   KMS creates the default encryption key for your account. Your
-    #   account has a different default encryption key for each Region.
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -1236,6 +1267,7 @@ module Aws::DatabaseMigrationService
     #           {
     #             key: "String",
     #             value: "String",
+    #             resource_arn: "String",
     #           },
     #         ],
     #       }
@@ -1303,6 +1335,7 @@ module Aws::DatabaseMigrationService
     #           {
     #             key: "String",
     #             value: "String",
+    #             resource_arn: "String",
     #           },
     #         ],
     #         task_data: "String",
@@ -1733,12 +1766,12 @@ module Aws::DatabaseMigrationService
     #   @return [Array<Types::AccountQuota>]
     #
     # @!attribute [rw] unique_account_identifier
-    #   A unique DMS identifier for an account in a particular Region. The
-    #   value of this identifier has the following format: `c99999999999`.
-    #   DMS uses this identifier to name artifacts. For example, DMS uses
-    #   this identifier to name the default Amazon S3 bucket for storing
-    #   task assessment reports in a given Region. The format of this S3
-    #   bucket name is the following:
+    #   A unique DMS identifier for an account in a particular Amazon Web
+    #   Services Region. The value of this identifier has the following
+    #   format: `c99999999999`. DMS uses this identifier to name artifacts.
+    #   For example, DMS uses this identifier to name the default Amazon S3
+    #   bucket for storing task assessment reports in a given Amazon Web
+    #   Services Region. The format of this S3 bucket name is the following:
     #   `dms-AccountNumber-UniqueAccountIdentifier.` Here is an example name
     #   for this default S3 bucket: `dms-111122223333-c44445555666`.
     #
@@ -3247,8 +3280,9 @@ module Aws::DatabaseMigrationService
     #   The KMS key identifier that is used to encrypt the content on the
     #   replication instance. If you don't specify a value for the
     #   `KmsKeyId` parameter, then DMS uses your default encryption key. KMS
-    #   creates the default encryption key for your account. Your account
-    #   has a different default encryption key for each Region.
+    #   creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] secrets_manager_access_role_arn
@@ -3438,8 +3472,9 @@ module Aws::DatabaseMigrationService
     #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
     #   uses your default encryption key.
     #
-    #   KMS creates the default encryption key for your account. Your
-    #   account has a different default encryption key for each Region.
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_arn
@@ -3565,6 +3600,11 @@ module Aws::DatabaseMigrationService
     #   Provides information that defines a DocumentDB endpoint.
     #   @return [Types::DocDbSettings]
     #
+    # @!attribute [rw] redis_settings
+    #   The settings for the Redis target endpoint. For more information,
+    #   see the `RedisSettings` structure.
+    #   @return [Types::RedisSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -3600,7 +3640,8 @@ module Aws::DatabaseMigrationService
       :sybase_settings,
       :microsoft_sql_server_settings,
       :ibm_db_2_settings,
-      :doc_db_settings)
+      :doc_db_settings,
+      :redis_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3941,6 +3982,7 @@ module Aws::DatabaseMigrationService
     #           {
     #             key: "String",
     #             value: "String",
+    #             resource_arn: "String",
     #           },
     #         ],
     #       }
@@ -4257,9 +4299,9 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] ssl_ca_certificate_arn
-    #   The Amazon Resource Name (ARN) for the private Certification
-    #   Authority (CA) cert that DMS uses to securely connect to your Kafka
-    #   target endpoint.
+    #   The Amazon Resource Name (ARN) for the private certificate authority
+    #   (CA) cert that DMS uses to securely connect to your Kafka target
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] sasl_username
@@ -4275,10 +4317,12 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] no_hex_prefix
-    #   If this attribute is Y, it allows hexadecimal values that don't
-    #   have the `0x` prefix when migrated to a Kafka target. If this
-    #   attribute is N, all hexadecimal values include this prefix when
-    #   migrated to Kafka.
+    #   Set this optional parameter to `true` to avoid adding a '0x'
+    #   prefix to raw data in hexadecimal format. For example, by default,
+    #   DMS adds a '0x' prefix to the LOB column type in hexadecimal
+    #   format moving from an Oracle source to a Kafka target. Use the
+    #   `NoHexPrefix` endpoint setting to enable migration of RAW data type
+    #   columns without adding the '0x' prefix.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KafkaSettings AWS API Documentation
@@ -4386,10 +4430,12 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] no_hex_prefix
-    #   If this attribute is Y, it allows hexadecimal values that don't
-    #   have the `0x` prefix when migrated to a Kinesis target. If this
-    #   attribute is N, all hexadecimal values include this prefix when
-    #   migrated to Kinesis.
+    #   Set this optional parameter to `true` to avoid adding a '0x'
+    #   prefix to raw data in hexadecimal format. For example, by default,
+    #   DMS adds a '0x' prefix to the LOB column type in hexadecimal
+    #   format moving from an Oracle source to an Amazon Kinesis target. Use
+    #   the `NoHexPrefix` endpoint setting to enable migration of RAW data
+    #   type columns without adding the '0x' prefix.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KinesisSettings AWS API Documentation
@@ -4413,18 +4459,29 @@ module Aws::DatabaseMigrationService
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "String", # required
+    #         resource_arn: "String",
+    #         resource_arn_list: ["String"],
     #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   DMS resource.
+    #   DMS resource to list tags for. This returns a list of keys (names of
+    #   tags) created for the resource and their associated tag values.
     #   @return [String]
+    #
+    # @!attribute [rw] resource_arn_list
+    #   List of ARNs that identify multiple DMS resources that you want to
+    #   list tags for. This returns a list of keys (tag names) and their
+    #   associated tag values. It also returns each tag's associated
+    #   `ResourceArn` value, which is the ARN of the resource for which each
+    #   listed tag is created.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResourceMessage AWS API Documentation
     #
     class ListTagsForResourceMessage < Struct.new(
-      :resource_arn)
+      :resource_arn,
+      :resource_arn_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4647,6 +4704,14 @@ module Aws::DatabaseMigrationService
     #           csv_no_sup_value: "String",
     #           preserve_transactions: false,
     #           cdc_path: "String",
+    #           canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #           add_column_name: false,
+    #           cdc_max_batch_interval: 1,
+    #           cdc_min_file_size: 1,
+    #           csv_null_value: "String",
+    #           ignore_header_rows: 1,
+    #           max_file_size: 1,
+    #           rfc_4180: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -4787,6 +4852,7 @@ module Aws::DatabaseMigrationService
     #           add_supplemental_logging: false,
     #           archived_log_dest_id: 1,
     #           additional_archived_log_dest_id: 1,
+    #           extra_archived_log_dest_ids: [1],
     #           allow_select_nested_tables: false,
     #           parallel_asm_read_threads: 1,
     #           read_ahead_blocks: 1,
@@ -4873,6 +4939,15 @@ module Aws::DatabaseMigrationService
     #           kms_key_id: "String",
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #         },
+    #         redis_settings: {
+    #           server_name: "String", # required
+    #           port: 1, # required
+    #           ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
+    #           auth_type: "none", # accepts none, auth-role, auth-token
+    #           auth_user_name: "String",
+    #           auth_password: "SecretString",
+    #           ssl_ca_certificate_arn: "String",
     #         },
     #         exact_settings: false,
     #       }
@@ -5136,6 +5211,10 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
     #   @return [Types::DocDbSettings]
     #
+    # @!attribute [rw] redis_settings
+    #   Settings in JSON format for the Redis target endpoint.
+    #   @return [Types::RedisSettings]
+    #
     # @!attribute [rw] exact_settings
     #   If this attribute is Y, the current call to `ModifyEndpoint`
     #   replaces all existing endpoint settings with the exact settings that
@@ -5194,6 +5273,7 @@ module Aws::DatabaseMigrationService
       :microsoft_sql_server_settings,
       :ibm_db_2_settings,
       :doc_db_settings,
+      :redis_settings,
       :exact_settings)
       SENSITIVE = [:password]
       include Aws::Structure
@@ -5690,8 +5770,9 @@ module Aws::DatabaseMigrationService
     #   The KMS key identifier that is used to encrypt the content on the
     #   replication instance. If you don't specify a value for the
     #   `KmsKeyId` parameter, then DMS uses your default encryption key. KMS
-    #   creates the default encryption key for your account. Your account
-    #   has a different default encryption key for each Region.
+    #   creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] secrets_manager_access_role_arn
@@ -6032,6 +6113,7 @@ module Aws::DatabaseMigrationService
     #         add_supplemental_logging: false,
     #         archived_log_dest_id: 1,
     #         additional_archived_log_dest_id: 1,
+    #         extra_archived_log_dest_ids: [1],
     #         allow_select_nested_tables: false,
     #         parallel_asm_read_threads: 1,
     #         read_ahead_blocks: 1,
@@ -6105,6 +6187,38 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B
     #   @return [Integer]
+    #
+    # @!attribute [rw] extra_archived_log_dest_ids
+    #   Specifies the IDs of one more destinations for one or more archived
+    #   redo logs. These IDs are the values of the `dest_id` column in the
+    #   `v$archived_log` view. Use this setting with the `archivedLogDestId`
+    #   extra connection attribute in a primary-to-single setup or a
+    #   primary-to-multiple-standby setup.
+    #
+    #   This setting is useful in a switchover when you use an Oracle Data
+    #   Guard database as a source. In this case, DMS needs information
+    #   about what destination to get archive redo logs from to read
+    #   changes. DMS needs this because after the switchover the previous
+    #   primary is a standby instance. For example, in a primary-to-single
+    #   standby setup you might apply the following settings.
+    #
+    #   `archivedLogDestId=1; ExtraArchivedLogDestIds=[2]`
+    #
+    #   In a primary-to-multiple-standby setup, you might apply the
+    #   following settings.
+    #
+    #   `archivedLogDestId=1; ExtraArchivedLogDestIds=[2,3,4]`
+    #
+    #   Although DMS supports the use of the Oracle `RESETLOGS` option to
+    #   open the database, never use `RESETLOGS` unless it's necessary. For
+    #   more information about `RESETLOGS`, see [ RMAN Data Repair
+    #   Concepts][1] in the *Oracle Database Backup and Recovery User's
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B
+    #   @return [Array<Integer>]
     #
     # @!attribute [rw] allow_select_nested_tables
     #   Set this attribute to `true` to enable replication of Oracle tables
@@ -6438,6 +6552,7 @@ module Aws::DatabaseMigrationService
       :add_supplemental_logging,
       :archived_log_dest_id,
       :additional_archived_log_dest_id,
+      :extra_archived_log_dest_ids,
       :allow_select_nested_tables,
       :parallel_asm_read_threads,
       :read_ahead_blocks,
@@ -6688,11 +6803,11 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] heartbeat_enable
-    #   If this attribute is set to true, the write-ahead log (WAL)
-    #   heartbeat keeps `restart_lsn` moving and prevents storage full
-    #   scenarios. The WAL heartbeat mimics a dummy transaction, so that
-    #   idle logical replication slots don't hold onto old WAL logs that
-    #   result in storage full situations on the source.
+    #   The write-ahead log (WAL) heartbeat feature mimics a dummy
+    #   transaction. By doing this, it prevents idle logical replication
+    #   slots from holding onto old WAL logs, which can result in storage
+    #   full situations on the source. This heartbeat keeps `restart_lsn`
+    #   moving and prevents storage full scenarios.
     #   @return [Boolean]
     #
     # @!attribute [rw] heartbeat_schema
@@ -6721,10 +6836,28 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] slot_name
     #   Sets the name of a previously created logical replication slot for a
-    #   CDC load of the PostgreSQL source instance.
+    #   change data capture (CDC) load of the PostgreSQL source instance.
     #
-    #   When used with the DMS API `CdcStartPosition` request parameter,
-    #   this attribute also enables using native CDC start points.
+    #   When used with the `CdcStartPosition` request parameter for the DMS
+    #   API , this attribute also makes it possible to use native CDC start
+    #   points. DMS verifies that the specified logical replication slot
+    #   exists before starting the CDC load task. It also verifies that the
+    #   task was created with a valid setting of `CdcStartPosition`. If the
+    #   specified slot doesn't exist or the task doesn't have a valid
+    #   `CdcStartPosition` setting, DMS raises an error.
+    #
+    #   For more information about setting the `CdcStartPosition` request
+    #   parameter, see [Determining a CDC native start
+    #   point](dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native)
+    #   in the *Database Migration Service User Guide*. For more information
+    #   about using `CdcStartPosition`, see [CreateReplicationTask][1],
+    #   [StartReplicationTask][2], and [ModifyReplicationTask][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html
+    #   [3]: https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html
     #   @return [String]
     #
     # @!attribute [rw] plugin_name
@@ -6823,6 +6956,79 @@ module Aws::DatabaseMigrationService
     class RebootReplicationInstanceResponse < Struct.new(
       :replication_instance)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that defines a Redis target endpoint.
+    #
+    # @note When making an API call, you may pass RedisSettings
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "String", # required
+    #         port: 1, # required
+    #         ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
+    #         auth_type: "none", # accepts none, auth-role, auth-token
+    #         auth_user_name: "String",
+    #         auth_password: "SecretString",
+    #         ssl_ca_certificate_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   Fully qualified domain name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Transmission Control Protocol (TCP) port for the endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ssl_security_protocol
+    #   The connection to a Redis target endpoint using Transport Layer
+    #   Security (TLS). Valid values include `plaintext` and
+    #   `ssl-encryption`. The default is `ssl-encryption`. The
+    #   `ssl-encryption` option makes an encrypted connection. Optionally,
+    #   you can identify an Amazon Resource Name (ARN) for an SSL
+    #   certificate authority (CA) using the `SslCaCertificateArn `setting.
+    #   If an ARN isn't given for a CA, DMS uses the Amazon root CA.
+    #
+    #   The `plaintext` option doesn't provide Transport Layer Security
+    #   (TLS) encryption for traffic between endpoint and database.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication to perform when connecting to a Redis
+    #   target. Options include `none`, `auth-token`, and `auth-role`. The
+    #   `auth-token` option requires an `AuthPassword` value to be provided.
+    #   The `auth-role` option requires `AuthUserName` and `AuthPassword`
+    #   values to be provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_user_name
+    #   The user name provided with the `auth-role` option of the `AuthType`
+    #   setting for a Redis target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_password
+    #   The password provided with the `auth-role` and `auth-token` options
+    #   of the `AuthType` setting for a Redis target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_ca_certificate_arn
+    #   The Amazon Resource Name (ARN) for the certificate authority (CA)
+    #   that DMS uses to connect to your Redis target endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedisSettings AWS API Documentation
+    #
+    class RedisSettings < Struct.new(
+      :server_name,
+      :port,
+      :ssl_security_protocol,
+      :auth_type,
+      :auth_user_name,
+      :auth_password,
+      :ssl_ca_certificate_arn)
+      SENSITIVE = [:auth_password]
       include Aws::Structure
     end
 
@@ -7429,8 +7635,9 @@ module Aws::DatabaseMigrationService
     #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
     #   uses your default encryption key.
     #
-    #   KMS creates the default encryption key for your account. Your
-    #   account has a different default encryption key for each Region.
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_arn
@@ -8296,6 +8503,14 @@ module Aws::DatabaseMigrationService
     #         csv_no_sup_value: "String",
     #         preserve_transactions: false,
     #         cdc_path: "String",
+    #         canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #         add_column_name: false,
+    #         cdc_max_batch_interval: 1,
+    #         cdc_min_file_size: 1,
+    #         csv_null_value: "String",
+    #         ignore_header_rows: 1,
+    #         max_file_size: 1,
+    #         rfc_4180: false,
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -8727,6 +8942,101 @@ module Aws::DatabaseMigrationService
     #   [4]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath
     #   @return [String]
     #
+    # @!attribute [rw] canned_acl_for_objects
+    #   A value that enables DMS to specify a predefined (canned) access
+    #   control list for objects created in an Amazon S3 bucket as .csv or
+    #   .parquet files. For more information about Amazon S3 canned ACLs,
+    #   see [Canned ACL][1] in the *Amazon S3 Developer Guide.*
+    #
+    #   The default value is NONE. Valid values include NONE, PRIVATE,
+    #   PUBLIC\_READ, PUBLIC\_READ\_WRITE, AUTHENTICATED\_READ,
+    #   AWS\_EXEC\_READ, BUCKET\_OWNER\_READ, and
+    #   BUCKET\_OWNER\_FULL\_CONTROL.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
+    #   @return [String]
+    #
+    # @!attribute [rw] add_column_name
+    #   An optional parameter that, when set to `true` or `y`, you can use
+    #   to add column name information to the .csv output file.
+    #
+    #   The default value is `false`. Valid values are `true`, `false`, `y`,
+    #   and `n`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cdc_max_batch_interval
+    #   Maximum length of the interval, defined in seconds, after which to
+    #   output a file to Amazon S3.
+    #
+    #   When `CdcMaxBatchInterval` and `CdcMinFileSize` are both specified,
+    #   the file write is triggered by whichever parameter condition is met
+    #   first within an DMS CloudFormation template.
+    #
+    #   The default value is 60 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cdc_min_file_size
+    #   Minimum file size, defined in megabytes, to reach for a file output
+    #   to Amazon S3.
+    #
+    #   When `CdcMinFileSize` and `CdcMaxBatchInterval` are both specified,
+    #   the file write is triggered by whichever parameter condition is met
+    #   first within an DMS CloudFormation template.
+    #
+    #   The default value is 32 MB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] csv_null_value
+    #   An optional parameter that specifies how DMS treats null values.
+    #   While handling the null value, you can use this parameter to pass a
+    #   user-defined string as null when writing to the target. For example,
+    #   when target columns are not nullable, you can use this option to
+    #   differentiate between the empty string value and the null value. So,
+    #   if you set this parameter value to the empty string ("" or ''),
+    #   DMS treats the empty string as the null value instead of `NULL`.
+    #
+    #   The default value is `NULL`. Valid values include any valid string.
+    #   @return [String]
+    #
+    # @!attribute [rw] ignore_header_rows
+    #   When this value is set to 1, DMS ignores the first row header in a
+    #   .csv file. A value of 1 turns on the feature; a value of 0 turns off
+    #   the feature.
+    #
+    #   The default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_file_size
+    #   A value that specifies the maximum size (in KB) of any .csv file to
+    #   be created while migrating to an S3 target during full load.
+    #
+    #   The default value is 1,048,576 KB (1 GB). Valid values include 1 to
+    #   1,048,576.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rfc_4180
+    #   For an S3 source, when this value is set to `true` or `y`, each
+    #   leading double quotation mark has to be followed by an ending double
+    #   quotation mark. This formatting complies with RFC 4180. When this
+    #   value is set to `false` or `n`, string literals are copied to the
+    #   target as is. In this case, a delimiter (row or column) signals the
+    #   end of the field. Thus, you can't use a delimiter as part of the
+    #   string, because it signals the end of the value.
+    #
+    #   For an S3 target, an optional parameter used to set behavior to
+    #   comply with RFC 4180 for data migrated to Amazon S3 using .csv file
+    #   format only. When this value is set to `true` or `y` using Amazon S3
+    #   as a target, if the data has quotation marks or newline characters
+    #   in it, DMS encloses the entire column with an additional pair of
+    #   double quotation marks ("). Every quotation mark within the data is
+    #   repeated twice.
+    #
+    #   The default value is `true`. Valid values include `true`, `false`,
+    #   `y`, and `n`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -8757,7 +9067,15 @@ module Aws::DatabaseMigrationService
       :use_csv_no_sup_value,
       :csv_no_sup_value,
       :preserve_transactions,
-      :cdc_path)
+      :cdc_path,
+      :canned_acl_for_objects,
+      :add_column_name,
+      :cdc_max_batch_interval,
+      :cdc_min_file_size,
+      :csv_null_value,
+      :ignore_header_rows,
+      :max_file_size,
+      :rfc_4180)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9431,6 +9749,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       }
     #
     # @!attribute [rw] key
@@ -9451,11 +9770,17 @@ module Aws::DatabaseMigrationService
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   resource for which the tag is created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
-      :value)
+      :value,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end

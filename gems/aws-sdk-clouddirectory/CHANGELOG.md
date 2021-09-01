@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-08-17)
+------------------
+
+* Feature - Documentation updates for clouddirectory
+
 1.33.0 (2021-07-30)
 ------------------
 

@@ -18,7 +18,7 @@ module Aws
             },
           },
         })
-        body = Json.load(resp.context.http_request.body)
+        body = Json.load(resp.context.http_request.body_contents)
         time = body['InventoryRetrievalParameters']['StartDate']
         expect(time).to be_a(String)
         expect(time).to eq(now.utc.iso8601)

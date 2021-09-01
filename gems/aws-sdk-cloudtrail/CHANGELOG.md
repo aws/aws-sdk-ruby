@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-09-01)
+------------------
+
+* Feature - Documentation updates for CloudTrail
+
 1.37.0 (2021-07-30)
 ------------------
 

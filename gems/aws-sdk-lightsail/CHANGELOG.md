@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2021-08-06)
+------------------
+
+* Feature - This release adds support to track when a bucket access key was last used.
+
 1.54.0 (2021-07-30)
 ------------------
 

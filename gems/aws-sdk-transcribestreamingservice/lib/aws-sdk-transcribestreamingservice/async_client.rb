@@ -7,11 +7,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-if RUBY_VERSION >= '2.1'
-  begin
-    require 'http/2'
-  rescue LoadError; end
-end
+begin
+  require 'http/2'
+rescue LoadError; end
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
@@ -811,7 +809,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

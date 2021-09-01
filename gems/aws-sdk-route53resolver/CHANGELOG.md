@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-08-18)
+------------------
+
+* Feature - Documentation updates for Route 53 Resolver
+
 1.28.0 (2021-07-30)
 ------------------
 

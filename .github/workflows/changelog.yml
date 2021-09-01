@@ -15,7 +15,7 @@ jobs:
 
       - name: Comment PR
         if: ${{!contains(steps.file_changes.outputs.files_modified, 'gems/aws-sdk-core/CHANGELOG.md')}}
-        uses: thollander/actions-comment-pull-request@master
+        uses: thollander/actions-comment-pull-request@main
         with:
           message: 'You have made a change to core without a corresponding change to the CHANGELOG.md.  This change will not result in a new version and will not published unless an entry is added to CHANGELOG.md'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

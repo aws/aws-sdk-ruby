@@ -1450,6 +1450,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     ReplicationGroup.add_member(:user_group_ids, Shapes::ShapeRef.new(shape: UserGroupIdList, location_name: "UserGroupIds"))
     ReplicationGroup.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
+    ReplicationGroup.add_member(:replication_group_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationGroupCreateTime"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault

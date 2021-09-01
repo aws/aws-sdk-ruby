@@ -471,6 +471,55 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetBlueprintsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["OrchestrationNameString"], # required
+    #         include_blueprint: false,
+    #         include_parameter_spec: false,
+    #       }
+    #
+    # @!attribute [rw] names
+    #   A list of blueprint names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_blueprint
+    #   Specifies whether or not to include the blueprint in the response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_parameter_spec
+    #   Specifies whether or not to include the parameters, as a JSON
+    #   string, for the blueprint in the response.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetBlueprintsRequest AWS API Documentation
+    #
+    class BatchGetBlueprintsRequest < Struct.new(
+      :names,
+      :include_blueprint,
+      :include_parameter_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprints
+    #   Returns a list of blueprint as a `Blueprints` object.
+    #   @return [Array<Types::Blueprint>]
+    #
+    # @!attribute [rw] missing_blueprints
+    #   Returns a list of `BlueprintNames` that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetBlueprintsResponse AWS API Documentation
+    #
+    class BatchGetBlueprintsResponse < Struct.new(
+      :blueprints,
+      :missing_blueprints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetCrawlersRequest
     #   data as a hash:
     #
@@ -1065,6 +1114,173 @@ module Aws::Glue
       :maximum_length,
       :average_length,
       :number_of_nulls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a blueprint.
+    #
+    # @!attribute [rw] name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The date and time the blueprint was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The date and time the blueprint was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] parameter_spec
+    #   A JSON string that indicates the list of parameter specifications
+    #   for the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_location
+    #   Specifies the path in Amazon S3 where the blueprint is published.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_service_location
+    #   Specifies a path in Amazon S3 where the blueprint is copied when you
+    #   call `CreateBlueprint/UpdateBlueprint` to register the blueprint in
+    #   Glue.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the blueprint registration.
+    #
+    #   * Creating — The blueprint registration is in progress.
+    #
+    #   * Active — The blueprint has been successfully registered.
+    #
+    #   * Updating — An update to the blueprint registration is in progress.
+    #
+    #   * Failed — The blueprint registration failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   An error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_active_definition
+    #   When there are multiple versions of a blueprint and the latest
+    #   version has some errors, this attribute indicates the last
+    #   successful blueprint definition that is available with the service.
+    #   @return [Types::LastActiveDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Blueprint AWS API Documentation
+    #
+    class Blueprint < Struct.new(
+      :name,
+      :description,
+      :created_on,
+      :last_modified_on,
+      :parameter_spec,
+      :blueprint_location,
+      :blueprint_service_location,
+      :status,
+      :error_message,
+      :last_active_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a blueprint.
+    #
+    # @!attribute [rw] blueprint_name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The run ID for this blueprint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BlueprintDetails AWS API Documentation
+    #
+    class BlueprintDetails < Struct.new(
+      :blueprint_name,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a blueprint run.
+    #
+    # @!attribute [rw] blueprint_name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The run ID for this blueprint run.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_name
+    #   The name of a workflow that is created as a result of a successful
+    #   blueprint run. If a blueprint run has an error, there will not be a
+    #   workflow created.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the blueprint run. Possible values are:
+    #
+    #   * Running — The blueprint run is in progress.
+    #
+    #   * Succeeded — The blueprint run completed successfully.
+    #
+    #   * Failed — The blueprint run failed and rollback is complete.
+    #
+    #   * Rolling Back — The blueprint run failed and rollback is in
+    #     progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time that the blueprint run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time that the blueprint run completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_message
+    #   Indicates any errors that are seen while running the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_error_message
+    #   If there are any errors while creating the entities of a workflow,
+    #   we try to roll back the created entities until that point and delete
+    #   them. This attribute indicates the errors seen while trying to
+    #   delete the entities that are created.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The blueprint parameters as a string. You will have to provide a
+    #   value for each key that is required from the parameter spec that is
+    #   defined in the `Blueprint$ParameterSpec`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The role ARN. This role will be assumed by the Glue service and will
+    #   be used to create the workflow and other entities of a workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BlueprintRun AWS API Documentation
+    #
+    class BlueprintRun < Struct.new(
+      :blueprint_name,
+      :run_id,
+      :workflow_name,
+      :state,
+      :started_on,
+      :completed_on,
+      :error_message,
+      :rollback_error_message,
+      :parameters,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2100,8 +2316,9 @@ module Aws::Glue
     #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
     #   * `MARKETPLACE` - Uses configuration settings contained in a
-    #     connector purchased from Marketplace to read from and write to
-    #     data stores that are not natively supported by Glue.
+    #     connector purchased from Amazon Web Services Marketplace to read
+    #     from and write to data stores that are not natively supported by
+    #     Glue.
     #
     #   * `CUSTOM` - Uses configuration settings contained in a custom
     #     connector to read from and write to data stores that are not
@@ -2548,6 +2765,57 @@ module Aws::Glue
       :mongo_db_targets,
       :dynamo_db_targets,
       :catalog_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateBlueprintRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "OrchestrationNameString", # required
+    #         description: "Generic512CharString",
+    #         blueprint_location: "OrchestrationS3Location", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_location
+    #   Specifies a path in Amazon S3 where the blueprint is published.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be applied to this blueprint.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateBlueprintRequest AWS API Documentation
+    #
+    class CreateBlueprintRequest < Struct.new(
+      :name,
+      :description,
+      :blueprint_location,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Returns the name of the blueprint that was registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateBlueprintResponse AWS API Documentation
+    #
+    class CreateBlueprintResponse < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5121,6 +5389,37 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteBlueprintRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the blueprint to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteBlueprintRequest AWS API Documentation
+    #
+    class DeleteBlueprintRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Returns the name of the blueprint that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteBlueprintResponse AWS API Documentation
+    #
+    class DeleteBlueprintResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteClassifierRequest
     #   data as a hash:
     #
@@ -6629,6 +6928,134 @@ module Aws::Glue
       :job_id,
       :job_name,
       :job_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBlueprintRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         include_blueprint: false,
+    #         include_parameter_spec: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_blueprint
+    #   Specifies whether or not to include the blueprint in the response.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_parameter_spec
+    #   Specifies whether or not to include the parameter specification.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintRequest AWS API Documentation
+    #
+    class GetBlueprintRequest < Struct.new(
+      :name,
+      :include_blueprint,
+      :include_parameter_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint
+    #   Returns a `Blueprint` object.
+    #   @return [Types::Blueprint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintResponse AWS API Documentation
+    #
+    class GetBlueprintResponse < Struct.new(
+      :blueprint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBlueprintRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blueprint_name: "OrchestrationNameString", # required
+    #         run_id: "IdString", # required
+    #       }
+    #
+    # @!attribute [rw] blueprint_name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The run ID for the blueprint run you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintRunRequest AWS API Documentation
+    #
+    class GetBlueprintRunRequest < Struct.new(
+      :blueprint_name,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_run
+    #   Returns a `BlueprintRun` object.
+    #   @return [Types::BlueprintRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintRunResponse AWS API Documentation
+    #
+    class GetBlueprintRunResponse < Struct.new(
+      :blueprint_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBlueprintRunsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blueprint_name: "NameString", # required
+    #         next_token: "GenericString",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] blueprint_name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintRunsRequest AWS API Documentation
+    #
+    class GetBlueprintRunsRequest < Struct.new(
+      :blueprint_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprint_runs
+    #   Returns a list of `BlueprintRun` objects.
+    #   @return [Array<Types::BlueprintRun>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all blueprint runs have been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetBlueprintRunsResponse AWS API Documentation
+    #
+    class GetBlueprintRunsResponse < Struct.new(
+      :blueprint_runs,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9783,6 +10210,17 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IllegalBlueprintStateException AWS API Documentation
+    #
+    class IllegalBlueprintStateException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The workflow is in an invalid state to perform a requested operation.
     #
     # @!attribute [rw] message
@@ -10736,6 +11174,44 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # When there are multiple versions of a blueprint and the latest version
+    # has some errors, this attribute indicates the last successful
+    # blueprint definition that is available with the service.
+    #
+    # @!attribute [rw] description
+    #   The description of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The date and time the blueprint was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] parameter_spec
+    #   A JSON string specifying the parameters for the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_location
+    #   Specifies a path in Amazon S3 where the blueprint is published by
+    #   the Glue developer.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_service_location
+    #   Specifies a path in Amazon S3 where the blueprint is copied when you
+    #   create or update the blueprint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LastActiveDefinition AWS API Documentation
+    #
+    class LastActiveDefinition < Struct.new(
+      :description,
+      :last_modified_on,
+      :parameter_spec,
+      :blueprint_location,
+      :blueprint_service_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Status and error information about the most recent crawl.
     #
     # @!attribute [rw] status
@@ -10797,6 +11273,56 @@ module Aws::Glue
     #
     class LineageConfiguration < Struct.new(
       :crawler_lineage_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBlueprintsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "GenericString",
+    #         max_results: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Filters the list by an Amazon Web Services resource tag.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListBlueprintsRequest AWS API Documentation
+    #
+    class ListBlueprintsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blueprints
+    #   List of names of blueprints in the account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all blueprint names have been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListBlueprintsResponse AWS API Documentation
+    #
+    class ListBlueprintsResponse < Struct.new(
+      :blueprints,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12425,8 +12951,8 @@ module Aws::Glue
     #
     #   * By directly updating the resource policy with `PutResourePolicy`
     #
-    #   * By using the **Grant permissions** command on the Management
-    #     Console.
+    #   * By using the **Grant permissions** command on the Amazon Web
+    #     Services Management Console.
     #
     #   Must be set to `'TRUE'` if you have already used the Management
     #   Console to grant cross-account access, otherwise the call fails.
@@ -13727,6 +14253,49 @@ module Aws::Glue
     class SortCriterion < Struct.new(
       :field_name,
       :sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartBlueprintRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blueprint_name: "OrchestrationNameString", # required
+    #         parameters: "BlueprintParameters",
+    #         role_arn: "OrchestrationIAMRoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] blueprint_name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the parameters as a `BlueprintParameters` object.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   Specifies the IAM role used to create the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartBlueprintRunRequest AWS API Documentation
+    #
+    class StartBlueprintRunRequest < Struct.new(
+      :blueprint_name,
+      :parameters,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] run_id
+    #   The run ID for this blueprint run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartBlueprintRunResponse AWS API Documentation
+    #
+    class StartBlueprintRunResponse < Struct.new(
+      :run_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15437,6 +16006,49 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateBlueprintRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "OrchestrationNameString", # required
+    #         description: "Generic512CharString",
+    #         blueprint_location: "OrchestrationS3Location", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] blueprint_location
+    #   Specifies a path in Amazon S3 where the blueprint is published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateBlueprintRequest AWS API Documentation
+    #
+    class UpdateBlueprintRequest < Struct.new(
+      :name,
+      :description,
+      :blueprint_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Returns the name of the blueprint that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateBlueprintResponse AWS API Documentation
+    #
+    class UpdateBlueprintResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateClassifierRequest
     #   data as a hash:
@@ -17193,6 +17805,11 @@ module Aws::Glue
     #   concurrent workflow runs.
     #   @return [Integer]
     #
+    # @!attribute [rw] blueprint_details
+    #   This structure indicates the details of the blueprint that this
+    #   particular workflow is created from.
+    #   @return [Types::BlueprintDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Workflow AWS API Documentation
     #
     class Workflow < Struct.new(
@@ -17203,7 +17820,8 @@ module Aws::Glue
       :last_modified_on,
       :last_run,
       :graph,
-      :max_concurrent_runs)
+      :max_concurrent_runs,
+      :blueprint_details)
       SENSITIVE = []
       include Aws::Structure
     end

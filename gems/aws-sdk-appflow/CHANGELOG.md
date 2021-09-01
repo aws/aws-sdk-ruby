@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2021-08-19)
+------------------
+
+* Feature - This release adds support for SAPOData connector and extends Veeva connector for document extraction.
+
 1.13.0 (2021-07-30)
 ------------------
 

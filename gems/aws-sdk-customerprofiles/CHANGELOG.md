@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2021-08-13)
+------------------
+
+* Feature - This release introduces Standard Profile Objects, namely Asset and Case which contain values populated by data from third party systems and belong to a specific profile. This release adds an optional parameter, ObjectFilter to the ListProfileObjects API in order to search for these Standard Objects.
+
 1.9.0 (2021-07-30)
 ------------------
 

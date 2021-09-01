@@ -337,6 +337,167 @@ module Aws::TranscribeService
 
     # @!group API Operations
 
+    # Creates an analytics category. Amazon Transcribe applies the
+    # conditions specified by your analytics categories to your call
+    # analytics jobs. For each analytics category, you specify one or more
+    # rules. For example, you can specify a rule that the customer sentiment
+    # was neutral or negative within that category. If you start a call
+    # analytics job, Amazon Transcribe applies the category to the analytics
+    # job that you've specified.
+    #
+    # @option params [required, String] :category_name
+    #   The name that you choose for your category when you create it.
+    #
+    # @option params [required, Array<Types::Rule>] :rules
+    #   To create a category, you must specify between 1 and 20 rules. For
+    #   each rule, you specify a filter to be applied to the attributes of the
+    #   call. For example, you can specify a sentiment filter to detect if the
+    #   customer's sentiment was negative or neutral.
+    #
+    # @return [Types::CreateCallAnalyticsCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCallAnalyticsCategoryResponse#category_properties #category_properties} => Types::CategoryProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_call_analytics_category({
+    #     category_name: "CategoryName", # required
+    #     rules: [ # required
+    #       {
+    #         non_talk_time_filter: {
+    #           threshold: 1,
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           negate: false,
+    #         },
+    #         interruption_filter: {
+    #           threshold: 1,
+    #           participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           negate: false,
+    #         },
+    #         transcript_filter: {
+    #           transcript_filter_type: "EXACT", # required, accepts EXACT
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #           negate: false,
+    #           targets: ["NonEmptyString"], # required
+    #         },
+    #         sentiment_filter: {
+    #           sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #           negate: false,
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.category_properties.category_name #=> String
+    #   resp.category_properties.rules #=> Array
+    #   resp.category_properties.rules[0].non_talk_time_filter.threshold #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].interruption_filter.threshold #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].transcript_filter.transcript_filter_type #=> String, one of "EXACT"
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].transcript_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].transcript_filter.targets #=> Array
+    #   resp.category_properties.rules[0].transcript_filter.targets[0] #=> String
+    #   resp.category_properties.rules[0].sentiment_filter.sentiments #=> Array
+    #   resp.category_properties.rules[0].sentiment_filter.sentiments[0] #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL", "MIXED"
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].sentiment_filter.negate #=> Boolean
+    #   resp.category_properties.create_time #=> Time
+    #   resp.category_properties.last_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateCallAnalyticsCategory AWS API Documentation
+    #
+    # @overload create_call_analytics_category(params = {})
+    # @param [Hash] params ({})
+    def create_call_analytics_category(params = {}, options = {})
+      req = build_request(:create_call_analytics_category, params)
+      req.send_request(options)
+    end
+
     # Creates a new custom language model. Use Amazon S3 prefixes to provide
     # the location of your input files. The time it takes to create your
     # model depends on the size of your training data.
@@ -350,10 +511,10 @@ module Aws::TranscribeService
     #   create your custom language model.
     #
     #   If you want to use your custom language model to transcribe audio with
-    #   a sample rate of 16 kHz or greater, choose `Wideband`.
+    #   a sample rate of 16,000 Hz or greater, choose `Wideband`.
     #
     #   If you want to use your custom language model to transcribe audio with
-    #   a sample rate that is less than 16 kHz, choose `Narrowband`.
+    #   a sample rate that is less than 16,000 Hz, choose `Narrowband`.
     #
     # @option params [required, String] :model_name
     #   The name you choose for your custom language model when you create it.
@@ -361,6 +522,10 @@ module Aws::TranscribeService
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   Contains the data access role and the Amazon S3 prefixes to read the
     #   required input files to create a custom language model.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   language model at the time you create this new model.
     #
     # @return [Types::CreateLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -381,6 +546,12 @@ module Aws::TranscribeService
     #       tuning_data_s3_uri: "Uri",
     #       data_access_role_arn: "DataAccessRoleArn", # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -402,14 +573,14 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Creates a new custom vocabulary that you can use to change how Amazon
+    # Creates a new custom vocabulary that you can use to modify how Amazon
     # Transcribe Medical transcribes your audio file.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the custom vocabulary. This case-sensitive name must be
-    #   unique within an AWS account. If you try to create a vocabulary with
-    #   the same name as a previous vocabulary, you get a `ConflictException`
-    #   error.
+    #   unique within an Amazon Web Services account. If you try to create a
+    #   vocabulary with the same name as a previous vocabulary, you get a
+    #   `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code for the language used for the entries in your custom
@@ -419,9 +590,9 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :vocabulary_file_uri
     #   The location in Amazon S3 of the text file you use to define your
-    #   custom vocabulary. The URI must be in the same AWS Region as the
-    #   resource that you're calling. Enter information about your
-    #   `VocabularyFileUri` in the following format:
+    #   custom vocabulary. The URI must be in the same Amazon Web Services
+    #   Region as the resource that you're calling. Enter information about
+    #   your `VocabularyFileUri` in the following format:
     #
     #   `
     #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -440,8 +611,12 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   medical vocabulary at the time you create this new vocabulary.
     #
     # @return [Types::CreateMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -455,14 +630,20 @@ module Aws::TranscribeService
     #
     #   resp = client.create_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     vocabulary_file_uri: "Uri", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -480,14 +661,14 @@ module Aws::TranscribeService
     # Amazon Transcribe handles transcription of an audio file.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary. The name must be unique within an AWS
-    #   account. The name is case sensitive. If you try to create a vocabulary
-    #   with the same name as a previous vocabulary you will receive a
-    #   `ConflictException` error.
+    #   The name of the vocabulary. The name must be unique within an Amazon
+    #   Web Services account. The name is case sensitive. If you try to create
+    #   a vocabulary with the same name as a previous vocabulary you will
+    #   receive a `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see what-is-transcribe.
+    #   and their corresponding language codes, see transcribe-whatis.
     #
     # @option params [Array<String>] :phrases
     #   An array of strings that contains the vocabulary entries.
@@ -495,18 +676,23 @@ module Aws::TranscribeService
     # @option params [String] :vocabulary_file_uri
     #   The S3 location of the text file that contains the definition of the
     #   custom vocabulary. The URI must be in the same region as the API
-    #   endpoint that you are calling. The general form is
+    #   endpoint that you are calling. The general form is:
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
     #
     #   For more information about custom vocabularies, see [Custom
-    #   Vocabularies][2].
+    #   vocabularies][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   Amazon Transcribe vocabulary at the time you create this new
+    #   vocabulary.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -520,15 +706,21 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -584,6 +776,11 @@ module Aws::TranscribeService
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Adds one or more tags, each in the form of a key:value pair, to a new
+    #   Amazon Transcribe vocabulary filter at the time you create this new
+    #   vocabulary filter.
+    #
     # @return [Types::CreateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVocabularyFilterResponse#vocabulary_filter_name #vocabulary_filter_name} => String
@@ -594,15 +791,21 @@ module Aws::TranscribeService
     #
     #   resp = client.create_vocabulary_filter({
     #     vocabulary_filter_name: "VocabularyFilterName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilter AWS API Documentation
@@ -611,6 +814,51 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def create_vocabulary_filter(params = {}, options = {})
       req = build_request(:create_vocabulary_filter, params)
+      req.send_request(options)
+    end
+
+    # Deletes a call analytics category using its name.
+    #
+    # @option params [required, String] :category_name
+    #   The name of the call analytics category that you're choosing to
+    #   delete. The value is case sensitive.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_call_analytics_category({
+    #     category_name: "CategoryName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteCallAnalyticsCategory AWS API Documentation
+    #
+    # @overload delete_call_analytics_category(params = {})
+    # @param [Hash] params ({})
+    def delete_call_analytics_category(params = {}, options = {})
+      req = build_request(:delete_call_analytics_category, params)
+      req.send_request(options)
+    end
+
+    # Deletes a call analytics job using its name.
+    #
+    # @option params [required, String] :call_analytics_job_name
+    #   The name of the call analytics job you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_call_analytics_job({
+    #     call_analytics_job_name: "CallAnalyticsJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteCallAnalyticsJob AWS API Documentation
+    #
+    # @overload delete_call_analytics_job(params = {})
+    # @param [Hash] params ({})
+    def delete_call_analytics_job(params = {}, options = {})
+      req = build_request(:delete_call_analytics_job, params)
       req.send_request(options)
     end
 
@@ -750,9 +998,9 @@ module Aws::TranscribeService
     end
 
     # Gets information about a single custom language model. Use this
-    # information to see details about the language model in your AWS
-    # account. You can also see whether the base language model used to
-    # create your custom language model has been updated. If Amazon
+    # information to see details about the language model in your Amazon Web
+    # Services account. You can also see whether the base language model
+    # used to create your custom language model has been updated. If Amazon
     # Transcribe has updated the base model, you can create a new custom
     # language model using the updated base model. If the language model
     # wasn't created, you can use this operation to understand why Amazon
@@ -795,6 +1043,143 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Retrieves information about a call analytics category.
+    #
+    # @option params [required, String] :category_name
+    #   The name of the category you want information about. This value is
+    #   case sensitive.
+    #
+    # @return [Types::GetCallAnalyticsCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCallAnalyticsCategoryResponse#category_properties #category_properties} => Types::CategoryProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_call_analytics_category({
+    #     category_name: "CategoryName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.category_properties.category_name #=> String
+    #   resp.category_properties.rules #=> Array
+    #   resp.category_properties.rules[0].non_talk_time_filter.threshold #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].interruption_filter.threshold #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].transcript_filter.transcript_filter_type #=> String, one of "EXACT"
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].transcript_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].transcript_filter.targets #=> Array
+    #   resp.category_properties.rules[0].transcript_filter.targets[0] #=> String
+    #   resp.category_properties.rules[0].sentiment_filter.sentiments #=> Array
+    #   resp.category_properties.rules[0].sentiment_filter.sentiments[0] #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL", "MIXED"
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].sentiment_filter.negate #=> Boolean
+    #   resp.category_properties.create_time #=> Time
+    #   resp.category_properties.last_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetCallAnalyticsCategory AWS API Documentation
+    #
+    # @overload get_call_analytics_category(params = {})
+    # @param [Hash] params ({})
+    def get_call_analytics_category(params = {}, options = {})
+      req = build_request(:get_call_analytics_category, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a call analytics job. To see the status of
+    # the job, check the `CallAnalyticsJobStatus` field. If the status is
+    # `COMPLETED`, the job is finished and you can find the results at the
+    # location specified in the `TranscriptFileUri` field. If you enable
+    # personally identifiable information (PII) redaction, the redacted
+    # transcript appears in the `RedactedTranscriptFileUri` field.
+    #
+    # @option params [required, String] :call_analytics_job_name
+    #   The name of the analytics job you want information about. This value
+    #   is case sensitive.
+    #
+    # @return [Types::GetCallAnalyticsJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCallAnalyticsJobResponse#call_analytics_job #call_analytics_job} => Types::CallAnalyticsJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_call_analytics_job({
+    #     call_analytics_job_name: "CallAnalyticsJobName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.call_analytics_job.call_analytics_job_name #=> String
+    #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
+    #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.call_analytics_job.media.media_file_uri #=> String
+    #   resp.call_analytics_job.media.redacted_media_file_uri #=> String
+    #   resp.call_analytics_job.transcript.transcript_file_uri #=> String
+    #   resp.call_analytics_job.transcript.redacted_transcript_file_uri #=> String
+    #   resp.call_analytics_job.start_time #=> Time
+    #   resp.call_analytics_job.creation_time #=> Time
+    #   resp.call_analytics_job.completion_time #=> Time
+    #   resp.call_analytics_job.failure_reason #=> String
+    #   resp.call_analytics_job.data_access_role_arn #=> String
+    #   resp.call_analytics_job.identified_language_score #=> Float
+    #   resp.call_analytics_job.settings.vocabulary_name #=> String
+    #   resp.call_analytics_job.settings.vocabulary_filter_name #=> String
+    #   resp.call_analytics_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.call_analytics_job.settings.language_model_name #=> String
+    #   resp.call_analytics_job.settings.content_redaction.redaction_type #=> String, one of "PII"
+    #   resp.call_analytics_job.settings.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.call_analytics_job.settings.language_options #=> Array
+    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.channel_definitions #=> Array
+    #   resp.call_analytics_job.channel_definitions[0].channel_id #=> Integer
+    #   resp.call_analytics_job.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetCallAnalyticsJob AWS API Documentation
+    #
+    # @overload get_call_analytics_job(params = {})
+    # @param [Hash] params ({})
+    def get_call_analytics_job(params = {}, options = {})
+      req = build_request(:get_call_analytics_job, params)
+      req.send_request(options)
+    end
+
     # Returns information about a transcription job from Amazon Transcribe
     # Medical. To see the status of the job, check the
     # `TranscriptionJobStatus` field. If the status is `COMPLETED`, the job
@@ -818,10 +1203,11 @@ module Aws::TranscribeService
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
+    #   resp.medical_transcription_job.media.redacted_media_file_uri #=> String
     #   resp.medical_transcription_job.transcript.transcript_file_uri #=> String
     #   resp.medical_transcription_job.start_time #=> Time
     #   resp.medical_transcription_job.creation_time #=> Time
@@ -836,6 +1222,9 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.content_identification_type #=> String, one of "PHI"
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
+    #   resp.medical_transcription_job.tags #=> Array
+    #   resp.medical_transcription_job.tags[0].key #=> String
+    #   resp.medical_transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalTranscriptionJob AWS API Documentation
     #
@@ -870,7 +1259,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -909,10 +1298,11 @@ module Aws::TranscribeService
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.transcription_job.media.media_file_uri #=> String
+    #   resp.transcription_job.media.redacted_media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
     #   resp.transcription_job.transcript.redacted_transcript_file_uri #=> String
     #   resp.transcription_job.start_time #=> Time
@@ -934,8 +1324,11 @@ module Aws::TranscribeService
     #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.transcription_job.identify_language #=> Boolean
     #   resp.transcription_job.language_options #=> Array
-    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.identified_language_score #=> Float
+    #   resp.transcription_job.tags #=> Array
+    #   resp.transcription_job.tags[0].key #=> String
+    #   resp.transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -970,7 +1363,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -1006,7 +1399,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #   resp.download_uri #=> String
     #
@@ -1016,6 +1409,161 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def get_vocabulary_filter(params = {}, options = {})
       req = build_request(:get_vocabulary_filter, params)
+      req.send_request(options)
+    end
+
+    # Provides more information about the call analytics categories that
+    # you've created. You can use the information in this list to find a
+    # specific category. You can then use the operation to get more
+    # information about it.
+    #
+    # @option params [String] :next_token
+    #   When included, `NextToken`fetches the next set of categories if the
+    #   result of the previous request was truncated.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of categories to return in each page of results. If
+    #   there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
+    #
+    # @return [Types::ListCallAnalyticsCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCallAnalyticsCategoriesResponse#next_token #next_token} => String
+    #   * {Types::ListCallAnalyticsCategoriesResponse#categories #categories} => Array&lt;Types::CategoryProperties&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_call_analytics_categories({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.categories #=> Array
+    #   resp.categories[0].category_name #=> String
+    #   resp.categories[0].rules #=> Array
+    #   resp.categories[0].rules[0].non_talk_time_filter.threshold #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.absolute_time_range.start_time #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.absolute_time_range.end_time #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.absolute_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.absolute_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.relative_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.relative_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].non_talk_time_filter.negate #=> Boolean
+    #   resp.categories[0].rules[0].interruption_filter.threshold #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.categories[0].rules[0].interruption_filter.absolute_time_range.start_time #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.absolute_time_range.end_time #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.absolute_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.absolute_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.relative_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.relative_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].interruption_filter.negate #=> Boolean
+    #   resp.categories[0].rules[0].transcript_filter.transcript_filter_type #=> String, one of "EXACT"
+    #   resp.categories[0].rules[0].transcript_filter.absolute_time_range.start_time #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.absolute_time_range.end_time #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.absolute_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.absolute_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.relative_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.relative_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].transcript_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.categories[0].rules[0].transcript_filter.negate #=> Boolean
+    #   resp.categories[0].rules[0].transcript_filter.targets #=> Array
+    #   resp.categories[0].rules[0].transcript_filter.targets[0] #=> String
+    #   resp.categories[0].rules[0].sentiment_filter.sentiments #=> Array
+    #   resp.categories[0].rules[0].sentiment_filter.sentiments[0] #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL", "MIXED"
+    #   resp.categories[0].rules[0].sentiment_filter.absolute_time_range.start_time #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.absolute_time_range.end_time #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.absolute_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.absolute_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.relative_time_range.first #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.relative_time_range.last #=> Integer
+    #   resp.categories[0].rules[0].sentiment_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.categories[0].rules[0].sentiment_filter.negate #=> Boolean
+    #   resp.categories[0].create_time #=> Time
+    #   resp.categories[0].last_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsCategories AWS API Documentation
+    #
+    # @overload list_call_analytics_categories(params = {})
+    # @param [Hash] params ({})
+    def list_call_analytics_categories(params = {}, options = {})
+      req = build_request(:list_call_analytics_categories, params)
+      req.send_request(options)
+    end
+
+    # List call analytics jobs with a specified status or substring that
+    # matches their names.
+    #
+    # @option params [String] :status
+    #   When specified, returns only call analytics jobs with the specified
+    #   status. Jobs are ordered by creation date, with the most recent jobs
+    #   returned first. If you don't specify a status, Amazon Transcribe
+    #   returns all analytics jobs ordered by creation date.
+    #
+    # @option params [String] :job_name_contains
+    #   When specified, the jobs returned in the list are limited to jobs
+    #   whose name contains the specified string.
+    #
+    # @option params [String] :next_token
+    #   If you receive a truncated result in the previous request of , include
+    #   `NextToken` to fetch the next set of jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of call analytics jobs to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
+    #
+    # @return [Types::ListCallAnalyticsJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCallAnalyticsJobsResponse#status #status} => String
+    #   * {Types::ListCallAnalyticsJobsResponse#next_token #next_token} => String
+    #   * {Types::ListCallAnalyticsJobsResponse#call_analytics_job_summaries #call_analytics_job_summaries} => Array&lt;Types::CallAnalyticsJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_call_analytics_jobs({
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
+    #     job_name_contains: "CallAnalyticsJobName",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.next_token #=> String
+    #   resp.call_analytics_job_summaries #=> Array
+    #   resp.call_analytics_job_summaries[0].call_analytics_job_name #=> String
+    #   resp.call_analytics_job_summaries[0].creation_time #=> Time
+    #   resp.call_analytics_job_summaries[0].start_time #=> Time
+    #   resp.call_analytics_job_summaries[0].completion_time #=> Time
+    #   resp.call_analytics_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job_summaries[0].call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.call_analytics_job_summaries[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsJobs AWS API Documentation
+    #
+    # @overload list_call_analytics_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_call_analytics_jobs(params = {}, options = {})
+      req = build_request(:list_call_analytics_jobs, params)
       req.send_request(options)
     end
 
@@ -1039,9 +1587,10 @@ module Aws::TranscribeService
     #   previous request was truncated.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of language models to return in the response. If
-    #   there are fewer results in the list, the response contains only the
-    #   actual results.
+    #   The maximum number of language models to return in each page of
+    #   results. If there are fewer results than the value you specify, only
+    #   the actual results are returned. If you do not specify a value, the
+    #   default of 5 is used.
     #
     # @return [Types::ListLanguageModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1103,9 +1652,10 @@ module Aws::TranscribeService
     #   set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of medical transcription jobs to return in the
-    #   response. IF there are fewer results in the list, this response
-    #   contains only the actual results.
+    #   The maximum number of medical transcription jobs to return in each
+    #   page of results. If there are fewer results than the value you
+    #   specify, only the actual results are returned. If you do not specify a
+    #   value, the default of 5 is used.
     #
     # @return [Types::ListMedicalTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1133,7 +1683,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job_summaries[0].creation_time #=> Time
     #   resp.medical_transcription_job_summaries[0].start_time #=> Time
     #   resp.medical_transcription_job_summaries[0].completion_time #=> Time
-    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.medical_transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.medical_transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.medical_transcription_job_summaries[0].failure_reason #=> String
     #   resp.medical_transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -1160,7 +1710,10 @@ module Aws::TranscribeService
     #   vocabularies.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of vocabularies to return in the response.
+    #   The maximum number of vocabularies to return in each page of results.
+    #   If there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
     #
     # @option params [String] :state_equals
     #   When specified, returns only vocabularies with the `VocabularyState`
@@ -1195,7 +1748,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1205,6 +1758,39 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def list_medical_vocabularies(params = {}, options = {})
       req = build_request(:list_medical_vocabularies, params)
+      req.send_request(options)
+    end
+
+    # Lists all tags associated with a given transcription job, vocabulary,
+    # or resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   Lists all tags associated with a given Amazon Resource Name (ARN).
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_arn #resource_arn} => String
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TranscribeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1221,13 +1807,13 @@ module Aws::TranscribeService
     #   whose name contains the specified string.
     #
     # @option params [String] :next_token
-    #   If the result of the previous request to `ListTranscriptionJobs` was
+    #   If the result of the previous request to `ListTranscriptionJobs` is
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of jobs to return in the response. If there are
-    #   fewer results in the list, this response contains only the actual
-    #   results.
+    #   The maximum number of jobs to return in each page of results. If there
+    #   are fewer results than the value you specify, only the actual results
+    #   are returned. If you do not specify a value, the default of 5 is used.
     #
     # @return [Types::ListTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1255,7 +1841,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].creation_time #=> Time
     #   resp.transcription_job_summaries[0].start_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
-    #   resp.transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.transcription_job_summaries[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
@@ -1282,9 +1868,10 @@ module Aws::TranscribeService
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of vocabularies to return in the response. If there
-    #   are fewer results in the list, this response contains only the actual
-    #   results.
+    #   The maximum number of vocabularies to return in each page of results.
+    #   If there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
     #
     # @option params [String] :state_equals
     #   When specified, only returns vocabularies with the `VocabularyState`
@@ -1319,7 +1906,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
-    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.vocabularies[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabularies[0].last_modified_time #=> Time
     #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1340,9 +1927,10 @@ module Aws::TranscribeService
     #   collections.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of filters to return in the response. If there are
-    #   fewer results in the list, this response contains only the actual
-    #   results.
+    #   The maximum number of filters to return in each page of results. If
+    #   there are fewer results than the value you specify, only the actual
+    #   results are returned. If you do not specify a value, the default of 5
+    #   is used.
     #
     # @option params [String] :name_contains
     #   Filters the response so that it only contains vocabulary filters whose
@@ -1368,7 +1956,7 @@ module Aws::TranscribeService
     #   resp.next_token #=> String
     #   resp.vocabulary_filters #=> Array
     #   resp.vocabulary_filters[0].vocabulary_filter_name #=> String
-    #   resp.vocabulary_filters[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.vocabulary_filters[0].language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.vocabulary_filters[0].last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularyFilters AWS API Documentation
@@ -1380,13 +1968,182 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Starts an asynchronous analytics job that not only transcribes the
+    # audio recording of a caller and agent, but also returns additional
+    # insights. These insights include how quickly or loudly the caller or
+    # agent was speaking. To retrieve additional insights with your
+    # analytics jobs, create categories. A category is a way to classify
+    # analytics jobs based on attributes, such as a customer's sentiment or
+    # a particular phrase being used during the call. For more information,
+    # see the operation.
+    #
+    # @option params [required, String] :call_analytics_job_name
+    #   The name of the call analytics job. You can't use the string "." or
+    #   ".." by themselves as the job name. The name must also be unique
+    #   within an Amazon Web Services account. If you try to create a call
+    #   analytics job with the same name as a previous call analytics job, you
+    #   get a `ConflictException` error.
+    #
+    # @option params [required, Types::Media] :media
+    #   Describes the input media file in a transcription request.
+    #
+    # @option params [String] :output_location
+    #   The Amazon S3 location where the output of the call analytics job is
+    #   stored. You can provide the following location types to store the
+    #   output of call analytics job:
+    #
+    #   * s3://DOC-EXAMPLE-BUCKET1
+    #
+    #     If you specify a bucket, Amazon Transcribe saves the output of the
+    #     analytics job as a JSON file at the root level of the bucket.
+    #
+    #   * s3://DOC-EXAMPLE-BUCKET1/folder/
+    #
+    #     f you specify a path, Amazon Transcribe saves the output of the
+    #     analytics job as
+    #     s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json
+    #
+    #     If you specify a folder, you must provide a trailing slash.
+    #
+    #   * s3://DOC-EXAMPLE-BUCKET1/folder/filename.json
+    #
+    #     If you provide a path that has the filename specified, Amazon
+    #     Transcribe saves the output of the analytics job as
+    #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json
+    #
+    #   You can specify an Amazon Web Services Key Management Service (KMS)
+    #   key to encrypt the output of our analytics job using the
+    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
+    #   Amazon Transcribe uses the default Amazon S3 key for server-side
+    #   encryption of the analytics job output that is placed in your S3
+    #   bucket.
+    #
+    # @option params [String] :output_encryption_kms_key_id
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service key used to encrypt the output of the call
+    #   analytics job. The user calling the operation must have permission to
+    #   use the specified KMS key.
+    #
+    #   You use either of the following to identify an Amazon Web Services KMS
+    #   key in the current account:
+    #
+    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * KMS Key Alias: "alias/ExampleAlias"
+    #
+    #   You can use either of the following to identify a KMS key in the
+    #   current account or another account:
+    #
+    #   * Amazon Resource Name (ARN) of a KMS key in the current account or
+    #     another account: "arn:aws:kms:region:account
+    #     ID:key/1234abcd-12ab-34cd-56ef1234567890ab"
+    #
+    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
+    #     ID:alias/ExampleAlias"
+    #
+    #   If you don't specify an encryption key, the output of the call
+    #   analytics job is encrypted with the default Amazon S3 key (SSE-S3).
+    #
+    #   If you specify a KMS key to encrypt your output, you must also specify
+    #   an output location in the `OutputLocation` parameter.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of a role that has access to the S3
+    #   bucket that contains your input files. Amazon Transcribe assumes this
+    #   role to read queued audio files. If you have specified an output S3
+    #   bucket for your transcription results, this role should have access to
+    #   the output bucket as well.
+    #
+    # @option params [Types::CallAnalyticsJobSettings] :settings
+    #   A `Settings` object that provides optional settings for a call
+    #   analytics job.
+    #
+    # @option params [Array<Types::ChannelDefinition>] :channel_definitions
+    #   When you start a call analytics job, you must pass an array that maps
+    #   the agent and the customer to specific audio channels. The values you
+    #   can assign to a channel are 0 and 1. The agent and the customer must
+    #   each have their own channel. You can't assign more than one channel
+    #   to an agent or customer.
+    #
+    # @return [Types::StartCallAnalyticsJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCallAnalyticsJobResponse#call_analytics_job #call_analytics_job} => Types::CallAnalyticsJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_call_analytics_job({
+    #     call_analytics_job_name: "CallAnalyticsJobName", # required
+    #     media: { # required
+    #       media_file_uri: "Uri",
+    #       redacted_media_file_uri: "Uri",
+    #     },
+    #     output_location: "Uri",
+    #     output_encryption_kms_key_id: "KMSKeyId",
+    #     data_access_role_arn: "DataAccessRoleArn", # required
+    #     settings: {
+    #       vocabulary_name: "VocabularyName",
+    #       vocabulary_filter_name: "VocabularyFilterName",
+    #       vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #       language_model_name: "ModelName",
+    #       content_redaction: {
+    #         redaction_type: "PII", # required, accepts PII
+    #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #       },
+    #       language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     },
+    #     channel_definitions: [
+    #       {
+    #         channel_id: 1,
+    #         participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.call_analytics_job.call_analytics_job_name #=> String
+    #   resp.call_analytics_job.call_analytics_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.call_analytics_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.media_sample_rate_hertz #=> Integer
+    #   resp.call_analytics_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
+    #   resp.call_analytics_job.media.media_file_uri #=> String
+    #   resp.call_analytics_job.media.redacted_media_file_uri #=> String
+    #   resp.call_analytics_job.transcript.transcript_file_uri #=> String
+    #   resp.call_analytics_job.transcript.redacted_transcript_file_uri #=> String
+    #   resp.call_analytics_job.start_time #=> Time
+    #   resp.call_analytics_job.creation_time #=> Time
+    #   resp.call_analytics_job.completion_time #=> Time
+    #   resp.call_analytics_job.failure_reason #=> String
+    #   resp.call_analytics_job.data_access_role_arn #=> String
+    #   resp.call_analytics_job.identified_language_score #=> Float
+    #   resp.call_analytics_job.settings.vocabulary_name #=> String
+    #   resp.call_analytics_job.settings.vocabulary_filter_name #=> String
+    #   resp.call_analytics_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
+    #   resp.call_analytics_job.settings.language_model_name #=> String
+    #   resp.call_analytics_job.settings.content_redaction.redaction_type #=> String, one of "PII"
+    #   resp.call_analytics_job.settings.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
+    #   resp.call_analytics_job.settings.language_options #=> Array
+    #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.channel_definitions #=> Array
+    #   resp.call_analytics_job.channel_definitions[0].channel_id #=> Integer
+    #   resp.call_analytics_job.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartCallAnalyticsJob AWS API Documentation
+    #
+    # @overload start_call_analytics_job(params = {})
+    # @param [Hash] params ({})
+    def start_call_analytics_job(params = {}, options = {})
+      req = build_request(:start_call_analytics_job, params)
+      req.send_request(options)
+    end
+
     # Starts a batch job to transcribe medical speech to text.
     #
     # @option params [required, String] :medical_transcription_job_name
     #   The name of the medical transcription job. You can't use the strings
     #   "`.`" or "`..`" by themselves as the job name. The name must also
-    #   be unique within an AWS account. If you try to create a medical
-    #   transcription job with the same name as a previous medical
+    #   be unique within an Amazon Web Services account. If you try to create
+    #   a medical transcription job with the same name as a previous medical
     #   transcription job, you get a `ConflictException` error.
     #
     # @option params [required, String] :language_code
@@ -1421,11 +2178,12 @@ module Aws::TranscribeService
     #   to put files in the bucket. For more information, see [Permissions
     #   Required for IAM User Roles][1].
     #
-    #   You can specify an AWS Key Management Service (KMS) key to encrypt the
-    #   output of your transcription using the `OutputEncryptionKMSKeyId`
-    #   parameter. If you don't specify a KMS key, Amazon Transcribe Medical
-    #   uses the default Amazon S3 key for server-side encryption of
-    #   transcripts that are placed in your S3 bucket.
+    #   You can specify an Amazon Web Services Key Management Service (KMS)
+    #   key to encrypt the output of your transcription using the
+    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
+    #   Amazon Transcribe Medical uses the default Amazon S3 key for
+    #   server-side encryption of transcripts that are placed in your S3
+    #   bucket.
     #
     #
     #
@@ -1454,10 +2212,10 @@ module Aws::TranscribeService
     #   the `OutputBucketName` parameter.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS)
-    #   key used to encrypt the output of the transcription job. The user
-    #   calling the StartMedicalTranscriptionJob operation must have
-    #   permission to use the specified KMS key.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service (KMS) key used to encrypt the output of the
+    #   transcription job. The user calling the StartMedicalTranscriptionJob
+    #   operation must have permission to use the specified KMS key.
     #
     #   You use either of the following to identify a KMS key in the current
     #   account:
@@ -1499,7 +2257,10 @@ module Aws::TranscribeService
     #   The type of speech in the input audio. `CONVERSATION` refers to
     #   conversations between two or more speakers, e.g., a conversations
     #   between doctors and patients. `DICTATION` refers to single-speaker
-    #   dictated speech, e.g., for clinical notes.
+    #   dictated speech, such as clinical notes.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Add tags to an Amazon Transcribe medical transcription job.
     #
     # @return [Types::StartMedicalTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1509,11 +2270,12 @@ module Aws::TranscribeService
     #
     #   resp = client.start_medical_transcription_job({
     #     medical_transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #     media: { # required
     #       media_file_uri: "Uri",
+    #       redacted_media_file_uri: "Uri",
     #     },
     #     output_bucket_name: "OutputBucketName", # required
     #     output_key: "OutputKey",
@@ -1529,16 +2291,23 @@ module Aws::TranscribeService
     #     content_identification_type: "PHI", # accepts PHI
     #     specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
     #     type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.medical_transcription_job.medical_transcription_job_name #=> String
     #   resp.medical_transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.medical_transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.medical_transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.medical_transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.medical_transcription_job.media.media_file_uri #=> String
+    #   resp.medical_transcription_job.media.redacted_media_file_uri #=> String
     #   resp.medical_transcription_job.transcript.transcript_file_uri #=> String
     #   resp.medical_transcription_job.start_time #=> Time
     #   resp.medical_transcription_job.creation_time #=> Time
@@ -1553,6 +2322,9 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.content_identification_type #=> String, one of "PHI"
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
+    #   resp.medical_transcription_job.tags #=> Array
+    #   resp.medical_transcription_job.tags[0].key #=> String
+    #   resp.medical_transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartMedicalTranscriptionJob AWS API Documentation
     #
@@ -1567,15 +2339,16 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :transcription_job_name
     #   The name of the job. You can't use the strings "`.`" or "`..`" by
-    #   themselves as the job name. The name must also be unique within an AWS
-    #   account. If you try to create a transcription job with the same name
-    #   as a previous transcription job, you get a `ConflictException` error.
+    #   themselves as the job name. The name must also be unique within an
+    #   Amazon Web Services account. If you try to create a transcription job
+    #   with the same name as a previous transcription job, you get a
+    #   `ConflictException` error.
     #
     # @option params [String] :language_code
     #   The language code for the language used in the input media file.
     #
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
-    #   video file must be encoded at a sample rate of 16000 Hz or higher.
+    #   video file must be encoded at a sample rate of 16,000 Hz or higher.
     #
     # @option params [Integer] :media_sample_rate_hertz
     #   The sample rate, in Hertz, of the audio track in the input media file.
@@ -1606,11 +2379,11 @@ module Aws::TranscribeService
     #   Amazon Transcribe to put files in the bucket. For more information,
     #   see [Permissions Required for IAM User Roles][1].
     #
-    #   You can specify an AWS Key Management Service (KMS) key to encrypt the
-    #   output of your transcription using the `OutputEncryptionKMSKeyId`
-    #   parameter. If you don't specify a KMS key, Amazon Transcribe uses the
-    #   default Amazon S3 key for server-side encryption of transcripts that
-    #   are placed in your S3 bucket.
+    #   You can specify an Amazon Web Services Key Management Service (KMS)
+    #   key to encrypt the output of your transcription using the
+    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS key,
+    #   Amazon Transcribe uses the default Amazon S3 key for server-side
+    #   encryption of transcripts that are placed in your S3 bucket.
     #
     #   If you don't set the `OutputBucketName`, Amazon Transcribe generates
     #   a pre-signed URL, a shareable URL that provides secure access to your
@@ -1644,10 +2417,10 @@ module Aws::TranscribeService
     #   the `OutputBucketName` parameter.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS)
-    #   key used to encrypt the output of the transcription job. The user
-    #   calling the `StartTranscriptionJob` operation must have permission to
-    #   use the specified KMS key.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service (KMS) key used to encrypt the output of the
+    #   transcription job. The user calling the `StartTranscriptionJob`
+    #   operation must have permission to use the specified KMS key.
     #
     #   You can use either of the following to identify a KMS key in the
     #   current account:
@@ -1701,6 +2474,12 @@ module Aws::TranscribeService
     #   collection of audio files. Automatic language identification chooses a
     #   language that best matches the source audio from that list.
     #
+    #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
+    #   video file must be encoded at a sample rate of 16,000 Hz or higher.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Add tags to an Amazon Transcribe transcription job.
+    #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTranscriptionJobResponse#transcription_job #transcription_job} => Types::TranscriptionJob
@@ -1709,11 +2488,12 @@ module Aws::TranscribeService
     #
     #   resp = client.start_transcription_job({
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3", # accepts mp3, mp4, wav, flac, ogg, amr, webm
     #     media: { # required
     #       media_file_uri: "Uri",
+    #       redacted_media_file_uri: "Uri",
     #     },
     #     output_bucket_name: "OutputBucketName",
     #     output_key: "OutputKey",
@@ -1740,17 +2520,24 @@ module Aws::TranscribeService
     #       redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #     },
     #     identify_language: false,
-    #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.transcription_job.transcription_job_name #=> String
     #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
-    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.transcription_job.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac", "ogg", "amr", "webm"
     #   resp.transcription_job.media.media_file_uri #=> String
+    #   resp.transcription_job.media.redacted_media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
     #   resp.transcription_job.transcript.redacted_transcript_file_uri #=> String
     #   resp.transcription_job.start_time #=> Time
@@ -1772,8 +2559,11 @@ module Aws::TranscribeService
     #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.transcription_job.identify_language #=> Boolean
     #   resp.transcription_job.language_options #=> Array
-    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.transcription_job.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.transcription_job.identified_language_score #=> Float
+    #   resp.transcription_job.tags #=> Array
+    #   resp.transcription_job.tags[0].key #=> String
+    #   resp.transcription_job.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -1781,6 +2571,224 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def start_transcription_job(params = {}, options = {})
       req = build_request(:start_transcription_job, params)
+      req.send_request(options)
+    end
+
+    # Tags a Amazon Transcribe resource with the given list of tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
+    #   want to tag.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you are assigning to a given Amazon Transcribe resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TranscribeArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes specified tags from a specified Amazon Transcribe resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
+    #   want to remove tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys you want to remove from a specified Amazon
+    #   Transcribe resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TranscribeArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the call analytics category with new values. The
+    # `UpdateCallAnalyticsCategory` operation overwrites all of the existing
+    # information with the values that you provide in the request.
+    #
+    # @option params [required, String] :category_name
+    #   The name of the analytics category to update. The name is case
+    #   sensitive. If you try to update a call analytics category with the
+    #   same name as a previous category you will receive a
+    #   `ConflictException` error.
+    #
+    # @option params [required, Array<Types::Rule>] :rules
+    #   The rules used for the updated analytics category. The rules that you
+    #   provide in this field replace the ones that are currently being used.
+    #
+    # @return [Types::UpdateCallAnalyticsCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCallAnalyticsCategoryResponse#category_properties #category_properties} => Types::CategoryProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_call_analytics_category({
+    #     category_name: "CategoryName", # required
+    #     rules: [ # required
+    #       {
+    #         non_talk_time_filter: {
+    #           threshold: 1,
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           negate: false,
+    #         },
+    #         interruption_filter: {
+    #           threshold: 1,
+    #           participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           negate: false,
+    #         },
+    #         transcript_filter: {
+    #           transcript_filter_type: "EXACT", # required, accepts EXACT
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #           negate: false,
+    #           targets: ["NonEmptyString"], # required
+    #         },
+    #         sentiment_filter: {
+    #           sentiments: ["POSITIVE"], # required, accepts POSITIVE, NEGATIVE, NEUTRAL, MIXED
+    #           absolute_time_range: {
+    #             start_time: 1,
+    #             end_time: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           relative_time_range: {
+    #             start_percentage: 1,
+    #             end_percentage: 1,
+    #             first: 1,
+    #             last: 1,
+    #           },
+    #           participant_role: "AGENT", # accepts AGENT, CUSTOMER
+    #           negate: false,
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.category_properties.category_name #=> String
+    #   resp.category_properties.rules #=> Array
+    #   resp.category_properties.rules[0].non_talk_time_filter.threshold #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].non_talk_time_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].interruption_filter.threshold #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].interruption_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].transcript_filter.transcript_filter_type #=> String, one of "EXACT"
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].transcript_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].transcript_filter.negate #=> Boolean
+    #   resp.category_properties.rules[0].transcript_filter.targets #=> Array
+    #   resp.category_properties.rules[0].transcript_filter.targets[0] #=> String
+    #   resp.category_properties.rules[0].sentiment_filter.sentiments #=> Array
+    #   resp.category_properties.rules[0].sentiment_filter.sentiments[0] #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL", "MIXED"
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.start_time #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.end_time #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.absolute_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.start_percentage #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.end_percentage #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.first #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.relative_time_range.last #=> Integer
+    #   resp.category_properties.rules[0].sentiment_filter.participant_role #=> String, one of "AGENT", "CUSTOMER"
+    #   resp.category_properties.rules[0].sentiment_filter.negate #=> Boolean
+    #   resp.category_properties.create_time #=> Time
+    #   resp.category_properties.last_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateCallAnalyticsCategory AWS API Documentation
+    #
+    # @overload update_call_analytics_category(params = {})
+    # @param [Hash] params ({})
+    def update_call_analytics_category(params = {}, options = {})
+      req = build_request(:update_call_analytics_category, params)
       req.send_request(options)
     end
 
@@ -1800,8 +2808,8 @@ module Aws::TranscribeService
     #   Amazon Transcribe Medical.
     #
     # @option params [String] :vocabulary_file_uri
-    #   The location in Amazon S3 of the text file that contains the you use
-    #   for your custom vocabulary. The URI must be in the same AWS Region as
+    #   The location in Amazon S3 of the text file that contains your custom
+    #   vocabulary. The URI must be in the same Amazon Web Services Region as
     #   the resource that you are calling. The following is the format for a
     #   URI:
     #
@@ -1821,8 +2829,8 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #
     # @return [Types::UpdateMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1835,14 +2843,14 @@ module Aws::TranscribeService
     #
     #   resp = client.update_medical_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     vocabulary_file_uri: "Uri",
     #   })
     #
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1866,7 +2874,7 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see what-is-transcribe.
+    #   and their corresponding language codes, see transcribe-whatis.
     #
     # @option params [Array<String>] :phrases
     #   An array of strings containing the vocabulary entries.
@@ -1886,8 +2894,8 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
     #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1900,7 +2908,7 @@ module Aws::TranscribeService
     #
     #   resp = client.update_vocabulary({
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN
+    #     language_code: "af-ZA", # required, accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #   })
@@ -1908,7 +2916,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
     #
@@ -1973,7 +2981,7 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.vocabulary_filter_name #=> String
-    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN"
+    #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
     #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilter AWS API Documentation
@@ -1998,7 +3006,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -50,6 +50,6 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 # @!group service
 module Aws::TranscribeStreamingService
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end

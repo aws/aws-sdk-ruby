@@ -590,7 +590,7 @@ module Aws::GlueDataBrew
     #         outputs: [
     #           {
     #             compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
+    #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
     #             partition_columns: ["ColumnName"],
     #             location: { # required
     #               bucket: "Bucket", # required
@@ -3131,7 +3131,7 @@ module Aws::GlueDataBrew
     #
     #       {
     #         compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
+    #         format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
     #         partition_columns: ["ColumnName"],
     #         location: { # required
     #           bucket: "Bucket", # required
@@ -4546,7 +4546,7 @@ module Aws::GlueDataBrew
     #         outputs: [
     #           {
     #             compression_format: "GZIP", # accepts GZIP, LZ4, SNAPPY, BZIP2, DEFLATE, LZO, BROTLI, ZSTD, ZLIB
-    #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML
+    #             format: "CSV", # accepts CSV, JSON, PARQUET, GLUEPARQUET, AVRO, ORC, XML, TABLEAUHYPER
     #             partition_columns: ["ColumnName"],
     #             location: { # required
     #               bucket: "Bucket", # required

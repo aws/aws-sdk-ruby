@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2021-08-13)
+------------------
+
+* Feature - This release adds ReplicationGroupCreateTime field to ReplicationGroup which indicates the UTC time when ElastiCache ReplicationGroup is created
+
 1.59.0 (2021-07-30)
 ------------------
 

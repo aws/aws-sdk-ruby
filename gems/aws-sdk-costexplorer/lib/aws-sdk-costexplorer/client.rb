@@ -469,6 +469,10 @@ module Aws::CostExplorer
     # @option params [String] :default_value
     #   The default value for the cost category.
     #
+    # @option params [Array<Types::CostCategorySplitChargeRule>] :split_charge_rules
+    #   The split charge rules used to allocate your charges between your Cost
+    #   Category values.
+    #
     # @return [Types::CreateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCostCategoryDefinitionResponse#cost_category_arn #cost_category_arn} => String
@@ -520,6 +524,19 @@ module Aws::CostExplorer
     #       },
     #     ],
     #     default_value: "CostCategoryValue",
+    #     split_charge_rules: [
+    #       {
+    #         source: "GenericString", # required
+    #         targets: ["GenericString"], # required
+    #         method: "FIXED", # required, accepts FIXED, PROPORTIONAL, EVEN
+    #         parameters: [
+    #           {
+    #             type: "ALLOCATION_PERCENTAGES", # required, accepts ALLOCATION_PERCENTAGES
+    #             values: ["GenericString"], # required
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -671,6 +688,15 @@ module Aws::CostExplorer
     #   resp.cost_category.rules[0].inherited_value.dimension_name #=> String, one of "LINKED_ACCOUNT_NAME", "TAG"
     #   resp.cost_category.rules[0].inherited_value.dimension_key #=> String
     #   resp.cost_category.rules[0].type #=> String, one of "REGULAR", "INHERITED_VALUE"
+    #   resp.cost_category.split_charge_rules #=> Array
+    #   resp.cost_category.split_charge_rules[0].source #=> String
+    #   resp.cost_category.split_charge_rules[0].targets #=> Array
+    #   resp.cost_category.split_charge_rules[0].targets[0] #=> String
+    #   resp.cost_category.split_charge_rules[0].method #=> String, one of "FIXED", "PROPORTIONAL", "EVEN"
+    #   resp.cost_category.split_charge_rules[0].parameters #=> Array
+    #   resp.cost_category.split_charge_rules[0].parameters[0].type #=> String, one of "ALLOCATION_PERCENTAGES"
+    #   resp.cost_category.split_charge_rules[0].parameters[0].values #=> Array
+    #   resp.cost_category.split_charge_rules[0].parameters[0].values[0] #=> String
     #   resp.cost_category.processing_status #=> Array
     #   resp.cost_category.processing_status[0].component #=> String, one of "COST_EXPLORER"
     #   resp.cost_category.processing_status[0].status #=> String, one of "PROCESSING", "APPLIED"
@@ -685,8 +711,8 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves all of the cost anomalies detected on your account, during
-    # the time period specified by the `DateInterval` object.
+    # Retrieves all of the cost anomalies detected on your account during
+    # the time period that's specified by the `DateInterval` object.
     #
     # @option params [String] :monitor_arn
     #   Retrieves all of the cost anomalies detected for a specific cost
@@ -706,9 +732,9 @@ module Aws::CostExplorer
     #   retrieve anomalies, with an estimated dollar impact greater than 200.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @option params [Integer] :max_results
     #   The number of entries a paginated response contains.
@@ -773,12 +799,12 @@ module Aws::CostExplorer
     #   A list of cost anomaly monitor ARNs.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @option params [Integer] :max_results
-    #   The number of entries a paginated response contains.
+    #   The number of entries that a paginated response contains.
     #
     # @return [Types::GetAnomalyMonitorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -846,9 +872,9 @@ module Aws::CostExplorer
     #   Cost anomaly monitor ARNs.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @option params [Integer] :max_results
     #   The number of entries a paginated response contains.
@@ -893,13 +919,13 @@ module Aws::CostExplorer
     end
 
     # Retrieves cost and usage metrics for your account. You can specify
-    # which cost and usage-related metric, such as `BlendedCosts` or
-    # `UsageQuantity`, that you want the request to return. You can also
-    # filter and group your data by various dimensions, such as `SERVICE` or
-    # `AZ`, in a specific time range. For a complete list of valid
-    # dimensions, see the [GetDimensionValues][1] operation. Management
-    # account in an organization in AWS Organizations have access to all
-    # member accounts.
+    # which cost and usage-related metric that you want the request to
+    # return. For example, you can specify `BlendedCosts` or
+    # `UsageQuantity`. You can also filter and group your data by various
+    # dimensions, such as `SERVICE` or `AZ`, in a specific time range. For a
+    # complete list of valid dimensions, see the [GetDimensionValues][1]
+    # operation. Management account in an organization in Organizations have
+    # access to all member accounts.
     #
     # For information about filter limitations, see [Quotas and
     # restrictions][2] in the *Billing and Cost Management User Guide*.
@@ -910,23 +936,23 @@ module Aws::CostExplorer
     # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   Sets the start and end dates for retrieving AWS costs. The start date
-    #   is inclusive, but the end date is exclusive. For example, if `start`
-    #   is `2017-01-01` and `end` is `2017-05-01`, then the cost and usage
-    #   data is retrieved from `2017-01-01` up to and including `2017-04-30`
-    #   but not including `2017-05-01`.
+    #   Sets the start date and end date for retrieving Amazon Web Services
+    #   costs. The start date is inclusive, but the end date is exclusive. For
+    #   example, if `start` is `2017-01-01` and `end` is `2017-05-01`, then
+    #   the cost and usage data is retrieved from `2017-01-01` up to and
+    #   including `2017-04-30` but not including `2017-05-01`.
     #
     # @option params [required, String] :granularity
-    #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`, or `HOURLY`. If
-    #   `Granularity` isn't set, the response object doesn't include the
-    #   `Granularity`, either `MONTHLY` or `DAILY`, or `HOURLY`.
+    #   Sets the Amazon Web Services cost granularity to `MONTHLY` or `DAILY`,
+    #   or `HOURLY`. If `Granularity` isn't set, the response object doesn't
+    #   include the `Granularity`, either `MONTHLY` or `DAILY`, or `HOURLY`.
     #
     # @option params [Types::Expression] :filter
-    #   Filters AWS costs by different dimensions. For example, you can
-    #   specify `SERVICE` and `LINKED_ACCOUNT` and get the costs that are
-    #   associated with that account's usage of that service. You can nest
-    #   `Expression` objects to define any combination of dimension filters.
-    #   For more information, see [Expression][1].
+    #   Filters Amazon Web Services costs by different dimensions. For
+    #   example, you can specify `SERVICE` and `LINKED_ACCOUNT` and get the
+    #   costs that are associated with that account's usage of that service.
+    #   You can nest `Expression` objects to define any combination of
+    #   dimension filters. For more information, see [Expression][1].
     #
     #
     #
@@ -945,7 +971,7 @@ module Aws::CostExplorer
     #   usage numbers without taking into account the units. For example, if
     #   you aggregate `usageQuantity` across all of Amazon EC2, the results
     #   aren't meaningful because Amazon EC2 compute hours and data transfer
-    #   are measured in different units (for example, hours vs. GB). To get
+    #   are measured in different units (for example, hours and GB). To get
     #   more meaningful `UsageQuantity` metrics, filter by `UsageType` or
     #   `UsageTypeGroups`.
     #
@@ -958,20 +984,22 @@ module Aws::CostExplorer
     #   [1]: http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
-    #   You can group AWS costs using up to two different groups, either
-    #   dimensions, tag keys, cost categories, or any two group by types.
+    #   You can group Amazon Web Services costs using up to two different
+    #   groups, either dimensions, tag keys, cost categories, or any two group
+    #   by types.
     #
-    #   When you group by tag key, you get all tag values, including empty
-    #   strings.
+    #   Valid values for the `DIMENSION` type are `AZ`, `INSTANCE_TYPE`,
+    #   `LEGAL_ENTITY_NAME`, `LINKED_ACCOUNT`, `OPERATION`, `PLATFORM`,
+    #   `PURCHASE_TYPE`, `SERVICE`, `TENANCY`, `RECORD_TYPE`, and
+    #   `USAGE_TYPE`.
     #
-    #   Valid values are `AZ`, `INSTANCE_TYPE`, `LEGAL_ENTITY_NAME`,
-    #   `LINKED_ACCOUNT`, `OPERATION`, `PLATFORM`, `PURCHASE_TYPE`, `SERVICE`,
-    #   `TAGS`, `TENANCY`, `RECORD_TYPE`, and `USAGE_TYPE`.
+    #   When you group by the `TAG` type and include a valid tag key, you get
+    #   all tag values, including empty strings.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @return [Types::GetCostAndUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1067,14 +1095,14 @@ module Aws::CostExplorer
     # return. You can also filter and group your data by various dimensions,
     # such as `SERVICE` or `AZ`, in a specific time range. For a complete
     # list of valid dimensions, see the [GetDimensionValues][1] operation.
-    # Management account in an organization in AWS Organizations have access
-    # to all member accounts. This API is currently available for the Amazon
+    # Management account in an organization in Organizations have access to
+    # all member accounts. This API is currently available for the Amazon
     # Elastic Compute Cloud – Compute service only.
     #
     # <note markdown="1"> This is an opt-in only feature. You can enable this feature from the
     # Cost Explorer Settings page. For information on how to access the
     # Settings page, see [Controlling Access for Cost Explorer][2] in the
-    # *AWS Billing and Cost Management User Guide*.
+    # *Billing and Cost Management User Guide*.
     #
     #  </note>
     #
@@ -1093,9 +1121,9 @@ module Aws::CostExplorer
     #   `2017-05-01`.
     #
     # @option params [required, String] :granularity
-    #   Sets the AWS cost granularity to `MONTHLY`, `DAILY`, or `HOURLY`. If
-    #   `Granularity` isn't set, the response object doesn't include the
-    #   `Granularity`, `MONTHLY`, `DAILY`, or `HOURLY`.
+    #   Sets the Amazon Web Services cost granularity to `MONTHLY`, `DAILY`,
+    #   or `HOURLY`. If `Granularity` isn't set, the response object doesn't
+    #   include the `Granularity`, `MONTHLY`, `DAILY`, or `HOURLY`.
     #
     # @option params [required, Types::Expression] :filter
     #   Filters Amazon Web Services costs by different dimensions. For
@@ -1142,9 +1170,9 @@ module Aws::CostExplorer
     #   groups: `DIMENSION`, `TAG`, `COST_CATEGORY`.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @return [Types::GetCostAndUsageWithResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1265,7 +1293,7 @@ module Aws::CostExplorer
     #     for `REGION==us-east-1 OR REGION==us-west-1`. For
     #     `GetRightsizingRecommendation`, the Region is a full name (for
     #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     looks like:
+    #     is as follows:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -1277,11 +1305,11 @@ module Aws::CostExplorer
     #
     #   * Compound dimension values with logical operations - You can use
     #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. This allows
-    #     you to filter on more advanced options. For example, you can filter
+    #     to create a list of one or more `Expression` objects. By doing this,
+    #     you can filter on more advanced options. For example, you can filter
     #     on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
     #     Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
-    #     looks like this:
+    #     is as follows:
     #
     #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
     #     [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
@@ -1298,13 +1326,13 @@ module Aws::CostExplorer
     #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
-    #   NOT is not supported. OR is not supported between different
+    #   NOT isn't supported. OR isn't supported between different
     #   dimensions, or dimensions and tags. NOT operators aren't supported.
     #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
     #   `RIGHTSIZING_TYPE`.
     #
     #    For the `GetReservationPurchaseRecommendation` action, only NOT is
-    #   supported. AND and OR are not supported. Dimensions are limited to
+    #   supported. AND and OR aren't supported. Dimensions are limited to
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
@@ -1345,9 +1373,9 @@ module Aws::CostExplorer
     #
     # @option params [String] :next_page_token
     #   If the number of objects that are still available for retrieval
-    #   exceeds the limit, AWS returns a NextPageToken value in the response.
-    #   To retrieve the next batch of objects, provide the NextPageToken from
-    #   the prior call in your next request.
+    #   exceeds the limit, Amazon Web Services returns a NextPageToken value
+    #   in the response. To retrieve the next batch of objects, provide the
+    #   NextPageToken from the prior call in your next request.
     #
     # @return [Types::GetCostCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1595,10 +1623,10 @@ module Aws::CostExplorer
     #   The value that you want to search the filter values for.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   The start and end dates for retrieving the dimension values. The start
-    #   date is inclusive, but the end date is exclusive. For example, if
-    #   `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost and
-    #   usage data is retrieved from `2017-01-01` up to and including
+    #   The start date and end date for retrieving the dimension values. The
+    #   start date is inclusive, but the end date is exclusive. For example,
+    #   if `start` is `2017-01-01` and `end` is `2017-05-01`, then the cost
+    #   and usage data is retrieved from `2017-01-01` up to and including
     #   `2017-04-30` but not including `2017-05-01`.
     #
     # @option params [required, String] :dimension
@@ -1626,11 +1654,11 @@ module Aws::CostExplorer
     #     `m4.xlarge`.
     #
     #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
-    #     AWS services, such as Amazon Web Services.
+    #     Amazon Web Services services, such as Amazon Web Services.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
-    #     AWS ID of the member account.
+    #     Amazon Web Services ID of the member account.
     #
     #   * OPERATING\_SYSTEM - The operating system. Examples are Windows or
     #     Linux.
@@ -1645,7 +1673,7 @@ module Aws::CostExplorer
     #     usage is related. Examples include On-Demand Instances and Standard
     #     Reserved Instances.
     #
-    #   * SERVICE - The AWS service such as Amazon DynamoDB.
+    #   * SERVICE - The Amazon Web Services service such as Amazon DynamoDB.
     #
     #   * USAGE\_TYPE - The type of usage. An example is
     #     DataTransfer-In-Bytes. The response for the `GetDimensionValues`
@@ -1655,7 +1683,7 @@ module Aws::CostExplorer
     #     is Amazon EC2: CloudWatch – Alarms. The response for this operation
     #     includes a unit attribute.
     #
-    #   * REGION - The AWS Region.
+    #   * REGION - The Amazon Web Services Region.
     #
     #   * RECORD\_TYPE - The different types of charges such as RI fees, usage
     #     costs, tax refunds, and credits.
@@ -1680,12 +1708,12 @@ module Aws::CostExplorer
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
-    #     AWS ID of the member account.
+    #     Amazon Web Services ID of the member account.
     #
     #   * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
     #     Linux.
     #
-    #   * REGION - The AWS Region.
+    #   * REGION - The Amazon Web Services Region.
     #
     #   * SCOPE (Utilization only) - The scope of a Reserved Instance (RI).
     #     Values are regional or a single Availability Zone.
@@ -1705,13 +1733,13 @@ module Aws::CostExplorer
     #   * PAYMENT\_OPTION - Payment option for the given Savings Plans (for
     #     example, All Upfront)
     #
-    #   * REGION - The AWS Region.
+    #   * REGION - The Amazon Web Services Region.
     #
     #   * INSTANCE\_TYPE\_FAMILY - The family of instances (For example, `m5`)
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
-    #     AWS ID of the member account.
+    #     Amazon Web Services ID of the member account.
     #
     #   * SAVINGS\_PLAN\_ARN - The unique identifier for your Savings Plan
     #
@@ -1724,7 +1752,7 @@ module Aws::CostExplorer
     #     for `REGION==us-east-1 OR REGION==us-west-1`. For
     #     `GetRightsizingRecommendation`, the Region is a full name (for
     #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     looks like:
+    #     is as follows:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -1736,11 +1764,11 @@ module Aws::CostExplorer
     #
     #   * Compound dimension values with logical operations - You can use
     #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. This allows
-    #     you to filter on more advanced options. For example, you can filter
+    #     to create a list of one or more `Expression` objects. By doing this,
+    #     you can filter on more advanced options. For example, you can filter
     #     on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
     #     Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
-    #     looks like this:
+    #     is as follows:
     #
     #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
     #     [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
@@ -1757,13 +1785,13 @@ module Aws::CostExplorer
     #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
-    #   NOT is not supported. OR is not supported between different
+    #   NOT isn't supported. OR isn't supported between different
     #   dimensions, or dimensions and tags. NOT operators aren't supported.
     #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
     #   `RIGHTSIZING_TYPE`.
     #
     #    For the `GetReservationPurchaseRecommendation` action, only NOT is
-    #   supported. AND and OR are not supported. Dimensions are limited to
+    #   supported. AND and OR aren't supported. Dimensions are limited to
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
@@ -1803,9 +1831,9 @@ module Aws::CostExplorer
     #   For `GetDimensionValues`, MaxResults has an upper limit of 1000.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @return [Types::GetDimensionValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1952,8 +1980,8 @@ module Aws::CostExplorer
     #   * TENANCY
     #
     # @option params [String] :granularity
-    #   The granularity of the AWS cost data for the reservation. Valid values
-    #   are `MONTHLY` and `DAILY`.
+    #   The granularity of the Amazon Web Services cost data for the
+    #   reservation. Valid values are `MONTHLY` and `DAILY`.
     #
     #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
     #   isn't set, the response object doesn't include `Granularity`, either
@@ -2011,9 +2039,9 @@ module Aws::CostExplorer
     #   values in a request.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @option params [Types::SortDefinition] :sort_by
     #   The value by which you want to sort the data.
@@ -2044,9 +2072,9 @@ module Aws::CostExplorer
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects that you returned for this request. If
-    #   more objects are available, in the response, AWS provides a
-    #   NextPageToken value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   more objects are available, in the response, Amazon Web Services
+    #   provides a NextPageToken value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #
     # @return [Types::GetReservationCoverageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2157,22 +2185,24 @@ module Aws::CostExplorer
     # recommendations could help you reduce your costs. Reservations provide
     # a discounted hourly rate (up to 75%) compared to On-Demand pricing.
     #
-    # AWS generates your recommendations by identifying your On-Demand usage
-    # during a specific time period and collecting your usage into
-    # categories that are eligible for a reservation. After AWS has these
-    # categories, it simulates every combination of reservations in each
-    # category of usage to identify the best number of each type of RI to
-    # purchase to maximize your estimated savings.
+    # Amazon Web Services generates your recommendations by identifying your
+    # On-Demand usage during a specific time period and collecting your
+    # usage into categories that are eligible for a reservation. After
+    # Amazon Web Services has these categories, it simulates every
+    # combination of reservations in each category of usage to identify the
+    # best number of each type of RI to purchase to maximize your estimated
+    # savings.
     #
-    # For example, AWS automatically aggregates your Amazon EC2 Linux,
-    # shared tenancy, and c4 family usage in the US West (Oregon) Region and
-    # recommends that you buy size-flexible regional reservations to apply
-    # to the c4 family usage. AWS recommends the smallest size instance in
-    # an instance family. This makes it easier to purchase a size-flexible
-    # RI. AWS also shows the equal number of normalized units so that you
-    # can purchase any instance size that you want. For this example, your
-    # RI recommendation would be for `c4.large` because that is the smallest
-    # size instance in the c4 instance family.
+    # For example, Amazon Web Services automatically aggregates your Amazon
+    # EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon)
+    # Region and recommends that you buy size-flexible regional reservations
+    # to apply to the c4 family usage. Amazon Web Services recommends the
+    # smallest size instance in an instance family. This makes it easier to
+    # purchase a size-flexible RI. Amazon Web Services also shows the equal
+    # number of normalized units so that you can purchase any instance size
+    # that you want. For this example, your RI recommendation would be for
+    # `c4.large` because that is the smallest size instance in the c4
+    # instance family.
     #
     # @option params [String] :account_id
     #   The account ID that is associated with the recommendation.
@@ -2189,7 +2219,7 @@ module Aws::CostExplorer
     #     for `REGION==us-east-1 OR REGION==us-west-1`. For
     #     `GetRightsizingRecommendation`, the Region is a full name (for
     #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     looks like:
+    #     is as follows:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -2201,11 +2231,11 @@ module Aws::CostExplorer
     #
     #   * Compound dimension values with logical operations - You can use
     #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. This allows
-    #     you to filter on more advanced options. For example, you can filter
+    #     to create a list of one or more `Expression` objects. By doing this,
+    #     you can filter on more advanced options. For example, you can filter
     #     on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
     #     Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
-    #     looks like this:
+    #     is as follows:
     #
     #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
     #     [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
@@ -2222,13 +2252,13 @@ module Aws::CostExplorer
     #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
-    #   NOT is not supported. OR is not supported between different
+    #   NOT isn't supported. OR isn't supported between different
     #   dimensions, or dimensions and tags. NOT operators aren't supported.
     #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
     #   `RIGHTSIZING_TYPE`.
     #
     #    For the `GetReservationPurchaseRecommendation` action, only NOT is
-    #   supported. AND and OR are not supported. Dimensions are limited to
+    #   supported. AND and OR aren't supported. Dimensions are limited to
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
@@ -2241,8 +2271,8 @@ module Aws::CostExplorer
     #   accounts only.
     #
     # @option params [String] :lookback_period_in_days
-    #   The number of previous days that you want AWS to consider when it
-    #   calculates your recommendations.
+    #   The number of previous days that you want Amazon Web Services to
+    #   consider when it calculates your recommendations.
     #
     # @option params [String] :term_in_years
     #   The reservation term that you want recommendations for.
@@ -2495,15 +2525,15 @@ module Aws::CostExplorer
     #   Supported values for `SortOrder` are `ASCENDING` or `DESCENDING`.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects that you returned for this request. If
-    #   more objects are available, in the response, AWS provides a
-    #   NextPageToken value that you can use in a subsequent call to get the
-    #   next batch of objects.
+    #   more objects are available, in the response, Amazon Web Services
+    #   provides a NextPageToken value that you can use in a subsequent call
+    #   to get the next batch of objects.
     #
     # @return [Types::GetReservationUtilizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2641,8 +2671,8 @@ module Aws::CostExplorer
     # Recommendations are generated to either downsize or terminate
     # instances, along with providing savings detail and metrics. For
     # details on calculation and function, see [Optimizing Your Cost with
-    # Rightsizing Recommendations][1] in the *AWS Billing and Cost
-    # Management User Guide*.
+    # Rightsizing Recommendations][1] in the *Billing and Cost Management
+    # User Guide*.
     #
     #
     #
@@ -2657,7 +2687,7 @@ module Aws::CostExplorer
     #     for `REGION==us-east-1 OR REGION==us-west-1`. For
     #     `GetRightsizingRecommendation`, the Region is a full name (for
     #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     looks like:
+    #     is as follows:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -2669,11 +2699,11 @@ module Aws::CostExplorer
     #
     #   * Compound dimension values with logical operations - You can use
     #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. This allows
-    #     you to filter on more advanced options. For example, you can filter
+    #     to create a list of one or more `Expression` objects. By doing this,
+    #     you can filter on more advanced options. For example, you can filter
     #     on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
     #     Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
-    #     looks like this:
+    #     is as follows:
     #
     #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
     #     [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
@@ -2690,13 +2720,13 @@ module Aws::CostExplorer
     #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
-    #   NOT is not supported. OR is not supported between different
+    #   NOT isn't supported. OR isn't supported between different
     #   dimensions, or dimensions and tags. NOT operators aren't supported.
     #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
     #   `RIGHTSIZING_TYPE`.
     #
     #    For the `GetReservationPurchaseRecommendation` action, only NOT is
-    #   supported. AND and OR are not supported. Dimensions are limited to
+    #   supported. AND and OR aren't supported. Dimensions are limited to
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
@@ -3527,7 +3557,7 @@ module Aws::CostExplorer
     #     for `REGION==us-east-1 OR REGION==us-west-1`. For
     #     `GetRightsizingRecommendation`, the Region is a full name (for
     #     example, `REGION==US East (N. Virginia)`. The `Expression` example
-    #     looks like:
+    #     is as follows:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -3539,11 +3569,11 @@ module Aws::CostExplorer
     #
     #   * Compound dimension values with logical operations - You can use
     #     multiple `Expression` types and the logical operators `AND/OR/NOT`
-    #     to create a list of one or more `Expression` objects. This allows
-    #     you to filter on more advanced options. For example, you can filter
+    #     to create a list of one or more `Expression` objects. By doing this,
+    #     you can filter on more advanced options. For example, you can filter
     #     on `((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type ==
     #     Type1)) AND (USAGE_TYPE != DataTransfer)`. The `Expression` for that
-    #     looks like this:
+    #     is as follows:
     #
     #     `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "REGION", "Values":
     #     [ "us-east-1", "us-west-1" ] \}\}, \{"Tags": \{ "Key": "TagName",
@@ -3560,13 +3590,13 @@ module Aws::CostExplorer
     #     "USAGE_TYPE", "Values": [ "DataTransfer" ] \} \} `
     #
     #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
-    #   NOT is not supported. OR is not supported between different
+    #   NOT isn't supported. OR isn't supported between different
     #   dimensions, or dimensions and tags. NOT operators aren't supported.
     #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
     #   `RIGHTSIZING_TYPE`.
     #
     #    For the `GetReservationPurchaseRecommendation` action, only NOT is
-    #   supported. AND and OR are not supported. Dimensions are limited to
+    #   supported. AND and OR aren't supported. Dimensions are limited to
     #   `LINKED_ACCOUNT`.
     #
     #    </note>
@@ -3605,9 +3635,9 @@ module Aws::CostExplorer
     #   For `GetTags`, MaxResults has an upper limit of 1000.
     #
     # @option params [String] :next_page_token
-    #   The token to retrieve the next set of results. AWS provides the token
-    #   when the response from a previous call has more results than the
-    #   maximum page size.
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
     #
     # @return [Types::GetTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3930,7 +3960,7 @@ module Aws::CostExplorer
     end
 
     # Updates an existing cost anomaly monitor. The changes made are applied
-    # going forward, and does not change anomalies detected in the past.
+    # going forward, and doesn'tt change anomalies detected in the past.
     #
     # @option params [required, String] :monitor_arn
     #   Cost anomaly monitor Amazon Resource Names (ARNs).
@@ -3971,7 +4001,7 @@ module Aws::CostExplorer
     #   The update to the threshold value for receiving notifications.
     #
     # @option params [String] :frequency
-    #   The update to the frequency value at which subscribers will receive
+    #   The update to the frequency value that subscribers receive
     #   notifications.
     #
     # @option params [Array<String>] :monitor_arn_list
@@ -3981,7 +4011,7 @@ module Aws::CostExplorer
     #   The update to the subscriber list.
     #
     # @option params [String] :subscription_name
-    #   The subscription's new name.
+    #   The new name of the subscription.
     #
     # @return [Types::UpdateAnomalySubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4039,6 +4069,10 @@ module Aws::CostExplorer
     # @option params [String] :default_value
     #   The default value for the cost category.
     #
+    # @option params [Array<Types::CostCategorySplitChargeRule>] :split_charge_rules
+    #   The split charge rules used to allocate your charges between your Cost
+    #   Category values.
+    #
     # @return [Types::UpdateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateCostCategoryDefinitionResponse#cost_category_arn #cost_category_arn} => String
@@ -4090,6 +4124,19 @@ module Aws::CostExplorer
     #       },
     #     ],
     #     default_value: "CostCategoryValue",
+    #     split_charge_rules: [
+    #       {
+    #         source: "GenericString", # required
+    #         targets: ["GenericString"], # required
+    #         method: "FIXED", # required, accepts FIXED, PROPORTIONAL, EVEN
+    #         parameters: [
+    #           {
+    #             type: "ALLOCATION_PERCENTAGES", # required, accepts ALLOCATION_PERCENTAGES
+    #             values: ["GenericString"], # required
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4119,7 +4166,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

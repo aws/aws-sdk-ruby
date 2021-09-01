@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2021-08-31)
+------------------
+
+* Feature - Documentation updates for Compute Optimizer
+
+1.22.0 (2021-08-26)
+------------------
+
+* Feature - Adds support for 1) the AWS Graviton (AWS_ARM64) recommendation preference for Amazon EC2 instance and Auto Scaling group recommendations, and 2) the ability to get the enrollment statuses for all member accounts of an organization.
+
 1.21.0 (2021-07-30)
 ------------------
 

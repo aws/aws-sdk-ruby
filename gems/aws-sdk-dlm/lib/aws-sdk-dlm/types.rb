@@ -111,6 +111,10 @@ module Aws::DLM
     #                     interval: 1,
     #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                   },
+    #                   deprecate_rule: {
+    #                     interval: 1,
+    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                   },
     #                 },
     #               ],
     #               share_rules: [
@@ -120,6 +124,11 @@ module Aws::DLM
     #                   unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                 },
     #               ],
+    #               deprecate_rule: {
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
     #             },
     #           ],
     #           parameters: {
@@ -227,8 +236,9 @@ module Aws::DLM
     #   resource, specify `OUTPOST_LOCAL`. If you omit this parameter,
     #   `CLOUD` is used by default.
     #
-    #   If the policy targets resources in an AWS Region, then you must
-    #   create snapshots in the same Region as the source resource.
+    #   If the policy targets resources in an Amazon Web Services Region,
+    #   then you must create snapshots in the same Region as the source
+    #   resource.
     #
     #   If the policy targets resources on an Outpost, then you can create
     #   snapshots on the same Outpost as the source resource, or in the
@@ -314,6 +324,37 @@ module Aws::DLM
       include Aws::Structure
     end
 
+    # Specifies an AMI deprecation rule for cross-Region AMI copies created
+    # by a cross-Region copy rule.
+    #
+    # @note When making an API call, you may pass CrossRegionCopyDeprecateRule
+    #   data as a hash:
+    #
+    #       {
+    #         interval: 1,
+    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #       }
+    #
+    # @!attribute [rw] interval
+    #   The period after which to deprecate the cross-Region AMI copies. The
+    #   period must be less than or equal to the cross-Region AMI copy
+    #   retention period, and it can't be greater than 10 years. This is
+    #   equivalent to 120 months, 520 weeks, or 3650 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_unit
+    #   The unit of time in which to measure the **Interval**.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyDeprecateRule AWS API Documentation
+    #
+    class CrossRegionCopyDeprecateRule < Struct.new(
+      :interval,
+      :interval_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the retention rule for cross-Region snapshot copies.
     #
     # @note When making an API call, you may pass CrossRegionCopyRetainRule
@@ -357,21 +398,26 @@ module Aws::DLM
     #           interval: 1,
     #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #         },
+    #         deprecate_rule: {
+    #           interval: 1,
+    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #         },
     #       }
     #
     # @!attribute [rw] target_region
-    #   The target Region for the snapshot copies.
+    #   Avoid using this parameter when creating new policies. Instead, use
+    #   **Target** to specify a target Region or a target Outpost for
+    #   snapshot copies.
     #
-    #   If you specify a target Region, you must omit **Target**. You cannot
-    #   specify a target Region and a target Outpost in the same rule.
+    #   For policies created before the **Target** parameter was introduced,
+    #   this parameter indicates the target Region for snapshot copies.
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The Amazon Resource Name (ARN) of the target AWS Outpost for the
-    #   snapshot copies.
+    #   The target Region or the Amazon Resource Name (ARN) of the target
+    #   Outpost for the snapshot copies.
     #
-    #   If you specify an ARN, you must omit **TargetRegion**. You cannot
-    #   specify a target Region and a target Outpost in the same rule.
+    #   Use this parameter instead of **TargetRegion**. Do not specify both.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -382,19 +428,25 @@ module Aws::DLM
     #   @return [Boolean]
     #
     # @!attribute [rw] cmk_arn
-    #   The Amazon Resource Name (ARN) of the AWS KMS customer master key
-    #   (CMK) to use for EBS encryption. If this parameter is not specified,
-    #   your AWS managed CMK for EBS is used.
+    #   The Amazon Resource Name (ARN) of the KMS key to use for EBS
+    #   encryption. If this parameter is not specified, the default KMS key
+    #   for the account is used.
     #   @return [String]
     #
     # @!attribute [rw] copy_tags
-    #   Copy all user-defined tags from the source snapshot to the copied
-    #   snapshot.
+    #   Indicates whether to copy all user-defined tags from the source
+    #   snapshot to the cross-Region snapshot copy.
     #   @return [Boolean]
     #
     # @!attribute [rw] retain_rule
-    #   The retention rule.
+    #   The retention rule that indicates how long snapshot copies are to be
+    #   retained in the destination Region.
     #   @return [Types::CrossRegionCopyRetainRule]
+    #
+    # @!attribute [rw] deprecate_rule
+    #   The AMI deprecation rule for cross-Region AMI copies created by the
+    #   rule.
+    #   @return [Types::CrossRegionCopyDeprecateRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyRule AWS API Documentation
     #
@@ -404,7 +456,8 @@ module Aws::DLM
       :encrypted,
       :cmk_arn,
       :copy_tags,
-      :retain_rule)
+      :retain_rule,
+      :deprecate_rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -432,6 +485,46 @@ module Aws::DLM
     #
     class DeleteLifecyclePolicyResponse < Aws::EmptyStructure; end
 
+    # Specifies an AMI deprecation rule for a schedule.
+    #
+    # @note When making an API call, you may pass DeprecateRule
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1,
+    #         interval: 1,
+    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #       }
+    #
+    # @!attribute [rw] count
+    #   If the schedule has a count-based retention rule, this parameter
+    #   specifies the number of oldest AMIs to deprecate. The count must be
+    #   less than or equal to the schedule's retention count, and it can't
+    #   be greater than 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval
+    #   If the schedule has an age-based retention rule, this parameter
+    #   specifies the period after which to deprecate AMIs created by the
+    #   schedule. The period must be less than or equal to the schedule's
+    #   retention period, and it can't be greater than 10 years. This is
+    #   equivalent to 120 months, 520 weeks, or 3650 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_unit
+    #   The unit of time in which to measure the **Interval**.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/DeprecateRule AWS API Documentation
+    #
+    class DeprecateRule < Struct.new(
+      :count,
+      :interval,
+      :interval_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the encryption settings for shared snapshots that are copied
     # across Regions.
     #
@@ -451,9 +544,9 @@ module Aws::DLM
     #   @return [Boolean]
     #
     # @!attribute [rw] cmk_arn
-    #   The Amazon Resource Name (ARN) of the AWS KMS customer master key
-    #   (CMK) to use for EBS encryption. If this parameter is not specified,
-    #   your AWS managed CMK for EBS is used.
+    #   The Amazon Resource Name (ARN) of the KMS key to use for EBS
+    #   encryption. If this parameter is not specified, the default KMS key
+    #   for the account is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/EncryptionConfiguration AWS API Documentation
@@ -482,9 +575,10 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] snapshot_owner
-    #   The IDs of the AWS accounts that can trigger policy by sharing
-    #   snapshots with your account. The policy only runs if one of the
-    #   specified AWS accounts shares a snapshot with your account.
+    #   The IDs of the Amazon Web Services accounts that can trigger policy
+    #   by sharing snapshots with your account. The policy only runs if one
+    #   of the specified Amazon Web Services accounts shares a snapshot with
+    #   your account.
     #   @return [Array<String>]
     #
     # @!attribute [rw] description_regex
@@ -524,8 +618,8 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] type
-    #   The source of the event. Currently only managed AWS CloudWatch
-    #   Events rules are supported.
+    #   The source of the event. Currently only managed CloudWatch Events
+    #   rules are supported.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -617,8 +711,8 @@ module Aws::DLM
     #
     #   Tags are strings in the format `key=value`.
     #
-    #   These user-defined tags are added in addition to the AWS-added
-    #   lifecycle tags.
+    #   These user-defined tags are added in addition to the Amazon Web
+    #   Services-added lifecycle tags.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePoliciesRequest AWS API Documentation
@@ -970,6 +1064,10 @@ module Aws::DLM
     #                   interval: 1,
     #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                 },
+    #                 deprecate_rule: {
+    #                   interval: 1,
+    #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                 },
     #               },
     #             ],
     #             share_rules: [
@@ -979,6 +1077,11 @@ module Aws::DLM
     #                 unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #               },
     #             ],
+    #             deprecate_rule: {
+    #               count: 1,
+    #               interval: 1,
+    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
     #           },
     #         ],
     #         parameters: {
@@ -1020,7 +1123,7 @@ module Aws::DLM
     #   `IMAGE_MANAGEMENT` to create a lifecycle policy that manages the
     #   lifecycle of EBS-backed AMIs. Specify `EVENT_BASED_POLICY ` to
     #   create an event-based policy that performs specific actions when a
-    #   defined event occurs in your AWS account.
+    #   defined event occurs in your Amazon Web Services account.
     #
     #   The default is `EBS_SNAPSHOT_MANAGEMENT`.
     #   @return [String]
@@ -1037,8 +1140,9 @@ module Aws::DLM
     #
     # @!attribute [rw] resource_locations
     #   The location of the resources to backup. If the source resources are
-    #   located in an AWS Region, specify `CLOUD`. If the source resources
-    #   are located on an AWS Outpost in your account, specify `OUTPOST`.
+    #   located in an Amazon Web Services Region, specify `CLOUD`. If the
+    #   source resources are located on an Outpost in your account, specify
+    #   `OUTPOST`.
     #
     #   If you specify `OUTPOST`, Amazon Data Lifecycle Manager backs up all
     #   resources of the specified type with matching target tags across all
@@ -1211,6 +1315,10 @@ module Aws::DLM
     #               interval: 1,
     #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #             },
+    #             deprecate_rule: {
+    #               interval: 1,
+    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
     #           },
     #         ],
     #         share_rules: [
@@ -1220,6 +1328,11 @@ module Aws::DLM
     #             unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #           },
     #         ],
+    #         deprecate_rule: {
+    #           count: 1,
+    #           interval: 1,
+    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1233,7 +1346,8 @@ module Aws::DLM
     #
     # @!attribute [rw] tags_to_add
     #   The tags to apply to policy-created resources. These user-defined
-    #   tags are in addition to the AWS-added lifecycle tags.
+    #   tags are in addition to the Amazon Web Services-added lifecycle
+    #   tags.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] variable_tags
@@ -1267,8 +1381,13 @@ module Aws::DLM
     #   @return [Array<Types::CrossRegionCopyRule>]
     #
     # @!attribute [rw] share_rules
-    #   The rule for sharing snapshots with other AWS accounts.
+    #   The rule for sharing snapshots with other Amazon Web Services
+    #   accounts.
     #   @return [Array<Types::ShareRule>]
+    #
+    # @!attribute [rw] deprecate_rule
+    #   The AMI deprecation rule for the schedule.
+    #   @return [Types::DeprecateRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Schedule AWS API Documentation
     #
@@ -1281,12 +1400,14 @@ module Aws::DLM
       :retain_rule,
       :fast_restore_rule,
       :cross_region_copy_rules,
-      :share_rules)
+      :share_rules,
+      :deprecate_rule)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Specifies a rule for sharing snapshots across AWS accounts.
+    # Specifies a rule for sharing snapshots across Amazon Web Services
+    # accounts.
     #
     # @note When making an API call, you may pass ShareRule
     #   data as a hash:
@@ -1298,12 +1419,13 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] target_accounts
-    #   The IDs of the AWS accounts with which to share the snapshots.
+    #   The IDs of the Amazon Web Services accounts with which to share the
+    #   snapshots.
     #   @return [Array<String>]
     #
     # @!attribute [rw] unshare_interval
-    #   The period after which snapshots that are shared with other AWS
-    #   accounts are automatically unshared.
+    #   The period after which snapshots that are shared with other Amazon
+    #   Web Services accounts are automatically unshared.
     #   @return [Integer]
     #
     # @!attribute [rw] unshare_interval_unit
@@ -1470,6 +1592,10 @@ module Aws::DLM
     #                     interval: 1,
     #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                   },
+    #                   deprecate_rule: {
+    #                     interval: 1,
+    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                   },
     #                 },
     #               ],
     #               share_rules: [
@@ -1479,6 +1605,11 @@ module Aws::DLM
     #                   unshare_interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                 },
     #               ],
+    #               deprecate_rule: {
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
     #             },
     #           ],
     #           parameters: {

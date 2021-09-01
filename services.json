@@ -96,6 +96,12 @@
   "Chime": {
     "models": "chime/2018-05-01"
   },
+  "ChimeSDKIdentity": {
+    "models": "chime-sdk-identity/2021-04-20"
+  },
+  "ChimeSDKMessaging": {
+    "models": "chime-sdk-messaging/2021-05-15"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },
@@ -595,6 +601,9 @@
   "MediaTailor": {
     "models": "mediatailor/2018-04-23"
   },
+  "MemoryDB": {
+    "models": "memorydb/2021-01-01"
+  },
   "Mgn": {
     "models": "mgn/2020-02-26"
   },
@@ -737,7 +746,7 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.1"
+      "aws-sigv4": "~> 1.4"
     },
     "removePlugins": [
       "Aws::Plugins::SignatureV4"
@@ -879,6 +888,9 @@
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15"
+  },
+  "SnowDeviceManagement": {
+    "models": "snow-device-management/2021-08-04"
   },
   "Snowball": {
     "models": "snowball/2016-06-30"

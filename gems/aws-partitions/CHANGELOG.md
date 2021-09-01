@@ -1,6 +1,70 @@
 Unreleased Changes
 ------------------
 
+1.494.0 (2021-09-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 1.9, 2.0, 2.1, and 2.2.
+
+1.493.0 (2021-08-31)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.492.0 (2021-08-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.491.0 (2021-08-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.490.0 (2021-08-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.489.0 (2021-08-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MemoryDB`.
+
+1.488.0 (2021-08-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.487.0 (2021-08-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.486.0 (2021-08-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SnowDeviceManagement`.
+
+1.485.0 (2021-08-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.484.0 (2021-08-06)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKMessaging`.
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKIdentity`.
+
+1.483.0 (2021-08-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.482.0 (2021-07-30)
 ------------------
 

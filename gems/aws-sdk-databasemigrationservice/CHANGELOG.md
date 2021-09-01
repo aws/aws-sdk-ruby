@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2021-08-23)
+------------------
+
+* Feature - Amazon AWS DMS service now support Redis target endpoint migration. Now S3 endpoint setting is capable to setup features which are used to be configurable only in extract connection attributes.
+
 1.56.0 (2021-07-30)
 ------------------
 

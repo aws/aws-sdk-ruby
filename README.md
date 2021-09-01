@@ -11,6 +11,7 @@
 * [Developer Guide](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/welcome.html)
 * [V3 Upgrading Guide](https://github.com/aws/aws-sdk-ruby/blob/version-3/V3_UPGRADING_GUIDE.md)
 * [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/ruby/)
+* [Github Discussions](https://github.com/aws/aws-sdk-ruby/discussions)
 
 ## Installation
 
@@ -256,6 +257,7 @@ Simply downcase the service module name for the helper:
 
 Please use any of these resources for getting help:
 
+* Ask a question on [Github Discussions](https://github.com/aws/aws-sdk-ruby/discussions).
 * Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`.
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
 
@@ -402,6 +404,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Signer                                            | Aws::Signer                          | aws-sdk-signer                          | 2017-08-25  |
 | AWS Single Sign-On                                    | Aws::SSO                             | aws-sdk-core                            | 2019-06-10  |
 | AWS Single Sign-On Admin                              | Aws::SSOAdmin                        | aws-sdk-ssoadmin                        | 2020-07-20  |
+| AWS Snow Device Management                            | Aws::SnowDeviceManagement            | aws-sdk-snowdevicemanagement            | 2021-08-04  |
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
@@ -426,6 +429,8 @@ RubyGems.org page under "LINKS" section.
 | Amazon Athena                                         | Aws::Athena                          | aws-sdk-athena                          | 2017-05-18  |
 | Amazon Augmented AI Runtime                           | Aws::AugmentedAIRuntime              | aws-sdk-augmentedairuntime              | 2019-11-07  |
 | Amazon Chime                                          | Aws::Chime                           | aws-sdk-chime                           | 2018-05-01  |
+| Amazon Chime SDK Identity                             | Aws::ChimeSDKIdentity                | aws-sdk-chimesdkidentity                | 2021-04-20  |
+| Amazon Chime SDK Messaging                            | Aws::ChimeSDKMessaging               | aws-sdk-chimesdkmessaging               | 2021-05-15  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                  | aws-sdk-clouddirectory                  | 2017-01-11  |
 | Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2020-05-31  |
 | Amazon CloudHSM                                       | Aws::CloudHSM                        | aws-sdk-cloudhsm                        | 2014-05-30  |
@@ -454,6 +459,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon DynamoDB Streams                               | Aws::DynamoDBStreams                 | aws-sdk-dynamodbstreams                 | 2012-08-10  |
 | Amazon EC2 Container Registry                         | Aws::ECR                             | aws-sdk-ecr                             | 2015-09-21  |
 | Amazon EC2 Container Service                          | Aws::ECS                             | aws-sdk-ecs                             | 2014-11-13  |
+| Amazon EMR                                            | Aws::EMR                             | aws-sdk-emr                             | 2009-03-31  |
 | Amazon EMR Containers                                 | Aws::EMRContainers                   | aws-sdk-emrcontainers                   | 2020-10-01  |
 | Amazon ElastiCache                                    | Aws::ElastiCache                     | aws-sdk-elasticache                     | 2015-02-02  |
 | Amazon Elastic  Inference                             | Aws::ElasticInference                | aws-sdk-elasticinference                | 2017-07-25  |
@@ -462,7 +468,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon Elastic Container Registry Public              | Aws::ECRPublic                       | aws-sdk-ecrpublic                       | 2020-10-30  |
 | Amazon Elastic File System                            | Aws::EFS                             | aws-sdk-efs                             | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | Aws::EKS                             | aws-sdk-eks                             | 2017-11-01  |
-| Amazon Elastic MapReduce                              | Aws::EMR                             | aws-sdk-emr                             | 2009-03-31  |
 | Amazon Elastic Transcoder                             | Aws::ElasticTranscoder               | aws-sdk-elastictranscoder               | 2012-09-25  |
 | Amazon Elasticsearch Service                          | Aws::ElasticsearchService            | aws-sdk-elasticsearchservice            | 2015-01-01  |
 | Amazon EventBridge                                    | Aws::EventBridge                     | aws-sdk-eventbridge                     | 2015-10-07  |
@@ -500,6 +505,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Macie 2                                        | Aws::Macie2                          | aws-sdk-macie2                          | 2020-01-01  |
 | Amazon Managed Blockchain                             | Aws::ManagedBlockchain               | aws-sdk-managedblockchain               | 2018-09-24  |
 | Amazon Mechanical Turk                                | Aws::MTurk                           | aws-sdk-mturk                           | 2017-01-17  |
+| Amazon MemoryDB                                       | Aws::MemoryDB                        | aws-sdk-memorydb                        | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                         | aws-sdk-neptune                         | 2014-10-31  |
 | Amazon Personalize                                    | Aws::Personalize                     | aws-sdk-personalize                     | 2018-05-22  |
 | Amazon Personalize Events                             | Aws::PersonalizeEvents               | aws-sdk-personalizeevents               | 2018-03-22  |

@@ -395,6 +395,7 @@ module Aws::EMR
     #               },
     #             },
     #           ],
+    #           custom_ami_id: "XmlStringMaxLen256",
     #         },
     #       ],
     #       launch_specifications: {
@@ -518,6 +519,7 @@ module Aws::EMR
     #             },
     #           ],
     #         },
+    #         custom_ami_id: "XmlStringMaxLen256",
     #       },
     #     ],
     #     job_flow_id: "XmlStringMaxLen256", # required
@@ -856,7 +858,7 @@ module Aws::EMR
     #   Amazon Web Services SSO Identity Store. For more information, see
     #   [UserId][1] and [GroupId][2] in the *Amazon Web Services SSO Identity
     #   Store API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   specified, but not both.
     #
     #
     #
@@ -867,7 +869,7 @@ module Aws::EMR
     #   The name of the user or group. For more information, see [UserName][1]
     #   and [DisplayName][2] in the *Amazon Web Services SSO Identity Store
     #   API Reference*. Either `IdentityName` or `IdentityId` must be
-    #   specified.
+    #   specified, but not both.
     #
     #
     #
@@ -1187,6 +1189,7 @@ module Aws::EMR
     #   resp.job_flows[0].instances.instance_groups[0].start_date_time #=> Time
     #   resp.job_flows[0].instances.instance_groups[0].ready_date_time #=> Time
     #   resp.job_flows[0].instances.instance_groups[0].end_date_time #=> Time
+    #   resp.job_flows[0].instances.instance_groups[0].custom_ami_id #=> String
     #   resp.job_flows[0].instances.normalized_instance_hours #=> Integer
     #   resp.job_flows[0].instances.ec2_key_name #=> String
     #   resp.job_flows[0].instances.ec2_subnet_id #=> String
@@ -1455,10 +1458,39 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Returns the auto-termination policy for an Amazon EMR cluster.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of the Amazon EMR cluster for which the
+    #   auto-termination policy will be fetched.
+    #
+    # @return [Types::GetAutoTerminationPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAutoTerminationPolicyOutput#auto_termination_policy #auto_termination_policy} => Types::AutoTerminationPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_auto_termination_policy({
+    #     cluster_id: "ClusterId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auto_termination_policy.idle_timeout #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetAutoTerminationPolicy AWS API Documentation
+    #
+    # @overload get_auto_termination_policy(params = {})
+    # @param [Hash] params ({})
+    def get_auto_termination_policy(params = {}, options = {})
+      req = build_request(:get_auto_termination_policy, params)
+      req.send_request(options)
+    end
+
     # Returns the Amazon EMR block public access configuration for your
-    # account in the current Region. For more information see [Configure
-    # Block Public Access for Amazon EMR][1] in the *Amazon EMR Management
-    # Guide*.
+    # Amazon Web Services account in the current Region. For more
+    # information see [Configure Block Public Access for Amazon EMR][1] in
+    # the *Amazon EMR Management Guide*.
     #
     #
     #
@@ -1625,12 +1657,12 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Provides the status of all clusters visible to this account. Allows
-    # you to filter the list of clusters based on certain criteria; for
-    # example, filtering by cluster creation date and time or by status.
-    # This call returns a maximum of 50 clusters in unsorted order per call,
-    # but returns a marker to track the paging of the cluster list across
-    # multiple ListClusters calls.
+    # Provides the status of all clusters visible to this Amazon Web
+    # Services account. Allows you to filter the list of clusters based on
+    # certain criteria; for example, filtering by cluster creation date and
+    # time or by status. This call returns a maximum of 50 clusters in
+    # unsorted order per call, but returns a marker to track the paging of
+    # the cluster list across multiple ListClusters calls.
     #
     # @option params [Time,DateTime,Date,Integer,String] :created_after
     #   The creation date and time beginning value filter for listing
@@ -1749,6 +1781,7 @@ module Aws::EMR
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.size_in_gb #=> Integer
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].device #=> String
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_optimized #=> Boolean
+    #   resp.instance_fleets[0].instance_type_specifications[0].custom_ami_id #=> String
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_duration_minutes #=> Integer
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_action #=> String, one of "SWITCH_TO_ON_DEMAND", "TERMINATE_CLUSTER"
     #   resp.instance_fleets[0].launch_specifications.spot_specification.block_duration_minutes #=> Integer
@@ -1855,6 +1888,7 @@ module Aws::EMR
     #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions #=> Array
     #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
     #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
+    #   resp.instance_groups[0].custom_ami_id #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroups AWS API Documentation
@@ -2049,9 +2083,9 @@ module Aws::EMR
     #   which is usually the case for the first request of ListReleaseLabels,
     #   the first page of results are determined by other filtering parameters
     #   or by the latest version. The `ListReleaseLabels` request fails if the
-    #   identity (AWS AccountID) and all filtering parameters are different
-    #   from the original request, or if the `NextToken` is expired or
-    #   tampered with.
+    #   identity (Amazon Web Services account ID) and all filtering parameters
+    #   are different from the original request, or if the `NextToken` is
+    #   expired or tampered with.
     #
     # @option params [Integer] :max_results
     #   Defines the maximum number of release labels to return in a single
@@ -2249,9 +2283,9 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Returns a list of all Amazon EMR Studios associated with the account.
-    # The list includes details such as ID, Studio Access URL, and creation
-    # time for each Studio.
+    # Returns a list of all Amazon EMR Studios associated with the Amazon
+    # Web Services account. The list includes details such as ID, Studio
+    # Access URL, and creation time for each Studio.
     #
     # @option params [String] :marker
     #   The pagination token that indicates the set of results to retrieve.
@@ -2525,10 +2559,47 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Creates or updates an auto-termination policy for an Amazon EMR
+    # cluster. An auto-termination policy defines the amount of idle time in
+    # seconds after which a cluster automatically terminates. For
+    # alternative cluster termination options, see [Control cluster
+    # termination][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of the Amazon EMR cluster to which the
+    #   auto-termination policy will be attached.
+    #
+    # @option params [Types::AutoTerminationPolicy] :auto_termination_policy
+    #   Specifies the auto-termination policy to attach to the cluster.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_auto_termination_policy({
+    #     cluster_id: "ClusterId", # required
+    #     auto_termination_policy: {
+    #       idle_timeout: 1,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoTerminationPolicy AWS API Documentation
+    #
+    # @overload put_auto_termination_policy(params = {})
+    # @param [Hash] params ({})
+    def put_auto_termination_policy(params = {}, options = {})
+      req = build_request(:put_auto_termination_policy, params)
+      req.send_request(options)
+    end
+
     # Creates or updates an Amazon EMR block public access configuration for
-    # your account in the current Region. For more information see
-    # [Configure Block Public Access for Amazon EMR][1] in the *Amazon EMR
-    # Management Guide*.
+    # your Amazon Web Services account in the current Region. For more
+    # information see [Configure Block Public Access for Amazon EMR][1] in
+    # the *Amazon EMR Management Guide*.
     #
     #
     #
@@ -2645,6 +2716,29 @@ module Aws::EMR
     # @param [Hash] params ({})
     def remove_auto_scaling_policy(params = {}, options = {})
       req = build_request(:remove_auto_scaling_policy, params)
+      req.send_request(options)
+    end
+
+    # Removes an auto-termination policy from an Amazon EMR cluster.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of the Amazon EMR cluster from which the
+    #   auto-termination policy will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_auto_termination_policy({
+    #     cluster_id: "ClusterId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoTerminationPolicy AWS API Documentation
+    #
+    # @overload remove_auto_termination_policy(params = {})
+    # @param [Hash] params ({})
+    def remove_auto_termination_policy(params = {}, options = {})
+      req = build_request(:remove_auto_termination_policy, params)
       req.send_request(options)
     end
 
@@ -2860,17 +2954,18 @@ module Aws::EMR
     #   supplied for the EMR cluster you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
-    #   Set this value to `true` so that IAM principals in the account
-    #   associated with the cluster can perform EMR actions on the cluster
-    #   that their IAM policies allow. This value defaults to `false` for
-    #   clusters created using the EMR API or the CLI [create-cluster][1]
-    #   command.
+    #   Set this value to `true` so that IAM principals in the Amazon Web
+    #   Services account associated with the cluster can perform EMR actions
+    #   on the cluster that their IAM policies allow. This value defaults to
+    #   `true` for clusters created using the EMR API or the CLI
+    #   [create-cluster][1] command.
     #
     #   When set to `false`, only the IAM principal that created the cluster
-    #   and the account root user can perform EMR actions for the cluster,
-    #   regardless of the IAM permissions policies attached to other IAM
-    #   principals. For more information, see [Understanding the EMR Cluster
-    #   VisibleToAllUsers Setting][2] in the *Amazon EMR Management Guide*.
+    #   and the Amazon Web Services account root user can perform EMR actions
+    #   for the cluster, regardless of the IAM permissions policies attached
+    #   to other IAM principals. For more information, see [Understanding the
+    #   EMR Cluster VisibleToAllUsers Setting][2] in the *Amazon EMRManagement
+    #   Guide*.
     #
     #
     #
@@ -2968,6 +3063,16 @@ module Aws::EMR
     # @option params [Array<Types::PlacementGroupConfig>] :placement_group_configs
     #   The specified placement group configuration for an Amazon EMR cluster.
     #
+    # @option params [Types::AutoTerminationPolicy] :auto_termination_policy
+    #   An auto-termination policy for an Amazon EMR cluster. An
+    #   auto-termination policy defines the amount of idle time in seconds
+    #   after which a cluster automatically terminates. For alternative
+    #   cluster termination options, see [Control cluster termination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -3056,6 +3161,7 @@ module Aws::EMR
     #               },
     #             ],
     #           },
+    #           custom_ami_id: "XmlStringMaxLen256",
     #         },
     #       ],
     #       instance_fleets: [
@@ -3094,6 +3200,7 @@ module Aws::EMR
     #                   },
     #                 },
     #               ],
+    #               custom_ami_id: "XmlStringMaxLen256",
     #             },
     #           ],
     #           launch_specifications: {
@@ -3222,6 +3329,9 @@ module Aws::EMR
     #         placement_strategy: "SPREAD", # accepts SPREAD, PARTITION, CLUSTER, NONE
     #       },
     #     ],
+    #     auto_termination_policy: {
+    #       idle_timeout: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3292,17 +3402,17 @@ module Aws::EMR
     end
 
     # Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When
-    # `true`, IAM principals in the account can perform EMR cluster actions
-    # that their IAM policies allow. When `false`, only the IAM principal
-    # that created the cluster and the account root user can perform EMR
-    # actions on the cluster, regardless of IAM permissions policies
-    # attached to other IAM principals.
+    # `true`, IAM principals in the Amazon Web Services account can perform
+    # EMR cluster actions that their IAM policies allow. When `false`, only
+    # the IAM principal that created the cluster and the Amazon Web Services
+    # account root user can perform EMR actions on the cluster, regardless
+    # of IAM permissions policies attached to other IAM principals.
     #
     # This action works on running clusters. When you create a cluster, use
     # the RunJobFlowInput$VisibleToAllUsers parameter.
     #
     # For more information, see [Understanding the EMR Cluster
-    # VisibleToAllUsers Setting][1] in the *Amazon EMR Management Guide*.
+    # VisibleToAllUsers Setting][1] in the *Amazon EMRManagement Guide*.
     #
     #
     #
@@ -3312,11 +3422,11 @@ module Aws::EMR
     #   The unique identifier of the job flow (cluster).
     #
     # @option params [required, Boolean] :visible_to_all_users
-    #   A value of `true` indicates that an IAM principal in the account can
-    #   perform EMR actions on the cluster that the IAM policies attached to
-    #   the principal allow. A value of `false` indicates that only the IAM
-    #   principal that created the cluster and the Amazon Web Services root
-    #   user can perform EMR actions on the cluster.
+    #   A value of `true` indicates that an IAM principal in the Amazon Web
+    #   Services account can perform EMR actions on the cluster that the IAM
+    #   policies attached to the principal allow. A value of `false` indicates
+    #   that only the IAM principal that created the cluster and the Amazon
+    #   Web Services root user can perform EMR actions on the cluster.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3584,7 +3694,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

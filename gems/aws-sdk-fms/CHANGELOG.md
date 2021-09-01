@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2021-08-25)
+------------------
+
+* Feature - AWS Firewall Manager now supports triggering resource cleanup workflow when account or resource goes out of policy scope for AWS WAF, Security group, AWS Network Firewall, and Amazon Route 53 Resolver DNS Firewall policies.
+
 1.39.0 (2021-07-30)
 ------------------
 

@@ -46,6 +46,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-braket', '~> 1')
   spec.add_dependency('aws-sdk-budgets', '~> 1')
   spec.add_dependency('aws-sdk-chime', '~> 1')
+  spec.add_dependency('aws-sdk-chimesdkidentity', '~> 1')
+  spec.add_dependency('aws-sdk-chimesdkmessaging', '~> 1')
   spec.add_dependency('aws-sdk-cloud9', '~> 1')
   spec.add_dependency('aws-sdk-clouddirectory', '~> 1')
   spec.add_dependency('aws-sdk-cloudformation', '~> 1')
@@ -196,6 +198,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-mediastore', '~> 1')
   spec.add_dependency('aws-sdk-mediastoredata', '~> 1')
   spec.add_dependency('aws-sdk-mediatailor', '~> 1')
+  spec.add_dependency('aws-sdk-memorydb', '~> 1')
   spec.add_dependency('aws-sdk-mgn', '~> 1')
   spec.add_dependency('aws-sdk-migrationhub', '~> 1')
   spec.add_dependency('aws-sdk-migrationhubconfig', '~> 1')
@@ -266,6 +269,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-shield', '~> 1')
   spec.add_dependency('aws-sdk-signer', '~> 1')
   spec.add_dependency('aws-sdk-simpledb', '~> 1')
+  spec.add_dependency('aws-sdk-snowdevicemanagement', '~> 1')
   spec.add_dependency('aws-sdk-snowball', '~> 1')
   spec.add_dependency('aws-sdk-states', '~> 1')
   spec.add_dependency('aws-sdk-storagegateway', '~> 1')
@@ -294,4 +298,6 @@ Gem::Specification.new do |spec|
     'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-resources',
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-resources/CHANGELOG.md'
   }
+
+  spec.required_ruby_version = '>= 2.3'
 end

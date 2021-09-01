@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2021-08-23)
+------------------
+
+* Feature - Documentation updates for AWS IoT SiteWise
+
+1.30.0 (2021-08-16)
+------------------
+
+* Feature - AWS IoT SiteWise added query window for the interpolation interval. AWS IoT SiteWise computes each interpolated value by using data points from the timestamp of each interval minus the window to the timestamp of each interval plus the window.
+
+1.29.0 (2021-08-03)
+------------------
+
+* Feature - My AWS Service (placeholder) - This release introduces custom Intervals and offset for tumbling window in metric for AWS IoT SiteWise.
+
 1.28.0 (2021-07-30)
 ------------------
 

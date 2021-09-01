@@ -36,6 +36,9 @@ module Aws::Glue
     BatchDeleteTableVersionList = Shapes::ListShape.new(name: 'BatchDeleteTableVersionList')
     BatchDeleteTableVersionRequest = Shapes::StructureShape.new(name: 'BatchDeleteTableVersionRequest')
     BatchDeleteTableVersionResponse = Shapes::StructureShape.new(name: 'BatchDeleteTableVersionResponse')
+    BatchGetBlueprintNames = Shapes::ListShape.new(name: 'BatchGetBlueprintNames')
+    BatchGetBlueprintsRequest = Shapes::StructureShape.new(name: 'BatchGetBlueprintsRequest')
+    BatchGetBlueprintsResponse = Shapes::StructureShape.new(name: 'BatchGetBlueprintsResponse')
     BatchGetCrawlersRequest = Shapes::StructureShape.new(name: 'BatchGetCrawlersRequest')
     BatchGetCrawlersResponse = Shapes::StructureShape.new(name: 'BatchGetCrawlersResponse')
     BatchGetDevEndpointsRequest = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsRequest')
@@ -66,6 +69,16 @@ module Aws::Glue
     BatchWindow = Shapes::IntegerShape.new(name: 'BatchWindow')
     BinaryColumnStatisticsData = Shapes::StructureShape.new(name: 'BinaryColumnStatisticsData')
     Blob = Shapes::BlobShape.new(name: 'Blob')
+    Blueprint = Shapes::StructureShape.new(name: 'Blueprint')
+    BlueprintDetails = Shapes::StructureShape.new(name: 'BlueprintDetails')
+    BlueprintNames = Shapes::ListShape.new(name: 'BlueprintNames')
+    BlueprintParameterSpec = Shapes::StringShape.new(name: 'BlueprintParameterSpec')
+    BlueprintParameters = Shapes::StringShape.new(name: 'BlueprintParameters')
+    BlueprintRun = Shapes::StructureShape.new(name: 'BlueprintRun')
+    BlueprintRunState = Shapes::StringShape.new(name: 'BlueprintRunState')
+    BlueprintRuns = Shapes::ListShape.new(name: 'BlueprintRuns')
+    BlueprintStatus = Shapes::StringShape.new(name: 'BlueprintStatus')
+    Blueprints = Shapes::ListShape.new(name: 'Blueprints')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanColumnStatisticsData = Shapes::StructureShape.new(name: 'BooleanColumnStatisticsData')
     BooleanNullable = Shapes::BooleanShape.new(name: 'BooleanNullable')
@@ -150,6 +163,8 @@ module Aws::Glue
     CrawlerState = Shapes::StringShape.new(name: 'CrawlerState')
     CrawlerStoppingException = Shapes::StructureShape.new(name: 'CrawlerStoppingException')
     CrawlerTargets = Shapes::StructureShape.new(name: 'CrawlerTargets')
+    CreateBlueprintRequest = Shapes::StructureShape.new(name: 'CreateBlueprintRequest')
+    CreateBlueprintResponse = Shapes::StructureShape.new(name: 'CreateBlueprintResponse')
     CreateClassifierRequest = Shapes::StructureShape.new(name: 'CreateClassifierRequest')
     CreateClassifierResponse = Shapes::StructureShape.new(name: 'CreateClassifierResponse')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
@@ -211,6 +226,8 @@ module Aws::Glue
     DecimalColumnStatisticsData = Shapes::StructureShape.new(name: 'DecimalColumnStatisticsData')
     DecimalNumber = Shapes::StructureShape.new(name: 'DecimalNumber')
     DeleteBehavior = Shapes::StringShape.new(name: 'DeleteBehavior')
+    DeleteBlueprintRequest = Shapes::StructureShape.new(name: 'DeleteBlueprintRequest')
+    DeleteBlueprintResponse = Shapes::StructureShape.new(name: 'DeleteBlueprintResponse')
     DeleteClassifierRequest = Shapes::StructureShape.new(name: 'DeleteClassifierRequest')
     DeleteClassifierResponse = Shapes::StructureShape.new(name: 'DeleteClassifierResponse')
     DeleteColumnStatisticsForPartitionRequest = Shapes::StructureShape.new(name: 'DeleteColumnStatisticsForPartitionRequest')
@@ -289,9 +306,16 @@ module Aws::Glue
     FindMatchesParameters = Shapes::StructureShape.new(name: 'FindMatchesParameters')
     FindMatchesTaskRunProperties = Shapes::StructureShape.new(name: 'FindMatchesTaskRunProperties')
     FormatString = Shapes::StringShape.new(name: 'FormatString')
+    Generic512CharString = Shapes::StringShape.new(name: 'Generic512CharString')
     GenericBoundedDouble = Shapes::FloatShape.new(name: 'GenericBoundedDouble')
     GenericMap = Shapes::MapShape.new(name: 'GenericMap')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
+    GetBlueprintRequest = Shapes::StructureShape.new(name: 'GetBlueprintRequest')
+    GetBlueprintResponse = Shapes::StructureShape.new(name: 'GetBlueprintResponse')
+    GetBlueprintRunRequest = Shapes::StructureShape.new(name: 'GetBlueprintRunRequest')
+    GetBlueprintRunResponse = Shapes::StructureShape.new(name: 'GetBlueprintRunResponse')
+    GetBlueprintRunsRequest = Shapes::StructureShape.new(name: 'GetBlueprintRunsRequest')
+    GetBlueprintRunsResponse = Shapes::StructureShape.new(name: 'GetBlueprintRunsResponse')
     GetCatalogImportStatusRequest = Shapes::StructureShape.new(name: 'GetCatalogImportStatusRequest')
     GetCatalogImportStatusResponse = Shapes::StructureShape.new(name: 'GetCatalogImportStatusResponse')
     GetClassifierRequest = Shapes::StructureShape.new(name: 'GetClassifierRequest')
@@ -411,6 +435,7 @@ module Aws::Glue
     HashString = Shapes::StringShape.new(name: 'HashString')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+    IllegalBlueprintStateException = Shapes::StructureShape.new(name: 'IllegalBlueprintStateException')
     IllegalWorkflowStateException = Shapes::StructureShape.new(name: 'IllegalWorkflowStateException')
     ImportCatalogToGlueRequest = Shapes::StructureShape.new(name: 'ImportCatalogToGlueRequest')
     ImportCatalogToGlueResponse = Shapes::StructureShape.new(name: 'ImportCatalogToGlueResponse')
@@ -447,10 +472,13 @@ module Aws::Glue
     LabelCount = Shapes::IntegerShape.new(name: 'LabelCount')
     LabelingSetGenerationTaskRunProperties = Shapes::StructureShape.new(name: 'LabelingSetGenerationTaskRunProperties')
     Language = Shapes::StringShape.new(name: 'Language')
+    LastActiveDefinition = Shapes::StructureShape.new(name: 'LastActiveDefinition')
     LastCrawlInfo = Shapes::StructureShape.new(name: 'LastCrawlInfo')
     LastCrawlStatus = Shapes::StringShape.new(name: 'LastCrawlStatus')
     LatestSchemaVersionBoolean = Shapes::BooleanShape.new(name: 'LatestSchemaVersionBoolean')
     LineageConfiguration = Shapes::StructureShape.new(name: 'LineageConfiguration')
+    ListBlueprintsRequest = Shapes::StructureShape.new(name: 'ListBlueprintsRequest')
+    ListBlueprintsResponse = Shapes::StructureShape.new(name: 'ListBlueprintsResponse')
     ListCrawlersRequest = Shapes::StructureShape.new(name: 'ListCrawlersRequest')
     ListCrawlersResponse = Shapes::StructureShape.new(name: 'ListCrawlersResponse')
     ListDevEndpointsRequest = Shapes::StructureShape.new(name: 'ListDevEndpointsRequest')
@@ -516,6 +544,9 @@ module Aws::Glue
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
+    OrchestrationIAMRoleArn = Shapes::StringShape.new(name: 'OrchestrationIAMRoleArn')
+    OrchestrationNameString = Shapes::StringShape.new(name: 'OrchestrationNameString')
+    OrchestrationS3Location = Shapes::StringShape.new(name: 'OrchestrationS3Location')
     OrchestrationStringList = Shapes::ListShape.new(name: 'OrchestrationStringList')
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderList = Shapes::ListShape.new(name: 'OrderList')
@@ -638,6 +669,8 @@ module Aws::Glue
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
     SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
     SortDirectionType = Shapes::StringShape.new(name: 'SortDirectionType')
+    StartBlueprintRunRequest = Shapes::StructureShape.new(name: 'StartBlueprintRunRequest')
+    StartBlueprintRunResponse = Shapes::StructureShape.new(name: 'StartBlueprintRunResponse')
     StartCrawlerRequest = Shapes::StructureShape.new(name: 'StartCrawlerRequest')
     StartCrawlerResponse = Shapes::StructureShape.new(name: 'StartCrawlerResponse')
     StartCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StartCrawlerScheduleRequest')
@@ -721,6 +754,8 @@ module Aws::Glue
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateBehavior = Shapes::StringShape.new(name: 'UpdateBehavior')
+    UpdateBlueprintRequest = Shapes::StructureShape.new(name: 'UpdateBlueprintRequest')
+    UpdateBlueprintResponse = Shapes::StructureShape.new(name: 'UpdateBlueprintResponse')
     UpdateClassifierRequest = Shapes::StructureShape.new(name: 'UpdateClassifierRequest')
     UpdateClassifierResponse = Shapes::StructureShape.new(name: 'UpdateClassifierResponse')
     UpdateColumnStatisticsForPartitionRequest = Shapes::StructureShape.new(name: 'UpdateColumnStatisticsForPartitionRequest')
@@ -862,6 +897,17 @@ module Aws::Glue
     BatchDeleteTableVersionResponse.add_member(:errors, Shapes::ShapeRef.new(shape: TableVersionErrors, location_name: "Errors"))
     BatchDeleteTableVersionResponse.struct_class = Types::BatchDeleteTableVersionResponse
 
+    BatchGetBlueprintNames.member = Shapes::ShapeRef.new(shape: OrchestrationNameString)
+
+    BatchGetBlueprintsRequest.add_member(:names, Shapes::ShapeRef.new(shape: BatchGetBlueprintNames, required: true, location_name: "Names"))
+    BatchGetBlueprintsRequest.add_member(:include_blueprint, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeBlueprint"))
+    BatchGetBlueprintsRequest.add_member(:include_parameter_spec, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeParameterSpec"))
+    BatchGetBlueprintsRequest.struct_class = Types::BatchGetBlueprintsRequest
+
+    BatchGetBlueprintsResponse.add_member(:blueprints, Shapes::ShapeRef.new(shape: Blueprints, location_name: "Blueprints"))
+    BatchGetBlueprintsResponse.add_member(:missing_blueprints, Shapes::ShapeRef.new(shape: BlueprintNames, location_name: "MissingBlueprints"))
+    BatchGetBlueprintsResponse.struct_class = Types::BatchGetBlueprintsResponse
+
     BatchGetCrawlersRequest.add_member(:crawler_names, Shapes::ShapeRef.new(shape: CrawlerNameList, required: true, location_name: "CrawlerNames"))
     BatchGetCrawlersRequest.struct_class = Types::BatchGetCrawlersRequest
 
@@ -958,6 +1004,40 @@ module Aws::Glue
     BinaryColumnStatisticsData.add_member(:average_length, Shapes::ShapeRef.new(shape: NonNegativeDouble, required: true, location_name: "AverageLength"))
     BinaryColumnStatisticsData.add_member(:number_of_nulls, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfNulls"))
     BinaryColumnStatisticsData.struct_class = Types::BinaryColumnStatisticsData
+
+    Blueprint.add_member(:name, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "Name"))
+    Blueprint.add_member(:description, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Description"))
+    Blueprint.add_member(:created_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedOn"))
+    Blueprint.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedOn"))
+    Blueprint.add_member(:parameter_spec, Shapes::ShapeRef.new(shape: BlueprintParameterSpec, location_name: "ParameterSpec"))
+    Blueprint.add_member(:blueprint_location, Shapes::ShapeRef.new(shape: GenericString, location_name: "BlueprintLocation"))
+    Blueprint.add_member(:blueprint_service_location, Shapes::ShapeRef.new(shape: GenericString, location_name: "BlueprintServiceLocation"))
+    Blueprint.add_member(:status, Shapes::ShapeRef.new(shape: BlueprintStatus, location_name: "Status"))
+    Blueprint.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorString, location_name: "ErrorMessage"))
+    Blueprint.add_member(:last_active_definition, Shapes::ShapeRef.new(shape: LastActiveDefinition, location_name: "LastActiveDefinition"))
+    Blueprint.struct_class = Types::Blueprint
+
+    BlueprintDetails.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "BlueprintName"))
+    BlueprintDetails.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "RunId"))
+    BlueprintDetails.struct_class = Types::BlueprintDetails
+
+    BlueprintNames.member = Shapes::ShapeRef.new(shape: OrchestrationNameString)
+
+    BlueprintRun.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "BlueprintName"))
+    BlueprintRun.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "RunId"))
+    BlueprintRun.add_member(:workflow_name, Shapes::ShapeRef.new(shape: NameString, location_name: "WorkflowName"))
+    BlueprintRun.add_member(:state, Shapes::ShapeRef.new(shape: BlueprintRunState, location_name: "State"))
+    BlueprintRun.add_member(:started_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "StartedOn"))
+    BlueprintRun.add_member(:completed_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CompletedOn"))
+    BlueprintRun.add_member(:error_message, Shapes::ShapeRef.new(shape: MessageString, location_name: "ErrorMessage"))
+    BlueprintRun.add_member(:rollback_error_message, Shapes::ShapeRef.new(shape: MessageString, location_name: "RollbackErrorMessage"))
+    BlueprintRun.add_member(:parameters, Shapes::ShapeRef.new(shape: BlueprintParameters, location_name: "Parameters"))
+    BlueprintRun.add_member(:role_arn, Shapes::ShapeRef.new(shape: OrchestrationIAMRoleArn, location_name: "RoleArn"))
+    BlueprintRun.struct_class = Types::BlueprintRun
+
+    BlueprintRuns.member = Shapes::ShapeRef.new(shape: BlueprintRun)
+
+    Blueprints.member = Shapes::ShapeRef.new(shape: Blueprint)
 
     BooleanColumnStatisticsData.add_member(:number_of_trues, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfTrues"))
     BooleanColumnStatisticsData.add_member(:number_of_falses, Shapes::ShapeRef.new(shape: NonNegativeLong, required: true, location_name: "NumberOfFalses"))
@@ -1203,6 +1283,15 @@ module Aws::Glue
     CrawlerTargets.add_member(:dynamo_db_targets, Shapes::ShapeRef.new(shape: DynamoDBTargetList, location_name: "DynamoDBTargets"))
     CrawlerTargets.add_member(:catalog_targets, Shapes::ShapeRef.new(shape: CatalogTargetList, location_name: "CatalogTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
+
+    CreateBlueprintRequest.add_member(:name, Shapes::ShapeRef.new(shape: OrchestrationNameString, required: true, location_name: "Name"))
+    CreateBlueprintRequest.add_member(:description, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Description"))
+    CreateBlueprintRequest.add_member(:blueprint_location, Shapes::ShapeRef.new(shape: OrchestrationS3Location, required: true, location_name: "BlueprintLocation"))
+    CreateBlueprintRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateBlueprintRequest.struct_class = Types::CreateBlueprintRequest
+
+    CreateBlueprintResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    CreateBlueprintResponse.struct_class = Types::CreateBlueprintResponse
 
     CreateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: CreateGrokClassifierRequest, location_name: "GrokClassifier"))
     CreateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: CreateXMLClassifierRequest, location_name: "XMLClassifier"))
@@ -1520,6 +1609,12 @@ module Aws::Glue
     DecimalNumber.add_member(:scale, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Scale"))
     DecimalNumber.struct_class = Types::DecimalNumber
 
+    DeleteBlueprintRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteBlueprintRequest.struct_class = Types::DeleteBlueprintRequest
+
+    DeleteBlueprintResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    DeleteBlueprintResponse.struct_class = Types::DeleteBlueprintResponse
+
     DeleteClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DeleteClassifierRequest.struct_class = Types::DeleteClassifierRequest
 
@@ -1776,6 +1871,30 @@ module Aws::Glue
 
     GenericMap.key = Shapes::ShapeRef.new(shape: GenericString)
     GenericMap.value = Shapes::ShapeRef.new(shape: GenericString)
+
+    GetBlueprintRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetBlueprintRequest.add_member(:include_blueprint, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeBlueprint"))
+    GetBlueprintRequest.add_member(:include_parameter_spec, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeParameterSpec"))
+    GetBlueprintRequest.struct_class = Types::GetBlueprintRequest
+
+    GetBlueprintResponse.add_member(:blueprint, Shapes::ShapeRef.new(shape: Blueprint, location_name: "Blueprint"))
+    GetBlueprintResponse.struct_class = Types::GetBlueprintResponse
+
+    GetBlueprintRunRequest.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: OrchestrationNameString, required: true, location_name: "BlueprintName"))
+    GetBlueprintRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, required: true, location_name: "RunId"))
+    GetBlueprintRunRequest.struct_class = Types::GetBlueprintRunRequest
+
+    GetBlueprintRunResponse.add_member(:blueprint_run, Shapes::ShapeRef.new(shape: BlueprintRun, location_name: "BlueprintRun"))
+    GetBlueprintRunResponse.struct_class = Types::GetBlueprintRunResponse
+
+    GetBlueprintRunsRequest.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "BlueprintName"))
+    GetBlueprintRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    GetBlueprintRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetBlueprintRunsRequest.struct_class = Types::GetBlueprintRunsRequest
+
+    GetBlueprintRunsResponse.add_member(:blueprint_runs, Shapes::ShapeRef.new(shape: BlueprintRuns, location_name: "BlueprintRuns"))
+    GetBlueprintRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    GetBlueprintRunsResponse.struct_class = Types::GetBlueprintRunsResponse
 
     GetCatalogImportStatusRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetCatalogImportStatusRequest.struct_class = Types::GetCatalogImportStatusRequest
@@ -2300,6 +2419,9 @@ module Aws::Glue
     IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
 
+    IllegalBlueprintStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    IllegalBlueprintStateException.struct_class = Types::IllegalBlueprintStateException
+
     IllegalWorkflowStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IllegalWorkflowStateException.struct_class = Types::IllegalWorkflowStateException
 
@@ -2435,6 +2557,13 @@ module Aws::Glue
     LabelingSetGenerationTaskRunProperties.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: UriString, location_name: "OutputS3Path"))
     LabelingSetGenerationTaskRunProperties.struct_class = Types::LabelingSetGenerationTaskRunProperties
 
+    LastActiveDefinition.add_member(:description, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Description"))
+    LastActiveDefinition.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedOn"))
+    LastActiveDefinition.add_member(:parameter_spec, Shapes::ShapeRef.new(shape: BlueprintParameterSpec, location_name: "ParameterSpec"))
+    LastActiveDefinition.add_member(:blueprint_location, Shapes::ShapeRef.new(shape: GenericString, location_name: "BlueprintLocation"))
+    LastActiveDefinition.add_member(:blueprint_service_location, Shapes::ShapeRef.new(shape: GenericString, location_name: "BlueprintServiceLocation"))
+    LastActiveDefinition.struct_class = Types::LastActiveDefinition
+
     LastCrawlInfo.add_member(:status, Shapes::ShapeRef.new(shape: LastCrawlStatus, location_name: "Status"))
     LastCrawlInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
     LastCrawlInfo.add_member(:log_group, Shapes::ShapeRef.new(shape: LogGroup, location_name: "LogGroup"))
@@ -2445,6 +2574,15 @@ module Aws::Glue
 
     LineageConfiguration.add_member(:crawler_lineage_settings, Shapes::ShapeRef.new(shape: CrawlerLineageSettings, location_name: "CrawlerLineageSettings"))
     LineageConfiguration.struct_class = Types::LineageConfiguration
+
+    ListBlueprintsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListBlueprintsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListBlueprintsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListBlueprintsRequest.struct_class = Types::ListBlueprintsRequest
+
+    ListBlueprintsResponse.add_member(:blueprints, Shapes::ShapeRef.new(shape: BlueprintNames, location_name: "Blueprints"))
+    ListBlueprintsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    ListBlueprintsResponse.struct_class = Types::ListBlueprintsResponse
 
     ListCrawlersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     ListCrawlersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -2961,6 +3099,14 @@ module Aws::Glue
     SortCriterion.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "Sort"))
     SortCriterion.struct_class = Types::SortCriterion
 
+    StartBlueprintRunRequest.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: OrchestrationNameString, required: true, location_name: "BlueprintName"))
+    StartBlueprintRunRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: BlueprintParameters, location_name: "Parameters"))
+    StartBlueprintRunRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: OrchestrationIAMRoleArn, required: true, location_name: "RoleArn"))
+    StartBlueprintRunRequest.struct_class = Types::StartBlueprintRunRequest
+
+    StartBlueprintRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "RunId"))
+    StartBlueprintRunResponse.struct_class = Types::StartBlueprintRunResponse
+
     StartCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StartCrawlerRequest.struct_class = Types::StartCrawlerRequest
 
@@ -3239,6 +3385,14 @@ module Aws::Glue
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateBlueprintRequest.add_member(:name, Shapes::ShapeRef.new(shape: OrchestrationNameString, required: true, location_name: "Name"))
+    UpdateBlueprintRequest.add_member(:description, Shapes::ShapeRef.new(shape: Generic512CharString, location_name: "Description"))
+    UpdateBlueprintRequest.add_member(:blueprint_location, Shapes::ShapeRef.new(shape: OrchestrationS3Location, required: true, location_name: "BlueprintLocation"))
+    UpdateBlueprintRequest.struct_class = Types::UpdateBlueprintRequest
+
+    UpdateBlueprintResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    UpdateBlueprintResponse.struct_class = Types::UpdateBlueprintResponse
+
     UpdateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: UpdateGrokClassifierRequest, location_name: "GrokClassifier"))
     UpdateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: UpdateXMLClassifierRequest, location_name: "XMLClassifier"))
     UpdateClassifierRequest.add_member(:json_classifier, Shapes::ShapeRef.new(shape: UpdateJsonClassifierRequest, location_name: "JsonClassifier"))
@@ -3459,6 +3613,7 @@ module Aws::Glue
     Workflow.add_member(:last_run, Shapes::ShapeRef.new(shape: WorkflowRun, location_name: "LastRun"))
     Workflow.add_member(:graph, Shapes::ShapeRef.new(shape: WorkflowGraph, location_name: "Graph"))
     Workflow.add_member(:max_concurrent_runs, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxConcurrentRuns"))
+    Workflow.add_member(:blueprint_details, Shapes::ShapeRef.new(shape: BlueprintDetails, location_name: "BlueprintDetails"))
     Workflow.struct_class = Types::Workflow
 
     WorkflowGraph.add_member(:nodes, Shapes::ShapeRef.new(shape: NodeList, location_name: "Nodes"))
@@ -3582,6 +3737,17 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:batch_get_blueprints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetBlueprints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetBlueprintsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetBlueprintsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:batch_get_crawlers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetCrawlers"
         o.http_method = "POST"
@@ -3697,6 +3863,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+      end)
+
       api.add_operation(:create_classifier, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateClassifier"
         o.http_method = "POST"
@@ -3745,6 +3924,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_dev_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -3887,6 +4067,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -3932,6 +4113,17 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:delete_classifier, Seahorse::Model::Operation.new.tap do |o|
@@ -4002,6 +4194,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_dev_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -4136,6 +4329,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -4184,6 +4378,47 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:get_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_blueprint_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlueprintRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBlueprintRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBlueprintRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:get_blueprint_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlueprintRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBlueprintRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBlueprintRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_catalog_import_status, Seahorse::Model::Operation.new.tap do |o|
@@ -4928,6 +5163,23 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:list_blueprints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBlueprints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBlueprintsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBlueprintsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_crawlers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCrawlers"
         o.http_method = "POST"
@@ -5216,6 +5468,20 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:start_blueprint_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartBlueprintRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartBlueprintRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartBlueprintRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalBlueprintStateException)
+      end)
+
       api.add_operation(:start_crawler, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartCrawler"
         o.http_method = "POST"
@@ -5408,6 +5674,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
+      api.add_operation(:update_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalBlueprintStateException)
+      end)
+
       api.add_operation(:update_classifier, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateClassifier"
         o.http_method = "POST"
@@ -5496,6 +5776,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_dev_endpoint, Seahorse::Model::Operation.new.tap do |o|

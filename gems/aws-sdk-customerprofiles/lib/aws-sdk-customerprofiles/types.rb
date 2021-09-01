@@ -254,8 +254,15 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. This process runs every
-    #   Saturday at 12AM.
+    #   The process of matching duplicate profiles. If Matching = true,
+    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
+    #   After that batch process completes, use the [GetMatches][1] API to
+    #   return and review the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingRequest]
     #
     # @!attribute [rw] tags
@@ -297,8 +304,15 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. This process runs every
-    #   Saturday at 12AM.
+    #   The process of matching duplicate profiles. If Matching = true,
+    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
+    #   After that batch process completes, use the [GetMatches][1] API to
+    #   return and review the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingResponse]
     #
     # @!attribute [rw] created_at
@@ -1110,8 +1124,15 @@ module Aws::CustomerProfiles
     #   @return [Types::DomainStats]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. This process runs every
-    #   Saturday at 12AM.
+    #   The process of matching duplicate profiles. If Matching = true,
+    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
+    #   After that batch process completes, use the [GetMatches][1] API to
+    #   return and review the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingResponse]
     #
     # @!attribute [rw] created_at
@@ -1853,6 +1874,10 @@ module Aws::CustomerProfiles
     #         domain_name: "name", # required
     #         object_type_name: "typeName", # required
     #         profile_id: "uuid", # required
+    #         object_filter: {
+    #           key_name: "name", # required
+    #           values: ["string1To255"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] next_token
@@ -1875,6 +1900,12 @@ module Aws::CustomerProfiles
     #   The unique identifier of a customer profile.
     #   @return [String]
     #
+    # @!attribute [rw] object_filter
+    #   Applies a filter to the response to include profile objects with the
+    #   specified index values. This filter is only supported for
+    #   ObjectTypeName \_asset and \_case.
+    #   @return [Types::ObjectFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileObjectsRequest AWS API Documentation
     #
     class ListProfileObjectsRequest < Struct.new(
@@ -1882,7 +1913,8 @@ module Aws::CustomerProfiles
       :max_results,
       :domain_name,
       :object_type_name,
-      :profile_id)
+      :profile_id,
+      :object_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2088,6 +2120,38 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The filter applied to ListProfileObjects response to include profile
+    # objects with the specified index values. This filter is only supported
+    # for ObjectTypeName \_asset and \_case.
+    #
+    # @note When making an API call, you may pass ObjectFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key_name: "name", # required
+    #         values: ["string1To255"], # required
+    #       }
+    #
+    # @!attribute [rw] key_name
+    #   A searchable identifier of a standard profile object. The predefined
+    #   keys you can use to search for \_asset include: \_assetId,
+    #   \_assetName, \_serialNumber. The predefined keys you can use to
+    #   search for \_case include: \_caseId.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of key values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ObjectFilter AWS API Documentation
+    #
+    class ObjectFilter < Struct.new(
+      :key_name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a field in a ProfileObjectType.
     #
     # @note When making an API call, you may pass ObjectTypeField
@@ -2132,21 +2196,22 @@ module Aws::CustomerProfiles
     #   data as a hash:
     #
     #       {
-    #         standard_identifiers: ["PROFILE"], # accepts PROFILE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #         standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
     #         field_names: ["name"],
     #       }
     #
     # @!attribute [rw] standard_identifiers
     #   The types of keys that a ProfileObject can have. Each ProfileObject
-    #   can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means
-    #   that this key can be used to tie an object to a PROFILE. UNIQUE
-    #   means that it can be used to uniquely identify an object. If a key a
-    #   is marked as SECONDARY, it will be used to search for profiles after
-    #   all other PROFILE keys have been searched. A LOOKUP\_ONLY key is
-    #   only used to match a profile but is not persisted to be used for
-    #   searching of the profile. A NEW\_ONLY key is only used if the
-    #   profile does not already exist before the object is ingested,
-    #   otherwise it is only used for matching objects to profiles.
+    #   can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET
+    #   or CASE means that this key can be used to tie an object to a
+    #   PROFILE, ASSET or CASE respectively. UNIQUE means that it can be
+    #   used to uniquely identify an object. If a key a is marked as
+    #   SECONDARY, it will be used to search for profiles after all other
+    #   PROFILE keys have been searched. A LOOKUP\_ONLY key is only used to
+    #   match a profile but is not persisted to be used for searching of the
+    #   profile. A NEW\_ONLY key is only used if the profile does not
+    #   already exist before the object is ingested, otherwise it is only
+    #   used for matching objects to profiles.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_names
@@ -2496,7 +2561,7 @@ module Aws::CustomerProfiles
     #         keys: {
     #           "name" => [
     #             {
-    #               standard_identifiers: ["PROFILE"], # accepts PROFILE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #               standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
     #               field_names: ["name"],
     #             },
     #           ],
@@ -3317,8 +3382,15 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. This process runs every
-    #   Saturday at 12AM.
+    #   The process of matching duplicate profiles. If Matching = true,
+    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
+    #   After that batch process completes, use the [GetMatches][1] API to
+    #   return and review the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingRequest]
     #
     # @!attribute [rw] tags
@@ -3360,8 +3432,15 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. This process runs every
-    #   Saturday at 12AM.
+    #   The process of matching duplicate profiles. If Matching = true,
+    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
+    #   After that batch process completes, use the [GetMatches][1] API to
+    #   return and review the results.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #   @return [Types::MatchingResponse]
     #
     # @!attribute [rw] created_at

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2021-08-23)
+------------------
+
+* Feature - Add support for Custom Blueprints
+
+1.93.0 (2021-08-03)
+------------------
+
+* Feature - Add ConcurrentModificationException to create-table, delete-table, create-database, update-database, delete-database
+
 1.92.0 (2021-07-30)
 ------------------
 

@@ -646,6 +646,62 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Creates an agent status for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the status.
+    #
+    # @option params [String] :description
+    #   The description of the status.
+    #
+    # @option params [required, String] :state
+    #   The state of the status.
+    #
+    # @option params [Integer] :display_order
+    #   The display order of the status.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAgentStatusResponse#agent_status_arn #agent_status_arn} => String
+    #   * {Types::CreateAgentStatusResponse#agent_status_id #agent_status_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_agent_status({
+    #     instance_id: "InstanceId", # required
+    #     name: "AgentStatusName", # required
+    #     description: "AgentStatusDescription",
+    #     state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     display_order: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_status_arn #=> String
+    #   resp.agent_status_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatus AWS API Documentation
+    #
+    # @overload create_agent_status(params = {})
+    # @param [Hash] params ({})
+    def create_agent_status(params = {}, options = {})
+      req = build_request(:create_agent_status, params)
+      req.send_request(options)
+    end
+
     # Creates a contact flow for the specified Amazon Connect instance.
     #
     # You can also create and update contact flows using the [Amazon Connect
@@ -708,6 +764,75 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_contact_flow(params = {}, options = {})
       req = build_request(:create_contact_flow, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Creates hours of operation.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the hours of operation.
+    #
+    # @option params [String] :description
+    #   The description of the hours of operation.
+    #
+    # @option params [required, String] :time_zone
+    #   The time zone of the hours of operation.
+    #
+    # @option params [required, Array<Types::HoursOfOperationConfig>] :config
+    #   Configuration information for the hours of operation: day, start time,
+    #   and end time.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHoursOfOperationResponse#hours_of_operation_id #hours_of_operation_id} => String
+    #   * {Types::CreateHoursOfOperationResponse#hours_of_operation_arn #hours_of_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_hours_of_operation({
+    #     instance_id: "InstanceId", # required
+    #     name: "CommonNameLength127", # required
+    #     description: "HoursOfOperationDescription",
+    #     time_zone: "TimeZone", # required
+    #     config: [ # required
+    #       {
+    #         day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         start_time: { # required
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #         end_time: { # required
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hours_of_operation_id #=> String
+    #   resp.hours_of_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperation AWS API Documentation
+    #
+    # @overload create_hours_of_operation(params = {})
+    # @param [Hash] params ({})
+    def create_hours_of_operation(params = {}, options = {})
+      req = build_request(:create_hours_of_operation, params)
       req.send_request(options)
     end
 
@@ -1228,6 +1353,36 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
+    # Deletes an hours of operation.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_hours_of_operation({
+    #     instance_id: "InstanceId", # required
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteHoursOfOperation AWS API Documentation
+    #
+    # @overload delete_hours_of_operation(params = {})
+    # @param [Hash] params ({})
+    def delete_hours_of_operation(params = {}, options = {})
+      req = build_request(:delete_hours_of_operation, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Deletes the Amazon Connect instance.
     #
     # Amazon Connect enforces a limit on the total number of instances that
@@ -1404,6 +1559,50 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_user_hierarchy_group(params = {}, options = {})
       req = build_request(:delete_user_hierarchy_group, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Describes an agent status.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :agent_status_id
+    #   The identifier for the agent status.
+    #
+    # @return [Types::DescribeAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAgentStatusResponse#agent_status #agent_status} => Types::AgentStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_agent_status({
+    #     instance_id: "InstanceId", # required
+    #     agent_status_id: "AgentStatusId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_status.agent_status_arn #=> String
+    #   resp.agent_status.agent_status_id #=> String
+    #   resp.agent_status.name #=> String
+    #   resp.agent_status.description #=> String
+    #   resp.agent_status.type #=> String, one of "ROUTABLE", "CUSTOM", "OFFLINE"
+    #   resp.agent_status.display_order #=> Integer
+    #   resp.agent_status.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_status.tags #=> Hash
+    #   resp.agent_status.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAgentStatus AWS API Documentation
+    #
+    # @overload describe_agent_status(params = {})
+    # @param [Hash] params ({})
+    def describe_agent_status(params = {}, options = {})
+      req = build_request(:describe_agent_status, params)
       req.send_request(options)
     end
 
@@ -2754,6 +2953,60 @@ module Aws::Connect
     # @param [Hash] params ({})
     def get_metric_data(params = {}, options = {})
       req = build_request(:get_metric_data, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Lists agent statuses.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Array<String>] :agent_status_types
+    #   Available agent status types.
+    #
+    # @return [Types::ListAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentStatusResponse#next_token #next_token} => String
+    #   * {Types::ListAgentStatusResponse#agent_status_summary_list #agent_status_summary_list} => Array&lt;Types::AgentStatusSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_statuses({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     agent_status_types: ["ROUTABLE"], # accepts ROUTABLE, CUSTOM, OFFLINE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.agent_status_summary_list #=> Array
+    #   resp.agent_status_summary_list[0].id #=> String
+    #   resp.agent_status_summary_list[0].arn #=> String
+    #   resp.agent_status_summary_list[0].name #=> String
+    #   resp.agent_status_summary_list[0].type #=> String, one of "ROUTABLE", "CUSTOM", "OFFLINE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAgentStatuses AWS API Documentation
+    #
+    # @overload list_agent_statuses(params = {})
+    # @param [Hash] params ({})
+    def list_agent_statuses(params = {}, options = {})
+      req = build_request(:list_agent_statuses, params)
       req.send_request(options)
     end
 
@@ -4458,7 +4711,7 @@ module Aws::Connect
     # Adds the specified tags to the specified resource.
     #
     # The supported resource types are users, routing profiles, queues,
-    # quick connects, and contact flows.
+    # quick connects, contact flows, agent status, and hours of operation.
     #
     # For sample policies that use tags, see [Amazon Connect Identity-Based
     # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
@@ -4517,6 +4770,56 @@ module Aws::Connect
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates agent status.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :agent_status_id
+    #   The identifier of the agent status.
+    #
+    # @option params [String] :name
+    #   The name of the agent status.
+    #
+    # @option params [String] :description
+    #   The description of the agent status.
+    #
+    # @option params [String] :state
+    #   The state of the agent status.
+    #
+    # @option params [Integer] :display_order
+    #   The display order of the agent status.
+    #
+    # @option params [Boolean] :reset_order_number
+    #   A number indicating the reset order of the agent status.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_status({
+    #     instance_id: "InstanceId", # required
+    #     agent_status_id: "AgentStatusId", # required
+    #     name: "AgentStatusName",
+    #     description: "UpdateAgentStatusDescription",
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     display_order: 1,
+    #     reset_order_number: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateAgentStatus AWS API Documentation
+    #
+    # @overload update_agent_status(params = {})
+    # @param [Hash] params ({})
+    def update_agent_status(params = {}, options = {})
+      req = build_request(:update_agent_status, params)
       req.send_request(options)
     end
 
@@ -4669,6 +4972,64 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_contact_flow_name(params = {}, options = {})
       req = build_request(:update_contact_flow_name, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the hours of operation.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :hours_of_operation_id
+    #   The identifier of the hours of operation.
+    #
+    # @option params [String] :name
+    #   The name of the hours of operation.
+    #
+    # @option params [String] :description
+    #   The description of the hours of operation.
+    #
+    # @option params [String] :time_zone
+    #   The time zone of the hours of operation.
+    #
+    # @option params [Array<Types::HoursOfOperationConfig>] :config
+    #   Configuration information of the hours of operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_hours_of_operation({
+    #     instance_id: "InstanceId", # required
+    #     hours_of_operation_id: "HoursOfOperationId", # required
+    #     name: "CommonNameLength127",
+    #     description: "UpdateHoursOfOperationDescription",
+    #     time_zone: "TimeZone",
+    #     config: [
+    #       {
+    #         day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         start_time: { # required
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #         end_time: { # required
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateHoursOfOperation AWS API Documentation
+    #
+    # @overload update_hours_of_operation(params = {})
+    # @param [Hash] params ({})
+    def update_hours_of_operation(params = {}, options = {})
+      req = build_request(:update_hours_of_operation, params)
       req.send_request(options)
     end
 
@@ -5448,7 +5809,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10,6 +10,84 @@
 module Aws::Connect
   module Types
 
+    # Contains information about an agent status.
+    #
+    # @!attribute [rw] agent_status_arn
+    #   The Amazon Resource Name (ARN) of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_status_id
+    #   The identifier of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order of the agent status.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatus AWS API Documentation
+    #
+    class AgentStatus < Struct.new(
+      :agent_status_arn,
+      :agent_status_id,
+      :name,
+      :description,
+      :type,
+      :display_order,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for an agent status.
+    #
+    # @!attribute [rw] id
+    #   The identifier for an agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the agent status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusSummary AWS API Documentation
+    #
+    class AgentStatusSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateApprovedOriginRequest
     #   data as a hash:
     #
@@ -470,6 +548,75 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateAgentStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "AgentStatusName", # required
+    #         description: "AgentStatusDescription",
+    #         state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         display_order: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the status.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the status.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the status.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order of the status.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatusRequest AWS API Documentation
+    #
+    class CreateAgentStatusRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :state,
+      :display_order,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_status_arn
+    #   The Amazon Resource Name (ARN) of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_status_id
+    #   The identifier of the agent status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatusResponse AWS API Documentation
+    #
+    class CreateAgentStatusResponse < Struct.new(
+      :agent_status_arn,
+      :agent_status_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateContactFlowRequest
     #   data as a hash:
     #
@@ -540,6 +687,88 @@ module Aws::Connect
     class CreateContactFlowResponse < Struct.new(
       :contact_flow_id,
       :contact_flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateHoursOfOperationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "CommonNameLength127", # required
+    #         description: "HoursOfOperationDescription",
+    #         time_zone: "TimeZone", # required
+    #         config: [ # required
+    #           {
+    #             day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #             start_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #             end_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #           },
+    #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   Configuration information for the hours of operation: day, start
+    #   time, and end time.
+    #   @return [Array<Types::HoursOfOperationConfig>]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationRequest AWS API Documentation
+    #
+    class CreateHoursOfOperationRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :time_zone,
+      :config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hours_of_operation_arn
+    #   The Amazon Resource Name (ARN) for the hours of operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationResponse AWS API Documentation
+    #
+    class CreateHoursOfOperationResponse < Struct.new(
+      :hours_of_operation_id,
+      :hours_of_operation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1271,6 +1500,32 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteHoursOfOperationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         hours_of_operation_id: "HoursOfOperationId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteHoursOfOperationRequest AWS API Documentation
+    #
+    class DeleteHoursOfOperationRequest < Struct.new(
+      :instance_id,
+      :hours_of_operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteInstanceRequest
     #   data as a hash:
     #
@@ -1423,6 +1678,44 @@ module Aws::Connect
     class DeleteUserRequest < Struct.new(
       :instance_id,
       :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAgentStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         agent_status_id: "AgentStatusId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_status_id
+    #   The identifier for the agent status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAgentStatusRequest AWS API Documentation
+    #
+    class DescribeAgentStatusRequest < Struct.new(
+      :instance_id,
+      :agent_status_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_status
+    #   The agent status.
+    #   @return [Types::AgentStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAgentStatusResponse AWS API Documentation
+    #
+    class DescribeAgentStatusResponse < Struct.new(
+      :agent_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3125,6 +3418,21 @@ module Aws::Connect
 
     # Contains information about the hours of operation.
     #
+    # @note When making an API call, you may pass HoursOfOperationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         start_time: { # required
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #         end_time: { # required
+    #           hours: 1, # required
+    #           minutes: 1, # required
+    #         },
+    #       }
+    #
     # @!attribute [rw] day
     #   The day that the hours of operation applies to.
     #   @return [String]
@@ -3173,6 +3481,14 @@ module Aws::Connect
     end
 
     # The start time or end time for an hours of operation.
+    #
+    # @note When making an API call, you may pass HoursOfOperationTimeSlice
+    #   data as a hash:
+    #
+    #       {
+    #         hours: 1, # required
+    #         minutes: 1, # required
+    #       }
     #
     # @!attribute [rw] hours
     #   The hours.
@@ -3656,6 +3972,64 @@ module Aws::Connect
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAgentStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         agent_status_types: ["ROUTABLE"], # accepts ROUTABLE, CUSTOM, OFFLINE
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] agent_status_types
+    #   Available agent status types.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAgentStatusRequest AWS API Documentation
+    #
+    class ListAgentStatusRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :agent_status_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_status_summary_list
+    #   A summary of agent statuses.
+    #   @return [Array<Types::AgentStatusSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAgentStatusResponse AWS API Documentation
+    #
+    class ListAgentStatusResponse < Struct.new(
+      :next_token,
+      :agent_status_summary_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6309,6 +6683,62 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateAgentStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         agent_status_id: "AgentStatusId", # required
+    #         name: "AgentStatusName",
+    #         description: "UpdateAgentStatusDescription",
+    #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #         display_order: 1,
+    #         reset_order_number: false,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_status_id
+    #   The identifier of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order of the agent status.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reset_order_number
+    #   A number indicating the reset order of the agent status.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateAgentStatusRequest AWS API Documentation
+    #
+    class UpdateAgentStatusRequest < Struct.new(
+      :instance_id,
+      :agent_status_id,
+      :name,
+      :description,
+      :state,
+      :display_order,
+      :reset_order_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateContactAttributesRequest
     #   data as a hash:
     #
@@ -6423,6 +6853,68 @@ module Aws::Connect
       :contact_flow_id,
       :name,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateHoursOfOperationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         hours_of_operation_id: "HoursOfOperationId", # required
+    #         name: "CommonNameLength127",
+    #         description: "UpdateHoursOfOperationDescription",
+    #         time_zone: "TimeZone",
+    #         config: [
+    #           {
+    #             day: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #             start_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #             end_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone of the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   Configuration information of the hours of operation.
+    #   @return [Array<Types::HoursOfOperationConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateHoursOfOperationRequest AWS API Documentation
+    #
+    class UpdateHoursOfOperationRequest < Struct.new(
+      :instance_id,
+      :hours_of_operation_id,
+      :name,
+      :description,
+      :time_zone,
+      :config)
       SENSITIVE = []
       include Aws::Structure
     end

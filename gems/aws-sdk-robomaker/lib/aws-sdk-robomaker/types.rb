@@ -1145,7 +1145,8 @@ module Aws::RoboMaker
     #
     #   Continue
     #
-    #   : Restart the simulation job in the same host instance.
+    #   : Leaves the instance running for its maximum timeout duration after
+    #     a `4XX` error code.
     #
     #   Fail
     #
@@ -5248,7 +5249,8 @@ module Aws::RoboMaker
     #
     #   Continue
     #
-    #   : Restart the simulation job in the same host instance.
+    #   : Leaves the host running for its maximum timeout duration after a
+    #     `4XX` error code.
     #
     #   Fail
     #
@@ -5591,7 +5593,8 @@ module Aws::RoboMaker
     #
     #   Continue
     #
-    #   : Restart the simulation job in the same host instance.
+    #   : Leaves the host running for its maximum timeout duration after a
+    #     `4XX` error code.
     #
     #   Fail
     #

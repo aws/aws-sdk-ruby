@@ -52,6 +52,9 @@ module Aws::DirectoryService
     CertificatesInfo = Shapes::ListShape.new(name: 'CertificatesInfo')
     CidrIp = Shapes::StringShape.new(name: 'CidrIp')
     CidrIps = Shapes::ListShape.new(name: 'CidrIps')
+    ClientAuthenticationSettingInfo = Shapes::StructureShape.new(name: 'ClientAuthenticationSettingInfo')
+    ClientAuthenticationSettingsInfo = Shapes::ListShape.new(name: 'ClientAuthenticationSettingsInfo')
+    ClientAuthenticationStatus = Shapes::StringShape.new(name: 'ClientAuthenticationStatus')
     ClientAuthenticationType = Shapes::StringShape.new(name: 'ClientAuthenticationType')
     ClientCertAuthSettings = Shapes::StructureShape.new(name: 'ClientCertAuthSettings')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
@@ -102,6 +105,8 @@ module Aws::DirectoryService
     DeregisterEventTopicResult = Shapes::StructureShape.new(name: 'DeregisterEventTopicResult')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResult = Shapes::StructureShape.new(name: 'DescribeCertificateResult')
+    DescribeClientAuthenticationSettingsRequest = Shapes::StructureShape.new(name: 'DescribeClientAuthenticationSettingsRequest')
+    DescribeClientAuthenticationSettingsResult = Shapes::StructureShape.new(name: 'DescribeClientAuthenticationSettingsResult')
     DescribeConditionalForwardersRequest = Shapes::StructureShape.new(name: 'DescribeConditionalForwardersRequest')
     DescribeConditionalForwardersResult = Shapes::StructureShape.new(name: 'DescribeConditionalForwardersResult')
     DescribeDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeDirectoriesRequest')
@@ -428,6 +433,13 @@ module Aws::DirectoryService
 
     CidrIps.member = Shapes::ShapeRef.new(shape: CidrIp)
 
+    ClientAuthenticationSettingInfo.add_member(:type, Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: "Type"))
+    ClientAuthenticationSettingInfo.add_member(:status, Shapes::ShapeRef.new(shape: ClientAuthenticationStatus, location_name: "Status"))
+    ClientAuthenticationSettingInfo.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    ClientAuthenticationSettingInfo.struct_class = Types::ClientAuthenticationSettingInfo
+
+    ClientAuthenticationSettingsInfo.member = Shapes::ShapeRef.new(shape: ClientAuthenticationSettingInfo)
+
     ClientCertAuthSettings.add_member(:ocsp_url, Shapes::ShapeRef.new(shape: OCSPUrl, location_name: "OCSPUrl"))
     ClientCertAuthSettings.struct_class = Types::ClientCertAuthSettings
 
@@ -581,6 +593,16 @@ module Aws::DirectoryService
 
     DescribeCertificateResult.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     DescribeCertificateResult.struct_class = Types::DescribeCertificateResult
+
+    DescribeClientAuthenticationSettingsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DescribeClientAuthenticationSettingsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: "Type"))
+    DescribeClientAuthenticationSettingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientAuthenticationSettingsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeClientAuthenticationSettingsRequest.struct_class = Types::DescribeClientAuthenticationSettingsRequest
+
+    DescribeClientAuthenticationSettingsResult.add_member(:client_authentication_settings_info, Shapes::ShapeRef.new(shape: ClientAuthenticationSettingsInfo, location_name: "ClientAuthenticationSettingsInfo"))
+    DescribeClientAuthenticationSettingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeClientAuthenticationSettingsResult.struct_class = Types::DescribeClientAuthenticationSettingsResult
 
     DescribeConditionalForwardersRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DescribeConditionalForwardersRequest.add_member(:remote_domain_names, Shapes::ShapeRef.new(shape: RemoteDomainNames, location_name: "RemoteDomainNames"))
@@ -1537,6 +1559,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: CertificateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:describe_client_authentication_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClientAuthenticationSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClientAuthenticationSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClientAuthenticationSettingsResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)

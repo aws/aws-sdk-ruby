@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2021-08-06)
+------------------
+
+* Feature - This release adds support for agent status and hours of operation. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
 1.48.0 (2021-07-30)
 ------------------
 

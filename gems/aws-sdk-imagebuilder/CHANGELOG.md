@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2021-08-04)
+------------------
+
+* Feature - Updated list actions to include a list of valid filters that can be used in the request.
+
 1.27.0 (2021-07-30)
 ------------------
 

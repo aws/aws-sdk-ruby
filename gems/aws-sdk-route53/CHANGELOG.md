@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2021-08-18)
+------------------
+
+* Feature - Documentation updates for route53
+
+1.53.0 (2021-08-11)
+------------------
+
+* Feature - Documentation updates for route53
+
 1.52.0 (2021-07-30)
 ------------------
 

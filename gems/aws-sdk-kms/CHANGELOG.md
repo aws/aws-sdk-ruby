@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2021-08-30)
+------------------
+
+* Feature - This release has changes to KMS nomenclature to remove the word master from both the "Customer master key" and "CMK" abbreviation and replace those naming conventions with "KMS key".
+
 1.46.0 (2021-07-30)
 ------------------
 

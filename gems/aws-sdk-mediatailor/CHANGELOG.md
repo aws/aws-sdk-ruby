@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-09-01)
+------------------
+
+* Feature - This release adds support for wall clock programs in LINEAR channels.
+
 1.43.0 (2021-07-30)
 ------------------
 

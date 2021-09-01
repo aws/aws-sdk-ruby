@@ -1,6 +1,28 @@
 Unreleased Changes
 ------------------
 
+3.110.0 (2021-09-01)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 1.9, 2.0, 2.1, and 2.2.
+
+3.109.0 (2021-08-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-memorydb` gem.
+
+3.108.0 (2021-08-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-snowdevicemanagement` gem.
+
+3.107.0 (2021-08-06)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkmessaging` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkidentity` gem.
+
 3.106.0 (2021-07-27)
 ------------------
 

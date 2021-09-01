@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2021-08-25)
+------------------
+
+* Feature - AWS EventBridge adds an enum of EXTERNAL for EcsParameters LaunchType for PutTargets API
+
+1.28.0 (2021-08-04)
+------------------
+
+* Feature - Documentation updates to add EC2 Image Builder as a target on PutTargets.
+
 1.27.0 (2021-07-30)
 ------------------
 

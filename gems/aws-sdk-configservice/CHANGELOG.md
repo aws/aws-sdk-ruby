@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2021-09-01)
+------------------
+
+* Feature - Documentation updates for config
+
+1.65.0 (2021-08-16)
+------------------
+
+* Feature - Update ResourceType enum with values for Backup Plan, Selection, Vault, RecoveryPoint; ECS Cluster, Service, TaskDefinition; EFS AccessPoint, FileSystem; EKS Cluster; ECR Repository resources
+
 1.64.0 (2021-07-30)
 ------------------
 

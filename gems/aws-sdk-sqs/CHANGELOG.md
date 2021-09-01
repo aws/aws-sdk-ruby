@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2021-08-31)
+------------------
+
+* Feature - Amazon SQS adds a new queue attribute, RedriveAllowPolicy, which includes the dead-letter queue redrive permission parameters. It defines which source queues can specify dead-letter queues as a JSON object.
+
 1.42.0 (2021-07-30)
 ------------------
 

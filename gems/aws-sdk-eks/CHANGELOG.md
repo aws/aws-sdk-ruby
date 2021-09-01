@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2021-08-20)
+------------------
+
+* Feature - Adds support for EKS add-ons "preserve" flag, which allows customers to maintain software on their EKS clusters after removing it from EKS add-ons management.
+
 1.60.0 (2021-07-30)
 ------------------
 

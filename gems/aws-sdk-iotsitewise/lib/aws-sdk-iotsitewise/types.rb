@@ -314,6 +314,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -411,6 +412,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -575,6 +577,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
     #             },
     #             processing_config: {
@@ -674,6 +677,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
     #             },
     #             processing_config: {
@@ -1540,6 +1544,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -1609,6 +1614,7 @@ module Aws::IoTSiteWise
     #                     window: { # required
     #                       tumbling: {
     #                         interval: "Interval", # required
+    #                         offset: "Offset",
     #                       },
     #                     },
     #                     processing_config: {
@@ -3772,6 +3778,7 @@ module Aws::IoTSiteWise
     #         next_token: "NextToken",
     #         max_results: 1,
     #         type: "InterpolationType", # required
+    #         interval_window_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] asset_id
@@ -3835,8 +3842,63 @@ module Aws::IoTSiteWise
     # @!attribute [rw] type
     #   The interpolation type.
     #
-    #   Valid values: `LINEAR_INTERPOLATION`
+    #   Valid values: `LINEAR_INTERPOLATION | LOCF_INTERPOLATION`
+    #
+    #   * `LINEAR_INTERPOLATION` – Estimates missing data using [linear
+    #     interpolation][1].
+    #
+    #     For example, you can use this operation to return the interpolated
+    #     temperature values for a wind turbine every 24 hours over a
+    #     duration of 7 days. If the interpolation starts on July 1, 2021,
+    #     at 9 AM, IoT SiteWise returns the first interpolated value on July
+    #     2, 2021, at 9 AM, the second interpolated value on July 3, 2021,
+    #     at 9 AM, and so on.
+    #
+    #   * `LOCF_INTERPOLATION` – Estimates missing data using last
+    #     observation carried forward interpolation
+    #
+    #     If no data point is found for an interval, IoT SiteWise returns
+    #     the last observed data point for the previous interval and carries
+    #     forward this interpolated value until a new data point is found.
+    #
+    #     For example, you can get the state of an on-off valve every 24
+    #     hours over a duration of 7 days. If the interpolation starts on
+    #     July 1, 2021, at 9 AM, IoT SiteWise returns the last observed data
+    #     point between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as
+    #     the first interpolated value. If no data point is found after 9 AM
+    #     on July 2, 2021, IoT SiteWise uses the same interpolated value for
+    #     the rest of the days.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Linear_interpolation
     #   @return [String]
+    #
+    # @!attribute [rw] interval_window_in_seconds
+    #   The query interval for the window in seconds. IoT SiteWise computes
+    #   each interpolated value by using data points from the timestamp of
+    #   each interval minus the window to the timestamp of each interval
+    #   plus the window. If not specified, the window is between the start
+    #   time minus the interval and the end time plus the interval.
+    #
+    #   <note markdown="1"> * If you specify a value for the `intervalWindowInSeconds`
+    #     parameter, the `type` parameter must be `LINEAR_INTERPOLATION`.
+    #
+    #   * If no data point is found during the specified query window, IoT
+    #     SiteWise won't return an interpolated value for the interval.
+    #     This indicates that there's a gap in the ingested data points.
+    #
+    #    </note>
+    #
+    #   For example, you can get the interpolated temperature values for a
+    #   wind turbine every 24 hours over a duration of 7 days. If the
+    #   interpolation starts on July 1, 2021, at 9 AM with a window of 2
+    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours)
+    #   to 11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first
+    #   interpolated value, uses the data points from 7 AM (9 AM - 2 hours)
+    #   to 11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second
+    #   interpolated value, and so on.
+    #   @return [Integer]
     #
     class GetInterpolatedAssetPropertyValuesRequest < Struct.new(
       :asset_id,
@@ -3850,7 +3912,8 @@ module Aws::IoTSiteWise
       :interval_in_seconds,
       :next_token,
       :max_results,
-      :type)
+      :type,
+      :interval_window_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4906,6 +4969,7 @@ module Aws::IoTSiteWise
     #         window: { # required
     #           tumbling: {
     #             interval: "Interval", # required
+    #             offset: "Offset",
     #           },
     #         },
     #         processing_config: {
@@ -4981,6 +5045,7 @@ module Aws::IoTSiteWise
     #       {
     #         tumbling: {
     #           interval: "Interval", # required
+    #           offset: "Offset",
     #         },
     #       }
     #
@@ -5308,6 +5373,7 @@ module Aws::IoTSiteWise
     #           window: { # required
     #             tumbling: {
     #               interval: "Interval", # required
+    #               offset: "Offset",
     #             },
     #           },
     #           processing_config: {
@@ -5840,23 +5906,37 @@ module Aws::IoTSiteWise
     end
 
     # Contains a tumbling window, which is a repeating fixed-sized,
-    # non-overlapping, and contiguous time interval. This window is used in
-    # metric and aggregation computations.
+    # non-overlapping, and contiguous time window. You use this window in
+    # metrics to aggregate data from properties and other assets.
+    #
+    # You can use `m`, `h`, `d`, and `w` when you specify an interval or
+    # offset. Note that `m` represents minutes, and `w` represents weeks.
+    # You can also use `s` to represent seconds in `offset`.
+    #
+    # The `interval` and `offset` parameters support the [ISO 8601
+    # format][1]. For example, `PT5S` represents five seconds, `PT5M`
+    # represents five minutes, and `PT5H` represents five hours.
+    #
+    #
+    #
+    # [1]: https://en.wikipedia.org/wiki/ISO_8601
     #
     # @note When making an API call, you may pass TumblingWindow
     #   data as a hash:
     #
     #       {
     #         interval: "Interval", # required
+    #         offset: "Offset",
     #       }
     #
     # @!attribute [rw] interval
-    #   The time interval for the tumbling window. Note that `w` represents
-    #   weeks, `d` represents days, `h` represents hours, and `m` represents
-    #   minutes. IoT SiteWise computes the `1w` interval the end of Sunday
-    #   at midnight each week (UTC), the `1d` interval at the end of each
-    #   day at midnight (UTC), the `1h` interval at the end of each hour,
-    #   and so on.
+    #   The time interval for the tumbling window. The interval time must be
+    #   between 1 minute and 1 week.
+    #
+    #   IoT SiteWise computes the `1w` interval the end of Sunday at
+    #   midnight each week (UTC), the `1d` interval at the end of each day
+    #   at midnight (UTC), the `1h` interval at the end of each hour, and so
+    #   on.
     #
     #   When IoT SiteWise aggregates data points for metric computations,
     #   the start of each interval is exclusive and the end of each interval
@@ -5864,8 +5944,60 @@ module Aws::IoTSiteWise
     #   of the interval.
     #   @return [String]
     #
+    # @!attribute [rw] offset
+    #   The offset for the tumbling window. The `offset` parameter accepts
+    #   the following:
+    #
+    #   * The offset time.
+    #
+    #     For example, if you specify `18h` for `offset` and `1d` for
+    #     `interval`, IoT SiteWise aggregates data in one of the following
+    #     ways:
+    #
+    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #       first aggregation result at 6 PM (UTC) on the day when you
+    #       create the metric.
+    #
+    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #       aggregation result at 6 PM (UTC) the next day.
+    #
+    #   * The ISO 8601 format.
+    #
+    #     For example, if you specify `PT18H` for `offset` and `1d` for
+    #     `interval`, IoT SiteWise aggregates data in one of the following
+    #     ways:
+    #
+    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #       first aggregation result at 6 PM (UTC) on the day when you
+    #       create the metric.
+    #
+    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #       aggregation result at 6 PM (UTC) the next day.
+    #
+    #   * The 24-hour clock.
+    #
+    #     For example, if you specify `00:03:00` for `offset` and `5m` for
+    #     `interval`, and you create the metric at 2 PM (UTC), you get the
+    #     first aggregation result at 2:03 PM (UTC). You get the second
+    #     aggregation result at 2:08 PM (UTC).
+    #
+    #   * The offset time zone.
+    #
+    #     For example, if you specify `2021-07-23T18:00-08` for `offset` and
+    #     `1d` for `interval`, IoT SiteWise aggregates data in one of the
+    #     following ways:
+    #
+    #     * If you create the metric before or at 6:00 PM (PST), you get the
+    #       first aggregation result at 6 PM (PST) on the day when you
+    #       create the metric.
+    #
+    #     * If you create the metric after 6:00 PM (PST), you get the first
+    #       aggregation result at 6 PM (PST) the next day.
+    #   @return [String]
+    #
     class TumblingWindow < Struct.new(
-      :interval)
+      :interval,
+      :offset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6038,6 +6170,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -6109,6 +6242,7 @@ module Aws::IoTSiteWise
     #                     window: { # required
     #                       tumbling: {
     #                         interval: "Interval", # required
+    #                         offset: "Offset",
     #                       },
     #                     },
     #                     processing_config: {

@@ -488,9 +488,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -757,6 +758,7 @@ module Aws::CloudFormation
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     disable_rollback: false,
     #     client_request_token: "ClientRequestToken",
     #   })
     # @param [Hash] options ({})
@@ -827,9 +829,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -968,6 +971,11 @@ module Aws::CloudFormation
     #   If you don't specify this parameter, CloudFormation doesn't modify
     #   the stack's tags. If you specify an empty value, CloudFormation
     #   removes all associated tags.
+    # @option options [Boolean] :disable_rollback
+    #   Preserve the state of previously provisioned resources when an
+    #   operation fails.
+    #
+    #   Default: `False`
     # @option options [String] :client_request_token
     #   A unique identifier for this `UpdateStack` request. Specify this token
     #   if you plan to retry requests so that CloudFormation knows that

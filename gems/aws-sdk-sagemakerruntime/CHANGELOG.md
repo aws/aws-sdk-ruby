@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-08-18)
+------------------
+
+* Feature - Amazon SageMaker Runtime now supports InvokeEndpointAsync to asynchronously invoke endpoints that were created with the AsyncInferenceConfig object in the EndpointConfig. Asynchronous invocations support larger payload sizes in Amazon S3 and longer processing times.
+
 1.33.0 (2021-07-30)
 ------------------
 

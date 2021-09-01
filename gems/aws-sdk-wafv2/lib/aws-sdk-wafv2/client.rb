@@ -669,6 +669,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -786,7 +787,7 @@ module Aws::WAFV2
     #   A description of the IP set that helps with identification.
     #
     # @option params [required, String] :ip_address_version
-    #   Specify IPV4 or IPV6.
+    #   The version of the IP addresses, either `IPV4` or `IPV6`.
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specify one or more IP addresses or
@@ -1259,6 +1260,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -1715,6 +1717,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -1835,14 +1838,14 @@ module Aws::WAFV2
     #   The Amazon Resource Name (ARN) of the web ACL.
     #
     # @option params [required, String] :web_acl_lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @return [Types::DeleteFirewallManagerRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1894,14 +1897,14 @@ module Aws::WAFV2
     #   and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1999,14 +2002,14 @@ module Aws::WAFV2
     #   and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2054,14 +2057,14 @@ module Aws::WAFV2
     #   like update and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2112,14 +2115,14 @@ module Aws::WAFV2
     #   like update and delete.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2166,8 +2169,15 @@ module Aws::WAFV2
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
+    # @option params [String] :version_name
+    #   The version of the rule group. You can only use a version that is not
+    #   scheduled for expiration. If you don't provide this, WAF uses the
+    #   vendor's default version.
+    #
     # @return [Types::DescribeManagedRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeManagedRuleGroupResponse#version_name #version_name} => String
+    #   * {Types::DescribeManagedRuleGroupResponse#sns_topic_arn #sns_topic_arn} => String
     #   * {Types::DescribeManagedRuleGroupResponse#capacity #capacity} => Integer
     #   * {Types::DescribeManagedRuleGroupResponse#rules #rules} => Array&lt;Types::RuleSummary&gt;
     #   * {Types::DescribeManagedRuleGroupResponse#label_namespace #label_namespace} => String
@@ -2180,10 +2190,13 @@ module Aws::WAFV2
     #     vendor_name: "VendorName", # required
     #     name: "EntityName", # required
     #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     version_name: "VersionKeyString",
     #   })
     #
     # @example Response structure
     #
+    #   resp.version_name #=> String
+    #   resp.sns_topic_arn #=> String
     #   resp.capacity #=> Integer
     #   resp.rules #=> Array
     #   resp.rules[0].name #=> String
@@ -2360,6 +2373,84 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def get_logging_configuration(params = {}, options = {})
       req = build_request(:get_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified managed rule set.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
+    #   GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #
+    # @return [Types::GetManagedRuleSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedRuleSetResponse#managed_rule_set #managed_rule_set} => Types::ManagedRuleSet
+    #   * {Types::GetManagedRuleSetResponse#lock_token #lock_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_rule_set({
+    #     name: "EntityName", # required
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     id: "EntityId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_rule_set.name #=> String
+    #   resp.managed_rule_set.id #=> String
+    #   resp.managed_rule_set.arn #=> String
+    #   resp.managed_rule_set.description #=> String
+    #   resp.managed_rule_set.published_versions #=> Hash
+    #   resp.managed_rule_set.published_versions["VersionKeyString"].associated_rule_group_arn #=> String
+    #   resp.managed_rule_set.published_versions["VersionKeyString"].capacity #=> Integer
+    #   resp.managed_rule_set.published_versions["VersionKeyString"].forecasted_lifetime #=> Integer
+    #   resp.managed_rule_set.published_versions["VersionKeyString"].publish_timestamp #=> Time
+    #   resp.managed_rule_set.published_versions["VersionKeyString"].last_update_timestamp #=> Time
+    #   resp.managed_rule_set.published_versions["VersionKeyString"].expiry_timestamp #=> Time
+    #   resp.managed_rule_set.recommended_version #=> String
+    #   resp.managed_rule_set.label_namespace #=> String
+    #   resp.lock_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetManagedRuleSet AWS API Documentation
+    #
+    # @overload get_managed_rule_set(params = {})
+    # @param [Hash] params ({})
+    def get_managed_rule_set(params = {}, options = {})
+      req = build_request(:get_managed_rule_set, params)
       req.send_request(options)
     end
 
@@ -2639,6 +2730,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.not_statement.statement #=> Types::Statement
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.version #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
@@ -2917,6 +3009,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.not_statement.statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
@@ -2950,6 +3043,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3040,6 +3134,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3246,6 +3341,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.not_statement.statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
@@ -3279,6 +3375,7 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3369,6 +3466,7 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.version #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
@@ -3469,10 +3567,79 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Returns a list of the available versions for the specified managed
+    # rule group.
+    #
+    # @option params [required, String] :vendor_name
+    #   The name of the managed rule group vendor. You use this, along with
+    #   the rule group name, to identify the rule group.
+    #
+    # @option params [required, String] :name
+    #   The name of the managed rule group. You use this, along with the
+    #   vendor name, to identify the rule group.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
+    #   GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF provides
+    #   a `NextMarker` value that you can use in a subsequent call to get the
+    #   next batch of objects.
+    #
+    # @return [Types::ListAvailableManagedRuleGroupVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailableManagedRuleGroupVersionsResponse#next_marker #next_marker} => String
+    #   * {Types::ListAvailableManagedRuleGroupVersionsResponse#versions #versions} => Array&lt;Types::ManagedRuleGroupVersion&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_available_managed_rule_group_versions({
+    #     vendor_name: "VendorName", # required
+    #     name: "EntityName", # required
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.versions #=> Array
+    #   resp.versions[0].name #=> String
+    #   resp.versions[0].last_update_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupVersions AWS API Documentation
+    #
+    # @overload list_available_managed_rule_group_versions(params = {})
+    # @param [Hash] params ({})
+    def list_available_managed_rule_group_versions(params = {}, options = {})
+      req = build_request(:list_available_managed_rule_group_versions, params)
+      req.send_request(options)
+    end
+
     # Retrieves an array of managed rule groups that are available for you
     # to use. This list includes all Amazon Web Services Managed Rules rule
-    # groups and the Marketplace managed rule groups that you're subscribed
-    # to.
+    # groups and all of the Marketplace managed rule groups that you're
+    # subscribed to.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
@@ -3664,6 +3831,79 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def list_logging_configurations(params = {}, options = {})
       req = build_request(:list_logging_configurations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the managed rule sets that you own.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
+    #   GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF provides
+    #   a `NextMarker` value that you can use in a subsequent call to get the
+    #   next batch of objects.
+    #
+    # @return [Types::ListManagedRuleSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedRuleSetsResponse#next_marker #next_marker} => String
+    #   * {Types::ListManagedRuleSetsResponse#managed_rule_sets #managed_rule_sets} => Array&lt;Types::ManagedRuleSetSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_rule_sets({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.managed_rule_sets #=> Array
+    #   resp.managed_rule_sets[0].name #=> String
+    #   resp.managed_rule_sets[0].id #=> String
+    #   resp.managed_rule_sets[0].description #=> String
+    #   resp.managed_rule_sets[0].lock_token #=> String
+    #   resp.managed_rule_sets[0].arn #=> String
+    #   resp.managed_rule_sets[0].label_namespace #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListManagedRuleSets AWS API Documentation
+    #
+    # @overload list_managed_rule_sets(params = {})
+    # @param [Hash] params ({})
+    def list_managed_rule_sets(params = {}, options = {})
+      req = build_request(:list_managed_rule_sets, params)
       req.send_request(options)
     end
 
@@ -4084,6 +4324,110 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Defines the versions of your managed rule set that you are offering to
+    # the customers. Customers see your offerings as managed rule groups
+    # with versioning.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # Customers retrieve their managed rule group list by calling
+    # ListAvailableManagedRuleGroups. The name that you provide here for
+    # your managed rule set is the name the customer sees for the
+    # corresponding managed rule group. Customers can retrieve the available
+    # versions for a managed rule group by calling
+    # ListAvailableManagedRuleGroupVersions. You provide a rule group
+    # specification for each version. For each managed rule set, you must
+    # specify a version that you recommend using.
+    #
+    # To initiate the expiration of a managed rule group version, use
+    # UpdateManagedRuleSetVersionExpiryDate.
+    #
+    # @option params [required, String] :name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
+    #   GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #
+    # @option params [required, String] :lock_token
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
+    #
+    # @option params [String] :recommended_version
+    #   The version of the named managed rule group that you'd like your
+    #   customers to choose, from among your version offerings.
+    #
+    # @option params [Hash<String,Types::VersionToPublish>] :versions_to_publish
+    #   The versions of the named managed rule group that you want to offer to
+    #   your customers.
+    #
+    # @return [Types::PutManagedRuleSetVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutManagedRuleSetVersionsResponse#next_lock_token #next_lock_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_managed_rule_set_versions({
+    #     name: "EntityName", # required
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     id: "EntityId", # required
+    #     lock_token: "LockToken", # required
+    #     recommended_version: "VersionKeyString",
+    #     versions_to_publish: {
+    #       "VersionKeyString" => {
+    #         associated_rule_group_arn: "ResourceArn",
+    #         forecasted_lifetime: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_lock_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutManagedRuleSetVersions AWS API Documentation
+    #
+    # @overload put_managed_rule_set_versions(params = {})
+    # @param [Hash] params ({})
+    def put_managed_rule_set_versions(params = {}, options = {})
+      req = build_request(:put_managed_rule_set_versions, params)
+      req.send_request(options)
+    end
+
     # Attaches an IAM policy to the specified resource. Use this to share a
     # rule group across accounts.
     #
@@ -4285,14 +4629,14 @@ module Aws::WAFV2
     #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @return [Types::UpdateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4319,6 +4663,101 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def update_ip_set(params = {}, options = {})
       req = build_request(:update_ip_set, params)
+      req.send_request(options)
+    end
+
+    # Updates the expiration information for your managed rule set. Use this
+    # to initiate the expiration of a managed rule group version. After you
+    # initiate expiration for a version, WAF excludes it from the reponse to
+    # ListAvailableManagedRuleGroupVersions for the managed rule group.
+    #
+    # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
+    # are Amazon Web Services and Marketplace sellers.
+    #
+    #  Vendors, you can use the managed rule set APIs to provide controlled
+    # rollout of your versioned managed rule group offerings for your
+    # customers. The APIs are `ListManagedRuleSets`, `GetManagedRuleSet`,
+    # `PutManagedRuleSetVersions`, and
+    # `UpdateManagedRuleSetVersionExpiryDate`.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :name
+    #   The name of the managed rule set. You use this, along with the rule
+    #   set ID, to identify the rule set.
+    #
+    #   This name is assigned to the corresponding managed rule group, which
+    #   your customers can access and use.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
+    #   GraphQL API.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :id
+    #   A unique identifier for the managed rule set. The ID is returned in
+    #   the responses to commands like `list`. You provide it to operations
+    #   like `get` and `update`.
+    #
+    # @option params [required, String] :lock_token
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
+    #
+    # @option params [required, String] :version_to_expire
+    #   The version that you want to remove from your list of offerings for
+    #   the named managed rule group.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :expiry_timestamp
+    #   The time that you want the version to expire.
+    #
+    #   Times are in Coordinated Universal Time (UTC) format. UTC format
+    #   includes the special designator, Z. For example,
+    #   "2016-09-27T14:50Z".
+    #
+    # @return [Types::UpdateManagedRuleSetVersionExpiryDateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateManagedRuleSetVersionExpiryDateResponse#expiring_version #expiring_version} => String
+    #   * {Types::UpdateManagedRuleSetVersionExpiryDateResponse#expiry_timestamp #expiry_timestamp} => Time
+    #   * {Types::UpdateManagedRuleSetVersionExpiryDateResponse#next_lock_token #next_lock_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_managed_rule_set_version_expiry_date({
+    #     name: "EntityName", # required
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     id: "EntityId", # required
+    #     lock_token: "LockToken", # required
+    #     version_to_expire: "VersionKeyString", # required
+    #     expiry_timestamp: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.expiring_version #=> String
+    #   resp.expiry_timestamp #=> Time
+    #   resp.next_lock_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateManagedRuleSetVersionExpiryDate AWS API Documentation
+    #
+    # @overload update_managed_rule_set_version_expiry_date(params = {})
+    # @param [Hash] params ({})
+    def update_managed_rule_set_version_expiry_date(params = {}, options = {})
+      req = build_request(:update_managed_rule_set_version_expiry_date, params)
       req.send_request(options)
     end
 
@@ -4361,14 +4800,14 @@ module Aws::WAFV2
     # @option params [required, Array<Types::Regex>] :regular_expression_list
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @return [Types::UpdateRegexPatternSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4455,14 +4894,14 @@ module Aws::WAFV2
     #   collection.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @option params [Hash<String,Types::CustomResponseBody>] :custom_response_bodies
     #   A map of custom response keys and content bodies. When you create a
@@ -4736,6 +5175,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -4899,14 +5339,14 @@ module Aws::WAFV2
     #   collection.
     #
     # @option params [required, String] :lock_token
-    #   A token used for optimistic locking. WAF returns a token to your get
-    #   and list requests, to mark the state of the entity at the time of the
-    #   request. To make changes to the entity associated with the token, you
-    #   provide the token to operations like update and delete. WAF uses the
-    #   token to ensure that no changes have been made to the entity since you
-    #   last retrieved it. If a change has been made, the update fails with a
-    #   `WAFOptimisticLockException`. If this happens, perform another get,
-    #   and use the new token returned by that operation.
+    #   A token used for optimistic locking. WAF returns a token to your `get`
+    #   and `list` requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like `update` and `delete`. WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another `get`, and use the new token returned by that operation.
     #
     # @option params [Hash<String,Types::CustomResponseBody>] :custom_response_bodies
     #   A map of custom response keys and content bodies. When you create a
@@ -5204,6 +5644,7 @@ module Aws::WAFV2
     #           managed_rule_group_statement: {
     #             vendor_name: "VendorName", # required
     #             name: "EntityName", # required
+    #             version: "VersionKeyString",
     #             excluded_rules: [
     #               {
     #                 name: "EntityName", # required
@@ -5318,7 +5759,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

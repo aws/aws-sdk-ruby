@@ -2174,7 +2174,19 @@ module Aws::Imagebuilder
     #   you by other customers.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `description`
+    #
+    #   * `name`
+    #
+    #   * `platform`
+    #
+    #   * `supportedOsVersion`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #
     # @option params [Boolean] :by_name
     #   Returns the list of component build versions for the specified name.
@@ -2242,8 +2254,15 @@ module Aws::Imagebuilder
     #   recipes belonging to your account.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Request filters that are used to narrow the list of container images
-    #   that are returned.
+    #   Use the following filters to streamline results:
+    #
+    #   * `containerType`
+    #
+    #   * `name`
+    #
+    #   * `parentImage`
+    #
+    #   * `platform`
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the list.
@@ -2302,11 +2321,7 @@ module Aws::Imagebuilder
     # Returns a list of distribution configurations.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
-    #
-    #   * `name` - The name of this distribution configuration.
-    #
-    #   ^
+    #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2367,7 +2382,17 @@ module Aws::Imagebuilder
     #   want to retrieve.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `osVersion`
+    #
+    #   * `platform`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2492,7 +2517,11 @@ module Aws::Imagebuilder
     #   want to view.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `version`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2565,7 +2594,19 @@ module Aws::Imagebuilder
     # Returns a list of image pipelines.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `description`
+    #
+    #   * `distributionConfigurationArn`
+    #
+    #   * `imageRecipeArn`
+    #
+    #   * `infrastructureConfigurationArn`
+    #
+    #   * `name`
+    #
+    #   * `status`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2641,7 +2682,13 @@ module Aws::Imagebuilder
     #   with you by other customers.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `parentImage`
+    #
+    #   * `platform`
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2705,7 +2752,17 @@ module Aws::Imagebuilder
     #   customers.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   Use the following filters to streamline results:
+    #
+    #   * `name`
+    #
+    #   * `osVersion`
+    #
+    #   * `platform`
+    #
+    #   * `type`
+    #
+    #   * `version`
     #
     # @option params [Boolean] :by_name
     #   Requests a list of images with a specific recipe name.
@@ -2770,7 +2827,7 @@ module Aws::Imagebuilder
     # Returns a list of infrastructure configurations.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters.
+    #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -3417,7 +3474,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

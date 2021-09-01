@@ -101,6 +101,7 @@ module Aws::MediaTailor
     ScheduleAdBreak = Shapes::StructureShape.new(name: 'ScheduleAdBreak')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     ScheduleEntry = Shapes::StructureShape.new(name: 'ScheduleEntry')
+    ScheduleEntryType = Shapes::StringShape.new(name: 'ScheduleEntryType')
     SecretsManagerAccessTokenConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerAccessTokenConfiguration')
     SlateSource = Shapes::StructureShape.new(name: 'SlateSource')
     SourceLocation = Shapes::StructureShape.new(name: 'SourceLocation')
@@ -176,6 +177,7 @@ module Aws::MediaTailor
     Channel.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
     Channel.add_member(:channel_state, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelState"))
     Channel.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    Channel.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     Channel.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
     Channel.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, required: true, location_name: "Outputs"))
     Channel.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackMode"))
@@ -189,6 +191,7 @@ module Aws::MediaTailor
     ConfigurationAliasesResponse.value = Shapes::ShapeRef.new(shape: __mapOf__string)
 
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
+    CreateChannelRequest.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     CreateChannelRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: RequestOutputs, required: true, location_name: "Outputs"))
     CreateChannelRequest.add_member(:playback_mode, Shapes::ShapeRef.new(shape: PlaybackMode, required: true, location_name: "PlaybackMode"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -198,6 +201,7 @@ module Aws::MediaTailor
     CreateChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     CreateChannelResponse.add_member(:channel_state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "ChannelState"))
     CreateChannelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    CreateChannelResponse.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     CreateChannelResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
     CreateChannelResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, location_name: "Outputs"))
     CreateChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
@@ -217,6 +221,7 @@ module Aws::MediaTailor
     CreateProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     CreateProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
     CreateProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "ProgramName"))
+    CreateProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
     CreateProgramResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     CreateProgramResponse.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     CreateProgramResponse.struct_class = Types::CreateProgramResponse
@@ -310,6 +315,7 @@ module Aws::MediaTailor
     DescribeChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     DescribeChannelResponse.add_member(:channel_state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "ChannelState"))
     DescribeChannelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    DescribeChannelResponse.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     DescribeChannelResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
     DescribeChannelResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, location_name: "Outputs"))
     DescribeChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
@@ -325,6 +331,7 @@ module Aws::MediaTailor
     DescribeProgramResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     DescribeProgramResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
     DescribeProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "ProgramName"))
+    DescribeProgramResponse.add_member(:scheduled_start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "ScheduledStartTime"))
     DescribeProgramResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     DescribeProgramResponse.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     DescribeProgramResponse.struct_class = Types::DescribeProgramResponse
@@ -559,6 +566,7 @@ module Aws::MediaTailor
     ScheduleEntry.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ChannelName"))
     ScheduleEntry.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProgramName"))
     ScheduleEntry.add_member(:schedule_ad_breaks, Shapes::ShapeRef.new(shape: __listOfScheduleAdBreak, location_name: "ScheduleAdBreaks"))
+    ScheduleEntry.add_member(:schedule_entry_type, Shapes::ShapeRef.new(shape: ScheduleEntryType, location_name: "ScheduleEntryType"))
     ScheduleEntry.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
     ScheduleEntry.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "VodSourceName"))
     ScheduleEntry.struct_class = Types::ScheduleEntry
@@ -604,6 +612,7 @@ module Aws::MediaTailor
 
     Transition.add_member(:relative_position, Shapes::ShapeRef.new(shape: RelativePosition, required: true, location_name: "RelativePosition"))
     Transition.add_member(:relative_program, Shapes::ShapeRef.new(shape: __string, location_name: "RelativeProgram"))
+    Transition.add_member(:scheduled_start_time_millis, Shapes::ShapeRef.new(shape: __long, location_name: "ScheduledStartTimeMillis"))
     Transition.add_member(:type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Type"))
     Transition.struct_class = Types::Transition
 
@@ -619,6 +628,7 @@ module Aws::MediaTailor
     UpdateChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, location_name: "ChannelName"))
     UpdateChannelResponse.add_member(:channel_state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "ChannelState"))
     UpdateChannelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "CreationTime"))
+    UpdateChannelResponse.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     UpdateChannelResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
     UpdateChannelResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: ResponseOutputs, location_name: "Outputs"))
     UpdateChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))

@@ -346,8 +346,8 @@ module Aws::DataSync
     # you allow the task execution to complete, file content on the
     # destination is complete and consistent. This applies to other
     # unexpected failures that interrupt a task execution. In all of these
-    # cases, AWS DataSync successfully complete the transfer when you start
-    # the next task execution.
+    # cases, DataSync successfully complete the transfer when you start the
+    # next task execution.
     #
     # @option params [required, String] :task_execution_arn
     #   The Amazon Resource Name (ARN) of the task execution to cancel.
@@ -369,12 +369,13 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Activates an AWS DataSync agent that you have deployed on your host.
-    # The activation process associates your agent with your account. In the
-    # activation process, you specify information such as the AWS Region
-    # that you want to activate the agent in. You activate the agent in the
-    # AWS Region where your target locations (in Amazon S3 or Amazon EFS)
-    # reside. Your tasks are created in this AWS Region.
+    # Activates an DataSync agent that you have deployed on your host. The
+    # activation process associates your agent with your account. In the
+    # activation process, you specify information such as the Amazon Web
+    # Services Region that you want to activate the agent in. You activate
+    # the agent in the Amazon Web Services Region where your target
+    # locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created
+    # in this Amazon Web Services Region.
     #
     # You can activate the agent in a VPC (virtual private cloud) or provide
     # the agent access to a VPC endpoint so you can run tasks without going
@@ -385,13 +386,14 @@ module Aws::DataSync
     # task to run. If you use multiple agents for a source location, the
     # status of all the agents must be AVAILABLE for the task to run.
     #
-    # Agents are automatically updated by AWS on a regular basis, using a
-    # mechanism that ensures minimal interruption to your tasks.
+    # Agents are automatically updated by Amazon Web Services on a regular
+    # basis, using a mechanism that ensures minimal interruption to your
+    # tasks.
     #
     # @option params [required, String] :activation_key
     #   Your agent activation key. You can get the activation key either by
     #   sending an HTTP GET request with redirects that enable you to get the
-    #   agent IP address (port 80). Alternatively, you can get it from the AWS
+    #   agent IP address (port 80). Alternatively, you can get it from the
     #   DataSync console.
     #
     #   The redirect URL returned in the response provides you the activation
@@ -400,8 +402,8 @@ module Aws::DataSync
     #   are merely defaults. The arguments you pass to this API call determine
     #   the actual configuration of your agent.
     #
-    #   For more information, see Activating an Agent in the *AWS DataSync
-    #   User Guide.*
+    #   For more information, see Activating an Agent in the *DataSync User
+    #   Guide.*
     #
     # @option params [String] :agent_name
     #   The name you configured for your agent. This value is a text reference
@@ -487,7 +489,7 @@ module Aws::DataSync
     # @option params [String] :subdirectory
     #   A subdirectory in the location’s path. This subdirectory in the EFS
     #   file system is used to read data from the EFS source location or write
-    #   data to the EFS destination. By default, AWS DataSync uses the root
+    #   data to the EFS destination. By default, DataSync uses the root
     #   directory.
     #
     #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
@@ -658,8 +660,8 @@ module Aws::DataSync
     #   files. For the agent to access directories, you must additionally
     #   enable all execute access.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see [NFS
-    #   Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #   For information about NFS export configuration, see 18.7. The
     #   /etc/exports Configuration File in the Red Hat Enterprise Linux
@@ -674,8 +676,8 @@ module Aws::DataSync
     #   Name Service (DNS) name of the NFS server. An agent that is installed
     #   on-premises uses this host name to mount the NFS server in a network.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see [NFS
-    #   Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #   <note markdown="1"> This name must either be DNS-compliant or must be an IP version 4
     #   (IPv4) address.
@@ -690,8 +692,8 @@ module Aws::DataSync
     #   Contains a list of Amazon Resource Names (ARNs) of agents that are
     #   used to connect to an NFS server.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see [NFS
-    #   Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #
     #
@@ -832,9 +834,12 @@ module Aws::DataSync
 
     # Creates an endpoint for an Amazon S3 bucket.
     #
-    # For more information, see
-    # https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
-    # in the *AWS DataSync User Guide*.
+    # For more information, see [Create an Amazon S3 location][1] in the
+    # *DataSync User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
     #
     # @option params [String] :subdirectory
     #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3
@@ -842,14 +847,15 @@ module Aws::DataSync
     #   S3 destination.
     #
     # @option params [required, String] :s3_bucket_arn
-    #   The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost,
-    #   this must be an access point ARN.
+    #   The ARN of the Amazon S3 bucket. If the bucket is on an Amazon Web
+    #   Services Outpost, this must be an access point ARN.
     #
     # @option params [String] :s3_storage_class
     #   The Amazon S3 storage class that you want to store your files in when
-    #   this location is used as a task destination. For buckets in AWS
-    #   Regions, the storage class defaults to Standard. For buckets on AWS
-    #   Outposts, the storage class defaults to AWS S3 Outposts.
+    #   this location is used as a task destination. For buckets in Amazon Web
+    #   Services Regions, the storage class defaults to Standard. For buckets
+    #   on Outposts, the storage class defaults to Amazon Web Services S3
+    #   Outposts.
     #
     #   For more information about S3 storage classes, see [Amazon S3 Storage
     #   Classes][1]. Some storage classes have behaviors that can affect your
@@ -862,17 +868,18 @@ module Aws::DataSync
     #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #
     # @option params [required, Types::S3Config] :s3_config
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that is used to access an Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that is used to access an Amazon S3 bucket.
     #
     #   For detailed information about using such a role, see Creating a
-    #   Location for Amazon S3 in the *AWS DataSync User Guide*.
+    #   Location for Amazon S3 in the *DataSync User Guide*.
     #
     # @option params [Array<String>] :agent_arns
-    #   If you are using DataSync on an AWS Outpost, specify the Amazon
-    #   Resource Names (ARNs) of the DataSync agents deployed on your Outpost.
-    #   For more information about launching a DataSync agent on an AWS
-    #   Outpost, see [Deploy your DataSync agent on AWS Outposts][1].
+    #   If you are using DataSync on an Amazon Web Services Outpost, specify
+    #   the Amazon Resource Names (ARNs) of the DataSync agents deployed on
+    #   your Outpost. For more information about launching a DataSync agent on
+    #   an Amazon Web Services Outpost, see [Deploy your DataSync agent on
+    #   Outposts][1].
     #
     #
     #
@@ -1025,18 +1032,21 @@ module Aws::DataSync
     # The configuration specifies options such as task scheduling, bandwidth
     # limits, etc. A task is the complete definition of a data transfer.
     #
-    # When you create a task that transfers data between AWS services in
-    # different AWS Regions, one of the two locations that you specify must
-    # reside in the Region where DataSync is being used. The other location
-    # must be specified in a different Region.
+    # When you create a task that transfers data between Amazon Web Services
+    # services in different Amazon Web Services Regions, one of the two
+    # locations that you specify must reside in the Region where DataSync is
+    # being used. The other location must be specified in a different
+    # Region.
     #
-    # You can transfer data between commercial AWS Regions except for China,
-    # or between AWS GovCloud (US-East and US-West) Regions.
+    # You can transfer data between commercial Amazon Web Services Regions
+    # except for China, or between Amazon Web Services GovCloud (US)
+    # Regions.
     #
-    # When you use DataSync to copy files or objects between AWS Regions,
-    # you pay for data transfer between Regions. This is billed as data
-    # transfer OUT from your source Region to your destination Region. For
-    # more information, see [Data Transfer pricing][1].
+    # When you use DataSync to copy files or objects between Amazon Web
+    # Services Regions, you pay for data transfer between Regions. This is
+    # billed as data transfer OUT from your source Region to your
+    # destination Region. For more information, see [Data Transfer
+    # pricing][1].
     #
     #
     #
@@ -1046,7 +1056,8 @@ module Aws::DataSync
     #   The Amazon Resource Name (ARN) of the source location for the task.
     #
     # @option params [required, String] :destination_location_arn
-    #   The Amazon Resource Name (ARN) of an AWS storage resource's location.
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services storage
+    #   resource's location.
     #
     # @option params [String] :cloud_watch_log_group_arn
     #   The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that
@@ -1090,6 +1101,12 @@ module Aws::DataSync
     #   The key-value pair that represents the tag that you want to add to the
     #   resource. The value can be an empty string.
     #
+    # @option params [Array<Types::FilterRule>] :includes
+    #   A list of filter rules that determines which files to include when
+    #   running a task. The pattern should contain a single filter string that
+    #   consists of the patterns to include. The patterns are delimited by
+    #   "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #
     # @return [Types::CreateTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTaskResponse#task_arn #task_arn} => String
@@ -1132,6 +1149,12 @@ module Aws::DataSync
     #         value: "TagValue",
     #       },
     #     ],
+    #     includes: [
+    #       {
+    #         filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #         value: "FilterValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1149,14 +1172,14 @@ module Aws::DataSync
 
     # Deletes an agent. To specify which agent to delete, use the Amazon
     # Resource Name (ARN) of the agent in your request. The operation
-    # disassociates the agent from your AWS account. However, it doesn't
-    # delete the agent virtual machine (VM) from your on-premises
-    # environment.
+    # disassociates the agent from your Amazon Web Services account.
+    # However, it doesn't delete the agent virtual machine (VM) from your
+    # on-premises environment.
     #
     # @option params [required, String] :agent_arn
     #   The Amazon Resource Name (ARN) of the agent to delete. Use the
     #   `ListAgents` operation to return a list of agents for your account and
-    #   AWS Region.
+    #   Amazon Web Services Region.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1175,7 +1198,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Deletes the configuration of a location used by AWS DataSync.
+    # Deletes the configuration of a location used by DataSync.
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the location to delete.
@@ -1535,6 +1558,7 @@ module Aws::DataSync
     #   * {Types::DescribeTaskResponse#error_code #error_code} => String
     #   * {Types::DescribeTaskResponse#error_detail #error_detail} => String
     #   * {Types::DescribeTaskResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeTaskResponse#includes #includes} => Array&lt;Types::FilterRule&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1576,6 +1600,9 @@ module Aws::DataSync
     #   resp.error_code #=> String
     #   resp.error_detail #=> String
     #   resp.creation_time #=> Time
+    #   resp.includes #=> Array
+    #   resp.includes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
+    #   resp.includes[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTask AWS API Documentation
     #
@@ -1661,9 +1688,9 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns a list of agents owned by an AWS account in the AWS Region
-    # specified in the request. The returned list is ordered by agent Amazon
-    # Resource Name (ARN).
+    # Returns a list of agents owned by an Amazon Web Services account in
+    # the Amazon Web Services Region specified in the request. The returned
+    # list is ordered by agent Amazon Resource Name (ARN).
     #
     # By default, this operation returns a maximum of 100 agents. This
     # operation supports pagination that enables you to optionally reduce
@@ -1917,7 +1944,7 @@ module Aws::DataSync
     # PREPARING \| TRANSFERRING \| VERIFYING \| SUCCESS/FAILURE.
     #
     # For detailed information, see the Task Execution section in the
-    # Components and Terminology topic in the *AWS DataSync User Guide*.
+    # Components and Terminology topic in the *DataSync User Guide*.
     #
     # @option params [required, String] :task_arn
     #   The Amazon Resource Name (ARN) of the task to start.
@@ -1943,6 +1970,12 @@ module Aws::DataSync
     #   running a task. The pattern should contain a single filter string that
     #   consists of the patterns to include. The patterns are delimited by
     #   "\|" (that is, a pipe). For example: `"/folder1|/folder2"`
+    #
+    # @option params [Array<Types::FilterRule>] :excludes
+    #   A list of filter rules that determines which files to exclude from a
+    #   task. The list should contain a single filter string that consists of
+    #   the patterns to exclude. The patterns are delimited by "\|" (that
+    #   is, a pipe), for example, `"/folder1|/folder2"`.
     #
     # @return [Types::StartTaskExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1974,6 +2007,12 @@ module Aws::DataSync
     #         value: "FilterValue",
     #       },
     #     ],
+    #     excludes: [
+    #       {
+    #         filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #         value: "FilterValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1989,7 +2028,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Applies a key-value pair to an AWS resource.
+    # Applies a key-value pair to an Amazon Web Services resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to apply the tag to.
@@ -2020,7 +2059,7 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Removes a tag from an AWS resource.
+    # Removes a tag from an Amazon Web Services resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to remove the tag from.
@@ -2104,8 +2143,8 @@ module Aws::DataSync
     #   the files. For the agent to access directories, you must additionally
     #   enable all execute access.
     #
-    #   If you are copying data to or from your AWS Snowcone device, see [NFS
-    #   Server on AWS Snowcone][1] for more information.
+    #   If you are copying data to or from your Snowcone device, see [NFS
+    #   Server on Snowcone][1] for more information.
     #
     #   For information about NFS export configuration, see 18.7. The
     #   /etc/exports Configuration File in the Red Hat Enterprise Linux
@@ -2342,6 +2381,12 @@ module Aws::DataSync
     #   The Amazon Resource Name (ARN) of the resource name of the CloudWatch
     #   LogGroup.
     #
+    # @option params [Array<Types::FilterRule>] :includes
+    #   A list of filter rules that determines which files to include when
+    #   running a task. The pattern should contain a single filter string that
+    #   consists of the patterns to include. The patterns are delimited by
+    #   "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2375,6 +2420,12 @@ module Aws::DataSync
     #     },
     #     name: "TagValue",
     #     cloud_watch_log_group_arn: "LogGroupArn",
+    #     includes: [
+    #       {
+    #         filter_type: "SIMPLE_PATTERN", # accepts SIMPLE_PATTERN
+    #         value: "FilterValue",
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTask AWS API Documentation
@@ -2467,7 +2518,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3090,7 +3090,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Returns the full details of an `AppInstanceUser` .
+    # Returns the full details of an `AppInstanceUser`.
     #
     # @option params [required, String] :app_instance_user_arn
     #   The ARN of the `AppInstanceUser`.
@@ -7215,14 +7215,14 @@ module Aws::Chime
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
-    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1
+    #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
     #       },
     #       engine_transcribe_medical_settings: {
     #         language_code: "en-US", # required, accepts en-US
     #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE, CARDIOLOGY, NEUROLOGY, ONCOLOGY, RADIOLOGY, UROLOGY
     #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #         vocabulary_name: "String",
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
     #       },
     #     },
     #   })
@@ -8405,7 +8405,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

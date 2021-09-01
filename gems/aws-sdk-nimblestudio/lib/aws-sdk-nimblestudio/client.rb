@@ -529,6 +529,8 @@ module Aws::NimbleStudio
     #
     # @option params [String] :launch_profile_id
     #
+    # @option params [String] :owned_by
+    #
     # @option params [String] :streaming_image_id
     #
     # @option params [required, String] :studio_id
@@ -545,6 +547,7 @@ module Aws::NimbleStudio
     #     client_token: "ClientToken",
     #     ec2_instance_type: "g4dn.xlarge", # accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
     #     launch_profile_id: "__string",
+    #     owned_by: "__string",
     #     streaming_image_id: "StreamingImageId",
     #     studio_id: "__string", # required
     #     tags: {
@@ -559,6 +562,7 @@ module Aws::NimbleStudio
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR"
@@ -612,6 +616,7 @@ module Aws::NimbleStudio
     #   resp.stream.created_at #=> Time
     #   resp.stream.created_by #=> String
     #   resp.stream.expires_at #=> Time
+    #   resp.stream.owned_by #=> String
     #   resp.stream.state #=> String, one of "READY", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.stream.status_code #=> String, one of "STREAM_CREATE_IN_PROGRESS", "STREAM_READY", "STREAM_DELETE_IN_PROGRESS", "STREAM_DELETED", "INTERNAL_ERROR", "NETWORK_CONNECTION_ERROR"
     #   resp.stream.stream_id #=> String
@@ -643,11 +648,11 @@ module Aws::NimbleStudio
     #
     # In Nimble Studio, resource names, descriptions, initialization
     # scripts, and other data you provide are always encrypted at rest using
-    # an AWS KMS key. By default, this key is owned by AWS and managed on
-    # your behalf. You may provide your own AWS KMS key when calling
+    # an KMS key. By default, this key is owned by Amazon Web Services and
+    # managed on your behalf. You may provide your own KMS key when calling
     # CreateStudio to encrypt this data using a key you own and manage.
     #
-    # When providing an AWS KMS key during studio creation, Nimble Studio
+    # When providing an KMS key during studio creation, Nimble Studio
     # creates KMS grants in your account to provide your studio user and
     # admin roles access to these KMS keys.
     #
@@ -1037,6 +1042,7 @@ module Aws::NimbleStudio
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR"
@@ -1549,6 +1555,7 @@ module Aws::NimbleStudio
     #   resp.session.created_by #=> String
     #   resp.session.ec2_instance_type #=> String
     #   resp.session.launch_profile_id #=> String
+    #   resp.session.owned_by #=> String
     #   resp.session.session_id #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR"
@@ -1601,6 +1608,7 @@ module Aws::NimbleStudio
     #   resp.stream.created_at #=> Time
     #   resp.stream.created_by #=> String
     #   resp.stream.expires_at #=> Time
+    #   resp.stream.owned_by #=> String
     #   resp.stream.state #=> String, one of "READY", "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.stream.status_code #=> String, one of "STREAM_CREATE_IN_PROGRESS", "STREAM_READY", "STREAM_DELETE_IN_PROGRESS", "STREAM_DELETED", "INTERNAL_ERROR", "NETWORK_CONNECTION_ERROR"
     #   resp.stream.stream_id #=> String
@@ -1952,8 +1960,8 @@ module Aws::NimbleStudio
 
     # List the streaming image resources available to this studio.
     #
-    # This list will contain both images provided by AWS, as well as
-    # streaming images that you have created in your studio.
+    # This list will contain both images provided by Amazon Web Services, as
+    # well as streaming images that you have created in your studio.
     #
     # @option params [String] :next_token
     #
@@ -2012,6 +2020,8 @@ module Aws::NimbleStudio
     #
     # @option params [String] :next_token
     #
+    # @option params [String] :owned_by
+    #
     # @option params [String] :session_ids
     #
     # @option params [required, String] :studio_id
@@ -2028,6 +2038,7 @@ module Aws::NimbleStudio
     #   resp = client.list_streaming_sessions({
     #     created_by: "__string",
     #     next_token: "__string",
+    #     owned_by: "__string",
     #     session_ids: "__string",
     #     studio_id: "__string", # required
     #   })
@@ -2041,6 +2052,7 @@ module Aws::NimbleStudio
     #   resp.sessions[0].created_by #=> String
     #   resp.sessions[0].ec2_instance_type #=> String
     #   resp.sessions[0].launch_profile_id #=> String
+    #   resp.sessions[0].owned_by #=> String
     #   resp.sessions[0].session_id #=> String
     #   resp.sessions[0].state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.sessions[0].status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR"
@@ -2182,7 +2194,8 @@ module Aws::NimbleStudio
       req.send_request(options)
     end
 
-    # List studios in your AWS account in the requested AWS Region.
+    # List studios in your Amazon Web Services account in the requested
+    # Amazon Web Services Region.
     #
     # @option params [String] :next_token
     #
@@ -2344,15 +2357,18 @@ module Aws::NimbleStudio
 
     # Repairs the SSO configuration for a given studio.
     #
-    # If the studio has a valid AWS SSO configuration currently associated
-    # with it, this operation will fail with a validation error.
+    # If the studio has a valid Amazon Web Services SSO configuration
+    # currently associated with it, this operation will fail with a
+    # validation error.
     #
-    # If the studio does not have a valid AWS SSO configuration currently
-    # associated with it, then a new AWS SSO application is created for the
-    # studio and the studio is changed to the READY state.
+    # If the studio does not have a valid Amazon Web Services SSO
+    # configuration currently associated with it, then a new Amazon Web
+    # Services SSO application is created for the studio and the studio is
+    # changed to the READY state.
     #
-    # After the AWS SSO application is repaired, you must use the Amazon
-    # Nimble Studio console to add administrators and users to your studio.
+    # After the Amazon Web Services SSO application is repaired, you must
+    # use the Amazon Nimble Studio console to add administrators and users
+    # to your studio.
     #
     # @option params [String] :client_token
     #   **A suitable default value is auto-generated.** You should normally
@@ -2839,7 +2855,7 @@ module Aws::NimbleStudio
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-nimblestudio'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

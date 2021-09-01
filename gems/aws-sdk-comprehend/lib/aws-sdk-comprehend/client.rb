@@ -1098,6 +1098,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.document_classification_job_properties.job_id #=> String
+    #   resp.document_classification_job_properties.job_arn #=> String
     #   resp.document_classification_job_properties.job_name #=> String
     #   resp.document_classification_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.document_classification_job_properties.message #=> String
@@ -1208,6 +1209,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.dominant_language_detection_job_properties.job_id #=> String
+    #   resp.dominant_language_detection_job_properties.job_arn #=> String
     #   resp.dominant_language_detection_job_properties.job_name #=> String
     #   resp.dominant_language_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.dominant_language_detection_job_properties.message #=> String
@@ -1290,6 +1292,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.entities_detection_job_properties.job_id #=> String
+    #   resp.entities_detection_job_properties.job_arn #=> String
     #   resp.entities_detection_job_properties.job_name #=> String
     #   resp.entities_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.entities_detection_job_properties.message #=> String
@@ -1400,6 +1403,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.events_detection_job_properties.job_id #=> String
+    #   resp.events_detection_job_properties.job_arn #=> String
     #   resp.events_detection_job_properties.job_name #=> String
     #   resp.events_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.events_detection_job_properties.message #=> String
@@ -1443,6 +1447,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.key_phrases_detection_job_properties.job_id #=> String
+    #   resp.key_phrases_detection_job_properties.job_arn #=> String
     #   resp.key_phrases_detection_job_properties.job_name #=> String
     #   resp.key_phrases_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.key_phrases_detection_job_properties.message #=> String
@@ -1489,6 +1494,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.pii_entities_detection_job_properties.job_id #=> String
+    #   resp.pii_entities_detection_job_properties.job_arn #=> String
     #   resp.pii_entities_detection_job_properties.job_name #=> String
     #   resp.pii_entities_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.pii_entities_detection_job_properties.message #=> String
@@ -1535,6 +1541,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.sentiment_detection_job_properties.job_id #=> String
+    #   resp.sentiment_detection_job_properties.job_arn #=> String
     #   resp.sentiment_detection_job_properties.job_name #=> String
     #   resp.sentiment_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.sentiment_detection_job_properties.message #=> String
@@ -1580,6 +1587,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.topics_detection_job_properties.job_id #=> String
+    #   resp.topics_detection_job_properties.job_arn #=> String
     #   resp.topics_detection_job_properties.job_name #=> String
     #   resp.topics_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.topics_detection_job_properties.message #=> String
@@ -1899,6 +1907,7 @@ module Aws::Comprehend
     #
     #   resp.document_classification_job_properties_list #=> Array
     #   resp.document_classification_job_properties_list[0].job_id #=> String
+    #   resp.document_classification_job_properties_list[0].job_arn #=> String
     #   resp.document_classification_job_properties_list[0].job_name #=> String
     #   resp.document_classification_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.document_classification_job_properties_list[0].message #=> String
@@ -2048,6 +2057,7 @@ module Aws::Comprehend
     #
     #   resp.dominant_language_detection_job_properties_list #=> Array
     #   resp.dominant_language_detection_job_properties_list[0].job_id #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].job_arn #=> String
     #   resp.dominant_language_detection_job_properties_list[0].job_name #=> String
     #   resp.dominant_language_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.dominant_language_detection_job_properties_list[0].message #=> String
@@ -2167,6 +2177,7 @@ module Aws::Comprehend
     #
     #   resp.entities_detection_job_properties_list #=> Array
     #   resp.entities_detection_job_properties_list[0].job_id #=> String
+    #   resp.entities_detection_job_properties_list[0].job_arn #=> String
     #   resp.entities_detection_job_properties_list[0].job_name #=> String
     #   resp.entities_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.entities_detection_job_properties_list[0].message #=> String
@@ -2322,6 +2333,7 @@ module Aws::Comprehend
     #
     #   resp.events_detection_job_properties_list #=> Array
     #   resp.events_detection_job_properties_list[0].job_id #=> String
+    #   resp.events_detection_job_properties_list[0].job_arn #=> String
     #   resp.events_detection_job_properties_list[0].job_name #=> String
     #   resp.events_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.events_detection_job_properties_list[0].message #=> String
@@ -2384,6 +2396,7 @@ module Aws::Comprehend
     #
     #   resp.key_phrases_detection_job_properties_list #=> Array
     #   resp.key_phrases_detection_job_properties_list[0].job_id #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].job_arn #=> String
     #   resp.key_phrases_detection_job_properties_list[0].job_name #=> String
     #   resp.key_phrases_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.key_phrases_detection_job_properties_list[0].message #=> String
@@ -2446,6 +2459,7 @@ module Aws::Comprehend
     #
     #   resp.pii_entities_detection_job_properties_list #=> Array
     #   resp.pii_entities_detection_job_properties_list[0].job_id #=> String
+    #   resp.pii_entities_detection_job_properties_list[0].job_arn #=> String
     #   resp.pii_entities_detection_job_properties_list[0].job_name #=> String
     #   resp.pii_entities_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.pii_entities_detection_job_properties_list[0].message #=> String
@@ -2511,6 +2525,7 @@ module Aws::Comprehend
     #
     #   resp.sentiment_detection_job_properties_list #=> Array
     #   resp.sentiment_detection_job_properties_list[0].job_id #=> String
+    #   resp.sentiment_detection_job_properties_list[0].job_arn #=> String
     #   resp.sentiment_detection_job_properties_list[0].job_name #=> String
     #   resp.sentiment_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.sentiment_detection_job_properties_list[0].message #=> String
@@ -2609,6 +2624,7 @@ module Aws::Comprehend
     #
     #   resp.topics_detection_job_properties_list #=> Array
     #   resp.topics_detection_job_properties_list[0].job_id #=> String
+    #   resp.topics_detection_job_properties_list[0].job_arn #=> String
     #   resp.topics_detection_job_properties_list[0].job_name #=> String
     #   resp.topics_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.topics_detection_job_properties_list[0].message #=> String
@@ -2684,9 +2700,16 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the document classification job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartDocumentClassificationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentClassificationJobResponse#job_id #job_id} => String
+    #   * {Types::StartDocumentClassificationJobResponse#job_arn #job_arn} => String
     #   * {Types::StartDocumentClassificationJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -2709,11 +2732,18 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDocumentClassificationJob AWS API Documentation
@@ -2775,9 +2805,16 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the dominant language detection job. A tag
+    #   is a key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDominantLanguageDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartDominantLanguageDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartDominantLanguageDetectionJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -2799,11 +2836,18 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDominantLanguageDetectionJob AWS API Documentation
@@ -2880,9 +2924,16 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the entities detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEntitiesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartEntitiesDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartEntitiesDetectionJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -2906,11 +2957,18 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJob AWS API Documentation
@@ -2952,9 +3010,16 @@ module Aws::Comprehend
     # @option params [required, Array<String>] :target_event_types
     #   The types of events to detect in the input documents.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the events detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartEventsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEventsDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartEventsDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartEventsDetectionJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -2973,11 +3038,18 @@ module Aws::Comprehend
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     client_request_token: "ClientRequestTokenString",
     #     target_event_types: ["EventTypeString"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEventsDetectionJob AWS API Documentation
@@ -3043,9 +3115,16 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the key phrases detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartKeyPhrasesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartKeyPhrasesDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartKeyPhrasesDetectionJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -3068,11 +3147,18 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartKeyPhrasesDetectionJob AWS API Documentation
@@ -3123,9 +3209,16 @@ module Aws::Comprehend
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the PII entities detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartPiiEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPiiEntitiesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartPiiEntitiesDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartPiiEntitiesDetectionJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -3149,11 +3242,18 @@ module Aws::Comprehend
     #     job_name: "JobName",
     #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
     #     client_request_token: "ClientRequestTokenString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartPiiEntitiesDetectionJob AWS API Documentation
@@ -3219,9 +3319,16 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the sentiment detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSentimentDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartSentimentDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartSentimentDetectionJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -3244,11 +3351,18 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJob AWS API Documentation
@@ -3315,9 +3429,16 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the topics detection job. A tag is a
+    #   key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
     # @return [Types::StartTopicsDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTopicsDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartTopicsDetectionJobResponse#job_arn #job_arn} => String
     #   * {Types::StartTopicsDetectionJobResponse#job_status #job_status} => String
     #
     # @example Request syntax with placeholder values
@@ -3340,11 +3461,18 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.job_id #=> String
+    #   resp.job_arn #=> String
     #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJob AWS API Documentation
@@ -3753,7 +3881,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

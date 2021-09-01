@@ -93,10 +93,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    # Describes an account authorized to restore a snapshot.
+    # Describes an Amazon Web Services account authorized to restore a
+    # snapshot.
     #
     # @!attribute [rw] account_id
-    #   The identifier of an account authorized to restore a snapshot.
+    #   The identifier of an Amazon Web Services account authorized to
+    #   restore a snapshot.
     #   @return [String]
     #
     # @!attribute [rw] account_alias
@@ -131,8 +133,8 @@ module Aws::Redshift
     #   The value represents how the cluster is configured to use AQUA.
     #   Possible values include the following.
     #
-    #   * enabled - Use AQUA if it is available for the current Region and
-    #     Amazon Redshift node type.
+    #   * enabled - Use AQUA if it is available for the current Amazon Web
+    #     Services Region and Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
     #
@@ -144,6 +146,40 @@ module Aws::Redshift
     class AquaConfiguration < Struct.new(
       :aqua_status,
       :aqua_configuration_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateDataShareConsumerMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data_share_arn: "String", # required
+    #         associate_entire_account: false,
+    #         consumer_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare that the consumer is
+    #   to use with the account or the namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] associate_entire_account
+    #   A value that specifies whether the datashare is associated with the
+    #   entire account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] consumer_arn
+    #   The Amazon Resource Name (ARN) of the consumer that is associated
+    #   with the datashare.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AssociateDataShareConsumerMessage AWS API Documentation
+    #
+    class AssociateDataShareConsumerMessage < Struct.new(
+      :data_share_arn,
+      :associate_entire_account,
+      :consumer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -248,9 +284,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] ec2_security_group_owner_id
-    #   The account number of the owner of the security group specified by
-    #   the *EC2SecurityGroupName* parameter. The Amazon Web Services Access
-    #   Key ID is not an acceptable value.
+    #   The Amazon Web Services account number of the owner of the security
+    #   group specified by the *EC2SecurityGroupName* parameter. The Amazon
+    #   Web Services Access Key ID is not an acceptable value.
     #
     #   Example: `111122223333`
     #   @return [String]
@@ -278,6 +314,33 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AuthorizeDataShareMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data_share_arn: "String", # required
+    #         consumer_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare that producers are
+    #   to authorize sharing for.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_identifier
+    #   The identifier of the data consumer that is authorized to access the
+    #   datashare. This identifier is an AWS account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeDataShareMessage AWS API Documentation
+    #
+    class AuthorizeDataShareMessage < Struct.new(
+      :data_share_arn,
+      :consumer_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AuthorizeEndpointAccessMessage
     #   data as a hash:
     #
@@ -292,7 +355,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The account ID to grant access to.
+    #   The Amazon Web Services account ID to grant access to.
     #   @return [String]
     #
     # @!attribute [rw] vpc_ids
@@ -330,8 +393,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] account_with_restore_access
-    #   The identifier of the account authorized to restore the specified
-    #   snapshot.
+    #   The identifier of the Amazon Web Services account authorized to
+    #   restore the specified snapshot.
     #
     #   To share a snapshot with Amazon Web Services Support, specify
     #   amazon-redshift-support.
@@ -1667,7 +1730,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for the account that is making the request.
+    #   * Must be unique for the Amazon Web Services account that is making
+    #     the request.
     #   @return [String]
     #
     # @!attribute [rw] manual_snapshot_retention_period
@@ -1839,7 +1903,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #
     #   Example: `myexamplecluster`
     #   @return [String]
@@ -2160,8 +2225,8 @@ module Aws::Redshift
     #   (Advanced Query Accelerator) when it is created. Possible values
     #   include the following.
     #
-    #   * enabled - Use AQUA if it is available for the current Region and
-    #     Amazon Redshift node type.
+    #   * enabled - Use AQUA if it is available for the current Amazon Web
+    #     Services Region and Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
     #
@@ -2233,7 +2298,7 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique withing your account.
+    #   * Must be unique withing your Amazon Web Services account.
     #
     #   <note markdown="1"> This value is stored as a lower-case string.
     #
@@ -2247,11 +2312,11 @@ module Aws::Redshift
     #
     #   To get a list of valid parameter group family names, you can call
     #   DescribeClusterParameterGroups. By default, Amazon Redshift returns
-    #   a list of all the parameter groups that are owned by your account,
-    #   including the default parameter groups for each Amazon Redshift
-    #   engine version. The parameter group family names associated with the
-    #   default parameter groups provide you the valid values. For example,
-    #   a valid family name is "redshift-1.0".
+    #   a list of all the parameter groups that are owned by your Amazon Web
+    #   Services account, including the default parameter groups for each
+    #   Amazon Redshift engine version. The parameter group family names
+    #   associated with the default parameter groups provide you the valid
+    #   values. For example, a valid family name is "redshift-1.0".
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2322,7 +2387,7 @@ module Aws::Redshift
     #   * Must not be "Default".
     #
     #   * Must be unique for all security groups that are created by your
-    #     account.
+    #     Amazon Web Services account.
     #
     #   Example: `examplesecuritygroup`
     #   @return [String]
@@ -2374,7 +2439,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_identifier
     #   A unique identifier for the snapshot that you are requesting. This
-    #   identifier must be unique for all snapshots within the account.
+    #   identifier must be unique for all snapshots within the Amazon Web
+    #   Services account.
     #
     #   Constraints:
     #
@@ -2455,7 +2521,7 @@ module Aws::Redshift
     #   * Must not be "Default".
     #
     #   * Must be unique for all subnet groups that are created by your
-    #     account.
+    #     Amazon Web Services account.
     #
     #   Example: `examplesubnetgroup`
     #   @return [String]
@@ -2512,8 +2578,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The account ID of the owner of the cluster. This is only required if
-    #   the cluster is in another account.
+    #   The Amazon Web Services account ID of the owner of the cluster. This
+    #   is only required if the cluster is in another Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_name
@@ -2590,8 +2657,9 @@ module Aws::Redshift
     #   The type of source that will be generating the events. For example,
     #   if you want to be notified of events generated by a cluster, you
     #   would set this parameter to cluster. If this value is not specified,
-    #   events are returned for all Amazon Redshift objects in your account.
-    #   You must specify a source type in order to specify source IDs.
+    #   events are returned for all Amazon Redshift objects in your Amazon
+    #   Web Services account. You must specify a source type in order to
+    #   specify source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
     #   cluster-security-group, cluster-snapshot, and scheduled-action.
@@ -2614,7 +2682,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by
     #   the event notification subscription.
     #
-    #   Values: configuration, management, monitoring, security
+    #   Values: configuration, management, monitoring, security, pending
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -2890,7 +2958,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant. This name must be unique in the
-    #   region for the account.
+    #   region for the Amazon Web Services account.
     #
     #   Constraints:
     #
@@ -2902,7 +2970,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -3127,6 +3196,70 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_share_arn
+    #   An Amazon Resource Name (ARN) that references the datashare that is
+    #   owned by a specific namespace of the producer cluster. A datashare
+    #   ARN is in the
+    #   `arn:aws:redshift:\{region\}:\{account-id\}:\{datashare\}:\{namespace-guid\}/\{datashare-name\}`
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] producer_arn
+    #   The Amazon Resource Name (ARN) of the producer.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_publicly_accessible_consumers
+    #   A value that specifies whether the datashare can be shared to a
+    #   publicly accessible cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_share_associations
+    #   A value that specifies when the datashare has an association between
+    #   a producer and data consumers.
+    #   @return [Array<Types::DataShareAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataShare AWS API Documentation
+    #
+    class DataShare < Struct.new(
+      :data_share_arn,
+      :producer_arn,
+      :allow_publicly_accessible_consumers,
+      :data_share_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The association of a datashare from a producer account with a data
+    # consumer.
+    #
+    # @!attribute [rw] consumer_identifier
+    #   The name of the consumer accounts that have an association with a
+    #   producer datashare.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the datashare that is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The creation date of the datashare that is associated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_change_date
+    #   The status change data of the datashare that is associated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataShareAssociation AWS API Documentation
+    #
+    class DataShareAssociation < Struct.new(
+      :consumer_identifier,
+      :status,
+      :created_date,
+      :status_change_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the status of a cluster while it is in the process of
     # resizing with an incremental resize.
     #
@@ -3167,6 +3300,33 @@ module Aws::Redshift
       :data_transferred_in_mega_bytes,
       :estimated_time_to_completion_in_seconds,
       :elapsed_time_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeauthorizeDataShareMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data_share_arn: "String", # required
+    #         consumer_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare to remove
+    #   authorization from.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_identifier
+    #   The identifier of the data consumer that is to have authorization
+    #   removed from the datashare. This identifier is an AWS account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeauthorizeDataShareMessage AWS API Documentation
+    #
+    class DeauthorizeDataShareMessage < Struct.new(
+      :data_share_arn,
+      :consumer_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4046,10 +4206,10 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The account used to create or copy the snapshot. Use this field to
-    #   filter the results to snapshots owned by a particular account. To
-    #   describe snapshots you own, either specify your account, or do not
-    #   specify the parameter.
+    #   The Amazon Web Services account used to create or copy the snapshot.
+    #   Use this field to filter the results to snapshots owned by a
+    #   particular account. To describe snapshots you own, either specify
+    #   your Amazon Web Services account, or do not specify the parameter.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -4360,6 +4520,214 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDataSharesForConsumerMessage
+    #   data as a hash:
+    #
+    #       {
+    #         consumer_arn: "String",
+    #         status: "ACTIVE", # accepts ACTIVE, AVAILABLE
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] consumer_arn
+    #   The Amazon Resource Name (ARN) of the consumer that returns in the
+    #   list of datashares.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An identifier giving the status of a datashare in the consumer
+    #   cluster. If this field is specified, Amazon Redshift returns the
+    #   list of datashares that have the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeDataSharesForConsumer request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForConsumerMessage AWS API Documentation
+    #
+    class DescribeDataSharesForConsumerMessage < Struct.new(
+      :consumer_arn,
+      :status,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_shares
+    #   Shows the results of datashares available for consumers.
+    #   @return [Array<Types::DataShare>]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeDataSharesForConsumer request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForConsumerResult AWS API Documentation
+    #
+    class DescribeDataSharesForConsumerResult < Struct.new(
+      :data_shares,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDataSharesForProducerMessage
+    #   data as a hash:
+    #
+    #       {
+    #         producer_arn: "String",
+    #         status: "ACTIVE", # accepts ACTIVE, AUTHORIZED, PENDING_AUTHORIZATION, DEAUTHORIZED, REJECTED
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] producer_arn
+    #   The Amazon Resource Name (ARN) of the producer that returns in the
+    #   list of datashares.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An identifier giving the status of a datashare in the producer. If
+    #   this field is specified, Amazon Redshift returns the list of
+    #   datashares that have the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeDataSharesForProducer request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForProducerMessage AWS API Documentation
+    #
+    class DescribeDataSharesForProducerMessage < Struct.new(
+      :producer_arn,
+      :status,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_shares
+    #   Shows the results of datashares available for producers.
+    #   @return [Array<Types::DataShare>]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeDataSharesForProducer request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForProducerResult AWS API Documentation
+    #
+    class DescribeDataSharesForProducerResult < Struct.new(
+      :data_shares,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDataSharesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data_share_arn: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] data_share_arn
+    #   The identifier of the datashare to describe details of.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a DescribeDataShares
+    #   request exceed the value specified in `MaxRecords`, AWS returns a
+    #   value in the `Marker` field of the response. You can retrieve the
+    #   next set of response records by providing the returned marker value
+    #   in the `Marker` parameter and retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesMessage AWS API Documentation
+    #
+    class DescribeDataSharesMessage < Struct.new(
+      :data_share_arn,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_shares
+    #   The results returned from describing datashares.
+    #   @return [Array<Types::DataShare>]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a DescribeDataShares
+    #   request exceed the value specified in `MaxRecords`, AWS returns a
+    #   value in the `Marker` field of the response. You can retrieve the
+    #   next set of response records by providing the returned marker value
+    #   in the `Marker` parameter and retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesResult AWS API Documentation
+    #
+    class DescribeDataSharesResult < Struct.new(
+      :data_shares,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDefaultClusterParametersMessage
     #   data as a hash:
     #
@@ -4435,7 +4803,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The account ID of the owner of the cluster.
+    #   The Amazon Web Services account ID of the owner of the cluster.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_name
@@ -4490,9 +4858,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The Aaccount ID of either the cluster owner (grantor) or grantee. If
-    #   `Grantee` parameter is true, then the `Account` value is of the
-    #   grantor.
+    #   The AAmazon Web Services account ID of either the cluster owner
+    #   (grantor) or grantee. If `Grantee` parameter is true, then the
+    #   `Account` value is of the grantor.
     #   @return [String]
     #
     # @!attribute [rw] grantee
@@ -4760,7 +5128,8 @@ module Aws::Redshift
     # @!attribute [rw] hsm_client_certificate_identifier
     #   The identifier of a specific HSM client certificate for which you
     #   want information. If no identifier is specified, information is
-    #   returned for all HSM client certificates owned by your account.
+    #   returned for all HSM client certificates owned by your Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4831,7 +5200,8 @@ module Aws::Redshift
     # @!attribute [rw] hsm_configuration_identifier
     #   The identifier of a specific Amazon Redshift HSM configuration to be
     #   described. If no identifier is specified, information is returned
-    #   for all HSM configurations owned by your account.
+    #   for all HSM configurations owned by your Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4948,9 +5318,9 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The account used to create or copy the snapshot. Required if you are
-    #   restoring a snapshot you do not own, optional if you own the
-    #   snapshot.
+    #   The Amazon Web Services account used to create or copy the snapshot.
+    #   Required if you are restoring a snapshot you do not own, optional if
+    #   you own the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -5062,7 +5432,7 @@ module Aws::Redshift
     #       }
     #
     # @!attribute [rw] account_id
-    #   The Region ID that owns the cluster.
+    #   The Amazon Web Services account ID that owns the cluster.
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier
@@ -5205,8 +5575,8 @@ module Aws::Redshift
     #   The unique identifier of a cluster whose resize progress you are
     #   requesting. This parameter is case-sensitive.
     #
-    #   By default, resize operations for all clusters defined for an
-    #   account are returned.
+    #   By default, resize operations for all clusters defined for an Amazon
+    #   Web Services account are returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResizeMessage AWS API Documentation
@@ -5741,6 +6111,40 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateDataShareConsumerMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data_share_arn: "String", # required
+    #         disassociate_entire_account: false,
+    #         consumer_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare to remove
+    #   association for.
+    #   @return [String]
+    #
+    # @!attribute [rw] disassociate_entire_account
+    #   A value that specifies whether association for the datashare is
+    #   removed from the entire account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] consumer_arn
+    #   The Amazon Resource Name (ARN) of the consumer that association for
+    #   the datashare is removed from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisassociateDataShareConsumerMessage AWS API Documentation
+    #
+    class DisassociateDataShareConsumerMessage < Struct.new(
+      :data_share_arn,
+      :disassociate_entire_account,
+      :consumer_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon EC2 security group.
     #
     # @!attribute [rw] status
@@ -5752,8 +6156,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] ec2_security_group_owner_id
-    #   The account ID of the owner of the EC2 security group specified in
-    #   the `EC2SecurityGroupName` field.
+    #   The Amazon Web Services account ID of the owner of the EC2 security
+    #   group specified in the `EC2SecurityGroupName` field.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5867,11 +6271,12 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] destination_region
-    #   The destination Region that you want to copy snapshots to.
+    #   The destination Amazon Web Services Region that you want to copy
+    #   snapshots to.
     #
-    #   Constraints: Must be the name of a valid Region. For more
-    #   information, see [Regions and Endpoints][1] in the Amazon Web
-    #   Services General Reference.
+    #   Constraints: Must be the name of a valid Amazon Web Services Region.
+    #   For more information, see [Regions and Endpoints][1] in the Amazon
+    #   Web Services General Reference.
     #
     #
     #
@@ -5895,8 +6300,9 @@ module Aws::Redshift
     #
     # @!attribute [rw] manual_snapshot_retention_period
     #   The number of days to retain newly copied snapshots in the
-    #   destination Region after they are copied from the source Region. If
-    #   the value is -1, the manual snapshot is retained indefinitely.
+    #   destination Amazon Web Services Region after they are copied from
+    #   the source Amazon Web Services Region. If the value is -1, the
+    #   manual snapshot is retained indefinitely.
     #
     #   The value must be either -1 or an integer between 1 and 3,653.
     #   @return [Integer]
@@ -5956,7 +6362,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The account ID of the owner of the cluster.
+    #   The Amazon Web Services account ID of the owner of the cluster.
     #   @return [String]
     #
     # @!attribute [rw] subnet_group_name
@@ -6038,14 +6444,14 @@ module Aws::Redshift
     class EndpointAlreadyExistsFault < Aws::EmptyStructure; end
 
     # Describes an endpoint authorization for authorizing Redshift-managed
-    # VPC endpoint access to a cluster across accounts.
+    # VPC endpoint access to a cluster across Amazon Web Services accounts.
     #
     # @!attribute [rw] grantor
-    #   The account ID of the cluster owner.
+    #   The Amazon Web Services account ID of the cluster owner.
     #   @return [String]
     #
     # @!attribute [rw] grantee
-    #   The account ID of the grantee of the cluster.
+    #   The Amazon Web Services account ID of the grantee of the cluster.
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier
@@ -6170,7 +6576,7 @@ module Aws::Redshift
     # @!attribute [rw] event_categories
     #   A list of the event categories.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: Configuration, Management, Monitoring, Security, Pending
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -6267,8 +6673,8 @@ module Aws::Redshift
     # Describes event subscriptions.
     #
     # @!attribute [rw] customer_aws_id
-    #   The account associated with the Amazon Redshift event notification
-    #   subscription.
+    #   The Amazon Web Services account associated with the Amazon Redshift
+    #   event notification subscription.
     #   @return [String]
     #
     # @!attribute [rw] cust_subscription_id
@@ -6315,7 +6721,7 @@ module Aws::Redshift
     #   The list of Amazon Redshift event categories specified in the event
     #   notification subscription.
     #
-    #   Values: Configuration, Management, Monitoring, Security
+    #   Values: Configuration, Management, Monitoring, Security, Pending
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -6846,7 +7252,7 @@ module Aws::Redshift
 
     # The authentication profile request is not valid. The profile name
     # can't be null or empty. The authentication profile API operation must
-    # be available in the Region.
+    # be available in the Amazon Web Services Region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidAuthenticationProfileRequestFault AWS API Documentation
     #
@@ -6909,6 +7315,12 @@ module Aws::Redshift
     #
     class InvalidClusterTrackFault < Aws::EmptyStructure; end
 
+    # There is an error with the datashare.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidDataShareFault AWS API Documentation
+    #
+    class InvalidDataShareFault < Aws::EmptyStructure; end
+
     # The Elastic IP (EIP) is invalid or cannot be found.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidElasticIpFault AWS API Documentation
@@ -6934,6 +7346,13 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidHsmConfigurationStateFault AWS API Documentation
     #
     class InvalidHsmConfigurationStateFault < Aws::EmptyStructure; end
+
+    # The namespace isn't valid because the namespace doesn't exist.
+    # Provide a valid namespace.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidNamespaceFault AWS API Documentation
+    #
+    class InvalidNamespaceFault < Aws::EmptyStructure; end
 
     # Indicates that the Reserved Node being exchanged is not in an active
     # state.
@@ -7128,8 +7547,8 @@ module Aws::Redshift
     #   The new value of AQUA configuration status. Possible values include
     #   the following.
     #
-    #   * enabled - Use AQUA if it is available for the current Region and
-    #     Amazon Redshift node type.
+    #   * enabled - Use AQUA if it is available for the current Amazon Web
+    #     Services Region and Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
     #
@@ -7597,7 +8016,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #
     #   Example: `examplecluster`
     #   @return [String]
@@ -7949,8 +8369,9 @@ module Aws::Redshift
     #   The type of source that will be generating the events. For example,
     #   if you want to be notified of events generated by a cluster, you
     #   would set this parameter to cluster. If this value is not specified,
-    #   events are returned for all Amazon Redshift objects in your account.
-    #   You must specify a source type in order to specify source IDs.
+    #   events are returned for all Amazon Redshift objects in your Amazon
+    #   Web Services account. You must specify a source type in order to
+    #   specify source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
     #   cluster-security-group, cluster-snapshot, and scheduled-action.
@@ -7973,7 +8394,7 @@ module Aws::Redshift
     #   Specifies the Amazon Redshift event categories to be published by
     #   the event notification subscription.
     #
-    #   Values: configuration, management, monitoring, security
+    #   Values: configuration, management, monitoring, security, pending
     #   @return [Array<String>]
     #
     # @!attribute [rw] severity
@@ -8108,7 +8529,7 @@ module Aws::Redshift
     # @!attribute [rw] cluster_identifier
     #   The unique identifier of the cluster for which you want to change
     #   the retention period for either automated or manual snapshots that
-    #   are copied to a destination Region.
+    #   are copied to a destination Amazon Web Services Region.
     #
     #   Constraints: Must be the valid name of an existing cluster that has
     #   cross-region snapshot copy enabled.
@@ -8116,15 +8537,17 @@ module Aws::Redshift
     #
     # @!attribute [rw] retention_period
     #   The number of days to retain automated snapshots in the destination
-    #   Region after they are copied from the source Region.
+    #   Amazon Web Services Region after they are copied from the source
+    #   Amazon Web Services Region.
     #
     #   By default, this only changes the retention period of copied
     #   automated snapshots.
     #
     #   If you decrease the retention period for automated snapshots that
-    #   are copied to a destination Region, Amazon Redshift deletes any
-    #   existing automated snapshots that were copied to the destination
-    #   Region and that fall outside of the new retention period.
+    #   are copied to a destination Amazon Web Services Region, Amazon
+    #   Redshift deletes any existing automated snapshots that were copied
+    #   to the destination Amazon Web Services Region and that fall outside
+    #   of the new retention period.
     #
     #   Constraints: Must be at least 1 and no more than 35 for automated
     #   snapshots.
@@ -8552,7 +8975,7 @@ module Aws::Redshift
     #       }
     #
     # @!attribute [rw] account_id
-    #   The Region ID that owns the cluster.
+    #   The Amazon Web Services account ID that owns the cluster.
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier
@@ -8810,6 +9233,25 @@ module Aws::Redshift
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RejectDataShareMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data_share_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare to reject.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RejectDataShareMessage AWS API Documentation
+    #
+    class RejectDataShareMessage < Struct.new(
+      :data_share_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9359,7 +9801,8 @@ module Aws::Redshift
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Must be unique for all clusters within an account.
+    #   * Must be unique for all clusters within an Amazon Web Services
+    #     account.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_identifier
@@ -9413,9 +9856,9 @@ module Aws::Redshift
     #   @return [Boolean]
     #
     # @!attribute [rw] owner_account
-    #   The account used to create or copy the snapshot. Required if you are
-    #   restoring a snapshot you do not own, optional if you own the
-    #   snapshot.
+    #   The Amazon Web Services account used to create or copy the snapshot.
+    #   Required if you are restoring a snapshot you do not own, optional if
+    #   you own the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] hsm_client_certificate_identifier
@@ -9600,8 +10043,8 @@ module Aws::Redshift
     #   (Advanced Query Accelerator) after the cluster is restored. Possible
     #   values include the following.
     #
-    #   * enabled - Use AQUA if it is available for the current Region and
-    #     Amazon Redshift node type.
+    #   * enabled - Use AQUA if it is available for the current Amazon Web
+    #     Services Region and Amazon Redshift node type.
     #
     #   * disabled - Don't use AQUA.
     #
@@ -9883,11 +10326,11 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] ec2_security_group_owner_id
-    #   The account number of the owner of the security group specified in
-    #   the `EC2SecurityGroupName` parameter. The Amazon Web Services access
-    #   key ID is not an acceptable value. If `EC2SecurityGroupOwnerId` is
-    #   specified, `EC2SecurityGroupName` must also be provided. and
-    #   `CIDRIP` cannot be provided.
+    #   The Amazon Web Services account number of the owner of the security
+    #   group specified in the `EC2SecurityGroupName` parameter. The Amazon
+    #   Web Services access key ID is not an acceptable value. If
+    #   `EC2SecurityGroupOwnerId` is specified, `EC2SecurityGroupName` must
+    #   also be provided. and `CIDRIP` cannot be provided.
     #
     #   Example: `111122223333`
     #   @return [String]
@@ -9930,7 +10373,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The account ID whose access is to be revoked.
+    #   The Amazon Web Services account ID whose access is to be revoked.
     #   @return [String]
     #
     # @!attribute [rw] vpc_ids
@@ -9977,8 +10420,8 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] account_with_restore_access
-    #   The identifier of the account that can no longer restore the
-    #   specified snapshot.
+    #   The identifier of the Amazon Web Services account that can no longer
+    #   restore the specified snapshot.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccessMessage AWS API Documentation
@@ -10365,16 +10808,16 @@ module Aws::Redshift
     #   @return [Boolean]
     #
     # @!attribute [rw] accounts_with_restore_access
-    #   A list of the accounts authorized to restore the snapshot. Returns
-    #   `null` if no accounts are authorized. Visible only to the snapshot
-    #   owner.
+    #   A list of the Amazon Web Services accounts authorized to restore the
+    #   snapshot. Returns `null` if no accounts are authorized. Visible only
+    #   to the snapshot owner.
     #   @return [Array<Types::AccountWithRestoreAccess>]
     #
     # @!attribute [rw] owner_account
-    #   For manual snapshots, the account used to create or copy the
-    #   snapshot. For automatic snapshots, the owner of the cluster. The
-    #   owner can perform all snapshot actions, such as sharing a manual
-    #   snapshot.
+    #   For manual snapshots, the Amazon Web Services account used to create
+    #   or copy the snapshot. For automatic snapshots, the owner of the
+    #   cluster. The owner can perform all snapshot actions, such as sharing
+    #   a manual snapshot.
     #   @return [String]
     #
     # @!attribute [rw] total_backup_size_in_mega_bytes
@@ -10592,8 +11035,8 @@ module Aws::Redshift
     #
     class SnapshotCopyGrantNotFoundFault < Aws::EmptyStructure; end
 
-    # The account has exceeded the maximum number of snapshot copy grants in
-    # this region.
+    # The Amazon Web Services account has exceeded the maximum number of
+    # snapshot copy grants in this region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrantQuotaExceededFault AWS API Documentation
     #
@@ -11144,7 +11587,7 @@ module Aws::Redshift
     #       }
     #
     # @!attribute [rw] account_id
-    #   The Region ID that owns the cluster.
+    #   The Amazon Web Services account ID that owns the cluster.
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier

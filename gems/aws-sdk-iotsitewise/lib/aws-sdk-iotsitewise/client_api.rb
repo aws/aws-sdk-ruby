@@ -199,6 +199,7 @@ module Aws::IoTSiteWise
     InterpolationType = Shapes::StringShape.new(name: 'InterpolationType')
     Interval = Shapes::StringShape.new(name: 'Interval')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
+    IntervalWindowInSeconds = Shapes::IntegerShape.new(name: 'IntervalWindowInSeconds')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -241,6 +242,7 @@ module Aws::IoTSiteWise
     MultiLayerStorage = Shapes::StructureShape.new(name: 'MultiLayerStorage')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Offset = Shapes::StringShape.new(name: 'Offset')
     OffsetInNanos = Shapes::IntegerShape.new(name: 'OffsetInNanos')
     Permission = Shapes::StringShape.new(name: 'Permission')
     PortalClientId = Shapes::StringShape.new(name: 'PortalClientId')
@@ -946,6 +948,7 @@ module Aws::IoTSiteWise
     GetInterpolatedAssetPropertyValuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     GetInterpolatedAssetPropertyValuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxInterpolatedResults, location: "querystring", location_name: "maxResults"))
     GetInterpolatedAssetPropertyValuesRequest.add_member(:type, Shapes::ShapeRef.new(shape: InterpolationType, required: true, location: "querystring", location_name: "type"))
+    GetInterpolatedAssetPropertyValuesRequest.add_member(:interval_window_in_seconds, Shapes::ShapeRef.new(shape: IntervalWindowInSeconds, location: "querystring", location_name: "intervalWindowInSeconds"))
     GetInterpolatedAssetPropertyValuesRequest.struct_class = Types::GetInterpolatedAssetPropertyValuesRequest
 
     GetInterpolatedAssetPropertyValuesResponse.add_member(:interpolated_asset_property_values, Shapes::ShapeRef.new(shape: InterpolatedAssetPropertyValues, required: true, location_name: "interpolatedAssetPropertyValues"))
@@ -1264,6 +1267,7 @@ module Aws::IoTSiteWise
     TransformProcessingConfig.struct_class = Types::TransformProcessingConfig
 
     TumblingWindow.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "interval"))
+    TumblingWindow.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "offset"))
     TumblingWindow.struct_class = Types::TumblingWindow
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))

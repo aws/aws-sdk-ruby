@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2021-08-05)
+------------------
+
+* Feature - EC2 Auto Scaling adds configuration checks and Launch Template validation to Instance Refresh.
+
 1.66.0 (2021-07-30)
 ------------------
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2021-08-30)
+------------------
+
+* Feature - Documentation updates for CodeBuild
+
+1.79.0 (2021-08-18)
+------------------
+
+* Feature - CodeBuild now allows you to make the build results for your build projects available to the public without requiring access to an AWS account.
+
+1.78.0 (2021-08-16)
+------------------
+
+* Feature - CodeBuild now allows you to select how batch build statuses are sent to the source provider for a project.
+
+1.77.0 (2021-08-11)
+------------------
+
+* Feature - CodeBuild now allows you to make the build results for your build projects available to the public without requiring access to an AWS account.
+
 1.76.0 (2021-07-30)
 ------------------
 

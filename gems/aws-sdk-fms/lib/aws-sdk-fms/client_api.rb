@@ -593,6 +593,7 @@ module Aws::FMS
     Policy.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
     Policy.add_member(:exclude_resource_tags, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ExcludeResourceTags"))
     Policy.add_member(:remediation_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "RemediationEnabled"))
+    Policy.add_member(:delete_unused_fm_managed_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteUnusedFMManagedResources"))
     Policy.add_member(:include_map, Shapes::ShapeRef.new(shape: CustomerPolicyScopeMap, location_name: "IncludeMap"))
     Policy.add_member(:exclude_map, Shapes::ShapeRef.new(shape: CustomerPolicyScopeMap, location_name: "ExcludeMap"))
     Policy.struct_class = Types::Policy
@@ -623,6 +624,7 @@ module Aws::FMS
     PolicySummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     PolicySummary.add_member(:security_service_type, Shapes::ShapeRef.new(shape: SecurityServiceType, location_name: "SecurityServiceType"))
     PolicySummary.add_member(:remediation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "RemediationEnabled"))
+    PolicySummary.add_member(:delete_unused_fm_managed_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteUnusedFMManagedResources"))
     PolicySummary.struct_class = Types::PolicySummary
 
     PolicySummaryList.member = Shapes::ShapeRef.new(shape: PolicySummary)

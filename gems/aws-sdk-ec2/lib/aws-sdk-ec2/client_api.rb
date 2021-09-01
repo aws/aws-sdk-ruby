@@ -993,6 +993,7 @@ module Aws::EC2
     EnableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'EnableVpcClassicLinkResult')
     EnclaveOptions = Shapes::StructureShape.new(name: 'EnclaveOptions')
     EnclaveOptionsRequest = Shapes::StructureShape.new(name: 'EnclaveOptionsRequest')
+    EncryptionInTransitSupported = Shapes::BooleanShape.new(name: 'EncryptionInTransitSupported')
     EndDateType = Shapes::StringShape.new(name: 'EndDateType')
     EndpointSet = Shapes::ListShape.new(name: 'EndpointSet')
     EphemeralNvmeSupport = Shapes::StringShape.new(name: 'EphemeralNvmeSupport')
@@ -1291,6 +1292,7 @@ module Aws::EC2
     InstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsRequest')
     InstanceMetadataOptionsResponse = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsResponse')
     InstanceMetadataOptionsState = Shapes::StringShape.new(name: 'InstanceMetadataOptionsState')
+    InstanceMetadataProtocolState = Shapes::StringShape.new(name: 'InstanceMetadataProtocolState')
     InstanceMonitoring = Shapes::StructureShape.new(name: 'InstanceMonitoring')
     InstanceMonitoringList = Shapes::ListShape.new(name: 'InstanceMonitoringList')
     InstanceNetworkInterface = Shapes::StructureShape.new(name: 'InstanceNetworkInterface')
@@ -1380,6 +1382,7 @@ module Aws::EC2
     KeyPairInfo = Shapes::StructureShape.new(name: 'KeyPairInfo')
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
     KeyPairName = Shapes::StringShape.new(name: 'KeyPairName')
+    KeyType = Shapes::StringShape.new(name: 'KeyType')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastError = Shapes::StructureShape.new(name: 'LastError')
     LaunchPermission = Shapes::StructureShape.new(name: 'LaunchPermission')
@@ -1422,6 +1425,7 @@ module Aws::EC2
     LaunchTemplateInstanceMetadataOptions = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMetadataOptions')
     LaunchTemplateInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMetadataOptionsRequest')
     LaunchTemplateInstanceMetadataOptionsState = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataOptionsState')
+    LaunchTemplateInstanceMetadataProtocolIpv6 = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataProtocolIpv6')
     LaunchTemplateInstanceNetworkInterfaceSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecification')
     LaunchTemplateInstanceNetworkInterfaceSpecificationList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationList')
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationRequest')
@@ -3545,6 +3549,7 @@ module Aws::EC2
 
     CreateKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KeyName"))
     CreateKeyPairRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CreateKeyPairRequest.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "KeyType"))
     CreateKeyPairRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateKeyPairRequest.struct_class = Types::CreateKeyPairRequest
 
@@ -4059,7 +4064,6 @@ module Aws::EC2
     CreateVpcPeeringConnectionResult.add_member(:vpc_peering_connection, Shapes::ShapeRef.new(shape: VpcPeeringConnection, location_name: "vpcPeeringConnection"))
     CreateVpcPeeringConnectionResult.struct_class = Types::CreateVpcPeeringConnectionResult
 
-    CreateVpcRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateVpcRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
     CreateVpcRequest.add_member(:ipv_6_pool, Shapes::ShapeRef.new(shape: Ipv6PoolEc2Id, location_name: "Ipv6Pool"))
     CreateVpcRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
@@ -4067,6 +4071,7 @@ module Aws::EC2
     CreateVpcRequest.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
     CreateVpcRequest.add_member(:ipv_6_cidr_block_network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlockNetworkBorderGroup"))
     CreateVpcRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateVpcRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateVpcRequest.struct_class = Types::CreateVpcRequest
 
     CreateVpcResult.add_member(:vpc, Shapes::ShapeRef.new(shape: Vpc, location_name: "vpc"))
@@ -7159,6 +7164,8 @@ module Aws::EC2
     ImportImageRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
     ImportImageRequest.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListRequest, location_name: "LicenseSpecifications"))
     ImportImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    ImportImageRequest.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "UsageOperation"))
+    ImportImageRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "BootMode"))
     ImportImageRequest.struct_class = Types::ImportImageRequest
 
     ImportImageResult.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
@@ -7176,6 +7183,7 @@ module Aws::EC2
     ImportImageResult.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     ImportImageResult.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListResponse, location_name: "licenseSpecifications"))
     ImportImageResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    ImportImageResult.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
     ImportImageResult.struct_class = Types::ImportImageResult
 
     ImportImageTask.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
@@ -7193,6 +7201,8 @@ module Aws::EC2
     ImportImageTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     ImportImageTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ImportImageTask.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListResponse, location_name: "licenseSpecifications"))
+    ImportImageTask.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
+    ImportImageTask.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "bootMode"))
     ImportImageTask.struct_class = Types::ImportImageTask
 
     ImportImageTaskList.member = Shapes::ShapeRef.new(shape: ImportImageTask, location_name: "item")
@@ -7506,12 +7516,14 @@ module Aws::EC2
     InstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
     InstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     InstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    InstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "HttpProtocolIpv6"))
     InstanceMetadataOptionsRequest.struct_class = Types::InstanceMetadataOptionsRequest
 
     InstanceMetadataOptionsResponse.add_member(:state, Shapes::ShapeRef.new(shape: InstanceMetadataOptionsState, location_name: "state"))
     InstanceMetadataOptionsResponse.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "httpTokens"))
     InstanceMetadataOptionsResponse.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "httpPutResponseHopLimit"))
     InstanceMetadataOptionsResponse.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "httpEndpoint"))
+    InstanceMetadataOptionsResponse.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "httpProtocolIpv6"))
     InstanceMetadataOptionsResponse.struct_class = Types::InstanceMetadataOptionsResponse
 
     InstanceMonitoring.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -7803,6 +7815,7 @@ module Aws::EC2
     KeyPairInfo.add_member(:key_pair_id, Shapes::ShapeRef.new(shape: String, location_name: "keyPairId"))
     KeyPairInfo.add_member(:key_fingerprint, Shapes::ShapeRef.new(shape: String, location_name: "keyFingerprint"))
     KeyPairInfo.add_member(:key_name, Shapes::ShapeRef.new(shape: String, location_name: "keyName"))
+    KeyPairInfo.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, location_name: "keyType"))
     KeyPairInfo.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     KeyPairInfo.struct_class = Types::KeyPairInfo
 
@@ -7958,11 +7971,13 @@ module Aws::EC2
     LaunchTemplateInstanceMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: LaunchTemplateHttpTokensState, location_name: "httpTokens"))
     LaunchTemplateInstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "httpPutResponseHopLimit"))
     LaunchTemplateInstanceMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataEndpointState, location_name: "httpEndpoint"))
+    LaunchTemplateInstanceMetadataOptions.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataProtocolIpv6, location_name: "httpProtocolIpv6"))
     LaunchTemplateInstanceMetadataOptions.struct_class = Types::LaunchTemplateInstanceMetadataOptions
 
     LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: LaunchTemplateHttpTokensState, location_name: "HttpTokens"))
     LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataProtocolIpv6, location_name: "HttpProtocolIpv6"))
     LaunchTemplateInstanceMetadataOptionsRequest.struct_class = Types::LaunchTemplateInstanceMetadataOptionsRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:associate_carrier_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateCarrierIpAddress"))
@@ -8416,6 +8431,7 @@ module Aws::EC2
     ModifyInstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     ModifyInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
     ModifyInstanceMetadataOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "HttpProtocolIpv6"))
     ModifyInstanceMetadataOptionsRequest.struct_class = Types::ModifyInstanceMetadataOptionsRequest
 
     ModifyInstanceMetadataOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -8450,6 +8466,7 @@ module Aws::EC2
     ModifyManagedPrefixListRequest.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, location_name: "PrefixListName"))
     ModifyManagedPrefixListRequest.add_member(:add_entries, Shapes::ShapeRef.new(shape: AddPrefixListEntries, location_name: "AddEntry"))
     ModifyManagedPrefixListRequest.add_member(:remove_entries, Shapes::ShapeRef.new(shape: RemovePrefixListEntries, location_name: "RemoveEntry"))
+    ModifyManagedPrefixListRequest.add_member(:max_entries, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxEntries"))
     ModifyManagedPrefixListRequest.struct_class = Types::ModifyManagedPrefixListRequest
 
     ModifyManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
@@ -8837,6 +8854,7 @@ module Aws::EC2
     NetworkInfo.add_member(:ena_support, Shapes::ShapeRef.new(shape: EnaSupport, location_name: "enaSupport"))
     NetworkInfo.add_member(:efa_supported, Shapes::ShapeRef.new(shape: EfaSupportedFlag, location_name: "efaSupported"))
     NetworkInfo.add_member(:efa_info, Shapes::ShapeRef.new(shape: EfaInfo, location_name: "efaInfo"))
+    NetworkInfo.add_member(:encryption_in_transit_supported, Shapes::ShapeRef.new(shape: EncryptionInTransitSupported, location_name: "encryptionInTransitSupported"))
     NetworkInfo.struct_class = Types::NetworkInfo
 
     NetworkInsightsAnalysis.add_member(:network_insights_analysis_id, Shapes::ShapeRef.new(shape: NetworkInsightsAnalysisId, location_name: "networkInsightsAnalysisId"))
@@ -14268,6 +14286,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTrunkInterfaceAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTrunkInterfaceAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_volume_attribute, Seahorse::Model::Operation.new.tap do |o|

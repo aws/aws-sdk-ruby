@@ -698,6 +698,7 @@ module Aws::AppRegistry
     #   * {Types::GetApplicationResponse#last_update_time #last_update_time} => Time
     #   * {Types::GetApplicationResponse#associated_resource_count #associated_resource_count} => Integer
     #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetApplicationResponse#integrations #integrations} => Types::Integrations
     #
     # @example Request syntax with placeholder values
     #
@@ -716,6 +717,9 @@ module Aws::AppRegistry
     #   resp.associated_resource_count #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.integrations.resource_group.state #=> String, one of "CREATING", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATING", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.integrations.resource_group.arn #=> String
+    #   resp.integrations.resource_group.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetApplication AWS API Documentation
     #
@@ -723,6 +727,47 @@ module Aws::AppRegistry
     # @param [Hash] params ({})
     def get_application(params = {}, options = {})
       req = build_request(:get_application, params)
+      req.send_request(options)
+    end
+
+    # Gets the resource associated with the application.
+    #
+    # @option params [required, String] :application
+    #   The name or ID of the application.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource associated with the application.
+    #
+    # @option params [required, String] :resource
+    #   The name or ID of the resource associated with the application.
+    #
+    # @return [Types::GetAssociatedResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAssociatedResourceResponse#resource #resource} => Types::Resource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_associated_resource({
+    #     application: "ApplicationSpecifier", # required
+    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #     resource: "ResourceSpecifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource.name #=> String
+    #   resp.resource.arn #=> String
+    #   resp.resource.association_time #=> Time
+    #   resp.resource.integrations.resource_group.state #=> String, one of "CREATING", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATING", "UPDATE_COMPLETE", "UPDATE_FAILED"
+    #   resp.resource.integrations.resource_group.arn #=> String
+    #   resp.resource.integrations.resource_group.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetAssociatedResource AWS API Documentation
+    #
+    # @overload get_associated_resource(params = {})
+    # @param [Hash] params ({})
+    def get_associated_resource(params = {}, options = {})
+      req = build_request(:get_associated_resource, params)
       req.send_request(options)
     end
 
@@ -983,19 +1028,20 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Syncs the resource with what is currently recorded in App registry.
-    # Specifically, the resource’s App registry system tags are synced with
-    # its associated application. The resource is removed if it is not
-    # associated with the application. The caller must have permissions to
-    # read and update the resource.
+    # Syncs the resource with current AppRegistry records.
+    #
+    # Specifically, the resource’s AppRegistry system tags sync with its
+    # associated application. We remove the resource's AppRegistry system
+    # tags if it does not associate with the application. The caller must
+    # have permissions to read and update the resource.
     #
     # @option params [required, String] :resource_type
     #   The type of resource of which the application will be associated.
     #
     # @option params [required, String] :resource
     #   An entity you can work with and specify with a name or ID. Examples
-    #   include an Amazon EC2 instance, an AWS CloudFormation stack, or an
-    #   Amazon S3 bucket.
+    #   include an Amazon EC2 instance, an Amazon Web Services CloudFormation
+    #   stack, or an Amazon S3 bucket.
     #
     # @return [Types::SyncResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1195,7 +1241,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

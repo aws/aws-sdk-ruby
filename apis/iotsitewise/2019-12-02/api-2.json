@@ -2865,6 +2865,11 @@
           "shape":"InterpolationType",
           "location":"querystring",
           "locationName":"type"
+        },
+        "intervalWindowInSeconds":{
+          "shape":"IntervalWindowInSeconds",
+          "location":"querystring",
+          "locationName":"intervalWindowInSeconds"
         }
       }
     },
@@ -3016,11 +3021,15 @@
     },
     "Interval":{
       "type":"string",
-      "max":3,
-      "min":2,
-      "pattern":"1w|1d|1h|15m|5m|1m"
+      "max":23,
+      "min":2
     },
     "IntervalInSeconds":{
+      "type":"long",
+      "max":320000000,
+      "min":1
+    },
+    "IntervalWindowInSeconds":{
       "type":"long",
       "max":320000000,
       "min":1
@@ -3489,6 +3498,11 @@
       "min":1,
       "pattern":"[A-Za-z0-9+/=]+"
     },
+    "Offset":{
+      "type":"string",
+      "max":25,
+      "min":2
+    },
     "OffsetInNanos":{
       "type":"integer",
       "max":999999999,
@@ -3927,7 +3941,8 @@
       "type":"structure",
       "required":["interval"],
       "members":{
-        "interval":{"shape":"Interval"}
+        "interval":{"shape":"Interval"},
+        "offset":{"shape":"Offset"}
       }
     },
     "UnauthorizedException":{

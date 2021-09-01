@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.116.0 (2021-08-24)
+------------------
+
+* Feature - Updated Parameter Store property for logging improvements.
+
+1.115.0 (2021-08-09)
+------------------
+
+* Feature - Documentation updates for AWS Systems Manager.
+
 1.114.0 (2021-07-30)
 ------------------
 

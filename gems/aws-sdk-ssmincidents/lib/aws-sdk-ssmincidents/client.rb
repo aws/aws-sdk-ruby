@@ -469,7 +469,7 @@ module Aws::SSMIncidents
     # timeline events to mark important events that are automatically
     # detected by Incident Manager.
     #
-    # @option params [required, String] :client_token
+    # @option params [String] :client_token
     #   A token ensuring that the action is called only once with the
     #   specified details.
     #
@@ -477,7 +477,8 @@ module Aws::SSMIncidents
     #   not need to pass this option.**
     #
     # @option params [required, String] :event_data
-    #   A short description of the event.
+    #   A valid JSON string. There is no other schema imposed. A short
+    #   description of the event.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :event_time
     #   The time that the event occurred.
@@ -498,7 +499,7 @@ module Aws::SSMIncidents
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_timeline_event({
-    #     client_token: "ClientToken", # required
+    #     client_token: "ClientToken",
     #     event_data: "EventData", # required
     #     event_time: Time.now, # required
     #     event_type: "TimelineEventType", # required
@@ -711,6 +712,7 @@ module Aws::SSMIncidents
     #
     # @example Response structure
     #
+    #   resp.replication_set.arn #=> String
     #   resp.replication_set.created_by #=> String
     #   resp.replication_set.created_time #=> Time
     #   resp.replication_set.deletion_protected #=> Boolean
@@ -1440,9 +1442,8 @@ module Aws::SSMIncidents
     #     action is needed to avoid impact.
     #
     # @option params [Array<Types::NotificationTargetItem>] :notification_targets
-    #   The SNS targets that AWS Chatbot uses to notify the chat channel of
-    #   updates to an incident. You can also make updates to the incident
-    #   through the chat channel using the SNS topics.
+    #   The SNS targets that are notified when updates are made to an
+    #   incident.
     #
     #   Using multiple SNS topics creates redundancy in the case that a Region
     #   is down during the incident.
@@ -1602,6 +1603,9 @@ module Aws::SSMIncidents
     #   The AWS Chatbot chat channel used for collaboration during an
     #   incident.
     #
+    #   Use the empty structure to remove the chat channel from the response
+    #   plan.
+    #
     # @option params [String] :client_token
     #   A token ensuring that the action is called only once with the
     #   specified details.
@@ -1636,8 +1640,8 @@ module Aws::SSMIncidents
     #   * `1` - No impact
     #
     # @option params [Array<Types::NotificationTargetItem>] :incident_template_notification_targets
-    #   The SNS targets that AWS Chatbot uses to notify the chat channels and
-    #   perform actions on the incident record.
+    #   The SNS targets that are notified when updates are made to an
+    #   incident.
     #
     # @option params [String] :incident_template_summary
     #   A brief summary of the incident. This typically contains what has
@@ -1696,7 +1700,7 @@ module Aws::SSMIncidents
     # Updates a timeline event. You can update events of type `Custom
     # Event`.
     #
-    # @option params [required, String] :client_token
+    # @option params [String] :client_token
     #   A token ensuring that the action is called only once with the
     #   specified details.
     #
@@ -1725,7 +1729,7 @@ module Aws::SSMIncidents
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_timeline_event({
-    #     client_token: "ClientToken", # required
+    #     client_token: "ClientToken",
     #     event_data: "EventData",
     #     event_id: "UUID", # required
     #     event_time: Time.now,
@@ -1755,7 +1759,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

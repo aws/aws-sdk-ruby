@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2021-08-12)
+------------------
+
+* Feature - Adding support for ACM imported or private CA certificates for mTLS enabled domain names
+
 1.34.0 (2021-07-30)
 ------------------
 

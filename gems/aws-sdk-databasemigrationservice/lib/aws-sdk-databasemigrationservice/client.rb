@@ -388,6 +388,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       },
     #     ],
     #   })
@@ -564,8 +565,9 @@ module Aws::DatabaseMigrationService
     #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
     #   uses your default encryption key.
     #
-    #   KMS creates the default encryption key for your account. Your account
-    #   has a different default encryption key for each Region.
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the endpoint.
@@ -760,6 +762,9 @@ module Aws::DatabaseMigrationService
     # @option params [Types::DocDbSettings] :doc_db_settings
     #   Provides information that defines a DocumentDB endpoint.
     #
+    # @option params [Types::RedisSettings] :redis_settings
+    #   Settings in JSON format for the target Redis endpoint.
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -822,6 +827,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       },
     #     ],
     #     certificate_arn: "String",
@@ -860,6 +866,14 @@ module Aws::DatabaseMigrationService
     #       csv_no_sup_value: "String",
     #       preserve_transactions: false,
     #       cdc_path: "String",
+    #       canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #       add_column_name: false,
+    #       cdc_max_batch_interval: 1,
+    #       cdc_min_file_size: 1,
+    #       csv_null_value: "String",
+    #       ignore_header_rows: 1,
+    #       max_file_size: 1,
+    #       rfc_4180: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -1000,6 +1014,7 @@ module Aws::DatabaseMigrationService
     #       add_supplemental_logging: false,
     #       archived_log_dest_id: 1,
     #       additional_archived_log_dest_id: 1,
+    #       extra_archived_log_dest_ids: [1],
     #       allow_select_nested_tables: false,
     #       parallel_asm_read_threads: 1,
     #       read_ahead_blocks: 1,
@@ -1088,6 +1103,15 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #     },
+    #     redis_settings: {
+    #       server_name: "String", # required
+    #       port: 1, # required
+    #       ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
+    #       auth_type: "none", # accepts none, auth-role, auth-token
+    #       auth_user_name: "String",
+    #       auth_password: "SecretString",
+    #       ssl_ca_certificate_arn: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1138,6 +1162,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
     #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoint.s3_settings.cdc_path #=> String
+    #   resp.endpoint.s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
+    #   resp.endpoint.s3_settings.add_column_name #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_max_batch_interval #=> Integer
+    #   resp.endpoint.s3_settings.cdc_min_file_size #=> Integer
+    #   resp.endpoint.s3_settings.csv_null_value #=> String
+    #   resp.endpoint.s3_settings.ignore_header_rows #=> Integer
+    #   resp.endpoint.s3_settings.max_file_size #=> Integer
+    #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -1258,6 +1290,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.extra_archived_log_dest_ids #=> Array
+    #   resp.endpoint.oracle_settings.extra_archived_log_dest_ids[0] #=> Integer
     #   resp.endpoint.oracle_settings.allow_select_nested_tables #=> Boolean
     #   resp.endpoint.oracle_settings.parallel_asm_read_threads #=> Integer
     #   resp.endpoint.oracle_settings.read_ahead_blocks #=> Integer
@@ -1336,6 +1370,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.redis_settings.server_name #=> String
+    #   resp.endpoint.redis_settings.port #=> Integer
+    #   resp.endpoint.redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
+    #   resp.endpoint.redis_settings.auth_type #=> String, one of "none", "auth-role", "auth-token"
+    #   resp.endpoint.redis_settings.auth_user_name #=> String
+    #   resp.endpoint.redis_settings.auth_password #=> String
+    #   resp.endpoint.redis_settings.ssl_ca_certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -1428,6 +1469,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       },
     #     ],
     #   })
@@ -1508,7 +1550,7 @@ module Aws::DatabaseMigrationService
     # @option params [String] :availability_zone
     #   The Availability Zone where the replication instance will be created.
     #   The default value is a random, system-chosen Availability Zone in the
-    #   endpoint's Region, for example: `us-east-1d`
+    #   endpoint's Amazon Web Services Region, for example: `us-east-1d`
     #
     # @option params [String] :replication_subnet_group_identifier
     #   A subnet group to associate with the replication instance.
@@ -1520,7 +1562,8 @@ module Aws::DatabaseMigrationService
     #   Format: `ddd:hh24:mi-ddd:hh24:mi`
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
-    #   time per Region, occurring on a random day of the week.
+    #   time per Amazon Web Services Region, occurring on a random day of the
+    #   week.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
     #
@@ -1555,8 +1598,9 @@ module Aws::DatabaseMigrationService
     #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
     #   uses your default encryption key.
     #
-    #   KMS creates the default encryption key for your account. Your account
-    #   has a different default encryption key for each Region.
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies the accessibility options for the replication instance. A
@@ -1686,6 +1730,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       },
     #     ],
     #     kms_key_id: "String",
@@ -1804,6 +1849,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       },
     #     ],
     #   })
@@ -2003,6 +2049,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       },
     #     ],
     #     task_data: "String",
@@ -2250,6 +2297,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
     #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoint.s3_settings.cdc_path #=> String
+    #   resp.endpoint.s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
+    #   resp.endpoint.s3_settings.add_column_name #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_max_batch_interval #=> Integer
+    #   resp.endpoint.s3_settings.cdc_min_file_size #=> Integer
+    #   resp.endpoint.s3_settings.csv_null_value #=> String
+    #   resp.endpoint.s3_settings.ignore_header_rows #=> Integer
+    #   resp.endpoint.s3_settings.max_file_size #=> Integer
+    #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -2370,6 +2425,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.extra_archived_log_dest_ids #=> Array
+    #   resp.endpoint.oracle_settings.extra_archived_log_dest_ids[0] #=> Integer
     #   resp.endpoint.oracle_settings.allow_select_nested_tables #=> Boolean
     #   resp.endpoint.oracle_settings.parallel_asm_read_threads #=> Integer
     #   resp.endpoint.oracle_settings.read_ahead_blocks #=> Integer
@@ -2448,6 +2505,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.redis_settings.server_name #=> String
+    #   resp.endpoint.redis_settings.port #=> Integer
+    #   resp.endpoint.redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
+    #   resp.endpoint.redis_settings.auth_type #=> String, one of "none", "auth-role", "auth-token"
+    #   resp.endpoint.redis_settings.auth_user_name #=> String
+    #   resp.endpoint.redis_settings.auth_password #=> String
+    #   resp.endpoint.redis_settings.ssl_ca_certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -3399,6 +3463,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.csv_no_sup_value #=> String
     #   resp.endpoints[0].s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoints[0].s3_settings.cdc_path #=> String
+    #   resp.endpoints[0].s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
+    #   resp.endpoints[0].s3_settings.add_column_name #=> Boolean
+    #   resp.endpoints[0].s3_settings.cdc_max_batch_interval #=> Integer
+    #   resp.endpoints[0].s3_settings.cdc_min_file_size #=> Integer
+    #   resp.endpoints[0].s3_settings.csv_null_value #=> String
+    #   resp.endpoints[0].s3_settings.ignore_header_rows #=> Integer
+    #   resp.endpoints[0].s3_settings.max_file_size #=> Integer
+    #   resp.endpoints[0].s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -3519,6 +3591,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoints[0].oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoints[0].oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoints[0].oracle_settings.extra_archived_log_dest_ids #=> Array
+    #   resp.endpoints[0].oracle_settings.extra_archived_log_dest_ids[0] #=> Integer
     #   resp.endpoints[0].oracle_settings.allow_select_nested_tables #=> Boolean
     #   resp.endpoints[0].oracle_settings.parallel_asm_read_threads #=> Integer
     #   resp.endpoints[0].oracle_settings.read_ahead_blocks #=> Integer
@@ -3597,6 +3671,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].doc_db_settings.kms_key_id #=> String
     #   resp.endpoints[0].doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].redis_settings.server_name #=> String
+    #   resp.endpoints[0].redis_settings.port #=> Integer
+    #   resp.endpoints[0].redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
+    #   resp.endpoints[0].redis_settings.auth_type #=> String, one of "none", "auth-role", "auth-token"
+    #   resp.endpoints[0].redis_settings.auth_user_name #=> String
+    #   resp.endpoints[0].redis_settings.auth_password #=> String
+    #   resp.endpoints[0].redis_settings.ssl_ca_certificate_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4288,8 +4369,8 @@ module Aws::DatabaseMigrationService
     end
 
     # Returns the task assessment results from the Amazon S3 bucket that DMS
-    # creates in your account. This action always returns the latest
-    # results.
+    # creates in your Amazon Web Services account. This action always
+    # returns the latest results.
     #
     # For more information about DMS task assessments, see [Creating a task
     # assessment report][1] in the [ Database Migration Service User
@@ -4854,6 +4935,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         key: "String",
     #         value: "String",
+    #         resource_arn: "String",
     #       },
     #     ],
     #   })
@@ -4888,9 +4970,17 @@ module Aws::DatabaseMigrationService
     #
     # [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
     #
-    # @option params [required, String] :resource_arn
+    # @option params [String] :resource_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the DMS
-    #   resource.
+    #   resource to list tags for. This returns a list of keys (names of tags)
+    #   created for the resource and their associated tag values.
+    #
+    # @option params [Array<String>] :resource_arn_list
+    #   List of ARNs that identify multiple DMS resources that you want to
+    #   list tags for. This returns a list of keys (tag names) and their
+    #   associated tag values. It also returns each tag's associated
+    #   `ResourceArn` value, which is the ARN of the resource for which each
+    #   listed tag is created.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4914,7 +5004,8 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_arn: "String", # required
+    #     resource_arn: "String",
+    #     resource_arn_list: ["String"],
     #   })
     #
     # @example Response structure
@@ -4922,6 +5013,7 @@ module Aws::DatabaseMigrationService
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #   resp.tag_list[0].resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResource AWS API Documentation
     #
@@ -5170,6 +5262,9 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
     #
+    # @option params [Types::RedisSettings] :redis_settings
+    #   Settings in JSON format for the Redis target endpoint.
+    #
     # @option params [Boolean] :exact_settings
     #   If this attribute is Y, the current call to `ModifyEndpoint` replaces
     #   all existing endpoint settings with the exact settings that you
@@ -5273,6 +5368,14 @@ module Aws::DatabaseMigrationService
     #       csv_no_sup_value: "String",
     #       preserve_transactions: false,
     #       cdc_path: "String",
+    #       canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #       add_column_name: false,
+    #       cdc_max_batch_interval: 1,
+    #       cdc_min_file_size: 1,
+    #       csv_null_value: "String",
+    #       ignore_header_rows: 1,
+    #       max_file_size: 1,
+    #       rfc_4180: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -5413,6 +5516,7 @@ module Aws::DatabaseMigrationService
     #       add_supplemental_logging: false,
     #       archived_log_dest_id: 1,
     #       additional_archived_log_dest_id: 1,
+    #       extra_archived_log_dest_ids: [1],
     #       allow_select_nested_tables: false,
     #       parallel_asm_read_threads: 1,
     #       read_ahead_blocks: 1,
@@ -5500,6 +5604,15 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #     },
+    #     redis_settings: {
+    #       server_name: "String", # required
+    #       port: 1, # required
+    #       ssl_security_protocol: "plaintext", # accepts plaintext, ssl-encryption
+    #       auth_type: "none", # accepts none, auth-role, auth-token
+    #       auth_user_name: "String",
+    #       auth_password: "SecretString",
+    #       ssl_ca_certificate_arn: "String",
+    #     },
     #     exact_settings: false,
     #   })
     #
@@ -5551,6 +5664,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
     #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoint.s3_settings.cdc_path #=> String
+    #   resp.endpoint.s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
+    #   resp.endpoint.s3_settings.add_column_name #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_max_batch_interval #=> Integer
+    #   resp.endpoint.s3_settings.cdc_min_file_size #=> Integer
+    #   resp.endpoint.s3_settings.csv_null_value #=> String
+    #   resp.endpoint.s3_settings.ignore_header_rows #=> Integer
+    #   resp.endpoint.s3_settings.max_file_size #=> Integer
+    #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -5671,6 +5792,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.extra_archived_log_dest_ids #=> Array
+    #   resp.endpoint.oracle_settings.extra_archived_log_dest_ids[0] #=> Integer
     #   resp.endpoint.oracle_settings.allow_select_nested_tables #=> Boolean
     #   resp.endpoint.oracle_settings.parallel_asm_read_threads #=> Integer
     #   resp.endpoint.oracle_settings.read_ahead_blocks #=> Integer
@@ -5749,6 +5872,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.redis_settings.server_name #=> String
+    #   resp.endpoint.redis_settings.port #=> Integer
+    #   resp.endpoint.redis_settings.ssl_security_protocol #=> String, one of "plaintext", "ssl-encryption"
+    #   resp.endpoint.redis_settings.auth_type #=> String, one of "none", "auth-role", "auth-token"
+    #   resp.endpoint.redis_settings.auth_user_name #=> String
+    #   resp.endpoint.redis_settings.auth_password #=> String
+    #   resp.endpoint.redis_settings.ssl_ca_certificate_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -7028,7 +7158,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

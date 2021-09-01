@@ -477,6 +477,109 @@ module Aws::SageMakerRuntime
       req.send_request(options)
     end
 
+    # After you deploy a model into production using Amazon SageMaker
+    # hosting services, your client applications use this API to get
+    # inferences from the model hosted at the specified endpoint in an
+    # asynchronous manner.
+    #
+    # Inference requests sent to this API are enqueued for asynchronous
+    # processing. The processing of the inference request may or may not
+    # complete before the you receive a response from this API. The response
+    # from this API will not contain the result of the inference request but
+    # contain information about where you can locate it.
+    #
+    # Amazon SageMaker strips all `POST` headers except those supported by
+    # the API. Amazon SageMaker might add additional headers. You should not
+    # rely on the behavior of headers outside those enumerated in the
+    # request syntax.
+    #
+    # Calls to `InvokeEndpointAsync` are authenticated by using AWS
+    # Signature Version 4. For information, see [Authenticating Requests
+    # (AWS Signature Version 4)][1] in the *Amazon S3 API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint that you specified when you created the
+    #   endpoint using the [ `CreateEndpoint` ][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html
+    #
+    # @option params [String] :content_type
+    #   The MIME type of the input data in the request body.
+    #
+    # @option params [String] :accept
+    #   The desired MIME type of the inference in the response.
+    #
+    # @option params [String] :custom_attributes
+    #   Provides additional information about a request for an inference
+    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   information is an opaque value that is forwarded verbatim. You could
+    #   use this value, for example, to provide an ID that you can use to
+    #   track a request or to provide other metadata that a service endpoint
+    #   was programmed to process. The value must consist of no more than 1024
+    #   visible US-ASCII characters as specified in [Section 3.3.6. Field
+    #   Value Components][1] of the Hypertext Transfer Protocol (HTTP/1.1).
+    #
+    #   The code in your model is responsible for setting or updating any
+    #   custom attributes in the response. If your code does not set this
+    #   value in the response, an empty value is returned. For example, if a
+    #   custom attribute represents the trace ID, your model can prepend the
+    #   custom attribute with `Trace ID`\: in your post-processing function.
+    #
+    #   This feature is currently supported in the AWS SDKs but not in the
+    #   Amazon SageMaker Python SDK.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
+    #
+    # @option params [String] :inference_id
+    #   The identifier for the inference request. Amazon SageMaker will
+    #   generate an identifier for you if none is specified.
+    #
+    # @option params [required, String] :input_location
+    #   The Amazon S3 URI where the inference request payload is stored.
+    #
+    # @option params [Integer] :request_ttl_seconds
+    #   Maximum age in seconds a request can be in the queue before it is
+    #   marked as expired.
+    #
+    # @return [Types::InvokeEndpointAsyncOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeEndpointAsyncOutput#inference_id #inference_id} => String
+    #   * {Types::InvokeEndpointAsyncOutput#output_location #output_location} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_endpoint_async({
+    #     endpoint_name: "EndpointName", # required
+    #     content_type: "Header",
+    #     accept: "Header",
+    #     custom_attributes: "CustomAttributesHeader",
+    #     inference_id: "InferenceId",
+    #     input_location: "InputLocationHeader", # required
+    #     request_ttl_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_id #=> String
+    #   resp.output_location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointAsync AWS API Documentation
+    #
+    # @overload invoke_endpoint_async(params = {})
+    # @param [Hash] params ({})
+    def invoke_endpoint_async(params = {}, options = {})
+      req = build_request(:invoke_endpoint_async, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -490,7 +593,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

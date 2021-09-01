@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2021-08-05)
+------------------
+
+* Feature - Customers can now toggle the active field on prompts and responses.
+
 1.8.0 (2021-07-30)
 ------------------
 

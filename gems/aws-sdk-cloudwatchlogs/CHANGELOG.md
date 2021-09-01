@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2021-08-17)
+------------------
+
+* Feature - Documentation-only update for CloudWatch Logs
+
 1.43.0 (2021-07-30)
 ------------------
 

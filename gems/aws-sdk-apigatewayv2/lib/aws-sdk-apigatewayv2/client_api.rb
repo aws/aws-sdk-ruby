@@ -821,6 +821,7 @@ module Aws::ApiGatewayV2
     DomainNameConfiguration.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "endpointType"))
     DomainNameConfiguration.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: __string, location_name: "hostedZoneId"))
     DomainNameConfiguration.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
+    DomainNameConfiguration.add_member(:ownership_verification_certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ownershipVerificationCertificateArn"))
     DomainNameConfiguration.struct_class = Types::DomainNameConfiguration
 
     DomainNameConfigurations.member = Shapes::ShapeRef.new(shape: DomainNameConfiguration)

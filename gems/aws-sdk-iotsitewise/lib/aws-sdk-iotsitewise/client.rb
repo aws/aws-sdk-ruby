@@ -826,6 +826,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
     #             },
     #             processing_config: {
@@ -895,6 +896,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -1680,6 +1682,7 @@ module Aws::IoTSiteWise
     #   resp.asset_model_properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_properties[0].type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_model_properties[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_properties[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_hierarchies #=> Array
     #   resp.asset_model_hierarchies[0].id #=> String
@@ -1710,6 +1713,7 @@ module Aws::IoTSiteWise
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.asset_model_creation_date #=> Time
     #   resp.asset_model_last_update_date #=> Time
@@ -1797,6 +1801,7 @@ module Aws::IoTSiteWise
     #   resp.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_property.type.metric.window.tumbling.interval #=> String
+    #   resp.asset_property.type.metric.window.tumbling.offset #=> String
     #   resp.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #   resp.composite_model.name #=> String
     #   resp.composite_model.type #=> String
@@ -1822,6 +1827,7 @@ module Aws::IoTSiteWise
     #   resp.composite_model.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.composite_model.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.composite_model.asset_property.type.metric.window.tumbling.interval #=> String
+    #   resp.composite_model.asset_property.type.metric.window.tumbling.offset #=> String
     #   resp.composite_model.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
     #
     # @overload describe_asset_property(params = {})
@@ -2113,12 +2119,6 @@ module Aws::IoTSiteWise
 
     # Retrieves information about the storage configuration for IoT
     # SiteWise.
-    #
-    # <note markdown="1"> Exporting data to Amazon S3 is currently in preview release and is
-    # subject to change. We recommend that you use this feature only with
-    # test data, and not in production environments.
-    #
-    #  </note>
     #
     # @return [Types::DescribeStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2456,9 +2456,13 @@ module Aws::IoTSiteWise
     end
 
     # Get interpolated values for an asset property for a specified time
-    # interval, during a period of time. For example, you can use the this
-    # operation to return the interpolated temperature values for a wind
-    # turbine every 24 hours over a duration of 7 days.
+    # interval, during a period of time. If your time series is missing data
+    # points during the specified time interval, you can use interpolation
+    # to estimate the missing data.
+    #
+    # For example, you can use this operation to return the interpolated
+    # temperature values for a wind turbine every 24 hours over a duration
+    # of 7 days.
     #
     # To identify an asset property, you must specify one of the following:
     #
@@ -2522,7 +2526,61 @@ module Aws::IoTSiteWise
     # @option params [required, String] :type
     #   The interpolation type.
     #
-    #   Valid values: `LINEAR_INTERPOLATION`
+    #   Valid values: `LINEAR_INTERPOLATION | LOCF_INTERPOLATION`
+    #
+    #   * `LINEAR_INTERPOLATION` – Estimates missing data using [linear
+    #     interpolation][1].
+    #
+    #     For example, you can use this operation to return the interpolated
+    #     temperature values for a wind turbine every 24 hours over a duration
+    #     of 7 days. If the interpolation starts on July 1, 2021, at 9 AM, IoT
+    #     SiteWise returns the first interpolated value on July 2, 2021, at 9
+    #     AM, the second interpolated value on July 3, 2021, at 9 AM, and so
+    #     on.
+    #
+    #   * `LOCF_INTERPOLATION` – Estimates missing data using last observation
+    #     carried forward interpolation
+    #
+    #     If no data point is found for an interval, IoT SiteWise returns the
+    #     last observed data point for the previous interval and carries
+    #     forward this interpolated value until a new data point is found.
+    #
+    #     For example, you can get the state of an on-off valve every 24 hours
+    #     over a duration of 7 days. If the interpolation starts on July 1,
+    #     2021, at 9 AM, IoT SiteWise returns the last observed data point
+    #     between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as the first
+    #     interpolated value. If no data point is found after 9 AM on July 2,
+    #     2021, IoT SiteWise uses the same interpolated value for the rest of
+    #     the days.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Linear_interpolation
+    #
+    # @option params [Integer] :interval_window_in_seconds
+    #   The query interval for the window in seconds. IoT SiteWise computes
+    #   each interpolated value by using data points from the timestamp of
+    #   each interval minus the window to the timestamp of each interval plus
+    #   the window. If not specified, the window is between the start time
+    #   minus the interval and the end time plus the interval.
+    #
+    #   <note markdown="1"> * If you specify a value for the `intervalWindowInSeconds` parameter,
+    #     the `type` parameter must be `LINEAR_INTERPOLATION`.
+    #
+    #   * If no data point is found during the specified query window, IoT
+    #     SiteWise won't return an interpolated value for the interval. This
+    #     indicates that there's a gap in the ingested data points.
+    #
+    #    </note>
+    #
+    #   For example, you can get the interpolated temperature values for a
+    #   wind turbine every 24 hours over a duration of 7 days. If the
+    #   interpolation starts on July 1, 2021, at 9 AM with a window of 2
+    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours) to
+    #   11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first
+    #   interpolated value, uses the data points from 7 AM (9 AM - 2 hours) to
+    #   11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second
+    #   interpolated value, and so on.
     #
     # @return [Types::GetInterpolatedAssetPropertyValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2546,6 +2604,7 @@ module Aws::IoTSiteWise
     #     next_token: "NextToken",
     #     max_results: 1,
     #     type: "InterpolationType", # required
+    #     interval_window_in_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -3246,12 +3305,6 @@ module Aws::IoTSiteWise
 
     # Configures storage settings for IoT SiteWise.
     #
-    # <note markdown="1"> Exporting data to Amazon S3 is currently in preview release and is
-    # subject to change. We recommend that you use this feature only with
-    # test data, and not in production environments.
-    #
-    #  </note>
-    #
     # @option params [required, String] :storage_type
     #   The type of storage that you specified for your data. The storage type
     #   can be one of the following values:
@@ -3615,6 +3668,7 @@ module Aws::IoTSiteWise
     #             window: { # required
     #               tumbling: {
     #                 interval: "Interval", # required
+    #                 offset: "Offset",
     #               },
     #             },
     #             processing_config: {
@@ -3686,6 +3740,7 @@ module Aws::IoTSiteWise
     #                 window: { # required
     #                   tumbling: {
     #                     interval: "Interval", # required
+    #                     offset: "Offset",
     #                   },
     #                 },
     #                 processing_config: {
@@ -4060,7 +4115,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2021-08-27)
+------------------
+
+* Feature - Documentation updates for Amazon S3.
+
+1.99.0 (2021-08-16)
+------------------
+
+* Feature - Documentation updates for Amazon S3
+
 1.98.0 (2021-07-30)
 ------------------
 

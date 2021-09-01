@@ -733,9 +733,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -980,8 +981,8 @@ module Aws::CloudFormation
     #   the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case sensitive)
-    #   and hyphens. It must start with an alphabetic character and cannot be
-    #   longer than 128 characters.
+    #   and hyphens. It must start with an alphabetical character and cannot
+    #   be longer than 128 characters.
     #
     #    </note>
     #
@@ -1048,9 +1049,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1299,8 +1301,9 @@ module Aws::CloudFormation
     #   instances from.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more accounts that
-    #   you want to create stack instances in the specified Region(s) for.
+    #   \[Self-managed permissions\] The names of one or more Amazon Web
+    #   Services accounts that you want to create stack instances in the
+    #   specified Region(s) for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
@@ -1312,7 +1315,7 @@ module Aws::CloudFormation
     #
     # @option params [required, Array<String>] :regions
     #   The names of one or more Regions where you want to create stack
-    #   instances using the specified accounts.
+    #   instances using the specified Amazon Web Services accounts.
     #
     # @option params [Array<Types::Parameter>] :parameter_overrides
     #   A list of stack set parameters whose values you want to override in
@@ -1382,9 +1385,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -1495,9 +1499,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stack sets, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stack sets, you must explicitly acknowledge this by specifying one
+    #     of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -1635,9 +1640,9 @@ module Aws::CloudFormation
     #   * To create a stack set with service-managed permissions while signed
     #     in to a delegated administrator account, specify `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated admin in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     admin in the management account. For more information, see [Register
+    #     a delegated administrator][1] in the *CloudFormation User Guide*.
     #
     #   Stack sets with service-managed permissions are created in the
     #   management account, including stack sets that are created by delegated
@@ -1870,8 +1875,8 @@ module Aws::CloudFormation
     #   instances for.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of the accounts that you want
-    #   to delete stack instances for.
+    #   \[Self-managed permissions\] The names of the Amazon Web Services
+    #   accounts that you want to delete stack instances for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
@@ -1929,9 +1934,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -1999,9 +2005,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -2415,7 +2422,7 @@ module Aws::CloudFormation
     #   resp.stack_events[0].physical_resource_id #=> String
     #   resp.stack_events[0].resource_type #=> String
     #   resp.stack_events[0].timestamp #=> Time
-    #   resp.stack_events[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
+    #   resp.stack_events[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"
     #   resp.stack_events[0].resource_status_reason #=> String
     #   resp.stack_events[0].resource_properties #=> String
     #   resp.stack_events[0].client_request_token #=> String
@@ -2431,7 +2438,7 @@ module Aws::CloudFormation
     end
 
     # Returns the stack instance that's associated with the specified stack
-    # set, account, and Region.
+    # set, Amazon Web Services account, and Region.
     #
     # For a list of stack instances that are associated with a specific
     # stack set, use ListStackInstances.
@@ -2441,7 +2448,8 @@ module Aws::CloudFormation
     #   stack instance information for.
     #
     # @option params [required, String] :stack_instance_account
-    #   The ID of an account that's associated with this stack instance.
+    #   The ID of an Amazon Web Services account that's associated with this
+    #   stack instance.
     #
     # @option params [required, String] :stack_instance_region
     #   The name of a Region that's associated with this stack instance.
@@ -2459,9 +2467,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -2548,7 +2557,7 @@ module Aws::CloudFormation
     #   resp.stack_resource_detail.physical_resource_id #=> String
     #   resp.stack_resource_detail.resource_type #=> String
     #   resp.stack_resource_detail.last_updated_timestamp #=> Time
-    #   resp.stack_resource_detail.resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
+    #   resp.stack_resource_detail.resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"
     #   resp.stack_resource_detail.resource_status_reason #=> String
     #   resp.stack_resource_detail.description #=> String
     #   resp.stack_resource_detail.metadata #=> String
@@ -2745,7 +2754,7 @@ module Aws::CloudFormation
     #   resp.stack_resources[0].physical_resource_id #=> String
     #   resp.stack_resources[0].resource_type #=> String
     #   resp.stack_resources[0].timestamp #=> Time
-    #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
+    #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"
     #   resp.stack_resources[0].resource_status_reason #=> String
     #   resp.stack_resources[0].description #=> String
     #   resp.stack_resources[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
@@ -2780,9 +2789,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -2864,9 +2874,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -2981,7 +2992,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].rollback_configuration.rollback_triggers[0].arn #=> String
     #   resp.stacks[0].rollback_configuration.rollback_triggers[0].type #=> String
     #   resp.stacks[0].rollback_configuration.monitoring_time_in_minutes #=> Integer
-    #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
+    #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stacks[0].stack_status_reason #=> String
     #   resp.stacks[0].disable_rollback #=> Boolean
     #   resp.stacks[0].notification_arns #=> Array
@@ -3410,9 +3421,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -3546,6 +3558,12 @@ module Aws::CloudFormation
     #   the same name. You might retry `ExecuteChangeSet` requests to ensure
     #   that CloudFormation successfully received them.
     #
+    # @option params [Boolean] :disable_rollback
+    #   Preserves the state of previously provisioned resources when an
+    #   operation fails.
+    #
+    #   Default: `True`
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3554,6 +3572,7 @@ module Aws::CloudFormation
     #     change_set_name: "ChangeSetNameOrId", # required
     #     stack_name: "StackNameOrId",
     #     client_request_token: "ClientRequestToken",
+    #     disable_rollback: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet AWS API Documentation
@@ -3726,9 +3745,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -4021,8 +4041,8 @@ module Aws::CloudFormation
 
     # Returns summary information about stack instances that are associated
     # with the specified stack set. You can filter for stack instances that
-    # are associated with a specific account name or Region, or that have a
-    # specific status.
+    # are associated with a specific Amazon Web Services account name or
+    # Region, or that have a specific status.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to list stack
@@ -4046,7 +4066,8 @@ module Aws::CloudFormation
     #   The status that stack instances are filtered by.
     #
     # @option params [String] :stack_instance_account
-    #   The name of the account that you want to list stack instances for.
+    #   The name of the Amazon Web Services account that you want to list
+    #   stack instances for.
     #
     # @option params [String] :stack_instance_region
     #   The name of the Region where you want to list stack instances.
@@ -4064,9 +4085,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -4161,7 +4183,7 @@ module Aws::CloudFormation
     #   resp.stack_resource_summaries[0].physical_resource_id #=> String
     #   resp.stack_resource_summaries[0].resource_type #=> String
     #   resp.stack_resource_summaries[0].last_updated_timestamp #=> Time
-    #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
+    #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE", "IMPORT_FAILED", "IMPORT_COMPLETE", "IMPORT_IN_PROGRESS", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "UPDATE_ROLLBACK_FAILED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED"
     #   resp.stack_resource_summaries[0].resource_status_reason #=> String
     #   resp.stack_resource_summaries[0].drift_information.stack_resource_drift_status #=> String, one of "IN_SYNC", "MODIFIED", "DELETED", "NOT_CHECKED"
     #   resp.stack_resource_summaries[0].drift_information.last_check_timestamp #=> Time
@@ -4216,9 +4238,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -4296,9 +4319,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -4343,8 +4367,9 @@ module Aws::CloudFormation
     # the user.
     #
     # * \[Self-managed permissions\] If you set the `CallAs` parameter to
-    #   `SELF` while signed in to your account, `ListStackSets` returns all
-    #   self-managed stack sets in your account.
+    #   `SELF` while signed in to your Amazon Web Services account,
+    #   `ListStackSets` returns all self-managed stack sets in your Amazon
+    #   Web Services account.
     #
     # * \[Service-managed permissions\] If you set the `CallAs` parameter to
     #   `SELF` while signed in to the organization's management account,
@@ -4386,9 +4411,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -4461,7 +4487,7 @@ module Aws::CloudFormation
     #
     #   resp = client.list_stacks({
     #     next_token: "NextToken",
-    #     stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
+    #     stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_FAILED, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS, IMPORT_IN_PROGRESS, IMPORT_COMPLETE, IMPORT_ROLLBACK_IN_PROGRESS, IMPORT_ROLLBACK_FAILED, IMPORT_ROLLBACK_COMPLETE
     #   })
     #
     # @example Response structure
@@ -4473,7 +4499,7 @@ module Aws::CloudFormation
     #   resp.stack_summaries[0].creation_time #=> Time
     #   resp.stack_summaries[0].last_updated_time #=> Time
     #   resp.stack_summaries[0].deletion_time #=> Time
-    #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
+    #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS", "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_ROLLBACK_IN_PROGRESS", "IMPORT_ROLLBACK_FAILED", "IMPORT_ROLLBACK_COMPLETE"
     #   resp.stack_summaries[0].stack_status_reason #=> String
     #   resp.stack_summaries[0].parent_id #=> String
     #   resp.stack_summaries[0].root_id #=> String
@@ -4941,7 +4967,7 @@ module Aws::CloudFormation
     # Registers your account as a publisher of public extensions in the
     # CloudFormation registry. Public extensions are available for use by
     # all CloudFormation users. This publisher ID applies to your account in
-    # all Regions.
+    # all Amazon Web Services Regions.
     #
     # For information on requirements for registering as a public extension
     # publisher, see [Registering your account to publish CloudFormation
@@ -5003,7 +5029,7 @@ module Aws::CloudFormation
 
     # Registers an extension with the CloudFormation service. Registering an
     # extension makes it available for use in CloudFormation templates in
-    # your account, and includes:
+    # your Amazon Web Services account, and includes:
     #
     # * Validating the extension schema
     #
@@ -5150,6 +5176,62 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def register_type(params = {}, options = {})
       req = build_request(:register_type, params)
+      req.send_request(options)
+    end
+
+    # When specifying `RollbackStack`, you preserve the state of previously
+    # provisioned resources when an operation fails. You can check the
+    # status of the stack through the DescribeStacks API.
+    #
+    # Rolls back the specified stack to the last known stable state from
+    # `CREATE_FAILED` or `UPDATE_FAILED` stack statuses.
+    #
+    # This operation will delete a stack if it doesn't contain a last known
+    # stable state. A last known stable state includes any status in a
+    # `*_COMPLETE`. This includes the following stack statuses.
+    #
+    # * `CREATE_COMPLETE`
+    #
+    # * `UPDATE_COMPLETE`
+    #
+    # * `UPDATE_ROLLBACK_COMPLETE`
+    #
+    # * `IMPORT_COMPLETE`
+    #
+    # * `IMPORT_ROLLBACK_COMPLETE`
+    #
+    # @option params [required, String] :stack_name
+    #   The name that is associated with the stack.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of an Identity and Access Management
+    #   role that CloudFormation assumes to rollback the stack.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for this `RollbackStack` request.
+    #
+    # @return [Types::RollbackStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RollbackStackOutput#stack_id #stack_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rollback_stack({
+    #     stack_name: "StackNameOrId", # required
+    #     role_arn: "RoleARN",
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stack_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStack AWS API Documentation
+    #
+    # @overload rollback_stack(params = {})
+    # @param [Hash] params ({})
+    def rollback_stack(params = {}, options = {})
+      req = build_request(:rollback_stack, params)
       req.send_request(options)
     end
 
@@ -5403,9 +5485,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -5630,9 +5713,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks, you must explicitly acknowledge this by specifying one of
+    #     these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -5779,6 +5863,12 @@ module Aws::CloudFormation
     #   the stack's tags. If you specify an empty value, CloudFormation
     #   removes all associated tags.
     #
+    # @option params [Boolean] :disable_rollback
+    #   Preserve the state of previously provisioned resources when an
+    #   operation fails.
+    #
+    #   Default: `False`
+    #
     # @option params [String] :client_request_token
     #   A unique identifier for this `UpdateStack` request. Specify this token
     #   if you plan to retry requests so that CloudFormation knows that
@@ -5842,6 +5932,7 @@ module Aws::CloudFormation
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     disable_rollback: false,
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -5889,10 +5980,10 @@ module Aws::CloudFormation
     #   instances.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more accounts for
-    #   which you want to update parameter values for stack instances. The
-    #   overridden parameter values will be applied to all stack instances in
-    #   the specified accounts and Regions.
+    #   \[Self-managed permissions\] The names of one or more Amazon Web
+    #   Services accounts for which you want to update parameter values for
+    #   stack instances. The overridden parameter values will be applied to
+    #   all stack instances in the specified accounts and Regions.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
@@ -5982,9 +6073,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -6097,9 +6189,10 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your account; for example, by creating new Identity
-    #     and Access Management (IAM) users. For those stacks sets, you must
-    #     explicitly acknowledge this by specifying one of these capabilities.
+    #     permissions in your Amazon Web Services account; for example, by
+    #     creating new Identity and Access Management (IAM) users. For those
+    #     stacks sets, you must explicitly acknowledge this by specifying one
+    #     of these capabilities.
     #
     #     The following IAM resources require you to specify either the
     #     `CAPABILITY_IAM` or `CAPABILITY_NAMED_IAM` capability.
@@ -6344,9 +6437,10 @@ module Aws::CloudFormation
     #   * If you are signed in to a delegated administrator account, specify
     #     `DELEGATED_ADMIN`.
     #
-    #     Your account must be registered as a delegated administrator in the
-    #     management account. For more information, see [Register a delegated
-    #     administrator][1] in the *CloudFormation User Guide*.
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
     #
     #
     #
@@ -6544,7 +6638,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -55,13 +55,14 @@ module Aws::S3
     # below:
     #
     # * Objects created by the PUT Object, POST Object, or Copy operation,
-    #   or through the AWS Management Console, and are encrypted by SSE-S3
-    #   or plaintext, have ETags that are an MD5 digest of their object
-    #   data.
+    #   or through the Amazon Web Services Management Console, and are
+    #   encrypted by SSE-S3 or plaintext, have ETags that are an MD5 digest
+    #   of their object data.
     #
     # * Objects created by the PUT Object, POST Object, or Copy operation,
-    #   or through the AWS Management Console, and are encrypted by SSE-C or
-    #   SSE-KMS, have ETags that are not an MD5 digest of their object data.
+    #   or through the Amazon Web Services Management Console, and are
+    #   encrypted by SSE-C or SSE-KMS, have ETags that are not an MD5 digest
+    #   of their object data.
     #
     # * If an object is created by either the Multipart Upload or Part Copy
     #   operation, the ETag is not an MD5 digest, regardless of the method
@@ -354,7 +355,8 @@ module Aws::S3
     #     The value must be URL encoded.
     #
     #     <note markdown="1"> Amazon S3 supports copy operations using access points only when the
-    #     source and destination buckets are in the same AWS Region.
+    #     source and destination buckets are in the same Amazon Web Services
+    #     Region.
     #
     #      </note>
     #
@@ -445,20 +447,21 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET and
-    #   PUT requests for an object protected by AWS KMS will fail if not made
-    #   via SSL or using SigV4. For information about configuring using any of
-    #   the officially supported AWS SDKs and AWS CLI, see [Specifying the
-    #   Signature Version in Request Authentication][1] in the *Amazon S3 User
-    #   Guide*.
+    #   Specifies the Amazon Web Services KMS key ID to use for object
+    #   encryption. All GET and PUT requests for an object protected by Amazon
+    #   Web Services KMS will fail if not made via SSL or using SigV4. For
+    #   information about configuring using any of the officially supported
+    #   Amazon Web Services SDKs and Amazon Web Services CLI, see [Specifying
+    #   the Signature Version in Request Authentication][1] in the *Amazon S3
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     # @option options [String] :ssekms_encryption_context
-    #   Specifies the AWS KMS Encryption Context to use for object encryption.
-    #   The value of this header is a base64-encoded UTF-8 string holding JSON
-    #   with the encryption context key-value pairs.
+    #   Specifies the Amazon Web Services KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using AWS KMS (SSE-KMS).
@@ -546,7 +549,8 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
-    #   restrictions to process this operation.
+    #   restrictions to process this operation. To use this header, you must
+    #   have the `s3:PutBucketPublicAccessBlock` permission.
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -768,20 +772,21 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the ID of the symmetric customer managed AWS KMS CMK to use
-    #   for object encryption. All GET and PUT requests for an object
-    #   protected by AWS KMS will fail if not made via SSL or using SigV4. For
-    #   information about configuring using any of the officially supported
-    #   AWS SDKs and AWS CLI, see [Specifying the Signature Version in Request
+    #   Specifies the ID of the symmetric customer managed Amazon Web Services
+    #   KMS CMK to use for object encryption. All GET and PUT requests for an
+    #   object protected by Amazon Web Services KMS will fail if not made via
+    #   SSL or using SigV4. For information about configuring using any of the
+    #   officially supported Amazon Web Services SDKs and Amazon Web Services
+    #   CLI, see [Specifying the Signature Version in Request
     #   Authentication][1] in the *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     # @option options [String] :ssekms_encryption_context
-    #   Specifies the AWS KMS Encryption Context to use for object encryption.
-    #   The value of this header is a base64-encoded UTF-8 string holding JSON
-    #   with the encryption context key-value pairs.
+    #   Specifies the Amazon Web Services KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using AWS KMS (SSE-KMS).
@@ -1014,18 +1019,18 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
-    #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) symmetrical customer managed customer master key
-    #   (CMK) that was used for the object. If you specify
-    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
-    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
-    #   managed CMK in AWS to protect the data. If the KMS key does not exist
-    #   in the same account issuing the command, you must use the full ARN and
-    #   not just the ID.
+    #   `aws:kms`, this header specifies the ID of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) symmetrical customer
+    #   managed customer master key (CMK) that was used for the object. If you
+    #   specify `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
+    #   Amazon Web Services managed CMK in Amazon Web Services to protect the
+    #   data. If the KMS key does not exist in the same account issuing the
+    #   command, you must use the full ARN and not just the ID.
     # @option options [String] :ssekms_encryption_context
-    #   Specifies the AWS KMS Encryption Context to use for object encryption.
-    #   The value of this header is a base64-encoded UTF-8 string holding JSON
-    #   with the encryption context key-value pairs.
+    #   Specifies the Amazon Web Services KMS Encryption Context to use for
+    #   object encryption. The value of this header is a base64-encoded UTF-8
+    #   string holding JSON with the encryption context key-value pairs.
     # @option options [Boolean] :bucket_key_enabled
     #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
     #   encryption with server-side encryption using AWS KMS (SSE-KMS).
@@ -1331,8 +1336,8 @@ module Aws::S3
       #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
-      #   Governance-type Object Lock in place. You must have sufficient
-      #   permissions to perform this operation.
+      #   Governance-type Object Lock in place. To use this header, you must
+      #   have the `s3:PutBucketPublicAccessBlock` permission.
       # @option options [String] :expected_bucket_owner
       #   The account ID of the expected bucket owner. If the bucket is owned by
       #   a different account, the request will fail with an HTTP `403 (Access

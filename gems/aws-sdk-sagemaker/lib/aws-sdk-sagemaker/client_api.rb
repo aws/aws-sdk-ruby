@@ -77,6 +77,10 @@ module Aws::SageMaker
     AssociationEntityArn = Shapes::StringShape.new(name: 'AssociationEntityArn')
     AssociationSummaries = Shapes::ListShape.new(name: 'AssociationSummaries')
     AssociationSummary = Shapes::StructureShape.new(name: 'AssociationSummary')
+    AsyncInferenceClientConfig = Shapes::StructureShape.new(name: 'AsyncInferenceClientConfig')
+    AsyncInferenceConfig = Shapes::StructureShape.new(name: 'AsyncInferenceConfig')
+    AsyncInferenceNotificationConfig = Shapes::StructureShape.new(name: 'AsyncInferenceNotificationConfig')
+    AsyncInferenceOutputConfig = Shapes::StructureShape.new(name: 'AsyncInferenceOutputConfig')
     AthenaCatalog = Shapes::StringShape.new(name: 'AthenaCatalog')
     AthenaDatabase = Shapes::StringShape.new(name: 'AthenaDatabase')
     AthenaDatasetDefinition = Shapes::StructureShape.new(name: 'AthenaDatasetDefinition')
@@ -689,6 +693,7 @@ module Aws::SageMaker
     InferenceExecutionMode = Shapes::StringShape.new(name: 'InferenceExecutionMode')
     InferenceImage = Shapes::StringShape.new(name: 'InferenceImage')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
+    InitialTaskCount = Shapes::IntegerShape.new(name: 'InitialTaskCount')
     InputConfig = Shapes::StructureShape.new(name: 'InputConfig')
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
     InputMode = Shapes::StringShape.new(name: 'InputMode')
@@ -860,6 +865,7 @@ module Aws::SageMaker
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxAutoMLJobRuntimeInSeconds = Shapes::IntegerShape.new(name: 'MaxAutoMLJobRuntimeInSeconds')
     MaxCandidates = Shapes::IntegerShape.new(name: 'MaxCandidates')
+    MaxConcurrentInvocationsPerInstance = Shapes::IntegerShape.new(name: 'MaxConcurrentInvocationsPerInstance')
     MaxConcurrentTaskCount = Shapes::IntegerShape.new(name: 'MaxConcurrentTaskCount')
     MaxConcurrentTransforms = Shapes::IntegerShape.new(name: 'MaxConcurrentTransforms')
     MaxHumanLabeledObjectCount = Shapes::IntegerShape.new(name: 'MaxHumanLabeledObjectCount')
@@ -879,10 +885,13 @@ module Aws::SageMaker
     MetadataProperties = Shapes::StructureShape.new(name: 'MetadataProperties')
     MetadataPropertyValue = Shapes::StringShape.new(name: 'MetadataPropertyValue')
     MetricData = Shapes::StructureShape.new(name: 'MetricData')
+    MetricDataList = Shapes::ListShape.new(name: 'MetricDataList')
+    MetricDatum = Shapes::StructureShape.new(name: 'MetricDatum')
     MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
     MetricDefinitionList = Shapes::ListShape.new(name: 'MetricDefinitionList')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricRegex = Shapes::StringShape.new(name: 'MetricRegex')
+    MetricSetSource = Shapes::StringShape.new(name: 'MetricSetSource')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
     ModelApprovalStatus = Shapes::StringShape.new(name: 'ModelApprovalStatus')
@@ -1067,6 +1076,7 @@ module Aws::SageMaker
     PipelineStatus = Shapes::StringShape.new(name: 'PipelineStatus')
     PipelineSummary = Shapes::StructureShape.new(name: 'PipelineSummary')
     PipelineSummaryList = Shapes::ListShape.new(name: 'PipelineSummaryList')
+    PlatformIdentifier = Shapes::StringShape.new(name: 'PlatformIdentifier')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PresignedDomainUrl = Shapes::StringShape.new(name: 'PresignedDomainUrl')
     ProbabilityThresholdAttribute = Shapes::FloatShape.new(name: 'ProbabilityThresholdAttribute')
@@ -1599,6 +1609,22 @@ module Aws::SageMaker
     AssociationSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     AssociationSummary.struct_class = Types::AssociationSummary
 
+    AsyncInferenceClientConfig.add_member(:max_concurrent_invocations_per_instance, Shapes::ShapeRef.new(shape: MaxConcurrentInvocationsPerInstance, location_name: "MaxConcurrentInvocationsPerInstance"))
+    AsyncInferenceClientConfig.struct_class = Types::AsyncInferenceClientConfig
+
+    AsyncInferenceConfig.add_member(:client_config, Shapes::ShapeRef.new(shape: AsyncInferenceClientConfig, location_name: "ClientConfig"))
+    AsyncInferenceConfig.add_member(:output_config, Shapes::ShapeRef.new(shape: AsyncInferenceOutputConfig, required: true, location_name: "OutputConfig"))
+    AsyncInferenceConfig.struct_class = Types::AsyncInferenceConfig
+
+    AsyncInferenceNotificationConfig.add_member(:success_topic, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "SuccessTopic"))
+    AsyncInferenceNotificationConfig.add_member(:error_topic, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "ErrorTopic"))
+    AsyncInferenceNotificationConfig.struct_class = Types::AsyncInferenceNotificationConfig
+
+    AsyncInferenceOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    AsyncInferenceOutputConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "S3OutputPath"))
+    AsyncInferenceOutputConfig.add_member(:notification_config, Shapes::ShapeRef.new(shape: AsyncInferenceNotificationConfig, location_name: "NotificationConfig"))
+    AsyncInferenceOutputConfig.struct_class = Types::AsyncInferenceOutputConfig
+
     AthenaDatasetDefinition.add_member(:catalog, Shapes::ShapeRef.new(shape: AthenaCatalog, required: true, location_name: "Catalog"))
     AthenaDatasetDefinition.add_member(:database, Shapes::ShapeRef.new(shape: AthenaDatabase, required: true, location_name: "Database"))
     AthenaDatasetDefinition.add_member(:query_string, Shapes::ShapeRef.new(shape: AthenaQueryString, required: true, location_name: "QueryString"))
@@ -1718,6 +1744,7 @@ module Aws::SageMaker
     CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
 
     CandidateProperties.add_member(:candidate_artifact_locations, Shapes::ShapeRef.new(shape: CandidateArtifactLocations, location_name: "CandidateArtifactLocations"))
+    CandidateProperties.add_member(:candidate_metrics, Shapes::ShapeRef.new(shape: MetricDataList, location_name: "CandidateMetrics"))
     CandidateProperties.struct_class = Types::CandidateProperties
 
     CandidateSteps.member = Shapes::ShapeRef.new(shape: AutoMLCandidateStep)
@@ -2020,6 +2047,7 @@ module Aws::SageMaker
     CreateEndpointConfigInput.add_member(:data_capture_config, Shapes::ShapeRef.new(shape: DataCaptureConfig, location_name: "DataCaptureConfig"))
     CreateEndpointConfigInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEndpointConfigInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateEndpointConfigInput.add_member(:async_inference_config, Shapes::ShapeRef.new(shape: AsyncInferenceConfig, location_name: "AsyncInferenceConfig"))
     CreateEndpointConfigInput.struct_class = Types::CreateEndpointConfigInput
 
     CreateEndpointConfigOutput.add_member(:endpoint_config_arn, Shapes::ShapeRef.new(shape: EndpointConfigArn, required: true, location_name: "EndpointConfigArn"))
@@ -2225,6 +2253,7 @@ module Aws::SageMaker
     CreateNotebookInstanceInput.add_member(:default_code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryNameOrUrl, location_name: "DefaultCodeRepository"))
     CreateNotebookInstanceInput.add_member(:additional_code_repositories, Shapes::ShapeRef.new(shape: AdditionalCodeRepositoryNamesOrUrls, location_name: "AdditionalCodeRepositories"))
     CreateNotebookInstanceInput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
+    CreateNotebookInstanceInput.add_member(:platform_identifier, Shapes::ShapeRef.new(shape: PlatformIdentifier, location_name: "PlatformIdentifier"))
     CreateNotebookInstanceInput.struct_class = Types::CreateNotebookInstanceInput
 
     CreateNotebookInstanceLifecycleConfigInput.add_member(:notebook_instance_lifecycle_config_name, Shapes::ShapeRef.new(shape: NotebookInstanceLifecycleConfigName, required: true, location_name: "NotebookInstanceLifecycleConfigName"))
@@ -2903,6 +2932,7 @@ module Aws::SageMaker
     DescribeEndpointConfigOutput.add_member(:data_capture_config, Shapes::ShapeRef.new(shape: DataCaptureConfig, location_name: "DataCaptureConfig"))
     DescribeEndpointConfigOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     DescribeEndpointConfigOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeEndpointConfigOutput.add_member(:async_inference_config, Shapes::ShapeRef.new(shape: AsyncInferenceConfig, location_name: "AsyncInferenceConfig"))
     DescribeEndpointConfigOutput.struct_class = Types::DescribeEndpointConfigOutput
 
     DescribeEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
@@ -2918,6 +2948,7 @@ module Aws::SageMaker
     DescribeEndpointOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeEndpointOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
     DescribeEndpointOutput.add_member(:last_deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfig, location_name: "LastDeploymentConfig"))
+    DescribeEndpointOutput.add_member(:async_inference_config, Shapes::ShapeRef.new(shape: AsyncInferenceConfig, location_name: "AsyncInferenceConfig"))
     DescribeEndpointOutput.struct_class = Types::DescribeEndpointOutput
 
     DescribeExperimentRequest.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ExperimentName"))
@@ -3197,6 +3228,7 @@ module Aws::SageMaker
     DescribeNotebookInstanceOutput.add_member(:default_code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryNameOrUrl, location_name: "DefaultCodeRepository"))
     DescribeNotebookInstanceOutput.add_member(:additional_code_repositories, Shapes::ShapeRef.new(shape: AdditionalCodeRepositoryNamesOrUrls, location_name: "AdditionalCodeRepositories"))
     DescribeNotebookInstanceOutput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
+    DescribeNotebookInstanceOutput.add_member(:platform_identifier, Shapes::ShapeRef.new(shape: PlatformIdentifier, location_name: "PlatformIdentifier"))
     DescribeNotebookInstanceOutput.struct_class = Types::DescribeNotebookInstanceOutput
 
     DescribePipelineDefinitionForExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
@@ -4781,6 +4813,13 @@ module Aws::SageMaker
     MetricData.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     MetricData.struct_class = Types::MetricData
 
+    MetricDataList.member = Shapes::ShapeRef.new(shape: MetricDatum)
+
+    MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, location_name: "MetricName"))
+    MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: Float, location_name: "Value"))
+    MetricDatum.add_member(:set, Shapes::ShapeRef.new(shape: MetricSetSource, location_name: "Set"))
+    MetricDatum.struct_class = Types::MetricDatum
+
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
     MetricDefinition.add_member(:regex, Shapes::ShapeRef.new(shape: MetricRegex, required: true, location_name: "Regex"))
     MetricDefinition.struct_class = Types::MetricDefinition
@@ -5398,7 +5437,7 @@ module Aws::SageMaker
 
     ProductionVariant.add_member(:variant_name, Shapes::ShapeRef.new(shape: VariantName, required: true, location_name: "VariantName"))
     ProductionVariant.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
-    ProductionVariant.add_member(:initial_instance_count, Shapes::ShapeRef.new(shape: TaskCount, required: true, location_name: "InitialInstanceCount"))
+    ProductionVariant.add_member(:initial_instance_count, Shapes::ShapeRef.new(shape: InitialTaskCount, required: true, location_name: "InitialInstanceCount"))
     ProductionVariant.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProductionVariantInstanceType, required: true, location_name: "InstanceType"))
     ProductionVariant.add_member(:initial_variant_weight, Shapes::ShapeRef.new(shape: VariantWeight, location_name: "InitialVariantWeight"))
     ProductionVariant.add_member(:accelerator_type, Shapes::ShapeRef.new(shape: ProductionVariantAcceleratorType, location_name: "AcceleratorType"))

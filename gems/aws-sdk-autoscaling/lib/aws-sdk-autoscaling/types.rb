@@ -2543,6 +2543,83 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Describes the desired configuration for an instance refresh.
+    #
+    # If you specify a desired configuration, you must specify either a
+    # `LaunchTemplate` or a `MixedInstancesPolicy`.
+    #
+    # @note When making an API call, you may pass DesiredConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template: {
+    #           launch_template_id: "XmlStringMaxLen255",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "XmlStringMaxLen255",
+    #         },
+    #         mixed_instances_policy: {
+    #           launch_template: {
+    #             launch_template_specification: {
+    #               launch_template_id: "XmlStringMaxLen255",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "XmlStringMaxLen255",
+    #             },
+    #             overrides: [
+    #               {
+    #                 instance_type: "XmlStringMaxLen255",
+    #                 weighted_capacity: "XmlStringMaxLen32",
+    #                 launch_template_specification: {
+    #                   launch_template_id: "XmlStringMaxLen255",
+    #                   launch_template_name: "LaunchTemplateName",
+    #                   version: "XmlStringMaxLen255",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           instances_distribution: {
+    #             on_demand_allocation_strategy: "XmlString",
+    #             on_demand_base_capacity: 1,
+    #             on_demand_percentage_above_base_capacity: 1,
+    #             spot_allocation_strategy: "XmlString",
+    #             spot_instance_pools: 1,
+    #             spot_max_price: "MixedInstanceSpotPrice",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] launch_template
+    #   Describes the launch template and the version of the launch template
+    #   that Amazon EC2 Auto Scaling uses to launch Amazon EC2 instances.
+    #   For more information about launch templates, see [Launch
+    #   templates][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html
+    #   @return [Types::LaunchTemplateSpecification]
+    #
+    # @!attribute [rw] mixed_instances_policy
+    #   Describes a mixed instances policy. A mixed instances policy
+    #   contains the instance types Amazon EC2 Auto Scaling can launch, and
+    #   other information Amazon EC2 Auto Scaling can use to launch
+    #   instances to help you optimize your costs. For more information, see
+    #   [Auto Scaling groups with multiple instance types and purchase
+    #   options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   @return [Types::MixedInstancesPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DesiredConfiguration AWS API Documentation
+    #
+    class DesiredConfiguration < Struct.new(
+      :launch_template,
+      :mixed_instances_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] activities
     #   The activities related to detaching the instances from the Auto
     #   Scaling group.
@@ -3484,6 +3561,14 @@ module Aws::AutoScaling
     #   warm pool.
     #   @return [Types::InstanceRefreshProgressDetails]
     #
+    # @!attribute [rw] preferences
+    #   Describes the preferences for an instance refresh.
+    #   @return [Types::RefreshPreferences]
+    #
+    # @!attribute [rw] desired_configuration
+    #   Describes the specific update you want to deploy.
+    #   @return [Types::DesiredConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefresh AWS API Documentation
     #
     class InstanceRefresh < Struct.new(
@@ -3495,7 +3580,9 @@ module Aws::AutoScaling
       :end_time,
       :percentage_complete,
       :instances_to_update,
-      :progress_details)
+      :progress_details,
+      :preferences,
+      :desired_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3595,14 +3682,15 @@ module Aws::AutoScaling
     # Instances, and how the Auto Scaling group allocates instance types to
     # fulfill On-Demand and Spot capacities.
     #
-    # When you update `SpotAllocationStrategy`, `SpotInstancePools`, or
-    # `SpotMaxPrice`, this update action does not deploy any changes across
-    # the running Amazon EC2 instances in the group. Your existing Spot
-    # Instances continue to run as long as the maximum price for those
-    # instances is higher than the current Spot price. When scale out
-    # occurs, Amazon EC2 Auto Scaling launches instances based on the new
-    # settings. When scale in occurs, Amazon EC2 Auto Scaling terminates
-    # instances according to the group's termination policies.
+    # When you modify `SpotAllocationStrategy`, `SpotInstancePools`, or
+    # `SpotMaxPrice` in the UpdateAutoScalingGroup API call, this update
+    # action does not deploy any changes across the running Amazon EC2
+    # instances in the group. Your existing Spot Instances continue to run
+    # as long as the maximum price for those instances is higher than the
+    # current Spot price. When scale out occurs, Amazon EC2 Auto Scaling
+    # launches instances based on the new settings. When scale in occurs,
+    # Amazon EC2 Auto Scaling terminates instances according to the group's
+    # termination policies.
     #
     # @note When making an API call, you may pass InstancesDistribution
     #   data as a hash:
@@ -4009,11 +4097,12 @@ module Aws::AutoScaling
     #
     # You specify these properties as part of a mixed instances policy.
     #
-    # When you update the launch template or overrides, existing Amazon EC2
-    # instances continue to run. When scale out occurs, Amazon EC2 Auto
-    # Scaling launches instances to match the new settings. When scale in
-    # occurs, Amazon EC2 Auto Scaling terminates instances according to the
-    # group's termination policies.
+    # When you update the launch template or overrides in the
+    # UpdateAutoScalingGroup API call, existing Amazon EC2 instances
+    # continue to run. When scale out occurs, Amazon EC2 Auto Scaling
+    # launches instances to match the new settings. When scale in occurs,
+    # Amazon EC2 Auto Scaling terminates instances according to the group's
+    # termination policies.
     #
     # @note When making an API call, you may pass LaunchTemplate
     #   data as a hash:
@@ -4136,18 +4225,14 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes the Amazon EC2 launch template and the launch template
-    # version that can be used by an Auto Scaling group to configure Amazon
-    # EC2 instances.
-    #
-    # The launch template that is specified must be configured for use with
-    # an Auto Scaling group. For more information, see [Creating a launch
-    # template for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
-    # User Guide*.
+    # Describes the launch template and the version of the launch template
+    # that Amazon EC2 Auto Scaling uses to launch Amazon EC2 instances. For
+    # more information about launch templates, see [Launch templates][1] in
+    # the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html
     #
     # @note When making an API call, you may pass LaunchTemplateSpecification
     #   data as a hash:
@@ -4613,17 +4698,12 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a mixed instances policy for an Auto Scaling group. With
-    # mixed instances, your Auto Scaling group can provision a combination
-    # of On-Demand Instances and Spot Instances across multiple instance
-    # types. For more information, see [Auto Scaling groups with multiple
-    # instance types and purchase options][1] in the *Amazon EC2 Auto
-    # Scaling User Guide*.
-    #
-    # You can create a mixed instances policy for a new Auto Scaling group,
-    # or you can create it for an existing group by updating the group to
-    # specify `MixedInstancesPolicy` as the top-level property instead of a
-    # launch configuration or launch template.
+    # Describes a mixed instances policy. A mixed instances policy contains
+    # the instance types Amazon EC2 Auto Scaling can launch, and other
+    # information Amazon EC2 Auto Scaling can use to launch instances to
+    # help you optimize your costs. For more information, see [Auto Scaling
+    # groups with multiple instance types and purchase options][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -4662,10 +4742,10 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] launch_template
-    #   Specifies the launch template to use and optionally the instance
-    #   types (overrides) that are used to provision EC2 instances to
-    #   fulfill On-Demand and Spot capacities. Required when creating a
-    #   mixed instances policy.
+    #   Specifies the launch template to use and the instance types
+    #   (overrides) that are used to provision EC2 instances to fulfill
+    #   On-Demand and Spot capacities. Required when creating a mixed
+    #   instances policy.
     #   @return [Types::LaunchTemplate]
     #
     # @!attribute [rw] instances_distribution
@@ -5856,11 +5936,7 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes information used to start an instance refresh.
-    #
-    # All properties are optional. However, if you specify a value for
-    # `CheckpointDelay`, you must also provide a value for
-    # `CheckpointPercentages`.
+    # Describes the preferences for an instance refresh.
     #
     # @note When making an API call, you may pass RefreshPreferences
     #   data as a hash:
@@ -5870,14 +5946,20 @@ module Aws::AutoScaling
     #         instance_warmup: 1,
     #         checkpoint_percentages: [1],
     #         checkpoint_delay: 1,
+    #         skip_matching: false,
     #       }
     #
     # @!attribute [rw] min_healthy_percentage
     #   The amount of capacity in the Auto Scaling group that must remain
     #   healthy during an instance refresh to allow the operation to
-    #   continue, as a percentage of the desired capacity of the Auto
-    #   Scaling group (rounded up to the nearest integer). The default is
-    #   `90`.
+    #   continue. The value is expressed as a percentage of the desired
+    #   capacity of the Auto Scaling group (rounded up to the nearest
+    #   integer). The default is `90`.
+    #
+    #   Setting the minimum healthy percentage to 100 percent limits the
+    #   rate of replacement to one instance at a time. In contrast, setting
+    #   it to 0 percent has the effect of replacing all instances at the
+    #   same time.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_warmup
@@ -5909,13 +5991,23 @@ module Aws::AutoScaling
     #   hour).
     #   @return [Integer]
     #
+    # @!attribute [rw] skip_matching
+    #   A boolean value that indicates whether skip matching is enabled. If
+    #   true, then Amazon EC2 Auto Scaling skips replacing instances that
+    #   match the desired configuration. If no desired configuration is
+    #   specified, then it skips replacing instances that have the same
+    #   configuration that is already set on the group. The default is
+    #   `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RefreshPreferences AWS API Documentation
     #
     class RefreshPreferences < Struct.new(
       :min_healthy_percentage,
       :instance_warmup,
       :checkpoint_percentages,
-      :checkpoint_delay)
+      :checkpoint_delay,
+      :skip_matching)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6463,11 +6555,47 @@ module Aws::AutoScaling
     #       {
     #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         strategy: "Rolling", # accepts Rolling
+    #         desired_configuration: {
+    #           launch_template: {
+    #             launch_template_id: "XmlStringMaxLen255",
+    #             launch_template_name: "LaunchTemplateName",
+    #             version: "XmlStringMaxLen255",
+    #           },
+    #           mixed_instances_policy: {
+    #             launch_template: {
+    #               launch_template_specification: {
+    #                 launch_template_id: "XmlStringMaxLen255",
+    #                 launch_template_name: "LaunchTemplateName",
+    #                 version: "XmlStringMaxLen255",
+    #               },
+    #               overrides: [
+    #                 {
+    #                   instance_type: "XmlStringMaxLen255",
+    #                   weighted_capacity: "XmlStringMaxLen32",
+    #                   launch_template_specification: {
+    #                     launch_template_id: "XmlStringMaxLen255",
+    #                     launch_template_name: "LaunchTemplateName",
+    #                     version: "XmlStringMaxLen255",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             instances_distribution: {
+    #               on_demand_allocation_strategy: "XmlString",
+    #               on_demand_base_capacity: 1,
+    #               on_demand_percentage_above_base_capacity: 1,
+    #               spot_allocation_strategy: "XmlString",
+    #               spot_instance_pools: 1,
+    #               spot_max_price: "MixedInstanceSpotPrice",
+    #             },
+    #           },
+    #         },
     #         preferences: {
     #           min_healthy_percentage: 1,
     #           instance_warmup: 1,
     #           checkpoint_percentages: [1],
     #           checkpoint_delay: 1,
+    #           skip_matching: false,
     #         },
     #       }
     #
@@ -6479,28 +6607,36 @@ module Aws::AutoScaling
     #   The strategy to use for the instance refresh. The only valid value
     #   is `Rolling`.
     #
-    #   A rolling update is an update that is applied to all instances in an
-    #   Auto Scaling group until all instances have been updated. A rolling
-    #   update can fail due to failed health checks or if instances are on
-    #   standby or are protected from scale in. If the rolling update
-    #   process fails, any instances that were already replaced are not
-    #   rolled back to their previous configuration.
+    #   A rolling update helps you update your instances gradually. A
+    #   rolling update can fail due to failed health checks or if instances
+    #   are on standby or are protected from scale in. If the rolling update
+    #   process fails, any instances that are replaced are not rolled back
+    #   to their previous configuration.
     #   @return [String]
     #
+    # @!attribute [rw] desired_configuration
+    #   The desired configuration. For example, the desired configuration
+    #   can specify a new launch template or a new version of the current
+    #   launch template.
+    #
+    #   Once the instance refresh succeeds, Amazon EC2 Auto Scaling updates
+    #   the settings of the Auto Scaling group to reflect the new desired
+    #   configuration.
+    #
+    #   <note markdown="1"> When you specify a new launch template or a new version of the
+    #   current launch template for your desired configuration, consider
+    #   enabling the `SkipMatching` property in preferences. If it's
+    #   enabled, Amazon EC2 Auto Scaling skips replacing instances that
+    #   already use the specified launch template and version. This can help
+    #   you reduce the number of replacements that are required to apply
+    #   updates.
+    #
+    #    </note>
+    #   @return [Types::DesiredConfiguration]
+    #
     # @!attribute [rw] preferences
-    #   Set of preferences associated with the instance refresh request.
-    #
-    #   If not provided, the default values are used. For
-    #   `MinHealthyPercentage`, the default value is `90`. For
-    #   `InstanceWarmup`, the default is to use the value specified for the
-    #   health check grace period for the Auto Scaling group.
-    #
-    #   For more information, see [RefreshPreferences][1] in the *Amazon EC2
-    #   Auto Scaling API Reference*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RefreshPreferences.html
+    #   Set of preferences associated with the instance refresh request. If
+    #   not provided, the default values are used.
     #   @return [Types::RefreshPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StartInstanceRefreshType AWS API Documentation
@@ -6508,6 +6644,7 @@ module Aws::AutoScaling
     class StartInstanceRefreshType < Struct.new(
       :auto_scaling_group_name,
       :strategy,
+      :desired_configuration,
       :preferences)
       SENSITIVE = []
       include Aws::Structure

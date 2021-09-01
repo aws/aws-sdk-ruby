@@ -78,14 +78,62 @@ module Aws::Lightsail
     #   The timestamp when the access key was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_used
+    #   An object that describes the last time the access key was used.
+    #
+    #   <note markdown="1"> This object does not include data in the response of a
+    #   CreateBucketAccessKey action. If the access key has not been used,
+    #   the `region` and `serviceName` values are `N/A`, and the
+    #   `lastUsedDate` value is null.
+    #
+    #    </note>
+    #   @return [Types::AccessKeyLastUsed]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessKey AWS API Documentation
     #
     class AccessKey < Struct.new(
       :access_key_id,
       :secret_access_key,
       :status,
-      :created_at)
+      :created_at,
+      :last_used)
       SENSITIVE = [:access_key_id]
+      include Aws::Structure
+    end
+
+    # Describes the last time an access key was used.
+    #
+    # <note markdown="1"> This object does not include data in the response of a
+    # CreateBucketAccessKey action.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] last_used_date
+    #   The date and time when the access key was most recently used.
+    #
+    #   This value is null if the access key has not been used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region where this access key was most recently used.
+    #
+    #   This value is `N/A` if the access key has not been used.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS service with which this access key was most
+    #   recently used.
+    #
+    #   This value is `N/A` if the access key has not been used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessKeyLastUsed AWS API Documentation
+    #
+    class AccessKeyLastUsed < Struct.new(
+      :last_used_date,
+      :region,
+      :service_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2728,7 +2776,7 @@ module Aws::Lightsail
     #   objects in the bucket.
     #
     #   For more information about versioning, see [Enabling and suspending
-    #   bucket object versioning in Amazon Lightsail][1] in the *Amazon
+    #   object versioning in a bucket in Amazon Lightsail][1] in the *Amazon
     #   Lightsail Developer Guide*.
     #
     #

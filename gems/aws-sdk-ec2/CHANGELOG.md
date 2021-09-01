@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.261.0 (2021-09-01)
+------------------
+
+* Feature - Added LaunchTemplate support for the IMDS IPv6 endpoint
+
+1.260.0 (2021-08-27)
+------------------
+
+* Feature - This release adds the BootMode flag to the ImportImage API and showing the detected BootMode of an ImportImage task.
+
+1.259.0 (2021-08-26)
+------------------
+
+* Feature - Support added for resizing VPC prefix lists
+
+1.258.0 (2021-08-25)
+------------------
+
+* Feature - Support added for IMDS IPv6 endpoint
+
+1.257.0 (2021-08-20)
+------------------
+
+* Feature - encryptionInTransitSupported added to DescribeInstanceTypes API
+
+1.256.0 (2021-08-19)
+------------------
+
+* Feature - The ImportImage API now supports the ability to create AMIs with AWS-managed licenses for Microsoft SQL Server for both Windows and Linux.
+
+1.255.0 (2021-08-17)
+------------------
+
+* Feature - This release adds support for EC2 ED25519 key pairs for authentication
+
 1.254.0 (2021-07-30)
 ------------------
 

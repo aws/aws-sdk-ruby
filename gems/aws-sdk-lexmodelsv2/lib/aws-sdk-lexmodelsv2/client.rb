@@ -1130,6 +1130,7 @@ module Aws::LexModelsV2
     #         ],
     #         allow_interrupt: false,
     #       },
+    #       active: false,
     #     },
     #     intent_closing_setting: {
     #       closing_response: { # required
@@ -1185,6 +1186,7 @@ module Aws::LexModelsV2
     #         ],
     #         allow_interrupt: false,
     #       },
+    #       active: false,
     #     },
     #     input_contexts: [
     #       {
@@ -1261,6 +1263,7 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_confirmation_setting.declination_response.allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.active #=> Boolean
     #   resp.intent_closing_setting.closing_response.message_groups #=> Array
     #   resp.intent_closing_setting.closing_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_closing_setting.closing_response.message_groups[0].message.custom_payload.value #=> String
@@ -1282,6 +1285,7 @@ module Aws::LexModelsV2
     #   resp.intent_closing_setting.closing_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
     #   resp.intent_closing_setting.closing_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_closing_setting.closing_response.allow_interrupt #=> Boolean
+    #   resp.intent_closing_setting.active #=> Boolean
     #   resp.input_contexts #=> Array
     #   resp.input_contexts[0].name #=> String
     #   resp.output_contexts #=> Array
@@ -1761,6 +1765,7 @@ module Aws::LexModelsV2
     #           timeout_in_seconds: 1, # required
     #           allow_interrupt: false,
     #         },
+    #         active: false,
     #       },
     #     },
     #     obfuscation_setting: {
@@ -1873,6 +1878,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.frequency_in_seconds #=> Integer
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.timeout_in_seconds #=> Integer
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.wait_and_continue_specification.active #=> Boolean
     #   resp.obfuscation_setting.obfuscation_setting_type #=> String, one of "None", "DefaultObfuscation"
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -2985,6 +2991,7 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_confirmation_setting.declination_response.allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.active #=> Boolean
     #   resp.intent_closing_setting.closing_response.message_groups #=> Array
     #   resp.intent_closing_setting.closing_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_closing_setting.closing_response.message_groups[0].message.custom_payload.value #=> String
@@ -3006,6 +3013,7 @@ module Aws::LexModelsV2
     #   resp.intent_closing_setting.closing_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
     #   resp.intent_closing_setting.closing_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_closing_setting.closing_response.allow_interrupt #=> Boolean
+    #   resp.intent_closing_setting.active #=> Boolean
     #   resp.input_contexts #=> Array
     #   resp.input_contexts[0].name #=> String
     #   resp.output_contexts #=> Array
@@ -3210,6 +3218,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.frequency_in_seconds #=> Integer
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.timeout_in_seconds #=> Integer
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.wait_and_continue_specification.active #=> Boolean
     #   resp.obfuscation_setting.obfuscation_setting_type #=> String, one of "None", "DefaultObfuscation"
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -4908,6 +4917,7 @@ module Aws::LexModelsV2
     #         ],
     #         allow_interrupt: false,
     #       },
+    #       active: false,
     #     },
     #     intent_closing_setting: {
     #       closing_response: { # required
@@ -4963,6 +4973,7 @@ module Aws::LexModelsV2
     #         ],
     #         allow_interrupt: false,
     #       },
+    #       active: false,
     #     },
     #     input_contexts: [
     #       {
@@ -5042,6 +5053,7 @@ module Aws::LexModelsV2
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
     #   resp.intent_confirmation_setting.declination_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_confirmation_setting.declination_response.allow_interrupt #=> Boolean
+    #   resp.intent_confirmation_setting.active #=> Boolean
     #   resp.intent_closing_setting.closing_response.message_groups #=> Array
     #   resp.intent_closing_setting.closing_response.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_closing_setting.closing_response.message_groups[0].message.custom_payload.value #=> String
@@ -5063,6 +5075,7 @@ module Aws::LexModelsV2
     #   resp.intent_closing_setting.closing_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
     #   resp.intent_closing_setting.closing_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
     #   resp.intent_closing_setting.closing_response.allow_interrupt #=> Boolean
+    #   resp.intent_closing_setting.active #=> Boolean
     #   resp.input_contexts #=> Array
     #   resp.input_contexts[0].name #=> String
     #   resp.output_contexts #=> Array
@@ -5446,6 +5459,7 @@ module Aws::LexModelsV2
     #           timeout_in_seconds: 1, # required
     #           allow_interrupt: false,
     #         },
+    #         active: false,
     #       },
     #     },
     #     obfuscation_setting: {
@@ -5558,6 +5572,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.frequency_in_seconds #=> Integer
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.timeout_in_seconds #=> Integer
     #   resp.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt #=> Boolean
+    #   resp.value_elicitation_setting.wait_and_continue_specification.active #=> Boolean
     #   resp.obfuscation_setting.obfuscation_setting_type #=> String, one of "None", "DefaultObfuscation"
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -5698,7 +5713,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

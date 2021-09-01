@@ -197,8 +197,9 @@ module Aws::S3
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line Interface
+    #   (CLI) or Amazon Web Services SDKs, this field is calculated
+    #   automatically.
     #
     #
     #
@@ -240,8 +241,9 @@ module Aws::S3
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line Interface
+    #   (CLI) or Amazon Web Services SDKs, this field is calculated
+    #   automatically.
     #
     #
     #
@@ -276,8 +278,9 @@ module Aws::S3
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
-    #   For requests made using the AWS Command Line Interface (CLI) or AWS
-    #   SDKs, this field is calculated automatically.
+    #   For requests made using the Amazon Web Services Command Line Interface
+    #   (CLI) or Amazon Web Services SDKs, this field is calculated
+    #   automatically.
     #
     #
     #
