@@ -339,18 +339,18 @@ module Aws
           expect(Aws::Sigv4::Signer).to receive(:new).and_call_original
           expect(Aws::Sigv4::Signer)
             .to receive(:new)
-            .with(hash_including(
-                    service: 's3',
-                    region: '*',
-                    signing_algorithm: :sigv4a
-                  ))
-            .and_return(signer)
+                  .with(hash_including(
+                          service: 's3',
+                          region: '*',
+                          signing_algorithm: :sigv4a
+                        ))
+                  .and_return(signer)
 
           expect(signer)
             .to receive(:presign_url)
-            .with(hash_including(
-                    url: URI.parse('https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/obj')
-                  ))
+                  .with(hash_including(
+                          url: URI.parse('https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/obj')
+                        ))
 
           subject.presigned_url(:get_object, bucket: arn, key: 'obj')
         end
@@ -365,9 +365,9 @@ module Aws
 
           it 'raises an ArgumentError' do
             arn = 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
-            expect {
+            expect do
               subject.presigned_url(:get_object, bucket: arn, key: 'obj')
-            }.to raise_error(ArgumentError)
+            end.to raise_error(ArgumentError)
           end
         end
       end

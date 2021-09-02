@@ -133,7 +133,7 @@ result in cross region requests.
             if arn.region.empty? && context.config.s3_disable_multiregion_access_points
               raise ArgumentError,
                     'Cannot provide a Multi-region Access Point ARN with '\
-                    ':s3_disable_multiregion_access_points set to true'
+                    '`:s3_disable_multiregion_access_points` set to true'
             end
           end
         end
