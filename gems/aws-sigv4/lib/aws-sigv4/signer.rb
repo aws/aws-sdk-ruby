@@ -129,6 +129,12 @@ module Aws
         [:uri_escape_path, :apply_checksum_header].each do |opt|
           instance_variable_set("@#{opt}", options.key?(opt) ? !!options[opt] : true)
         end
+
+        if options[:signing_algorithm] == :sigv4a
+          raise ArgumentError, 'You are attempting to sign a' \
+' request with sigv4a which requires aws-crt and version 1.4.0.crt or later of the aws-sigv4 gem.'\
+' Please install the gem or add it to your gemfile.'
+        end
       end
 
       # @return [String]

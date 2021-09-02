@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for S3 Multi-region access point configuration.
+
 3.120.0 (2021-09-01)
 ------------------
 

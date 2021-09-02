@@ -96,9 +96,10 @@ module Aws
                 .sub('{dnsSuffix}', partition['dnsSuffix'])
       end
 
-      def get_partition(region)
-        partition_containing_region(region) ||
-          partition_matching_region(region) ||
+      def get_partition(region_or_partition)
+        partition_containing_region(region_or_partition) ||
+          partition_matching_region(region_or_partition) ||
+          partition_matching_name(region_or_partition) ||
           default_partition
       end
 
@@ -115,6 +116,10 @@ module Aws
               svc['endpoints'].key?(region) if svc.key?('endpoints')
             end
         end
+      end
+
+      def partition_matching_name(partition_name)
+        @rules['partitions'].find { |p| p['partition'] == partition_name }
       end
 
       def default_partition
