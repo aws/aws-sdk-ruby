@@ -132,7 +132,7 @@ module BuildTools
       dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{core_version_string}"
 
       case api['metadata']['signatureVersion']
-      when 'v4' then dependencies['aws-sigv4'] = '~> 1.3'
+      when 'v4' then dependencies['aws-sigv4'] = '~> 1.1'
       when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
       end
       dependencies
