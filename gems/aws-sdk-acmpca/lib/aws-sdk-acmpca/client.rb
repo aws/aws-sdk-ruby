@@ -338,17 +338,19 @@ module Aws::ACMPCA
     # @!group API Operations
 
     # Creates a root or subordinate private certificate authority (CA). You
-    # must specify the CA configuration, the certificate revocation list
-    # (CRL) configuration, the CA type, and an optional idempotency token to
-    # avoid accidental creation of multiple CAs. The CA configuration
+    # must specify the CA configuration, an optional configuration for
+    # Online Certificate Status Protocol (OCSP) and/or a certificate
+    # revocation list (CRL), the CA type, and an optional idempotency token
+    # to avoid accidental creation of multiple CAs. The CA configuration
     # specifies the name of the algorithm and key size to be used to create
     # the CA private key, the type of signing algorithm that the CA uses,
-    # and X.500 subject information. The CRL configuration specifies the CRL
-    # expiration period in days (the validity period of the CRL), the Amazon
-    # S3 bucket that will contain the CRL, and a CNAME alias for the S3
-    # bucket that is included in certificates issued by the CA. If
-    # successful, this action returns the Amazon Resource Name (ARN) of the
-    # CA.
+    # and X.500 subject information. The OCSP configuration can optionally
+    # specify a custom URL for the OCSP responder. The CRL configuration
+    # specifies the CRL expiration period in days (the validity period of
+    # the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME
+    # alias for the S3 bucket that is included in certificates issued by the
+    # CA. If successful, this action returns the Amazon Resource Name (ARN)
+    # of the CA.
     #
     # ACM Private CA assets that are stored in Amazon S3 can be protected
     # with encryption. For more information, see [Encrypting Your CRLs][1].
@@ -370,16 +372,16 @@ module Aws::ACMPCA
     #   signing algorithm, and X.500 certificate subject information.
     #
     # @option params [Types::RevocationConfiguration] :revocation_configuration
-    #   Contains a Boolean value that you can use to enable a certification
-    #   revocation list (CRL) for the CA, the name of the S3 bucket to which
-    #   ACM Private CA will write the CRL, and an optional CNAME alias that
-    #   you can use to hide the name of your bucket in the **CRL Distribution
-    #   Points** extension of your CA certificate. For more information, see
-    #   the [CrlConfiguration][1] structure.
+    #   Contains information to enable Online Certificate Status Protocol
+    #   (OCSP) support, to enable a certificate revocation list (CRL), to
+    #   enable both, or to enable neither. The default is for both certificate
+    #   validation mechanisms to be disabled. For more information, see the
+    #   [OcspConfiguration][1] and [CrlConfiguration][2] types.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
     #
     # @option params [required, String] :certificate_authority_type
     #   The type of the certificate authority.
@@ -504,6 +506,10 @@ module Aws::ACMPCA
     #         custom_cname: "String253",
     #         s3_bucket_name: "String3To255",
     #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
+    #       },
+    #       ocsp_configuration: {
+    #         enabled: false, # required
+    #         ocsp_custom_cname: "String253",
     #       },
     #     },
     #     certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
@@ -999,6 +1005,8 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.certificate_authority.revocation_configuration.ocsp_configuration.enabled #=> Boolean
+    #   resp.certificate_authority.revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authority.restorable_until #=> Time
     #   resp.certificate_authority.key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
     #
@@ -1805,6 +1813,8 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.enabled #=> Boolean
+    #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authorities[0].restorable_until #=> Time
     #   resp.certificate_authorities[0].key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
     #   resp.next_token #=> String
@@ -2316,7 +2326,16 @@ module Aws::ACMPCA
     #   `
     #
     # @option params [Types::RevocationConfiguration] :revocation_configuration
-    #   Revocation information for your private CA.
+    #   Contains information to enable Online Certificate Status Protocol
+    #   (OCSP) support, to enable a certificate revocation list (CRL), to
+    #   enable both, or to enable neither. If this parameter is not supplied,
+    #   existing capibilites remain unchanged. For more information, see the
+    #   [OcspConfiguration][1] and [CrlConfiguration][2] types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
     #
     # @option params [String] :status
     #   Status of your private CA.
@@ -2334,6 +2353,10 @@ module Aws::ACMPCA
     #         custom_cname: "String253",
     #         s3_bucket_name: "String3To255",
     #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
+    #       },
+    #       ocsp_configuration: {
+    #         enabled: false, # required
+    #         ocsp_custom_cname: "String253",
     #       },
     #     },
     #     status: "CREATING", # accepts CREATING, PENDING_CERTIFICATE, ACTIVE, DELETED, DISABLED, EXPIRED, FAILED
@@ -2361,7 +2384,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

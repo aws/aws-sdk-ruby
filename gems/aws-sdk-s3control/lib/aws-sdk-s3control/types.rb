@@ -147,6 +147,134 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Error details for the failed asynchronous operation.
+    #
+    # @!attribute [rw] code
+    #   A string that uniquely identifies the error condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A generic descritpion of the error condition in English.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The identifier of the resource associated with the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the request associated with the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AsyncErrorDetails AWS API Documentation
+    #
+    class AsyncErrorDetails < Struct.new(
+      :code,
+      :message,
+      :resource,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the information about an asynchronous operation.
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the request was sent to the service.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation
+    #   The specific operation for the asynchronous request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_token_arn
+    #   The request token associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_parameters
+    #   The parameters associated with the request.
+    #   @return [Types::AsyncRequestParameters]
+    #
+    # @!attribute [rw] request_status
+    #   The current status of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_details
+    #   The details of the response.
+    #   @return [Types::AsyncResponseDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AsyncOperation AWS API Documentation
+    #
+    class AsyncOperation < Struct.new(
+      :creation_time,
+      :operation,
+      :request_token_arn,
+      :request_parameters,
+      :request_status,
+      :response_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the request parameters associated with an asynchronous
+    # request.
+    #
+    # @!attribute [rw] create_multi_region_access_point_request
+    #   A container of the parameters for a
+    #   [CreateMultiRegionAccessPoint][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
+    #   @return [Types::CreateMultiRegionAccessPointInput]
+    #
+    # @!attribute [rw] delete_multi_region_access_point_request
+    #   A container of the parameters for a
+    #   [DeleteMultiRegionAccessPoint][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+    #   @return [Types::DeleteMultiRegionAccessPointInput]
+    #
+    # @!attribute [rw] put_multi_region_access_point_policy_request
+    #   A container of the parameters for a [PutMultiRegionAccessPoint][1]
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html
+    #   @return [Types::PutMultiRegionAccessPointPolicyInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AsyncRequestParameters AWS API Documentation
+    #
+    class AsyncRequestParameters < Struct.new(
+      :create_multi_region_access_point_request,
+      :delete_multi_region_access_point_request,
+      :put_multi_region_access_point_policy_request)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the response details that are returned when querying
+    # about an asynchronous request.
+    #
+    # @!attribute [rw] multi_region_access_point_details
+    #   The details for the Multi-Region Access Point.
+    #   @return [Types::MultiRegionAccessPointsAsyncResponse]
+    #
+    # @!attribute [rw] error_details
+    #   Error details for an asynchronous request.
+    #   @return [Types::AsyncErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AsyncResponseDetails AWS API Documentation
+    #
+    class AsyncResponseDetails < Struct.new(
+      :multi_region_access_point_details,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Lambda function used to transform objects through an Object Lambda
     # Access Point.
     #
@@ -267,8 +395,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for owner of the specified Object Lambda Access
-    #   Point.
+    #   The Amazon Web Services account ID for owner of the specified Object
+    #   Lambda Access Point.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -320,8 +448,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the owner of the bucket for which you want to
-    #   create an access point.
+    #   The Amazon Web Services account ID for the owner of the bucket for
+    #   which you want to create an access point.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -705,7 +833,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID that creates the job.
+    #   The Amazon Web Services account ID that creates the job.
     #   @return [String]
     #
     # @!attribute [rw] confirmation_required
@@ -789,6 +917,134 @@ module Aws::S3Control
     #
     class CreateJobResult < Struct.new(
       :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the information associated with a
+    # [CreateMultiRegionAccessPoint][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
+    #
+    # @note When making an API call, you may pass CreateMultiRegionAccessPointInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MultiRegionAccessPointName", # required
+    #         public_access_block: {
+    #           block_public_acls: false,
+    #           ignore_public_acls: false,
+    #           block_public_policy: false,
+    #           restrict_public_buckets: false,
+    #         },
+    #         regions: [ # required
+    #           {
+    #             bucket: "BucketName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Multi-Region Access Point associated with this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block
+    #   The `PublicAccessBlock` configuration that you want to apply to this
+    #   Amazon S3 account. You can enable the configuration options in any
+    #   combination. For more information about when Amazon S3 considers a
+    #   bucket or object public, see [The Meaning of "Public"][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @!attribute [rw] regions
+    #   The buckets in different Regions that are associated with the
+    #   Multi-Region Access Point.
+    #   @return [Array<Types::Region>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateMultiRegionAccessPointInput AWS API Documentation
+    #
+    class CreateMultiRegionAccessPointInput < Struct.new(
+      :name,
+      :public_access_block,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMultiRegionAccessPointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         client_token: "MultiRegionAccessPointClientToken", # required
+    #         details: { # required
+    #           name: "MultiRegionAccessPointName", # required
+    #           public_access_block: {
+    #             block_public_acls: false,
+    #             ignore_public_acls: false,
+    #             block_public_policy: false,
+    #             restrict_public_buckets: false,
+    #           },
+    #           regions: [ # required
+    #             {
+    #               bucket: "BucketName", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point. The owner of the Multi-Region Access Point also must
+    #   own the underlying buckets.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   An idempotency token used to identify the request and guarantee that
+    #   requests are unique.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A container element containing details about the Multi-Region Access
+    #   Point.
+    #   @return [Types::CreateMultiRegionAccessPointInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateMultiRegionAccessPointRequest AWS API Documentation
+    #
+    class CreateMultiRegionAccessPointRequest < Struct.new(
+      :account_id,
+      :client_token,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_token_arn
+    #   The request token associated with the request. You can use this
+    #   token with [DescribeMultiRegionAccessPointOperation][1] to determine
+    #   the status of asynchronous requests.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateMultiRegionAccessPointResult AWS API Documentation
+    #
+    class CreateMultiRegionAccessPointResult < Struct.new(
+      :request_token_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1045,7 +1301,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket tag set to be removed.
+    #   The Amazon Web Services account ID of the Outposts bucket tag set to
+    #   be removed.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -1083,7 +1340,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -1104,6 +1362,90 @@ module Aws::S3Control
     #
     class DeleteJobTaggingResult < Aws::EmptyStructure; end
 
+    # A container for the information associated with a
+    # [DeleteMultiRegionAccessPoint][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+    #
+    # @note When making an API call, you may pass DeleteMultiRegionAccessPointInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MultiRegionAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Multi-Region Access Point associated with this
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteMultiRegionAccessPointInput AWS API Documentation
+    #
+    class DeleteMultiRegionAccessPointInput < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteMultiRegionAccessPointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         client_token: "MultiRegionAccessPointClientToken", # required
+    #         details: { # required
+    #           name: "MultiRegionAccessPointName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   An idempotency token used to identify the request and guarantee that
+    #   requests are unique.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A container element containing details about the Multi-Region Access
+    #   Point.
+    #   @return [Types::DeleteMultiRegionAccessPointInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteMultiRegionAccessPointRequest AWS API Documentation
+    #
+    class DeleteMultiRegionAccessPointRequest < Struct.new(
+      :account_id,
+      :client_token,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_token_arn
+    #   The request token associated with the request. You can use this
+    #   token with [DescribeMultiRegionAccessPointOperation][1] to determine
+    #   the status of asynchronous requests.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteMultiRegionAccessPointResult AWS API Documentation
+    #
+    class DeleteMultiRegionAccessPointResult < Struct.new(
+      :request_token_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeletePublicAccessBlockRequest
     #   data as a hash:
     #
@@ -1112,8 +1454,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the account whose `PublicAccessBlock`
-    #   configuration you want to remove.
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeletePublicAccessBlockRequest AWS API Documentation
@@ -1187,7 +1529,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -1212,6 +1555,69 @@ module Aws::S3Control
     #
     class DescribeJobResult < Struct.new(
       :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeMultiRegionAccessPointOperationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         request_token_arn: "AsyncRequestTokenARN", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_token_arn
+    #   The request token associated with the request you want to know
+    #   about. This request token is returned as part of the response when
+    #   you make an asynchronous request. You provide this token to query
+    #   about the status of the asynchronous action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DescribeMultiRegionAccessPointOperationRequest AWS API Documentation
+    #
+    class DescribeMultiRegionAccessPointOperationRequest < Struct.new(
+      :account_id,
+      :request_token_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] async_operation
+    #   A container element containing the details of the asynchronous
+    #   operation.
+    #   @return [Types::AsyncOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DescribeMultiRegionAccessPointOperationResult AWS API Documentation
+    #
+    class DescribeMultiRegionAccessPointOperationResult < Struct.new(
+      :async_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The last established access control policy for a Multi-Region Access
+    # Point.
+    #
+    # When you update the policy, the update is first listed as the proposed
+    # policy. After the update is finished and all Regions have been
+    # updated, the proposed policy is listed as the established policy. If
+    # both policies have the same version number, the proposed policy is the
+    # established policy.
+    #
+    # @!attribute [rw] policy
+    #   The details of the last established policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/EstablishedMultiRegionAccessPointPolicy AWS API Documentation
+    #
+    class EstablishedMultiRegionAccessPointPolicy < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1626,7 +2032,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -1676,7 +2082,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -1726,7 +2132,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -1785,7 +2191,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -1835,7 +2241,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -1864,9 +2271,156 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMultiRegionAccessPointPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "MultiRegionAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies the Multi-Region Access Point. The name of the
+    #   Multi-Region Access Point is different from the alias. For more
+    #   information about the distinction between the name and the alias of
+    #   an Multi-Region Access Point, see [Managing Multi-Region Access
+    #   Points][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointPolicyRequest AWS API Documentation
+    #
+    class GetMultiRegionAccessPointPolicyRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The policy associated with the specified Multi-Region Access Point.
+    #   @return [Types::MultiRegionAccessPointPolicyDocument]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointPolicyResult AWS API Documentation
+    #
+    class GetMultiRegionAccessPointPolicyResult < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMultiRegionAccessPointPolicyStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "MultiRegionAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies the Multi-Region Access Point. The name of the
+    #   Multi-Region Access Point is different from the alias. For more
+    #   information about the distinction between the name and the alias of
+    #   an Multi-Region Access Point, see [Managing Multi-Region Access
+    #   Points][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointPolicyStatusRequest AWS API Documentation
+    #
+    class GetMultiRegionAccessPointPolicyStatusRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] established
+    #   Indicates whether this access point policy is public. For more
+    #   information about how Amazon S3 evaluates policies to determine
+    #   whether they are public, see [The Meaning of "Public"][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   @return [Types::PolicyStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointPolicyStatusResult AWS API Documentation
+    #
+    class GetMultiRegionAccessPointPolicyStatusResult < Struct.new(
+      :established)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMultiRegionAccessPointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "MultiRegionAccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Multi-Region Access Point whose configuration
+    #   information you want to receive. The name of the Multi-Region Access
+    #   Point is different from the alias. For more information about the
+    #   distinction between the name and the alias of an Multi-Region Access
+    #   Point, see [Managing Multi-Region Access Points][1] in the *Amazon
+    #   S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointRequest AWS API Documentation
+    #
+    class GetMultiRegionAccessPointRequest < Struct.new(
+      :account_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_point
+    #   A container element containing the details of the requested
+    #   Multi-Region Access Point.
+    #   @return [Types::MultiRegionAccessPointReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointResult AWS API Documentation
+    #
+    class GetMultiRegionAccessPointResult < Struct.new(
+      :access_point)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration currently in effect for this
-    #   account.
+    #   Amazon Web Services account.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockOutput AWS API Documentation
@@ -1885,8 +2439,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the account whose `PublicAccessBlock`
-    #   configuration you want to retrieve.
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockRequest AWS API Documentation
@@ -3007,8 +3561,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for owner of the bucket whose access points you want
-    #   to list.
+    #   The Amazon Web Services account ID for owner of the bucket whose
+    #   access points you want to list.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -3087,7 +3641,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_statuses
@@ -3139,6 +3694,58 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMultiRegionAccessPointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         next_token: "NonEmptyMaxLength1024String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Not currently used. Do not use this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Not currently used. Do not use this parameter.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListMultiRegionAccessPointsRequest AWS API Documentation
+    #
+    class ListMultiRegionAccessPointsRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_points
+    #   The list of Multi-Region Access Points associated with the user.
+    #   @return [Array<Types::MultiRegionAccessPointReport>]
+    #
+    # @!attribute [rw] next_token
+    #   If the specified bucket has more Multi-Region Access Points than can
+    #   be returned in one call to this action, this field contains a
+    #   continuation token. You can use this token tin subsequent calls to
+    #   this action to retrieve additional Multi-Region Access Points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListMultiRegionAccessPointsResult AWS API Documentation
+    #
+    class ListMultiRegionAccessPointsResult < Struct.new(
+      :access_points,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRegionalBucketsRequest
     #   data as a hash:
     #
@@ -3150,7 +3757,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3272,6 +3879,132 @@ module Aws::S3Control
     class ListStorageLensConfigurationsResult < Struct.new(
       :next_token,
       :storage_lens_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Multi-Region Access Point access control policy.
+    #
+    # When you update the policy, the update is first listed as the proposed
+    # policy. After the update is finished and all Regions have been
+    # updated, the proposed policy is listed as the established policy. If
+    # both policies have the same version number, the proposed policy is the
+    # established policy.
+    #
+    # @!attribute [rw] established
+    #   The last established policy for the Multi-Region Access Point.
+    #   @return [Types::EstablishedMultiRegionAccessPointPolicy]
+    #
+    # @!attribute [rw] proposed
+    #   The proposed policy for the Multi-Region Access Point.
+    #   @return [Types::ProposedMultiRegionAccessPointPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/MultiRegionAccessPointPolicyDocument AWS API Documentation
+    #
+    class MultiRegionAccessPointPolicyDocument < Struct.new(
+      :established,
+      :proposed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Status information for a single Multi-Region Access Point Region.
+    #
+    # @!attribute [rw] name
+    #   The name of the Region in the Multi-Region Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_status
+    #   The current status of the Multi-Region Access Point in this Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/MultiRegionAccessPointRegionalResponse AWS API Documentation
+    #
+    class MultiRegionAccessPointRegionalResponse < Struct.new(
+      :name,
+      :request_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of statuses for a Multi-Region Access Point in the
+    # various Regions it supports.
+    #
+    # @!attribute [rw] name
+    #   The name of the Multi-Region Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias for the Multi-Region Access Point. For more information
+    #   about the distinction between the name and the alias of an
+    #   Multi-Region Access Point, see [Managing Multi-Region Access
+    #   Points][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   When the Multi-Region Access Point create request was received.
+    #   @return [Time]
+    #
+    # @!attribute [rw] public_access_block
+    #   The `PublicAccessBlock` configuration that you want to apply to this
+    #   Amazon S3 account. You can enable the configuration options in any
+    #   combination. For more information about when Amazon S3 considers a
+    #   bucket or object public, see [The Meaning of "Public"][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Multi-Region Access Point.
+    #
+    #   `CREATING` and `DELETING` are temporary states that exist while the
+    #   request is propogating and being completed. If a Multi-Region Access
+    #   Point has a status of `PARTIALLY_CREATED`, you can retry creation or
+    #   send a request to delete the Multi-Region Access Point. If a
+    #   Multi-Region Access Point has a status of `PARTIALLY_DELETED`, you
+    #   can retry a delete request to finish the deletion of the
+    #   Multi-Region Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   A collection of the Regions and buckets associated with the
+    #   Multi-Region Access Point.
+    #   @return [Array<Types::RegionReport>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/MultiRegionAccessPointReport AWS API Documentation
+    #
+    class MultiRegionAccessPointReport < Struct.new(
+      :name,
+      :alias,
+      :created_at,
+      :public_access_block,
+      :status,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Multi-Region Access Point details that are returned when querying
+    # about an asynchronous request.
+    #
+    # @!attribute [rw] regions
+    #   A collection of status information for the different Regions that a
+    #   Multi-Region Access Point supports.
+    #   @return [Array<Types::MultiRegionAccessPointRegionalResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/MultiRegionAccessPointsAsyncResponse AWS API Documentation
+    #
+    class MultiRegionAccessPointsAsyncResponse < Struct.new(
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3575,6 +4308,26 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The proposed access control policy for the Multi-Region Access Point.
+    #
+    # When you update the policy, the update is first listed as the proposed
+    # policy. After the update is finished and all Regions have been
+    # updated, the proposed policy is listed as the established policy. If
+    # both policies have the same version number, the proposed policy is the
+    # established policy.
+    #
+    # @!attribute [rw] policy
+    #   The details of the proposed policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ProposedMultiRegionAccessPointPolicy AWS API Documentation
+    #
+    class ProposedMultiRegionAccessPointPolicy < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `PublicAccessBlock` configuration that you want to apply to this
     # Amazon S3 account. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
@@ -3751,8 +4504,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for owner of the bucket associated with the specified
-    #   access point.
+    #   The Amazon Web Services account ID for owner of the bucket
+    #   associated with the specified access point.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3851,7 +4604,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -3883,7 +4636,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -3944,7 +4697,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #   @return [String]
     #
     # @!attribute [rw] bucket
@@ -3992,7 +4745,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -4018,6 +4772,97 @@ module Aws::S3Control
     #
     class PutJobTaggingResult < Aws::EmptyStructure; end
 
+    # A container for the information associated with a
+    # [PutMultiRegionAccessPoint][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html
+    #
+    # @note When making an API call, you may pass PutMultiRegionAccessPointPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MultiRegionAccessPointName", # required
+    #         policy: "Policy", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Multi-Region Access Point associated with the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy details for the `PutMultiRegionAccessPoint` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutMultiRegionAccessPointPolicyInput AWS API Documentation
+    #
+    class PutMultiRegionAccessPointPolicyInput < Struct.new(
+      :name,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutMultiRegionAccessPointPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         client_token: "MultiRegionAccessPointClientToken", # required
+    #         details: { # required
+    #           name: "MultiRegionAccessPointName", # required
+    #           policy: "Policy", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   An idempotency token used to identify the request and guarantee that
+    #   requests are unique.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A container element containing the details of the policy for the
+    #   Multi-Region Access Point.
+    #   @return [Types::PutMultiRegionAccessPointPolicyInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutMultiRegionAccessPointPolicyRequest AWS API Documentation
+    #
+    class PutMultiRegionAccessPointPolicyRequest < Struct.new(
+      :account_id,
+      :client_token,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_token_arn
+    #   The request token associated with the request. You can use this
+    #   token with [DescribeMultiRegionAccessPointOperation][1] to determine
+    #   the status of asynchronous requests.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutMultiRegionAccessPointPolicyResult AWS API Documentation
+    #
+    class PutMultiRegionAccessPointPolicyResult < Struct.new(
+      :request_token_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutPublicAccessBlockRequest
     #   data as a hash:
     #
@@ -4033,12 +4878,12 @@ module Aws::S3Control
     #
     # @!attribute [rw] public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to the
-    #   specified account.
+    #   specified Amazon Web Services account.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @!attribute [rw] account_id
-    #   The account ID for the account whose `PublicAccessBlock`
-    #   configuration you want to set.
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutPublicAccessBlockRequest AWS API Documentation
@@ -4190,6 +5035,48 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationTaggingResult AWS API Documentation
     #
     class PutStorageLensConfigurationTaggingResult < Aws::EmptyStructure; end
+
+    # A Region that supports a Multi-Region Access Point as well as the
+    # associated bucket for the Region.
+    #
+    # @note When making an API call, you may pass Region
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the associated bucket for the Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/Region AWS API Documentation
+    #
+    class Region < Struct.new(
+      :bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A combination of a bucket and Region that's part of a Multi-Region
+    # Access Point.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The name of the Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/RegionReport AWS API Documentation
+    #
+    class RegionReport < Struct.new(
+      :bucket,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The container for the regional bucket.
     #
@@ -5368,7 +6255,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -5417,7 +6305,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id

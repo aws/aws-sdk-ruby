@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-09-02)
+------------------
+
+* Feature - Updates service API, documentation, and paginators to support multi-region access points from Amazon S3.
+
 1.22.0 (2021-09-01)
 ------------------
 

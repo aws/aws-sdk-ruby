@@ -102,6 +102,7 @@ module Aws::ACMPCA
     MalformedCertificateException = Shapes::StructureShape.new(name: 'MalformedCertificateException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OcspConfiguration = Shapes::StructureShape.new(name: 'OcspConfiguration')
     OtherName = Shapes::StructureShape.new(name: 'OtherName')
     PermanentDeletionTimeInDays = Shapes::IntegerShape.new(name: 'PermanentDeletionTimeInDays')
     Permission = Shapes::StructureShape.new(name: 'Permission')
@@ -424,6 +425,10 @@ module Aws::ACMPCA
     MalformedCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     MalformedCertificateException.struct_class = Types::MalformedCertificateException
 
+    OcspConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled", metadata: {"box"=>true}))
+    OcspConfiguration.add_member(:ocsp_custom_cname, Shapes::ShapeRef.new(shape: String253, location_name: "OcspCustomCname"))
+    OcspConfiguration.struct_class = Types::OcspConfiguration
+
     OtherName.add_member(:type_id, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, required: true, location_name: "TypeId"))
     OtherName.add_member(:value, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "Value"))
     OtherName.struct_class = Types::OtherName
@@ -474,6 +479,7 @@ module Aws::ACMPCA
     RestoreCertificateAuthorityRequest.struct_class = Types::RestoreCertificateAuthorityRequest
 
     RevocationConfiguration.add_member(:crl_configuration, Shapes::ShapeRef.new(shape: CrlConfiguration, location_name: "CrlConfiguration"))
+    RevocationConfiguration.add_member(:ocsp_configuration, Shapes::ShapeRef.new(shape: OcspConfiguration, location_name: "OcspConfiguration"))
     RevocationConfiguration.struct_class = Types::RevocationConfiguration
 
     RevokeCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))

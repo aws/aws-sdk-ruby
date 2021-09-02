@@ -18,6 +18,7 @@ module Aws::FSx
     ActiveDirectoryError = Shapes::StructureShape.new(name: 'ActiveDirectoryError')
     ActiveDirectoryErrorType = Shapes::StringShape.new(name: 'ActiveDirectoryErrorType')
     ActiveDirectoryFullyQualifiedName = Shapes::StringShape.new(name: 'ActiveDirectoryFullyQualifiedName')
+    AdminPassword = Shapes::StringShape.new(name: 'AdminPassword')
     AdministrativeAction = Shapes::StructureShape.new(name: 'AdministrativeAction')
     AdministrativeActionFailureDetails = Shapes::StructureShape.new(name: 'AdministrativeActionFailureDetails')
     AdministrativeActionType = Shapes::StringShape.new(name: 'AdministrativeActionType')
@@ -48,6 +49,7 @@ module Aws::FSx
     CancelDataRepositoryTaskResponse = Shapes::StructureShape.new(name: 'CancelDataRepositoryTaskResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CompletionReport = Shapes::StructureShape.new(name: 'CompletionReport')
+    CoolingPeriod = Shapes::IntegerShape.new(name: 'CoolingPeriod')
     CopyBackupRequest = Shapes::StructureShape.new(name: 'CopyBackupRequest')
     CopyBackupResponse = Shapes::StructureShape.new(name: 'CopyBackupResponse')
     CreateBackupRequest = Shapes::StructureShape.new(name: 'CreateBackupRequest')
@@ -57,9 +59,18 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupRequest')
     CreateFileSystemFromBackupResponse = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupResponse')
     CreateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemLustreConfiguration')
+    CreateFileSystemOntapConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemOntapConfiguration')
     CreateFileSystemRequest = Shapes::StructureShape.new(name: 'CreateFileSystemRequest')
     CreateFileSystemResponse = Shapes::StructureShape.new(name: 'CreateFileSystemResponse')
     CreateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemWindowsConfiguration')
+    CreateOntapVolumeConfiguration = Shapes::StructureShape.new(name: 'CreateOntapVolumeConfiguration')
+    CreateStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachineRequest')
+    CreateStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachineResponse')
+    CreateSvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'CreateSvmActiveDirectoryConfiguration')
+    CreateVolumeFromBackupRequest = Shapes::StructureShape.new(name: 'CreateVolumeFromBackupRequest')
+    CreateVolumeFromBackupResponse = Shapes::StructureShape.new(name: 'CreateVolumeFromBackupResponse')
+    CreateVolumeRequest = Shapes::StructureShape.new(name: 'CreateVolumeRequest')
+    CreateVolumeResponse = Shapes::StructureShape.new(name: 'CreateVolumeResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
     DNSName = Shapes::StringShape.new(name: 'DNSName')
     DailyTime = Shapes::StringShape.new(name: 'DailyTime')
@@ -91,6 +102,12 @@ module Aws::FSx
     DeleteFileSystemResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemResponse')
     DeleteFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemWindowsConfiguration')
     DeleteFileSystemWindowsResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemWindowsResponse')
+    DeleteStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachineRequest')
+    DeleteStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachineResponse')
+    DeleteVolumeOntapConfiguration = Shapes::StructureShape.new(name: 'DeleteVolumeOntapConfiguration')
+    DeleteVolumeOntapResponse = Shapes::StructureShape.new(name: 'DeleteVolumeOntapResponse')
+    DeleteVolumeRequest = Shapes::StructureShape.new(name: 'DeleteVolumeRequest')
+    DeleteVolumeResponse = Shapes::StructureShape.new(name: 'DeleteVolumeResponse')
     DescribeBackupsRequest = Shapes::StructureShape.new(name: 'DescribeBackupsRequest')
     DescribeBackupsResponse = Shapes::StructureShape.new(name: 'DescribeBackupsResponse')
     DescribeDataRepositoryTasksRequest = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksRequest')
@@ -99,11 +116,17 @@ module Aws::FSx
     DescribeFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesResponse')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
     DescribeFileSystemsResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemsResponse')
+    DescribeStorageVirtualMachinesRequest = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinesRequest')
+    DescribeStorageVirtualMachinesResponse = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinesResponse')
+    DescribeVolumesRequest = Shapes::StructureShape.new(name: 'DescribeVolumesRequest')
+    DescribeVolumesResponse = Shapes::StructureShape.new(name: 'DescribeVolumesResponse')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryPassword = Shapes::StringShape.new(name: 'DirectoryPassword')
     DirectoryUserName = Shapes::StringShape.new(name: 'DirectoryUserName')
     DisassociateFileSystemAliasesRequest = Shapes::StructureShape.new(name: 'DisassociateFileSystemAliasesRequest')
     DisassociateFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'DisassociateFileSystemAliasesResponse')
+    DiskIopsConfiguration = Shapes::StructureShape.new(name: 'DiskIopsConfiguration')
+    DiskIopsConfigurationMode = Shapes::StringShape.new(name: 'DiskIopsConfigurationMode')
     DnsIps = Shapes::ListShape.new(name: 'DnsIps')
     DriveCacheType = Shapes::StringShape.new(name: 'DriveCacheType')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
@@ -111,6 +134,8 @@ module Aws::FSx
     FailedCount = Shapes::IntegerShape.new(name: 'FailedCount')
     FileSystem = Shapes::StructureShape.new(name: 'FileSystem')
     FileSystemAdministratorsGroupName = Shapes::StringShape.new(name: 'FileSystemAdministratorsGroupName')
+    FileSystemEndpoint = Shapes::StructureShape.new(name: 'FileSystemEndpoint')
+    FileSystemEndpoints = Shapes::StructureShape.new(name: 'FileSystemEndpoints')
     FileSystemFailureDetails = Shapes::StructureShape.new(name: 'FileSystemFailureDetails')
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
     FileSystemIds = Shapes::ListShape.new(name: 'FileSystemIds')
@@ -126,6 +151,7 @@ module Aws::FSx
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     Filters = Shapes::ListShape.new(name: 'Filters')
     Flag = Shapes::BooleanShape.new(name: 'Flag')
+    FlexCacheEndpointType = Shapes::StringShape.new(name: 'FlexCacheEndpointType')
     GeneralARN = Shapes::StringShape.new(name: 'GeneralARN')
     IncompatibleParameterError = Shapes::StructureShape.new(name: 'IncompatibleParameterError')
     IncompatibleRegionForMultiAZ = Shapes::StructureShape.new(name: 'IncompatibleRegionForMultiAZ')
@@ -137,9 +163,13 @@ module Aws::FSx
     InvalidPerUnitStorageThroughput = Shapes::StructureShape.new(name: 'InvalidPerUnitStorageThroughput')
     InvalidRegion = Shapes::StructureShape.new(name: 'InvalidRegion')
     InvalidSourceKmsKey = Shapes::StructureShape.new(name: 'InvalidSourceKmsKey')
+    Iops = Shapes::IntegerShape.new(name: 'Iops')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
+    IpAddressRange = Shapes::StringShape.new(name: 'IpAddressRange')
+    JunctionPath = Shapes::StringShape.new(name: 'JunctionPath')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
+    LifecycleTransitionReason = Shapes::StructureShape.new(name: 'LifecycleTransitionReason')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LustreDeploymentType = Shapes::StringShape.new(name: 'LustreDeploymentType')
@@ -149,10 +179,17 @@ module Aws::FSx
     Megabytes = Shapes::IntegerShape.new(name: 'Megabytes')
     MegabytesPerSecond = Shapes::IntegerShape.new(name: 'MegabytesPerSecond')
     MissingFileSystemConfiguration = Shapes::StructureShape.new(name: 'MissingFileSystemConfiguration')
+    MissingVolumeConfiguration = Shapes::StructureShape.new(name: 'MissingVolumeConfiguration')
+    NetBiosAlias = Shapes::StringShape.new(name: 'NetBiosAlias')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceIds = Shapes::ListShape.new(name: 'NetworkInterfaceIds')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotServiceResourceError = Shapes::StructureShape.new(name: 'NotServiceResourceError')
+    OntapDeploymentType = Shapes::StringShape.new(name: 'OntapDeploymentType')
+    OntapEndpointIpAddresses = Shapes::ListShape.new(name: 'OntapEndpointIpAddresses')
+    OntapFileSystemConfiguration = Shapes::StructureShape.new(name: 'OntapFileSystemConfiguration')
+    OntapVolumeConfiguration = Shapes::StructureShape.new(name: 'OntapVolumeConfiguration')
+    OntapVolumeType = Shapes::StringShape.new(name: 'OntapVolumeType')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
     PerUnitStorageThroughput = Shapes::IntegerShape.new(name: 'PerUnitStorageThroughput')
@@ -164,8 +201,12 @@ module Aws::FSx
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceDoesNotSupportTagging = Shapes::StructureShape.new(name: 'ResourceDoesNotSupportTagging')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RouteTableId = Shapes::StringShape.new(name: 'RouteTableId')
+    RouteTableIds = Shapes::ListShape.new(name: 'RouteTableIds')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    SecurityStyle = Shapes::StringShape.new(name: 'SecurityStyle')
     SelfManagedActiveDirectoryAttributes = Shapes::StructureShape.new(name: 'SelfManagedActiveDirectoryAttributes')
     SelfManagedActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'SelfManagedActiveDirectoryConfiguration')
     SelfManagedActiveDirectoryConfigurationUpdates = Shapes::StructureShape.new(name: 'SelfManagedActiveDirectoryConfigurationUpdates')
@@ -177,9 +218,26 @@ module Aws::FSx
     Status = Shapes::StringShape.new(name: 'Status')
     StorageCapacity = Shapes::IntegerShape.new(name: 'StorageCapacity')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
+    StorageVirtualMachine = Shapes::StructureShape.new(name: 'StorageVirtualMachine')
+    StorageVirtualMachineFilter = Shapes::StructureShape.new(name: 'StorageVirtualMachineFilter')
+    StorageVirtualMachineFilterName = Shapes::StringShape.new(name: 'StorageVirtualMachineFilterName')
+    StorageVirtualMachineFilterValue = Shapes::StringShape.new(name: 'StorageVirtualMachineFilterValue')
+    StorageVirtualMachineFilterValues = Shapes::ListShape.new(name: 'StorageVirtualMachineFilterValues')
+    StorageVirtualMachineFilters = Shapes::ListShape.new(name: 'StorageVirtualMachineFilters')
+    StorageVirtualMachineId = Shapes::StringShape.new(name: 'StorageVirtualMachineId')
+    StorageVirtualMachineIds = Shapes::ListShape.new(name: 'StorageVirtualMachineIds')
+    StorageVirtualMachineLifecycle = Shapes::StringShape.new(name: 'StorageVirtualMachineLifecycle')
+    StorageVirtualMachineName = Shapes::StringShape.new(name: 'StorageVirtualMachineName')
+    StorageVirtualMachineNotFound = Shapes::StructureShape.new(name: 'StorageVirtualMachineNotFound')
+    StorageVirtualMachineRootVolumeSecurityStyle = Shapes::StringShape.new(name: 'StorageVirtualMachineRootVolumeSecurityStyle')
+    StorageVirtualMachineSubtype = Shapes::StringShape.new(name: 'StorageVirtualMachineSubtype')
+    StorageVirtualMachines = Shapes::ListShape.new(name: 'StorageVirtualMachines')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     SucceededCount = Shapes::IntegerShape.new(name: 'SucceededCount')
+    SvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'SvmActiveDirectoryConfiguration')
+    SvmEndpoint = Shapes::StructureShape.new(name: 'SvmEndpoint')
+    SvmEndpoints = Shapes::StructureShape.new(name: 'SvmEndpoints')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -189,14 +247,38 @@ module Aws::FSx
     Tags = Shapes::ListShape.new(name: 'Tags')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskIds = Shapes::ListShape.new(name: 'TaskIds')
+    TieringPolicy = Shapes::StructureShape.new(name: 'TieringPolicy')
+    TieringPolicyName = Shapes::StringShape.new(name: 'TieringPolicyName')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
+    UUID = Shapes::StringShape.new(name: 'UUID')
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemLustreConfiguration')
+    UpdateFileSystemOntapConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemOntapConfiguration')
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
     UpdateFileSystemResponse = Shapes::StructureShape.new(name: 'UpdateFileSystemResponse')
     UpdateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemWindowsConfiguration')
+    UpdateOntapVolumeConfiguration = Shapes::StructureShape.new(name: 'UpdateOntapVolumeConfiguration')
+    UpdateStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachineRequest')
+    UpdateStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachineResponse')
+    UpdateSvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'UpdateSvmActiveDirectoryConfiguration')
+    UpdateVolumeRequest = Shapes::StructureShape.new(name: 'UpdateVolumeRequest')
+    UpdateVolumeResponse = Shapes::StructureShape.new(name: 'UpdateVolumeResponse')
+    Volume = Shapes::StructureShape.new(name: 'Volume')
+    VolumeCapacity = Shapes::IntegerShape.new(name: 'VolumeCapacity')
+    VolumeFilter = Shapes::StructureShape.new(name: 'VolumeFilter')
+    VolumeFilterName = Shapes::StringShape.new(name: 'VolumeFilterName')
+    VolumeFilterValue = Shapes::StringShape.new(name: 'VolumeFilterValue')
+    VolumeFilterValues = Shapes::ListShape.new(name: 'VolumeFilterValues')
+    VolumeFilters = Shapes::ListShape.new(name: 'VolumeFilters')
+    VolumeId = Shapes::StringShape.new(name: 'VolumeId')
+    VolumeIds = Shapes::ListShape.new(name: 'VolumeIds')
+    VolumeLifecycle = Shapes::StringShape.new(name: 'VolumeLifecycle')
+    VolumeName = Shapes::StringShape.new(name: 'VolumeName')
+    VolumeNotFound = Shapes::StructureShape.new(name: 'VolumeNotFound')
+    VolumeType = Shapes::StringShape.new(name: 'VolumeType')
+    Volumes = Shapes::ListShape.new(name: 'Volumes')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     WeeklyTime = Shapes::StringShape.new(name: 'WeeklyTime')
     WindowsAccessAuditLogLevel = Shapes::StringShape.new(name: 'WindowsAccessAuditLogLevel')
@@ -221,6 +303,7 @@ module Aws::FSx
     AdministrativeAction.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     AdministrativeAction.add_member(:target_file_system_values, Shapes::ShapeRef.new(shape: FileSystem, location_name: "TargetFileSystemValues"))
     AdministrativeAction.add_member(:failure_details, Shapes::ShapeRef.new(shape: AdministrativeActionFailureDetails, location_name: "FailureDetails"))
+    AdministrativeAction.add_member(:target_volume_values, Shapes::ShapeRef.new(shape: Volume, location_name: "TargetVolumeValues"))
     AdministrativeAction.struct_class = Types::AdministrativeAction
 
     AdministrativeActionFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -258,6 +341,8 @@ module Aws::FSx
     Backup.add_member(:owner_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
     Backup.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackupId"))
     Backup.add_member(:source_backup_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceBackupRegion"))
+    Backup.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    Backup.add_member(:volume, Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
     Backup.struct_class = Types::Backup
 
     BackupBeingCopied.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -308,9 +393,10 @@ module Aws::FSx
     CopyBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
     CopyBackupResponse.struct_class = Types::CopyBackupResponse
 
-    CreateBackupRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    CreateBackupRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
     CreateBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateBackupRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     CreateBackupRequest.struct_class = Types::CreateBackupRequest
 
     CreateBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
@@ -355,6 +441,18 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
+    CreateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    CreateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    CreateFileSystemOntapConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: OntapDeploymentType, required: true, location_name: "DeploymentType"))
+    CreateFileSystemOntapConfiguration.add_member(:endpoint_ip_address_range, Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    CreateFileSystemOntapConfiguration.add_member(:fsx_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
+    CreateFileSystemOntapConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    CreateFileSystemOntapConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
+    CreateFileSystemOntapConfiguration.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
+    CreateFileSystemOntapConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, required: true, location_name: "ThroughputCapacity"))
+    CreateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileSystemOntapConfiguration.struct_class = Types::CreateFileSystemOntapConfiguration
+
     CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateFileSystemRequest.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FileSystemType, required: true, location_name: "FileSystemType"))
     CreateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, required: true, location_name: "StorageCapacity"))
@@ -365,6 +463,7 @@ module Aws::FSx
     CreateFileSystemRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     CreateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
+    CreateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
     CreateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -382,6 +481,50 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases"))
     CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
+
+    CreateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, required: true, location_name: "JunctionPath"))
+    CreateOntapVolumeConfiguration.add_member(:security_style, Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
+    CreateOntapVolumeConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: VolumeCapacity, required: true, location_name: "SizeInMegabytes"))
+    CreateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, Shapes::ShapeRef.new(shape: Flag, required: true, location_name: "StorageEfficiencyEnabled"))
+    CreateOntapVolumeConfiguration.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
+    CreateOntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
+    CreateOntapVolumeConfiguration.struct_class = Types::CreateOntapVolumeConfiguration
+
+    CreateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: CreateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
+    CreateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateStorageVirtualMachineRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    CreateStorageVirtualMachineRequest.add_member(:name, Shapes::ShapeRef.new(shape: StorageVirtualMachineName, required: true, location_name: "Name"))
+    CreateStorageVirtualMachineRequest.add_member(:svm_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "SvmAdminPassword"))
+    CreateStorageVirtualMachineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateStorageVirtualMachineRequest.add_member(:root_volume_security_style, Shapes::ShapeRef.new(shape: StorageVirtualMachineRootVolumeSecurityStyle, location_name: "RootVolumeSecurityStyle"))
+    CreateStorageVirtualMachineRequest.struct_class = Types::CreateStorageVirtualMachineRequest
+
+    CreateStorageVirtualMachineResponse.add_member(:storage_virtual_machine, Shapes::ShapeRef.new(shape: StorageVirtualMachine, location_name: "StorageVirtualMachine"))
+    CreateStorageVirtualMachineResponse.struct_class = Types::CreateStorageVirtualMachineResponse
+
+    CreateSvmActiveDirectoryConfiguration.add_member(:net_bios_name, Shapes::ShapeRef.new(shape: NetBiosAlias, required: true, location_name: "NetBiosName"))
+    CreateSvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfiguration, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    CreateSvmActiveDirectoryConfiguration.struct_class = Types::CreateSvmActiveDirectoryConfiguration
+
+    CreateVolumeFromBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
+    CreateVolumeFromBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateVolumeFromBackupRequest.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, required: true, location_name: "Name"))
+    CreateVolumeFromBackupRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    CreateVolumeFromBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateVolumeFromBackupRequest.struct_class = Types::CreateVolumeFromBackupRequest
+
+    CreateVolumeFromBackupResponse.add_member(:volume, Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
+    CreateVolumeFromBackupResponse.struct_class = Types::CreateVolumeFromBackupResponse
+
+    CreateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, required: true, location_name: "VolumeType"))
+    CreateVolumeRequest.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, required: true, location_name: "Name"))
+    CreateVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    CreateVolumeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
+
+    CreateVolumeResponse.add_member(:volume, Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
+    CreateVolumeResponse.struct_class = Types::CreateVolumeResponse
 
     DataRepositoryConfiguration.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
     DataRepositoryConfiguration.add_member(:import_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ImportPath"))
@@ -475,6 +618,32 @@ module Aws::FSx
     DeleteFileSystemWindowsResponse.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemWindowsResponse.struct_class = Types::DeleteFileSystemWindowsResponse
 
+    DeleteStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
+    DeleteStorageVirtualMachineRequest.struct_class = Types::DeleteStorageVirtualMachineRequest
+
+    DeleteStorageVirtualMachineResponse.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    DeleteStorageVirtualMachineResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: StorageVirtualMachineLifecycle, location_name: "Lifecycle"))
+    DeleteStorageVirtualMachineResponse.struct_class = Types::DeleteStorageVirtualMachineResponse
+
+    DeleteVolumeOntapConfiguration.add_member(:skip_final_backup, Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
+    DeleteVolumeOntapConfiguration.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteVolumeOntapConfiguration.struct_class = Types::DeleteVolumeOntapConfiguration
+
+    DeleteVolumeOntapResponse.add_member(:final_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
+    DeleteVolumeOntapResponse.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteVolumeOntapResponse.struct_class = Types::DeleteVolumeOntapResponse
+
+    DeleteVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    DeleteVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: DeleteVolumeOntapConfiguration, location_name: "OntapConfiguration"))
+    DeleteVolumeRequest.struct_class = Types::DeleteVolumeRequest
+
+    DeleteVolumeResponse.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    DeleteVolumeResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: VolumeLifecycle, location_name: "Lifecycle"))
+    DeleteVolumeResponse.add_member(:ontap_response, Shapes::ShapeRef.new(shape: DeleteVolumeOntapResponse, location_name: "OntapResponse"))
+    DeleteVolumeResponse.struct_class = Types::DeleteVolumeResponse
+
     DescribeBackupsRequest.add_member(:backup_ids, Shapes::ShapeRef.new(shape: BackupIds, location_name: "BackupIds"))
     DescribeBackupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
     DescribeBackupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -514,6 +683,26 @@ module Aws::FSx
     DescribeFileSystemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeFileSystemsResponse.struct_class = Types::DescribeFileSystemsResponse
 
+    DescribeStorageVirtualMachinesRequest.add_member(:storage_virtual_machine_ids, Shapes::ShapeRef.new(shape: StorageVirtualMachineIds, location_name: "StorageVirtualMachineIds"))
+    DescribeStorageVirtualMachinesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StorageVirtualMachineFilters, location_name: "Filters"))
+    DescribeStorageVirtualMachinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeStorageVirtualMachinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStorageVirtualMachinesRequest.struct_class = Types::DescribeStorageVirtualMachinesRequest
+
+    DescribeStorageVirtualMachinesResponse.add_member(:storage_virtual_machines, Shapes::ShapeRef.new(shape: StorageVirtualMachines, location_name: "StorageVirtualMachines"))
+    DescribeStorageVirtualMachinesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStorageVirtualMachinesResponse.struct_class = Types::DescribeStorageVirtualMachinesResponse
+
+    DescribeVolumesRequest.add_member(:volume_ids, Shapes::ShapeRef.new(shape: VolumeIds, location_name: "VolumeIds"))
+    DescribeVolumesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: VolumeFilters, location_name: "Filters"))
+    DescribeVolumesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeVolumesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVolumesRequest.struct_class = Types::DescribeVolumesRequest
+
+    DescribeVolumesResponse.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "Volumes"))
+    DescribeVolumesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeVolumesResponse.struct_class = Types::DescribeVolumesResponse
+
     DisassociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DisassociateFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     DisassociateFileSystemAliasesRequest.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, required: true, location_name: "Aliases"))
@@ -521,6 +710,10 @@ module Aws::FSx
 
     DisassociateFileSystemAliasesResponse.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     DisassociateFileSystemAliasesResponse.struct_class = Types::DisassociateFileSystemAliasesResponse
+
+    DiskIopsConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: DiskIopsConfigurationMode, location_name: "Mode"))
+    DiskIopsConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: Iops, location_name: "Iops"))
+    DiskIopsConfiguration.struct_class = Types::DiskIopsConfiguration
 
     DnsIps.member = Shapes::ShapeRef.new(shape: IpAddress)
 
@@ -542,7 +735,16 @@ module Aws::FSx
     FileSystem.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: WindowsFileSystemConfiguration, location_name: "WindowsConfiguration"))
     FileSystem.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: LustreFileSystemConfiguration, location_name: "LustreConfiguration"))
     FileSystem.add_member(:administrative_actions, Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
+    FileSystem.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: OntapFileSystemConfiguration, location_name: "OntapConfiguration"))
     FileSystem.struct_class = Types::FileSystem
+
+    FileSystemEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
+    FileSystemEndpoint.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    FileSystemEndpoint.struct_class = Types::FileSystemEndpoint
+
+    FileSystemEndpoints.add_member(:intercluster, Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: "Intercluster"))
+    FileSystemEndpoints.add_member(:management, Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: "Management"))
+    FileSystemEndpoints.struct_class = Types::FileSystemEndpoints
 
     FileSystemFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     FileSystemFailureDetails.struct_class = Types::FileSystemFailureDetails
@@ -586,6 +788,7 @@ module Aws::FSx
     InvalidNetworkSettings.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidNetworkSettings.add_member(:invalid_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "InvalidSubnetId"))
     InvalidNetworkSettings.add_member(:invalid_security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "InvalidSecurityGroupId"))
+    InvalidNetworkSettings.add_member(:invalid_route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, location_name: "InvalidRouteTableId"))
     InvalidNetworkSettings.struct_class = Types::InvalidNetworkSettings
 
     InvalidPerUnitStorageThroughput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -596,6 +799,9 @@ module Aws::FSx
 
     InvalidSourceKmsKey.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidSourceKmsKey.struct_class = Types::InvalidSourceKmsKey
+
+    LifecycleTransitionReason.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LifecycleTransitionReason.struct_class = Types::LifecycleTransitionReason
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -621,11 +827,40 @@ module Aws::FSx
     MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     MissingFileSystemConfiguration.struct_class = Types::MissingFileSystemConfiguration
 
+    MissingVolumeConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MissingVolumeConfiguration.struct_class = Types::MissingVolumeConfiguration
+
     NetworkInterfaceIds.member = Shapes::ShapeRef.new(shape: NetworkInterfaceId)
 
     NotServiceResourceError.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     NotServiceResourceError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     NotServiceResourceError.struct_class = Types::NotServiceResourceError
+
+    OntapEndpointIpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
+
+    OntapFileSystemConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    OntapFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    OntapFileSystemConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: OntapDeploymentType, location_name: "DeploymentType"))
+    OntapFileSystemConfiguration.add_member(:endpoint_ip_address_range, Shapes::ShapeRef.new(shape: IpAddressRange, location_name: "EndpointIpAddressRange"))
+    OntapFileSystemConfiguration.add_member(:endpoints, Shapes::ShapeRef.new(shape: FileSystemEndpoints, location_name: "Endpoints"))
+    OntapFileSystemConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    OntapFileSystemConfiguration.add_member(:preferred_subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "PreferredSubnetId"))
+    OntapFileSystemConfiguration.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RouteTableIds"))
+    OntapFileSystemConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    OntapFileSystemConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    OntapFileSystemConfiguration.struct_class = Types::OntapFileSystemConfiguration
+
+    OntapVolumeConfiguration.add_member(:flex_cache_endpoint_type, Shapes::ShapeRef.new(shape: FlexCacheEndpointType, location_name: "FlexCacheEndpointType"))
+    OntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
+    OntapVolumeConfiguration.add_member(:security_style, Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
+    OntapVolumeConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: VolumeCapacity, location_name: "SizeInMegabytes"))
+    OntapVolumeConfiguration.add_member(:storage_efficiency_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "StorageEfficiencyEnabled"))
+    OntapVolumeConfiguration.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    OntapVolumeConfiguration.add_member(:storage_virtual_machine_root, Shapes::ShapeRef.new(shape: Flag, location_name: "StorageVirtualMachineRoot"))
+    OntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
+    OntapVolumeConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    OntapVolumeConfiguration.add_member(:ontap_volume_type, Shapes::ShapeRef.new(shape: OntapVolumeType, location_name: "OntapVolumeType"))
+    OntapVolumeConfiguration.struct_class = Types::OntapVolumeConfiguration
 
     ResourceDoesNotSupportTagging.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ResourceDoesNotSupportTagging.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -634,6 +869,8 @@ module Aws::FSx
     ResourceNotFound.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
+
+    RouteTableIds.member = Shapes::ShapeRef.new(shape: RouteTableId)
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -665,7 +902,51 @@ module Aws::FSx
     SourceBackupUnavailable.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
     SourceBackupUnavailable.struct_class = Types::SourceBackupUnavailable
 
+    StorageVirtualMachine.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: SvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
+    StorageVirtualMachine.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    StorageVirtualMachine.add_member(:endpoints, Shapes::ShapeRef.new(shape: SvmEndpoints, location_name: "Endpoints"))
+    StorageVirtualMachine.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    StorageVirtualMachine.add_member(:lifecycle, Shapes::ShapeRef.new(shape: StorageVirtualMachineLifecycle, location_name: "Lifecycle"))
+    StorageVirtualMachine.add_member(:name, Shapes::ShapeRef.new(shape: StorageVirtualMachineName, location_name: "Name"))
+    StorageVirtualMachine.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    StorageVirtualMachine.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, location_name: "StorageVirtualMachineId"))
+    StorageVirtualMachine.add_member(:subtype, Shapes::ShapeRef.new(shape: StorageVirtualMachineSubtype, location_name: "Subtype"))
+    StorageVirtualMachine.add_member(:uuid, Shapes::ShapeRef.new(shape: UUID, location_name: "UUID"))
+    StorageVirtualMachine.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StorageVirtualMachine.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    StorageVirtualMachine.add_member(:root_volume_security_style, Shapes::ShapeRef.new(shape: StorageVirtualMachineRootVolumeSecurityStyle, location_name: "RootVolumeSecurityStyle"))
+    StorageVirtualMachine.struct_class = Types::StorageVirtualMachine
+
+    StorageVirtualMachineFilter.add_member(:name, Shapes::ShapeRef.new(shape: StorageVirtualMachineFilterName, location_name: "Name"))
+    StorageVirtualMachineFilter.add_member(:values, Shapes::ShapeRef.new(shape: StorageVirtualMachineFilterValues, location_name: "Values"))
+    StorageVirtualMachineFilter.struct_class = Types::StorageVirtualMachineFilter
+
+    StorageVirtualMachineFilterValues.member = Shapes::ShapeRef.new(shape: StorageVirtualMachineFilterValue)
+
+    StorageVirtualMachineFilters.member = Shapes::ShapeRef.new(shape: StorageVirtualMachineFilter)
+
+    StorageVirtualMachineIds.member = Shapes::ShapeRef.new(shape: StorageVirtualMachineId)
+
+    StorageVirtualMachineNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    StorageVirtualMachineNotFound.struct_class = Types::StorageVirtualMachineNotFound
+
+    StorageVirtualMachines.member = Shapes::ShapeRef.new(shape: StorageVirtualMachine)
+
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    SvmActiveDirectoryConfiguration.add_member(:net_bios_name, Shapes::ShapeRef.new(shape: NetBiosAlias, location_name: "NetBiosName"))
+    SvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryAttributes, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    SvmActiveDirectoryConfiguration.struct_class = Types::SvmActiveDirectoryConfiguration
+
+    SvmEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
+    SvmEndpoint.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    SvmEndpoint.struct_class = Types::SvmEndpoint
+
+    SvmEndpoints.add_member(:iscsi, Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Iscsi"))
+    SvmEndpoints.add_member(:management, Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Management"))
+    SvmEndpoints.add_member(:nfs, Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Nfs"))
+    SvmEndpoints.add_member(:smb, Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Smb"))
+    SvmEndpoints.struct_class = Types::SvmEndpoints
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -683,6 +964,10 @@ module Aws::FSx
 
     TaskIds.member = Shapes::ShapeRef.new(shape: TaskId)
 
+    TieringPolicy.add_member(:cooling_period, Shapes::ShapeRef.new(shape: CoolingPeriod, location_name: "CoolingPeriod"))
+    TieringPolicy.add_member(:name, Shapes::ShapeRef.new(shape: TieringPolicyName, location_name: "Name"))
+    TieringPolicy.struct_class = Types::TieringPolicy
+
     UnsupportedOperation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UnsupportedOperation.struct_class = Types::UnsupportedOperation
 
@@ -699,11 +984,18 @@ module Aws::FSx
     UpdateFileSystemLustreConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
     UpdateFileSystemLustreConfiguration.struct_class = Types::UpdateFileSystemLustreConfiguration
 
+    UpdateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    UpdateFileSystemOntapConfiguration.add_member(:fsx_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
+    UpdateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileSystemOntapConfiguration.struct_class = Types::UpdateFileSystemOntapConfiguration
+
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     UpdateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
     UpdateFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     UpdateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
+    UpdateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
     UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
 
     UpdateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -716,6 +1008,60 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     UpdateFileSystemWindowsConfiguration.struct_class = Types::UpdateFileSystemWindowsConfiguration
+
+    UpdateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
+    UpdateOntapVolumeConfiguration.add_member(:security_style, Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
+    UpdateOntapVolumeConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: VolumeCapacity, location_name: "SizeInMegabytes"))
+    UpdateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "StorageEfficiencyEnabled"))
+    UpdateOntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
+    UpdateOntapVolumeConfiguration.struct_class = Types::UpdateOntapVolumeConfiguration
+
+    UpdateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: UpdateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
+    UpdateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
+    UpdateStorageVirtualMachineRequest.add_member(:svm_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "SvmAdminPassword"))
+    UpdateStorageVirtualMachineRequest.struct_class = Types::UpdateStorageVirtualMachineRequest
+
+    UpdateStorageVirtualMachineResponse.add_member(:storage_virtual_machine, Shapes::ShapeRef.new(shape: StorageVirtualMachine, location_name: "StorageVirtualMachine"))
+    UpdateStorageVirtualMachineResponse.struct_class = Types::UpdateStorageVirtualMachineResponse
+
+    UpdateSvmActiveDirectoryConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
+    UpdateSvmActiveDirectoryConfiguration.struct_class = Types::UpdateSvmActiveDirectoryConfiguration
+
+    UpdateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    UpdateVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    UpdateVolumeRequest.struct_class = Types::UpdateVolumeRequest
+
+    UpdateVolumeResponse.add_member(:volume, Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
+    UpdateVolumeResponse.struct_class = Types::UpdateVolumeResponse
+
+    Volume.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    Volume.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    Volume.add_member(:lifecycle, Shapes::ShapeRef.new(shape: VolumeLifecycle, location_name: "Lifecycle"))
+    Volume.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, location_name: "Name"))
+    Volume.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: OntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    Volume.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    Volume.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    Volume.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
+    Volume.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    Volume.struct_class = Types::Volume
+
+    VolumeFilter.add_member(:name, Shapes::ShapeRef.new(shape: VolumeFilterName, location_name: "Name"))
+    VolumeFilter.add_member(:values, Shapes::ShapeRef.new(shape: VolumeFilterValues, location_name: "Values"))
+    VolumeFilter.struct_class = Types::VolumeFilter
+
+    VolumeFilterValues.member = Shapes::ShapeRef.new(shape: VolumeFilterValue)
+
+    VolumeFilters.member = Shapes::ShapeRef.new(shape: VolumeFilter)
+
+    VolumeIds.member = Shapes::ShapeRef.new(shape: VolumeId)
+
+    VolumeNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    VolumeNotFound.struct_class = Types::VolumeNotFound
+
+    Volumes.member = Shapes::ShapeRef.new(shape: Volume)
 
     WindowsAuditLogConfiguration.add_member(:file_access_audit_log_level, Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, required: true, location_name: "FileAccessAuditLogLevel"))
     WindowsAuditLogConfiguration.add_member(:file_share_access_audit_log_level, Shapes::ShapeRef.new(shape: WindowsAccessAuditLogLevel, required: true, location_name: "FileShareAccessAuditLogLevel"))
@@ -814,6 +1160,7 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
         o.errors << Shapes::ShapeRef.new(shape: BackupInProgress)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
@@ -870,6 +1217,53 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
       end)
 
+      api.add_operation(:create_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStorageVirtualMachine"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateStorageVirtualMachineRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateStorageVirtualMachineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ActiveDirectoryError)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
+      api.add_operation(:create_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: MissingVolumeConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
+      api.add_operation(:create_volume_from_backup, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVolumeFromBackup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVolumeFromBackupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVolumeFromBackupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: MissingVolumeConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+      end)
+
       api.add_operation(:delete_backup, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBackup"
         o.http_method = "POST"
@@ -898,6 +1292,30 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:delete_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStorageVirtualMachine"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStorageVirtualMachineRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteStorageVirtualMachineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+      end)
+
+      api.add_operation(:delete_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+      end)
+
       api.add_operation(:describe_backups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBackups"
         o.http_method = "POST"
@@ -906,6 +1324,7 @@ module Aws::FSx
         o.output = Shapes::ShapeRef.new(shape: DescribeBackupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o[:pager] = Aws::Pager.new(
@@ -968,6 +1387,40 @@ module Aws::FSx
         )
       end)
 
+      api.add_operation(:describe_storage_virtual_machines, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStorageVirtualMachines"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStorageVirtualMachinesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStorageVirtualMachinesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_volumes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVolumes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVolumesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVolumesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:disassociate_file_system_aliases, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFileSystemAliases"
         o.http_method = "POST"
@@ -990,6 +1443,12 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: NotServiceResourceError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceDoesNotSupportTagging)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1031,6 +1490,32 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+      end)
+
+      api.add_operation(:update_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStorageVirtualMachine"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStorageVirtualMachineRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStorageVirtualMachineResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: StorageVirtualMachineNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
+      api.add_operation(:update_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: MissingVolumeConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
       end)
     end
 

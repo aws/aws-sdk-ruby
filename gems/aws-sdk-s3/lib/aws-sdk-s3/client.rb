@@ -327,6 +327,11 @@ module Aws::S3
     #       in the future.
     #
     #
+    #   @option options [Boolean] :s3_disable_multiregion_access_points (false)
+    #     When set to `false` this will option will raise errors when multi-region
+    #     access point ARNs are used.  Multi-region access points can potentially
+    #     result in cross region requests.
+    #
     #   @option options [String] :s3_us_east_1_regional_endpoint ("legacy")
     #     Pass in `regional` to enable the `us-east-1` regional endpoint.
     #     Defaults to `legacy` mode which uses the global endpoint.
@@ -14047,7 +14052,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

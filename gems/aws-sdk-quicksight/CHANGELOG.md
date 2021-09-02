@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-09-02)
+------------------
+
+* Feature - This release adds support for referencing parent datasets as sources in a child dataset.
+
 1.52.0 (2021-09-01)
 ------------------
 

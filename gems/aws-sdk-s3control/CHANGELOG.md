@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-09-02)
+------------------
+
+* Feature - S3 Multi-Region Access Points provide a single global endpoint to access a data set that spans multiple S3 buckets in different AWS Regions.
+
 1.39.0 (2021-09-01)
 ------------------
 

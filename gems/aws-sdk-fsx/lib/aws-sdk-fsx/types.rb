@@ -18,16 +18,16 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] active_directory_id
-    #   The ID of the AWS Managed Microsoft Active Directory instance to
-    #   which the file system is joined.
+    #   The ID of the Amazon Web Services Managed Microsoft Active Directory
+    #   instance to which the file system is joined.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
-    #   identify AWS resources. We require an ARN when you need to specify a
-    #   resource unambiguously across all of AWS. For more information, see
-    #   [Amazon Resource Names (ARNs) and AWS Service Namespaces][1] in the
-    #   *AWS General Reference*.
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -159,6 +159,10 @@ module Aws::FSx
     #   Provides information about a failed administrative action.
     #   @return [Types::AdministrativeActionFailureDetails]
     #
+    # @!attribute [rw] target_volume_values
+    #   Describes an Amazon FSx for NetApp ONTAP volume.
+    #   @return [Types::Volume]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeAction AWS API Documentation
     #
     class AdministrativeAction < Struct.new(
@@ -167,7 +171,8 @@ module Aws::FSx
       :request_time,
       :status,
       :target_file_system_values,
-      :failure_details)
+      :failure_details,
+      :target_volume_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -232,7 +237,7 @@ module Aws::FSx
     #   * DELETING - Amazon FSx is disassociating the DNS alias from the
     #     file system and deleting it.
     #
-    #   * DELETE\_FAILED - Amazon FSx was unable to disassocate the DNS
+    #   * DELETE\_FAILED - Amazon FSx was unable to disassociate the DNS
     #     alias from the file system.
     #   @return [String]
     #
@@ -260,8 +265,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -322,7 +327,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # A backup of an Amazon FSx file system.
+    # A backup of an Amazon FSx for Windows File Server or Amazon FSx for
+    # Lustre file system, or of an Amazon FSx for NetApp ONTAP volume.
     #
     # @!attribute [rw] backup_id
     #   The ID of the backup.
@@ -366,8 +372,8 @@ module Aws::FSx
     #   @return [Time]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the backup of the Amazon FSx file system's data at rest.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   backup of the Amazon FSx file system's data at rest.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -389,8 +395,8 @@ module Aws::FSx
     #   @return [Types::ActiveDirectoryBackupAttributes]
     #
     # @!attribute [rw] owner_id
-    #   An AWS account ID. This ID is a 12-digit number that you use to
-    #   construct Amazon Resource Names (ARNs) for resources.
+    #   An Amazon Web Services account ID. This ID is a 12-digit number that
+    #   you use to construct Amazon Resource Names (ARNs) for resources.
     #   @return [String]
     #
     # @!attribute [rw] source_backup_id
@@ -401,6 +407,14 @@ module Aws::FSx
     #   The source Region of the backup. Specifies the Region from where
     #   this backup is copied.
     #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Specifies the resource type that is backed up.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume
+    #   Describes an Amazon FSx for NetApp ONTAP volume.
+    #   @return [Types::Volume]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup AWS API Documentation
     #
@@ -418,7 +432,9 @@ module Aws::FSx
       :directory_information,
       :owner_id,
       :source_backup_id,
-      :source_backup_region)
+      :source_backup_region,
+      :resource_type,
+      :volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -656,8 +672,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -669,22 +685,22 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The source AWS Region of the backup. Specifies the AWS Region from
-    #   which the backup is being copied. The source and destination Regions
-    #   must be in the same AWS partition. If you don't specify a Region,
-    #   it defaults to the Region where the request is sent from (in-Region
-    #   copy).
+    #   The source Amazon Web Services Region of the backup. Specifies the
+    #   Amazon Web Services Region from which the backup is being copied.
+    #   The source and destination Regions must be in the same Amazon Web
+    #   Services partition. If you don't specify a Region, it defaults to
+    #   the Region where the request is sent from (in-Region copy).
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for Amazon FSx for Windows File
-    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
-    #   systems at rest. In either case, if not specified, the Amazon FSx
-    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
-    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
-    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
-    #   Key Management Service API Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   file system's data for Amazon FSx for Windows File Server file
+    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
+    #   for Lustre `PERSISTENT_1` file systems at rest. If not specified,
+    #   the Amazon FSx managed key is used. The Amazon FSx for Lustre
+    #   `SCRATCH_1` and `SCRATCH_2` file systems are always encrypted at
+    #   rest using Amazon FSx managed keys. For more information, see
+    #   [Encrypt][1] in the *Key Management Service API Reference*.
     #
     #
     #
@@ -721,7 +737,8 @@ module Aws::FSx
     end
 
     # @!attribute [rw] backup
-    #   A backup of an Amazon FSx file system.
+    #   A backup of an Amazon FSx for Windows File Server or Amazon FSx for
+    #   Lustre file system, or of an Amazon FSx for NetApp ONTAP volume.
     #   @return [Types::Backup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackupResponse AWS API Documentation
@@ -738,7 +755,7 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         file_system_id: "FileSystemId", # required
+    #         file_system_id: "FileSystemId",
     #         client_request_token: "ClientRequestToken",
     #         tags: [
     #           {
@@ -746,6 +763,7 @@ module Aws::FSx
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         volume_id: "VolumeId",
     #       }
     #
     # @!attribute [rw] file_system_id
@@ -755,8 +773,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   (Optional) A string of up to 64 ASCII characters that Amazon FSx
     #   uses to ensure idempotent creation. This string is automatically
-    #   filled on your behalf when you use the AWS Command Line Interface
-    #   (AWS CLI) or an AWS SDK.
+    #   filled on your behalf when you use the Command Line Interface (CLI)
+    #   or an Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -770,12 +788,17 @@ module Aws::FSx
     #   system tags are copied from the file system to the backup.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] volume_id
+    #   The ID of he FSx for NetApp ONTAP volume to back up.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackupRequest AWS API Documentation
     #
     class CreateBackupRequest < Struct.new(
       :file_system_id,
       :client_request_token,
-      :tags)
+      :tags,
+      :volume_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -849,8 +872,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -950,8 +973,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent creation. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
-    #   AWS SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon
+    #   Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1015,14 +1038,14 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for Amazon FSx for Windows File
-    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
-    #   systems at rest. In either case, if not specified, the Amazon FSx
-    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
-    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
-    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
-    #   Key Management Service API Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   file system's data for Amazon FSx for Windows File Server file
+    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
+    #   for Lustre `PERSISTENT_1` file systems at rest. If not specified,
+    #   the Amazon FSx managed key is used. The Amazon FSx for Lustre
+    #   `SCRATCH_1` and `SCRATCH_2` file systems are always encrypted at
+    #   rest using Amazon FSx managed keys. For more information, see
+    #   [Encrypt][1] in the *Key Management Service API Reference*.
     #
     #
     #
@@ -1146,8 +1169,8 @@ module Aws::FSx
     #
     #   Encryption of data in-transit for `SCRATCH_2` and `PERSISTENT_1`
     #   deployment types is supported when accessed from supported instance
-    #   types in supported AWS Regions. To learn more, [Encrypting Data in
-    #   Transit][3].
+    #   types in supported Amazon Web Services Regions. To learn more,
+    #   [Encrypting Data in Transit][3].
     #
     #
     #
@@ -1275,6 +1298,117 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The ONTAP configuration properties of the FSx for NetApp ONTAP file
+    # system that you are creating.
+    #
+    # @note When making an API call, you may pass CreateFileSystemOntapConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         automatic_backup_retention_days: 1,
+    #         daily_automatic_backup_start_time: "DailyTime",
+    #         deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1
+    #         endpoint_ip_address_range: "IpAddressRange",
+    #         fsx_admin_password: "AdminPassword",
+    #         disk_iops_configuration: {
+    #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #           iops: 1,
+    #         },
+    #         preferred_subnet_id: "SubnetId",
+    #         route_table_ids: ["RouteTableId"],
+    #         throughput_capacity: 1, # required
+    #         weekly_maintenance_start_time: "WeeklyTime",
+    #       }
+    #
+    # @!attribute [rw] automatic_backup_retention_days
+    #   The number of days to retain automatic backups. Setting this to 0
+    #   disables automatic backups. You can retain automatic backups for a
+    #   maximum of 90 days. The default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] daily_automatic_backup_start_time
+    #   A recurring daily time, in the format `HH:MM`. `HH` is the
+    #   zero-padded hour of the day (0-23), and `MM` is the zero-padded
+    #   minute of the hour. For example, `05:00` specifies 5 AM daily.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies the ONTAP file system deployment type to use in creating
+    #   the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_ip_address_range
+    #   Specifies the IP address range in which the endpoints to access your
+    #   file system will be created. By default, Amazon FSx selects an
+    #   unused IP address range for you from the 198.19.* range.
+    #   @return [String]
+    #
+    # @!attribute [rw] fsx_admin_password
+    #   The ONTAP administrative password for the `fsxadmin` user that you
+    #   can use to administer your file system using the ONTAP CLI and REST
+    #   API.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_iops_configuration
+    #   The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file
+    #   system.
+    #   @return [Types::DiskIopsConfiguration]
+    #
+    # @!attribute [rw] preferred_subnet_id
+    #   The ID for a subnet. A *subnet* is a range of IP addresses in your
+    #   virtual private cloud (VPC). For more information, see [VPC and
+    #   Subnets][1] in the *Amazon VPC User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_ids
+    #   Specifies the VPC route tables in which your file system's
+    #   endpoints will be created. You should specify all VPC route tables
+    #   associated with the subnets in which your clients are located. By
+    #   default, Amazon FSx selects your VPC's default route table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] throughput_capacity
+    #   Sustained throughput of an Amazon FSx file system in MBps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] weekly_maintenance_start_time
+    #   A recurring weekly time, in the format `D:HH:MM`.
+    #
+    #   `D` is the day of the week, for which 1 represents Monday and 7
+    #   represents Sunday. For further details, see [the ISO-8601 spec as
+    #   described on Wikipedia][1].
+    #
+    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
+    #   zero-padded minute of the hour.
+    #
+    #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemOntapConfiguration AWS API Documentation
+    #
+    class CreateFileSystemOntapConfiguration < Struct.new(
+      :automatic_backup_retention_days,
+      :daily_automatic_backup_start_time,
+      :deployment_type,
+      :endpoint_ip_address_range,
+      :fsx_admin_password,
+      :disk_iops_configuration,
+      :preferred_subnet_id,
+      :route_table_ids,
+      :throughput_capacity,
+      :weekly_maintenance_start_time)
+      SENSITIVE = [:fsx_admin_password]
+      include Aws::Structure
+    end
+
     # The request object used to create a new Amazon FSx file system.
     #
     # @note When making an API call, you may pass CreateFileSystemRequest
@@ -1282,7 +1416,7 @@ module Aws::FSx
     #
     #       {
     #         client_request_token: "ClientRequestToken",
-    #         file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE
+    #         file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE, ONTAP
     #         storage_capacity: 1, # required
     #         storage_type: "SSD", # accepts SSD, HDD
     #         subnet_ids: ["SubnetId"], # required
@@ -1332,21 +1466,36 @@ module Aws::FSx
     #           drive_cache_type: "NONE", # accepts NONE, READ
     #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
+    #         ontap_configuration: {
+    #           automatic_backup_retention_days: 1,
+    #           daily_automatic_backup_start_time: "DailyTime",
+    #           deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1
+    #           endpoint_ip_address_range: "IpAddressRange",
+    #           fsx_admin_password: "AdminPassword",
+    #           disk_iops_configuration: {
+    #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #             iops: 1,
+    #           },
+    #           preferred_subnet_id: "SubnetId",
+    #           route_table_ids: ["RouteTableId"],
+    #           throughput_capacity: 1, # required
+    #           weekly_maintenance_start_time: "WeeklyTime",
+    #         },
     #       }
     #
     # @!attribute [rw] client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent creation. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
-    #   AWS SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon
+    #   Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   The type of Amazon FSx file system to create, either `WINDOWS` or
-    #   `LUSTRE`.
+    #   The type of Amazon FSx file system to create. Valid values are
+    #   `WINDOWS`, `LUSTRE`, and `ONTAP`.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
@@ -1371,6 +1520,12 @@ module Aws::FSx
     #
     #   * If `StorageType=HDD`, valid values are 2000 GiB - 65,536 GiB (64
     #     TiB).
+    #
+    #   For ONTAP file systems:
+    #
+    #   * Valid values are 1024 GiB - 196,608 GiB (192 TiB).
+    #
+    #   ^
     #   @return [Integer]
     #
     # @!attribute [rw] storage_type
@@ -1378,7 +1533,7 @@ module Aws::FSx
     #   values are `SSD` and `HDD`.
     #
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
-    #     all Windows and Lustre deployment types.
+    #     all Windows, Lustre, and ONTAP deployment types.
     #
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment
@@ -1396,13 +1551,15 @@ module Aws::FSx
     #
     # @!attribute [rw] subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
-    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
-    #   types, provide exactly two subnet IDs, one for the preferred file
-    #   server and one for the standby file server. You specify one of these
-    #   subnets as the preferred subnet using the `WindowsConfiguration >
-    #   PreferredSubnetID` property. For more information, see [
-    #   Availability and durability: Single-AZ and Multi-AZ file
-    #   systems][1].
+    #   accessible from. For Windows and ONTAP `MULTI_AZ_1` file system
+    #   deployment types, provide exactly two subnet IDs, one for the
+    #   preferred file server and one for the standby file server. You
+    #   specify one of these subnets as the preferred subnet using the
+    #   `WindowsConfiguration > PreferredSubnetID` or `OntapConfiguration >
+    #   PreferredSubnetID` properties. For more information, see [
+    #   Availability and durability: Single-AZ and Multi-AZ file systems][1]
+    #   in the *Amazon FSx for Windows User Guide* and [ Availability and
+    #   durability][2] in the *Amazon FSx for ONTAP User Guide*.
     #
     #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
     #   types and Lustre file systems, provide exactly one subnet ID. The
@@ -1411,6 +1568,7 @@ module Aws::FSx
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
@@ -1425,14 +1583,14 @@ module Aws::FSx
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for Amazon FSx for Windows File
-    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
-    #   systems at rest. In either case, if not specified, the Amazon FSx
-    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
-    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
-    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
-    #   Key Management Service API Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   file system's data for Amazon FSx for Windows File Server file
+    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
+    #   for Lustre `PERSISTENT_1` file systems at rest. If not specified,
+    #   the Amazon FSx managed key is used. The Amazon FSx for Lustre
+    #   `SCRATCH_1` and `SCRATCH_2` file systems are always encrypted at
+    #   rest using Amazon FSx managed keys. For more information, see
+    #   [Encrypt][1] in the *Key Management Service API Reference*.
     #
     #
     #
@@ -1448,6 +1606,11 @@ module Aws::FSx
     #   The Lustre configuration for the file system being created.
     #   @return [Types::CreateFileSystemLustreConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   The ONTAP configuration properties of the FSx for NetApp ONTAP file
+    #   system that you are creating.
+    #   @return [Types::CreateFileSystemOntapConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
     #
     class CreateFileSystemRequest < Struct.new(
@@ -1460,7 +1623,8 @@ module Aws::FSx
       :tags,
       :kms_key_id,
       :windows_configuration,
-      :lustre_configuration)
+      :lustre_configuration,
+      :ontap_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1511,20 +1675,23 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] active_directory_id
-    #   The ID for an existing AWS Managed Microsoft Active Directory (AD)
-    #   instance that the file system should join when it's created.
+    #   The ID for an existing Amazon Web Services Managed Microsoft Active
+    #   Directory (AD) instance that the file system should join when it's
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
-    #   The configuration that Amazon FSx uses to join the Windows File
-    #   Server instance to your self-managed (including on-premises)
-    #   Microsoft Active Directory (AD) directory. For more information, see
-    #   [ Using Amazon FSx with your self-managed Microsoft Active
-    #   Directory][1].
+    #   The configuration that Amazon FSx uses to join a Amazon FSx for
+    #   Windows File Server file system or an ONTAP storage virtual machine
+    #   (SVM) to a self-managed (including on-premises) Microsoft Active
+    #   Directory (AD) directory. For more information, see [ Using Amazon
+    #   FSx with your self-managed Microsoft Active Directory][1] or
+    #   [Managing SVMs][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
     #   @return [Types::SelfManagedActiveDirectoryConfiguration]
     #
     # @!attribute [rw] deployment_type
@@ -1534,8 +1701,9 @@ module Aws::FSx
     #   * `MULTI_AZ_1` - Deploys a high availability file system that is
     #     configured for Multi-AZ redundancy to tolerate temporary
     #     Availability Zone (AZ) unavailability. You can only deploy a
-    #     Multi-AZ file system in AWS Regions that have a minimum of three
-    #     Availability Zones. Also supports HDD storage type
+    #     Multi-AZ file system in Amazon Web Services Regions that have a
+    #     minimum of three Availability Zones. Also supports HDD storage
+    #     type
     #
     #   * `SINGLE_AZ_1` - (Default) Choose to deploy a file system that is
     #     configured for single AZ redundancy.
@@ -1555,10 +1723,10 @@ module Aws::FSx
     # @!attribute [rw] preferred_subnet_id
     #   Required when `DeploymentType` is set to `MULTI_AZ_1`. This
     #   specifies the subnet in which you want the preferred file server to
-    #   be located. For in-AWS applications, we recommend that you launch
-    #   your clients in the same Availability Zone (AZ) as your preferred
-    #   file server to reduce cross-AZ data transfer costs and minimize
-    #   latency.
+    #   be located. For in-Amazon Web Services applications, we recommend
+    #   that you launch your clients in the same Availability Zone (AZ) as
+    #   your preferred file server to reduce cross-AZ data transfer costs
+    #   and minimize latency.
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
@@ -1655,6 +1823,389 @@ module Aws::FSx
       :copy_tags_to_backups,
       :aliases,
       :audit_log_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration of the ONTAP volume that you are creating.
+    #
+    # @note When making an API call, you may pass CreateOntapVolumeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         junction_path: "JunctionPath", # required
+    #         security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #         size_in_megabytes: 1, # required
+    #         storage_efficiency_enabled: false, # required
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         tiering_policy: {
+    #           cooling_period: 1,
+    #           name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] junction_path
+    #   Specifies the location in the SVM's namespace where the volume is
+    #   mounted. The `JunctionPath` must have a leading forward slash, such
+    #   as `/vol3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_style
+    #   The security style for the volume. Specify one of the following
+    #   values:
+    #
+    #   * `UNIX` if the file system is managed by a UNIX administrator, the
+    #     majority of users are NFS clients, and an application accessing
+    #     the data uses a UNIX user as the service account. `UNIX` is the
+    #     default.
+    #
+    #   * `NTFS` if the file system is managed by a Windows administrator,
+    #     the majority of users are SMB clients, and an application
+    #     accessing the data uses a Windows user as the service account.
+    #
+    #   * `MIXED` if the file system is managed by both UNIX and Windows
+    #     administrators and users consist of both NFS and SMB clients.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_megabytes
+    #   Specifies the size of the volume, in megabytes (MB), that you are
+    #   creating.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_efficiency_enabled
+    #   Set to true to enable deduplication, compression, and compaction
+    #   storage efficiency features on the volume.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   Specifies the ONTAP SVM in which to create the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] tiering_policy
+    #   Describes the data tiering policy for an ONTAP volume. When enabled,
+    #   Amazon FSx for ONTAP's intelligent tiering automatically
+    #   transitions a volume's data between the file system's primary
+    #   storage and capacity pool storage based on your access patterns.
+    #   @return [Types::TieringPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapVolumeConfiguration AWS API Documentation
+    #
+    class CreateOntapVolumeConfiguration < Struct.new(
+      :junction_path,
+      :security_style,
+      :size_in_megabytes,
+      :storage_efficiency_enabled,
+      :storage_virtual_machine_id,
+      :tiering_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateStorageVirtualMachineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         active_directory_configuration: {
+    #           net_bios_name: "NetBiosAlias", # required
+    #           self_managed_active_directory_configuration: {
+    #             domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #             organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #             file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #             user_name: "DirectoryUserName", # required
+    #             password: "DirectoryPassword", # required
+    #             dns_ips: ["IpAddress"], # required
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         file_system_id: "FileSystemId", # required
+    #         name: "StorageVirtualMachineName", # required
+    #         svm_admin_password: "AdminPassword",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         root_volume_security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #       }
+    #
+    # @!attribute [rw] active_directory_configuration
+    #   Describes the self-managed Microsoft Active Directory to which you
+    #   want to join the SVM. Joining an Active Directory provides user
+    #   authentication and access control for SMB clients, including
+    #   Microsoft Windows and macOS client accessing the file system.
+    #   @return [Types::CreateSvmActiveDirectoryConfiguration]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] svm_admin_password
+    #   The password to use when managing the SVM using the NetApp ONTAP CLI
+    #   or REST API. If you do not specify a password, you can still use the
+    #   file system's `fsxadmin` user to manage the SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] root_volume_security_style
+    #   The security style of the root volume of the SVM. Specify one of the
+    #   following values:
+    #
+    #   * `UNIX` if the file system is managed by a UNIX administrator, the
+    #     majority of users are NFS clients, and an application accessing
+    #     the data uses a UNIX user as the service account.
+    #
+    #   * `NTFS` if the file system is managed by a Windows administrator,
+    #     the majority of users are SMB clients, and an application
+    #     accessing the data uses a Windows user as the service account.
+    #
+    #   * `MIXED` if the file system is managed by both UNIX and Windows
+    #     administrators and users consist of both NFS and SMB clients.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachineRequest AWS API Documentation
+    #
+    class CreateStorageVirtualMachineRequest < Struct.new(
+      :active_directory_configuration,
+      :client_request_token,
+      :file_system_id,
+      :name,
+      :svm_admin_password,
+      :tags,
+      :root_volume_security_style)
+      SENSITIVE = [:svm_admin_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine
+    #   Returned after a successful `CreateStorageVirtualMachine` operation;
+    #   describes the SVM just created.
+    #   @return [Types::StorageVirtualMachine]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachineResponse AWS API Documentation
+    #
+    class CreateStorageVirtualMachineResponse < Struct.new(
+      :storage_virtual_machine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that Amazon FSx uses to join the ONTAP storage
+    # virtual machine (SVM) to your self-managed (including on-premises)
+    # Microsoft Active Directory (AD) directory.
+    #
+    # @note When making an API call, you may pass CreateSvmActiveDirectoryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         net_bios_name: "NetBiosAlias", # required
+    #         self_managed_active_directory_configuration: {
+    #           domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #           file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #           user_name: "DirectoryUserName", # required
+    #           password: "DirectoryPassword", # required
+    #           dns_ips: ["IpAddress"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] net_bios_name
+    #   The NetBIOS name of the Active Directory computer object that will
+    #   be created for your SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration that Amazon FSx uses to join a Amazon FSx for
+    #   Windows File Server file system or an ONTAP storage virtual machine
+    #   (SVM) to a self-managed (including on-premises) Microsoft Active
+    #   Directory (AD) directory. For more information, see [ Using Amazon
+    #   FSx with your self-managed Microsoft Active Directory][1] or
+    #   [Managing SVMs][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
+    #   @return [Types::SelfManagedActiveDirectoryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSvmActiveDirectoryConfiguration AWS API Documentation
+    #
+    class CreateSvmActiveDirectoryConfiguration < Struct.new(
+      :net_bios_name,
+      :self_managed_active_directory_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVolumeFromBackupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_id: "BackupId", # required
+    #         client_request_token: "ClientRequestToken",
+    #         name: "VolumeName", # required
+    #         ontap_configuration: {
+    #           junction_path: "JunctionPath", # required
+    #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #           size_in_megabytes: 1, # required
+    #           storage_efficiency_enabled: false, # required
+    #           storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #           tiering_policy: {
+    #             cooling_period: 1,
+    #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the new volume you're creating.
+    #   @return [String]
+    #
+    # @!attribute [rw] ontap_configuration
+    #   Specifies the configuration of the ONTAP volume that you are
+    #   creating.
+    #   @return [Types::CreateOntapVolumeConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeFromBackupRequest AWS API Documentation
+    #
+    class CreateVolumeFromBackupRequest < Struct.new(
+      :backup_id,
+      :client_request_token,
+      :name,
+      :ontap_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] volume
+    #   Returned after a successful `CreateVolumeFromBackup` API operation,
+    #   describing the volume just created.
+    #   @return [Types::Volume]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeFromBackupResponse AWS API Documentation
+    #
+    class CreateVolumeFromBackupResponse < Struct.new(
+      :volume)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVolumeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         volume_type: "ONTAP", # required, accepts ONTAP
+    #         name: "VolumeName", # required
+    #         ontap_configuration: {
+    #           junction_path: "JunctionPath", # required
+    #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #           size_in_megabytes: 1, # required
+    #           storage_efficiency_enabled: false, # required
+    #           storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #           tiering_policy: {
+    #             cooling_period: 1,
+    #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   Specifies the type of volume to create; `ONTAP` is the only valid
+    #   volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the volume you're creating.
+    #   @return [String]
+    #
+    # @!attribute [rw] ontap_configuration
+    #   Specifies the `ONTAP` configuration to use in creating the volume.
+    #   @return [Types::CreateOntapVolumeConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeRequest AWS API Documentation
+    #
+    class CreateVolumeRequest < Struct.new(
+      :client_request_token,
+      :volume_type,
+      :name,
+      :ontap_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] volume
+    #   Returned after a successful `CreateVolume` API operation, describing
+    #   the volume just created.
+    #   @return [Types::Volume]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeResponse AWS API Documentation
+    #
+    class CreateVolumeResponse < Struct.new(
+      :volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1832,10 +2383,10 @@ module Aws::FSx
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
-    #   identify AWS resources. We require an ARN when you need to specify a
-    #   resource unambiguously across all of AWS. For more information, see
-    #   [Amazon Resource Names (ARNs) and AWS Service Namespaces][1] in the
-    #   *AWS General Reference*.
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -2052,7 +2603,7 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent deletion. This is automatically filled on your behalf
-    #   when using the AWS CLI or SDK.
+    #   when using the CLI or SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2181,7 +2732,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent deletion. This is automatically filled on your behalf
-    #   when using the AWS CLI or SDK.
+    #   when using the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2297,6 +2849,177 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteStorageVirtualMachineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The ID of the SVM that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteStorageVirtualMachineRequest AWS API Documentation
+    #
+    class DeleteStorageVirtualMachineRequest < Struct.new(
+      :client_request_token,
+      :storage_virtual_machine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The ID of the SVM Amazon FSx is deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   Describes the lifecycle state of the SVM being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteStorageVirtualMachineResponse AWS API Documentation
+    #
+    class DeleteStorageVirtualMachineResponse < Struct.new(
+      :storage_virtual_machine_id,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use to specify skipping a final backup, or to add tags to a final
+    # backup.
+    #
+    # @note When making an API call, you may pass DeleteVolumeOntapConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         skip_final_backup: false,
+    #         final_backup_tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] skip_final_backup
+    #   Set to true if you want to skip taking a final backup of the volume
+    #   you are deleting.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] final_backup_tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteVolumeOntapConfiguration AWS API Documentation
+    #
+    class DeleteVolumeOntapConfiguration < Struct.new(
+      :skip_final_backup,
+      :final_backup_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for the Amazon FSx for NetApp ONTAP volume being
+    # deleted in the `DeleteVolume` operation.
+    #
+    # @!attribute [rw] final_backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #   @return [String]
+    #
+    # @!attribute [rw] final_backup_tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteVolumeOntapResponse AWS API Documentation
+    #
+    class DeleteVolumeOntapResponse < Struct.new(
+      :final_backup_id,
+      :final_backup_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVolumeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         volume_id: "VolumeId", # required
+    #         ontap_configuration: {
+    #           skip_final_backup: false,
+    #           final_backup_tags: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the volume you are deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] ontap_configuration
+    #   For Amazon FSx for ONTAP volumes, specify whether to take a final
+    #   backup of the volume, and apply tags to the backup.
+    #   @return [Types::DeleteVolumeOntapConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteVolumeRequest AWS API Documentation
+    #
+    class DeleteVolumeRequest < Struct.new(
+      :client_request_token,
+      :volume_id,
+      :ontap_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] volume_id
+    #   The ID of the volume being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   Describes the lifecycle state of the volume being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] ontap_response
+    #   Returned after a `DeleteVolume request, showing the status of the
+    #   delete request.`
+    #   @return [Types::DeleteVolumeOntapResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteVolumeResponse AWS API Documentation
+    #
+    class DeleteVolumeResponse < Struct.new(
+      :volume_id,
+      :lifecycle,
+      :ontap_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request object for `DescribeBackups` operation.
     #
     # @note When making an API call, you may pass DescribeBackupsRequest
@@ -2306,7 +3029,7 @@ module Aws::FSx
     #         backup_ids: ["BackupId"],
     #         filters: [
     #           {
-    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type
+    #             name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id
     #             values: ["FilterValue"],
     #           },
     #         ],
@@ -2320,8 +3043,8 @@ module Aws::FSx
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   Filters structure. Supported names are file-system-id and
-    #   backup-type.
+    #   Filters structure. Supported names are `file-system-id`,
+    #   `backup-type`, `file-system-type`, and `volume-id`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -2454,8 +3177,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2575,6 +3298,140 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeStorageVirtualMachinesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         storage_virtual_machine_ids: ["StorageVirtualMachineId"],
+    #         filters: [
+    #           {
+    #             name: "file-system-id", # accepts file-system-id
+    #             values: ["StorageVirtualMachineFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] storage_virtual_machine_ids
+    #   Enter the ID of one or more SVMs that you want to view.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Enter a filter name:value pair to view a select set of SVMs.
+    #   @return [Array<Types::StorageVirtualMachineFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeStorageVirtualMachinesRequest AWS API Documentation
+    #
+    class DescribeStorageVirtualMachinesRequest < Struct.new(
+      :storage_virtual_machine_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machines
+    #   Returned after a successful `DescribeStorageVirtualMachines`
+    #   operation, describing each SVM.
+    #   @return [Array<Types::StorageVirtualMachine>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeStorageVirtualMachinesResponse AWS API Documentation
+    #
+    class DescribeStorageVirtualMachinesResponse < Struct.new(
+      :storage_virtual_machines,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVolumesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         volume_ids: ["VolumeId"],
+    #         filters: [
+    #           {
+    #             name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
+    #             values: ["VolumeFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] volume_ids
+    #   IDs of the volumes whose descriptions you want to retrieve.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Enter a filter name:value pair to view a select set of volumes.
+    #   @return [Array<Types::VolumeFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeVolumesRequest AWS API Documentation
+    #
+    class DescribeVolumesRequest < Struct.new(
+      :volume_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] volumes
+    #   Returned after a successful `DescribeVolumes` operation, describing
+    #   each volume.
+    #   @return [Array<Types::Volume>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeVolumesResponse AWS API Documentation
+    #
+    class DescribeVolumesResponse < Struct.new(
+      :volumes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request object of DNS aliases to disassociate from an Amazon FSx
     # for Windows File Server file system.
     #
@@ -2590,8 +3447,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   (Optional) An idempotency token for resource creation, in a string
     #   of up to 64 ASCII characters. This token is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2635,12 +3492,47 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The SSD IOPS (input/output operations per second) configuration for an
+    # Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS per GB
+    # of storage capacity, but you can provision additional IOPS per GB of
+    # storage. The configuration consists of the total number of provisioned
+    # SSD IOPS and how the amount was provisioned (by the customer or by the
+    # system).
+    #
+    # @note When making an API call, you may pass DiskIopsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether the number of IOPS for the file system is using
+    #   the system default (`AUTOMATIC`) or was provisioned by the customer
+    #   (`USER_PROVISIONED`).
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   The total number of SSD IOPS provisioned for the file system.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DiskIopsConfiguration AWS API Documentation
+    #
+    class DiskIopsConfiguration < Struct.new(
+      :mode,
+      :iops)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of a specific Amazon FSx file system.
     #
     # @!attribute [rw] owner_id
-    #   The AWS account that created the file system. If the file system was
-    #   created by an AWS Identity and Access Management (IAM) user, the AWS
-    #   account to which the IAM user belongs is the owner.
+    #   The Amazon Web Services account that created the file system. If the
+    #   file system was created by an Identity and Access Management (IAM)
+    #   user, the Amazon Web Services account to which the IAM user belongs
+    #   is the owner.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2653,7 +3545,8 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   The type of Amazon FSx file system, either `LUSTRE` or `WINDOWS`.
+    #   The type of Amazon FSx file system, which can be `LUSTRE`,
+    #   `WINDOWS`, or `ONTAP`.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle
@@ -2700,16 +3593,16 @@ module Aws::FSx
     #
     # @!attribute [rw] subnet_ids
     #   Specifies the IDs of the subnets that the file system is accessible
-    #   from. For Windows `MULTI_AZ_1` file system deployment type, there
-    #   are two subnet IDs, one for the preferred file server and one for
-    #   the standby file server. The preferred file server subnet identified
-    #   in the `PreferredSubnetID` property. All other file systems have
-    #   only one subnet ID.
+    #   from. For Windows and ONTAP `MULTI_AZ_1` file system deployment
+    #   type, there are two subnet IDs, one for the preferred file server
+    #   and one for the standby file server. The preferred file server
+    #   subnet identified in the `PreferredSubnetID` property. All other
+    #   file systems have only one subnet ID.
     #
     #   For Lustre file systems, and Single-AZ Windows file systems, this is
     #   the ID of the subnet that contains the endpoint for the file system.
-    #   For `MULTI_AZ_1` Windows file systems, the endpoint for the file
-    #   system is available in the `PreferredSubnetID`.
+    #   For `MULTI_AZ_1` Windows and ONTAP file systems, the endpoint for
+    #   the file system is available in the `PreferredSubnetID`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_ids
@@ -2733,14 +3626,14 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for Amazon FSx for Windows File
-    #   Server file systems and persistent Amazon FSx for Lustre file
-    #   systems at rest. In either case, if not specified, the Amazon FSx
-    #   managed key is used. The scratch Amazon FSx for Lustre file systems
-    #   are always encrypted at rest using Amazon FSx managed keys. For more
-    #   information, see [Encrypt][1] in the *AWS Key Management Service API
-    #   Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   file system's data for Amazon FSx for Windows File Server file
+    #   systems, Amazon FSx for NetApp ONTAP file systems, and persistent
+    #   Amazon FSx for Lustre file systems at rest. If not specified, the
+    #   Amazon FSx managed key is used. The scratch Amazon FSx for Lustre
+    #   file systems are always encrypted at rest using Amazon FSx managed
+    #   keys. For more information, see [Encrypt][1] in the *Key Management
+    #   Service API Reference*.
     #
     #
     #
@@ -2772,9 +3665,13 @@ module Aws::FSx
     # @!attribute [rw] administrative_actions
     #   A list of administrative actions for the file system that are in
     #   process or waiting to be processed. Administrative actions describe
-    #   changes to the Windows file system that you have initiated using the
-    #   `UpdateFileSystem` action.
+    #   changes to the Amazon FSx file system that you have initiated using
+    #   the `UpdateFileSystem` action.
     #   @return [Array<Types::AdministrativeAction>]
+    #
+    # @!attribute [rw] ontap_configuration
+    #   The configuration for this FSx for NetApp ONTAP file system.
+    #   @return [Types::OntapFileSystemConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystem AWS API Documentation
     #
@@ -2796,7 +3693,54 @@ module Aws::FSx
       :tags,
       :windows_configuration,
       :lustre_configuration,
-      :administrative_actions)
+      :administrative_actions,
+      :ontap_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon FSx for NetApp ONTAP file system has two endpoints that are
+    # used to access data or to manage the file system using the NetApp
+    # ONTAP CLI, REST API, or NetApp SnapMirror. They are the `Management`
+    # and `Intercluster` endpoints.
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name Service (DNS) name for the file system. You can
+    #   mount your file system using its DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   IP addresses of the file system endpoint.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemEndpoint AWS API Documentation
+    #
+    class FileSystemEndpoint < Struct.new(
+      :dns_name,
+      :ip_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon FSx for NetApp ONTAP file system has the following endpoints
+    # that are used to access data or to manage the file system using the
+    # NetApp ONTAP CLI, REST API, or NetApp SnapMirror.
+    #
+    # @!attribute [rw] intercluster
+    #   An endpoint for managing your file system by setting up NetApp
+    #   SnapMirror with other ONTAP systems.
+    #   @return [Types::FileSystemEndpoint]
+    #
+    # @!attribute [rw] management
+    #   An endpoint for managing your file system using the NetApp ONTAP CLI
+    #   and NetApp ONTAP API.
+    #   @return [Types::FileSystemEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemEndpoints AWS API Documentation
+    #
+    class FileSystemEndpoints < Struct.new(
+      :intercluster,
+      :management)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2839,7 +3783,7 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id
     #         values: ["FilterValue"],
     #       }
     #
@@ -2911,8 +3855,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The AWS Key Management Service (AWS KMS) key of the destination backup
-    # is invalid.
+    # The Key Management Service (KMS) key of the destination backup is
+    # invalid.
     #
     # @!attribute [rw] message
     #   A detailed error message.
@@ -2955,36 +3899,24 @@ module Aws::FSx
     end
 
     # One or more network settings specified in the request are invalid.
-    # `InvalidVpcId` means that the ID passed for the virtual private cloud
-    # (VPC) is invalid. `InvalidSubnetIds` returns the list of IDs for
-    # subnets that are either invalid or not part of the VPC specified.
-    # `InvalidSecurityGroupIds` returns the list of IDs for security groups
-    # that are either invalid or not part of the VPC specified.
     #
     # @!attribute [rw] message
-    #   A detailed error message.
+    #   Error message explaining what's wrong with network settings.
     #   @return [String]
     #
     # @!attribute [rw] invalid_subnet_id
-    #   The ID for a subnet. A *subnet* is a range of IP addresses in your
-    #   virtual private cloud (VPC). For more information, see [VPC and
-    #   Subnets][1] in the *Amazon VPC User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    #   The subnet ID that is either invalid or not part of the VPC
+    #   specified.
     #   @return [String]
     #
     # @!attribute [rw] invalid_security_group_id
-    #   The ID of your Amazon EC2 security group. This ID is used to control
-    #   network access to the endpoint that Amazon FSx creates on your
-    #   behalf in each subnet. For more information, see [Amazon EC2
-    #   Security Groups for Linux Instances][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   The security group ID is either invalid or not part of the VPC
+    #   specified.
+    #   @return [String]
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+    # @!attribute [rw] invalid_route_table_id
+    #   The route table ID is either invalid or not part of the VPC
+    #   specified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidNetworkSettings AWS API Documentation
@@ -2992,7 +3924,8 @@ module Aws::FSx
     class InvalidNetworkSettings < Struct.new(
       :message,
       :invalid_subnet_id,
-      :invalid_security_group_id)
+      :invalid_security_group_id,
+      :invalid_route_table_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3013,7 +3946,7 @@ module Aws::FSx
     end
 
     # The Region provided for `Source Region` is invalid or is in a
-    # different AWS partition.
+    # different Amazon Web Services partition.
     #
     # @!attribute [rw] message
     #   A detailed error message.
@@ -3027,8 +3960,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The AWS Key Management Service (AWS KMS) key of the source backup is
-    # invalid.
+    # The Key Management Service (KMS) key of the source backup is invalid.
     #
     # @!attribute [rw] message
     #   A detailed error message.
@@ -3037,6 +3969,20 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidSourceKmsKey AWS API Documentation
     #
     class InvalidSourceKmsKey < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes why a resource lifecycle state changed.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LifecycleTransitionReason AWS API Documentation
+    #
+    class LifecycleTransitionReason < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3151,7 +4097,7 @@ module Aws::FSx
     #
     #   For the `SCRATCH_1` deployment type, this value is always "`fsx`".
     #   For `SCRATCH_2` and `PERSISTENT_1` deployment types, this value is a
-    #   string that is unique within an AWS Region.
+    #   string that is unique within an Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -3233,6 +4179,20 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # A volume configuration is required for this operation.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/MissingVolumeConfiguration AWS API Documentation
+    #
+    class MissingVolumeConfiguration < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource specified for the tagging operation is not a resource
     # type owned by Amazon FSx. Use the API of the relevant service to
     # perform the operation.
@@ -3250,6 +4210,185 @@ module Aws::FSx
     class NotServiceResourceError < Struct.new(
       :resource_arn,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for the FSx for NetApp ONTAP file system.
+    #
+    # @!attribute [rw] automatic_backup_retention_days
+    #   The number of days to retain automatic backups. Setting this to 0
+    #   disables automatic backups. You can retain automatic backups for a
+    #   maximum of 90 days. The default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] daily_automatic_backup_start_time
+    #   A recurring daily time, in the format `HH:MM`. `HH` is the
+    #   zero-padded hour of the day (0-23), and `MM` is the zero-padded
+    #   minute of the hour. For example, `05:00` specifies 5 AM daily.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   The ONTAP file system deployment type.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_ip_address_range
+    #   The IP address range in which the endpoints to access your file
+    #   system are created.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   The `Management` and `Intercluster` endpoints that are used to
+    #   access data or to manage the file system using the NetApp ONTAP CLI,
+    #   REST API, or NetApp SnapMirror.
+    #   @return [Types::FileSystemEndpoints]
+    #
+    # @!attribute [rw] disk_iops_configuration
+    #   The SSD IOPS configuration for the ONTAP file system, specifying the
+    #   number of provisioned IOPS and the provision mode.
+    #   @return [Types::DiskIopsConfiguration]
+    #
+    # @!attribute [rw] preferred_subnet_id
+    #   The ID for a subnet. A *subnet* is a range of IP addresses in your
+    #   virtual private cloud (VPC). For more information, see [VPC and
+    #   Subnets][1] in the *Amazon VPC User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_ids
+    #   The VPC route tables in which your file system's endpoints are
+    #   created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] throughput_capacity
+    #   Sustained throughput of an Amazon FSx file system in MBps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] weekly_maintenance_start_time
+    #   A recurring weekly time, in the format `D:HH:MM`.
+    #
+    #   `D` is the day of the week, for which 1 represents Monday and 7
+    #   represents Sunday. For further details, see [the ISO-8601 spec as
+    #   described on Wikipedia][1].
+    #
+    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
+    #   zero-padded minute of the hour.
+    #
+    #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemConfiguration AWS API Documentation
+    #
+    class OntapFileSystemConfiguration < Struct.new(
+      :automatic_backup_retention_days,
+      :daily_automatic_backup_start_time,
+      :deployment_type,
+      :endpoint_ip_address_range,
+      :endpoints,
+      :disk_iops_configuration,
+      :preferred_subnet_id,
+      :route_table_ids,
+      :throughput_capacity,
+      :weekly_maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of an Amazon FSx for NetApp ONTAP volume
+    #
+    # @!attribute [rw] flex_cache_endpoint_type
+    #   Specifies the FlexCache endpoint type of the volume. Valid values
+    #   are the following:
+    #
+    #   * `NONE` specifies that the volume doesn't have a FlexCache
+    #     configuration. `NONE` is the default.
+    #
+    #   * `ORIGIN` specifies that the volume is the origin volume for a
+    #     FlexCache volume.
+    #
+    #   * `CACHE` specifies that the volume is a FlexCache volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] junction_path
+    #   Specifies the directory that NAS clients use to mount the volume,
+    #   along with the SVM DNS name or IP address. You can create a
+    #   `JunctionPath` directly below a parent volume junction or on a
+    #   directory within a volume. A `JunctionPath` for a volume named vol3
+    #   might be /vol1/vol2/vol3, or /vol1/dir2/vol3, or even
+    #   /dir1/dir2/vol3..
+    #   @return [String]
+    #
+    # @!attribute [rw] security_style
+    #   The security style for the volume, which can be `UNIX`, `NTFS`, or
+    #   `MIXED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_megabytes
+    #   The configured size of the volume, in megabytes (MBs).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_efficiency_enabled
+    #   The volume's storage efficiency setting.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The ID of the volume's storage virtual machine.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_root
+    #   A boolean flag indicating whether this volume is the root volume for
+    #   its storage virtual machine (SVM). Only one volume on an SVM can be
+    #   the root volume. This value defaults to false. If this value is
+    #   true, then this is the SVM root volume.
+    #
+    #   This flag is useful when you're deleting an SVM, because you must
+    #   first delete all non-root volumes. This flag, when set to false,
+    #   helps you identify which volumes to delete before you can delete the
+    #   SVM.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tiering_policy
+    #   The volume's `TieringPolicy` setting.
+    #   @return [Types::TieringPolicy]
+    #
+    # @!attribute [rw] uuid
+    #   The volume's UUID (universally unique identifier).
+    #   @return [String]
+    #
+    # @!attribute [rw] ontap_volume_type
+    #   Specifies the type of volume. Valid values are the following:
+    #
+    #   * `RW` specifies a read-write volume. `RW` is the default.
+    #
+    #   * `DP` specifies a data protection volume. You can protect data by
+    #     replicating it to data protection mirror copies and use data
+    #     protection mirror copies to recover data when a disaster occurs.
+    #
+    #   * `LS` specifies a load-sharing mirror volume. A load-sharing mirror
+    #     reduces the network traffic to a FlexVol volume by providing
+    #     additional read-only access to clients.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapVolumeConfiguration AWS API Documentation
+    #
+    class OntapVolumeConfiguration < Struct.new(
+      :flex_cache_endpoint_type,
+      :junction_path,
+      :security_style,
+      :size_in_megabytes,
+      :storage_efficiency_enabled,
+      :storage_virtual_machine_id,
+      :storage_virtual_machine_root,
+      :tiering_policy,
+      :uuid,
+      :ontap_volume_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3295,7 +4434,8 @@ module Aws::FSx
     end
 
     # The configuration of the self-managed Microsoft Active Directory (AD)
-    # directory to which the Windows File Server instance is joined.
+    # directory to which the Windows File Server or ONTAP storage virtual
+    # machine (SVM) instance is joined.
     #
     # @!attribute [rw] domain_name
     #   The fully qualified domain name of the self-managed AD directory.
@@ -3304,7 +4444,7 @@ module Aws::FSx
     # @!attribute [rw] organizational_unit_distinguished_name
     #   The fully qualified distinguished name of the organizational unit
     #   within the self-managed AD directory to which the Windows File
-    #   Server instance is joined.
+    #   Server or ONTAP storage virtual machine (SVM) instance is joined.
     #   @return [String]
     #
     # @!attribute [rw] file_system_administrators_group
@@ -3334,14 +4474,17 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration that Amazon FSx uses to join the Windows File Server
-    # instance to your self-managed (including on-premises) Microsoft Active
+    # The configuration that Amazon FSx uses to join a Amazon FSx for
+    # Windows File Server file system or an ONTAP storage virtual machine
+    # (SVM) to a self-managed (including on-premises) Microsoft Active
     # Directory (AD) directory. For more information, see [ Using Amazon FSx
-    # with your self-managed Microsoft Active Directory][1].
+    # with your self-managed Microsoft Active Directory][1] or [Managing
+    # SVMs][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
     #
     # @note When making an API call, you may pass SelfManagedActiveDirectoryConfiguration
     #   data as a hash:
@@ -3362,12 +4505,11 @@ module Aws::FSx
     #
     # @!attribute [rw] organizational_unit_distinguished_name
     #   (Optional) The fully qualified distinguished name of the
-    #   organizational unit within your self-managed AD directory that the
-    #   Windows File Server instance will join. Amazon FSx only accepts OU
-    #   as the direct parent of the file system. An example is
-    #   `OU=FSx,DC=yourdomain,DC=corp,DC=com`. To learn more, see [RFC
-    #   2253][1]. If none is provided, the FSx file system is created in the
-    #   default location of your self-managed AD directory.
+    #   organizational unit within your self-managed AD directory. Amazon
+    #   FSx only accepts OU as the direct parent of the file system. An
+    #   example is `OU=FSx,DC=yourdomain,DC=corp,DC=com`. To learn more, see
+    #   [RFC 2253][1]. If none is provided, the FSx file system is created
+    #   in the default location of your self-managed AD directory.
     #
     #   Only Organizational Unit (OU) objects can be the direct parent of
     #   the file system that you're creating.
@@ -3460,7 +4602,8 @@ module Aws::FSx
     end
 
     # An error indicating that a particular service limit was exceeded. You
-    # can increase some service limits by contacting AWS Support.
+    # can increase some service limits by contacting Amazon Web Services
+    # Support.
     #
     # @!attribute [rw] limit
     #   Enumeration of the service limit that was exceeded.
@@ -3495,6 +4638,233 @@ module Aws::FSx
     class SourceBackupUnavailable < Struct.new(
       :message,
       :backup_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Amazon FSx for NetApp ONTAP storage virtual machine
+    # (SVM) configuraton.
+    #
+    # @!attribute [rw] active_directory_configuration
+    #   Describes the Microsoft Active Directory configuration to which the
+    #   SVM is joined, if applicable.
+    #   @return [Types::SvmActiveDirectoryConfiguration]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] endpoints
+    #   The endpoints that are used to access data or to manage the SVM
+    #   using the NetApp ONTAP CLI, REST API, or NetApp CloudManager. They
+    #   are the `Iscsi`, `Management`, `Nfs`, and `Smb` endpoints.
+    #   @return [Types::SvmEndpoints]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   Describes the SVM's lifecycle status.
+    #
+    #   * `CREATED` - The SVM is fully available for use.
+    #
+    #   * `CREATING` - Amazon FSx is creating the new SVM.
+    #
+    #   * `DELETING` - Amazon FSx is deleting an existing SVM.
+    #
+    #   * `FAILED` - Amazon FSx was unable to create the SVM.
+    #
+    #   * `MISCONFIGURED` - The SVM is in a failed but recoverable state.
+    #
+    #   * `PENDING` - Amazon FSx has not started creating the SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the SVM, if provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The SVM's system generated unique ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] subtype
+    #   Describes the SVM's subtype.
+    #   @return [String]
+    #
+    # @!attribute [rw] uuid
+    #   The SVM's UUID (universally unique identifier).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   Describes why the SVM lifecycle state changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] root_volume_security_style
+    #   The security style of the root volume of the SVM.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StorageVirtualMachine AWS API Documentation
+    #
+    class StorageVirtualMachine < Struct.new(
+      :active_directory_configuration,
+      :creation_time,
+      :endpoints,
+      :file_system_id,
+      :lifecycle,
+      :name,
+      :resource_arn,
+      :storage_virtual_machine_id,
+      :subtype,
+      :uuid,
+      :tags,
+      :lifecycle_transition_reason,
+      :root_volume_security_style)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict the results of describe calls for Amazon FSx
+    # for NetApp ONTAP storage virtual machines (SVMs). You can use multiple
+    # filters to return results that meet all applied filter requirements.
+    #
+    # @note When making an API call, you may pass StorageVirtualMachineFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "file-system-id", # accepts file-system-id
+    #         values: ["StorageVirtualMachineFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name for this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter. These are all the values for any of the
+    #   applied filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StorageVirtualMachineFilter AWS API Documentation
+    #
+    class StorageVirtualMachineFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No Amazon FSx for NetApp ONTAP SVMs were found based upon the supplied
+    # parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/StorageVirtualMachineNotFound AWS API Documentation
+    #
+    class StorageVirtualMachineNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of the Microsoft Active Directory (AD)
+    # directory to which the Amazon FSx for ONTAP storage virtual machine
+    # (SVM) is joined. Pleae note, account credentials are not returned in
+    # the response payload.
+    #
+    # @!attribute [rw] net_bios_name
+    #   The NetBIOS name of the Active Directory computer object that is
+    #   joined to your SVM.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration of the self-managed Microsoft Active Directory
+    #   (AD) directory to which the Windows File Server or ONTAP storage
+    #   virtual machine (SVM) instance is joined.
+    #   @return [Types::SelfManagedActiveDirectoryAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SvmActiveDirectoryConfiguration AWS API Documentation
+    #
+    class SvmActiveDirectoryConfiguration < Struct.new(
+      :net_bios_name,
+      :self_managed_active_directory_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has four
+    # endpoints that are used to access data or to manage the SVM using the
+    # NetApp ONTAP CLI, REST API, or NetApp CloudManager. They are the
+    # `Iscsi`, `Management`, `Nfs`, and `Smb` endpoints.
+    #
+    # @!attribute [rw] dns_name
+    #   The Domain Name Service (DNS) name for the file system. You can
+    #   mount your file system using its DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   The SVM endpoint's IP addresses.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SvmEndpoint AWS API Documentation
+    #
+    class SvmEndpoint < Struct.new(
+      :dns_name,
+      :ip_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has the
+    # following endpoints that are used to access data or to manage the SVM
+    # using the NetApp ONTAP CLI, REST API, or NetApp CloudManager.
+    #
+    # @!attribute [rw] iscsi
+    #   An endpoint for connecting using the Internet Small Computer Systems
+    #   Interface (iSCSI) protocol.
+    #   @return [Types::SvmEndpoint]
+    #
+    # @!attribute [rw] management
+    #   An endpoint for managing SVMs using the NetApp ONTAP CLI, NetApp
+    #   ONTAP API, or NetApp CloudManager.
+    #   @return [Types::SvmEndpoint]
+    #
+    # @!attribute [rw] nfs
+    #   An endpoint for connecting using the Network File System (NFS)
+    #   protocol.
+    #   @return [Types::SvmEndpoint]
+    #
+    # @!attribute [rw] smb
+    #   An endpoint for connecting using the Server Message Block (SMB)
+    #   protocol.
+    #   @return [Types::SvmEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SvmEndpoints AWS API Documentation
+    #
+    class SvmEndpoints < Struct.new(
+      :iscsi,
+      :management,
+      :nfs,
+      :smb)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3570,6 +4940,53 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Describes the data tiering policy for an ONTAP volume. When enabled,
+    # Amazon FSx for ONTAP's intelligent tiering automatically transitions
+    # a volume's data between the file system's primary storage and
+    # capacity pool storage based on your access patterns.
+    #
+    # @note When making an API call, you may pass TieringPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         cooling_period: 1,
+    #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #       }
+    #
+    # @!attribute [rw] cooling_period
+    #   Specifies the number of days that user data in a volume must remain
+    #   inactive before it is considered "cold" and moved to the capacity
+    #   pool. Used with the `AUTO` and `SNAPSHOT_ONLY` tiering policies.
+    #   Enter a whole number between 2 and 183. Default values are 31 days
+    #   for `AUTO` and 2 days for `SNAPSHOT_ONLY`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   Specifies the tiering policy used to transition data. Default value
+    #   is `SNAPSHOT_ONLY`.
+    #
+    #   * `SNAPSHOT_ONLY` - moves cold snapshots to the capacity pool
+    #     storage tier.
+    #
+    #   * `AUTO` - moves cold user data and snapshots to the capacity pool
+    #     storage tier based on your access patterns.
+    #
+    #   * `ALL` - moves all user data blocks in both the active file system
+    #     and Snapshot copies to the storage pool tier.
+    #
+    #   * `NONE` - keeps a volume's data in the primary storage tier,
+    #     preventing it from being moved to the capacity pool tier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/TieringPolicy AWS API Documentation
+    #
+    class TieringPolicy < Struct.new(
+      :cooling_period,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The requested operation is not supported for this resource or API.
     #
@@ -3710,6 +5127,63 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The configuration updates for an Amazon FSx for NetApp ONTAP file
+    # system.
+    #
+    # @note When making an API call, you may pass UpdateFileSystemOntapConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         automatic_backup_retention_days: 1,
+    #         daily_automatic_backup_start_time: "DailyTime",
+    #         fsx_admin_password: "AdminPassword",
+    #         weekly_maintenance_start_time: "WeeklyTime",
+    #       }
+    #
+    # @!attribute [rw] automatic_backup_retention_days
+    #   The number of days to retain automatic backups. Setting this to 0
+    #   disables automatic backups. You can retain automatic backups for a
+    #   maximum of 90 days. The default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] daily_automatic_backup_start_time
+    #   A recurring daily time, in the format `HH:MM`. `HH` is the
+    #   zero-padded hour of the day (0-23), and `MM` is the zero-padded
+    #   minute of the hour. For example, `05:00` specifies 5 AM daily.
+    #   @return [String]
+    #
+    # @!attribute [rw] fsx_admin_password
+    #   The ONTAP administrative password for the `fsxadmin` user.
+    #   @return [String]
+    #
+    # @!attribute [rw] weekly_maintenance_start_time
+    #   A recurring weekly time, in the format `D:HH:MM`.
+    #
+    #   `D` is the day of the week, for which 1 represents Monday and 7
+    #   represents Sunday. For further details, see [the ISO-8601 spec as
+    #   described on Wikipedia][1].
+    #
+    #   `HH` is the zero-padded hour of the day (0-23), and `MM` is the
+    #   zero-padded minute of the hour.
+    #
+    #   For example, `1:05:00` specifies maintenance at 5 AM Monday.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
+    #
+    class UpdateFileSystemOntapConfiguration < Struct.new(
+      :automatic_backup_retention_days,
+      :daily_automatic_backup_start_time,
+      :fsx_admin_password,
+      :weekly_maintenance_start_time)
+      SENSITIVE = [:fsx_admin_password]
+      include Aws::Structure
+    end
+
     # The request object for the `UpdateFileSystem` operation.
     #
     # @note When making an API call, you may pass UpdateFileSystemRequest
@@ -3742,6 +5216,12 @@ module Aws::FSx
     #           auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #           data_compression_type: "NONE", # accepts NONE, LZ4
     #         },
+    #         ontap_configuration: {
+    #           automatic_backup_retention_days: 1,
+    #           daily_automatic_backup_start_time: "DailyTime",
+    #           fsx_admin_password: "AdminPassword",
+    #           weekly_maintenance_start_time: "WeeklyTime",
+    #         },
     #       }
     #
     # @!attribute [rw] file_system_id
@@ -3751,8 +5231,8 @@ module Aws::FSx
     # @!attribute [rw] client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent updates. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an
-    #   AWS SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon
+    #   Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3760,10 +5240,11 @@ module Aws::FSx
     #
     # @!attribute [rw] storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   file system. Specifies the storage capacity target value, GiB, to
-    #   increase the storage capacity for the file system that you're
-    #   updating. You cannot make a storage capacity increase request if
-    #   there is an existing storage capacity increase request in progress.
+    #   for Windows File Server or Amazon FSx for Lustre file system.
+    #   Specifies the storage capacity target value, GiB, to increase the
+    #   storage capacity for the file system that you're updating. You
+    #   cannot make a storage capacity increase request if there is an
+    #   existing storage capacity increase request in progress.
     #
     #   For Windows file systems, the storage capacity target value must be
     #   at least 10 percent (%) greater than the current storage capacity
@@ -3806,6 +5287,11 @@ module Aws::FSx
     #   in the `UpdateFileSystem` operation.
     #   @return [Types::UpdateFileSystemLustreConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   The configuration updates for an Amazon FSx for NetApp ONTAP file
+    #   system.
+    #   @return [Types::UpdateFileSystemOntapConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemRequest AWS API Documentation
     #
     class UpdateFileSystemRequest < Struct.new(
@@ -3813,7 +5299,8 @@ module Aws::FSx
       :client_request_token,
       :storage_capacity,
       :windows_configuration,
-      :lustre_configuration)
+      :lustre_configuration,
+      :ontap_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3917,6 +5404,338 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Used to specify changes to the ONTAP configuration for the volume you
+    # are updating.
+    #
+    # @note When making an API call, you may pass UpdateOntapVolumeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         junction_path: "JunctionPath",
+    #         security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #         size_in_megabytes: 1,
+    #         storage_efficiency_enabled: false,
+    #         tiering_policy: {
+    #           cooling_period: 1,
+    #           name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] junction_path
+    #   Specifies the location in the SVM's namespace where the volume is
+    #   mounted. The `JunctionPath` must have a leading forward slash, such
+    #   as `/vol3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_style
+    #   The security style for the volume, which can be `UNIX`. `NTFS`, or
+    #   `MIXED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_megabytes
+    #   Specifies the size of the volume in megabytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_efficiency_enabled
+    #   Default is `false`. Set to true to enable the deduplication,
+    #   compression, and compaction storage efficiency features on the
+    #   volume.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tiering_policy
+    #   Update the volume's data tiering policy.
+    #   @return [Types::TieringPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateOntapVolumeConfiguration AWS API Documentation
+    #
+    class UpdateOntapVolumeConfiguration < Struct.new(
+      :junction_path,
+      :security_style,
+      :size_in_megabytes,
+      :storage_efficiency_enabled,
+      :tiering_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateStorageVirtualMachineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         active_directory_configuration: {
+    #           self_managed_active_directory_configuration: {
+    #             user_name: "DirectoryUserName",
+    #             password: "DirectoryPassword",
+    #             dns_ips: ["IpAddress"],
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         svm_admin_password: "AdminPassword",
+    #       }
+    #
+    # @!attribute [rw] active_directory_configuration
+    #   Updates the Microsoft Active Directory (AD) configuration for an SVM
+    #   that is joined to an AD.
+    #   @return [Types::UpdateSvmActiveDirectoryConfiguration]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_virtual_machine_id
+    #   The ID of the SVM that you want to update, in the format
+    #   `svm-0123456789abcdef0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] svm_admin_password
+    #   Enter a new SvmAdminPassword if you are updating it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachineRequest AWS API Documentation
+    #
+    class UpdateStorageVirtualMachineRequest < Struct.new(
+      :active_directory_configuration,
+      :client_request_token,
+      :storage_virtual_machine_id,
+      :svm_admin_password)
+      SENSITIVE = [:svm_admin_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_virtual_machine
+    #   Describes the Amazon FSx for NetApp ONTAP storage virtual machine
+    #   (SVM) configuraton.
+    #   @return [Types::StorageVirtualMachine]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachineResponse AWS API Documentation
+    #
+    class UpdateStorageVirtualMachineResponse < Struct.new(
+      :storage_virtual_machine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the Microsoft Active Directory (AD) configuration of an SVM
+    # joined to an AD. Pleae note, account credentials are not returned in
+    # the response payload.
+    #
+    # @note When making an API call, you may pass UpdateSvmActiveDirectoryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         self_managed_active_directory_configuration: {
+    #           user_name: "DirectoryUserName",
+    #           password: "DirectoryPassword",
+    #           dns_ips: ["IpAddress"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] self_managed_active_directory_configuration
+    #   The configuration that Amazon FSx uses to join the Windows File
+    #   Server instance to a self-managed Microsoft Active Directory (AD)
+    #   directory.
+    #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSvmActiveDirectoryConfiguration AWS API Documentation
+    #
+    class UpdateSvmActiveDirectoryConfiguration < Struct.new(
+      :self_managed_active_directory_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVolumeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         volume_id: "VolumeId", # required
+    #         ontap_configuration: {
+    #           junction_path: "JunctionPath",
+    #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #           size_in_megabytes: 1,
+    #           storage_efficiency_enabled: false,
+    #           tiering_policy: {
+    #             cooling_period: 1,
+    #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   Specifies the volume that you want to update, formatted
+    #   `fsvol-0123456789abcdef0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ontap_configuration
+    #   The `ONTAP` configuration of the volume you are updating.
+    #   @return [Types::UpdateOntapVolumeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateVolumeRequest AWS API Documentation
+    #
+    class UpdateVolumeRequest < Struct.new(
+      :client_request_token,
+      :volume_id,
+      :ontap_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] volume
+    #   Returned after a successful `UpdateVolume` API operation, describing
+    #   the volume just updated.
+    #   @return [Types::Volume]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateVolumeResponse AWS API Documentation
+    #
+    class UpdateVolumeResponse < Struct.new(
+      :volume)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon FSx for NetApp ONTAP volume.
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the volume.
+    #
+    #   * `CREATED` - The volume is fully available for use.
+    #
+    #   * `CREATING` - Amazon FSx is creating the new volume.
+    #
+    #   * `DELETING` - Amazon FSx is deleting an existing volume.
+    #
+    #   * `FAILED` - Amazon FSx was unable to create the volume.
+    #
+    #   * `MISCONFIGURED` - The volume is in a failed but recoverable state.
+    #
+    #   * `PENDING` - Amazon FSx has not started creating the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] ontap_configuration
+    #   The configuration of an Amazon FSx for NetApp ONTAP volume
+    #   @return [Types::OntapVolumeConfiguration]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] volume_id
+    #   The system-generated, unique ID of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of volume; `ONTAP` is the only valid volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   Describes why the volume lifecycle state changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Volume AWS API Documentation
+    #
+    class Volume < Struct.new(
+      :creation_time,
+      :file_system_id,
+      :lifecycle,
+      :name,
+      :ontap_configuration,
+      :resource_arn,
+      :tags,
+      :volume_id,
+      :volume_type,
+      :lifecycle_transition_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter used to restrict the results of describe calls for Amazon FSx
+    # for NetApp ONTAP volumes. You can use multiple filters to return
+    # results that meet all applied filter requirements.
+    #
+    # @note When making an API call, you may pass VolumeFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
+    #         values: ["VolumeFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name for this filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter. These are all the values for any of the
+    #   applied filters.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/VolumeFilter AWS API Documentation
+    #
+    class VolumeFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No Amazon FSx for NetApp ONTAP volumes were found based upon the
+    # supplied parameters.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/VolumeNotFound AWS API Documentation
+    #
+    class VolumeNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration that Amazon FSx for Windows File Server uses to
     # audit and log user accesses of files, folders, and file shares on the
     # Amazon FSx for Windows File Server file system. For more information,
@@ -3968,8 +5787,9 @@ module Aws::FSx
     #   delivery stream must begin with the `aws-fsx` prefix.
     #
     #   The destination ARN (either CloudWatch Logs log group or Kinesis
-    #   Data Firehose delivery stream) must be in the same AWS partition,
-    #   AWS region, and AWS account as your Amazon FSx file system.
+    #   Data Firehose delivery stream) must be in the same Amazon Web
+    #   Services partition, Amazon Web Services Region, and Amazon Web
+    #   Services account as your Amazon FSx file system.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsAuditLogConfiguration AWS API Documentation
@@ -4036,8 +5856,8 @@ module Aws::FSx
     #
     #   * The destination ARN that you provide (either CloudWatch Logs log
     #     group or Kinesis Data Firehose delivery stream) must be in the
-    #     same AWS partition, AWS region, and AWS account as your Amazon FSx
-    #     file system.
+    #     same Amazon Web Services partition, Amazon Web Services Region,
+    #     and Amazon Web Services account as your Amazon FSx file system.
     #
     #   * The name of the Amazon CloudWatch Logs log group must begin with
     #     the `/aws/fsx` prefix. The name of the Amazon Kinesis Data
@@ -4068,13 +5888,14 @@ module Aws::FSx
     # The configuration for this Microsoft Windows file system.
     #
     # @!attribute [rw] active_directory_id
-    #   The ID for an existing AWS Managed Microsoft Active Directory
-    #   instance that the file system is joined to.
+    #   The ID for an existing Amazon Web Services Managed Microsoft Active
+    #   Directory instance that the file system is joined to.
     #   @return [String]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
     #   The configuration of the self-managed Microsoft Active Directory
-    #   (AD) directory to which the Windows File Server instance is joined.
+    #   (AD) directory to which the Windows File Server or ONTAP storage
+    #   virtual machine (SVM) instance is joined.
     #   @return [Types::SelfManagedActiveDirectoryAttributes]
     #
     # @!attribute [rw] deployment_type

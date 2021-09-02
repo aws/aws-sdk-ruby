@@ -75,6 +75,11 @@ module Aws::Schemas
     #   The ARN of the event bus.
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   Support discovery of schemas in events sent to the bus from another
+    #   account. (default: true)
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -84,6 +89,7 @@ module Aws::Schemas
     class CreateDiscovererInput < Struct.new(
       :description,
       :source_arn,
+      :cross_account,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -95,6 +101,7 @@ module Aws::Schemas
     #       {
     #         description: "__stringMin0Max256",
     #         source_arn: "__stringMin20Max1600", # required
+    #         cross_account: false,
     #         tags: {
     #           "__string" => "__string",
     #         },
@@ -106,6 +113,9 @@ module Aws::Schemas
     # @!attribute [rw] source_arn
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Key-value pairs associated with a resource.
     #   @return [Hash<String,String>]
@@ -115,6 +125,7 @@ module Aws::Schemas
     class CreateDiscovererRequest < Struct.new(
       :description,
       :source_arn,
+      :cross_account,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -135,6 +146,9 @@ module Aws::Schemas
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Key-value pairs associated with a resource.
     #   @return [Hash<String,String>]
@@ -147,6 +161,7 @@ module Aws::Schemas
       :discoverer_id,
       :source_arn,
       :state,
+      :cross_account,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -531,6 +546,9 @@ module Aws::Schemas
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Key-value pairs associated with a resource.
     #   @return [Hash<String,String>]
@@ -543,6 +561,7 @@ module Aws::Schemas
       :discoverer_id,
       :source_arn,
       :state,
+      :cross_account,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -734,6 +753,11 @@ module Aws::Schemas
     #   The state of the discoverer.
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   The Status if the discoverer will discover schemas from events sent
+    #   from another account.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -746,6 +770,7 @@ module Aws::Schemas
       :discoverer_id,
       :source_arn,
       :state,
+      :cross_account,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -784,6 +809,11 @@ module Aws::Schemas
     #   The state of the discoverer.
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   The Status if the discoverer will discover schemas from events sent
+    #   from another account.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the resource.
     #   @return [Hash<String,String>]
@@ -795,6 +825,7 @@ module Aws::Schemas
       :discoverer_id,
       :source_arn,
       :state,
+      :cross_account,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2045,10 +2076,16 @@ module Aws::Schemas
     #   The description of the discoverer to update.
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   Support discovery of schemas in events sent to the bus from another
+    #   account. (default: true)
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UpdateDiscovererInput AWS API Documentation
     #
     class UpdateDiscovererInput < Struct.new(
-      :description)
+      :description,
+      :cross_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2059,6 +2096,7 @@ module Aws::Schemas
     #       {
     #         description: "__stringMin0Max256",
     #         discoverer_id: "__string", # required
+    #         cross_account: false,
     #       }
     #
     # @!attribute [rw] description
@@ -2067,11 +2105,15 @@ module Aws::Schemas
     # @!attribute [rw] discoverer_id
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UpdateDiscovererRequest AWS API Documentation
     #
     class UpdateDiscovererRequest < Struct.new(
       :description,
-      :discoverer_id)
+      :discoverer_id,
+      :cross_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2091,6 +2133,9 @@ module Aws::Schemas
     # @!attribute [rw] state
     #   @return [String]
     #
+    # @!attribute [rw] cross_account
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   Key-value pairs associated with a resource.
     #   @return [Hash<String,String>]
@@ -2103,6 +2148,7 @@ module Aws::Schemas
       :discoverer_id,
       :source_arn,
       :state,
+      :cross_account,
       :tags)
       SENSITIVE = []
       include Aws::Structure

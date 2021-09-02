@@ -21,6 +21,14 @@ module Aws::S3Control
     AccountLevel = Shapes::StructureShape.new(name: 'AccountLevel')
     ActivityMetrics = Shapes::StructureShape.new(name: 'ActivityMetrics')
     Alias = Shapes::StringShape.new(name: 'Alias')
+    AsyncCreationTimestamp = Shapes::TimestampShape.new(name: 'AsyncCreationTimestamp')
+    AsyncErrorDetails = Shapes::StructureShape.new(name: 'AsyncErrorDetails')
+    AsyncOperation = Shapes::StructureShape.new(name: 'AsyncOperation')
+    AsyncOperationName = Shapes::StringShape.new(name: 'AsyncOperationName')
+    AsyncRequestParameters = Shapes::StructureShape.new(name: 'AsyncRequestParameters')
+    AsyncRequestStatus = Shapes::StringShape.new(name: 'AsyncRequestStatus')
+    AsyncRequestTokenARN = Shapes::StringShape.new(name: 'AsyncRequestTokenARN')
+    AsyncResponseDetails = Shapes::StructureShape.new(name: 'AsyncResponseDetails')
     AwsLambdaTransformation = Shapes::StructureShape.new(name: 'AwsLambdaTransformation')
     AwsLambdaTransformationPayload = Shapes::StringShape.new(name: 'AwsLambdaTransformationPayload')
     AwsOrgArn = Shapes::StringShape.new(name: 'AwsOrgArn')
@@ -46,7 +54,11 @@ module Aws::S3Control
     CreateBucketResult = Shapes::StructureShape.new(name: 'CreateBucketResult')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResult = Shapes::StructureShape.new(name: 'CreateJobResult')
+    CreateMultiRegionAccessPointInput = Shapes::StructureShape.new(name: 'CreateMultiRegionAccessPointInput')
+    CreateMultiRegionAccessPointRequest = Shapes::StructureShape.new(name: 'CreateMultiRegionAccessPointRequest')
+    CreateMultiRegionAccessPointResult = Shapes::StructureShape.new(name: 'CreateMultiRegionAccessPointResult')
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
+    CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
     Date = Shapes::TimestampShape.new(name: 'Date')
     Days = Shapes::IntegerShape.new(name: 'Days')
     DaysAfterInitiation = Shapes::IntegerShape.new(name: 'DaysAfterInitiation')
@@ -60,13 +72,19 @@ module Aws::S3Control
     DeleteBucketTaggingRequest = Shapes::StructureShape.new(name: 'DeleteBucketTaggingRequest')
     DeleteJobTaggingRequest = Shapes::StructureShape.new(name: 'DeleteJobTaggingRequest')
     DeleteJobTaggingResult = Shapes::StructureShape.new(name: 'DeleteJobTaggingResult')
+    DeleteMultiRegionAccessPointInput = Shapes::StructureShape.new(name: 'DeleteMultiRegionAccessPointInput')
+    DeleteMultiRegionAccessPointRequest = Shapes::StructureShape.new(name: 'DeleteMultiRegionAccessPointRequest')
+    DeleteMultiRegionAccessPointResult = Shapes::StructureShape.new(name: 'DeleteMultiRegionAccessPointResult')
     DeletePublicAccessBlockRequest = Shapes::StructureShape.new(name: 'DeletePublicAccessBlockRequest')
     DeleteStorageLensConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteStorageLensConfigurationRequest')
     DeleteStorageLensConfigurationTaggingRequest = Shapes::StructureShape.new(name: 'DeleteStorageLensConfigurationTaggingRequest')
     DeleteStorageLensConfigurationTaggingResult = Shapes::StructureShape.new(name: 'DeleteStorageLensConfigurationTaggingResult')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
+    DescribeMultiRegionAccessPointOperationRequest = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationRequest')
+    DescribeMultiRegionAccessPointOperationResult = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationResult')
     Endpoints = Shapes::MapShape.new(name: 'Endpoints')
+    EstablishedMultiRegionAccessPointPolicy = Shapes::StructureShape.new(name: 'EstablishedMultiRegionAccessPointPolicy')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Exclude = Shapes::StructureShape.new(name: 'Exclude')
     ExpirationStatus = Shapes::StringShape.new(name: 'ExpirationStatus')
@@ -97,6 +115,12 @@ module Aws::S3Control
     GetBucketTaggingResult = Shapes::StructureShape.new(name: 'GetBucketTaggingResult')
     GetJobTaggingRequest = Shapes::StructureShape.new(name: 'GetJobTaggingRequest')
     GetJobTaggingResult = Shapes::StructureShape.new(name: 'GetJobTaggingResult')
+    GetMultiRegionAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointPolicyRequest')
+    GetMultiRegionAccessPointPolicyResult = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointPolicyResult')
+    GetMultiRegionAccessPointPolicyStatusRequest = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointPolicyStatusRequest')
+    GetMultiRegionAccessPointPolicyStatusResult = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointPolicyStatusResult')
+    GetMultiRegionAccessPointRequest = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointRequest')
+    GetMultiRegionAccessPointResult = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointResult')
     GetPublicAccessBlockOutput = Shapes::StructureShape.new(name: 'GetPublicAccessBlockOutput')
     GetPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'GetPublicAccessBlockRequest')
     GetStorageLensConfigurationRequest = Shapes::StructureShape.new(name: 'GetStorageLensConfigurationRequest')
@@ -161,6 +185,8 @@ module Aws::S3Control
     ListAccessPointsResult = Shapes::StructureShape.new(name: 'ListAccessPointsResult')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
+    ListMultiRegionAccessPointsRequest = Shapes::StructureShape.new(name: 'ListMultiRegionAccessPointsRequest')
+    ListMultiRegionAccessPointsResult = Shapes::StructureShape.new(name: 'ListMultiRegionAccessPointsResult')
     ListRegionalBucketsRequest = Shapes::StructureShape.new(name: 'ListRegionalBucketsRequest')
     ListRegionalBucketsResult = Shapes::StructureShape.new(name: 'ListRegionalBucketsResult')
     ListStorageLensConfigurationEntry = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationEntry')
@@ -170,6 +196,16 @@ module Aws::S3Control
     MaxLength1024String = Shapes::StringShape.new(name: 'MaxLength1024String')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MinStorageBytesPercentage = Shapes::FloatShape.new(name: 'MinStorageBytesPercentage')
+    MultiRegionAccessPointAlias = Shapes::StringShape.new(name: 'MultiRegionAccessPointAlias')
+    MultiRegionAccessPointClientToken = Shapes::StringShape.new(name: 'MultiRegionAccessPointClientToken')
+    MultiRegionAccessPointName = Shapes::StringShape.new(name: 'MultiRegionAccessPointName')
+    MultiRegionAccessPointPolicyDocument = Shapes::StructureShape.new(name: 'MultiRegionAccessPointPolicyDocument')
+    MultiRegionAccessPointRegionalResponse = Shapes::StructureShape.new(name: 'MultiRegionAccessPointRegionalResponse')
+    MultiRegionAccessPointRegionalResponseList = Shapes::ListShape.new(name: 'MultiRegionAccessPointRegionalResponseList')
+    MultiRegionAccessPointReport = Shapes::StructureShape.new(name: 'MultiRegionAccessPointReport')
+    MultiRegionAccessPointReportList = Shapes::ListShape.new(name: 'MultiRegionAccessPointReportList')
+    MultiRegionAccessPointStatus = Shapes::StringShape.new(name: 'MultiRegionAccessPointStatus')
+    MultiRegionAccessPointsAsyncResponse = Shapes::StructureShape.new(name: 'MultiRegionAccessPointsAsyncResponse')
     NetworkOrigin = Shapes::StringShape.new(name: 'NetworkOrigin')
     NoSuchPublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'NoSuchPublicAccessBlockConfiguration')
     NoSuchPublicAccessBlockConfigurationMessage = Shapes::StringShape.new(name: 'NoSuchPublicAccessBlockConfigurationMessage')
@@ -203,6 +239,7 @@ module Aws::S3Control
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     PrefixLevel = Shapes::StructureShape.new(name: 'PrefixLevel')
     PrefixLevelStorageMetrics = Shapes::StructureShape.new(name: 'PrefixLevelStorageMetrics')
+    ProposedMultiRegionAccessPointPolicy = Shapes::StructureShape.new(name: 'ProposedMultiRegionAccessPointPolicy')
     PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
     PublicAccessBlockEnabled = Shapes::BooleanShape.new(name: 'PublicAccessBlockEnabled')
     PutAccessPointConfigurationForObjectLambdaRequest = Shapes::StructureShape.new(name: 'PutAccessPointConfigurationForObjectLambdaRequest')
@@ -213,10 +250,18 @@ module Aws::S3Control
     PutBucketTaggingRequest = Shapes::StructureShape.new(name: 'PutBucketTaggingRequest')
     PutJobTaggingRequest = Shapes::StructureShape.new(name: 'PutJobTaggingRequest')
     PutJobTaggingResult = Shapes::StructureShape.new(name: 'PutJobTaggingResult')
+    PutMultiRegionAccessPointPolicyInput = Shapes::StructureShape.new(name: 'PutMultiRegionAccessPointPolicyInput')
+    PutMultiRegionAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'PutMultiRegionAccessPointPolicyRequest')
+    PutMultiRegionAccessPointPolicyResult = Shapes::StructureShape.new(name: 'PutMultiRegionAccessPointPolicyResult')
     PutPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'PutPublicAccessBlockRequest')
     PutStorageLensConfigurationRequest = Shapes::StructureShape.new(name: 'PutStorageLensConfigurationRequest')
     PutStorageLensConfigurationTaggingRequest = Shapes::StructureShape.new(name: 'PutStorageLensConfigurationTaggingRequest')
     PutStorageLensConfigurationTaggingResult = Shapes::StructureShape.new(name: 'PutStorageLensConfigurationTaggingResult')
+    Region = Shapes::StructureShape.new(name: 'Region')
+    RegionCreationList = Shapes::ListShape.new(name: 'RegionCreationList')
+    RegionName = Shapes::StringShape.new(name: 'RegionName')
+    RegionReport = Shapes::StructureShape.new(name: 'RegionReport')
+    RegionReportList = Shapes::ListShape.new(name: 'RegionReportList')
     RegionalBucket = Shapes::StructureShape.new(name: 'RegionalBucket')
     RegionalBucketList = Shapes::ListShape.new(name: 'RegionalBucketList')
     Regions = Shapes::ListShape.new(name: 'Regions')
@@ -314,6 +359,29 @@ module Aws::S3Control
     ActivityMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
     ActivityMetrics.struct_class = Types::ActivityMetrics
 
+    AsyncErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "Code"))
+    AsyncErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "Message"))
+    AsyncErrorDetails.add_member(:resource, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "Resource"))
+    AsyncErrorDetails.add_member(:request_id, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "RequestId"))
+    AsyncErrorDetails.struct_class = Types::AsyncErrorDetails
+
+    AsyncOperation.add_member(:creation_time, Shapes::ShapeRef.new(shape: AsyncCreationTimestamp, location_name: "CreationTime"))
+    AsyncOperation.add_member(:operation, Shapes::ShapeRef.new(shape: AsyncOperationName, location_name: "Operation"))
+    AsyncOperation.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, location_name: "RequestTokenARN"))
+    AsyncOperation.add_member(:request_parameters, Shapes::ShapeRef.new(shape: AsyncRequestParameters, location_name: "RequestParameters"))
+    AsyncOperation.add_member(:request_status, Shapes::ShapeRef.new(shape: AsyncRequestStatus, location_name: "RequestStatus"))
+    AsyncOperation.add_member(:response_details, Shapes::ShapeRef.new(shape: AsyncResponseDetails, location_name: "ResponseDetails"))
+    AsyncOperation.struct_class = Types::AsyncOperation
+
+    AsyncRequestParameters.add_member(:create_multi_region_access_point_request, Shapes::ShapeRef.new(shape: CreateMultiRegionAccessPointInput, location_name: "CreateMultiRegionAccessPointRequest"))
+    AsyncRequestParameters.add_member(:delete_multi_region_access_point_request, Shapes::ShapeRef.new(shape: DeleteMultiRegionAccessPointInput, location_name: "DeleteMultiRegionAccessPointRequest"))
+    AsyncRequestParameters.add_member(:put_multi_region_access_point_policy_request, Shapes::ShapeRef.new(shape: PutMultiRegionAccessPointPolicyInput, location_name: "PutMultiRegionAccessPointPolicyRequest"))
+    AsyncRequestParameters.struct_class = Types::AsyncRequestParameters
+
+    AsyncResponseDetails.add_member(:multi_region_access_point_details, Shapes::ShapeRef.new(shape: MultiRegionAccessPointsAsyncResponse, location_name: "MultiRegionAccessPointDetails"))
+    AsyncResponseDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: AsyncErrorDetails, location_name: "ErrorDetails"))
+    AsyncResponseDetails.struct_class = Types::AsyncResponseDetails
+
     AwsLambdaTransformation.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArnString, required: true, location_name: "FunctionArn"))
     AwsLambdaTransformation.add_member(:function_payload, Shapes::ShapeRef.new(shape: AwsLambdaTransformationPayload, location_name: "FunctionPayload"))
     AwsLambdaTransformation.struct_class = Types::AwsLambdaTransformation
@@ -386,6 +454,19 @@ module Aws::S3Control
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     CreateJobResult.struct_class = Types::CreateJobResult
 
+    CreateMultiRegionAccessPointInput.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location_name: "Name"))
+    CreateMultiRegionAccessPointInput.add_member(:public_access_block, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlock"))
+    CreateMultiRegionAccessPointInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionCreationList, required: true, location_name: "Regions"))
+    CreateMultiRegionAccessPointInput.struct_class = Types::CreateMultiRegionAccessPointInput
+
+    CreateMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    CreateMultiRegionAccessPointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: MultiRegionAccessPointClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMultiRegionAccessPointRequest.add_member(:details, Shapes::ShapeRef.new(shape: CreateMultiRegionAccessPointInput, required: true, location_name: "Details"))
+    CreateMultiRegionAccessPointRequest.struct_class = Types::CreateMultiRegionAccessPointRequest
+
+    CreateMultiRegionAccessPointResult.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, location_name: "RequestTokenARN"))
+    CreateMultiRegionAccessPointResult.struct_class = Types::CreateMultiRegionAccessPointResult
+
     DeleteAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeleteAccessPointForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     DeleteAccessPointForObjectLambdaRequest.struct_class = Types::DeleteAccessPointForObjectLambdaRequest
@@ -424,6 +505,17 @@ module Aws::S3Control
 
     DeleteJobTaggingResult.struct_class = Types::DeleteJobTaggingResult
 
+    DeleteMultiRegionAccessPointInput.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location_name: "Name"))
+    DeleteMultiRegionAccessPointInput.struct_class = Types::DeleteMultiRegionAccessPointInput
+
+    DeleteMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DeleteMultiRegionAccessPointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: MultiRegionAccessPointClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteMultiRegionAccessPointRequest.add_member(:details, Shapes::ShapeRef.new(shape: DeleteMultiRegionAccessPointInput, required: true, location_name: "Details"))
+    DeleteMultiRegionAccessPointRequest.struct_class = Types::DeleteMultiRegionAccessPointRequest
+
+    DeleteMultiRegionAccessPointResult.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, location_name: "RequestTokenARN"))
+    DeleteMultiRegionAccessPointResult.struct_class = Types::DeleteMultiRegionAccessPointResult
+
     DeletePublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     DeletePublicAccessBlockRequest.struct_class = Types::DeletePublicAccessBlockRequest
 
@@ -444,8 +536,18 @@ module Aws::S3Control
     DescribeJobResult.add_member(:job, Shapes::ShapeRef.new(shape: JobDescriptor, location_name: "Job"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
 
+    DescribeMultiRegionAccessPointOperationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    DescribeMultiRegionAccessPointOperationRequest.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, required: true, location: "uri", location_name: "request_token"))
+    DescribeMultiRegionAccessPointOperationRequest.struct_class = Types::DescribeMultiRegionAccessPointOperationRequest
+
+    DescribeMultiRegionAccessPointOperationResult.add_member(:async_operation, Shapes::ShapeRef.new(shape: AsyncOperation, location_name: "AsyncOperation"))
+    DescribeMultiRegionAccessPointOperationResult.struct_class = Types::DescribeMultiRegionAccessPointOperationResult
+
     Endpoints.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String)
     Endpoints.value = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
+
+    EstablishedMultiRegionAccessPointPolicy.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    EstablishedMultiRegionAccessPointPolicy.struct_class = Types::EstablishedMultiRegionAccessPointPolicy
 
     Exclude.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     Exclude.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "Regions"))
@@ -546,6 +648,27 @@ module Aws::S3Control
 
     GetJobTaggingResult.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "Tags"))
     GetJobTaggingResult.struct_class = Types::GetJobTaggingResult
+
+    GetMultiRegionAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetMultiRegionAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location: "uri", location_name: "name"))
+    GetMultiRegionAccessPointPolicyRequest.struct_class = Types::GetMultiRegionAccessPointPolicyRequest
+
+    GetMultiRegionAccessPointPolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: MultiRegionAccessPointPolicyDocument, location_name: "Policy"))
+    GetMultiRegionAccessPointPolicyResult.struct_class = Types::GetMultiRegionAccessPointPolicyResult
+
+    GetMultiRegionAccessPointPolicyStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetMultiRegionAccessPointPolicyStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location: "uri", location_name: "name"))
+    GetMultiRegionAccessPointPolicyStatusRequest.struct_class = Types::GetMultiRegionAccessPointPolicyStatusRequest
+
+    GetMultiRegionAccessPointPolicyStatusResult.add_member(:established, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "Established"))
+    GetMultiRegionAccessPointPolicyStatusResult.struct_class = Types::GetMultiRegionAccessPointPolicyStatusResult
+
+    GetMultiRegionAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    GetMultiRegionAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location: "uri", location_name: "name"))
+    GetMultiRegionAccessPointRequest.struct_class = Types::GetMultiRegionAccessPointRequest
+
+    GetMultiRegionAccessPointResult.add_member(:access_point, Shapes::ShapeRef.new(shape: MultiRegionAccessPointReport, location_name: "AccessPoint"))
+    GetMultiRegionAccessPointResult.struct_class = Types::GetMultiRegionAccessPointResult
 
     GetPublicAccessBlockOutput.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     GetPublicAccessBlockOutput.struct_class = Types::GetPublicAccessBlockOutput
@@ -727,6 +850,15 @@ module Aws::S3Control
     ListJobsResult.add_member(:jobs, Shapes::ShapeRef.new(shape: JobListDescriptorList, location_name: "Jobs"))
     ListJobsResult.struct_class = Types::ListJobsResult
 
+    ListMultiRegionAccessPointsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    ListMultiRegionAccessPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
+    ListMultiRegionAccessPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMultiRegionAccessPointsRequest.struct_class = Types::ListMultiRegionAccessPointsRequest
+
+    ListMultiRegionAccessPointsResult.add_member(:access_points, Shapes::ShapeRef.new(shape: MultiRegionAccessPointReportList, location_name: "AccessPoints"))
+    ListMultiRegionAccessPointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
+    ListMultiRegionAccessPointsResult.struct_class = Types::ListMultiRegionAccessPointsResult
+
     ListRegionalBucketsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     ListRegionalBucketsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
     ListRegionalBucketsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -750,6 +882,29 @@ module Aws::S3Control
     ListStorageLensConfigurationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
     ListStorageLensConfigurationsResult.add_member(:storage_lens_configuration_list, Shapes::ShapeRef.new(shape: StorageLensConfigurationList, location_name: "StorageLensConfigurationList"))
     ListStorageLensConfigurationsResult.struct_class = Types::ListStorageLensConfigurationsResult
+
+    MultiRegionAccessPointPolicyDocument.add_member(:established, Shapes::ShapeRef.new(shape: EstablishedMultiRegionAccessPointPolicy, location_name: "Established"))
+    MultiRegionAccessPointPolicyDocument.add_member(:proposed, Shapes::ShapeRef.new(shape: ProposedMultiRegionAccessPointPolicy, location_name: "Proposed"))
+    MultiRegionAccessPointPolicyDocument.struct_class = Types::MultiRegionAccessPointPolicyDocument
+
+    MultiRegionAccessPointRegionalResponse.add_member(:name, Shapes::ShapeRef.new(shape: RegionName, location_name: "Name"))
+    MultiRegionAccessPointRegionalResponse.add_member(:request_status, Shapes::ShapeRef.new(shape: AsyncRequestStatus, location_name: "RequestStatus"))
+    MultiRegionAccessPointRegionalResponse.struct_class = Types::MultiRegionAccessPointRegionalResponse
+
+    MultiRegionAccessPointRegionalResponseList.member = Shapes::ShapeRef.new(shape: MultiRegionAccessPointRegionalResponse, location_name: "Region")
+
+    MultiRegionAccessPointReport.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, location_name: "Name"))
+    MultiRegionAccessPointReport.add_member(:alias, Shapes::ShapeRef.new(shape: MultiRegionAccessPointAlias, location_name: "Alias"))
+    MultiRegionAccessPointReport.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    MultiRegionAccessPointReport.add_member(:public_access_block, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlock"))
+    MultiRegionAccessPointReport.add_member(:status, Shapes::ShapeRef.new(shape: MultiRegionAccessPointStatus, location_name: "Status"))
+    MultiRegionAccessPointReport.add_member(:regions, Shapes::ShapeRef.new(shape: RegionReportList, location_name: "Regions"))
+    MultiRegionAccessPointReport.struct_class = Types::MultiRegionAccessPointReport
+
+    MultiRegionAccessPointReportList.member = Shapes::ShapeRef.new(shape: MultiRegionAccessPointReport, location_name: "AccessPoint")
+
+    MultiRegionAccessPointsAsyncResponse.add_member(:regions, Shapes::ShapeRef.new(shape: MultiRegionAccessPointRegionalResponseList, location_name: "Regions"))
+    MultiRegionAccessPointsAsyncResponse.struct_class = Types::MultiRegionAccessPointsAsyncResponse
 
     NoSuchPublicAccessBlockConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: NoSuchPublicAccessBlockConfigurationMessage, location_name: "Message"))
     NoSuchPublicAccessBlockConfiguration.struct_class = Types::NoSuchPublicAccessBlockConfiguration
@@ -804,6 +959,9 @@ module Aws::S3Control
     PrefixLevelStorageMetrics.add_member(:selection_criteria, Shapes::ShapeRef.new(shape: SelectionCriteria, location_name: "SelectionCriteria"))
     PrefixLevelStorageMetrics.struct_class = Types::PrefixLevelStorageMetrics
 
+    ProposedMultiRegionAccessPointPolicy.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    ProposedMultiRegionAccessPointPolicy.struct_class = Types::ProposedMultiRegionAccessPointPolicy
+
     PublicAccessBlockConfiguration.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicAcls"))
     PublicAccessBlockConfiguration.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "IgnorePublicAcls"))
     PublicAccessBlockConfiguration.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicPolicy"))
@@ -852,6 +1010,18 @@ module Aws::S3Control
 
     PutJobTaggingResult.struct_class = Types::PutJobTaggingResult
 
+    PutMultiRegionAccessPointPolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: MultiRegionAccessPointName, required: true, location_name: "Name"))
+    PutMultiRegionAccessPointPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
+    PutMultiRegionAccessPointPolicyInput.struct_class = Types::PutMultiRegionAccessPointPolicyInput
+
+    PutMultiRegionAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
+    PutMultiRegionAccessPointPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: MultiRegionAccessPointClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    PutMultiRegionAccessPointPolicyRequest.add_member(:details, Shapes::ShapeRef.new(shape: PutMultiRegionAccessPointPolicyInput, required: true, location_name: "Details"))
+    PutMultiRegionAccessPointPolicyRequest.struct_class = Types::PutMultiRegionAccessPointPolicyRequest
+
+    PutMultiRegionAccessPointPolicyResult.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, location_name: "RequestTokenARN"))
+    PutMultiRegionAccessPointPolicyResult.struct_class = Types::PutMultiRegionAccessPointPolicyResult
+
     PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
     PutPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     PutPublicAccessBlockRequest.struct_class = Types::PutPublicAccessBlockRequest
@@ -870,6 +1040,17 @@ module Aws::S3Control
     PutStorageLensConfigurationTaggingRequest.struct_class = Types::PutStorageLensConfigurationTaggingRequest
 
     PutStorageLensConfigurationTaggingResult.struct_class = Types::PutStorageLensConfigurationTaggingResult
+
+    Region.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    Region.struct_class = Types::Region
+
+    RegionCreationList.member = Shapes::ShapeRef.new(shape: Region, location_name: "Region")
+
+    RegionReport.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
+    RegionReport.add_member(:region, Shapes::ShapeRef.new(shape: RegionName, location_name: "Region"))
+    RegionReport.struct_class = Types::RegionReport
+
+    RegionReportList.member = Shapes::ShapeRef.new(shape: RegionReport, location_name: "Region")
 
     RegionalBucket.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
     RegionalBucket.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3RegionalBucketArn, location_name: "BucketArn"))
@@ -1137,6 +1318,23 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_multi_region_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMultiRegionAccessPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/async-requests/mrap/create"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateMultiRegionAccessPointRequest,
+          location_name: "CreateMultiRegionAccessPointRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateMultiRegionAccessPointResult)
+      end)
+
       api.add_operation(:delete_access_point, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAccessPoint"
         o.http_method = "DELETE"
@@ -1239,6 +1437,23 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:delete_multi_region_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMultiRegionAccessPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/async-requests/mrap/delete"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteMultiRegionAccessPointRequest,
+          location_name: "DeleteMultiRegionAccessPointRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: DeleteMultiRegionAccessPointResult)
+      end)
+
       api.add_operation(:delete_public_access_block, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePublicAccessBlock"
         o.http_method = "DELETE"
@@ -1285,6 +1500,18 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_multi_region_access_point_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMultiRegionAccessPointOperation"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/async-requests/mrap/{request_token+}"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeMultiRegionAccessPointOperationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMultiRegionAccessPointOperationResult)
       end)
 
       api.add_operation(:get_access_point, Seahorse::Model::Operation.new.tap do |o|
@@ -1422,6 +1649,42 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:get_multi_region_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMultiRegionAccessPoint"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/mrap/instances/{name}"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointResult)
+      end)
+
+      api.add_operation(:get_multi_region_access_point_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMultiRegionAccessPointPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/mrap/instances/{name}/policy"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyResult)
+      end)
+
+      api.add_operation(:get_multi_region_access_point_policy_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMultiRegionAccessPointPolicyStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/mrap/instances/{name}/policystatus"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMultiRegionAccessPointPolicyStatusResult)
+      end)
+
       api.add_operation(:get_public_access_block, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPublicAccessBlock"
         o.http_method = "GET"
@@ -1502,6 +1765,24 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_multi_region_access_points, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMultiRegionAccessPoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/mrap/instances"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListMultiRegionAccessPointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMultiRegionAccessPointsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1650,6 +1931,23 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:put_multi_region_access_point_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutMultiRegionAccessPointPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/async-requests/mrap/put-policy"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+          "hostPrefix" => "{AccountId}.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: PutMultiRegionAccessPointPolicyRequest,
+          location_name: "PutMultiRegionAccessPointPolicyRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: PutMultiRegionAccessPointPolicyResult)
       end)
 
       api.add_operation(:put_public_access_block, Seahorse::Model::Operation.new.tap do |o|

@@ -76,6 +76,8 @@ module Aws::QuickSight
     ColumnSchemaList = Shapes::ListShape.new(name: 'ColumnSchemaList')
     ColumnTag = Shapes::StructureShape.new(name: 'ColumnTag')
     ColumnTagList = Shapes::ListShape.new(name: 'ColumnTagList')
+    ColumnTagName = Shapes::StringShape.new(name: 'ColumnTagName')
+    ColumnTagNames = Shapes::ListShape.new(name: 'ColumnTagNames')
     ConcurrentUpdatingException = Shapes::StructureShape.new(name: 'ConcurrentUpdatingException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CopySourceArn = Shapes::StringShape.new(name: 'CopySourceArn')
@@ -145,6 +147,7 @@ module Aws::QuickSight
     DataSetSchema = Shapes::StructureShape.new(name: 'DataSetSchema')
     DataSetSummary = Shapes::StructureShape.new(name: 'DataSetSummary')
     DataSetSummaryList = Shapes::ListShape.new(name: 'DataSetSummaryList')
+    DataSetUsageConfiguration = Shapes::StructureShape.new(name: 'DataSetUsageConfiguration')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceCredentials = Shapes::StructureShape.new(name: 'DataSourceCredentials')
     DataSourceErrorInfo = Shapes::StructureShape.new(name: 'DataSourceErrorInfo')
@@ -531,6 +534,7 @@ module Aws::QuickSight
     UIColorPalette = Shapes::StructureShape.new(name: 'UIColorPalette')
     UnsupportedPricingPlanException = Shapes::StructureShape.new(name: 'UnsupportedPricingPlanException')
     UnsupportedUserEditionException = Shapes::StructureShape.new(name: 'UnsupportedUserEditionException')
+    UntagColumnOperation = Shapes::StructureShape.new(name: 'UntagColumnOperation')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'UpdateAccountCustomizationRequest')
@@ -759,6 +763,8 @@ module Aws::QuickSight
 
     ColumnTagList.member = Shapes::ShapeRef.new(shape: ColumnTag)
 
+    ColumnTagNames.member = Shapes::ShapeRef.new(shape: ColumnTagName)
+
     ConcurrentUpdatingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConcurrentUpdatingException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ConcurrentUpdatingException.struct_class = Types::ConcurrentUpdatingException
@@ -834,6 +840,7 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:row_level_permission_tag_configuration, Shapes::ShapeRef.new(shape: RowLevelPermissionTagConfiguration, location_name: "RowLevelPermissionTagConfiguration"))
     CreateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     CreateDataSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDataSetRequest.add_member(:data_set_usage_configuration, Shapes::ShapeRef.new(shape: DataSetUsageConfiguration, location_name: "DataSetUsageConfiguration"))
     CreateDataSetRequest.struct_class = Types::CreateDataSetRequest
 
     CreateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -1110,6 +1117,7 @@ module Aws::QuickSight
     DataSet.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     DataSet.add_member(:row_level_permission_tag_configuration, Shapes::ShapeRef.new(shape: RowLevelPermissionTagConfiguration, location_name: "RowLevelPermissionTagConfiguration"))
     DataSet.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
+    DataSet.add_member(:data_set_usage_configuration, Shapes::ShapeRef.new(shape: DataSetUsageConfiguration, location_name: "DataSetUsageConfiguration"))
     DataSet.struct_class = Types::DataSet
 
     DataSetArnsList.member = Shapes::ShapeRef.new(shape: Arn)
@@ -1142,6 +1150,10 @@ module Aws::QuickSight
     DataSetSummary.struct_class = Types::DataSetSummary
 
     DataSetSummaryList.member = Shapes::ShapeRef.new(shape: DataSetSummary)
+
+    DataSetUsageConfiguration.add_member(:disable_use_as_direct_query_source, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableUseAsDirectQuerySource"))
+    DataSetUsageConfiguration.add_member(:disable_use_as_imported_source, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableUseAsImportedSource"))
+    DataSetUsageConfiguration.struct_class = Types::DataSetUsageConfiguration
 
     DataSource.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DataSource.add_member(:data_source_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DataSourceId"))
@@ -2102,6 +2114,7 @@ module Aws::QuickSight
 
     LogicalTableSource.add_member(:join_instruction, Shapes::ShapeRef.new(shape: JoinInstruction, location_name: "JoinInstruction"))
     LogicalTableSource.add_member(:physical_table_id, Shapes::ShapeRef.new(shape: PhysicalTableId, location_name: "PhysicalTableId"))
+    LogicalTableSource.add_member(:data_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DataSetArn"))
     LogicalTableSource.struct_class = Types::LogicalTableSource
 
     LongList.member = Shapes::ShapeRef.new(shape: Long)
@@ -2560,6 +2573,7 @@ module Aws::QuickSight
     TransformOperation.add_member(:rename_column_operation, Shapes::ShapeRef.new(shape: RenameColumnOperation, location_name: "RenameColumnOperation"))
     TransformOperation.add_member(:cast_column_type_operation, Shapes::ShapeRef.new(shape: CastColumnTypeOperation, location_name: "CastColumnTypeOperation"))
     TransformOperation.add_member(:tag_column_operation, Shapes::ShapeRef.new(shape: TagColumnOperation, location_name: "TagColumnOperation"))
+    TransformOperation.add_member(:untag_column_operation, Shapes::ShapeRef.new(shape: UntagColumnOperation, location_name: "UntagColumnOperation"))
     TransformOperation.struct_class = Types::TransformOperation
 
     TransformOperationList.member = Shapes::ShapeRef.new(shape: TransformOperation)
@@ -2593,6 +2607,10 @@ module Aws::QuickSight
     UnsupportedUserEditionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedUserEditionException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UnsupportedUserEditionException.struct_class = Types::UnsupportedUserEditionException
+
+    UntagColumnOperation.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "ColumnName"))
+    UntagColumnOperation.add_member(:tag_names, Shapes::ShapeRef.new(shape: ColumnTagNames, required: true, location_name: "TagNames"))
+    UntagColumnOperation.struct_class = Types::UntagColumnOperation
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "keys"))
@@ -2717,6 +2735,7 @@ module Aws::QuickSight
     UpdateDataSetRequest.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     UpdateDataSetRequest.add_member(:row_level_permission_tag_configuration, Shapes::ShapeRef.new(shape: RowLevelPermissionTagConfiguration, location_name: "RowLevelPermissionTagConfiguration"))
     UpdateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
+    UpdateDataSetRequest.add_member(:data_set_usage_configuration, Shapes::ShapeRef.new(shape: DataSetUsageConfiguration, location_name: "DataSetUsageConfiguration"))
     UpdateDataSetRequest.struct_class = Types::UpdateDataSetRequest
 
     UpdateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
