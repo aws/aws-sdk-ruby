@@ -133,6 +133,7 @@ module BuildTools
 
       case api['metadata']['signatureVersion']
       when 'v4' then dependencies['aws-sigv4'] = '~> 1.4'
+      when 's3' then dependencies['aws-sigv4'] = '~> 1.4'
       when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
       end
       dependencies
