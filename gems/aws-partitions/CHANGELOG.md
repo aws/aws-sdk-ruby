@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.496.0 (2021-09-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.495.0 (2021-09-02)
 ------------------
 

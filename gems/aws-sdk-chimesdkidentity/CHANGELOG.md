@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2021-09-03)
+------------------
+
+* Feature - Documentation updates for Chime
+
 1.1.0 (2021-09-01)
 ------------------
 

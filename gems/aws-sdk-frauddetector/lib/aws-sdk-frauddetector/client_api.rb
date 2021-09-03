@@ -89,6 +89,9 @@ module Aws::FraudDetector
     ExternalModel = Shapes::StructureShape.new(name: 'ExternalModel')
     ExternalModelEndpointDataBlobMap = Shapes::MapShape.new(name: 'ExternalModelEndpointDataBlobMap')
     ExternalModelList = Shapes::ListShape.new(name: 'ExternalModelList')
+    ExternalModelOutputs = Shapes::StructureShape.new(name: 'ExternalModelOutputs')
+    ExternalModelPredictionMap = Shapes::MapShape.new(name: 'ExternalModelPredictionMap')
+    ExternalModelSummary = Shapes::StructureShape.new(name: 'ExternalModelSummary')
     ExternalModelsMaxResults = Shapes::IntegerShape.new(name: 'ExternalModelsMaxResults')
     FieldValidationMessage = Shapes::StructureShape.new(name: 'FieldValidationMessage')
     FileValidationMessage = Shapes::StructureShape.new(name: 'FileValidationMessage')
@@ -127,6 +130,7 @@ module Aws::FraudDetector
     Label = Shapes::StructureShape.new(name: 'Label')
     LabelSchema = Shapes::StructureShape.new(name: 'LabelSchema')
     Language = Shapes::StringShape.new(name: 'Language')
+    ListOfExternalModelOutputs = Shapes::ListShape.new(name: 'ListOfExternalModelOutputs')
     ListOfLogOddsMetrics = Shapes::ListShape.new(name: 'ListOfLogOddsMetrics')
     ListOfModelScores = Shapes::ListShape.new(name: 'ListOfModelScores')
     ListOfModelVersions = Shapes::ListShape.new(name: 'ListOfModelVersions')
@@ -546,6 +550,17 @@ module Aws::FraudDetector
 
     ExternalModelList.member = Shapes::ShapeRef.new(shape: ExternalModel)
 
+    ExternalModelOutputs.add_member(:external_model, Shapes::ShapeRef.new(shape: ExternalModelSummary, location_name: "externalModel"))
+    ExternalModelOutputs.add_member(:outputs, Shapes::ShapeRef.new(shape: ExternalModelPredictionMap, location_name: "outputs"))
+    ExternalModelOutputs.struct_class = Types::ExternalModelOutputs
+
+    ExternalModelPredictionMap.key = Shapes::ShapeRef.new(shape: string)
+    ExternalModelPredictionMap.value = Shapes::ShapeRef.new(shape: string)
+
+    ExternalModelSummary.add_member(:model_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "modelEndpoint"))
+    ExternalModelSummary.add_member(:model_source, Shapes::ShapeRef.new(shape: ModelSource, location_name: "modelSource"))
+    ExternalModelSummary.struct_class = Types::ExternalModelSummary
+
     FieldValidationMessage.add_member(:field_name, Shapes::ShapeRef.new(shape: string, location_name: "fieldName"))
     FieldValidationMessage.add_member(:identifier, Shapes::ShapeRef.new(shape: string, location_name: "identifier"))
     FieldValidationMessage.add_member(:title, Shapes::ShapeRef.new(shape: string, location_name: "title"))
@@ -614,6 +629,7 @@ module Aws::FraudDetector
 
     GetEventPredictionResult.add_member(:model_scores, Shapes::ShapeRef.new(shape: ListOfModelScores, location_name: "modelScores"))
     GetEventPredictionResult.add_member(:rule_results, Shapes::ShapeRef.new(shape: ListOfRuleResults, location_name: "ruleResults"))
+    GetEventPredictionResult.add_member(:external_model_outputs, Shapes::ShapeRef.new(shape: ListOfExternalModelOutputs, location_name: "externalModelOutputs"))
     GetEventPredictionResult.struct_class = Types::GetEventPredictionResult
 
     GetEventTypesRequest.add_member(:name, Shapes::ShapeRef.new(shape: identifier, location_name: "name"))
@@ -718,6 +734,8 @@ module Aws::FraudDetector
 
     LabelSchema.add_member(:label_mapper, Shapes::ShapeRef.new(shape: labelMapper, required: true, location_name: "labelMapper"))
     LabelSchema.struct_class = Types::LabelSchema
+
+    ListOfExternalModelOutputs.member = Shapes::ShapeRef.new(shape: ExternalModelOutputs)
 
     ListOfLogOddsMetrics.member = Shapes::ShapeRef.new(shape: LogOddsMetric)
 

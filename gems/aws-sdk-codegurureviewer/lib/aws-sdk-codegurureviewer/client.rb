@@ -1050,7 +1050,7 @@ module Aws::CodeGuruReviewer
     #   resp.recommendation_summaries[0].start_line #=> Integer
     #   resp.recommendation_summaries[0].end_line #=> Integer
     #   resp.recommendation_summaries[0].description #=> String
-    #   resp.recommendation_summaries[0].recommendation_category #=> String, one of "AWSBestPractices", "AWSCloudFormationIssues", "DuplicateCode", "CodeMaintenanceIssues", "ConcurrencyIssues", "InputValidations", "PythonBestPractices", "JavaBestPractices", "ResourceLeaks", "SecurityIssues"
+    #   resp.recommendation_summaries[0].recommendation_category #=> String, one of "AWSBestPractices", "AWSCloudFormationIssues", "DuplicateCode", "CodeMaintenanceIssues", "ConcurrencyIssues", "InputValidations", "PythonBestPractices", "JavaBestPractices", "ResourceLeaks", "SecurityIssues", "CodeInconsistencies"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListRecommendations AWS API Documentation
@@ -1357,7 +1357,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

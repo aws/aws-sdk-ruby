@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2021-09-03)
+------------------
+
+* Feature - Added support for CodeInconsistencies detectors
+
 1.21.0 (2021-09-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-09-03)
+------------------
+
+* Feature - This release adds a new API CreateOrder.
+
 1.20.0 (2021-09-01)
 ------------------
 

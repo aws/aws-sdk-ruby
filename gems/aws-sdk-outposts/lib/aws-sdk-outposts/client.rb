@@ -327,6 +327,61 @@ module Aws::Outposts
 
     # @!group API Operations
 
+    # Creates an order for an Outpost.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    # @option params [required, Array<Types::LineItemRequest>] :line_items
+    #   The line items that make up the order.
+    #
+    # @option params [required, String] :payment_option
+    #   The payment option for the order.
+    #
+    # @option params [String] :payment_term
+    #   The payment terms for the order.
+    #
+    # @return [Types::CreateOrderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOrderOutput#order #order} => Types::Order
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_order({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     line_items: [ # required
+    #       {
+    #         catalog_item_id: "SkuCode",
+    #         quantity: 1,
+    #       },
+    #     ],
+    #     payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
+    #     payment_term: "THREE_YEARS", # accepts THREE_YEARS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.order.outpost_id #=> String
+    #   resp.order.order_id #=> String
+    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED"
+    #   resp.order.line_items #=> Array
+    #   resp.order.line_items[0].catalog_item_id #=> String
+    #   resp.order.line_items[0].line_item_id #=> String
+    #   resp.order.line_items[0].quantity #=> Integer
+    #   resp.order.line_items[0].status #=> String
+    #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
+    #   resp.order.order_submission_date #=> Time
+    #   resp.order.order_fulfilled_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrder AWS API Documentation
+    #
+    # @overload create_order(params = {})
+    # @param [Hash] params ({})
+    def create_order(params = {}, options = {})
+      req = build_request(:create_order, params)
+      req.send_request(options)
+    end
+
     # Creates an Outpost.
     #
     # You can specify `AvailabilityZone` or `AvailabilityZoneId`.
@@ -734,7 +789,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
