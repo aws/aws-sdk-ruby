@@ -853,6 +853,7 @@ module Aws::ForecastService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         optimization_metric: "WAPE", # accepts WAPE, RMSE, AverageWeightedQuantileLoss, MASE, MAPE
     #       }
     #
     # @!attribute [rw] predictor_name
@@ -915,6 +916,12 @@ module Aws::ForecastService
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_ml_override_strategy
+    #   <note markdown="1"> The `LatencyOptimized` AutoML override strategy is only available in
+    #   private beta. Contact AWS Support or your account manager to learn
+    #   more about access privileges.
+    #
+    #    </note>
+    #
     #   Used to overide the default AutoML strategy, which is to optimize
     #   predictor accuracy. To apply an AutoML strategy that minimizes
     #   training time, use `LatencyOptimized`.
@@ -1018,6 +1025,10 @@ module Aws::ForecastService
     #     of `aws` do not count against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] optimization_metric
+    #   The accuracy metric used to optimize the predictor.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreatePredictorRequest AWS API Documentation
     #
     class CreatePredictorRequest < Struct.new(
@@ -1034,7 +1045,8 @@ module Aws::ForecastService
       :input_data_config,
       :featurization_config,
       :encryption_config,
-      :tags)
+      :tags,
+      :optimization_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2075,6 +2087,12 @@ module Aws::ForecastService
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_ml_override_strategy
+    #   <note markdown="1"> The `LatencyOptimized` AutoML override strategy is only available in
+    #   private beta. Contact AWS Support or your account manager to learn
+    #   more about access privileges.
+    #
+    #    </note>
+    #
     #   The AutoML strategy used to train the predictor. Unless
     #   `LatencyOptimized` is specified, the AutoML strategy optimizes
     #   predictor accuracy.
@@ -2181,6 +2199,10 @@ module Aws::ForecastService
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
+    # @!attribute [rw] optimization_metric
+    #   The accuracy metric used to optimize the predictor.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorResponse AWS API Documentation
     #
     class DescribePredictorResponse < Struct.new(
@@ -2205,7 +2227,8 @@ module Aws::ForecastService
       :status,
       :message,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :optimization_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2249,7 +2272,7 @@ module Aws::ForecastService
     # predictor. This object is part of the Metrics object.
     #
     # @!attribute [rw] forecast_type
-    #   The Forecast type used to compute WAPE and RMSE.
+    #   The Forecast type used to compute WAPE, MAPE, MASE, and RMSE.
     #   @return [String]
     #
     # @!attribute [rw] wape
@@ -2260,12 +2283,22 @@ module Aws::ForecastService
     #   The root-mean-square error (RMSE).
     #   @return [Float]
     #
+    # @!attribute [rw] mase
+    #   The Mean Absolute Scaled Error (MASE)
+    #   @return [Float]
+    #
+    # @!attribute [rw] mape
+    #   The Mean Absolute Percentage Error (MAPE)
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ErrorMetric AWS API Documentation
     #
     class ErrorMetric < Struct.new(
       :forecast_type,
       :wape,
-      :rmse)
+      :rmse,
+      :mase,
+      :mape)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2760,6 +2793,12 @@ module Aws::ForecastService
     #   @return [Array<Types::EvaluationResult>]
     #
     # @!attribute [rw] auto_ml_override_strategy
+    #   <note markdown="1"> The `LatencyOptimized` AutoML override strategy is only available in
+    #   private beta. Contact AWS Support or your account manager to learn
+    #   more about access privileges.
+    #
+    #    </note>
+    #
     #   The AutoML strategy used to train the predictor. Unless
     #   `LatencyOptimized` is specified, the AutoML strategy optimizes
     #   predictor accuracy.
@@ -2767,11 +2806,16 @@ module Aws::ForecastService
     #   This parameter is only valid for predictors trained using AutoML.
     #   @return [String]
     #
+    # @!attribute [rw] optimization_metric
+    #   The accuracy metric used to optimize the predictor.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetricsResponse AWS API Documentation
     #
     class GetAccuracyMetricsResponse < Struct.new(
       :predictor_evaluation_results,
-      :auto_ml_override_strategy)
+      :auto_ml_override_strategy,
+      :optimization_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3508,16 +3552,23 @@ module Aws::ForecastService
     #   @return [Array<Types::WeightedQuantileLoss>]
     #
     # @!attribute [rw] error_metrics
-    #   Provides detailed error metrics on forecast type, root-mean
-    #   square-error (RMSE), and weighted average percentage error (WAPE).
+    #   Provides detailed error metrics for each forecast type. Metrics
+    #   include root-mean square-error (RMSE), mean absolute percentage
+    #   error (MAPE), mean absolute scaled error (MASE), and weighted
+    #   average percentage error (WAPE).
     #   @return [Array<Types::ErrorMetric>]
+    #
+    # @!attribute [rw] average_weighted_quantile_loss
+    #   The average value of all weighted quantile losses.
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Metrics AWS API Documentation
     #
     class Metrics < Struct.new(
       :rmse,
       :weighted_quantile_losses,
-      :error_metrics)
+      :error_metrics,
+      :average_weighted_quantile_loss)
       SENSITIVE = []
       include Aws::Structure
     end

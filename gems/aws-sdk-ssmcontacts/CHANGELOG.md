@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-09-07)
+------------------
+
+* Feature - Added SDK examples for SSM-Contacts.
+
 1.6.0 (2021-09-01)
 ------------------
 

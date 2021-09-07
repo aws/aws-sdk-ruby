@@ -369,6 +369,21 @@ module Aws::SSMContacts
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To accept a page during and engagement
+    #
+    #   # The following accept-page operation uses an accept code sent to the contact channel to accept a page.
+    #
+    #   resp = client.accept_page({
+    #     accept_code: "425440", 
+    #     accept_type: "READ", 
+    #     page_id: "arn:aws:ssm-contacts:us-east-2:682428703967:page/akuam/94ea0c7b-56d9-46c3-b84a-a37c8b067ad3", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_page({
@@ -400,6 +415,20 @@ module Aws::SSMContacts
     #   contact.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Activate a contact's contact channel
+    #
+    #   # The following activate-contact-channel example activates a contact channel and makes it usable as part of an incident.
+    #
+    #   resp = client.activate_contact_channel({
+    #     activation_code: "466136", 
+    #     contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -442,7 +471,7 @@ module Aws::SSMContacts
     #   first Region of your replication set.
     #
     # @option params [String] :idempotency_token
-    #   A token ensuring that the action is called only once with the
+    #   A token ensuring that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -451,6 +480,28 @@ module Aws::SSMContacts
     # @return [Types::CreateContactResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContactResult#contact_arn #contact_arn} => String
+    #
+    #
+    # @example Example: To create a contact
+    #
+    #   # The following create-contact example creates a contact in your environment with a blank plan. The plan can be updated
+    #   # after creating contact channels. Use the create-contact-channel operation with the output ARN of this command. After you
+    #   # have created contact channels for this contact use update-contact to update the plan.
+    #
+    #   resp = client.create_contact({
+    #     alias: "akuam", 
+    #     display_name: "Akua Mansa", 
+    #     plan: {
+    #       stages: [
+    #       ], 
+    #     }, 
+    #     type: "PERSONAL", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -535,7 +586,7 @@ module Aws::SSMContacts
     #   until it has been activated.
     #
     # @option params [String] :idempotency_token
-    #   A token ensuring that the action is called only once with the
+    #   A token ensuring that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -544,6 +595,26 @@ module Aws::SSMContacts
     # @return [Types::CreateContactChannelResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContactChannelResult#contact_channel_arn #contact_channel_arn} => String
+    #
+    #
+    # @example Example: To create a contact channel
+    #
+    #   # Creates a contact channel of type SMS for the contact Akua Mansa. Contact channels can be created of type SMS, EMAIL, or
+    #   # VOICE.
+    #
+    #   resp = client.create_contact_channel({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam", 
+    #     delivery_address: {
+    #       simple_address: "+15005550199", 
+    #     }, 
+    #     name: "akuas sms-test", 
+    #     type: "SMS", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contact_channel_arn: "arn:aws:ssm-contacts:us-east-1:111122223333:contact-channel/akuam/02f506b9-ea5d-4764-af89-2daa793ff024", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -580,6 +651,21 @@ module Aws::SSMContacts
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To deactivate a contact channel
+    #
+    #   # The following ``deactivate-contact-channel`` example deactivates a contact channel. Deactivating a contact channel means
+    #   # the contact channel will no longer be paged during an incident. You can also reactivate a contact channel at any time
+    #   # using the activate-contact-channel operation.
+    #
+    #   resp = client.deactivate_contact_channel({
+    #     contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.deactivate_contact_channel({
@@ -606,6 +692,20 @@ module Aws::SSMContacts
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a contact
+    #
+    #   # The following delete-contact example deletes a contact. The contact will no longer be reachable from any escalation plan
+    #   # that refers to them.
+    #
+    #   resp = client.delete_contact({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/alejr", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_contact({
@@ -631,6 +731,20 @@ module Aws::SSMContacts
     #   The Amazon Resource Name (ARN) of the contact channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a contact channel
+    #
+    #   # The following delete-contact-channel example deletes a contact channel. Deleting a contact channel ensures the contact
+    #   # channel will not be paged during an incident.
+    #
+    #   resp = client.delete_contact_channel({
+    #     contact_channel_id: "arn:aws:ssm-contacts:us-east-1:111122223333:contact-channel/akuam/13149bad-52ee-45ea-ae1e-45857f78f9b2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -667,6 +781,28 @@ module Aws::SSMContacts
     #   * {Types::DescribeEngagementResult#incident_id #incident_id} => String
     #   * {Types::DescribeEngagementResult#start_time #start_time} => Time
     #   * {Types::DescribeEngagementResult#stop_time #stop_time} => Time
+    #
+    #
+    # @example Example: To describe the details of an engagement
+    #
+    #   # The following describe-engagement example lists the details of an engagement to a contact or escalation plan. The
+    #   # subject and content are sent to the contact channels.
+    #
+    #   resp = client.describe_engagement({
+    #     engagement_id: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation", 
+    #     content: "Testing engagements", 
+    #     engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356", 
+    #     public_content: "Testing engagements", 
+    #     public_subject: "test", 
+    #     sender: "tester", 
+    #     start_time: Time.parse("$2021-05-18T18:25:41.151000+00:00"), 
+    #     subject: "test", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -716,6 +852,31 @@ module Aws::SSMContacts
     #   * {Types::DescribePageResult#read_time #read_time} => Time
     #   * {Types::DescribePageResult#delivery_time #delivery_time} => Time
     #
+    #
+    # @example Example: To list the details of a page to a contact channel
+    #
+    #   # The following describe-page example lists details of a page to a contact channel. The page will include the subject and
+    #   # content provided.
+    #
+    #   resp = client.describe_page({
+    #     page_id: "arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #     content: "Testing engagements", 
+    #     delivery_time: Time.parse("2021-05-18T18:43:55.265000+00:00"), 
+    #     engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0", 
+    #     page_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93", 
+    #     public_content: "Testing engagements", 
+    #     public_subject: "test", 
+    #     read_time: Time.parse("2021-05-18T18:43:55.708000+00:00"), 
+    #     sender: "tester", 
+    #     sent_time: Time.parse("2021-05-18T18:43:29.301000+00:00"), 
+    #     subject: "test", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_page({
@@ -758,6 +919,113 @@ module Aws::SSMContacts
     #   * {Types::GetContactResult#display_name #display_name} => String
     #   * {Types::GetContactResult#type #type} => String
     #   * {Types::GetContactResult#plan #plan} => Types::Plan
+    #
+    #
+    # @example Example: Example 1: To describe a contact plan
+    #
+    #   # The following get-contact example describes a contact.
+    #
+    #   resp = client.get_contact({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alias: "akuam", 
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #     display_name: "Akua Mansa", 
+    #     plan: {
+    #       stages: [
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               channel_target_info: {
+    #                 contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/beb25840-5ac8-4644-95cc-7a8de390fa65", 
+    #                 retry_interval_in_minutes: 1, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               channel_target_info: {
+    #                 contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/49f3c24d-5f9f-4638-ae25-3f49e04229ad", 
+    #                 retry_interval_in_minutes: 1, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               channel_target_info: {
+    #                 contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/77d4f447-f619-4954-afff-85551e369c2a", 
+    #                 retry_interval_in_minutes: 1, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     type: "PERSONAL", 
+    #   }
+    #
+    # @example Example: Example 2: To describe an escalation plan
+    #
+    #   # The following get-contact example describes an escalation plan.
+    #
+    #   resp = client.get_contact({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alias: "example_escalation", 
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation", 
+    #     display_name: "Example Escalation Plan", 
+    #     plan: {
+    #       stages: [
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               contact_target_info: {
+    #                 contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #                 is_essential: true, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               contact_target_info: {
+    #                 contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/alejr", 
+    #                 is_essential: false, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           duration_in_minutes: 0, 
+    #           targets: [
+    #             {
+    #               contact_target_info: {
+    #                 contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/anasi", 
+    #                 is_essential: false, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     type: "ESCALATION", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -803,6 +1071,27 @@ module Aws::SSMContacts
     #   * {Types::GetContactChannelResult#delivery_address #delivery_address} => Types::ContactChannelAddress
     #   * {Types::GetContactChannelResult#activation_status #activation_status} => String
     #
+    #
+    # @example Example: To list the details of a contact channel
+    #
+    #   # The following get-contact-channel example lists the details of a contact channel.
+    #
+    #   resp = client.get_contact_channel({
+    #     contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     activation_status: "ACTIVATED", 
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #     contact_channel_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #     delivery_address: {
+    #       simple_address: "+15005550199", 
+    #     }, 
+    #     name: "akuas sms", 
+    #     type: "SMS", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_contact_channel({
@@ -837,6 +1126,21 @@ module Aws::SSMContacts
     #
     #   * {Types::GetContactPolicyResult#contact_arn #contact_arn} => String
     #   * {Types::GetContactPolicyResult#policy #policy} => String
+    #
+    #
+    # @example Example: To list the resource policies of a contact
+    #
+    #   # The following get-contact-policy example lists the resource policies associated with the specified contact.
+    #
+    #   resp = client.get_contact_policy({
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam", 
+    #     policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"SharePolicyForDocumentationDralia\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"222233334444\"},\"Action\":[\"ssm-contacts:GetContact\",\"ssm-contacts:StartEngagement\",\"ssm-contacts:DescribeEngagement\",\"ssm-contacts:ListPagesByEngagement\",\"ssm-contacts:StopEngagement\"],\"Resource\":[\"arn:aws:ssm-contacts:*:111122223333:contact/akuam\",\"arn:aws:ssm-contacts:*:111122223333:engagement/akuam/*\"]}]}", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -875,6 +1179,31 @@ module Aws::SSMContacts
     #   * {Types::ListContactChannelsResult#contact_channels #contact_channels} => Array&lt;Types::ContactChannel&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the contact channels of a contact
+    #
+    #   # The following list-contact-channels example lists the available contact channels of the specified contact.
+    #
+    #   resp = client.list_contact_channels({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contact_channels: [
+    #       {
+    #         activation_status: "ACTIVATED", 
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #         contact_channel_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #         delivery_address: {
+    #           simple_address: "+15005550100", 
+    #         }, 
+    #         name: "akuas sms", 
+    #         type: "SMS", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -928,6 +1257,44 @@ module Aws::SSMContacts
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list all escalation plans and contacts
+    #
+    #   # The following list-contacts example lists the contacts and escalation plans in your account.
+    #
+    #   resp = client.list_contacts({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     contacts: [
+    #       {
+    #         alias: "akuam", 
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #         display_name: "Akua Mansa", 
+    #         type: "PERSONAL", 
+    #       }, 
+    #       {
+    #         alias: "alejr", 
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/alejr", 
+    #         display_name: "Alejandro Rosalez", 
+    #         type: "PERSONAL", 
+    #       }, 
+    #       {
+    #         alias: "anasi", 
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/anasi", 
+    #         display_name: "Ana Carolina Silva", 
+    #         type: "PERSONAL", 
+    #       }, 
+    #       {
+    #         alias: "example_escalation", 
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation", 
+    #         display_name: "Example Escalation", 
+    #         type: "ESCALATION", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contacts({
@@ -976,6 +1343,45 @@ module Aws::SSMContacts
     #   * {Types::ListEngagementsResult#engagements #engagements} => Array&lt;Types::Engagement&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list all engagements
+    #
+    #   # The following list-engagements example lists engagements to escalation plans and contacts. You can also list engagements
+    #   # for a single incident.
+    #
+    #   resp = client.list_engagements({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     engagements: [
+    #       {
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #         engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/91792571-0b53-4821-9f73-d25d13d9e529", 
+    #         sender: "cli", 
+    #         start_time: Time.parse("2021-05-18T20:37:50.300000+00:00"), 
+    #       }, 
+    #       {
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #         engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0", 
+    #         sender: "cli", 
+    #         start_time: Time.parse("2021-05-18T18:40:26.666000+00:00"), 
+    #       }, 
+    #       {
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation", 
+    #         engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356", 
+    #         sender: "cli", 
+    #         start_time: Time.parse("2021-05-18T18:25:41.151000+00:00"), 
+    #       }, 
+    #       {
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #         engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/607ced0e-e8fa-4ea7-8958-a237b8803f8f", 
+    #         sender: "cli", 
+    #         start_time: Time.parse("2021-05-18T18:20:58.093000+00:00"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1029,6 +1435,39 @@ module Aws::SSMContacts
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list page receipts
+    #
+    #   # The following command-name example lists whether a page was received or not by a contact.
+    #
+    #   resp = client.list_page_receipts({
+    #     page_id: "arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/94ea0c7b-56d9-46c3-b84a-a37c8b067ad3", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     receipts: [
+    #       {
+    #         contact_channel_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #         receipt_info: "425440", 
+    #         receipt_time: Time.parse("2021-05-18T20:42:57.485000+00:00"), 
+    #         receipt_type: "DELIVERED", 
+    #       }, 
+    #       {
+    #         contact_channel_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #         receipt_info: "425440", 
+    #         receipt_time: Time.parse("2021-05-18T20:42:57.907000+00:00"), 
+    #         receipt_type: "READ", 
+    #       }, 
+    #       {
+    #         contact_channel_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/fc7405c4-46b2-48b7-87b2-93e2f225b90d", 
+    #         receipt_info: "SM6656c19132f1465f9c9c1123a5dde7c9", 
+    #         receipt_time: Time.parse("2021-05-18T20:40:52.962000+00:00"), 
+    #         receipt_type: "SENT", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_page_receipts({
@@ -1074,6 +1513,30 @@ module Aws::SSMContacts
     #   * {Types::ListPagesByContactResult#pages #pages} => Array&lt;Types::Page&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list pages by contact
+    #
+    #   # The following list-pages-by-contact example lists all pages to the specified contact.
+    #
+    #   resp = client.list_pages_by_contact({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     pages: [
+    #       {
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #         delivery_time: Time.parse("2021-05-18T18:43:55.265000+00:00"), 
+    #         engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0", 
+    #         page_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93", 
+    #         read_time: Time.parse("2021-05-18T18:43:55.708000+00:00"), 
+    #         sender: "cli", 
+    #         sent_time: Time.parse("2021-05-18T18:43:29.301000+00:00"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1125,6 +1588,28 @@ module Aws::SSMContacts
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list pages to contact channels started from an engagement.
+    #
+    #   # The following list-pages-by-engagement example lists the pages that occurred while engaging the defined engagement plan.
+    #
+    #   resp = client.list_pages_by_engagement({
+    #     engagement_id: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     pages: [
+    #       {
+    #         contact_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #         engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/78a29753-3674-4ac5-9f83-0468563567f0", 
+    #         page_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:page/akuam/ad0052bd-e606-498a-861b-25726292eb93", 
+    #         sender: "cli", 
+    #         sent_time: Time.parse("2021-05-18T18:40:27.245000+00:00"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pages_by_engagement({
@@ -1164,6 +1649,25 @@ module Aws::SSMContacts
     #
     #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: To list tags for a contact
+    #
+    #   # The following list-tags-for-resource example lists the tags of the specified contact.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: [
+    #       {
+    #         key: "group1", 
+    #         value: "1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
@@ -1195,6 +1699,21 @@ module Aws::SSMContacts
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To share a contact and engagements
+    #
+    #   # The following put-contact-policy example adds a resource policy to the contact Akua that shares the contact and related
+    #   # engagements with the principal.
+    #
+    #   resp = client.put_contact_policy({
+    #     contact_arn: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam", 
+    #     policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"ExampleResourcePolicy\",\"Action\":[\"ssm-contacts:GetContact\",\"ssm-contacts:StartEngagement\",\"ssm-contacts:DescribeEngagement\",\"ssm-contacts:ListPagesByEngagement\",\"ssm-contacts:StopEngagement\"],\"Principal\":{\"AWS\":\"222233334444\"},\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:ssm-contacts:*:111122223333:contact/akuam\",\"arn:aws:ssm-contacts:*:111122223333:engagement/akuam/*\"]}]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_contact_policy({
@@ -1213,13 +1732,26 @@ module Aws::SSMContacts
 
     # Sends an activation code to a contact channel. The contact can use
     # this code to activate the contact channel in the console or with the
-    # `ActivateChannel` action. Incident Manager can't engage a contact
+    # `ActivateChannel` operation. Incident Manager can't engage a contact
     # channel until it has been activated.
     #
     # @option params [required, String] :contact_channel_id
     #   The Amazon Resource Name (ARN) of the contact channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To send an activation code
+    #
+    #   # The following send-activation-code example sends an activation code and message to the specified contact channel.
+    #
+    #   resp = client.send_activation_code({
+    #     contact_channel_id: "arn:aws:ssm-contacts:us-east-1:111122223333:contact-channel/akuam/8ddae2d1-12c8-4e45-b852-c8587266c400", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1265,7 +1797,7 @@ module Aws::SSMContacts
     #   The ARN of the incident that the engagement is part of.
     #
     # @option params [String] :idempotency_token
-    #   A token ensuring that the action is called only once with the
+    #   A token ensuring that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1274,6 +1806,47 @@ module Aws::SSMContacts
     # @return [Types::StartEngagementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartEngagementResult#engagement_arn #engagement_arn} => String
+    #
+    #
+    # @example Example: Example 1: To page a contact's contact channels
+    #
+    #   # The following start-engagement pages contact's contact channels. Sender, subject, public-subject, and public-content are
+    #   # all free from fields. Incident Manager sends the subject and content to the provided VOICE or EMAIL contact channels.
+    #   # Incident Manager sends the public-subject and public-content to the provided SMS contact channels. Sender is used to
+    #   # track who started the engagement.
+    #
+    #   resp = client.start_engagement({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #     content: "Testing engagements", 
+    #     public_content: "Testing engagements", 
+    #     public_subject: "test", 
+    #     sender: "tester", 
+    #     subject: "test", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/akuam/607ced0e-e8fa-4ea7-8958-a237b8803f8f", 
+    #   }
+    #
+    # @example Example: Example 2: To page a contact in the provided escalation plan.
+    #
+    #   # The following start-engagement engages contact's through an escalation plan. Each contact is paged according to their
+    #   # engagement plan.
+    #
+    #   resp = client.start_engagement({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/example_escalation", 
+    #     content: "Testing engagements", 
+    #     public_content: "Testing engagements", 
+    #     public_subject: "test", 
+    #     sender: "tester", 
+    #     subject: "test", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     engagement_arn: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1312,6 +1885,19 @@ module Aws::SSMContacts
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To stop an engagement
+    #
+    #   # The following stop-engagement example stops an engagement from paging further contacts and contact channels.
+    #
+    #   resp = client.stop_engagement({
+    #     engagement_id: "arn:aws:ssm-contacts:us-east-2:111122223333:engagement/example_escalation/69e40ce1-8dbb-4d57-8962-5fbe7fc53356", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_engagement({
@@ -1338,6 +1924,25 @@ module Aws::SSMContacts
     #   A list of tags that you are adding to the contact or escalation plan.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To tag a contact
+    #
+    #   # The following tag-resource example tags a specified contact with the provided tag key value pair.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam", 
+    #     tags: [
+    #       {
+    #         key: "group1", 
+    #         value: "1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1370,6 +1975,22 @@ module Aws::SSMContacts
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove tags from a contact
+    #
+    #   # The following untag-resource example removes the group1 tag from the specified contact.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:ssm-contacts:us-east-1:111122223333:contact/akuam", 
+    #     tag_keys: [
+    #       "group1", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
@@ -1401,6 +2022,57 @@ module Aws::SSMContacts
     #   contact specified contacts.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update the engagement plan of contact
+    #
+    #   # The following update-contact example updates the engagement plan of the contact Akua to include the three types of
+    #   # contacts channels. This is done after creating contact channels for Akua.
+    #
+    #   resp = client.update_contact({
+    #     contact_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact/akuam", 
+    #     plan: {
+    #       stages: [
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               channel_target_info: {
+    #                 contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/beb25840-5ac8-4644-95cc-7a8de390fa65", 
+    #                 retry_interval_in_minutes: 1, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               channel_target_info: {
+    #                 contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/49f3c24d-5f9f-4638-ae25-3f49e04229ad", 
+    #                 retry_interval_in_minutes: 1, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         {
+    #           duration_in_minutes: 5, 
+    #           targets: [
+    #             {
+    #               channel_target_info: {
+    #                 contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/77d4f447-f619-4954-afff-85551e369c2a", 
+    #                 retry_interval_in_minutes: 1, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1444,13 +2116,30 @@ module Aws::SSMContacts
     #   update.
     #
     # @option params [String] :name
-    #   The name of the contact channel
+    #   The name of the contact channel.
     #
     # @option params [Types::ContactChannelAddress] :delivery_address
     #   The details that Incident Manager uses when trying to engage the
     #   contact channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update a contact channel
+    #
+    #   # The following update-contact-channel example updates the name and delivery address of a contact channel.
+    #
+    #   resp = client.update_contact_channel({
+    #     contact_channel_id: "arn:aws:ssm-contacts:us-east-2:111122223333:contact-channel/akuam/49f3c24d-5f9f-4638-ae25-3f49e04229ad", 
+    #     delivery_address: {
+    #       simple_address: "+15005550198", 
+    #     }, 
+    #     name: "akuas voice channel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1484,7 +2173,7 @@ module Aws::SSMContacts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmcontacts'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

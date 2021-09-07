@@ -1078,6 +1078,12 @@ module Aws::ForecastService
     #   for your training data. In this case, `PerformHPO` must be false.
     #
     # @option params [String] :auto_ml_override_strategy
+    #   <note markdown="1"> The `LatencyOptimized` AutoML override strategy is only available in
+    #   private beta. Contact AWS Support or your account manager to learn
+    #   more about access privileges.
+    #
+    #    </note>
+    #
     #   Used to overide the default AutoML strategy, which is to optimize
     #   predictor accuracy. To apply an AutoML strategy that minimizes
     #   training time, use `LatencyOptimized`.
@@ -1171,6 +1177,9 @@ module Aws::ForecastService
     #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
     #     count against your tags per resource limit.
     #
+    # @option params [String] :optimization_metric
+    #   The accuracy metric used to optimize the predictor.
+    #
     # @return [Types::CreatePredictorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePredictorResponse#predictor_arn #predictor_arn} => String
@@ -1254,6 +1263,7 @@ module Aws::ForecastService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     optimization_metric: "WAPE", # accepts WAPE, RMSE, AverageWeightedQuantileLoss, MASE, MAPE
     #   })
     #
     # @example Response structure
@@ -1966,6 +1976,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#message #message} => String
     #   * {Types::DescribePredictorResponse#creation_time #creation_time} => Time
     #   * {Types::DescribePredictorResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribePredictorResponse#optimization_metric #optimization_metric} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2033,6 +2044,7 @@ module Aws::ForecastService
     #   resp.message #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.optimization_metric #=> String, one of "WAPE", "RMSE", "AverageWeightedQuantileLoss", "MASE", "MAPE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictor AWS API Documentation
     #
@@ -2135,6 +2147,7 @@ module Aws::ForecastService
     #
     #   * {Types::GetAccuracyMetricsResponse#predictor_evaluation_results #predictor_evaluation_results} => Array&lt;Types::EvaluationResult&gt;
     #   * {Types::GetAccuracyMetricsResponse#auto_ml_override_strategy #auto_ml_override_strategy} => String
+    #   * {Types::GetAccuracyMetricsResponse#optimization_metric #optimization_metric} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2159,7 +2172,11 @@ module Aws::ForecastService
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].forecast_type #=> String
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].wape #=> Float
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].rmse #=> Float
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].mase #=> Float
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].mape #=> Float
+    #   resp.predictor_evaluation_results[0].test_windows[0].metrics.average_weighted_quantile_loss #=> Float
     #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized"
+    #   resp.optimization_metric #=> String, one of "WAPE", "RMSE", "AverageWeightedQuantileLoss", "MASE", "MAPE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetrics AWS API Documentation
     #
@@ -2887,7 +2904,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

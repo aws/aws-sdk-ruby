@@ -252,6 +252,12 @@ module Aws::EKS
                 "argument" => "cluster.status"
               },
               {
+                "expected" => "PENDING",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "cluster.status"
+              },
+              {
                 "expected" => "ResourceNotFoundException",
                 "matcher" => "error",
                 "state" => "success"

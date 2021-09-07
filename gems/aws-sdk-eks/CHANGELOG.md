@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2021-09-07)
+------------------
+
+* Feature - Adding RegisterCluster and DeregisterCluster operations, to support connecting external clusters to EKS.
+
 1.62.0 (2021-09-01)
 ------------------
 

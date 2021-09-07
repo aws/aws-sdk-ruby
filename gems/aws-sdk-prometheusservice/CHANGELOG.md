@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-09-07)
+------------------
+
+* Feature - This release adds tagging support for Amazon Managed Service for Prometheus workspace.
+
 1.6.0 (2021-09-01)
 ------------------
 

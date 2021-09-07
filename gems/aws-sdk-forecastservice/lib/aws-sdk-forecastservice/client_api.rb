@@ -129,6 +129,7 @@ module Aws::ForecastService
     Metrics = Shapes::StructureShape.new(name: 'Metrics')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OptimizationMetric = Shapes::StringShape.new(name: 'OptimizationMetric')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
     ParameterRanges = Shapes::StructureShape.new(name: 'ParameterRanges')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
@@ -271,6 +272,7 @@ module Aws::ForecastService
     CreatePredictorRequest.add_member(:featurization_config, Shapes::ShapeRef.new(shape: FeaturizationConfig, required: true, location_name: "FeaturizationConfig"))
     CreatePredictorRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     CreatePredictorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreatePredictorRequest.add_member(:optimization_metric, Shapes::ShapeRef.new(shape: OptimizationMetric, location_name: "OptimizationMetric"))
     CreatePredictorRequest.struct_class = Types::CreatePredictorRequest
 
     CreatePredictorResponse.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorArn"))
@@ -448,6 +450,7 @@ module Aws::ForecastService
     DescribePredictorResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DescribePredictorResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribePredictorResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DescribePredictorResponse.add_member(:optimization_metric, Shapes::ShapeRef.new(shape: OptimizationMetric, location_name: "OptimizationMetric"))
     DescribePredictorResponse.struct_class = Types::DescribePredictorResponse
 
     EncryptionConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
@@ -457,6 +460,8 @@ module Aws::ForecastService
     ErrorMetric.add_member(:forecast_type, Shapes::ShapeRef.new(shape: ForecastType, location_name: "ForecastType"))
     ErrorMetric.add_member(:wape, Shapes::ShapeRef.new(shape: Double, location_name: "WAPE"))
     ErrorMetric.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, location_name: "RMSE"))
+    ErrorMetric.add_member(:mase, Shapes::ShapeRef.new(shape: Double, location_name: "MASE"))
+    ErrorMetric.add_member(:mape, Shapes::ShapeRef.new(shape: Double, location_name: "MAPE"))
     ErrorMetric.struct_class = Types::ErrorMetric
 
     ErrorMetrics.member = Shapes::ShapeRef.new(shape: ErrorMetric)
@@ -531,6 +536,7 @@ module Aws::ForecastService
 
     GetAccuracyMetricsResponse.add_member(:predictor_evaluation_results, Shapes::ShapeRef.new(shape: PredictorEvaluationResults, location_name: "PredictorEvaluationResults"))
     GetAccuracyMetricsResponse.add_member(:auto_ml_override_strategy, Shapes::ShapeRef.new(shape: AutoMLOverrideStrategy, location_name: "AutoMLOverrideStrategy"))
+    GetAccuracyMetricsResponse.add_member(:optimization_metric, Shapes::ShapeRef.new(shape: OptimizationMetric, location_name: "OptimizationMetric"))
     GetAccuracyMetricsResponse.struct_class = Types::GetAccuracyMetricsResponse
 
     HyperParameterTuningJobConfig.add_member(:parameter_ranges, Shapes::ShapeRef.new(shape: ParameterRanges, location_name: "ParameterRanges"))
@@ -627,6 +633,7 @@ module Aws::ForecastService
     Metrics.add_member(:rmse, Shapes::ShapeRef.new(shape: Double, deprecated: true, location_name: "RMSE", metadata: {"deprecatedMessage"=>"This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"}))
     Metrics.add_member(:weighted_quantile_losses, Shapes::ShapeRef.new(shape: WeightedQuantileLosses, location_name: "WeightedQuantileLosses"))
     Metrics.add_member(:error_metrics, Shapes::ShapeRef.new(shape: ErrorMetrics, location_name: "ErrorMetrics"))
+    Metrics.add_member(:average_weighted_quantile_loss, Shapes::ShapeRef.new(shape: Double, location_name: "AverageWeightedQuantileLoss"))
     Metrics.struct_class = Types::Metrics
 
     ParameterRanges.add_member(:categorical_parameter_ranges, Shapes::ShapeRef.new(shape: CategoricalParameterRanges, location_name: "CategoricalParameterRanges"))

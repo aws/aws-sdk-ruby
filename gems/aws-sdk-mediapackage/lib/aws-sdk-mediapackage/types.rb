@@ -1334,9 +1334,9 @@ module Aws::MediaPackage
     # video tracks in your stream. To configure the encryption contract,
     # specify which audio and video encryption presets to use. Note the
     # following considerations when using encryptionContractConfiguration:
-    # encryptionContractConfiguration can be used for DASH endpoints that
-    # use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification. You
-    # must disable key rotation for this endpoint by setting
+    # encryptionContractConfiguration can be used for DASH or CMAF endpoints
+    # that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.
+    # You must disable key rotation for this endpoint by setting
     # keyRotationIntervalSeconds to 0.
     #
     # @note When making an API call, you may pass EncryptionContractConfiguration
@@ -2674,9 +2674,9 @@ module Aws::MediaPackage
     #   encryption contract, specify which audio and video encryption
     #   presets to use. Note the following considerations when using
     #   encryptionContractConfiguration: encryptionContractConfiguration can
-    #   be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on
-    #   the CPIX 2.3 specification. You must disable key rotation for this
-    #   endpoint by setting keyRotationIntervalSeconds to 0.
+    #   be used for DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0
+    #   relies on the CPIX 2.3 specification. You must disable key rotation
+    #   for this endpoint by setting keyRotationIntervalSeconds to 0.
     #   @return [Types::EncryptionContractConfiguration]
     #
     # @!attribute [rw] resource_id
