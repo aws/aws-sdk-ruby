@@ -507,6 +507,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Mechanical Turk                                | Aws::MTurk                           | aws-sdk-mturk                           | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                        | aws-sdk-memorydb                        | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                         | aws-sdk-neptune                         | 2014-10-31  |
+| Amazon OpenSearch Service                             | Aws::OpenSearchService               | aws-sdk-opensearchservice               | 2021-01-01  |
 | Amazon Personalize                                    | Aws::Personalize                     | aws-sdk-personalize                     | 2018-05-22  |
 | Amazon Personalize Events                             | Aws::PersonalizeEvents               | aws-sdk-personalizeevents               | 2018-03-22  |
 | Amazon Personalize Runtime                            | Aws::PersonalizeRuntime              | aws-sdk-personalizeruntime              | 2018-05-22  |

@@ -431,6 +431,10 @@ module Aws::Kafka
     #       },
     #       tls: {
     #         certificate_authority_arn_list: ["__string"],
+    #         enabled: false,
+    #       },
+    #       unauthenticated: {
+    #         enabled: false,
     #       },
     #     },
     #     cluster_name: "__stringMin1Max64", # required
@@ -641,6 +645,8 @@ module Aws::Kafka
     #   resp.cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_info.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info.client_authentication.unauthenticated.enabled #=> Boolean
     #   resp.cluster_info.cluster_arn #=> String
     #   resp.cluster_info.cluster_name #=> String
     #   resp.cluster_info.creation_time #=> Time
@@ -723,6 +729,15 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_operation_info.source_cluster_info.instance_type #=> String
+    #   resp.cluster_operation_info.source_cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_operation_info.source_cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_operation_info.source_cluster_info.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -741,6 +756,15 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_operation_info.target_cluster_info.instance_type #=> String
+    #   resp.cluster_operation_info.target_cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_operation_info.target_cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_operation_info.target_cluster_info.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation AWS API Documentation
     #
@@ -988,6 +1012,15 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.instance_type #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_operation_info_list[0].source_cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -1006,6 +1039,15 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.instance_type #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_operation_info_list[0].target_cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperations AWS API Documentation
@@ -1055,6 +1097,8 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_info_list[0].client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info_list[0].client_authentication.unauthenticated.enabled #=> Boolean
     #   resp.cluster_info_list[0].cluster_arn #=> String
     #   resp.cluster_info_list[0].cluster_name #=> String
     #   resp.cluster_info_list[0].creation_time #=> Time
@@ -1748,6 +1792,74 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # You can use this operation to update the encrypting and authentication
+    # settings for an existing cluster.
+    #
+    # @option params [Types::ClientAuthentication] :client_authentication
+    #   Includes all client authentication related information.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :current_version
+    #   You can use the DescribeCluster operation to get the current version
+    #   of the cluster. After the security update is complete, the cluster
+    #   will have a new version.
+    #
+    # @option params [Types::EncryptionInfo] :encryption_info
+    #   Includes all encryption-related information.
+    #
+    # @return [Types::UpdateSecurityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSecurityResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::UpdateSecurityResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security({
+    #     client_authentication: {
+    #       sasl: {
+    #         scram: {
+    #           enabled: false,
+    #         },
+    #         iam: {
+    #           enabled: false,
+    #         },
+    #       },
+    #       tls: {
+    #         certificate_authority_arn_list: ["__string"],
+    #         enabled: false,
+    #       },
+    #       unauthenticated: {
+    #         enabled: false,
+    #       },
+    #     },
+    #     cluster_arn: "__string", # required
+    #     current_version: "__string", # required
+    #     encryption_info: {
+    #       encryption_at_rest: {
+    #         data_volume_kms_key_id: "__string", # required
+    #       },
+    #       encryption_in_transit: {
+    #         client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
+    #         in_cluster: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateSecurity AWS API Documentation
+    #
+    # @overload update_security(params = {})
+    # @param [Hash] params ({})
+    def update_security(params = {}, options = {})
+      req = build_request(:update_security, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1761,7 +1873,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.498.0 (2021-09-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::OpenSearchService`.
+
 1.497.0 (2021-09-07)
 ------------------
 

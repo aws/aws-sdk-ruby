@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.111.0 (2021-09-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-opensearchservice` gem.
+
 3.110.0 (2021-09-01)
 ------------------
 

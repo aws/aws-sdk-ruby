@@ -197,6 +197,7 @@ module Aws
   autoload :NetworkFirewall, 'aws-sdk-networkfirewall'
   autoload :NetworkManager, 'aws-sdk-networkmanager'
   autoload :NimbleStudio, 'aws-sdk-nimblestudio'
+  autoload :OpenSearchService, 'aws-sdk-opensearchservice'
   autoload :OpsWorks, 'aws-sdk-opsworks'
   autoload :OpsWorksCM, 'aws-sdk-opsworkscm'
   autoload :Organizations, 'aws-sdk-organizations'

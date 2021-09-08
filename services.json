@@ -634,6 +634,9 @@
       "Aws::NimbleStudio::Plugins::ContentType"
     ]
   },
+  "OpenSearchService": {
+    "models": "opensearch/2021-01-01"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
   },
