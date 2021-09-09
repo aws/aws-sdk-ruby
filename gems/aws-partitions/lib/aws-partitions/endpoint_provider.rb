@@ -40,21 +40,24 @@ module Aws
       #   using regional endpoint for supported regions except 'aws-global'
       # @param [Boolean] dualstack Set to `true` to use a dualstack endpoint if
       #   available. Falls back to normal endpoints.
-      # @param [Boolean] fips Set to `true` to use a fips endpoint if
-      #   available. Falls back to normal endpoints.
       # @api private Use the static class methods instead.
-      def resolve(region, service, sts_endpoint, dualstack, fips)
-        'https://' + endpoint_for(region, service, sts_endpoint, dualstack, fips)
+      def resolve(region, service, sts_endpoint, dualstack)
+        'https://' + endpoint_for(region, service, sts_endpoint, dualstack)
       end
 
       # @param [String] region The region for signing.
       # @param [String] service The service to sign with.
+      # @param [Boolean] dualstack Set to `true` to use a dualstack signing
+      #   region if available. Falls back to normal endpoints.
       # @api private Use the static class methods instead.
-      def signing_region(region, service)
-        get_partition(region)
-          .fetch('services', {})
-          .fetch(service, {})
-          .fetch('endpoints', {})
+      def signing_region(region, service, dualstack)
+        service = get_partition(region)
+                  .fetch('services', {})
+                  .fetch(service, {})
+        endpoints_str = dualstack && service.key?('dualstackEndpoints') ?
+          'dualstackEndpoints' : 'endpoints'
+        service
+          .fetch(endpoints_str, {})
           .fetch(region, {})
           .fetch('credentialScope', {})
           .fetch('region', region)
@@ -66,40 +69,33 @@ module Aws
       # @param [Boolean] dualstack Set to `true` to use a dualstack DNS suffix
       #   if available. Falls back to normal suffixes.
       # @api private Use the static class methods instead.
-      def dns_suffix_for(region, service, dualstack, fips)
+      def dns_suffix_for(region, service, dualstack)
         partition = get_partition(region)
-        service_suffixes = partition.fetch('services', {})
-                               .fetch(service, {})
-                               .fetch('dnsSuffixes', {})
-        partition_suffixes = partition.fetch('dnsSuffixes', {})
-
-        get_suffix_from_labels(service_suffixes, dualstack, fips) ||
-          get_suffix_from_labels(partition_suffixes, dualstack, fips) ||
-          partition['dnsSuffix']
+        service_cfg = partition.fetch('services', {}).fetch(service, {})
+        dns_suffix = dualstack ? 'dualstackDnsSuffix' : 'dnsSuffix'
+        dualstack && service_cfg.key?('dualstackDnsSuffix') ?
+          service_cfg['dualstackDnsSuffix'] : partition[dns_suffix]
       end
 
       private
 
-      def endpoint_for(region, service, sts_endpoint, dualstack, fips)
+      def endpoint_for(region, service, sts_endpoint, dualstack)
         partition = get_partition(region)
         service_cfg = partition.fetch('services', {}).fetch(service, {})
-        # check_dualstack_support(partition, service_cfg) if dualstack
+        check_dualstack_support(partition, service_cfg) if dualstack
 
         # Find the default endpoint
-        # has_dualstack_defaults = service_cfg.key?('dualstackDefaults') ||
-        #                          partition.key?('dualstackDefaults')
-        # defaults_key = dualstack && has_dualstack_defaults ?
-        #    'dualstackDefaults' : 'defaults'
-        default_endpoints = service_cfg
-                   .fetch('defaults', {})
-                   .fetch('endpoints', {})
-        default_endpoint = get_endpoint_from_labels(
-          default_endpoints, dualstack, fips
-        ) || partition['defaults']['hostname']
+        has_dualstack_defaults = service_cfg.key?('dualstackDefaults') ||
+                                 partition.key?('dualstackDefaults')
+        defaults_key = dualstack && has_dualstack_defaults ?
+           'dualstackDefaults' : 'defaults'
+        default_endpoint = service_cfg
+                   .fetch(defaults_key, {})
+                   .fetch('hostname', partition[defaults_key]['hostname'])
 
-        # endpoints_key = dualstack && service_cfg.key?('dualstackEndpoints') ?
-        #   'dualstackEndpoints' : 'endpoints'
-        endpoints = service_cfg.fetch('endpoints', {})
+        endpoints_key = dualstack && service_cfg.key?('dualstackEndpoints') ?
+          'dualstackEndpoints' : 'endpoints'
+        endpoints = service_cfg.fetch(endpoints_key, {})
 
         # Check for sts legacy behavior
         sts_legacy = service == 'sts' &&
@@ -115,33 +111,28 @@ module Aws
         end
 
         # Check for service/region level endpoint.
-        regional_endpoint = endpoints
+        endpoint = endpoints
                    .fetch(region, {})
-        regional_endpoints = regional_endpoint
-                   .fetch('endpoints', {})
-        endpoint = get_endpoint_from_labels(
-          regional_endpoints, dualstack, fips
-        ) || regional_endpoint.fetch('hostname', default_endpoint)
+                   .fetch('hostname', default_endpoint)
 
         # Replace placeholders from the endpoints
-        # dns_suffix = dualstack ? 'dualstackDnsSuffix' : 'dnsSuffix'
-        # suffix = dualstack && service_cfg.key?('dualstackDnsSuffix') ?
-        #   service_cfg['dualstackDnsSuffix'] : partition[dns_suffix]
-        suffix = dns_suffix_for(region, service, dualstack, fips)
+        dns_suffix = dualstack ? 'dualstackDnsSuffix' : 'dnsSuffix'
+        suffix = dualstack && service_cfg.key?('dualstackDnsSuffix') ?
+          service_cfg['dualstackDnsSuffix'] : partition[dns_suffix]
 
         endpoint.sub('{region}', region)
                 .sub('{service}', service)
-                .sub('{dnsSuffix}', suffix)
+                .sub("{#{dns_suffix}}", suffix)
       end
 
-      # def check_dualstack_support(partition, service_cfg)
-      #   if !service_cfg.key?('dualstackEndpoints') &&
-      #     !service_cfg.key?('dualstackDefaults') &&
-      #     !partition.key?('dualstackDefaults')
-      #     raise ArgumentError,
-      #           'Dualstack is not supported for this region and partition'
-      #   end
-      # end
+      def check_dualstack_support(partition, service_cfg)
+        if !service_cfg.key?('dualstackEndpoints') &&
+          !service_cfg.key?('dualstackDefaults') &&
+          !partition.key?('dualstackDefaults')
+          raise ArgumentError,
+                'Dualstack is not supported for this region and partition'
+        end
+      end
 
       def get_partition(region)
         partition_containing_region(region) ||
@@ -169,46 +160,17 @@ module Aws
           @rules['partitions'].first
       end
 
-      # return matched endpoint
-      def get_endpoint_from_labels(endpoints, dualstack, fips)
-        bag = []
-        bag << 'dualstack' if dualstack
-        bag << 'fips' if fips
-        endpoints.each do |endpoint|
-          # puts "bag: #{bag}, labels: #{endpoint['labels']}"
-          if Set.new(bag) == Set.new(endpoint['labels'])
-            # puts "matched endpoint"
-            return endpoint['hostname']
-          end
-        end
-        nil
-      end
-
-      def get_suffix_from_labels(suffixes, dualstack, fips)
-        bag = []
-        bag << 'dualstack' if dualstack
-        bag << 'fips' if fips
-        suffixes.each do |suffix|
-          # puts "bag: #{bag}, labels: #{suffix['labels']}"
-          if Set.new(bag) == Set.new(suffix['labels'])
-            # puts "matched suffix"
-            return suffix['suffix']
-          end
-        end
-        nil
-      end
-
       class << self
-        def resolve(region, service, sts_endpoint = 'regional', dualstack = false, fips = false)
-          default_provider.resolve(region, service, sts_endpoint, dualstack, fips)
+        def resolve(region, service, sts_endpoint = 'regional', dualstack = false)
+          default_provider.resolve(region, service, sts_endpoint, dualstack)
         end
 
-        def signing_region(region, service)
-          default_provider.signing_region(region, service)
+        def signing_region(region, service, dualstack = false)
+          default_provider.signing_region(region, service, dualstack)
         end
 
-        def dns_suffix_for(region, service = nil, dualstack = false, fips = false)
-          default_provider.dns_suffix_for(region, service, dualstack, fips)
+        def dns_suffix_for(region, service = nil, dualstack = false)
+          default_provider.dns_suffix_for(region, service, dualstack)
         end
 
         private

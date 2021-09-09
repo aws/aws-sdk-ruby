@@ -22,7 +22,9 @@ module Aws
           # S3 removes core's signature_v4 plugin that checks for this
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
 
-          Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
+          Aws::Partitions::EndpointProvider.signing_region(
+            cfg.region, 's3', cfg.use_dualstack_endpoint
+          )
         end
 
         def add_handlers(handlers, cfg)
