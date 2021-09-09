@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-09-09)
+------------------
+
+* Feature - Added OffCondition parameter to CreateModel API
+
 1.3.0 (2021-09-01)
 ------------------
 

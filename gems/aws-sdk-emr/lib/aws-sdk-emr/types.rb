@@ -292,7 +292,8 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # This input identifies a cluster and a list of tags to attach.
+    # This input identifies an Amazon EMR resource and a list of tags to
+    # attach.
     #
     # @note When making an API call, you may pass AddTagsInput
     #   data as a hash:
@@ -308,15 +309,15 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The Amazon EMR resource identifier to which tags will be added. This
-    #   value must be a cluster identifier.
+    #   The Amazon EMR resource identifier to which tags will be added. For
+    #   example, a cluster identifier or an Amazon EMR Studio ID.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags to associate with a cluster and propagate to EC2
-    #   instances. Tags are user-defined key-value pairs that consist of a
-    #   required key string with a maximum of 128 characters, and an
-    #   optional value string with a maximum of 256 characters.
+    #   A list of tags to associate with a resource. Tags are user-defined
+    #   key-value pairs that consist of a required key string with a maximum
+    #   of 128 characters, and an optional value string with a maximum of
+    #   256 characters.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTagsInput AWS API Documentation
@@ -956,8 +957,8 @@ module Aws::EMR
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] service_role
-    #   The IAM role that will be assumed by the Amazon EMR service to
-    #   access Amazon Web Services resources on your behalf.
+    #   The IAM role that Amazon EMR assumes in order to access Amazon Web
+    #   Services resources on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] normalized_instance_hours
@@ -1411,10 +1412,12 @@ module Aws::EMR
     #         vpc_id: "XmlStringMaxLen256", # required
     #         subnet_ids: ["String"], # required
     #         service_role: "XmlString", # required
-    #         user_role: "XmlString", # required
+    #         user_role: "XmlString",
     #         workspace_security_group_id: "XmlStringMaxLen256", # required
     #         engine_security_group_id: "XmlStringMaxLen256", # required
     #         default_s3_location: "XmlString", # required
+    #         idp_auth_url: "XmlString",
+    #         idp_relay_state_parameter_name: "XmlStringMaxLen256",
     #         tags: [
     #           {
     #             key: "String",
@@ -1432,9 +1435,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] auth_mode
-    #   Specifies whether the Studio authenticates users using single
-    #   sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO
-    #   authentication.
+    #   Specifies whether the Studio authenticates users using IAM or Amazon
+    #   Web Services SSO.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -1450,15 +1452,17 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role
-    #   The IAM role that will be assumed by the Amazon EMR Studio. The
-    #   service role provides a way for Amazon EMR Studio to interoperate
-    #   with other Amazon Web Services services.
+    #   The IAM role that the Amazon EMR Studio assumes. The service role
+    #   provides a way for Amazon EMR Studio to interoperate with other
+    #   Amazon Web Services services.
     #   @return [String]
     #
     # @!attribute [rw] user_role
-    #   The IAM user role that will be assumed by users and groups logged in
-    #   to an Amazon EMR Studio. The permissions attached to this IAM role
-    #   can be scoped down for each user or group using session policies.
+    #   The IAM user role that users and groups assume when logged in to an
+    #   Amazon EMR Studio. Only specify a `UserRole` when you use Amazon Web
+    #   Services SSO authentication. The permissions attached to the
+    #   `UserRole` can be scoped down for each user or group using session
+    #   policies.
     #   @return [String]
     #
     # @!attribute [rw] workspace_security_group_id
@@ -1477,6 +1481,22 @@ module Aws::EMR
     # @!attribute [rw] default_s3_location
     #   The Amazon S3 location to back up Amazon EMR Studio Workspaces and
     #   notebook files.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_auth_url
+    #   The authentication endpoint of your identity provider (IdP). Specify
+    #   this value when you use IAM authentication and want to let federated
+    #   users log in to a Studio with the Studio URL and credentials from
+    #   your IdP. Amazon EMR Studio redirects users to this endpoint to
+    #   enter credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_relay_state_parameter_name
+    #   The name that your identity provider (IdP) uses for its `RelayState`
+    #   parameter. For example, `RelayState` or `TargetSource`. Specify this
+    #   value when you use IAM authentication and want to let federated
+    #   users log in to a Studio using the Studio URL. The `RelayState`
+    #   parameter differs by IdP.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1499,6 +1519,8 @@ module Aws::EMR
       :workspace_security_group_id,
       :engine_security_group_id,
       :default_s3_location,
+      :idp_auth_url,
+      :idp_relay_state_parameter_name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -6051,7 +6073,8 @@ module Aws::EMR
     #
     class RemoveManagedScalingPolicyOutput < Aws::EmptyStructure; end
 
-    # This input identifies a cluster and a list of tags to remove.
+    # This input identifies an Amazon EMR resource and a list of tags to
+    # remove.
     #
     # @note When making an API call, you may pass RemoveTagsInput
     #   data as a hash:
@@ -6063,11 +6086,11 @@ module Aws::EMR
     #
     # @!attribute [rw] resource_id
     #   The Amazon EMR resource identifier from which tags will be removed.
-    #   This value must be a cluster identifier.
+    #   For example, a cluster identifier or an Amazon EMR Studio ID.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   A list of tag keys to remove from a resource.
+    #   A list of tag keys to remove from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTagsInput AWS API Documentation
@@ -6079,7 +6102,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # This output indicates the result of removing tags from a resource.
+    # This output indicates the result of removing tags from the resource.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTagsOutput AWS API Documentation
     #
@@ -6500,8 +6523,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] service_role
-    #   The IAM role that will be assumed by the Amazon EMR service to
-    #   access Amazon Web Services resources on your behalf.
+    #   The IAM role that Amazon EMR assumes in order to access Amazon Web
+    #   Services resources on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7654,7 +7677,7 @@ module Aws::EMR
     #
     # @!attribute [rw] auth_mode
     #   Specifies whether the Amazon EMR Studio authenticates users using
-    #   single sign-on (SSO) or IAM.
+    #   IAM or Amazon Web Services SSO.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -7672,7 +7695,8 @@ module Aws::EMR
     #
     # @!attribute [rw] user_role
     #   The name of the IAM role assumed by users logged in to the Amazon
-    #   EMR Studio.
+    #   EMR Studio. A Studio only requires a `UserRole` when you use IAM
+    #   authentication.
     #   @return [String]
     #
     # @!attribute [rw] workspace_security_group_id
@@ -7701,6 +7725,16 @@ module Aws::EMR
     #   notebook files.
     #   @return [String]
     #
+    # @!attribute [rw] idp_auth_url
+    #   Your identity provider's authentication endpoint. Amazon EMR Studio
+    #   redirects federated users to this endpoint for authentication when
+    #   logging in to a Studio with the Studio URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] idp_relay_state_parameter_name
+    #   The name of your identity provider's `RelayState` parameter.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tags associated with the Amazon EMR Studio.
     #   @return [Array<Types::Tag>]
@@ -7722,6 +7756,8 @@ module Aws::EMR
       :url,
       :creation_time,
       :default_s3_location,
+      :idp_auth_url,
+      :idp_relay_state_parameter_name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -7752,6 +7788,11 @@ module Aws::EMR
     #   The unique access URL of the Amazon EMR Studio.
     #   @return [String]
     #
+    # @!attribute [rw] auth_mode
+    #   Specifies whether the Studio authenticates users using IAM or Amazon
+    #   Web Services SSO.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The time when the Amazon EMR Studio was created.
     #   @return [Time]
@@ -7764,6 +7805,7 @@ module Aws::EMR
       :vpc_id,
       :description,
       :url,
+      :auth_mode,
       :creation_time)
       SENSITIVE = []
       include Aws::Structure

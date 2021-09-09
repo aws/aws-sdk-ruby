@@ -66,8 +66,8 @@ module Aws::LookoutEquipment
     #   @return [Types::DatasetSchema]
     #
     # @!attribute [rw] server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK)
-    #   used to encrypt dataset data by Amazon Lookout for Equipment.
+    #   Provides the identifier of the KMS key used to encrypt dataset data
+    #   by Amazon Lookout for Equipment.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -201,9 +201,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK)
-    #   used to encrypt inference scheduler data by Amazon Lookout for
-    #   Equipment.
+    #   Provides the identifier of the KMS key used to encrypt inference
+    #   scheduler data by Amazon Lookout for Equipment.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -289,6 +288,7 @@ module Aws::LookoutEquipment
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         off_condition: "OffCondition",
     #       }
     #
     # @!attribute [rw] model_name
@@ -356,13 +356,19 @@ module Aws::LookoutEquipment
     #   @return [Types::DataPreProcessingConfiguration]
     #
     # @!attribute [rw] server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK)
-    #   used to encrypt model data by Amazon Lookout for Equipment.
+    #   Provides the identifier of the KMS key used to encrypt model data by
+    #   Amazon Lookout for Equipment.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   Any tags associated with the ML model being created.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] off_condition
+    #   Indicates that the asset associated with this sensor has been shut
+    #   off. As long as this condition is met, Lookout for Equipment will
+    #   not use data from this asset for training, evaluation, or inference.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateModelRequest AWS API Documentation
     #
@@ -379,7 +385,8 @@ module Aws::LookoutEquipment
       :role_arn,
       :data_pre_processing_configuration,
       :server_side_kms_key_id,
-      :tags)
+      :tags,
+      :off_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -697,8 +704,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK)
-    #   used to encrypt dataset data by Amazon Lookout for Equipment.
+    #   Provides the identifier of the KMS key used to encrypt dataset data
+    #   by Amazon Lookout for Equipment.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_input_configuration
@@ -810,9 +817,8 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK)
-    #   used to encrypt inference scheduler data by Amazon Lookout for
-    #   Equipment.
+    #   Provides the identifier of the KMS key used to encrypt inference
+    #   scheduler data by Amazon Lookout for Equipment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeInferenceSchedulerResponse AWS API Documentation
@@ -955,8 +961,14 @@ module Aws::LookoutEquipment
     #   @return [Time]
     #
     # @!attribute [rw] server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK)
-    #   used to encrypt model data by Amazon Lookout for Equipment.
+    #   Provides the identifier of the KMS key used to encrypt model data by
+    #   Amazon Lookout for Equipment.
+    #   @return [String]
+    #
+    # @!attribute [rw] off_condition
+    #   Indicates that the asset associated with this sensor has been shut
+    #   off. As long as this condition is met, Lookout for Equipment will
+    #   not use data from this asset for training, evaluation, or inference.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelResponse AWS API Documentation
@@ -981,7 +993,8 @@ module Aws::LookoutEquipment
       :model_metrics,
       :last_updated_time,
       :created_at,
-      :server_side_kms_key_id)
+      :server_side_kms_key_id,
+      :off_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1066,7 +1079,7 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # &gt; Specifies configuration information for the input data for the
+    # Specifies configuration information for the input data for the
     # inference, including S3 location of input data..
     #
     # @note When making an API call, you may pass InferenceInputConfiguration
@@ -1095,7 +1108,7 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] inference_input_name_configuration
-    #   &gt; Specifies configuration information for the input data for the
+    #   Specifies configuration information for the input data for the
     #   inference, including timestamp format and delimiter.
     #   @return [Types::InferenceInputNameConfiguration]
     #
@@ -1109,8 +1122,8 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
-    # &gt;&gt; Specifies configuration information for the input data for
-    # the inference, including timestamp format and delimiter.
+    # Specifies configuration information for the input data for the
+    # inference, including timestamp format and delimiter.
     #
     # @note When making an API call, you may pass InferenceInputNameConfiguration
     #   data as a hash:
@@ -1254,7 +1267,7 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] data_delay_offset_in_minutes
-    #   &gt; A period of time (in minutes) by which inference on the data is
+    #   A period of time (in minutes) by which inference on the data is
     #   delayed after the data starts. For instance, if an offset delay time
     #   of five minutes was selected, inference will not begin on the data
     #   until the first data measurement after the five minute mark. For
@@ -2150,7 +2163,7 @@ module Aws::LookoutEquipment
     #   @return [String]
     #
     # @!attribute [rw] data_delay_offset_in_minutes
-    #   &gt; A period of time (in minutes) by which inference on the data is
+    #   A period of time (in minutes) by which inference on the data is
     #   delayed after the data starts. For instance, if you select an offset
     #   delay time of five minutes, inference will not begin on the data
     #   until the first data measurement after the five minute mark. For

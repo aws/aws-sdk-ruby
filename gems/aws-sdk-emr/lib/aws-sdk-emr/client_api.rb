@@ -512,10 +512,12 @@ module Aws::EMR
     CreateStudioInput.add_member(:vpc_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "VpcId"))
     CreateStudioInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "SubnetIds"))
     CreateStudioInput.add_member(:service_role, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "ServiceRole"))
-    CreateStudioInput.add_member(:user_role, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "UserRole"))
+    CreateStudioInput.add_member(:user_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "UserRole"))
     CreateStudioInput.add_member(:workspace_security_group_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "WorkspaceSecurityGroupId"))
     CreateStudioInput.add_member(:engine_security_group_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "EngineSecurityGroupId"))
     CreateStudioInput.add_member(:default_s3_location, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "DefaultS3Location"))
+    CreateStudioInput.add_member(:idp_auth_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "IdpAuthUrl"))
+    CreateStudioInput.add_member(:idp_relay_state_parameter_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdpRelayStateParameterName"))
     CreateStudioInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateStudioInput.struct_class = Types::CreateStudioInput
 
@@ -1391,6 +1393,8 @@ module Aws::EMR
     Studio.add_member(:url, Shapes::ShapeRef.new(shape: XmlString, location_name: "Url"))
     Studio.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
     Studio.add_member(:default_s3_location, Shapes::ShapeRef.new(shape: XmlString, location_name: "DefaultS3Location"))
+    Studio.add_member(:idp_auth_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "IdpAuthUrl"))
+    Studio.add_member(:idp_relay_state_parameter_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdpRelayStateParameterName"))
     Studio.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Studio.struct_class = Types::Studio
 
@@ -1399,6 +1403,7 @@ module Aws::EMR
     StudioSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "VpcId"))
     StudioSummary.add_member(:description, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Description"))
     StudioSummary.add_member(:url, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Url"))
+    StudioSummary.add_member(:auth_mode, Shapes::ShapeRef.new(shape: AuthMode, location_name: "AuthMode"))
     StudioSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
     StudioSummary.struct_class = Types::StudioSummary
 

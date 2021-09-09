@@ -327,28 +327,29 @@ module Aws::CodeGuruReviewer
 
     # @!group API Operations
 
-    # Use to associate an AWS CodeCommit repository or a repostory managed
-    # by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you
-    # associate a repository, CodeGuru Reviewer reviews source code changes
-    # in the repository's pull requests and provides automatic
-    # recommendations. You can view recommendations using the CodeGuru
-    # Reviewer console. For more information, see [Recommendations in Amazon
-    # CodeGuru Reviewer][1] in the *Amazon CodeGuru Reviewer User Guide.*
+    # Use to associate an Amazon Web Services CodeCommit repository or a
+    # repostory managed by Amazon Web Services CodeStar Connections with
+    # Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru
+    # Reviewer reviews source code changes in the repository's pull
+    # requests and provides automatic recommendations. You can view
+    # recommendations using the CodeGuru Reviewer console. For more
+    # information, see [Recommendations in Amazon CodeGuru Reviewer][1] in
+    # the *Amazon CodeGuru Reviewer User Guide.*
     #
     # If you associate a CodeCommit or S3 repository, it must be in the same
-    # AWS Region and AWS account where its CodeGuru Reviewer code reviews
-    # are configured.
+    # Amazon Web Services Region and Amazon Web Services account where its
+    # CodeGuru Reviewer code reviews are configured.
     #
-    # Bitbucket and GitHub Enterprise Server repositories are managed by AWS
-    # CodeStar Connections to connect to CodeGuru Reviewer. For more
-    # information, see [Associate a repository][2] in the *Amazon CodeGuru
+    # Bitbucket and GitHub Enterprise Server repositories are managed by
+    # Amazon Web Services CodeStar Connections to connect to CodeGuru
+    # Reviewer. For more information, see [Associate a repository][2] in the
+    # *Amazon CodeGuru Reviewer User Guide.*
+    #
+    # <note markdown="1"> You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services
+    # CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To
+    # associate a GitHub repository, use the console. For more information,
+    # see [Getting started with CodeGuru Reviewer][3] in the *CodeGuru
     # Reviewer User Guide.*
-    #
-    # <note markdown="1"> You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a
-    # GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub
-    # repository, use the console. For more information, see [Getting
-    # started with CodeGuru Reviewer][3] in the *CodeGuru Reviewer User
-    # Guide.*
     #
     #  </note>
     #
@@ -385,11 +386,11 @@ module Aws::CodeGuruReviewer
     #   A `KMSKeyDetails` object that contains:
     #
     #   * The encryption option for this repository association. It is either
-    #     owned by AWS Key Management Service (KMS) (`AWS_OWNED_CMK`) or
-    #     customer managed (`CUSTOMER_MANAGED_CMK`).
+    #     owned by Amazon Web Services Key Management Service (KMS)
+    #     (`AWS_OWNED_CMK`) or customer managed (`CUSTOMER_MANAGED_CMK`).
     #
-    #   * The ID of the AWS KMS key that is associated with this respository
-    #     association.
+    #   * The ID of the Amazon Web Services KMS key that is associated with
+    #     this respository association.
     #
     # @return [Types::AssociateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -467,8 +468,8 @@ module Aws::CodeGuruReviewer
     # [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html
     #
     # @option params [required, String] :name
-    #   The name of the code review. The name of each code review in your AWS
-    #   account must be unique.
+    #   The name of the code review. The name of each code review in your
+    #   Amazon Web Services account must be unique.
     #
     # @option params [required, String] :repository_association_arn
     #   The Amazon Resource Name (ARN) of the [ `RepositoryAssociation` ][1]
@@ -681,10 +682,10 @@ module Aws::CodeGuruReviewer
     #   Optional parameter to describe the feedback for a given user. If this
     #   is not supplied, it defaults to the user making the request.
     #
-    #   The `UserId` is an IAM principal that can be specified as an AWS
-    #   account ID or an Amazon Resource Name (ARN). For more information, see
-    #   [ Specifying a Principal][1] in the *AWS Identity and Access
-    #   Management User Guide*.
+    #   The `UserId` is an IAM principal that can be specified as an Amazon
+    #   Web Services account ID or an Amazon Resource Name (ARN). For more
+    #   information, see [ Specifying a Principal][1] in the *Amazon Web
+    #   Services Identity and Access Management User Guide*.
     #
     #
     #
@@ -961,13 +962,14 @@ module Aws::CodeGuruReviewer
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
     #
     # @option params [Array<String>] :user_ids
-    #   An AWS user's account ID or Amazon Resource Name (ARN). Use this ID
-    #   to query the recommendation feedback for a code review from that user.
+    #   An Amazon Web Services user's account ID or Amazon Resource Name
+    #   (ARN). Use this ID to query the recommendation feedback for a code
+    #   review from that user.
     #
-    #   The `UserId` is an IAM principal that can be specified as an AWS
-    #   account ID or an Amazon Resource Name (ARN). For more information, see
-    #   [ Specifying a Principal][1] in the *AWS Identity and Access
-    #   Management User Guide*.
+    #   The `UserId` is an IAM principal that can be specified as an Amazon
+    #   Web Services account ID or an Amazon Resource Name (ARN). For more
+    #   information, see [ Specifying a Principal][1] in the *Amazon Web
+    #   Services Identity and Access Management User Guide*.
     #
     #
     #
@@ -1051,6 +1053,13 @@ module Aws::CodeGuruReviewer
     #   resp.recommendation_summaries[0].end_line #=> Integer
     #   resp.recommendation_summaries[0].description #=> String
     #   resp.recommendation_summaries[0].recommendation_category #=> String, one of "AWSBestPractices", "AWSCloudFormationIssues", "DuplicateCode", "CodeMaintenanceIssues", "ConcurrencyIssues", "InputValidations", "PythonBestPractices", "JavaBestPractices", "ResourceLeaks", "SecurityIssues", "CodeInconsistencies"
+    #   resp.recommendation_summaries[0].rule_metadata.rule_id #=> String
+    #   resp.recommendation_summaries[0].rule_metadata.rule_name #=> String
+    #   resp.recommendation_summaries[0].rule_metadata.short_description #=> String
+    #   resp.recommendation_summaries[0].rule_metadata.long_description #=> String
+    #   resp.recommendation_summaries[0].rule_metadata.rule_tags #=> Array
+    #   resp.recommendation_summaries[0].rule_metadata.rule_tags[0] #=> String
+    #   resp.recommendation_summaries[0].severity #=> String, one of "Info", "Low", "Medium", "High", "Critical"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ListRecommendations AWS API Documentation
@@ -1122,11 +1131,11 @@ module Aws::CodeGuruReviewer
     #   List of repository names to use as a filter.
     #
     # @option params [Array<String>] :owners
-    #   List of owners to use as a filter. For AWS CodeCommit, it is the name
-    #   of the CodeCommit account that was used to associate the repository.
-    #   For other repository source providers, such as Bitbucket and GitHub
-    #   Enterprise Server, this is name of the account that was used to
-    #   associate the repository.
+    #   List of owners to use as a filter. For Amazon Web Services CodeCommit,
+    #   it is the name of the CodeCommit account that was used to associate
+    #   the repository. For other repository source providers, such as
+    #   Bitbucket and GitHub Enterprise Server, this is name of the account
+    #   that was used to associate the repository.
     #
     # @option params [Integer] :max_results
     #   The maximum number of repository association results returned by
@@ -1357,7 +1366,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
