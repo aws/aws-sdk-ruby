@@ -46,7 +46,8 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
             cfg.region,
             endpoint_prefix,
             sts_regional,
-            cfg.use_dualstack_endpoint
+            cfg.use_dualstack_endpoint,
+            cfg.use_fips_endpoint
           )
         end
       end

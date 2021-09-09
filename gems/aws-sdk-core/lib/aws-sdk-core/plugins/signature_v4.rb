@@ -38,7 +38,7 @@ module Aws
           'us-east-1'
         elsif cfg.region
           Aws::Partitions::EndpointProvider.signing_region(
-            cfg.region, cfg.sigv4_name, cfg.use_dualstack_endpoint
+            cfg.region, cfg.sigv4_name
           )
         end
       end
