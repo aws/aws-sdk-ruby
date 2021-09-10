@@ -70,9 +70,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   image layers to check. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the image layers to check. If you do not specify a
+    #   registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -130,9 +130,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   image to delete. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the image to delete. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -188,9 +188,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   images to describe. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the images to describe. If you do not specify a registry,
+    #   the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -251,9 +251,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry to which to upload
-    #   layers. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   which to upload layers. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -395,9 +395,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -472,9 +472,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository policy to delete. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository policy to delete. If you do not specify a
+    #   registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -523,9 +523,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository to delete. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository to delete. If you do not specify a registry,
+    #   the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -573,9 +573,10 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to describe the image scan findings for. If you
-    #   do not specify a registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to describe the image scan findings
+    #   for. If you do not specify a registry, the default registry is
+    #   assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -703,9 +704,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to describe images. If you do not specify a
-    #   registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to describe images. If you do not
+    #   specify a registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -811,9 +812,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repositories to be described. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repositories to be described. If you do not specify a
+    #   registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_names
@@ -906,10 +907,10 @@ module Aws::ECR
     # action on your part.
     #
     # For more control over the encryption of the contents of your
-    # repository, you can use server-side encryption with customer master
-    # keys (CMKs) stored in AWS Key Management Service (AWS KMS) to encrypt
-    # your images. For more information, see [Amazon ECR encryption at
-    # rest][1] in the *Amazon Elastic Container Registry User Guide*.
+    # repository, you can use server-side encryption with Key Management
+    # Service key stored in Key Management Service (KMS) to encrypt your
+    # images. For more information, see [Amazon ECR encryption at rest][1]
+    # in the *Amazon Elastic Container Registry User Guide*.
     #
     #
     #
@@ -927,19 +928,20 @@ module Aws::ECR
     #   The encryption type to use.
     #
     #   If you use the `KMS` encryption type, the contents of the repository
-    #   will be encrypted using server-side encryption with customer master
-    #   keys (CMKs) stored in AWS KMS. When you use AWS KMS to encrypt your
-    #   data, you can either use the default AWS managed CMK for Amazon ECR,
-    #   or specify your own CMK, which you already created. For more
-    #   information, see [Protecting Data Using Server-Side Encryption with
-    #   CMKs Stored in AWS Key Management Service (SSE-KMS)][1] in the
-    #   *Amazon Simple Storage Service Console Developer Guide.*.
+    #   will be encrypted using server-side encryption with Key Management
+    #   Service key stored in KMS. When you use KMS to encrypt your data,
+    #   you can either use the default Amazon Web Services managed KMS key
+    #   for Amazon ECR, or specify your own KMS key, which you already
+    #   created. For more information, see [Protecting data using
+    #   server-side encryption with an KMS key stored in Key Management
+    #   Service (SSE-KMS)][1] in the *Amazon Simple Storage Service Console
+    #   Developer Guide.*.
     #
     #   If you use the `AES256` encryption type, Amazon ECR uses server-side
     #   encryption with Amazon S3-managed encryption keys which encrypts the
     #   images in the repository using an AES-256 encryption algorithm. For
-    #   more information, see [Protecting Data Using Server-Side Encryption
-    #   with Amazon S3-Managed Encryption Keys (SSE-S3)][2] in the *Amazon
+    #   more information, see [Protecting data using server-side encryption
+    #   with Amazon S3-managed encryption keys (SSE-S3)][2] in the *Amazon
     #   Simple Storage Service Console Developer Guide.*.
     #
     #
@@ -949,11 +951,11 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   If you use the `KMS` encryption type, specify the CMK to use for
-    #   encryption. The alias, key ID, or full ARN of the CMK can be
+    #   If you use the `KMS` encryption type, specify the KMS key to use for
+    #   encryption. The alias, key ID, or full ARN of the KMS key can be
     #   specified. The key must exist in the same Region as the repository.
-    #   If no key is specified, the default AWS managed CMK for Amazon ECR
-    #   will be used.
+    #   If no key is specified, the default Amazon Web Services managed KMS
+    #   key for Amazon ECR will be used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/EncryptionConfiguration AWS API Documentation
@@ -973,9 +975,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_ids
-    #   A list of AWS account IDs that are associated with the registries
-    #   for which to get AuthorizationData objects. If you do not specify a
-    #   registry, the default registry is assumed.
+    #   A list of Amazon Web Services account IDs that are associated with
+    #   the registries for which to get AuthorizationData objects. If you do
+    #   not specify a registry, the default registry is assumed.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationTokenRequest AWS API Documentation
@@ -1009,9 +1011,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   image layer to download. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the image layer to download. If you do not specify a
+    #   registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -1070,9 +1072,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -1180,9 +1182,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -1257,9 +1259,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -1300,8 +1302,8 @@ module Aws::ECR
     # An object representing an Amazon ECR image.
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry containing the
-    #   image.
+    #   The Amazon Web Services account ID associated with the registry
+    #   containing the image.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -1352,8 +1354,8 @@ module Aws::ECR
     # operation.
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry to which this image
-    #   belongs.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   which this image belongs.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -1621,7 +1623,11 @@ module Aws::ECR
     #   pushed to a repository. If set to `true`, images will be scanned
     #   after being pushed. If this parameter is not specified, it will
     #   default to `false` and images will not be scanned unless a scan is
-    #   manually started with the StartImageScan API.
+    #   manually started with the [API\_StartImageScan][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_StartImageScan.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageScanningConfiguration AWS API Documentation
@@ -1655,9 +1661,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry to which you intend
-    #   to upload layers. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   which you intend to upload layers. If you do not specify a registry,
+    #   the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -1779,7 +1785,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] kms_error
-    #   The error code returned by AWS KMS.
+    #   The error code returned by KMS.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/KmsException AWS API Documentation
@@ -2030,8 +2036,8 @@ module Aws::ECR
     end
 
     # The operation did not succeed because it would have exceeded a service
-    # limit for your account. For more information, see [Amazon ECR Service
-    # Quotas][1] in the Amazon Elastic Container Registry User Guide.
+    # limit for your account. For more information, see [Amazon ECR service
+    # quotas][1] in the Amazon Elastic Container Registry User Guide.
     #
     #
     #
@@ -2085,9 +2091,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to list images. If you do not specify a
-    #   registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to list images. If you do not
+    #   specify a registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2202,9 +2208,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to put the image. If you do not specify a
-    #   registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to put the image. If you do not
+    #   specify a registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2268,10 +2274,10 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to update the image scanning configuration
-    #   setting. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to update the image scanning
+    #   configuration setting. If you do not specify a registry, the default
+    #   registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2327,9 +2333,10 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to update the image tag mutability settings. If
-    #   you do not specify a registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to update the image tag mutability
+    #   settings. If you do not specify a registry, the default registry is
+    #   assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2386,9 +2393,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do  not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do  not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2638,14 +2645,14 @@ module Aws::ECR
     # @!attribute [rw] repository_arn
     #   The Amazon Resource Name (ARN) that identifies the repository. The
     #   ARN contains the `arn:aws:ecr` namespace, followed by the region of
-    #   the repository, AWS account ID of the repository owner, repository
-    #   namespace, and repository name. For example,
+    #   the repository, Amazon Web Services account ID of the repository
+    #   owner, repository namespace, and repository name. For example,
     #   `arn:aws:ecr:region:012345678910:repository/test`.
     #   @return [String]
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2790,9 +2797,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2801,7 +2808,7 @@ module Aws::ECR
     #
     # @!attribute [rw] policy_text
     #   The JSON repository policy text to apply to the repository. For more
-    #   information, see [Amazon ECR Repository Policies][1] in the *Amazon
+    #   information, see [Amazon ECR repository policies][1] in the *Amazon
     #   Elastic Container Registry User Guide*.
     #
     #
@@ -2862,9 +2869,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to start an image scan request. If you do not
-    #   specify a registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to start an image scan request. If
+    #   you do not specify a registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -2922,9 +2929,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the
+    #   default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -3117,9 +3124,9 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] registry_id
-    #   The AWS account ID associated with the registry to which you are
-    #   uploading layer parts. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   which you are uploading layer parts. If you do not specify a
+    #   registry, the default registry is assumed.
     #   @return [String]
     #
     # @!attribute [rw] repository_name

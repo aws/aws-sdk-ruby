@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2021-09-10)
+------------------
+
+* Feature - This release adds support for "Lifecycle Configurations" to SageMaker Studio
+
 1.98.0 (2021-09-01)
 ------------------
 

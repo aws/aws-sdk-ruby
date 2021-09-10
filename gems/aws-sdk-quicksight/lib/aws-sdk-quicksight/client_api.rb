@@ -23,6 +23,7 @@ module Aws::QuickSight
     AdditionalDashboardIdList = Shapes::ListShape.new(name: 'AdditionalDashboardIdList')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AmazonElasticsearchParameters = Shapes::StructureShape.new(name: 'AmazonElasticsearchParameters')
+    AmazonOpenSearchParameters = Shapes::StructureShape.new(name: 'AmazonOpenSearchParameters')
     Analysis = Shapes::StructureShape.new(name: 'Analysis')
     AnalysisError = Shapes::StructureShape.new(name: 'AnalysisError')
     AnalysisErrorList = Shapes::ListShape.new(name: 'AnalysisErrorList')
@@ -627,6 +628,9 @@ module Aws::QuickSight
     AmazonElasticsearchParameters.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
     AmazonElasticsearchParameters.struct_class = Types::AmazonElasticsearchParameters
 
+    AmazonOpenSearchParameters.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
+    AmazonOpenSearchParameters.struct_class = Types::AmazonOpenSearchParameters
+
     Analysis.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "AnalysisId"))
     Analysis.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Analysis.add_member(:name, Shapes::ShapeRef.new(shape: AnalysisName, location_name: "Name"))
@@ -1199,6 +1203,7 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:sql_server_parameters, Shapes::ShapeRef.new(shape: SqlServerParameters, location_name: "SqlServerParameters"))
     DataSourceParameters.add_member(:teradata_parameters, Shapes::ShapeRef.new(shape: TeradataParameters, location_name: "TeradataParameters"))
     DataSourceParameters.add_member(:twitter_parameters, Shapes::ShapeRef.new(shape: TwitterParameters, location_name: "TwitterParameters"))
+    DataSourceParameters.add_member(:amazon_open_search_parameters, Shapes::ShapeRef.new(shape: AmazonOpenSearchParameters, location_name: "AmazonOpenSearchParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
 
     DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)

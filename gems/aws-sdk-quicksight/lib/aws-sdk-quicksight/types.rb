@@ -151,6 +151,24 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AmazonOpenSearchParameters
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "Domain", # required
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AmazonOpenSearchParameters AWS API Documentation
+    #
+    class AmazonOpenSearchParameters < Struct.new(
+      :domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata structure for an analysis in Amazon QuickSight
     #
     # @!attribute [rw] analysis_id
@@ -1674,7 +1692,7 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         data_source_id: "ResourceId", # required
     #         name: "ResourceName", # required
-    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
+    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH
     #         data_source_parameters: {
     #           amazon_elasticsearch_parameters: {
     #             domain: "Domain", # required
@@ -1764,6 +1782,9 @@ module Aws::QuickSight
     #           twitter_parameters: {
     #             query: "Query", # required
     #             max_rows: 1, # required
+    #           },
+    #           amazon_open_search_parameters: {
+    #             domain: "Domain", # required
     #           },
     #         },
     #         credentials: {
@@ -1860,6 +1881,9 @@ module Aws::QuickSight
     #                 twitter_parameters: {
     #                   query: "Query", # required
     #                   max_rows: 1, # required
+    #                 },
+    #                 amazon_open_search_parameters: {
+    #                   domain: "Domain", # required
     #                 },
     #               },
     #             ],
@@ -3065,6 +3089,9 @@ module Aws::QuickSight
     #               query: "Query", # required
     #               max_rows: 1, # required
     #             },
+    #             amazon_open_search_parameters: {
+    #               domain: "Domain", # required
+    #             },
     #           },
     #         ],
     #       }
@@ -3962,6 +3989,9 @@ module Aws::QuickSight
     #                 query: "Query", # required
     #                 max_rows: 1, # required
     #               },
+    #               amazon_open_search_parameters: {
+    #                 domain: "Domain", # required
+    #               },
     #             },
     #           ],
     #         },
@@ -4104,6 +4134,9 @@ module Aws::QuickSight
     #           query: "Query", # required
     #           max_rows: 1, # required
     #         },
+    #         amazon_open_search_parameters: {
+    #           domain: "Domain", # required
+    #         },
     #       }
     #
     # @!attribute [rw] amazon_elasticsearch_parameters
@@ -4186,6 +4219,9 @@ module Aws::QuickSight
     #   The parameters for Twitter.
     #   @return [Types::TwitterParameters]
     #
+    # @!attribute [rw] amazon_open_search_parameters
+    #   @return [Types::AmazonOpenSearchParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceParameters AWS API Documentation
     #
     class DataSourceParameters < Struct.new(
@@ -4208,7 +4244,8 @@ module Aws::QuickSight
       :spark_parameters,
       :sql_server_parameters,
       :teradata_parameters,
-      :twitter_parameters)
+      :twitter_parameters,
+      :amazon_open_search_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13606,6 +13643,9 @@ module Aws::QuickSight
     #             query: "Query", # required
     #             max_rows: 1, # required
     #           },
+    #           amazon_open_search_parameters: {
+    #             domain: "Domain", # required
+    #           },
     #         },
     #         credentials: {
     #           credential_pair: {
@@ -13701,6 +13741,9 @@ module Aws::QuickSight
     #                 twitter_parameters: {
     #                   query: "Query", # required
     #                   max_rows: 1, # required
+    #                 },
+    #                 amazon_open_search_parameters: {
+    #                   domain: "Domain", # required
     #                 },
     #               },
     #             ],

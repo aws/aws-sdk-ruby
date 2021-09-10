@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2021-09-10)
+------------------
+
+* Feature - This release adds support for providing a custom timeout value for finding a scaling point during autoscaling in Aurora Serverless v1.
+
 1.126.0 (2021-09-01)
 ------------------
 

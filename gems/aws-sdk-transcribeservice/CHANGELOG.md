@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-09-10)
+------------------
+
+* Feature - This release adds an API option for startTranscriptionJob and startMedicalTranscriptionJob that allows the user to specify encryption context key value pairs for batch jobs.
+
 1.61.0 (2021-09-01)
 ------------------
 

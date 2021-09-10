@@ -76,6 +76,7 @@ module Aws::TranscribeService
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InterruptionFilter = Shapes::StructureShape.new(name: 'InterruptionFilter')
     JobExecutionSettings = Shapes::StructureShape.new(name: 'JobExecutionSettings')
+    KMSEncryptionContextMap = Shapes::MapShape.new(name: 'KMSEncryptionContextMap')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LanguageModel = Shapes::StructureShape.new(name: 'LanguageModel')
@@ -418,6 +419,9 @@ module Aws::TranscribeService
     JobExecutionSettings.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
     JobExecutionSettings.struct_class = Types::JobExecutionSettings
 
+    KMSEncryptionContextMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
+    KMSEncryptionContextMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     LanguageModel.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
     LanguageModel.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime"))
     LanguageModel.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
@@ -646,6 +650,7 @@ module Aws::TranscribeService
     StartMedicalTranscriptionJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, required: true, location_name: "OutputBucketName"))
     StartMedicalTranscriptionJobRequest.add_member(:output_key, Shapes::ShapeRef.new(shape: OutputKey, location_name: "OutputKey"))
     StartMedicalTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
+    StartMedicalTranscriptionJobRequest.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KMSEncryptionContextMap, location_name: "KMSEncryptionContext"))
     StartMedicalTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalTranscriptionSetting, location_name: "Settings"))
     StartMedicalTranscriptionJobRequest.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     StartMedicalTranscriptionJobRequest.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, required: true, location_name: "Specialty"))
@@ -664,6 +669,7 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, location_name: "OutputBucketName"))
     StartTranscriptionJobRequest.add_member(:output_key, Shapes::ShapeRef.new(shape: OutputKey, location_name: "OutputKey"))
     StartTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
+    StartTranscriptionJobRequest.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KMSEncryptionContextMap, location_name: "KMSEncryptionContext"))
     StartTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))
     StartTranscriptionJobRequest.add_member(:model_settings, Shapes::ShapeRef.new(shape: ModelSettings, location_name: "ModelSettings"))
     StartTranscriptionJobRequest.add_member(:job_execution_settings, Shapes::ShapeRef.new(shape: JobExecutionSettings, location_name: "JobExecutionSettings"))

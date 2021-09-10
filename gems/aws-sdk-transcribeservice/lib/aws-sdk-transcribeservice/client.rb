@@ -2241,6 +2241,10 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also specify
     #   an output location in the `OutputBucketName` parameter.
     #
+    # @option params [Hash<String,String>] :kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your data.
+    #
     # @option params [Types::MedicalTranscriptionSetting] :settings
     #   Optional settings for the medical transcription job.
     #
@@ -2280,6 +2284,9 @@ module Aws::TranscribeService
     #     output_bucket_name: "OutputBucketName", # required
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
+    #     kms_encryption_context: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
     #     settings: {
     #       show_speaker_labels: false,
     #       max_speaker_labels: 1,
@@ -2446,6 +2453,10 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also specify
     #   an output location in the `OutputBucketName` parameter.
     #
+    # @option params [Hash<String,String>] :kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your data.
+    #
     # @option params [Types::Settings] :settings
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
@@ -2498,6 +2509,9 @@ module Aws::TranscribeService
     #     output_bucket_name: "OutputBucketName",
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
+    #     kms_encryption_context: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
     #     settings: {
     #       vocabulary_name: "VocabularyName",
     #       show_speaker_labels: false,
@@ -3006,7 +3020,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
