@@ -25,7 +25,7 @@ module Aws
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
 
           Aws::Partitions::EndpointProvider.signing_region(
-            cfg.region, 's3', cfg.use_dualstack_endpoint
+            cfg.region, 's3'
           )
         end
 

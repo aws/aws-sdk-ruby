@@ -56,7 +56,7 @@ module Aws
           req.context.config.region,
           'sts',
           req.context.config.sts_regional_endpoints,
-          req.context.config.use_dualstack_endpoint
+          { dualstack: req.context.config.use_dualstack_endpoint }
         )
         url += "/?#{param_list}"
 

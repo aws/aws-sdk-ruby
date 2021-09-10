@@ -3,24 +3,26 @@
     {
       "defaults": {
         "hostname": "{service}.{region}.{dnsSuffix}",
-        "protocols": [
-          "https"
-        ],
-        "signatureVersions": [
-          "v4"
-        ]
-      },
-      "dualstackDefaults": {
-        "hostname": "{service}.{region}.{dualstackDnsSuffix}",
-        "protocols": [
-          "https"
-        ],
-        "signatureVersions": [
-          "v4"
+        "protocols": ["https"],
+        "signatureVersions": ["v4"],
+        "variants": [
+          {
+            "hostname": "{service}-fips.{region}.{dnsSuffix}",
+            "tags": ["fips"]
+          },
+          {
+            "dnsSuffix": "api.aws",
+            "hostname": "{service}.{region}.{dnsSuffix}",
+            "tags": ["dualstack"]
+          },
+          {
+            "dnsSuffix": "api.aws",
+            "hostname": "{service}.{region}.{dnsSuffix}",
+            "tags": ["dualstack", "fips"]
+          }
         ]
       },
       "dnsSuffix": "amazonaws.com",
-      "dualstackDnsSuffix": "aws",
       "partition": "aws",
       "regionRegex": "^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$",
       "regions": {
@@ -32,71 +34,52 @@
         }
       },
       "services": {
-        "ec2": {
+        "dynamodb": {
           "defaults": {
-            "protocols": [
-              "http",
-              "https"
-            ],
-            "hostname": "api.{service}.{region}.{dnsSuffix}"
-          },
-          "dualstackDefaults": {
-            "protocols": [
-              "http",
-              "https"
-            ],
-            "hostname": "api.{service}.{region}.{dualstackDnsSuffix}"
+            "protocols": ["http", "https"]
           },
           "endpoints": {
             "us-west-2": {
-              "credentialScope": {
-                "region": "us-west-2"
-              },
-              "hostname": "ec2.us-west-2.amazonaws.com"
-            }
-          },
-          "dualstackEndpoints": {
-            "us-west-2": {
-              "credentialScope": {
-                "region": "us-west-2"
-              },
-              "hostname": "ec2.us-west-2.aws"
+              "variants":[
+                {
+                  "hostname": "dynamodb-fips.us-west-2.amazonaws.com",
+                  "tags": ["fips"]
+                },
+                {
+                  "hostname": "fips.dynamodb.us-west-2.api.aws",
+                  "tags": ["fips", "dualstack"]
+                },
+                {
+                  "hostname": "dynamodb.us-west-2.api.aws",
+                  "tags": ["dualstack"]
+                }
+              ]
             }
           }
         },
-        "s3": {
+        "ec2": {
           "defaults": {
-            "protocols": [
-              "http",
-              "https"
-            ],
-            "signatureVersions": [
-              "s3v4"
+            "hostname": "api.ec2.{region}.{dnsSuffix}",
+            "protocols": ["http", "https"],
+            "variants": [
+              {
+                "dnsSuffix": "api.aws",
+                "hostname": "api.ec2.{region}.{dnsSuffix}",
+                "tags": ["dualstack"]
+              }
             ]
           },
-          "dualstackDefaults": {
-            "protocols": [
-              "http",
-              "https"
-            ],
-            "hostname": "{service}.dualstack.{region}.{dualstackDnsSuffix}"
-          },
-          "dualstackDnsSuffix": "amazonaws.com",
           "endpoints": {
             "us-west-2": {
-              "hostname": "s3.api.us-west-2.amazonaws.com",
-              "signatureVersions": [
-                "s3",
-                "s3v4"
-              ]
-            }
-          },
-          "dualstackEndpoints": {
-            "us-west-2": {
-              "hostname": "s3.api.dualstack.us-west-2.amazonaws.com",
-              "signatureVersions": [
-                "s3",
-                "s3v4"
+              "credentialScope": {
+                "region": "us-west-2"
+              },
+              "hostname": "ec2.us-west-2.amazonaws.com",
+              "variants": [
+                {
+                  "hostname": "ec2.us-west-2.api.aws",
+                  "tags": ["dualstack"]
+                }
               ]
             }
           }
@@ -107,43 +90,42 @@
               "credentialScope": {
                 "region": "us-east-1"
               },
-              "hostname": "route53.amazonaws.com"
-            }
-          },
-          "dualstackEndpoints": {
-            "aws-global": {
-              "credentialScope": {
-                "region": "us-east-1"
-              },
-              "hostname": "route53.global.aws"
+              "hostname": "route53.amazonaws.com",
+              "variants":[
+                {
+                  "hostname": "route53.global.api.aws",
+                  "tags": [
+                    "dualstack"
+                  ]
+                }
+              ]
             }
           },
           "isRegionalized": false,
           "partitionEndpoint": "aws-global"
         },
-        "dynamodb": {
+        "s3": {
           "defaults": {
-            "protocols": [
-              "http",
-              "https"
+            "protocols": ["http", "https"],
+            "signatureVersions": ["s3v4"],
+            "variants": [
+              {
+                "dnsSuffix": "amazonaws.com",
+                "hostname": "s3.dualstack.{region}.{dnsSuffix}",
+                "tags": ["dualstack"]
+              }
             ]
           },
           "endpoints": {
-            "us-west-2": {},
-            "fips-us-west-2": {
-              "credentialScope": {
-                "region": "us-west-2"
-              },
-              "hostname": "dynamodb-fips.us-west-2.amazonaws.com"
-            }
-          },
-          "dualstackEndpoints": {
-            "us-west-2": {},
-            "fips-us-west-2": {
-              "credentialScope": {
-                "region": "us-west-2"
-              },
-              "hostname": "fips.dynamodb.us-west-2.aws"
+            "us-west-2": {
+              "hostname": "s3.api.us-west-2.amazonaws.com",
+              "signatureVersions": ["s3", "s3v4"],
+              "variants": [
+                {
+                  "hostname": "s3.api.dualstack.us-west-2.amazonaws.com",
+                  "tags": ["dualstack"]
+                }
+              ]
             }
           }
         }
@@ -152,12 +134,8 @@
     {
       "defaults": {
         "hostname": "{service}.{region}.{dnsSuffix}",
-        "protocols": [
-          "https"
-        ],
-        "signatureVersions": [
-          "v4"
-        ]
+        "protocols": ["https"],
+        "signatureVersions": ["v4"]
       },
       "dnsSuffix": "c2s.ic.gov",
       "partition": "aws-iso",

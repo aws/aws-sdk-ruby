@@ -348,7 +348,7 @@ module Aws
                 'us-west-2',
                 'ec2',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://ec2.us-west-2.amazonaws.com')
           end
@@ -359,7 +359,7 @@ module Aws
                 'us-east-2',
                 'ec2',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://api.ec2.us-east-2.amazonaws.com')
           end
@@ -370,9 +370,9 @@ module Aws
                 'us-west-2',
                 'ec2',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
-            ).to eq('https://ec2.us-west-2.aws')
+            ).to eq('https://ec2.us-west-2.api.aws')
           end
 
           it 'resolves dualstack endpoint using hostname pattern' do
@@ -381,9 +381,9 @@ module Aws
                 'us-east-2',
                 'ec2',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
-            ).to eq('https://api.ec2.us-east-2.aws')
+            ).to eq('https://api.ec2.us-east-2.api.aws')
           end
         end
 
@@ -394,7 +394,7 @@ module Aws
                 'us-west-2',
                 's3',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://s3.api.us-west-2.amazonaws.com')
           end
@@ -405,7 +405,7 @@ module Aws
                 'us-east-2',
                 's3',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://s3.us-east-2.amazonaws.com')
           end
@@ -416,7 +416,7 @@ module Aws
                 'us-west-2',
                 's3',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
             ).to eq('https://s3.api.dualstack.us-west-2.amazonaws.com')
           end
@@ -427,7 +427,7 @@ module Aws
                 'us-east-2',
                 's3',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
             ).to eq('https://s3.dualstack.us-east-2.amazonaws.com')
           end
@@ -440,7 +440,7 @@ module Aws
                 'us-west-2',
                 'route53',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://route53.amazonaws.com')
           end
@@ -451,7 +451,7 @@ module Aws
                 'us-east-2',
                 'route53',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://route53.amazonaws.com')
           end
@@ -462,9 +462,9 @@ module Aws
                 'us-west-2',
                 'route53',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
-            ).to eq('https://route53.global.aws')
+            ).to eq('https://route53.global.api.aws')
           end
 
           it 'resolves a dualstack global endpoint 2' do
@@ -473,9 +473,9 @@ module Aws
                 'us-east-2',
                 'route53',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
-            ).to eq('https://route53.global.aws')
+            ).to eq('https://route53.global.api.aws')
           end
         end
 
@@ -486,7 +486,7 @@ module Aws
                 'us-west-2',
                 'dynamodb',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://dynamodb.us-west-2.amazonaws.com')
           end
@@ -497,7 +497,7 @@ module Aws
                 'us-east-2',
                 'dynamodb',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://dynamodb.us-east-2.amazonaws.com')
           end
@@ -508,9 +508,9 @@ module Aws
                 'us-west-2',
                 'dynamodb',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
-            ).to eq('https://dynamodb.us-west-2.aws')
+            ).to eq('https://dynamodb.us-west-2.api.aws')
           end
 
           it 'resolves a dualstack endpoint using hostname pattern' do
@@ -519,18 +519,18 @@ module Aws
                 'us-east-2',
                 'dynamodb',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
-            ).to eq('https://dynamodb.us-east-2.aws')
+            ).to eq('https://dynamodb.us-east-2.api.aws')
           end
 
           it 'still resolves a fips endpoint' do
             expect(
               Partitions::EndpointProvider.resolve(
-                'fips-us-west-2',
+                'us-west-2',
                 'dynamodb',
                 'regional',
-                false
+                { dualstack: false, fips: true }
               )
             ).to eq('https://dynamodb-fips.us-west-2.amazonaws.com')
           end
@@ -538,12 +538,12 @@ module Aws
           it 'resolves a fips dualstack endpoint' do
             expect(
               Partitions::EndpointProvider.resolve(
-                'fips-us-west-2',
+                'us-west-2',
                 'dynamodb',
                 'regional',
-                true
+                { dualstack: true, fips: true }
               )
-            ).to eq('https://fips.dynamodb.us-west-2.aws')
+            ).to eq('https://fips.dynamodb.us-west-2.api.aws')
           end
         end
 
@@ -554,7 +554,7 @@ module Aws
                 'us-iso-east-1',
                 'ec2',
                 'regional',
-                false
+                { dualstack: false, fips: false }
               )
             ).to eq('https://ec2.us-iso-east-1.c2s.ic.gov')
           end
@@ -565,7 +565,7 @@ module Aws
                 'us-iso-east-1',
                 'ec2',
                 'regional',
-                true
+                { dualstack: true, fips: false }
               )
             end.to raise_error(ArgumentError)
           end
@@ -573,24 +573,34 @@ module Aws
       end
 
       describe '.dns_suffix_for' do
-        it 'gets the dualstack dns suffix for a region' do
-          expect(
-            Partitions::EndpointProvider.dns_suffix_for('us-west-2', nil, true)
-          ).to eq('aws')
+        it 'resolves dns suffix from region variant' do
+          # expect(
+          #   Partitions::EndpointProvider.dns_suffix_for(
+          #     'us-west-2',
+          #     nil,
+          #     { dualstack: true, fips: false }
+          #   )
+          # ).to eq('aws')
         end
 
-        it 'gets a service level dualstack dns suffix' do
-          expect(
-            Partitions::EndpointProvider.dns_suffix_for('us-west-2', 's3', true)
-          ).to eq('amazonaws.com')
-        end
-
-        it 'does not look at the service for regular dns suffix' do
+        it 'resolves dns suffix from service variant' do
           expect(
             Partitions::EndpointProvider.dns_suffix_for(
-              'us-west-2', 'ec2', false
+              'us-west-2',
+              's3',
+              { dualstack: true, fips: false }
             )
           ).to eq('amazonaws.com')
+        end
+
+        it 'resolves dns suffix from partition variant' do
+          expect(
+            Partitions::EndpointProvider.dns_suffix_for(
+              'us-west-2',
+              'dynamodb',
+              { dualstack: true, fips: false }
+            )
+          ).to eq('api.aws')
         end
       end
 

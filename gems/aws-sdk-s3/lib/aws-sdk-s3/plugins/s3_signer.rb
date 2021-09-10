@@ -23,7 +23,7 @@ module Aws
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
 
           Aws::Partitions::EndpointProvider.signing_region(
-            cfg.region, 's3', cfg.use_dualstack_endpoint
+            cfg.region, 's3'
           )
         end
 
@@ -166,7 +166,7 @@ module Aws
             resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
               resp.context.config.region,
               's3',
-              resp.context[:use_dualstack_endpoint]
+              { dualstack: resp.context[:use_dualstack_endpoint] }
             )
             !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
           end
@@ -239,7 +239,8 @@ module Aws
           def new_hostname(context, region)
             uri = URI.parse(
               Aws::Partitions::EndpointProvider.resolve(
-                region, 's3', 'regional', context[:use_dualstack_endpoint]
+                region, 's3', 'regional',
+                { dualstack: context[:use_dualstack_endpoint] }
               )
             )
 
