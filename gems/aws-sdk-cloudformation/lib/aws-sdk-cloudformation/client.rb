@@ -2581,9 +2581,9 @@ module Aws::CloudFormation
     # configuration drift.
     #
     # For a given stack, there will be one `StackResourceDrift` for each
-    # stack resource that has been checked for drift. Resources that have
-    # not yet been checked for drift are not included. Resources that do not
-    # currently support drift detection are not checked, and so not
+    # stack resource that has been checked for drift. Resources that
+    # haven't yet been checked for drift are not included. Resources that
+    # do not currently support drift detection are not checked, and so not
     # included. For a list of resources that support drift detection, see
     # [Resources that Support Drift Detection][1].
     #
@@ -2939,8 +2939,7 @@ module Aws::CloudFormation
     # Returns the description for the specified stack; if no stack name was
     # specified, then it returns the description for all the stacks created.
     #
-    # <note markdown="1"> If the stack does not exist, an `AmazonCloudFormationException` is
-    # returned.
+    # <note markdown="1"> If the stack does not exist, an `ValidationError` is returned.
     #
     #  </note>
     #
@@ -6638,7 +6637,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -342,9 +342,9 @@ module Aws::CloudTrail
     # tag key. Tag key names must be unique for a trail; you cannot have two
     # keys with the same name but different values. If you specify a key
     # without a value, the tag will be created with the specified key and a
-    # value of null. You can tag a trail that applies to all AWS Regions
-    # only from the Region in which the trail was created (also known as its
-    # home region).
+    # value of null. You can tag a trail that applies to all Amazon Web
+    # Services Regions only from the Region in which the trail was created
+    # (also known as its home region).
     #
     # @option params [required, String] :resource_id
     #   Specifies the ARN of the trail to which one or more tags will be
@@ -353,7 +353,7 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @option params [Array<Types::Tag>] :tags_list
-    #   Contains a list of CloudTrail tags, up to a limit of 50
+    #   Contains a list of tags, up to a limit of 50
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -393,7 +393,7 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #
@@ -434,7 +434,7 @@ module Aws::CloudTrail
     #   default is false.
     #
     #   <note markdown="1"> When you disable log file integrity validation, the chain of digest
-    #   files is broken after one hour. CloudTrail will not create digest
+    #   files is broken after one hour. CloudTrail does not create digest
     #   files for log files that were delivered during a period in which log
     #   file integrity validation was disabled. For example, if you enable log
     #   file integrity validation at noon on January 1, disable it at noon on
@@ -449,7 +449,7 @@ module Aws::CloudTrail
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
     #   logs will be delivered. Not required unless you specify
-    #   CloudWatchLogsRoleArn.
+    #   `CloudWatchLogsRoleArn`.
     #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
@@ -461,6 +461,10 @@ module Aws::CloudTrail
     #   fully specified ARN to an alias, a fully specified ARN to a key, or a
     #   globally unique identifier.
     #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the *Key
+    #   Management Service Developer Guide*.
+    #
     #   Examples:
     #
     #   * alias/MyAliasName
@@ -471,12 +475,16 @@ module Aws::CloudTrail
     #
     #   * 12345678-1234-1234-1234-123456789012
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    #
     # @option params [Boolean] :is_organization_trail
     #   Specifies whether the trail is created for all accounts in an
-    #   organization in AWS Organizations, or only for the current AWS
-    #   account. The default is false, and cannot be true unless the call is
-    #   made on behalf of an AWS account that is the master account for an
-    #   organization in AWS Organizations.
+    #   organization in Organizations, or only for the current Amazon Web
+    #   Services account. The default is false, and cannot be true unless the
+    #   call is made on behalf of an Amazon Web Services account that is the
+    #   management account for an organization in Organizations.
     #
     # @option params [Array<Types::Tag>] :tags_list
     #   A list of tags.
@@ -551,7 +559,7 @@ module Aws::CloudTrail
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
-    #   The format of a trail ARN is:
+    #   The following is the format of a trail ARN.
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -659,7 +667,7 @@ module Aws::CloudTrail
     #   you are logging data events.
     #
     # For more information, see [Logging Data and Management Events for
-    # Trails ][1] in the *AWS CloudTrail User Guide*.
+    # Trails ][1] in the *CloudTrail User Guide*.
     #
     #
     #
@@ -743,7 +751,7 @@ module Aws::CloudTrail
     # exception `InsightNotEnabledException`
     #
     # For more information, see [Logging CloudTrail Insights Events for
-    # Trails ][1] in the *AWS CloudTrail User Guide*.
+    # Trails ][1] in the *CloudTrail User Guide*.
     #
     #
     #
@@ -850,7 +858,7 @@ module Aws::CloudTrail
     #   Specifies the name or the CloudTrail ARN of the trail for which you
     #   are requesting status. To get the status of a shadow trail (a
     #   replication of the trail in another region), you must specify its ARN.
-    #   The format of a trail ARN is:
+    #   The following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -914,10 +922,10 @@ module Aws::CloudTrail
     # to validate digest files that were signed with its corresponding
     # private key.
     #
-    # <note markdown="1"> CloudTrail uses different private/public key pairs per region. Each
-    # digest file is signed with a private key unique to its region.
-    # Therefore, when you validate a digest file from a particular region,
-    # you must look in the same region for its corresponding public key.
+    # <note markdown="1"> CloudTrail uses different private and public key pairs per region.
+    # Each digest file is signed with a private key unique to its region.
+    # When you validate a digest file from a specific region, you must look
+    # in the same region for its corresponding public key.
     #
     #  </note>
     #
@@ -971,7 +979,7 @@ module Aws::CloudTrail
     #
     # @option params [required, Array<String>] :resource_id_list
     #   Specifies a list of trail ARNs whose tags will be listed. The list has
-    #   a limit of 20 ARNs. The format of a trail ARN is:
+    #   a limit of 20 ARNs. The following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -1054,7 +1062,7 @@ module Aws::CloudTrail
     # in a region within the last 90 days. Lookup supports the following
     # attributes for management events:
     #
-    # * AWS access key
+    # * Amazon Web Services access key
     #
     # * Event ID
     #
@@ -1204,7 +1212,7 @@ module Aws::CloudTrail
     #
     # You can configure up to five event selectors for each trail. For more
     # information, see [Logging data and management events for trails ][1]
-    # and [Quotas in AWS CloudTrail][2] in the *AWS CloudTrail User Guide*.
+    # and [Quotas in CloudTrail][2] in the *CloudTrail User Guide*.
     #
     # You can add advanced event selectors, and conditions for your advanced
     # event selectors, up to a maximum of 500 values for all conditions and
@@ -1212,7 +1220,7 @@ module Aws::CloudTrail
     # `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
     # to a trail, any existing `EventSelectors` are overwritten. For more
     # information about advanced event selectors, see [Logging data events
-    # for trails][3] in the *AWS CloudTrail User Guide*.
+    # for trails][3] in the *CloudTrail User Guide*.
     #
     #
     #
@@ -1232,11 +1240,11 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #
-    #   If you specify a trail ARN, it must be in the format:
+    #   If you specify a trail ARN, it must be in the following format.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -1255,7 +1263,7 @@ module Aws::CloudTrail
     #   `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
     #   to a trail, any existing `EventSelectors` are overwritten. For more
     #   information about advanced event selectors, see [Logging data events
-    #   for trails][1] in the *AWS CloudTrail User Guide*.
+    #   for trails][1] in the *CloudTrail User Guide*.
     #
     #
     #
@@ -1343,17 +1351,17 @@ module Aws::CloudTrail
     # Lets you enable Insights event logging by specifying the Insights
     # selectors that you want to enable on an existing trail. You also use
     # `PutInsightSelectors` to turn off Insights event logging, by passing
-    # an empty list of insight types. In this release, only
-    # `ApiCallRateInsight` is supported as an Insights selector.
+    # an empty list of insight types. The valid Insights event type in this
+    # release is `ApiCallRateInsight`.
     #
     # @option params [required, String] :trail_name
     #   The name of the CloudTrail trail for which you want to change or add
     #   Insights selectors.
     #
     # @option params [required, Array<Types::InsightSelector>] :insight_selectors
-    #   A JSON string that contains the insight types you want to log on a
-    #   trail. In this release, only `ApiCallRateInsight` is supported as an
-    #   insight type.
+    #   A JSON string that contains the Insights types that you want to log on
+    #   a trail. The valid Insights type in this release is
+    #   `ApiCallRateInsight`.
     #
     # @return [Types::PutInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1420,15 +1428,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Starts the recording of AWS API calls and log file delivery for a
-    # trail. For a trail that is enabled in all regions, this operation must
-    # be called from the region in which the trail was created. This
-    # operation cannot be called on the shadow trails (replicated trails in
-    # other regions) of a trail that is enabled in all regions.
+    # Starts the recording of Amazon Web Services API calls and log file
+    # delivery for a trail. For a trail that is enabled in all regions, this
+    # operation must be called from the region in which the trail was
+    # created. This operation cannot be called on the shadow trails
+    # (replicated trails in other regions) of a trail that is enabled in all
+    # regions.
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail for which
-    #   CloudTrail logs AWS API calls. The format of a trail ARN is:
+    #   CloudTrail logs Amazon Web Services API calls. The following is the
+    #   format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -1449,19 +1459,20 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Suspends the recording of AWS API calls and log file delivery for the
-    # specified trail. Under most circumstances, there is no need to use
-    # this action. You can update a trail without stopping it first. This
-    # action is the only way to stop recording. For a trail enabled in all
-    # regions, this operation must be called from the region in which the
-    # trail was created, or an `InvalidHomeRegionException` will occur. This
-    # operation cannot be called on the shadow trails (replicated trails in
-    # other regions) of a trail enabled in all regions.
+    # Suspends the recording of Amazon Web Services API calls and log file
+    # delivery for the specified trail. Under most circumstances, there is
+    # no need to use this action. You can update a trail without stopping it
+    # first. This action is the only way to stop recording. For a trail
+    # enabled in all regions, this operation must be called from the region
+    # in which the trail was created, or an `InvalidHomeRegionException`
+    # will occur. This operation cannot be called on the shadow trails
+    # (replicated trails in other regions) of a trail enabled in all
+    # regions.
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail for which
-    #   CloudTrail will stop logging AWS API calls. The format of a trail ARN
-    #   is:
+    #   CloudTrail will stop logging Amazon Web Services API calls. The
+    #   following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -1482,13 +1493,13 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Updates the settings that specify delivery of log files. Changes to a
-    # trail do not require stopping the CloudTrail service. Use this action
-    # to designate an existing bucket for log delivery. If the existing
-    # bucket has previously been a target for CloudTrail log files, an IAM
-    # policy exists for the bucket. `UpdateTrail` must be called from the
-    # region in which the trail was created; otherwise, an
-    # `InvalidHomeRegionException` is thrown.
+    # Updates trail settings that control what events you are logging, and
+    # how to handle log files. Changes to a trail do not require stopping
+    # the CloudTrail service. Use this action to designate an existing
+    # bucket for log delivery. If the existing bucket has previously been a
+    # target for CloudTrail log files, an IAM policy exists for the bucket.
+    # `UpdateTrail` must be called from the region in which the trail was
+    # created; otherwise, an `InvalidHomeRegionException` is thrown.
     #
     # @option params [required, String] :name
     #   Specifies the name of the trail or trail ARN. If `Name` is a trail
@@ -1502,11 +1513,11 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #
-    #   If `Name` is a trail ARN, it must be in the format:
+    #   If `Name` is a trail ARN, it must be in the following format.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -1551,7 +1562,7 @@ module Aws::CloudTrail
     #   false.
     #
     #   <note markdown="1"> When you disable log file integrity validation, the chain of digest
-    #   files is broken after one hour. CloudTrail will not create digest
+    #   files is broken after one hour. CloudTrail does not create digest
     #   files for log files that were delivered during a period in which log
     #   file integrity validation was disabled. For example, if you enable log
     #   file integrity validation at noon on January 1, disable it at noon on
@@ -1565,8 +1576,8 @@ module Aws::CloudTrail
     # @option params [String] :cloud_watch_logs_log_group_arn
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
-    #   logs will be delivered. Not required unless you specify
-    #   CloudWatchLogsRoleArn.
+    #   logs are delivered. Not required unless you specify
+    #   `CloudWatchLogsRoleArn`.
     #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
@@ -1578,6 +1589,10 @@ module Aws::CloudTrail
     #   fully specified ARN to an alias, a fully specified ARN to a key, or a
     #   globally unique identifier.
     #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the *Key
+    #   Management Service Developer Guide*.
+    #
     #   Examples:
     #
     #   * alias/MyAliasName
@@ -1588,17 +1603,21 @@ module Aws::CloudTrail
     #
     #   * 12345678-1234-1234-1234-123456789012
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    #
     # @option params [Boolean] :is_organization_trail
     #   Specifies whether the trail is applied to all accounts in an
-    #   organization in AWS Organizations, or only for the current AWS
-    #   account. The default is false, and cannot be true unless the call is
-    #   made on behalf of an AWS account that is the master account for an
-    #   organization in AWS Organizations. If the trail is not an organization
-    #   trail and this is set to true, the trail will be created in all AWS
-    #   accounts that belong to the organization. If the trail is an
-    #   organization trail and this is set to false, the trail will remain in
-    #   the current AWS account but be deleted from all member accounts in the
-    #   organization.
+    #   organization in Organizations, or only for the current Amazon Web
+    #   Services account. The default is false, and cannot be true unless the
+    #   call is made on behalf of an Amazon Web Services account that is the
+    #   management account for an organization in Organizations. If the trail
+    #   is not an organization trail and this is set to `true`, the trail will
+    #   be created in all Amazon Web Services accounts that belong to the
+    #   organization. If the trail is an organization trail and this is set to
+    #   `false`, the trail will remain in the current Amazon Web Services
+    #   account but be deleted from all member accounts in the organization.
     #
     # @return [Types::UpdateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1670,7 +1689,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

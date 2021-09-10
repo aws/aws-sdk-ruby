@@ -350,9 +350,9 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   image layers to check. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the image layers to check. If you do not specify a registry,
+    #   the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository that is associated with the image layers to
@@ -406,9 +406,9 @@ module Aws::ECR
     # the image's digest in your request.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   image to delete. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the image to delete. If you do not specify a registry, the
+    #   default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository that contains the image to delete.
@@ -490,9 +490,9 @@ module Aws::ECR
     # retrieve the image manifest.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   images to describe. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the images to describe. If you do not specify a registry, the
+    #   default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository that contains the images to describe.
@@ -599,9 +599,9 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry to which to upload
-    #   layers. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   which to upload layers. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to associate with the image layer.
@@ -646,7 +646,7 @@ module Aws::ECR
     end
 
     # Creates a repository. For more information, see [Amazon ECR
-    # Repositories][1] in the *Amazon Elastic Container Registry User
+    # repositories][1] in the *Amazon Elastic Container Registry User
     # Guide*.
     #
     #
@@ -749,9 +749,9 @@ module Aws::ECR
     # Deletes the lifecycle policy associated with the specified repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository.
@@ -812,9 +812,9 @@ module Aws::ECR
     # to delete the repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository to delete. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository to delete. If you do not specify a registry,
+    #   the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to delete.
@@ -879,9 +879,9 @@ module Aws::ECR
     # repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository policy to delete. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository policy to delete. If you do not specify a
+    #   registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository that is associated with the repository
@@ -934,9 +934,10 @@ module Aws::ECR
     # Returns the scan findings for the specified image.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to describe the image scan findings for. If you do
-    #   not specify a registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to describe the image scan findings
+    #   for. If you do not specify a registry, the default registry is
+    #   assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository for the image for which to describe the scan findings.
@@ -1033,9 +1034,9 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to describe images. If you do not specify a
-    #   registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to describe images. If you do not
+    #   specify a registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository that contains the images to describe.
@@ -1149,9 +1150,9 @@ module Aws::ECR
     # Describes image repositories in a registry.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repositories to be described. If you do not specify a registry, the
-    #   default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repositories to be described. If you do not specify a
+    #   registry, the default registry is assumed.
     #
     # @option params [Array<String>] :repository_names
     #   A list of repositories to describe. If this parameter is omitted, then
@@ -1255,9 +1256,9 @@ module Aws::ECR
     #
     # The `authorizationToken` returned is a base64 encoded string that can
     # be decoded and used in a `docker login` command to authenticate to a
-    # registry. The AWS CLI offers an `get-login-password` command that
+    # registry. The CLI offers an `get-login-password` command that
     # simplifies the login process. For more information, see [Registry
-    # Authentication][1] in the *Amazon Elastic Container Registry User
+    # authentication][1] in the *Amazon Elastic Container Registry User
     # Guide*.
     #
     #
@@ -1265,9 +1266,9 @@ module Aws::ECR
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth
     #
     # @option params [Array<String>] :registry_ids
-    #   A list of AWS account IDs that are associated with the registries for
-    #   which to get AuthorizationData objects. If you do not specify a
-    #   registry, the default registry is assumed.
+    #   A list of Amazon Web Services account IDs that are associated with the
+    #   registries for which to get AuthorizationData objects. If you do not
+    #   specify a registry, the default registry is assumed.
     #
     # @return [Types::GetAuthorizationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1328,9 +1329,9 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   image layer to download. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the image layer to download. If you do not specify a
+    #   registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository that is associated with the image layer to
@@ -1369,9 +1370,9 @@ module Aws::ECR
     # Retrieves the lifecycle policy for the specified repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository.
@@ -1410,9 +1411,9 @@ module Aws::ECR
     # specified repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository.
@@ -1530,9 +1531,9 @@ module Aws::ECR
     # Retrieves the repository policy for the specified repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository with the policy to retrieve.
@@ -1595,9 +1596,9 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry to which you intend to
-    #   upload layers. If you do not specify a registry, the default registry
-    #   is assumed.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   which you intend to upload layers. If you do not specify a registry,
+    #   the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to which you intend to upload layers.
@@ -1638,9 +1639,9 @@ module Aws::ECR
     # only `TAGGED` images to list all of the tags in your repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to list images. If you do not specify a registry,
-    #   the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to list images. If you do not specify
+    #   a registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The repository with image IDs to be listed.
@@ -1772,9 +1773,9 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to put the image. If you do not specify a
-    #   registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to put the image. If you do not
+    #   specify a registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository in which to put the image.
@@ -1831,10 +1832,10 @@ module Aws::ECR
     # Updates the image scanning configuration for the specified repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to update the image scanning configuration
-    #   setting. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to update the image scanning
+    #   configuration setting. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository in which to update the image scanning
@@ -1877,7 +1878,7 @@ module Aws::ECR
     end
 
     # Updates the image tag mutability settings for the specified
-    # repository. For more information, see [Image Tag Mutability][1] in the
+    # repository. For more information, see [Image tag mutability][1] in the
     # *Amazon Elastic Container Registry User Guide*.
     #
     #
@@ -1885,9 +1886,10 @@ module Aws::ECR
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to update the image tag mutability settings. If
-    #   you do not specify a registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to update the image tag mutability
+    #   settings. If you do not specify a registry, the default registry is
+    #   assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository in which to update the image tag mutability
@@ -1929,16 +1931,16 @@ module Aws::ECR
     end
 
     # Creates or updates the lifecycle policy for the specified repository.
-    # For more information, see [Lifecycle Policy Template][1].
+    # For more information, see [Lifecycle policy template][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do  not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do  not specify a registry, the
+    #   default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to receive the policy.
@@ -1977,10 +1979,10 @@ module Aws::ECR
 
     # Creates or updates the permissions policy for your registry.
     #
-    # A registry policy is used to specify permissions for another AWS
-    # account and is used when configuring cross-account replication. For
-    # more information, see [Registry permissions][1] in the *Amazon Elastic
-    # Container Registry User Guide*.
+    # A registry policy is used to specify permissions for another Amazon
+    # Web Services account and is used when configuring cross-account
+    # replication. For more information, see [Registry permissions][1] in
+    # the *Amazon Elastic Container Registry User Guide*.
     #
     #
     #
@@ -2026,7 +2028,7 @@ module Aws::ECR
     # with the DescribeRegistry API action. The first time the
     # PutReplicationConfiguration API is called, a service-linked IAM role
     # is created in your account for the replication process. For more
-    # information, see [Using Service-Linked Roles for Amazon ECR][1] in the
+    # information, see [Using service-linked roles for Amazon ECR][1] in the
     # *Amazon Elastic Container Registry User Guide*.
     #
     # <note markdown="1"> When configuring cross-account replication, the destination account
@@ -2082,23 +2084,23 @@ module Aws::ECR
 
     # Applies a repository policy to the specified repository to control
     # access permissions. For more information, see [Amazon ECR Repository
-    # Policies][1] in the *Amazon Elastic Container Registry User Guide*.
+    # policies][1] in the *Amazon Elastic Container Registry User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to receive the policy.
     #
     # @option params [required, String] :policy_text
     #   The JSON repository policy text to apply to the repository. For more
-    #   information, see [Amazon ECR Repository Policies][1] in the *Amazon
+    #   information, see [Amazon ECR repository policies][1] in the *Amazon
     #   Elastic Container Registry User Guide*.
     #
     #
@@ -2142,18 +2144,18 @@ module Aws::ECR
     end
 
     # Starts an image vulnerability scan. An image scan can only be started
-    # once per day on an individual image. This limit includes if an image
-    # was scanned on initial push. For more information, see [Image
-    # Scanning][1] in the *Amazon Elastic Container Registry User Guide*.
+    # once per 24 hours on an individual image. This limit includes if an
+    # image was scanned on initial push. For more information, see [Image
+    # scanning][1] in the *Amazon Elastic Container Registry User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository in which to start an image scan request. If you do not
-    #   specify a registry, the default registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository in which to start an image scan request. If
+    #   you do not specify a registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository that contains the images to scan.
@@ -2202,9 +2204,9 @@ module Aws::ECR
     # policy with the repository.
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry that contains the
-    #   repository. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the repository. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to be evaluated.
@@ -2323,9 +2325,9 @@ module Aws::ECR
     #  </note>
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry to which you are
-    #   uploading layer parts. If you do not specify a registry, the default
-    #   registry is assumed.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   which you are uploading layer parts. If you do not specify a registry,
+    #   the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to which you are uploading layer parts.
@@ -2392,7 +2394,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-09-03)
+------------------
+
+* Feature - This release adds a new API CreateOrder.
+
+1.20.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.19.0 (2021-07-30)
 ------------------
 

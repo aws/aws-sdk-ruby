@@ -776,7 +776,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.identity.oidc.issuer #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "PENDING"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
@@ -786,6 +786,11 @@ module Aws::EKS
     #   resp.cluster.encryption_config[0].resources #=> Array
     #   resp.cluster.encryption_config[0].resources[0] #=> String
     #   resp.cluster.encryption_config[0].provider.key_arn #=> String
+    #   resp.cluster.connector_config.activation_id #=> String
+    #   resp.cluster.connector_config.activation_code #=> String
+    #   resp.cluster.connector_config.activation_expiry #=> Time
+    #   resp.cluster.connector_config.provider #=> String
+    #   resp.cluster.connector_config.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -1346,7 +1351,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.identity.oidc.issuer #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "PENDING"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
@@ -1356,6 +1361,11 @@ module Aws::EKS
     #   resp.cluster.encryption_config[0].resources #=> Array
     #   resp.cluster.encryption_config[0].resources[0] #=> String
     #   resp.cluster.encryption_config[0].provider.key_arn #=> String
+    #   resp.cluster.connector_config.activation_id #=> String
+    #   resp.cluster.connector_config.activation_code #=> String
+    #   resp.cluster.connector_config.activation_expiry #=> Time
+    #   resp.cluster.connector_config.provider #=> String
+    #   resp.cluster.connector_config.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -1494,6 +1504,71 @@ module Aws::EKS
     # @param [Hash] params ({})
     def delete_nodegroup(params = {}, options = {})
       req = build_request(:delete_nodegroup, params)
+      req.send_request(options)
+    end
+
+    # Deregisters a connected cluster to remove it from the Amazon EKS
+    # control plane.
+    #
+    # @option params [required, String] :name
+    #   The name of the connected cluster to deregister.
+    #
+    # @return [Types::DeregisterClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeregisterClusterResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_cluster({
+    #     name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.name #=> String
+    #   resp.cluster.arn #=> String
+    #   resp.cluster.created_at #=> Time
+    #   resp.cluster.version #=> String
+    #   resp.cluster.endpoint #=> String
+    #   resp.cluster.role_arn #=> String
+    #   resp.cluster.resources_vpc_config.subnet_ids #=> Array
+    #   resp.cluster.resources_vpc_config.subnet_ids[0] #=> String
+    #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
+    #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
+    #   resp.cluster.resources_vpc_config.cluster_security_group_id #=> String
+    #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
+    #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "PENDING"
+    #   resp.cluster.certificate_authority.data #=> String
+    #   resp.cluster.client_request_token #=> String
+    #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
+    #   resp.cluster.encryption_config #=> Array
+    #   resp.cluster.encryption_config[0].resources #=> Array
+    #   resp.cluster.encryption_config[0].resources[0] #=> String
+    #   resp.cluster.encryption_config[0].provider.key_arn #=> String
+    #   resp.cluster.connector_config.activation_id #=> String
+    #   resp.cluster.connector_config.activation_code #=> String
+    #   resp.cluster.connector_config.activation_expiry #=> Time
+    #   resp.cluster.connector_config.provider #=> String
+    #   resp.cluster.connector_config.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeregisterCluster AWS API Documentation
+    #
+    # @overload deregister_cluster(params = {})
+    # @param [Hash] params ({})
+    def deregister_cluster(params = {}, options = {})
+      req = build_request(:deregister_cluster, params)
       req.send_request(options)
     end
 
@@ -1712,7 +1787,7 @@ module Aws::EKS
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
     #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
     #   resp.cluster.identity.oidc.issuer #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "PENDING"
     #   resp.cluster.certificate_authority.data #=> String
     #   resp.cluster.client_request_token #=> String
     #   resp.cluster.platform_version #=> String
@@ -1722,6 +1797,11 @@ module Aws::EKS
     #   resp.cluster.encryption_config[0].resources #=> Array
     #   resp.cluster.encryption_config[0].resources[0] #=> String
     #   resp.cluster.encryption_config[0].provider.key_arn #=> String
+    #   resp.cluster.connector_config.activation_id #=> String
+    #   resp.cluster.connector_config.activation_code #=> String
+    #   resp.cluster.connector_config.activation_expiry #=> Time
+    #   resp.cluster.connector_config.provider #=> String
+    #   resp.cluster.connector_config.role_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2120,6 +2200,10 @@ module Aws::EKS
     #
     #    </note>
     #
+    # @option params [Array<String>] :include
+    #   Indicates whether connected clusters are included in the returned
+    #   list. Default value is 'ALL'.
+    #
     # @return [Types::ListClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListClustersResponse#clusters #clusters} => Array&lt;String&gt;
@@ -2148,6 +2232,7 @@ module Aws::EKS
     #   resp = client.list_clusters({
     #     max_results: 1,
     #     next_token: "String",
+    #     include: ["String"],
     #   })
     #
     # @example Response structure
@@ -2434,6 +2519,105 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_updates(params = {}, options = {})
       req = build_request(:list_updates, params)
+      req.send_request(options)
+    end
+
+    # Connects a Kubernetes cluster to the Amazon EKS control plane.
+    #
+    # Any Kubernetes cluster can be connected to the Amazon EKS control
+    # plane to view current information about the cluster and its nodes.
+    #
+    # Cluster connection requires two steps. First, send a `
+    # RegisterClusterRequest ` to add it to the Amazon EKS control plane.
+    #
+    # Second, a [Manifest][1] containing the `activationID` and
+    # `activationCode` must be applied to the Kubernetes cluster through
+    # it's native provider to provide visibility.
+    #
+    # After the Manifest is updated and applied, then the connected cluster
+    # is visible to the Amazon EKS control plane. If the Manifest is not
+    # applied within a set amount of time, then the connected cluster will
+    # no longer be visible and must be deregistered. See DeregisterCluster.
+    #
+    #
+    #
+    # [1]: https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml
+    #
+    # @option params [required, String] :name
+    #   Define a unique name for this cluster within your AWS account.
+    #
+    # @option params [required, Types::ConnectorConfigRequest] :connector_config
+    #   The configuration settings required to connect the Kubernetes cluster
+    #   to the Amazon EKS control plane.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::RegisterClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterClusterResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_cluster({
+    #     name: "ClusterName", # required
+    #     connector_config: { # required
+    #       role_arn: "String", # required
+    #       provider: "EKS_ANYWHERE", # required, accepts EKS_ANYWHERE, ANTHOS, GKE, AKS, OPENSHIFT, TANZU, RANCHER, EC2, OTHER
+    #     },
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.name #=> String
+    #   resp.cluster.arn #=> String
+    #   resp.cluster.created_at #=> Time
+    #   resp.cluster.version #=> String
+    #   resp.cluster.endpoint #=> String
+    #   resp.cluster.role_arn #=> String
+    #   resp.cluster.resources_vpc_config.subnet_ids #=> Array
+    #   resp.cluster.resources_vpc_config.subnet_ids[0] #=> String
+    #   resp.cluster.resources_vpc_config.security_group_ids #=> Array
+    #   resp.cluster.resources_vpc_config.security_group_ids[0] #=> String
+    #   resp.cluster.resources_vpc_config.cluster_security_group_id #=> String
+    #   resp.cluster.resources_vpc_config.vpc_id #=> String
+    #   resp.cluster.resources_vpc_config.endpoint_public_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.endpoint_private_access #=> Boolean
+    #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
+    #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
+    #   resp.cluster.logging.cluster_logging #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
+    #   resp.cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.cluster.identity.oidc.issuer #=> String
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "PENDING"
+    #   resp.cluster.certificate_authority.data #=> String
+    #   resp.cluster.client_request_token #=> String
+    #   resp.cluster.platform_version #=> String
+    #   resp.cluster.tags #=> Hash
+    #   resp.cluster.tags["TagKey"] #=> String
+    #   resp.cluster.encryption_config #=> Array
+    #   resp.cluster.encryption_config[0].resources #=> Array
+    #   resp.cluster.encryption_config[0].resources[0] #=> String
+    #   resp.cluster.encryption_config[0].provider.key_arn #=> String
+    #   resp.cluster.connector_config.activation_id #=> String
+    #   resp.cluster.connector_config.activation_code #=> String
+    #   resp.cluster.connector_config.activation_expiry #=> Time
+    #   resp.cluster.connector_config.provider #=> String
+    #   resp.cluster.connector_config.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterCluster AWS API Documentation
+    #
+    # @overload register_cluster(params = {})
+    # @param [Hash] params ({})
+    def register_cluster(params = {}, options = {})
+      req = build_request(:register_cluster, params)
       req.send_request(options)
     end
 
@@ -3024,7 +3208,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

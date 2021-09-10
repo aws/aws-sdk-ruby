@@ -343,7 +343,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/managing-updates.html#applying-updates
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/managing-updates.html#applying-updates
     #
     # @option params [required, Array<String>] :cluster_names
     #   The cluster names to apply the updates.
@@ -444,7 +444,7 @@ module Aws::MemoryDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/snapshots-exporting.html
+    #   [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key used to encrypt the target snapshot.
@@ -514,7 +514,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html
     #
     # @option params [required, String] :acl_name
     #   The name of the Access Control List.
@@ -585,19 +585,11 @@ module Aws::MemoryDB
     #   An optional description of the cluster.
     #
     # @option params [Integer] :num_shards
-    #   The number of shards the cluster will contain.
-    #
-    #   Clusters can have up to 500 shards, with your data partitioned across
-    #   the shards. For example, you can choose to configure a 500 node
-    #   cluster that ranges between 83 shards (one primary and 5 replicas per
-    #   shard) and 500 shards (single primary and no replicas). Make sure
-    #   there are enough available IP addresses to accommodate the increase.
-    #   Common pitfalls include the subnets in the subnet group have too small
-    #   a CIDR range or the subnets are shared and heavily used by other
-    #   clusters.
+    #   The number of shards the cluster will contain. The default value is 1.
     #
     # @option params [Integer] :num_replicas_per_shard
-    #   The number of replicas to apply to each shard. The limit is 5.
+    #   The number of replicas to apply to each shard. The default value is 1.
+    #   The maximum is 5.
     #
     # @option params [String] :subnet_group_name
     #   The name of the subnet group to be used for the cluster.
@@ -763,7 +755,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/ParameterGroups.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/parametergroups.html
     #
     # @option params [required, String] :parameter_group_name
     #   The name of the parameter group.
@@ -894,7 +886,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/SubnetGroups.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/subnetgroups.html
     #
     # @option params [required, String] :subnet_group_name
     #   The name of the subnet group.
@@ -952,7 +944,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html
     #
     # @option params [required, String] :user_name
     #   The name of the user. This value must be unique as it also serves as
@@ -1018,7 +1010,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html
     #
     # @option params [required, String] :acl_name
     #   The name of the Access Control List to delete
@@ -2052,7 +2044,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging-Resources.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want the
@@ -2145,8 +2137,8 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/IAM.ResourceLevelPermissions.html
-    # [2]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html
+    # [2]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which the tags are
@@ -2457,7 +2449,7 @@ module Aws::MemoryDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/SubnetGroups.Modifying.html
+    # [1]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/ubnetGroups.Modifying.html
     #
     # @option params [required, String] :subnet_group_name
     #   The name of the subnet group
@@ -2560,7 +2552,7 @@ module Aws::MemoryDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

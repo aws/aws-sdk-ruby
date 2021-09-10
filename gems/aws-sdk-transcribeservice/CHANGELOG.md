@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-09-10)
+------------------
+
+* Feature - This release adds an API option for startTranscriptionJob and startMedicalTranscriptionJob that allows the user to specify encryption context key value pairs for batch jobs.
+
+1.61.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.60.0 (2021-08-26)
 ------------------
 

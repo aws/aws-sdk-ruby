@@ -7672,6 +7672,7 @@ module Aws::EC2
     #             http_tokens: "optional", # accepts optional, required
     #             http_put_response_hop_limit: 1,
     #             http_endpoint: "disabled", # accepts disabled, enabled
+    #             http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #           },
     #           enclave_options: {
     #             enabled: false,
@@ -7911,6 +7912,7 @@ module Aws::EC2
     #             http_tokens: "optional", # accepts optional, required
     #             http_put_response_hop_limit: 1,
     #             http_endpoint: "disabled", # accepts disabled, enabled
+    #             http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #           },
     #           enclave_options: {
     #             enabled: false,
@@ -11804,7 +11806,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         cidr_block: "String", # required
     #         amazon_provided_ipv_6_cidr_block: false,
     #         ipv_6_pool: "Ipv6PoolEc2Id",
     #         ipv_6_cidr_block: "String",
@@ -11822,14 +11823,8 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         cidr_block: "String", # required
     #       }
-    #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
-    #   @return [String]
     #
     # @!attribute [rw] amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
@@ -11883,17 +11878,24 @@ module Aws::EC2
     #   The tags to assign to the VPC.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the VPC, in CIDR notation. For example,
+    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcRequest AWS API Documentation
     #
     class CreateVpcRequest < Struct.new(
-      :cidr_block,
       :amazon_provided_ipv_6_cidr_block,
       :ipv_6_pool,
       :ipv_6_cidr_block,
       :dry_run,
       :instance_tenancy,
       :ipv_6_cidr_block_network_border_group,
-      :tag_specifications)
+      :tag_specifications,
+      :cidr_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37906,13 +37908,21 @@ module Aws::EC2
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Enables or disables the IPv6 endpoint for the instance metadata
+    #   service.
+    #
+    #   Default: `disabled`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMetadataOptions AWS API Documentation
     #
     class LaunchTemplateInstanceMetadataOptions < Struct.new(
       :state,
       :http_tokens,
       :http_put_response_hop_limit,
-      :http_endpoint)
+      :http_endpoint,
+      :http_protocol_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37932,6 +37942,7 @@ module Aws::EC2
     #         http_tokens: "optional", # accepts optional, required
     #         http_put_response_hop_limit: 1,
     #         http_endpoint: "disabled", # accepts disabled, enabled
+    #         http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #       }
     #
     # @!attribute [rw] http_tokens
@@ -37973,12 +37984,20 @@ module Aws::EC2
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] http_protocol_ipv_6
+    #   Enables or disables the IPv6 endpoint for the instance metadata
+    #   service.
+    #
+    #   Default: `disabled`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMetadataOptionsRequest AWS API Documentation
     #
     class LaunchTemplateInstanceMetadataOptionsRequest < Struct.new(
       :http_tokens,
       :http_put_response_hop_limit,
-      :http_endpoint)
+      :http_endpoint,
+      :http_protocol_ipv_6)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38059,22 +38078,20 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   One or more IPv4 delegated prefixes assigned to the network
-    #   interface.
+    #   One or more IPv4 prefixes assigned to the network interface.
     #   @return [Array<Types::Ipv4PrefixSpecificationResponse>]
     #
     # @!attribute [rw] ipv_4_prefix_count
-    #   The number of IPv4 delegated prefixes that AWS automatically
+    #   The number of IPv4 prefixes that Amazon Web Services automatically
     #   assigned to the network interface.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or more IPv6 delegated prefixes assigned to the network
-    #   interface.
+    #   One or more IPv6 prefixes assigned to the network interface.
     #   @return [Array<Types::Ipv6PrefixSpecificationResponse>]
     #
     # @!attribute [rw] ipv_6_prefix_count
-    #   The number of IPv6 delegated prefixes that AWS automatically
+    #   The number of IPv6 prefixes that Amazon Web Services automatically
     #   assigned to the network interface.
     #   @return [Integer]
     #
@@ -38240,26 +38257,24 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_4_prefixes
-    #   One or more IPv4 delegated prefixes to be assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv4PrefixCount` option.
+    #   One or more IPv4 prefixes to be assigned to the network interface.
+    #   You cannot use this option if you use the `Ipv4PrefixCount` option.
     #   @return [Array<Types::Ipv4PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_4_prefix_count
-    #   The number of IPv4 delegated prefixes to be automatically assigned
-    #   to the network interface. You cannot use this option if you use the
+    #   The number of IPv4 prefixes to be automatically assigned to the
+    #   network interface. You cannot use this option if you use the
     #   `Ipv4Prefix` option.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_prefixes
-    #   One or more IPv6 delegated prefixes to be assigned to the network
-    #   interface. You cannot use this option if you use the
-    #   `Ipv6PrefixCount` option.
+    #   One or more IPv6 prefixes to be assigned to the network interface.
+    #   You cannot use this option if you use the `Ipv6PrefixCount` option.
     #   @return [Array<Types::Ipv6PrefixSpecificationRequest>]
     #
     # @!attribute [rw] ipv_6_prefix_count
-    #   The number of IPv6 delegated prefixes to be automatically assigned
-    #   to the network interface. You cannot use this option if you use the
+    #   The number of IPv6 prefixes to be automatically assigned to the
+    #   network interface. You cannot use this option if you use the
     #   `Ipv6Prefix` option.
     #   @return [Integer]
     #
@@ -47363,6 +47378,7 @@ module Aws::EC2
     #           http_tokens: "optional", # accepts optional, required
     #           http_put_response_hop_limit: 1,
     #           http_endpoint: "disabled", # accepts disabled, enabled
+    #           http_protocol_ipv_6: "disabled", # accepts disabled, enabled
     #         },
     #         enclave_options: {
     #           enabled: false,
@@ -47474,14 +47490,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data to make available to the instance. For
-    #   more information, see [Running Commands on Your Linux Instance at
-    #   Launch][1] (Linux) and [Adding User Data][2] (Windows).
+    #   The user data to make available to the instance. You must provide
+    #   base64-encoded text. User data is limited to 16 KB. For more
+    #   information, see [Running Commands on Your Linux Instance at
+    #   Launch][1] (Linux) or [Adding User Data][2] (Windows).
+    #
+    #   If you are creating the launch template for use with Batch, the user
+    #   data must be provided in the [ MIME multi-part archive format][3].
+    #   For more information, see [Amazon EC2 user data in launch
+    #   templates][4] in the *Batch User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [3]: https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive
+    #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-09-09)
+------------------
+
+* Feature - This release enables customers to login to EMR Studio using AWS Identity and Access Management (IAM) identities or identities in their Identity Provider (IdP) via IAM.
+
+1.51.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2021-08-27)
 ------------------
 

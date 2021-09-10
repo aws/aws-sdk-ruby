@@ -176,7 +176,8 @@ module Aws
       :csm_port,
       :sts_regional_endpoints,
       :s3_use_arn_region,
-      :s3_us_east_1_regional_endpoint
+      :s3_us_east_1_regional_endpoint,
+      :s3_disable_multiregion_access_points
     )
 
     private

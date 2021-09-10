@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-09-10)
+------------------
+
+* Feature - This release updates terminology around KMS keys.
+
+1.45.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.44.0 (2021-07-30)
 ------------------
 

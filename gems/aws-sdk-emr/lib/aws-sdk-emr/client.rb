@@ -618,24 +618,24 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Adds tags to an Amazon EMR resource. Tags make it easier to associate
-    # clusters in various ways, such as grouping clusters to track your
-    # Amazon EMR resource allocation costs. For more information, see [Tag
-    # Clusters][1].
+    # Adds tags to an Amazon EMR resource, such as a cluster or an Amazon
+    # EMR Studio. Tags make it easier to associate resources in various
+    # ways, such as grouping clusters to track your Amazon EMR resource
+    # allocation costs. For more information, see [Tag Clusters][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @option params [required, String] :resource_id
-    #   The Amazon EMR resource identifier to which tags will be added. This
-    #   value must be a cluster identifier.
+    #   The Amazon EMR resource identifier to which tags will be added. For
+    #   example, a cluster identifier or an Amazon EMR Studio ID.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   A list of tags to associate with a cluster and propagate to EC2
-    #   instances. Tags are user-defined key-value pairs that consist of a
-    #   required key string with a maximum of 128 characters, and an optional
-    #   value string with a maximum of 256 characters.
+    #   A list of tags to associate with a resource. Tags are user-defined
+    #   key-value pairs that consist of a required key string with a maximum
+    #   of 128 characters, and an optional value string with a maximum of 256
+    #   characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -760,9 +760,8 @@ module Aws::EMR
     #   A detailed description of the Amazon EMR Studio.
     #
     # @option params [required, String] :auth_mode
-    #   Specifies whether the Studio authenticates users using single sign-on
-    #   (SSO) or IAM. Amazon EMR Studio currently only supports SSO
-    #   authentication.
+    #   Specifies whether the Studio authenticates users using IAM or Amazon
+    #   Web Services SSO.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate
@@ -775,14 +774,16 @@ module Aws::EMR
     #   the specified subnets.
     #
     # @option params [required, String] :service_role
-    #   The IAM role that will be assumed by the Amazon EMR Studio. The
-    #   service role provides a way for Amazon EMR Studio to interoperate with
-    #   other Amazon Web Services services.
+    #   The IAM role that the Amazon EMR Studio assumes. The service role
+    #   provides a way for Amazon EMR Studio to interoperate with other Amazon
+    #   Web Services services.
     #
-    # @option params [required, String] :user_role
-    #   The IAM user role that will be assumed by users and groups logged in
-    #   to an Amazon EMR Studio. The permissions attached to this IAM role can
-    #   be scoped down for each user or group using session policies.
+    # @option params [String] :user_role
+    #   The IAM user role that users and groups assume when logged in to an
+    #   Amazon EMR Studio. Only specify a `UserRole` when you use Amazon Web
+    #   Services SSO authentication. The permissions attached to the
+    #   `UserRole` can be scoped down for each user or group using session
+    #   policies.
     #
     # @option params [required, String] :workspace_security_group_id
     #   The ID of the Amazon EMR Studio Workspace security group. The
@@ -798,6 +799,20 @@ module Aws::EMR
     # @option params [required, String] :default_s3_location
     #   The Amazon S3 location to back up Amazon EMR Studio Workspaces and
     #   notebook files.
+    #
+    # @option params [String] :idp_auth_url
+    #   The authentication endpoint of your identity provider (IdP). Specify
+    #   this value when you use IAM authentication and want to let federated
+    #   users log in to a Studio with the Studio URL and credentials from your
+    #   IdP. Amazon EMR Studio redirects users to this endpoint to enter
+    #   credentials.
+    #
+    # @option params [String] :idp_relay_state_parameter_name
+    #   The name that your identity provider (IdP) uses for its `RelayState`
+    #   parameter. For example, `RelayState` or `TargetSource`. Specify this
+    #   value when you use IAM authentication and want to let federated users
+    #   log in to a Studio using the Studio URL. The `RelayState` parameter
+    #   differs by IdP.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with the Amazon EMR Studio. Tags are
@@ -819,10 +834,12 @@ module Aws::EMR
     #     vpc_id: "XmlStringMaxLen256", # required
     #     subnet_ids: ["String"], # required
     #     service_role: "XmlString", # required
-    #     user_role: "XmlString", # required
+    #     user_role: "XmlString",
     #     workspace_security_group_id: "XmlStringMaxLen256", # required
     #     engine_security_group_id: "XmlStringMaxLen256", # required
     #     default_s3_location: "XmlString", # required
+    #     idp_auth_url: "XmlString",
+    #     idp_relay_state_parameter_name: "XmlStringMaxLen256",
     #     tags: [
     #       {
     #         key: "String",
@@ -847,7 +864,14 @@ module Aws::EMR
 
     # Maps a user or group to the Amazon EMR Studio specified by `StudioId`,
     # and applies a session policy to refine Studio permissions for that
-    # user or group.
+    # user or group. Use `CreateStudioSessionMapping` to assign users to a
+    # Studio when you use Amazon Web Services SSO authentication. For
+    # instructions on how to assign users to a Studio when you use IAM
+    # authentication, see [Assign a user or group to your EMR Studio][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-manage-users.html#emr-studio-assign-users-groups
     #
     # @option params [required, String] :studio_id
     #   The ID of the Amazon EMR Studio to which the user or group will be
@@ -1445,6 +1469,8 @@ module Aws::EMR
     #   resp.studio.url #=> String
     #   resp.studio.creation_time #=> Time
     #   resp.studio.default_s3_location #=> String
+    #   resp.studio.idp_auth_url #=> String
+    #   resp.studio.idp_relay_state_parameter_name #=> String
     #   resp.studio.tags #=> Array
     #   resp.studio.tags[0].key #=> String
     #   resp.studio.tags[0].value #=> String
@@ -2311,6 +2337,7 @@ module Aws::EMR
     #   resp.studios[0].vpc_id #=> String
     #   resp.studios[0].description #=> String
     #   resp.studios[0].url #=> String
+    #   resp.studios[0].auth_mode #=> String, one of "SSO", "IAM"
     #   resp.studios[0].creation_time #=> Time
     #   resp.marker #=> String
     #
@@ -2765,10 +2792,10 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # Removes tags from an Amazon EMR resource. Tags make it easier to
-    # associate clusters in various ways, such as grouping clusters to track
-    # your Amazon EMR resource allocation costs. For more information, see
-    # [Tag Clusters][1].
+    # Removes tags from an Amazon EMR resource, such as a cluster or Amazon
+    # EMR Studio. Tags make it easier to associate resources in various
+    # ways, such as grouping clusters to track your Amazon EMR resource
+    # allocation costs. For more information, see [Tag Clusters][1].
     #
     # The following example removes the stack tag with value Prod from a
     # cluster:
@@ -2779,10 +2806,10 @@ module Aws::EMR
     #
     # @option params [required, String] :resource_id
     #   The Amazon EMR resource identifier from which tags will be removed.
-    #   This value must be a cluster identifier.
+    #   For example, a cluster identifier or an Amazon EMR Studio ID.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of tag keys to remove from a resource.
+    #   A list of tag keys to remove from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2979,8 +3006,8 @@ module Aws::EMR
     #   role, you must have already created it using the CLI or console.
     #
     # @option params [String] :service_role
-    #   The IAM role that will be assumed by the Amazon EMR service to access
-    #   Amazon Web Services resources on your behalf.
+    #   The IAM role that Amazon EMR assumes in order to access Amazon Web
+    #   Services resources on your behalf.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with a cluster and propagate to Amazon EC2
@@ -3694,7 +3721,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

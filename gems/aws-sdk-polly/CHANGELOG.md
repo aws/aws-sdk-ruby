@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2021-08-31)
+------------------
+
+* Feature - Amazon Polly adds new South African English voice - Ayanda. Ayanda is available as Neural voice only.
+
 1.44.0 (2021-08-24)
 ------------------
 

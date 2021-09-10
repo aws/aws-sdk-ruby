@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-09-02)
+------------------
+
+* Feature - This update include the support for Schema Discoverer to discover the events sent to the bus from another account. The feature will be enabled by default when discoverer is created or updated but can also be opt-in or opt-out  by specifying the value for crossAccount.
+
+1.15.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2021-07-30)
 ------------------
 

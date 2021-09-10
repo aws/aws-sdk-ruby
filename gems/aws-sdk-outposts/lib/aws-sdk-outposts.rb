@@ -28,7 +28,7 @@ require_relative 'aws-sdk-outposts/customizations'
 # structure.
 #
 #     outposts = Aws::Outposts::Client.new
-#     resp = outposts.create_outpost(params)
+#     resp = outposts.create_order(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-outposts/customizations'
 # @!group service
 module Aws::Outposts
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.21.0'
 
 end

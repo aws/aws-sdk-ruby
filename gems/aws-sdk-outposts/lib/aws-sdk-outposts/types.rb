@@ -46,6 +46,60 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateOrderInput
+    #   data as a hash:
+    #
+    #       {
+    #         outpost_identifier: "OutpostIdentifier", # required
+    #         line_items: [ # required
+    #           {
+    #             catalog_item_id: "SkuCode",
+    #             quantity: 1,
+    #           },
+    #         ],
+    #         payment_option: "ALL_UPFRONT", # required, accepts ALL_UPFRONT, NO_UPFRONT, PARTIAL_UPFRONT
+    #         payment_term: "THREE_YEARS", # accepts THREE_YEARS
+    #       }
+    #
+    # @!attribute [rw] outpost_identifier
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_items
+    #   The line items that make up the order.
+    #   @return [Array<Types::LineItemRequest>]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option for the order.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_term
+    #   The payment terms for the order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrderInput AWS API Documentation
+    #
+    class CreateOrderInput < Struct.new(
+      :outpost_identifier,
+      :line_items,
+      :payment_option,
+      :payment_term)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] order
+    #   Information about this order.
+    #   @return [Types::Order]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOrderOutput AWS API Documentation
+    #
+    class CreateOrderOutput < Struct.new(
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateOutpostInput
     #   data as a hash:
     #
@@ -271,6 +325,62 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Information about a line item.
+    #
+    # @!attribute [rw] catalog_item_id
+    #   The ID of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_item_id
+    #   The ID of the line item.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of the line item.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the line item.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItem AWS API Documentation
+    #
+    class LineItem < Struct.new(
+      :catalog_item_id,
+      :line_item_id,
+      :quantity,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a line item request.
+    #
+    # @note When making an API call, you may pass LineItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_item_id: "SkuCode",
+    #         quantity: 1,
+    #       }
+    #
+    # @!attribute [rw] catalog_item_id
+    #   The ID of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   The quantity of a line item request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/LineItemRequest AWS API Documentation
+    #
+    class LineItemRequest < Struct.new(
+      :catalog_item_id,
+      :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOutpostsInput
     #   data as a hash:
     #
@@ -425,6 +535,50 @@ module Aws::Outposts
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an order.
+    #
+    # @!attribute [rw] outpost_id
+    #   The ID of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] order_id
+    #   The ID of the order.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the order
+    #   @return [String]
+    #
+    # @!attribute [rw] line_items
+    #   The line items for the order
+    #   @return [Array<Types::LineItem>]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option for the order.
+    #   @return [String]
+    #
+    # @!attribute [rw] order_submission_date
+    #   The submission date for the order.
+    #   @return [Time]
+    #
+    # @!attribute [rw] order_fulfilled_date
+    #   The fulfillment date of the order.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Order AWS API Documentation
+    #
+    class Order < Struct.new(
+      :outpost_id,
+      :order_id,
+      :status,
+      :line_items,
+      :payment_option,
+      :order_submission_date,
+      :order_fulfilled_date)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -287,6 +287,10 @@ module Aws::Kafka
     #         },
     #         tls: {
     #           certificate_authority_arn_list: ["__string"],
+    #           enabled: false,
+    #         },
+    #         unauthenticated: {
+    #           enabled: false,
     #         },
     #       }
     #
@@ -297,11 +301,16 @@ module Aws::Kafka
     #   Details for ClientAuthentication using TLS.
     #   @return [Types::Tls]
     #
+    # @!attribute [rw] unauthenticated
+    #   Contains information about unauthenticated traffic to the cluster.
+    #   @return [Types::Unauthenticated]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClientAuthentication AWS API Documentation
     #
     class ClientAuthentication < Struct.new(
       :sasl,
-      :tls)
+      :tls,
+      :unauthenticated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -702,6 +711,10 @@ module Aws::Kafka
     #           },
     #           tls: {
     #             certificate_authority_arn_list: ["__string"],
+    #             enabled: false,
+    #           },
+    #           unauthenticated: {
+    #             enabled: false,
     #           },
     #         },
     #         cluster_name: "__stringMin1Max64", # required
@@ -2005,6 +2018,14 @@ module Aws::Kafka
     #   cluster to be.
     #   @return [String]
     #
+    # @!attribute [rw] client_authentication
+    #   Includes all client authentication related information.
+    #   @return [Types::ClientAuthentication]
+    #
+    # @!attribute [rw] encryption_info
+    #   Includes all encryption-related information.
+    #   @return [Types::EncryptionInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -2015,7 +2036,9 @@ module Aws::Kafka
       :enhanced_monitoring,
       :kafka_version,
       :logging_info,
-      :instance_type)
+      :instance_type,
+      :client_authentication,
+      :encryption_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2111,6 +2134,7 @@ module Aws::Kafka
     #       }
     #
     # @!attribute [rw] enabled
+    #   SASL/SCRAM authentication is enabled or not.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Scram AWS API Documentation
@@ -2236,16 +2260,22 @@ module Aws::Kafka
     #
     #       {
     #         certificate_authority_arn_list: ["__string"],
+    #         enabled: false,
     #       }
     #
     # @!attribute [rw] certificate_authority_arn_list
     #   List of ACM Certificate Authority ARNs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] enabled
+    #   TLS authentication is enabled or not.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Tls AWS API Documentation
     #
     class Tls < Struct.new(
-      :certificate_authority_arn_list)
+      :certificate_authority_arn_list,
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2263,6 +2293,28 @@ module Aws::Kafka
     class TooManyRequestsException < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about unauthenticated traffic to the cluster.
+    #
+    # @note When making an API call, you may pass Unauthenticated
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether you want to enable or disable unauthenticated
+    #   traffic to your cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Unauthenticated AWS API Documentation
+    #
+    class Unauthenticated < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2744,6 +2796,89 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateMonitoringResponse AWS API Documentation
     #
     class UpdateMonitoringResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for UpdateSecurity.
+    #
+    # @note When making an API call, you may pass UpdateSecurityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_authentication: {
+    #           sasl: {
+    #             scram: {
+    #               enabled: false,
+    #             },
+    #             iam: {
+    #               enabled: false,
+    #             },
+    #           },
+    #           tls: {
+    #             certificate_authority_arn_list: ["__string"],
+    #             enabled: false,
+    #           },
+    #           unauthenticated: {
+    #             enabled: false,
+    #           },
+    #         },
+    #         cluster_arn: "__string", # required
+    #         current_version: "__string", # required
+    #         encryption_info: {
+    #           encryption_at_rest: {
+    #             data_volume_kms_key_id: "__string", # required
+    #           },
+    #           encryption_in_transit: {
+    #             client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
+    #             in_cluster: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_authentication
+    #   Includes all client authentication related information.
+    #   @return [Types::ClientAuthentication]
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   You can use the DescribeCluster operation to get the current version
+    #   of the cluster. After the security update is complete, the cluster
+    #   will have a new version.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_info
+    #   Includes all encryption-related information.
+    #   @return [Types::EncryptionInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateSecurityRequest AWS API Documentation
+    #
+    class UpdateSecurityRequest < Struct.new(
+      :client_authentication,
+      :cluster_arn,
+      :current_version,
+      :encryption_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateSecurity.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateSecurityResponse AWS API Documentation
+    #
+    class UpdateSecurityResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
       SENSITIVE = []

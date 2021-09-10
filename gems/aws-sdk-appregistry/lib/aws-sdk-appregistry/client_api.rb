@@ -50,8 +50,11 @@ module Aws::AppRegistry
     DisassociateResourceResponse = Shapes::StructureShape.new(name: 'DisassociateResourceResponse')
     GetApplicationRequest = Shapes::StructureShape.new(name: 'GetApplicationRequest')
     GetApplicationResponse = Shapes::StructureShape.new(name: 'GetApplicationResponse')
+    GetAssociatedResourceRequest = Shapes::StructureShape.new(name: 'GetAssociatedResourceRequest')
+    GetAssociatedResourceResponse = Shapes::StructureShape.new(name: 'GetAssociatedResourceResponse')
     GetAttributeGroupRequest = Shapes::StructureShape.new(name: 'GetAttributeGroupRequest')
     GetAttributeGroupResponse = Shapes::StructureShape.new(name: 'GetAttributeGroupResponse')
+    Integrations = Shapes::StructureShape.new(name: 'Integrations')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
@@ -66,7 +69,11 @@ module Aws::AppRegistry
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceGroup = Shapes::StructureShape.new(name: 'ResourceGroup')
+    ResourceGroupState = Shapes::StringShape.new(name: 'ResourceGroupState')
     ResourceInfo = Shapes::StructureShape.new(name: 'ResourceInfo')
+    ResourceIntegrations = Shapes::StructureShape.new(name: 'ResourceIntegrations')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceSpecifier = Shapes::StringShape.new(name: 'ResourceSpecifier')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -211,7 +218,16 @@ module Aws::AppRegistry
     GetApplicationResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     GetApplicationResponse.add_member(:associated_resource_count, Shapes::ShapeRef.new(shape: AssociationCount, location_name: "associatedResourceCount"))
     GetApplicationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    GetApplicationResponse.add_member(:integrations, Shapes::ShapeRef.new(shape: Integrations, location_name: "integrations"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
+
+    GetAssociatedResourceRequest.add_member(:application, Shapes::ShapeRef.new(shape: ApplicationSpecifier, required: true, location: "uri", location_name: "application"))
+    GetAssociatedResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location: "uri", location_name: "resourceType"))
+    GetAssociatedResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceSpecifier, required: true, location: "uri", location_name: "resource"))
+    GetAssociatedResourceRequest.struct_class = Types::GetAssociatedResourceRequest
+
+    GetAssociatedResourceResponse.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
+    GetAssociatedResourceResponse.struct_class = Types::GetAssociatedResourceResponse
 
     GetAttributeGroupRequest.add_member(:attribute_group, Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, required: true, location: "uri", location_name: "attributeGroup"))
     GetAttributeGroupRequest.struct_class = Types::GetAttributeGroupRequest
@@ -225,6 +241,9 @@ module Aws::AppRegistry
     GetAttributeGroupResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     GetAttributeGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetAttributeGroupResponse.struct_class = Types::GetAttributeGroupResponse
+
+    Integrations.add_member(:resource_group, Shapes::ShapeRef.new(shape: ResourceGroup, location_name: "resourceGroup"))
+    Integrations.struct_class = Types::Integrations
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -269,9 +288,23 @@ module Aws::AppRegistry
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    Resource.add_member(:name, Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "name"))
+    Resource.add_member(:arn, Shapes::ShapeRef.new(shape: StackArn, location_name: "arn"))
+    Resource.add_member(:association_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associationTime"))
+    Resource.add_member(:integrations, Shapes::ShapeRef.new(shape: ResourceIntegrations, location_name: "integrations"))
+    Resource.struct_class = Types::Resource
+
+    ResourceGroup.add_member(:state, Shapes::ShapeRef.new(shape: ResourceGroupState, location_name: "state"))
+    ResourceGroup.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    ResourceGroup.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    ResourceGroup.struct_class = Types::ResourceGroup
+
     ResourceInfo.add_member(:name, Shapes::ShapeRef.new(shape: ResourceSpecifier, location_name: "name"))
     ResourceInfo.add_member(:arn, Shapes::ShapeRef.new(shape: StackArn, location_name: "arn"))
     ResourceInfo.struct_class = Types::ResourceInfo
+
+    ResourceIntegrations.add_member(:resource_group, Shapes::ShapeRef.new(shape: ResourceGroup, location_name: "resourceGroup"))
+    ResourceIntegrations.struct_class = Types::ResourceIntegrations
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -442,6 +475,17 @@ module Aws::AppRegistry
         o.http_request_uri = "/applications/{application}"
         o.input = Shapes::ShapeRef.new(shape: GetApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_associated_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAssociatedResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{application}/resources/{resourceType}/{resource}"
+        o.input = Shapes::ShapeRef.new(shape: GetAssociatedResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAssociatedResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

@@ -5,13 +5,6 @@ module Aws
   module S3
     module EncryptionV2
       describe IOEncrypter do
-
-        before do
-          if RUBY_VERSION.match(/^1.9/)
-            skip('authenticated encryption not supported by OpenSSL in Ruby version ~> 1.9')
-          end
-        end
-
         let(:key) do
           Base64.decode64('kM5UVbhE/4rtMZJfsadYEdm2vaKFsmV2f5+URSeUCV4=')
         end

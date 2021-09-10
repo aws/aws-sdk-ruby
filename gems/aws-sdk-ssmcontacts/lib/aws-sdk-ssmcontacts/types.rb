@@ -74,7 +74,7 @@ module Aws::SSMContacts
     #
     class AcceptPageResult < Aws::EmptyStructure; end
 
-    # You don't have sufficient access to perform this action.
+    # You don't have sufficient access to perform this operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -358,7 +358,7 @@ module Aws::SSMContacts
     #   @return [Boolean]
     #
     # @!attribute [rw] idempotency_token
-    #   A token ensuring that the action is called only once with the
+    #   A token ensuring that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -379,7 +379,7 @@ module Aws::SSMContacts
     end
 
     # @!attribute [rw] contact_channel_arn
-    #   The ARN of the contact channel.
+    #   The Amazon Resource Name (ARN) of the contact channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/CreateContactChannelResult AWS API Documentation
@@ -451,7 +451,7 @@ module Aws::SSMContacts
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] idempotency_token
-    #   A token ensuring that the action is called only once with the
+    #   A token ensuring that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -484,7 +484,7 @@ module Aws::SSMContacts
       include Aws::Structure
     end
 
-    # The action failed to due an encryption key error.
+    # The operation failed to due an encryption key error.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1607,7 +1607,7 @@ module Aws::SSMContacts
     #   @return [String]
     #
     # @!attribute [rw] idempotency_token
-    #   A token ensuring that the action is called only once with the
+    #   A token ensuring that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1732,7 +1732,7 @@ module Aws::SSMContacts
     #
     class TagResourceResult < Aws::EmptyStructure; end
 
-    # The contact or contact channel that is being engaged.
+    # The contact or contact channel that's being engaged.
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -1866,7 +1866,7 @@ module Aws::SSMContacts
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact channel
+    #   The name of the contact channel.
     #   @return [String]
     #
     # @!attribute [rw] delivery_address
@@ -1944,8 +1944,8 @@ module Aws::SSMContacts
     #
     class UpdateContactResult < Aws::EmptyStructure; end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   @return [String]

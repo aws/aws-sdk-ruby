@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack endpoints. It can be configured with shared configuration (`use_dualstack_endpoint`), an ENV variable (`AWS_USE_DUALSTACK_ENDPOINT`), and a constructor option (`:use_dualstack_endpoint`). Requests made to services without a dualstack endpoint will fail.
 
+3.121.0 (2021-09-02)
+------------------
+
+* Feature - Add support for S3 Multi-region access point configuration.
+
+3.120.0 (2021-09-01)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 1.9, 2.0, 2.1, and 2.2.
+
 3.119.1 (2021-08-20)
 ------------------
 

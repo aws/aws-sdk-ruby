@@ -1405,7 +1405,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc = ec2.create_vpc({
-    #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
     #     ipv_6_pool: "Ipv6PoolEc2Id",
     #     ipv_6_cidr_block: "String",
@@ -1423,13 +1422,9 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     cidr_block: "String", # required
     #   })
     # @param [Hash] options ({})
-    # @option options [required, String] :cidr_block
-    #   The IPv4 network range for the VPC, in CIDR notation. For example,
-    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
     # @option options [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
     #   for the VPC. You cannot specify the range of IP addresses, or the size
@@ -1467,6 +1462,11 @@ module Aws::EC2
     #   parameter.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the VPC.
+    # @option options [required, String] :cidr_block
+    #   The IPv4 network range for the VPC, in CIDR notation. For example,
+    #   `10.0.0.0/16`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     # @return [Vpc]
     def create_vpc(options = {})
       resp = @client.create_vpc(options)

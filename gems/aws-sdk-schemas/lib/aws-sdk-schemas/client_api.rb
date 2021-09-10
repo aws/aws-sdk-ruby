@@ -163,11 +163,13 @@ module Aws::Schemas
 
     CreateDiscovererInput.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max256, location_name: "Description"))
     CreateDiscovererInput.add_member(:source_arn, Shapes::ShapeRef.new(shape: __stringMin20Max1600, required: true, location_name: "SourceArn"))
+    CreateDiscovererInput.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     CreateDiscovererInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDiscovererInput.struct_class = Types::CreateDiscovererInput
 
     CreateDiscovererRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max256, location_name: "Description"))
     CreateDiscovererRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: __stringMin20Max1600, required: true, location_name: "SourceArn"))
+    CreateDiscovererRequest.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     CreateDiscovererRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDiscovererRequest.struct_class = Types::CreateDiscovererRequest
 
@@ -176,6 +178,7 @@ module Aws::Schemas
     CreateDiscovererResponse.add_member(:discoverer_id, Shapes::ShapeRef.new(shape: __string, location_name: "DiscovererId"))
     CreateDiscovererResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SourceArn"))
     CreateDiscovererResponse.add_member(:state, Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
+    CreateDiscovererResponse.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     CreateDiscovererResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDiscovererResponse.struct_class = Types::CreateDiscovererResponse
 
@@ -256,6 +259,7 @@ module Aws::Schemas
     DescribeDiscovererResponse.add_member(:discoverer_id, Shapes::ShapeRef.new(shape: __string, location_name: "DiscovererId"))
     DescribeDiscovererResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SourceArn"))
     DescribeDiscovererResponse.add_member(:state, Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
+    DescribeDiscovererResponse.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     DescribeDiscovererResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeDiscovererResponse.struct_class = Types::DescribeDiscovererResponse
 
@@ -300,6 +304,7 @@ module Aws::Schemas
     DiscovererOutput.add_member(:discoverer_id, Shapes::ShapeRef.new(shape: __string, location_name: "DiscovererId"))
     DiscovererOutput.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SourceArn"))
     DiscovererOutput.add_member(:state, Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
+    DiscovererOutput.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     DiscovererOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DiscovererOutput.struct_class = Types::DiscovererOutput
 
@@ -311,6 +316,7 @@ module Aws::Schemas
     DiscovererSummary.add_member(:discoverer_id, Shapes::ShapeRef.new(shape: __string, location_name: "DiscovererId"))
     DiscovererSummary.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SourceArn"))
     DiscovererSummary.add_member(:state, Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
+    DiscovererSummary.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     DiscovererSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DiscovererSummary.struct_class = Types::DiscovererSummary
 
@@ -614,10 +620,12 @@ module Aws::Schemas
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateDiscovererInput.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max256, location_name: "Description"))
+    UpdateDiscovererInput.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     UpdateDiscovererInput.struct_class = Types::UpdateDiscovererInput
 
     UpdateDiscovererRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max256, location_name: "Description"))
     UpdateDiscovererRequest.add_member(:discoverer_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "discovererId"))
+    UpdateDiscovererRequest.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     UpdateDiscovererRequest.struct_class = Types::UpdateDiscovererRequest
 
     UpdateDiscovererResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
@@ -625,6 +633,7 @@ module Aws::Schemas
     UpdateDiscovererResponse.add_member(:discoverer_id, Shapes::ShapeRef.new(shape: __string, location_name: "DiscovererId"))
     UpdateDiscovererResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SourceArn"))
     UpdateDiscovererResponse.add_member(:state, Shapes::ShapeRef.new(shape: DiscovererState, location_name: "State"))
+    UpdateDiscovererResponse.add_member(:cross_account, Shapes::ShapeRef.new(shape: __boolean, location_name: "CrossAccount"))
     UpdateDiscovererResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateDiscovererResponse.struct_class = Types::UpdateDiscovererResponse
 

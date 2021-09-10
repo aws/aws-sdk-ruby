@@ -353,7 +353,13 @@ module Aws::EFS
     #
     # @option params [Array<Types::Tag>] :tags
     #   Creates tags associated with the access point. Each tag is a key-value
-    #   pair.
+    #   pair, each key must be unique. For more information, see [Tagging
+    #   Amazon Web Services resources][1] in the *Amazon Web Services General
+    #   Reference Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [required, String] :file_system_id
     #   The ID of the EFS file system that the access point provides access
@@ -452,8 +458,8 @@ module Aws::EFS
     # token in the request that Amazon EFS uses to ensure idempotent
     # creation (calling the operation with same creation token has no
     # effect). If a file system does not currently exist that is owned by
-    # the caller's AWS account with the specified creation token, this
-    # operation does the following:
+    # the caller's Amazon Web Services account with the specified creation
+    # token, this operation does the following:
     #
     # * Creates a new, empty file system. The file system will have an
     #   Amazon EFS assigned ID, and an initial lifecycle state `creating`.
@@ -538,17 +544,17 @@ module Aws::EFS
     # @option params [Boolean] :encrypted
     #   A Boolean value that, if true, creates an encrypted file system. When
     #   creating an encrypted file system, you have the option of specifying
-    #   CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management
-    #   Service (AWS KMS) customer master key (CMK). If you don't specify a
-    #   CMK, then the default CMK for Amazon EFS, `/aws/elasticfilesystem`, is
-    #   used to protect the encrypted file system.
+    #   CreateFileSystemRequest$KmsKeyId for an existing Key Management
+    #   Service (KMS customer master key (CMK). If you don't specify a CMK,
+    #   then the default CMK for Amazon EFS, `/aws/elasticfilesystem`, is used
+    #   to protect the encrypted file system.
     #
     # @option params [String] :kms_key_id
-    #   The ID of the AWS KMS CMK that you want to use to protect the
-    #   encrypted file system. This parameter is only required if you want to
-    #   use a non-default KMS key. If this parameter is not specified, the
-    #   default CMK for Amazon EFS is used. This ID can be in one of the
-    #   following formats:
+    #   The ID of the KMS CMK that you want to use to protect the encrypted
+    #   file system. This parameter is only required if you want to use a
+    #   non-default KMS key. If this parameter is not specified, the default
+    #   CMK for Amazon EFS is used. This ID can be in one of the following
+    #   formats:
     #
     #   * Key ID - A unique identifier of the key, for example
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
@@ -589,9 +595,9 @@ module Aws::EFS
     #   The throughput, measured in MiB/s, that you want to provision for a
     #   file system that you're creating. Valid values are 1-1024. Required
     #   if `ThroughputMode` is set to `provisioned`. The upper limit for
-    #   throughput is 1024 MiB/s. To increase this limit, contact AWS Support.
-    #   For more information, see [Amazon EFS quotas that you can increase][1]
-    #   in the *Amazon EFS User Guide*.
+    #   throughput is 1024 MiB/s. To increase this limit, contact Amazon Web
+    #   Services Support. For more information, see [Amazon EFS quotas that
+    #   you can increase][1] in the *Amazon EFS User Guide*.
     #
     #
     #
@@ -599,13 +605,14 @@ module Aws::EFS
     #
     # @option params [String] :availability_zone_name
     #   Used to create a file system that uses One Zone storage classes. It
-    #   specifies the AWS Availability Zone in which to create the file
-    #   system. Use the format `us-east-1a` to specify the Availability Zone.
-    #   For more information about One Zone storage classes, see [Using EFS
-    #   storage classes][1] in the *Amazon EFS User Guide*.
+    #   specifies the Amazon Web Services Availability Zone in which to create
+    #   the file system. Use the format `us-east-1a` to specify the
+    #   Availability Zone. For more information about One Zone storage
+    #   classes, see [Using EFS storage classes][1] in the *Amazon EFS User
+    #   Guide*.
     #
     #   <note markdown="1"> One Zone storage classes are not available in all Availability Zones
-    #   in AWS Regions where Amazon EFS is available.
+    #   in Amazon Web Services Regions where Amazon EFS is available.
     #
     #    </note>
     #
@@ -624,8 +631,8 @@ module Aws::EFS
     #   Default is `false`. However, if you specify an `AvailabilityZoneName`,
     #   the default is `true`.
     #
-    #   <note markdown="1"> AWS Backup is not available in all AWS Regions where Amazon EFS is
-    #   available.
+    #   <note markdown="1"> Backup is not available in all Amazon Web Services Regionswhere Amazon
+    #   EFS is available.
     #
     #    </note>
     #
@@ -634,10 +641,16 @@ module Aws::EFS
     #   [1]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A value that specifies to create one or more tags associated with the
-    #   file system. Each tag is a user-defined key-value pair. Name your file
-    #   system on creation by including a `"Key":"Name","Value":"\{value\}"`
-    #   key-value pair.
+    #   Use to create one or more tags associated with the file system. Each
+    #   tag is a user-defined key-value pair. Name your file system on
+    #   creation by including a `"Key":"Name","Value":"\{value\}"` key-value
+    #   pair. Each key must be unique. For more information, see [Tagging
+    #   Amazon Web Services resources][1] in the *Amazon Web Services General
+    #   Reference Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1201,8 +1214,8 @@ module Aws::EFS
     # Deletes the specified tags from a file system. If the `DeleteTags`
     # request includes a tag key that doesn't exist, Amazon EFS ignores it
     # and doesn't cause an error. For more information about tags and
-    # related restrictions, see [Tag Restrictions][1] in the *AWS Billing
-    # and Cost Management User Guide*.
+    # related restrictions, see [Tag restrictions][1] in the *Billing and
+    # Cost Management User Guide*.
     #
     # This operation requires permissions for the
     # `elasticfilesystem:DeleteTags` action.
@@ -1322,11 +1335,20 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Returns the account preferences settings for the Amazon Web Services
+    # account associated with the user making the request, in the current
+    # Amazon Web Services Region. For more information, see [Managing Amazon
+    # EFS resource IDs](efs/latest/ug/manage-efs-resource-ids.html).
+    #
     # @option params [String] :next_token
-    #   Token used for pagination.
+    #   (Optional) You can use `NextToken` in a subsequent request to fetch
+    #   the next page of Amazon Web Services account preferences if the
+    #   response payload was paginated.
     #
     # @option params [Integer] :max_results
-    #   Max results used for pagination.
+    #   (Optional) When retrieving account preferences, you can optionally
+    #   specify the `MaxItems` parameter to limit the number of objects
+    #   returned in a response. The default value is 100.
     #
     # @return [Types::DescribeAccountPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1421,8 +1443,8 @@ module Aws::EFS
     # Returns the description of a specific Amazon EFS file system if either
     # the file system `CreationToken` or the `FileSystemId` is provided.
     # Otherwise, it returns descriptions of all file systems owned by the
-    # caller's AWS account in the AWS Region of the endpoint that you're
-    # calling.
+    # caller's Amazon Web Services account in the Amazon Web Services
+    # Region of the endpoint that you're calling.
     #
     # When retrieving all file system descriptions, you can optionally
     # specify the `MaxItems` parameter to limit the number of descriptions
@@ -1559,6 +1581,9 @@ module Aws::EFS
     # `LifecycleConfiguration` object, the call returns an empty array in
     # the response.
     #
+    # When EFS Intelligent Tiering is enabled,
+    # `TransitionToPrimaryStorageClass` has a value of `AFTER_1_ACCESS`.
+    #
     # This operation requires permissions for the
     # `elasticfilesystem:DescribeLifecycleConfiguration` operation.
     #
@@ -1599,6 +1624,7 @@ module Aws::EFS
     #
     #   resp.lifecycle_policies #=> Array
     #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_7_DAYS", "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"
+    #   resp.lifecycle_policies[0].transition_to_primary_storage_class #=> String, one of "AFTER_1_ACCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeLifecycleConfiguration AWS API Documentation
     #
@@ -1952,9 +1978,18 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Use this operation to set the account preference in the current Amazon
+    # Web Services Region to use either long 17 character (63 bit) or short
+    # 8 character (32 bit) IDs for new EFS file systems and mount targets
+    # created. All existing resource IDs are not affected by any changes you
+    # make. You can set the ID preference during the opt-in period as EFS
+    # transitions to long resource IDs. For more information, see [Managing
+    # Amazon EFS resource IDs](efs/latest/ug/manage-efs-resource-ids.html).
+    #
     # @option params [required, String] :resource_id_type
-    #   A preference indicating a choice to use 63bit/32bit IDs for all
-    #   applicable resources.
+    #   Specifies the EFS resource ID preference to set for the user's Amazon
+    #   Web Services account, in the current Amazon Web Services Region,
+    #   either `LONG_ID` (17 characters), or `SHORT_ID` (8 characters).
     #
     # @return [Types::PutAccountPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2090,8 +2125,11 @@ module Aws::EFS
     # `LifecycleConfiguration` object. A `LifecycleConfiguration` object
     # defines when files in an Amazon EFS file system are automatically
     # transitioned to the lower-cost EFS Infrequent Access (IA) storage
-    # class. A `LifecycleConfiguration` applies to all files in a file
-    # system.
+    # class. To enable EFS Intelligent Tiering, set the value of
+    # `TransitionToPrimaryStorageClass` to `AFTER_1_ACCESS`. For more
+    # information, see [EFS Lifecycle Management][1].
+    #
+    # A `LifecycleConfiguration` applies to all files in a file system.
     #
     # Each Amazon EFS file system supports one lifecycle configuration,
     # which applies to all files in the file system. If a
@@ -2114,8 +2152,12 @@ module Aws::EFS
     # `elasticfilesystem:PutLifecycleConfiguration` operation.
     #
     # To apply a `LifecycleConfiguration` object to an encrypted file
-    # system, you need the same AWS Key Management Service (AWS KMS)
-    # permissions as when you created the encrypted file system.
+    # system, you need the same Key Management Service permissions as when
+    # you created the encrypted file system.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html
     #
     # @option params [required, String] :file_system_id
     #   The ID of the file system for which you are creating the
@@ -2163,6 +2205,7 @@ module Aws::EFS
     #     lifecycle_policies: [ # required
     #       {
     #         transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
+    #         transition_to_primary_storage_class: "AFTER_1_ACCESS", # accepts AFTER_1_ACCESS
     #       },
     #     ],
     #   })
@@ -2171,6 +2214,7 @@ module Aws::EFS
     #
     #   resp.lifecycle_policies #=> Array
     #   resp.lifecycle_policies[0].transition_to_ia #=> String, one of "AFTER_7_DAYS", "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"
+    #   resp.lifecycle_policies[0].transition_to_primary_storage_class #=> String, one of "AFTER_1_ACCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfiguration AWS API Documentation
     #
@@ -2343,7 +2387,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

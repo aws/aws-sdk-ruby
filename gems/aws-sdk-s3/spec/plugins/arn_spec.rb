@@ -3,44 +3,88 @@ require_relative '../spec_helper'
 module Aws
   module S3
     describe Client do
-      it 'is configured to use the arn region by default' do
-        client = Aws::S3::Client.new(
-          stub_responses: true,
-          region: 'us-west-2'
-        )
-        expect(client.config.s3_use_arn_region).to be true
-      end
-
-      it 'can be configured using shared config' do
-        allow_any_instance_of(Aws::SharedConfig)
-          .to receive(:s3_use_arn_region).and_return('false')
-        client = Aws::S3::Client.new(
-          stub_responses: true,
-          region: 'us-west-2'
-        )
-        expect(client.config.s3_use_arn_region).to be false
-      end
-
-      it 'can be configured using ENV with precedence over shared config' do
-        allow_any_instance_of(Aws::SharedConfig)
-          .to receive(:s3_use_arn_region).and_return('true')
-        ENV['AWS_S3_USE_ARN_REGION'] = 'false'
-        client = Aws::S3::Client.new(
-          stub_responses: true,
-          region: 'us-west-2'
-        )
-        expect(client.config.s3_use_arn_region).to be false
-      end
-
-      it 'raises when use arn region is not true or false' do
-        ENV['AWS_S3_USE_ARN_REGION'] = 'peccy'
-
-        expect do
-          Aws::S3::Client.new(
+      describe 's3_use_arn_region' do
+        it 'is configured to use the arn region by default' do
+          client = Aws::S3::Client.new(
             stub_responses: true,
             region: 'us-west-2'
           )
-        end.to raise_error(ArgumentError)
+          expect(client.config.s3_use_arn_region).to be true
+        end
+
+        it 'can be configured using shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:s3_use_arn_region).and_return('false')
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.s3_use_arn_region).to be false
+        end
+
+        it 'can be configured using ENV with precedence over shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:s3_use_arn_region).and_return('true')
+          ENV['AWS_S3_USE_ARN_REGION'] = 'false'
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.s3_use_arn_region).to be false
+        end
+
+        it 'raises when use arn region is not true or false' do
+          ENV['AWS_S3_USE_ARN_REGION'] = 'peccy'
+
+          expect do
+            Aws::S3::Client.new(
+              stub_responses: true,
+              region: 'us-west-2'
+            )
+          end.to raise_error(ArgumentError)
+        end
+      end
+
+      describe 's3_disable_multiregion_access_points' do
+        it 'is is false by default' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.s3_disable_multiregion_access_points).to be false
+        end
+
+        it 'can be configured using shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:s3_disable_multiregion_access_points).and_return('true')
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.s3_disable_multiregion_access_points).to be true
+        end
+
+        it 'can be configured using ENV with precedence over shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:s3_disable_multiregion_access_points).and_return('false')
+          ENV['AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS'] = 'true'
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.s3_disable_multiregion_access_points).to be true
+        end
+
+        it 'raises when use arn region is not true or false' do
+          ENV['AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS'] = 'peccy'
+
+          expect do
+            Aws::S3::Client.new(
+              stub_responses: true,
+              region: 'us-west-2'
+            )
+          end.to raise_error(ArgumentError)
+        end
       end
 
       it 'sends an arn over the wire for #copy_object' do
@@ -343,17 +387,6 @@ module Aws
           end.to raise_error(ArgumentError)
 
           arn = 'arn:aws:s3:us-west-2:123456789012:bucket_name:mybucket'
-          expect do
-            client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'validates missing region' do
-          client = Aws::S3::Client.new(
-            stub_responses: true,
-            region: 'us-west-2'
-          )
-          arn = 'arn:aws:s3::123456789012:accesspoint:myendpoint'
           expect do
             client.get_object(bucket: arn, key: 'obj')
           end.to raise_error(ArgumentError)
@@ -1023,6 +1056,208 @@ module Aws
           host = 'mybanner-123456789012.my-endpoint.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
           expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+      end
+
+      context 'Multi-region access point (MRAP) ARN' do
+        def expect_sigv4a_signer(region='*')
+          mock_signature = Aws::Sigv4::Signature.new(headers: {})
+          mock_signer = double('sigv4a_signer', sign_request: mock_signature)
+
+          # the S3Signer plugin always creates a base signer.
+          # MRAP arns will then result in a second signer being created with :sigv4a
+          allow(Aws::Sigv4::Signer).to receive(:new).and_call_original
+          allow(Aws::Sigv4::Signer).to receive(:new).with(hash_including(region: region, signing_algorithm: :sigv4a)).and_return(mock_signer)
+        end
+
+        it 's3_use_arn_region n/a; accepts MRAP with client us-east-1' do
+          # Tests specify N/A for use_arn_region.  Test that both true and false behave the same way
+          arn = 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+          expected_host = 'mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com'
+
+          client_true = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            s3_use_arn_region: true
+          )
+          expect_sigv4a_signer('*')
+          resp = client_true.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+
+          client_false = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            s3_use_arn_region: false
+          )
+          expect_sigv4a_signer('*')
+          resp = client_false.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 'accepts MRAP with client us-west-2' do
+          arn = 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+          expected_host = 'mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect_sigv4a_signer('*')
+          resp = client.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 'accepts MRAP with client aws-global' do
+          arn = 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+          expected_host = 'mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'aws-global'
+          )
+          expect_sigv4a_signer('*')
+          resp = client.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 'accepts aws-cn MRAP with client cn-north-1 and uses the cn partition' do
+          arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+          expected_host = 'mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'cn-north-1'
+          )
+          expect_sigv4a_signer('*')
+          resp = client.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 'accepts aws-cn MRAP with client us-west-1 and uses the cn partition' do
+          arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+          expected_host = 'mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-1'
+          )
+          expect_sigv4a_signer('*')
+          resp = client.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 's3_disable_multiregion_access_points true; raises for MRAP ARN' do
+          arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2',
+            s3_disable_multiregion_access_points: true
+          )
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
+        it 's3_disable_multiregion_access_points true; raises for MRAP ARN with client region aws-global' do
+          arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'aws-global',
+            s3_disable_multiregion_access_points: true
+          )
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(Aws::Errors::InvalidARNPartitionError)
+        end
+
+        it 'raises with :use_dualstack_endpoint' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2',
+            use_dualstack_endpoint: true
+          )
+          arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
+        it 'raises with :use_accelerate_endpoint' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2',
+            use_accelerate_endpoint: true
+          )
+          arn = 'arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
+        it 's3_disable_multiregion_access_points true; raises for MRAP ARN myendpoint' do
+          arn = 'arn:aws:s3::123456789012:accesspoint:myendpoint'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2',
+            s3_disable_multiregion_access_points: true
+          )
+          expect do
+            client.get_object(bucket: arn, key: 'obj')
+          end.to raise_error(ArgumentError)
+        end
+
+        it 'accepts MRAP arn myendpoint' do
+          arn = 'arn:aws:s3::123456789012:accesspoint:myendpoint'
+          expected_host = 'myendpoint.accesspoint.s3-global.amazonaws.com'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect_sigv4a_signer('*')
+          resp = client.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 'accepts MRAP arn my.bucket' do
+          arn = 'arn:aws:s3::123456789012:accesspoint:my.bucket'
+          expected_host = 'my.bucket.accesspoint.s3-global.amazonaws.com'
+
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect_sigv4a_signer('*')
+          resp = client.get_object(bucket: arn, key: 'obj')
+          expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        context 'MRAP VPCE' do
+          it 'accepts a custom endpoint url' do
+            arn = 'arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap'
+            expected_host = 'mfzwi23gnjvgw.mrap.vpce-123-abc.vpce.s3-global.amazonaws.com'
+
+            client = Aws::S3::Client.new(
+              stub_responses: true,
+              region: 'us-west-2',
+              endpoint: 'https://vpce-123-abc.vpce.s3-global.amazonaws.com'
+            )
+            expect_sigv4a_signer('*')
+            resp = client.get_object(bucket: arn, key: 'obj')
+            expect(resp.context.http_request.endpoint.host).to eq(expected_host)
+            expect(resp.context.http_request.endpoint.path).to eq('/obj')
+          end
         end
       end
     end

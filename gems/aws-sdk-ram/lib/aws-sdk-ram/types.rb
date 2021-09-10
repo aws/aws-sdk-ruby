@@ -70,8 +70,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_arn
-    #   The Amazon Resource Name (ARN) of the AWS RAM permissions to
-    #   associate with the resource share.
+    #   The Amazon Resource Name (ARN) of the RAM permission to associate
+    #   with the resource share.
     #   @return [String]
     #
     # @!attribute [rw] replace
@@ -87,8 +87,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_version
-    #   The version of the AWS RAM permissions to associate with the
-    #   resource share.
+    #   The version of the RAM permissions to associate with the resource
+    #   share.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceSharePermissionRequest AWS API Documentation
@@ -136,13 +136,32 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARNs) of the resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
     #   The principals to associate with the resource share. The possible
-    #   values are IDs of AWS accounts, and the ARNs of organizational units
-    #   (OU) or organizations from AWS Organizations.
+    #   values are:
+    #
+    #   * An Amazon Web Services account ID
+    #
+    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations
+    #
+    #   * An ARN of an IAM role
+    #
+    #   * An ARN of an IAM user
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users.
+    #   For more information, see [Sharing with IAM roles and IAM users][1]
+    #   in the *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
@@ -202,14 +221,32 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARN) of the resources to associate with
-    #   the resource share.
+    #   The ARNs of the resources to associate with the resource share.
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
     #   The principals to associate with the resource share. The possible
-    #   values are IDs of AWS accounts, the ARN of an OU or organization
-    #   from AWS Organizations.
+    #   values are:
+    #
+    #   * An Amazon Web Services account ID
+    #
+    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations
+    #
+    #   * An ARN of an IAM role
+    #
+    #   * An ARN of an IAM user
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users.
+    #   For more information, see [Sharing with IAM roles and IAM users][1]
+    #   in the *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -217,8 +254,8 @@ module Aws::RAM
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] allow_external_principals
-    #   Indicates whether principals outside your AWS organization can be
-    #   associated with a resource share.
+    #   Indicates whether principals outside your organization in
+    #   Organizations can be associated with a resource share.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
@@ -227,10 +264,11 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_arns
-    #   The ARNs of the permissions to associate with the resource share. If
-    #   you do not specify an ARN for the permission, AWS RAM automatically
-    #   attaches the default version of the permission for each resource
-    #   type.
+    #   The Amazon Resource Names (ARNs) of the permissions to associate
+    #   with the resource share. If you do not specify an ARN for the
+    #   permission, RAM automatically attaches the default version of the
+    #   permission for each resource type. Only one permission can be
+    #   associated with each resource type in a resource share.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShareRequest AWS API Documentation
@@ -323,7 +361,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] permission_arn
-    #   The ARN of the permission to disassociate from the resource share.
+    #   The Amazon Resource Name (ARN) of the permission to disassociate
+    #   from the resource share.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -442,7 +481,7 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] permission_arn
-    #   The ARN of the permission.
+    #   The Amazon Resource Name (ARN) of the permission.
     #   @return [String]
     #
     # @!attribute [rw] permission_version
@@ -481,7 +520,7 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARNs) of the resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] principal
@@ -684,7 +723,7 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arns
-    #   The ARNs of the resource shares.
+    #   The Amazon Resource Names (ARNs) of the resource shares.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_share_status
@@ -714,7 +753,7 @@ module Aws::RAM
     #   @return [Integer]
     #
     # @!attribute [rw] permission_arn
-    #   The Amazon Resource Name (ARN) of the AWS RAM permission that is
+    #   The Amazon Resource Name (ARN) of the RAM permission that is
     #   associated with the resource share.
     #   @return [String]
     #
@@ -989,8 +1028,10 @@ module Aws::RAM
     #   `network-firewall:StatefulRuleGroup` \|
     #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule`
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
+    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
+    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arns
@@ -1118,7 +1159,7 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_types
-    #   The shareable resource types supported by AWS RAM.
+    #   The shareable resource types supported by RAM.
     #   @return [Array<Types::ServiceNameAndResourceType>]
     #
     # @!attribute [rw] next_token
@@ -1172,12 +1213,14 @@ module Aws::RAM
     #   `network-firewall:StatefulRuleGroup` \|
     #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule`
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
+    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
+    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARNs) of the resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_share_arns
@@ -1265,7 +1308,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Describes a principal for use with AWS Resource Access Manager.
+    # Describes a principal for use with Resource Access Manager.
     #
     # @!attribute [rw] id
     #   The ID of the principal.
@@ -1284,8 +1327,9 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] external
-    #   Indicates whether the principal belongs to the same AWS organization
-    #   as the AWS account that owns the resource share.
+    #   Indicates whether the principal belongs to the same organization in
+    #   Organizations as the Amazon Web Services account that owns the
+    #   resource share.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/Principal AWS API Documentation
@@ -1308,7 +1352,7 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The ARN of the resource share to promote.
+    #   The Amazon Resource Name (ARN) of the resource share to promote.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromoteResourceShareCreatedFromPolicyRequest AWS API Documentation
@@ -1390,8 +1434,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] resource_group_arn
-    #   The ARN of the resource group. This value is returned only if the
-    #   resource is a resource group.
+    #   The Amazon Resource Name (ARN) of the resource group. This value is
+    #   returned only if the resource is a resource group.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1449,12 +1493,13 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] owning_account_id
-    #   The ID of the AWS account that owns the resource share.
+    #   The ID of the Amazon Web Services account that owns the resource
+    #   share.
     #   @return [String]
     #
     # @!attribute [rw] allow_external_principals
-    #   Indicates whether principals outside your AWS organization can be
-    #   associated with a resource share.
+    #   Indicates whether principals outside your organization in
+    #   Organizations can be associated with a resource share.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -1482,18 +1527,18 @@ module Aws::RAM
     #   include:
     #
     #   * `CREATED_FROM_POLICY` - Indicates that the resource share was
-    #     created from an AWS Identity and Access Management (AWS IAM)
-    #     policy attached to a resource. These resource shares are visible
-    #     only to the AWS account that created it. They cannot be modified
-    #     in AWS RAM.
+    #     created from an Amazon Web Services Identity and Access Management
+    #     (Amazon Web Services IAM) policy attached to a resource. These
+    #     resource shares are visible only to the Amazon Web Services
+    #     account that created it. They cannot be modified in RAM.
     #
     #   * `PROMOTING_TO_STANDARD` - The resource share is in the process of
     #     being promoted. For more information, see
     #     PromoteResourceShareCreatedFromPolicy.
     #
-    #   * `STANDARD` - Indicates that the resource share was created in AWS
-    #     RAM using the console or APIs. These resource shares are visible
-    #     to all principals. They can be modified in AWS RAM.
+    #   * `STANDARD` - Indicates that the resource share was created in RAM
+    #     using the console or APIs. These resource shares are visible to
+    #     all principals. They can be modified in RAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShare AWS API Documentation
@@ -1524,9 +1569,19 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] associated_entity
-    #   The associated entity. For resource associations, this is the ARN of
-    #   the resource. For principal associations, this is the ID of an AWS
-    #   account or the ARN of an OU or organization from AWS Organizations.
+    #   The associated entity. For resource associations, this is the Amazon
+    #   Resource Name (ARN) of the resource. For principal associations,
+    #   this is one of the following:
+    #
+    #   * An Amazon Web Services account ID
+    #
+    #   * An ARN of an organization in Organizations
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations
+    #
+    #   * An ARN of an IAM role
+    #
+    #   * An ARN of an IAM user
     #   @return [String]
     #
     # @!attribute [rw] association_type
@@ -1550,8 +1605,9 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] external
-    #   Indicates whether the principal belongs to the same AWS organization
-    #   as the AWS account that owns the resource share.
+    #   Indicates whether the principal belongs to the same organization in
+    #   Organizations as the Amazon Web Services account that owns the
+    #   resource share.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareAssociation AWS API Documentation
@@ -1585,11 +1641,12 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] sender_account_id
-    #   The ID of the AWS account that sent the invitation.
+    #   The ID of the Amazon Web Services account that sent the invitation.
     #   @return [String]
     #
     # @!attribute [rw] receiver_account_id
-    #   The ID of the AWS account that received the invitation.
+    #   The ID of the Amazon Web Services account that received the
+    #   invitation.
     #   @return [String]
     #
     # @!attribute [rw] invitation_timestamp
@@ -1695,10 +1752,10 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Information about an AWS RAM permission.
+    # Information about an RAM permission.
     #
     # @!attribute [rw] arn
-    #   The ARN of the permission.
+    #   The Amazon Resource Name (ARN) of the permission.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1758,7 +1815,7 @@ module Aws::RAM
     # share.
     #
     # @!attribute [rw] arn
-    #   The ARN of the permission.
+    #   The Amazon Resource Name (ARN) of the permission.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1825,15 +1882,16 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Information about the shareable resource types and the AWS services to
-    # which they belong.
+    # Information about the shareable resource types and the Amazon Web
+    # Services services to which they belong.
     #
     # @!attribute [rw] resource_type
     #   The shareable resource types.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS services to which the resources belong.
+    #   The name of the Amazon Web Services services to which the resources
+    #   belong.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ServiceNameAndResourceType AWS API Documentation
@@ -2033,8 +2091,8 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] allow_external_principals
-    #   Indicates whether principals outside your AWS organization can be
-    #   associated with a resource share.
+    #   Indicates whether principals outside your organization in
+    #   Organizations can be associated with a resource share.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token

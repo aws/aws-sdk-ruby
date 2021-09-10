@@ -3842,6 +3842,7 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
     #
@@ -4200,7 +4201,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -4641,13 +4642,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -4656,12 +4660,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -7975,6 +7981,63 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateStudioLifecycleConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
+    #         studio_lifecycle_config_content: "StudioLifecycleConfigContent", # required
+    #         studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_content
+    #   The content of your Studio Lifecycle Configuration script. This
+    #   content must be base64 encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_app_type
+    #   The App type that the Lifecycle Configuration is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the Lifecycle Configuration. Each tag
+    #   consists of a key and an optional value. Tag keys must be unique per
+    #   resource. Tags are searchable using the Search API.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateStudioLifecycleConfigRequest AWS API Documentation
+    #
+    class CreateStudioLifecycleConfigRequest < Struct.new(
+      :studio_lifecycle_config_name,
+      :studio_lifecycle_config_content,
+      :studio_lifecycle_config_app_type,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] studio_lifecycle_config_arn
+    #   The ARN of your created Lifecycle Configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateStudioLifecycleConfigResponse AWS API Documentation
+    #
+    class CreateStudioLifecycleConfigResponse < Struct.new(
+      :studio_lifecycle_config_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTrainingJobRequest
     #   data as a hash:
     #
@@ -8812,13 +8875,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -8827,12 +8893,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -10515,6 +10583,25 @@ module Aws::SageMaker
     #
     class DeleteProjectInput < Struct.new(
       :project_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteStudioLifecycleConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteStudioLifecycleConfigRequest AWS API Documentation
+    #
+    class DeleteStudioLifecycleConfigRequest < Struct.new(
+      :studio_lifecycle_config_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14337,6 +14424,63 @@ module Aws::SageMaker
       :project_status,
       :created_by,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStudioLifecycleConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeStudioLifecycleConfigRequest AWS API Documentation
+    #
+    class DescribeStudioLifecycleConfigRequest < Struct.new(
+      :studio_lifecycle_config_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] studio_lifecycle_config_arn
+    #   The ARN of the Lifecycle Configuration to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration that is described.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the Studio Lifecycle Configuration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   This value is equivalent to CreationTime because Studio Lifecycle
+    #   Configurations are immutable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] studio_lifecycle_config_content
+    #   The content of your Studio Lifecycle Configuration script.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_app_type
+    #   The App type that the Lifecycle Configuration is attached to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeStudioLifecycleConfigResponse AWS API Documentation
+    #
+    class DescribeStudioLifecycleConfigResponse < Struct.new(
+      :studio_lifecycle_config_arn,
+      :studio_lifecycle_config_name,
+      :creation_time,
+      :last_modified_time,
+      :studio_lifecycle_config_content,
+      :studio_lifecycle_config_app_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19584,7 +19728,9 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       }
     #
     # @!attribute [rw] default_resource_spec
@@ -19592,10 +19738,16 @@ module Aws::SageMaker
     #   default SageMaker image used by the JupyterServer app.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] lifecycle_config_arns
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
+    #   attached to the JupyterServerApp.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterServerAppSettings AWS API Documentation
     #
     class JupyterServerAppSettings < Struct.new(
-      :default_resource_spec)
+      :default_resource_spec,
+      :lifecycle_config_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19610,6 +19762,7 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         custom_images: [
     #           {
@@ -19618,6 +19771,7 @@ module Aws::SageMaker
     #             app_image_config_name: "AppImageConfigName", # required
     #           },
     #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       }
     #
     # @!attribute [rw] default_resource_spec
@@ -19630,11 +19784,17 @@ module Aws::SageMaker
     #   KernelGateway app.
     #   @return [Array<Types::CustomImage>]
     #
+    # @!attribute [rw] lifecycle_config_arns
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
+    #   attached to the KernelGatewayApp.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
     #
     class KernelGatewayAppSettings < Struct.new(
       :default_resource_spec,
-      :custom_images)
+      :custom_images,
+      :lifecycle_config_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24078,6 +24238,107 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStudioLifecycleConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         name_contains: "StudioLifecycleConfigName",
+    #         app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway
+    #         creation_time_before: Time.now,
+    #         creation_time_after: Time.now,
+    #         modified_time_before: Time.now,
+    #         modified_time_after: Time.now,
+    #         sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime, Name
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of Studio Lifecycle Configurations to return in
+    #   the response. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous call to ListStudioLifecycleConfigs didn't return
+    #   the full set of Lifecycle Configurations, the call returns a token
+    #   for getting the next set of Lifecycle Configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the Lifecycle Configuration name. This filter returns
+    #   only Lifecycle Configurations whose name contains the specified
+    #   string.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_type_equals
+    #   A parameter to search for the App Type to which the Lifecycle
+    #   Configuration is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only Lifecycle Configurations created on or
+    #   before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only Lifecycle Configurations created on or
+    #   after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_time_before
+    #   A filter that returns only Lifecycle Configurations modified before
+    #   the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_time_after
+    #   A filter that returns only Lifecycle Configurations modified after
+    #   the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The property used to sort results. The default value is
+    #   CreationTime.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order. The default value is Descending.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStudioLifecycleConfigsRequest AWS API Documentation
+    #
+    class ListStudioLifecycleConfigsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :name_contains,
+      :app_type_equals,
+      :creation_time_before,
+      :creation_time_after,
+      :modified_time_before,
+      :modified_time_after,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of actions, if there are any.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_configs
+    #   A list of Lifecycle Configurations and their properties.
+    #   @return [Array<Types::StudioLifecycleConfigDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStudioLifecycleConfigsResponse AWS API Documentation
+    #
+    class ListStudioLifecycleConfigsResponse < Struct.new(
+      :next_token,
+      :studio_lifecycle_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSubscribedWorkteamsRequest
     #   data as a hash:
     #
@@ -27861,7 +28122,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -30620,6 +30881,7 @@ module Aws::SageMaker
     #         sage_maker_image_arn: "ImageArn",
     #         sage_maker_image_version_arn: "ImageVersionArn",
     #         instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         lifecycle_config_arn: "StudioLifecycleConfigArn",
     #       }
     #
     # @!attribute [rw] sage_maker_image_arn
@@ -30634,12 +30896,18 @@ module Aws::SageMaker
     #   The instance type that the image version runs on.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_config_arn
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
+    #   attached to the Resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceSpec AWS API Documentation
     #
     class ResourceSpec < Struct.new(
       :sage_maker_image_arn,
       :sage_maker_image_version_arn,
-      :instance_type)
+      :instance_type,
+      :lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32099,6 +32367,41 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Details of the Studio Lifecycle Configuration.
+    #
+    # @!attribute [rw] studio_lifecycle_config_arn
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the Studio Lifecycle Configuration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   This value is equivalent to CreationTime because Studio Lifecycle
+    #   Configurations are immutable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] studio_lifecycle_config_app_type
+    #   The App type to which the Lifecycle Configuration is attached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StudioLifecycleConfigDetails AWS API Documentation
+    #
+    class StudioLifecycleConfigDetails < Struct.new(
+      :studio_lifecycle_config_arn,
+      :studio_lifecycle_config_name,
+      :creation_time,
+      :last_modified_time,
+      :studio_lifecycle_config_app_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a work team of a vendor that does the a labelling job.
     #
     # @!attribute [rw] workteam_arn
@@ -32274,6 +32577,7 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
     #
@@ -34819,13 +35123,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -34834,12 +35141,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -35821,13 +36130,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -35836,12 +36148,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -36128,13 +36442,16 @@ module Aws::SageMaker
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
+    #           lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #         },
     #         kernel_gateway_app_settings: {
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #           custom_images: [
     #             {
@@ -36143,12 +36460,14 @@ module Aws::SageMaker
     #               app_image_config_name: "AppImageConfigName", # required
     #             },
     #           ],
+    #           lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #         },
     #         tensor_board_app_settings: {
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
     #       }

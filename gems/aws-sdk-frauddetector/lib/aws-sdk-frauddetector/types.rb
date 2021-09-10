@@ -1498,6 +1498,44 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The fraud prediction scores from Amazon SageMaker model.
+    #
+    # @!attribute [rw] external_model
+    #   The Amazon SageMaker model.
+    #   @return [Types::ExternalModelSummary]
+    #
+    # @!attribute [rw] outputs
+    #   The fraud prediction scores from Amazon SageMaker model.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ExternalModelOutputs AWS API Documentation
+    #
+    class ExternalModelOutputs < Struct.new(
+      :external_model,
+      :outputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon SageMaker model.
+    #
+    # @!attribute [rw] model_endpoint
+    #   The endpoint of the Amazon SageMaker model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_source
+    #   The source of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ExternalModelSummary AWS API Documentation
+    #
+    class ExternalModelSummary < Struct.new(
+      :model_endpoint,
+      :model_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The message details.
     #
     # @!attribute [rw] field_name
@@ -1913,11 +1951,16 @@ module Aws::FraudDetector
     #   The results from the rules.
     #   @return [Array<Types::RuleResult>]
     #
+    # @!attribute [rw] external_model_outputs
+    #   The model scores for Amazon SageMaker models.
+    #   @return [Array<Types::ExternalModelOutputs>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventPredictionResult AWS API Documentation
     #
     class GetEventPredictionResult < Struct.new(
       :model_scores,
-      :rule_results)
+      :rule_results,
+      :external_model_outputs)
       SENSITIVE = []
       include Aws::Structure
     end

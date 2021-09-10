@@ -387,8 +387,8 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the owner of the bucket for which you want to
-    #   create an access point.
+    #   The Amazon Web Services account ID for the owner of the bucket for
+    #   which you want to create an access point.
     #
     # @option params [required, String] :name
     #   The name you want to assign to this access point.
@@ -480,7 +480,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for owner of the specified Object Lambda Access Point.
+    #   The Amazon Web Services account ID for owner of the specified Object
+    #   Lambda Access Point.
     #
     # @option params [required, String] :name
     #   The name you want to assign to this Object Lambda Access Point.
@@ -717,7 +718,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html
     #
     # @option params [required, String] :account_id
-    #   The account ID that creates the job.
+    #   The Amazon Web Services account ID that creates the job.
     #
     # @option params [Boolean] :confirmation_required
     #   Indicates whether confirmation is required before Amazon S3 runs the
@@ -912,6 +913,94 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def create_job(params = {}, options = {})
       req = build_request(:create_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a Multi-Region Access Point and associates it with the
+    # specified buckets. For more information about creating Multi-Region
+    # Access Points, see [Creating Multi-Region Access Points][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    # This action will always be routed to the US West (Oregon) Region. For
+    # more information about the restrictions around managing Multi-Region
+    # Access Points, see [Managing Multi-Region Access Points][2] in the
+    # *Amazon S3 User Guide*.
+    #
+    # This request is asynchronous, meaning that you might receive a
+    # response before the command has completed. When this request provides
+    # a response, it provides a token that you can use to monitor the status
+    # of the request with `DescribeMultiRegionAccessPointOperation`.
+    #
+    # The following actions are related to `CreateMultiRegionAccessPoint`\:
+    #
+    # * [DeleteMultiRegionAccessPoint][3]
+    #
+    # * [DescribeMultiRegionAccessPointOperation][4]
+    #
+    # * [GetMultiRegionAccessPoint][5]
+    #
+    # * [ListMultiRegionAccessPoints][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point. The owner of the Multi-Region Access Point also must own
+    #   the underlying buckets.
+    #
+    # @option params [required, String] :client_token
+    #   An idempotency token used to identify the request and guarantee that
+    #   requests are unique.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::CreateMultiRegionAccessPointInput] :details
+    #   A container element containing details about the Multi-Region Access
+    #   Point.
+    #
+    # @return [Types::CreateMultiRegionAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMultiRegionAccessPointResult#request_token_arn #request_token_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_multi_region_access_point({
+    #     account_id: "AccountId", # required
+    #     client_token: "MultiRegionAccessPointClientToken", # required
+    #     details: { # required
+    #       name: "MultiRegionAccessPointName", # required
+    #       public_access_block: {
+    #         block_public_acls: false,
+    #         ignore_public_acls: false,
+    #         block_public_policy: false,
+    #         restrict_public_buckets: false,
+    #       },
+    #       regions: [ # required
+    #         {
+    #           bucket: "BucketName", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_token_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateMultiRegionAccessPoint AWS API Documentation
+    #
+    # @overload create_multi_region_access_point(params = {})
+    # @param [Hash] params ({})
+    def create_multi_region_access_point(params = {}, options = {})
+      req = build_request(:create_multi_region_access_point, params)
       req.send_request(options)
     end
 
@@ -1282,21 +1371,22 @@ module Aws::S3Control
     #
     # This implementation of the DELETE action uses the policy subresource
     # to delete the policy of a specified Amazon S3 on Outposts bucket. If
-    # you are using an identity other than the root user of the account that
-    # owns the bucket, the calling identity must have the
-    # `s3-outposts:DeleteBucketPolicy` permissions on the specified Outposts
-    # bucket and belong to the bucket owner's account to use this action.
-    # For more information, see [Using Amazon S3 on Outposts][2] in *Amazon
-    # S3 User Guide*.
+    # you are using an identity other than the root user of the Amazon Web
+    # Services account that owns the bucket, the calling identity must have
+    # the `s3-outposts:DeleteBucketPolicy` permissions on the specified
+    # Outposts bucket and belong to the bucket owner's account to use this
+    # action. For more information, see [Using Amazon S3 on Outposts][2] in
+    # *Amazon S3 User Guide*.
     #
     # If you don't have `DeleteBucketPolicy` permissions, Amazon S3 returns
     # a `403 Access Denied` error. If you have the correct permissions, but
     # you're not using an identity that belongs to the bucket owner's
     # account, Amazon S3 returns a `405 Method Not Allowed` error.
     #
-    # As a security precaution, the root user of the account that owns a
-    # bucket can always use this action, even if the policy explicitly
-    # denies the root user the ability to perform this action.
+    # As a security precaution, the root user of the Amazon Web Services
+    # account that owns a bucket can always use this action, even if the
+    # policy explicitly denies the root user the ability to perform this
+    # action.
     #
     # For more information about bucket policies, see [Using Bucket Policies
     # and User Policies][3].
@@ -1397,7 +1487,8 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket tag set to be removed.
+    #   The Amazon Web Services account ID of the Outposts bucket tag set to
+    #   be removed.
     #
     # @option params [required, String] :bucket
     #   The bucket ARN that has the tag set to be removed.
@@ -1456,7 +1547,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the S3 Batch Operations job whose tags you want to delete.
@@ -1479,8 +1571,83 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Removes the `PublicAccessBlock` configuration for an account. For more
-    # information, see [ Using Amazon S3 block public access][1].
+    # Deletes a Multi-Region Access Point. This action does not delete the
+    # buckets associated with the Multi-Region Access Point, only the
+    # Multi-Region Access Point itself.
+    #
+    # This action will always be routed to the US West (Oregon) Region. For
+    # more information about the restrictions around managing Multi-Region
+    # Access Points, see [Managing Multi-Region Access Points][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    # This request is asynchronous, meaning that you might receive a
+    # response before the command has completed. When this request provides
+    # a response, it provides a token that you can use to monitor the status
+    # of the request with `DescribeMultiRegionAccessPointOperation`.
+    #
+    # The following actions are related to `DeleteMultiRegionAccessPoint`\:
+    #
+    # * [CreateMultiRegionAccessPoint][2]
+    #
+    # * [DescribeMultiRegionAccessPointOperation][3]
+    #
+    # * [GetMultiRegionAccessPoint][4]
+    #
+    # * [ListMultiRegionAccessPoints][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :client_token
+    #   An idempotency token used to identify the request and guarantee that
+    #   requests are unique.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::DeleteMultiRegionAccessPointInput] :details
+    #   A container element containing details about the Multi-Region Access
+    #   Point.
+    #
+    # @return [Types::DeleteMultiRegionAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteMultiRegionAccessPointResult#request_token_arn #request_token_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_multi_region_access_point({
+    #     account_id: "AccountId", # required
+    #     client_token: "MultiRegionAccessPointClientToken", # required
+    #     details: { # required
+    #       name: "MultiRegionAccessPointName", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_token_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteMultiRegionAccessPoint AWS API Documentation
+    #
+    # @overload delete_multi_region_access_point(params = {})
+    # @param [Hash] params ({})
+    def delete_multi_region_access_point(params = {}, options = {})
+      req = build_request(:delete_multi_region_access_point, params)
+      req.send_request(options)
+    end
+
+    # Removes the `PublicAccessBlock` configuration for an Amazon Web
+    # Services account. For more information, see [ Using Amazon S3 block
+    # public access][1].
     #
     # Related actions include:
     #
@@ -1495,8 +1662,8 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the account whose `PublicAccessBlock` configuration
-    #   you want to remove.
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1621,7 +1788,8 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the job whose information you want to retrieve.
@@ -1727,6 +1895,84 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def describe_job(params = {}, options = {})
       req = build_request(:describe_job, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the status of an asynchronous request to manage a
+    # Multi-Region Access Point. For more information about managing
+    # Multi-Region Access Points and how asynchronous requests work, see
+    # [Managing Multi-Region Access Points][1] in the *Amazon S3 User
+    # Guide*.
+    #
+    # The following actions are related to `GetMultiRegionAccessPoint`\:
+    #
+    # * [CreateMultiRegionAccessPoint][2]
+    #
+    # * [DeleteMultiRegionAccessPoint][3]
+    #
+    # * [GetMultiRegionAccessPoint][4]
+    #
+    # * [ListMultiRegionAccessPoints][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :request_token_arn
+    #   The request token associated with the request you want to know about.
+    #   This request token is returned as part of the response when you make
+    #   an asynchronous request. You provide this token to query about the
+    #   status of the asynchronous action.
+    #
+    # @return [Types::DescribeMultiRegionAccessPointOperationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMultiRegionAccessPointOperationResult#async_operation #async_operation} => Types::AsyncOperation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_multi_region_access_point_operation({
+    #     account_id: "AccountId", # required
+    #     request_token_arn: "AsyncRequestTokenARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.async_operation.creation_time #=> Time
+    #   resp.async_operation.operation #=> String, one of "CreateMultiRegionAccessPoint", "DeleteMultiRegionAccessPoint", "PutMultiRegionAccessPointPolicy"
+    #   resp.async_operation.request_token_arn #=> String
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.name #=> String
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.public_access_block.block_public_acls #=> Boolean
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.public_access_block.ignore_public_acls #=> Boolean
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.public_access_block.block_public_policy #=> Boolean
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.public_access_block.restrict_public_buckets #=> Boolean
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.regions #=> Array
+    #   resp.async_operation.request_parameters.create_multi_region_access_point_request.regions[0].bucket #=> String
+    #   resp.async_operation.request_parameters.delete_multi_region_access_point_request.name #=> String
+    #   resp.async_operation.request_parameters.put_multi_region_access_point_policy_request.name #=> String
+    #   resp.async_operation.request_parameters.put_multi_region_access_point_policy_request.policy #=> String
+    #   resp.async_operation.request_status #=> String
+    #   resp.async_operation.response_details.multi_region_access_point_details.regions #=> Array
+    #   resp.async_operation.response_details.multi_region_access_point_details.regions[0].name #=> String
+    #   resp.async_operation.response_details.multi_region_access_point_details.regions[0].request_status #=> String
+    #   resp.async_operation.response_details.error_details.code #=> String
+    #   resp.async_operation.response_details.error_details.message #=> String
+    #   resp.async_operation.response_details.error_details.resource #=> String
+    #   resp.async_operation.response_details.error_details.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DescribeMultiRegionAccessPointOperation AWS API Documentation
+    #
+    # @overload describe_multi_region_access_point_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_multi_region_access_point_operation(params = {}, options = {})
+      req = build_request(:describe_multi_region_access_point_operation, params)
       req.send_request(options)
     end
 
@@ -2107,12 +2353,13 @@ module Aws::S3Control
     # Gets an Amazon S3 on Outposts bucket. For more information, see [
     # Using Amazon S3 on Outposts][1] in the *Amazon S3 User Guide*.
     #
-    # If you are using an identity other than the root user of the account
-    # that owns the Outposts bucket, the calling identity must have the
-    # `s3-outposts:GetBucket` permissions on the specified Outposts bucket
-    # and belong to the Outposts bucket owner's account in order to use
-    # this action. Only users from Outposts bucket owner account with the
-    # right permissions can perform actions on an Outposts bucket.
+    # If you are using an identity other than the root user of the Amazon
+    # Web Services account that owns the Outposts bucket, the calling
+    # identity must have the `s3-outposts:GetBucket` permissions on the
+    # specified Outposts bucket and belong to the Outposts bucket owner's
+    # account in order to use this action. Only users from Outposts bucket
+    # owner account with the right permissions can perform actions on an
+    # Outposts bucket.
     #
     # If you don't have `s3-outposts:GetBucket` permissions or you're not
     # using an identity that belongs to the bucket owner's account, Amazon
@@ -2144,7 +2391,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -2245,7 +2492,7 @@ module Aws::S3Control
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   The Amazon Resource Name (ARN) of the bucket.
@@ -2318,10 +2565,10 @@ module Aws::S3Control
     # information, see [Using Amazon S3 on Outposts][2] in the *Amazon S3
     # User Guide*.
     #
-    # If you are using an identity other than the root user of the account
-    # that owns the bucket, the calling identity must have the
-    # `GetBucketPolicy` permissions on the specified bucket and belong to
-    # the bucket owner's account in order to use this action.
+    # If you are using an identity other than the root user of the Amazon
+    # Web Services account that owns the bucket, the calling identity must
+    # have the `GetBucketPolicy` permissions on the specified bucket and
+    # belong to the bucket owner's account in order to use this action.
     #
     # Only users from Outposts bucket owner account with the right
     # permissions can perform actions on an Outposts bucket. If you don't
@@ -2329,9 +2576,10 @@ module Aws::S3Control
     # identity that belongs to the bucket owner's account, Amazon S3
     # returns a `403 Access Denied` error.
     #
-    # As a security precaution, the root user of the account that owns a
-    # bucket can always use this action, even if the policy explicitly
-    # denies the root user the ability to perform this action.
+    # As a security precaution, the root user of the Amazon Web Services
+    # account that owns a bucket can always use this action, even if the
+    # policy explicitly denies the root user the ability to perform this
+    # action.
     #
     # For more information about bucket policies, see [Using Bucket Policies
     # and User Policies][3].
@@ -2363,7 +2611,7 @@ module Aws::S3Control
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -2450,7 +2698,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -2517,7 +2765,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the S3 Batch Operations job whose tags you want to
@@ -2549,8 +2798,206 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Retrieves the `PublicAccessBlock` configuration for an account. For
-    # more information, see [ Using Amazon S3 block public access][1].
+    # Returns configuration information about the specified Multi-Region
+    # Access Point.
+    #
+    # This action will always be routed to the US West (Oregon) Region. For
+    # more information about the restrictions around managing Multi-Region
+    # Access Points, see [Managing Multi-Region Access Points][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    # The following actions are related to `GetMultiRegionAccessPoint`\:
+    #
+    # * [CreateMultiRegionAccessPoint][2]
+    #
+    # * [DeleteMultiRegionAccessPoint][3]
+    #
+    # * [DescribeMultiRegionAccessPointOperation][4]
+    #
+    # * [ListMultiRegionAccessPoints][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   The name of the Multi-Region Access Point whose configuration
+    #   information you want to receive. The name of the Multi-Region Access
+    #   Point is different from the alias. For more information about the
+    #   distinction between the name and the alias of an Multi-Region Access
+    #   Point, see [Managing Multi-Region Access Points][1] in the *Amazon S3
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
+    #
+    # @return [Types::GetMultiRegionAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMultiRegionAccessPointResult#access_point #access_point} => Types::MultiRegionAccessPointReport
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_multi_region_access_point({
+    #     account_id: "AccountId", # required
+    #     name: "MultiRegionAccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_point.name #=> String
+    #   resp.access_point.alias #=> String
+    #   resp.access_point.created_at #=> Time
+    #   resp.access_point.public_access_block.block_public_acls #=> Boolean
+    #   resp.access_point.public_access_block.ignore_public_acls #=> Boolean
+    #   resp.access_point.public_access_block.block_public_policy #=> Boolean
+    #   resp.access_point.public_access_block.restrict_public_buckets #=> Boolean
+    #   resp.access_point.status #=> String, one of "READY", "INCONSISTENT_ACROSS_REGIONS", "CREATING", "PARTIALLY_CREATED", "PARTIALLY_DELETED", "DELETING"
+    #   resp.access_point.regions #=> Array
+    #   resp.access_point.regions[0].bucket #=> String
+    #   resp.access_point.regions[0].region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPoint AWS API Documentation
+    #
+    # @overload get_multi_region_access_point(params = {})
+    # @param [Hash] params ({})
+    def get_multi_region_access_point(params = {}, options = {})
+      req = build_request(:get_multi_region_access_point, params)
+      req.send_request(options)
+    end
+
+    # Returns the access control policy of the specified Multi-Region Access
+    # Point.
+    #
+    # This action will always be routed to the US West (Oregon) Region. For
+    # more information about the restrictions around managing Multi-Region
+    # Access Points, see [Managing Multi-Region Access Points][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    # The following actions are related to
+    # `GetMultiRegionAccessPointPolicy`\:
+    #
+    # * [GetMultiRegionAccessPointPolicyStatus][2]
+    #
+    # * [PutMultiRegionAccessPointPolicy][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   Specifies the Multi-Region Access Point. The name of the Multi-Region
+    #   Access Point is different from the alias. For more information about
+    #   the distinction between the name and the alias of an Multi-Region
+    #   Access Point, see [Managing Multi-Region Access Points][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
+    #
+    # @return [Types::GetMultiRegionAccessPointPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMultiRegionAccessPointPolicyResult#policy #policy} => Types::MultiRegionAccessPointPolicyDocument
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_multi_region_access_point_policy({
+    #     account_id: "AccountId", # required
+    #     name: "MultiRegionAccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy.established.policy #=> String
+    #   resp.policy.proposed.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointPolicy AWS API Documentation
+    #
+    # @overload get_multi_region_access_point_policy(params = {})
+    # @param [Hash] params ({})
+    def get_multi_region_access_point_policy(params = {}, options = {})
+      req = build_request(:get_multi_region_access_point_policy, params)
+      req.send_request(options)
+    end
+
+    # Indicates whether the specified Multi-Region Access Point has an
+    # access control policy that allows public access.
+    #
+    # This action will always be routed to the US West (Oregon) Region. For
+    # more information about the restrictions around managing Multi-Region
+    # Access Points, see [Managing Multi-Region Access Points][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    # The following actions are related to
+    # `GetMultiRegionAccessPointPolicyStatus`\:
+    #
+    # * [GetMultiRegionAccessPointPolicy][2]
+    #
+    # * [PutMultiRegionAccessPointPolicy][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :name
+    #   Specifies the Multi-Region Access Point. The name of the Multi-Region
+    #   Access Point is different from the alias. For more information about
+    #   the distinction between the name and the alias of an Multi-Region
+    #   Access Point, see [Managing Multi-Region Access Points][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
+    #
+    # @return [Types::GetMultiRegionAccessPointPolicyStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMultiRegionAccessPointPolicyStatusResult#established #established} => Types::PolicyStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_multi_region_access_point_policy_status({
+    #     account_id: "AccountId", # required
+    #     name: "MultiRegionAccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.established.is_public #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointPolicyStatus AWS API Documentation
+    #
+    # @overload get_multi_region_access_point_policy_status(params = {})
+    # @param [Hash] params ({})
+    def get_multi_region_access_point_policy_status(params = {}, options = {})
+      req = build_request(:get_multi_region_access_point_policy_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the `PublicAccessBlock` configuration for an Amazon Web
+    # Services account. For more information, see [ Using Amazon S3 block
+    # public access][1].
     #
     # Related actions include:
     #
@@ -2565,8 +3012,8 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the account whose `PublicAccessBlock` configuration
-    #   you want to retrieve.
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to retrieve.
     #
     # @return [Types::GetPublicAccessBlockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2745,8 +3192,8 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for owner of the bucket whose access points you want to
-    #   list.
+    #   The Amazon Web Services account ID for owner of the bucket whose
+    #   access points you want to list.
     #
     # @option params [String] :bucket
     #   The name of the bucket whose associated access points you want to
@@ -2883,9 +3330,9 @@ module Aws::S3Control
     end
 
     # Lists current S3 Batch Operations jobs and jobs that have ended within
-    # the last 30 days for the account making the request. For more
-    # information, see [S3 Batch Operations][1] in the *Amazon S3 User
-    # Guide*.
+    # the last 30 days for the Amazon Web Services account making the
+    # request. For more information, see [S3 Batch Operations][1] in the
+    # *Amazon S3 User Guide*.
     #
     # Related actions include:
     #
@@ -2908,7 +3355,8 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #
     # @option params [Array<String>] :job_statuses
     #   The `List Jobs` request returns jobs that match the statuses listed in
@@ -2965,6 +3413,85 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns a list of the Multi-Region Access Points currently associated
+    # with the specified Amazon Web Services account. Each call can return
+    # up to 100 Multi-Region Access Points, the maximum number of
+    # Multi-Region Access Points that can be associated with a single
+    # account.
+    #
+    # This action will always be routed to the US West (Oregon) Region. For
+    # more information about the restrictions around managing Multi-Region
+    # Access Points, see [Managing Multi-Region Access Points][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    # The following actions are related to `ListMultiRegionAccessPoint`\:
+    #
+    # * [CreateMultiRegionAccessPoint][2]
+    #
+    # * [DeleteMultiRegionAccessPoint][3]
+    #
+    # * [DescribeMultiRegionAccessPointOperation][4]
+    #
+    # * [GetMultiRegionAccessPoint][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [String] :next_token
+    #   Not currently used. Do not use this parameter.
+    #
+    # @option params [Integer] :max_results
+    #   Not currently used. Do not use this parameter.
+    #
+    # @return [Types::ListMultiRegionAccessPointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMultiRegionAccessPointsResult#access_points #access_points} => Array&lt;Types::MultiRegionAccessPointReport&gt;
+    #   * {Types::ListMultiRegionAccessPointsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_multi_region_access_points({
+    #     account_id: "AccountId", # required
+    #     next_token: "NonEmptyMaxLength1024String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_points #=> Array
+    #   resp.access_points[0].name #=> String
+    #   resp.access_points[0].alias #=> String
+    #   resp.access_points[0].created_at #=> Time
+    #   resp.access_points[0].public_access_block.block_public_acls #=> Boolean
+    #   resp.access_points[0].public_access_block.ignore_public_acls #=> Boolean
+    #   resp.access_points[0].public_access_block.block_public_policy #=> Boolean
+    #   resp.access_points[0].public_access_block.restrict_public_buckets #=> Boolean
+    #   resp.access_points[0].status #=> String, one of "READY", "INCONSISTENT_ACROSS_REGIONS", "CREATING", "PARTIALLY_CREATED", "PARTIALLY_DELETED", "DELETING"
+    #   resp.access_points[0].regions #=> Array
+    #   resp.access_points[0].regions[0].bucket #=> String
+    #   resp.access_points[0].regions[0].region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListMultiRegionAccessPoints AWS API Documentation
+    #
+    # @overload list_multi_region_access_points(params = {})
+    # @param [Hash] params ({})
+    def list_multi_region_access_points(params = {}, options = {})
+      req = build_request(:list_multi_region_access_points, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all Outposts buckets in an Outpost that are owned by
     # the authenticated sender of the request. For more information, see
     # [Using Amazon S3 on Outposts][1] in the *Amazon S3 User Guide*.
@@ -2979,7 +3506,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [String] :next_token
     #
@@ -3167,8 +3694,8 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for owner of the bucket associated with the specified
-    #   access point.
+    #   The Amazon Web Services account ID for owner of the bucket associated
+    #   with the specified access point.
     #
     # @option params [required, String] :name
     #   The name of the access point that you want to associate with the
@@ -3297,7 +3824,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to set the configuration.
@@ -3381,19 +3908,21 @@ module Aws::S3Control
     # information, see [Using Amazon S3 on Outposts][2] in the *Amazon S3
     # User Guide*.
     #
-    # If you are using an identity other than the root user of the account
-    # that owns the Outposts bucket, the calling identity must have the
-    # `PutBucketPolicy` permissions on the specified Outposts bucket and
-    # belong to the bucket owner's account in order to use this action.
+    # If you are using an identity other than the root user of the Amazon
+    # Web Services account that owns the Outposts bucket, the calling
+    # identity must have the `PutBucketPolicy` permissions on the specified
+    # Outposts bucket and belong to the bucket owner's account in order to
+    # use this action.
     #
     # If you don't have `PutBucketPolicy` permissions, Amazon S3 returns a
     # `403 Access Denied` error. If you have the correct permissions, but
     # you're not using an identity that belongs to the bucket owner's
     # account, Amazon S3 returns a `405 Method Not Allowed` error.
     #
-    # As a security precaution, the root user of the account that owns a
-    # bucket can always use this action, even if the policy explicitly
-    # denies the root user the ability to perform this action.
+    # As a security precaution, the root user of the Amazon Web Services
+    # account that owns a bucket can always use this action, even if the
+    # policy explicitly denies the root user the ability to perform this
+    # action.
     #
     # For more information about bucket policies, see [Using Bucket Policies
     # and User Policies][3].
@@ -3422,7 +3951,7 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   Specifies the bucket.
@@ -3481,13 +4010,14 @@ module Aws::S3Control
     # [Using Amazon S3 on Outposts][2] in the *Amazon S3 User Guide*.
     #
     # Use tags to organize your Amazon Web Services bill to reflect your own
-    # cost structure. To do this, sign up to get your account bill with tag
-    # key values included. Then, to see the cost of combined resources,
-    # organize your billing information according to resources with the same
-    # tag key values. For example, you can tag several resources with a
-    # specific application name, and then organize your billing information
-    # to see the total cost of that application across several services. For
-    # more information, see [Cost allocation and tagging][3].
+    # cost structure. To do this, sign up to get your Amazon Web Services
+    # account bill with tag key values included. Then, to see the cost of
+    # combined resources, organize your billing information according to
+    # resources with the same tag key values. For example, you can tag
+    # several resources with a specific application name, and then organize
+    # your billing information to see the total cost of that application
+    # across several services. For more information, see [Cost allocation
+    # and tagging][3].
     #
     # <note markdown="1"> Within a bucket, if you add a tag that has the same key as an existing
     # tag, the new value overwrites the old value. For more information, see
@@ -3563,7 +4093,7 @@ module Aws::S3Control
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
     #
     # @option params [required, String] :account_id
-    #   The account ID of the Outposts bucket.
+    #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
     #   The Amazon Resource Name (ARN) of the bucket.
@@ -3673,7 +4203,8 @@ module Aws::S3Control
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the S3 Batch Operations job whose tags you want to replace.
@@ -3705,9 +4236,75 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Associates an access control policy with the specified Multi-Region
+    # Access Point. Each Multi-Region Access Point can have only one policy,
+    # so a request made to this action replaces any existing policy that is
+    # associated with the specified Multi-Region Access Point.
+    #
+    # This action will always be routed to the US West (Oregon) Region. For
+    # more information about the restrictions around managing Multi-Region
+    # Access Points, see [Managing Multi-Region Access Points][1] in the
+    # *Amazon S3 User Guide*.
+    #
+    # The following actions are related to
+    # `PutMultiRegionAccessPointPolicy`\:
+    #
+    # * [GetMultiRegionAccessPointPolicy][2]
+    #
+    # * [GetMultiRegionAccessPointPolicyStatus][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :client_token
+    #   An idempotency token used to identify the request and guarantee that
+    #   requests are unique.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::PutMultiRegionAccessPointPolicyInput] :details
+    #   A container element containing the details of the policy for the
+    #   Multi-Region Access Point.
+    #
+    # @return [Types::PutMultiRegionAccessPointPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutMultiRegionAccessPointPolicyResult#request_token_arn #request_token_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_multi_region_access_point_policy({
+    #     account_id: "AccountId", # required
+    #     client_token: "MultiRegionAccessPointClientToken", # required
+    #     details: { # required
+    #       name: "MultiRegionAccessPointName", # required
+    #       policy: "Policy", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_token_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutMultiRegionAccessPointPolicy AWS API Documentation
+    #
+    # @overload put_multi_region_access_point_policy(params = {})
+    # @param [Hash] params ({})
+    def put_multi_region_access_point_policy(params = {}, options = {})
+      req = build_request(:put_multi_region_access_point_policy, params)
+      req.send_request(options)
+    end
+
     # Creates or modifies the `PublicAccessBlock` configuration for an
-    # account. For more information, see [ Using Amazon S3 block public
-    # access][1].
+    # Amazon Web Services account. For more information, see [ Using Amazon
+    # S3 block public access][1].
     #
     # Related actions include:
     #
@@ -3723,11 +4320,11 @@ module Aws::S3Control
     #
     # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to the
-    #   specified account.
+    #   specified Amazon Web Services account.
     #
     # @option params [required, String] :account_id
-    #   The account ID for the account whose `PublicAccessBlock` configuration
-    #   you want to set.
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3939,7 +4536,8 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the job whose priority you want to update.
@@ -4000,7 +4598,8 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the S3 Batch Operations job.
+    #   The Amazon Web Services account ID associated with the S3 Batch
+    #   Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID of the job whose status you want to update.
@@ -4055,7 +4654,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -418,7 +418,8 @@ module Aws::ACMPCA
     #   @return [Types::CertificateAuthorityConfiguration]
     #
     # @!attribute [rw] revocation_configuration
-    #   Information about the certificate revocation list (CRL) created and
+    #   Information about the Online Certificate Status Protocol (OCSP)
+    #   configuration or certificate revocation list (CRL) created and
     #   maintained by your private CA.
     #   @return [Types::RevocationConfiguration]
     #
@@ -756,6 +757,10 @@ module Aws::ACMPCA
     #             s3_bucket_name: "String3To255",
     #             s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #           },
+    #           ocsp_configuration: {
+    #             enabled: false, # required
+    #             ocsp_custom_cname: "String253",
+    #           },
     #         },
     #         certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
     #         idempotency_token: "IdempotencyToken",
@@ -774,16 +779,17 @@ module Aws::ACMPCA
     #   @return [Types::CertificateAuthorityConfiguration]
     #
     # @!attribute [rw] revocation_configuration
-    #   Contains a Boolean value that you can use to enable a certification
-    #   revocation list (CRL) for the CA, the name of the S3 bucket to which
-    #   ACM Private CA will write the CRL, and an optional CNAME alias that
-    #   you can use to hide the name of your bucket in the **CRL
-    #   Distribution Points** extension of your CA certificate. For more
-    #   information, see the [CrlConfiguration][1] structure.
+    #   Contains information to enable Online Certificate Status Protocol
+    #   (OCSP) support, to enable a certificate revocation list (CRL), to
+    #   enable both, or to enable neither. The default is for both
+    #   certificate validation mechanisms to be disabled. For more
+    #   information, see the [OcspConfiguration][1] and
+    #   [CrlConfiguration][2] types.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
     #   @return [Types::RevocationConfiguration]
     #
     # @!attribute [rw] certificate_authority_type
@@ -927,6 +933,10 @@ module Aws::ACMPCA
     # generated and in the next audit report. Only time valid certificates
     # are listed in the CRL. Expired certificates are not included.
     #
+    # A CRL is typically updated approximately 30 minutes after a
+    # certificate is revoked. If for any reason a CRL update fails, ACM
+    # Private CA makes further attempts every 15 minutes.
+    #
     # CRLs contain the following fields:
     #
     # * **Version**\: The current version number defined in RFC 5280 is V2.
@@ -974,9 +984,14 @@ module Aws::ACMPCA
     #
     # `openssl crl -inform DER -text -in crl_path -noout`
     #
+    # For more information, see [Planning a certificate revocation list
+    # (CRL)][2] in the *AWS Certificate Manager Private Certificate
+    # Authority (PCA) User Guide*
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html
     #
     # @note When making an API call, you may pass CrlConfiguration
     #   data as a hash:
@@ -1018,9 +1033,9 @@ module Aws::ACMPCA
     #   value for the **CustomCname** argument, the name of your S3 bucket
     #   is placed into the **CRL Distribution Points** extension of the
     #   issued certificate. You can change the name of your bucket by
-    #   calling the [UpdateCertificateAuthority][1] action. You must specify
-    #   a [bucket policy][2] that allows ACM Private CA to write the CRL to
-    #   your bucket.
+    #   calling the [UpdateCertificateAuthority][1] operation. You must
+    #   specify a [bucket policy][2] that allows ACM Private CA to write the
+    #   CRL to your bucket.
     #
     #
     #
@@ -2553,6 +2568,52 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # Contains information to enable and configure Online Certificate Status
+    # Protocol (OCSP) for validating certificate revocation status.
+    #
+    # When you revoke a certificate, OCSP responses may take up to 60
+    # minutes to reflect the new status.
+    #
+    # @note When making an API call, you may pass OcspConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         ocsp_custom_cname: "String253",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Flag enabling use of the Online Certificate Status Protocol (OCSP)
+    #   for validating certificate revocation status.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ocsp_custom_cname
+    #   By default, ACM Private CA injects an AWS domain into certificates
+    #   being validated by the Online Certificate Status Protocol (OCSP). A
+    #   customer can alternatively use this object to define a CNAME
+    #   specifying a customized OCSP domain.
+    #
+    #   Note: The value of the CNAME must not include a protocol prefix such
+    #   as "http://" or "https://".
+    #
+    #   For more information, see [Customizing Online Certificate Status
+    #   Protocol (OCSP) ][1] in the *AWS Certificate Manager Private
+    #   Certificate Authority (PCA) User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/ocsp-customize.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/OcspConfiguration AWS API Documentation
+    #
+    class OcspConfiguration < Struct.new(
+      :enabled,
+      :ocsp_custom_cname)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a custom ASN.1 X.400 `GeneralName` using an object identifier
     # (OID) and value. The OID must satisfy the regular expression shown
     # below. For more information, see NIST's definition of [Object
@@ -2879,16 +2940,21 @@ module Aws::ACMPCA
 
     # Certificate revocation information used by the
     # [CreateCertificateAuthority][1] and [UpdateCertificateAuthority][2]
-    # actions. Your private certificate authority (CA) can create and
-    # maintain a certificate revocation list (CRL). A CRL contains
-    # information about certificates revoked by your CA. For more
-    # information, see [RevokeCertificate][3].
+    # actions. Your private certificate authority (CA) can configure Online
+    # Certificate Status Protocol (OCSP) support and/or maintain a
+    # certificate revocation list (CRL). OCSP returns validation information
+    # about certificates as requested by clients, and a CRL contains an
+    # updated list of certificates revoked by your CA. For more information,
+    # see [RevokeCertificate][3] and [Setting up a certificate revocation
+    # method][4] in the *AWS Certificate Manager Private Certificate
+    # Authority (PCA) User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html
     # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html
+    # [4]: https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html
     #
     # @note When making an API call, you may pass RevocationConfiguration
     #   data as a hash:
@@ -2901,17 +2967,32 @@ module Aws::ACMPCA
     #           s3_bucket_name: "String3To255",
     #           s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #         },
+    #         ocsp_configuration: {
+    #           enabled: false, # required
+    #           ocsp_custom_cname: "String253",
+    #         },
     #       }
     #
     # @!attribute [rw] crl_configuration
     #   Configuration of the certificate revocation list (CRL), if any,
-    #   maintained by your private CA.
+    #   maintained by your private CA. A CRL is typically updated
+    #   approximately 30 minutes after a certificate is revoked. If for any
+    #   reason a CRL update fails, ACM Private CA makes further attempts
+    #   every 15 minutes.
     #   @return [Types::CrlConfiguration]
+    #
+    # @!attribute [rw] ocsp_configuration
+    #   Configuration of Online Certificate Status Protocol (OCSP) support,
+    #   if any, maintained by your private CA. When you revoke a
+    #   certificate, OCSP responses may take up to 60 minutes to reflect the
+    #   new status.
+    #   @return [Types::OcspConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RevocationConfiguration AWS API Documentation
     #
     class RevocationConfiguration < Struct.new(
-      :crl_configuration)
+      :crl_configuration,
+      :ocsp_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3107,6 +3188,10 @@ module Aws::ACMPCA
     #             s3_bucket_name: "String3To255",
     #             s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
     #           },
+    #           ocsp_configuration: {
+    #             enabled: false, # required
+    #             ocsp_custom_cname: "String253",
+    #           },
     #         },
     #         status: "CREATING", # accepts CREATING, PENDING_CERTIFICATE, ACTIVE, DELETED, DISABLED, EXPIRED, FAILED
     #       }
@@ -3120,7 +3205,17 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] revocation_configuration
-    #   Revocation information for your private CA.
+    #   Contains information to enable Online Certificate Status Protocol
+    #   (OCSP) support, to enable a certificate revocation list (CRL), to
+    #   enable both, or to enable neither. If this parameter is not
+    #   supplied, existing capibilites remain unchanged. For more
+    #   information, see the [OcspConfiguration][1] and
+    #   [CrlConfiguration][2] types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html
     #   @return [Types::RevocationConfiguration]
     #
     # @!attribute [rw] status

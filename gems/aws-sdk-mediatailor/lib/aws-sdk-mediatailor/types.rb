@@ -329,6 +329,12 @@ module Aws::MediaTailor
     #   The timestamp of when the channel was created.
     #   @return [Time]
     #
+    # @!attribute [rw] filler_slate
+    #   Contains information about the slate used to fill gaps between
+    #   programs in the schedule. You must configure FillerSlate if your
+    #   channel uses an LINEAR PlaybackMode.
+    #   @return [Types::SlateSource]
+    #
     # @!attribute [rw] last_modified_time
     #   The timestamp of when the channel was last modified.
     #   @return [Time]
@@ -338,8 +344,13 @@ module Aws::MediaTailor
     #   @return [Array<Types::ResponseOutputItem>]
     #
     # @!attribute [rw] playback_mode
-    #   The type of playback mode for this channel. Possible values: ONCE or
-    #   LOOP.
+    #   The type of playback mode for this channel.
+    #
+    #   LINEAR - Programs play back-to-back only once.
+    #
+    #   LOOP - Programs play back-to-back in an endless loop. When the last
+    #   program in the schedule plays, playback loops back to the first
+    #   program in the schedule.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -353,6 +364,7 @@ module Aws::MediaTailor
       :channel_name,
       :channel_state,
       :creation_time,
+      :filler_slate,
       :last_modified_time,
       :outputs,
       :playback_mode,
@@ -368,6 +380,10 @@ module Aws::MediaTailor
     #
     #       {
     #         channel_name: "__string", # required
+    #         filler_slate: {
+    #           source_location_name: "__string",
+    #           vod_source_name: "__string",
+    #         },
     #         outputs: [ # required
     #           {
     #             dash_playlist_settings: {
@@ -383,7 +399,7 @@ module Aws::MediaTailor
     #             source_group: "__string", # required
     #           },
     #         ],
-    #         playback_mode: "LOOP", # required, accepts LOOP
+    #         playback_mode: "LOOP", # required, accepts LOOP, LINEAR
     #         tags: {
     #           "__string" => "__string",
     #         },
@@ -392,13 +408,25 @@ module Aws::MediaTailor
     # @!attribute [rw] channel_name
     #   @return [String]
     #
+    # @!attribute [rw] filler_slate
+    #   The slate used to fill gaps between programs in the schedule. You
+    #   must configure filler slate if your channel uses an LINEAR
+    #   PlaybackMode.
+    #   @return [Types::SlateSource]
+    #
     # @!attribute [rw] outputs
     #   The channel's output properties.
     #   @return [Array<Types::RequestOutputItem>]
     #
     # @!attribute [rw] playback_mode
-    #   The type of playback mode for this channel. The only supported value
-    #   is LOOP.
+    #   The type of playback mode to use for this channel.
+    #
+    #   LINEAR - The programs in the schedule play once back-to-back in the
+    #   schedule.
+    #
+    #   LOOP - The programs in the schedule play back-to-back in an endless
+    #   loop. When the last program in the schedule stops playing, playback
+    #   loops back to the first program in the schedule.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -409,6 +437,7 @@ module Aws::MediaTailor
     #
     class CreateChannelRequest < Struct.new(
       :channel_name,
+      :filler_slate,
       :outputs,
       :playback_mode,
       :tags)
@@ -427,6 +456,10 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] creation_time
     #   @return [Time]
+    #
+    # @!attribute [rw] filler_slate
+    #   Slate VOD source configuration.
+    #   @return [Types::SlateSource]
     #
     # @!attribute [rw] last_modified_time
     #   @return [Time]
@@ -447,6 +480,7 @@ module Aws::MediaTailor
       :channel_name,
       :channel_state,
       :creation_time,
+      :filler_slate,
       :last_modified_time,
       :outputs,
       :playback_mode,
@@ -483,6 +517,7 @@ module Aws::MediaTailor
     #           transition: { # required
     #             relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #             relative_program: "__string",
+    #             scheduled_start_time_millis: 1,
     #             type: "__string", # required
     #           },
     #         },
@@ -540,6 +575,9 @@ module Aws::MediaTailor
     # @!attribute [rw] program_name
     #   @return [String]
     #
+    # @!attribute [rw] scheduled_start_time
+    #   @return [Time]
+    #
     # @!attribute [rw] source_location_name
     #   @return [String]
     #
@@ -554,6 +592,7 @@ module Aws::MediaTailor
       :channel_name,
       :creation_time,
       :program_name,
+      :scheduled_start_time,
       :source_location_name,
       :vod_source_name)
       SENSITIVE = []
@@ -1091,6 +1130,11 @@ module Aws::MediaTailor
     #   The timestamp of when the channel was created.
     #   @return [Time]
     #
+    # @!attribute [rw] filler_slate
+    #   Contains information about the slate used to fill gaps between
+    #   programs in the schedule.
+    #   @return [Types::SlateSource]
+    #
     # @!attribute [rw] last_modified_time
     #   The timestamp of when the channel was last modified.
     #   @return [Time]
@@ -1100,8 +1144,7 @@ module Aws::MediaTailor
     #   @return [Array<Types::ResponseOutputItem>]
     #
     # @!attribute [rw] playback_mode
-    #   The type of playback for this channel. The only supported value is
-    #   LOOP.
+    #   The channel's playback mode.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1115,6 +1158,7 @@ module Aws::MediaTailor
       :channel_name,
       :channel_state,
       :creation_time,
+      :filler_slate,
       :last_modified_time,
       :outputs,
       :playback_mode,
@@ -1168,6 +1212,13 @@ module Aws::MediaTailor
     #   The name of the program.
     #   @return [String]
     #
+    # @!attribute [rw] scheduled_start_time
+    #   The date and time that the program is scheduled to start in ISO 8601
+    #   format and Coordinated Universal Time (UTC). For example, the value
+    #   2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751
+    #   UTC.
+    #   @return [Time]
+    #
     # @!attribute [rw] source_location_name
     #   The source location name.
     #   @return [String]
@@ -1184,6 +1235,7 @@ module Aws::MediaTailor
       :channel_name,
       :creation_time,
       :program_name,
+      :scheduled_start_time,
       :source_location_name,
       :vod_source_name)
       SENSITIVE = []
@@ -2582,6 +2634,7 @@ module Aws::MediaTailor
     #         transition: { # required
     #           relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #           relative_program: "__string",
+    #           scheduled_start_time_millis: 1,
     #           type: "__string", # required
     #         },
     #       }
@@ -2624,6 +2677,12 @@ module Aws::MediaTailor
     #   The schedule's ad break properties.
     #   @return [Array<Types::ScheduleAdBreak>]
     #
+    # @!attribute [rw] schedule_entry_type
+    #   The type of schedule entry.
+    #
+    #   Valid values: PROGRAM or FILLER\_SLATE.
+    #   @return [String]
+    #
     # @!attribute [rw] source_location_name
     #   The name of the source location.
     #   @return [String]
@@ -2641,6 +2700,7 @@ module Aws::MediaTailor
       :channel_name,
       :program_name,
       :schedule_ad_breaks,
+      :schedule_entry_type,
       :source_location_name,
       :vod_source_name)
       SENSITIVE = []
@@ -2897,13 +2957,13 @@ module Aws::MediaTailor
     #       {
     #         relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
     #         relative_program: "__string",
+    #         scheduled_start_time_millis: 1,
     #         type: "__string", # required
     #       }
     #
     # @!attribute [rw] relative_position
     #   The position where this program will be inserted relative to the
-    #   RelativeProgram. Possible values are: AFTER\_PROGRAM, and
-    #   BEFORE\_PROGRAM.
+    #   RelativePosition.
     #   @return [String]
     #
     # @!attribute [rw] relative_program
@@ -2911,9 +2971,29 @@ module Aws::MediaTailor
     #   as defined by RelativePosition.
     #   @return [String]
     #
+    # @!attribute [rw] scheduled_start_time_millis
+    #   The date and time that the program is scheduled to start, in epoch
+    #   milliseconds.
+    #   @return [Integer]
+    #
     # @!attribute [rw] type
-    #   When the program should be played. RELATIVE means that programs will
-    #   be played back-to-back.
+    #   Defines when the program plays in the schedule. You can set the
+    #   value to ABSOLUTE or RELATIVE.
+    #
+    #   ABSOLUTE - The program plays at a specific wall clock time. This
+    #   setting can only be used for channels using the LINEAR PlaybackMode.
+    #
+    #   Note the following considerations when using ABSOLUTE transitions:
+    #
+    #   If the preceding program in the schedule has a duration that extends
+    #   past the wall clock time, MediaTailor truncates the preceding
+    #   program on a common segment boundary.
+    #
+    #   If there are gaps in playback, MediaTailor plays the FillerSlate you
+    #   configured for your linear channel.
+    #
+    #   RELATIVE - The program is inserted into the schedule either before
+    #   or after a program that you specify via RelativePosition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Transition AWS API Documentation
@@ -2921,6 +3001,7 @@ module Aws::MediaTailor
     class Transition < Struct.new(
       :relative_position,
       :relative_program,
+      :scheduled_start_time_millis,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -3001,6 +3082,10 @@ module Aws::MediaTailor
     # @!attribute [rw] creation_time
     #   @return [Time]
     #
+    # @!attribute [rw] filler_slate
+    #   Slate VOD source configuration.
+    #   @return [Types::SlateSource]
+    #
     # @!attribute [rw] last_modified_time
     #   @return [Time]
     #
@@ -3020,6 +3105,7 @@ module Aws::MediaTailor
       :channel_name,
       :channel_state,
       :creation_time,
+      :filler_slate,
       :last_modified_time,
       :outputs,
       :playback_mode,

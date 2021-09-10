@@ -634,6 +634,9 @@
       "Aws::NimbleStudio::Plugins::ContentType"
     ]
   },
+  "OpenSearchService": {
+    "models": "opensearch/2021-01-01"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
   },
@@ -746,7 +749,7 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.1"
+      "aws-sigv4": "~> 1.4"
     },
     "removePlugins": [
       "Aws::Plugins::SignatureV4"

@@ -1776,6 +1776,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #           timeout_action: "String",
+    #           seconds_before_timeout: 1,
     #         },
     #         deletion_protection: false,
     #         global_cluster_identifier: "String",
@@ -13556,9 +13557,7 @@ module Aws::RDS
     #   a scaling point to perform seamless scaling before enforcing the
     #   timeout action. The default is 300.
     #
-    #   * Value must be from 10 through 600.
-    #
-    #   ^
+    #   Specify a value between 10 and 600 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] timeout_action
@@ -13657,6 +13656,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #           timeout_action: "String",
+    #           seconds_before_timeout: 1,
     #         },
     #         deletion_protection: false,
     #         enable_http_endpoint: false,
@@ -18222,6 +18222,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #           timeout_action: "String",
+    #           seconds_before_timeout: 1,
     #         },
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
@@ -18548,6 +18549,7 @@ module Aws::RDS
     #           auto_pause: false,
     #           seconds_until_auto_pause: 1,
     #           timeout_action: "String",
+    #           seconds_before_timeout: 1,
     #         },
     #         engine_mode: "String",
     #       }
@@ -20405,6 +20407,7 @@ module Aws::RDS
     #         auto_pause: false,
     #         seconds_until_auto_pause: 1,
     #         timeout_action: "String",
+    #         seconds_before_timeout: 1,
     #       }
     #
     # @!attribute [rw] min_capacity
@@ -20475,6 +20478,14 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling
     #   @return [String]
     #
+    # @!attribute [rw] seconds_before_timeout
+    #   The amount of time, in seconds, that Aurora Serverless tries to find
+    #   a scaling point to perform seamless scaling before enforcing the
+    #   timeout action. The default is 300.
+    #
+    #   Specify a value between 60 and 600 seconds.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfiguration AWS API Documentation
     #
     class ScalingConfiguration < Struct.new(
@@ -20482,7 +20493,8 @@ module Aws::RDS
       :max_capacity,
       :auto_pause,
       :seconds_until_auto_pause,
-      :timeout_action)
+      :timeout_action,
+      :seconds_before_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20522,9 +20534,22 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] timeout_action
-    #   The timeout action of a call to `ModifyCurrentDBClusterCapacity`,
+    #   The action that occurs when Aurora times out while attempting to
+    #   change the capacity of an Aurora Serverless cluster. The value is
     #   either `ForceApplyCapacityChange` or `RollbackCapacityChange`.
+    #
+    #   `ForceApplyCapacityChange`, the default, sets the capacity to the
+    #   specified value as soon as possible.
+    #
+    #   `RollbackCapacityChange` ignores the capacity change if a scaling
+    #   point isn't found in the timeout period.
     #   @return [String]
+    #
+    # @!attribute [rw] seconds_before_timeout
+    #   The number of seconds before scaling times out. What happens when an
+    #   attempted scaling action times out is determined by the
+    #   `TimeoutAction` setting.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfigurationInfo AWS API Documentation
     #
@@ -20533,7 +20558,8 @@ module Aws::RDS
       :max_capacity,
       :auto_pause,
       :seconds_until_auto_pause,
-      :timeout_action)
+      :timeout_action,
+      :seconds_before_timeout)
       SENSITIVE = []
       include Aws::Structure
     end

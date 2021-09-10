@@ -649,7 +649,7 @@ module Aws::EBS
     # [1]: https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html
     #
     # @option params [required, Integer] :volume_size
-    #   The size of the volume, in GiB. The maximum size is `16384` GiB (16
+    #   The size of the volume, in GiB. The maximum size is `65536` GiB (64
     #   TiB).
     #
     # @option params [String] :parent_snapshot_id
@@ -806,7 +806,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

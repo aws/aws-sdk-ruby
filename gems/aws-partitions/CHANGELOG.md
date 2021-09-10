@@ -3,6 +3,48 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack endpoints in `Aws::Partitions::EndpointProvider`.
 
+1.500.0 (2021-09-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.499.0 (2021-09-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.498.0 (2021-09-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::OpenSearchService`.
+
+1.497.0 (2021-09-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.496.0 (2021-09-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.495.0 (2021-09-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.494.0 (2021-09-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 1.9, 2.0, 2.1, and 2.2.
+
+1.493.0 (2021-08-31)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.492.0 (2021-08-27)
 ------------------
 

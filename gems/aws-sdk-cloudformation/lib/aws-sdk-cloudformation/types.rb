@@ -14,7 +14,7 @@ module Aws::CloudFormation
     # CloudFormation invokes, if present, before proceeding with a stack set
     # operation in an account and Region.
     #
-    # For each account and Region, CloudFormation lets you specify a Lamdba
+    # For each account and Region, CloudFormation lets you specify a Lambda
     # function that encapsulates any requirements that must be met before
     # CloudFormation can proceed with a stack set operation in that account
     # and Region. CloudFormation invokes the function each time a stack set
@@ -4113,10 +4113,10 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] capabilities
     #   The capabilities found within the template. If your template
-    #   contains IAM resources, you must specify the CAPABILITY\_IAM or
-    #   CAPABILITY\_NAMED\_IAM value for this parameter when you use the
+    #   contains IAM resources, you must specify the `CAPABILITY_IAM` or
+    #   `CAPABILITY_NAMED_IAM` value for this parameter when you use the
     #   CreateStack or UpdateStack actions with your template; otherwise,
-    #   those actions return an InsufficientCapabilities error.
+    #   those actions return an `InsufficientCapabilities` error.
     #
     #   For more information, see [Acknowledging IAM Resources in
     #   CloudFormation Templates][1].

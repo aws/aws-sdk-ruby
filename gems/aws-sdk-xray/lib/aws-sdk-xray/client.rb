@@ -396,7 +396,8 @@ module Aws::XRay
     # @option params [Array<Types::Tag>] :tags
     #   A map that contains one or more tag keys and tag values to attach to
     #   an X-Ray group. For more information about ways to use tags, see
-    #   [Tagging AWS resources][1] in the *AWS General Reference*.
+    #   [Tagging Amazon Web Services resources][1] in the *Amazon Web Services
+    #   General Reference*.
     #
     #   The following restrictions apply to tags:
     #
@@ -411,7 +412,8 @@ module Aws::XRay
     #
     #   * Tag keys and values are case sensitive.
     #
-    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS use.
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for Amazon
+    #     Web Services use.
     #
     #
     #
@@ -456,13 +458,18 @@ module Aws::XRay
     end
 
     # Creates a rule to control sampling behavior for instrumented
-    # applications. Services retrieve rules with GetSamplingRules, and
+    # applications. Services retrieve rules with [GetSamplingRules][1], and
     # evaluate each rule in ascending order of *priority* for each request.
     # If a rule matches, the service records a trace, borrowing it from the
     # reservoir size. After 10 seconds, the service reports back to X-Ray
-    # with GetSamplingTargets to get updated versions of each in-use rule.
-    # The updated rule contains a trace quota that the service can use
+    # with [GetSamplingTargets][2] to get updated versions of each in-use
+    # rule. The updated rule contains a trace quota that the service can use
     # instead of borrowing from the reservoir.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html
+    # [2]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html
     #
     # @option params [required, Types::SamplingRule] :sampling_rule
     #   The rule definition.
@@ -470,7 +477,8 @@ module Aws::XRay
     # @option params [Array<Types::Tag>] :tags
     #   A map that contains one or more tag keys and tag values to attach to
     #   an X-Ray sampling rule. For more information about ways to use tags,
-    #   see [Tagging AWS resources][1] in the *AWS General Reference*.
+    #   see [Tagging Amazon Web Services resources][1] in the *Amazon Web
+    #   Services General Reference*.
     #
     #   The following restrictions apply to tags:
     #
@@ -485,7 +493,8 @@ module Aws::XRay
     #
     #   * Tag keys and values are case sensitive.
     #
-    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS use.
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for Amazon
+    #     Web Services use.
     #
     #
     #
@@ -1130,9 +1139,9 @@ module Aws::XRay
     # Retrieves a document that describes services that process incoming
     # requests, and downstream services that they call as a result. Root
     # services process incoming requests and make calls to downstream
-    # services. Root services are applications that use the [AWS X-Ray
-    # SDK][1]. Downstream services can be other applications, AWS resources,
-    # HTTP web APIs, or SQL databases.
+    # services. Root services are applications that use the [Amazon Web
+    # Services X-Ray SDK][1]. Downstream services can be other applications,
+    # Amazon Web Services resources, HTTP web APIs, or SQL databases.
     #
     #
     #
@@ -1422,8 +1431,8 @@ module Aws::XRay
     # `annotation.account = "12345"`
     #
     # For a full list of indexed fields and keywords that you can use in
-    # filter expressions, see [Using Filter Expressions][1] in the *AWS
-    # X-Ray Developer Guide*.
+    # filter expressions, see [Using Filter Expressions][1] in the *Amazon
+    # Web Services X-Ray Developer Guide*.
     #
     #
     #
@@ -1587,8 +1596,8 @@ module Aws::XRay
       req.send_request(options)
     end
 
-    # Returns a list of tags that are applied to the specified AWS X-Ray
-    # group or sampling rule.
+    # Returns a list of tags that are applied to the specified Amazon Web
+    # Services X-Ray group or sampling rule.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
@@ -1629,13 +1638,13 @@ module Aws::XRay
     # Updates the encryption configuration for X-Ray data.
     #
     # @option params [String] :key_id
-    #   An AWS KMS customer master key (CMK) in one of the following formats:
+    #   An Amazon Web Services KMS key in one of the following formats:
     #
     #   * **Alias** - The name of the key. For example, `alias/MyKey`.
     #
     #   * **Key ID** - The KMS key ID of the key. For example,
-    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`. AWS X-Ray does not support
-    #     asymmetric CMKs.
+    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`. Amazon Web Services X-Ray
+    #     does not support asymmetric KMS keys.
     #
     #   * **ARN** - The full Amazon Resource Name of the key ID or alias. For
     #     example,
@@ -1674,7 +1683,7 @@ module Aws::XRay
       req.send_request(options)
     end
 
-    # Used by the AWS X-Ray daemon to upload telemetry.
+    # Used by the Amazon Web Services X-Ray daemon to upload telemetry.
     #
     # @option params [required, Array<Types::TelemetryRecord>] :telemetry_records
     #
@@ -1720,14 +1729,14 @@ module Aws::XRay
       req.send_request(options)
     end
 
-    # Uploads segment documents to AWS X-Ray. The [X-Ray SDK][1] generates
-    # segment documents and sends them to the X-Ray daemon, which uploads
-    # them in batches. A segment document can be a completed segment, an
-    # in-progress segment, or an array of subsegments.
+    # Uploads segment documents to Amazon Web Services X-Ray. The [X-Ray
+    # SDK][1] generates segment documents and sends them to the X-Ray
+    # daemon, which uploads them in batches. A segment document can be a
+    # completed segment, an in-progress segment, or an array of subsegments.
     #
     # Segments must include the following fields. For the full segment
-    # document schema, see [AWS X-Ray Segment Documents][2] in the *AWS
-    # X-Ray Developer Guide*.
+    # document schema, see [Amazon Web Services X-Ray Segment Documents][2]
+    # in the *Amazon Web Services X-Ray Developer Guide*.
     #
     # **Required segment document fields**
     #
@@ -1803,7 +1812,8 @@ module Aws::XRay
       req.send_request(options)
     end
 
-    # Applies tags to an existing AWS X-Ray group or sampling rule.
+    # Applies tags to an existing Amazon Web Services X-Ray group or
+    # sampling rule.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
@@ -1811,8 +1821,8 @@ module Aws::XRay
     # @option params [required, Array<Types::Tag>] :tags
     #   A map that contains one or more tag keys and tag values to attach to
     #   an X-Ray group or sampling rule. For more information about ways to
-    #   use tags, see [Tagging AWS resources][1] in the *AWS General
-    #   Reference*.
+    #   use tags, see [Tagging Amazon Web Services resources][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #   The following restrictions apply to tags:
     #
@@ -1827,8 +1837,8 @@ module Aws::XRay
     #
     #   * Tag keys and values are case sensitive.
     #
-    #   * Don't use `aws:` as a prefix for keys; it's reserved for AWS use.
-    #     You cannot edit or delete system tags.
+    #   * Don't use `aws:` as a prefix for keys; it's reserved for Amazon
+    #     Web Services use. You cannot edit or delete system tags.
     #
     #
     #
@@ -1857,8 +1867,8 @@ module Aws::XRay
       req.send_request(options)
     end
 
-    # Removes tags from an AWS X-Ray group or sampling rule. You cannot edit
-    # or delete system tags (those with an `aws:` prefix).
+    # Removes tags from an Amazon Web Services X-Ray group or sampling rule.
+    # You cannot edit or delete system tags (those with an `aws:` prefix).
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
@@ -2011,7 +2021,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

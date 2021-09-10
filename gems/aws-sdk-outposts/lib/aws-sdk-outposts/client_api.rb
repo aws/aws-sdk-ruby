@@ -21,6 +21,8 @@ module Aws::Outposts
     AvailabilityZoneIdList = Shapes::ListShape.new(name: 'AvailabilityZoneIdList')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateOrderInput = Shapes::StructureShape.new(name: 'CreateOrderInput')
+    CreateOrderOutput = Shapes::StructureShape.new(name: 'CreateOrderOutput')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
     CreateOutpostOutput = Shapes::StructureShape.new(name: 'CreateOutpostOutput')
     DeleteOutpostInput = Shapes::StructureShape.new(name: 'DeleteOutpostInput')
@@ -32,12 +34,19 @@ module Aws::Outposts
     GetOutpostInstanceTypesInput = Shapes::StructureShape.new(name: 'GetOutpostInstanceTypesInput')
     GetOutpostInstanceTypesOutput = Shapes::StructureShape.new(name: 'GetOutpostInstanceTypesOutput')
     GetOutpostOutput = Shapes::StructureShape.new(name: 'GetOutpostOutput')
+    ISO8601Timestamp = Shapes::TimestampShape.new(name: 'ISO8601Timestamp')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeItem = Shapes::StructureShape.new(name: 'InstanceTypeItem')
     InstanceTypeListDefinition = Shapes::ListShape.new(name: 'InstanceTypeListDefinition')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LifeCycleStatus = Shapes::StringShape.new(name: 'LifeCycleStatus')
     LifeCycleStatusList = Shapes::ListShape.new(name: 'LifeCycleStatusList')
+    LineItem = Shapes::StructureShape.new(name: 'LineItem')
+    LineItemId = Shapes::StringShape.new(name: 'LineItemId')
+    LineItemListDefinition = Shapes::ListShape.new(name: 'LineItemListDefinition')
+    LineItemQuantity = Shapes::IntegerShape.new(name: 'LineItemQuantity')
+    LineItemRequest = Shapes::StructureShape.new(name: 'LineItemRequest')
+    LineItemRequestListDefinition = Shapes::ListShape.new(name: 'LineItemRequestListDefinition')
     ListOutpostsInput = Shapes::StructureShape.new(name: 'ListOutpostsInput')
     ListOutpostsOutput = Shapes::StructureShape.new(name: 'ListOutpostsOutput')
     ListSitesInput = Shapes::StructureShape.new(name: 'ListSitesInput')
@@ -46,12 +55,19 @@ module Aws::Outposts
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults1000 = Shapes::IntegerShape.new(name: 'MaxResults1000')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    Order = Shapes::StructureShape.new(name: 'Order')
+    OrderId = Shapes::StringShape.new(name: 'OrderId')
+    OrderStatus = Shapes::StringShape.new(name: 'OrderStatus')
     Outpost = Shapes::StructureShape.new(name: 'Outpost')
     OutpostArn = Shapes::StringShape.new(name: 'OutpostArn')
     OutpostDescription = Shapes::StringShape.new(name: 'OutpostDescription')
     OutpostId = Shapes::StringShape.new(name: 'OutpostId')
+    OutpostIdOnly = Shapes::StringShape.new(name: 'OutpostIdOnly')
+    OutpostIdentifier = Shapes::StringShape.new(name: 'OutpostIdentifier')
     OutpostName = Shapes::StringShape.new(name: 'OutpostName')
     OwnerId = Shapes::StringShape.new(name: 'OwnerId')
+    PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
+    PaymentTerm = Shapes::StringShape.new(name: 'PaymentTerm')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Site = Shapes::StructureShape.new(name: 'Site')
@@ -59,6 +75,8 @@ module Aws::Outposts
     SiteDescription = Shapes::StringShape.new(name: 'SiteDescription')
     SiteId = Shapes::StringShape.new(name: 'SiteId')
     SiteName = Shapes::StringShape.new(name: 'SiteName')
+    SkuCode = Shapes::StringShape.new(name: 'SkuCode')
+    Status = Shapes::StringShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -84,6 +102,15 @@ module Aws::Outposts
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateOrderInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location_name: "OutpostIdentifier"))
+    CreateOrderInput.add_member(:line_items, Shapes::ShapeRef.new(shape: LineItemRequestListDefinition, required: true, location_name: "LineItems"))
+    CreateOrderInput.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, required: true, location_name: "PaymentOption"))
+    CreateOrderInput.add_member(:payment_term, Shapes::ShapeRef.new(shape: PaymentTerm, location_name: "PaymentTerm"))
+    CreateOrderInput.struct_class = Types::CreateOrderInput
+
+    CreateOrderOutput.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "Order"))
+    CreateOrderOutput.struct_class = Types::CreateOrderOutput
 
     CreateOutpostInput.add_member(:name, Shapes::ShapeRef.new(shape: OutpostName, required: true, location_name: "Name"))
     CreateOutpostInput.add_member(:description, Shapes::ShapeRef.new(shape: OutpostDescription, location_name: "Description"))
@@ -133,6 +160,20 @@ module Aws::Outposts
 
     LifeCycleStatusList.member = Shapes::ShapeRef.new(shape: LifeCycleStatus)
 
+    LineItem.add_member(:catalog_item_id, Shapes::ShapeRef.new(shape: SkuCode, location_name: "CatalogItemId"))
+    LineItem.add_member(:line_item_id, Shapes::ShapeRef.new(shape: LineItemId, location_name: "LineItemId"))
+    LineItem.add_member(:quantity, Shapes::ShapeRef.new(shape: LineItemQuantity, location_name: "Quantity"))
+    LineItem.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    LineItem.struct_class = Types::LineItem
+
+    LineItemListDefinition.member = Shapes::ShapeRef.new(shape: LineItem)
+
+    LineItemRequest.add_member(:catalog_item_id, Shapes::ShapeRef.new(shape: SkuCode, location_name: "CatalogItemId"))
+    LineItemRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: LineItemQuantity, location_name: "Quantity"))
+    LineItemRequest.struct_class = Types::LineItemRequest
+
+    LineItemRequestListDefinition.member = Shapes::ShapeRef.new(shape: LineItemRequest)
+
     ListOutpostsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
     ListOutpostsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
     ListOutpostsInput.add_member(:life_cycle_status_filter, Shapes::ShapeRef.new(shape: LifeCycleStatusList, location: "querystring", location_name: "LifeCycleStatusFilter"))
@@ -160,6 +201,15 @@ module Aws::Outposts
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
+
+    Order.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostIdOnly, location_name: "OutpostId"))
+    Order.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, location_name: "OrderId"))
+    Order.add_member(:status, Shapes::ShapeRef.new(shape: OrderStatus, location_name: "Status"))
+    Order.add_member(:line_items, Shapes::ShapeRef.new(shape: LineItemListDefinition, location_name: "LineItems"))
+    Order.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
+    Order.add_member(:order_submission_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "OrderSubmissionDate"))
+    Order.add_member(:order_fulfilled_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "OrderFulfilledDate"))
+    Order.struct_class = Types::Order
 
     Outpost.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
     Outpost.add_member(:owner_id, Shapes::ShapeRef.new(shape: OwnerId, location_name: "OwnerId"))
@@ -227,6 +277,20 @@ module Aws::Outposts
         "signingName" => "outposts",
         "uid" => "outposts-2019-12-03",
       }
+
+      api.add_operation(:create_order, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateOrder"
+        o.http_method = "POST"
+        o.http_request_uri = "/orders"
+        o.input = Shapes::ShapeRef.new(shape: CreateOrderInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateOrderOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
 
       api.add_operation(:create_outpost, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOutpost"

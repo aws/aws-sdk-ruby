@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-09-09)
+------------------
+
+* Feature - The Amazon CodeGuru Reviewer API now includes the RuleMetadata data object and a Severity attribute on a RecommendationSummary object. A RuleMetadata object contains information about a rule that generates a recommendation. Severity indicates how severe the issue associated with a recommendation is.
+
+1.22.0 (2021-09-03)
+------------------
+
+* Feature - Added support for CodeInconsistencies detectors
+
+1.21.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2021-07-30)
 ------------------
 

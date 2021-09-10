@@ -48,6 +48,6 @@ require_relative 'aws-sdk-costandusagereportservice/customizations'
 # @!group service
 module Aws::CostandUsageReportService
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end

@@ -327,7 +327,8 @@ module Aws::RAM
 
     # @!group API Operations
 
-    # Accepts an invitation to a resource share from another AWS account.
+    # Accepts an invitation to a resource share from another Amazon Web
+    # Services account.
     #
     # @option params [required, String] :resource_share_invitation_arn
     #   The Amazon Resource Name (ARN) of the invitation.
@@ -386,12 +387,31 @@ module Aws::RAM
     #   The Amazon Resource Name (ARN) of the resource share.
     #
     # @option params [Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARNs) of the resources.
     #
     # @option params [Array<String>] :principals
     #   The principals to associate with the resource share. The possible
-    #   values are IDs of AWS accounts, and the ARNs of organizational units
-    #   (OU) or organizations from AWS Organizations.
+    #   values are:
+    #
+    #   * An Amazon Web Services account ID
+    #
+    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations
+    #
+    #   * An ARN of an IAM role
+    #
+    #   * An ARN of an IAM user
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users. For
+    #   more information, see [Sharing with IAM roles and IAM users][1] in the
+    #   *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -440,8 +460,8 @@ module Aws::RAM
     #   The Amazon Resource Name (ARN) of the resource share.
     #
     # @option params [required, String] :permission_arn
-    #   The Amazon Resource Name (ARN) of the AWS RAM permissions to associate
-    #   with the resource share.
+    #   The Amazon Resource Name (ARN) of the RAM permission to associate with
+    #   the resource share.
     #
     # @option params [Boolean] :replace
     #   Indicates whether the permission should replace the permissions that
@@ -454,7 +474,7 @@ module Aws::RAM
     #   idempotency of the request.
     #
     # @option params [Integer] :permission_version
-    #   The version of the AWS RAM permissions to associate with the resource
+    #   The version of the RAM permissions to associate with the resource
     #   share.
     #
     # @return [Types::AssociateResourceSharePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -486,35 +506,65 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Creates a resource share.
+    # Creates a resource share. You must provide a list of the Amazon
+    # Resource Names (ARNs) for the resources you want to share. You must
+    # also specify who you want to share the resources with, and the
+    # permissions that you grant them.
+    #
+    # <note markdown="1"> Sharing a resource makes it available for use by principals outside of
+    # the Amazon Web Services account that created the resource. Sharing
+    # doesn't change any permissions or quotas that apply to the resource
+    # in the account that created it.
+    #
+    #  </note>
     #
     # @option params [required, String] :name
     #   The name of the resource share.
     #
     # @option params [Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARN) of the resources to associate with the
-    #   resource share.
+    #   The ARNs of the resources to associate with the resource share.
     #
     # @option params [Array<String>] :principals
     #   The principals to associate with the resource share. The possible
-    #   values are IDs of AWS accounts, the ARN of an OU or organization from
-    #   AWS Organizations.
+    #   values are:
+    #
+    #   * An Amazon Web Services account ID
+    #
+    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations
+    #
+    #   * An ARN of an IAM role
+    #
+    #   * An ARN of an IAM user
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users. For
+    #   more information, see [Sharing with IAM roles and IAM users][1] in the
+    #   *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your AWS organization can be
-    #   associated with a resource share.
+    #   Indicates whether principals outside your organization in
+    #   Organizations can be associated with a resource share.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
     # @option params [Array<String>] :permission_arns
-    #   The ARNs of the permissions to associate with the resource share. If
-    #   you do not specify an ARN for the permission, AWS RAM automatically
-    #   attaches the default version of the permission for each resource type.
+    #   The Amazon Resource Names (ARNs) of the permissions to associate with
+    #   the resource share. If you do not specify an ARN for the permission,
+    #   RAM automatically attaches the default version of the permission for
+    #   each resource type. Only one permission can be associated with each
+    #   resource type in a resource share.
     #
     # @return [Types::CreateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -651,13 +701,14 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Disassociates an AWS RAM permission from a resource share.
+    # Disassociates an RAM permission from a resource share.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
     #
     # @option params [required, String] :permission_arn
-    #   The ARN of the permission to disassociate from the resource share.
+    #   The Amazon Resource Name (ARN) of the permission to disassociate from
+    #   the resource share.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -690,9 +741,9 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Enables resource sharing within your AWS Organization.
+    # Enables resource sharing within your organization in Organizations.
     #
-    # The caller must be the master account for the AWS Organization.
+    # The caller must be the master account for the organization.
     #
     # @return [Types::EnableSharingWithAwsOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -711,10 +762,10 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the contents of an AWS RAM permission in JSON format.
+    # Gets the contents of an RAM permission in JSON format.
     #
     # @option params [required, String] :permission_arn
-    #   The ARN of the permission.
+    #   The Amazon Resource Name (ARN) of the permission.
     #
     # @option params [Integer] :permission_version
     #   The identifier for the version of the permission.
@@ -755,7 +806,7 @@ module Aws::RAM
     # shared.
     #
     # @option params [required, Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARNs) of the resources.
     #
     # @option params [String] :principal
     #   The principal.
@@ -939,7 +990,7 @@ module Aws::RAM
     # shared with you.
     #
     # @option params [Array<String>] :resource_share_arns
-    #   The ARNs of the resource shares.
+    #   The Amazon Resource Names (ARNs) of the resource shares.
     #
     # @option params [String] :resource_share_status
     #   The status of the resource share.
@@ -962,7 +1013,7 @@ module Aws::RAM
     #   `nextToken` value.
     #
     # @option params [String] :permission_arn
-    #   The Amazon Resource Name (ARN) of the AWS RAM permission that is
+    #   The Amazon Resource Name (ARN) of the RAM permission that is
     #   associated with the resource share.
     #
     # @return [Types::GetResourceSharesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1067,7 +1118,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the AWS RAM permissions.
+    # Lists the RAM permissions.
     #
     # @option params [String] :resource_type
     #   Specifies the resource type for which to list permissions. For
@@ -1148,8 +1199,10 @@ module Aws::RAM
     #   `network-firewall:StatefulRuleGroup` \|
     #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule`
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
+    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
+    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -1200,8 +1253,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the AWS RAM permissions that are associated with a resource
-    # share.
+    # Lists the RAM permissions that are associated with a resource share.
     #
     # @option params [required, String] :resource_share_arn
     #   The Amazon Resource Name (ARN) of the resource share.
@@ -1252,7 +1304,7 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the shareable resource types supported by AWS RAM.
+    # Lists the shareable resource types supported by RAM.
     #
     # @option params [String] :next_token
     #   The token for the next page of results.
@@ -1317,11 +1369,13 @@ module Aws::RAM
     #   `network-firewall:StatefulRuleGroup` \|
     #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
     #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule`
+    #   `route53resolver:FirewallRuleGroup`
+    #   \|`route53resolver:ResolverQueryLogConfig` \|
+    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
+    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
     #
     # @option params [Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARNs) of the resources.
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -1377,17 +1431,17 @@ module Aws::RAM
 
     # Resource shares that were created by attaching a policy to a resource
     # are visible only to the resource share owner, and the resource share
-    # cannot be modified in AWS RAM.
+    # cannot be modified in RAM.
     #
     # Use this API action to promote the resource share. When you promote
     # the resource share, it becomes:
     #
     # * Visible to all principals that it is shared with.
     #
-    # * Modifiable in AWS RAM.
+    # * Modifiable in RAM.
     #
     # @option params [required, String] :resource_share_arn
-    #   The ARN of the resource share to promote.
+    #   The Amazon Resource Name (ARN) of the resource share to promote.
     #
     # @return [Types::PromoteResourceShareCreatedFromPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1412,7 +1466,8 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Rejects an invitation to a resource share from another AWS account.
+    # Rejects an invitation to a resource share from another Amazon Web
+    # Services account.
     #
     # @option params [required, String] :resource_share_invitation_arn
     #   The Amazon Resource Name (ARN) of the invitation.
@@ -1531,8 +1586,8 @@ module Aws::RAM
     #   The name of the resource share.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your AWS organization can be
-    #   associated with a resource share.
+    #   Indicates whether principals outside your organization in
+    #   Organizations can be associated with a resource share.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1590,7 +1645,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

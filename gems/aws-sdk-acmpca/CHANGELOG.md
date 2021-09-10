@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-09-02)
+------------------
+
+* Feature - Private Certificate Authority Service now allows customers to enable an online certificate status protocol (OCSP) responder service on their private certificate authorities. Customers can also optionally configure a custom CNAME for their OCSP responder.
+
+1.39.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2021-07-30)
 ------------------
 

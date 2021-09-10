@@ -2366,6 +2366,7 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #       timeout_action: "String",
+    #       seconds_before_timeout: 1,
     #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
@@ -2442,6 +2443,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -5855,6 +5857,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -8003,6 +8006,7 @@ module Aws::RDS
     #   resp.db_clusters[0].scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_clusters[0].scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_clusters[0].scaling_configuration_info.timeout_action #=> String
+    #   resp.db_clusters[0].scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
     #   resp.db_clusters[0].activity_stream_mode #=> String, one of "sync", "async"
@@ -11611,6 +11615,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -11995,7 +12000,7 @@ module Aws::RDS
     # scaling points, see [ Autoscaling for Aurora Serverless][2] in the
     # *Amazon Aurora User Guide*.
     #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    # <note markdown="1"> This action only applies to Aurora Serverless DB clusters.
     #
     #  </note>
     #
@@ -12033,9 +12038,7 @@ module Aws::RDS
     #   scaling point to perform seamless scaling before enforcing the timeout
     #   action. The default is 300.
     #
-    #   * Value must be from 10 through 600.
-    #
-    #   ^
+    #   Specify a value between 10 and 600 seconds.
     #
     # @option params [String] :timeout_action
     #   The action to take when the timeout is reached, either
@@ -12424,6 +12427,7 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #       timeout_action: "String",
+    #       seconds_before_timeout: 1,
     #     },
     #     deletion_protection: false,
     #     enable_http_endpoint: false,
@@ -12496,6 +12500,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -15060,6 +15065,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -16316,6 +16322,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -16647,6 +16654,7 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #       timeout_action: "String",
+    #       seconds_before_timeout: 1,
     #     },
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
@@ -16720,6 +16728,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -17053,6 +17062,7 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #       timeout_action: "String",
+    #       seconds_before_timeout: 1,
     #     },
     #     engine_mode: "String",
     #   })
@@ -17122,6 +17132,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -19245,6 +19256,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -19814,6 +19826,7 @@ module Aws::RDS
     #   resp.db_cluster.scaling_configuration_info.auto_pause #=> Boolean
     #   resp.db_cluster.scaling_configuration_info.seconds_until_auto_pause #=> Integer
     #   resp.db_cluster.scaling_configuration_info.timeout_action #=> String
+    #   resp.db_cluster.scaling_configuration_info.seconds_before_timeout #=> Integer
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -20105,7 +20118,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

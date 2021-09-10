@@ -73,7 +73,8 @@ module Aws::EFS
     #   @return [Types::RootDirectory]
     #
     # @!attribute [rw] owner_id
-    #   Identified the AWS account that owns the access point resource.
+    #   Identified the Amazon Web Services account that owns the access
+    #   point resource.
     #   @return [String]
     #
     # @!attribute [rw] life_cycle_state
@@ -97,8 +98,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the AWS account has already created the maximum number of
-    # access points allowed per file system.
+    # Returned if the Amazon Web Services account has already created the
+    # maximum number of access points allowed per file system.
     #
     # @!attribute [rw] error_code
     #   @return [String]
@@ -116,7 +117,7 @@ module Aws::EFS
     end
 
     # Returned if the specified `AccessPointId` value doesn't exist in the
-    # requester's AWS account.
+    # requester's Amazon Web Services account.
     #
     # @!attribute [rw] error_code
     #   @return [String]
@@ -265,7 +266,13 @@ module Aws::EFS
     #
     # @!attribute [rw] tags
     #   Creates tags associated with the access point. Each tag is a
-    #   key-value pair.
+    #   key-value pair, each key must be unique. For more information, see
+    #   [Tagging Amazon Web Services resources][1] in the *Amazon Web
+    #   Services General Reference Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] file_system_id
@@ -353,19 +360,19 @@ module Aws::EFS
     # @!attribute [rw] encrypted
     #   A Boolean value that, if true, creates an encrypted file system.
     #   When creating an encrypted file system, you have the option of
-    #   specifying CreateFileSystemRequest$KmsKeyId for an existing AWS Key
-    #   Management Service (AWS KMS) customer master key (CMK). If you
-    #   don't specify a CMK, then the default CMK for Amazon EFS,
+    #   specifying CreateFileSystemRequest$KmsKeyId for an existing Key
+    #   Management Service (KMS customer master key (CMK). If you don't
+    #   specify a CMK, then the default CMK for Amazon EFS,
     #   `/aws/elasticfilesystem`, is used to protect the encrypted file
     #   system.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS KMS CMK that you want to use to protect the
-    #   encrypted file system. This parameter is only required if you want
-    #   to use a non-default KMS key. If this parameter is not specified,
-    #   the default CMK for Amazon EFS is used. This ID can be in one of the
-    #   following formats:
+    #   The ID of the KMS CMK that you want to use to protect the encrypted
+    #   file system. This parameter is only required if you want to use a
+    #   non-default KMS key. If this parameter is not specified, the default
+    #   CMK for Amazon EFS is used. This ID can be in one of the following
+    #   formats:
     #
     #   * Key ID - A unique identifier of the key, for example
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
@@ -408,9 +415,9 @@ module Aws::EFS
     #   The throughput, measured in MiB/s, that you want to provision for a
     #   file system that you're creating. Valid values are 1-1024. Required
     #   if `ThroughputMode` is set to `provisioned`. The upper limit for
-    #   throughput is 1024 MiB/s. To increase this limit, contact AWS
-    #   Support. For more information, see [Amazon EFS quotas that you can
-    #   increase][1] in the *Amazon EFS User Guide*.
+    #   throughput is 1024 MiB/s. To increase this limit, contact Amazon Web
+    #   Services Support. For more information, see [Amazon EFS quotas that
+    #   you can increase][1] in the *Amazon EFS User Guide*.
     #
     #
     #
@@ -419,13 +426,14 @@ module Aws::EFS
     #
     # @!attribute [rw] availability_zone_name
     #   Used to create a file system that uses One Zone storage classes. It
-    #   specifies the AWS Availability Zone in which to create the file
-    #   system. Use the format `us-east-1a` to specify the Availability
-    #   Zone. For more information about One Zone storage classes, see
-    #   [Using EFS storage classes][1] in the *Amazon EFS User Guide*.
+    #   specifies the Amazon Web Services Availability Zone in which to
+    #   create the file system. Use the format `us-east-1a` to specify the
+    #   Availability Zone. For more information about One Zone storage
+    #   classes, see [Using EFS storage classes][1] in the *Amazon EFS User
+    #   Guide*.
     #
     #   <note markdown="1"> One Zone storage classes are not available in all Availability Zones
-    #   in AWS Regions where Amazon EFS is available.
+    #   in Amazon Web Services Regions where Amazon EFS is available.
     #
     #    </note>
     #
@@ -445,8 +453,8 @@ module Aws::EFS
     #   Default is `false`. However, if you specify an
     #   `AvailabilityZoneName`, the default is `true`.
     #
-    #   <note markdown="1"> AWS Backup is not available in all AWS Regions where Amazon EFS is
-    #   available.
+    #   <note markdown="1"> Backup is not available in all Amazon Web Services Regionswhere
+    #   Amazon EFS is available.
     #
     #    </note>
     #
@@ -456,10 +464,16 @@ module Aws::EFS
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A value that specifies to create one or more tags associated with
-    #   the file system. Each tag is a user-defined key-value pair. Name
-    #   your file system on creation by including a
-    #   `"Key":"Name","Value":"\{value\}"` key-value pair.
+    #   Use to create one or more tags associated with the file system. Each
+    #   tag is a user-defined key-value pair. Name your file system on
+    #   creation by including a `"Key":"Name","Value":"\{value\}"` key-value
+    #   pair. Each key must be unique. For more information, see [Tagging
+    #   Amazon Web Services resources][1] in the *Amazon Web Services
+    #   General Reference Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemRequest AWS API Documentation
@@ -793,11 +807,15 @@ module Aws::EFS
     #       }
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   (Optional) You can use `NextToken` in a subsequent request to fetch
+    #   the next page of Amazon Web Services account preferences if the
+    #   response payload was paginated.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Max results used for pagination.
+    #   (Optional) When retrieving account preferences, you can optionally
+    #   specify the `MaxItems` parameter to limit the number of objects
+    #   returned in a response. The default value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccountPreferencesRequest AWS API Documentation
@@ -810,10 +828,15 @@ module Aws::EFS
     end
 
     # @!attribute [rw] resource_id_preference
+    #   Describes the resource ID preference setting for the Amazon Web
+    #   Services account associated with the user making the request, in the
+    #   current Amazon Web Services Region.
     #   @return [Types::ResourceIdPreference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   Present if there are more records than returned in the response. You
+    #   can use the `NextToken` in the subsequent request to fetch the
+    #   additional descriptions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccountPreferencesResponse AWS API Documentation
@@ -1156,9 +1179,9 @@ module Aws::EFS
     # A description of the file system.
     #
     # @!attribute [rw] owner_id
-    #   The AWS account that created the file system. If the file system was
-    #   created by an IAM user, the parent account to which the user belongs
-    #   is the owner.
+    #   The Amazon Web Services account that created the file system. If the
+    #   file system was created by an IAM user, the parent account to which
+    #   the user belongs is the owner.
     #   @return [String]
     #
     # @!attribute [rw] creation_token
@@ -1220,8 +1243,8 @@ module Aws::EFS
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of an AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) that was used to protect the encrypted file system.
+    #   The ID of an Key Management Service customer master key (CMK) that
+    #   was used to protect the encrypted file system.
     #   @return [String]
     #
     # @!attribute [rw] throughput_mode
@@ -1240,10 +1263,10 @@ module Aws::EFS
     #   @return [Float]
     #
     # @!attribute [rw] availability_zone_name
-    #   Describes the AWS Availability Zone in which the file system is
-    #   located, and is valid only for file systems using One Zone storage
-    #   classes. For more information, see [Using EFS storage classes][1] in
-    #   the *Amazon EFS User Guide*.
+    #   Describes the Amazon Web Services Availability Zone in which the
+    #   file system is located, and is valid only for file systems using One
+    #   Zone storage classes. For more information, see [Using EFS storage
+    #   classes][1] in the *Amazon EFS User Guide*.
     #
     #
     #
@@ -1253,8 +1276,9 @@ module Aws::EFS
     # @!attribute [rw] availability_zone_id
     #   The unique and consistent identifier of the Availability Zone in
     #   which the file system's One Zone storage classes exist. For
-    #   example, `use1-az1` is an Availability Zone ID for the us-east-1 AWS
-    #   Region, and it has the same location in every AWS account.
+    #   example, `use1-az1` is an Availability Zone ID for the us-east-1
+    #   Amazon Web Services Region, and it has the same location in every
+    #   Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1303,8 +1327,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the AWS account has already created the maximum number of
-    # file systems allowed per account.
+    # Returned if the Amazon Web Services account has already created the
+    # maximum number of file systems allowed per account.
     #
     # @!attribute [rw] error_code
     #   @return [String]
@@ -1322,7 +1346,7 @@ module Aws::EFS
     end
 
     # Returned if the specified `FileSystemId` value doesn't exist in the
-    # requester's AWS account.
+    # requester's Amazon Web Services account.
     #
     # @!attribute [rw] error_code
     #   @return [String]
@@ -1512,8 +1536,8 @@ module Aws::EFS
     end
 
     # @!attribute [rw] lifecycle_policies
-    #   An array of lifecycle management policies. Currently, EFS supports a
-    #   maximum of one policy per file system.
+    #   An array of lifecycle management policies. EFS supports a maximum of
+    #   one policy per file system.
     #   @return [Array<Types::LifecyclePolicy>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecycleConfigurationDescription AWS API Documentation
@@ -1532,19 +1556,26 @@ module Aws::EFS
     #
     #       {
     #         transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
+    #         transition_to_primary_storage_class: "AFTER_1_ACCESS", # accepts AFTER_1_ACCESS
     #       }
     #
     # @!attribute [rw] transition_to_ia
-    #   A value that describes the period of time that a file is not
-    #   accessed, after which it transitions to the IA storage class.
-    #   Metadata operations such as listing the contents of a directory
-    #   don't count as file access events.
+    #   Describes the period of time that a file is not accessed, after
+    #   which it transitions to the IA storage class. Metadata operations
+    #   such as listing the contents of a directory don't count as file
+    #   access events.
+    #   @return [String]
+    #
+    # @!attribute [rw] transition_to_primary_storage_class
+    #   Describes the policy used to transition a file from infequent access
+    #   storage to primary storage.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecyclePolicy AWS API Documentation
     #
     class LifecyclePolicy < Struct.new(
-      :transition_to_ia)
+      :transition_to_ia,
+      :transition_to_primary_storage_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1650,7 +1681,7 @@ module Aws::EFS
     # Provides a description of a mount target.
     #
     # @!attribute [rw] owner_id
-    #   AWS account ID that owns the resource.
+    #   Amazon Web Services account ID that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] mount_target_id
@@ -1682,16 +1713,17 @@ module Aws::EFS
     # @!attribute [rw] availability_zone_id
     #   The unique and consistent identifier of the Availability Zone that
     #   the mount target resides in. For example, `use1-az1` is an AZ ID for
-    #   the us-east-1 Region and it has the same location in every AWS
-    #   account.
+    #   the us-east-1 Region and it has the same location in every Amazon
+    #   Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_name
     #   The name of the Availability Zone in which the mount target is
     #   located. Availability Zones are independently mapped to names for
-    #   each AWS account. For example, the Availability Zone `us-east-1a`
-    #   for your AWS account might not be the same location as `us-east-1a`
-    #   for another AWS account.
+    #   each Amazon Web Services account. For example, the Availability Zone
+    #   `us-east-1a` for your Amazon Web Services account might not be the
+    #   same location as `us-east-1a` for another Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -1717,7 +1749,7 @@ module Aws::EFS
     end
 
     # Returned if there is no mount target with the specified ID found in
-    # the caller's account.
+    # the caller's Amazon Web Services account.
     #
     # @!attribute [rw] error_code
     #   @return [String]
@@ -1735,11 +1767,11 @@ module Aws::EFS
     end
 
     # The calling account has reached the limit for elastic network
-    # interfaces for the specific AWS Region. The client should try to
-    # delete some elastic network interfaces or get the account limit
-    # raised. For more information, see [Amazon VPC Limits][1] in the
-    # <i>Amazon VPC User Guide </i> (see the Network interfaces per VPC
-    # entry in the table).
+    # interfaces for the specific Amazon Web Services Region. The client
+    # should try to delete some elastic network interfaces or get the
+    # account limit raised. For more information, see [Amazon VPC Limits][1]
+    # in the <i>Amazon VPC User Guide </i> (see the Network interfaces per
+    # VPC entry in the table).
     #
     #
     #
@@ -1842,8 +1874,10 @@ module Aws::EFS
     #       }
     #
     # @!attribute [rw] resource_id_type
-    #   A preference indicating a choice to use 63bit/32bit IDs for all
-    #   applicable resources.
+    #   Specifies the EFS resource ID preference to set for the user's
+    #   Amazon Web Services account, in the current Amazon Web Services
+    #   Region, either `LONG_ID` (17 characters), or `SHORT_ID` (8
+    #   characters).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutAccountPreferencesRequest AWS API Documentation
@@ -1855,6 +1889,9 @@ module Aws::EFS
     end
 
     # @!attribute [rw] resource_id_preference
+    #   Describes the resource type and its ID preference for the user's
+    #   Amazon Web Services account, in the current Amazon Web Services
+    #   Region.
     #   @return [Types::ResourceIdPreference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutAccountPreferencesResponse AWS API Documentation
@@ -1947,6 +1984,7 @@ module Aws::EFS
     #         lifecycle_policies: [ # required
     #           {
     #             transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
+    #             transition_to_primary_storage_class: "AFTER_1_ACCESS", # accepts AFTER_1_ACCESS
     #           },
     #         ],
     #       }
@@ -1972,13 +2010,18 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Describes the resource type and its ID preference for the user's
+    # Amazon Web Services account, in the current Amazon Web Services
+    # Region.
+    #
     # @!attribute [rw] resource_id_type
-    #   A preference indicating a choice to use 63bit/32bit IDs for all
-    #   applicable resources.
+    #   Identifies the EFS resource ID preference, either `LONG_ID` (17
+    #   characters) or `SHORT_ID` (8 characters).
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   EFS resources to which a preference applies to.
+    #   Identifies the Amazon EFS resources to which the ID preference
+    #   setting applies, `FILE_SYSTEM` and `MOUNT_TARGET`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ResourceIdPreference AWS API Documentation
@@ -2274,8 +2317,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the AWS Backup service is not available in the Region in
-    # which the request was made.
+    # Returned if the Backup service is not available in the Amazon Web
+    # Services Region in which the request was made.
     #
     # @!attribute [rw] error_code
     #   @return [String]

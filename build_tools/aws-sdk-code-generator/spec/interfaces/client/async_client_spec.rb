@@ -9,8 +9,6 @@ describe 'Client Interface:' do
       SpecHelper.generate_service(['Async'], multiple_files: false)
     end
 
-    if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
-
       let(:output_stream) {
         [
           { message_type: 'event', event_type: :baz_result, result: { details: [ "foo" ]}}
@@ -151,10 +149,11 @@ describe 'Client Interface:' do
           output_event_stream_handler: output)
         input.signal_end_stream
       end
-    else
 
       it 'raises error when initializing AsyncClient' do
         expected_msg = "Must include http/2 gem to use AsyncClient instances."
+        allow(Kernel).to receive(:const_defined?)
+          .with('HTTP2').and_return(false)
         expect {
           Async::AsyncClient.new
         }.to raise_error(RuntimeError, expected_msg)
@@ -162,4 +161,3 @@ describe 'Client Interface:' do
 
     end
   end
-end

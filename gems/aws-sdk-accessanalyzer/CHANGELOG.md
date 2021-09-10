@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-09-02)
+------------------
+
+* Feature - Updates service API, documentation, and paginators to support multi-region access points from Amazon S3.
+
+1.22.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2021-07-30)
 ------------------
 

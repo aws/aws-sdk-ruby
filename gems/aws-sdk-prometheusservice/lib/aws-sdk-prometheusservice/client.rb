@@ -340,10 +340,14 @@ module Aws::PrometheusService
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   Optional, user-provided tags for this workspace.
+    #
     # @return [Types::CreateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkspaceResponse#arn #arn} => String
     #   * {Types::CreateWorkspaceResponse#status #status} => Types::WorkspaceStatus
+    #   * {Types::CreateWorkspaceResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateWorkspaceResponse#workspace_id #workspace_id} => String
     #
     # @example Request syntax with placeholder values
@@ -351,12 +355,17 @@ module Aws::PrometheusService
     #   resp = client.create_workspace({
     #     alias: "WorkspaceAlias",
     #     client_token: "IdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
     #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #   resp.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspace AWS API Documentation
@@ -420,6 +429,8 @@ module Aws::PrometheusService
     #   resp.workspace.created_at #=> Time
     #   resp.workspace.prometheus_endpoint #=> String
     #   resp.workspace.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED"
+    #   resp.workspace.tags #=> Hash
+    #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeWorkspace AWS API Documentation
@@ -428,6 +439,35 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def describe_workspace(params = {}, options = {})
       req = build_request(:describe_workspace, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags you have assigned to the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -469,6 +509,8 @@ module Aws::PrometheusService
     #   resp.workspaces[0].arn #=> String
     #   resp.workspaces[0].created_at #=> Time
     #   resp.workspaces[0].status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED"
+    #   resp.workspaces[0].tags #=> Hash
+    #   resp.workspaces[0].tags["TagKey"] #=> String
     #   resp.workspaces[0].workspace_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListWorkspaces AWS API Documentation
@@ -477,6 +519,60 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def list_workspaces(params = {}, options = {})
       req = build_request(:list_workspaces, params)
+      req.send_request(options)
+    end
+
+    # Creates tags for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The list of tags assigned to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   One or more tag keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -527,7 +623,7 @@ module Aws::PrometheusService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

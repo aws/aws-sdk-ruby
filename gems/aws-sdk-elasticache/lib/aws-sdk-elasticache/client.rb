@@ -8835,14 +8835,16 @@ module Aws::ElastiCache
     #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
     # @option params [Array<String>] :user_group_ids_to_add
-    #   The user group you are associating with the replication group.
+    #   The ID of the user group you are associating with the replication
+    #   group.
     #
     # @option params [Array<String>] :user_group_ids_to_remove
-    #   The user group to remove, meaning the users in the group no longer can
-    #   access the replication group.
+    #   The ID of the user group to disassociate from the replication group,
+    #   meaning the users in the group no longer can access the replication
+    #   group.
     #
     # @option params [Boolean] :remove_user_groups
-    #   Removes the user groups that can access this replication group.
+    #   Removes the user group associated with this replication group.
     #
     # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
     #   Specifies the destination, format and type of the logs.
@@ -10095,7 +10097,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

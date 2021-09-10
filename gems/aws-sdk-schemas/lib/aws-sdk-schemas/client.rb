@@ -333,6 +333,8 @@ module Aws::Schemas
     #
     # @option params [required, String] :source_arn
     #
+    # @option params [Boolean] :cross_account
+    #
     # @option params [Hash<String,String>] :tags
     #   Key-value pairs associated with a resource.
     #
@@ -343,6 +345,7 @@ module Aws::Schemas
     #   * {Types::CreateDiscovererResponse#discoverer_id #discoverer_id} => String
     #   * {Types::CreateDiscovererResponse#source_arn #source_arn} => String
     #   * {Types::CreateDiscovererResponse#state #state} => String
+    #   * {Types::CreateDiscovererResponse#cross_account #cross_account} => Boolean
     #   * {Types::CreateDiscovererResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -350,6 +353,7 @@ module Aws::Schemas
     #   resp = client.create_discoverer({
     #     description: "__stringMin0Max256",
     #     source_arn: "__stringMin20Max1600", # required
+    #     cross_account: false,
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -362,6 +366,7 @@ module Aws::Schemas
     #   resp.discoverer_id #=> String
     #   resp.source_arn #=> String
     #   resp.state #=> String, one of "STARTED", "STOPPED"
+    #   resp.cross_account #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -653,6 +658,7 @@ module Aws::Schemas
     #   * {Types::DescribeDiscovererResponse#discoverer_id #discoverer_id} => String
     #   * {Types::DescribeDiscovererResponse#source_arn #source_arn} => String
     #   * {Types::DescribeDiscovererResponse#state #state} => String
+    #   * {Types::DescribeDiscovererResponse#cross_account #cross_account} => Boolean
     #   * {Types::DescribeDiscovererResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -668,6 +674,7 @@ module Aws::Schemas
     #   resp.discoverer_id #=> String
     #   resp.source_arn #=> String
     #   resp.state #=> String, one of "STARTED", "STOPPED"
+    #   resp.cross_account #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -892,6 +899,7 @@ module Aws::Schemas
     #   resp.discoverers[0].discoverer_id #=> String
     #   resp.discoverers[0].source_arn #=> String
     #   resp.discoverers[0].state #=> String, one of "STARTED", "STOPPED"
+    #   resp.discoverers[0].cross_account #=> Boolean
     #   resp.discoverers[0].tags #=> Hash
     #   resp.discoverers[0].tags["__string"] #=> String
     #   resp.next_token #=> String
@@ -1309,6 +1317,8 @@ module Aws::Schemas
     #
     # @option params [required, String] :discoverer_id
     #
+    # @option params [Boolean] :cross_account
+    #
     # @return [Types::UpdateDiscovererResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDiscovererResponse#description #description} => String
@@ -1316,6 +1326,7 @@ module Aws::Schemas
     #   * {Types::UpdateDiscovererResponse#discoverer_id #discoverer_id} => String
     #   * {Types::UpdateDiscovererResponse#source_arn #source_arn} => String
     #   * {Types::UpdateDiscovererResponse#state #state} => String
+    #   * {Types::UpdateDiscovererResponse#cross_account #cross_account} => Boolean
     #   * {Types::UpdateDiscovererResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1323,6 +1334,7 @@ module Aws::Schemas
     #   resp = client.update_discoverer({
     #     description: "__stringMin0Max256",
     #     discoverer_id: "__string", # required
+    #     cross_account: false,
     #   })
     #
     # @example Response structure
@@ -1332,6 +1344,7 @@ module Aws::Schemas
     #   resp.discoverer_id #=> String
     #   resp.source_arn #=> String
     #   resp.state #=> String, one of "STARTED", "STOPPED"
+    #   resp.cross_account #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -1501,7 +1514,7 @@ module Aws::Schemas
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-schemas'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

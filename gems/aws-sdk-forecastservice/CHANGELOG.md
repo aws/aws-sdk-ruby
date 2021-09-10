@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-09-07)
+------------------
+
+* Feature - Predictor creation now supports selecting an accuracy metric to optimize in AutoML and hyperparameter optimization. This release adds additional accuracy metrics for predictors - AverageWeightedQuantileLoss, MAPE and MASE.
+
+1.24.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.23.0 (2021-07-30)
 ------------------
 

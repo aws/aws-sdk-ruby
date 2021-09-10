@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-09-08)
+------------------
+
+* Feature - Amazon MSK has added a new API that allows you to update the encrypting and authentication settings for an existing cluster.
+
+1.39.0 (2021-09-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2021-07-30)
 ------------------
 

@@ -33,7 +33,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] tags_list
-    #   Contains a list of CloudTrail tags, up to a limit of 50
+    #   Contains a list of tags, up to a limit of 50
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTagsRequest AWS API Documentation
@@ -45,18 +45,18 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # Returns the objects or data listed below if successful. Otherwise,
-    # returns an error.
+    # Returns the objects or data if successful. Otherwise, returns an
+    # error.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTagsResponse AWS API Documentation
     #
     class AddTagsResponse < Aws::EmptyStructure; end
 
     # Advanced event selectors let you create fine-grained selectors for the
-    # following AWS CloudTrail event record ﬁelds. They help you control
-    # costs by logging only those events that are important to you. For more
+    # following CloudTrail event record ﬁelds. They help you control costs
+    # by logging only those events that are important to you. For more
     # information about advanced event selectors, see [Logging data events
-    # for trails][1] in the *AWS CloudTrail User Guide*.
+    # for trails][1] in the *CloudTrail User Guide*.
     #
     # * `readOnly`
     #
@@ -144,8 +144,8 @@ module Aws::CloudTrail
     #
     #   * <b> <code>eventName</code> </b> - Can use any operator. You can
     #     use it to ﬁlter in or ﬁlter out any data event logged to
-    #     CloudTrail, such as `PutBucket`. You can have multiple values for
-    #     this ﬁeld, separated by commas.
+    #     CloudTrail, such as `PutBucket` or `GetSnapshotBlock`. You can
+    #     have multiple values for this ﬁeld, separated by commas.
     #
     #   * <b> <code>eventCategory</code> </b> - This is required. It must be
     #     set to `Equals`, and the value must be `Management` or `Data`.
@@ -153,11 +153,12 @@ module Aws::CloudTrail
     #   * <b> <code>resources.type</code> </b> - This ﬁeld is required.
     #     `resources.type` can only use the `Equals` operator, and the value
     #     can be one of the following: `AWS::S3::Object`,
-    #     `AWS::Lambda::Function`, `AWS::DynamoDB::Table`,
-    #     `AWS::S3Outposts::Object`, `AWS::ManagedBlockchain::Node`, or
-    #     `AWS::S3ObjectLambda::AccessPoint`. You can have only one
-    #     `resources.type` ﬁeld per selector. To log data events on more
-    #     than one resource type, add another selector.
+    #     `AWS::S3::AccessPoint`, `AWS::Lambda::Function`,
+    #     `AWS::DynamoDB::Table`, `AWS::S3Outposts::Object`,
+    #     `AWS::ManagedBlockchain::Node`,
+    #     `AWS::S3ObjectLambda::AccessPoint`, or `AWS::EC2::Snapshot`. You
+    #     can have only one `resources.type` ﬁeld per selector. To log data
+    #     events on more than one resource type, add another selector.
     #
     #   * <b> <code>resources.ARN</code> </b> - You can use any operator
     #     with resources.ARN, but if you use `Equals` or `NotEquals`, the
@@ -168,17 +169,30 @@ module Aws::CloudTrail
     #     for all objects in a specific S3 bucket, use the `StartsWith`
     #     operator, and include only the bucket ARN as the matching value.
     #
-    #     The trailing slash is intentional; do not exclude it.
+    #     The trailing slash is intentional; do not exclude it. Replace the
+    #     text between less than and greater than symbols (&lt;&gt;) with
+    #     resource-specific information.
     #
-    #     * `arn:partition:s3:::bucket_name/`
+    #     * `arn:<partition>:s3:::<bucket_name>/`
     #
-    #     * `arn:partition:s3:::bucket_name/object_or_file_name/`
+    #     * `arn:<partition>:s3:::<bucket_name>/<object_path>/`
+    #
+    #     When `resources.type` equals `AWS::S3::AccessPoint`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in one
+    #     of the following formats. To log events on all objects in an S3
+    #     access point, we recommend that you use only the access point ARN,
+    #     don’t include the object path, and use the `StartsWith` or
+    #     `NotStartsWith` operators.
+    #
+    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>`
+    #
+    #     * `arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path>`
     #
     #     When resources.type equals `AWS::Lambda::Function`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:partition:lambda:region:account_ID:function:function_name`
+    #     * `arn:<partition>:lambda:<region>:<account_ID>:function:<function_name>`
     #
     #     ^
     #
@@ -186,7 +200,7 @@ module Aws::CloudTrail
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:partition:dynamodb:region:account_ID:table:table_name`
+    #     * `arn:<partition>:dynamodb:<region>:<account_ID>:table:<table_name>`
     #
     #     ^
     #
@@ -194,7 +208,7 @@ module Aws::CloudTrail
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:partition:s3-outposts:region:>account_ID:object_path`
+    #     * `arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path>`
     #
     #     ^
     #
@@ -202,7 +216,7 @@ module Aws::CloudTrail
     #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
     #     the following format:
     #
-    #     * `arn:partition:managedblockchain:region:account_ID:nodes/node_ID`
+    #     * `arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID>`
     #
     #     ^
     #
@@ -210,7 +224,15 @@ module Aws::CloudTrail
     #     and the operator is set to `Equals` or `NotEquals`, the ARN must
     #     be in the following format:
     #
-    #     * `arn:partition:s3-object-lambda:region:account_ID:accesspoint/access_point_name`
+    #     * `arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::EC2::Snapshot`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:ec2:<region>::snapshot/<snapshot_ID>`
     #
     #     ^
     #   @return [String]
@@ -261,8 +283,8 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # This exception is thrown when an operation is called with an invalid
-    # trail ARN. The format of a trail ARN is:
+    # This exception is thrown when an operation is called with a trail ARN
+    # that is not valid. The following is the format of a trail ARN.
     #
     # `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -271,9 +293,9 @@ module Aws::CloudTrail
     class CloudTrailARNInvalidException < Aws::EmptyStructure; end
 
     # This exception is thrown when trusted access has not been enabled
-    # between AWS CloudTrail and AWS Organizations. For more information,
-    # see [Enabling Trusted Access with Other AWS Services][1] and [Prepare
-    # For Creating a Trail For Your Organization][2].
+    # between CloudTrail and Organizations. For more information, see
+    # [Enabling Trusted Access with Other Amazon Web Services Services][1]
+    # and [Prepare For Creating a Trail For Your Organization][2].
     #
     #
     #
@@ -287,7 +309,7 @@ module Aws::CloudTrail
     # This exception is thrown when a call results in the
     # `InvalidClientTokenId` error code. This can occur when you are
     # creating or updating a trail to send notifications to an Amazon SNS
-    # topic that is in a suspended AWS account.
+    # topic that is in a suspended Amazon Web Services account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudTrailInvalidClientTokenIdException AWS API Documentation
     #
@@ -346,7 +368,7 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #   @return [String]
@@ -393,7 +415,7 @@ module Aws::CloudTrail
     #   default is false.
     #
     #   <note markdown="1"> When you disable log file integrity validation, the chain of digest
-    #   files is broken after one hour. CloudTrail will not create digest
+    #   files is broken after one hour. CloudTrail does not create digest
     #   files for log files that were delivered during a period in which log
     #   file integrity validation was disabled. For example, if you enable
     #   log file integrity validation at noon on January 1, disable it at
@@ -409,7 +431,7 @@ module Aws::CloudTrail
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
     #   logs will be delivered. Not required unless you specify
-    #   CloudWatchLogsRoleArn.
+    #   `CloudWatchLogsRoleArn`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
@@ -423,6 +445,10 @@ module Aws::CloudTrail
     #   fully specified ARN to an alias, a fully specified ARN to a key, or
     #   a globally unique identifier.
     #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the
+    #   *Key Management Service Developer Guide*.
+    #
     #   Examples:
     #
     #   * alias/MyAliasName
@@ -432,14 +458,18 @@ module Aws::CloudTrail
     #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
     #
     #   * 12345678-1234-1234-1234-123456789012
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #   @return [String]
     #
     # @!attribute [rw] is_organization_trail
     #   Specifies whether the trail is created for all accounts in an
-    #   organization in AWS Organizations, or only for the current AWS
-    #   account. The default is false, and cannot be true unless the call is
-    #   made on behalf of an AWS account that is the master account for an
-    #   organization in AWS Organizations.
+    #   organization in Organizations, or only for the current Amazon Web
+    #   Services account. The default is false, and cannot be true unless
+    #   the call is made on behalf of an Amazon Web Services account that is
+    #   the management account for an organization in Organizations.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags_list
@@ -532,7 +562,7 @@ module Aws::CloudTrail
     # @!attribute [rw] kms_key_id
     #   Specifies the KMS key ID that encrypts the logs delivered by
     #   CloudTrail. The value is a fully specified ARN to a KMS key in the
-    #   format:
+    #   following format.
     #
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
@@ -561,7 +591,7 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # The Amazon S3 buckets, AWS Lambda functions, or Amazon DynamoDB tables
+    # The Amazon S3 buckets, Lambda functions, or Amazon DynamoDB tables
     # that you specify in your event selectors for your trail to log data
     # events. Data events provide information about the resource operations
     # performed on or within a resource itself. These are also known as data
@@ -599,22 +629,22 @@ module Aws::CloudTrail
     #     trail doesn’t log the event.
     #
     # The following example demonstrates how logging works when you
-    # configure logging of AWS Lambda data events for a Lambda function
-    # named *MyLambdaFunction*, but not for all AWS Lambda functions.
+    # configure logging of Lambda data events for a Lambda function named
+    # *MyLambdaFunction*, but not for all Lambda functions.
     #
     # 1.  A user runs a script that includes a call to the
     #     *MyLambdaFunction* function and the *MyOtherLambdaFunction*
     #     function.
     #
-    # 2.  The `Invoke` API operation on *MyLambdaFunction* is an AWS Lambda
-    #     API. It is recorded as a data event in CloudTrail. Because the
+    # 2.  The `Invoke` API operation on *MyLambdaFunction* is an Lambda API.
+    #     It is recorded as a data event in CloudTrail. Because the
     #     CloudTrail user specified logging data events for
     #     *MyLambdaFunction*, any invocations of that function are logged.
     #     The trail processes and logs the event.
     #
-    # 3.  The `Invoke` API operation on *MyOtherLambdaFunction* is an AWS
-    #     Lambda API. Because the CloudTrail user did not specify logging
-    #     data events for all Lambda functions, the `Invoke` operation for
+    # 3.  The `Invoke` API operation on *MyOtherLambdaFunction* is an Lambda
+    #     API. Because the CloudTrail user did not specify logging data
+    #     events for all Lambda functions, the `Invoke` operation for
     #     *MyOtherLambdaFunction* does not match the function specified for
     #     the trail. The trail doesn’t log the event.
     #
@@ -631,22 +661,24 @@ module Aws::CloudTrail
     #   specify `AWS::S3::Object`, `AWS::Lambda::Function`, or
     #   `AWS::DynamoDB::Table` resources.
     #
-    #   The `AWS::S3Outposts::Object`, `AWS::ManagedBlockchain::Node`, and
-    #   `AWS::S3ObjectLambda::AccessPoint` resource types are not valid in
-    #   basic event selectors. To log data events on these resource types,
-    #   use advanced event selectors.
+    #   The `AWS::S3Outposts::Object`, `AWS::ManagedBlockchain::Node`,
+    #   `AWS::S3ObjectLambda::AccessPoint`, and `AWS::EC2::Snapshot`
+    #   resource types are not valid in basic event selectors. To log data
+    #   events on these resource types, use advanced event selectors.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   An array of Amazon Resource Name (ARN) strings or partial ARN
     #   strings for the specified objects.
     #
-    #   * To log data events for all objects in all S3 buckets in your AWS
-    #     account, specify the prefix as `arn:aws:s3:::`.
+    #   * To log data events for all objects in all S3 buckets in your
+    #     Amazon Web Services account, specify the prefix as
+    #     `arn:aws:s3:::`.
     #
-    #     <note markdown="1"> This will also enable logging of data event activity performed by
-    #     any user or role in your AWS account, even if that activity is
-    #     performed on a bucket that belongs to another AWS account.
+    #     <note markdown="1"> This also enables logging of data event activity performed by any
+    #     user or role in your Amazon Web Services account, even if that
+    #     activity is performed on a bucket that belongs to another Amazon
+    #     Web Services account.
     #
     #      </note>
     #
@@ -660,12 +692,13 @@ module Aws::CloudTrail
     #     trail logs data events for objects in this S3 bucket that match
     #     the prefix.
     #
-    #   * To log data events for all Lambda functions in your AWS account,
-    #     specify the prefix as `arn:aws:lambda`.
+    #   * To log data events for all Lambda functions in your Amazon Web
+    #     Services account, specify the prefix as `arn:aws:lambda`.
     #
-    #     <note markdown="1"> This will also enable logging of `Invoke` activity performed by
-    #     any user or role in your AWS account, even if that activity is
-    #     performed on a function that belongs to another AWS account.
+    #     <note markdown="1"> This also enables logging of `Invoke` activity performed by any
+    #     user or role in your Amazon Web Services account, even if that
+    #     activity is performed on a function that belongs to another Amazon
+    #     Web Services account.
     #
     #      </note>
     #
@@ -682,8 +715,8 @@ module Aws::CloudTrail
     #
     #      </note>
     #
-    #   * To log data events for all DynamoDB tables in your AWS account,
-    #     specify the prefix as `arn:aws:dynamodb`.
+    #   * To log data events for all DynamoDB tables in your Amazon Web
+    #     Services account, specify the prefix as `arn:aws:dynamodb`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DataResource AWS API Documentation
@@ -706,7 +739,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
-    #   The format of a trail ARN is:
+    #   The following is the format of a trail ARN.
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
     #
@@ -787,7 +820,7 @@ module Aws::CloudTrail
     #   configuration. For example, `SNSTopicName` and `SNSTopicARN` are
     #   only returned in results if a trail is configured to send SNS
     #   notifications. Similarly, `KMSKeyId` only appears in results if a
-    #   trail's log files are encrypted with AWS KMS-managed keys.
+    #   trail's log files are encrypted with KMS customer managed keys.
     #   @return [Array<Types::Trail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsResponse AWS API Documentation
@@ -815,9 +848,9 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] access_key_id
-    #   The AWS access key ID that was used to sign the request. If the
-    #   request was made with temporary security credentials, this is the
-    #   access key ID of the temporary credentials.
+    #   The Amazon Web Services access key ID that was used to sign the
+    #   request. If the request was made with temporary security
+    #   credentials, this is the access key ID of the temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] event_time
@@ -825,7 +858,7 @@ module Aws::CloudTrail
     #   @return [Time]
     #
     # @!attribute [rw] event_source
-    #   The AWS service that the request was made to.
+    #   The Amazon Web Services service to which the request was made.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -899,15 +932,15 @@ module Aws::CloudTrail
     #   Specify if you want your event selector to include management events
     #   for your trail.
     #
-    #   For more information, see [Management Events][1] in the *AWS
-    #   CloudTrail User Guide*.
+    #   For more information, see [Management Events][1] in the *CloudTrail
+    #   User Guide*.
     #
     #   By default, the value is `true`.
     #
     #   The first copy of management events is free. You are charged for
     #   additional copies of management events that you are logging on any
     #   subsequent trail in the same region. For more information about
-    #   CloudTrail pricing, see [AWS CloudTrail Pricing][2].
+    #   CloudTrail pricing, see [CloudTrail Pricing][2].
     #
     #
     #
@@ -916,15 +949,15 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] data_resources
-    #   CloudTrail supports data event logging for Amazon S3 objects and AWS
-    #   Lambda functions with basic event selectors. You can specify up to
-    #   250 resources for an individual event selector, but the total number
-    #   of data resources cannot exceed 250 across all event selectors in a
-    #   trail. This limit does not apply if you configure resource logging
-    #   for all data events.
+    #   CloudTrail supports data event logging for Amazon S3 objects, Lambda
+    #   functions, and Amazon DynamoDB tables with basic event selectors.
+    #   You can specify up to 250 resources for an individual event
+    #   selector, but the total number of data resources cannot exceed 250
+    #   across all event selectors in a trail. This limit does not apply if
+    #   you configure resource logging for all data events.
     #
-    #   For more information, see [Data Events][1] and [Limits in AWS
-    #   CloudTrail][2] in the *AWS CloudTrail User Guide*.
+    #   For more information, see [Data Events][1] and [Limits in
+    #   CloudTrail][2] in the *CloudTrail User Guide*.
     #
     #
     #
@@ -935,10 +968,11 @@ module Aws::CloudTrail
     # @!attribute [rw] exclude_management_event_sources
     #   An optional list of service event sources from which you do not want
     #   management events to be logged on your trail. In this release, the
-    #   list can be empty (disables the filter), or it can filter out AWS
-    #   Key Management Service events by containing `"kms.amazonaws.com"`.
-    #   By default, `ExcludeManagementEventSources` is empty, and AWS KMS
-    #   events are included in events that are logged to your trail.
+    #   list can be empty (disables the filter), or it can filter out Key
+    #   Management Service or Amazon RDS Data API events by containing
+    #   `kms.amazonaws.com` or `rdsdata.amazonaws.com`. By default,
+    #   `ExcludeManagementEventSources` is empty, and KMS and Amazon RDS
+    #   Data API events are logged to your trail.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation
@@ -1111,7 +1145,7 @@ module Aws::CloudTrail
     #   Specifies the name or the CloudTrail ARN of the trail for which you
     #   are requesting status. To get the status of a shadow trail (a
     #   replication of the trail in another region), you must specify its
-    #   ARN. The format of a trail ARN is:
+    #   ARN. The following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -1128,20 +1162,21 @@ module Aws::CloudTrail
     # returns an error.
     #
     # @!attribute [rw] is_logging
-    #   Whether the CloudTrail is currently logging AWS API calls.
+    #   Whether the CloudTrail trail is currently logging Amazon Web
+    #   Services API calls.
     #   @return [Boolean]
     #
     # @!attribute [rw] latest_delivery_error
     #   Displays any Amazon S3 error that CloudTrail encountered when
     #   attempting to deliver log files to the designated bucket. For more
-    #   information see the topic [Error Responses][1] in the Amazon S3 API
+    #   information, see [Error Responses][1] in the Amazon S3 API
     #   Reference.
     #
     #   <note markdown="1"> This error occurs only when there is a problem with the destination
-    #   S3 bucket and will not occur for timeouts. To resolve the issue,
-    #   create a new bucket and call `UpdateTrail` to specify the new
-    #   bucket, or fix the existing objects so that CloudTrail can again
-    #   write to the bucket.
+    #   S3 bucket, and does not occur for requests that time out. To resolve
+    #   the issue, create a new bucket, and then call `UpdateTrail` to
+    #   specify the new bucket; or fix the existing objects so that
+    #   CloudTrail can again write to the bucket.
     #
     #    </note>
     #
@@ -1173,12 +1208,12 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] start_logging_time
     #   Specifies the most recent date and time when CloudTrail started
-    #   recording API calls for an AWS account.
+    #   recording API calls for an Amazon Web Services account.
     #   @return [Time]
     #
     # @!attribute [rw] stop_logging_time
     #   Specifies the most recent date and time when CloudTrail stopped
-    #   recording API calls for an AWS account.
+    #   recording API calls for an Amazon Web Services account.
     #   @return [Time]
     #
     # @!attribute [rw] latest_cloud_watch_logs_delivery_error
@@ -1199,14 +1234,14 @@ module Aws::CloudTrail
     # @!attribute [rw] latest_digest_delivery_error
     #   Displays any Amazon S3 error that CloudTrail encountered when
     #   attempting to deliver a digest file to the designated bucket. For
-    #   more information see the topic [Error Responses][1] in the Amazon S3
-    #   API Reference.
+    #   more information, see [Error Responses][1] in the Amazon S3 API
+    #   Reference.
     #
     #   <note markdown="1"> This error occurs only when there is a problem with the destination
-    #   S3 bucket and will not occur for timeouts. To resolve the issue,
-    #   create a new bucket and call `UpdateTrail` to specify the new
-    #   bucket, or fix the existing objects so that CloudTrail can again
-    #   write to the bucket.
+    #   S3 bucket, and does not occur for requests that time out. To resolve
+    #   the issue, create a new bucket, and then call `UpdateTrail` to
+    #   specify the new bucket; or fix the existing objects so that
+    #   CloudTrail can again write to the bucket.
     #
     #    </note>
     #
@@ -1282,8 +1317,8 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] insight_type
-    #   The type of insights to log on a trail. In this release, only
-    #   `ApiCallRateInsight` is supported as an insight type.
+    #   The type of Insights events to log on a trail. The valid Insights
+    #   type in this release is `ApiCallRateInsight`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsightSelector AWS API Documentation
@@ -1322,15 +1357,15 @@ module Aws::CloudTrail
     #
     class InsufficientS3BucketPolicyException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the policy on the SNS topic is not
-    # sufficient.
+    # This exception is thrown when the policy on the Amazon SNS topic is
+    # not sufficient.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientSnsTopicPolicyException AWS API Documentation
     #
     class InsufficientSnsTopicPolicyException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the provided CloudWatch log group is not
-    # valid.
+    # This exception is thrown when the provided CloudWatch Logs log group
+    # is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidCloudWatchLogsLogGroupArnException AWS API Documentation
     #
@@ -1373,7 +1408,7 @@ module Aws::CloudTrail
     #   selectors for a trail.
     #
     # * Specify a valid value for a parameter. For example, specifying the
-    #   `ReadWriteType` parameter with a value of `read-only` is invalid.
+    #   `ReadWriteType` parameter with a value of `read-only` is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventSelectorsException AWS API Documentation
     #
@@ -1395,27 +1430,27 @@ module Aws::CloudTrail
     #
     class InvalidInsightSelectorsException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the KMS key ARN is invalid.
+    # This exception is thrown when the KMS key ARN is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidKmsKeyIdException AWS API Documentation
     #
     class InvalidKmsKeyIdException < Aws::EmptyStructure; end
 
-    # Occurs when an invalid lookup attribute is specified.
+    # Occurs when a lookup attribute is specified that is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidLookupAttributesException AWS API Documentation
     #
     class InvalidLookupAttributesException < Aws::EmptyStructure; end
 
-    # This exception is thrown if the limit specified is invalid.
+    # This exception is thrown if the limit specified is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidMaxResultsException AWS API Documentation
     #
     class InvalidMaxResultsException < Aws::EmptyStructure; end
 
-    # Invalid token or token that was previously used in a request with
-    # different parameters. This exception is thrown if the token is
-    # invalid.
+    # A token that is not valid, or a token that was previously used in a
+    # request with different parameters. This exception is thrown if the
+    # token is not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidNextTokenException AWS API Documentation
     #
@@ -1456,8 +1491,8 @@ module Aws::CloudTrail
     #
     class InvalidTagParameterException < Aws::EmptyStructure; end
 
-    # Occurs if the timestamp values are invalid. Either the start time
-    # occurs after the end time or the time range is outside the range of
+    # Occurs if the timestamp values are not valid. Either the start time
+    # occurs after the end time, or the time range is outside the range of
     # possible values.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidTimeRangeException AWS API Documentation
@@ -1481,7 +1516,7 @@ module Aws::CloudTrail
     # * Be between 3 and 128 characters
     #
     # * Have no adjacent periods, underscores or dashes. Names like
-    #   `my-_namespace` and `my--namespace` are invalid.
+    #   `my-_namespace` and `my--namespace` are not valid.
     #
     # * Not be in IP address format (for example, 192.168.5.4)
     #
@@ -1502,10 +1537,10 @@ module Aws::CloudTrail
     #
     class KmsKeyDisabledException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the AWS KMS key does not exist, when the
-    # S3 bucket and the AWS KMS key are not in the same region, or when the
-    # AWS KMS key associated with the SNS topic either does not exist or is
-    # not in the same region.
+    # This exception is thrown when the KMS key does not exist, when the S3
+    # bucket and the KMS key are not in the same region, or when the KMS key
+    # associated with the Amazon SNS topic either does not exist or is not
+    # in the same region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/KmsKeyNotFoundException AWS API Documentation
     #
@@ -1584,7 +1619,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] resource_id_list
     #   Specifies a list of trail ARNs whose tags will be listed. The list
-    #   has a limit of 20 ARNs. The format of a trail ARN is:
+    #   has a limit of 20 ARNs. The following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [Array<String>]
@@ -1798,10 +1833,11 @@ module Aws::CloudTrail
     #
     class MaximumNumberOfTrailsExceededException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the AWS account making the request to
-    # create or update an organization trail is not the master account for
-    # an organization in AWS Organizations. For more information, see
-    # [Prepare For Creating a Trail For Your Organization][1].
+    # This exception is thrown when the Amazon Web Services account making
+    # the request to create or update an organization trail is not the
+    # management account for an organization in Organizations. For more
+    # information, see [Prepare For Creating a Trail For Your
+    # Organization][1].
     #
     #
     #
@@ -1818,9 +1854,9 @@ module Aws::CloudTrail
     #
     class OperationNotPermittedException < Aws::EmptyStructure; end
 
-    # This exception is thrown when AWS Organizations is not configured to
-    # support all features. All features must be enabled in AWS Organization
-    # to support creating an organization trail. For more information, see
+    # This exception is thrown when Organizations is not configured to
+    # support all features. All features must be enabled in Organizations to
+    # support creating an organization trail. For more information, see
     # [Prepare For Creating a Trail For Your Organization][1].
     #
     #
@@ -1831,9 +1867,10 @@ module Aws::CloudTrail
     #
     class OrganizationNotInAllFeaturesModeException < Aws::EmptyStructure; end
 
-    # This exception is thrown when the request is made from an AWS account
-    # that is not a member of an organization. To make this request, sign in
-    # using the credentials of an account that belongs to an organization.
+    # This exception is thrown when the request is made from an Amazon Web
+    # Services account that is not a member of an organization. To make this
+    # request, sign in using the credentials of an account that belongs to
+    # an organization.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/OrganizationsNotInUseException AWS API Documentation
     #
@@ -1916,11 +1953,11 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #
-    #   If you specify a trail ARN, it must be in the format:
+    #   If you specify a trail ARN, it must be in the following format.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -1942,8 +1979,8 @@ module Aws::CloudTrail
     #   `EventSelectors`, but not both. If you apply
     #   `AdvancedEventSelectors` to a trail, any existing `EventSelectors`
     #   are overwritten. For more information about advanced event
-    #   selectors, see [Logging data events for trails][1] in the *AWS
-    #   CloudTrail User Guide*.
+    #   selectors, see [Logging data events for trails][1] in the
+    #   *CloudTrail User Guide*.
     #
     #
     #
@@ -1962,7 +1999,7 @@ module Aws::CloudTrail
 
     # @!attribute [rw] trail_arn
     #   Specifies the ARN of the trail that was updated with event
-    #   selectors. The format of a trail ARN is:
+    #   selectors. The following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -2003,9 +2040,9 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] insight_selectors
-    #   A JSON string that contains the insight types you want to log on a
-    #   trail. In this release, only `ApiCallRateInsight` is supported as an
-    #   insight type.
+    #   A JSON string that contains the Insights types that you want to log
+    #   on a trail. The valid Insights type in this release is
+    #   `ApiCallRateInsight`.
     #   @return [Array<Types::InsightSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsRequest AWS API Documentation
@@ -2023,9 +2060,9 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] insight_selectors
-    #   A JSON string that contains the insight types you want to log on a
-    #   trail. In this release, only `ApiCallRateInsight` is supported as an
-    #   insight type.
+    #   A JSON string that contains the Insights event types that you want
+    #   to log on a trail. The valid Insights type in this release is
+    #   `ApiCallRateInsight`.
     #   @return [Array<Types::InsightSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsResponse AWS API Documentation
@@ -2085,9 +2122,10 @@ module Aws::CloudTrail
     #   The type of a resource referenced by the event returned. When the
     #   resource type cannot be determined, null is returned. Some examples
     #   of resource types are: **Instance** for EC2, **Trail** for
-    #   CloudTrail, **DBInstance** for RDS, and **AccessKey** for IAM. To
-    #   learn more about how to look up and filter events by the resource
-    #   types supported for a service, see [Filtering CloudTrail Events][1].
+    #   CloudTrail, **DBInstance** for Amazon RDS, and **AccessKey** for
+    #   IAM. To learn more about how to look up and filter events by the
+    #   resource types supported for a service, see [Filtering CloudTrail
+    #   Events][1].
     #
     #
     #
@@ -2148,8 +2186,8 @@ module Aws::CloudTrail
     #
     class S3BucketDoesNotExistException < Aws::EmptyStructure; end
 
-    # The request to CloudTrail to start logging AWS API calls for an
-    # account.
+    # The request to CloudTrail to start logging Amazon Web Services API
+    # calls for an account.
     #
     # @note When making an API call, you may pass StartLoggingRequest
     #   data as a hash:
@@ -2160,7 +2198,8 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail for which
-    #   CloudTrail logs AWS API calls. The format of a trail ARN is:
+    #   CloudTrail logs Amazon Web Services API calls. The following is the
+    #   format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -2180,8 +2219,8 @@ module Aws::CloudTrail
     #
     class StartLoggingResponse < Aws::EmptyStructure; end
 
-    # Passes the request to CloudTrail to stop logging AWS API calls for the
-    # specified account.
+    # Passes the request to CloudTrail to stop logging Amazon Web Services
+    # API calls for the specified account.
     #
     # @note When making an API call, you may pass StopLoggingRequest
     #   data as a hash:
@@ -2192,8 +2231,8 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] name
     #   Specifies the name or the CloudTrail ARN of the trail for which
-    #   CloudTrail will stop logging AWS API calls. The format of a trail
-    #   ARN is:
+    #   CloudTrail will stop logging Amazon Web Services API calls. The
+    #   following is the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -2270,7 +2309,7 @@ module Aws::CloudTrail
     # @!attribute [rw] s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
     #   bucket you have designated for log file delivery. For more
-    #   information, see [Finding Your CloudTrail Log Files][1].The maximum
+    #   information, see [Finding Your CloudTrail Log Files][1]. The maximum
     #   length is 200 characters.
     #
     #
@@ -2284,15 +2323,15 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] sns_topic_arn
     #   Specifies the ARN of the Amazon SNS topic that CloudTrail uses to
-    #   send notifications when log files are delivered. The format of a
-    #   topic ARN is:
+    #   send notifications when log files are delivered. The following is
+    #   the format of a topic ARN.
     #
     #   `arn:aws:sns:us-east-2:123456789012:MyTopic`
     #   @return [String]
     #
     # @!attribute [rw] include_global_service_events
-    #   Set to **True** to include AWS API calls from AWS global services
-    #   such as IAM. Otherwise, **False**.
+    #   Set to **True** to include Amazon Web Services API calls from Amazon
+    #   Web Services global services such as IAM. Otherwise, **False**.
     #   @return [Boolean]
     #
     # @!attribute [rw] is_multi_region_trail
@@ -2305,7 +2344,8 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] trail_arn
-    #   Specifies the ARN of the trail. The format of a trail ARN is:
+    #   Specifies the ARN of the trail. The following is the format of a
+    #   trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -2327,7 +2367,7 @@ module Aws::CloudTrail
     # @!attribute [rw] kms_key_id
     #   Specifies the KMS key ID that encrypts the logs delivered by
     #   CloudTrail. The value is a fully specified ARN to a KMS key in the
-    #   format:
+    #   following format.
     #
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
@@ -2386,7 +2426,7 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] home_region
-    #   The AWS region in which a trail was created.
+    #   The Amazon Web Services Region in which a trail was created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/TrailInfo AWS API Documentation
@@ -2450,11 +2490,11 @@ module Aws::CloudTrail
     #   * Be between 3 and 128 characters
     #
     #   * Have no adjacent periods, underscores or dashes. Names like
-    #     `my-_namespace` and `my--namespace` are invalid.
+    #     `my-_namespace` and `my--namespace` are not valid.
     #
     #   * Not be in IP address format (for example, 192.168.5.4)
     #
-    #   If `Name` is a trail ARN, it must be in the format:
+    #   If `Name` is a trail ARN, it must be in the following format.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -2505,7 +2545,7 @@ module Aws::CloudTrail
     #   false.
     #
     #   <note markdown="1"> When you disable log file integrity validation, the chain of digest
-    #   files is broken after one hour. CloudTrail will not create digest
+    #   files is broken after one hour. CloudTrail does not create digest
     #   files for log files that were delivered during a period in which log
     #   file integrity validation was disabled. For example, if you enable
     #   log file integrity validation at noon on January 1, disable it at
@@ -2520,8 +2560,8 @@ module Aws::CloudTrail
     # @!attribute [rw] cloud_watch_logs_log_group_arn
     #   Specifies a log group name using an Amazon Resource Name (ARN), a
     #   unique identifier that represents the log group to which CloudTrail
-    #   logs will be delivered. Not required unless you specify
-    #   CloudWatchLogsRoleArn.
+    #   logs are delivered. Not required unless you specify
+    #   `CloudWatchLogsRoleArn`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
@@ -2535,6 +2575,10 @@ module Aws::CloudTrail
     #   fully specified ARN to an alias, a fully specified ARN to a key, or
     #   a globally unique identifier.
     #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the
+    #   *Key Management Service Developer Guide*.
+    #
     #   Examples:
     #
     #   * alias/MyAliasName
@@ -2544,19 +2588,24 @@ module Aws::CloudTrail
     #   * arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
     #
     #   * 12345678-1234-1234-1234-123456789012
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #   @return [String]
     #
     # @!attribute [rw] is_organization_trail
     #   Specifies whether the trail is applied to all accounts in an
-    #   organization in AWS Organizations, or only for the current AWS
-    #   account. The default is false, and cannot be true unless the call is
-    #   made on behalf of an AWS account that is the master account for an
-    #   organization in AWS Organizations. If the trail is not an
-    #   organization trail and this is set to true, the trail will be
-    #   created in all AWS accounts that belong to the organization. If the
-    #   trail is an organization trail and this is set to false, the trail
-    #   will remain in the current AWS account but be deleted from all
-    #   member accounts in the organization.
+    #   organization in Organizations, or only for the current Amazon Web
+    #   Services account. The default is false, and cannot be true unless
+    #   the call is made on behalf of an Amazon Web Services account that is
+    #   the management account for an organization in Organizations. If the
+    #   trail is not an organization trail and this is set to `true`, the
+    #   trail will be created in all Amazon Web Services accounts that
+    #   belong to the organization. If the trail is an organization trail
+    #   and this is set to `false`, the trail will remain in the current
+    #   Amazon Web Services account but be deleted from all member accounts
+    #   in the organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailRequest AWS API Documentation
@@ -2592,7 +2641,7 @@ module Aws::CloudTrail
     # @!attribute [rw] s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
     #   bucket you have designated for log file delivery. For more
-    #   information, see [Finding Your CloudTrail Log Files][1].
+    #   information, see [Finding Your IAM Log Files][1].
     #
     #
     #
@@ -2600,13 +2649,13 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
-    #   This field is no longer in use. Use SnsTopicARN.
+    #   This field is no longer in use. Use UpdateTrailResponse$SnsTopicARN.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn
     #   Specifies the ARN of the Amazon SNS topic that CloudTrail uses to
-    #   send notifications when log files are delivered. The format of a
-    #   topic ARN is:
+    #   send notifications when log files are delivered. The following is
+    #   the format of a topic ARN.
     #
     #   `arn:aws:sns:us-east-2:123456789012:MyTopic`
     #   @return [String]
@@ -2621,8 +2670,8 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] trail_arn
-    #   Specifies the ARN of the trail that was updated. The format of a
-    #   trail ARN is:
+    #   Specifies the ARN of the trail that was updated. The following is
+    #   the format of a trail ARN.
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #   @return [String]
@@ -2633,7 +2682,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] cloud_watch_logs_log_group_arn
     #   Specifies the Amazon Resource Name (ARN) of the log group to which
-    #   CloudTrail logs will be delivered.
+    #   CloudTrail logs are delivered.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_role_arn
@@ -2644,7 +2693,7 @@ module Aws::CloudTrail
     # @!attribute [rw] kms_key_id
     #   Specifies the KMS key ID that encrypts the logs delivered by
     #   CloudTrail. The value is a fully specified ARN to a KMS key in the
-    #   format:
+    #   following format.
     #
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]

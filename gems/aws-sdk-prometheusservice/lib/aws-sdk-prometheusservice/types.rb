@@ -56,6 +56,9 @@ module Aws::PrometheusService
     #       {
     #         alias: "WorkspaceAlias",
     #         client_token: "IdempotencyToken",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] alias
@@ -71,11 +74,16 @@ module Aws::PrometheusService
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Optional, user-provided tags for this workspace.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspaceRequest AWS API Documentation
     #
     class CreateWorkspaceRequest < Struct.new(
       :alias,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -91,6 +99,10 @@ module Aws::PrometheusService
     #   CREATING).
     #   @return [Types::WorkspaceStatus]
     #
+    # @!attribute [rw] tags
+    #   The tags of this workspace.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] workspace_id
     #   The generated ID of the workspace that was just created.
     #   @return [String]
@@ -100,6 +112,7 @@ module Aws::PrometheusService
     class CreateWorkspaceResponse < Struct.new(
       :arn,
       :status,
+      :tags,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -186,6 +199,37 @@ module Aws::PrometheusService
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags assigned to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -304,6 +348,37 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags assigned to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -332,6 +407,35 @@ module Aws::PrometheusService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   One or more tag keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Represents the input of an UpdateWorkspaceAlias operation.
     #
@@ -438,6 +542,10 @@ module Aws::PrometheusService
     #   The status of this workspace.
     #   @return [Types::WorkspaceStatus]
     #
+    # @!attribute [rw] tags
+    #   The tags of this workspace.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] workspace_id
     #   Unique string identifying this workspace.
     #   @return [String]
@@ -450,6 +558,7 @@ module Aws::PrometheusService
       :created_at,
       :prometheus_endpoint,
       :status,
+      :tags,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -487,6 +596,10 @@ module Aws::PrometheusService
     #   The status of this workspace.
     #   @return [Types::WorkspaceStatus]
     #
+    # @!attribute [rw] tags
+    #   The tags of this workspace.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] workspace_id
     #   Unique string identifying this workspace.
     #   @return [String]
@@ -498,6 +611,7 @@ module Aws::PrometheusService
       :arn,
       :created_at,
       :status,
+      :tags,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure

@@ -414,6 +414,7 @@ module Aws
             'NetworkFirewall' => 'network-firewall',
             'NetworkManager' => 'networkmanager',
             'NimbleStudio' => 'nimble',
+            'OpenSearchService' => 'es',
             'OpsWorks' => 'opsworks',
             'OpsWorksCM' => 'opsworks-cm',
             'Organizations' => 'organizations',

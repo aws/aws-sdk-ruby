@@ -48,6 +48,6 @@ require_relative 'aws-sdk-memorydb/customizations'
 # @!group service
 module Aws::MemoryDB
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.2.0'
 
 end

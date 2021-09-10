@@ -43,6 +43,9 @@ module Aws::EKS
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     Compatibilities = Shapes::ListShape.new(name: 'Compatibilities')
     Compatibility = Shapes::StructureShape.new(name: 'Compatibility')
+    ConnectorConfigProvider = Shapes::StringShape.new(name: 'ConnectorConfigProvider')
+    ConnectorConfigRequest = Shapes::StructureShape.new(name: 'ConnectorConfigRequest')
+    ConnectorConfigResponse = Shapes::StructureShape.new(name: 'ConnectorConfigResponse')
     CreateAddonRequest = Shapes::StructureShape.new(name: 'CreateAddonRequest')
     CreateAddonResponse = Shapes::StructureShape.new(name: 'CreateAddonResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
@@ -59,6 +62,8 @@ module Aws::EKS
     DeleteFargateProfileResponse = Shapes::StructureShape.new(name: 'DeleteFargateProfileResponse')
     DeleteNodegroupRequest = Shapes::StructureShape.new(name: 'DeleteNodegroupRequest')
     DeleteNodegroupResponse = Shapes::StructureShape.new(name: 'DeleteNodegroupResponse')
+    DeregisterClusterRequest = Shapes::StructureShape.new(name: 'DeregisterClusterRequest')
+    DeregisterClusterResponse = Shapes::StructureShape.new(name: 'DeregisterClusterResponse')
     DescribeAddonRequest = Shapes::StructureShape.new(name: 'DescribeAddonRequest')
     DescribeAddonResponse = Shapes::StructureShape.new(name: 'DescribeAddonResponse')
     DescribeAddonVersionsRequest = Shapes::StructureShape.new(name: 'DescribeAddonVersionsRequest')
@@ -91,6 +96,7 @@ module Aws::EKS
     IdentityProviderConfig = Shapes::StructureShape.new(name: 'IdentityProviderConfig')
     IdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'IdentityProviderConfigResponse')
     IdentityProviderConfigs = Shapes::ListShape.new(name: 'IdentityProviderConfigs')
+    IncludeClustersList = Shapes::ListShape.new(name: 'IncludeClustersList')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     Issue = Shapes::StructureShape.new(name: 'Issue')
@@ -136,6 +142,8 @@ module Aws::EKS
     OidcIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'OidcIdentityProviderConfigRequest')
     PercentCapacity = Shapes::IntegerShape.new(name: 'PercentCapacity')
     Provider = Shapes::StructureShape.new(name: 'Provider')
+    RegisterClusterRequest = Shapes::StructureShape.new(name: 'RegisterClusterRequest')
+    RegisterClusterResponse = Shapes::StructureShape.new(name: 'RegisterClusterResponse')
     RemoteAccessConfig = Shapes::StructureShape.new(name: 'RemoteAccessConfig')
     ResolveConflicts = Shapes::StringShape.new(name: 'ResolveConflicts')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -278,6 +286,7 @@ module Aws::EKS
     Cluster.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Cluster.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
+    Cluster.add_member(:connector_config, Shapes::ShapeRef.new(shape: ConnectorConfigResponse, location_name: "connectorConfig"))
     Cluster.struct_class = Types::Cluster
 
     Compatibilities.member = Shapes::ShapeRef.new(shape: Compatibility)
@@ -286,6 +295,17 @@ module Aws::EKS
     Compatibility.add_member(:platform_versions, Shapes::ShapeRef.new(shape: StringList, location_name: "platformVersions"))
     Compatibility.add_member(:default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultVersion"))
     Compatibility.struct_class = Types::Compatibility
+
+    ConnectorConfigRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "roleArn"))
+    ConnectorConfigRequest.add_member(:provider, Shapes::ShapeRef.new(shape: ConnectorConfigProvider, required: true, location_name: "provider"))
+    ConnectorConfigRequest.struct_class = Types::ConnectorConfigRequest
+
+    ConnectorConfigResponse.add_member(:activation_id, Shapes::ShapeRef.new(shape: String, location_name: "activationId"))
+    ConnectorConfigResponse.add_member(:activation_code, Shapes::ShapeRef.new(shape: String, location_name: "activationCode"))
+    ConnectorConfigResponse.add_member(:activation_expiry, Shapes::ShapeRef.new(shape: Timestamp, location_name: "activationExpiry"))
+    ConnectorConfigResponse.add_member(:provider, Shapes::ShapeRef.new(shape: String, location_name: "provider"))
+    ConnectorConfigResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
+    ConnectorConfigResponse.struct_class = Types::ConnectorConfigResponse
 
     CreateAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     CreateAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "addonName"))
@@ -375,6 +395,12 @@ module Aws::EKS
 
     DeleteNodegroupResponse.add_member(:nodegroup, Shapes::ShapeRef.new(shape: Nodegroup, location_name: "nodegroup"))
     DeleteNodegroupResponse.struct_class = Types::DeleteNodegroupResponse
+
+    DeregisterClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DeregisterClusterRequest.struct_class = Types::DeregisterClusterRequest
+
+    DeregisterClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
+    DeregisterClusterResponse.struct_class = Types::DeregisterClusterResponse
 
     DescribeAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     DescribeAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "addonName"))
@@ -482,6 +508,8 @@ module Aws::EKS
 
     IdentityProviderConfigs.member = Shapes::ShapeRef.new(shape: IdentityProviderConfig)
 
+    IncludeClustersList.member = Shapes::ShapeRef.new(shape: String)
+
     InvalidParameterException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     InvalidParameterException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     InvalidParameterException.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "fargateProfileName"))
@@ -524,6 +552,7 @@ module Aws::EKS
 
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListClustersRequestMaxResults, location: "querystring", location_name: "maxResults"))
     ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListClustersRequest.add_member(:include, Shapes::ShapeRef.new(shape: IncludeClustersList, location: "querystring", location_name: "include"))
     ListClustersRequest.struct_class = Types::ListClustersRequest
 
     ListClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: StringList, location_name: "clusters"))
@@ -658,6 +687,14 @@ module Aws::EKS
 
     Provider.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "keyArn"))
     Provider.struct_class = Types::Provider
+
+    RegisterClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location_name: "name"))
+    RegisterClusterRequest.add_member(:connector_config, Shapes::ShapeRef.new(shape: ConnectorConfigRequest, required: true, location_name: "connectorConfig"))
+    RegisterClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RegisterClusterRequest.struct_class = Types::RegisterClusterRequest
+
+    RegisterClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
+    RegisterClusterResponse.struct_class = Types::RegisterClusterResponse
 
     RemoteAccessConfig.add_member(:ec2_ssh_key, Shapes::ShapeRef.new(shape: String, location_name: "ec2SshKey"))
     RemoteAccessConfig.add_member(:source_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "sourceSecurityGroups"))
@@ -977,6 +1014,19 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:deregister_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterCluster"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/cluster-registrations/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:describe_addon, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAddon"
         o.http_method = "GET"
@@ -1202,6 +1252,19 @@ module Aws::EKS
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:register_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/cluster-registrations"
+        o.input = Shapes::ShapeRef.new(shape: RegisterClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

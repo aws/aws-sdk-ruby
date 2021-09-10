@@ -1616,6 +1616,8 @@ module Aws::TranscribeService
     #   execution limit. If the field is false, Amazon Transcribe returns a
     #   `LimitExceededException` exception.
     #
+    #   Note that job queuing is enabled by default for call analytics jobs.
+    #
     #   If you specify the `AllowDeferredExecution` field, you must specify
     #   the `DataAccessRoleArn` field.
     #   @return [Boolean]
@@ -3220,6 +3222,9 @@ module Aws::TranscribeService
     #         output_bucket_name: "OutputBucketName", # required
     #         output_key: "OutputKey",
     #         output_encryption_kms_key_id: "KMSKeyId",
+    #         kms_encryption_context: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
     #         settings: {
     #           show_speaker_labels: false,
     #           max_speaker_labels: 1,
@@ -3351,6 +3356,12 @@ module Aws::TranscribeService
     #   specify an output location in the `OutputBucketName` parameter.
     #   @return [String]
     #
+    # @!attribute [rw] kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your
+    #   data.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] settings
     #   Optional settings for the medical transcription job.
     #   @return [Types::MedicalTranscriptionSetting]
@@ -3388,6 +3399,7 @@ module Aws::TranscribeService
       :output_bucket_name,
       :output_key,
       :output_encryption_kms_key_id,
+      :kms_encryption_context,
       :settings,
       :content_identification_type,
       :specialty,
@@ -3424,6 +3436,9 @@ module Aws::TranscribeService
     #         output_bucket_name: "OutputBucketName",
     #         output_key: "OutputKey",
     #         output_encryption_kms_key_id: "KMSKeyId",
+    #         kms_encryption_context: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
     #         settings: {
     #           vocabulary_name: "VocabularyName",
     #           show_speaker_labels: false,
@@ -3576,6 +3591,12 @@ module Aws::TranscribeService
     #   specify an output location in the `OutputBucketName` parameter.
     #   @return [String]
     #
+    # @!attribute [rw] kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your
+    #   data.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] settings
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
@@ -3631,6 +3652,7 @@ module Aws::TranscribeService
       :output_bucket_name,
       :output_key,
       :output_encryption_kms_key_id,
+      :kms_encryption_context,
       :settings,
       :model_settings,
       :job_execution_settings,

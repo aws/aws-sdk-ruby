@@ -49,6 +49,6 @@ require_relative 'aws-sdk-emr/customizations'
 # @!group service
 module Aws::EMR
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.52.0'
 
 end
