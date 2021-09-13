@@ -51,13 +51,13 @@ module Aws
       # @param [String] service The service to sign with.
       # @api private Use the static class methods instead.
       def signing_region(region, service)
-        service = get_partition(region)
-                  .fetch('services', {})
-                  .fetch(service, {})
-                  .fetch('endpoints', {})
-                  .fetch(region, {})
-                  .fetch('credentialScope', {})
-                  .fetch('region', region)
+        get_partition(region)
+          .fetch('services', {})
+          .fetch(service, {})
+          .fetch('endpoints', {})
+          .fetch(region, {})
+          .fetch('credentialScope', {})
+          .fetch('region', region)
       end
 
       # @param [String] region The region used to fetch the partition.
