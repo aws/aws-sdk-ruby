@@ -669,7 +669,7 @@ module Aws::EC2
     #     no_reboot: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -700,9 +700,11 @@ module Aws::EC2
     # @option options [Boolean] :no_reboot
     #   By default, Amazon EC2 attempts to shut down and reboot the instance
     #   before creating the image. If the `No Reboot` option is set, Amazon
-    #   EC2 doesn't shut down the instance before creating the image. When
-    #   this option is used, file system integrity on the created image can't
-    #   be guaranteed.
+    #   EC2 doesn't shut down the instance before creating the image. Without
+    #   a reboot, the AMI will be crash consistent (all the volumes are
+    #   snapshotted at the same time), but not application consistent (all the
+    #   operating system buffers are not flushed to disk before the snapshots
+    #   are created).
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the AMI and snapshots on creation. You can tag
     #   the AMI, the snapshots, or both.
@@ -710,9 +712,9 @@ module Aws::EC2
     #   * To tag the AMI, the value for `ResourceType` must be `image`.
     #
     #   * To tag the snapshots that are created of the root volume and of
-    #     other EBS volumes that are attached to the instance, the value for
-    #     `ResourceType` must be `snapshot`. The same tag is applied to all of
-    #     the snapshots that are created.
+    #     other Amazon EBS volumes that are attached to the instance, the
+    #     value for `ResourceType` must be `snapshot`. The same tag is applied
+    #     to all of the snapshots that are created.
     #
     #   If you specify other values for `ResourceType`, the request fails.
     #

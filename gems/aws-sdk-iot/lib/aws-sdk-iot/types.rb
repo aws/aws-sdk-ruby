@@ -276,6 +276,13 @@ module Aws::IoT
     #             "String" => "String",
     #           },
     #         },
+    #         open_search: {
+    #           role_arn: "AwsArn", # required
+    #           endpoint: "ElasticsearchEndpoint", # required
+    #           index: "ElasticsearchIndex", # required
+    #           type: "ElasticsearchType", # required
+    #           id: "ElasticsearchId", # required
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -330,6 +337,14 @@ module Aws::IoT
     #
     # @!attribute [rw] elasticsearch
     #   Write data to an Amazon Elasticsearch Service domain.
+    #
+    #   <note markdown="1"> This action is deprecated. Use the [OpenSearch action][1] instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html
     #   @return [Types::ElasticsearchAction]
     #
     # @!attribute [rw] salesforce
@@ -372,6 +387,10 @@ module Aws::IoT
     #   (Amazon MSK) or self-managed Apache Kafka cluster.
     #   @return [Types::KafkaAction]
     #
+    # @!attribute [rw] open_search
+    #   Write data to an Amazon OpenSearch Service domain.
+    #   @return [Types::OpenSearchAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -393,7 +412,8 @@ module Aws::IoT
       :step_functions,
       :timestream,
       :http,
-      :kafka)
+      :kafka,
+      :open_search)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5168,6 +5188,13 @@ module Aws::IoT
     #                   "String" => "String",
     #                 },
     #               },
+    #               open_search: {
+    #                 role_arn: "AwsArn", # required
+    #                 endpoint: "ElasticsearchEndpoint", # required
+    #                 index: "ElasticsearchIndex", # required
+    #                 type: "ElasticsearchType", # required
+    #                 id: "ElasticsearchId", # required
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -5338,6 +5365,13 @@ module Aws::IoT
     #               client_properties: { # required
     #                 "String" => "String",
     #               },
+    #             },
+    #             open_search: {
+    #               role_arn: "AwsArn", # required
+    #               endpoint: "ElasticsearchEndpoint", # required
+    #               index: "ElasticsearchIndex", # required
+    #               type: "ElasticsearchType", # required
+    #               id: "ElasticsearchId", # required
     #             },
     #           },
     #         },
@@ -8429,6 +8463,14 @@ module Aws::IoT
 
     # Describes an action that writes data to an Amazon Elasticsearch
     # Service domain.
+    #
+    # <note markdown="1"> This action is deprecated. Use the [OpenSearch action][1] instead.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html
     #
     # @note When making an API call, you may pass ElasticsearchAction
     #   data as a hash:
@@ -13889,6 +13931,50 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes an action that writes data to an Amazon OpenSearch Service
+    # domain.
+    #
+    # @note When making an API call, you may pass OpenSearchAction
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "AwsArn", # required
+    #         endpoint: "ElasticsearchEndpoint", # required
+    #         index: "ElasticsearchIndex", # required
+    #         type: "ElasticsearchType", # required
+    #         id: "ElasticsearchId", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role ARN that has access to OpenSearch.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint of your OpenSearch domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The OpenSearch index where you want to store your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of document you are storing.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the document you are storing.
+    #   @return [String]
+    #
+    class OpenSearchAction < Struct.new(
+      :role_arn,
+      :endpoint,
+      :index,
+      :type,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A certificate that has been transferred but not yet accepted.
     #
     # @!attribute [rw] certificate_arn
@@ -14851,6 +14937,13 @@ module Aws::IoT
     #                   "String" => "String",
     #                 },
     #               },
+    #               open_search: {
+    #                 role_arn: "AwsArn", # required
+    #                 endpoint: "ElasticsearchEndpoint", # required
+    #                 index: "ElasticsearchIndex", # required
+    #                 type: "ElasticsearchType", # required
+    #                 id: "ElasticsearchId", # required
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -15021,6 +15114,13 @@ module Aws::IoT
     #               client_properties: { # required
     #                 "String" => "String",
     #               },
+    #             },
+    #             open_search: {
+    #               role_arn: "AwsArn", # required
+    #               endpoint: "ElasticsearchEndpoint", # required
+    #               index: "ElasticsearchIndex", # required
+    #               type: "ElasticsearchType", # required
+    #               id: "ElasticsearchId", # required
     #             },
     #           },
     #         },
@@ -16724,7 +16824,9 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_reason
-    #   The reason why the client is disconnected.
+    #   The reason why the client is disconnected. If the thing has been
+    #   disconnected for approximately an hour, the `disconnectReason` value
+    #   might be missing.
     #   @return [String]
     #
     class ThingConnectivity < Struct.new(
@@ -17679,6 +17781,13 @@ module Aws::IoT
     #                 "String" => "String",
     #               },
     #             },
+    #             open_search: {
+    #               role_arn: "AwsArn", # required
+    #               endpoint: "ElasticsearchEndpoint", # required
+    #               index: "ElasticsearchIndex", # required
+    #               type: "ElasticsearchType", # required
+    #               id: "ElasticsearchId", # required
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -17849,6 +17958,13 @@ module Aws::IoT
     #             client_properties: { # required
     #               "String" => "String",
     #             },
+    #           },
+    #           open_search: {
+    #             role_arn: "AwsArn", # required
+    #             endpoint: "ElasticsearchEndpoint", # required
+    #             index: "ElasticsearchIndex", # required
+    #             type: "ElasticsearchType", # required
+    #             id: "ElasticsearchId", # required
     #           },
     #         },
     #       }

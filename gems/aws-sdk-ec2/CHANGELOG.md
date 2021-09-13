@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.262.0 (2021-09-13)
+------------------
+
+* Feature - Adds support for T3 instances on Amazon EC2 Dedicated Hosts.
+
 1.261.0 (2021-09-01)
 ------------------
 

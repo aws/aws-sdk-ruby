@@ -3203,6 +3203,13 @@ module Aws::IoT
     #               "String" => "String",
     #             },
     #           },
+    #           open_search: {
+    #             role_arn: "AwsArn", # required
+    #             endpoint: "ElasticsearchEndpoint", # required
+    #             index: "ElasticsearchIndex", # required
+    #             type: "ElasticsearchType", # required
+    #             id: "ElasticsearchId", # required
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -3373,6 +3380,13 @@ module Aws::IoT
     #           client_properties: { # required
     #             "String" => "String",
     #           },
+    #         },
+    #         open_search: {
+    #           role_arn: "AwsArn", # required
+    #           endpoint: "ElasticsearchEndpoint", # required
+    #           index: "ElasticsearchIndex", # required
+    #           type: "ElasticsearchType", # required
+    #           id: "ElasticsearchId", # required
     #         },
     #       },
     #     },
@@ -7034,6 +7048,11 @@ module Aws::IoT
     #   resp.rule.actions[0].kafka.partition #=> String
     #   resp.rule.actions[0].kafka.client_properties #=> Hash
     #   resp.rule.actions[0].kafka.client_properties["String"] #=> String
+    #   resp.rule.actions[0].open_search.role_arn #=> String
+    #   resp.rule.actions[0].open_search.endpoint #=> String
+    #   resp.rule.actions[0].open_search.index #=> String
+    #   resp.rule.actions[0].open_search.type #=> String
+    #   resp.rule.actions[0].open_search.id #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -7135,6 +7154,11 @@ module Aws::IoT
     #   resp.rule.error_action.kafka.partition #=> String
     #   resp.rule.error_action.kafka.client_properties #=> Hash
     #   resp.rule.error_action.kafka.client_properties["String"] #=> String
+    #   resp.rule.error_action.open_search.role_arn #=> String
+    #   resp.rule.error_action.open_search.endpoint #=> String
+    #   resp.rule.error_action.open_search.index #=> String
+    #   resp.rule.error_action.open_search.type #=> String
+    #   resp.rule.error_action.open_search.id #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -10822,6 +10846,13 @@ module Aws::IoT
     #               "String" => "String",
     #             },
     #           },
+    #           open_search: {
+    #             role_arn: "AwsArn", # required
+    #             endpoint: "ElasticsearchEndpoint", # required
+    #             index: "ElasticsearchIndex", # required
+    #             type: "ElasticsearchType", # required
+    #             id: "ElasticsearchId", # required
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -10992,6 +11023,13 @@ module Aws::IoT
     #           client_properties: { # required
     #             "String" => "String",
     #           },
+    #         },
+    #         open_search: {
+    #           role_arn: "AwsArn", # required
+    #           endpoint: "ElasticsearchEndpoint", # required
+    #           index: "ElasticsearchIndex", # required
+    #           type: "ElasticsearchType", # required
+    #           id: "ElasticsearchId", # required
     #         },
     #       },
     #     },
@@ -13290,7 +13328,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

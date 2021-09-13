@@ -816,6 +816,7 @@ module Aws::IoT
     OTAUpdateStatus = Shapes::StringShape.new(name: 'OTAUpdateStatus')
     OTAUpdateSummary = Shapes::StructureShape.new(name: 'OTAUpdateSummary')
     OTAUpdatesSummary = Shapes::ListShape.new(name: 'OTAUpdatesSummary')
+    OpenSearchAction = Shapes::StructureShape.new(name: 'OpenSearchAction')
     OptionalVersion = Shapes::IntegerShape.new(name: 'OptionalVersion')
     OutgoingCertificate = Shapes::StructureShape.new(name: 'OutgoingCertificate')
     OutgoingCertificates = Shapes::ListShape.new(name: 'OutgoingCertificates')
@@ -1262,6 +1263,7 @@ module Aws::IoT
     Action.add_member(:timestream, Shapes::ShapeRef.new(shape: TimestreamAction, location_name: "timestream"))
     Action.add_member(:http, Shapes::ShapeRef.new(shape: HttpAction, location_name: "http"))
     Action.add_member(:kafka, Shapes::ShapeRef.new(shape: KafkaAction, location_name: "kafka"))
+    Action.add_member(:open_search, Shapes::ShapeRef.new(shape: OpenSearchAction, location_name: "openSearch"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -3683,6 +3685,13 @@ module Aws::IoT
     OTAUpdateSummary.struct_class = Types::OTAUpdateSummary
 
     OTAUpdatesSummary.member = Shapes::ShapeRef.new(shape: OTAUpdateSummary)
+
+    OpenSearchAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    OpenSearchAction.add_member(:endpoint, Shapes::ShapeRef.new(shape: ElasticsearchEndpoint, required: true, location_name: "endpoint"))
+    OpenSearchAction.add_member(:index, Shapes::ShapeRef.new(shape: ElasticsearchIndex, required: true, location_name: "index"))
+    OpenSearchAction.add_member(:type, Shapes::ShapeRef.new(shape: ElasticsearchType, required: true, location_name: "type"))
+    OpenSearchAction.add_member(:id, Shapes::ShapeRef.new(shape: ElasticsearchId, required: true, location_name: "id"))
+    OpenSearchAction.struct_class = Types::OpenSearchAction
 
     OutgoingCertificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
     OutgoingCertificate.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "certificateId"))
