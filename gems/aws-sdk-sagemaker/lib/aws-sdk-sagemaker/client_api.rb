@@ -1138,6 +1138,7 @@ module Aws::SageMaker
     ProfilingIntervalInMilliseconds = Shapes::IntegerShape.new(name: 'ProfilingIntervalInMilliseconds')
     ProfilingParameters = Shapes::MapShape.new(name: 'ProfilingParameters')
     ProfilingStatus = Shapes::StringShape.new(name: 'ProfilingStatus')
+    Project = Shapes::StructureShape.new(name: 'Project')
     ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
     ProjectEntityName = Shapes::StringShape.new(name: 'ProjectEntityName')
     ProjectId = Shapes::StringShape.new(name: 'ProjectId')
@@ -5552,6 +5553,18 @@ module Aws::SageMaker
     ProfilingParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     ProfilingParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)
 
+    Project.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
+    Project.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, location_name: "ProjectName"))
+    Project.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "ProjectId"))
+    Project.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
+    Project.add_member(:service_catalog_provisioning_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisioningDetails, location_name: "ServiceCatalogProvisioningDetails"))
+    Project.add_member(:service_catalog_provisioned_product_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisionedProductDetails, location_name: "ServiceCatalogProvisionedProductDetails"))
+    Project.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "ProjectStatus"))
+    Project.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
+    Project.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Project.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Project.struct_class = Types::Project
+
     ProjectSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, required: true, location_name: "ProjectName"))
     ProjectSummary.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
     ProjectSummary.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
@@ -5702,6 +5715,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
     SearchRecord.add_member(:pipeline_execution, Shapes::ShapeRef.new(shape: PipelineExecution, location_name: "PipelineExecution"))
     SearchRecord.add_member(:feature_group, Shapes::ShapeRef.new(shape: FeatureGroup, location_name: "FeatureGroup"))
+    SearchRecord.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))

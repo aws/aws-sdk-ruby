@@ -48,6 +48,6 @@ require_relative 'aws-sdk-comprehend/customizations'
 # @!group service
 module Aws::Comprehend
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end

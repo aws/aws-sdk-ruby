@@ -16,6 +16,7 @@ module Aws::Comprehend
     AnyLengthString = Shapes::StringShape.new(name: 'AnyLengthString')
     AttributeNamesList = Shapes::ListShape.new(name: 'AttributeNamesList')
     AttributeNamesListItem = Shapes::StringShape.new(name: 'AttributeNamesListItem')
+    AugmentedManifestsDocumentTypeFormat = Shapes::StringShape.new(name: 'AugmentedManifestsDocumentTypeFormat')
     AugmentedManifestsListItem = Shapes::StructureShape.new(name: 'AugmentedManifestsListItem')
     BatchDetectDominantLanguageItemResult = Shapes::StructureShape.new(name: 'BatchDetectDominantLanguageItemResult')
     BatchDetectDominantLanguageRequest = Shapes::StructureShape.new(name: 'BatchDetectDominantLanguageRequest')
@@ -111,6 +112,10 @@ module Aws::Comprehend
     DocumentClassifierProperties = Shapes::StructureShape.new(name: 'DocumentClassifierProperties')
     DocumentClassifierPropertiesList = Shapes::ListShape.new(name: 'DocumentClassifierPropertiesList')
     DocumentLabel = Shapes::StructureShape.new(name: 'DocumentLabel')
+    DocumentReadAction = Shapes::StringShape.new(name: 'DocumentReadAction')
+    DocumentReadFeatureTypes = Shapes::StringShape.new(name: 'DocumentReadFeatureTypes')
+    DocumentReadMode = Shapes::StringShape.new(name: 'DocumentReadMode')
+    DocumentReaderConfig = Shapes::StructureShape.new(name: 'DocumentReaderConfig')
     DominantLanguage = Shapes::StructureShape.new(name: 'DominantLanguage')
     DominantLanguageDetectionJobFilter = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobFilter')
     DominantLanguageDetectionJobProperties = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobProperties')
@@ -192,6 +197,7 @@ module Aws::Comprehend
     ListOfDetectKeyPhrasesResult = Shapes::ListShape.new(name: 'ListOfDetectKeyPhrasesResult')
     ListOfDetectSentimentResult = Shapes::ListShape.new(name: 'ListOfDetectSentimentResult')
     ListOfDetectSyntaxResult = Shapes::ListShape.new(name: 'ListOfDetectSyntaxResult')
+    ListOfDocumentReadFeatureTypes = Shapes::ListShape.new(name: 'ListOfDocumentReadFeatureTypes')
     ListOfDominantLanguages = Shapes::ListShape.new(name: 'ListOfDominantLanguages')
     ListOfEntities = Shapes::ListShape.new(name: 'ListOfEntities')
     ListOfEntityLabels = Shapes::ListShape.new(name: 'ListOfEntityLabels')
@@ -300,6 +306,9 @@ module Aws::Comprehend
 
     AugmentedManifestsListItem.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     AugmentedManifestsListItem.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNamesList, required: true, location_name: "AttributeNames"))
+    AugmentedManifestsListItem.add_member(:annotation_data_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "AnnotationDataS3Uri"))
+    AugmentedManifestsListItem.add_member(:source_documents_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "SourceDocumentsS3Uri"))
+    AugmentedManifestsListItem.add_member(:document_type, Shapes::ShapeRef.new(shape: AugmentedManifestsDocumentTypeFormat, location_name: "DocumentType"))
     AugmentedManifestsListItem.struct_class = Types::AugmentedManifestsListItem
 
     BatchDetectDominantLanguageItemResult.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
@@ -641,6 +650,11 @@ module Aws::Comprehend
     DocumentLabel.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     DocumentLabel.struct_class = Types::DocumentLabel
 
+    DocumentReaderConfig.add_member(:document_read_action, Shapes::ShapeRef.new(shape: DocumentReadAction, required: true, location_name: "DocumentReadAction"))
+    DocumentReaderConfig.add_member(:document_read_mode, Shapes::ShapeRef.new(shape: DocumentReadMode, location_name: "DocumentReadMode"))
+    DocumentReaderConfig.add_member(:feature_types, Shapes::ShapeRef.new(shape: ListOfDocumentReadFeatureTypes, location_name: "FeatureTypes"))
+    DocumentReaderConfig.struct_class = Types::DocumentReaderConfig
+
     DominantLanguage.add_member(:language_code, Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
     DominantLanguage.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     DominantLanguage.struct_class = Types::DominantLanguage
@@ -815,6 +829,7 @@ module Aws::Comprehend
 
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     InputDataConfig.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
+    InputDataConfig.add_member(:document_reader_config, Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     InputDataConfig.struct_class = Types::InputDataConfig
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -944,6 +959,8 @@ module Aws::Comprehend
     ListOfDetectSentimentResult.member = Shapes::ShapeRef.new(shape: BatchDetectSentimentItemResult)
 
     ListOfDetectSyntaxResult.member = Shapes::ShapeRef.new(shape: BatchDetectSyntaxItemResult)
+
+    ListOfDocumentReadFeatureTypes.member = Shapes::ShapeRef.new(shape: DocumentReadFeatureTypes)
 
     ListOfDominantLanguages.member = Shapes::ShapeRef.new(shape: DominantLanguage)
 

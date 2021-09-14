@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2021-09-14)
+------------------
+
+* Feature - This release adds support for "Project Search"
+
 1.99.0 (2021-09-10)
 ------------------
 

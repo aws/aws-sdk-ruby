@@ -4738,9 +4738,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
-    #   attached to the domain with an Amazon Web Services managed customer
-    #   master key (CMK) by default. For more control, specify a customer
-    #   managed CMK.
+    #   attached to the domain with an Amazon Web Services managed key by
+    #   default. For more control, specify a customer managed key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -4829,8 +4828,8 @@ module Aws::SageMaker
     #   @return [Types::EdgeOutputConfig]
     #
     # @!attribute [rw] resource_key
-    #   The CMK to use when encrypting the EBS volume the edge packaging job
-    #   runs on.
+    #   The Amazon Web Services KMS key to use when encrypting the EBS
+    #   volume the edge packaging job runs on.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -12032,7 +12031,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services KMS customer managed CMK used to encrypt the
+    #   The Amazon Web Services KMS customer managed key used to encrypt the
     #   EFS volume attached to the domain.
     #   @return [String]
     #
@@ -12110,7 +12109,8 @@ module Aws::SageMaker
     #   @return [Types::EdgeOutputConfig]
     #
     # @!attribute [rw] resource_key
-    #   The CMK to use when encrypting the EBS volume the job run on.
+    #   The Amazon Web Services KMS key to use when encrypting the EBS
+    #   volume the job run on.
     #   @return [String]
     #
     # @!attribute [rw] edge_packaging_job_status
@@ -17071,7 +17071,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #         suggestion_query: {
     #           property_name_query: {
     #             property_name_hint: "PropertyNameHint", # required
@@ -19786,7 +19786,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
-    #   attached to the KernelGatewayApp.
+    #   attached to the the user profile or domain.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
@@ -20239,10 +20239,10 @@ module Aws::SageMaker
     #   You can only specify a `VolumeKmsKeyId` when you create a labeling
     #   job with automated data labeling enabled using the API operation
     #   `CreateLabelingJob`. You cannot specify an Amazon Web Services KMS
-    #   customer managed CMK to encrypt the storage volume used for
-    #   automated data labeling model training and inference when you create
-    #   a labeling job using the console. To learn more, see [Output Data
-    #   and Storage Volume Encryption][1].
+    #   key to encrypt the storage volume used for automated data labeling
+    #   model training and inference when you create a labeling job using
+    #   the console. To learn more, see [Output Data and Storage Volume
+    #   Encryption][1].
     #
     #   The `VolumeKmsKeyId` can be any of the following formats:
     #
@@ -23252,8 +23252,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] name_contains
-    #   A string in the training job name. This filter returns only models
-    #   in the training job whose name contains the specified string.
+    #   A string in the model name. This filter returns only models whose
+    #   name contains the specified string.
     #   @return [String]
     #
     # @!attribute [rw] creation_time_before
@@ -28363,7 +28363,7 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
     #   SageMaker execution role must include permissions to call
     #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
     #   uses the default KMS key for Amazon S3 for your role's account.
@@ -29738,7 +29738,7 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
     #   SageMaker execution role must include permissions to call
     #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
     #   uses the default KMS key for Amazon S3 for your role's account.
@@ -30018,6 +30018,85 @@ module Aws::SageMaker
       :rule_evaluation_status,
       :status_details,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a project as returned by the Search API.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The ID of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_description
+    #   The description of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_catalog_provisioning_details
+    #   Details that you specify to provision a service catalog product. For
+    #   information about service catalog, see .[What is Amazon Web Services
+    #   Service Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #   @return [Types::ServiceCatalogProvisioningDetails]
+    #
+    # @!attribute [rw] service_catalog_provisioned_product_details
+    #   Details of a provisioned service catalog product. For information
+    #   about service catalog, see [What is Amazon Web Services Service
+    #   Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #   @return [Types::ServiceCatalogProvisionedProductDetails]
+    #
+    # @!attribute [rw] project_status
+    #   The status of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, or trial component.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp specifying when the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Project AWS API Documentation
+    #
+    class Project < Struct.new(
+      :project_arn,
+      :project_name,
+      :project_id,
+      :project_description,
+      :service_catalog_provisioning_details,
+      :service_catalog_provisioned_product_details,
+      :project_status,
+      :created_by,
+      :creation_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30897,7 +30976,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_config_arn
-    #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configuration
     #   attached to the Resource.
     #   @return [String]
     #
@@ -31338,6 +31417,10 @@ module Aws::SageMaker
     #   composed of features and values per features.
     #   @return [Types::FeatureGroup]
     #
+    # @!attribute [rw] project
+    #   The properties of a project.
+    #   @return [Types::Project]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -31350,7 +31433,8 @@ module Aws::SageMaker
       :model_package_group,
       :pipeline,
       :pipeline_execution,
-      :feature_group)
+      :feature_group,
+      :project)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31359,7 +31443,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #         search_expression: {
     #           filters: [
     #             {

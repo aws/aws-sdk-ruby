@@ -20,6 +20,9 @@ module Aws::Comprehend
     #       {
     #         s3_uri: "S3Uri", # required
     #         attribute_names: ["AttributeNamesListItem"], # required
+    #         annotation_data_s3_uri: "S3Uri",
+    #         source_documents_s3_uri: "S3Uri",
+    #         document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -42,11 +45,38 @@ module Aws::Comprehend
     #   job.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] annotation_data_s3_uri
+    #   The S3 prefix to the annotation files that are referred in the
+    #   augmented manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_documents_s3_uri
+    #   The S3 prefix to the source files (PDFs) that are referred to in the
+    #   augmented manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_type
+    #   The type of augmented manifest. PlainTextDocument or
+    #   SemiStructuredDocument. If you don't specify, the default is
+    #   PlainTextDocument.
+    #
+    #   * `PLAIN_TEXT_DOCUMENT` A document type that represents any unicode
+    #     text that is encoded in UTF-8.
+    #
+    #   * `SEMI_STRUCTURED_DOCUMENT` A document type with positional and
+    #     structural context, like a PDF. For training with Amazon
+    #     Comprehend, only PDFs are supported. For inference, Amazon
+    #     Comprehend support PDFs, DOCX and TXT.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/AugmentedManifestsListItem AWS API Documentation
     #
     class AugmentedManifestsListItem < Struct.new(
       :s3_uri,
-      :attribute_names)
+      :attribute_names,
+      :annotation_data_s3_uri,
+      :source_documents_s3_uri,
+      :document_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -692,6 +722,9 @@ module Aws::Comprehend
     #             {
     #               s3_uri: "S3Uri", # required
     #               attribute_names: ["AttributeNamesListItem"], # required
+    #               annotation_data_s3_uri: "S3Uri",
+    #               source_documents_s3_uri: "S3Uri",
+    #               document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #             },
     #           ],
     #         },
@@ -939,6 +972,9 @@ module Aws::Comprehend
     #             {
     #               s3_uri: "S3Uri", # required
     #               attribute_names: ["AttributeNamesListItem"], # required
+    #               annotation_data_s3_uri: "S3Uri",
+    #               source_documents_s3_uri: "S3Uri",
+    #               document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #             },
     #           ],
     #         },
@@ -1996,6 +2032,9 @@ module Aws::Comprehend
     #           {
     #             s3_uri: "S3Uri", # required
     #             attribute_names: ["AttributeNamesListItem"], # required
+    #             annotation_data_s3_uri: "S3Uri",
+    #             source_documents_s3_uri: "S3Uri",
+    #             document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #           },
     #         ],
     #       }
@@ -2260,6 +2299,52 @@ module Aws::Comprehend
     class DocumentLabel < Struct.new(
       :name,
       :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input properties for a topic detection job.
+    #
+    # @note When making an API call, you may pass DocumentReaderConfig
+    #   data as a hash:
+    #
+    #       {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       }
+    #
+    # @!attribute [rw] document_read_action
+    #   This enum field will start with two values which will apply to PDFs:
+    #
+    #   * `TEXTRACT_DETECT_DOCUMENT_TEXT` - The service calls
+    #     DetectDocumentText for PDF documents per page.
+    #
+    #   * `TEXTRACT_ANALYZE_DOCUMENT` - The service calls AnalyzeDocument
+    #     for PDF documents per page.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_read_mode
+    #   This enum field provides two values:
+    #
+    #   * `SERVICE_DEFAULT` - use service defaults for Document reading. For
+    #     Digital PDF it would mean using an internal parser instead of
+    #     Textract APIs
+    #
+    #   * `FORCE_DOCUMENT_READ_ACTION` - Always use specified action for
+    #     DocumentReadAction, including Digital PDF.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_types
+    #   Specifies how the text in an input file should be processed:
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentReaderConfig AWS API Documentation
+    #
+    class DocumentReaderConfig < Struct.new(
+      :document_read_action,
+      :document_read_mode,
+      :feature_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2931,6 +3016,9 @@ module Aws::Comprehend
     #           {
     #             s3_uri: "S3Uri", # required
     #             attribute_names: ["AttributeNamesListItem"], # required
+    #             annotation_data_s3_uri: "S3Uri",
+    #             source_documents_s3_uri: "S3Uri",
+    #             document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #           },
     #         ],
     #       }
@@ -3368,7 +3456,7 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The input properties for a topic detection job.
+    # The input properties for an inference job.
     #
     # @note When making an API call, you may pass InputDataConfig
     #   data as a hash:
@@ -3376,6 +3464,11 @@ module Aws::Comprehend
     #       {
     #         s3_uri: "S3Uri", # required
     #         input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         document_reader_config: {
+    #           document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #           document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #           feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #         },
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -3402,11 +3495,21 @@ module Aws::Comprehend
     #     documents, such as text messages.
     #   @return [String]
     #
+    # @!attribute [rw] document_reader_config
+    #   The document reader config field applies only for InputDataConfig of
+    #   StartEntitiesDetectionJob.
+    #
+    #   Use DocumentReaderConfig to provide specifications about how you
+    #   want your inference documents read. Currently it applies for PDF
+    #   documents in StartEntitiesDetectionJob custom inference.
+    #   @return [Types::DocumentReaderConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InputDataConfig AWS API Documentation
     #
     class InputDataConfig < Struct.new(
       :s3_uri,
-      :input_format)
+      :input_format,
+      :document_reader_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4877,6 +4980,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5026,6 +5134,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5173,6 +5286,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5342,6 +5460,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5455,6 +5578,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5609,6 +5737,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5737,6 +5870,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5891,6 +6029,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required

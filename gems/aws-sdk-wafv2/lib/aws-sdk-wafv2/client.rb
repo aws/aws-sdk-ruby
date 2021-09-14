@@ -2379,7 +2379,7 @@ module Aws::WAFV2
     # Retrieves the specified managed rule set.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -2485,10 +2485,24 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Retrieves the keys that are currently blocked by a rate-based rule.
-    # The maximum number of managed keys that can be blocked for a single
-    # rate-based rule is 10,000. If more than 10,000 addresses exceed the
-    # rate limit, those with the highest rates are blocked.
+    # Retrieves the keys that are currently blocked by a rate-based rule
+    # instance. The maximum number of managed keys that can be blocked for a
+    # single rate-based rule instance is 10,000. If more than 10,000
+    # addresses exceed the rate limit, those with the highest rates are
+    # blocked.
+    #
+    # For a rate-based rule that you've defined inside a rule group,
+    # provide the name of the rule group reference statement in your
+    # request, in addition to the rate-based rule name and the web ACL name.
+    #
+    # WAF monitors web requests and manages keys independently for each
+    # unique combination of web ACL, optional rule group, and rate-based
+    # rule. For example, if you define a rate-based rule inside a rule
+    # group, and then use the rule group in a web ACL, WAF monitors web
+    # requests and manages keys for that web ACL, rule group reference
+    # statement, and rate-based rule instance. If you use the same rule
+    # group in a second web ACL, WAF monitors web requests and manages keys
+    # for this second usage completely independent of your first.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
@@ -2513,8 +2527,16 @@ module Aws::WAFV2
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #
+    # @option params [String] :rule_group_rule_name
+    #   The name of the rule group reference statement in your web ACL. This
+    #   is required only when you have the rate-based rule nested inside a
+    #   rule group.
+    #
     # @option params [required, String] :rule_name
-    #   The name of the rate-based rule to get the keys for.
+    #   The name of the rate-based rule to get the keys for. If you have the
+    #   rule defined inside a rule group that you're using in your web ACL,
+    #   also provide the name of the rule group reference statement in the
+    #   request parameter `RuleGroupRuleName`.
     #
     # @return [Types::GetRateBasedStatementManagedKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2527,6 +2549,7 @@ module Aws::WAFV2
     #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #     web_acl_name: "EntityName", # required
     #     web_acl_id: "EntityId", # required
+    #     rule_group_rule_name: "EntityName",
     #     rule_name: "EntityName", # required
     #   })
     #
@@ -3638,8 +3661,8 @@ module Aws::WAFV2
 
     # Retrieves an array of managed rule groups that are available for you
     # to use. This list includes all Amazon Web Services Managed Rules rule
-    # groups and all of the Marketplace managed rule groups that you're
-    # subscribed to.
+    # groups and all of the Amazon Web Services Marketplace managed rule
+    # groups that you're subscribed to.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
@@ -3837,7 +3860,7 @@ module Aws::WAFV2
     # Retrieves the managed rule sets that you own.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -4329,7 +4352,7 @@ module Aws::WAFV2
     # with versioning.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -4672,7 +4695,7 @@ module Aws::WAFV2
     # ListAvailableManagedRuleGroupVersions for the managed rule group.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -5759,7 +5782,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -511,6 +511,7 @@ module Aws::Chime
     SigninDelegateGroup = Shapes::StructureShape.new(name: 'SigninDelegateGroup')
     SigninDelegateGroupList = Shapes::ListShape.new(name: 'SigninDelegateGroupList')
     SipApplicationPriority = Shapes::IntegerShape.new(name: 'SipApplicationPriority')
+    SipHeadersMap = Shapes::MapShape.new(name: 'SipHeadersMap')
     SipMediaApplication = Shapes::StructureShape.new(name: 'SipMediaApplication')
     SipMediaApplicationCall = Shapes::StructureShape.new(name: 'SipMediaApplicationCall')
     SipMediaApplicationEndpoint = Shapes::StructureShape.new(name: 'SipMediaApplicationEndpoint')
@@ -1136,6 +1137,7 @@ module Aws::Chime
     CreateSipMediaApplicationCallRequest.add_member(:from_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "FromPhoneNumber"))
     CreateSipMediaApplicationCallRequest.add_member(:to_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "ToPhoneNumber"))
     CreateSipMediaApplicationCallRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    CreateSipMediaApplicationCallRequest.add_member(:sip_headers, Shapes::ShapeRef.new(shape: SipHeadersMap, location_name: "SipHeaders"))
     CreateSipMediaApplicationCallRequest.struct_class = Types::CreateSipMediaApplicationCallRequest
 
     CreateSipMediaApplicationCallResponse.add_member(:sip_media_application_call, Shapes::ShapeRef.new(shape: SipMediaApplicationCall, location_name: "SipMediaApplicationCall"))
@@ -2312,6 +2314,9 @@ module Aws::Chime
 
     SigninDelegateGroupList.member = Shapes::ShapeRef.new(shape: SigninDelegateGroup)
 
+    SipHeadersMap.key = Shapes::ShapeRef.new(shape: SensitiveString)
+    SipHeadersMap.value = Shapes::ShapeRef.new(shape: SensitiveString)
+
     SipMediaApplication.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipMediaApplicationId"))
     SipMediaApplication.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
     SipMediaApplication.add_member(:name, Shapes::ShapeRef.new(shape: SipMediaApplicationName, location_name: "Name"))
@@ -3213,6 +3218,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

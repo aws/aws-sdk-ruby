@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-09-14)
+------------------
+
+* Feature - This release adds support for including rate based rules in a rule group.
+
 1.25.0 (2021-09-01)
 ------------------
 

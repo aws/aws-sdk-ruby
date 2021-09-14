@@ -1670,9 +1670,9 @@ module Aws::SageMaker
     #
     # SageMaker uses the Amazon Web Services Key Management Service (Amazon
     # Web Services KMS) to encrypt the EFS volume attached to the domain
-    # with an Amazon Web Services managed customer master key (CMK) by
-    # default. For more control, you can specify a customer managed CMK. For
-    # more information, see [Protect Data at Rest Using Encryption][1].
+    # with an Amazon Web Services managed key by default. For more control,
+    # you can specify a customer managed key. For more information, see
+    # [Protect Data at Rest Using Encryption][1].
     #
     # **VPC configuration**
     #
@@ -1754,9 +1754,8 @@ module Aws::SageMaker
     #
     # @option params [String] :kms_key_id
     #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
-    #   attached to the domain with an Amazon Web Services managed customer
-    #   master key (CMK) by default. For more control, specify a customer
-    #   managed CMK.
+    #   attached to the domain with an Amazon Web Services managed key by
+    #   default. For more control, specify a customer managed key.
     #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1864,8 +1863,8 @@ module Aws::SageMaker
     #   Provides information about the output location for the packaged model.
     #
     # @option params [String] :resource_key
-    #   The CMK to use when encrypting the EBS volume the edge packaging job
-    #   runs on.
+    #   The Amazon Web Services KMS key to use when encrypting the EBS volume
+    #   the edge packaging job runs on.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Creates tags for the packaging job.
@@ -11000,7 +10999,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_search_suggestions({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #     suggestion_query: {
     #       property_name_query: {
     #         property_name_hint: "PropertyNameHint", # required
@@ -13425,8 +13424,8 @@ module Aws::SageMaker
     #   The maximum number of models to return in the response.
     #
     # @option params [String] :name_contains
-    #   A string in the training job name. This filter returns only models in
-    #   the training job whose name contains the specified string.
+    #   A string in the model name. This filter returns only models whose name
+    #   contains the specified string.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
     #   A filter that returns only models created before the specified time
@@ -15259,7 +15258,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #     resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #     search_expression: {
     #       filters: [
     #         {
@@ -15957,6 +15956,26 @@ module Aws::SageMaker
     #   resp.results[0].feature_group.tags #=> Array
     #   resp.results[0].feature_group.tags[0].key #=> String
     #   resp.results[0].feature_group.tags[0].value #=> String
+    #   resp.results[0].project.project_arn #=> String
+    #   resp.results[0].project.project_name #=> String
+    #   resp.results[0].project.project_id #=> String
+    #   resp.results[0].project.project_description #=> String
+    #   resp.results[0].project.service_catalog_provisioning_details.product_id #=> String
+    #   resp.results[0].project.service_catalog_provisioning_details.provisioning_artifact_id #=> String
+    #   resp.results[0].project.service_catalog_provisioning_details.path_id #=> String
+    #   resp.results[0].project.service_catalog_provisioning_details.provisioning_parameters #=> Array
+    #   resp.results[0].project.service_catalog_provisioning_details.provisioning_parameters[0].key #=> String
+    #   resp.results[0].project.service_catalog_provisioning_details.provisioning_parameters[0].value #=> String
+    #   resp.results[0].project.service_catalog_provisioned_product_details.provisioned_product_id #=> String
+    #   resp.results[0].project.service_catalog_provisioned_product_details.provisioned_product_status_message #=> String
+    #   resp.results[0].project.project_status #=> String, one of "Pending", "CreateInProgress", "CreateCompleted", "CreateFailed", "DeleteInProgress", "DeleteFailed", "DeleteCompleted"
+    #   resp.results[0].project.created_by.user_profile_arn #=> String
+    #   resp.results[0].project.created_by.user_profile_name #=> String
+    #   resp.results[0].project.created_by.domain_id #=> String
+    #   resp.results[0].project.creation_time #=> Time
+    #   resp.results[0].project.tags #=> Array
+    #   resp.results[0].project.tags[0].key #=> String
+    #   resp.results[0].project.tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search AWS API Documentation
@@ -17976,7 +17995,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

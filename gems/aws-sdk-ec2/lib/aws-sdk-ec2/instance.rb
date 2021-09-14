@@ -652,7 +652,7 @@ module Aws::EC2
     #         ebs: {
     #           delete_on_termination: false,
     #           iops: 1,
-    #           snapshot_id: "String",
+    #           snapshot_id: "SnapshotId",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",

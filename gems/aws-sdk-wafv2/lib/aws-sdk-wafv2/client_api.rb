@@ -560,6 +560,7 @@ module Aws::WAFV2
     GetRateBasedStatementManagedKeysRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     GetRateBasedStatementManagedKeysRequest.add_member(:web_acl_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "WebACLName"))
     GetRateBasedStatementManagedKeysRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "WebACLId"))
+    GetRateBasedStatementManagedKeysRequest.add_member(:rule_group_rule_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "RuleGroupRuleName"))
     GetRateBasedStatementManagedKeysRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "RuleName"))
     GetRateBasedStatementManagedKeysRequest.struct_class = Types::GetRateBasedStatementManagedKeysRequest
 

@@ -1995,6 +1995,9 @@ module Aws::Chime
     # @option params [required, String] :sip_media_application_id
     #   The ID of the SIP media application.
     #
+    # @option params [Hash<String,String>] :sip_headers
+    #   The SIP headers added to an outbound call leg.
+    #
     # @return [Types::CreateSipMediaApplicationCallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSipMediaApplicationCallResponse#sip_media_application_call #sip_media_application_call} => Types::SipMediaApplicationCall
@@ -2005,6 +2008,9 @@ module Aws::Chime
     #     from_phone_number: "E164PhoneNumber", # required
     #     to_phone_number: "E164PhoneNumber", # required
     #     sip_media_application_id: "NonEmptyString", # required
+    #     sip_headers: {
+    #       "SensitiveString" => "SensitiveString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7193,7 +7199,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Start transcription for the specified `meetingId`.
+    # Starts transcription for the specified `meetingId`.
     #
     # @option params [required, String] :meeting_id
     #   The unique ID of the meeting being transcribed.
@@ -8405,7 +8411,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

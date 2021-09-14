@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.263.0 (2021-09-14)
+------------------
+
+* Feature - This release adds support for vt1 3xlarge, 6xlarge and 24xlarge instances powered by Xilinx Alveo U30 Media Accelerators for video transcoding workloads
+
 1.262.0 (2021-09-13)
 ------------------
 
