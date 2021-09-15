@@ -573,16 +573,6 @@ module Aws
       end
 
       describe '.dns_suffix_for' do
-        it 'resolves dns suffix from region variant' do
-          # expect(
-          #   Partitions::EndpointProvider.dns_suffix_for(
-          #     'us-west-2',
-          #     nil,
-          #     { dualstack: true, fips: false }
-          #   )
-          # ).to eq('aws')
-        end
-
         it 'resolves dns suffix from service variant' do
           expect(
             Partitions::EndpointProvider.dns_suffix_for(
