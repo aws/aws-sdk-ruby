@@ -1622,7 +1622,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AssociationSummary AWS API Documentation
@@ -10936,7 +10936,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -10945,7 +10945,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -11251,7 +11251,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11260,7 +11260,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -11662,7 +11662,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11671,7 +11671,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeContextResponse AWS API Documentation
@@ -13419,7 +13419,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -13521,7 +13521,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -13539,7 +13539,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -14098,12 +14098,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
@@ -14185,12 +14185,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineResponse AWS API Documentation
@@ -14405,7 +14405,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] creation_time
@@ -15127,7 +15127,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Who created the component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16235,8 +16235,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the experiment.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16245,7 +16244,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -25824,7 +25823,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -25842,7 +25841,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -25981,7 +25980,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -28654,12 +28653,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -28726,12 +28725,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] pipeline_parameters
@@ -30042,7 +30041,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] service_catalog_provisioning_details
     #   Details that you specify to provision a service catalog product. For
-    #   information about service catalog, see .[What is Amazon Web Services
+    #   information about service catalog, see [What is Amazon Web Services
     #   Service Catalog][1].
     #
     #
@@ -30065,8 +30064,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] creation_time
@@ -31016,6 +31014,48 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RetryPipelineExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_execution_arn: "PipelineExecutionArn", # required
+    #         client_request_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecutionRequest AWS API Documentation
+    #
+    class RetryPipelineExecutionRequest < Struct.new(
+      :pipeline_execution_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecutionResponse AWS API Documentation
+    #
+    class RetryPipelineExecutionResponse < Struct.new(
+      :pipeline_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The retry strategy to use when a training job fails due to an
     # `InternalServerError`. `RetryStrategy` is specified as part of the
     # `CreateTrainingJob` and `CreateHyperParameterTuningJob` requests. You
@@ -31812,7 +31852,7 @@ module Aws::SageMaker
     end
 
     # Details that you specify to provision a service catalog product. For
-    # information about service catalog, see .[What is Amazon Web Services
+    # information about service catalog, see [What is Amazon Web Services
     # Service Catalog][1].
     #
     #
@@ -32120,7 +32160,7 @@ module Aws::SageMaker
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -32298,7 +32338,7 @@ module Aws::SageMaker
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -34110,8 +34150,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the trial.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -34120,7 +34159,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -34194,8 +34233,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -34204,7 +34242,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parameters
@@ -34415,7 +34453,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSimpleSummary AWS API Documentation
@@ -34555,7 +34593,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Who created the component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -36442,7 +36480,7 @@ module Aws::SageMaker
     end
 
     # Information about the user who created or modified an experiment,
-    # trial, or trial component.
+    # trial, trial component, or project.
     #
     # @!attribute [rw] user_profile_arn
     #   The Amazon Resource Name (ARN) of the user's profile.

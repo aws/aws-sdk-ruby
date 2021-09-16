@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2021-09-16)
+------------------
+
+* Feature - Add API for users to retry a failed pipeline execution or resume a stopped one.
+
 1.100.0 (2021-09-14)
 ------------------
 

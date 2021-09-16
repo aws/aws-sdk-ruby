@@ -22,6 +22,7 @@ module Aws::S3
     AcceptRanges = Shapes::StringShape.new(name: 'AcceptRanges')
     AccessControlPolicy = Shapes::StructureShape.new(name: 'AccessControlPolicy')
     AccessControlTranslation = Shapes::StructureShape.new(name: 'AccessControlTranslation')
+    AccessPointArn = Shapes::StringShape.new(name: 'AccessPointArn')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AllowQuotedRecordDelimiter = Shapes::BooleanShape.new(name: 'AllowQuotedRecordDelimiter')
     AllowedHeader = Shapes::StringShape.new(name: 'AllowedHeader')
@@ -1686,6 +1687,7 @@ module Aws::S3
 
     MetricsAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     MetricsAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+    MetricsAndOperator.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, location_name: "AccessPointArn"))
     MetricsAndOperator.struct_class = Types::MetricsAndOperator
 
     MetricsConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: MetricsId, required: true, location_name: "Id"))
@@ -1696,6 +1698,7 @@ module Aws::S3
 
     MetricsFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     MetricsFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    MetricsFilter.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, location_name: "AccessPointArn"))
     MetricsFilter.add_member(:and, Shapes::ShapeRef.new(shape: MetricsAndOperator, location_name: "And"))
     MetricsFilter.struct_class = Types::MetricsFilter
 

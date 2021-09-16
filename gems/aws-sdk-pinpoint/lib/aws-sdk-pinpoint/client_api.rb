@@ -31,6 +31,7 @@ module Aws::Pinpoint
     Activity = Shapes::StructureShape.new(name: 'Activity')
     ActivityResponse = Shapes::StructureShape.new(name: 'ActivityResponse')
     AddressConfiguration = Shapes::StructureShape.new(name: 'AddressConfiguration')
+    Alignment = Shapes::StringShape.new(name: 'Alignment')
     AndroidPushNotificationTemplate = Shapes::StructureShape.new(name: 'AndroidPushNotificationTemplate')
     ApplicationDateRangeKpiResponse = Shapes::StructureShape.new(name: 'ApplicationDateRangeKpiResponse')
     ApplicationResponse = Shapes::StructureShape.new(name: 'ApplicationResponse')
@@ -44,11 +45,13 @@ module Aws::Pinpoint
     BaiduChannelResponse = Shapes::StructureShape.new(name: 'BaiduChannelResponse')
     BaiduMessage = Shapes::StructureShape.new(name: 'BaiduMessage')
     BaseKpiResult = Shapes::StructureShape.new(name: 'BaseKpiResult')
+    ButtonAction = Shapes::StringShape.new(name: 'ButtonAction')
     CampaignCustomMessage = Shapes::StructureShape.new(name: 'CampaignCustomMessage')
     CampaignDateRangeKpiResponse = Shapes::StructureShape.new(name: 'CampaignDateRangeKpiResponse')
     CampaignEmailMessage = Shapes::StructureShape.new(name: 'CampaignEmailMessage')
     CampaignEventFilter = Shapes::StructureShape.new(name: 'CampaignEventFilter')
     CampaignHook = Shapes::StructureShape.new(name: 'CampaignHook')
+    CampaignInAppMessage = Shapes::StructureShape.new(name: 'CampaignInAppMessage')
     CampaignLimits = Shapes::StructureShape.new(name: 'CampaignLimits')
     CampaignResponse = Shapes::StructureShape.new(name: 'CampaignResponse')
     CampaignSmsMessage = Shapes::StructureShape.new(name: 'CampaignSmsMessage')
@@ -72,6 +75,8 @@ module Aws::Pinpoint
     CreateExportJobResponse = Shapes::StructureShape.new(name: 'CreateExportJobResponse')
     CreateImportJobRequest = Shapes::StructureShape.new(name: 'CreateImportJobRequest')
     CreateImportJobResponse = Shapes::StructureShape.new(name: 'CreateImportJobResponse')
+    CreateInAppTemplateRequest = Shapes::StructureShape.new(name: 'CreateInAppTemplateRequest')
+    CreateInAppTemplateResponse = Shapes::StructureShape.new(name: 'CreateInAppTemplateResponse')
     CreateJourneyRequest = Shapes::StructureShape.new(name: 'CreateJourneyRequest')
     CreateJourneyResponse = Shapes::StructureShape.new(name: 'CreateJourneyResponse')
     CreatePushTemplateRequest = Shapes::StructureShape.new(name: 'CreatePushTemplateRequest')
@@ -88,6 +93,7 @@ module Aws::Pinpoint
     CreateVoiceTemplateResponse = Shapes::StructureShape.new(name: 'CreateVoiceTemplateResponse')
     CustomDeliveryConfiguration = Shapes::StructureShape.new(name: 'CustomDeliveryConfiguration')
     CustomMessageActivity = Shapes::StructureShape.new(name: 'CustomMessageActivity')
+    DefaultButtonConfiguration = Shapes::StructureShape.new(name: 'DefaultButtonConfiguration')
     DefaultMessage = Shapes::StructureShape.new(name: 'DefaultMessage')
     DefaultPushNotificationMessage = Shapes::StructureShape.new(name: 'DefaultPushNotificationMessage')
     DefaultPushNotificationTemplate = Shapes::StructureShape.new(name: 'DefaultPushNotificationTemplate')
@@ -117,6 +123,8 @@ module Aws::Pinpoint
     DeleteEventStreamResponse = Shapes::StructureShape.new(name: 'DeleteEventStreamResponse')
     DeleteGcmChannelRequest = Shapes::StructureShape.new(name: 'DeleteGcmChannelRequest')
     DeleteGcmChannelResponse = Shapes::StructureShape.new(name: 'DeleteGcmChannelResponse')
+    DeleteInAppTemplateRequest = Shapes::StructureShape.new(name: 'DeleteInAppTemplateRequest')
+    DeleteInAppTemplateResponse = Shapes::StructureShape.new(name: 'DeleteInAppTemplateResponse')
     DeleteJourneyRequest = Shapes::StructureShape.new(name: 'DeleteJourneyRequest')
     DeleteJourneyResponse = Shapes::StructureShape.new(name: 'DeleteJourneyResponse')
     DeletePushTemplateRequest = Shapes::StructureShape.new(name: 'DeletePushTemplateRequest')
@@ -231,6 +239,10 @@ module Aws::Pinpoint
     GetImportJobResponse = Shapes::StructureShape.new(name: 'GetImportJobResponse')
     GetImportJobsRequest = Shapes::StructureShape.new(name: 'GetImportJobsRequest')
     GetImportJobsResponse = Shapes::StructureShape.new(name: 'GetImportJobsResponse')
+    GetInAppMessagesRequest = Shapes::StructureShape.new(name: 'GetInAppMessagesRequest')
+    GetInAppMessagesResponse = Shapes::StructureShape.new(name: 'GetInAppMessagesResponse')
+    GetInAppTemplateRequest = Shapes::StructureShape.new(name: 'GetInAppTemplateRequest')
+    GetInAppTemplateResponse = Shapes::StructureShape.new(name: 'GetInAppTemplateResponse')
     GetJourneyDateRangeKpiRequest = Shapes::StructureShape.new(name: 'GetJourneyDateRangeKpiRequest')
     GetJourneyDateRangeKpiResponse = Shapes::StructureShape.new(name: 'GetJourneyDateRangeKpiResponse')
     GetJourneyExecutionActivityMetricsRequest = Shapes::StructureShape.new(name: 'GetJourneyExecutionActivityMetricsRequest')
@@ -272,6 +284,16 @@ module Aws::Pinpoint
     ImportJobResource = Shapes::StructureShape.new(name: 'ImportJobResource')
     ImportJobResponse = Shapes::StructureShape.new(name: 'ImportJobResponse')
     ImportJobsResponse = Shapes::StructureShape.new(name: 'ImportJobsResponse')
+    InAppCampaignSchedule = Shapes::StructureShape.new(name: 'InAppCampaignSchedule')
+    InAppMessage = Shapes::StructureShape.new(name: 'InAppMessage')
+    InAppMessageBodyConfig = Shapes::StructureShape.new(name: 'InAppMessageBodyConfig')
+    InAppMessageButton = Shapes::StructureShape.new(name: 'InAppMessageButton')
+    InAppMessageCampaign = Shapes::StructureShape.new(name: 'InAppMessageCampaign')
+    InAppMessageContent = Shapes::StructureShape.new(name: 'InAppMessageContent')
+    InAppMessageHeaderConfig = Shapes::StructureShape.new(name: 'InAppMessageHeaderConfig')
+    InAppMessagesResponse = Shapes::StructureShape.new(name: 'InAppMessagesResponse')
+    InAppTemplateRequest = Shapes::StructureShape.new(name: 'InAppTemplateRequest')
+    InAppTemplateResponse = Shapes::StructureShape.new(name: 'InAppTemplateResponse')
     Include = Shapes::StringShape.new(name: 'Include')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ItemResponse = Shapes::StructureShape.new(name: 'ItemResponse')
@@ -288,6 +310,7 @@ module Aws::Pinpoint
     JourneySchedule = Shapes::StructureShape.new(name: 'JourneySchedule')
     JourneyStateRequest = Shapes::StructureShape.new(name: 'JourneyStateRequest')
     JourneysResponse = Shapes::StructureShape.new(name: 'JourneysResponse')
+    Layout = Shapes::StringShape.new(name: 'Layout')
     ListJourneysRequest = Shapes::StructureShape.new(name: 'ListJourneysRequest')
     ListJourneysResponse = Shapes::StructureShape.new(name: 'ListJourneysResponse')
     ListOfActivityResponse = Shapes::ListShape.new(name: 'ListOfActivityResponse')
@@ -297,6 +320,8 @@ module Aws::Pinpoint
     ListOfEndpointResponse = Shapes::ListShape.new(name: 'ListOfEndpointResponse')
     ListOfExportJobResponse = Shapes::ListShape.new(name: 'ListOfExportJobResponse')
     ListOfImportJobResponse = Shapes::ListShape.new(name: 'ListOfImportJobResponse')
+    ListOfInAppMessageCampaign = Shapes::ListShape.new(name: 'ListOfInAppMessageCampaign')
+    ListOfInAppMessageContent = Shapes::ListShape.new(name: 'ListOfInAppMessageContent')
     ListOfJourneyResponse = Shapes::ListShape.new(name: 'ListOfJourneyResponse')
     ListOfMultiConditionalBranch = Shapes::ListShape.new(name: 'ListOfMultiConditionalBranch')
     ListOfRandomSplitEntry = Shapes::ListShape.new(name: 'ListOfRandomSplitEntry')
@@ -354,6 +379,7 @@ module Aws::Pinpoint
     NumberValidateRequest = Shapes::StructureShape.new(name: 'NumberValidateRequest')
     NumberValidateResponse = Shapes::StructureShape.new(name: 'NumberValidateResponse')
     Operator = Shapes::StringShape.new(name: 'Operator')
+    OverrideButtonConfiguration = Shapes::StructureShape.new(name: 'OverrideButtonConfiguration')
     PayloadTooLargeException = Shapes::StructureShape.new(name: 'PayloadTooLargeException')
     PhoneNumberValidateRequest = Shapes::StructureShape.new(name: 'PhoneNumberValidateRequest')
     PhoneNumberValidateResponse = Shapes::StructureShape.new(name: 'PhoneNumberValidateResponse')
@@ -414,6 +440,7 @@ module Aws::Pinpoint
     Template = Shapes::StructureShape.new(name: 'Template')
     TemplateActiveVersionRequest = Shapes::StructureShape.new(name: 'TemplateActiveVersionRequest')
     TemplateConfiguration = Shapes::StructureShape.new(name: 'TemplateConfiguration')
+    TemplateCreateMessageBody = Shapes::StructureShape.new(name: 'TemplateCreateMessageBody')
     TemplateResponse = Shapes::StructureShape.new(name: 'TemplateResponse')
     TemplateType = Shapes::StringShape.new(name: 'TemplateType')
     TemplateVersionResponse = Shapes::StructureShape.new(name: 'TemplateVersionResponse')
@@ -450,6 +477,8 @@ module Aws::Pinpoint
     UpdateEndpointsBatchResponse = Shapes::StructureShape.new(name: 'UpdateEndpointsBatchResponse')
     UpdateGcmChannelRequest = Shapes::StructureShape.new(name: 'UpdateGcmChannelRequest')
     UpdateGcmChannelResponse = Shapes::StructureShape.new(name: 'UpdateGcmChannelResponse')
+    UpdateInAppTemplateRequest = Shapes::StructureShape.new(name: 'UpdateInAppTemplateRequest')
+    UpdateInAppTemplateResponse = Shapes::StructureShape.new(name: 'UpdateInAppTemplateResponse')
     UpdateJourneyRequest = Shapes::StructureShape.new(name: 'UpdateJourneyRequest')
     UpdateJourneyResponse = Shapes::StructureShape.new(name: 'UpdateJourneyResponse')
     UpdateJourneyStateRequest = Shapes::StructureShape.new(name: 'UpdateJourneyStateRequest')
@@ -806,10 +835,17 @@ module Aws::Pinpoint
     CampaignHook.add_member(:web_url, Shapes::ShapeRef.new(shape: __string, location_name: "WebUrl"))
     CampaignHook.struct_class = Types::CampaignHook
 
+    CampaignInAppMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    CampaignInAppMessage.add_member(:content, Shapes::ShapeRef.new(shape: ListOfInAppMessageContent, location_name: "Content"))
+    CampaignInAppMessage.add_member(:custom_config, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "CustomConfig"))
+    CampaignInAppMessage.add_member(:layout, Shapes::ShapeRef.new(shape: Layout, location_name: "Layout"))
+    CampaignInAppMessage.struct_class = Types::CampaignInAppMessage
+
     CampaignLimits.add_member(:daily, Shapes::ShapeRef.new(shape: __integer, location_name: "Daily"))
     CampaignLimits.add_member(:maximum_duration, Shapes::ShapeRef.new(shape: __integer, location_name: "MaximumDuration"))
     CampaignLimits.add_member(:messages_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "MessagesPerSecond"))
     CampaignLimits.add_member(:total, Shapes::ShapeRef.new(shape: __integer, location_name: "Total"))
+    CampaignLimits.add_member(:session, Shapes::ShapeRef.new(shape: __integer, location_name: "Session"))
     CampaignLimits.struct_class = Types::CampaignLimits
 
     CampaignResponse.add_member(:additional_treatments, Shapes::ShapeRef.new(shape: ListOfTreatmentResource, location_name: "AdditionalTreatments"))
@@ -836,6 +872,7 @@ module Aws::Pinpoint
     CampaignResponse.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     CampaignResponse.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     CampaignResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
+    CampaignResponse.add_member(:priority, Shapes::ShapeRef.new(shape: __integer, location_name: "Priority"))
     CampaignResponse.struct_class = Types::CampaignResponse
 
     CampaignSmsMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
@@ -939,6 +976,17 @@ module Aws::Pinpoint
     CreateImportJobResponse[:payload] = :import_job_response
     CreateImportJobResponse[:payload_member] = CreateImportJobResponse.member(:import_job_response)
 
+    CreateInAppTemplateRequest.add_member(:in_app_template_request, Shapes::ShapeRef.new(shape: InAppTemplateRequest, required: true, location_name: "InAppTemplateRequest"))
+    CreateInAppTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    CreateInAppTemplateRequest.struct_class = Types::CreateInAppTemplateRequest
+    CreateInAppTemplateRequest[:payload] = :in_app_template_request
+    CreateInAppTemplateRequest[:payload_member] = CreateInAppTemplateRequest.member(:in_app_template_request)
+
+    CreateInAppTemplateResponse.add_member(:template_create_message_body, Shapes::ShapeRef.new(shape: TemplateCreateMessageBody, required: true, location_name: "TemplateCreateMessageBody"))
+    CreateInAppTemplateResponse.struct_class = Types::CreateInAppTemplateResponse
+    CreateInAppTemplateResponse[:payload] = :template_create_message_body
+    CreateInAppTemplateResponse[:payload_member] = CreateInAppTemplateResponse.member(:template_create_message_body)
+
     CreateJourneyRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     CreateJourneyRequest.add_member(:write_journey_request, Shapes::ShapeRef.new(shape: WriteJourneyRequest, required: true, location_name: "WriteJourneyRequest"))
     CreateJourneyRequest.struct_class = Types::CreateJourneyRequest
@@ -1031,6 +1079,14 @@ module Aws::Pinpoint
     CustomMessageActivity.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateName"))
     CustomMessageActivity.add_member(:template_version, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateVersion"))
     CustomMessageActivity.struct_class = Types::CustomMessageActivity
+
+    DefaultButtonConfiguration.add_member(:background_color, Shapes::ShapeRef.new(shape: __string, location_name: "BackgroundColor"))
+    DefaultButtonConfiguration.add_member(:border_radius, Shapes::ShapeRef.new(shape: __integer, location_name: "BorderRadius"))
+    DefaultButtonConfiguration.add_member(:button_action, Shapes::ShapeRef.new(shape: ButtonAction, required: true, location_name: "ButtonAction"))
+    DefaultButtonConfiguration.add_member(:link, Shapes::ShapeRef.new(shape: __string, location_name: "Link"))
+    DefaultButtonConfiguration.add_member(:text, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Text"))
+    DefaultButtonConfiguration.add_member(:text_color, Shapes::ShapeRef.new(shape: __string, location_name: "TextColor"))
+    DefaultButtonConfiguration.struct_class = Types::DefaultButtonConfiguration
 
     DefaultMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     DefaultMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
@@ -1158,6 +1214,15 @@ module Aws::Pinpoint
     DeleteGcmChannelResponse.struct_class = Types::DeleteGcmChannelResponse
     DeleteGcmChannelResponse[:payload] = :gcm_channel_response
     DeleteGcmChannelResponse[:payload_member] = DeleteGcmChannelResponse.member(:gcm_channel_response)
+
+    DeleteInAppTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    DeleteInAppTemplateRequest.add_member(:version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "version"))
+    DeleteInAppTemplateRequest.struct_class = Types::DeleteInAppTemplateRequest
+
+    DeleteInAppTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    DeleteInAppTemplateResponse.struct_class = Types::DeleteInAppTemplateResponse
+    DeleteInAppTemplateResponse[:payload] = :message_body
+    DeleteInAppTemplateResponse[:payload_member] = DeleteInAppTemplateResponse.member(:message_body)
 
     DeleteJourneyRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteJourneyRequest.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "journey-id"))
@@ -1771,6 +1836,24 @@ module Aws::Pinpoint
     GetImportJobsResponse[:payload] = :import_jobs_response
     GetImportJobsResponse[:payload_member] = GetImportJobsResponse.member(:import_jobs_response)
 
+    GetInAppMessagesRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetInAppMessagesRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "endpoint-id"))
+    GetInAppMessagesRequest.struct_class = Types::GetInAppMessagesRequest
+
+    GetInAppMessagesResponse.add_member(:in_app_messages_response, Shapes::ShapeRef.new(shape: InAppMessagesResponse, required: true, location_name: "InAppMessagesResponse"))
+    GetInAppMessagesResponse.struct_class = Types::GetInAppMessagesResponse
+    GetInAppMessagesResponse[:payload] = :in_app_messages_response
+    GetInAppMessagesResponse[:payload_member] = GetInAppMessagesResponse.member(:in_app_messages_response)
+
+    GetInAppTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    GetInAppTemplateRequest.add_member(:version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "version"))
+    GetInAppTemplateRequest.struct_class = Types::GetInAppTemplateRequest
+
+    GetInAppTemplateResponse.add_member(:in_app_template_response, Shapes::ShapeRef.new(shape: InAppTemplateResponse, required: true, location_name: "InAppTemplateResponse"))
+    GetInAppTemplateResponse.struct_class = Types::GetInAppTemplateResponse
+    GetInAppTemplateResponse[:payload] = :in_app_template_response
+    GetInAppTemplateResponse[:payload_member] = GetInAppTemplateResponse.member(:in_app_template_response)
+
     GetJourneyDateRangeKpiRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetJourneyDateRangeKpiRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location: "querystring", location_name: "end-time"))
     GetJourneyDateRangeKpiRequest.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "journey-id"))
@@ -1991,6 +2074,73 @@ module Aws::Pinpoint
     ImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ImportJobsResponse.struct_class = Types::ImportJobsResponse
 
+    InAppCampaignSchedule.add_member(:end_date, Shapes::ShapeRef.new(shape: __string, location_name: "EndDate"))
+    InAppCampaignSchedule.add_member(:event_filter, Shapes::ShapeRef.new(shape: CampaignEventFilter, location_name: "EventFilter"))
+    InAppCampaignSchedule.add_member(:quiet_time, Shapes::ShapeRef.new(shape: QuietTime, location_name: "QuietTime"))
+    InAppCampaignSchedule.struct_class = Types::InAppCampaignSchedule
+
+    InAppMessage.add_member(:content, Shapes::ShapeRef.new(shape: ListOfInAppMessageContent, location_name: "Content"))
+    InAppMessage.add_member(:custom_config, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "CustomConfig"))
+    InAppMessage.add_member(:layout, Shapes::ShapeRef.new(shape: Layout, location_name: "Layout"))
+    InAppMessage.struct_class = Types::InAppMessage
+
+    InAppMessageBodyConfig.add_member(:alignment, Shapes::ShapeRef.new(shape: Alignment, required: true, location_name: "Alignment"))
+    InAppMessageBodyConfig.add_member(:body, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Body"))
+    InAppMessageBodyConfig.add_member(:text_color, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TextColor"))
+    InAppMessageBodyConfig.struct_class = Types::InAppMessageBodyConfig
+
+    InAppMessageButton.add_member(:android, Shapes::ShapeRef.new(shape: OverrideButtonConfiguration, location_name: "Android"))
+    InAppMessageButton.add_member(:default_config, Shapes::ShapeRef.new(shape: DefaultButtonConfiguration, location_name: "DefaultConfig"))
+    InAppMessageButton.add_member(:ios, Shapes::ShapeRef.new(shape: OverrideButtonConfiguration, location_name: "IOS"))
+    InAppMessageButton.add_member(:web, Shapes::ShapeRef.new(shape: OverrideButtonConfiguration, location_name: "Web"))
+    InAppMessageButton.struct_class = Types::InAppMessageButton
+
+    InAppMessageCampaign.add_member(:campaign_id, Shapes::ShapeRef.new(shape: __string, location_name: "CampaignId"))
+    InAppMessageCampaign.add_member(:daily_cap, Shapes::ShapeRef.new(shape: __integer, location_name: "DailyCap"))
+    InAppMessageCampaign.add_member(:in_app_message, Shapes::ShapeRef.new(shape: InAppMessage, location_name: "InAppMessage"))
+    InAppMessageCampaign.add_member(:priority, Shapes::ShapeRef.new(shape: __integer, location_name: "Priority"))
+    InAppMessageCampaign.add_member(:schedule, Shapes::ShapeRef.new(shape: InAppCampaignSchedule, location_name: "Schedule"))
+    InAppMessageCampaign.add_member(:session_cap, Shapes::ShapeRef.new(shape: __integer, location_name: "SessionCap"))
+    InAppMessageCampaign.add_member(:total_cap, Shapes::ShapeRef.new(shape: __integer, location_name: "TotalCap"))
+    InAppMessageCampaign.add_member(:treatment_id, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentId"))
+    InAppMessageCampaign.struct_class = Types::InAppMessageCampaign
+
+    InAppMessageContent.add_member(:background_color, Shapes::ShapeRef.new(shape: __string, location_name: "BackgroundColor"))
+    InAppMessageContent.add_member(:body_config, Shapes::ShapeRef.new(shape: InAppMessageBodyConfig, location_name: "BodyConfig"))
+    InAppMessageContent.add_member(:header_config, Shapes::ShapeRef.new(shape: InAppMessageHeaderConfig, location_name: "HeaderConfig"))
+    InAppMessageContent.add_member(:image_url, Shapes::ShapeRef.new(shape: __string, location_name: "ImageUrl"))
+    InAppMessageContent.add_member(:primary_btn, Shapes::ShapeRef.new(shape: InAppMessageButton, location_name: "PrimaryBtn"))
+    InAppMessageContent.add_member(:secondary_btn, Shapes::ShapeRef.new(shape: InAppMessageButton, location_name: "SecondaryBtn"))
+    InAppMessageContent.struct_class = Types::InAppMessageContent
+
+    InAppMessageHeaderConfig.add_member(:alignment, Shapes::ShapeRef.new(shape: Alignment, required: true, location_name: "Alignment"))
+    InAppMessageHeaderConfig.add_member(:header, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Header"))
+    InAppMessageHeaderConfig.add_member(:text_color, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TextColor"))
+    InAppMessageHeaderConfig.struct_class = Types::InAppMessageHeaderConfig
+
+    InAppMessagesResponse.add_member(:in_app_message_campaigns, Shapes::ShapeRef.new(shape: ListOfInAppMessageCampaign, location_name: "InAppMessageCampaigns"))
+    InAppMessagesResponse.struct_class = Types::InAppMessagesResponse
+
+    InAppTemplateRequest.add_member(:content, Shapes::ShapeRef.new(shape: ListOfInAppMessageContent, location_name: "Content"))
+    InAppTemplateRequest.add_member(:custom_config, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "CustomConfig"))
+    InAppTemplateRequest.add_member(:layout, Shapes::ShapeRef.new(shape: Layout, location_name: "Layout"))
+    InAppTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    InAppTemplateRequest.add_member(:template_description, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateDescription"))
+    InAppTemplateRequest.struct_class = Types::InAppTemplateRequest
+
+    InAppTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    InAppTemplateResponse.add_member(:content, Shapes::ShapeRef.new(shape: ListOfInAppMessageContent, location_name: "Content"))
+    InAppTemplateResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationDate"))
+    InAppTemplateResponse.add_member(:custom_config, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "CustomConfig"))
+    InAppTemplateResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastModifiedDate"))
+    InAppTemplateResponse.add_member(:layout, Shapes::ShapeRef.new(shape: Layout, location_name: "Layout"))
+    InAppTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    InAppTemplateResponse.add_member(:template_description, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateDescription"))
+    InAppTemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TemplateName"))
+    InAppTemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "TemplateType"))
+    InAppTemplateResponse.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "Version"))
+    InAppTemplateResponse.struct_class = Types::InAppTemplateResponse
+
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     InternalServerErrorException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
@@ -2096,6 +2246,10 @@ module Aws::Pinpoint
     ListOfExportJobResponse.member = Shapes::ShapeRef.new(shape: ExportJobResponse)
 
     ListOfImportJobResponse.member = Shapes::ShapeRef.new(shape: ImportJobResponse)
+
+    ListOfInAppMessageCampaign.member = Shapes::ShapeRef.new(shape: InAppMessageCampaign)
+
+    ListOfInAppMessageContent.member = Shapes::ShapeRef.new(shape: InAppMessageContent)
 
     ListOfJourneyResponse.member = Shapes::ShapeRef.new(shape: JourneyResponse)
 
@@ -2242,6 +2396,7 @@ module Aws::Pinpoint
     MessageConfiguration.add_member(:email_message, Shapes::ShapeRef.new(shape: CampaignEmailMessage, location_name: "EmailMessage"))
     MessageConfiguration.add_member(:gcm_message, Shapes::ShapeRef.new(shape: Message, location_name: "GCMMessage"))
     MessageConfiguration.add_member(:sms_message, Shapes::ShapeRef.new(shape: CampaignSmsMessage, location_name: "SMSMessage"))
+    MessageConfiguration.add_member(:in_app_message, Shapes::ShapeRef.new(shape: CampaignInAppMessage, location_name: "InAppMessage"))
     MessageConfiguration.struct_class = Types::MessageConfiguration
 
     MessageRequest.add_member(:addresses, Shapes::ShapeRef.new(shape: MapOfAddressConfiguration, location_name: "Addresses"))
@@ -2305,6 +2460,10 @@ module Aws::Pinpoint
     NumberValidateResponse.add_member(:timezone, Shapes::ShapeRef.new(shape: __string, location_name: "Timezone"))
     NumberValidateResponse.add_member(:zip_code, Shapes::ShapeRef.new(shape: __string, location_name: "ZipCode"))
     NumberValidateResponse.struct_class = Types::NumberValidateResponse
+
+    OverrideButtonConfiguration.add_member(:button_action, Shapes::ShapeRef.new(shape: ButtonAction, required: true, location_name: "ButtonAction"))
+    OverrideButtonConfiguration.add_member(:link, Shapes::ShapeRef.new(shape: __string, location_name: "Link"))
+    OverrideButtonConfiguration.struct_class = Types::OverrideButtonConfiguration
 
     PayloadTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     PayloadTooLargeException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
@@ -2660,6 +2819,11 @@ module Aws::Pinpoint
     TemplateConfiguration.add_member(:voice_template, Shapes::ShapeRef.new(shape: Template, location_name: "VoiceTemplate"))
     TemplateConfiguration.struct_class = Types::TemplateConfiguration
 
+    TemplateCreateMessageBody.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    TemplateCreateMessageBody.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
+    TemplateCreateMessageBody.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
+    TemplateCreateMessageBody.struct_class = Types::TemplateCreateMessageBody
+
     TemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     TemplateResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationDate"))
     TemplateResponse.add_member(:default_substitutions, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultSubstitutions"))
@@ -2858,6 +3022,19 @@ module Aws::Pinpoint
     UpdateGcmChannelResponse.struct_class = Types::UpdateGcmChannelResponse
     UpdateGcmChannelResponse[:payload] = :gcm_channel_response
     UpdateGcmChannelResponse[:payload_member] = UpdateGcmChannelResponse.member(:gcm_channel_response)
+
+    UpdateInAppTemplateRequest.add_member(:create_new_version, Shapes::ShapeRef.new(shape: __boolean, location: "querystring", location_name: "create-new-version"))
+    UpdateInAppTemplateRequest.add_member(:in_app_template_request, Shapes::ShapeRef.new(shape: InAppTemplateRequest, required: true, location_name: "InAppTemplateRequest"))
+    UpdateInAppTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "template-name"))
+    UpdateInAppTemplateRequest.add_member(:version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "version"))
+    UpdateInAppTemplateRequest.struct_class = Types::UpdateInAppTemplateRequest
+    UpdateInAppTemplateRequest[:payload] = :in_app_template_request
+    UpdateInAppTemplateRequest[:payload_member] = UpdateInAppTemplateRequest.member(:in_app_template_request)
+
+    UpdateInAppTemplateResponse.add_member(:message_body, Shapes::ShapeRef.new(shape: MessageBody, required: true, location_name: "MessageBody"))
+    UpdateInAppTemplateResponse.struct_class = Types::UpdateInAppTemplateResponse
+    UpdateInAppTemplateResponse[:payload] = :message_body
+    UpdateInAppTemplateResponse[:payload_member] = UpdateInAppTemplateResponse.member(:message_body)
 
     UpdateJourneyRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     UpdateJourneyRequest.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "journey-id"))
@@ -3064,6 +3241,7 @@ module Aws::Pinpoint
     WriteCampaignRequest.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     WriteCampaignRequest.add_member(:treatment_description, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentDescription"))
     WriteCampaignRequest.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
+    WriteCampaignRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integer, location_name: "Priority"))
     WriteCampaignRequest.struct_class = Types::WriteCampaignRequest
 
     WriteEventStream.add_member(:destination_stream_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DestinationStreamArn"))
@@ -3190,6 +3368,19 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_in_app_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInAppTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/templates/{template-name}/inapp"
+        o.input = Shapes::ShapeRef.new(shape: CreateInAppTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInAppTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
       api.add_operation(:create_journey, Seahorse::Model::Operation.new.tap do |o|
@@ -3462,6 +3653,21 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/gcm"
         o.input = Shapes::ShapeRef.new(shape: DeleteGcmChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteGcmChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_in_app_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInAppTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/templates/{template-name}/inapp"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInAppTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInAppTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
@@ -3987,6 +4193,36 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/jobs/import"
         o.input = Shapes::ShapeRef.new(shape: GetImportJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetImportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_in_app_messages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInAppMessages"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/endpoints/{endpoint-id}/inappmessages"
+        o.input = Shapes::ShapeRef.new(shape: GetInAppMessagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInAppMessagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_in_app_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInAppTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/templates/{template-name}/inapp"
+        o.input = Shapes::ShapeRef.new(shape: GetInAppTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInAppTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
@@ -4609,6 +4845,21 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/gcm"
         o.input = Shapes::ShapeRef.new(shape: UpdateGcmChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateGcmChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_in_app_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInAppTemplate"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/templates/{template-name}/inapp"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInAppTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInAppTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)

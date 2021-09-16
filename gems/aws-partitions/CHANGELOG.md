@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.502.0 (2021-09-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::KafkaConnect`.
+
 1.501.0 (2021-09-13)
 ------------------
 

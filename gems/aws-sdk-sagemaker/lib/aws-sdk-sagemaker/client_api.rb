@@ -1193,6 +1193,8 @@ module Aws::SageMaker
     ResponseMIMETypes = Shapes::ListShape.new(name: 'ResponseMIMETypes')
     RetentionPolicy = Shapes::StructureShape.new(name: 'RetentionPolicy')
     RetentionType = Shapes::StringShape.new(name: 'RetentionType')
+    RetryPipelineExecutionRequest = Shapes::StructureShape.new(name: 'RetryPipelineExecutionRequest')
+    RetryPipelineExecutionResponse = Shapes::StructureShape.new(name: 'RetryPipelineExecutionResponse')
     RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RootAccess = Shapes::StringShape.new(name: 'RootAccess')
@@ -5677,6 +5679,13 @@ module Aws::SageMaker
     RetentionPolicy.add_member(:home_efs_file_system, Shapes::ShapeRef.new(shape: RetentionType, location_name: "HomeEfsFileSystem"))
     RetentionPolicy.struct_class = Types::RetentionPolicy
 
+    RetryPipelineExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
+    RetryPipelineExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RetryPipelineExecutionRequest.struct_class = Types::RetryPipelineExecutionRequest
+
+    RetryPipelineExecutionResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
+    RetryPipelineExecutionResponse.struct_class = Types::RetryPipelineExecutionResponse
+
     RetryStrategy.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttempts, required: true, location_name: "MaximumRetryAttempts"))
     RetryStrategy.struct_class = Types::RetryStrategy
 
@@ -8541,6 +8550,17 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: RenderUiTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: RenderUiTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:retry_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RetryPipelineExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RetryPipelineExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RetryPipelineExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:search, Seahorse::Model::Operation.new.tap do |o|

@@ -148,6 +148,7 @@ module Aws
   autoload :IoTWireless, 'aws-sdk-iotwireless'
   autoload :KMS, 'aws-sdk-kms'
   autoload :Kafka, 'aws-sdk-kafka'
+  autoload :KafkaConnect, 'aws-sdk-kafkaconnect'
   autoload :Kendra, 'aws-sdk-kendra'
   autoload :Kinesis, 'aws-sdk-kinesis'
   autoload :KinesisAnalytics, 'aws-sdk-kinesisanalytics'

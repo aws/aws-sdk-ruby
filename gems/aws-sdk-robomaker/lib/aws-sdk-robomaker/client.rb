@@ -804,7 +804,7 @@ module Aws::RoboMaker
     # @option params [required, String] :name
     #   The name of the robot application.
     #
-    # @option params [required, Array<Types::SourceConfig>] :sources
+    # @option params [Array<Types::SourceConfig>] :sources
     #   The sources of the robot application.
     #
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
@@ -814,6 +814,10 @@ module Aws::RoboMaker
     # @option params [Hash<String,String>] :tags
     #   A map that contains tag keys and tag values that are attached to the
     #   robot application.
+    #
+    # @option params [Types::Environment] :environment
+    #   The object that contains that URI of the Docker image that you use for
+    #   your robot application.
     #
     # @return [Types::CreateRobotApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -825,12 +829,13 @@ module Aws::RoboMaker
     #   * {Types::CreateRobotApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateRobotApplicationResponse#revision_id #revision_id} => String
     #   * {Types::CreateRobotApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateRobotApplicationResponse#environment #environment} => Types::Environment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_robot_application({
     #     name: "Name", # required
-    #     sources: [ # required
+    #     sources: [
     #       {
     #         s3_bucket: "S3Bucket",
     #         s3_key: "S3Key",
@@ -843,6 +848,9 @@ module Aws::RoboMaker
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     environment: {
+    #       uri: "RepositoryUrl",
     #     },
     #   })
     #
@@ -862,6 +870,7 @@ module Aws::RoboMaker
     #   resp.revision_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.environment.uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplication AWS API Documentation
     #
@@ -882,6 +891,14 @@ module Aws::RoboMaker
     #   value and it matches the latest revision ID, a new version will be
     #   created.
     #
+    # @option params [Array<String>] :s3_etags
+    #   The Amazon S3 identifier for the zip file bundle that you use for your
+    #   robot application.
+    #
+    # @option params [String] :image_digest
+    #   A SHA256 identifier for the Docker image that you use for your robot
+    #   application.
+    #
     # @return [Types::CreateRobotApplicationVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRobotApplicationVersionResponse#arn #arn} => String
@@ -891,12 +908,15 @@ module Aws::RoboMaker
     #   * {Types::CreateRobotApplicationVersionResponse#robot_software_suite #robot_software_suite} => Types::RobotSoftwareSuite
     #   * {Types::CreateRobotApplicationVersionResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateRobotApplicationVersionResponse#revision_id #revision_id} => String
+    #   * {Types::CreateRobotApplicationVersionResponse#environment #environment} => Types::Environment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_robot_application_version({
     #     application: "Arn", # required
     #     current_revision_id: "RevisionId",
+    #     s3_etags: ["S3Etag"],
+    #     image_digest: "ImageDigest",
     #   })
     #
     # @example Response structure
@@ -913,6 +933,7 @@ module Aws::RoboMaker
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
+    #   resp.environment.uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationVersion AWS API Documentation
     #
@@ -928,7 +949,7 @@ module Aws::RoboMaker
     # @option params [required, String] :name
     #   The name of the simulation application.
     #
-    # @option params [required, Array<Types::SourceConfig>] :sources
+    # @option params [Array<Types::SourceConfig>] :sources
     #   The sources of the simulation application.
     #
     # @option params [required, Types::SimulationSoftwareSuite] :simulation_software_suite
@@ -945,6 +966,10 @@ module Aws::RoboMaker
     #   A map that contains tag keys and tag values that are attached to the
     #   simulation application.
     #
+    # @option params [Types::Environment] :environment
+    #   The object that contains the Docker image URI used to create your
+    #   simulation application.
+    #
     # @return [Types::CreateSimulationApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSimulationApplicationResponse#arn #arn} => String
@@ -957,12 +982,13 @@ module Aws::RoboMaker
     #   * {Types::CreateSimulationApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateSimulationApplicationResponse#revision_id #revision_id} => String
     #   * {Types::CreateSimulationApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateSimulationApplicationResponse#environment #environment} => Types::Environment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_simulation_application({
     #     name: "Name", # required
-    #     sources: [ # required
+    #     sources: [
     #       {
     #         s3_bucket: "S3Bucket",
     #         s3_key: "S3Key",
@@ -984,6 +1010,9 @@ module Aws::RoboMaker
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     environment: {
+    #       uri: "RepositoryUrl",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1006,6 +1035,7 @@ module Aws::RoboMaker
     #   resp.revision_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.environment.uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplication AWS API Documentation
     #
@@ -1026,6 +1056,14 @@ module Aws::RoboMaker
     #   a value and it matches the latest revision ID, a new version will be
     #   created.
     #
+    # @option params [Array<String>] :s3_etags
+    #   The Amazon S3 eTag identifier for the zip file bundle that you use to
+    #   create the simulation application.
+    #
+    # @option params [String] :image_digest
+    #   The SHA256 digest used to identify the Docker image URI used to
+    #   created the simulation application.
+    #
     # @return [Types::CreateSimulationApplicationVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSimulationApplicationVersionResponse#arn #arn} => String
@@ -1037,12 +1075,15 @@ module Aws::RoboMaker
     #   * {Types::CreateSimulationApplicationVersionResponse#rendering_engine #rendering_engine} => Types::RenderingEngine
     #   * {Types::CreateSimulationApplicationVersionResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateSimulationApplicationVersionResponse#revision_id #revision_id} => String
+    #   * {Types::CreateSimulationApplicationVersionResponse#environment #environment} => Types::Environment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_simulation_application_version({
     #     application: "Arn", # required
     #     current_revision_id: "RevisionId",
+    #     s3_etags: ["S3Etag"],
+    #     image_digest: "ImageDigest",
     #   })
     #
     # @example Response structure
@@ -1063,6 +1104,7 @@ module Aws::RoboMaker
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
+    #   resp.environment.uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplicationVersion AWS API Documentation
     #
@@ -1925,6 +1967,8 @@ module Aws::RoboMaker
     #   * {Types::DescribeRobotApplicationResponse#revision_id #revision_id} => String
     #   * {Types::DescribeRobotApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::DescribeRobotApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeRobotApplicationResponse#environment #environment} => Types::Environment
+    #   * {Types::DescribeRobotApplicationResponse#image_digest #image_digest} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1949,6 +1993,8 @@ module Aws::RoboMaker
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.environment.uri #=> String
+    #   resp.image_digest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeRobotApplication AWS API Documentation
     #
@@ -1979,6 +2025,8 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationApplicationResponse#revision_id #revision_id} => String
     #   * {Types::DescribeSimulationApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::DescribeSimulationApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeSimulationApplicationResponse#environment #environment} => Types::Environment
+    #   * {Types::DescribeSimulationApplicationResponse#image_digest #image_digest} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2007,6 +2055,8 @@ module Aws::RoboMaker
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.environment.uri #=> String
+    #   resp.image_digest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationApplication AWS API Documentation
     #
@@ -3894,7 +3944,7 @@ module Aws::RoboMaker
     # @option params [required, String] :application
     #   The application information for the robot application.
     #
-    # @option params [required, Array<Types::SourceConfig>] :sources
+    # @option params [Array<Types::SourceConfig>] :sources
     #   The sources of the robot application.
     #
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
@@ -3903,6 +3953,10 @@ module Aws::RoboMaker
     #
     # @option params [String] :current_revision_id
     #   The revision id for the robot application.
+    #
+    # @option params [Types::Environment] :environment
+    #   The object that contains the Docker image URI for your robot
+    #   application.
     #
     # @return [Types::UpdateRobotApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3913,12 +3967,13 @@ module Aws::RoboMaker
     #   * {Types::UpdateRobotApplicationResponse#robot_software_suite #robot_software_suite} => Types::RobotSoftwareSuite
     #   * {Types::UpdateRobotApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateRobotApplicationResponse#revision_id #revision_id} => String
+    #   * {Types::UpdateRobotApplicationResponse#environment #environment} => Types::Environment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_robot_application({
     #     application: "Arn", # required
-    #     sources: [ # required
+    #     sources: [
     #       {
     #         s3_bucket: "S3Bucket",
     #         s3_key: "S3Key",
@@ -3930,6 +3985,9 @@ module Aws::RoboMaker
     #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #     },
     #     current_revision_id: "RevisionId",
+    #     environment: {
+    #       uri: "RepositoryUrl",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3946,6 +4004,7 @@ module Aws::RoboMaker
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
+    #   resp.environment.uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateRobotApplication AWS API Documentation
     #
@@ -3961,7 +4020,7 @@ module Aws::RoboMaker
     # @option params [required, String] :application
     #   The application information for the simulation application.
     #
-    # @option params [required, Array<Types::SourceConfig>] :sources
+    # @option params [Array<Types::SourceConfig>] :sources
     #   The sources of the simulation application.
     #
     # @option params [required, Types::SimulationSoftwareSuite] :simulation_software_suite
@@ -3976,6 +4035,10 @@ module Aws::RoboMaker
     # @option params [String] :current_revision_id
     #   The revision id for the robot application.
     #
+    # @option params [Types::Environment] :environment
+    #   The object that contains the Docker image URI for your simulation
+    #   application.
+    #
     # @return [Types::UpdateSimulationApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSimulationApplicationResponse#arn #arn} => String
@@ -3987,12 +4050,13 @@ module Aws::RoboMaker
     #   * {Types::UpdateSimulationApplicationResponse#rendering_engine #rendering_engine} => Types::RenderingEngine
     #   * {Types::UpdateSimulationApplicationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateSimulationApplicationResponse#revision_id #revision_id} => String
+    #   * {Types::UpdateSimulationApplicationResponse#environment #environment} => Types::Environment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_simulation_application({
     #     application: "Arn", # required
-    #     sources: [ # required
+    #     sources: [
     #       {
     #         s3_bucket: "S3Bucket",
     #         s3_key: "S3Key",
@@ -4012,6 +4076,9 @@ module Aws::RoboMaker
     #       version: "RenderingEngineVersionType",
     #     },
     #     current_revision_id: "RevisionId",
+    #     environment: {
+    #       uri: "RepositoryUrl",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4032,6 +4099,7 @@ module Aws::RoboMaker
     #   resp.rendering_engine.version #=> String
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
+    #   resp.environment.uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateSimulationApplication AWS API Documentation
     #
@@ -4104,7 +4172,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

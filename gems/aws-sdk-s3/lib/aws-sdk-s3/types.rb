@@ -964,10 +964,10 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   If you specified server-side encryption either with an Amazon
-    #   S3-managed encryption key or an Amazon Web Services KMS customer
-    #   master key (CMK) in your initiate multipart upload request, the
-    #   response includes this header. It confirms the encryption algorithm
-    #   that Amazon S3 used to encrypt the object.
+    #   S3-managed encryption key or an Amazon Web Services KMS key in your
+    #   initiate multipart upload request, the response includes this
+    #   header. It confirms the encryption algorithm that Amazon S3 used to
+    #   encrypt the object.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -978,7 +978,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for the object.
+    #   managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -1248,7 +1248,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for the object.
+    #   managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1917,7 +1917,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for the object.
+    #   managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -2130,14 +2130,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the ID of the symmetric customer managed Amazon Web
-    #   Services KMS CMK to use for object encryption. All GET and PUT
-    #   requests for an object protected by Amazon Web Services KMS will
-    #   fail if not made via SSL or using SigV4. For information about
-    #   configuring using any of the officially supported Amazon Web
-    #   Services SDKs and Amazon Web Services CLI, see [Specifying the
-    #   Signature Version in Request Authentication][1] in the *Amazon S3
-    #   User Guide*.
+    #   Specifies the ID of the symmetric customer managed key to use for
+    #   object encryption. All GET and PUT requests for an object protected
+    #   by Amazon Web Services KMS will fail if not made via SSL or using
+    #   SigV4. For information about configuring using any of the officially
+    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -3266,11 +3265,10 @@ module Aws::S3
     #
     # @!attribute [rw] kms_key_id
     #   If the encryption type is `aws:kms`, this optional value specifies
-    #   the ID of the symmetric customer managed Amazon Web Services KMS CMK
-    #   to use for encryption of job results. Amazon S3 only supports
-    #   symmetric CMKs. For more information, see [Using symmetric and
-    #   asymmetric keys][1] in the *Amazon Web Services Key Management
-    #   Service Developer Guide*.
+    #   the ID of the symmetric customer managed key to use for encryption
+    #   of job results. Amazon S3 only supports symmetric keys. For more
+    #   information, see [Using symmetric and asymmetric keys][1] in the
+    #   *Amazon Web Services Key Management Service Developer Guide*.
     #
     #
     #
@@ -5483,7 +5481,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for the object.
+    #   managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -5606,6 +5604,9 @@ module Aws::S3
     #   Services SDKs, you provide the access point ARN in place of the
     #   bucket name. For more information about access point ARNs, see
     #   [Using access points][1] in the *Amazon S3 User Guide*.
+    #
+    #   When using an Object Lambda access point the hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-object-lambda.*Region*.amazonaws.com.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -6330,10 +6331,10 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   If the object is stored using server-side encryption either with an
-    #   Amazon Web Services KMS customer master key (CMK) or an Amazon
-    #   S3-managed encryption key, the response includes this header with
-    #   the value of the server-side encryption algorithm used when storing
-    #   this object in Amazon S3 (for example, AES256, aws:kms).
+    #   Amazon Web Services KMS key or an Amazon S3-managed encryption key,
+    #   the response includes this header with the value of the server-side
+    #   encryption algorithm used when storing this object in Amazon S3 (for
+    #   example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -6356,7 +6357,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for the object.
+    #   managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -9048,6 +9049,7 @@ module Aws::S3
     #             value: "Value", # required
     #           },
     #         ],
+    #         access_point_arn: "AccessPointArn",
     #       }
     #
     # @!attribute [rw] prefix
@@ -9058,11 +9060,16 @@ module Aws::S3
     #   The list of tags used when evaluating an AND predicate.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] access_point_arn
+    #   The access point ARN used when evaluating an AND predicate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsAndOperator AWS API Documentation
     #
     class MetricsAndOperator < Struct.new(
       :prefix,
-      :tags)
+      :tags,
+      :access_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9072,8 +9079,7 @@ module Aws::S3
     # If you're updating an existing metrics configuration, note that this
     # is a full replacement of the existing metrics configuration. If you
     # don't include the elements you want to keep, they are erased. For
-    # more information, see [ PUT Bucket metrics][1] in the *Amazon S3 API
-    # Reference*.
+    # more information, see [PutBucketMetricsConfiguration][1].
     #
     #
     #
@@ -9090,6 +9096,7 @@ module Aws::S3
     #             key: "ObjectKey", # required
     #             value: "Value", # required
     #           },
+    #           access_point_arn: "AccessPointArn",
     #           and: {
     #             prefix: "Prefix",
     #             tags: [
@@ -9098,6 +9105,7 @@ module Aws::S3
     #                 value: "Value", # required
     #               },
     #             ],
+    #             access_point_arn: "AccessPointArn",
     #           },
     #         },
     #       }
@@ -9109,7 +9117,8 @@ module Aws::S3
     # @!attribute [rw] filter
     #   Specifies a metrics configuration filter. The metrics configuration
     #   will only include objects that meet the filter's criteria. A filter
-    #   must be a prefix, a tag, or a conjunction (MetricsAndOperator).
+    #   must be a prefix, an object tag, an access point ARN, or a
+    #   conjunction (MetricsAndOperator).
     #   @return [Types::MetricsFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsConfiguration AWS API Documentation
@@ -9123,7 +9132,13 @@ module Aws::S3
 
     # Specifies a metrics configuration filter. The metrics configuration
     # only includes objects that meet the filter's criteria. A filter must
-    # be a prefix, a tag, or a conjunction (MetricsAndOperator).
+    # be a prefix, an object tag, an access point ARN, or a conjunction
+    # (MetricsAndOperator). For more information, see
+    # [PutBucketMetricsConfiguration][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html
     #
     # @note When making an API call, you may pass MetricsFilter
     #   data as a hash:
@@ -9134,6 +9149,7 @@ module Aws::S3
     #           key: "ObjectKey", # required
     #           value: "Value", # required
     #         },
+    #         access_point_arn: "AccessPointArn",
     #         and: {
     #           prefix: "Prefix",
     #           tags: [
@@ -9142,6 +9158,7 @@ module Aws::S3
     #               value: "Value", # required
     #             },
     #           ],
+    #           access_point_arn: "AccessPointArn",
     #         },
     #       }
     #
@@ -9152,6 +9169,10 @@ module Aws::S3
     # @!attribute [rw] tag
     #   The tag used when evaluating a metrics filter.
     #   @return [Types::Tag]
+    #
+    # @!attribute [rw] access_point_arn
+    #   The access point ARN used when evaluating a metrics filter.
+    #   @return [String]
     #
     # @!attribute [rw] and
     #   A conjunction (logical AND) of predicates, which is used in
@@ -9165,6 +9186,7 @@ module Aws::S3
     class MetricsFilter < Struct.new(
       :prefix,
       :tag,
+      :access_point_arn,
       :and)
       SENSITIVE = []
       include Aws::Structure
@@ -10393,10 +10415,10 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   Specifies default encryption for a bucket using server-side
-    #   encryption with Amazon S3-managed keys (SSE-S3) or customer master
-    #   keys stored in Amazon Web Services KMS (SSE-KMS). For information
-    #   about the Amazon S3 default encryption feature, see [Amazon S3
-    #   Default Bucket Encryption][1] in the *Amazon S3 User Guide*.
+    #   encryption with Amazon S3-managed keys (SSE-S3) or customer managed
+    #   keys (SSE-KMS). For information about the Amazon S3 default
+    #   encryption feature, see [Amazon S3 Default Bucket Encryption][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -10778,6 +10800,7 @@ module Aws::S3
     #               key: "ObjectKey", # required
     #               value: "Value", # required
     #             },
+    #             access_point_arn: "AccessPointArn",
     #             and: {
     #               prefix: "Prefix",
     #               tags: [
@@ -10786,6 +10809,7 @@ module Aws::S3
     #                   value: "Value", # required
     #                 },
     #               ],
+    #               access_point_arn: "AccessPointArn",
     #             },
     #           },
     #         },
@@ -11839,10 +11863,9 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   If you specified server-side encryption either with an Amazon Web
-    #   Services KMS customer master key (CMK) or Amazon S3-managed
-    #   encryption key in your PUT request, the response includes this
-    #   header. It confirms the encryption algorithm that Amazon S3 used to
-    #   encrypt the object.
+    #   Services KMS key or Amazon S3-managed encryption key in your PUT
+    #   request, the response includes this header. It confirms the
+    #   encryption algorithm that Amazon S3 used to encrypt the object.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -11866,7 +11889,7 @@ module Aws::S3
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the Amazon Web Services
     #   Key Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for the object.
+    #   managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -12168,13 +12191,12 @@ module Aws::S3
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the Amazon Web Services
     #   Key Management Service (Amazon Web Services KMS) symmetrical
-    #   customer managed customer master key (CMK) that was used for the
-    #   object. If you specify `x-amz-server-side-encryption:aws:kms`, but
-    #   do not provide` x-amz-server-side-encryption-aws-kms-key-id`, Amazon
-    #   S3 uses the Amazon Web Services managed CMK in Amazon Web Services
-    #   to protect the data. If the KMS key does not exist in the same
-    #   account issuing the command, you must use the full ARN and not just
-    #   the ID.
+    #   customer managed key that was used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
+    #   Amazon Web Services managed key to protect the data. If the KMS key
+    #   does not exist in the same account issuing the command, you must use
+    #   the full ARN and not just the ID.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -13022,8 +13044,8 @@ module Aws::S3
     #   source objects that you want to replicate. You can choose to enable
     #   or disable the replication of these objects. Currently, Amazon S3
     #   supports only the filter that you can specify for objects created
-    #   with server-side encryption using a customer master key (CMK) stored
-    #   in Amazon Web Services Key Management Service (SSE-KMS).
+    #   with server-side encryption using a customer managed key stored in
+    #   Amazon Web Services Key Management Service (SSE-KMS).
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] existing_object_replication
@@ -13902,8 +13924,8 @@ module Aws::S3
     #
     # @!attribute [rw] key_id
     #   Specifies the ID of the Amazon Web Services Key Management Service
-    #   (Amazon Web Services KMS) symmetric customer managed customer master
-    #   key (CMK) to use for encrypting inventory reports.
+    #   (Amazon Web Services KMS) symmetric customer managed key to use for
+    #   encrypting inventory reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
@@ -14344,8 +14366,8 @@ module Aws::S3
     # source objects that you want to replicate. You can choose to enable or
     # disable the replication of these objects. Currently, Amazon S3
     # supports only the filter that you can specify for objects created with
-    # server-side encryption using a customer master key (CMK) stored in
-    # Amazon Web Services Key Management Service (SSE-KMS).
+    # server-side encryption using a customer managed key stored in Amazon
+    # Web Services Key Management Service (SSE-KMS).
     #
     # @note When making an API call, you may pass SourceSelectionCriteria
     #   data as a hash:
@@ -14837,7 +14859,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for the object.
+    #   managed key that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -15119,7 +15141,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) was used for the object.
+    #   managed key was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] bucket_key_enabled
@@ -15615,8 +15637,7 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetric customer
-    #   managed customer master key (CMK) that was used for stored in Amazon
-    #   S3 object.
+    #   managed key that was used for stored in Amazon S3 object.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5

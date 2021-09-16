@@ -15213,6 +15213,43 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Retry the execution of the pipeline.
+    #
+    # @option params [required, String] :pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::RetryPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RetryPipelineExecutionResponse#pipeline_execution_arn #pipeline_execution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.retry_pipeline_execution({
+    #     pipeline_execution_arn: "PipelineExecutionArn", # required
+    #     client_request_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecution AWS API Documentation
+    #
+    # @overload retry_pipeline_execution(params = {})
+    # @param [Hash] params ({})
+    def retry_pipeline_execution(params = {}, options = {})
+      req = build_request(:retry_pipeline_execution, params)
+      req.send_request(options)
+    end
+
     # Finds Amazon SageMaker resources that match a search query. Matching
     # resources are returned as a list of `SearchRecord` objects in the
     # response. You can sort the search results by any resource property in
@@ -16150,7 +16187,7 @@ module Aws::SageMaker
     # @option params [required, String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -16404,7 +16441,7 @@ module Aws::SageMaker
     # @option params [required, String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -17995,7 +18032,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

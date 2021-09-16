@@ -517,12 +517,12 @@ module Aws::S3
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetrical customer
-    #   managed customer master key (CMK) that was used for the object. If you
-    #   specify `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   managed key that was used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
-    #   Amazon Web Services managed CMK in Amazon Web Services to protect the
-    #   data. If the KMS key does not exist in the same account issuing the
-    #   command, you must use the full ARN and not just the ID.
+    #   Amazon Web Services managed key to protect the data. If the KMS key
+    #   does not exist in the same account issuing the command, you must use
+    #   the full ARN and not just the ID.
     # @option options [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
     #   object encryption. The value of this header is a base64-encoded UTF-8

@@ -365,6 +365,7 @@ module Aws
             'IoTWireless' => 'api.iotwireless',
             'KMS' => 'kms',
             'Kafka' => 'kafka',
+            'KafkaConnect' => 'kafkaconnect',
             'Kendra' => 'kendra',
             'Kinesis' => 'kinesis',
             'KinesisAnalytics' => 'kinesisanalytics',

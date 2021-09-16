@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.112.0 (2021-09-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-kafkaconnect` gem.
+
 3.111.0 (2021-09-08)
 ------------------
 

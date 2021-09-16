@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2021-09-16)
+------------------
+
+* Feature - Add support for access point arn filtering in S3 CW Request Metrics
+
 1.102.0 (2021-09-02)
 ------------------
 

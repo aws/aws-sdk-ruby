@@ -472,6 +472,9 @@
   "Kafka": {
     "models": "kafka/2018-11-14"
   },
+  "KafkaConnect": {
+    "models": "kafkaconnect/2021-09-14"
+  },
   "Kendra": {
     "models": "kendra/2019-02-03"
   },

@@ -386,7 +386,7 @@ module Aws::Pinpoint
     #         {
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           },
     #           message_configuration: {
     #             adm_message: {
@@ -476,6 +476,73 @@ module Aws::Pinpoint
     #               entity_id: "__string",
     #               template_id: "__string",
     #             },
+    #             in_app_message: {
+    #               body: "__string",
+    #               content: [
+    #                 {
+    #                   background_color: "__string",
+    #                   body_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     body: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   header_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     header: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   image_url: "__string",
+    #                   primary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                   secondary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               custom_config: {
+    #                 "__string" => "__string",
+    #               },
+    #               layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #             },
     #           },
     #           schedule: {
     #             end_time: "__string",
@@ -500,7 +567,7 @@ module Aws::Pinpoint
     #               },
     #               filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #             },
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -534,7 +601,7 @@ module Aws::Pinpoint
     #       ],
     #       custom_delivery_configuration: {
     #         delivery_uri: "__string", # required
-    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #       },
     #       description: "__string",
     #       holdout_percent: 1,
@@ -549,6 +616,7 @@ module Aws::Pinpoint
     #         maximum_duration: 1,
     #         messages_per_second: 1,
     #         total: 1,
+    #         session: 1,
     #       },
     #       message_configuration: {
     #         adm_message: {
@@ -638,6 +706,73 @@ module Aws::Pinpoint
     #           entity_id: "__string",
     #           template_id: "__string",
     #         },
+    #         in_app_message: {
+    #           body: "__string",
+    #           content: [
+    #             {
+    #               background_color: "__string",
+    #               body_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 body: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               header_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 header: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               image_url: "__string",
+    #               primary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #               secondary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           custom_config: {
+    #             "__string" => "__string",
+    #           },
+    #           layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #         },
     #       },
     #       name: "__string",
     #       schedule: {
@@ -663,7 +798,7 @@ module Aws::Pinpoint
     #           },
     #           filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #         },
-    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #         is_local_time: false,
     #         quiet_time: {
     #           end: "__string",
@@ -697,6 +832,7 @@ module Aws::Pinpoint
     #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
+    #       priority: 1,
     #     },
     #   })
     #
@@ -705,7 +841,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -778,6 +914,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -790,7 +963,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -813,7 +986,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -827,6 +1000,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.limits.session #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.adm_message.body #=> String
     #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
@@ -898,6 +1072,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -911,7 +1122,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -933,6 +1144,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
+    #   resp.campaign_response.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaign AWS API Documentation
     #
@@ -1102,6 +1314,109 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Creates a new message template for messages using the in-app message
+    # channel.
+    #
+    # @option params [required, Types::InAppTemplateRequest] :in_app_template_request
+    #   In-App Template Request.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @return [Types::CreateInAppTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInAppTemplateResponse#template_create_message_body #template_create_message_body} => Types::TemplateCreateMessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_in_app_template({
+    #     in_app_template_request: { # required
+    #       content: [
+    #         {
+    #           background_color: "__string",
+    #           body_config: {
+    #             alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #             body: "__string", # required
+    #             text_color: "__string", # required
+    #           },
+    #           header_config: {
+    #             alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #             header: "__string", # required
+    #             text_color: "__string", # required
+    #           },
+    #           image_url: "__string",
+    #           primary_btn: {
+    #             android: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             default_config: {
+    #               background_color: "__string",
+    #               border_radius: 1,
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #               text: "__string", # required
+    #               text_color: "__string",
+    #             },
+    #             ios: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             web: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #           },
+    #           secondary_btn: {
+    #             android: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             default_config: {
+    #               background_color: "__string",
+    #               border_radius: 1,
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #               text: "__string", # required
+    #               text_color: "__string",
+    #             },
+    #             ios: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             web: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       custom_config: {
+    #         "__string" => "__string",
+    #       },
+    #       layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       template_description: "__string",
+    #     },
+    #     template_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_create_message_body.arn #=> String
+    #   resp.template_create_message_body.message #=> String
+    #   resp.template_create_message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateInAppTemplate AWS API Documentation
+    #
+    # @overload create_in_app_template(params = {})
+    # @param [Hash] params ({})
+    def create_in_app_template(params = {}, options = {})
+      req = build_request(:create_in_app_template, params)
+      req.send_request(options)
+    end
+
     # Creates a journey for an application.
     #
     # @option params [required, String] :application_id
@@ -1122,7 +1437,7 @@ module Aws::Pinpoint
     #         "__string" => {
     #           custom: {
     #             delivery_uri: "__string",
-    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #             message_config: {
     #               data: "__string",
     #             },
@@ -1449,7 +1764,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities #=> Hash
     #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
     #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
-    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
     #   resp.journey_response.activities["__string"].custom.next_activity #=> String
     #   resp.journey_response.activities["__string"].custom.template_name #=> String
@@ -2432,7 +2747,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -2505,6 +2820,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -2517,7 +2869,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -2540,7 +2892,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -2554,6 +2906,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.limits.session #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.adm_message.body #=> String
     #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
@@ -2625,6 +2978,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -2638,7 +3028,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -2660,6 +3050,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
+    #   resp.campaign_response.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaign AWS API Documentation
     #
@@ -2768,7 +3159,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -2876,6 +3267,38 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Deletes a message template for messages sent using the in-app message
+    # channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
+    #
+    # @return [Types::DeleteInAppTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInAppTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_in_app_template({
+    #     template_name: "__string", # required
+    #     version: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteInAppTemplate AWS API Documentation
+    #
+    # @overload delete_in_app_template(params = {})
+    # @param [Hash] params ({})
+    def delete_in_app_template(params = {}, options = {})
+      req = build_request(:delete_in_app_template, params)
+      req.send_request(options)
+    end
+
     # Deletes a journey from an application.
     #
     # @option params [required, String] :application_id
@@ -2898,7 +3321,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities #=> Hash
     #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
     #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
-    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
     #   resp.journey_response.activities["__string"].custom.next_activity #=> String
     #   resp.journey_response.activities["__string"].custom.template_name #=> String
@@ -3378,7 +3801,7 @@ module Aws::Pinpoint
     #   resp.endpoints_response.item[0].attributes #=> Hash
     #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
     #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
-    #   resp.endpoints_response.item[0].channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.endpoints_response.item[0].cohort_id #=> String
     #   resp.endpoints_response.item[0].creation_date #=> String
     #   resp.endpoints_response.item[0].demographic.app_version #=> String
@@ -3790,6 +4213,7 @@ module Aws::Pinpoint
     #   resp.application_settings_resource.limits.maximum_duration #=> Integer
     #   resp.application_settings_resource.limits.messages_per_second #=> Integer
     #   resp.application_settings_resource.limits.total #=> Integer
+    #   resp.application_settings_resource.limits.session #=> Integer
     #   resp.application_settings_resource.quiet_time.end #=> String
     #   resp.application_settings_resource.quiet_time.start #=> String
     #
@@ -3900,7 +4324,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -3973,6 +4397,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -3985,7 +4446,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -4008,7 +4469,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -4022,6 +4483,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.limits.session #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.adm_message.body #=> String
     #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
@@ -4093,6 +4555,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -4106,7 +4605,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -4128,6 +4627,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
+    #   resp.campaign_response.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaign AWS API Documentation
     #
@@ -4274,7 +4774,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4347,6 +4847,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -4359,7 +4896,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -4382,7 +4919,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -4396,6 +4933,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.limits.session #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.adm_message.body #=> String
     #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
@@ -4467,6 +5005,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -4480,7 +5055,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -4502,6 +5077,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
+    #   resp.campaign_response.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersion AWS API Documentation
     #
@@ -4542,7 +5118,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4615,6 +5191,43 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -4627,7 +5240,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.start #=> String
@@ -4650,7 +5263,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
@@ -4664,6 +5277,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].limits.maximum_duration #=> Integer
     #   resp.campaigns_response.item[0].limits.messages_per_second #=> Integer
     #   resp.campaigns_response.item[0].limits.total #=> Integer
+    #   resp.campaigns_response.item[0].limits.session #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.adm_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.image_icon_url #=> String
@@ -4735,6 +5349,43 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -4748,7 +5399,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaigns_response.item[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaigns_response.item[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].schedule.quiet_time.start #=> String
@@ -4770,6 +5421,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
+    #   resp.campaigns_response.item[0].priority #=> Integer
     #   resp.campaigns_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersions AWS API Documentation
@@ -4809,7 +5461,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4882,6 +5534,43 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -4894,7 +5583,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.quiet_time.start #=> String
@@ -4917,7 +5606,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
@@ -4931,6 +5620,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].limits.maximum_duration #=> Integer
     #   resp.campaigns_response.item[0].limits.messages_per_second #=> Integer
     #   resp.campaigns_response.item[0].limits.total #=> Integer
+    #   resp.campaigns_response.item[0].limits.session #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.adm_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.adm_message.image_icon_url #=> String
@@ -5002,6 +5692,43 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaigns_response.item[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -5015,7 +5742,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaigns_response.item[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaigns_response.item[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaigns_response.item[0].schedule.is_local_time #=> Boolean
     #   resp.campaigns_response.item[0].schedule.quiet_time.end #=> String
     #   resp.campaigns_response.item[0].schedule.quiet_time.start #=> String
@@ -5037,6 +5764,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
+    #   resp.campaigns_response.item[0].priority #=> Integer
     #   resp.campaigns_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaigns AWS API Documentation
@@ -5158,7 +5886,7 @@ module Aws::Pinpoint
     #   resp.email_template_response.tags["__string"] #=> String
     #   resp.email_template_response.template_description #=> String
     #   resp.email_template_response.template_name #=> String
-    #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH", "INAPP"
     #   resp.email_template_response.text_part #=> String
     #   resp.email_template_response.version #=> String
     #
@@ -5196,7 +5924,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -5511,6 +6239,167 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Retrieves the in-app messages targeted for the provided endpoint ID.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :endpoint_id
+    #
+    # @return [Types::GetInAppMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInAppMessagesResponse#in_app_messages_response #in_app_messages_response} => Types::InAppMessagesResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_in_app_messages({
+    #     application_id: "__string", # required
+    #     endpoint_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.in_app_messages_response.in_app_message_campaigns #=> Array
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].campaign_id #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].daily_cap #=> Integer
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content #=> Array
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].background_color #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].body_config.body #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].body_config.text_color #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].header_config.header #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].header_config.text_color #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].image_url #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.custom_config #=> Hash
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.custom_config["__string"] #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].priority #=> Integer
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.end_date #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.attributes #=> Hash
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.event_type.values #=> Array
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.metrics #=> Hash
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.quiet_time.end #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].schedule.quiet_time.start #=> String
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].session_cap #=> Integer
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].total_cap #=> Integer
+    #   resp.in_app_messages_response.in_app_message_campaigns[0].treatment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetInAppMessages AWS API Documentation
+    #
+    # @overload get_in_app_messages(params = {})
+    # @param [Hash] params ({})
+    def get_in_app_messages(params = {}, options = {})
+      req = build_request(:get_in_app_messages, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the content and settings of a message template for messages
+    # sent through the in-app channel.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
+    #
+    # @return [Types::GetInAppTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInAppTemplateResponse#in_app_template_response #in_app_template_response} => Types::InAppTemplateResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_in_app_template({
+    #     template_name: "__string", # required
+    #     version: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.in_app_template_response.arn #=> String
+    #   resp.in_app_template_response.content #=> Array
+    #   resp.in_app_template_response.content[0].background_color #=> String
+    #   resp.in_app_template_response.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.in_app_template_response.content[0].body_config.body #=> String
+    #   resp.in_app_template_response.content[0].body_config.text_color #=> String
+    #   resp.in_app_template_response.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.in_app_template_response.content[0].header_config.header #=> String
+    #   resp.in_app_template_response.content[0].header_config.text_color #=> String
+    #   resp.in_app_template_response.content[0].image_url #=> String
+    #   resp.in_app_template_response.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].primary_btn.android.link #=> String
+    #   resp.in_app_template_response.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.in_app_template_response.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.in_app_template_response.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].primary_btn.default_config.link #=> String
+    #   resp.in_app_template_response.content[0].primary_btn.default_config.text #=> String
+    #   resp.in_app_template_response.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.in_app_template_response.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].primary_btn.ios.link #=> String
+    #   resp.in_app_template_response.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].primary_btn.web.link #=> String
+    #   resp.in_app_template_response.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].secondary_btn.android.link #=> String
+    #   resp.in_app_template_response.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.in_app_template_response.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.in_app_template_response.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].secondary_btn.default_config.link #=> String
+    #   resp.in_app_template_response.content[0].secondary_btn.default_config.text #=> String
+    #   resp.in_app_template_response.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.in_app_template_response.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].secondary_btn.ios.link #=> String
+    #   resp.in_app_template_response.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.in_app_template_response.content[0].secondary_btn.web.link #=> String
+    #   resp.in_app_template_response.creation_date #=> String
+    #   resp.in_app_template_response.custom_config #=> Hash
+    #   resp.in_app_template_response.custom_config["__string"] #=> String
+    #   resp.in_app_template_response.last_modified_date #=> String
+    #   resp.in_app_template_response.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
+    #   resp.in_app_template_response.tags #=> Hash
+    #   resp.in_app_template_response.tags["__string"] #=> String
+    #   resp.in_app_template_response.template_description #=> String
+    #   resp.in_app_template_response.template_name #=> String
+    #   resp.in_app_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH", "INAPP"
+    #   resp.in_app_template_response.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetInAppTemplate AWS API Documentation
+    #
+    # @overload get_in_app_template(params = {})
+    # @param [Hash] params ({})
+    def get_in_app_template(params = {}, options = {})
+      req = build_request(:get_in_app_template, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the status, configuration, and other
     # settings for a journey.
     #
@@ -5534,7 +6423,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities #=> Hash
     #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
     #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
-    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
     #   resp.journey_response.activities["__string"].custom.next_activity #=> String
     #   resp.journey_response.activities["__string"].custom.template_name #=> String
@@ -5932,7 +6821,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.tags["__string"] #=> String
     #   resp.push_notification_template_response.template_description #=> String
     #   resp.push_notification_template_response.template_name #=> String
-    #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH", "INAPP"
     #   resp.push_notification_template_response.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplate AWS API Documentation
@@ -6749,7 +7638,7 @@ module Aws::Pinpoint
     #   resp.sms_template_response.tags["__string"] #=> String
     #   resp.sms_template_response.template_description #=> String
     #   resp.sms_template_response.template_name #=> String
-    #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH", "INAPP"
     #   resp.sms_template_response.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplate AWS API Documentation
@@ -6787,7 +7676,7 @@ module Aws::Pinpoint
     #   resp.endpoints_response.item[0].attributes #=> Hash
     #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
     #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
-    #   resp.endpoints_response.item[0].channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.endpoints_response.item[0].cohort_id #=> String
     #   resp.endpoints_response.item[0].creation_date #=> String
     #   resp.endpoints_response.item[0].demographic.app_version #=> String
@@ -6892,7 +7781,7 @@ module Aws::Pinpoint
     #   resp.voice_template_response.tags["__string"] #=> String
     #   resp.voice_template_response.template_description #=> String
     #   resp.voice_template_response.template_name #=> String
-    #   resp.voice_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.voice_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH", "INAPP"
     #   resp.voice_template_response.version #=> String
     #   resp.voice_template_response.voice_id #=> String
     #
@@ -6932,7 +7821,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities #=> Hash
     #   resp.journeys_response.item[0].activities["__string"].custom.delivery_uri #=> String
     #   resp.journeys_response.item[0].activities["__string"].custom.endpoint_types #=> Array
-    #   resp.journeys_response.item[0].activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journeys_response.item[0].activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.journeys_response.item[0].activities["__string"].custom.message_config.data #=> String
     #   resp.journeys_response.item[0].activities["__string"].custom.next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].custom.template_name #=> String
@@ -7227,7 +8116,7 @@ module Aws::Pinpoint
     #   resp.templates_response.item[0].tags["__string"] #=> String
     #   resp.templates_response.item[0].template_description #=> String
     #   resp.templates_response.item[0].template_name #=> String
-    #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH", "INAPP"
     #   resp.templates_response.item[0].version #=> String
     #   resp.templates_response.next_token #=> String
     #
@@ -7350,7 +8239,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -7489,7 +8378,7 @@ module Aws::Pinpoint
     #       addresses: {
     #         "__string" => {
     #           body_override: "__string",
-    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           context: {
     #             "__string" => "__string",
     #           },
@@ -8300,6 +9189,7 @@ module Aws::Pinpoint
     #         maximum_duration: 1,
     #         messages_per_second: 1,
     #         total: 1,
+    #         session: 1,
     #       },
     #       quiet_time: {
     #         end: "__string",
@@ -8319,6 +9209,7 @@ module Aws::Pinpoint
     #   resp.application_settings_resource.limits.maximum_duration #=> Integer
     #   resp.application_settings_resource.limits.messages_per_second #=> Integer
     #   resp.application_settings_resource.limits.total #=> Integer
+    #   resp.application_settings_resource.limits.session #=> Integer
     #   resp.application_settings_resource.quiet_time.end #=> String
     #   resp.application_settings_resource.quiet_time.start #=> String
     #
@@ -8401,7 +9292,7 @@ module Aws::Pinpoint
     #         {
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           },
     #           message_configuration: {
     #             adm_message: {
@@ -8491,6 +9382,73 @@ module Aws::Pinpoint
     #               entity_id: "__string",
     #               template_id: "__string",
     #             },
+    #             in_app_message: {
+    #               body: "__string",
+    #               content: [
+    #                 {
+    #                   background_color: "__string",
+    #                   body_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     body: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   header_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     header: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   image_url: "__string",
+    #                   primary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                   secondary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               custom_config: {
+    #                 "__string" => "__string",
+    #               },
+    #               layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #             },
     #           },
     #           schedule: {
     #             end_time: "__string",
@@ -8515,7 +9473,7 @@ module Aws::Pinpoint
     #               },
     #               filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #             },
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -8549,7 +9507,7 @@ module Aws::Pinpoint
     #       ],
     #       custom_delivery_configuration: {
     #         delivery_uri: "__string", # required
-    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #       },
     #       description: "__string",
     #       holdout_percent: 1,
@@ -8564,6 +9522,7 @@ module Aws::Pinpoint
     #         maximum_duration: 1,
     #         messages_per_second: 1,
     #         total: 1,
+    #         session: 1,
     #       },
     #       message_configuration: {
     #         adm_message: {
@@ -8653,6 +9612,73 @@ module Aws::Pinpoint
     #           entity_id: "__string",
     #           template_id: "__string",
     #         },
+    #         in_app_message: {
+    #           body: "__string",
+    #           content: [
+    #             {
+    #               background_color: "__string",
+    #               body_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 body: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               header_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 header: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               image_url: "__string",
+    #               primary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #               secondary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           custom_config: {
+    #             "__string" => "__string",
+    #           },
+    #           layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #         },
     #       },
     #       name: "__string",
     #       schedule: {
@@ -8678,7 +9704,7 @@ module Aws::Pinpoint
     #           },
     #           filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #         },
-    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #         is_local_time: false,
     #         quiet_time: {
     #           end: "__string",
@@ -8712,6 +9738,7 @@ module Aws::Pinpoint
     #       },
     #       treatment_description: "__string",
     #       treatment_name: "__string",
+    #       priority: 1,
     #     },
     #   })
     #
@@ -8720,7 +9747,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -8793,6 +9820,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -8805,7 +9869,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.additional_treatments[0].schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.additional_treatments[0].schedule.is_local_time #=> Boolean
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.end #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.quiet_time.start #=> String
@@ -8828,7 +9892,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -8842,6 +9906,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.limits.maximum_duration #=> Integer
     #   resp.campaign_response.limits.messages_per_second #=> Integer
     #   resp.campaign_response.limits.total #=> Integer
+    #   resp.campaign_response.limits.session #=> Integer
     #   resp.campaign_response.message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.adm_message.body #=> String
     #   resp.campaign_response.message_configuration.adm_message.image_icon_url #=> String
@@ -8913,6 +9978,43 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
     #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content #=> Array
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.body #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].body_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.alignment #=> String, one of "LEFT", "CENTER", "RIGHT"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.header #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].header_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].image_url #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].primary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.android.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.background_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.border_radius #=> Integer
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.default_config.text_color #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.ios.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.button_action #=> String, one of "LINK", "DEEP_LINK", "CLOSE"
+    #   resp.campaign_response.message_configuration.in_app_message.content[0].secondary_btn.web.link #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config #=> Hash
+    #   resp.campaign_response.message_configuration.in_app_message.custom_config["__string"] #=> String
+    #   resp.campaign_response.message_configuration.in_app_message.layout #=> String, one of "BOTTOM_BANNER", "TOP_BANNER", "OVERLAYS", "MOBILE_FEED", "MIDDLE_BANNER", "CAROUSEL"
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -8926,7 +10028,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.metrics["__string"].value #=> Float
     #   resp.campaign_response.schedule.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
-    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT"
+    #   resp.campaign_response.schedule.frequency #=> String, one of "ONCE", "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "EVENT", "IN_APP_EVENT"
     #   resp.campaign_response.schedule.is_local_time #=> Boolean
     #   resp.campaign_response.schedule.quiet_time.end #=> String
     #   resp.campaign_response.schedule.quiet_time.start #=> String
@@ -8948,6 +10050,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
+    #   resp.campaign_response.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaign AWS API Documentation
     #
@@ -9089,7 +10192,7 @@ module Aws::Pinpoint
     #       attributes: {
     #         "__string" => ["__string"],
     #       },
-    #       channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #       channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #       demographic: {
     #         app_version: "__string",
     #         locale: "__string",
@@ -9166,7 +10269,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -9266,6 +10369,114 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Updates an existing message template for messages sent through the
+    # in-app message channel.
+    #
+    # @option params [Boolean] :create_new_version
+    #
+    # @option params [required, Types::InAppTemplateRequest] :in_app_template_request
+    #   In-App Template Request.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
+    #
+    # @return [Types::UpdateInAppTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInAppTemplateResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_in_app_template({
+    #     create_new_version: false,
+    #     in_app_template_request: { # required
+    #       content: [
+    #         {
+    #           background_color: "__string",
+    #           body_config: {
+    #             alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #             body: "__string", # required
+    #             text_color: "__string", # required
+    #           },
+    #           header_config: {
+    #             alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #             header: "__string", # required
+    #             text_color: "__string", # required
+    #           },
+    #           image_url: "__string",
+    #           primary_btn: {
+    #             android: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             default_config: {
+    #               background_color: "__string",
+    #               border_radius: 1,
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #               text: "__string", # required
+    #               text_color: "__string",
+    #             },
+    #             ios: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             web: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #           },
+    #           secondary_btn: {
+    #             android: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             default_config: {
+    #               background_color: "__string",
+    #               border_radius: 1,
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #               text: "__string", # required
+    #               text_color: "__string",
+    #             },
+    #             ios: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #             web: {
+    #               button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #               link: "__string",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       custom_config: {
+    #         "__string" => "__string",
+    #       },
+    #       layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #       tags: {
+    #         "__string" => "__string",
+    #       },
+    #       template_description: "__string",
+    #     },
+    #     template_name: "__string", # required
+    #     version: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateInAppTemplate AWS API Documentation
+    #
+    # @overload update_in_app_template(params = {})
+    # @param [Hash] params ({})
+    def update_in_app_template(params = {}, options = {})
+      req = build_request(:update_in_app_template, params)
+      req.send_request(options)
+    end
+
     # Updates the configuration and other settings for a journey.
     #
     # @option params [required, String] :application_id
@@ -9289,7 +10500,7 @@ module Aws::Pinpoint
     #         "__string" => {
     #           custom: {
     #             delivery_uri: "__string",
-    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #             message_config: {
     #               data: "__string",
     #             },
@@ -9616,7 +10827,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities #=> Hash
     #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
     #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
-    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
     #   resp.journey_response.activities["__string"].custom.next_activity #=> String
     #   resp.journey_response.activities["__string"].custom.template_name #=> String
@@ -9827,7 +11038,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities #=> Hash
     #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
     #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
-    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM", "IN_APP"
     #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
     #   resp.journey_response.activities["__string"].custom.next_activity #=> String
     #   resp.journey_response.activities["__string"].custom.template_name #=> String
@@ -10693,7 +11904,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

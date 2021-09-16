@@ -567,6 +567,7 @@ RubyGems.org page under "LINKS" section.
 | FinSpace User Environment Management service          | Aws::Finspace                        | aws-sdk-finspace                        | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
+| Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                    | aws-sdk-kafkaconnect                    | 2021-09-14  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |
 | Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster          | aws-sdk-route53recoverycluster          | 2019-12-02  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
