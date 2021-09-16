@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Updated the "snapshot_completed" waiter to consider "error" as a terminal state. (#2586)
+
 1.263.0 (2021-09-14)
 ------------------
 
