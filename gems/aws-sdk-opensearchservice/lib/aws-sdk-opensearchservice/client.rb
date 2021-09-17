@@ -2065,14 +2065,25 @@ module Aws::OpenSearchService
 
     # Returns the names of all domains owned by the current user's account.
     #
+    # @option params [String] :engine_type
+    #   Optional parameter to filter the output by domain engine type.
+    #   Acceptable values are 'Elasticsearch' and 'OpenSearch'.
+    #
     # @return [Types::ListDomainNamesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDomainNamesResponse#domain_names #domain_names} => Array&lt;Types::DomainInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_names({
+    #     engine_type: "OpenSearch", # accepts OpenSearch, Elasticsearch
+    #   })
     #
     # @example Response structure
     #
     #   resp.domain_names #=> Array
     #   resp.domain_names[0].domain_name #=> String
+    #   resp.domain_names[0].engine_type #=> String, one of "OpenSearch", "Elasticsearch"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainNames AWS API Documentation
     #
@@ -2905,7 +2916,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
