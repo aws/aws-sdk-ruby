@@ -58,9 +58,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::ClientMetricsPlugin' => "#{core_plugins}/client_metrics_plugin.rb",
         'Aws::Plugins::ClientMetricsSendPlugin' => "#{core_plugins}/client_metrics_send_plugin.rb",
         'Aws::Plugins::TransferEncoding' => "#{core_plugins}/transfer_encoding.rb",
-        'Aws::Plugins::HttpChecksum' => "#{core_plugins}/http_checksum.rb",
-        'Aws::Plugins::DualstackEndpoint' => "#{core_plugins}/dualstack_endpoint.rb",
-        'Aws::Plugins::FipsEndpoint' => "#{core_plugins}/fips_endpoint.rb"
+        'Aws::Plugins::HttpChecksum' => "#{core_plugins}/http_checksum.rb"
       }
     end
 

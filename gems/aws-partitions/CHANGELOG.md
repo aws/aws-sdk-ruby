@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support modeled dualstack endpoints in `Aws::Partitions::EndpointProvider`.
+* Feature - Support modeled dualstack and fips endpoints in `Aws::Partitions::EndpointProvider`.
 
 1.500.0 (2021-09-10)
 ------------------

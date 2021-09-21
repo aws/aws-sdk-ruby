@@ -27,8 +27,6 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
-require 'aws-sdk-core/plugins/dualstack_endpoint.rb'
-require 'aws-sdk-core/plugins/fips_endpoint.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-machinelearning/plugins/predict_endpoint.rb'
@@ -76,8 +74,6 @@ module Aws::MachineLearning
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
-    add_plugin(Aws::Plugins::DualstackEndpoint)
-    add_plugin(Aws::Plugins::FipsEndpoint)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::MachineLearning::Plugins::PredictEndpoint)
@@ -290,14 +286,6 @@ module Aws::MachineLearning
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
-    #
-    #   @option options [Boolean] :use_dualstack_endpoint
-    #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
-    #     will be used if available.
-    #
-    #   @option options [Boolean] :use_fips_endpoint
-    #     When set to `true`, fips compatible endpoints
-    #     will be used if available.
     #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before

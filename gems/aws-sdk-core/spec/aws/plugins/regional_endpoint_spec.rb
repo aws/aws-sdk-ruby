@@ -97,6 +97,78 @@ module Aws
             .to eq("https://#{prefix}.REGION.amazonaws.com")
         end
       end
+
+      describe 'use dualstack endpoint option' do
+        DualstackClient = ApiHelper.sample_service.const_get(:Client)
+
+        let(:creds) { Aws::Credentials.new('akid', 'secret') }
+
+        it 'defaults to false' do
+          client = DualstackClient.new(region: 'us-west-2')
+          expect(client.config.use_dualstack_endpoint).to eq false
+        end
+
+        it 'can be configured with shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:use_dualstack_endpoint).and_return(true)
+          client = DualstackClient.new(region: 'us-west-2')
+          expect(client.config.use_dualstack_endpoint).to eq true
+        end
+
+        it 'can be configured using env variable with precedence' do
+          ENV['AWS_USE_DUALSTACK_ENDPOINT'] = 'true'
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:use_dualstack_endpoint).and_return(false)
+          client = DualstackClient.new(region: 'us-west-2')
+          expect(client.config.use_dualstack_endpoint).to eq true
+        end
+
+        it 'can be configure through code with precedence' do
+          ENV['AWS_USE_DUALSTACK_ENDPOINT'] = 'true'
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:use_dualstack_endpoint).and_return(true)
+          client = DualstackClient.new(
+            region: 'us-west-2', use_dualstack_endpoint: false
+          )
+          expect(client.config.use_dualstack_endpoint).to eq false
+        end
+      end
+
+      describe 'use fips endpoint option' do
+        FipsClient = ApiHelper.sample_service.const_get(:Client)
+
+        let(:creds) { Aws::Credentials.new('akid', 'secret') }
+
+        it 'defaults to false' do
+          client = FipsClient.new(region: 'us-west-2')
+          expect(client.config.use_fips_endpoint).to eq false
+        end
+
+        it 'can be configured with shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:use_fips_endpoint).and_return(true)
+          client = FipsClient.new(region: 'us-west-2')
+          expect(client.config.use_fips_endpoint).to eq true
+        end
+
+        it 'can be configured using env variable with precedence' do
+          ENV['AWS_USE_FIPS_ENDPOINT'] = 'true'
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:use_fips_endpoint).and_return(false)
+          client = FipsClient.new(region: 'us-west-2')
+          expect(client.config.use_fips_endpoint).to eq true
+        end
+
+        it 'can be configure through code with precedence' do
+          ENV['AWS_USE_FIPS_ENDPOINT'] = 'true'
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:use_fips_endpoint).and_return(true)
+          client = FipsClient.new(
+            region: 'us-west-2', use_fips_endpoint: false
+          )
+          expect(client.config.use_fips_endpoint).to eq false
+        end
+      end
     end
   end
 end

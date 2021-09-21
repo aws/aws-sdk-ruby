@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack endpoints. It can be configured with shared configuration (`use_dualstack_endpoint`), an ENV variable (`AWS_USE_DUALSTACK_ENDPOINT`), and a constructor option (`:use_dualstack_endpoint`). Requests made to services without a dualstack endpoint will fail.
 
+* Feature - Support modeled fips endpoints. It can be configured with shared configuration (`use_fips_endpoint`), an ENV variable (`AWS_USE_FIPS_ENDPOINT`), and a constructor option (`:use_fips_endpoint`). Requests made to services without a fips endpoint will fail.
+
 3.121.0 (2021-09-02)
 ------------------
 

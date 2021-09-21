@@ -70,7 +70,7 @@
             "protocols": ["http", "https"],
             "variants": [
               {
-                "dnsSuffix": "api.aws",
+                "dnsSuffix": "amazonaws.com",
                 "hostname": "api.ec2-fips.{region}.{dnsSuffix}",
                 "tags": ["fips"]
               }
@@ -95,7 +95,7 @@
                 "region": "us-west-2"
               },
               "deprecated": true
-            },
+            }
           }
         },
         "route53": {
