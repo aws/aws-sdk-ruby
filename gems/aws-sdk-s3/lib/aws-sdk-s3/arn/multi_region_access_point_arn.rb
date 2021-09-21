@@ -55,12 +55,11 @@ module Aws
         end
       end
 
-      def host_url(region, fips = false, dualstack = false, custom_endpoint = nil)
+      def host_url(_region, _fips = false, _dualstack = false, custom_endpoint = nil)
         if custom_endpoint
           "#{@mrap_alias}.#{custom_endpoint}"
         else
-
-          sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(@partition)
+          sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(@partition, 's3')
           "#{@mrap_alias}.accesspoint.s3-global.#{sfx}"
         end
       end

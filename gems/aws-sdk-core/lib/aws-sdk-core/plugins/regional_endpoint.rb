@@ -46,7 +46,10 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
             cfg.region,
             endpoint_prefix,
             sts_regional,
-            { dualstack: cfg.use_dualstack_endpoint }
+            {
+              dualstack: cfg.use_dualstack_endpoint,
+              fips: cfg.use_fips_endpoint
+            }
           )
         end
       end
@@ -54,6 +57,14 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
       def after_initialize(client)
         if client.config.region.nil? || client.config.region == ''
           raise Errors::MissingRegionError
+        end
+
+        # shimmed support for use_fips_endpoint - extract fips from region
+        region = client.config.region
+        new_region = region.gsub('fips-', '').gsub('-fips', '')
+        if region != new_region
+          client.config.use_fips_endpoint = true
+          client.config.region = new_region
         end
       end
 

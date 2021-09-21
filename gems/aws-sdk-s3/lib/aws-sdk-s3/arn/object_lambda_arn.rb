@@ -60,7 +60,7 @@ module Aws
         if custom_endpoint
           "#{pfx}.#{custom_endpoint}"
         else
-          sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
+          sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(region, 's3')
           "#{pfx}.s3-object-lambda#{'-fips' if fips}.#{region}.#{sfx}"
         end
       end

@@ -9183,6 +9183,13 @@
                 ],
                 "hostname": "s3.dualstack.{region}.{dnsSuffix}",
                 "dnsSuffix": "amazonaws.com"
+              },
+              {
+                "tags": [
+                  "dualstack", "fips"
+                ],
+                "hostname": "s3-fips.dualstack.{region}.{dnsSuffix}",
+                "dnsSuffix": "amazonaws.com"
               }
             ]
           },

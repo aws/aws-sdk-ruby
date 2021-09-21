@@ -166,7 +166,10 @@ module Aws
             resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
               resp.context.config.region,
               's3',
-              { dualstack: resp.context[:use_dualstack_endpoint] }
+              {
+                dualstack: resp.context[:use_dualstack_endpoint],
+                fips: resp.context.config.use_fips_endpoint
+              }
             )
             !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
           end
@@ -240,7 +243,10 @@ module Aws
             uri = URI.parse(
               Aws::Partitions::EndpointProvider.resolve(
                 region, 's3', 'regional',
-                { dualstack: context[:use_dualstack_endpoint] }
+                {
+                  dualstack: context[:use_dualstack_endpoint],
+                  fips: context.config.use_fips_endpoint
+                }
               )
             )
 

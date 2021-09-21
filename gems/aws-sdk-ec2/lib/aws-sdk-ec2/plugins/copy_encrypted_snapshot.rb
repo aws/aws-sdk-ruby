@@ -42,7 +42,10 @@ module Aws
             )
             url = Aws::Partitions::EndpointProvider.resolve(
               signer.region, 'ec2', 'regional',
-              { dualstack: context.config.use_dualstack_endpoint }
+              {
+                dualstack: context.config.use_dualstack_endpoint,
+                fips: context.config.use_fips_endpoint
+              }
             )
             url += "?#{param_list.to_s}"
 

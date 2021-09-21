@@ -116,18 +116,6 @@ module Aws
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
         end
 
-        it 's3_use_arn_region false; raises when given a fips client region' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1',
-            s3_use_arn_region: false
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
         it 'raises when given a fips arn' do
           client = Aws::S3Control::Client.new(
             stub_responses: true,
@@ -286,18 +274,6 @@ module Aws
           expect(resp.context.http_request.endpoint.host).to eq(host)
           expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
-        end
-
-        it 's3_use_arn_region false; raises when given a fips client region' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1',
-            s3_use_arn_region: false
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
         end
 
         it 'raises when given a fips arn' do

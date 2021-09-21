@@ -339,15 +339,43 @@ module Aws
           end.to raise_error(Aws::Errors::InvalidARNRegionError)
         end
 
-        it 'raises when the fips client region does not match the arn region' do
+        it 'uses the arn region with the fips client region' do
           client = Aws::S3::Client.new(
             stub_responses: true,
             region: 'fips-us-gov-east-1'
           )
           arn = 'arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint'
-          expect do
-            client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          resp = client.get_object(bucket: arn, key: 'obj')
+          host = 'myendpoint-123456789012.s3-accesspoint-fips.us-gov-west-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 's3_use_arn_region false; uses the fips configuration flag' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-east-1',
+            use_fips_endpoint: true,
+            s3_use_arn_region: false
+          )
+          arn = 'arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint'
+          resp = client.get_object(bucket: arn, key: 'obj')
+          host = 'myendpoint-123456789012.s3-accesspoint-fips.us-gov-east-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 'uses the fips configuration flag' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-east-1',
+            use_fips_endpoint: true
+          )
+          arn = 'arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint'
+          resp = client.get_object(bucket: arn, key: 'obj')
+          host = 'myendpoint-123456789012.s3-accesspoint-fips.us-gov-west-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
         end
 
         it 'uses the arn region for a fips client with dualstack' do
@@ -917,21 +945,49 @@ module Aws
             region: 'fips-us-gov-east-1',
             s3_use_arn_region: false
           )
-          arn = 'arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint'
+          arn = 'arn:aws-us-gov:s3-object-lambda:us-gov-west-1:123456789012:accesspoint/mybanner'
           expect do
             client.get_object(bucket: arn, key: 'obj')
           end.to raise_error(Aws::Errors::InvalidARNRegionError)
         end
 
-        it 'raises when the fips client region does not match the arn region' do
+        it 'uses the arn region with the fips client region' do
           client = Aws::S3::Client.new(
             stub_responses: true,
             region: 'fips-us-gov-east-1'
           )
-          arn = 'arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint'
-          expect do
-            client.get_object(bucket: arn, key: 'obj')
-          end.to raise_error(Aws::Errors::InvalidARNRegionError)
+          arn = 'arn:aws-us-gov:s3-object-lambda:us-gov-west-1:123456789012:accesspoint/mybanner'
+          resp = client.get_object(bucket: arn, key: 'obj')
+          host = 'mybanner-123456789012.s3-object-lambda-fips.us-gov-west-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 's3_use_arn_region false; uses the fips configuration flag' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-east-1',
+            use_fips_endpoint: true,
+            s3_use_arn_region: false
+          )
+          arn = 'arn:aws-us-gov:s3-object-lambda:us-gov-east-1:123456789012:accesspoint/mybanner'
+          resp = client.get_object(bucket: arn, key: 'obj')
+          host = 'mybanner-123456789012.s3-object-lambda-fips.us-gov-east-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
+        end
+
+        it 'uses the fips configuration flag' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-gov-east-1',
+            use_fips_endpoint: true
+          )
+          arn = 'arn:aws-us-gov:s3-object-lambda:us-gov-west-1:123456789012:accesspoint/mybanner'
+          resp = client.get_object(bucket: arn, key: 'obj')
+          host = 'mybanner-123456789012.s3-object-lambda-fips.us-gov-west-1.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.endpoint.path).to eq('/obj')
         end
 
         it 'raises with :use_accelerate_endpoint' do

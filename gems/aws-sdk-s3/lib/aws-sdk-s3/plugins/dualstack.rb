@@ -48,7 +48,10 @@ module Aws
               context.config.region,
               's3',
               'regional',
-              { dualstack: context[:use_dualstack_endpoint] }
+              {
+                dualstack: context[:use_dualstack_endpoint],
+                fips: context.config.use_fips_endpoint
+              }
             )
             endpoint = URI.parse(context.http_request.endpoint.to_s)
             endpoint.host = URI.parse(new_endpoint).host
