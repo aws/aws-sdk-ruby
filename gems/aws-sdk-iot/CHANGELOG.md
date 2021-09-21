@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2021-09-21)
+------------------
+
+* Feature - This release adds support for verifying, viewing and filtering AWS IoT Device Defender detect violations with four verification states.
+
 1.75.0 (2021-09-13)
 ------------------
 

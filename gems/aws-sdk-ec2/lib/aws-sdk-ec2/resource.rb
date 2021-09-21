@@ -3059,7 +3059,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     group_ids: ["String"],
+    #     group_ids: ["SecurityGroupId"],
     #     group_names: ["SecurityGroupName"],
     #     dry_run: false,
     #   })

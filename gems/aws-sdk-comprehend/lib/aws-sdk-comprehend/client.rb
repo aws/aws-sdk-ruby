@@ -669,6 +669,13 @@ module Aws::Comprehend
     # @option params [required, String] :document_classifier_name
     #   The name of the document classifier.
     #
+    # @option params [String] :version_name
+    #   The version name given to the newly created classifier. Version names
+    #   can have a maximum of 256 characters. Alphanumeric characters, hyphens
+    #   (-) and underscores (\_) are allowed. The version name must be unique
+    #   among all models with the same classifier name in the account/AWS
+    #   Region.
+    #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Management
     #   (IAM) role that grants Amazon Comprehend read access to your input
@@ -746,6 +753,7 @@ module Aws::Comprehend
     #
     #   resp = client.create_document_classifier({
     #     document_classifier_name: "ComprehendArnName", # required
+    #     version_name: "VersionName",
     #     data_access_role_arn: "IamRoleArn", # required
     #     tags: [
     #       {
@@ -756,10 +764,12 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #       s3_uri: "S3Uri",
+    #       test_s3_uri: "S3Uri",
     #       label_delimiter: "LabelDelimiter",
     #       augmented_manifests: [
     #         {
     #           s3_uri: "S3Uri", # required
+    #           split: "TRAIN", # accepts TRAIN, TEST
     #           attribute_names: ["AttributeNamesListItem"], # required
     #           annotation_data_s3_uri: "S3Uri",
     #           source_documents_s3_uri: "S3Uri",
@@ -874,6 +884,13 @@ module Aws::Comprehend
     #   and underscores (\_) are allowed. The name must be unique in the
     #   account/region.
     #
+    # @option params [String] :version_name
+    #   The version name given to the newly created recognizer. Version names
+    #   can be a maximum of 256 characters. Alphanumeric characters, hyphens
+    #   (-) and underscores (\_) are allowed. The version name must be unique
+    #   among all models with the same recognizer name in the account/ AWS
+    #   Region.
+    #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Management
     #   (IAM) role that grants Amazon Comprehend read access to your input
@@ -941,6 +958,7 @@ module Aws::Comprehend
     #
     #   resp = client.create_entity_recognizer({
     #     recognizer_name: "ComprehendArnName", # required
+    #     version_name: "VersionName",
     #     data_access_role_arn: "IamRoleArn", # required
     #     tags: [
     #       {
@@ -957,9 +975,12 @@ module Aws::Comprehend
     #       ],
     #       documents: {
     #         s3_uri: "S3Uri", # required
+    #         test_s3_uri: "S3Uri",
+    #         input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
     #       },
     #       annotations: {
     #         s3_uri: "S3Uri", # required
+    #         test_s3_uri: "S3Uri",
     #       },
     #       entity_list: {
     #         s3_uri: "S3Uri", # required
@@ -967,6 +988,7 @@ module Aws::Comprehend
     #       augmented_manifests: [
     #         {
     #           s3_uri: "S3Uri", # required
+    #           split: "TRAIN", # accepts TRAIN, TEST
     #           attribute_names: ["AttributeNamesListItem"], # required
     #           annotation_data_s3_uri: "S3Uri",
     #           source_documents_s3_uri: "S3Uri",
@@ -1163,9 +1185,11 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.training_end_time #=> Time
     #   resp.document_classifier_properties.input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.document_classifier_properties.input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.test_s3_uri #=> String
     #   resp.document_classifier_properties.input_data_config.label_delimiter #=> String
     #   resp.document_classifier_properties.input_data_config.augmented_manifests #=> Array
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
@@ -1192,6 +1216,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.vpc_config.subnets[0] #=> String
     #   resp.document_classifier_properties.mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #   resp.document_classifier_properties.model_kms_key_id #=> String
+    #   resp.document_classifier_properties.version_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -1274,11 +1299,13 @@ module Aws::Comprehend
     #   resp.endpoint_properties.status #=> String, one of "CREATING", "DELETING", "FAILED", "IN_SERVICE", "UPDATING"
     #   resp.endpoint_properties.message #=> String
     #   resp.endpoint_properties.model_arn #=> String
+    #   resp.endpoint_properties.desired_model_arn #=> String
     #   resp.endpoint_properties.desired_inference_units #=> Integer
     #   resp.endpoint_properties.current_inference_units #=> Integer
     #   resp.endpoint_properties.creation_time #=> Time
     #   resp.endpoint_properties.last_modified_time #=> Time
     #   resp.endpoint_properties.data_access_role_arn #=> String
+    #   resp.endpoint_properties.desired_data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpoint AWS API Documentation
     #
@@ -1372,10 +1399,14 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.input_data_config.entity_types #=> Array
     #   resp.entity_recognizer_properties.input_data_config.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties.input_data_config.documents.s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.documents.test_s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.documents.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entity_recognizer_properties.input_data_config.annotations.s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.annotations.test_s3_uri #=> String
     #   resp.entity_recognizer_properties.input_data_config.entity_list.s3_uri #=> String
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests #=> Array
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
@@ -1399,6 +1430,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.vpc_config.subnets #=> Array
     #   resp.entity_recognizer_properties.vpc_config.subnets[0] #=> String
     #   resp.entity_recognizer_properties.model_kms_key_id #=> String
+    #   resp.entity_recognizer_properties.version_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -1983,6 +2015,49 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets a list of summaries of the document classifiers that you have
+    # created
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #
+    # @return [Types::ListDocumentClassifierSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDocumentClassifierSummariesResponse#document_classifier_summaries_list #document_classifier_summaries_list} => Array&lt;Types::DocumentClassifierSummary&gt;
+    #   * {Types::ListDocumentClassifierSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_document_classifier_summaries({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_classifier_summaries_list #=> Array
+    #   resp.document_classifier_summaries_list[0].document_classifier_name #=> String
+    #   resp.document_classifier_summaries_list[0].number_of_versions #=> Integer
+    #   resp.document_classifier_summaries_list[0].latest_version_created_at #=> Time
+    #   resp.document_classifier_summaries_list[0].latest_version_name #=> String
+    #   resp.document_classifier_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifierSummaries AWS API Documentation
+    #
+    # @overload list_document_classifier_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_document_classifier_summaries(params = {}, options = {})
+      req = build_request(:list_document_classifier_summaries, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the document classifiers that you have created.
     #
     # @option params [Types::DocumentClassifierFilter] :filter
@@ -2009,6 +2084,7 @@ module Aws::Comprehend
     #   resp = client.list_document_classifiers({
     #     filter: {
     #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #       document_classifier_name: "ComprehendArnName",
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -2029,9 +2105,11 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].training_end_time #=> Time
     #   resp.document_classifier_properties_list[0].input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.document_classifier_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.test_s3_uri #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.label_delimiter #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests #=> Array
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
@@ -2058,6 +2136,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.document_classifier_properties_list[0].mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #   resp.document_classifier_properties_list[0].model_kms_key_id #=> String
+    #   resp.document_classifier_properties_list[0].version_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -2178,11 +2257,13 @@ module Aws::Comprehend
     #   resp.endpoint_properties_list[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "IN_SERVICE", "UPDATING"
     #   resp.endpoint_properties_list[0].message #=> String
     #   resp.endpoint_properties_list[0].model_arn #=> String
+    #   resp.endpoint_properties_list[0].desired_model_arn #=> String
     #   resp.endpoint_properties_list[0].desired_inference_units #=> Integer
     #   resp.endpoint_properties_list[0].current_inference_units #=> Integer
     #   resp.endpoint_properties_list[0].creation_time #=> Time
     #   resp.endpoint_properties_list[0].last_modified_time #=> Time
     #   resp.endpoint_properties_list[0].data_access_role_arn #=> String
+    #   resp.endpoint_properties_list[0].desired_data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpoints AWS API Documentation
@@ -2265,6 +2346,49 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets a list of summaries for the entity recognizers that you have
+    # created.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #
+    # @return [Types::ListEntityRecognizerSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntityRecognizerSummariesResponse#entity_recognizer_summaries_list #entity_recognizer_summaries_list} => Array&lt;Types::EntityRecognizerSummary&gt;
+    #   * {Types::ListEntityRecognizerSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_recognizer_summaries({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_recognizer_summaries_list #=> Array
+    #   resp.entity_recognizer_summaries_list[0].recognizer_name #=> String
+    #   resp.entity_recognizer_summaries_list[0].number_of_versions #=> Integer
+    #   resp.entity_recognizer_summaries_list[0].latest_version_created_at #=> Time
+    #   resp.entity_recognizer_summaries_list[0].latest_version_name #=> String
+    #   resp.entity_recognizer_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizerSummaries AWS API Documentation
+    #
+    # @overload list_entity_recognizer_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_entity_recognizer_summaries(params = {}, options = {})
+      req = build_request(:list_entity_recognizer_summaries, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the properties of all entity recognizers that you
     # created, including recognizers currently in training. Allows you to
     # filter the list of recognizers based on criteria such as status and
@@ -2298,6 +2422,7 @@ module Aws::Comprehend
     #   resp = client.list_entity_recognizers({
     #     filter: {
     #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #       recognizer_name: "ComprehendArnName",
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -2320,10 +2445,14 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types #=> Array
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.documents.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.documents.test_s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.documents.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entity_recognizer_properties_list[0].input_data_config.annotations.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.annotations.test_s3_uri #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_list.s3_uri #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests #=> Array
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].attribute_names[0] #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
@@ -2347,6 +2476,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].vpc_config.subnets #=> Array
     #   resp.entity_recognizer_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.entity_recognizer_properties_list[0].model_kms_key_id #=> String
+    #   resp.entity_recognizer_properties_list[0].version_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -3967,10 +4097,17 @@ module Aws::Comprehend
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being updated.
     #
-    # @option params [required, Integer] :desired_inference_units
+    # @option params [String] :desired_model_arn
+    #   The ARN of the new model to use when updating an existing endpoint.
+    #
+    # @option params [Integer] :desired_inference_units
     #   The desired number of inference units to be used by the model using
     #   this endpoint. Each inference unit represents of a throughput of 100
     #   characters per second.
+    #
+    # @option params [String] :desired_data_access_role_arn
+    #   Data access role ARN to use in case the new model is encrypted with a
+    #   customer CMK.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3978,7 +4115,9 @@ module Aws::Comprehend
     #
     #   resp = client.update_endpoint({
     #     endpoint_arn: "ComprehendEndpointArn", # required
-    #     desired_inference_units: 1, # required
+    #     desired_model_arn: "ComprehendModelArn",
+    #     desired_inference_units: 1,
+    #     desired_data_access_role_arn: "IamRoleArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpoint AWS API Documentation
@@ -4003,7 +4142,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1404,8 +1404,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2158,7 +2158,7 @@ module Aws::EC2
     #
     #   resp = client.attach_classic_link_vpc({
     #     dry_run: false,
-    #     groups: ["String"], # required
+    #     groups: ["SecurityGroupId"], # required
     #     instance_id: "InstanceId", # required
     #     vpc_id: "VpcId", # required
     #   })
@@ -2400,8 +2400,8 @@ module Aws::EC2
     # Attaches a virtual private gateway to a VPC. You can attach one
     # virtual private gateway to one VPC at a time.
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     #
     #
@@ -2448,7 +2448,8 @@ module Aws::EC2
     # Adds an ingress authorization rule to a Client VPN endpoint. Ingress
     # authorization rules act as firewall rules that grant access to
     # networks. You must configure ingress authorization rules to enable
-    # clients to access resources in AWS or on-premises networks.
+    # clients to access resources in Amazon Web Services or on-premises
+    # networks.
     #
     # @option params [required, String] :client_vpn_endpoint_id
     #   The ID of the Client VPN endpoint.
@@ -2473,8 +2474,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -4305,8 +4306,8 @@ module Aws::EC2
     #   greater.
     #
     # @option params [required, String] :server_certificate_arn
-    #   The ARN of the server certificate. For more information, see the [AWS
-    #   Certificate Manager User Guide][1].
+    #   The ARN of the server certificate. For more information, see the
+    #   [Certificate Manager User Guide][1].
     #
     #
     #
@@ -4354,14 +4355,12 @@ module Aws::EC2
     #   A brief description of the Client VPN endpoint.
     #
     # @option params [Boolean] :split_tunnel
-    #   Indicates whether split-tunnel is enabled on the AWS Client VPN
-    #   endpoint.
+    #   Indicates whether split-tunnel is enabled on the Client VPN endpoint.
     #
     #   By default, split-tunnel on a VPN endpoint is disabled.
     #
-    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
-    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
-    #   Guide*.
+    #   For information about split-tunnel VPN endpoints, see [Split-tunnel
+    #   Client VPN endpoint][1] in the *Client VPN Administrator Guide*.
     #
     #
     #
@@ -4375,8 +4374,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -4499,8 +4498,8 @@ module Aws::EC2
     #   * To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR
     #     range
     #
-    #   * To add a route for an on-premises network, enter the AWS
-    #     Site-to-Site VPN connection's IPv4 CIDR range
+    #   * To add a route for an on-premises network, enter the Amazon Web
+    #     Services Site-to-Site VPN connection's IPv4 CIDR range
     #
     #   * To add a route for the local network, enter the client CIDR range
     #
@@ -4517,8 +4516,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -4562,13 +4561,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Provides information to AWS about your VPN customer gateway device.
-    # The customer gateway is the appliance at your end of the VPN
-    # connection. (The device on the AWS side of the VPN connection is the
-    # virtual private gateway.) You must provide the internet-routable IP
-    # address of the customer gateway's external interface. The IP address
-    # must be static and can be behind a device performing network address
-    # translation (NAT).
+    # Provides information to Amazon Web Services about your VPN customer
+    # gateway device. The customer gateway is the appliance at your end of
+    # the VPN connection. (The device on the Amazon Web Services side of the
+    # VPN connection is the virtual private gateway.) You must provide the
+    # internet-routable IP address of the customer gateway's external
+    # interface. The IP address must be static and can be behind a device
+    # performing network address translation (NAT).
     #
     # For devices that use Border Gateway Protocol (BGP), you can also
     # provide the device's BGP Autonomous System Number (ASN). You can use
@@ -4588,8 +4587,8 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     # To create more than one customer gateway with the same VPN type, IP
     # address, and BGP ASN, specify a unique device name for each customer
@@ -11448,8 +11447,8 @@ module Aws::EC2
     # This is an idempotent operation. If you perform the operation more
     # than once, Amazon EC2 doesn't return an error.
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     #
     #
@@ -11638,8 +11637,8 @@ module Aws::EC2
     # static route allows traffic to be routed from the virtual private
     # gateway to the VPN customer gateway.
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     #
     #
@@ -11674,8 +11673,8 @@ module Aws::EC2
     # endpoint on the VPC side of your VPN connection. You can create a
     # virtual private gateway before creating the VPC itself.
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     #
     #
@@ -14227,9 +14226,10 @@ module Aws::EC2
     # gateway device using the new configuration information returned with
     # the new VPN connection ID.
     #
-    # For certificate-based authentication, delete all AWS Certificate
-    # Manager (ACM) private certificates used for the AWS-side tunnel
-    # endpoints for the VPN connection before deleting the VPN connection.
+    # For certificate-based authentication, delete all Certificate Manager
+    # (ACM) private certificates used for the Amazon Web Services-side
+    # tunnel endpoints for the VPN connection before deleting the VPN
+    # connection.
     #
     # @option params [required, String] :vpn_connection_id
     #   The ID of the VPN connection.
@@ -16229,8 +16229,8 @@ module Aws::EC2
 
     # Describes one or more of your VPN customer gateways.
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     #
     #
@@ -24452,7 +24452,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     group_ids: ["String"],
+    #     group_ids: ["SecurityGroupId"],
     #     group_names: ["SecurityGroupName"],
     #     dry_run: false,
     #     next_token: "String",
@@ -29092,8 +29092,8 @@ module Aws::EC2
 
     # Describes one or more of your VPN connections.
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     #
     #
@@ -29247,8 +29247,8 @@ module Aws::EC2
 
     # Describes one or more of your virtual private gateways.
     #
-    # For more information, see [AWS Site-to-Site VPN][1] in the *AWS
-    # Site-to-Site VPN User Guide*.
+    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     #
     #
@@ -32874,6 +32874,121 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Download an AWS-provided sample configuration file to be used with the
+    # customer gateway device specified for your Site-to-Site VPN
+    # connection.
+    #
+    # @option params [required, String] :vpn_connection_id
+    #   The `VpnConnectionId` specifies the Site-to-Site VPN connection used
+    #   for the sample configuration.
+    #
+    # @option params [required, String] :vpn_connection_device_type_id
+    #   Device identifier provided by the `GetVpnConnectionDeviceTypes` API.
+    #
+    # @option params [String] :internet_key_exchange_version
+    #   The IKE version to be used in the sample configuration file for your
+    #   customer gateway device. You can specify one of the following
+    #   versions: `ikev1` or `ikev2`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetVpnConnectionDeviceSampleConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVpnConnectionDeviceSampleConfigurationResult#vpn_connection_device_sample_configuration #vpn_connection_device_sample_configuration} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpn_connection_device_sample_configuration({
+    #     vpn_connection_id: "VpnConnectionId", # required
+    #     vpn_connection_device_type_id: "VpnConnectionDeviceTypeId", # required
+    #     internet_key_exchange_version: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection_device_sample_configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnConnectionDeviceSampleConfiguration AWS API Documentation
+    #
+    # @overload get_vpn_connection_device_sample_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_vpn_connection_device_sample_configuration(params = {}, options = {})
+      req = build_request(:get_vpn_connection_device_sample_configuration, params)
+      req.send_request(options)
+    end
+
+    # Obtain a list of customer gateway devices for which sample
+    # configuration files can be provided. The request has no additional
+    # parameters. You can also see the list of device types with sample
+    # configuration files available under [Your customer gateway device][1]
+    # in the *Amazon Web Services Site-to-Site VPN User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by
+    #   `GetVpnConnectionDeviceTypes` in paginated output. When this parameter
+    #   is used, `GetVpnConnectionDeviceTypes` only returns `MaxResults`
+    #   results in a single page along with a `NextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `GetVpnConnectionDeviceTypes` request with the returned
+    #   `NextToken` value. This value can be between 200 and 1000. If this
+    #   parameter is not used, then `GetVpnConnectionDeviceTypes` returns all
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   The `NextToken` value returned from a previous paginated
+    #   `GetVpnConnectionDeviceTypes` request where `MaxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `NextToken`
+    #   value. This value is null when there are no more results to return.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetVpnConnectionDeviceTypesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVpnConnectionDeviceTypesResult#vpn_connection_device_types #vpn_connection_device_types} => Array&lt;Types::VpnConnectionDeviceType&gt;
+    #   * {Types::GetVpnConnectionDeviceTypesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpn_connection_device_types({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpn_connection_device_types #=> Array
+    #   resp.vpn_connection_device_types[0].vpn_connection_device_type_id #=> String
+    #   resp.vpn_connection_device_types[0].vendor #=> String
+    #   resp.vpn_connection_device_types[0].platform #=> String
+    #   resp.vpn_connection_device_types[0].software #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnConnectionDeviceTypes AWS API Documentation
+    #
+    # @overload get_vpn_connection_device_types(params = {})
+    # @param [Hash] params ({})
+    def get_vpn_connection_device_types(params = {}, options = {})
+      req = build_request(:get_vpn_connection_device_types, params)
+      req.send_request(options)
+    end
+
     # Uploads a client certificate revocation list to the specified Client
     # VPN endpoint. Uploading a client certificate revocation list
     # overwrites the existing client certificate revocation list.
@@ -32887,8 +33002,8 @@ module Aws::EC2
     #
     # @option params [required, String] :certificate_revocation_list
     #   The client certificate revocation list file. For more information, see
-    #   [Generate a Client Certificate Revocation List][1] in the *AWS Client
-    #   VPN Administrator Guide*.
+    #   [Generate a Client Certificate Revocation List][1] in the *Client VPN
+    #   Administrator Guide*.
     #
     #
     #
@@ -33826,7 +33941,7 @@ module Aws::EC2
     #
     # @option params [String] :server_certificate_arn
     #   The ARN of the server certificate to be used. The server certificate
-    #   must be provisioned in AWS Certificate Manager (ACM).
+    #   must be provisioned in Certificate Manager (ACM).
     #
     # @option params [Types::ConnectionLogOptions] :connection_log_options
     #   Information about the client connection logging options.
@@ -33861,9 +33976,8 @@ module Aws::EC2
     # @option params [Boolean] :split_tunnel
     #   Indicates whether the VPN is split-tunnel.
     #
-    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
-    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
-    #   Guide*.
+    #   For information about split-tunnel VPN endpoints, see [Split-tunnel
+    #   Client VPN endpoint][1] in the *Client VPN Administrator Guide*.
     #
     #
     #
@@ -34830,7 +34944,7 @@ module Aws::EC2
     #     ena_support: {
     #       value: false,
     #     },
-    #     groups: ["String"],
+    #     groups: ["SecurityGroupId"],
     #     instance_id: "InstanceId", # required
     #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -37223,9 +37337,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the customer gateway or the target gateway of an AWS
-    # Site-to-Site VPN connection. To modify the target gateway, the
-    # following migration options are available:
+    # Modifies the customer gateway or the target gateway of an Amazon Web
+    # Services Site-to-Site VPN connection. To modify the target gateway,
+    # the following migration options are available:
     #
     # * An existing virtual private gateway to a new virtual private gateway
     #
@@ -37251,20 +37365,22 @@ module Aws::EC2
     #
     # After you migrate to the new gateway, you might need to modify your
     # VPC route table. Use CreateRoute and DeleteRoute to make the changes
-    # described in [VPN Gateway Target Modification Required VPC Route Table
-    # Updates][1] in the *AWS Site-to-Site VPN User Guide*.
+    # described in [Update VPC route tables][1] in the *Amazon Web Services
+    # Site-to-Site VPN User Guide*.
     #
     # When the new gateway is a transit gateway, modify the transit gateway
-    # route table to allow traffic between the VPC and the AWS Site-to-Site
-    # VPN connection. Use CreateTransitGatewayRoute to add the routes.
+    # route table to allow traffic between the VPC and the Amazon Web
+    # Services Site-to-Site VPN connection. Use CreateTransitGatewayRoute to
+    # add the routes.
     #
     # If you deleted VPN static routes, you must add the static routes to
     # the transit gateway route table.
     #
-    # After you perform this operation, the AWS VPN endpoint's IP addresses
-    # on the AWS side and the tunnel options remain intact. Your AWS
-    # Site-to-Site VPN connection will be temporarily unavailable for a
-    # brief period while we provision the new endpoints.
+    # After you perform this operation, the VPN endpoint's IP addresses on
+    # the Amazon Web Services side and the tunnel options remain intact.
+    # Your Amazon Web Services Site-to-Site VPN connection will be
+    # temporarily unavailable for a brief period while we provision the new
+    # endpoints.
     #
     #
     #
@@ -37280,8 +37396,8 @@ module Aws::EC2
     #   The ID of the customer gateway at your end of the VPN connection.
     #
     # @option params [String] :vpn_gateway_id
-    #   The ID of the virtual private gateway at the AWS side of the VPN
-    #   connection.
+    #   The ID of the virtual private gateway at the Amazon Web Services side
+    #   of the VPN connection.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -37374,9 +37490,9 @@ module Aws::EC2
     # Modifies the connection options for your Site-to-Site VPN connection.
     #
     # When you modify the VPN connection options, the VPN endpoint IP
-    # addresses on the AWS side do not change, and the tunnel options do not
-    # change. Your VPN connection will be temporarily unavailable for a
-    # brief period while the VPN connection is updated.
+    # addresses on the Amazon Web Services side do not change, and the
+    # tunnel options do not change. Your VPN connection will be temporarily
+    # unavailable for a brief period while the VPN connection is updated.
     #
     # @option params [required, String] :vpn_connection_id
     #   The ID of the Site-to-Site VPN connection.
@@ -37388,7 +37504,7 @@ module Aws::EC2
     #   Default: `0.0.0.0/0`
     #
     # @option params [String] :remote_ipv_4_network_cidr
-    #   The IPv4 CIDR on the AWS side of the VPN connection.
+    #   The IPv4 CIDR on the Amazon Web Services side of the VPN connection.
     #
     #   Default: `0.0.0.0/0`
     #
@@ -37399,7 +37515,7 @@ module Aws::EC2
     #   Default: `::/0`
     #
     # @option params [String] :remote_ipv_6_network_cidr
-    #   The IPv6 CIDR on the AWS side of the VPN connection.
+    #   The IPv6 CIDR on the Amazon Web Services side of the VPN connection.
     #
     #   Default: `::/0`
     #
@@ -37495,7 +37611,7 @@ module Aws::EC2
     # Modifies the VPN tunnel endpoint certificate.
     #
     # @option params [required, String] :vpn_connection_id
-    #   The ID of the AWS Site-to-Site VPN connection.
+    #   The ID of the Amazon Web Services Site-to-Site VPN connection.
     #
     # @option params [required, String] :vpn_tunnel_outside_ip_address
     #   The external IP address of the VPN tunnel.
@@ -37586,19 +37702,19 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN
-    # connection. You can modify multiple options for a tunnel in a single
-    # request, but you can only modify one tunnel at a time. For more
-    # information, see [Site-to-Site VPN Tunnel Options for Your
-    # Site-to-Site VPN Connection][1] in the *AWS Site-to-Site VPN User
-    # Guide*.
+    # Modifies the options for a VPN tunnel in an Amazon Web Services
+    # Site-to-Site VPN connection. You can modify multiple options for a
+    # tunnel in a single request, but you can only modify one tunnel at a
+    # time. For more information, see [Site-to-Site VPN tunnel options for
+    # your Site-to-Site VPN connection][1] in the *Amazon Web Services
+    # Site-to-Site VPN User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html
     #
     # @option params [required, String] :vpn_connection_id
-    #   The ID of the AWS Site-to-Site VPN connection.
+    #   The ID of the Amazon Web Services Site-to-Site VPN connection.
     #
     # @option params [required, String] :vpn_tunnel_outside_ip_address
     #   The external IP address of the VPN tunnel.
@@ -42129,9 +42245,6 @@ module Aws::EC2
     # @option params [required, String] :local_gateway_route_table_id
     #   The ID of the local gateway route table.
     #
-    # @option params [required, Array<Types::Filter>] :filters
-    #   One or more filters.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -42146,6 +42259,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [required, Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
     # @return [Types::SearchLocalGatewayRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchLocalGatewayRoutesResult#routes #routes} => Array&lt;Types::LocalGatewayRoute&gt;
@@ -42157,15 +42273,15 @@ module Aws::EC2
     #
     #   resp = client.search_local_gateway_routes({
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
     #     filters: [ # required
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     max_results: 1,
-    #     next_token: "String",
-    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -43640,7 +43756,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.263.0'
+      context[:gem_version] = '1.264.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -230,6 +230,7 @@ module Aws::Kafka
     ClusterInfo.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integer, location_name: "numberOfBrokerNodes"))
     ClusterInfo.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoring, location_name: "openMonitoring"))
     ClusterInfo.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    ClusterInfo.add_member(:state_info, Shapes::ShapeRef.new(shape: StateInfo, location_name: "stateInfo"))
     ClusterInfo.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ClusterInfo.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
     ClusterInfo.add_member(:zookeeper_connect_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectStringTls"))

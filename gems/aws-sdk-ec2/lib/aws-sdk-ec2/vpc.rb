@@ -297,7 +297,7 @@ module Aws::EC2
     #
     #   vpc.attach_classic_link_instance({
     #     dry_run: false,
-    #     groups: ["String"], # required
+    #     groups: ["SecurityGroupId"], # required
     #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
@@ -1772,7 +1772,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     group_ids: ["String"],
+    #     group_ids: ["SecurityGroupId"],
     #     group_names: ["SecurityGroupName"],
     #     dry_run: false,
     #   })

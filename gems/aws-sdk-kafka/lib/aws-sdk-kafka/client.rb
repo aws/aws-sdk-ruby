@@ -669,6 +669,8 @@ module Aws::Kafka
     #   resp.cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "HEALING", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
+    #   resp.cluster_info.state_info.code #=> String
+    #   resp.cluster_info.state_info.message #=> String
     #   resp.cluster_info.tags #=> Hash
     #   resp.cluster_info.tags["__string"] #=> String
     #   resp.cluster_info.zookeeper_connect_string #=> String
@@ -1121,6 +1123,8 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info_list[0].open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info_list[0].state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "HEALING", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
+    #   resp.cluster_info_list[0].state_info.code #=> String
+    #   resp.cluster_info_list[0].state_info.message #=> String
     #   resp.cluster_info_list[0].tags #=> Hash
     #   resp.cluster_info_list[0].tags["__string"] #=> String
     #   resp.cluster_info_list[0].zookeeper_connect_string #=> String
@@ -1873,7 +1877,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

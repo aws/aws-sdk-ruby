@@ -416,6 +416,10 @@ module Aws::Kafka
     #   UPDATING.
     #   @return [String]
     #
+    # @!attribute [rw] state_info
+    #   Contains information about the state of the Amazon MSK cluster.
+    #   @return [Types::StateInfo]
+    #
     # @!attribute [rw] tags
     #   Tags attached to the cluster.
     #   @return [Hash<String,String>]
@@ -447,6 +451,7 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :open_monitoring,
       :state,
+      :state_info,
       :tags,
       :zookeeper_connect_string,
       :zookeeper_connect_string_tls)

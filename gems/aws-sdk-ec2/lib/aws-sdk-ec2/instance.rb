@@ -573,7 +573,7 @@ module Aws::EC2
     #
     #   instance.attach_classic_link_vpc({
     #     dry_run: false,
-    #     groups: ["String"], # required
+    #     groups: ["SecurityGroupId"], # required
     #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
@@ -920,7 +920,7 @@ module Aws::EC2
     #     ena_support: {
     #       value: false,
     #     },
-    #     groups: ["String"],
+    #     groups: ["SecurityGroupId"],
     #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>

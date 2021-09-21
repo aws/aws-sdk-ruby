@@ -964,7 +964,10 @@ module Aws::IoT
     #   The description of the audit suppression.
     #
     # @option params [required, String] :client_request_token
-    #   The epoch timestamp in seconds at which this suppression expires.
+    #   Each audit supression must have a unique client request token. If you
+    #   try to create a new audit suppression with the same token as one that
+    #   already exists, an exception occurs. If you omit this value, Amazon
+    #   Web Services SDKs will automatically generate a unique client request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -7259,6 +7262,9 @@ module Aws::IoT
     # @option params [Boolean] :list_suppressed_alerts
     #   A list of all suppressed alerts.
     #
+    # @option params [String] :verification_state
+    #   The verification state of the violation (detect alarm).
+    #
     # @option params [String] :next_token
     #   The token for the next set of results.
     #
@@ -7279,6 +7285,7 @@ module Aws::IoT
     #     security_profile_name: "SecurityProfileName",
     #     behavior_criteria_type: "STATIC", # accepts STATIC, STATISTICAL, MACHINE_LEARNING
     #     list_suppressed_alerts: false,
+    #     verification_state: "FALSE_POSITIVE", # accepts FALSE_POSITIVE, BENIGN_POSITIVE, TRUE_POSITIVE, UNKNOWN
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -7321,6 +7328,8 @@ module Aws::IoT
     #   resp.active_violations[0].last_violation_value.strings #=> Array
     #   resp.active_violations[0].last_violation_value.strings[0] #=> String
     #   resp.active_violations[0].violation_event_additional_info.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.active_violations[0].verification_state #=> String, one of "FALSE_POSITIVE", "BENIGN_POSITIVE", "TRUE_POSITIVE", "UNKNOWN"
+    #   resp.active_violations[0].verification_state_description #=> String
     #   resp.active_violations[0].last_violation_time #=> Time
     #   resp.active_violations[0].violation_start_time #=> Time
     #   resp.next_token #=> String
@@ -10233,6 +10242,9 @@ module Aws::IoT
     # @option params [Boolean] :list_suppressed_alerts
     #   A list of all suppressed alerts.
     #
+    # @option params [String] :verification_state
+    #   The verification state of the violation (detect alarm).
+    #
     # @option params [String] :next_token
     #   The token for the next set of results.
     #
@@ -10255,6 +10267,7 @@ module Aws::IoT
     #     security_profile_name: "SecurityProfileName",
     #     behavior_criteria_type: "STATIC", # accepts STATIC, STATISTICAL, MACHINE_LEARNING
     #     list_suppressed_alerts: false,
+    #     verification_state: "FALSE_POSITIVE", # accepts FALSE_POSITIVE, BENIGN_POSITIVE, TRUE_POSITIVE, UNKNOWN
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -10298,6 +10311,8 @@ module Aws::IoT
     #   resp.violation_events[0].metric_value.strings[0] #=> String
     #   resp.violation_events[0].violation_event_additional_info.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.violation_events[0].violation_event_type #=> String, one of "in-alarm", "alarm-cleared", "alarm-invalidated"
+    #   resp.violation_events[0].verification_state #=> String, one of "FALSE_POSITIVE", "BENIGN_POSITIVE", "TRUE_POSITIVE", "UNKNOWN"
+    #   resp.violation_events[0].verification_state_description #=> String
     #   resp.violation_events[0].violation_event_time #=> Time
     #   resp.next_token #=> String
     #
@@ -10305,6 +10320,36 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_violation_events(params = {}, options = {})
       req = build_request(:list_violation_events, params)
+      req.send_request(options)
+    end
+
+    # Set a verification state and provide a description of that
+    # verification state on a violation (detect alarm).
+    #
+    # @option params [required, String] :violation_id
+    #   The violation ID.
+    #
+    # @option params [required, String] :verification_state
+    #   The verification state of the violation.
+    #
+    # @option params [String] :verification_state_description
+    #   The description of the verification state of the violation (detect
+    #   alarm).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_verification_state_on_violation({
+    #     violation_id: "ViolationId", # required
+    #     verification_state: "FALSE_POSITIVE", # required, accepts FALSE_POSITIVE, BENIGN_POSITIVE, TRUE_POSITIVE, UNKNOWN
+    #     verification_state_description: "VerificationStateDescription",
+    #   })
+    #
+    # @overload put_verification_state_on_violation(params = {})
+    # @param [Hash] params ({})
+    def put_verification_state_on_violation(params = {}, options = {})
+      req = build_request(:put_verification_state_on_violation, params)
       req.send_request(options)
     end
 
@@ -13328,7 +13373,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

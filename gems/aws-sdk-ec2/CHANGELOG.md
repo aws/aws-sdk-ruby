@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.264.0 (2021-09-21)
+------------------
+
+* Feature - This update adds support for downloading configuration templates using new APIs (GetVpnConnectionDeviceTypes and GetVpnConnectionDeviceSampleConfiguration) and Internet Key Exchange version 2 (IKEv2) parameters for many popular CGW devices.
+
 1.263.0 (2021-09-14)
 ------------------
 

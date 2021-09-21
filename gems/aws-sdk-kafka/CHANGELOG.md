@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-09-21)
+------------------
+
+* Feature - Added StateInfo to ClusterInfo
+
 1.40.0 (2021-09-08)
 ------------------
 

@@ -42,6 +42,8 @@ module Aws::ECR
     DeleteRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyResponse')
     DeleteRepositoryRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryRequest')
     DeleteRepositoryResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryResponse')
+    DescribeImageReplicationStatusRequest = Shapes::StructureShape.new(name: 'DescribeImageReplicationStatusRequest')
+    DescribeImageReplicationStatusResponse = Shapes::StructureShape.new(name: 'DescribeImageReplicationStatusResponse')
     DescribeImageScanFindingsRequest = Shapes::StructureShape.new(name: 'DescribeImageScanFindingsRequest')
     DescribeImageScanFindingsResponse = Shapes::StructureShape.new(name: 'DescribeImageScanFindingsResponse')
     DescribeImagesFilter = Shapes::StructureShape.new(name: 'DescribeImagesFilter')
@@ -92,6 +94,8 @@ module Aws::ECR
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageManifest = Shapes::StringShape.new(name: 'ImageManifest')
     ImageNotFoundException = Shapes::StructureShape.new(name: 'ImageNotFoundException')
+    ImageReplicationStatus = Shapes::StructureShape.new(name: 'ImageReplicationStatus')
+    ImageReplicationStatusList = Shapes::ListShape.new(name: 'ImageReplicationStatusList')
     ImageScanFinding = Shapes::StructureShape.new(name: 'ImageScanFinding')
     ImageScanFindingList = Shapes::ListShape.new(name: 'ImageScanFindingList')
     ImageScanFindings = Shapes::StructureShape.new(name: 'ImageScanFindings')
@@ -172,10 +176,16 @@ module Aws::ECR
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationDestination = Shapes::StructureShape.new(name: 'ReplicationDestination')
     ReplicationDestinationList = Shapes::ListShape.new(name: 'ReplicationDestinationList')
+    ReplicationError = Shapes::StringShape.new(name: 'ReplicationError')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
     ReplicationRuleList = Shapes::ListShape.new(name: 'ReplicationRuleList')
+    ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
     Repository = Shapes::StructureShape.new(name: 'Repository')
     RepositoryAlreadyExistsException = Shapes::StructureShape.new(name: 'RepositoryAlreadyExistsException')
+    RepositoryFilter = Shapes::StructureShape.new(name: 'RepositoryFilter')
+    RepositoryFilterList = Shapes::ListShape.new(name: 'RepositoryFilterList')
+    RepositoryFilterType = Shapes::StringShape.new(name: 'RepositoryFilterType')
+    RepositoryFilterValue = Shapes::StringShape.new(name: 'RepositoryFilterValue')
     RepositoryList = Shapes::ListShape.new(name: 'RepositoryList')
     RepositoryName = Shapes::StringShape.new(name: 'RepositoryName')
     RepositoryNameList = Shapes::ListShape.new(name: 'RepositoryNameList')
@@ -271,6 +281,7 @@ module Aws::ECR
     CompleteLayerUploadResponse.add_member(:layer_digest, Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
     CompleteLayerUploadResponse.struct_class = Types::CompleteLayerUploadResponse
 
+    CreateRepositoryRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     CreateRepositoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryRequest.add_member(:image_tag_mutability, Shapes::ShapeRef.new(shape: ImageTagMutability, location_name: "imageTagMutability"))
@@ -313,6 +324,16 @@ module Aws::ECR
 
     DeleteRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     DeleteRepositoryResponse.struct_class = Types::DeleteRepositoryResponse
+
+    DescribeImageReplicationStatusRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    DescribeImageReplicationStatusRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
+    DescribeImageReplicationStatusRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeImageReplicationStatusRequest.struct_class = Types::DescribeImageReplicationStatusRequest
+
+    DescribeImageReplicationStatusResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    DescribeImageReplicationStatusResponse.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
+    DescribeImageReplicationStatusResponse.add_member(:replication_statuses, Shapes::ShapeRef.new(shape: ImageReplicationStatusList, location_name: "replicationStatuses"))
+    DescribeImageReplicationStatusResponse.struct_class = Types::DescribeImageReplicationStatusResponse
 
     DescribeImageScanFindingsRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DescribeImageScanFindingsRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -473,6 +494,14 @@ module Aws::ECR
 
     ImageNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ImageNotFoundException.struct_class = Types::ImageNotFoundException
+
+    ImageReplicationStatus.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
+    ImageReplicationStatus.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    ImageReplicationStatus.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "status"))
+    ImageReplicationStatus.add_member(:failure_code, Shapes::ShapeRef.new(shape: ReplicationError, location_name: "failureCode"))
+    ImageReplicationStatus.struct_class = Types::ImageReplicationStatus
+
+    ImageReplicationStatusList.member = Shapes::ShapeRef.new(shape: ImageReplicationStatus)
 
     ImageScanFinding.add_member(:name, Shapes::ShapeRef.new(shape: FindingName, location_name: "name"))
     ImageScanFinding.add_member(:description, Shapes::ShapeRef.new(shape: FindingDescription, location_name: "description"))
@@ -685,6 +714,7 @@ module Aws::ECR
     ReplicationDestinationList.member = Shapes::ShapeRef.new(shape: ReplicationDestination)
 
     ReplicationRule.add_member(:destinations, Shapes::ShapeRef.new(shape: ReplicationDestinationList, required: true, location_name: "destinations"))
+    ReplicationRule.add_member(:repository_filters, Shapes::ShapeRef.new(shape: RepositoryFilterList, location_name: "repositoryFilters"))
     ReplicationRule.struct_class = Types::ReplicationRule
 
     ReplicationRuleList.member = Shapes::ShapeRef.new(shape: ReplicationRule)
@@ -701,6 +731,12 @@ module Aws::ECR
 
     RepositoryAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     RepositoryAlreadyExistsException.struct_class = Types::RepositoryAlreadyExistsException
+
+    RepositoryFilter.add_member(:filter, Shapes::ShapeRef.new(shape: RepositoryFilterValue, required: true, location_name: "filter"))
+    RepositoryFilter.add_member(:filter_type, Shapes::ShapeRef.new(shape: RepositoryFilterType, required: true, location_name: "filterType"))
+    RepositoryFilter.struct_class = Types::RepositoryFilter
+
+    RepositoryFilterList.member = Shapes::ShapeRef.new(shape: RepositoryFilter)
 
     RepositoryList.member = Shapes::ShapeRef.new(shape: Repository)
 
@@ -906,6 +942,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RegistryPolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_repository, Seahorse::Model::Operation.new.tap do |o|
@@ -931,6 +968,19 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
+      end)
+
+      api.add_operation(:describe_image_replication_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImageReplicationStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImageReplicationStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImageReplicationStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_image_scan_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -1060,6 +1110,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RegistryPolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_repository_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1173,6 +1224,7 @@ module Aws::ECR
         o.output = Shapes::ShapeRef.new(shape: PutRegistryPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_replication_configuration, Seahorse::Model::Operation.new.tap do |o|

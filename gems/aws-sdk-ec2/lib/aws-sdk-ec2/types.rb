@@ -1445,8 +1445,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2171,7 +2171,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         groups: ["String"], # required
+    #         groups: ["SecurityGroupId"], # required
     #         instance_id: "InstanceId", # required
     #         vpc_id: "VpcId", # required
     #       }
@@ -2541,8 +2541,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -4183,7 +4183,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_root_certificate_chain_arn
     #   The ARN of the client certificate. The certificate must be signed by
-    #   a certificate authority (CA) and it must be provisioned in AWS
+    #   a certificate authority (CA) and it must be provisioned in
     #   Certificate Manager (ACM).
     #   @return [String]
     #
@@ -4376,7 +4376,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_function_arn
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function used for
+    #   The Amazon Resource Name (ARN) of the Lambda function used for
     #   connection authorization.
     #   @return [String]
     #
@@ -4397,7 +4397,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_function_arn
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function used for
+    #   The Amazon Resource Name (ARN) of the Lambda function used for
     #   connection authorization.
     #   @return [String]
     #
@@ -4455,7 +4455,7 @@ module Aws::EC2
     end
 
     # Describes the authentication methods used by a Client VPN endpoint.
-    # For more information, see [Authentication][1] in the *AWS Client VPN
+    # For more information, see [Authentication][1] in the *Client VPN
     # Administrator Guide*.
     #
     #
@@ -4490,8 +4490,8 @@ module Aws::EC2
     end
 
     # Describes the authentication method to be used by a Client VPN
-    # endpoint. For more information, see [Authentication][1] in the *AWS
-    # Client VPN Administrator Guide*.
+    # endpoint. For more information, see [Authentication][1] in the *Client
+    # VPN Administrator Guide*.
     #
     #
     #
@@ -4706,12 +4706,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] split_tunnel
-    #   Indicates whether split-tunnel is enabled in the AWS Client VPN
+    #   Indicates whether split-tunnel is enabled in the Client VPN
     #   endpoint.
     #
     #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
-    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
-    #   Guide*.
+    #   Client VPN endpoint][1] in the *Client VPN Administrator Guide*.
     #
     #
     #
@@ -5951,7 +5950,7 @@ module Aws::EC2
     #
     # @!attribute [rw] server_certificate_arn
     #   The ARN of the server certificate. For more information, see the
-    #   [AWS Certificate Manager User Guide][1].
+    #   [Certificate Manager User Guide][1].
     #
     #
     #
@@ -6006,14 +6005,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] split_tunnel
-    #   Indicates whether split-tunnel is enabled on the AWS Client VPN
+    #   Indicates whether split-tunnel is enabled on the Client VPN
     #   endpoint.
     #
     #   By default, split-tunnel on a VPN endpoint is disabled.
     #
-    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
-    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
-    #   Guide*.
+    #   For information about split-tunnel VPN endpoints, see [Split-tunnel
+    #   Client VPN endpoint][1] in the *Client VPN Administrator Guide*.
     #
     #
     #
@@ -6029,8 +6027,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -6139,8 +6137,8 @@ module Aws::EC2
     #   * To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR
     #     range
     #
-    #   * To add a route for an on-premises network, enter the AWS
-    #     Site-to-Site VPN connection's IPv4 CIDR range
+    #   * To add a route for an on-premises network, enter the Amazon Web
+    #     Services Site-to-Site VPN connection's IPv4 CIDR range
     #
     #   * To add a route for the local network, enter the client CIDR range
     #   @return [String]
@@ -6160,8 +6158,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -22465,7 +22463,7 @@ module Aws::EC2
     #             values: ["String"],
     #           },
     #         ],
-    #         group_ids: ["String"],
+    #         group_ids: ["SecurityGroupId"],
     #         group_names: ["SecurityGroupName"],
     #         dry_run: false,
     #         next_token: "String",
@@ -32304,6 +32302,130 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetVpnConnectionDeviceSampleConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpn_connection_id: "VpnConnectionId", # required
+    #         vpn_connection_device_type_id: "VpnConnectionDeviceTypeId", # required
+    #         internet_key_exchange_version: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] vpn_connection_id
+    #   The `VpnConnectionId` specifies the Site-to-Site VPN connection used
+    #   for the sample configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_connection_device_type_id
+    #   Device identifier provided by the `GetVpnConnectionDeviceTypes` API.
+    #   @return [String]
+    #
+    # @!attribute [rw] internet_key_exchange_version
+    #   The IKE version to be used in the sample configuration file for your
+    #   customer gateway device. You can specify one of the following
+    #   versions: `ikev1` or `ikev2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnConnectionDeviceSampleConfigurationRequest AWS API Documentation
+    #
+    class GetVpnConnectionDeviceSampleConfigurationRequest < Struct.new(
+      :vpn_connection_id,
+      :vpn_connection_device_type_id,
+      :internet_key_exchange_version,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection_device_sample_configuration
+    #   Sample configuration file for the specified customer gateway device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnConnectionDeviceSampleConfigurationResult AWS API Documentation
+    #
+    class GetVpnConnectionDeviceSampleConfigurationResult < Struct.new(
+      :vpn_connection_device_sample_configuration)
+      SENSITIVE = [:vpn_connection_device_sample_configuration]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVpnConnectionDeviceTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by
+    #   `GetVpnConnectionDeviceTypes` in paginated output. When this
+    #   parameter is used, `GetVpnConnectionDeviceTypes` only returns
+    #   `MaxResults` results in a single page along with a `NextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `GetVpnConnectionDeviceTypes` request
+    #   with the returned `NextToken` value. This value can be between 200
+    #   and 1000. If this parameter is not used, then
+    #   `GetVpnConnectionDeviceTypes` returns all results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value returned from a previous paginated
+    #   `GetVpnConnectionDeviceTypes` request where `MaxResults` was used
+    #   and the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `NextToken` value. This value is null when there are no more results
+    #   to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnConnectionDeviceTypesRequest AWS API Documentation
+    #
+    class GetVpnConnectionDeviceTypesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpn_connection_device_types
+    #   List of customer gateway devices that have a sample configuration
+    #   file available for use.
+    #   @return [Array<Types::VpnConnectionDeviceType>]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value to include in a future
+    #   `GetVpnConnectionDeviceTypes` request. When the results of a
+    #   `GetVpnConnectionDeviceTypes` request exceed `MaxResults`, this
+    #   value can be used to retrieve the next page of results. This value
+    #   is null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVpnConnectionDeviceTypesResult AWS API Documentation
+    #
+    class GetVpnConnectionDeviceTypesResult < Struct.new(
+      :vpn_connection_device_types,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the GPU accelerators for the instance type.
     #
     # @!attribute [rw] name
@@ -33298,8 +33420,8 @@ module Aws::EC2
     #
     # @!attribute [rw] certificate_revocation_list
     #   The client certificate revocation list file. For more information,
-    #   see [Generate a Client Certificate Revocation List][1] in the *AWS
-    #   Client VPN Administrator Guide*.
+    #   see [Generate a Client Certificate Revocation List][1] in the
+    #   *Client VPN Administrator Guide*.
     #
     #
     #
@@ -39578,7 +39700,7 @@ module Aws::EC2
     #
     # @!attribute [rw] server_certificate_arn
     #   The ARN of the server certificate to be used. The server certificate
-    #   must be provisioned in AWS Certificate Manager (ACM).
+    #   must be provisioned in Certificate Manager (ACM).
     #   @return [String]
     #
     # @!attribute [rw] connection_log_options
@@ -39618,9 +39740,8 @@ module Aws::EC2
     # @!attribute [rw] split_tunnel
     #   Indicates whether the VPN is split-tunnel.
     #
-    #   For information about split-tunnel VPN endpoints, see [Split-Tunnel
-    #   AWS Client VPN Endpoint][1] in the *AWS Client VPN Administrator
-    #   Guide*.
+    #   For information about split-tunnel VPN endpoints, see [Split-tunnel
+    #   Client VPN endpoint][1] in the *Client VPN Administrator Guide*.
     #
     #
     #
@@ -40289,7 +40410,7 @@ module Aws::EC2
     #         ena_support: {
     #           value: false,
     #         },
-    #         groups: ["String"],
+    #         groups: ["SecurityGroupId"],
     #         instance_id: "InstanceId", # required
     #         instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -42670,7 +42791,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] remote_ipv_4_network_cidr
-    #   The IPv4 CIDR on the AWS side of the VPN connection.
+    #   The IPv4 CIDR on the Amazon Web Services side of the VPN connection.
     #
     #   Default: `0.0.0.0/0`
     #   @return [String]
@@ -42683,7 +42804,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] remote_ipv_6_network_cidr
-    #   The IPv6 CIDR on the AWS side of the VPN connection.
+    #   The IPv6 CIDR on the Amazon Web Services side of the VPN connection.
     #
     #   Default: `::/0`
     #   @return [String]
@@ -42744,8 +42865,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway at the AWS side of the VPN
-    #   connection.
+    #   The ID of the virtual private gateway at the Amazon Web Services
+    #   side of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -42789,7 +42910,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] vpn_connection_id
-    #   The ID of the AWS Site-to-Site VPN connection.
+    #   The ID of the Amazon Web Services Site-to-Site VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] vpn_tunnel_outside_ip_address
@@ -42883,7 +43004,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] vpn_connection_id
-    #   The ID of the AWS Site-to-Site VPN connection.
+    #   The ID of the Amazon Web Services Site-to-Site VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] vpn_tunnel_outside_ip_address
@@ -42924,7 +43045,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The AWS Site-to-Site VPN tunnel options to modify.
+    # The Amazon Web Services Site-to-Site VPN tunnel options to modify.
     #
     # @note When making an API call, you may pass ModifyVpnTunnelOptionsSpecification
     #   data as a hash:
@@ -43037,9 +43158,9 @@ module Aws::EC2
     #
     # @!attribute [rw] rekey_margin_time_seconds
     #   The margin time, in seconds, before the phase 2 lifetime expires,
-    #   during which the AWS side of the VPN connection performs an IKE
-    #   rekey. The exact time of the rekey is randomly selected based on the
-    #   value for `RekeyFuzzPercentage`.
+    #   during which the Amazon Web Services side of the VPN connection
+    #   performs an IKE rekey. The exact time of the rekey is randomly
+    #   selected based on the value for `RekeyFuzzPercentage`.
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
@@ -43136,8 +43257,8 @@ module Aws::EC2
     # @!attribute [rw] startup_action
     #   The action to take when the establishing the tunnel for the VPN
     #   connection. By default, your customer gateway device must initiate
-    #   the IKE negotiation and bring up the tunnel. Specify `start` for AWS
-    #   to initiate the IKE negotiation.
+    #   the IKE negotiation and bring up the tunnel. Specify `start` for
+    #   Amazon Web Services to initiate the IKE negotiation.
     #
     #   Valid Values: `add` \| `start`
     #
@@ -51605,24 +51726,20 @@ module Aws::EC2
     #
     #       {
     #         local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
     #         filters: [ # required
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
-    #         max_results: 1,
-    #         next_token: "String",
-    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] local_gateway_route_table_id
     #   The ID of the local gateway route table.
     #   @return [String]
-    #
-    # @!attribute [rw] filters
-    #   One or more filters.
-    #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
@@ -51641,14 +51758,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchLocalGatewayRoutesRequest AWS API Documentation
     #
     class SearchLocalGatewayRoutesRequest < Struct.new(
       :local_gateway_route_table_id,
-      :filters,
       :max_results,
       :next_token,
-      :dry_run)
+      :dry_run,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57044,8 +57165,8 @@ module Aws::EC2
     #
     # @!attribute [rw] rekey_margin_time_seconds
     #   The margin time, in seconds, before the phase 2 lifetime expires,
-    #   during which the AWS side of the VPN connection performs an IKE
-    #   rekey.
+    #   during which the Amazon Web Services side of the VPN connection
+    #   performs an IKE rekey.
     #   @return [Integer]
     #
     # @!attribute [rw] rekey_fuzz_percentage
@@ -58722,8 +58843,8 @@ module Aws::EC2
     #
     # @!attribute [rw] category
     #   The category of the VPN connection. A value of `VPN` indicates an
-    #   AWS VPN connection. A value of `VPN-Classic` indicates an AWS
-    #   Classic VPN connection.
+    #   Amazon Web Services VPN connection. A value of `VPN-Classic`
+    #   indicates an Amazon Web Services Classic VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -58739,8 +58860,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpn_gateway_id
-    #   The ID of the virtual private gateway at the AWS side of the VPN
-    #   connection.
+    #   The ID of the virtual private gateway at the Amazon Web Services
+    #   side of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_id
@@ -58782,6 +58903,42 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # List of customer gateway devices that have a sample configuration file
+    # available for use. You can also see the list of device types with
+    # sample configuration files available under [Your customer gateway
+    # device][1] in the *Amazon Web Services Site-to-Site VPN User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html
+    #
+    # @!attribute [rw] vpn_connection_device_type_id
+    #   Customer gateway device identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor
+    #   Customer gateway device vendor.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   Customer gateway device platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] software
+    #   Customer gateway device software version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionDeviceType AWS API Documentation
+    #
+    class VpnConnectionDeviceType < Struct.new(
+      :vpn_connection_device_type_id,
+      :vendor,
+      :platform,
+      :software)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes VPN connection options.
     #
     # @!attribute [rw] enable_acceleration
@@ -58799,7 +58956,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] remote_ipv_4_network_cidr
-    #   The IPv4 CIDR on the AWS side of the VPN connection.
+    #   The IPv4 CIDR on the Amazon Web Services side of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] local_ipv_6_network_cidr
@@ -58808,7 +58965,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] remote_ipv_6_network_cidr
-    #   The IPv6 CIDR on the AWS side of the VPN connection.
+    #   The IPv6 CIDR on the Amazon Web Services side of the VPN connection.
     #   @return [String]
     #
     # @!attribute [rw] tunnel_inside_ip_version
@@ -58932,7 +59089,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] remote_ipv_4_network_cidr
-    #   The IPv4 CIDR on the AWS side of the VPN connection.
+    #   The IPv4 CIDR on the Amazon Web Services side of the VPN connection.
     #
     #   Default: `0.0.0.0/0`
     #   @return [String]
@@ -58945,7 +59102,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] remote_ipv_6_network_cidr
-    #   The IPv6 CIDR on the AWS side of the VPN connection.
+    #   The IPv6 CIDR on the Amazon Web Services side of the VPN connection.
     #
     #   Default: `::/0`
     #   @return [String]
@@ -59149,9 +59306,9 @@ module Aws::EC2
     #
     # @!attribute [rw] rekey_margin_time_seconds
     #   The margin time, in seconds, before the phase 2 lifetime expires,
-    #   during which the AWS side of the VPN connection performs an IKE
-    #   rekey. The exact time of the rekey is randomly selected based on the
-    #   value for `RekeyFuzzPercentage`.
+    #   during which the Amazon Web Services side of the VPN connection
+    #   performs an IKE rekey. The exact time of the rekey is randomly
+    #   selected based on the value for `RekeyFuzzPercentage`.
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
@@ -59248,8 +59405,8 @@ module Aws::EC2
     # @!attribute [rw] startup_action
     #   The action to take when the establishing the tunnel for the VPN
     #   connection. By default, your customer gateway device must initiate
-    #   the IKE negotiation and bring up the tunnel. Specify `start` for AWS
-    #   to initiate the IKE negotiation.
+    #   the IKE negotiation and bring up the tunnel. Specify `start` for
+    #   Amazon Web Services to initiate the IKE negotiation.
     #
     #   Valid Values: `add` \| `start`
     #

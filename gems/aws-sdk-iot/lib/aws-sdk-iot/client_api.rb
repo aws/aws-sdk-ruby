@@ -873,6 +873,8 @@ module Aws::IoT
     PutAssetPropertyValueEntry = Shapes::StructureShape.new(name: 'PutAssetPropertyValueEntry')
     PutAssetPropertyValueEntryList = Shapes::ListShape.new(name: 'PutAssetPropertyValueEntryList')
     PutItemInput = Shapes::StructureShape.new(name: 'PutItemInput')
+    PutVerificationStateOnViolationRequest = Shapes::StructureShape.new(name: 'PutVerificationStateOnViolationRequest')
+    PutVerificationStateOnViolationResponse = Shapes::StructureShape.new(name: 'PutVerificationStateOnViolationResponse')
     Qos = Shapes::IntegerShape.new(name: 'Qos')
     QueryMaxResults = Shapes::IntegerShape.new(name: 'QueryMaxResults')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
@@ -1206,6 +1208,8 @@ module Aws::IoT
     ValidationErrors = Shapes::ListShape.new(name: 'ValidationErrors')
     Value = Shapes::StringShape.new(name: 'Value')
     Variance = Shapes::FloatShape.new(name: 'Variance')
+    VerificationState = Shapes::StringShape.new(name: 'VerificationState')
+    VerificationStateDescription = Shapes::StringShape.new(name: 'VerificationStateDescription')
     Version = Shapes::IntegerShape.new(name: 'Version')
     VersionConflictException = Shapes::StructureShape.new(name: 'VersionConflictException')
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
@@ -1274,6 +1278,8 @@ module Aws::IoT
     ActiveViolation.add_member(:behavior, Shapes::ShapeRef.new(shape: Behavior, location_name: "behavior"))
     ActiveViolation.add_member(:last_violation_value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "lastViolationValue"))
     ActiveViolation.add_member(:violation_event_additional_info, Shapes::ShapeRef.new(shape: ViolationEventAdditionalInfo, location_name: "violationEventAdditionalInfo"))
+    ActiveViolation.add_member(:verification_state, Shapes::ShapeRef.new(shape: VerificationState, location_name: "verificationState"))
+    ActiveViolation.add_member(:verification_state_description, Shapes::ShapeRef.new(shape: VerificationStateDescription, location_name: "verificationStateDescription"))
     ActiveViolation.add_member(:last_violation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastViolationTime"))
     ActiveViolation.add_member(:violation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "violationStartTime"))
     ActiveViolation.struct_class = Types::ActiveViolation
@@ -3049,6 +3055,7 @@ module Aws::IoT
     ListActiveViolationsRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
     ListActiveViolationsRequest.add_member(:behavior_criteria_type, Shapes::ShapeRef.new(shape: BehaviorCriteriaType, location: "querystring", location_name: "behaviorCriteriaType"))
     ListActiveViolationsRequest.add_member(:list_suppressed_alerts, Shapes::ShapeRef.new(shape: ListSuppressedAlerts, location: "querystring", location_name: "listSuppressedAlerts"))
+    ListActiveViolationsRequest.add_member(:verification_state, Shapes::ShapeRef.new(shape: VerificationState, location: "querystring", location_name: "verificationState"))
     ListActiveViolationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListActiveViolationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListActiveViolationsRequest.struct_class = Types::ListActiveViolationsRequest
@@ -3563,6 +3570,7 @@ module Aws::IoT
     ListViolationEventsRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
     ListViolationEventsRequest.add_member(:behavior_criteria_type, Shapes::ShapeRef.new(shape: BehaviorCriteriaType, location: "querystring", location_name: "behaviorCriteriaType"))
     ListViolationEventsRequest.add_member(:list_suppressed_alerts, Shapes::ShapeRef.new(shape: ListSuppressedAlerts, location: "querystring", location_name: "listSuppressedAlerts"))
+    ListViolationEventsRequest.add_member(:verification_state, Shapes::ShapeRef.new(shape: VerificationState, location: "querystring", location_name: "verificationState"))
     ListViolationEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListViolationEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListViolationEventsRequest.struct_class = Types::ListViolationEventsRequest
@@ -3787,6 +3795,13 @@ module Aws::IoT
 
     PutItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "tableName"))
     PutItemInput.struct_class = Types::PutItemInput
+
+    PutVerificationStateOnViolationRequest.add_member(:violation_id, Shapes::ShapeRef.new(shape: ViolationId, required: true, location: "uri", location_name: "violationId"))
+    PutVerificationStateOnViolationRequest.add_member(:verification_state, Shapes::ShapeRef.new(shape: VerificationState, required: true, location_name: "verificationState"))
+    PutVerificationStateOnViolationRequest.add_member(:verification_state_description, Shapes::ShapeRef.new(shape: VerificationStateDescription, location_name: "verificationStateDescription"))
+    PutVerificationStateOnViolationRequest.struct_class = Types::PutVerificationStateOnViolationRequest
+
+    PutVerificationStateOnViolationResponse.struct_class = Types::PutVerificationStateOnViolationResponse
 
     RateIncreaseCriteria.add_member(:number_of_notified_things, Shapes::ShapeRef.new(shape: NumberOfThings, location_name: "numberOfNotifiedThings"))
     RateIncreaseCriteria.add_member(:number_of_succeeded_things, Shapes::ShapeRef.new(shape: NumberOfThings, location_name: "numberOfSucceededThings"))
@@ -4657,6 +4672,8 @@ module Aws::IoT
     ViolationEvent.add_member(:metric_value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "metricValue"))
     ViolationEvent.add_member(:violation_event_additional_info, Shapes::ShapeRef.new(shape: ViolationEventAdditionalInfo, location_name: "violationEventAdditionalInfo"))
     ViolationEvent.add_member(:violation_event_type, Shapes::ShapeRef.new(shape: ViolationEventType, location_name: "violationEventType"))
+    ViolationEvent.add_member(:verification_state, Shapes::ShapeRef.new(shape: VerificationState, location_name: "verificationState"))
+    ViolationEvent.add_member(:verification_state_description, Shapes::ShapeRef.new(shape: VerificationStateDescription, location_name: "verificationStateDescription"))
     ViolationEvent.add_member(:violation_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "violationEventTime"))
     ViolationEvent.struct_class = Types::ViolationEvent
 
@@ -7438,6 +7455,17 @@ module Aws::IoT
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_verification_state_on_violation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutVerificationStateOnViolation"
+        o.http_method = "POST"
+        o.http_request_uri = "/violations/verification-state/{violationId}"
+        o.input = Shapes::ShapeRef.new(shape: PutVerificationStateOnViolationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutVerificationStateOnViolationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:register_ca_certificate, Seahorse::Model::Operation.new.tap do |o|
