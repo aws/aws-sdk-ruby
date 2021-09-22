@@ -419,6 +419,7 @@ module Aws::MediaPackageVod
     #   resp.created_at #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].packaging_configuration_id #=> String
+    #   resp.egress_endpoints[0].status #=> String
     #   resp.egress_endpoints[0].url #=> String
     #   resp.id #=> String
     #   resp.packaging_group_id #=> String
@@ -804,6 +805,7 @@ module Aws::MediaPackageVod
     #   resp.created_at #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].packaging_configuration_id #=> String
+    #   resp.egress_endpoints[0].status #=> String
     #   resp.egress_endpoints[0].url #=> String
     #   resp.id #=> String
     #   resp.packaging_group_id #=> String
@@ -1291,7 +1293,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

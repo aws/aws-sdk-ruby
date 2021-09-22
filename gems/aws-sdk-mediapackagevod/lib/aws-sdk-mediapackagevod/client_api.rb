@@ -294,6 +294,7 @@ module Aws::MediaPackageVod
     EgressAccessLogs.struct_class = Types::EgressAccessLogs
 
     EgressEndpoint.add_member(:packaging_configuration_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingConfigurationId"))
+    EgressEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     EgressEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     EgressEndpoint.struct_class = Types::EgressEndpoint
 

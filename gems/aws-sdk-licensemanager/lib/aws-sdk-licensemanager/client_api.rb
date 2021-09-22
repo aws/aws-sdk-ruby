@@ -46,6 +46,8 @@ module Aws::LicenseManager
     CreateGrantVersionResponse = Shapes::StructureShape.new(name: 'CreateGrantVersionResponse')
     CreateLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'CreateLicenseConfigurationRequest')
     CreateLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'CreateLicenseConfigurationResponse')
+    CreateLicenseConversionTaskForResourceRequest = Shapes::StructureShape.new(name: 'CreateLicenseConversionTaskForResourceRequest')
+    CreateLicenseConversionTaskForResourceResponse = Shapes::StructureShape.new(name: 'CreateLicenseConversionTaskForResourceResponse')
     CreateLicenseManagerReportGeneratorRequest = Shapes::StructureShape.new(name: 'CreateLicenseManagerReportGeneratorRequest')
     CreateLicenseManagerReportGeneratorResponse = Shapes::StructureShape.new(name: 'CreateLicenseManagerReportGeneratorResponse')
     CreateLicenseRequest = Shapes::StructureShape.new(name: 'CreateLicenseRequest')
@@ -92,6 +94,8 @@ module Aws::LicenseManager
     GetGrantResponse = Shapes::StructureShape.new(name: 'GetGrantResponse')
     GetLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'GetLicenseConfigurationRequest')
     GetLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'GetLicenseConfigurationResponse')
+    GetLicenseConversionTaskRequest = Shapes::StructureShape.new(name: 'GetLicenseConversionTaskRequest')
+    GetLicenseConversionTaskResponse = Shapes::StructureShape.new(name: 'GetLicenseConversionTaskResponse')
     GetLicenseManagerReportGeneratorRequest = Shapes::StructureShape.new(name: 'GetLicenseManagerReportGeneratorRequest')
     GetLicenseManagerReportGeneratorResponse = Shapes::StructureShape.new(name: 'GetLicenseManagerReportGeneratorResponse')
     GetLicenseRequest = Shapes::StructureShape.new(name: 'GetLicenseRequest')
@@ -122,6 +126,11 @@ module Aws::LicenseManager
     LicenseConfigurationUsage = Shapes::StructureShape.new(name: 'LicenseConfigurationUsage')
     LicenseConfigurationUsageList = Shapes::ListShape.new(name: 'LicenseConfigurationUsageList')
     LicenseConfigurations = Shapes::ListShape.new(name: 'LicenseConfigurations')
+    LicenseConversionContext = Shapes::StructureShape.new(name: 'LicenseConversionContext')
+    LicenseConversionTask = Shapes::StructureShape.new(name: 'LicenseConversionTask')
+    LicenseConversionTaskId = Shapes::StringShape.new(name: 'LicenseConversionTaskId')
+    LicenseConversionTaskStatus = Shapes::StringShape.new(name: 'LicenseConversionTaskStatus')
+    LicenseConversionTasks = Shapes::ListShape.new(name: 'LicenseConversionTasks')
     LicenseCountingType = Shapes::StringShape.new(name: 'LicenseCountingType')
     LicenseDeletionStatus = Shapes::StringShape.new(name: 'LicenseDeletionStatus')
     LicenseList = Shapes::ListShape.new(name: 'LicenseList')
@@ -140,6 +149,8 @@ module Aws::LicenseManager
     ListFailuresForLicenseConfigurationOperationsResponse = Shapes::StructureShape.new(name: 'ListFailuresForLicenseConfigurationOperationsResponse')
     ListLicenseConfigurationsRequest = Shapes::StructureShape.new(name: 'ListLicenseConfigurationsRequest')
     ListLicenseConfigurationsResponse = Shapes::StructureShape.new(name: 'ListLicenseConfigurationsResponse')
+    ListLicenseConversionTasksRequest = Shapes::StructureShape.new(name: 'ListLicenseConversionTasksRequest')
+    ListLicenseConversionTasksResponse = Shapes::StructureShape.new(name: 'ListLicenseConversionTasksResponse')
     ListLicenseManagerReportGeneratorsRequest = Shapes::StructureShape.new(name: 'ListLicenseManagerReportGeneratorsRequest')
     ListLicenseManagerReportGeneratorsResponse = Shapes::StructureShape.new(name: 'ListLicenseManagerReportGeneratorsResponse')
     ListLicenseSpecificationsForResourceRequest = Shapes::StructureShape.new(name: 'ListLicenseSpecificationsForResourceRequest')
@@ -223,6 +234,7 @@ module Aws::LicenseManager
     UpdateLicenseSpecificationsForResourceResponse = Shapes::StructureShape.new(name: 'UpdateLicenseSpecificationsForResourceResponse')
     UpdateServiceSettingsRequest = Shapes::StructureShape.new(name: 'UpdateServiceSettingsRequest')
     UpdateServiceSettingsResponse = Shapes::StructureShape.new(name: 'UpdateServiceSettingsResponse')
+    UsageOperation = Shapes::StringShape.new(name: 'UsageOperation')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AcceptGrantRequest.add_member(:grant_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GrantArn"))
@@ -346,6 +358,14 @@ module Aws::LicenseManager
 
     CreateLicenseConfigurationResponse.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
     CreateLicenseConfigurationResponse.struct_class = Types::CreateLicenseConfigurationResponse
+
+    CreateLicenseConversionTaskForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    CreateLicenseConversionTaskForResourceRequest.add_member(:source_license_context, Shapes::ShapeRef.new(shape: LicenseConversionContext, required: true, location_name: "SourceLicenseContext"))
+    CreateLicenseConversionTaskForResourceRequest.add_member(:destination_license_context, Shapes::ShapeRef.new(shape: LicenseConversionContext, required: true, location_name: "DestinationLicenseContext"))
+    CreateLicenseConversionTaskForResourceRequest.struct_class = Types::CreateLicenseConversionTaskForResourceRequest
+
+    CreateLicenseConversionTaskForResourceResponse.add_member(:license_conversion_task_id, Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
+    CreateLicenseConversionTaskForResourceResponse.struct_class = Types::CreateLicenseConversionTaskForResourceResponse
 
     CreateLicenseManagerReportGeneratorRequest.add_member(:report_generator_name, Shapes::ShapeRef.new(shape: ReportGeneratorName, required: true, location_name: "ReportGeneratorName"))
     CreateLicenseManagerReportGeneratorRequest.add_member(:type, Shapes::ShapeRef.new(shape: ReportTypeList, required: true, location_name: "Type"))
@@ -534,6 +554,20 @@ module Aws::LicenseManager
     GetLicenseConfigurationResponse.add_member(:disassociate_when_not_found, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     GetLicenseConfigurationResponse.struct_class = Types::GetLicenseConfigurationResponse
 
+    GetLicenseConversionTaskRequest.add_member(:license_conversion_task_id, Shapes::ShapeRef.new(shape: LicenseConversionTaskId, required: true, location_name: "LicenseConversionTaskId"))
+    GetLicenseConversionTaskRequest.struct_class = Types::GetLicenseConversionTaskRequest
+
+    GetLicenseConversionTaskResponse.add_member(:license_conversion_task_id, Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
+    GetLicenseConversionTaskResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    GetLicenseConversionTaskResponse.add_member(:source_license_context, Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "SourceLicenseContext"))
+    GetLicenseConversionTaskResponse.add_member(:destination_license_context, Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "DestinationLicenseContext"))
+    GetLicenseConversionTaskResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    GetLicenseConversionTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: LicenseConversionTaskStatus, location_name: "Status"))
+    GetLicenseConversionTaskResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    GetLicenseConversionTaskResponse.add_member(:license_conversion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LicenseConversionTime"))
+    GetLicenseConversionTaskResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    GetLicenseConversionTaskResponse.struct_class = Types::GetLicenseConversionTaskResponse
+
     GetLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseManagerReportGeneratorArn"))
     GetLicenseManagerReportGeneratorRequest.struct_class = Types::GetLicenseManagerReportGeneratorRequest
 
@@ -672,6 +706,22 @@ module Aws::LicenseManager
 
     LicenseConfigurations.member = Shapes::ShapeRef.new(shape: LicenseConfiguration)
 
+    LicenseConversionContext.add_member(:usage_operation, Shapes::ShapeRef.new(shape: UsageOperation, location_name: "UsageOperation"))
+    LicenseConversionContext.struct_class = Types::LicenseConversionContext
+
+    LicenseConversionTask.add_member(:license_conversion_task_id, Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
+    LicenseConversionTask.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    LicenseConversionTask.add_member(:source_license_context, Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "SourceLicenseContext"))
+    LicenseConversionTask.add_member(:destination_license_context, Shapes::ShapeRef.new(shape: LicenseConversionContext, location_name: "DestinationLicenseContext"))
+    LicenseConversionTask.add_member(:status, Shapes::ShapeRef.new(shape: LicenseConversionTaskStatus, location_name: "Status"))
+    LicenseConversionTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    LicenseConversionTask.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    LicenseConversionTask.add_member(:license_conversion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LicenseConversionTime"))
+    LicenseConversionTask.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndTime"))
+    LicenseConversionTask.struct_class = Types::LicenseConversionTask
+
+    LicenseConversionTasks.member = Shapes::ShapeRef.new(shape: LicenseConversionTask)
+
     LicenseList.member = Shapes::ShapeRef.new(shape: License)
 
     LicenseOperationFailure.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
@@ -735,6 +785,15 @@ module Aws::LicenseManager
     ListLicenseConfigurationsResponse.add_member(:license_configurations, Shapes::ShapeRef.new(shape: LicenseConfigurations, location_name: "LicenseConfigurations"))
     ListLicenseConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListLicenseConfigurationsResponse.struct_class = Types::ListLicenseConfigurationsResponse
+
+    ListLicenseConversionTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseConversionTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
+    ListLicenseConversionTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListLicenseConversionTasksRequest.struct_class = Types::ListLicenseConversionTasksRequest
+
+    ListLicenseConversionTasksResponse.add_member(:license_conversion_tasks, Shapes::ShapeRef.new(shape: LicenseConversionTasks, location_name: "LicenseConversionTasks"))
+    ListLicenseConversionTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListLicenseConversionTasksResponse.struct_class = Types::ListLicenseConversionTasksResponse
 
     ListLicenseManagerReportGeneratorsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListLicenseManagerReportGeneratorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -1158,6 +1217,20 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
       end)
 
+      api.add_operation(:create_license_conversion_task_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLicenseConversionTaskForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLicenseConversionTaskForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLicenseConversionTaskForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
       api.add_operation(:create_license_manager_report_generator, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLicenseManagerReportGenerator"
         o.http_method = "POST"
@@ -1351,6 +1424,19 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
       end)
 
+      api.add_operation(:get_license_conversion_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLicenseConversionTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLicenseConversionTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLicenseConversionTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
       api.add_operation(:get_license_manager_report_generator, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetLicenseManagerReportGenerator"
         o.http_method = "POST"
@@ -1444,6 +1530,19 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: FilterLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
+      api.add_operation(:list_license_conversion_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLicenseConversionTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLicenseConversionTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLicenseConversionTasksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)

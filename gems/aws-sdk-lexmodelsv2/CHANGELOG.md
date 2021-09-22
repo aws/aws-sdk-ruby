@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-09-22)
+------------------
+
+* Feature - This release adds support for utterances statistics for bots built using Lex V2 console and APIs. For details, see: https://docs.aws.amazon.com/lexv2/latest/dg/monitoring-utterances.html
+
 1.10.0 (2021-09-01)
 ------------------
 

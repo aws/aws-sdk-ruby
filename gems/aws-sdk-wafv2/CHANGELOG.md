@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-09-22)
+------------------
+
+* Feature - Added the regex match rule statement, for matching web requests against a single regular expression.
+
 1.26.0 (2021-09-14)
 ------------------
 

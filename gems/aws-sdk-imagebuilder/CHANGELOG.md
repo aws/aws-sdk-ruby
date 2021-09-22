@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-09-22)
+------------------
+
+* Feature - This feature adds support for specifying GP3 volume throughput and configuring instance metadata options for instances launched by EC2 Image Builder.
+
 1.29.0 (2021-09-01)
 ------------------
 

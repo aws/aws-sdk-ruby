@@ -357,6 +357,42 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #       }
@@ -883,6 +919,42 @@ module Aws::WAFV2
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
+    #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
     #               },
     #             },
     #             action: {
@@ -1514,6 +1586,42 @@ module Aws::WAFV2
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
     #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             action: {
     #               block: {
@@ -1989,6 +2097,42 @@ module Aws::WAFV2
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
+    #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
     #               },
     #             },
     #             action: {
@@ -5648,6 +5792,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -6267,6 +6447,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -6537,6 +6753,42 @@ module Aws::WAFV2
     #             label_match_statement: {
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
+    #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -7154,6 +7406,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #         forwarded_ip_config: {
     #           header_name: "ForwardedIPHeaderName", # required
@@ -7250,6 +7538,77 @@ module Aws::WAFV2
     #
     class Regex < Struct.new(
       :regex_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule statement used to search web request components for a match
+    # against a single regular expression.
+    #
+    # @note When making an API call, you may pass RegexMatchStatement
+    #   data as a hash:
+    #
+    #       {
+    #         regex_string: "RegexPatternString", # required
+    #         field_to_match: { # required
+    #           single_header: {
+    #             name: "FieldToMatchData", # required
+    #           },
+    #           single_query_argument: {
+    #             name: "FieldToMatchData", # required
+    #           },
+    #           all_query_arguments: {
+    #           },
+    #           uri_path: {
+    #           },
+    #           query_string: {
+    #           },
+    #           body: {
+    #           },
+    #           method: {
+    #           },
+    #           json_body: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_paths: ["JsonPointerPath"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #           },
+    #         },
+    #         text_transformations: [ # required
+    #           {
+    #             priority: 1, # required
+    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] regex_string
+    #   The string representing the regular expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_to_match
+    #   The part of a web request that you want WAF to inspect. For more
+    #   information, see FieldToMatch.
+    #   @return [Types::FieldToMatch]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. If
+    #   you specify one or more transformations in a rule statement, WAF
+    #   performs all transformations on the content of the request component
+    #   identified by `FieldToMatch`, starting from the lowest priority
+    #   setting, before inspecting the content for a match.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexMatchStatement AWS API Documentation
+    #
+    class RegexMatchStatement < Struct.new(
+      :regex_string,
+      :field_to_match,
+      :text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7686,6 +8045,42 @@ module Aws::WAFV2
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
+    #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
     #           },
     #         },
     #         action: {
@@ -8887,6 +9282,42 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #           forwarded_ip_config: {
     #             header_name: "ForwardedIPHeaderName", # required
@@ -9140,6 +9571,42 @@ module Aws::WAFV2
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
     #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
+    #               },
     #             },
     #           ],
     #         },
@@ -9389,6 +9856,42 @@ module Aws::WAFV2
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
+    #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],
@@ -9643,6 +10146,42 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         managed_rule_group_statement: {
@@ -9895,11 +10434,83 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         label_match_statement: {
     #           scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #           key: "LabelMatchKey", # required
+    #         },
+    #         regex_match_statement: {
+    #           regex_string: "RegexPatternString", # required
+    #           field_to_match: { # required
+    #             single_header: {
+    #               name: "FieldToMatchData", # required
+    #             },
+    #             single_query_argument: {
+    #               name: "FieldToMatchData", # required
+    #             },
+    #             all_query_arguments: {
+    #             },
+    #             uri_path: {
+    #             },
+    #             query_string: {
+    #             },
+    #             body: {
+    #             },
+    #             method: {
+    #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             },
+    #           },
+    #           text_transformations: [ # required
+    #             {
+    #               priority: 1, # required
+    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -10082,6 +10693,11 @@ module Aws::WAFV2
     #   that were added in the same context as the label match statement.
     #   @return [Types::LabelMatchStatement]
     #
+    # @!attribute [rw] regex_match_statement
+    #   A rule statement used to search web request components for a match
+    #   against a single regular expression.
+    #   @return [Types::RegexMatchStatement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Statement AWS API Documentation
     #
     class Statement < Struct.new(
@@ -10098,7 +10714,8 @@ module Aws::WAFV2
       :or_statement,
       :not_statement,
       :managed_rule_group_statement,
-      :label_match_statement)
+      :label_match_statement,
+      :regex_match_statement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11024,6 +11641,42 @@ module Aws::WAFV2
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
     #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             action: {
     #               block: {
@@ -11489,6 +12142,42 @@ module Aws::WAFV2
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
+    #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
     #               },
     #             },
     #             action: {

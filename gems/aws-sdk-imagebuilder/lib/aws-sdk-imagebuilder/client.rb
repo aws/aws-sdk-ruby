@@ -385,7 +385,7 @@ module Aws::Imagebuilder
     #    **Assignment:** For the first three nodes you can assign any positive
     #   integer value, including zero, with an upper limit of 2^30-1, or
     #   1073741823 for each node. Image Builder automatically assigns the
-    #   build number, and that is not open for updates.
+    #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -495,7 +495,7 @@ module Aws::Imagebuilder
     #    **Assignment:** For the first three nodes you can assign any positive
     #   integer value, including zero, with an upper limit of 2^30-1, or
     #   1073741823 for each node. Image Builder automatically assigns the
-    #   build number, and that is not open for updates.
+    #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -585,6 +585,7 @@ module Aws::Imagebuilder
     #             snapshot_id: "NonEmptyString",
     #             volume_size: 1,
     #             volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
+    #             throughput: 1,
     #           },
     #           virtual_name: "NonEmptyString",
     #           no_device: "EmptyString",
@@ -906,7 +907,7 @@ module Aws::Imagebuilder
     #    **Assignment:** For the first three nodes you can assign any positive
     #   integer value, including zero, with an upper limit of 2^30-1, or
     #   1073741823 for each node. Image Builder automatically assigns the
-    #   build number, and that is not open for updates.
+    #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -982,6 +983,7 @@ module Aws::Imagebuilder
     #           snapshot_id: "NonEmptyString",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
+    #           throughput: 1,
     #         },
     #         virtual_name: "NonEmptyString",
     #         no_device: "EmptyString",
@@ -1026,9 +1028,21 @@ module Aws::Imagebuilder
     #   The description of the infrastructure configuration.
     #
     # @option params [Array<String>] :instance_types
-    #   The instance types of the infrastructure configuration. You can
-    #   specify one or more instance types to use for this build. The service
-    #   will pick one of these instance types based on availability.
+    #   The instance metadata options that you can set for the HTTP requests
+    #   that pipeline builds use to launch EC2 build and test instances. For
+    #   more information about instance metadata options, see one of the
+    #   following links:
+    #
+    #   * [Configure the instance metadata options][1] in the <i> <i>Amazon
+    #     EC2 User Guide</i> </i> for Linux instances.
+    #
+    #   * [Configure the instance metadata options][2] in the <i> <i>Amazon
+    #     EC2 Windows Guide</i> </i> for Windows instances.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
@@ -1046,7 +1060,7 @@ module Aws::Imagebuilder
     #   The logging configuration of the infrastructure configuration.
     #
     # @option params [String] :key_pair
-    #   The key pair of the infrastructure configuration. This can be used to
+    #   The key pair of the infrastructure configuration. You can use this to
     #   log on to and debug the instance used to create your image.
     #
     # @option params [Boolean] :terminate_instance_on_failure
@@ -1060,6 +1074,10 @@ module Aws::Imagebuilder
     #
     # @option params [Hash<String,String>] :resource_tags
     #   The tags attached to the resource created by Image Builder.
+    #
+    # @option params [Types::InstanceMetadataOptions] :instance_metadata_options
+    #   The instance metadata options that you can set for the HTTP requests
+    #   that pipeline builds use to launch EC2 build and test instances.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags of the infrastructure configuration.
@@ -1096,6 +1114,10 @@ module Aws::Imagebuilder
     #     sns_topic_arn: "SnsTopicArn",
     #     resource_tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     instance_metadata_options: {
+    #       http_tokens: "HttpTokens",
+    #       http_put_response_hop_limit: 1,
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1210,10 +1232,29 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes an image.
+    # Deletes an Image Builder image resource. This does not delete any EC2
+    # AMIs or ECR container images that are created during the image build
+    # process. You must clean those up separately, using the appropriate
+    # Amazon EC2 or Amazon ECR console actions, or API or CLI commands.
+    #
+    # * To deregister an EC2 Linux AMI, see [Deregister your Linux AMI][1]
+    #   in the <i> <i>Amazon EC2 User Guide</i> </i>.
+    #
+    # * To deregister an EC2 Windows AMI, see [Deregister your Windows
+    #   AMI][2] in the <i> <i>Amazon EC2 Windows Guide</i> </i>.
+    #
+    # * To delete a container image from Amazon ECR, see [Deleting an
+    #   image][3] in the *Amazon ECR User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html
+    # [3]: https://docs.aws.amazon.com/https:/docs.aws.amazon.comAmazonECR/latest/userguide/delete_image.html
     #
     # @option params [required, String] :image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image to delete.
+    #   The Amazon Resource Name (ARN) of the Image Builder image resource to
+    #   delete.
     #
     # @return [Types::DeleteImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1360,6 +1401,8 @@ module Aws::Imagebuilder
     #   resp.component.platform #=> String, one of "Windows", "Linux"
     #   resp.component.supported_os_versions #=> Array
     #   resp.component.supported_os_versions[0] #=> String
+    #   resp.component.state.status #=> String, one of "DEPRECATED"
+    #   resp.component.state.reason #=> String
     #   resp.component.parameters #=> Array
     #   resp.component.parameters[0].name #=> String
     #   resp.component.parameters[0].type #=> String
@@ -1456,6 +1499,7 @@ module Aws::Imagebuilder
     #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
+    #   resp.container_recipe.instance_configuration.block_device_mappings[0].ebs.throughput #=> Integer
     #   resp.container_recipe.instance_configuration.block_device_mappings[0].virtual_name #=> String
     #   resp.container_recipe.instance_configuration.block_device_mappings[0].no_device #=> String
     #   resp.container_recipe.dockerfile_template_data #=> String
@@ -1622,6 +1666,7 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
+    #   resp.image.image_recipe.block_device_mappings[0].ebs.throughput #=> Integer
     #   resp.image.image_recipe.block_device_mappings[0].virtual_name #=> String
     #   resp.image.image_recipe.block_device_mappings[0].no_device #=> String
     #   resp.image.image_recipe.date_created #=> String
@@ -1653,6 +1698,7 @@ module Aws::Imagebuilder
     #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
+    #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].ebs.throughput #=> Integer
     #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].virtual_name #=> String
     #   resp.image.container_recipe.instance_configuration.block_device_mappings[0].no_device #=> String
     #   resp.image.container_recipe.dockerfile_template_data #=> String
@@ -1685,6 +1731,8 @@ module Aws::Imagebuilder
     #   resp.image.infrastructure_configuration.date_updated #=> String
     #   resp.image.infrastructure_configuration.resource_tags #=> Hash
     #   resp.image.infrastructure_configuration.resource_tags["TagKey"] #=> String
+    #   resp.image.infrastructure_configuration.instance_metadata_options.http_tokens #=> String
+    #   resp.image.infrastructure_configuration.instance_metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.image.infrastructure_configuration.tags #=> Hash
     #   resp.image.infrastructure_configuration.tags["TagKey"] #=> String
     #   resp.image.distribution_configuration.arn #=> String
@@ -1871,6 +1919,7 @@ module Aws::Imagebuilder
     #   resp.image_recipe.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.image_recipe.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
+    #   resp.image_recipe.block_device_mappings[0].ebs.throughput #=> Integer
     #   resp.image_recipe.block_device_mappings[0].virtual_name #=> String
     #   resp.image_recipe.block_device_mappings[0].no_device #=> String
     #   resp.image_recipe.date_created #=> String
@@ -1958,6 +2007,8 @@ module Aws::Imagebuilder
     #   resp.infrastructure_configuration.date_updated #=> String
     #   resp.infrastructure_configuration.resource_tags #=> Hash
     #   resp.infrastructure_configuration.resource_tags["TagKey"] #=> String
+    #   resp.infrastructure_configuration.instance_metadata_options.http_tokens #=> String
+    #   resp.infrastructure_configuration.instance_metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.infrastructure_configuration.tags #=> Hash
     #   resp.infrastructure_configuration.tags["TagKey"] #=> String
     #
@@ -1983,14 +2034,11 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Filtering:** When you retrieve or reference a resource with a
-    #   semantic version, you can use wildcards (x) to filter your results.
-    #   When you use a wildcard in any node, all nodes to the right of the
-    #   first wildcard must also be wildcards. For example, specifying
-    #   "1.2.x", or "1.x.x" works to filter list results, but neither
-    #   "1.x.2", nor "x.2.x" will work. You do not have to specify the
-    #   build - Image Builder automatically uses a wildcard for that, if
-    #   applicable.
+    #    **Filtering:** With semantic versioning, you have the flexibility to
+    #   use wildcards (x) to specify the most recent versions or nodes when
+    #   selecting the source image or components for your recipe. When you use
+    #   a wildcard in any node, all nodes to the right of the first wildcard
+    #   must also be wildcards.
     #
     #    </note>
     #
@@ -2082,14 +2130,11 @@ module Aws::Imagebuilder
     # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     # assign values for the first three, and can filter on all of them.
     #
-    #  **Filtering:** When you retrieve or reference a resource with a
-    # semantic version, you can use wildcards (x) to filter your results.
-    # When you use a wildcard in any node, all nodes to the right of the
-    # first wildcard must also be wildcards. For example, specifying
-    # "1.2.x", or "1.x.x" works to filter list results, but neither
-    # "1.x.2", nor "x.2.x" will work. You do not have to specify the
-    # build - Image Builder automatically uses a wildcard for that, if
-    # applicable.
+    #  **Filtering:** With semantic versioning, you have the flexibility to
+    # use wildcards (x) to specify the most recent versions or nodes when
+    # selecting the source image or components for your recipe. When you use
+    # a wildcard in any node, all nodes to the right of the first wildcard
+    # must also be wildcards.
     #
     #  </note>
     #
@@ -2130,6 +2175,8 @@ module Aws::Imagebuilder
     #   resp.component_summary_list[0].platform #=> String, one of "Windows", "Linux"
     #   resp.component_summary_list[0].supported_os_versions #=> Array
     #   resp.component_summary_list[0].supported_os_versions[0] #=> String
+    #   resp.component_summary_list[0].state.status #=> String, one of "DEPRECATED"
+    #   resp.component_summary_list[0].state.reason #=> String
     #   resp.component_summary_list[0].type #=> String, one of "BUILD", "TEST"
     #   resp.component_summary_list[0].owner #=> String
     #   resp.component_summary_list[0].description #=> String
@@ -2155,14 +2202,11 @@ module Aws::Imagebuilder
     # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     # assign values for the first three, and can filter on all of them.
     #
-    #  **Filtering:** When you retrieve or reference a resource with a
-    # semantic version, you can use wildcards (x) to filter your results.
-    # When you use a wildcard in any node, all nodes to the right of the
-    # first wildcard must also be wildcards. For example, specifying
-    # "1.2.x", or "1.x.x" works to filter list results, but neither
-    # "1.x.2", nor "x.2.x" will work. You do not have to specify the
-    # build - Image Builder automatically uses a wildcard for that, if
-    # applicable.
+    #  **Filtering:** With semantic versioning, you have the flexibility to
+    # use wildcards (x) to specify the most recent versions or nodes when
+    # selecting the source image or components for your recipe. When you use
+    # a wildcard in any node, all nodes to the right of the first wildcard
+    # must also be wildcards.
     #
     #  </note>
     #
@@ -2463,7 +2507,8 @@ module Aws::Imagebuilder
     end
 
     # List the Packages that are associated with an Image Build Version, as
-    # determined by Amazon EC2 Systems Manager Inventory at build time.
+    # determined by Amazon Web Services Systems Manager Inventory at build
+    # time.
     #
     # @option params [required, String] :image_build_version_arn
     #   Filter results for the ListImagePackages request by the Image Build
@@ -3395,7 +3440,7 @@ module Aws::Imagebuilder
     #   The logging configuration of the infrastructure configuration.
     #
     # @option params [String] :key_pair
-    #   The key pair of the infrastructure configuration. This can be used to
+    #   The key pair of the infrastructure configuration. You can use this to
     #   log on to and debug the instance used to create your image.
     #
     # @option params [Boolean] :terminate_instance_on_failure
@@ -3415,6 +3460,23 @@ module Aws::Imagebuilder
     #
     # @option params [Hash<String,String>] :resource_tags
     #   The tags attached to the resource created by Image Builder.
+    #
+    # @option params [Types::InstanceMetadataOptions] :instance_metadata_options
+    #   The instance metadata options that you can set for the HTTP requests
+    #   that pipeline builds use to launch EC2 build and test instances. For
+    #   more information about instance metadata options, see one of the
+    #   following links:
+    #
+    #   * [Configure the instance metadata options][1] in the <i> <i>Amazon
+    #     EC2 User Guide</i> </i> for Linux instances.
+    #
+    #   * [Configure the instance metadata options][2] in the <i> <i>Amazon
+    #     EC2 Windows Guide</i> </i> for Windows instances.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
     #
     # @return [Types::UpdateInfrastructureConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3443,6 +3505,10 @@ module Aws::Imagebuilder
     #     client_token: "ClientToken", # required
     #     resource_tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     instance_metadata_options: {
+    #       http_tokens: "HttpTokens",
+    #       http_put_response_hop_limit: 1,
     #     },
     #   })
     #
@@ -3474,7 +3540,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
