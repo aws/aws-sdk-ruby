@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2021-09-23)
+------------------
+
+* Feature - Added cutoff behavior support for preventing new task invocations from starting when the maintenance window cutoff time is reached.
+
 1.117.0 (2021-09-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2021-09-23)
+------------------
+
+* Feature - This release adds style and positioning support for caption or subtitle burn-in from rich text sources such as TTML. This release also introduces configurable image-based trick play track generation.
+
 1.74.0 (2021-09-01)
 ------------------
 
