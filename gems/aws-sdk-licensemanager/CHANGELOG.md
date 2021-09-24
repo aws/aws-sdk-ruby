@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-09-24)
+------------------
+
+* Feature - AWS License Manager now allows customers to get the LicenseArn in the Checkout API Response.
+
 1.33.0 (2021-09-22)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.265.0 (2021-09-24)
+------------------
+
+* Feature - DescribeInstances now returns Platform Details, Usage Operation, and Usage Operation Update Time.
+
 1.264.0 (2021-09-21)
 ------------------
 

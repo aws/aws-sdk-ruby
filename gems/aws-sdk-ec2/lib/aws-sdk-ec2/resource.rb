@@ -116,7 +116,7 @@ module Aws::EC2
     #     placement: {
     #       availability_zone: "String",
     #       affinity: "String",
-    #       group_name: "String",
+    #       group_name: "PlacementGroupName",
     #       partition_number: 1,
     #       host_id: "String",
     #       tenancy: "default", # accepts default, dedicated, host

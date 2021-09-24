@@ -319,7 +319,7 @@ module Aws::EC2
       data[:hibernation_options]
     end
 
-    # The license configurations.
+    # The license configurations for the instance.
     # @return [Array<Types::LicenseConfiguration>]
     def licenses
       data[:licenses]
@@ -347,6 +347,34 @@ module Aws::EC2
     # @return [String]
     def boot_mode
       data[:boot_mode]
+    end
+
+    # The platform details value for the instance. For more information, see
+    # [AMI billing information fields][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
+    # @return [String]
+    def platform_details
+      data[:platform_details]
+    end
+
+    # The usage operation value for the instance. For more information, see
+    # [AMI billing information fields][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
+    # @return [String]
+    def usage_operation
+      data[:usage_operation]
+    end
+
+    # The time that the usage operation was last updated.
+    # @return [Time]
+    def usage_operation_update_time
+      data[:usage_operation_update_time]
     end
 
     # @!endgroup

@@ -5219,7 +5219,7 @@ module Aws::EC2
     #             placement: {
     #               availability_zone: "String",
     #               affinity: "String",
-    #               group_name: "String",
+    #               group_name: "PlacementGroupName",
     #               partition_number: 1,
     #               host_id: "String",
     #               tenancy: "default", # accepts default, dedicated, host
@@ -19982,6 +19982,9 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.reservations[0].instances[0].enclave_options.enabled #=> Boolean
     #   resp.reservations[0].instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.reservations[0].instances[0].platform_details #=> String
+    #   resp.reservations[0].instances[0].usage_operation #=> String
+    #   resp.reservations[0].instances[0].usage_operation_update_time #=> Time
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -33357,7 +33360,7 @@ module Aws::EC2
     #       placement: {
     #         availability_zone: "String",
     #         affinity: "String",
-    #         group_name: "String",
+    #         group_name: "PlacementGroupName",
     #         partition_number: 1,
     #         host_id: "String",
     #         tenancy: "default", # accepts default, dedicated, host
@@ -34269,7 +34272,7 @@ module Aws::EC2
     #             placement: {
     #               availability_zone: "String",
     #               affinity: "String",
-    #               group_name: "String",
+    #               group_name: "PlacementGroupName",
     #               partition_number: 1,
     #               host_id: "String",
     #               tenancy: "default", # accepts default, dedicated, host
@@ -35349,8 +35352,7 @@ module Aws::EC2
     #
     # * Change the Dedicated Host with which an instance is associated.
     #
-    # * Change the instance tenancy of an instance from `host` to
-    #   `dedicated`, or from `dedicated` to `host`.
+    # * Change the instance tenancy of an instance.
     #
     # * Move an instance to or from a [placement group][2].
     #
@@ -35387,10 +35389,12 @@ module Aws::EC2
     # @option params [String] :tenancy
     #   The tenancy for the instance.
     #
-    #   For T3 instances, you can't change the tenancy from `dedicated` to
+    #   <note markdown="1"> For T3 instances, you can't change the tenancy from `dedicated` to
     #   `host`, or from `host` to `dedicated`. Attempting to make one of these
     #   unsupported tenancy changes results in the `InvalidTenancy` error
     #   code.
+    #
+    #    </note>
     #
     # @option params [Integer] :partition_number
     #   Reserved for future use.
@@ -41764,7 +41768,7 @@ module Aws::EC2
     #     placement: {
     #       availability_zone: "String",
     #       affinity: "String",
-    #       group_name: "String",
+    #       group_name: "PlacementGroupName",
     #       partition_number: 1,
     #       host_id: "String",
     #       tenancy: "default", # accepts default, dedicated, host
@@ -42027,6 +42031,9 @@ module Aws::EC2
     #   resp.instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.instances[0].enclave_options.enabled #=> Boolean
     #   resp.instances[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.instances[0].platform_details #=> String
+    #   resp.instances[0].usage_operation #=> String
+    #   resp.instances[0].usage_operation_update_time #=> Time
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -43756,7 +43763,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.264.0'
+      context[:gem_version] = '1.265.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

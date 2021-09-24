@@ -302,6 +302,7 @@ module Aws::LicenseManager
     CheckoutLicenseResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeId"))
     CheckoutLicenseResponse.add_member(:issued_at, Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "IssuedAt"))
     CheckoutLicenseResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ISO8601DateTime, location_name: "Expiration"))
+    CheckoutLicenseResponse.add_member(:license_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseArn"))
     CheckoutLicenseResponse.struct_class = Types::CheckoutLicenseResponse
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))

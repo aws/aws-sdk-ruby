@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.121.1 (2021-09-24)
+------------------
+
 * Issue - Fix error in finding union member for boolean shapes with `false` values.
 
 3.121.0 (2021-09-02)

@@ -7393,6 +7393,9 @@ module Aws::EC2
     Instance.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptionsResponse, location_name: "metadataOptions"))
     Instance.add_member(:enclave_options, Shapes::ShapeRef.new(shape: EnclaveOptions, location_name: "enclaveOptions"))
     Instance.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "bootMode"))
+    Instance.add_member(:platform_details, Shapes::ShapeRef.new(shape: String, location_name: "platformDetails"))
+    Instance.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
+    Instance.add_member(:usage_operation_update_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "usageOperationUpdateTime"))
     Instance.struct_class = Types::Instance
 
     InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
@@ -9130,7 +9133,7 @@ module Aws::EC2
 
     Placement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     Placement.add_member(:affinity, Shapes::ShapeRef.new(shape: String, location_name: "affinity"))
-    Placement.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    Placement.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "groupName"))
     Placement.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionNumber"))
     Placement.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
     Placement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))

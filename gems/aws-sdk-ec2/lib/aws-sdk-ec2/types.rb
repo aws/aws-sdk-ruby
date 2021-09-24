@@ -6632,7 +6632,7 @@ module Aws::EC2
     #                 placement: {
     #                   availability_zone: "String",
     #                   affinity: "String",
-    #                   group_name: "String",
+    #                   group_name: "PlacementGroupName",
     #                   partition_number: 1,
     #                   host_id: "String",
     #                   tenancy: "default", # accepts default, dedicated, host
@@ -30049,7 +30049,7 @@ module Aws::EC2
     #             placement: {
     #               availability_zone: "String",
     #               affinity: "String",
-    #               group_name: "String",
+    #               group_name: "PlacementGroupName",
     #               partition_number: 1,
     #               host_id: "String",
     #               tenancy: "default", # accepts default, dedicated, host
@@ -30157,7 +30157,7 @@ module Aws::EC2
     #         placement: {
     #           availability_zone: "String",
     #           affinity: "String",
-    #           group_name: "String",
+    #           group_name: "PlacementGroupName",
     #           partition_number: 1,
     #           host_id: "String",
     #           tenancy: "default", # accepts default, dedicated, host
@@ -33914,7 +33914,7 @@ module Aws::EC2
     #         placement: {
     #           availability_zone: "String",
     #           affinity: "String",
-    #           group_name: "String",
+    #           group_name: "PlacementGroupName",
     #           partition_number: 1,
     #           host_id: "String",
     #           tenancy: "default", # accepts default, dedicated, host
@@ -34029,7 +34029,7 @@ module Aws::EC2
     #           placement: {
     #             availability_zone: "String",
     #             affinity: "String",
-    #             group_name: "String",
+    #             group_name: "PlacementGroupName",
     #             partition_number: 1,
     #             host_id: "String",
     #             tenancy: "default", # accepts default, dedicated, host
@@ -34786,7 +34786,7 @@ module Aws::EC2
     #   @return [Types::HibernationOptions]
     #
     # @!attribute [rw] licenses
-    #   The license configurations.
+    #   The license configurations for the instance.
     #   @return [Array<Types::LicenseConfiguration>]
     #
     # @!attribute [rw] metadata_options
@@ -34806,6 +34806,30 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [String]
+    #
+    # @!attribute [rw] platform_details
+    #   The platform details value for the instance. For more information,
+    #   see [AMI billing information fields][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_operation
+    #   The usage operation value for the instance. For more information,
+    #   see [AMI billing information fields][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_operation_update_time
+    #   The time that the usage operation was last updated.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
@@ -34858,7 +34882,10 @@ module Aws::EC2
       :licenses,
       :metadata_options,
       :enclave_options,
-      :boot_mode)
+      :boot_mode,
+      :platform_details,
+      :usage_operation,
+      :usage_operation_update_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39940,7 +39967,7 @@ module Aws::EC2
     #                 placement: {
     #                   availability_zone: "String",
     #                   affinity: "String",
-    #                   group_name: "String",
+    #                   group_name: "PlacementGroupName",
     #                   partition_number: 1,
     #                   host_id: "String",
     #                   tenancy: "default", # accepts default, dedicated, host
@@ -40971,10 +40998,12 @@ module Aws::EC2
     # @!attribute [rw] tenancy
     #   The tenancy for the instance.
     #
-    #   For T3 instances, you can't change the tenancy from `dedicated` to
+    #   <note markdown="1"> For T3 instances, you can't change the tenancy from `dedicated` to
     #   `host`, or from `host` to `dedicated`. Attempting to make one of
     #   these unsupported tenancy changes results in the `InvalidTenancy`
     #   error code.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] partition_number
@@ -44849,7 +44878,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         affinity: "String",
-    #         group_name: "String",
+    #         group_name: "PlacementGroupName",
     #         partition_number: 1,
     #         host_id: "String",
     #         tenancy: "default", # accepts default, dedicated, host
@@ -50164,7 +50193,7 @@ module Aws::EC2
     #         placement: {
     #           availability_zone: "String",
     #           affinity: "String",
-    #           group_name: "String",
+    #           group_name: "PlacementGroupName",
     #           partition_number: 1,
     #           host_id: "String",
     #           tenancy: "default", # accepts default, dedicated, host

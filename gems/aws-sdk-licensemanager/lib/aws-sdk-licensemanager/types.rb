@@ -353,6 +353,10 @@ module Aws::LicenseManager
     #   Date and time at which the license checkout expires.
     #   @return [String]
     #
+    # @!attribute [rw] license_arn
+    #   Amazon Resource Name (ARN) of the checkout license.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CheckoutLicenseResponse AWS API Documentation
     #
     class CheckoutLicenseResponse < Struct.new(
@@ -362,7 +366,8 @@ module Aws::LicenseManager
       :signed_token,
       :node_id,
       :issued_at,
-      :expiration)
+      :expiration,
+      :license_arn)
       SENSITIVE = []
       include Aws::Structure
     end

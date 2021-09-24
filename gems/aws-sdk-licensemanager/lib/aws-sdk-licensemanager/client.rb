@@ -515,6 +515,7 @@ module Aws::LicenseManager
     #   * {Types::CheckoutLicenseResponse#node_id #node_id} => String
     #   * {Types::CheckoutLicenseResponse#issued_at #issued_at} => String
     #   * {Types::CheckoutLicenseResponse#expiration #expiration} => String
+    #   * {Types::CheckoutLicenseResponse#license_arn #license_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -546,6 +547,7 @@ module Aws::LicenseManager
     #   resp.node_id #=> String
     #   resp.issued_at #=> String
     #   resp.expiration #=> String
+    #   resp.license_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CheckoutLicense AWS API Documentation
     #
@@ -2965,7 +2967,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
