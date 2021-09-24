@@ -73,7 +73,7 @@ module Aws
 
     module Union
       def member
-        self.members.select { |k| self[k] }.first
+        self.members.select { |k| self[k] != nil }.first
       end
 
       def value
