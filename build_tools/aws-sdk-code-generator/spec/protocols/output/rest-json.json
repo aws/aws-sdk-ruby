@@ -931,8 +931,9 @@
       "UnionType": {
         "type": "structure",
         "members": {
-          "S":{"shape":"StringType"},
-          "L": {"shape": "ListType"}
+          "S": {"shape":"StringType"},
+          "L": {"shape":"ListType"},
+          "B": {"shape":"BooleanType"}
         },
         "union": true
       },
@@ -943,6 +944,9 @@
         }
       },
       "StringType": {
+        "type": "string"
+      },
+      "BooleanType": {
         "type": "string"
       }
     },
@@ -964,6 +968,25 @@
           "status_code": 200,
           "headers": {},
           "body": "{\"UnionMember\": {\"S\": \"string value\"}}"
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "UnionMember": {"B":  false}
+        },
+        "resultClass": {
+          "UnionMember": "UnionType::B"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"UnionMember\": {\"B\": false}}"
         }
       },
       {
