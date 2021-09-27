@@ -64,6 +64,7 @@ module Aws::Pinpoint
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionalSplitActivity = Shapes::StructureShape.new(name: 'ConditionalSplitActivity')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContactCenterActivity = Shapes::StructureShape.new(name: 'ContactCenterActivity')
     CreateAppRequest = Shapes::StructureShape.new(name: 'CreateAppRequest')
     CreateAppResponse = Shapes::StructureShape.new(name: 'CreateAppResponse')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
@@ -298,6 +299,7 @@ module Aws::Pinpoint
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ItemResponse = Shapes::StructureShape.new(name: 'ItemResponse')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    JourneyChannelSettings = Shapes::StructureShape.new(name: 'JourneyChannelSettings')
     JourneyCustomMessage = Shapes::StructureShape.new(name: 'JourneyCustomMessage')
     JourneyDateRangeKpiResponse = Shapes::StructureShape.new(name: 'JourneyDateRangeKpiResponse')
     JourneyEmailMessage = Shapes::StructureShape.new(name: 'JourneyEmailMessage')
@@ -697,6 +699,7 @@ module Aws::Pinpoint
     Activity.add_member(:random_split, Shapes::ShapeRef.new(shape: RandomSplitActivity, location_name: "RandomSplit"))
     Activity.add_member(:sms, Shapes::ShapeRef.new(shape: SMSMessageActivity, location_name: "SMS"))
     Activity.add_member(:wait, Shapes::ShapeRef.new(shape: WaitActivity, location_name: "Wait"))
+    Activity.add_member(:contact_center, Shapes::ShapeRef.new(shape: ContactCenterActivity, location_name: "ContactCenter"))
     Activity.struct_class = Types::Activity
 
     ActivityResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
@@ -917,6 +920,9 @@ module Aws::Pinpoint
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     ConflictException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContactCenterActivity.add_member(:next_activity, Shapes::ShapeRef.new(shape: __string, location_name: "NextActivity"))
+    ContactCenterActivity.struct_class = Types::ContactCenterActivity
 
     CreateAppRequest.add_member(:create_application_request, Shapes::ShapeRef.new(shape: CreateApplicationRequest, required: true, location_name: "CreateApplicationRequest"))
     CreateAppRequest.struct_class = Types::CreateAppRequest
@@ -2149,6 +2155,10 @@ module Aws::Pinpoint
     ItemResponse.add_member(:events_item_response, Shapes::ShapeRef.new(shape: MapOfEventItemResponse, location_name: "EventsItemResponse"))
     ItemResponse.struct_class = Types::ItemResponse
 
+    JourneyChannelSettings.add_member(:connect_campaign_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ConnectCampaignArn"))
+    JourneyChannelSettings.add_member(:connect_campaign_execution_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ConnectCampaignExecutionRoleArn"))
+    JourneyChannelSettings.struct_class = Types::JourneyChannelSettings
+
     JourneyCustomMessage.add_member(:data, Shapes::ShapeRef.new(shape: __string, location_name: "Data"))
     JourneyCustomMessage.struct_class = Types::JourneyCustomMessage
 
@@ -2202,6 +2212,7 @@ module Aws::Pinpoint
     JourneyResponse.add_member(:start_condition, Shapes::ShapeRef.new(shape: StartCondition, location_name: "StartCondition"))
     JourneyResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
     JourneyResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
+    JourneyResponse.add_member(:journey_channel_settings, Shapes::ShapeRef.new(shape: JourneyChannelSettings, location_name: "JourneyChannelSettings"))
     JourneyResponse.struct_class = Types::JourneyResponse
 
     JourneySMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
@@ -3262,6 +3273,7 @@ module Aws::Pinpoint
     WriteJourneyRequest.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
     WriteJourneyRequest.add_member(:wait_for_quiet_time, Shapes::ShapeRef.new(shape: __boolean, location_name: "WaitForQuietTime"))
     WriteJourneyRequest.add_member(:refresh_on_segment_update, Shapes::ShapeRef.new(shape: __boolean, location_name: "RefreshOnSegmentUpdate"))
+    WriteJourneyRequest.add_member(:journey_channel_settings, Shapes::ShapeRef.new(shape: JourneyChannelSettings, location_name: "JourneyChannelSettings"))
     WriteJourneyRequest.struct_class = Types::WriteJourneyRequest
 
     WriteSegmentRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))

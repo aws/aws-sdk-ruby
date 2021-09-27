@@ -28,7 +28,7 @@ require_relative 'aws-sdk-appintegrationsservice/customizations'
 # structure.
 #
 #     app_integrations_service = Aws::AppIntegrationsService::Client.new
-#     resp = app_integrations_service.create_event_integration(params)
+#     resp = app_integrations_service.create_data_integration(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-appintegrationsservice/customizations'
 # @!group service
 module Aws::AppIntegrationsService
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

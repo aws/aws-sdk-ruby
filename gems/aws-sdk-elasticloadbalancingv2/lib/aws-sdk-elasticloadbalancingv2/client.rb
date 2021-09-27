@@ -1355,8 +1355,8 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Boolean] :health_check_enabled
     #   Indicates whether health checks are enabled. If the target type is
     #   `lambda`, health checks are disabled by default but can be enabled. If
-    #   the target type is `instance` or `ip`, health checks are always
-    #   enabled and cannot be disabled.
+    #   the target type is `instance`, `ip`, or `alb`, health checks are
+    #   always enabled and cannot be disabled.
     #
     # @option params [String] :health_check_path
     #   \[HTTP/HTTPS health checks\] The destination for health checks on the
@@ -1418,6 +1418,8 @@ module Aws::ElasticLoadBalancingV2
     #     specify publicly routable IP addresses.
     #
     #   * `lambda` - Register a single Lambda function as a target.
+    #
+    #   * `alb` - Register a single Application Load Balancer as a target.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the target group.
@@ -1482,7 +1484,7 @@ module Aws::ElasticLoadBalancingV2
     #       http_code: "HttpCode",
     #       grpc_code: "GrpcCode",
     #     },
-    #     target_type: "instance", # accepts instance, ip, lambda
+    #     target_type: "instance", # accepts instance, ip, lambda, alb
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1511,7 +1513,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.grpc_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
-    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda"
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroup AWS API Documentation
@@ -2690,7 +2692,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.grpc_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
-    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda"
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
     #   resp.next_marker #=> String
     #
@@ -3655,7 +3657,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].matcher.grpc_code #=> String
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
-    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda"
+    #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroup AWS API Documentation
@@ -4272,7 +4274,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

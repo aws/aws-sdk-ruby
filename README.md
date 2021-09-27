@@ -450,6 +450,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Connect Customer Profiles                      | Aws::CustomerProfiles                | aws-sdk-customerprofiles                | 2020-08-15  |
 | Amazon Connect Participant Service                    | Aws::ConnectParticipant              | aws-sdk-connectparticipant              | 2018-09-07  |
 | Amazon Connect Service                                | Aws::Connect                         | aws-sdk-connect                         | 2017-08-08  |
+| Amazon Connect Wisdom Service                         | Aws::ConnectWisdomService            | aws-sdk-connectwisdomservice            | 2020-10-19  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                             | aws-sdk-dlm                             | 2018-01-12  |
 | Amazon Detective                                      | Aws::Detective                       | aws-sdk-detective                       | 2018-10-26  |
 | Amazon DevOps Guru                                    | Aws::DevOpsGuru                      | aws-sdk-devopsguru                      | 2020-12-01  |
@@ -544,6 +545,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Transcribe Service                             | Aws::TranscribeService               | aws-sdk-transcribeservice               | 2017-10-26  |
 | Amazon Transcribe Streaming Service                   | Aws::TranscribeStreamingService      | aws-sdk-transcribestreamingservice      | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                       | aws-sdk-translate                       | 2017-07-01  |
+| Amazon Voice ID                                       | Aws::VoiceID                         | aws-sdk-voiceid                         | 2021-09-27  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                        | aws-sdk-worklink                        | 2018-09-25  |
 | Amazon WorkMail                                       | Aws::WorkMail                        | aws-sdk-workmail                        | 2017-10-01  |

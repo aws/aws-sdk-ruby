@@ -88,6 +88,35 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Configuration of the answering machine detection.
+    #
+    # @note When making an API call, you may pass AnswerMachineDetectionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enable_answer_machine_detection: false,
+    #         await_answer_machine_prompt: false,
+    #       }
+    #
+    # @!attribute [rw] enable_answer_machine_detection
+    #   The flag to indicate if answer machine detection analysis needs to
+    #   be performed for a voice call. If set to `true`, `TrafficType` must
+    #   be set as `CAMPAIGN`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] await_answer_machine_prompt
+    #   Wait for the answering machine prompt.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AnswerMachineDetectionConfig AWS API Documentation
+    #
+    class AnswerMachineDetectionConfig < Struct.new(
+      :enable_answer_machine_detection,
+      :await_answer_machine_prompt)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateApprovedOriginRequest
     #   data as a hash:
     #
@@ -844,11 +873,11 @@ module Aws::Connect
     #
     #       {
     #         instance_id: "InstanceId", # required
-    #         integration_type: "EVENT", # required, accepts EVENT
+    #         integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
     #         integration_arn: "ARN", # required
-    #         source_application_url: "URI", # required
-    #         source_application_name: "SourceApplicationName", # required
-    #         source_type: "SALESFORCE", # required, accepts SALESFORCE, ZENDESK
+    #         source_application_url: "URI",
+    #         source_application_name: "SourceApplicationName",
+    #         source_type: "SALESFORCE", # accepts SALESFORCE, ZENDESK
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -868,15 +897,18 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] source_application_url
-    #   The URL for the external application.
+    #   The URL for the external application. This field is only required
+    #   for the EVENT integration type.
     #   @return [String]
     #
     # @!attribute [rw] source_application_name
-    #   The name of the external application.
+    #   The name of the external application. This field is only required
+    #   for the EVENT integration type.
     #   @return [String]
     #
     # @!attribute [rw] source_type
-    #   The type of the data source.
+    #   The type of the data source. This field is only required for the
+    #   EVENT integration type.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -898,7 +930,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] integration_association_id
-    #   The identifier for the association.
+    #   The identifier for the integration association.
     #   @return [String]
     #
     # @!attribute [rw] integration_association_arn
@@ -1175,7 +1207,7 @@ module Aws::Connect
     #       {
     #         instance_id: "InstanceId", # required
     #         integration_association_id: "IntegrationAssociationId", # required
-    #         use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION
+    #         use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION, CONNECT_CAMPAIGNS
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -1187,12 +1219,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] integration_association_id
-    #   The identifier for the AppIntegration association.
+    #   The identifier for the integration association.
     #   @return [String]
     #
     # @!attribute [rw] use_case_type
-    #   The type of use case to associate to the AppIntegration association.
-    #   Each AppIntegration association can have only one of each use case
+    #   The type of use case to associate to the integration association.
+    #   Each integration association can have only one of each use case
     #   type.
     #   @return [String]
     #
@@ -1560,7 +1592,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] integration_association_id
-    #   The identifier for the AppIntegration association.
+    #   The identifier for the integration association.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteIntegrationAssociationRequest AWS API Documentation
@@ -1613,7 +1645,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] integration_association_id
-    #   The identifier for the AppIntegration association.
+    #   The identifier for the integration association.
     #   @return [String]
     #
     # @!attribute [rw] use_case_id
@@ -2444,7 +2476,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The identifier of the encryption key.
+    #   The full ARN of the encryption key.
+    #
+    #   <note markdown="1"> Be sure to provide the full ARN of the encryption key, not just the
+    #   ID.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EncryptionConfig AWS API Documentation
@@ -2635,7 +2672,10 @@ module Aws::Connect
     #
     #   : Unit: SECONDS
     #
-    #     When you use groupings, Unit says SECONDS but the Value is
+    #     When you use groupings, Unit says SECONDS and the Value is
+    #     returned in SECONDS.
+    #
+    #     When you do not use groupings, Unit says SECONDS but the Value is
     #     returned in MILLISECONDS. For example, if you get a response like
     #     this:
     #
@@ -4415,6 +4455,7 @@ module Aws::Connect
     #
     #       {
     #         instance_id: "InstanceId", # required
+    #         integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -4422,6 +4463,9 @@ module Aws::Connect
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_type
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4438,6 +4482,7 @@ module Aws::Connect
     #
     class ListIntegrationAssociationsRequest < Struct.new(
       :instance_id,
+      :integration_type,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -4445,7 +4490,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] integration_association_summary_list
-    #   The AppIntegration associations.
+    #   The associations.
     #   @return [Array<Types::IntegrationAssociationSummary>]
     #
     # @!attribute [rw] next_token
@@ -5105,7 +5150,7 @@ module Aws::Connect
     end
 
     # Provides summary information about the use cases for the specified
-    # Amazon Connect AppIntegration association.
+    # integration association.
     #
     # @note When making an API call, you may pass ListUseCasesRequest
     #   data as a hash:
@@ -6302,6 +6347,12 @@ module Aws::Connect
     #         attributes: {
     #           "AttributeName" => "AttributeValue",
     #         },
+    #         answer_machine_detection_config: {
+    #           enable_answer_machine_detection: false,
+    #           await_answer_machine_prompt: false,
+    #         },
+    #         campaign_id: "CampaignId",
+    #         traffic_type: "GENERAL", # accepts GENERAL, CAMPAIGN
     #       }
     #
     # @!attribute [rw] destination_phone_number
@@ -6358,6 +6409,22 @@ module Aws::Connect
     #   underscore characters.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] answer_machine_detection_config
+    #   Configuration of the answering machine detection for this outbound
+    #   call.
+    #   @return [Types::AnswerMachineDetectionConfig]
+    #
+    # @!attribute [rw] campaign_id
+    #   The campaign identifier of the outbound communication.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_type
+    #   Denotes the class of traffic. Calls with different traffic types are
+    #   handled differently by Amazon Connect. The default value is
+    #   `GENERAL`. Use `CAMPAIGN` if `EnableAnswerMachineDetection` is set
+    #   to `true`. For all other cases, use `GENERAL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactRequest AWS API Documentation
     #
     class StartOutboundVoiceContactRequest < Struct.new(
@@ -6367,7 +6434,10 @@ module Aws::Connect
       :client_token,
       :source_phone_number,
       :queue_id,
-      :attributes)
+      :attributes,
+      :answer_machine_detection_config,
+      :campaign_id,
+      :traffic_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6935,6 +7005,11 @@ module Aws::Connect
     #
     # @!attribute [rw] attribute_type
     #   The type of attribute.
+    #
+    #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
+    #   access this feature, contact AWS Support for allowlisting.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7677,8 +7752,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] use_case_type
-    #   The type of use case to associate to the AppIntegration association.
-    #   Each AppIntegration association can have only one of each use case
+    #   The type of use case to associate to the integration association.
+    #   Each integration association can have only one of each use case
     #   type.
     #   @return [String]
     #

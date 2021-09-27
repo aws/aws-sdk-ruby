@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.113.0 (2021-09-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-voiceid` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-connectwisdomservice` gem.
+
 3.112.0 (2021-09-16)
 ------------------
 

@@ -1700,6 +1700,9 @@ module Aws::Pinpoint
     #               wait_until: "__string",
     #             },
     #           },
+    #           contact_center: {
+    #             next_activity: "__string",
+    #           },
     #         },
     #       },
     #       creation_date: "__string",
@@ -1756,6 +1759,10 @@ module Aws::Pinpoint
     #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #       wait_for_quiet_time: false,
     #       refresh_on_segment_update: false,
+    #       journey_channel_settings: {
+    #         connect_campaign_arn: "__string",
+    #         connect_campaign_execution_role_arn: "__string",
+    #       },
     #     },
     #   })
     #
@@ -1903,6 +1910,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].contact_center.next_activity #=> String
     #   resp.journey_response.application_id #=> String
     #   resp.journey_response.creation_date #=> String
     #   resp.journey_response.id #=> String
@@ -1937,6 +1945,8 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateJourney AWS API Documentation
     #
@@ -3460,6 +3470,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].contact_center.next_activity #=> String
     #   resp.journey_response.application_id #=> String
     #   resp.journey_response.creation_date #=> String
     #   resp.journey_response.id #=> String
@@ -3494,6 +3505,8 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteJourney AWS API Documentation
     #
@@ -6562,6 +6575,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].contact_center.next_activity #=> String
     #   resp.journey_response.application_id #=> String
     #   resp.journey_response.creation_date #=> String
     #   resp.journey_response.id #=> String
@@ -6596,6 +6610,8 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourney AWS API Documentation
     #
@@ -7960,6 +7976,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].wait.next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journeys_response.item[0].activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journeys_response.item[0].activities["__string"].contact_center.next_activity #=> String
     #   resp.journeys_response.item[0].application_id #=> String
     #   resp.journeys_response.item[0].creation_date #=> String
     #   resp.journeys_response.item[0].id #=> String
@@ -7994,6 +8011,8 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journeys_response.item[0].tags #=> Hash
     #   resp.journeys_response.item[0].tags["__string"] #=> String
+    #   resp.journeys_response.item[0].journey_channel_settings.connect_campaign_arn #=> String
+    #   resp.journeys_response.item[0].journey_channel_settings.connect_campaign_execution_role_arn #=> String
     #   resp.journeys_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListJourneys AWS API Documentation
@@ -10763,6 +10782,9 @@ module Aws::Pinpoint
     #               wait_until: "__string",
     #             },
     #           },
+    #           contact_center: {
+    #             next_activity: "__string",
+    #           },
     #         },
     #       },
     #       creation_date: "__string",
@@ -10819,6 +10841,10 @@ module Aws::Pinpoint
     #       state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #       wait_for_quiet_time: false,
     #       refresh_on_segment_update: false,
+    #       journey_channel_settings: {
+    #         connect_campaign_arn: "__string",
+    #         connect_campaign_execution_role_arn: "__string",
+    #       },
     #     },
     #   })
     #
@@ -10966,6 +10992,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].contact_center.next_activity #=> String
     #   resp.journey_response.application_id #=> String
     #   resp.journey_response.creation_date #=> String
     #   resp.journey_response.id #=> String
@@ -11000,6 +11027,8 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourney AWS API Documentation
     #
@@ -11177,6 +11206,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].contact_center.next_activity #=> String
     #   resp.journey_response.application_id #=> String
     #   resp.journey_response.creation_date #=> String
     #   resp.journey_response.id #=> String
@@ -11211,6 +11241,8 @@ module Aws::Pinpoint
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED", "PAUSED"
     #   resp.journey_response.tags #=> Hash
     #   resp.journey_response.tags["__string"] #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_arn #=> String
+    #   resp.journey_response.journey_channel_settings.connect_campaign_execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateJourneyState AWS API Documentation
     #
@@ -11904,7 +11936,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

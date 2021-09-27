@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-09-27)
+------------------
+
+* Feature - Adds new ALB-type target group to facilitate forwarding traffic from NLB to ALB
+
 1.67.0 (2021-09-01)
 ------------------
 

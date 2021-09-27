@@ -992,6 +992,8 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RuleNotFoundException)
       end)
 
       api.add_operation(:create_listener, Seahorse::Model::Operation.new.tap do |o|
@@ -1083,6 +1085,7 @@ module Aws::ElasticLoadBalancingV2
         o.input = Shapes::ShapeRef.new(shape: DeleteListenerInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteListenerOutput)
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:delete_load_balancer, Seahorse::Model::Operation.new.tap do |o|

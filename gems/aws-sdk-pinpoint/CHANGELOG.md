@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-09-27)
+------------------
+
+* Feature - Added support for journey with contact center activity
+
 1.57.0 (2021-09-16)
 ------------------
 

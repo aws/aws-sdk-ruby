@@ -1515,6 +1515,9 @@ module Aws::Pinpoint
     #             wait_until: "__string",
     #           },
     #         },
+    #         contact_center: {
+    #           next_activity: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] custom
@@ -1573,6 +1576,11 @@ module Aws::Pinpoint
     #   moving participants to the next activity in a journey.
     #   @return [Types::WaitActivity]
     #
+    # @!attribute [rw] contact_center
+    #   The settings for a connect activity. This type of activity initiates
+    #   a contact center call to participants.
+    #   @return [Types::ContactCenterActivity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Activity AWS API Documentation
     #
     class Activity < Struct.new(
@@ -1585,7 +1593,8 @@ module Aws::Pinpoint
       :push,
       :random_split,
       :sms,
-      :wait)
+      :wait,
+      :contact_center)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3368,6 +3377,29 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # The settings for a connect activity. This type of activity initiates a
+    # contact center call to participants.
+    #
+    # @note When making an API call, you may pass ContactCenterActivity
+    #   data as a hash:
+    #
+    #       {
+    #         next_activity: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform after the
+    #   this activity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ContactCenterActivity AWS API Documentation
+    #
+    class ContactCenterActivity < Struct.new(
+      :next_activity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an API request or response.
     #
     # @!attribute [rw] message
@@ -4465,6 +4497,9 @@ module Aws::Pinpoint
     #                   wait_until: "__string",
     #                 },
     #               },
+    #               contact_center: {
+    #                 next_activity: "__string",
+    #               },
     #             },
     #           },
     #           creation_date: "__string",
@@ -4521,6 +4556,10 @@ module Aws::Pinpoint
     #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #           wait_for_quiet_time: false,
     #           refresh_on_segment_update: false,
+    #           journey_channel_settings: {
+    #             connect_campaign_arn: "__string",
+    #             connect_campaign_execution_role_arn: "__string",
+    #           },
     #         },
     #       }
     #
@@ -11565,6 +11604,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] data
+    #   The message content that's passed to an AWS Lambda function or to a
+    #   web hook.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyCustomMessage AWS API Documentation
@@ -11850,6 +11891,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # The channel-specific configurations for the journey.
+    #
+    # @note When making an API call, you may pass JourneyChannelSettings
+    #   data as a hash:
+    #
+    #       {
+    #         connect_campaign_arn: "__string",
+    #         connect_campaign_execution_role_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] connect_campaign_arn
+    #   Amazon Resource Name (ARN) of the Connect Campaign.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_campaign_execution_role_arn
+    #   IAM role ARN to be assumed when invoking Connect campaign execution
+    #   APIs for dialing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyChannelSettings AWS API Documentation
+    #
+    class JourneyChannelSettings < Struct.new(
+      :connect_campaign_arn,
+      :connect_campaign_execution_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the status, configuration, and other
     # settings for a journey.
     #
@@ -11968,6 +12037,10 @@ module Aws::Pinpoint
     #   This object is not used or supported.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] journey_channel_settings
+    #   Amazon Resource Name (ARN) of the Connect Campaign.
+    #   @return [Types::JourneyChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyResponse AWS API Documentation
     #
     class JourneyResponse < Struct.new(
@@ -11985,7 +12058,8 @@ module Aws::Pinpoint
       :start_activity,
       :start_condition,
       :state,
-      :tags)
+      :tags,
+      :journey_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18912,6 +18986,9 @@ module Aws::Pinpoint
     #                   wait_until: "__string",
     #                 },
     #               },
+    #               contact_center: {
+    #                 next_activity: "__string",
+    #               },
     #             },
     #           },
     #           creation_date: "__string",
@@ -18968,6 +19045,10 @@ module Aws::Pinpoint
     #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #           wait_for_quiet_time: false,
     #           refresh_on_segment_update: false,
+    #           journey_channel_settings: {
+    #             connect_campaign_arn: "__string",
+    #             connect_campaign_execution_role_arn: "__string",
+    #           },
     #         },
     #       }
     #
@@ -21146,6 +21227,9 @@ module Aws::Pinpoint
     #                 wait_until: "__string",
     #               },
     #             },
+    #             contact_center: {
+    #               next_activity: "__string",
+    #             },
     #           },
     #         },
     #         creation_date: "__string",
@@ -21202,6 +21286,10 @@ module Aws::Pinpoint
     #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #         wait_for_quiet_time: false,
     #         refresh_on_segment_update: false,
+    #         journey_channel_settings: {
+    #           connect_campaign_arn: "__string",
+    #           connect_campaign_execution_role_arn: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] activities
@@ -21302,6 +21390,11 @@ module Aws::Pinpoint
     # @!attribute [rw] refresh_on_segment_update
     #   @return [Boolean]
     #
+    # @!attribute [rw] journey_channel_settings
+    #   IAM role ARN to be assumed when invoking Connect campaign execution
+    #   APIs for dialing.
+    #   @return [Types::JourneyChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
     #
     class WriteJourneyRequest < Struct.new(
@@ -21318,7 +21411,8 @@ module Aws::Pinpoint
       :start_condition,
       :state,
       :wait_for_quiet_time,
-      :refresh_on_segment_update)
+      :refresh_on_segment_update,
+      :journey_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end

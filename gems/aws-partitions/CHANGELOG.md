@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.507.0 (2021-09-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::VoiceID`.
+
+* Feature - Added support for enumerating regions for `Aws::ConnectWisdomService`.
+
 1.506.0 (2021-09-24)
 ------------------
 
