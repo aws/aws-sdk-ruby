@@ -40,7 +40,7 @@ module Aws::Imagebuilder
     #   Builder might have added to ensure that Systems Manager is installed
     #   on your Linux build instance. If you override the user data, make
     #   sure that you add commands to install Systems Manager, if it is not
-    #   pre-installed on your source image.
+    #   pre-installed on your base image.
     #
     #    </note>
     #   @return [String]
@@ -114,7 +114,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the distribution configuration.
+    #   The name of the output AMI.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -268,7 +268,7 @@ module Aws::Imagebuilder
     # @!attribute [rw] supported_os_versions
     #   The operating system (OS) version supported by the component. If the
     #   OS information is available, a prefix match is performed against the
-    #   parent image OS version during image recipe creation.
+    #   base image OS version during image recipe creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] state
@@ -460,7 +460,7 @@ module Aws::Imagebuilder
     # @!attribute [rw] supported_os_versions
     #   The operating system (OS) version supported by the component. If the
     #   OS information is available, a prefix match is performed against the
-    #   parent image OS version during image recipe creation.
+    #   base image OS version during image recipe creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] state
@@ -556,9 +556,9 @@ module Aws::Imagebuilder
     #
     #    **Filtering:** With semantic versioning, you have the flexibility to
     #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the source image or components for your recipe. When you
-    #   use a wildcard in any node, all nodes to the right of the first
-    #   wildcard must also be wildcards.
+    #   selecting the base image or components for your recipe. When you use
+    #   a wildcard in any node, all nodes to the right of the first wildcard
+    #   must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -574,7 +574,7 @@ module Aws::Imagebuilder
     # @!attribute [rw] supported_os_versions
     #   he operating system (OS) version supported by the component. If the
     #   OS information is available, a prefix match is performed against the
-    #   parent image OS version during image recipe creation.
+    #   base image OS version during image recipe creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
@@ -724,9 +724,9 @@ module Aws::Imagebuilder
     #
     #    **Filtering:** With semantic versioning, you have the flexibility to
     #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the source image or components for your recipe. When you
-    #   use a wildcard in any node, all nodes to the right of the first
-    #   wildcard must also be wildcards.
+    #   selecting the base image or components for your recipe. When you use
+    #   a wildcard in any node, all nodes to the right of the first wildcard
+    #   must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -759,7 +759,7 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] parent_image
-    #   The source image for the container recipe.
+    #   The base image for the container recipe.
     #   @return [String]
     #
     # @!attribute [rw] date_created
@@ -825,7 +825,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] parent_image
-    #   The source image for the container recipe.
+    #   The base image for the container recipe.
     #   @return [String]
     #
     # @!attribute [rw] date_created
@@ -913,7 +913,7 @@ module Aws::Imagebuilder
     # @!attribute [rw] supported_os_versions
     #   The operating system (OS) version supported by the component. If the
     #   OS information is available, a prefix match is performed against the
-    #   parent image OS version during image recipe creation.
+    #   base image OS version during image recipe creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] data
@@ -1096,16 +1096,16 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] platform_override
-    #   Specifies the operating system platform when you use a custom source
+    #   Specifies the operating system platform when you use a custom base
     #   image.
     #   @return [String]
     #
     # @!attribute [rw] image_os_version_override
-    #   Specifies the operating system version for the source image.
+    #   Specifies the operating system version for the base image.
     #   @return [String]
     #
     # @!attribute [rw] parent_image
-    #   The source image for the container recipe.
+    #   The base image for the container recipe.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1492,8 +1492,8 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] parent_image
-    #   The parent image of the image recipe. The value of the string can be
-    #   the ARN of the parent image or an AMI ID. The format for the ARN
+    #   The base image of the image recipe. The value of the string can be
+    #   the ARN of the base image or an AMI ID. The format for the ARN
     #   follows this example:
     #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x`.
     #   You can provide the specific version that you want to use, or you
@@ -1707,21 +1707,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] instance_types
-    #   The instance metadata options that you can set for the HTTP requests
-    #   that pipeline builds use to launch EC2 build and test instances. For
-    #   more information about instance metadata options, see one of the
-    #   following links:
-    #
-    #   * [Configure the instance metadata options][1] in the <i> <i>Amazon
-    #     EC2 User Guide</i> </i> for Linux instances.
-    #
-    #   * [Configure the instance metadata options][2] in the <i> <i>Amazon
-    #     EC2 Windows Guide</i> </i> for Windows instances.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
+    #   The instance types of the infrastructure configuration. You can
+    #   specify one or more instance types to use for this build. The
+    #   service will pick one of these instance types based on availability.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_profile_name
@@ -2836,9 +2824,9 @@ module Aws::Imagebuilder
     #
     #    **Filtering:** With semantic versioning, you have the flexibility to
     #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the source image or components for your recipe. When you
-    #   use a wildcard in any node, all nodes to the right of the first
-    #   wildcard must also be wildcards.
+    #   selecting the base image or components for your recipe. When you use
+    #   a wildcard in any node, all nodes to the right of the first wildcard
+    #   must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -3087,7 +3075,7 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] parent_image
-    #   The parent image of the image recipe.
+    #   The base image of the image recipe.
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -3155,7 +3143,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] parent_image
-    #   The parent image of the image recipe.
+    #   The base image of the image recipe.
     #   @return [String]
     #
     # @!attribute [rw] date_created
@@ -3342,9 +3330,9 @@ module Aws::Imagebuilder
     #
     #    **Filtering:** With semantic versioning, you have the flexibility to
     #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the source image or components for your recipe. When you
-    #   use a wildcard in any node, all nodes to the right of the first
-    #   wildcard must also be wildcards.
+    #   selecting the base image or components for your recipe. When you use
+    #   a wildcard in any node, all nodes to the right of the first wildcard
+    #   must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -3418,9 +3406,9 @@ module Aws::Imagebuilder
     #
     #    **Filtering:** With semantic versioning, you have the flexibility to
     #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the source image or components for your recipe. When you
-    #   use a wildcard in any node, all nodes to the right of the first
-    #   wildcard must also be wildcards.
+    #   selecting the base image or components for your recipe. When you use
+    #   a wildcard in any node, all nodes to the right of the first wildcard
+    #   must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -3700,7 +3688,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] no_device
-    #   Use to remove a mapping from the parent image.
+    #   Use to remove a mapping from the base image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InstanceBlockDeviceMapping AWS API Documentation
@@ -3714,7 +3702,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # Defines a custom source AMI and block device mapping configurations of
+    # Defines a custom base AMI and block device mapping configurations of
     # an instance used for building and testing container images.
     #
     # @note When making an API call, you may pass InstanceConfiguration
@@ -4703,9 +4691,9 @@ module Aws::Imagebuilder
     #
     #    **Filtering:** With semantic versioning, you have the flexibility to
     #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the source image or components for your recipe. When you
-    #   use a wildcard in any node, all nodes to the right of the first
-    #   wildcard must also be wildcards.
+    #   selecting the base image or components for your recipe. When you use
+    #   a wildcard in any node, all nodes to the right of the first wildcard
+    #   must also be wildcards.
     #
     #    </note>
     #   @return [Array<Types::ImageVersion>]
@@ -5161,7 +5149,7 @@ module Aws::Imagebuilder
     #   The condition configures when the pipeline should trigger a new
     #   image build. When the `pipelineExecutionStartCondition` is set to
     #   `EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE`, and you use
-    #   semantic version filters on the source image or components in your
+    #   semantic version filters on the base image or components in your
     #   image recipe, EC2 Image Builder will build a new image only when
     #   there are new versions of the image or components in your recipe
     #   that match the semantic version filter. When it is set to
