@@ -667,6 +667,7 @@ module Aws::SSM
     MaintenanceWindowTargetList = Shapes::ListShape.new(name: 'MaintenanceWindowTargetList')
     MaintenanceWindowTask = Shapes::StructureShape.new(name: 'MaintenanceWindowTask')
     MaintenanceWindowTaskArn = Shapes::StringShape.new(name: 'MaintenanceWindowTaskArn')
+    MaintenanceWindowTaskCutoffBehavior = Shapes::StringShape.new(name: 'MaintenanceWindowTaskCutoffBehavior')
     MaintenanceWindowTaskId = Shapes::StringShape.new(name: 'MaintenanceWindowTaskId')
     MaintenanceWindowTaskInvocationParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowTaskInvocationParameters')
     MaintenanceWindowTaskList = Shapes::ListShape.new(name: 'MaintenanceWindowTaskList')
@@ -2546,6 +2547,7 @@ module Aws::SSM
     GetMaintenanceWindowTaskResult.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "LoggingInfo"))
     GetMaintenanceWindowTaskResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     GetMaintenanceWindowTaskResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    GetMaintenanceWindowTaskResult.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
     GetMaintenanceWindowTaskResult.struct_class = Types::GetMaintenanceWindowTaskResult
 
     GetOpsItemRequest.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, required: true, location_name: "OpsItemId"))
@@ -3310,6 +3312,7 @@ module Aws::SSM
     MaintenanceWindowTask.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     MaintenanceWindowTask.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     MaintenanceWindowTask.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    MaintenanceWindowTask.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
     MaintenanceWindowTask.struct_class = Types::MaintenanceWindowTask
 
     MaintenanceWindowTaskInvocationParameters.add_member(:run_command, Shapes::ShapeRef.new(shape: MaintenanceWindowRunCommandParameters, location_name: "RunCommand"))
@@ -3890,6 +3893,7 @@ module Aws::SSM
     RegisterTaskWithMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
     RegisterTaskWithMaintenanceWindowRequest.struct_class = Types::RegisterTaskWithMaintenanceWindowRequest
 
     RegisterTaskWithMaintenanceWindowResult.add_member(:window_task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskId, location_name: "WindowTaskId"))
@@ -4420,6 +4424,7 @@ module Aws::SSM
     UpdateMaintenanceWindowTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     UpdateMaintenanceWindowTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
     UpdateMaintenanceWindowTaskRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "Replace", metadata: {"box"=>true}))
+    UpdateMaintenanceWindowTaskRequest.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
     UpdateMaintenanceWindowTaskRequest.struct_class = Types::UpdateMaintenanceWindowTaskRequest
 
     UpdateMaintenanceWindowTaskResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
@@ -4435,6 +4440,7 @@ module Aws::SSM
     UpdateMaintenanceWindowTaskResult.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "LoggingInfo"))
     UpdateMaintenanceWindowTaskResult.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     UpdateMaintenanceWindowTaskResult.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
+    UpdateMaintenanceWindowTaskResult.add_member(:cutoff_behavior, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskCutoffBehavior, location_name: "CutoffBehavior", metadata: {"box"=>true}))
     UpdateMaintenanceWindowTaskResult.struct_class = Types::UpdateMaintenanceWindowTaskResult
 
     UpdateManagedInstanceRoleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))

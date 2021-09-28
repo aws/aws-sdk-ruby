@@ -1027,7 +1027,7 @@ module Aws::ElasticLoadBalancingV2
     #           http_code: "HttpCode",
     #           grpc_code: "GrpcCode",
     #         },
-    #         target_type: "instance", # accepts instance, ip, lambda
+    #         target_type: "instance", # accepts instance, ip, lambda, alb
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1094,8 +1094,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] health_check_enabled
     #   Indicates whether health checks are enabled. If the target type is
     #   `lambda`, health checks are disabled by default but can be enabled.
-    #   If the target type is `instance` or `ip`, health checks are always
-    #   enabled and cannot be disabled.
+    #   If the target type is `instance`, `ip`, or `alb`, health checks are
+    #   always enabled and cannot be disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] health_check_path
@@ -1165,6 +1165,8 @@ module Aws::ElasticLoadBalancingV2
     #     can't specify publicly routable IP addresses.
     #
     #   * `lambda` - Register a single Lambda function as a target.
+    #
+    #   * `alb` - Register a single Application Load Balancer as a target.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3895,13 +3897,16 @@ module Aws::ElasticLoadBalancingV2
     #   The ID of the target. If the target type of the target group is
     #   `instance`, specify an instance ID. If the target type is `ip`,
     #   specify an IP address. If the target type is `lambda`, specify the
-    #   ARN of the Lambda function.
+    #   ARN of the Lambda function. If the target type is `alb`, specify the
+    #   ARN of the Application Load Balancer target.
     #   @return [String]
     #
     # @!attribute [rw] port
     #   The port on which the target is listening. If the target group
-    #   protocol is GENEVE, the supported port is 6081. Not used if the
-    #   target is a Lambda function.
+    #   protocol is GENEVE, the supported port is 6081. If the target type
+    #   is `alb`, the targeted Application Load Balancer must have at least
+    #   one listener whose port matches the target group port. Not used if
+    #   the target is a Lambda function.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -3911,7 +3916,7 @@ module Aws::ElasticLoadBalancingV2
     #   load balancer.
     #
     #   This parameter is not supported if the target type of the target
-    #   group is `instance`.
+    #   group is `instance` or `alb`.
     #
     #   If the target type is `ip` and the IP address is in a subnet of the
     #   VPC for the target group, the Availability Zone is automatically
@@ -4009,8 +4014,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] target_type
     #   The type of target that you must specify when registering targets
     #   with this target group. The possible values are `instance` (register
-    #   targets by instance ID), `ip` (register targets by IP address), or
-    #   `lambda` (register a single Lambda function as a target).
+    #   targets by instance ID), `ip` (register targets by IP address),
+    #   `lambda` (register a single Lambda function as a target), or `alb`
+    #   (register a single Application Load Balancer as a target).
     #   @return [String]
     #
     # @!attribute [rw] protocol_version

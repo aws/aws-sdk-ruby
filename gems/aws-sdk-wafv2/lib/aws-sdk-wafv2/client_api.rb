@@ -206,6 +206,7 @@ module Aws::WAFV2
     RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
     RedactedFields = Shapes::ListShape.new(name: 'RedactedFields')
     Regex = Shapes::StructureShape.new(name: 'Regex')
+    RegexMatchStatement = Shapes::StructureShape.new(name: 'RegexMatchStatement')
     RegexPatternSet = Shapes::StructureShape.new(name: 'RegexPatternSet')
     RegexPatternSetReferenceStatement = Shapes::StructureShape.new(name: 'RegexPatternSetReferenceStatement')
     RegexPatternSetSummaries = Shapes::ListShape.new(name: 'RegexPatternSetSummaries')
@@ -560,6 +561,7 @@ module Aws::WAFV2
     GetRateBasedStatementManagedKeysRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     GetRateBasedStatementManagedKeysRequest.add_member(:web_acl_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "WebACLName"))
     GetRateBasedStatementManagedKeysRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "WebACLId"))
+    GetRateBasedStatementManagedKeysRequest.add_member(:rule_group_rule_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "RuleGroupRuleName"))
     GetRateBasedStatementManagedKeysRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "RuleName"))
     GetRateBasedStatementManagedKeysRequest.struct_class = Types::GetRateBasedStatementManagedKeysRequest
 
@@ -892,6 +894,11 @@ module Aws::WAFV2
     Regex.add_member(:regex_string, Shapes::ShapeRef.new(shape: RegexPatternString, location_name: "RegexString"))
     Regex.struct_class = Types::Regex
 
+    RegexMatchStatement.add_member(:regex_string, Shapes::ShapeRef.new(shape: RegexPatternString, required: true, location_name: "RegexString"))
+    RegexMatchStatement.add_member(:field_to_match, Shapes::ShapeRef.new(shape: FieldToMatch, required: true, location_name: "FieldToMatch"))
+    RegexMatchStatement.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
+    RegexMatchStatement.struct_class = Types::RegexMatchStatement
+
     RegexPatternSet.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
     RegexPatternSet.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, location_name: "Id"))
     RegexPatternSet.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ARN"))
@@ -1007,6 +1014,7 @@ module Aws::WAFV2
     Statement.add_member(:not_statement, Shapes::ShapeRef.new(shape: NotStatement, location_name: "NotStatement"))
     Statement.add_member(:managed_rule_group_statement, Shapes::ShapeRef.new(shape: ManagedRuleGroupStatement, location_name: "ManagedRuleGroupStatement"))
     Statement.add_member(:label_match_statement, Shapes::ShapeRef.new(shape: LabelMatchStatement, location_name: "LabelMatchStatement"))
+    Statement.add_member(:regex_match_statement, Shapes::ShapeRef.new(shape: RegexMatchStatement, location_name: "RegexMatchStatement"))
     Statement.struct_class = Types::Statement
 
     Statements.member = Shapes::ShapeRef.new(shape: Statement)

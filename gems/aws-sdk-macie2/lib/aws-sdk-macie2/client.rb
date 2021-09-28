@@ -406,6 +406,12 @@ module Aws::Macie2
     # @option params [required, String] :job_type
     #   The schedule for running a classification job. Valid values are:
     #
+    # @option params [Array<String>] :managed_data_identifier_ids
+    #
+    # @option params [String] :managed_data_identifier_selector
+    #   The selection type that determines which managed data identifiers a
+    #   classification job uses to analyze data. Valid values are:
+    #
     # @option params [required, String] :name
     #
     # @option params [required, Types::S3JobDefinition] :s3_job_definition
@@ -440,6 +446,8 @@ module Aws::Macie2
     #     description: "__string",
     #     initial_run: false,
     #     job_type: "ONE_TIME", # required, accepts ONE_TIME, SCHEDULED
+    #     managed_data_identifier_ids: ["__string"],
+    #     managed_data_identifier_selector: "ALL", # accepts ALL, EXCLUDE, INCLUDE, NONE
     #     name: "__string", # required
     #     s3_job_definition: { # required
     #       bucket_definitions: [
@@ -1044,6 +1052,8 @@ module Aws::Macie2
     #   * {Types::DescribeClassificationJobResponse#job_type #job_type} => String
     #   * {Types::DescribeClassificationJobResponse#last_run_error_status #last_run_error_status} => Types::LastRunErrorStatus
     #   * {Types::DescribeClassificationJobResponse#last_run_time #last_run_time} => Time
+    #   * {Types::DescribeClassificationJobResponse#managed_data_identifier_ids #managed_data_identifier_ids} => Array&lt;String&gt;
+    #   * {Types::DescribeClassificationJobResponse#managed_data_identifier_selector #managed_data_identifier_selector} => String
     #   * {Types::DescribeClassificationJobResponse#name #name} => String
     #   * {Types::DescribeClassificationJobResponse#s3_job_definition #s3_job_definition} => Types::S3JobDefinition
     #   * {Types::DescribeClassificationJobResponse#sampling_percentage #sampling_percentage} => Integer
@@ -1072,6 +1082,9 @@ module Aws::Macie2
     #   resp.job_type #=> String, one of "ONE_TIME", "SCHEDULED"
     #   resp.last_run_error_status.code #=> String, one of "NONE", "ERROR"
     #   resp.last_run_time #=> Time
+    #   resp.managed_data_identifier_ids #=> Array
+    #   resp.managed_data_identifier_ids[0] #=> String
+    #   resp.managed_data_identifier_selector #=> String, one of "ALL", "EXCLUDE", "INCLUDE", "NONE"
     #   resp.name #=> String
     #   resp.s3_job_definition.bucket_definitions #=> Array
     #   resp.s3_job_definition.bucket_definitions[0].account_id #=> String
@@ -2266,8 +2279,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about all the Amazon Macie membership
-    # invitations that were received by an account.
+    # Retrieves information about the Amazon Macie membership invitations
+    # that were received by an account.
     #
     # @option params [Integer] :max_results
     #
@@ -2302,6 +2315,38 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def list_invitations(params = {}, options = {})
       req = build_request(:list_invitations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about all the managed data identifiers that
+    # Amazon Macie currently provides.
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListManagedDataIdentifiersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedDataIdentifiersResponse#items #items} => Array&lt;Types::ManagedDataIdentifierSummary&gt;
+    #   * {Types::ListManagedDataIdentifiersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_data_identifiers({
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].category #=> String, one of "FINANCIAL_INFORMATION", "PERSONAL_INFORMATION", "CREDENTIALS", "CUSTOM_IDENTIFIER"
+    #   resp.items[0].id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListManagedDataIdentifiers AWS API Documentation
+    #
+    # @overload list_managed_data_identifiers(params = {})
+    # @param [Hash] params ({})
+    def list_managed_data_identifiers(params = {}, options = {})
+      req = build_request(:list_managed_data_identifiers, params)
       req.send_request(options)
     end
 
@@ -2892,7 +2937,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

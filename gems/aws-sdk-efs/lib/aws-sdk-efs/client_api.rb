@@ -141,6 +141,7 @@ module Aws::EFS
     Token = Shapes::StringShape.new(name: 'Token')
     TooManyRequests = Shapes::StructureShape.new(name: 'TooManyRequests')
     TransitionToIARules = Shapes::StringShape.new(name: 'TransitionToIARules')
+    TransitionToPrimaryStorageClassRules = Shapes::StringShape.new(name: 'TransitionToPrimaryStorageClassRules')
     Uid = Shapes::IntegerShape.new(name: 'Uid')
     UnsupportedAvailabilityZone = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZone')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -386,6 +387,7 @@ module Aws::EFS
     LifecyclePolicies.member = Shapes::ShapeRef.new(shape: LifecyclePolicy)
 
     LifecyclePolicy.add_member(:transition_to_ia, Shapes::ShapeRef.new(shape: TransitionToIARules, location_name: "TransitionToIA"))
+    LifecyclePolicy.add_member(:transition_to_primary_storage_class, Shapes::ShapeRef.new(shape: TransitionToPrimaryStorageClassRules, location_name: "TransitionToPrimaryStorageClass"))
     LifecyclePolicy.struct_class = Types::LifecyclePolicy
 
     ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ResourceId"))

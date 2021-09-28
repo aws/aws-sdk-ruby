@@ -352,8 +352,8 @@ module Aws::LookoutEquipment
     #   including names, column names, and data types.
     #
     # @option params [String] :server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK) used
-    #   to encrypt dataset data by Amazon Lookout for Equipment.
+    #   Provides the identifier of the KMS key used to encrypt dataset data by
+    #   Amazon Lookout for Equipment.
     #
     # @option params [required, String] :client_token
     #   A unique identifier for the request. If you do not set the client
@@ -452,8 +452,8 @@ module Aws::LookoutEquipment
     #   data source being used for the inference.
     #
     # @option params [String] :server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK) used
-    #   to encrypt inference scheduler data by Amazon Lookout for Equipment.
+    #   Provides the identifier of the KMS key used to encrypt inference
+    #   scheduler data by Amazon Lookout for Equipment.
     #
     # @option params [required, String] :client_token
     #   A unique identifier for the request. If you do not set the client
@@ -589,11 +589,16 @@ module Aws::LookoutEquipment
     #   the value for a 1 hour rate is *PT1H*
     #
     # @option params [String] :server_side_kms_key_id
-    #   Provides the identifier of the AWS KMS customer master key (CMK) used
-    #   to encrypt model data by Amazon Lookout for Equipment.
+    #   Provides the identifier of the KMS key used to encrypt model data by
+    #   Amazon Lookout for Equipment.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Any tags associated with the ML model being created.
+    #
+    # @option params [String] :off_condition
+    #   Indicates that the asset associated with this sensor has been shut
+    #   off. As long as this condition is met, Lookout for Equipment will not
+    #   use data from this asset for training, evaluation, or inference.
     #
     # @return [Types::CreateModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -630,6 +635,7 @@ module Aws::LookoutEquipment
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     off_condition: "OffCondition",
     #   })
     #
     # @example Response structure
@@ -762,8 +768,8 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
-    # Provides information on a specified dataset such as the schema
-    # location, status, and so on.
+    # Provides a JSON description of the data that is in each time series
+    # dataset, including names, column names, and data types.
     #
     # @option params [required, String] :dataset_name
     #   The name of the dataset to be described.
@@ -865,9 +871,9 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
-    # Provides overall information about a specific ML model, including
-    # model name and ARN, dataset, training and evaluation information,
-    # status, and so on.
+    # Provides a JSON containing the overall information about a specific ML
+    # model, including model name and ARN, dataset, training and evaluation
+    # information, status, and so on.
     #
     # @option params [required, String] :model_name
     #   The name of the ML model to be described.
@@ -894,6 +900,7 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeModelResponse#last_updated_time #last_updated_time} => Time
     #   * {Types::DescribeModelResponse#created_at #created_at} => Time
     #   * {Types::DescribeModelResponse#server_side_kms_key_id #server_side_kms_key_id} => String
+    #   * {Types::DescribeModelResponse#off_condition #off_condition} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -924,6 +931,7 @@ module Aws::LookoutEquipment
     #   resp.last_updated_time #=> Time
     #   resp.created_at #=> Time
     #   resp.server_side_kms_key_id #=> String
+    #   resp.off_condition #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModel AWS API Documentation
     #
@@ -1447,7 +1455,7 @@ module Aws::LookoutEquipment
     #   The name of the inference scheduler to be updated.
     #
     # @option params [Integer] :data_delay_offset_in_minutes
-    #   &gt; A period of time (in minutes) by which inference on the data is
+    #   A period of time (in minutes) by which inference on the data is
     #   delayed after the data starts. For instance, if you select an offset
     #   delay time of five minutes, inference will not begin on the data until
     #   the first data measurement after the five minute mark. For example, if
@@ -1529,7 +1537,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

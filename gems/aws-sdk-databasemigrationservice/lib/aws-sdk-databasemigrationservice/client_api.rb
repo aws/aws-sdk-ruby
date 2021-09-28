@@ -1144,6 +1144,7 @@ module Aws::DatabaseMigrationService
 
     RebootReplicationInstanceMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     RebootReplicationInstanceMessage.add_member(:force_failover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceFailover"))
+    RebootReplicationInstanceMessage.add_member(:force_planned_failover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForcePlannedFailover"))
     RebootReplicationInstanceMessage.struct_class = Types::RebootReplicationInstanceMessage
 
     RebootReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))

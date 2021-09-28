@@ -112,6 +112,7 @@ module Aws::Kafka
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tls = Shapes::StructureShape.new(name: 'Tls')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    Unauthenticated = Shapes::StructureShape.new(name: 'Unauthenticated')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnprocessedScramSecret = Shapes::StructureShape.new(name: 'UnprocessedScramSecret')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -129,6 +130,8 @@ module Aws::Kafka
     UpdateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationResponse')
     UpdateMonitoringRequest = Shapes::StructureShape.new(name: 'UpdateMonitoringRequest')
     UpdateMonitoringResponse = Shapes::StructureShape.new(name: 'UpdateMonitoringResponse')
+    UpdateSecurityRequest = Shapes::StructureShape.new(name: 'UpdateSecurityRequest')
+    UpdateSecurityResponse = Shapes::StructureShape.new(name: 'UpdateSecurityResponse')
     ZookeeperNodeInfo = Shapes::StructureShape.new(name: 'ZookeeperNodeInfo')
     __blob = Shapes::BlobShape.new(name: '__blob')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
@@ -206,6 +209,7 @@ module Aws::Kafka
 
     ClientAuthentication.add_member(:sasl, Shapes::ShapeRef.new(shape: Sasl, location_name: "sasl"))
     ClientAuthentication.add_member(:tls, Shapes::ShapeRef.new(shape: Tls, location_name: "tls"))
+    ClientAuthentication.add_member(:unauthenticated, Shapes::ShapeRef.new(shape: Unauthenticated, location_name: "unauthenticated"))
     ClientAuthentication.struct_class = Types::ClientAuthentication
 
     CloudWatchLogs.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
@@ -226,6 +230,7 @@ module Aws::Kafka
     ClusterInfo.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integer, location_name: "numberOfBrokerNodes"))
     ClusterInfo.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoring, location_name: "openMonitoring"))
     ClusterInfo.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    ClusterInfo.add_member(:state_info, Shapes::ShapeRef.new(shape: StateInfo, location_name: "stateInfo"))
     ClusterInfo.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ClusterInfo.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
     ClusterInfo.add_member(:zookeeper_connect_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectStringTls"))
@@ -497,7 +502,9 @@ module Aws::Kafka
     MutableClusterInfo.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     MutableClusterInfo.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __string, location_name: "kafkaVersion"))
     MutableClusterInfo.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
-    MutableClusterInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __stringMin5Max32, location_name: "instanceType"))
+    MutableClusterInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "instanceType"))
+    MutableClusterInfo.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
+    MutableClusterInfo.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -568,11 +575,15 @@ module Aws::Kafka
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     Tls.add_member(:certificate_authority_arn_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "certificateAuthorityArnList"))
+    Tls.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
     Tls.struct_class = Types::Tls
 
     TooManyRequestsException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    Unauthenticated.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
+    Unauthenticated.struct_class = Types::Unauthenticated
 
     UnauthorizedException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -652,6 +663,16 @@ module Aws::Kafka
     UpdateMonitoringResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
     UpdateMonitoringResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     UpdateMonitoringResponse.struct_class = Types::UpdateMonitoringResponse
+
+    UpdateSecurityRequest.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
+    UpdateSecurityRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateSecurityRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
+    UpdateSecurityRequest.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
+    UpdateSecurityRequest.struct_class = Types::UpdateSecurityRequest
+
+    UpdateSecurityResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    UpdateSecurityResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    UpdateSecurityResponse.struct_class = Types::UpdateSecurityResponse
 
     ZookeeperNodeInfo.add_member(:attached_eni_id, Shapes::ShapeRef.new(shape: __string, location_name: "attachedENIId"))
     ZookeeperNodeInfo.add_member(:client_vpc_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "clientVpcIpAddress"))
@@ -1144,6 +1165,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:update_security, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSecurity"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/security"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSecurityRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSecurityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end
 

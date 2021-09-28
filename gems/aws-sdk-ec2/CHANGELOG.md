@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.265.0 (2021-09-24)
+------------------
+
+* Feature - DescribeInstances now returns Platform Details, Usage Operation, and Usage Operation Update Time.
+
+1.264.0 (2021-09-21)
+------------------
+
+* Feature - This update adds support for downloading configuration templates using new APIs (GetVpnConnectionDeviceTypes and GetVpnConnectionDeviceSampleConfiguration) and Internet Key Exchange version 2 (IKEv2) parameters for many popular CGW devices.
+
+1.263.0 (2021-09-14)
+------------------
+
+* Feature - This release adds support for vt1 3xlarge, 6xlarge and 24xlarge instances powered by Xilinx Alveo U30 Media Accelerators for video transcoding workloads
+
+1.262.0 (2021-09-13)
+------------------
+
+* Feature - Adds support for T3 instances on Amazon EC2 Dedicated Hosts.
+
 1.261.0 (2021-09-01)
 ------------------
 

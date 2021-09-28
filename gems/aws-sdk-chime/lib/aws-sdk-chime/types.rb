@@ -2655,6 +2655,9 @@ module Aws::Chime
     #         from_phone_number: "E164PhoneNumber", # required
     #         to_phone_number: "E164PhoneNumber", # required
     #         sip_media_application_id: "NonEmptyString", # required
+    #         sip_headers: {
+    #           "SensitiveString" => "SensitiveString",
+    #         },
     #       }
     #
     # @!attribute [rw] from_phone_number
@@ -2670,12 +2673,17 @@ module Aws::Chime
     #   The ID of the SIP media application.
     #   @return [String]
     #
+    # @!attribute [rw] sip_headers
+    #   The SIP headers added to an outbound call leg.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplicationCallRequest AWS API Documentation
     #
     class CreateSipMediaApplicationCallRequest < Struct.new(
       :from_phone_number,
       :to_phone_number,
-      :sip_media_application_id)
+      :sip_media_application_id,
+      :sip_headers)
       SENSITIVE = [:from_phone_number, :to_phone_number]
       include Aws::Structure
     end
@@ -7313,6 +7321,11 @@ module Aws::Chime
     # Origination settings enable your SIP hosts to receive inbound calls
     # using your Amazon Chime Voice Connector.
     #
+    # <note markdown="1"> The parameters listed below are not required, but you must use at
+    # least one.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass Origination
     #   data as a hash:
     #
@@ -7331,12 +7344,14 @@ module Aws::Chime
     #
     # @!attribute [rw] routes
     #   The call distribution properties defined for your SIP hosts. Valid
-    #   range: Minimum value of 1. Maximum value of 20.
+    #   range: Minimum value of 1. Maximum value of 20. This parameter is
+    #   not required, but you must specify this parameter or `Disabled`.
     #   @return [Array<Types::OriginationRoute>]
     #
     # @!attribute [rw] disabled
     #   When origination settings are disabled, inbound calls are not
-    #   enabled for your Amazon Chime Voice Connector.
+    #   enabled for your Amazon Chime Voice Connector. This parameter is not
+    #   required, but you must specify this parameter or `Routes`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Origination AWS API Documentation
@@ -7352,6 +7367,11 @@ module Aws::Chime
     # hosts to receive inbound calls using your Amazon Chime Voice
     # Connector. Limit: Ten origination routes for each Amazon Chime Voice
     # Connector.
+    #
+    # <note markdown="1"> The parameters listed below are not required, but you must use at
+    # least one.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass OriginationRoute
     #   data as a hash:
@@ -9474,8 +9494,8 @@ module Aws::Chime
     #   @return [Types::EngineTranscribeSettings]
     #
     # @!attribute [rw] engine_transcribe_medical_settings
-    #   The transcription configuration settings passed to Amazon
-    #   Transcribe.
+    #   The transcription configuration settings passed to Amazon Transcribe
+    #   Medical.
     #   @return [Types::EngineTranscribeMedicalSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TranscriptionConfiguration AWS API Documentation

@@ -356,9 +356,8 @@ module Aws::Transfer
     #   directory to be when they log into the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
+    #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
+    #   for how you want to make Amazon S3 or EFS paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -376,10 +375,10 @@ module Aws::Transfer
     #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
     #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
     #
-    #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock down your user to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to `/` and set
-    #   `Target` to the `HomeDirectory` parameter value.
+    #   In most cases, you can use this value instead of the session policy to
+    #   lock down your user to the designated home directory ("`chroot`").
+    #   To do this, you can set `Entry` to `/` and set `Target` to the
+    #   `HomeDirectory` parameter value.
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
@@ -397,22 +396,21 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
+    #   A session policy for your user so that you can use the same IAM role
+    #   across multiple users. This policy scopes down user access to portions
+    #   of their Amazon S3 bucket. Variables that you can use inside this
+    #   policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does not
-    #   use scope-down policies.
+    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
+    #   use session policies.
     #
-    #    For scope-down policies, Amazon Web Services Transfer Family stores
-    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
-    #   of the policy. You save the policy as a JSON blob and pass it in the
+    #    For session policies, Amazon Web Services Transfer Family stores the
+    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
+    #   the policy. You save the policy as a JSON blob and pass it in the
     #   `Policy` argument.
     #
-    #    For an example of a scope-down policy, see [Example scope-down
-    #   policy][1].
+    #    For an example of a session policy, see [Example session policy][1].
     #
     #    For more information, see [AssumeRole][2] in the *Amazon Web Services
     #   Security Token Service API Reference*.
@@ -421,7 +419,7 @@ module Aws::Transfer
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
     # @option params [Types::PosixProfile] :posix_profile
@@ -677,6 +675,10 @@ module Aws::Transfer
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for servers.
     #
+    # @option params [Types::WorkflowDetails] :workflow_details
+    #   Specifies the workflow ID for the workflow to assign and the execution
+    #   role used for executing the workflow.
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -710,6 +712,14 @@ module Aws::Transfer
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     workflow_details: {
+    #       on_upload: [ # required
+    #         {
+    #           workflow_id: "WorkflowId", # required
+    #           execution_role: "Role", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -731,8 +741,8 @@ module Aws::Transfer
     # Using parameters for `CreateUser`, you can specify the user name, set
     # the home directory, store the user's public key, and assign the
     # user's Amazon Web Services Identity and Access Management (IAM) role.
-    # You can also optionally add a scope-down policy, and assign metadata
-    # with tags that can be used to group and search for users.
+    # You can also optionally add a session policy, and assign metadata with
+    # tags that can be used to group and search for users.
     #
     # @option params [String] :home_directory
     #   The landing directory (folder) for a user when they log in to the
@@ -745,9 +755,8 @@ module Aws::Transfer
     #   directory to be when they log into the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
+    #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
+    #   for how you want to make Amazon S3 or EFS paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -765,10 +774,10 @@ module Aws::Transfer
     #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
     #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
     #
-    #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock your user down to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to `/` and set
-    #   `Target` to the HomeDirectory parameter value.
+    #   In most cases, you can use this value instead of the session policy to
+    #   lock your user down to the designated home directory ("`chroot`").
+    #   To do this, you can set `Entry` to `/` and set `Target` to the
+    #   HomeDirectory parameter value.
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
@@ -786,22 +795,21 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
+    #   A session policy for your user so that you can use the same IAM role
+    #   across multiple users. This policy scopes down user access to portions
+    #   of their Amazon S3 bucket. Variables that you can use inside this
+    #   policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when domain of ServerId is S3. EFS does not use
-    #   scope down policy.
+    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
+    #   use session policies.
     #
-    #    For scope-down policies, Amazon Web Services Transfer Family stores
-    #   the policy as a JSON blob, instead of the Amazon Resource Name (ARN)
-    #   of the policy. You save the policy as a JSON blob and pass it in the
+    #    For session policies, Amazon Web Services Transfer Family stores the
+    #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
+    #   the policy. You save the policy as a JSON blob and pass it in the
     #   `Policy` argument.
     #
-    #    For an example of a scope-down policy, see [Example scope-down
-    #   policy][1].
+    #    For an example of a session policy, see [Example session policy][1].
     #
     #    For more information, see [AssumeRole][2] in the *Amazon Web Services
     #   Security Token Service API Reference*.
@@ -810,7 +818,7 @@ module Aws::Transfer
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
     # @option params [Types::PosixProfile] :posix_profile
@@ -843,12 +851,11 @@ module Aws::Transfer
     #   are metadata attached to users for any purpose.
     #
     # @option params [required, String] :user_name
-    #   A unique string that identifies a user and is associated with a as
-    #   specified by the `ServerId`. This user name must be a minimum of 3 and
-    #   a maximum of 100 characters long. The following are valid characters:
-    #   a-z, A-Z, 0-9, underscore '\_', hyphen '-', period '.', and at
-    #   sign '@'. The user name can't start with a hyphen, period, or at
-    #   sign.
+    #   A unique string that identifies a user and is associated with a
+    #   `ServerId`. This user name must be a minimum of 3 and a maximum of 100
+    #   characters long. The following are valid characters: a-z, A-Z, 0-9,
+    #   underscore '\_', hyphen '-', period '.', and at sign '@'. The
+    #   user name can't start with a hyphen, period, or at sign.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -895,6 +902,142 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def create_user(params = {}, options = {})
       req = build_request(:create_user, params)
+      req.send_request(options)
+    end
+
+    # Allows you to create a workflow with specified steps and step details
+    # the workflow invokes after file transfer completes. After creating a
+    # workflow, you can associate the workflow created with any transfer
+    # servers by specifying the `workflow-details` field in `CreateServer`
+    # and `UpdateServer` operations.
+    #
+    # @option params [String] :description
+    #   A textual description for the workflow.
+    #
+    # @option params [required, Array<Types::WorkflowStep>] :steps
+    #   Specifies the details for the steps that are in the specified
+    #   workflow.
+    #
+    #   The `TYPE` specifies which of the following actions is being taken for
+    #   this step.
+    #
+    #   * *Copy*\: copy the file to another location
+    #
+    #   * *Custom*\: custom step with a lambda target
+    #
+    #   * *Delete*\: delete the file
+    #
+    #   * *Tag*\: add a tag to the file
+    #
+    #   For file location, you specify either the S3 bucket and key, or the
+    #   EFS filesystem ID and path.
+    #
+    # @option params [Array<Types::WorkflowStep>] :on_exception_steps
+    #   Specifies the steps (actions) to take if any errors are encountered
+    #   during execution of the workflow.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value pairs that can be used to group and search for workflows.
+    #   Tags are metadata attached to workflows for any purpose.
+    #
+    # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkflowResponse#workflow_id #workflow_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workflow({
+    #     description: "WorkflowDescription",
+    #     steps: [ # required
+    #       {
+    #         type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE
+    #         copy_step_details: {
+    #           name: "WorkflowStepName",
+    #           destination_file_location: {
+    #             s3_file_location: {
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
+    #             },
+    #             efs_file_location: {
+    #               file_system_id: "EfsFileSystemId",
+    #               path: "EfsPath",
+    #             },
+    #           },
+    #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #         },
+    #         custom_step_details: {
+    #           name: "WorkflowStepName",
+    #           target: "CustomStepTarget",
+    #           timeout_seconds: 1,
+    #         },
+    #         delete_step_details: {
+    #           name: "WorkflowStepName",
+    #         },
+    #         tag_step_details: {
+    #           name: "WorkflowStepName",
+    #           tags: [
+    #             {
+    #               key: "S3TagKey", # required
+    #               value: "S3TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #     on_exception_steps: [
+    #       {
+    #         type: "COPY", # accepts COPY, CUSTOM, TAG, DELETE
+    #         copy_step_details: {
+    #           name: "WorkflowStepName",
+    #           destination_file_location: {
+    #             s3_file_location: {
+    #               bucket: "S3Bucket",
+    #               key: "S3Key",
+    #             },
+    #             efs_file_location: {
+    #               file_system_id: "EfsFileSystemId",
+    #               path: "EfsPath",
+    #             },
+    #           },
+    #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #         },
+    #         custom_step_details: {
+    #           name: "WorkflowStepName",
+    #           target: "CustomStepTarget",
+    #           timeout_seconds: 1,
+    #         },
+    #         delete_step_details: {
+    #           name: "WorkflowStepName",
+    #         },
+    #         tag_step_details: {
+    #           name: "WorkflowStepName",
+    #           tags: [
+    #             {
+    #               key: "S3TagKey", # required
+    #               value: "S3TagValue", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateWorkflow AWS API Documentation
+    #
+    # @overload create_workflow(params = {})
+    # @param [Hash] params ({})
+    def create_workflow(params = {}, options = {})
+      req = build_request(:create_workflow, params)
       req.send_request(options)
     end
 
@@ -968,8 +1111,6 @@ module Aws::Transfer
 
     # Deletes a user's Secure Shell (SSH) public key.
     #
-    # No response is returned from this operation.
-    #
     # @option params [required, String] :server_id
     #   A system-assigned unique identifier for a file transfer
     #   protocol-enabled server instance that has the user assigned to it.
@@ -1032,6 +1173,28 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def delete_user(params = {}, options = {})
       req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified workflow.
+    #
+    # @option params [required, String] :workflow_id
+    #   A unique identifier for the workflow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workflow({
+    #     workflow_id: "WorkflowId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteWorkflow AWS API Documentation
+    #
+    # @overload delete_workflow(params = {})
+    # @param [Hash] params ({})
+    def delete_workflow(params = {}, options = {})
+      req = build_request(:delete_workflow, params)
       req.send_request(options)
     end
 
@@ -1099,6 +1262,68 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def describe_access(params = {}, options = {})
       req = build_request(:describe_access, params)
+      req.send_request(options)
+    end
+
+    # You can use `DescribeExecution` to check the details of the execution
+    # of the specified workflow.
+    #
+    # @option params [required, String] :execution_id
+    #   A unique identifier for the execution of a workflow.
+    #
+    # @option params [required, String] :workflow_id
+    #   A unique identifier for the workflow.
+    #
+    # @return [Types::DescribeExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExecutionResponse#workflow_id #workflow_id} => String
+    #   * {Types::DescribeExecutionResponse#execution #execution} => Types::DescribedExecution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_execution({
+    #     execution_id: "ExecutionId", # required
+    #     workflow_id: "WorkflowId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_id #=> String
+    #   resp.execution.execution_id #=> String
+    #   resp.execution.initial_file_location.s3_file_location.bucket #=> String
+    #   resp.execution.initial_file_location.s3_file_location.key #=> String
+    #   resp.execution.initial_file_location.s3_file_location.version_id #=> String
+    #   resp.execution.initial_file_location.s3_file_location.etag #=> String
+    #   resp.execution.initial_file_location.efs_file_location.file_system_id #=> String
+    #   resp.execution.initial_file_location.efs_file_location.path #=> String
+    #   resp.execution.service_metadata.user_details.user_name #=> String
+    #   resp.execution.service_metadata.user_details.server_id #=> String
+    #   resp.execution.service_metadata.user_details.session_id #=> String
+    #   resp.execution.execution_role #=> String
+    #   resp.execution.logging_configuration.logging_role #=> String
+    #   resp.execution.logging_configuration.log_group_name #=> String
+    #   resp.execution.posix_profile.uid #=> Integer
+    #   resp.execution.posix_profile.gid #=> Integer
+    #   resp.execution.posix_profile.secondary_gids #=> Array
+    #   resp.execution.posix_profile.secondary_gids[0] #=> Integer
+    #   resp.execution.status #=> String, one of "IN_PROGRESS", "COMPLETED", "EXCEPTION", "HANDLING_EXCEPTION"
+    #   resp.execution.results.steps #=> Array
+    #   resp.execution.results.steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.execution.results.steps[0].outputs #=> String
+    #   resp.execution.results.steps[0].error.type #=> String, one of "PERMISSION_DENIED"
+    #   resp.execution.results.steps[0].error.message #=> String
+    #   resp.execution.results.on_exception_steps #=> Array
+    #   resp.execution.results.on_exception_steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.execution.results.on_exception_steps[0].outputs #=> String
+    #   resp.execution.results.on_exception_steps[0].error.type #=> String, one of "PERMISSION_DENIED"
+    #   resp.execution.results.on_exception_steps[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeExecution AWS API Documentation
+    #
+    # @overload describe_execution(params = {})
+    # @param [Hash] params ({})
+    def describe_execution(params = {}, options = {})
+      req = build_request(:describe_execution, params)
       req.send_request(options)
     end
 
@@ -1197,6 +1422,9 @@ module Aws::Transfer
     #   resp.server.tags[0].key #=> String
     #   resp.server.tags[0].value #=> String
     #   resp.server.user_count #=> Integer
+    #   resp.server.workflow_details.on_upload #=> Array
+    #   resp.server.workflow_details.on_upload[0].workflow_id #=> String
+    #   resp.server.workflow_details.on_upload[0].execution_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeServer AWS API Documentation
     #
@@ -1264,6 +1492,71 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def describe_user(params = {}, options = {})
       req = build_request(:describe_user, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified workflow.
+    #
+    # @option params [required, String] :workflow_id
+    #   A unique identifier for the workflow.
+    #
+    # @return [Types::DescribeWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkflowResponse#workflow #workflow} => Types::DescribedWorkflow
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workflow({
+    #     workflow_id: "WorkflowId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow.arn #=> String
+    #   resp.workflow.description #=> String
+    #   resp.workflow.steps #=> Array
+    #   resp.workflow.steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.workflow.steps[0].copy_step_details.name #=> String
+    #   resp.workflow.steps[0].copy_step_details.destination_file_location.s3_file_location.bucket #=> String
+    #   resp.workflow.steps[0].copy_step_details.destination_file_location.s3_file_location.key #=> String
+    #   resp.workflow.steps[0].copy_step_details.destination_file_location.efs_file_location.file_system_id #=> String
+    #   resp.workflow.steps[0].copy_step_details.destination_file_location.efs_file_location.path #=> String
+    #   resp.workflow.steps[0].copy_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.steps[0].custom_step_details.name #=> String
+    #   resp.workflow.steps[0].custom_step_details.target #=> String
+    #   resp.workflow.steps[0].custom_step_details.timeout_seconds #=> Integer
+    #   resp.workflow.steps[0].delete_step_details.name #=> String
+    #   resp.workflow.steps[0].tag_step_details.name #=> String
+    #   resp.workflow.steps[0].tag_step_details.tags #=> Array
+    #   resp.workflow.steps[0].tag_step_details.tags[0].key #=> String
+    #   resp.workflow.steps[0].tag_step_details.tags[0].value #=> String
+    #   resp.workflow.on_exception_steps #=> Array
+    #   resp.workflow.on_exception_steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
+    #   resp.workflow.on_exception_steps[0].copy_step_details.name #=> String
+    #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.s3_file_location.bucket #=> String
+    #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.s3_file_location.key #=> String
+    #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.efs_file_location.file_system_id #=> String
+    #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.efs_file_location.path #=> String
+    #   resp.workflow.on_exception_steps[0].copy_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.on_exception_steps[0].custom_step_details.name #=> String
+    #   resp.workflow.on_exception_steps[0].custom_step_details.target #=> String
+    #   resp.workflow.on_exception_steps[0].custom_step_details.timeout_seconds #=> Integer
+    #   resp.workflow.on_exception_steps[0].delete_step_details.name #=> String
+    #   resp.workflow.on_exception_steps[0].tag_step_details.name #=> String
+    #   resp.workflow.on_exception_steps[0].tag_step_details.tags #=> Array
+    #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].key #=> String
+    #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].value #=> String
+    #   resp.workflow.workflow_id #=> String
+    #   resp.workflow.tags #=> Array
+    #   resp.workflow.tags[0].key #=> String
+    #   resp.workflow.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeWorkflow AWS API Documentation
+    #
+    # @overload describe_workflow(params = {})
+    # @param [Hash] params ({})
+    def describe_workflow(params = {}, options = {})
+      req = build_request(:describe_workflow, params)
       req.send_request(options)
     end
 
@@ -1359,6 +1652,78 @@ module Aws::Transfer
     # @param [Hash] params ({})
     def list_accesses(params = {}, options = {})
       req = build_request(:list_accesses, params)
+      req.send_request(options)
+    end
+
+    # Lists all executions for the specified workflow.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the aximum number of executions to return.
+    #
+    # @option params [String] :next_token
+    #   `ListExecutions` returns the `NextToken` parameter in the output. You
+    #   can then pass the `NextToken` parameter in a subsequent command to
+    #   continue listing additional executions.
+    #
+    #   This is useful for pagination, for instance. If you have 100
+    #   executions for a workflow, you might only want to list first 10. If
+    #   so, callthe API by specifing the `max-results`\:
+    #
+    #   `aws transfer list-executions --max-results 10`
+    #
+    #   This returns details for the first 10 executions, as well as the
+    #   pointer (`NextToken`) to the eleventh execution. You can now call the
+    #   API again, suppling the `NextToken` value you received:
+    #
+    #   `aws transfer list-executions --max-results 10 --next-token
+    #   $somePointerReturnedFromPreviousListResult`
+    #
+    #   This call returns the next 10 executions, the 11th through the 20th.
+    #   You can then repeat the call until the details for all 100 executions
+    #   have been returned.
+    #
+    # @option params [required, String] :workflow_id
+    #   A unique identifier for the workflow.
+    #
+    # @return [Types::ListExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExecutionsResponse#next_token #next_token} => String
+    #   * {Types::ListExecutionsResponse#workflow_id #workflow_id} => String
+    #   * {Types::ListExecutionsResponse#executions #executions} => Array&lt;Types::ListedExecution&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_executions({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     workflow_id: "WorkflowId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.workflow_id #=> String
+    #   resp.executions #=> Array
+    #   resp.executions[0].execution_id #=> String
+    #   resp.executions[0].initial_file_location.s3_file_location.bucket #=> String
+    #   resp.executions[0].initial_file_location.s3_file_location.key #=> String
+    #   resp.executions[0].initial_file_location.s3_file_location.version_id #=> String
+    #   resp.executions[0].initial_file_location.s3_file_location.etag #=> String
+    #   resp.executions[0].initial_file_location.efs_file_location.file_system_id #=> String
+    #   resp.executions[0].initial_file_location.efs_file_location.path #=> String
+    #   resp.executions[0].service_metadata.user_details.user_name #=> String
+    #   resp.executions[0].service_metadata.user_details.server_id #=> String
+    #   resp.executions[0].service_metadata.user_details.session_id #=> String
+    #   resp.executions[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "EXCEPTION", "HANDLING_EXCEPTION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListExecutions AWS API Documentation
+    #
+    # @overload list_executions(params = {})
+    # @param [Hash] params ({})
+    def list_executions(params = {}, options = {})
+      req = build_request(:list_executions, params)
       req.send_request(options)
     end
 
@@ -1558,6 +1923,86 @@ module Aws::Transfer
       req.send_request(options)
     end
 
+    # Lists all of your workflows.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of workflows to return.
+    #
+    # @option params [String] :next_token
+    #   `ListWorkflows` returns the `NextToken` parameter in the output. You
+    #   can then pass the `NextToken` parameter in a subsequent command to
+    #   continue listing additional workflows.
+    #
+    # @return [Types::ListWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowsResponse#next_token #next_token} => String
+    #   * {Types::ListWorkflowsResponse#workflows #workflows} => Array&lt;Types::ListedWorkflow&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflows({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.workflows #=> Array
+    #   resp.workflows[0].workflow_id #=> String
+    #   resp.workflows[0].description #=> String
+    #   resp.workflows[0].arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListWorkflows AWS API Documentation
+    #
+    # @overload list_workflows(params = {})
+    # @param [Hash] params ({})
+    def list_workflows(params = {}, options = {})
+      req = build_request(:list_workflows, params)
+      req.send_request(options)
+    end
+
+    # Sends a callback for asynchronous custom steps.
+    #
+    # The `ExecutionId`, `WorkflowId`, and `Token` are passed to the target
+    # resource during execution of a custom step of a workflow. You must
+    # include those with their callback as well as providing a status.
+    #
+    # @option params [required, String] :workflow_id
+    #   A unique identifier for the workflow.
+    #
+    # @option params [required, String] :execution_id
+    #   A unique identifier for the execution of a workflow.
+    #
+    # @option params [required, String] :token
+    #   Used to distinguish between multiple callbacks for multiple Lambda
+    #   steps within the same execution.
+    #
+    # @option params [required, String] :status
+    #   Indicates whether the specified step succeeded or failed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_workflow_step_state({
+    #     workflow_id: "WorkflowId", # required
+    #     execution_id: "ExecutionId", # required
+    #     token: "CallbackToken", # required
+    #     status: "SUCCESS", # required, accepts SUCCESS, FAILURE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SendWorkflowStepState AWS API Documentation
+    #
+    # @overload send_workflow_step_state(params = {})
+    # @param [Hash] params ({})
+    def send_workflow_step_state(params = {}, options = {})
+      req = build_request(:send_workflow_step_state, params)
+      req.send_request(options)
+    end
+
     # Changes the state of a file transfer protocol-enabled server from
     # `OFFLINE` to `ONLINE`. It has no impact on a server that is already
     # `ONLINE`. An `ONLINE` server can accept and process file transfer
@@ -1672,6 +2117,31 @@ module Aws::Transfer
     # identity provider integration to ensure that your users can
     # successfully use the service.
     #
+    # The `ServerId` and `UserName` parameters are required. The
+    # `ServerProtocol`, `SourceIp`, and `UserPassword` are all optional.
+    #
+    # <note markdown="1"> You cannot use `TestIdentityProvider` if the `IdentityProviderType` of
+    # your server is `SERVICE_MANAGED`.
+    #
+    #  </note>
+    #
+    # * If you provide any incorrect values for any parameters, the
+    #   `Response` field is empty.
+    #
+    # * If you provide a server ID for a server that uses service-managed
+    #   users, you get an error:
+    #
+    #   ` An error occurred (InvalidRequestException) when calling the
+    #   TestIdentityProvider operation: s-server-ID not configured for
+    #   external auth `
+    #
+    # * If you enter a Server ID for the `--server-id` parameter that does
+    #   not identify an actual Transfer server, you receive the following
+    #   error:
+    #
+    #   `An error occurred (ResourceNotFoundException) when calling the
+    #   TestIdentityProvider operation: Unknown server`
+    #
     # @option params [required, String] :server_id
     #   A system-assigned identifier for a specific server. That server's
     #   user authentication method is tested with a user name and password.
@@ -1777,9 +2247,8 @@ module Aws::Transfer
     #   directory to be when they log into the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
+    #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
+    #   for how you want to make Amazon S3 or EFS paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -1797,10 +2266,10 @@ module Aws::Transfer
     #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
     #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
     #
-    #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock down your user to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to `/` and set
-    #   `Target` to the `HomeDirectory` parameter value.
+    #   In most cases, you can use this value instead of the session policy to
+    #   lock down your user to the designated home directory ("`chroot`").
+    #   To do this, you can set `Entry` to `/` and set `Target` to the
+    #   `HomeDirectory` parameter value.
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
@@ -1818,22 +2287,21 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
+    #   A session policy for your user so that you can use the same IAM role
+    #   across multiple users. This policy scopes down user access to portions
+    #   of their Amazon S3 bucket. Variables that you can use inside this
+    #   policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does not
-    #   use scope down policy.
+    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
+    #   use session policies.
     #
-    #    For scope-down policies, Amazon Web ServicesTransfer Family stores the
+    #    For session policies, Amazon Web Services Transfer Family stores the
     #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
     #   the policy. You save the policy as a JSON blob and pass it in the
     #   `Policy` argument.
     #
-    #    For an example of a scope-down policy, see [Example scope-down
-    #   policy][1].
+    #    For an example of a session policy, see [Example session policy][1].
     #
     #    For more information, see [AssumeRole][2] in the *Amazon Web
     #   ServicesSecurity Token Service API Reference*.
@@ -1842,7 +2310,7 @@ module Aws::Transfer
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
     # @option params [Types::PosixProfile] :posix_profile
@@ -2077,6 +2545,10 @@ module Aws::Transfer
     #   A system-assigned unique identifier for a server instance that the
     #   user account is assigned to.
     #
+    # @option params [Types::WorkflowDetails] :workflow_details
+    #   Specifies the workflow ID for the workflow to assign and the execution
+    #   role used for executing the workflow.
+    #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServerResponse#server_id #server_id} => String
@@ -2106,6 +2578,14 @@ module Aws::Transfer
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #     security_policy_name: "SecurityPolicyName",
     #     server_id: "ServerId", # required
+    #     workflow_details: {
+    #       on_upload: [ # required
+    #         {
+    #           workflow_id: "WorkflowId", # required
+    #           execution_role: "Role", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2139,9 +2619,8 @@ module Aws::Transfer
     #   directory to be when they log into the server. If you set it to
     #   `PATH`, the user will see the absolute Amazon S3 bucket or EFS paths
     #   as is in their file transfer protocol clients. If you set it
-    #   `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 or EFS
-    #   paths visible to your users.
+    #   `LOGICAL`, you need to provide mappings in the `HomeDirectoryMappings`
+    #   for how you want to make Amazon S3 or EFS paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 or Amazon EFS
@@ -2159,10 +2638,10 @@ module Aws::Transfer
     #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
     #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
     #
-    #   In most cases, you can use this value instead of the scope-down policy
-    #   to lock down your user to the designated home directory
-    #   ("`chroot`"). To do this, you can set `Entry` to '/' and set
-    #   `Target` to the HomeDirectory parameter value.
+    #   In most cases, you can use this value instead of the session policy to
+    #   lock down your user to the designated home directory ("`chroot`").
+    #   To do this, you can set `Entry` to '/' and set `Target` to the
+    #   HomeDirectory parameter value.
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
@@ -2180,21 +2659,21 @@ module Aws::Transfer
     #    </note>
     #
     # @option params [String] :policy
-    #   A scope-down policy for your user so that you can use the same IAM
-    #   role across multiple users. This policy scopes down user access to
-    #   portions of their Amazon S3 bucket. Variables that you can use inside
-    #   this policy include `$\{Transfer:UserName\}`,
+    #   A session policy for your user so that you can use the same IAM role
+    #   across multiple users. This policy scopes down user access to portions
+    #   of their Amazon S3 bucket. Variables that you can use inside this
+    #   policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> This only applies when domain of `ServerId` is S3. Amazon EFS does not
-    #   use scope-down policies.
+    #   <note markdown="1"> This only applies when the domain of `ServerId` is S3. EFS does not
+    #   use session policies.
     #
-    #    For scope-down policies, Amazon Web ServicesTransfer Family stores the
+    #    For session policies, Amazon Web Services Transfer Family stores the
     #   policy as a JSON blob, instead of the Amazon Resource Name (ARN) of
     #   the policy. You save the policy as a JSON blob and pass it in the
     #   `Policy` argument.
     #
-    #    For an example of a scope-down policy, see [Creating a scope-down
+    #    For an example of a session policy, see [Creating a session
     #   policy][1].
     #
     #    For more information, see [AssumeRole][2] in the *Amazon Web Services
@@ -2204,7 +2683,7 @@ module Aws::Transfer
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/session-policy
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
     # @option params [Types::PosixProfile] :posix_profile
@@ -2290,7 +2769,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

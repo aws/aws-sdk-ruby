@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2021-09-21)
+------------------
+
+* Feature - This release adds support for verifying, viewing and filtering AWS IoT Device Defender detect violations with four verification states.
+
+1.75.0 (2021-09-13)
+------------------
+
+* Feature - AWS IoT Rules Engine adds OpenSearch action. The OpenSearch rule action lets you stream data from IoT sensors and applications to Amazon OpenSearch Service which is a successor to Amazon Elasticsearch Service.
+
 1.74.0 (2021-09-01)
 ------------------
 

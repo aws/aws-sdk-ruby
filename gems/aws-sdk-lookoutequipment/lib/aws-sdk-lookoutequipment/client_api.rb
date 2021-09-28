@@ -94,6 +94,7 @@ module Aws::LookoutEquipment
     ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
     NameOrArn = Shapes::StringShape.new(name: 'NameOrArn')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OffCondition = Shapes::StringShape.new(name: 'OffCondition')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
@@ -170,6 +171,7 @@ module Aws::LookoutEquipment
     CreateModelRequest.add_member(:data_pre_processing_configuration, Shapes::ShapeRef.new(shape: DataPreProcessingConfiguration, location_name: "DataPreProcessingConfiguration"))
     CreateModelRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
     CreateModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateModelRequest.add_member(:off_condition, Shapes::ShapeRef.new(shape: OffCondition, location_name: "OffCondition"))
     CreateModelRequest.struct_class = Types::CreateModelRequest
 
     CreateModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
@@ -274,6 +276,7 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     DescribeModelResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DescribeModelResponse.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "ServerSideKmsKeyId"))
+    DescribeModelResponse.add_member(:off_condition, Shapes::ShapeRef.new(shape: OffCondition, location_name: "OffCondition"))
     DescribeModelResponse.struct_class = Types::DescribeModelResponse
 
     InferenceExecutionSummaries.member = Shapes::ShapeRef.new(shape: InferenceExecutionSummary)

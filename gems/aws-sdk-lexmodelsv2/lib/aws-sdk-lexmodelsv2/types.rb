@@ -10,6 +10,125 @@
 module Aws::LexModelsV2
   module Types
 
+    # Filters responses returned by the `ListAggregatedUtterances`
+    # operation.
+    #
+    # @note When making an API call, you may pass AggregatedUtterancesFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Utterance", # required, accepts Utterance
+    #         values: ["FilterValue"], # required
+    #         operator: "CO", # required, accepts CO, EQ
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the field to filter the utterance list.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value to use for filtering the list of bots.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use for the filter. Specify `EQ` when the
+    #   `ListAggregatedUtterances` operation should return only utterances
+    #   that equal the specified value. Specify `CO` when the
+    #   `ListAggregatedUtterances` operation should return utterances that
+    #   contain the specified value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AggregatedUtterancesFilter AWS API Documentation
+    #
+    class AggregatedUtterancesFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies attributes for sorting a list of utterances.
+    #
+    # @note When making an API call, you may pass AggregatedUtterancesSortBy
+    #   data as a hash:
+    #
+    #       {
+    #         attribute: "HitCount", # required, accepts HitCount, MissedCount
+    #         order: "Ascending", # required, accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] attribute
+    #   The utterance attribute to sort by.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Specifies whether to sort the aggregated utterances in ascending or
+    #   descending order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AggregatedUtterancesSortBy AWS API Documentation
+    #
+    class AggregatedUtterancesSortBy < Struct.new(
+      :attribute,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information for aggregated utterances. The
+    # `ListAggregatedUtterances` operations combines all instances of the
+    # same utterance into a single aggregated summary.
+    #
+    # @!attribute [rw] utterance
+    #   The text of the utterance. If the utterance was used with the
+    #   `RecognizeUtterance` operation, the text is the transcription of the
+    #   audio utterance.
+    #   @return [String]
+    #
+    # @!attribute [rw] hit_count
+    #   The number of times that the utterance was detected by Amazon Lex
+    #   during the time period. When an utterance is detected, it activates
+    #   an intent or a slot.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] missed_count
+    #   The number of times that the utterance was missed by Amazon Lex An
+    #   utterance is missed when it doesn't activate an intent or slot.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utterance_first_recorded_in_aggregation_duration
+    #   The date and time that the utterance was first recorded in the time
+    #   window for aggregation. An utterance may have been sent to Amazon
+    #   Lex before that time, but only utterances within the time window are
+    #   counted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] utterance_last_recorded_in_aggregation_duration
+    #   The last date and time that an utterance was recorded in the time
+    #   window for aggregation. An utterance may be sent to Amazon Lex after
+    #   that time, but only utterances within the time window are counted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] contains_data_from_deleted_resources
+    #   Aggregated utterance data may contain utterances from versions of
+    #   your bot that have since been deleted. When the aggregated contains
+    #   this kind of data, this field is set to true.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AggregatedUtterancesSummary AWS API Documentation
+    #
+    class AggregatedUtterancesSummary < Struct.new(
+      :utterance,
+      :hit_count,
+      :missed_count,
+      :utterance_first_recorded_in_aggregation_duration,
+      :utterance_last_recorded_in_aggregation_duration,
+      :contains_data_from_deleted_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The location of audio log files collected when conversation logging is
     # enabled for a bot.
     #
@@ -968,6 +1087,10 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The action that you tried to perform couldn't be completed because
+    # the resource is in a conflicting state. For example, deleting a bot
+    # that is in the CREATING state. Try your request again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3480,6 +3603,48 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteUtterancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         locale_id: "LocaleId",
+    #         session_id: "SessionId",
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot that contains the utterances.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale where the utterances were
+    #   collected. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session with the user. The ID is
+    #   returned in the response from the and operations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteUtterancesRequest AWS API Documentation
+    #
+    class DeleteUtterancesRequest < Struct.new(
+      :bot_id,
+      :locale_id,
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteUtterancesResponse AWS API Documentation
+    #
+    class DeleteUtterancesResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeBotAliasRequest
     #   data as a hash:
     #
@@ -5216,6 +5381,9 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The service encountered an unexpected condition. Try your request
+    # again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -5297,6 +5465,184 @@ module Aws::LexModelsV2
     class LambdaCodeHook < Struct.new(
       :lambda_arn,
       :code_hook_interface_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAggregatedUtterancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_alias_id: "BotAliasId",
+    #         bot_version: "BotVersion",
+    #         locale_id: "LocaleId", # required
+    #         aggregation_duration: { # required
+    #           relative_aggregation_duration: { # required
+    #             time_dimension: "Hours", # required, accepts Hours, Days, Weeks
+    #             time_value: 1, # required
+    #           },
+    #         },
+    #         sort_by: {
+    #           attribute: "HitCount", # required, accepts HitCount, MissedCount
+    #           order: "Ascending", # required, accepts Ascending, Descending
+    #         },
+    #         filters: [
+    #           {
+    #             name: "Utterance", # required, accepts Utterance
+    #             values: ["FilterValue"], # required
+    #             operator: "CO", # required, accepts CO, EQ
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot associated with this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The identifier of the bot alias associated with this request. If you
+    #   specify the bot alias, you can't specify the bot version.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The identifier of the bot version associated with this request. If
+    #   you specify the bot version, you can't specify the bot alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale where the utterances were
+    #   collected. For more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_duration
+    #   The time window for aggregating the utterance information. You can
+    #   specify a time between one hour and two weeks.
+    #   @return [Types::UtteranceAggregationDuration]
+    #
+    # @!attribute [rw] sort_by
+    #   Specifies sorting parameters for the list of utterances. You can
+    #   sort by the hit count, the missed count, or the number of distinct
+    #   sessions the utterance appeared in.
+    #   @return [Types::AggregatedUtterancesSortBy]
+    #
+    # @!attribute [rw] filters
+    #   Provides the specification of a filter used to limit the utterances
+    #   in the response to only those that match the filter specification.
+    #   You can only specify one filter and one string to filter on.
+    #   @return [Array<Types::AggregatedUtterancesFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of utterances to return in each page of results.
+    #   If there are fewer results than the maximum page size, only the
+    #   actual number of results are returned. If you don't specify the
+    #   `maxResults` parameter, 1,000 results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the `ListAggregatedUtterances` operation
+    #   contains more results that specified in the `maxResults` parameter,
+    #   a token is returned in the response. Use that token in the
+    #   `nextToken` parameter to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListAggregatedUtterancesRequest AWS API Documentation
+    #
+    class ListAggregatedUtterancesRequest < Struct.new(
+      :bot_id,
+      :bot_alias_id,
+      :bot_version,
+      :locale_id,
+      :aggregation_duration,
+      :sort_by,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot that contains the utterances.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The identifier of the bot alias that contains the utterances. If you
+    #   specified the bot version, the bot alias ID isn't returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The identifier of the bot version that contains the utterances. If
+    #   you specified the bot alias, the bot version isn't returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale that the utterances are
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_duration
+    #   The time period used to aggregate the utterance data.
+    #   @return [Types::UtteranceAggregationDuration]
+    #
+    # @!attribute [rw] aggregation_window_start_time
+    #   The date and time that the aggregation window begins. Only data
+    #   collected after this time is returned in the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] aggregation_window_end_time
+    #   The date and time that the aggregation window ends. Only data
+    #   collected between the start time and the end time are returned in
+    #   the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] aggregation_last_refreshed_date_time
+    #   The last date and time that the aggregated data was collected. The
+    #   time period depends on the length of the aggregation window.
+    #
+    #   * **Hours** - for 1 hour time window, every half hour; otherwise
+    #     every hour.
+    #
+    #   * **Days** - every 6 hours
+    #
+    #   * **Weeks** - for a one week time window, every 12 hours; otherwise,
+    #     every day
+    #   @return [Time]
+    #
+    # @!attribute [rw] aggregated_utterances_summaries
+    #   Summaries of the aggregated utterance data. Each response contains
+    #   information about the number of times that the utterance was seen
+    #   during the time period, whether it was detected or missed, and when
+    #   it was seen during the time period.
+    #   @return [Array<Types::AggregatedUtterancesSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the `ListAggregatedUtterances` operation. If the
+    #   `nextToken` field is present, you send the contents as the
+    #   `nextToken` parameter of a `ListAggregatedUtterances` operation
+    #   request to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListAggregatedUtterancesResponse AWS API Documentation
+    #
+    class ListAggregatedUtterancesResponse < Struct.new(
+      :bot_id,
+      :bot_alias_id,
+      :bot_version,
+      :locale_id,
+      :aggregation_duration,
+      :aggregation_window_start_time,
+      :aggregation_window_end_time,
+      :aggregation_last_refreshed_date_time,
+      :aggregated_utterances_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6626,6 +6972,9 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Your request couldn't be completed because one or more request fields
+    # aren't valid. Check the fields in your request and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -6758,6 +7107,61 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Specifies the time window that utterance statistics are returned for.
+    # The time window is always relative to the last time that the that
+    # utterances were aggregated. For example, if the
+    # `ListAggregatedUtterances` operation is called at 1600, the time
+    # window is set to 1 hour, and the last refresh time was 1530, only
+    # utterances made between 1430 and 1530 are returned.
+    #
+    # You can choose the time window that statistics should be returned for.
+    #
+    # * **Hours** - You can request utterance statistics for 1, 3, 6, 12, or
+    #   24 hour time windows. Statistics are refreshed every half hour for 1
+    #   hour time windows, and hourly for the other time windows.
+    #
+    # * **Days** - You can request utterance statistics for 3 days.
+    #   Statistics are refreshed every 6 hours.
+    #
+    # * **Weeks** - You can see statistics for one or two weeks. Statistics
+    #   are refreshed every 12 hours for one week time windows, and once per
+    #   day for two week time windows.
+    #
+    # @note When making an API call, you may pass RelativeAggregationDuration
+    #   data as a hash:
+    #
+    #       {
+    #         time_dimension: "Hours", # required, accepts Hours, Days, Weeks
+    #         time_value: 1, # required
+    #       }
+    #
+    # @!attribute [rw] time_dimension
+    #   The type of time period that the `timeValue` field represents.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_value
+    #   The period of the time window to gather statistics for. The valid
+    #   value depends on the setting of the `timeDimension` field.
+    #
+    #   * `Hours` - 1/3/6/12/24
+    #
+    #   * `Days` - 3
+    #
+    #   * `Weeks` - 1/2
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RelativeAggregationDuration AWS API Documentation
+    #
+    class RelativeAggregationDuration < Struct.new(
+      :time_dimension,
+      :time_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You asked to describe a resource that doesn't exist. Check the
+    # resource that you are requesting and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -6971,6 +7375,8 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # You have reached a quota for your bot.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -7950,6 +8356,8 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Your request rate is too high. Reduce the frequency of requests.
+    #
     # @!attribute [rw] retry_after_seconds
     #   @return [Integer]
     #
@@ -9525,6 +9933,34 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Provides parameters for setting the time window and duration for
+    # aggregating utterance data.
+    #
+    # @note When making an API call, you may pass UtteranceAggregationDuration
+    #   data as a hash:
+    #
+    #       {
+    #         relative_aggregation_duration: { # required
+    #           time_dimension: "Hours", # required, accepts Hours, Days, Weeks
+    #           time_value: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] relative_aggregation_duration
+    #   The desired time window for aggregating utterances.
+    #   @return [Types::RelativeAggregationDuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UtteranceAggregationDuration AWS API Documentation
+    #
+    class UtteranceAggregationDuration < Struct.new(
+      :relative_aggregation_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One of the input parameters in your request isn't valid. Check the
+    # parameters and try your request again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #

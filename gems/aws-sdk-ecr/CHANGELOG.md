@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-09-21)
+------------------
+
+* Feature - This release adds additional support for repository replication
+
+1.46.0 (2021-09-10)
+------------------
+
+* Feature - This release updates terminology around KMS keys.
+
 1.45.0 (2021-09-01)
 ------------------
 

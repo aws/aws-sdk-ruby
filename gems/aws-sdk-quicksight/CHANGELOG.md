@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2021-09-10)
+------------------
+
+* Feature - Add new data source type for Amazon OpenSearch (successor to Amazon ElasticSearch).
+
+1.53.0 (2021-09-02)
+------------------
+
+* Feature - This release adds support for referencing parent datasets as sources in a child dataset.
+
 1.52.0 (2021-09-01)
 ------------------
 

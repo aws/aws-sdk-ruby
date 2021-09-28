@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-09-27)
+------------------
+
+* Feature - The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.
+
 1.6.0 (2021-09-01)
 ------------------
 

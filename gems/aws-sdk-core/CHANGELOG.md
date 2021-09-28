@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Issue - Fix an issue where Rest JSON services do not have a `Content-Type` header.
 
+3.121.1 (2021-09-24)
+------------------
+
+* Issue - Fix error in finding union member for boolean shapes with `false` values.
+
+3.121.0 (2021-09-02)
+------------------
+
+* Feature - Add support for S3 Multi-region access point configuration.
+
 3.120.0 (2021-09-01)
 ------------------
 

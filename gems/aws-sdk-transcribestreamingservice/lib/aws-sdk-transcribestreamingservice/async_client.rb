@@ -242,8 +242,7 @@ module Aws::TranscribeStreamingService
     #   Amazon Transcribe Medical, this is US English (en-US).
     #
     # @option params [required, Integer] :media_sample_rate_hertz
-    #   The sample rate of the input audio in Hertz. Sample rates of 16000 Hz
-    #   or higher are accepted.
+    #   The sample rate of the input audio in Hertz.
     #
     # @option params [required, String] :media_encoding
     #   The encoding used for the input audio.
@@ -503,11 +502,11 @@ module Aws::TranscribeStreamingService
       req.send_request(options, &block)
     end
 
-    # Starts a bidirectional HTTP2 stream where audio is streamed to Amazon
+    # Starts a bidirectional HTTP/2 stream where audio is streamed to Amazon
     # Transcribe and the transcription results are streamed to your
     # application.
     #
-    # The following are encoded as HTTP2 headers:
+    # The following are encoded as HTTP/2 headers:
     #
     # * x-amzn-transcribe-language-code
     #
@@ -517,12 +516,18 @@ module Aws::TranscribeStreamingService
     #
     # * x-amzn-transcribe-session-id
     #
+    # See the [ SDK for Go API Reference][1] for more detail.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sdk-for-go/api/service/transcribestreamingservice/#TranscribeStreamingService.StartStreamTranscription
+    #
     # @option params [required, String] :language_code
     #   Indicates the source language used in the input audio stream.
     #
     # @option params [required, Integer] :media_sample_rate_hertz
     #   The sample rate, in Hertz, of the input audio. We suggest that you use
-    #   8000 Hz for low quality audio and 16000 Hz for high quality audio.
+    #   8,000 Hz for low quality audio and 16,000 Hz for high quality audio.
     #
     # @option params [required, String] :media_encoding
     #   The encoding used for the input audio.
@@ -539,14 +544,14 @@ module Aws::TranscribeStreamingService
     #
     # @option params [String] :vocabulary_filter_name
     #   The name of the vocabulary filter you've created that is unique to
-    #   your AWS account. Provide the name in this field to successfully use
-    #   it in a stream.
+    #   your account. Provide the name in this field to successfully use it in
+    #   a stream.
     #
     # @option params [String] :vocabulary_filter_method
     #   The manner in which you use your vocabulary filter to filter words in
     #   your transcript. `Remove` removes filtered words from your
-    #   transcription results. `Mask` masks those words with a `***` in your
-    #   transcription results. `Tag` keeps the filtered words in your
+    #   transcription results. `Mask` masks filtered words with a `***` in
+    #   your transcription results. `Tag` keeps the filtered words in your
     #   transcription results and tags them. The tag appears as
     #   `VocabularyFilterMatch` equal to `True`
     #
@@ -581,6 +586,37 @@ module Aws::TranscribeStreamingService
     #   are less likely to change. Higher stability levels can come with lower
     #   overall transcription accuracy.
     #
+    # @option params [String] :content_identification_type
+    #   Set this field to PII to identify personally identifiable information
+    #   (PII) in the transcription output. Content identification is performed
+    #   only upon complete transcription of the audio segments.
+    #
+    #   You can’t set both `ContentIdentificationType` and
+    #   `ContentRedactionType` in the same request. If you set both, your
+    #   request returns a `BadRequestException`.
+    #
+    # @option params [String] :content_redaction_type
+    #   Set this field to PII to redact personally identifiable information
+    #   (PII) in the transcription output. Content redaction is performed only
+    #   upon complete transcription of the audio segments.
+    #
+    #   You can’t set both `ContentRedactionType` and
+    #   `ContentIdentificationType` in the same request. If you set both, your
+    #   request returns a `BadRequestException`.
+    #
+    # @option params [String] :pii_entity_types
+    #   List the PII entity types you want to identify or redact. In order to
+    #   specify entity types, you must have either `ContentIdentificationType`
+    #   or `ContentRedactionType` enabled.
+    #
+    #   `PIIEntityTypes` must be comma-separated; the available values are:
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
+    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`, `ADDRESS`,
+    #   `NAME`, `PHONE`, `SSN`, and `ALL`.
+    #
+    #   `PiiEntityTypes` is an optional parameter with a default value of
+    #   `ALL`.
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -597,6 +633,9 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#number_of_channels #number_of_channels} => Integer
     #   * {Types::StartStreamTranscriptionResponse#enable_partial_results_stabilization #enable_partial_results_stabilization} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#partial_results_stability #partial_results_stability} => String
+    #   * {Types::StartStreamTranscriptionResponse#content_identification_type #content_identification_type} => String
+    #   * {Types::StartStreamTranscriptionResponse#content_redaction_type #content_redaction_type} => String
+    #   * {Types::StartStreamTranscriptionResponse#pii_entity_types #pii_entity_types} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -706,6 +745,9 @@ module Aws::TranscribeStreamingService
     #     number_of_channels: 1,
     #     enable_partial_results_stabilization: false,
     #     partial_results_stability: "high", # accepts high, medium, low
+    #     content_identification_type: "PII", # accepts PII
+    #     content_redaction_type: "PII", # accepts PII
+    #     pii_entity_types: "PiiEntityTypes",
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -741,6 +783,13 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items[0].speaker #=> String
     #   event.transcript.results[0].alternatives[0].items[0].confidence #=> Float
     #   event.transcript.results[0].alternatives[0].items[0].stable #=> Boolean
+    #   event.transcript.results[0].alternatives[0].entities #=> Array
+    #   event.transcript.results[0].alternatives[0].entities[0].start_time #=> Float
+    #   event.transcript.results[0].alternatives[0].entities[0].end_time #=> Float
+    #   event.transcript.results[0].alternatives[0].entities[0].category #=> String
+    #   event.transcript.results[0].alternatives[0].entities[0].type #=> String
+    #   event.transcript.results[0].alternatives[0].entities[0].content #=> String
+    #   event.transcript.results[0].alternatives[0].entities[0].confidence #=> Float
     #   event.transcript.results[0].channel_id #=> String
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
@@ -765,6 +814,9 @@ module Aws::TranscribeStreamingService
     #   resp.number_of_channels #=> Integer
     #   resp.enable_partial_results_stabilization #=> Boolean
     #   resp.partial_results_stability #=> String, one of "high", "medium", "low"
+    #   resp.content_identification_type #=> String, one of "PII"
+    #   resp.content_redaction_type #=> String, one of "PII"
+    #   resp.pii_entity_types #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -809,7 +861,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

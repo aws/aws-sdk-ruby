@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-09-14)
+------------------
+
+* Feature - Adds support for SipHeaders parameter for CreateSipMediaApplicationCall.
+
 1.56.0 (2021-09-01)
 ------------------
 

@@ -208,6 +208,9 @@
   "ConnectParticipant": {
     "models": "connectparticipant/2018-09-07"
   },
+  "ConnectWisdomService": {
+    "models": "wisdom/2020-10-19"
+  },
   "CostExplorer": {
     "models": "ce/2017-10-25"
   },
@@ -466,6 +469,9 @@
   "Kafka": {
     "models": "kafka/2018-11-14"
   },
+  "KafkaConnect": {
+    "models": "kafkaconnect/2021-09-14"
+  },
   "Kendra": {
     "models": "kendra/2019-02-03"
   },
@@ -619,6 +625,9 @@
   "NimbleStudio": {
     "models": "nimble/2020-08-01"
   },
+  "OpenSearchService": {
+    "models": "opensearch/2021-01-01"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
   },
@@ -731,7 +740,7 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.1"
+      "aws-sigv4": "~> 1.4"
     },
     "removePlugins": [
       "Aws::Plugins::SignatureV4"
@@ -909,6 +918,9 @@
   },
   "Translate": {
     "models": "translate/2017-07-01"
+  },
+  "VoiceID": {
+    "models": "voice-id/2021-09-27"
   },
   "WAF": {
     "models": "waf/2015-08-24"

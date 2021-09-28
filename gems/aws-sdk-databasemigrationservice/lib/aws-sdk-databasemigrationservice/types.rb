@@ -106,6 +106,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] apply_action
     #   The pending maintenance action to apply to this resource.
+    #
+    #   Valid values: `os-upgrade`, `system-update`, `db-upgrade`
     #   @return [String]
     #
     # @!attribute [rw] opt_in_type
@@ -741,8 +743,8 @@ module Aws::DatabaseMigrationService
     #
     #   Possible settings include the following:
     #
-    #   * `ServiceAccessRoleArn` - The IAM role that has permission to
-    #     access the Amazon S3 bucket. The role must allow the
+    #   * `ServiceAccessRoleArn` - The Amazon Resource Name (ARN) used by
+    #     the service access IAM role. The role must allow the
     #     `iam:PassRole` action.
     #
     #   * `BucketName` - The name of the S3 bucket to use.
@@ -3195,10 +3197,8 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] service_access_role_arn
-    #   The IAM role that has permission to access the Amazon S3 bucket.
-    #   When specified as part of request syntax, such as for the
-    #   `CreateEndpoint` and `ModifyEndpoint` actions, the role must allow
-    #   the `iam:PassRole` action.
+    #   The Amazon Resource Name (ARN) used by the service access IAM role.
+    #   The role must allow the `iam:PassRole` action.
     #   @return [String]
     #
     # @!attribute [rw] bucket_name
@@ -3523,8 +3523,8 @@ module Aws::DatabaseMigrationService
     #
     #   Possible settings include the following:
     #
-    #   * `ServiceAccessRoleArn` - The IAM role that has permission to
-    #     access the Amazon S3 bucket. The role must allow the
+    #   * `ServiceAccessRoleArn` - - The Amazon Resource Name (ARN) used by
+    #     the service access IAM role. The role must allow the
     #     `iam:PassRole` action.
     #
     #   * `BucketName` - The name of the S3 bucket to use.
@@ -5049,9 +5049,9 @@ module Aws::DatabaseMigrationService
     #
     #   Attributes include the following:
     #
-    #   * serviceAccessRoleArn - The Identity and Access Management (IAM)
-    #     role that has permission to access the Amazon S3 bucket. The role
-    #     must allow the `iam:PassRole` action.
+    #   * serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the
+    #     service access IAM role. The role must allow the `iam:PassRole`
+    #     action.
     #
     #   * BucketName - The name of the S3 bucket to use.
     #
@@ -6926,6 +6926,7 @@ module Aws::DatabaseMigrationService
     #       {
     #         replication_instance_arn: "String", # required
     #         force_failover: false,
+    #         force_planned_failover: false,
     #       }
     #
     # @!attribute [rw] replication_instance_arn
@@ -6934,15 +6935,26 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] force_failover
     #   If this parameter is `true`, the reboot is conducted through a
-    #   Multi-AZ failover. (If the instance isn't configured for Multi-AZ,
-    #   then you can't specify `true`.)
+    #   Multi-AZ failover. If the instance isn't configured for Multi-AZ,
+    #   then you can't specify `true`. ( `--force-planned-failover` and
+    #   `--force-failover` can't both be set to `true`.)
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] force_planned_failover
+    #   If this parameter is `true`, the reboot is conducted through a
+    #   planned Multi-AZ failover where resources are released and cleaned
+    #   up prior to conducting the failover. If the instance isn''t
+    #   configured for Multi-AZ, then you can't specify `true`. (
+    #   `--force-planned-failover` and `--force-failover` can't both be set
+    #   to `true`.)
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstanceMessage AWS API Documentation
     #
     class RebootReplicationInstanceMessage < Struct.new(
       :replication_instance_arn,
-      :force_failover)
+      :force_failover,
+      :force_planned_failover)
       SENSITIVE = []
       include Aws::Structure
     end

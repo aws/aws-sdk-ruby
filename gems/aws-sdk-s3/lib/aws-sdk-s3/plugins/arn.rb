@@ -3,6 +3,7 @@
 require_relative '../arn/access_point_arn'
 require_relative '../arn/object_lambda_arn'
 require_relative '../arn/outpost_access_point_arn'
+require_relative '../arn/multi_region_access_point_arn'
 
 module Aws
   module S3
@@ -21,6 +22,18 @@ use the region in the ARN, allowing for cross-region requests to
 be made. Set to `false` to use the client's region instead.
           DOCS
           resolve_s3_use_arn_region(cfg)
+        end
+
+        option(
+          :s3_disable_multiregion_access_points,
+          default: false,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS) do |cfg|
+When set to `false` this will option will raise errors when multi-region
+access point ARNs are used.  Multi-region access points can potentially
+result in cross region requests.
+        DOCS
+          resolve_s3_disable_multiregion_access_points(cfg)
         end
 
         # param validator is validate:50
@@ -113,8 +126,14 @@ be made. Set to `false` to use the client's region instead.
 
             if !arn.support_dualstack? && context[:use_dualstack_endpoint]
               raise ArgumentError,
-                    'Cannot provide an Outpost Access Point ARN when '\
-                    '`:use_dualstack_endpoint` is set to true.'
+                    'Cannot provide an Outpost Access Point or Multi-region Access Point ARN'\
+                    ' when `:use_dualstack_endpoint` is set to true.'
+            end
+
+            if arn.region.empty? && context.config.s3_disable_multiregion_access_points
+              raise ArgumentError,
+                    'Cannot provide a Multi-region Access Point ARN with '\
+                    '`:s3_disable_multiregion_access_points` set to true'
             end
           end
         end
@@ -147,7 +166,9 @@ be made. Set to `false` to use the client's region instead.
           def resolve_arn_type!(arn)
             case arn.service
             when 's3'
-              Aws::S3::AccessPointARN.new(arn.to_h)
+              arn.region.empty? ?
+                Aws::S3::MultiRegionAccessPointARN.new(arn.to_h) :
+                Aws::S3::AccessPointARN.new(arn.to_h)
             when 's3-outposts'
               Aws::S3::OutpostAccessPointARN.new(arn.to_h)
             when 's3-object-lambda'
@@ -170,6 +191,21 @@ be made. Set to `false` to use the client's region instead.
                     'Must provide either `true` or `false` for the '\
                     '`s3_use_arn_region` profile option or for '\
                     "ENV['AWS_S3_USE_ARN_REGION']."
+            end
+            value
+          end
+
+          def resolve_s3_disable_multiregion_access_points(cfg)
+            value = ENV['AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS'] ||
+              Aws.shared_config.s3_disable_multiregion_access_points(profile: cfg.profile) ||
+              'false'
+            value = Aws::Util.str_2_bool(value)
+            # Raise if provided value is not true or false
+            if value.nil?
+              raise ArgumentError,
+                    'Must provide either `true` or `false` for '\
+                    's3_use_arn_region profile option or for '\
+                    "ENV['AWS_S3_USE_ARN_REGION']"
             end
             value
           end
@@ -208,16 +244,19 @@ be made. Set to `false` to use the client's region instead.
                 region = region.gsub('fips-', '').gsub('-fips', '')
               end
 
-              # Raise if the ARN and client regions are in different partitions
-              if use_arn_region &&
-                 !Aws::Partitions.partition(arn.partition).region?(region)
-                raise Aws::Errors::InvalidARNPartitionError
-              end
+              # use_arn_region does not apply to MRAP (global) arns
+              unless arn.region.empty?
+                # Raise if the ARN and client regions are in different partitions
+                if use_arn_region &&
+                   !Aws::Partitions.partition(arn.partition).region?(region)
+                  raise Aws::Errors::InvalidARNPartitionError
+                end
 
-              # Raise if regions mismatch
-              # Either when it's a fips client or not using the ARN region
-              if (!use_arn_region || fips) && region != arn.region
-                raise Aws::Errors::InvalidARNRegionError
+                # Raise if regions mismatch
+                # Either when it's a fips client or not using the ARN region
+                if (!use_arn_region || fips) && region != arn.region
+                  raise Aws::Errors::InvalidARNRegionError
+                end
               end
             end
           end

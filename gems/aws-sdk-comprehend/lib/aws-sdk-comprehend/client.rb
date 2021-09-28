@@ -669,6 +669,13 @@ module Aws::Comprehend
     # @option params [required, String] :document_classifier_name
     #   The name of the document classifier.
     #
+    # @option params [String] :version_name
+    #   The version name given to the newly created classifier. Version names
+    #   can have a maximum of 256 characters. Alphanumeric characters, hyphens
+    #   (-) and underscores (\_) are allowed. The version name must be unique
+    #   among all models with the same classifier name in the account/AWS
+    #   Region.
+    #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Management
     #   (IAM) role that grants Amazon Comprehend read access to your input
@@ -746,6 +753,7 @@ module Aws::Comprehend
     #
     #   resp = client.create_document_classifier({
     #     document_classifier_name: "ComprehendArnName", # required
+    #     version_name: "VersionName",
     #     data_access_role_arn: "IamRoleArn", # required
     #     tags: [
     #       {
@@ -756,11 +764,16 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #       s3_uri: "S3Uri",
+    #       test_s3_uri: "S3Uri",
     #       label_delimiter: "LabelDelimiter",
     #       augmented_manifests: [
     #         {
     #           s3_uri: "S3Uri", # required
+    #           split: "TRAIN", # accepts TRAIN, TEST
     #           attribute_names: ["AttributeNamesListItem"], # required
+    #           annotation_data_s3_uri: "S3Uri",
+    #           source_documents_s3_uri: "S3Uri",
+    #           document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #         },
     #       ],
     #     },
@@ -871,6 +884,13 @@ module Aws::Comprehend
     #   and underscores (\_) are allowed. The name must be unique in the
     #   account/region.
     #
+    # @option params [String] :version_name
+    #   The version name given to the newly created recognizer. Version names
+    #   can be a maximum of 256 characters. Alphanumeric characters, hyphens
+    #   (-) and underscores (\_) are allowed. The version name must be unique
+    #   among all models with the same recognizer name in the account/ AWS
+    #   Region.
+    #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Management
     #   (IAM) role that grants Amazon Comprehend read access to your input
@@ -938,6 +958,7 @@ module Aws::Comprehend
     #
     #   resp = client.create_entity_recognizer({
     #     recognizer_name: "ComprehendArnName", # required
+    #     version_name: "VersionName",
     #     data_access_role_arn: "IamRoleArn", # required
     #     tags: [
     #       {
@@ -954,9 +975,12 @@ module Aws::Comprehend
     #       ],
     #       documents: {
     #         s3_uri: "S3Uri", # required
+    #         test_s3_uri: "S3Uri",
+    #         input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
     #       },
     #       annotations: {
     #         s3_uri: "S3Uri", # required
+    #         test_s3_uri: "S3Uri",
     #       },
     #       entity_list: {
     #         s3_uri: "S3Uri", # required
@@ -964,7 +988,11 @@ module Aws::Comprehend
     #       augmented_manifests: [
     #         {
     #           s3_uri: "S3Uri", # required
+    #           split: "TRAIN", # accepts TRAIN, TEST
     #           attribute_names: ["AttributeNamesListItem"], # required
+    #           annotation_data_s3_uri: "S3Uri",
+    #           source_documents_s3_uri: "S3Uri",
+    #           document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #         },
     #       ],
     #     },
@@ -1107,6 +1135,10 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties.document_classifier_arn #=> String
     #   resp.document_classification_job_properties.input_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.document_classification_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.document_classification_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.document_classification_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.document_classification_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.document_classification_job_properties.output_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties.data_access_role_arn #=> String
@@ -1153,11 +1185,16 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.training_end_time #=> Time
     #   resp.document_classifier_properties.input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.document_classifier_properties.input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.test_s3_uri #=> String
     #   resp.document_classifier_properties.input_data_config.label_delimiter #=> String
     #   resp.document_classifier_properties.input_data_config.augmented_manifests #=> Array
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].attribute_names[0] #=> String
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].source_documents_s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
     #   resp.document_classifier_properties.output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties.classifier_metadata.number_of_labels #=> Integer
@@ -1179,6 +1216,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.vpc_config.subnets[0] #=> String
     #   resp.document_classifier_properties.mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #   resp.document_classifier_properties.model_kms_key_id #=> String
+    #   resp.document_classifier_properties.version_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -1217,6 +1255,10 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties.end_time #=> Time
     #   resp.dominant_language_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.dominant_language_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.dominant_language_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.dominant_language_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.dominant_language_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.dominant_language_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties.data_access_role_arn #=> String
@@ -1257,11 +1299,13 @@ module Aws::Comprehend
     #   resp.endpoint_properties.status #=> String, one of "CREATING", "DELETING", "FAILED", "IN_SERVICE", "UPDATING"
     #   resp.endpoint_properties.message #=> String
     #   resp.endpoint_properties.model_arn #=> String
+    #   resp.endpoint_properties.desired_model_arn #=> String
     #   resp.endpoint_properties.desired_inference_units #=> Integer
     #   resp.endpoint_properties.current_inference_units #=> Integer
     #   resp.endpoint_properties.creation_time #=> Time
     #   resp.endpoint_properties.last_modified_time #=> Time
     #   resp.endpoint_properties.data_access_role_arn #=> String
+    #   resp.endpoint_properties.desired_data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpoint AWS API Documentation
     #
@@ -1301,6 +1345,10 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties.entity_recognizer_arn #=> String
     #   resp.entities_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.entities_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.entities_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.entities_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.entities_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -1351,12 +1399,19 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.input_data_config.entity_types #=> Array
     #   resp.entity_recognizer_properties.input_data_config.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties.input_data_config.documents.s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.documents.test_s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.documents.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entity_recognizer_properties.input_data_config.annotations.s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.annotations.test_s3_uri #=> String
     #   resp.entity_recognizer_properties.input_data_config.entity_list.s3_uri #=> String
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests #=> Array
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].attribute_names[0] #=> String
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].source_documents_s3_uri #=> String
+    #   resp.entity_recognizer_properties.input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
     #   resp.entity_recognizer_properties.recognizer_metadata.number_of_trained_documents #=> Integer
     #   resp.entity_recognizer_properties.recognizer_metadata.number_of_test_documents #=> Integer
     #   resp.entity_recognizer_properties.recognizer_metadata.evaluation_metrics.precision #=> Float
@@ -1375,6 +1430,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.vpc_config.subnets #=> Array
     #   resp.entity_recognizer_properties.vpc_config.subnets[0] #=> String
     #   resp.entity_recognizer_properties.model_kms_key_id #=> String
+    #   resp.entity_recognizer_properties.version_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -1411,6 +1467,10 @@ module Aws::Comprehend
     #   resp.events_detection_job_properties.end_time #=> Time
     #   resp.events_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.events_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.events_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.events_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.events_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.events_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.events_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.events_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.events_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -1455,6 +1515,10 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties.end_time #=> Time
     #   resp.key_phrases_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.key_phrases_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.key_phrases_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.key_phrases_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.key_phrases_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.key_phrases_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -1502,6 +1566,10 @@ module Aws::Comprehend
     #   resp.pii_entities_detection_job_properties.end_time #=> Time
     #   resp.pii_entities_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.pii_entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.pii_entities_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.pii_entities_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.pii_entities_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.pii_entities_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.pii_entities_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.pii_entities_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.pii_entities_detection_job_properties.redaction_config.pii_entity_types #=> Array
@@ -1549,6 +1617,10 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties.end_time #=> Time
     #   resp.sentiment_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.sentiment_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.sentiment_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.sentiment_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.sentiment_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.sentiment_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -1595,6 +1667,10 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties.end_time #=> Time
     #   resp.topics_detection_job_properties.input_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.topics_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.topics_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.topics_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.topics_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.topics_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.topics_detection_job_properties.number_of_topics #=> Integer
@@ -1916,6 +1992,10 @@ module Aws::Comprehend
     #   resp.document_classification_job_properties_list[0].document_classifier_arn #=> String
     #   resp.document_classification_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.document_classification_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.document_classification_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.document_classification_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.document_classification_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.document_classification_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.document_classification_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classification_job_properties_list[0].data_access_role_arn #=> String
@@ -1932,6 +2012,49 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_document_classification_jobs(params = {}, options = {})
       req = build_request(:list_document_classification_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of summaries of the document classifiers that you have
+    # created
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #
+    # @return [Types::ListDocumentClassifierSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDocumentClassifierSummariesResponse#document_classifier_summaries_list #document_classifier_summaries_list} => Array&lt;Types::DocumentClassifierSummary&gt;
+    #   * {Types::ListDocumentClassifierSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_document_classifier_summaries({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_classifier_summaries_list #=> Array
+    #   resp.document_classifier_summaries_list[0].document_classifier_name #=> String
+    #   resp.document_classifier_summaries_list[0].number_of_versions #=> Integer
+    #   resp.document_classifier_summaries_list[0].latest_version_created_at #=> Time
+    #   resp.document_classifier_summaries_list[0].latest_version_name #=> String
+    #   resp.document_classifier_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifierSummaries AWS API Documentation
+    #
+    # @overload list_document_classifier_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_document_classifier_summaries(params = {}, options = {})
+      req = build_request(:list_document_classifier_summaries, params)
       req.send_request(options)
     end
 
@@ -1961,6 +2084,7 @@ module Aws::Comprehend
     #   resp = client.list_document_classifiers({
     #     filter: {
     #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #       document_classifier_name: "ComprehendArnName",
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -1981,11 +2105,16 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].training_end_time #=> Time
     #   resp.document_classifier_properties_list[0].input_data_config.data_format #=> String, one of "COMPREHEND_CSV", "AUGMENTED_MANIFEST"
     #   resp.document_classifier_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.test_s3_uri #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.label_delimiter #=> String
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests #=> Array
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].attribute_names[0] #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].source_documents_s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
     #   resp.document_classifier_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_labels #=> Integer
@@ -2007,6 +2136,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.document_classifier_properties_list[0].mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #   resp.document_classifier_properties_list[0].model_kms_key_id #=> String
+    #   resp.document_classifier_properties_list[0].version_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -2065,6 +2195,10 @@ module Aws::Comprehend
     #   resp.dominant_language_detection_job_properties_list[0].end_time #=> Time
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.dominant_language_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.dominant_language_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.dominant_language_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.dominant_language_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.dominant_language_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.dominant_language_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.dominant_language_detection_job_properties_list[0].data_access_role_arn #=> String
@@ -2123,11 +2257,13 @@ module Aws::Comprehend
     #   resp.endpoint_properties_list[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "IN_SERVICE", "UPDATING"
     #   resp.endpoint_properties_list[0].message #=> String
     #   resp.endpoint_properties_list[0].model_arn #=> String
+    #   resp.endpoint_properties_list[0].desired_model_arn #=> String
     #   resp.endpoint_properties_list[0].desired_inference_units #=> Integer
     #   resp.endpoint_properties_list[0].current_inference_units #=> Integer
     #   resp.endpoint_properties_list[0].creation_time #=> Time
     #   resp.endpoint_properties_list[0].last_modified_time #=> Time
     #   resp.endpoint_properties_list[0].data_access_role_arn #=> String
+    #   resp.endpoint_properties_list[0].desired_data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpoints AWS API Documentation
@@ -2186,6 +2322,10 @@ module Aws::Comprehend
     #   resp.entities_detection_job_properties_list[0].entity_recognizer_arn #=> String
     #   resp.entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.entities_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.entities_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.entities_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.entities_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.entities_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -2203,6 +2343,49 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_entities_detection_jobs(params = {}, options = {})
       req = build_request(:list_entities_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of summaries for the entity recognizers that you have
+    # created.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #
+    # @return [Types::ListEntityRecognizerSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntityRecognizerSummariesResponse#entity_recognizer_summaries_list #entity_recognizer_summaries_list} => Array&lt;Types::EntityRecognizerSummary&gt;
+    #   * {Types::ListEntityRecognizerSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_recognizer_summaries({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_recognizer_summaries_list #=> Array
+    #   resp.entity_recognizer_summaries_list[0].recognizer_name #=> String
+    #   resp.entity_recognizer_summaries_list[0].number_of_versions #=> Integer
+    #   resp.entity_recognizer_summaries_list[0].latest_version_created_at #=> Time
+    #   resp.entity_recognizer_summaries_list[0].latest_version_name #=> String
+    #   resp.entity_recognizer_summaries_list[0].latest_version_status #=> String, one of "SUBMITTED", "TRAINING", "DELETING", "STOP_REQUESTED", "STOPPED", "IN_ERROR", "TRAINED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizerSummaries AWS API Documentation
+    #
+    # @overload list_entity_recognizer_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_entity_recognizer_summaries(params = {}, options = {})
+      req = build_request(:list_entity_recognizer_summaries, params)
       req.send_request(options)
     end
 
@@ -2239,6 +2422,7 @@ module Aws::Comprehend
     #   resp = client.list_entity_recognizers({
     #     filter: {
     #       status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #       recognizer_name: "ComprehendArnName",
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -2261,12 +2445,19 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types #=> Array
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_types[0].type #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.documents.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.documents.test_s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.documents.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
     #   resp.entity_recognizer_properties_list[0].input_data_config.annotations.s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.annotations.test_s3_uri #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.entity_list.s3_uri #=> String
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests #=> Array
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].split #=> String, one of "TRAIN", "TEST"
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].attribute_names #=> Array
     #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].attribute_names[0] #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].annotation_data_s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].source_documents_s3_uri #=> String
+    #   resp.entity_recognizer_properties_list[0].input_data_config.augmented_manifests[0].document_type #=> String, one of "PLAIN_TEXT_DOCUMENT", "SEMI_STRUCTURED_DOCUMENT"
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.number_of_trained_documents #=> Integer
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.number_of_test_documents #=> Integer
     #   resp.entity_recognizer_properties_list[0].recognizer_metadata.evaluation_metrics.precision #=> Float
@@ -2285,6 +2476,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].vpc_config.subnets #=> Array
     #   resp.entity_recognizer_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.entity_recognizer_properties_list[0].model_kms_key_id #=> String
+    #   resp.entity_recognizer_properties_list[0].version_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -2341,6 +2533,10 @@ module Aws::Comprehend
     #   resp.events_detection_job_properties_list[0].end_time #=> Time
     #   resp.events_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.events_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.events_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.events_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.events_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.events_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.events_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.events_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.events_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -2404,6 +2600,10 @@ module Aws::Comprehend
     #   resp.key_phrases_detection_job_properties_list[0].end_time #=> Time
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.key_phrases_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.key_phrases_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.key_phrases_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.key_phrases_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.key_phrases_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -2467,6 +2667,10 @@ module Aws::Comprehend
     #   resp.pii_entities_detection_job_properties_list[0].end_time #=> Time
     #   resp.pii_entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.pii_entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.pii_entities_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.pii_entities_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.pii_entities_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.pii_entities_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.pii_entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.pii_entities_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.pii_entities_detection_job_properties_list[0].redaction_config.pii_entity_types #=> Array
@@ -2533,6 +2737,10 @@ module Aws::Comprehend
     #   resp.sentiment_detection_job_properties_list[0].end_time #=> Time
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.sentiment_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -2632,6 +2840,10 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties_list[0].end_time #=> Time
     #   resp.topics_detection_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.topics_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.topics_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.topics_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.topics_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
     #   resp.topics_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.topics_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.topics_detection_job_properties_list[0].number_of_topics #=> Integer
@@ -2720,6 +2932,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -2823,6 +3040,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -2942,6 +3164,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -3028,6 +3255,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -3133,6 +3365,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -3227,6 +3464,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -3337,6 +3579,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -3447,6 +3694,11 @@ module Aws::Comprehend
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
@@ -3845,10 +4097,17 @@ module Aws::Comprehend
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being updated.
     #
-    # @option params [required, Integer] :desired_inference_units
+    # @option params [String] :desired_model_arn
+    #   The ARN of the new model to use when updating an existing endpoint.
+    #
+    # @option params [Integer] :desired_inference_units
     #   The desired number of inference units to be used by the model using
     #   this endpoint. Each inference unit represents of a throughput of 100
     #   characters per second.
+    #
+    # @option params [String] :desired_data_access_role_arn
+    #   Data access role ARN to use in case the new model is encrypted with a
+    #   customer CMK.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3856,7 +4115,9 @@ module Aws::Comprehend
     #
     #   resp = client.update_endpoint({
     #     endpoint_arn: "ComprehendEndpointArn", # required
-    #     desired_inference_units: 1, # required
+    #     desired_model_arn: "ComprehendModelArn",
+    #     desired_inference_units: 1,
+    #     desired_data_access_role_arn: "IamRoleArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpoint AWS API Documentation
@@ -3881,7 +4142,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

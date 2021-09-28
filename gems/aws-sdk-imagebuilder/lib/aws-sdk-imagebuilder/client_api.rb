@@ -42,6 +42,8 @@ module Aws::Imagebuilder
     ComponentParameterType = Shapes::StringShape.new(name: 'ComponentParameterType')
     ComponentParameterValue = Shapes::StringShape.new(name: 'ComponentParameterValue')
     ComponentParameterValueList = Shapes::ListShape.new(name: 'ComponentParameterValueList')
+    ComponentState = Shapes::StructureShape.new(name: 'ComponentState')
+    ComponentStatus = Shapes::StringShape.new(name: 'ComponentStatus')
     ComponentSummary = Shapes::StructureShape.new(name: 'ComponentSummary')
     ComponentSummaryList = Shapes::ListShape.new(name: 'ComponentSummaryList')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
@@ -98,6 +100,7 @@ module Aws::Imagebuilder
     EbsInstanceBlockDeviceSpecification = Shapes::StructureShape.new(name: 'EbsInstanceBlockDeviceSpecification')
     EbsIopsInteger = Shapes::IntegerShape.new(name: 'EbsIopsInteger')
     EbsVolumeSizeInteger = Shapes::IntegerShape.new(name: 'EbsVolumeSizeInteger')
+    EbsVolumeThroughput = Shapes::IntegerShape.new(name: 'EbsVolumeThroughput')
     EbsVolumeType = Shapes::StringShape.new(name: 'EbsVolumeType')
     EmptyString = Shapes::StringShape.new(name: 'EmptyString')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -129,6 +132,8 @@ module Aws::Imagebuilder
     GetImageResponse = Shapes::StructureShape.new(name: 'GetImageResponse')
     GetInfrastructureConfigurationRequest = Shapes::StructureShape.new(name: 'GetInfrastructureConfigurationRequest')
     GetInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'GetInfrastructureConfigurationResponse')
+    HttpPutResponseHopLimit = Shapes::IntegerShape.new(name: 'HttpPutResponseHopLimit')
+    HttpTokens = Shapes::StringShape.new(name: 'HttpTokens')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageBuildVersionArn = Shapes::StringShape.new(name: 'ImageBuildVersionArn')
@@ -164,6 +169,7 @@ module Aws::Imagebuilder
     InstanceBlockDeviceMapping = Shapes::StructureShape.new(name: 'InstanceBlockDeviceMapping')
     InstanceBlockDeviceMappings = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappings')
     InstanceConfiguration = Shapes::StructureShape.new(name: 'InstanceConfiguration')
+    InstanceMetadataOptions = Shapes::StructureShape.new(name: 'InstanceMetadataOptions')
     InstanceProfileNameType = Shapes::StringShape.new(name: 'InstanceProfileNameType')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeList = Shapes::ListShape.new(name: 'InstanceTypeList')
@@ -309,6 +315,7 @@ module Aws::Imagebuilder
     Component.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     Component.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     Component.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
+    Component.add_member(:state, Shapes::ShapeRef.new(shape: ComponentState, location_name: "state"))
     Component.add_member(:parameters, Shapes::ShapeRef.new(shape: ComponentParameterDetailList, location_name: "parameters"))
     Component.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     Component.add_member(:data, Shapes::ShapeRef.new(shape: ComponentData, location_name: "data"))
@@ -340,11 +347,16 @@ module Aws::Imagebuilder
 
     ComponentParameterValueList.member = Shapes::ShapeRef.new(shape: ComponentParameterValue)
 
+    ComponentState.add_member(:status, Shapes::ShapeRef.new(shape: ComponentStatus, location_name: "status"))
+    ComponentState.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
+    ComponentState.struct_class = Types::ComponentState
+
     ComponentSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     ComponentSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ComponentSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ComponentSummary.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     ComponentSummary.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
+    ComponentSummary.add_member(:state, Shapes::ShapeRef.new(shape: ComponentState, location_name: "state"))
     ComponentSummary.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     ComponentSummary.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ComponentSummary.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
@@ -525,6 +537,7 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
     CreateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
     CreateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
+    CreateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     CreateInfrastructureConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateInfrastructureConfigurationRequest.struct_class = Types::CreateInfrastructureConfigurationRequest
@@ -620,6 +633,7 @@ module Aws::Imagebuilder
     EbsInstanceBlockDeviceSpecification.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "snapshotId"))
     EbsInstanceBlockDeviceSpecification.add_member(:volume_size, Shapes::ShapeRef.new(shape: EbsVolumeSizeInteger, location_name: "volumeSize"))
     EbsInstanceBlockDeviceSpecification.add_member(:volume_type, Shapes::ShapeRef.new(shape: EbsVolumeType, location_name: "volumeType"))
+    EbsInstanceBlockDeviceSpecification.add_member(:throughput, Shapes::ShapeRef.new(shape: EbsVolumeThroughput, location_name: "throughput"))
     EbsInstanceBlockDeviceSpecification.struct_class = Types::EbsInstanceBlockDeviceSpecification
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
@@ -855,6 +869,7 @@ module Aws::Imagebuilder
     InfrastructureConfiguration.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     InfrastructureConfiguration.add_member(:date_updated, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateUpdated"))
     InfrastructureConfiguration.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
+    InfrastructureConfiguration.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     InfrastructureConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     InfrastructureConfiguration.struct_class = Types::InfrastructureConfiguration
 
@@ -882,6 +897,10 @@ module Aws::Imagebuilder
     InstanceConfiguration.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "image"))
     InstanceConfiguration.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: InstanceBlockDeviceMappings, location_name: "blockDeviceMappings"))
     InstanceConfiguration.struct_class = Types::InstanceConfiguration
+
+    InstanceMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokens, location_name: "httpTokens"))
+    InstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: HttpPutResponseHopLimit, location_name: "httpPutResponseHopLimit"))
+    InstanceMetadataOptions.struct_class = Types::InstanceMetadataOptions
 
     InstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
 
@@ -1195,6 +1214,7 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
     UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
+    UpdateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     UpdateInfrastructureConfigurationRequest.struct_class = Types::UpdateInfrastructureConfigurationRequest
 
     UpdateInfrastructureConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))

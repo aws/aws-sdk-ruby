@@ -1329,6 +1329,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
     #   resp.transcription_job.tags[0].value #=> String
+    #   resp.transcription_job.subtitles.formats #=> Array
+    #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
+    #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
+    #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -2241,6 +2245,10 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also specify
     #   an output location in the `OutputBucketName` parameter.
     #
+    # @option params [Hash<String,String>] :kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your data.
+    #
     # @option params [Types::MedicalTranscriptionSetting] :settings
     #   Optional settings for the medical transcription job.
     #
@@ -2280,6 +2288,9 @@ module Aws::TranscribeService
     #     output_bucket_name: "OutputBucketName", # required
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
+    #     kms_encryption_context: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
     #     settings: {
     #       show_speaker_labels: false,
     #       max_speaker_labels: 1,
@@ -2446,6 +2457,10 @@ module Aws::TranscribeService
     #   If you specify a KMS key to encrypt your output, you must also specify
     #   an output location in the `OutputBucketName` parameter.
     #
+    # @option params [Hash<String,String>] :kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your data.
+    #
     # @option params [Types::Settings] :settings
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
@@ -2477,6 +2492,9 @@ module Aws::TranscribeService
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
     #   video file must be encoded at a sample rate of 16,000 Hz or higher.
     #
+    # @option params [Types::Subtitles] :subtitles
+    #   Add subtitles to your batch transcription job.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Add tags to an Amazon Transcribe transcription job.
     #
@@ -2498,6 +2516,9 @@ module Aws::TranscribeService
     #     output_bucket_name: "OutputBucketName",
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
+    #     kms_encryption_context: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
     #     settings: {
     #       vocabulary_name: "VocabularyName",
     #       show_speaker_labels: false,
@@ -2521,6 +2542,9 @@ module Aws::TranscribeService
     #     },
     #     identify_language: false,
     #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     subtitles: {
+    #       formats: ["vtt"], # accepts vtt, srt
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2564,6 +2588,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
     #   resp.transcription_job.tags[0].value #=> String
+    #   resp.transcription_job.subtitles.formats #=> Array
+    #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
+    #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
+    #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -3006,7 +3034,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

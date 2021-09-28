@@ -714,9 +714,9 @@ module Aws::IAM
 
     # Changes the password of the IAM user who is calling this operation.
     # This operation can be performed using the CLI, the Amazon Web Services
-    # API, or the **My Security Credentials** page in the Management
-    # Console. The account root user password is not affected by this
-    # operation.
+    # API, or the **My Security Credentials** page in the Amazon Web
+    # Services Management Console. The Amazon Web Services account root user
+    # password is not affected by this operation.
     #
     # Use UpdateLoginProfile to use the CLI, the Amazon Web Services API, or
     # the **Users** page in the IAM console to change the password for any
@@ -731,8 +731,8 @@ module Aws::IAM
     #   The IAM user's current password.
     #
     # @option params [required, String] :new_password
-    #   The new password. The new password must conform to the account's
-    #   password policy, if one exists.
+    #   The new password. The new password must conform to the Amazon Web
+    #   Services account's password policy, if one exists.
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
@@ -740,8 +740,9 @@ module Aws::IAM
     #   character range (`\u00FF`). You can also include the tab (`\u0009`),
     #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
     #   of these characters are valid in a password. However, many tools, such
-    #   as the Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   as the Amazon Web Services Management Console, might restrict the
+    #   ability to type certain characters because they have special meaning
+    #   within that tool.
     #
     #
     #
@@ -781,18 +782,19 @@ module Aws::IAM
     #
     # If you do not specify a user name, IAM determines the user name
     # implicitly based on the Amazon Web Services access key ID signing the
-    # request. This operation works for access keys under the account.
-    # Consequently, you can use this operation to manage account root user
-    # credentials. This is true even if the account has no associated users.
+    # request. This operation works for access keys under the Amazon Web
+    # Services account. Consequently, you can use this operation to manage
+    # Amazon Web Services account root user credentials. This is true even
+    # if the Amazon Web Services account has no associated users.
     #
     # For information about quotas on the number of keys you can create, see
     # [IAM and STS quotas][1] in the *IAM User Guide*.
     #
-    # To ensure the security of your account, the secret access key is
-    # accessible only during key and user creation. You must save the key
-    # (for example, in a text file) if you want to be able to access it
-    # again. If a secret key is lost, you can delete the access keys for the
-    # associated user and then create new keys.
+    # To ensure the security of your Amazon Web Services account, the secret
+    # access key is accessible only during key and user creation. You must
+    # save the key (for example, in a text file) if you want to be able to
+    # access it again. If a secret key is lost, you can delete the access
+    # keys for the associated user and then create new keys.
     #
     #
     #
@@ -857,9 +859,9 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Creates an alias for your account. For information about using an
-    # account alias, see [Using an alias for your account ID][1] in the *IAM
-    # User Guide*.
+    # Creates an alias for your Amazon Web Services account. For information
+    # about using an Amazon Web Services account alias, see [Using an alias
+    # for your Amazon Web Services account ID][1] in the *IAM User Guide*.
     #
     #
     #
@@ -1125,13 +1127,14 @@ module Aws::IAM
     end
 
     # Creates a password for the specified IAM user. A password allows an
-    # IAM user to access Amazon Web Services services through the Management
-    # Console.
+    # IAM user to access Amazon Web Services services through the Amazon Web
+    # Services Management Console.
     #
     # You can use the CLI, the Amazon Web Services API, or the **Users**
     # page in the IAM console to create a password for any IAM user. Use
     # ChangePassword to update your own existing password in the **My
-    # Security Credentials** page in the Management Console.
+    # Security Credentials** page in the Amazon Web Services Management
+    # Console.
     #
     # For more information about managing passwords, see [Managing
     # passwords][1] in the *IAM User Guide*.
@@ -1162,8 +1165,9 @@ module Aws::IAM
     #   character range (`\u00FF`). You can also include the tab (`\u0009`),
     #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
     #   of these characters are valid in a password. However, many tools, such
-    #   as the Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   as the Amazon Web Services Management Console, might restrict the
+    #   ability to type certain characters because they have special meaning
+    #   within that tool.
     #
     #
     #
@@ -1247,8 +1251,8 @@ module Aws::IAM
     # * A list of thumbprints of one or more server certificates that the
     #   IdP uses
     #
-    # You get all of this information from the OIDC IdP that you want to use
-    # to access Amazon Web Services.
+    # You get all of this information from the OIDC IdP you want to use to
+    # access Amazon Web Services.
     #
     # <note markdown="1"> Amazon Web Services secures communication with some OIDC identity
     # providers (IdPs) through our library of trusted certificate
@@ -1277,16 +1281,18 @@ module Aws::IAM
     #   Connect ID tokens. Per the OIDC standard, path components are allowed
     #   but query parameters are not. Typically the URL consists of only a
     #   hostname, like `https://server.example.org` or `https://example.com`.
+    #   The URL should not contain a port number.
     #
     #   You cannot register the same provider multiple times in a single
-    #   account. If you try to submit a URL that has already been used for an
-    #   OpenID Connect provider in the account, you will get an error.
+    #   Amazon Web Services account. If you try to submit a URL that has
+    #   already been used for an OpenID Connect provider in the Amazon Web
+    #   Services account, you will get an error.
     #
     # @option params [Array<String>] :client_id_list
-    #   A list of client IDs (also known as audiences). When a mobile or web
-    #   app registers with an OpenID Connect provider, they establish a value
-    #   that identifies the application. (This is the value that's sent as
-    #   the `client_id` parameter on OAuth requests.)
+    #   Provides a list of client IDs, also known as audiences. When a mobile
+    #   or web app registers with an OpenID Connect provider, they establish a
+    #   value that identifies the application. This is the value that's sent
+    #   as the `client_id` parameter on OAuth requests.
     #
     #   You can register multiple client IDs with the same provider. For
     #   example, you might have multiple applications that use the same OIDC
@@ -1313,11 +1319,11 @@ module Aws::IAM
     #   `server.example.com` and the provider stores its keys at
     #   https://keys.server.example.com/openid-connect. In that case, the
     #   thumbprint string would be the hex-encoded SHA-1 hash value of the
-    #   certificate used by https://keys.server.example.com.
+    #   certificate used by `https://keys.server.example.com.`
     #
-    #   For more information about obtaining the OIDC provider's thumbprint,
-    #   see [Obtaining the thumbprint for an OpenID Connect provider][1] in
-    #   the *IAM User Guide*.
+    #   For more information about obtaining the OIDC provider thumbprint, see
+    #   [Obtaining the thumbprint for an OpenID Connect provider][1] in the
+    #   *IAM User Guide*.
     #
     #
     #
@@ -1395,7 +1401,7 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Creates a new managed policy for your account.
+    # Creates a new managed policy for your Amazon Web Services account.
     #
     # This operation creates a policy version with a version identifier of
     # `v1` and sets v1 as the policy's default version. For more
@@ -1436,6 +1442,10 @@ module Aws::IAM
     #   can contain any ASCII character from the ! (`\u0021`) through the DEL
     #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
+    #
+    #   <note markdown="1"> You cannot use an asterisk (*) in the path name.
+    #
+    #    </note>
     #
     #
     #
@@ -1650,10 +1660,10 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Creates a new role for your account. For more information about roles,
-    # see [IAM roles][1]. For information about quotas for role names and
-    # the number of roles you can create, see [IAM and STS quotas][2] in the
-    # *IAM User Guide*.
+    # Creates a new role for your Amazon Web Services account. For more
+    # information about roles, see [IAM roles][1]. For information about
+    # quotas for role names and the number of roles you can create, see [IAM
+    # and STS quotas][2] in the *IAM User Guide*.
     #
     #
     #
@@ -1836,8 +1846,8 @@ module Aws::IAM
     # used as a principal in an IAM role's trust policy. Such a policy can
     # enable federated users who sign in using the SAML IdP to assume the
     # role. You can create an IAM role that supports Web-based single
-    # sign-on (SSO) to the Management Console or one that supports API
-    # access to Amazon Web Services.
+    # sign-on (SSO) to the Amazon Web Services Management Console or one
+    # that supports API access to Amazon Web Services.
     #
     # When you create the SAML provider resource, you upload a SAML metadata
     # document that you get from your IdP. That document includes the
@@ -1851,8 +1861,8 @@ module Aws::IAM
     #  </note>
     #
     # For more information, see [Enabling SAML 2.0 federated users to access
-    # the Management Console][2] and [About SAML 2.0-based federation][3] in
-    # the *IAM User Guide*.
+    # the Amazon Web Services Management Console][2] and [About SAML
+    # 2.0-based federation][3] in the *IAM User Guide*.
     #
     #
     #
@@ -2096,7 +2106,7 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Creates a new IAM user for your account.
+    # Creates a new IAM user for your Amazon Web Services account.
     #
     # For information about quotas for the number of IAM users you can
     # create, see [IAM and STS quotas][1] in the *IAM User Guide*.
@@ -2211,10 +2221,11 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Creates a new virtual MFA device for the account. After creating the
-    # virtual MFA, use EnableMFADevice to attach the MFA device to an IAM
-    # user. For more information about creating and working with virtual MFA
-    # devices, see [Using a virtual MFA device][1] in the *IAM User Guide*.
+    # Creates a new virtual MFA device for the Amazon Web Services account.
+    # After creating the virtual MFA, use EnableMFADevice to attach the MFA
+    # device to an IAM user. For more information about creating and working
+    # with virtual MFA devices, see [Using a virtual MFA device][1] in the
+    # *IAM User Guide*.
     #
     # For information about the maximum number of MFA devices you can
     # create, see [IAM and STS quotas][2] in the *IAM User Guide*.
@@ -2384,9 +2395,10 @@ module Aws::IAM
     #
     # If you do not specify a user name, IAM determines the user name
     # implicitly based on the Amazon Web Services access key ID signing the
-    # request. This operation works for access keys under the account.
-    # Consequently, you can use this operation to manage account root user
-    # credentials even if the account has no associated users.
+    # request. This operation works for access keys under the Amazon Web
+    # Services account. Consequently, you can use this operation to manage
+    # Amazon Web Services account root user credentials even if the Amazon
+    # Web Services account has no associated users.
     #
     # @option params [String] :user_name
     #   The name of the user whose access key pair you want to delete.
@@ -2440,9 +2452,10 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Deletes the specified account alias. For information about using an
-    # Amazon Web Services account alias, see [Using an alias for your
-    # account ID][1] in the *IAM User Guide*.
+    # Deletes the specified Amazon Web Services account alias. For
+    # information about using an Amazon Web Services account alias, see
+    # [Using an alias for your Amazon Web Services account ID][1] in the
+    # *IAM User Guide*.
     #
     #
     #
@@ -2486,7 +2499,8 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Deletes the password policy for the account. There are no parameters.
+    # Deletes the password policy for the Amazon Web Services account. There
+    # are no parameters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2659,12 +2673,13 @@ module Aws::IAM
 
     # Deletes the password for the specified IAM user, which terminates the
     # user's ability to access Amazon Web Services services through the
-    # Management Console.
+    # Amazon Web Services Management Console.
     #
     # You can use the CLI, the Amazon Web Services API, or the **Users**
     # page in the IAM console to delete a password for any IAM user. You can
     # use ChangePassword to update, but not delete, your own password in the
-    # **My Security Credentials** page in the Management Console.
+    # **My Security Credentials** page in the Amazon Web Services Management
+    # Console.
     #
     # Deleting a user's password does not prevent a user from accessing
     # Amazon Web Services through the command line interface or the API. To
@@ -3243,9 +3258,10 @@ module Aws::IAM
     #
     # If you do not specify a user name, IAM determines the user name
     # implicitly based on the Amazon Web Services access key ID signing the
-    # request. This operation works for access keys under the account.
-    # Consequently, you can use this operation to manage account root user
-    # credentials even if the account has no associated IAM users.
+    # request. This operation works for access keys under the Amazon Web
+    # Services account. Consequently, you can use this operation to manage
+    # Amazon Web Services account root user credentials even if the Amazon
+    # Web Services account has no associated IAM users.
     #
     # @option params [String] :user_name
     #   The name of the user the signing certificate belongs to.
@@ -3298,11 +3314,11 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Deletes the specified IAM user. Unlike the Management Console, when
-    # you delete a user programmatically, you must delete the items attached
-    # to the user manually, or the deletion fails. For more information, see
-    # [Deleting an IAM user][1]. Before attempting to delete a user, remove
-    # the following items:
+    # Deletes the specified IAM user. Unlike the Amazon Web Services
+    # Management Console, when you delete a user programmatically, you must
+    # delete the items attached to the user manually, or the deletion fails.
+    # For more information, see [Deleting an IAM user][1]. Before attempting
+    # to delete a user, remove the following items:
     #
     # * Password (DeleteLoginProfile)
     #
@@ -3738,9 +3754,9 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Generates a credential report for the account. For more information
-    # about the credential report, see [Getting credential reports][1] in
-    # the *IAM User Guide*.
+    # Generates a credential report for the Amazon Web Services account. For
+    # more information about the credential report, see [Getting credential
+    # reports][1] in the *IAM User Guide*.
     #
     #
     #
@@ -3796,14 +3812,14 @@ module Aws::IAM
     #
     # The data includes all attempts to access Amazon Web Services, not just
     # the successful ones. This includes all attempts that were made using
-    # the Management Console, the Amazon Web Services API through any of the
-    # SDKs, or any of the command line tools. An unexpected entry in the
-    # service last accessed data does not mean that an account has been
-    # compromised, because the request might have been denied. Refer to your
-    # CloudTrail logs as the authoritative source for information about all
-    # API calls and whether they were successful or denied access. For more
-    # information, see [Logging IAM events with CloudTrail][2] in the *IAM
-    # User Guide*.
+    # the Amazon Web Services Management Console, the Amazon Web Services
+    # API through any of the SDKs, or any of the command line tools. An
+    # unexpected entry in the service last accessed data does not mean that
+    # an account has been compromised, because the request might have been
+    # denied. Refer to your CloudTrail logs as the authoritative source for
+    # information about all API calls and whether they were successful or
+    # denied access. For more information, see [Logging IAM events with
+    # CloudTrail][2] in the *IAM User Guide*.
     #
     # This operation returns a `JobId`. Use this parameter in the `
     # GetOrganizationsAccessReport ` operation to check the status of the
@@ -3959,14 +3975,15 @@ module Aws::IAM
     #
     # The service last accessed data includes all attempts to access an
     # Amazon Web Services API, not just the successful ones. This includes
-    # all attempts that were made using the Management Console, the Amazon
-    # Web Services API through any of the SDKs, or any of the command line
-    # tools. An unexpected entry in the service last accessed data does not
-    # mean that your account has been compromised, because the request might
-    # have been denied. Refer to your CloudTrail logs as the authoritative
-    # source for information about all API calls and whether they were
-    # successful or denied access. For more information, see [Logging IAM
-    # events with CloudTrail][2] in the *IAM User Guide*.
+    # all attempts that were made using the Amazon Web Services Management
+    # Console, the Amazon Web Services API through any of the SDKs, or any
+    # of the command line tools. An unexpected entry in the service last
+    # accessed data does not mean that your account has been compromised,
+    # because the request might have been denied. Refer to your CloudTrail
+    # logs as the authoritative source for information about all API calls
+    # and whether they were successful or denied access. For more
+    # information, see [Logging IAM events with CloudTrail][2] in the *IAM
+    # User Guide*.
     #
     # The `GenerateServiceLastAccessedDetails` operation returns a `JobId`.
     # Use this parameter in the following operations to retrieve the
@@ -4284,10 +4301,11 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Retrieves the password policy for the account. This tells you the
-    # complexity requirements and mandatory rotation periods for the IAM
-    # user passwords in your account. For more information about using a
-    # password policy, see [Managing an IAM password policy][1].
+    # Retrieves the password policy for the Amazon Web Services account.
+    # This tells you the complexity requirements and mandatory rotation
+    # periods for the IAM user passwords in your account. For more
+    # information about using a password policy, see [Managing an IAM
+    # password policy][1].
     #
     #
     #
@@ -4554,9 +4572,9 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Retrieves a credential report for the account. For more information
-    # about the credential report, see [Getting credential reports][1] in
-    # the *IAM User Guide*.
+    # Retrieves a credential report for the Amazon Web Services account. For
+    # more information about the credential report, see [Getting credential
+    # reports][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4842,18 +4860,20 @@ module Aws::IAM
     end
 
     # Retrieves the user name for the specified IAM user. A login profile is
-    # created when you create a password for the user to access the
-    # Management Console. If the user does not exist or does not have a
-    # password, the operation returns a 404 (`NoSuchEntity`) error.
+    # created when you create a password for the user to access the Amazon
+    # Web Services Management Console. If the user does not exist or does
+    # not have a password, the operation returns a 404 (`NoSuchEntity`)
+    # error.
     #
     # If you create an IAM user with access to the console, the `CreateDate`
     # reflects the date you created the initial password for the user.
     #
     # If you create an IAM user with programmatic access, and then later add
-    # a password for the user to access the Management Console, the
-    # `CreateDate` reflects the initial password creation date. A user with
-    # programmatic access does not have a login profile unless you create a
-    # password for the user to access the Management Console.
+    # a password for the user to access the Amazon Web Services Management
+    # Console, the `CreateDate` reflects the initial password creation date.
+    # A user with programmatic access does not have a login profile unless
+    # you create a password for the user to access the Amazon Web Services
+    # Management Console.
     #
     # @option params [required, String] :user_name
     #   The name of the user whose login profile you want to retrieve.
@@ -6131,12 +6151,13 @@ module Aws::IAM
     #
     # If the `UserName` field is not specified, the user name is determined
     # implicitly based on the Amazon Web Services access key ID used to sign
-    # the request. This operation works for access keys under the account.
-    # Consequently, you can use this operation to manage account root user
-    # credentials even if the account has no associated users.
+    # the request. This operation works for access keys under the Amazon Web
+    # Services account. Consequently, you can use this operation to manage
+    # Amazon Web Services account root user credentials even if the Amazon
+    # Web Services account has no associated users.
     #
-    # <note markdown="1"> To ensure the security of your account, the secret access key is
-    # accessible only during key and user creation.
+    # <note markdown="1"> To ensure the security of your Amazon Web Services account, the secret
+    # access key is accessible only during key and user creation.
     #
     #  </note>
     #
@@ -6231,9 +6252,10 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Lists the account alias associated with the account (Note: you can
-    # have only one). For information about using an account alias, see
-    # [Using an alias for your account ID][1] in the *IAM User Guide*.
+    # Lists the account alias associated with the Amazon Web Services
+    # account (Note: you can have only one). For information about using an
+    # Amazon Web Services account alias, see [Using an alias for your Amazon
+    # Web Services account ID][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7510,7 +7532,7 @@ module Aws::IAM
     end
 
     # Lists information about the IAM OpenID Connect (OIDC) provider
-    # resource objects defined in the account.
+    # resource objects defined in the Amazon Web Services account.
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
     # attributes for the resource. For example, this operation does not
@@ -7538,9 +7560,9 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Lists all the managed policies that are available in your account,
-    # including your own customer-defined managed policies and all Amazon
-    # Web Services managed policies.
+    # Lists all the managed policies that are available in your Amazon Web
+    # Services account, including your own customer-defined managed policies
+    # and all Amazon Web Services managed policies.
     #
     # You can filter the list of policies that is returned using the
     # optional `OnlyAttached`, `Scope`, and `PathPrefix` parameters. For
@@ -7570,8 +7592,8 @@ module Aws::IAM
     #   The scope to use for filtering the results.
     #
     #   To list only Amazon Web Services managed policies, set `Scope` to
-    #   `AWS`. To list only the customer managed policies in your account, set
-    #   `Scope` to `Local`.
+    #   `AWS`. To list only the customer managed policies in your Amazon Web
+    #   Services account, set `Scope` to `Local`.
     #
     #   This parameter is optional. If it is not included, or if it is set to
     #   `All`, all policies are returned.
@@ -8671,9 +8693,9 @@ module Aws::IAM
     # If the `UserName` field is not specified, the user name is determined
     # implicitly based on the Amazon Web Services access key ID used to sign
     # the request for this operation. This operation works for access keys
-    # under the account. Consequently, you can use this operation to manage
-    # account root user credentials even if the account has no associated
-    # users.
+    # under the Amazon Web Services account. Consequently, you can use this
+    # operation to manage Amazon Web Services account root user credentials
+    # even if the Amazon Web Services account has no associated users.
     #
     # @option params [String] :user_name
     #   The name of the IAM user whose signing certificates you want to
@@ -8935,8 +8957,9 @@ module Aws::IAM
     end
 
     # Lists the IAM users that have the specified path prefix. If no path
-    # prefix is specified, the operation returns all users in the account.
-    # If there are none, the operation returns an empty list.
+    # prefix is specified, the operation returns all users in the Amazon Web
+    # Services account. If there are none, the operation returns an empty
+    # list.
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
     # attributes for the resource. For example, this operation does not
@@ -9054,10 +9077,10 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Lists the virtual MFA devices defined in the account by assignment
-    # status. If you do not specify an assignment status, the operation
-    # returns a list of all virtual MFA devices. Assignment status can be
-    # `Assigned`, `Unassigned`, or `Any`.
+    # Lists the virtual MFA devices defined in the Amazon Web Services
+    # account by assignment status. If you do not specify an assignment
+    # status, the operation returns a list of all virtual MFA devices.
+    # Assignment status can be `Assigned`, `Unassigned`, or `Any`.
     #
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
     # attributes for the resource. For example, this operation does not
@@ -9908,7 +9931,7 @@ module Aws::IAM
     end
 
     # Sets the specified version of the global endpoint token as the token
-    # version used for the account.
+    # version used for the Amazon Web Services account.
     #
     # By default, Security Token Service (STS) is available as a global
     # service, and all STS requests go to a single endpoint at
@@ -9921,12 +9944,13 @@ module Aws::IAM
     # If you make an STS call to the global endpoint, the resulting session
     # tokens might be valid in some Regions but not others. It depends on
     # the version that is set in this operation. Version 1 tokens are valid
-    # only in Regions that are available by default. These tokens do not
-    # work in manually enabled Regions, such as Asia Pacific (Hong Kong).
-    # Version 2 tokens are valid in all Regions. However, version 2 tokens
-    # are longer and might affect systems where you temporarily store
-    # tokens. For information, see [Activating and deactivating STS in an
-    # Region][2] in the *IAM User Guide*.
+    # only in Amazon Web Services Regions that are available by default.
+    # These tokens do not work in manually enabled Regions, such as Asia
+    # Pacific (Hong Kong). Version 2 tokens are valid in all Regions.
+    # However, version 2 tokens are longer and might affect systems where
+    # you temporarily store tokens. For information, see [Activating and
+    # deactivating STS in an Amazon Web Services Region][2] in the *IAM User
+    # Guide*.
     #
     # To view the current session token version, see the
     # `GlobalEndpointTokenVersion` entry in the response of the
@@ -9939,14 +9963,14 @@ module Aws::IAM
     #
     # @option params [required, String] :global_endpoint_token_version
     #   The version of the global endpoint token. Version 1 tokens are valid
-    #   only in Regions that are available by default. These tokens do not
-    #   work in manually enabled Regions, such as Asia Pacific (Hong Kong).
-    #   Version 2 tokens are valid in all Regions. However, version 2 tokens
-    #   are longer and might affect systems where you temporarily store
-    #   tokens.
+    #   only in Amazon Web Services Regions that are available by default.
+    #   These tokens do not work in manually enabled Regions, such as Asia
+    #   Pacific (Hong Kong). Version 2 tokens are valid in all Regions.
+    #   However, version 2 tokens are longer and might affect systems where
+    #   you temporarily store tokens.
     #
-    #   For information, see [Activating and deactivating STS in an Region][1]
-    #   in the *IAM User Guide*.
+    #   For information, see [Activating and deactivating STS in an Amazon Web
+    #   Services Region][1] in the *IAM User Guide*.
     #
     #
     #
@@ -10136,12 +10160,12 @@ module Aws::IAM
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [String] :resource_owner
-    #   An ARN representing the account ID that specifies the owner of any
-    #   simulated resource that does not identify its owner in the resource
-    #   ARN. Examples of resource ARNs include an S3 bucket or object. If
-    #   `ResourceOwner` is specified, it is also used as the account owner of
-    #   any `ResourcePolicy` included in the simulation. If the
-    #   `ResourceOwner` parameter is not specified, then the owner of the
+    #   An ARN representing the Amazon Web Services account ID that specifies
+    #   the owner of any simulated resource that does not identify its owner
+    #   in the resource ARN. Examples of resource ARNs include an S3 bucket or
+    #   object. If `ResourceOwner` is specified, it is also used as the
+    #   account owner of any `ResourcePolicy` included in the simulation. If
+    #   the `ResourceOwner` parameter is not specified, then the owner of the
     #   resources and the resource policy defaults to the account of the
     #   identity provided in `CallerArn`. This parameter is required only if
     #   you specify a resource-based policy and account that owns the resource
@@ -10482,16 +10506,17 @@ module Aws::IAM
     #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [String] :resource_owner
-    #   An account ID that specifies the owner of any simulated resource that
-    #   does not identify its owner in the resource ARN. Examples of resource
-    #   ARNs include an S3 bucket or object. If `ResourceOwner` is specified,
-    #   it is also used as the account owner of any `ResourcePolicy` included
-    #   in the simulation. If the `ResourceOwner` parameter is not specified,
-    #   then the owner of the resources and the resource policy defaults to
-    #   the account of the identity provided in `CallerArn`. This parameter is
-    #   required only if you specify a resource-based policy and account that
-    #   owns the resource is different from the account that owns the
-    #   simulated calling user `CallerArn`.
+    #   An Amazon Web Services account ID that specifies the owner of any
+    #   simulated resource that does not identify its owner in the resource
+    #   ARN. Examples of resource ARNs include an S3 bucket or object. If
+    #   `ResourceOwner` is specified, it is also used as the account owner of
+    #   any `ResourcePolicy` included in the simulation. If the
+    #   `ResourceOwner` parameter is not specified, then the owner of the
+    #   resources and the resource policy defaults to the account of the
+    #   identity provided in `CallerArn`. This parameter is required only if
+    #   you specify a resource-based policy and account that owns the resource
+    #   is different from the account that owns the simulated calling user
+    #   `CallerArn`.
     #
     # @option params [String] :caller_arn
     #   The ARN of the IAM user that you want to specify as the simulated
@@ -11723,9 +11748,10 @@ module Aws::IAM
     #
     # If the `UserName` is not specified, the user name is determined
     # implicitly based on the Amazon Web Services access key ID used to sign
-    # the request. This operation works for access keys under the account.
-    # Consequently, you can use this operation to manage account root user
-    # credentials even if the account has no associated users.
+    # the request. This operation works for access keys under the Amazon Web
+    # Services account. Consequently, you can use this operation to manage
+    # Amazon Web Services account root user credentials even if the Amazon
+    # Web Services account has no associated users.
     #
     # For information about rotating keys, see [Managing keys and
     # certificates][1] in the *IAM User Guide*.
@@ -11793,7 +11819,8 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Updates the password policy settings for the account.
+    # Updates the password policy settings for the Amazon Web Services
+    # account.
     #
     # <note markdown="1"> * This operation does not support partial updates. No parameters are
     #   required, but if you do not specify a parameter, that parameter's
@@ -11855,9 +11882,10 @@ module Aws::IAM
     #   require at least one lowercase character.
     #
     # @option params [Boolean] :allow_users_to_change_password
-    #   Allows all IAM users in your account to use the Management Console to
-    #   change their own passwords. For more information, see [Letting IAM
-    #   users change their own passwords][1] in the *IAM User Guide*.
+    #   Allows all IAM users in your account to use the Amazon Web Services
+    #   Management Console to change their own passwords. For more
+    #   information, see [Letting IAM users change their own passwords][1] in
+    #   the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in the
@@ -12092,7 +12120,7 @@ module Aws::IAM
     # the Amazon Web Services API, or the **Users** page in the IAM console
     # to change the password for any IAM user. Use ChangePassword to change
     # your own password in the **My Security Credentials** page in the
-    # Management Console.
+    # Amazon Web Services Management Console.
     #
     # For more information about modifying passwords, see [Managing
     # passwords][1] in the *IAM User Guide*.
@@ -12129,8 +12157,8 @@ module Aws::IAM
     #     carriage return (`\u000D`)
     #
     #   However, the format can be further restricted by the account
-    #   administrator by setting a password policy on the account. For more
-    #   information, see UpdateAccountPasswordPolicy.
+    #   administrator by setting a password policy on the Amazon Web Services
+    #   account. For more information, see UpdateAccountPasswordPolicy.
     #
     #
     #
@@ -12597,9 +12625,10 @@ module Aws::IAM
     #
     # If the `UserName` field is not specified, the user name is determined
     # implicitly based on the Amazon Web Services access key ID used to sign
-    # the request. This operation works for access keys under the account.
-    # Consequently, you can use this operation to manage account root user
-    # credentials even if the account has no associated users.
+    # the request. This operation works for access keys under the Amazon Web
+    # Services account. Consequently, you can use this operation to manage
+    # Amazon Web Services account root user credentials even if the Amazon
+    # Web Services account has no associated users.
     #
     # @option params [String] :user_name
     #   The name of the IAM user the signing certificate belongs to.
@@ -12820,9 +12849,10 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Uploads a server certificate entity for the account. The server
-    # certificate entity includes a public key certificate, a private key,
-    # and an optional certificate chain, which should all be PEM-encoded.
+    # Uploads a server certificate entity for the Amazon Web Services
+    # account. The server certificate entity includes a public key
+    # certificate, a private key, and an optional certificate chain, which
+    # should all be PEM-encoded.
     #
     # We recommend that you use [Certificate Manager][1] to provision,
     # manage, and deploy your server certificates. With ACM you can request
@@ -13047,9 +13077,10 @@ module Aws::IAM
     #
     # If the `UserName` is not specified, the IAM user name is determined
     # implicitly based on the Amazon Web Services access key ID used to sign
-    # the request. This operation works for access keys under the account.
-    # Consequently, you can use this operation to manage account root user
-    # credentials even if the account has no associated users.
+    # the request. This operation works for access keys under the Amazon Web
+    # Services account. Consequently, you can use this operation to manage
+    # Amazon Web Services account root user credentials even if the Amazon
+    # Web Services account has no associated users.
     #
     # <note markdown="1"> Because the body of an X.509 certificate can be large, you should use
     # POST rather than GET when calling `UploadSigningCertificate`. For
@@ -13160,7 +13191,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

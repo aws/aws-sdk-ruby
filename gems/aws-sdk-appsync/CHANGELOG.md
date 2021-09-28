@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-09-23)
+------------------
+
+* Feature - Documented the new OpenSearchServiceDataSourceConfig data type. Added deprecation notes to the ElasticsearchDataSourceConfig data type.
+
 1.43.0 (2021-09-01)
 ------------------
 

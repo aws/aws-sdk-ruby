@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-09-03)
+------------------
+
+* Feature - Enhanced GetEventPrediction API response to include risk scores from imported SageMaker models
+
 1.23.0 (2021-09-01)
 ------------------
 

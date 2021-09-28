@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-09-08)
+------------------
+
+* Feature - A minor text-only update that fixes several customer issues.
+
 1.29.0 (2021-09-01)
 ------------------
 

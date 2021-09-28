@@ -1252,7 +1252,7 @@ module Aws::Pinpoint
     #       {
     #         custom: {
     #           delivery_uri: "__string",
-    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           message_config: {
     #             data: "__string",
     #           },
@@ -1515,6 +1515,9 @@ module Aws::Pinpoint
     #             wait_until: "__string",
     #           },
     #         },
+    #         contact_center: {
+    #           next_activity: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] custom
@@ -1573,6 +1576,11 @@ module Aws::Pinpoint
     #   moving participants to the next activity in a journey.
     #   @return [Types::WaitActivity]
     #
+    # @!attribute [rw] contact_center
+    #   The settings for a connect activity. This type of activity initiates
+    #   a contact center call to participants.
+    #   @return [Types::ContactCenterActivity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Activity AWS API Documentation
     #
     class Activity < Struct.new(
@@ -1585,7 +1593,8 @@ module Aws::Pinpoint
       :push,
       :random_split,
       :sms,
-      :wait)
+      :wait,
+      :contact_center)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1682,7 +1691,7 @@ module Aws::Pinpoint
     #
     #       {
     #         body_override: "__string",
-    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #         context: {
     #           "__string" => "__string",
     #         },
@@ -2595,6 +2604,107 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # In-app message configuration.
+    #
+    # @note When making an API call, you may pass CampaignInAppMessage
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         content: [
+    #           {
+    #             background_color: "__string",
+    #             body_config: {
+    #               alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #               body: "__string", # required
+    #               text_color: "__string", # required
+    #             },
+    #             header_config: {
+    #               alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #               header: "__string", # required
+    #               text_color: "__string", # required
+    #             },
+    #             image_url: "__string",
+    #             primary_btn: {
+    #               android: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               default_config: {
+    #                 background_color: "__string",
+    #                 border_radius: 1,
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #                 text: "__string", # required
+    #                 text_color: "__string",
+    #               },
+    #               ios: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               web: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #             },
+    #             secondary_btn: {
+    #               android: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               default_config: {
+    #                 background_color: "__string",
+    #                 border_radius: 1,
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #                 text: "__string", # required
+    #                 text_color: "__string",
+    #               },
+    #               ios: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               web: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         custom_config: {
+    #           "__string" => "__string",
+    #         },
+    #         layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #       }
+    #
+    # @!attribute [rw] body
+    #   The message body of the notification, the email body or the text
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   In-app message content.
+    #   @return [Array<Types::InAppMessageContent>]
+    #
+    # @!attribute [rw] custom_config
+    #   Custom config to be sent to client.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] layout
+    #   In-app message layout.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignInAppMessage AWS API Documentation
+    #
+    class CampaignInAppMessage < Struct.new(
+      :body,
+      :content,
+      :custom_config,
+      :layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For a campaign, specifies limits on the messages that the campaign can
     # send. For an application, specifies the default limits for messages
     # that campaigns in the application can send.
@@ -2607,6 +2717,7 @@ module Aws::Pinpoint
     #         maximum_duration: 1,
     #         messages_per_second: 1,
     #         total: 1,
+    #         session: 1,
     #       }
     #
     # @!attribute [rw] daily
@@ -2637,13 +2748,19 @@ module Aws::Pinpoint
     #   is 100.
     #   @return [Integer]
     #
+    # @!attribute [rw] session
+    #   The maximum total number of messages that the campaign can send per
+    #   user session.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignLimits AWS API Documentation
     #
     class CampaignLimits < Struct.new(
       :daily,
       :maximum_duration,
       :messages_per_second,
-      :total)
+      :total,
+      :session)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2761,6 +2878,12 @@ module Aws::Pinpoint
     #   The version number of the campaign.
     #   @return [Integer]
     #
+    # @!attribute [rw] priority
+    #   Defines the priority of the campaign, used to decide the order of
+    #   messages displayed to user if there are multiple messages scheduled
+    #   to be displayed at the same moment
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignResponse AWS API Documentation
     #
     class CampaignResponse < Struct.new(
@@ -2787,7 +2910,8 @@ module Aws::Pinpoint
       :template_configuration,
       :treatment_description,
       :treatment_name,
-      :version)
+      :version,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3253,6 +3377,29 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # The settings for a connect activity. This type of activity initiates a
+    # contact center call to participants.
+    #
+    # @note When making an API call, you may pass ContactCenterActivity
+    #   data as a hash:
+    #
+    #       {
+    #         next_activity: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform after the
+    #   this activity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ContactCenterActivity AWS API Documentation
+    #
+    class ContactCenterActivity < Struct.new(
+      :next_activity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an API request or response.
     #
     # @!attribute [rw] message
@@ -3350,7 +3497,7 @@ module Aws::Pinpoint
     #             {
     #               custom_delivery_configuration: {
     #                 delivery_uri: "__string", # required
-    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #               },
     #               message_configuration: {
     #                 adm_message: {
@@ -3440,6 +3587,73 @@ module Aws::Pinpoint
     #                   entity_id: "__string",
     #                   template_id: "__string",
     #                 },
+    #                 in_app_message: {
+    #                   body: "__string",
+    #                   content: [
+    #                     {
+    #                       background_color: "__string",
+    #                       body_config: {
+    #                         alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                         body: "__string", # required
+    #                         text_color: "__string", # required
+    #                       },
+    #                       header_config: {
+    #                         alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                         header: "__string", # required
+    #                         text_color: "__string", # required
+    #                       },
+    #                       image_url: "__string",
+    #                       primary_btn: {
+    #                         android: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         default_config: {
+    #                           background_color: "__string",
+    #                           border_radius: 1,
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                           text: "__string", # required
+    #                           text_color: "__string",
+    #                         },
+    #                         ios: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         web: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                       },
+    #                       secondary_btn: {
+    #                         android: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         default_config: {
+    #                           background_color: "__string",
+    #                           border_radius: 1,
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                           text: "__string", # required
+    #                           text_color: "__string",
+    #                         },
+    #                         ios: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         web: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                   custom_config: {
+    #                     "__string" => "__string",
+    #                   },
+    #                   layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #                 },
     #               },
     #               schedule: {
     #                 end_time: "__string",
@@ -3464,7 +3678,7 @@ module Aws::Pinpoint
     #                   },
     #                   filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #                 },
-    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #                 is_local_time: false,
     #                 quiet_time: {
     #                   end: "__string",
@@ -3498,7 +3712,7 @@ module Aws::Pinpoint
     #           ],
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           },
     #           description: "__string",
     #           holdout_percent: 1,
@@ -3513,6 +3727,7 @@ module Aws::Pinpoint
     #             maximum_duration: 1,
     #             messages_per_second: 1,
     #             total: 1,
+    #             session: 1,
     #           },
     #           message_configuration: {
     #             adm_message: {
@@ -3602,6 +3817,73 @@ module Aws::Pinpoint
     #               entity_id: "__string",
     #               template_id: "__string",
     #             },
+    #             in_app_message: {
+    #               body: "__string",
+    #               content: [
+    #                 {
+    #                   background_color: "__string",
+    #                   body_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     body: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   header_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     header: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   image_url: "__string",
+    #                   primary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                   secondary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               custom_config: {
+    #                 "__string" => "__string",
+    #               },
+    #               layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #             },
     #           },
     #           name: "__string",
     #           schedule: {
@@ -3627,7 +3909,7 @@ module Aws::Pinpoint
     #               },
     #               filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #             },
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -3661,6 +3943,7 @@ module Aws::Pinpoint
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
+    #           priority: 1,
     #         },
     #       }
     #
@@ -3836,6 +4119,111 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateInAppTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         in_app_template_request: { # required
+    #           content: [
+    #             {
+    #               background_color: "__string",
+    #               body_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 body: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               header_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 header: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               image_url: "__string",
+    #               primary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #               secondary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           custom_config: {
+    #             "__string" => "__string",
+    #           },
+    #           layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           template_description: "__string",
+    #         },
+    #         template_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] in_app_template_request
+    #   In-App Template Request.
+    #   @return [Types::InAppTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateInAppTemplateRequest AWS API Documentation
+    #
+    class CreateInAppTemplateRequest < Struct.new(
+      :in_app_template_request,
+      :template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_create_message_body
+    #   Provides information about a request to create a message template.
+    #   @return [Types::TemplateCreateMessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateInAppTemplateResponse AWS API Documentation
+    #
+    class CreateInAppTemplateResponse < Struct.new(
+      :template_create_message_body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateJourneyRequest
     #   data as a hash:
     #
@@ -3846,7 +4234,7 @@ module Aws::Pinpoint
     #             "__string" => {
     #               custom: {
     #                 delivery_uri: "__string",
-    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #                 message_config: {
     #                   data: "__string",
     #                 },
@@ -4109,6 +4497,9 @@ module Aws::Pinpoint
     #                   wait_until: "__string",
     #                 },
     #               },
+    #               contact_center: {
+    #                 next_activity: "__string",
+    #               },
     #             },
     #           },
     #           creation_date: "__string",
@@ -4165,6 +4556,10 @@ module Aws::Pinpoint
     #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #           wait_for_quiet_time: false,
     #           refresh_on_segment_update: false,
+    #           journey_channel_settings: {
+    #             connect_campaign_arn: "__string",
+    #             connect_campaign_execution_role_arn: "__string",
+    #           },
     #         },
     #       }
     #
@@ -4800,7 +5195,7 @@ module Aws::Pinpoint
     #
     #       {
     #         delivery_uri: "__string", # required
-    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #       }
     #
     # @!attribute [rw] delivery_uri
@@ -4839,7 +5234,7 @@ module Aws::Pinpoint
     #
     #       {
     #         delivery_uri: "__string",
-    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #         message_config: {
     #           data: "__string",
     #         },
@@ -4907,6 +5302,57 @@ module Aws::Pinpoint
       :next_activity,
       :template_name,
       :template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Default button configuration.
+    #
+    # @note When making an API call, you may pass DefaultButtonConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         background_color: "__string",
+    #         border_radius: 1,
+    #         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #         link: "__string",
+    #         text: "__string", # required
+    #         text_color: "__string",
+    #       }
+    #
+    # @!attribute [rw] background_color
+    #   The background color of the button.
+    #   @return [String]
+    #
+    # @!attribute [rw] border_radius
+    #   The border radius of the button.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] button_action
+    #   Action triggered by the button.
+    #   @return [String]
+    #
+    # @!attribute [rw] link
+    #   Button destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   Button text.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_color
+    #   The text color of the button.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultButtonConfiguration AWS API Documentation
+    #
+    class DefaultButtonConfiguration < Struct.new(
+      :background_color,
+      :border_radius,
+      :button_action,
+      :link,
+      :text,
+      :text_color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5514,6 +5960,41 @@ module Aws::Pinpoint
     #
     class DeleteGcmChannelResponse < Struct.new(
       :gcm_channel_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteInAppTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #         version: "__string",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteInAppTemplateRequest AWS API Documentation
+    #
+    class DeleteInAppTemplateRequest < Struct.new(
+      :template_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteInAppTemplateResponse AWS API Documentation
+    #
+    class DeleteInAppTemplateResponse < Struct.new(
+      :message_body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6532,7 +7013,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -6685,7 +7166,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -6959,7 +7440,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -7716,7 +8197,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -7805,7 +8286,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -9441,6 +9922,76 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetInAppMessagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         endpoint_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetInAppMessagesRequest AWS API Documentation
+    #
+    class GetInAppMessagesRequest < Struct.new(
+      :application_id,
+      :endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] in_app_messages_response
+    #   Get in-app messages response object.
+    #   @return [Types::InAppMessagesResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetInAppMessagesResponse AWS API Documentation
+    #
+    class GetInAppMessagesResponse < Struct.new(
+      :in_app_messages_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInAppTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "__string", # required
+    #         version: "__string",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetInAppTemplateRequest AWS API Documentation
+    #
+    class GetInAppTemplateRequest < Struct.new(
+      :template_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] in_app_template_response
+    #   In-App Template Response.
+    #   @return [Types::InAppTemplateResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetInAppTemplateResponse AWS API Documentation
+    #
+    class GetInAppTemplateResponse < Struct.new(
+      :in_app_template_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetJourneyDateRangeKpiRequest
     #   data as a hash:
     #
@@ -10489,6 +11040,520 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @!attribute [rw] end_date
+    #   The scheduled time after which the in-app message should not be
+    #   shown. Timestamp is in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_filter
+    #   The event filter the SDK has to use to show the in-app message in
+    #   the application.
+    #   @return [Types::CampaignEventFilter]
+    #
+    # @!attribute [rw] quiet_time
+    #   Time during which the in-app message should not be shown to the
+    #   user.
+    #   @return [Types::QuietTime]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppCampaignSchedule AWS API Documentation
+    #
+    class InAppCampaignSchedule < Struct.new(
+      :end_date,
+      :event_filter,
+      :quiet_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides all fields required for building an in-app message.
+    #
+    # @!attribute [rw] content
+    #   In-app message content.
+    #   @return [Array<Types::InAppMessageContent>]
+    #
+    # @!attribute [rw] custom_config
+    #   Custom config to be sent to SDK.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] layout
+    #   The layout of the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppMessage AWS API Documentation
+    #
+    class InAppMessage < Struct.new(
+      :content,
+      :custom_config,
+      :layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Text config for Message Body.
+    #
+    # @note When making an API call, you may pass InAppMessageBodyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #         body: "__string", # required
+    #         text_color: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] alignment
+    #   The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   Message Body.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_color
+    #   The text color.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppMessageBodyConfig AWS API Documentation
+    #
+    class InAppMessageBodyConfig < Struct.new(
+      :alignment,
+      :body,
+      :text_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Button Config for an in-app message.
+    #
+    # @note When making an API call, you may pass InAppMessageButton
+    #   data as a hash:
+    #
+    #       {
+    #         android: {
+    #           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #           link: "__string",
+    #         },
+    #         default_config: {
+    #           background_color: "__string",
+    #           border_radius: 1,
+    #           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #           link: "__string",
+    #           text: "__string", # required
+    #           text_color: "__string",
+    #         },
+    #         ios: {
+    #           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #           link: "__string",
+    #         },
+    #         web: {
+    #           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #           link: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] android
+    #   Default button content.
+    #   @return [Types::OverrideButtonConfiguration]
+    #
+    # @!attribute [rw] default_config
+    #   Default button content.
+    #   @return [Types::DefaultButtonConfiguration]
+    #
+    # @!attribute [rw] ios
+    #   Default button content.
+    #   @return [Types::OverrideButtonConfiguration]
+    #
+    # @!attribute [rw] web
+    #   Default button content.
+    #   @return [Types::OverrideButtonConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppMessageButton AWS API Documentation
+    #
+    class InAppMessageButton < Struct.new(
+      :android,
+      :default_config,
+      :ios,
+      :web)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] campaign_id
+    #   Campaign id of the corresponding campaign.
+    #   @return [String]
+    #
+    # @!attribute [rw] daily_cap
+    #   Daily cap which controls the number of times any in-app messages can
+    #   be shown to the endpoint during a day.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] in_app_message
+    #   In-app message content with all fields required for rendering an
+    #   in-app message.
+    #   @return [Types::InAppMessage]
+    #
+    # @!attribute [rw] priority
+    #   Priority of the in-app message.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schedule
+    #   Schedule of the campaign.
+    #   @return [Types::InAppCampaignSchedule]
+    #
+    # @!attribute [rw] session_cap
+    #   Session cap which controls the number of times an in-app message can
+    #   be shown to the endpoint during an application session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_cap
+    #   Total cap which controls the number of times an in-app message can
+    #   be shown to the endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] treatment_id
+    #   Treatment id of the campaign.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppMessageCampaign AWS API Documentation
+    #
+    class InAppMessageCampaign < Struct.new(
+      :campaign_id,
+      :daily_cap,
+      :in_app_message,
+      :priority,
+      :schedule,
+      :session_cap,
+      :total_cap,
+      :treatment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for the message content.
+    #
+    # @note When making an API call, you may pass InAppMessageContent
+    #   data as a hash:
+    #
+    #       {
+    #         background_color: "__string",
+    #         body_config: {
+    #           alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #           body: "__string", # required
+    #           text_color: "__string", # required
+    #         },
+    #         header_config: {
+    #           alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #           header: "__string", # required
+    #           text_color: "__string", # required
+    #         },
+    #         image_url: "__string",
+    #         primary_btn: {
+    #           android: {
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #           },
+    #           default_config: {
+    #             background_color: "__string",
+    #             border_radius: 1,
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #             text: "__string", # required
+    #             text_color: "__string",
+    #           },
+    #           ios: {
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #           },
+    #           web: {
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #           },
+    #         },
+    #         secondary_btn: {
+    #           android: {
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #           },
+    #           default_config: {
+    #             background_color: "__string",
+    #             border_radius: 1,
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #             text: "__string", # required
+    #             text_color: "__string",
+    #           },
+    #           ios: {
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #           },
+    #           web: {
+    #             button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #             link: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] background_color
+    #   The background color for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] body_config
+    #   The configuration for the message body.
+    #   @return [Types::InAppMessageBodyConfig]
+    #
+    # @!attribute [rw] header_config
+    #   The configuration for the message header.
+    #   @return [Types::InAppMessageHeaderConfig]
+    #
+    # @!attribute [rw] image_url
+    #   The image url for the background of message.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_btn
+    #   The first button inside the message.
+    #   @return [Types::InAppMessageButton]
+    #
+    # @!attribute [rw] secondary_btn
+    #   The second button inside message.
+    #   @return [Types::InAppMessageButton]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppMessageContent AWS API Documentation
+    #
+    class InAppMessageContent < Struct.new(
+      :background_color,
+      :body_config,
+      :header_config,
+      :image_url,
+      :primary_btn,
+      :secondary_btn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Text config for Message Header.
+    #
+    # @note When making an API call, you may pass InAppMessageHeaderConfig
+    #   data as a hash:
+    #
+    #       {
+    #         alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #         header: "__string", # required
+    #         text_color: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] alignment
+    #   The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+    #   @return [String]
+    #
+    # @!attribute [rw] header
+    #   Message Header.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_color
+    #   The text color.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppMessageHeaderConfig AWS API Documentation
+    #
+    class InAppMessageHeaderConfig < Struct.new(
+      :alignment,
+      :header,
+      :text_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get in-app messages response object.
+    #
+    # @!attribute [rw] in_app_message_campaigns
+    #   List of targeted in-app message campaigns.
+    #   @return [Array<Types::InAppMessageCampaign>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppMessagesResponse AWS API Documentation
+    #
+    class InAppMessagesResponse < Struct.new(
+      :in_app_message_campaigns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # In-App Template Request.
+    #
+    # @note When making an API call, you may pass InAppTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         content: [
+    #           {
+    #             background_color: "__string",
+    #             body_config: {
+    #               alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #               body: "__string", # required
+    #               text_color: "__string", # required
+    #             },
+    #             header_config: {
+    #               alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #               header: "__string", # required
+    #               text_color: "__string", # required
+    #             },
+    #             image_url: "__string",
+    #             primary_btn: {
+    #               android: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               default_config: {
+    #                 background_color: "__string",
+    #                 border_radius: 1,
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #                 text: "__string", # required
+    #                 text_color: "__string",
+    #               },
+    #               ios: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               web: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #             },
+    #             secondary_btn: {
+    #               android: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               default_config: {
+    #                 background_color: "__string",
+    #                 border_radius: 1,
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #                 text: "__string", # required
+    #                 text_color: "__string",
+    #               },
+    #               ios: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #               web: {
+    #                 button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                 link: "__string",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         custom_config: {
+    #           "__string" => "__string",
+    #         },
+    #         layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #         template_description: "__string",
+    #       }
+    #
+    # @!attribute [rw] content
+    #   The content of the message, can include up to 5 modals. Each modal
+    #   must contain a message, a header, and background color. ImageUrl and
+    #   buttons are optional.
+    #   @return [Array<Types::InAppMessageContent>]
+    #
+    # @!attribute [rw] custom_config
+    #   Custom config to be sent to client.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] layout
+    #   The layout of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A string-to-string map of key-value pairs that defines the tags to
+    #   associate with the message template. Each tag consists of a required
+    #   tag key and an associated tag value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_description
+    #   The description of the template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppTemplateRequest AWS API Documentation
+    #
+    class InAppTemplateRequest < Struct.new(
+      :content,
+      :custom_config,
+      :layout,
+      :tags,
+      :template_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # In-App Template Response.
+    #
+    # @!attribute [rw] arn
+    #   The resource arn of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the message, can include up to 5 modals. Each modal
+    #   must contain a message, a header, and background color. ImageUrl and
+    #   buttons are optional.
+    #   @return [Array<Types::InAppMessageContent>]
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_config
+    #   Custom config to be sent to client.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The last modified date of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout
+    #   The layout of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags map that contains arn and InternalId for API GW.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_description
+    #   The description of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version id of the template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/InAppTemplateResponse AWS API Documentation
+    #
+    class InAppTemplateResponse < Struct.new(
+      :arn,
+      :content,
+      :creation_date,
+      :custom_config,
+      :last_modified_date,
+      :layout,
+      :tags,
+      :template_description,
+      :template_name,
+      :template_type,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an API request or response.
     #
     # @!attribute [rw] message
@@ -10826,6 +11891,34 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # The channel-specific configurations for the journey.
+    #
+    # @note When making an API call, you may pass JourneyChannelSettings
+    #   data as a hash:
+    #
+    #       {
+    #         connect_campaign_arn: "__string",
+    #         connect_campaign_execution_role_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] connect_campaign_arn
+    #   Amazon Resource Name (ARN) of the Connect Campaign.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_campaign_execution_role_arn
+    #   IAM role ARN to be assumed when invoking Connect campaign execution
+    #   APIs for dialing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyChannelSettings AWS API Documentation
+    #
+    class JourneyChannelSettings < Struct.new(
+      :connect_campaign_arn,
+      :connect_campaign_execution_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the status, configuration, and other
     # settings for a journey.
     #
@@ -10944,6 +12037,10 @@ module Aws::Pinpoint
     #   This object is not used or supported.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] journey_channel_settings
+    #   Amazon Resource Name (ARN) of the Connect Campaign.
+    #   @return [Types::JourneyChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyResponse AWS API Documentation
     #
     class JourneyResponse < Struct.new(
@@ -10961,7 +12058,8 @@ module Aws::Pinpoint
       :start_activity,
       :start_condition,
       :state,
-      :tags)
+      :tags,
+      :journey_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11554,6 +12652,73 @@ module Aws::Pinpoint
     #           entity_id: "__string",
     #           template_id: "__string",
     #         },
+    #         in_app_message: {
+    #           body: "__string",
+    #           content: [
+    #             {
+    #               background_color: "__string",
+    #               body_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 body: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               header_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 header: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               image_url: "__string",
+    #               primary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #               secondary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           custom_config: {
+    #             "__string" => "__string",
+    #           },
+    #           layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #         },
     #       }
     #
     # @!attribute [rw] adm_message
@@ -11604,6 +12769,10 @@ module Aws::Pinpoint
     #   specified, this message overrides the default message.
     #   @return [Types::CampaignSmsMessage]
     #
+    # @!attribute [rw] in_app_message
+    #   The in-app message configuration.
+    #   @return [Types::CampaignInAppMessage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageConfiguration AWS API Documentation
     #
     class MessageConfiguration < Struct.new(
@@ -11614,7 +12783,8 @@ module Aws::Pinpoint
       :default_message,
       :email_message,
       :gcm_message,
-      :sms_message)
+      :sms_message,
+      :in_app_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11628,7 +12798,7 @@ module Aws::Pinpoint
     #         addresses: {
     #           "__string" => {
     #             body_override: "__string",
-    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #             context: {
     #               "__string" => "__string",
     #             },
@@ -12451,6 +13621,33 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Override button configuration.
+    #
+    # @note When making an API call, you may pass OverrideButtonConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #         link: "__string",
+    #       }
+    #
+    # @!attribute [rw] button_action
+    #   Action triggered by the button.
+    #   @return [String]
+    #
+    # @!attribute [rw] link
+    #   Button destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/OverrideButtonConfiguration AWS API Documentation
+    #
+    class OverrideButtonConfiguration < Struct.new(
+      :button_action,
+      :link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an API request or response.
     #
     # @!attribute [rw] message
@@ -12513,7 +13710,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -12993,7 +14190,7 @@ module Aws::Pinpoint
     #                 attributes: {
     #                   "__string" => ["__string"],
     #                 },
-    #                 channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #                 demographic: {
     #                   app_version: "__string",
     #                   locale: "__string",
@@ -13894,7 +15091,7 @@ module Aws::Pinpoint
     #           },
     #           filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #         },
-    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #         frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #         is_local_time: false,
     #         quiet_time: {
     #           end: "__string",
@@ -14676,7 +15873,7 @@ module Aws::Pinpoint
     #           addresses: {
     #             "__string" => {
     #               body_override: "__string",
-    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #               context: {
     #                 "__string" => "__string",
     #               },
@@ -15935,6 +17132,33 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Provides information about a request to create a message template.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the message template that was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message that's returned from the API for the request to create
+    #   the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for the request to create the message
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateCreateMessageBody AWS API Documentation
+    #
+    class TemplateCreateMessageBody < Struct.new(
+      :arn,
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a message template that's associated with
     # your Amazon Pinpoint account.
     #
@@ -16470,6 +17694,7 @@ module Aws::Pinpoint
     #             maximum_duration: 1,
     #             messages_per_second: 1,
     #             total: 1,
+    #             session: 1,
     #           },
     #           quiet_time: {
     #             end: "__string",
@@ -16586,7 +17811,7 @@ module Aws::Pinpoint
     #             {
     #               custom_delivery_configuration: {
     #                 delivery_uri: "__string", # required
-    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #               },
     #               message_configuration: {
     #                 adm_message: {
@@ -16676,6 +17901,73 @@ module Aws::Pinpoint
     #                   entity_id: "__string",
     #                   template_id: "__string",
     #                 },
+    #                 in_app_message: {
+    #                   body: "__string",
+    #                   content: [
+    #                     {
+    #                       background_color: "__string",
+    #                       body_config: {
+    #                         alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                         body: "__string", # required
+    #                         text_color: "__string", # required
+    #                       },
+    #                       header_config: {
+    #                         alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                         header: "__string", # required
+    #                         text_color: "__string", # required
+    #                       },
+    #                       image_url: "__string",
+    #                       primary_btn: {
+    #                         android: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         default_config: {
+    #                           background_color: "__string",
+    #                           border_radius: 1,
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                           text: "__string", # required
+    #                           text_color: "__string",
+    #                         },
+    #                         ios: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         web: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                       },
+    #                       secondary_btn: {
+    #                         android: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         default_config: {
+    #                           background_color: "__string",
+    #                           border_radius: 1,
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                           text: "__string", # required
+    #                           text_color: "__string",
+    #                         },
+    #                         ios: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                         web: {
+    #                           button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                           link: "__string",
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                   custom_config: {
+    #                     "__string" => "__string",
+    #                   },
+    #                   layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #                 },
     #               },
     #               schedule: {
     #                 end_time: "__string",
@@ -16700,7 +17992,7 @@ module Aws::Pinpoint
     #                   },
     #                   filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #                 },
-    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #                 frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #                 is_local_time: false,
     #                 quiet_time: {
     #                   end: "__string",
@@ -16734,7 +18026,7 @@ module Aws::Pinpoint
     #           ],
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           },
     #           description: "__string",
     #           holdout_percent: 1,
@@ -16749,6 +18041,7 @@ module Aws::Pinpoint
     #             maximum_duration: 1,
     #             messages_per_second: 1,
     #             total: 1,
+    #             session: 1,
     #           },
     #           message_configuration: {
     #             adm_message: {
@@ -16838,6 +18131,73 @@ module Aws::Pinpoint
     #               entity_id: "__string",
     #               template_id: "__string",
     #             },
+    #             in_app_message: {
+    #               body: "__string",
+    #               content: [
+    #                 {
+    #                   background_color: "__string",
+    #                   body_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     body: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   header_config: {
+    #                     alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                     header: "__string", # required
+    #                     text_color: "__string", # required
+    #                   },
+    #                   image_url: "__string",
+    #                   primary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                   secondary_btn: {
+    #                     android: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     default_config: {
+    #                       background_color: "__string",
+    #                       border_radius: 1,
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                       text: "__string", # required
+    #                       text_color: "__string",
+    #                     },
+    #                     ios: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                     web: {
+    #                       button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                       link: "__string",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               custom_config: {
+    #                 "__string" => "__string",
+    #               },
+    #               layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #             },
     #           },
     #           name: "__string",
     #           schedule: {
@@ -16863,7 +18223,7 @@ module Aws::Pinpoint
     #               },
     #               filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #             },
-    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #             frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #             is_local_time: false,
     #             quiet_time: {
     #               end: "__string",
@@ -16897,6 +18257,7 @@ module Aws::Pinpoint
     #           },
     #           treatment_description: "__string",
     #           treatment_name: "__string",
+    #           priority: 1,
     #         },
     #       }
     #
@@ -17045,7 +18406,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -17124,7 +18485,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -17236,6 +18597,121 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateInAppTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         create_new_version: false,
+    #         in_app_template_request: { # required
+    #           content: [
+    #             {
+    #               background_color: "__string",
+    #               body_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 body: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               header_config: {
+    #                 alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                 header: "__string", # required
+    #                 text_color: "__string", # required
+    #               },
+    #               image_url: "__string",
+    #               primary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #               secondary_btn: {
+    #                 android: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 default_config: {
+    #                   background_color: "__string",
+    #                   border_radius: 1,
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                   text: "__string", # required
+    #                   text_color: "__string",
+    #                 },
+    #                 ios: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #                 web: {
+    #                   button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                   link: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           custom_config: {
+    #             "__string" => "__string",
+    #           },
+    #           layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #           tags: {
+    #             "__string" => "__string",
+    #           },
+    #           template_description: "__string",
+    #         },
+    #         template_name: "__string", # required
+    #         version: "__string",
+    #       }
+    #
+    # @!attribute [rw] create_new_version
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] in_app_template_request
+    #   In-App Template Request.
+    #   @return [Types::InAppTemplateRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateInAppTemplateRequest AWS API Documentation
+    #
+    class UpdateInAppTemplateRequest < Struct.new(
+      :create_new_version,
+      :in_app_template_request,
+      :template_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateInAppTemplateResponse AWS API Documentation
+    #
+    class UpdateInAppTemplateResponse < Struct.new(
+      :message_body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateJourneyRequest
     #   data as a hash:
     #
@@ -17247,7 +18723,7 @@ module Aws::Pinpoint
     #             "__string" => {
     #               custom: {
     #                 delivery_uri: "__string",
-    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #                 message_config: {
     #                   data: "__string",
     #                 },
@@ -17510,6 +18986,9 @@ module Aws::Pinpoint
     #                   wait_until: "__string",
     #                 },
     #               },
+    #               contact_center: {
+    #                 next_activity: "__string",
+    #               },
     #             },
     #           },
     #           creation_date: "__string",
@@ -17566,6 +19045,10 @@ module Aws::Pinpoint
     #           state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #           wait_for_quiet_time: false,
     #           refresh_on_segment_update: false,
+    #           journey_channel_settings: {
+    #             connect_campaign_arn: "__string",
+    #             connect_campaign_execution_role_arn: "__string",
+    #           },
     #         },
     #       }
     #
@@ -18785,6 +20268,7 @@ module Aws::Pinpoint
     #           maximum_duration: 1,
     #           messages_per_second: 1,
     #           total: 1,
+    #           session: 1,
     #         },
     #         quiet_time: {
     #           end: "__string",
@@ -18875,7 +20359,7 @@ module Aws::Pinpoint
     #           {
     #             custom_delivery_configuration: {
     #               delivery_uri: "__string", # required
-    #               endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #             },
     #             message_configuration: {
     #               adm_message: {
@@ -18965,6 +20449,73 @@ module Aws::Pinpoint
     #                 entity_id: "__string",
     #                 template_id: "__string",
     #               },
+    #               in_app_message: {
+    #                 body: "__string",
+    #                 content: [
+    #                   {
+    #                     background_color: "__string",
+    #                     body_config: {
+    #                       alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                       body: "__string", # required
+    #                       text_color: "__string", # required
+    #                     },
+    #                     header_config: {
+    #                       alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                       header: "__string", # required
+    #                       text_color: "__string", # required
+    #                     },
+    #                     image_url: "__string",
+    #                     primary_btn: {
+    #                       android: {
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                       },
+    #                       default_config: {
+    #                         background_color: "__string",
+    #                         border_radius: 1,
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                         text: "__string", # required
+    #                         text_color: "__string",
+    #                       },
+    #                       ios: {
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                       },
+    #                       web: {
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                       },
+    #                     },
+    #                     secondary_btn: {
+    #                       android: {
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                       },
+    #                       default_config: {
+    #                         background_color: "__string",
+    #                         border_radius: 1,
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                         text: "__string", # required
+    #                         text_color: "__string",
+    #                       },
+    #                       ios: {
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                       },
+    #                       web: {
+    #                         button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                         link: "__string",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #                 custom_config: {
+    #                   "__string" => "__string",
+    #                 },
+    #                 layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #               },
     #             },
     #             schedule: {
     #               end_time: "__string",
@@ -18989,7 +20540,7 @@ module Aws::Pinpoint
     #                 },
     #                 filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #               },
-    #               frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #               frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #               is_local_time: false,
     #               quiet_time: {
     #                 end: "__string",
@@ -19023,7 +20574,7 @@ module Aws::Pinpoint
     #         ],
     #         custom_delivery_configuration: {
     #           delivery_uri: "__string", # required
-    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #         },
     #         description: "__string",
     #         holdout_percent: 1,
@@ -19038,6 +20589,7 @@ module Aws::Pinpoint
     #           maximum_duration: 1,
     #           messages_per_second: 1,
     #           total: 1,
+    #           session: 1,
     #         },
     #         message_configuration: {
     #           adm_message: {
@@ -19127,6 +20679,73 @@ module Aws::Pinpoint
     #             entity_id: "__string",
     #             template_id: "__string",
     #           },
+    #           in_app_message: {
+    #             body: "__string",
+    #             content: [
+    #               {
+    #                 background_color: "__string",
+    #                 body_config: {
+    #                   alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                   body: "__string", # required
+    #                   text_color: "__string", # required
+    #                 },
+    #                 header_config: {
+    #                   alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                   header: "__string", # required
+    #                   text_color: "__string", # required
+    #                 },
+    #                 image_url: "__string",
+    #                 primary_btn: {
+    #                   android: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   default_config: {
+    #                     background_color: "__string",
+    #                     border_radius: 1,
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                     text: "__string", # required
+    #                     text_color: "__string",
+    #                   },
+    #                   ios: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   web: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                 },
+    #                 secondary_btn: {
+    #                   android: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   default_config: {
+    #                     background_color: "__string",
+    #                     border_radius: 1,
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                     text: "__string", # required
+    #                     text_color: "__string",
+    #                   },
+    #                   ios: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   web: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             custom_config: {
+    #               "__string" => "__string",
+    #             },
+    #             layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #           },
     #         },
     #         name: "__string",
     #         schedule: {
@@ -19152,7 +20771,7 @@ module Aws::Pinpoint
     #             },
     #             filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #           },
-    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #           is_local_time: false,
     #           quiet_time: {
     #             end: "__string",
@@ -19186,6 +20805,7 @@ module Aws::Pinpoint
     #         },
     #         treatment_description: "__string",
     #         treatment_name: "__string",
+    #         priority: 1,
     #       }
     #
     # @!attribute [rw] additional_treatments
@@ -19265,6 +20885,12 @@ module Aws::Pinpoint
     #   campaign that's used for A/B testing.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   Defines the priority of the campaign, used to decide the order of
+    #   messages displayed to user if there are multiple messages scheduled
+    #   to be displayed at the same moment.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteCampaignRequest AWS API Documentation
     #
     class WriteCampaignRequest < Struct.new(
@@ -19283,7 +20909,8 @@ module Aws::Pinpoint
       :tags,
       :template_configuration,
       :treatment_description,
-      :treatment_name)
+      :treatment_name,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19337,7 +20964,7 @@ module Aws::Pinpoint
     #           "__string" => {
     #             custom: {
     #               delivery_uri: "__string",
-    #               endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #               message_config: {
     #                 data: "__string",
     #               },
@@ -19600,6 +21227,9 @@ module Aws::Pinpoint
     #                 wait_until: "__string",
     #               },
     #             },
+    #             contact_center: {
+    #               next_activity: "__string",
+    #             },
     #           },
     #         },
     #         creation_date: "__string",
@@ -19656,6 +21286,10 @@ module Aws::Pinpoint
     #         state: "DRAFT", # accepts DRAFT, ACTIVE, COMPLETED, CANCELLED, CLOSED, PAUSED
     #         wait_for_quiet_time: false,
     #         refresh_on_segment_update: false,
+    #         journey_channel_settings: {
+    #           connect_campaign_arn: "__string",
+    #           connect_campaign_execution_role_arn: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] activities
@@ -19756,6 +21390,11 @@ module Aws::Pinpoint
     # @!attribute [rw] refresh_on_segment_update
     #   @return [Boolean]
     #
+    # @!attribute [rw] journey_channel_settings
+    #   IAM role ARN to be assumed when invoking Connect campaign execution
+    #   APIs for dialing.
+    #   @return [Types::JourneyChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteJourneyRequest AWS API Documentation
     #
     class WriteJourneyRequest < Struct.new(
@@ -19772,7 +21411,8 @@ module Aws::Pinpoint
       :start_condition,
       :state,
       :wait_for_quiet_time,
-      :refresh_on_segment_update)
+      :refresh_on_segment_update,
+      :journey_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19979,7 +21619,7 @@ module Aws::Pinpoint
     #       {
     #         custom_delivery_configuration: {
     #           delivery_uri: "__string", # required
-    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM, IN_APP
     #         },
     #         message_configuration: {
     #           adm_message: {
@@ -20069,6 +21709,73 @@ module Aws::Pinpoint
     #             entity_id: "__string",
     #             template_id: "__string",
     #           },
+    #           in_app_message: {
+    #             body: "__string",
+    #             content: [
+    #               {
+    #                 background_color: "__string",
+    #                 body_config: {
+    #                   alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                   body: "__string", # required
+    #                   text_color: "__string", # required
+    #                 },
+    #                 header_config: {
+    #                   alignment: "LEFT", # required, accepts LEFT, CENTER, RIGHT
+    #                   header: "__string", # required
+    #                   text_color: "__string", # required
+    #                 },
+    #                 image_url: "__string",
+    #                 primary_btn: {
+    #                   android: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   default_config: {
+    #                     background_color: "__string",
+    #                     border_radius: 1,
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                     text: "__string", # required
+    #                     text_color: "__string",
+    #                   },
+    #                   ios: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   web: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                 },
+    #                 secondary_btn: {
+    #                   android: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   default_config: {
+    #                     background_color: "__string",
+    #                     border_radius: 1,
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                     text: "__string", # required
+    #                     text_color: "__string",
+    #                   },
+    #                   ios: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                   web: {
+    #                     button_action: "LINK", # required, accepts LINK, DEEP_LINK, CLOSE
+    #                     link: "__string",
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             custom_config: {
+    #               "__string" => "__string",
+    #             },
+    #             layout: "BOTTOM_BANNER", # accepts BOTTOM_BANNER, TOP_BANNER, OVERLAYS, MOBILE_FEED, MIDDLE_BANNER, CAROUSEL
+    #           },
     #         },
     #         schedule: {
     #           end_time: "__string",
@@ -20093,7 +21800,7 @@ module Aws::Pinpoint
     #             },
     #             filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
     #           },
-    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT
+    #           frequency: "ONCE", # accepts ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, EVENT, IN_APP_EVENT
     #           is_local_time: false,
     #           quiet_time: {
     #             end: "__string",

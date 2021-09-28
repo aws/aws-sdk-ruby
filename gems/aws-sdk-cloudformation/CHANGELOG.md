@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-09-10)
+------------------
+
+* Feature - Doc only update for CloudFormation that fixes several customer-reported issues.
+
 1.57.0 (2021-09-01)
 ------------------
 

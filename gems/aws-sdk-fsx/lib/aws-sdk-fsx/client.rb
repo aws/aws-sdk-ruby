@@ -339,7 +339,7 @@ module Aws::FSx
 
     # Use this action to associate one or more Domain Name Server (DNS)
     # aliases with an existing Amazon FSx for Windows File Server file
-    # system. A file systen can have a maximum of 50 DNS aliases associated
+    # system. A file system can have a maximum of 50 DNS aliases associated
     # with it at any one time. If you try to associate a DNS alias that is
     # already associated with the file system, FSx takes no action on that
     # alias in the request. For more information, see [Working with DNS
@@ -360,8 +360,8 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
     #   up to 64 ASCII characters. This token is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -456,28 +456,29 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Copies an existing backup within the same AWS account to another
-    # Region (cross-Region copy) or within the same Region (in-Region copy).
-    # You can have up to five backup copy requests in progress to a single
-    # destination Region per account.
+    # Copies an existing backup within the same Amazon Web Services account
+    # to another Amazon Web Services Region (cross-Region copy) or within
+    # the same Amazon Web Services Region (in-Region copy). You can have up
+    # to five backup copy requests in progress to a single destination
+    # Region per account.
     #
     # You can use cross-Region backup copies for cross-region disaster
     # recovery. You periodically take backups and copy them to another
     # Region so that in the event of a disaster in the primary Region, you
     # can restore from backup and recover availability quickly in the other
-    # Region. You can make cross-Region copies only within your AWS
-    # partition.
+    # Region. You can make cross-Region copies only within your Amazon Web
+    # Services partition.
     #
     # You can also use backup copies to clone your file data set to another
     # Region or within the same Region.
     #
-    # You can use the `SourceRegion` parameter to specify the AWS Region
-    # from which the backup will be copied. For example, if you make the
-    # call from the `us-west-1` Region and want to copy a backup from the
-    # `us-east-2` Region, you specify `us-east-2` in the `SourceRegion`
-    # parameter to make a cross-Region copy. If you don't specify a Region,
-    # the backup copy is created in the same Region where the request is
-    # sent from (in-Region copy).
+    # You can use the `SourceRegion` parameter to specify the Amazon Web
+    # Services Region from which the backup will be copied. For example, if
+    # you make the call from the `us-west-1` Region and want to copy a
+    # backup from the `us-east-2` Region, you specify `us-east-2` in the
+    # `SourceRegion` parameter to make a cross-Region copy. If you don't
+    # specify a Region, the backup copy is created in the same Region where
+    # the request is sent from (in-Region copy).
     #
     # For more information on creating backup copies, see [ Copying
     # backups][1] in the *Amazon FSx for Windows User Guide* and [Copying
@@ -491,8 +492,8 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
     #   up to 64 ASCII characters. This token is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -502,21 +503,21 @@ module Aws::FSx
     #   being copied.
     #
     # @option params [String] :source_region
-    #   The source AWS Region of the backup. Specifies the AWS Region from
-    #   which the backup is being copied. The source and destination Regions
-    #   must be in the same AWS partition. If you don't specify a Region, it
-    #   defaults to the Region where the request is sent from (in-Region
-    #   copy).
+    #   The source Amazon Web Services Region of the backup. Specifies the
+    #   Amazon Web Services Region from which the backup is being copied. The
+    #   source and destination Regions must be in the same Amazon Web Services
+    #   partition. If you don't specify a Region, it defaults to the Region
+    #   where the request is sent from (in-Region copy).
     #
     # @option params [String] :kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
-    #   the file system's data for Amazon FSx for Windows File Server file
-    #   systems and Amazon FSx for Lustre `PERSISTENT_1` file systems at rest.
-    #   In either case, if not specified, the Amazon FSx managed key is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are
-    #   always encrypted at rest using Amazon FSx managed keys. For more
-    #   information, see [Encrypt][1] in the *AWS Key Management Service API
-    #   Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   file system's data for Amazon FSx for Windows File Server file
+    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
+    #   Lustre `PERSISTENT_1` file systems at rest. If not specified, the
+    #   Amazon FSx managed key is used. The Amazon FSx for Lustre `SCRATCH_1`
+    #   and `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *Key
+    #   Management Service API Reference*.
     #
     #
     #
@@ -614,7 +615,7 @@ module Aws::FSx
     #   resp.backup.file_system.owner_id #=> String
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
-    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
     #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
@@ -676,12 +677,74 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
     #   resp.backup.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.backup.file_system.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.file_system.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.backup.file_system.ontap_configuration.route_table_ids #=> Array
+    #   resp.backup.file_system.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
     #   resp.backup.owner_id #=> String
     #   resp.backup.source_backup_id #=> String
     #   resp.backup.source_backup_region #=> String
+    #   resp.backup.resource_type #=> String, one of "FILE_SYSTEM", "VOLUME"
+    #   resp.backup.volume.creation_time #=> Time
+    #   resp.backup.volume.file_system_id #=> String
+    #   resp.backup.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.volume.name #=> String
+    #   resp.backup.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.backup.volume.ontap_configuration.junction_path #=> String
+    #   resp.backup.volume.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.backup.volume.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.volume.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.backup.volume.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.backup.volume.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.backup.volume.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.backup.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.backup.volume.ontap_configuration.uuid #=> String
+    #   resp.backup.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.volume.resource_arn #=> String
+    #   resp.backup.volume.tags #=> Array
+    #   resp.backup.volume.tags[0].key #=> String
+    #   resp.backup.volume.tags[0].value #=> String
+    #   resp.backup.volume.volume_id #=> String
+    #   resp.backup.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.volume.lifecycle_transition_reason.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackup AWS API Documentation
     #
@@ -692,23 +755,29 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a backup of an existing Amazon FSx file system. Creating
-    # regular backups for your file system is a best practice, enabling you
-    # to restore a file system from a backup if an issue arises with the
-    # original file system.
+    # Creates a backup of an existing Amazon FSx for Windows File Server or
+    # Amazon FSx for Lustre file system, or of an Amazon FSx for NetApp
+    # ONTAP volume. Creating regular backups is a best practice, enabling
+    # you to restore a file system or volume from a backup if an issue
+    # arises with the original file system or volume.
     #
     # For Amazon FSx for Lustre file systems, you can create a backup only
     # for file systems with the following configuration:
     #
     # * a Persistent deployment type
     #
-    # * is *not* linked to a data respository.
+    # * is *not* linked to a data repository.
     #
-    # For more information about backing up Amazon FSx for Lustre file
-    # systems, see [Working with FSx for Lustre backups][1].
+    # For more information about backups, see the following:
     #
-    # For more information about backing up Amazon FSx for Windows file
-    # systems, see [Working with FSx for Windows backups][2].
+    # * For Amazon FSx for Lustre, see [Working with FSx for Lustre
+    #   backups][1].
+    #
+    # * For Amazon FSx for Windows, see [Working with FSx for Windows
+    #   backups][2].
+    #
+    # * For Amazon FSx for NetApp ONTAP, see [Working with FSx for NetApp
+    #   ONTAP backups][3].
     #
     # If a backup with the specified client request token exists, and the
     # parameters match, this operation returns the description of the
@@ -738,15 +807,16 @@ module Aws::FSx
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
     # [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html
+    # [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/using-backups.html
     #
-    # @option params [required, String] :file_system_id
+    # @option params [String] :file_system_id
     #   The ID of the file system to back up.
     #
     # @option params [String] :client_request_token
     #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
     #   to ensure idempotent creation. This string is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   your behalf when you use the Command Line Interface (CLI) or an Amazon
+    #   Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -757,6 +827,9 @@ module Aws::FSx
     #   you have set `CopyTagsToBackups` to true, and you specify one or more
     #   tags using the `CreateBackup` action, no existing file system tags are
     #   copied from the file system to the backup.
+    #
+    # @option params [String] :volume_id
+    #   The ID of he FSx for NetApp ONTAP volume to back up.
     #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -809,7 +882,7 @@ module Aws::FSx
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_backup({
-    #     file_system_id: "FileSystemId", # required
+    #     file_system_id: "FileSystemId",
     #     client_request_token: "ClientRequestToken",
     #     tags: [
     #       {
@@ -817,6 +890,7 @@ module Aws::FSx
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     volume_id: "VolumeId",
     #   })
     #
     # @example Response structure
@@ -835,7 +909,7 @@ module Aws::FSx
     #   resp.backup.file_system.owner_id #=> String
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
-    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
     #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
@@ -897,12 +971,74 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
     #   resp.backup.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.backup.file_system.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.backup.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.file_system.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.backup.file_system.ontap_configuration.route_table_ids #=> Array
+    #   resp.backup.file_system.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
     #   resp.backup.owner_id #=> String
     #   resp.backup.source_backup_id #=> String
     #   resp.backup.source_backup_region #=> String
+    #   resp.backup.resource_type #=> String, one of "FILE_SYSTEM", "VOLUME"
+    #   resp.backup.volume.creation_time #=> Time
+    #   resp.backup.volume.file_system_id #=> String
+    #   resp.backup.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.volume.name #=> String
+    #   resp.backup.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.backup.volume.ontap_configuration.junction_path #=> String
+    #   resp.backup.volume.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.backup.volume.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backup.volume.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.backup.volume.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.backup.volume.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.backup.volume.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.backup.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.backup.volume.ontap_configuration.uuid #=> String
+    #   resp.backup.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.volume.resource_arn #=> String
+    #   resp.backup.volume.tags #=> Array
+    #   resp.backup.volume.tags[0].key #=> String
+    #   resp.backup.volume.tags[0].value #=> String
+    #   resp.backup.volume.volume_id #=> String
+    #   resp.backup.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.volume.lifecycle_transition_reason.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup AWS API Documentation
     #
@@ -959,8 +1095,8 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
     #   up to 64 ASCII characters. This token is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1064,15 +1200,15 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent creation. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :file_system_type
-    #   The type of Amazon FSx file system to create, either `WINDOWS` or
-    #   `LUSTRE`.
+    #   The type of Amazon FSx file system to create. Valid values are
+    #   `WINDOWS`, `LUSTRE`, and `ONTAP`.
     #
     # @option params [required, Integer] :storage_capacity
     #   Sets the storage capacity of the file system that you're creating.
@@ -1096,12 +1232,18 @@ module Aws::FSx
     #   * If `StorageType=HDD`, valid values are 2000 GiB - 65,536 GiB (64
     #     TiB).
     #
+    #   For ONTAP file systems:
+    #
+    #   * Valid values are 1024 GiB - 196,608 GiB (192 TiB).
+    #
+    #   ^
+    #
     # @option params [String] :storage_type
     #   Sets the storage type for the file system you're creating. Valid
     #   values are `SSD` and `HDD`.
     #
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
-    #     all Windows and Lustre deployment types.
+    #     all Windows, Lustre, and ONTAP deployment types.
     #
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types,
@@ -1118,12 +1260,15 @@ module Aws::FSx
     #
     # @option params [required, Array<String>] :subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
-    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
-    #   types, provide exactly two subnet IDs, one for the preferred file
-    #   server and one for the standby file server. You specify one of these
-    #   subnets as the preferred subnet using the `WindowsConfiguration >
-    #   PreferredSubnetID` property. For more information, see [ Availability
-    #   and durability: Single-AZ and Multi-AZ file systems][1].
+    #   accessible from. For Windows and ONTAP `MULTI_AZ_1` file system
+    #   deployment types, provide exactly two subnet IDs, one for the
+    #   preferred file server and one for the standby file server. You specify
+    #   one of these subnets as the preferred subnet using the
+    #   `WindowsConfiguration > PreferredSubnetID` or `OntapConfiguration >
+    #   PreferredSubnetID` properties. For more information, see [
+    #   Availability and durability: Single-AZ and Multi-AZ file systems][1]
+    #   in the *Amazon FSx for Windows User Guide* and [ Availability and
+    #   durability][2] in the *Amazon FSx for ONTAP User Guide*.
     #
     #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
     #   types and Lustre file systems, provide exactly one subnet ID. The file
@@ -1132,6 +1277,7 @@ module Aws::FSx
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html
     #
     # @option params [Array<String>] :security_group_ids
     #   A list of IDs specifying the security groups to apply to all network
@@ -1143,14 +1289,14 @@ module Aws::FSx
     #   the `Name` tag appears in the console as the file system name.
     #
     # @option params [String] :kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
-    #   the file system's data for Amazon FSx for Windows File Server file
-    #   systems and Amazon FSx for Lustre `PERSISTENT_1` file systems at rest.
-    #   In either case, if not specified, the Amazon FSx managed key is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are
-    #   always encrypted at rest using Amazon FSx managed keys. For more
-    #   information, see [Encrypt][1] in the *AWS Key Management Service API
-    #   Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   file system's data for Amazon FSx for Windows File Server file
+    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
+    #   Lustre `PERSISTENT_1` file systems at rest. If not specified, the
+    #   Amazon FSx managed key is used. The Amazon FSx for Lustre `SCRATCH_1`
+    #   and `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *Key
+    #   Management Service API Reference*.
     #
     #
     #
@@ -1161,6 +1307,10 @@ module Aws::FSx
     #
     # @option params [Types::CreateFileSystemLustreConfiguration] :lustre_configuration
     #   The Lustre configuration for the file system being created.
+    #
+    # @option params [Types::CreateFileSystemOntapConfiguration] :ontap_configuration
+    #   The ONTAP configuration properties of the FSx for NetApp ONTAP file
+    #   system that you are creating.
     #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1243,7 +1393,7 @@ module Aws::FSx
     #
     #   resp = client.create_file_system({
     #     client_request_token: "ClientRequestToken",
-    #     file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE
+    #     file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE, ONTAP
     #     storage_capacity: 1, # required
     #     storage_type: "SSD", # accepts SSD, HDD
     #     subnet_ids: ["SubnetId"], # required
@@ -1293,6 +1443,21 @@ module Aws::FSx
     #       drive_cache_type: "NONE", # accepts NONE, READ
     #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
+    #     ontap_configuration: {
+    #       automatic_backup_retention_days: 1,
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1
+    #       endpoint_ip_address_range: "IpAddressRange",
+    #       fsx_admin_password: "AdminPassword",
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
+    #       preferred_subnet_id: "SubnetId",
+    #       route_table_ids: ["RouteTableId"],
+    #       throughput_capacity: 1, # required
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1300,7 +1465,7 @@ module Aws::FSx
     #   resp.file_system.owner_id #=> String
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
-    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
@@ -1362,6 +1527,45 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_system.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.ontap_configuration.route_table_ids #=> Array
+    #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -1372,8 +1576,8 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a new Amazon FSx file system from an existing Amazon FSx
-    # backup.
+    # Creates a new Amazon FSx for Lustre or Amazon FSx for Windows File
+    # Server file system from an existing Amazon FSx backup.
     #
     # If a file system with the specified client request token exists and
     # the parameters match, this operation returns the description of the
@@ -1415,8 +1619,8 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent creation. This string is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1472,14 +1676,14 @@ module Aws::FSx
     #    </note>
     #
     # @option params [String] :kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
-    #   the file system's data for Amazon FSx for Windows File Server file
-    #   systems and Amazon FSx for Lustre `PERSISTENT_1` file systems at rest.
-    #   In either case, if not specified, the Amazon FSx managed key is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are
-    #   always encrypted at rest using Amazon FSx managed keys. For more
-    #   information, see [Encrypt][1] in the *AWS Key Management Service API
-    #   Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt the
+    #   file system's data for Amazon FSx for Windows File Server file
+    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
+    #   Lustre `PERSISTENT_1` file systems at rest. If not specified, the
+    #   Amazon FSx managed key is used. The Amazon FSx for Lustre `SCRATCH_1`
+    #   and `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *Key
+    #   Management Service API Reference*.
     #
     #
     #
@@ -1605,7 +1809,7 @@ module Aws::FSx
     #   resp.file_system.owner_id #=> String
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
-    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
@@ -1667,6 +1871,45 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_system.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.ontap_configuration.route_table_ids #=> Array
+    #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -1674,6 +1917,302 @@ module Aws::FSx
     # @param [Hash] params ({})
     def create_file_system_from_backup(params = {}, options = {})
       req = build_request(:create_file_system_from_backup, params)
+      req.send_request(options)
+    end
+
+    # Creates a storage virtual machine (SVM) for an Amazon FSx for ONTAP
+    # file system.
+    #
+    # @option params [Types::CreateSvmActiveDirectoryConfiguration] :active_directory_configuration
+    #   Describes the self-managed Microsoft Active Directory to which you
+    #   want to join the SVM. Joining an Active Directory provides user
+    #   authentication and access control for SMB clients, including Microsoft
+    #   Windows and macOS client accessing the file system.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #
+    # @option params [required, String] :name
+    #   The name of the SVM.
+    #
+    # @option params [String] :svm_admin_password
+    #   The password to use when managing the SVM using the NetApp ONTAP CLI
+    #   or REST API. If you do not specify a password, you can still use the
+    #   file system's `fsxadmin` user to manage the SVM.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @option params [String] :root_volume_security_style
+    #   The security style of the root volume of the SVM. Specify one of the
+    #   following values:
+    #
+    #   * `UNIX` if the file system is managed by a UNIX administrator, the
+    #     majority of users are NFS clients, and an application accessing the
+    #     data uses a UNIX user as the service account.
+    #
+    #   * `NTFS` if the file system is managed by a Windows administrator, the
+    #     majority of users are SMB clients, and an application accessing the
+    #     data uses a Windows user as the service account.
+    #
+    #   * `MIXED` if the file system is managed by both UNIX and Windows
+    #     administrators and users consist of both NFS and SMB clients.
+    #
+    # @return [Types::CreateStorageVirtualMachineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStorageVirtualMachineResponse#storage_virtual_machine #storage_virtual_machine} => Types::StorageVirtualMachine
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_storage_virtual_machine({
+    #     active_directory_configuration: {
+    #       net_bios_name: "NetBiosAlias", # required
+    #       self_managed_active_directory_configuration: {
+    #         domain_name: "ActiveDirectoryFullyQualifiedName", # required
+    #         organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
+    #         file_system_administrators_group: "FileSystemAdministratorsGroupName",
+    #         user_name: "DirectoryUserName", # required
+    #         password: "DirectoryPassword", # required
+    #         dns_ips: ["IpAddress"], # required
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     file_system_id: "FileSystemId", # required
+    #     name: "StorageVirtualMachineName", # required
+    #     svm_admin_password: "AdminPassword",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     root_volume_security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machine.active_directory_configuration.net_bios_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.storage_virtual_machine.creation_time #=> Time
+    #   resp.storage_virtual_machine.endpoints.iscsi.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.management.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.management.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.management.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.nfs.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.smb.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.smb.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.smb.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.file_system_id #=> String
+    #   resp.storage_virtual_machine.lifecycle #=> String, one of "CREATED", "CREATING", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.storage_virtual_machine.name #=> String
+    #   resp.storage_virtual_machine.resource_arn #=> String
+    #   resp.storage_virtual_machine.storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machine.subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
+    #   resp.storage_virtual_machine.uuid #=> String
+    #   resp.storage_virtual_machine.tags #=> Array
+    #   resp.storage_virtual_machine.tags[0].key #=> String
+    #   resp.storage_virtual_machine.tags[0].value #=> String
+    #   resp.storage_virtual_machine.lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machine.root_volume_security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachine AWS API Documentation
+    #
+    # @overload create_storage_virtual_machine(params = {})
+    # @param [Hash] params ({})
+    def create_storage_virtual_machine(params = {}, options = {})
+      req = build_request(:create_storage_virtual_machine, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon FSx for NetApp ONTAP storage volume.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :volume_type
+    #   Specifies the type of volume to create; `ONTAP` is the only valid
+    #   volume type.
+    #
+    # @option params [required, String] :name
+    #   Specifies the name of the volume you're creating.
+    #
+    # @option params [Types::CreateOntapVolumeConfiguration] :ontap_configuration
+    #   Specifies the `ONTAP` configuration to use in creating the volume.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVolumeResponse#volume #volume} => Types::Volume
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_volume({
+    #     client_request_token: "ClientRequestToken",
+    #     volume_type: "ONTAP", # required, accepts ONTAP
+    #     name: "VolumeName", # required
+    #     ontap_configuration: {
+    #       junction_path: "JunctionPath", # required
+    #       security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #       size_in_megabytes: 1, # required
+    #       storage_efficiency_enabled: false, # required
+    #       storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #       tiering_policy: {
+    #         cooling_period: 1,
+    #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume.creation_time #=> Time
+    #   resp.volume.file_system_id #=> String
+    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volume.name #=> String
+    #   resp.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.volume.ontap_configuration.junction_path #=> String
+    #   resp.volume.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.volume.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volume.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.volume.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.volume.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.volume.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.volume.ontap_configuration.uuid #=> String
+    #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volume.resource_arn #=> String
+    #   resp.volume.tags #=> Array
+    #   resp.volume.tags[0].key #=> String
+    #   resp.volume.tags[0].value #=> String
+    #   resp.volume.volume_id #=> String
+    #   resp.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.volume.lifecycle_transition_reason.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolume AWS API Documentation
+    #
+    # @overload create_volume(params = {})
+    # @param [Hash] params ({})
+    def create_volume(params = {}, options = {})
+      req = build_request(:create_volume, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Amazon FSx for NetApp ONTAP volume from an existing
+    # Amazon FSx volume backup.
+    #
+    # @option params [required, String] :backup_id
+    #   The ID of the source backup. Specifies the backup you are copying.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the new volume you're creating.
+    #
+    # @option params [Types::CreateOntapVolumeConfiguration] :ontap_configuration
+    #   Specifies the configuration of the ONTAP volume that you are creating.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateVolumeFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVolumeFromBackupResponse#volume #volume} => Types::Volume
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_volume_from_backup({
+    #     backup_id: "BackupId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     name: "VolumeName", # required
+    #     ontap_configuration: {
+    #       junction_path: "JunctionPath", # required
+    #       security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #       size_in_megabytes: 1, # required
+    #       storage_efficiency_enabled: false, # required
+    #       storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #       tiering_policy: {
+    #         cooling_period: 1,
+    #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume.creation_time #=> Time
+    #   resp.volume.file_system_id #=> String
+    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volume.name #=> String
+    #   resp.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.volume.ontap_configuration.junction_path #=> String
+    #   resp.volume.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.volume.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volume.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.volume.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.volume.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.volume.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.volume.ontap_configuration.uuid #=> String
+    #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volume.resource_arn #=> String
+    #   resp.volume.tags #=> Array
+    #   resp.volume.tags[0].key #=> String
+    #   resp.volume.tags[0].value #=> String
+    #   resp.volume.volume_id #=> String
+    #   resp.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.volume.lifecycle_transition_reason.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeFromBackup AWS API Documentation
+    #
+    # @overload create_volume_from_backup(params = {})
+    # @param [Hash] params ({})
+    def create_volume_from_backup(params = {}, options = {})
+      req = build_request(:create_volume_from_backup, params)
       req.send_request(options)
     end
 
@@ -1692,7 +2231,7 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent deletion. This is automatically filled on your behalf when
-    #   using the AWS CLI or SDK.
+    #   using the CLI or SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1742,6 +2281,10 @@ module Aws::FSx
     # system no longer exists, and its data is gone. Any existing automatic
     # backups will also be deleted.
     #
+    # To delete an Amazon FSx for NetApp ONTAP file system, first delete all
+    # the volumes and SVMs on the file system. Then provide a `FileSystemId`
+    # value to the `DeleFileSystem` operation.
+    #
     # By default, when you delete an Amazon FSx for Windows File Server file
     # system, a final backup is created upon deletion. This final backup is
     # not subject to the file system's retention policy, and must be
@@ -1769,7 +2312,7 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent deletion. This is automatically filled on your behalf when
-    #   using the AWS CLI or SDK.
+    #   using the Command Line Interface (CLI) or an Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1851,10 +2394,114 @@ module Aws::FSx
       req.send_request(options)
     end
 
+    # Deletes an existing Amazon FSx for ONTAP storage virtual machine
+    # (SVM). Prior to deleting an SVM, you must delete all non-root volumes
+    # in the SVM, otherwise the operation will fail.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :storage_virtual_machine_id
+    #   The ID of the SVM that you want to delete.
+    #
+    # @return [Types::DeleteStorageVirtualMachineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteStorageVirtualMachineResponse#storage_virtual_machine_id #storage_virtual_machine_id} => String
+    #   * {Types::DeleteStorageVirtualMachineResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_virtual_machine({
+    #     client_request_token: "ClientRequestToken",
+    #     storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machine_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATED", "CREATING", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteStorageVirtualMachine AWS API Documentation
+    #
+    # @overload delete_storage_virtual_machine(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_virtual_machine(params = {}, options = {})
+      req = build_request(:delete_storage_virtual_machine, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon FSx for NetApp ONTAP volume. When deleting a volume,
+    # you have the option of creating a final backup. If you create a final
+    # backup, you have the option to apply Tags to the backup. You need to
+    # have `fsx:TagResource` permission in order to apply tags to the
+    # backup.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :volume_id
+    #   The ID of the volume you are deleting.
+    #
+    # @option params [Types::DeleteVolumeOntapConfiguration] :ontap_configuration
+    #   For Amazon FSx for ONTAP volumes, specify whether to take a final
+    #   backup of the volume, and apply tags to the backup.
+    #
+    # @return [Types::DeleteVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVolumeResponse#volume_id #volume_id} => String
+    #   * {Types::DeleteVolumeResponse#lifecycle #lifecycle} => String
+    #   * {Types::DeleteVolumeResponse#ontap_response #ontap_response} => Types::DeleteVolumeOntapResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_volume({
+    #     client_request_token: "ClientRequestToken",
+    #     volume_id: "VolumeId", # required
+    #     ontap_configuration: {
+    #       skip_final_backup: false,
+    #       final_backup_tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.ontap_response.final_backup_id #=> String
+    #   resp.ontap_response.final_backup_tags #=> Array
+    #   resp.ontap_response.final_backup_tags[0].key #=> String
+    #   resp.ontap_response.final_backup_tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteVolume AWS API Documentation
+    #
+    # @overload delete_volume(params = {})
+    # @param [Hash] params ({})
+    def delete_volume(params = {}, options = {})
+      req = build_request(:delete_volume, params)
+      req.send_request(options)
+    end
+
     # Returns the description of specific Amazon FSx backups, if a
     # `BackupIds` value is provided for that backup. Otherwise, it returns
-    # all backups owned by your AWS account in the AWS Region of the
-    # endpoint that you're calling.
+    # all backups owned by your Amazon Web Services account in the Amazon
+    # Web Services Region of the endpoint that you're calling.
     #
     # When retrieving all backups, you can optionally specify the
     # `MaxResults` parameter to limit the number of backups in a response.
@@ -1871,7 +2518,7 @@ module Aws::FSx
     #
     # When using this action, keep the following in mind:
     #
-    # * The implementation might return fewer than `MaxResults` file system
+    # * The implementation might return fewer than `MaxResults` backup
     #   descriptions while still including a `NextToken` value.
     #
     # * The order of backups returned in the response of one
@@ -1883,7 +2530,8 @@ module Aws::FSx
     #   filters. If any IDs are not found, BackupNotFound will be thrown.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters structure. Supported names are file-system-id and backup-type.
+    #   Filters structure. Supported names are `file-system-id`,
+    #   `backup-type`, `file-system-type`, and `volume-id`.
     #
     # @option params [Integer] :max_results
     #   Maximum number of backups to return in the response (integer). This
@@ -1948,7 +2596,7 @@ module Aws::FSx
     #     backup_ids: ["BackupId"],
     #     filters: [
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -1973,7 +2621,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.owner_id #=> String
     #   resp.backups[0].file_system.creation_time #=> Time
     #   resp.backups[0].file_system.file_system_id #=> String
-    #   resp.backups[0].file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.backups[0].file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
     #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backups[0].file_system.failure_details.message #=> String
     #   resp.backups[0].file_system.storage_capacity #=> Integer
@@ -2035,12 +2683,74 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
     #   resp.backups[0].file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.backups[0].file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backups[0].file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backups[0].file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backups[0].file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.backups[0].file_system.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.backups[0].file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backups[0].file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backups[0].file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backups[0].file_system.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.backups[0].file_system.ontap_configuration.route_table_ids #=> Array
+    #   resp.backups[0].file_system.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.backups[0].file_system.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.backups[0].file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.backups[0].directory_information.resource_arn #=> String
     #   resp.backups[0].owner_id #=> String
     #   resp.backups[0].source_backup_id #=> String
     #   resp.backups[0].source_backup_region #=> String
+    #   resp.backups[0].resource_type #=> String, one of "FILE_SYSTEM", "VOLUME"
+    #   resp.backups[0].volume.creation_time #=> Time
+    #   resp.backups[0].volume.file_system_id #=> String
+    #   resp.backups[0].volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backups[0].volume.name #=> String
+    #   resp.backups[0].volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.backups[0].volume.ontap_configuration.junction_path #=> String
+    #   resp.backups[0].volume.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.backups[0].volume.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.backups[0].volume.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.backups[0].volume.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.backups[0].volume.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.backups[0].volume.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.backups[0].volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.backups[0].volume.ontap_configuration.uuid #=> String
+    #   resp.backups[0].volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backups[0].volume.resource_arn #=> String
+    #   resp.backups[0].volume.tags #=> Array
+    #   resp.backups[0].volume.tags[0].key #=> String
+    #   resp.backups[0].volume.tags[0].value #=> String
+    #   resp.backups[0].volume.volume_id #=> String
+    #   resp.backups[0].volume.volume_type #=> String, one of "ONTAP"
+    #   resp.backups[0].volume.lifecycle_transition_reason.message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups AWS API Documentation
@@ -2057,8 +2767,8 @@ module Aws::FSx
     # request, or if filters are used in the request. You can use filters to
     # narrow the response to include just tasks for specific file systems,
     # or tasks in a specific lifecycle state. Otherwise, it returns all data
-    # repository tasks owned by your AWS account in the AWS Region of the
-    # endpoint that you're calling.
+    # repository tasks owned by your Amazon Web Services account in the
+    # Amazon Web Services Region of the endpoint that you're calling.
     #
     # When retrieving all tasks, you can paginate the response by using the
     # optional `MaxResults` parameter to limit the number of tasks returned
@@ -2152,8 +2862,8 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
     #   up to 64 ASCII characters. This token is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2209,8 +2919,9 @@ module Aws::FSx
 
     # Returns the description of specific Amazon FSx file systems, if a
     # `FileSystemIds` value is provided for that file system. Otherwise, it
-    # returns descriptions of all file systems owned by your AWS account in
-    # the AWS Region of the endpoint that you're calling.
+    # returns descriptions of all file systems owned by your Amazon Web
+    # Services account in the Amazon Web Services Region of the endpoint
+    # that you're calling.
     #
     # When retrieving all file system descriptions, you can optionally
     # specify the `MaxResults` parameter to limit the number of descriptions
@@ -2315,7 +3026,7 @@ module Aws::FSx
     #   resp.file_systems[0].owner_id #=> String
     #   resp.file_systems[0].creation_time #=> Time
     #   resp.file_systems[0].file_system_id #=> String
-    #   resp.file_systems[0].file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.file_systems[0].file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
     #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_systems[0].failure_details.message #=> String
     #   resp.file_systems[0].storage_capacity #=> Integer
@@ -2377,6 +3088,45 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
     #   resp.file_systems[0].administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_systems[0].administrative_actions[0].failure_details.message #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.name #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_systems[0].ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_systems[0].ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_systems[0].ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.file_systems[0].ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_systems[0].ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.file_systems[0].ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.file_systems[0].ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_systems[0].ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_systems[0].ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_systems[0].ontap_configuration.preferred_subnet_id #=> String
+    #   resp.file_systems[0].ontap_configuration.route_table_ids #=> Array
+    #   resp.file_systems[0].ontap_configuration.route_table_ids[0] #=> String
+    #   resp.file_systems[0].ontap_configuration.throughput_capacity #=> Integer
+    #   resp.file_systems[0].ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -2385,6 +3135,167 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_file_systems(params = {}, options = {})
       req = build_request(:describe_file_systems, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more Amazon FSx for NetApp ONTAP storage virtual
+    # machines (SVMs).
+    #
+    # @option params [Array<String>] :storage_virtual_machine_ids
+    #   Enter the ID of one or more SVMs that you want to view.
+    #
+    # @option params [Array<Types::StorageVirtualMachineFilter>] :filters
+    #   Enter a filter name:value pair to view a select set of SVMs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeStorageVirtualMachinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStorageVirtualMachinesResponse#storage_virtual_machines #storage_virtual_machines} => Array&lt;Types::StorageVirtualMachine&gt;
+    #   * {Types::DescribeStorageVirtualMachinesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_storage_virtual_machines({
+    #     storage_virtual_machine_ids: ["StorageVirtualMachineId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id
+    #         values: ["StorageVirtualMachineFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machines #=> Array
+    #   resp.storage_virtual_machines[0].active_directory_configuration.net_bios_name #=> String
+    #   resp.storage_virtual_machines[0].active_directory_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.storage_virtual_machines[0].active_directory_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.storage_virtual_machines[0].active_directory_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.storage_virtual_machines[0].active_directory_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.storage_virtual_machines[0].active_directory_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.storage_virtual_machines[0].active_directory_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.storage_virtual_machines[0].creation_time #=> Time
+    #   resp.storage_virtual_machines[0].endpoints.iscsi.dns_name #=> String
+    #   resp.storage_virtual_machines[0].endpoints.iscsi.ip_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.iscsi.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].endpoints.management.dns_name #=> String
+    #   resp.storage_virtual_machines[0].endpoints.management.ip_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.management.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].endpoints.nfs.dns_name #=> String
+    #   resp.storage_virtual_machines[0].endpoints.nfs.ip_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.nfs.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].endpoints.smb.dns_name #=> String
+    #   resp.storage_virtual_machines[0].endpoints.smb.ip_addresses #=> Array
+    #   resp.storage_virtual_machines[0].endpoints.smb.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machines[0].file_system_id #=> String
+    #   resp.storage_virtual_machines[0].lifecycle #=> String, one of "CREATED", "CREATING", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.storage_virtual_machines[0].name #=> String
+    #   resp.storage_virtual_machines[0].resource_arn #=> String
+    #   resp.storage_virtual_machines[0].storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machines[0].subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
+    #   resp.storage_virtual_machines[0].uuid #=> String
+    #   resp.storage_virtual_machines[0].tags #=> Array
+    #   resp.storage_virtual_machines[0].tags[0].key #=> String
+    #   resp.storage_virtual_machines[0].tags[0].value #=> String
+    #   resp.storage_virtual_machines[0].lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machines[0].root_volume_security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeStorageVirtualMachines AWS API Documentation
+    #
+    # @overload describe_storage_virtual_machines(params = {})
+    # @param [Hash] params ({})
+    def describe_storage_virtual_machines(params = {}, options = {})
+      req = build_request(:describe_storage_virtual_machines, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more Amazon FSx for NetApp ONTAP volumes.
+    #
+    # @option params [Array<String>] :volume_ids
+    #   IDs of the volumes whose descriptions you want to retrieve.
+    #
+    # @option params [Array<Types::VolumeFilter>] :filters
+    #   Enter a filter name:value pair to view a select set of volumes.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeVolumesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVolumesResponse#volumes #volumes} => Array&lt;Types::Volume&gt;
+    #   * {Types::DescribeVolumesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_volumes({
+    #     volume_ids: ["VolumeId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, storage-virtual-machine-id
+    #         values: ["VolumeFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volumes #=> Array
+    #   resp.volumes[0].creation_time #=> Time
+    #   resp.volumes[0].file_system_id #=> String
+    #   resp.volumes[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volumes[0].name #=> String
+    #   resp.volumes[0].ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.volumes[0].ontap_configuration.junction_path #=> String
+    #   resp.volumes[0].ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.volumes[0].ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volumes[0].ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.volumes[0].ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.volumes[0].ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.volumes[0].ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.volumes[0].ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.volumes[0].ontap_configuration.uuid #=> String
+    #   resp.volumes[0].ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volumes[0].resource_arn #=> String
+    #   resp.volumes[0].tags #=> Array
+    #   resp.volumes[0].tags[0].key #=> String
+    #   resp.volumes[0].tags[0].value #=> String
+    #   resp.volumes[0].volume_id #=> String
+    #   resp.volumes[0].volume_type #=> String, one of "ONTAP"
+    #   resp.volumes[0].lifecycle_transition_reason.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeVolumes AWS API Documentation
+    #
+    # @overload describe_volumes(params = {})
+    # @param [Hash] params ({})
+    def describe_volumes(params = {}, options = {})
+      req = build_request(:describe_volumes, params)
       req.send_request(options)
     end
 
@@ -2406,8 +3317,8 @@ module Aws::FSx
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
     #   up to 64 ASCII characters. This token is automatically filled on your
-    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
-    #   SDK.
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2489,6 +3400,8 @@ module Aws::FSx
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list tags for a resource
@@ -2656,23 +3569,36 @@ module Aws::FSx
     #
     # * WeeklyMaintenanceStartTime
     #
+    # For Amazon FSx for NetApp ONTAP file systems, you can update the
+    # following properties:
+    #
+    # * AutomaticBackupRetentionDays
+    #
+    # * DailyAutomaticBackupStartTime
+    #
+    # * FsxAdminPassword
+    #
+    # * WeeklyMaintenanceStartTime
+    #
     # @option params [required, String] :file_system_id
     #   Identifies the file system that you are updating.
     #
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
     #   idempotent updates. This string is automatically filled on your behalf
-    #   when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+    #   when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Integer] :storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   file system. Specifies the storage capacity target value, GiB, to
-    #   increase the storage capacity for the file system that you're
-    #   updating. You cannot make a storage capacity increase request if there
-    #   is an existing storage capacity increase request in progress.
+    #   for Windows File Server or Amazon FSx for Lustre file system.
+    #   Specifies the storage capacity target value, GiB, to increase the
+    #   storage capacity for the file system that you're updating. You cannot
+    #   make a storage capacity increase request if there is an existing
+    #   storage capacity increase request in progress.
     #
     #   For Windows file systems, the storage capacity target value must be at
     #   least 10 percent (%) greater than the current storage capacity value.
@@ -2710,6 +3636,10 @@ module Aws::FSx
     # @option params [Types::UpdateFileSystemLustreConfiguration] :lustre_configuration
     #   The configuration object for Amazon FSx for Lustre file systems used
     #   in the `UpdateFileSystem` operation.
+    #
+    # @option params [Types::UpdateFileSystemOntapConfiguration] :ontap_configuration
+    #   The configuration updates for an Amazon FSx for NetApp ONTAP file
+    #   system.
     #
     # @return [Types::UpdateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2788,6 +3718,12 @@ module Aws::FSx
     #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
     #       data_compression_type: "NONE", # accepts NONE, LZ4
     #     },
+    #     ontap_configuration: {
+    #       automatic_backup_retention_days: 1,
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       fsx_admin_password: "AdminPassword",
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2795,7 +3731,7 @@ module Aws::FSx
     #   resp.file_system.owner_id #=> String
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
-    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE"
+    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
@@ -2857,6 +3793,45 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
     #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_system.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.ontap_configuration.route_table_ids #=> Array
+    #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -2864,6 +3839,164 @@ module Aws::FSx
     # @param [Hash] params ({})
     def update_file_system(params = {}, options = {})
       req = build_request(:update_file_system, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon FSx for ONTAP storage virtual machine (SVM).
+    #
+    # @option params [Types::UpdateSvmActiveDirectoryConfiguration] :active_directory_configuration
+    #   Updates the Microsoft Active Directory (AD) configuration for an SVM
+    #   that is joined to an AD.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :storage_virtual_machine_id
+    #   The ID of the SVM that you want to update, in the format
+    #   `svm-0123456789abcdef0`.
+    #
+    # @option params [String] :svm_admin_password
+    #   Enter a new SvmAdminPassword if you are updating it.
+    #
+    # @return [Types::UpdateStorageVirtualMachineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStorageVirtualMachineResponse#storage_virtual_machine #storage_virtual_machine} => Types::StorageVirtualMachine
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_storage_virtual_machine({
+    #     active_directory_configuration: {
+    #       self_managed_active_directory_configuration: {
+    #         user_name: "DirectoryUserName",
+    #         password: "DirectoryPassword",
+    #         dns_ips: ["IpAddress"],
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #     svm_admin_password: "AdminPassword",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_virtual_machine.active_directory_configuration.net_bios_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.storage_virtual_machine.active_directory_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.storage_virtual_machine.creation_time #=> Time
+    #   resp.storage_virtual_machine.endpoints.iscsi.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.iscsi.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.management.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.management.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.management.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.nfs.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.nfs.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.endpoints.smb.dns_name #=> String
+    #   resp.storage_virtual_machine.endpoints.smb.ip_addresses #=> Array
+    #   resp.storage_virtual_machine.endpoints.smb.ip_addresses[0] #=> String
+    #   resp.storage_virtual_machine.file_system_id #=> String
+    #   resp.storage_virtual_machine.lifecycle #=> String, one of "CREATED", "CREATING", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.storage_virtual_machine.name #=> String
+    #   resp.storage_virtual_machine.resource_arn #=> String
+    #   resp.storage_virtual_machine.storage_virtual_machine_id #=> String
+    #   resp.storage_virtual_machine.subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
+    #   resp.storage_virtual_machine.uuid #=> String
+    #   resp.storage_virtual_machine.tags #=> Array
+    #   resp.storage_virtual_machine.tags[0].key #=> String
+    #   resp.storage_virtual_machine.tags[0].value #=> String
+    #   resp.storage_virtual_machine.lifecycle_transition_reason.message #=> String
+    #   resp.storage_virtual_machine.root_volume_security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachine AWS API Documentation
+    #
+    # @overload update_storage_virtual_machine(params = {})
+    # @param [Hash] params ({})
+    def update_storage_virtual_machine(params = {}, options = {})
+      req = build_request(:update_storage_virtual_machine, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon FSx for NetApp ONTAP volume's configuration.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :volume_id
+    #   Specifies the volume that you want to update, formatted
+    #   `fsvol-0123456789abcdef0`.
+    #
+    # @option params [Types::UpdateOntapVolumeConfiguration] :ontap_configuration
+    #   The `ONTAP` configuration of the volume you are updating.
+    #
+    # @return [Types::UpdateVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVolumeResponse#volume #volume} => Types::Volume
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_volume({
+    #     client_request_token: "ClientRequestToken",
+    #     volume_id: "VolumeId", # required
+    #     ontap_configuration: {
+    #       junction_path: "JunctionPath",
+    #       security_style: "UNIX", # accepts UNIX, NTFS, MIXED
+    #       size_in_megabytes: 1,
+    #       storage_efficiency_enabled: false,
+    #       tiering_policy: {
+    #         cooling_period: 1,
+    #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume.creation_time #=> Time
+    #   resp.volume.file_system_id #=> String
+    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volume.name #=> String
+    #   resp.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.volume.ontap_configuration.junction_path #=> String
+    #   resp.volume.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.volume.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.volume.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.volume.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.volume.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.volume.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.volume.ontap_configuration.uuid #=> String
+    #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volume.resource_arn #=> String
+    #   resp.volume.tags #=> Array
+    #   resp.volume.tags[0].key #=> String
+    #   resp.volume.tags[0].value #=> String
+    #   resp.volume.volume_id #=> String
+    #   resp.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.volume.lifecycle_transition_reason.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateVolume AWS API Documentation
+    #
+    # @overload update_volume(params = {})
+    # @param [Hash] params ({})
+    def update_volume(params = {}, options = {})
+      req = build_request(:update_volume, params)
       req.send_request(options)
     end
 
@@ -2880,7 +4013,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

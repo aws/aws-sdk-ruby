@@ -3209,6 +3209,8 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The default user assigned to the user group.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DefaultUserAssociatedToUserGroupFault AWS API Documentation
     #
     class DefaultUserAssociatedToUserGroupFault < Aws::EmptyStructure; end
@@ -6574,16 +6576,18 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] user_group_ids_to_add
-    #   The user group you are associating with the replication group.
+    #   The ID of the user group you are associating with the replication
+    #   group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_group_ids_to_remove
-    #   The user group to remove, meaning the users in the group no longer
-    #   can access the replication group.
+    #   The ID of the user group to disassociate from the replication group,
+    #   meaning the users in the group no longer can access the replication
+    #   group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_user_groups
-    #   Removes the user groups that can access this replication group.
+    #   Removes the user group associated with this replication group.
     #   @return [Boolean]
     #
     # @!attribute [rw] log_delivery_configurations
@@ -7752,8 +7756,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] user_group_ids
-    #   The list of user group IDs that have access to the replication
-    #   group.
+    #   The ID of the user group associated to the replication group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] log_delivery_configurations
@@ -7863,7 +7866,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] user_groups
-    #   The user groups being modified.
+    #   The user group being modified.
     #   @return [Types::UserGroupsUpdateStatus]
     #
     # @!attribute [rw] log_delivery_configurations
@@ -9371,7 +9374,7 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] pending_changes
-    #   A list of updates being applied to the user groups.
+    #   A list of updates being applied to the user group.
     #   @return [Types::UserGroupPendingChanges]
     #
     # @!attribute [rw] replication_groups
@@ -9436,11 +9439,11 @@ module Aws::ElastiCache
     # The status of the user group update.
     #
     # @!attribute [rw] user_group_ids_to_add
-    #   The list of user group IDs to add.
+    #   The ID of the user group to add.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_group_ids_to_remove
-    #   The list of user group IDs to remove.
+    #   The ID of the user group to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserGroupsUpdateStatus AWS API Documentation

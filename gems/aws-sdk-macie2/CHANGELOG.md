@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-09-16)
+------------------
+
+* Feature - This release adds support for specifying which managed data identifiers are used by a classification job, and retrieving a list of managed data identifiers that are available.
+
 1.33.0 (2021-09-01)
 ------------------
 

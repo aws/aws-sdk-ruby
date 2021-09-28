@@ -1631,6 +1631,7 @@ module Aws::FraudDetector
     #
     #   * {Types::GetEventPredictionResult#model_scores #model_scores} => Array&lt;Types::ModelScores&gt;
     #   * {Types::GetEventPredictionResult#rule_results #rule_results} => Array&lt;Types::RuleResult&gt;
+    #   * {Types::GetEventPredictionResult#external_model_outputs #external_model_outputs} => Array&lt;Types::ExternalModelOutputs&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1670,6 +1671,11 @@ module Aws::FraudDetector
     #   resp.rule_results[0].rule_id #=> String
     #   resp.rule_results[0].outcomes #=> Array
     #   resp.rule_results[0].outcomes[0] #=> String
+    #   resp.external_model_outputs #=> Array
+    #   resp.external_model_outputs[0].external_model.model_endpoint #=> String
+    #   resp.external_model_outputs[0].external_model.model_source #=> String, one of "SAGEMAKER"
+    #   resp.external_model_outputs[0].outputs #=> Hash
+    #   resp.external_model_outputs[0].outputs["string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventPrediction AWS API Documentation
     #
@@ -2970,7 +2976,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -539,7 +539,7 @@ module Aws::RoboMaker
     #
     #       {
     #         name: "Name", # required
-    #         sources: [ # required
+    #         sources: [
     #           {
     #             s3_bucket: "S3Bucket",
     #             s3_key: "S3Key",
@@ -552,6 +552,9 @@ module Aws::RoboMaker
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         environment: {
+    #           uri: "RepositoryUrl",
     #         },
     #       }
     #
@@ -573,13 +576,19 @@ module Aws::RoboMaker
     #   robot application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] environment
+    #   The object that contains that URI of the Docker image that you use
+    #   for your robot application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationRequest AWS API Documentation
     #
     class CreateRobotApplicationRequest < Struct.new(
       :name,
       :sources,
       :robot_software_suite,
-      :tags)
+      :tags,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -618,6 +627,11 @@ module Aws::RoboMaker
     #   The list of all tags added to the robot application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] environment
+    #   An object that contains the Docker image URI used to a create your
+    #   robot application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationResponse AWS API Documentation
     #
     class CreateRobotApplicationResponse < Struct.new(
@@ -628,7 +642,8 @@ module Aws::RoboMaker
       :robot_software_suite,
       :last_updated_at,
       :revision_id,
-      :tags)
+      :tags,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -639,6 +654,8 @@ module Aws::RoboMaker
     #       {
     #         application: "Arn", # required
     #         current_revision_id: "RevisionId",
+    #         s3_etags: ["S3Etag"],
+    #         image_digest: "ImageDigest",
     #       }
     #
     # @!attribute [rw] application
@@ -651,11 +668,23 @@ module Aws::RoboMaker
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] s3_etags
+    #   The Amazon S3 identifier for the zip file bundle that you use for
+    #   your robot application.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_digest
+    #   A SHA256 identifier for the Docker image that you use for your robot
+    #   application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationVersionRequest AWS API Documentation
     #
     class CreateRobotApplicationVersionRequest < Struct.new(
       :application,
-      :current_revision_id)
+      :current_revision_id,
+      :s3_etags,
+      :image_digest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -690,6 +719,11 @@ module Aws::RoboMaker
     #   The revision id of the robot application.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI used to create your
+    #   robot application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationVersionResponse AWS API Documentation
     #
     class CreateRobotApplicationVersionResponse < Struct.new(
@@ -699,7 +733,8 @@ module Aws::RoboMaker
       :sources,
       :robot_software_suite,
       :last_updated_at,
-      :revision_id)
+      :revision_id,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -788,7 +823,7 @@ module Aws::RoboMaker
     #
     #       {
     #         name: "Name", # required
-    #         sources: [ # required
+    #         sources: [
     #           {
     #             s3_bucket: "S3Bucket",
     #             s3_key: "S3Key",
@@ -809,6 +844,9 @@ module Aws::RoboMaker
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         environment: {
+    #           uri: "RepositoryUrl",
     #         },
     #       }
     #
@@ -838,6 +876,11 @@ module Aws::RoboMaker
     #   simulation application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI used to create your
+    #   simulation application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplicationRequest AWS API Documentation
     #
     class CreateSimulationApplicationRequest < Struct.new(
@@ -846,7 +889,8 @@ module Aws::RoboMaker
       :simulation_software_suite,
       :robot_software_suite,
       :rendering_engine,
-      :tags)
+      :tags,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -892,6 +936,11 @@ module Aws::RoboMaker
     #   The list of all tags added to the simulation application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI that you used to
+    #   create your simulation application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplicationResponse AWS API Documentation
     #
     class CreateSimulationApplicationResponse < Struct.new(
@@ -904,7 +953,8 @@ module Aws::RoboMaker
       :rendering_engine,
       :last_updated_at,
       :revision_id,
-      :tags)
+      :tags,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -915,6 +965,8 @@ module Aws::RoboMaker
     #       {
     #         application: "Arn", # required
     #         current_revision_id: "RevisionId",
+    #         s3_etags: ["S3Etag"],
+    #         image_digest: "ImageDigest",
     #       }
     #
     # @!attribute [rw] application
@@ -927,11 +979,23 @@ module Aws::RoboMaker
     #   will be created.
     #   @return [String]
     #
+    # @!attribute [rw] s3_etags
+    #   The Amazon S3 eTag identifier for the zip file bundle that you use
+    #   to create the simulation application.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_digest
+    #   The SHA256 digest used to identify the Docker image URI used to
+    #   created the simulation application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplicationVersionRequest AWS API Documentation
     #
     class CreateSimulationApplicationVersionRequest < Struct.new(
       :application,
-      :current_revision_id)
+      :current_revision_id,
+      :s3_etags,
+      :image_digest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -973,6 +1037,11 @@ module Aws::RoboMaker
     #   The revision ID of the simulation application.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI used to create the
+    #   simulation application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationApplicationVersionResponse AWS API Documentation
     #
     class CreateSimulationApplicationVersionResponse < Struct.new(
@@ -984,7 +1053,8 @@ module Aws::RoboMaker
       :robot_software_suite,
       :rendering_engine,
       :last_updated_at,
-      :revision_id)
+      :revision_id,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2401,6 +2471,16 @@ module Aws::RoboMaker
     #   The list of all tags added to the specified robot application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI used to create the
+    #   robot application.
+    #   @return [Types::Environment]
+    #
+    # @!attribute [rw] image_digest
+    #   A SHA256 identifier for the Docker image that you use for your robot
+    #   application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeRobotApplicationResponse AWS API Documentation
     #
     class DescribeRobotApplicationResponse < Struct.new(
@@ -2411,7 +2491,9 @@ module Aws::RoboMaker
       :robot_software_suite,
       :revision_id,
       :last_updated_at,
-      :tags)
+      :tags,
+      :environment,
+      :image_digest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2559,6 +2641,16 @@ module Aws::RoboMaker
     #   The list of all tags added to the specified simulation application.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI used to create the
+    #   simulation application.
+    #   @return [Types::Environment]
+    #
+    # @!attribute [rw] image_digest
+    #   A SHA256 identifier for the Docker image that you use for your
+    #   simulation application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationApplicationResponse AWS API Documentation
     #
     class DescribeSimulationApplicationResponse < Struct.new(
@@ -2571,7 +2663,9 @@ module Aws::RoboMaker
       :rendering_engine,
       :revision_id,
       :last_updated_at,
-      :tags)
+      :tags,
+      :environment,
+      :image_digest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3308,6 +3402,29 @@ module Aws::RoboMaker
       :last_updated_at,
       :tags,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that contains the Docker image URI for either your robot or
+    # simulation applications.
+    #
+    # @note When making an API call, you may pass Environment
+    #   data as a hash:
+    #
+    #       {
+    #         uri: "RepositoryUrl",
+    #       }
+    #
+    # @!attribute [rw] uri
+    #   The Docker image URI for either your robot or simulation
+    #   applications.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Environment AWS API Documentation
+    #
+    class Environment < Struct.new(
+      :uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6415,7 +6532,7 @@ module Aws::RoboMaker
     #
     #       {
     #         application: "Arn", # required
-    #         sources: [ # required
+    #         sources: [
     #           {
     #             s3_bucket: "S3Bucket",
     #             s3_key: "S3Key",
@@ -6427,6 +6544,9 @@ module Aws::RoboMaker
     #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         current_revision_id: "RevisionId",
+    #         environment: {
+    #           uri: "RepositoryUrl",
+    #         },
     #       }
     #
     # @!attribute [rw] application
@@ -6446,13 +6566,19 @@ module Aws::RoboMaker
     #   The revision id for the robot application.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI for your robot
+    #   application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateRobotApplicationRequest AWS API Documentation
     #
     class UpdateRobotApplicationRequest < Struct.new(
       :application,
       :sources,
       :robot_software_suite,
-      :current_revision_id)
+      :current_revision_id,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6487,6 +6613,11 @@ module Aws::RoboMaker
     #   The revision id of the robot application.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI for your robot
+    #   application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateRobotApplicationResponse AWS API Documentation
     #
     class UpdateRobotApplicationResponse < Struct.new(
@@ -6496,7 +6627,8 @@ module Aws::RoboMaker
       :sources,
       :robot_software_suite,
       :last_updated_at,
-      :revision_id)
+      :revision_id,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6506,7 +6638,7 @@ module Aws::RoboMaker
     #
     #       {
     #         application: "Arn", # required
-    #         sources: [ # required
+    #         sources: [
     #           {
     #             s3_bucket: "S3Bucket",
     #             s3_key: "S3Key",
@@ -6526,6 +6658,9 @@ module Aws::RoboMaker
     #           version: "RenderingEngineVersionType",
     #         },
     #         current_revision_id: "RevisionId",
+    #         environment: {
+    #           uri: "RepositoryUrl",
+    #         },
     #       }
     #
     # @!attribute [rw] application
@@ -6552,6 +6687,11 @@ module Aws::RoboMaker
     #   The revision id for the robot application.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI for your simulation
+    #   application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateSimulationApplicationRequest AWS API Documentation
     #
     class UpdateSimulationApplicationRequest < Struct.new(
@@ -6560,7 +6700,8 @@ module Aws::RoboMaker
       :simulation_software_suite,
       :robot_software_suite,
       :rendering_engine,
-      :current_revision_id)
+      :current_revision_id,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6603,6 +6744,11 @@ module Aws::RoboMaker
     #   The revision id of the simulation application.
     #   @return [String]
     #
+    # @!attribute [rw] environment
+    #   The object that contains the Docker image URI used for your
+    #   simulation application.
+    #   @return [Types::Environment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateSimulationApplicationResponse AWS API Documentation
     #
     class UpdateSimulationApplicationResponse < Struct.new(
@@ -6614,7 +6760,8 @@ module Aws::RoboMaker
       :robot_software_suite,
       :rendering_engine,
       :last_updated_at,
-      :revision_id)
+      :revision_id,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -74,9 +74,17 @@ module Aws
                 credentials: context.config.credentials
               )
             elsif (arn = context.metadata[:s3_arn])
+              if arn[:arn].is_a?(MultiRegionAccessPointARN)
+                signing_region = '*'
+                signing_algorithm = :sigv4a
+              else
+                signing_region = arn[:resolved_region]
+                signing_algorithm = :sigv4
+              end
               S3Signer.build_v4_signer(
                 service: arn[:arn].service,
-                region: arn[:resolved_region],
+                signing_algorithm: signing_algorithm,
+                region: signing_region,
                 credentials: context.config.credentials
               )
             elsif context.operation.name == 'WriteGetObjectResponse'
@@ -216,6 +224,7 @@ module Aws
               service: options[:service],
               region: options[:region],
               credentials_provider: options[:credentials],
+              signing_algorithm: options.fetch(:signing_algorithm, :sigv4),
               uri_escape_path: false,
               unsigned_headers: ['content-length', 'x-amzn-trace-id']
             )

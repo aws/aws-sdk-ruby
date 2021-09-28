@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-09-22)
+------------------
+
+* Feature - This release adds support to configure logs for playback configuration.
+
 1.44.0 (2021-09-01)
 ------------------
 

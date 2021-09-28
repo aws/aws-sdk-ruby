@@ -1622,7 +1622,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AssociationSummary AWS API Documentation
@@ -3842,6 +3842,7 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
     #
@@ -4200,7 +4201,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -4641,13 +4642,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -4656,12 +4660,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -4732,9 +4738,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
-    #   attached to the domain with an Amazon Web Services managed customer
-    #   master key (CMK) by default. For more control, specify a customer
-    #   managed CMK.
+    #   attached to the domain with an Amazon Web Services managed key by
+    #   default. For more control, specify a customer managed key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -4823,8 +4828,8 @@ module Aws::SageMaker
     #   @return [Types::EdgeOutputConfig]
     #
     # @!attribute [rw] resource_key
-    #   The CMK to use when encrypting the EBS volume the edge packaging job
-    #   runs on.
+    #   The Amazon Web Services KMS key to use when encrypting the EBS
+    #   volume the edge packaging job runs on.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7975,6 +7980,63 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateStudioLifecycleConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
+    #         studio_lifecycle_config_content: "StudioLifecycleConfigContent", # required
+    #         studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_content
+    #   The content of your Studio Lifecycle Configuration script. This
+    #   content must be base64 encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_app_type
+    #   The App type that the Lifecycle Configuration is attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the Lifecycle Configuration. Each tag
+    #   consists of a key and an optional value. Tag keys must be unique per
+    #   resource. Tags are searchable using the Search API.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateStudioLifecycleConfigRequest AWS API Documentation
+    #
+    class CreateStudioLifecycleConfigRequest < Struct.new(
+      :studio_lifecycle_config_name,
+      :studio_lifecycle_config_content,
+      :studio_lifecycle_config_app_type,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] studio_lifecycle_config_arn
+    #   The ARN of your created Lifecycle Configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateStudioLifecycleConfigResponse AWS API Documentation
+    #
+    class CreateStudioLifecycleConfigResponse < Struct.new(
+      :studio_lifecycle_config_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTrainingJobRequest
     #   data as a hash:
     #
@@ -8812,13 +8874,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -8827,12 +8892,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -10519,6 +10586,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteStudioLifecycleConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteStudioLifecycleConfigRequest AWS API Documentation
+    #
+    class DeleteStudioLifecycleConfigRequest < Struct.new(
+      :studio_lifecycle_config_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteTagsInput
     #   data as a hash:
     #
@@ -10850,7 +10936,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -10859,7 +10945,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -11165,7 +11251,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11174,7 +11260,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -11576,7 +11662,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11585,7 +11671,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeContextResponse AWS API Documentation
@@ -11945,7 +12031,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services KMS customer managed CMK used to encrypt the
+    #   The Amazon Web Services KMS customer managed key used to encrypt the
     #   EFS volume attached to the domain.
     #   @return [String]
     #
@@ -12023,7 +12109,8 @@ module Aws::SageMaker
     #   @return [Types::EdgeOutputConfig]
     #
     # @!attribute [rw] resource_key
-    #   The CMK to use when encrypting the EBS volume the job run on.
+    #   The Amazon Web Services KMS key to use when encrypting the EBS
+    #   volume the job run on.
     #   @return [String]
     #
     # @!attribute [rw] edge_packaging_job_status
@@ -13332,7 +13419,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -13434,7 +13521,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -13452,7 +13539,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -14011,12 +14098,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
@@ -14098,12 +14185,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineResponse AWS API Documentation
@@ -14318,7 +14405,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] creation_time
@@ -14337,6 +14424,63 @@ module Aws::SageMaker
       :project_status,
       :created_by,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStudioLifecycleConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeStudioLifecycleConfigRequest AWS API Documentation
+    #
+    class DescribeStudioLifecycleConfigRequest < Struct.new(
+      :studio_lifecycle_config_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] studio_lifecycle_config_arn
+    #   The ARN of the Lifecycle Configuration to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration that is described.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the Studio Lifecycle Configuration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   This value is equivalent to CreationTime because Studio Lifecycle
+    #   Configurations are immutable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] studio_lifecycle_config_content
+    #   The content of your Studio Lifecycle Configuration script.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_app_type
+    #   The App type that the Lifecycle Configuration is attached to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeStudioLifecycleConfigResponse AWS API Documentation
+    #
+    class DescribeStudioLifecycleConfigResponse < Struct.new(
+      :studio_lifecycle_config_arn,
+      :studio_lifecycle_config_name,
+      :creation_time,
+      :last_modified_time,
+      :studio_lifecycle_config_content,
+      :studio_lifecycle_config_app_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14983,7 +15127,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Who created the component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16091,8 +16235,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the experiment.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16101,7 +16244,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -16927,7 +17070,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #         suggestion_query: {
     #           property_name_query: {
     #             property_name_hint: "PropertyNameHint", # required
@@ -19584,7 +19727,9 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       }
     #
     # @!attribute [rw] default_resource_spec
@@ -19592,10 +19737,16 @@ module Aws::SageMaker
     #   default SageMaker image used by the JupyterServer app.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] lifecycle_config_arns
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
+    #   attached to the JupyterServerApp.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterServerAppSettings AWS API Documentation
     #
     class JupyterServerAppSettings < Struct.new(
-      :default_resource_spec)
+      :default_resource_spec,
+      :lifecycle_config_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19610,6 +19761,7 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #         custom_images: [
     #           {
@@ -19618,6 +19770,7 @@ module Aws::SageMaker
     #             app_image_config_name: "AppImageConfigName", # required
     #           },
     #         ],
+    #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       }
     #
     # @!attribute [rw] default_resource_spec
@@ -19630,11 +19783,17 @@ module Aws::SageMaker
     #   KernelGateway app.
     #   @return [Array<Types::CustomImage>]
     #
+    # @!attribute [rw] lifecycle_config_arns
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
+    #   attached to the the user profile or domain.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
     #
     class KernelGatewayAppSettings < Struct.new(
       :default_resource_spec,
-      :custom_images)
+      :custom_images,
+      :lifecycle_config_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20079,10 +20238,10 @@ module Aws::SageMaker
     #   You can only specify a `VolumeKmsKeyId` when you create a labeling
     #   job with automated data labeling enabled using the API operation
     #   `CreateLabelingJob`. You cannot specify an Amazon Web Services KMS
-    #   customer managed CMK to encrypt the storage volume used for
-    #   automated data labeling model training and inference when you create
-    #   a labeling job using the console. To learn more, see [Output Data
-    #   and Storage Volume Encryption][1].
+    #   key to encrypt the storage volume used for automated data labeling
+    #   model training and inference when you create a labeling job using
+    #   the console. To learn more, see [Output Data and Storage Volume
+    #   Encryption][1].
     #
     #   The `VolumeKmsKeyId` can be any of the following formats:
     #
@@ -23092,8 +23251,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] name_contains
-    #   A string in the training job name. This filter returns only models
-    #   in the training job whose name contains the specified string.
+    #   A string in the model name. This filter returns only models whose
+    #   name contains the specified string.
     #   @return [String]
     #
     # @!attribute [rw] creation_time_before
@@ -24074,6 +24233,107 @@ module Aws::SageMaker
     class ListProjectsOutput < Struct.new(
       :project_summary_list,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStudioLifecycleConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         name_contains: "StudioLifecycleConfigName",
+    #         app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway
+    #         creation_time_before: Time.now,
+    #         creation_time_after: Time.now,
+    #         modified_time_before: Time.now,
+    #         modified_time_after: Time.now,
+    #         sort_by: "CreationTime", # accepts CreationTime, LastModifiedTime, Name
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of Studio Lifecycle Configurations to return in
+    #   the response. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous call to ListStudioLifecycleConfigs didn't return
+    #   the full set of Lifecycle Configurations, the call returns a token
+    #   for getting the next set of Lifecycle Configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the Lifecycle Configuration name. This filter returns
+    #   only Lifecycle Configurations whose name contains the specified
+    #   string.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_type_equals
+    #   A parameter to search for the App Type to which the Lifecycle
+    #   Configuration is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only Lifecycle Configurations created on or
+    #   before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only Lifecycle Configurations created on or
+    #   after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_time_before
+    #   A filter that returns only Lifecycle Configurations modified before
+    #   the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_time_after
+    #   A filter that returns only Lifecycle Configurations modified after
+    #   the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The property used to sort results. The default value is
+    #   CreationTime.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order. The default value is Descending.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStudioLifecycleConfigsRequest AWS API Documentation
+    #
+    class ListStudioLifecycleConfigsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :name_contains,
+      :app_type_equals,
+      :creation_time_before,
+      :creation_time_after,
+      :modified_time_before,
+      :modified_time_after,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of actions, if there are any.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_configs
+    #   A list of Lifecycle Configurations and their properties.
+    #   @return [Array<Types::StudioLifecycleConfigDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStudioLifecycleConfigsResponse AWS API Documentation
+    #
+    class ListStudioLifecycleConfigsResponse < Struct.new(
+      :next_token,
+      :studio_lifecycle_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25563,7 +25823,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -25581,7 +25841,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -25720,7 +25980,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -27861,7 +28121,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -28102,7 +28362,7 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
     #   SageMaker execution role must include permissions to call
     #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
     #   uses the default KMS key for Amazon S3 for your role's account.
@@ -28393,12 +28653,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -28465,12 +28725,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] pipeline_parameters
@@ -29477,7 +29737,7 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
     #   SageMaker execution role must include permissions to call
     #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
     #   uses the default KMS key for Amazon S3 for your role's account.
@@ -29757,6 +30017,84 @@ module Aws::SageMaker
       :rule_evaluation_status,
       :status_details,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a project as returned by the Search API.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The ID of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_description
+    #   The description of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_catalog_provisioning_details
+    #   Details that you specify to provision a service catalog product. For
+    #   information about service catalog, see [What is Amazon Web Services
+    #   Service Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #   @return [Types::ServiceCatalogProvisioningDetails]
+    #
+    # @!attribute [rw] service_catalog_provisioned_product_details
+    #   Details of a provisioned service catalog product. For information
+    #   about service catalog, see [What is Amazon Web Services Service
+    #   Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #   @return [Types::ServiceCatalogProvisionedProductDetails]
+    #
+    # @!attribute [rw] project_status
+    #   The status of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Who created the project.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp specifying when the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Project AWS API Documentation
+    #
+    class Project < Struct.new(
+      :project_arn,
+      :project_name,
+      :project_id,
+      :project_description,
+      :service_catalog_provisioning_details,
+      :service_catalog_provisioned_product_details,
+      :project_status,
+      :created_by,
+      :creation_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30620,6 +30958,7 @@ module Aws::SageMaker
     #         sage_maker_image_arn: "ImageArn",
     #         sage_maker_image_version_arn: "ImageVersionArn",
     #         instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         lifecycle_config_arn: "StudioLifecycleConfigArn",
     #       }
     #
     # @!attribute [rw] sage_maker_image_arn
@@ -30634,12 +30973,18 @@ module Aws::SageMaker
     #   The instance type that the image version runs on.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_config_arn
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configuration
+    #   attached to the Resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceSpec AWS API Documentation
     #
     class ResourceSpec < Struct.new(
       :sage_maker_image_arn,
       :sage_maker_image_version_arn,
-      :instance_type)
+      :instance_type,
+      :lifecycle_config_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30665,6 +31010,48 @@ module Aws::SageMaker
     #
     class RetentionPolicy < Struct.new(
       :home_efs_file_system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RetryPipelineExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_execution_arn: "PipelineExecutionArn", # required
+    #         client_request_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecutionRequest AWS API Documentation
+    #
+    class RetryPipelineExecutionRequest < Struct.new(
+      :pipeline_execution_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecutionResponse AWS API Documentation
+    #
+    class RetryPipelineExecutionResponse < Struct.new(
+      :pipeline_execution_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31070,6 +31457,10 @@ module Aws::SageMaker
     #   composed of features and values per features.
     #   @return [Types::FeatureGroup]
     #
+    # @!attribute [rw] project
+    #   The properties of a project.
+    #   @return [Types::Project]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -31082,7 +31473,8 @@ module Aws::SageMaker
       :model_package_group,
       :pipeline,
       :pipeline_execution,
-      :feature_group)
+      :feature_group,
+      :project)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31091,7 +31483,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #         search_expression: {
     #           filters: [
     #             {
@@ -31460,7 +31852,7 @@ module Aws::SageMaker
     end
 
     # Details that you specify to provision a service catalog product. For
-    # information about service catalog, see .[What is Amazon Web Services
+    # information about service catalog, see [What is Amazon Web Services
     # Service Catalog][1].
     #
     #
@@ -31768,7 +32160,7 @@ module Aws::SageMaker
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -31946,7 +32338,7 @@ module Aws::SageMaker
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -32095,6 +32487,41 @@ module Aws::SageMaker
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds,
       :max_wait_time_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the Studio Lifecycle Configuration.
+    #
+    # @!attribute [rw] studio_lifecycle_config_arn
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] studio_lifecycle_config_name
+    #   The name of the Studio Lifecycle Configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the Studio Lifecycle Configuration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   This value is equivalent to CreationTime because Studio Lifecycle
+    #   Configurations are immutable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] studio_lifecycle_config_app_type
+    #   The App type to which the Lifecycle Configuration is attached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StudioLifecycleConfigDetails AWS API Documentation
+    #
+    class StudioLifecycleConfigDetails < Struct.new(
+      :studio_lifecycle_config_arn,
+      :studio_lifecycle_config_name,
+      :creation_time,
+      :last_modified_time,
+      :studio_lifecycle_config_app_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32274,6 +32701,7 @@ module Aws::SageMaker
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
     #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       }
     #
@@ -33722,8 +34150,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the trial.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -33732,7 +34159,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -33806,8 +34233,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -33816,7 +34242,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parameters
@@ -34027,7 +34453,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSimpleSummary AWS API Documentation
@@ -34167,7 +34593,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Who created the component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -34819,13 +35245,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -34834,12 +35263,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -35821,13 +36252,16 @@ module Aws::SageMaker
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           kernel_gateway_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #             custom_images: [
     #               {
@@ -35836,12 +36270,14 @@ module Aws::SageMaker
     #                 app_image_config_name: "AppImageConfigName", # required
     #               },
     #             ],
+    #             lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #           },
     #           tensor_board_app_settings: {
     #             default_resource_spec: {
     #               sage_maker_image_arn: "ImageArn",
     #               sage_maker_image_version_arn: "ImageVersionArn",
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
     #         },
@@ -36044,7 +36480,7 @@ module Aws::SageMaker
     end
 
     # Information about the user who created or modified an experiment,
-    # trial, or trial component.
+    # trial, trial component, or project.
     #
     # @!attribute [rw] user_profile_arn
     #   The Amazon Resource Name (ARN) of the user's profile.
@@ -36128,13 +36564,16 @@ module Aws::SageMaker
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
+    #           lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #         },
     #         kernel_gateway_app_settings: {
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #           custom_images: [
     #             {
@@ -36143,12 +36582,14 @@ module Aws::SageMaker
     #               app_image_config_name: "AppImageConfigName", # required
     #             },
     #           ],
+    #           lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #         },
     #         tensor_board_app_settings: {
     #           default_resource_spec: {
     #             sage_maker_image_arn: "ImageArn",
     #             sage_maker_image_version_arn: "ImageVersionArn",
     #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
     #       }

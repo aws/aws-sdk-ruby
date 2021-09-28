@@ -1,6 +1,73 @@
 Unreleased Changes
 ------------------
 
+1.507.0 (2021-09-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::VoiceID`.
+
+* Feature - Added support for enumerating regions for `Aws::ConnectWisdomService`.
+
+1.506.0 (2021-09-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.505.0 (2021-09-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.504.0 (2021-09-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.503.0 (2021-09-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.502.0 (2021-09-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::KafkaConnect`.
+
+1.501.0 (2021-09-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.500.0 (2021-09-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.499.0 (2021-09-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.498.0 (2021-09-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::OpenSearchService`.
+
+1.497.0 (2021-09-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.496.0 (2021-09-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.495.0 (2021-09-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.494.0 (2021-09-01)
 ------------------
 

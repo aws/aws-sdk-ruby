@@ -373,6 +373,66 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Configures Amazon CloudWatch log settings for an existing MediaTailor
+    # playback configuration.
+    #
+    # @note When making an API call, you may pass ConfigureLogsForPlaybackConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         percent_enabled: 1, # required
+    #         playback_configuration_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] percent_enabled
+    #   The percentage of session logs that MediaTailor sends to your
+    #   Cloudwatch Logs account. For example, if your playback configuration
+    #   has 1000 sessions and percentEnabled is set to 60, MediaTailor sends
+    #   logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides
+    #   at random which of the playback configuration sessions to send logs
+    #   for. If you want to view logs for a specific session, you can use
+    #   the [debug log mode][1].
+    #
+    #   Valid values: 0 - 100
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   The name of the playback configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForPlaybackConfigurationRequest AWS API Documentation
+    #
+    class ConfigureLogsForPlaybackConfigurationRequest < Struct.new(
+      :percent_enabled,
+      :playback_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon CloudWatch log settings for a playback configuration.
+    #
+    # @!attribute [rw] percent_enabled
+    #   The percentage of session logs that MediaTailor sends to your
+    #   Cloudwatch Logs account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   The name of the playback configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForPlaybackConfigurationResponse AWS API Documentation
+    #
+    class ConfigureLogsForPlaybackConfigurationResponse < Struct.new(
+      :percent_enabled,
+      :playback_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for this channel.
     #
     # @note When making an API call, you may pass CreateChannelRequest
@@ -410,7 +470,7 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] filler_slate
     #   The slate used to fill gaps between programs in the schedule. You
-    #   must configure filler slate if your channel uses an LINEAR
+    #   must configure filler slate if your channel uses a LINEAR
     #   PlaybackMode.
     #   @return [Types::SlateSource]
     #
@@ -1538,6 +1598,10 @@ module Aws::MediaTailor
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
     #
+    # @!attribute [rw] log_configuration
+    #   The Amazon CloudWatch log settings for a playback configuration.
+    #   @return [Types::LogConfiguration]
+    #
     # @!attribute [rw] manifest_processing_rules
     #   The configuration for manifest processing rules. Manifest processing
     #   rules enable customization of the personalized manifests created by
@@ -1615,6 +1679,7 @@ module Aws::MediaTailor
       :dash_configuration,
       :hls_configuration,
       :live_pre_roll_configuration,
+      :log_configuration,
       :manifest_processing_rules,
       :name,
       :personalization_threshold_seconds,
@@ -2018,6 +2083,32 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Returns Amazon CloudWatch log settings for a playback configuration.
+    #
+    # @!attribute [rw] percent_enabled
+    #   The percentage of session logs that MediaTailor sends to your
+    #   Cloudwatch Logs account. For example, if your playback configuration
+    #   has 1000 sessions and percentEnabled is set to 60, MediaTailor sends
+    #   logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides
+    #   at random which of the playback configuration sessions to send logs
+    #   for. If you want to view logs for a specific session, you can use
+    #   the [debug log mode][1].
+    #
+    #   Valid values: 0 - 100
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/LogConfiguration AWS API Documentation
+    #
+    class LogConfiguration < Struct.new(
+      :percent_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for manifest processing rules. Manifest processing
     # rules enable customization of the personalized manifests created by
     # MediaTailor.
@@ -2113,6 +2204,10 @@ module Aws::MediaTailor
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
     #
+    # @!attribute [rw] log_configuration
+    #   The Amazon CloudWatch log settings for a playback configuration.
+    #   @return [Types::LogConfiguration]
+    #
     # @!attribute [rw] manifest_processing_rules
     #   The configuration for manifest processing rules. Manifest processing
     #   rules enable customization of the personalized manifests created by
@@ -2190,6 +2285,7 @@ module Aws::MediaTailor
       :dash_configuration,
       :hls_configuration,
       :live_pre_roll_configuration,
+      :log_configuration,
       :manifest_processing_rules,
       :name,
       :personalization_threshold_seconds,
@@ -2452,6 +2548,10 @@ module Aws::MediaTailor
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
     #
+    # @!attribute [rw] log_configuration
+    #   Returns Amazon CloudWatch log settings for a playback configuration.
+    #   @return [Types::LogConfiguration]
+    #
     # @!attribute [rw] manifest_processing_rules
     #   The configuration for manifest processing rules. Manifest processing
     #   rules enable customization of the personalized manifests created by
@@ -2496,6 +2596,7 @@ module Aws::MediaTailor
       :dash_configuration,
       :hls_configuration,
       :live_pre_roll_configuration,
+      :log_configuration,
       :manifest_processing_rules,
       :name,
       :personalization_threshold_seconds,
@@ -2510,7 +2611,7 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # The ouput configuration for this channel.
+    # The output configuration for this channel.
     #
     # @note When making an API call, you may pass RequestOutputItem
     #   data as a hash:

@@ -19,11 +19,29 @@ module Aws::Comprehend
     #
     #       {
     #         s3_uri: "S3Uri", # required
+    #         split: "TRAIN", # accepts TRAIN, TEST
     #         attribute_names: ["AttributeNamesListItem"], # required
+    #         annotation_data_s3_uri: "S3Uri",
+    #         source_documents_s3_uri: "S3Uri",
+    #         document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #       }
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 location of the augmented manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] split
+    #   The purpose of the data you've provided in the augmented manifest.
+    #   You can either train or test this data. If you don't specify, the
+    #   default is train.
+    #
+    #   TRAIN - all of the documents in the manifest will be used for
+    #   training. If no test documents are provided, Amazon Comprehend will
+    #   automatically reserve a portion of the training documents for
+    #   testing.
+    #
+    #   TEST - all of the documents in the manifest will be used for
+    #   testing.
     #   @return [String]
     #
     # @!attribute [rw] attribute_names
@@ -42,11 +60,39 @@ module Aws::Comprehend
     #   job.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] annotation_data_s3_uri
+    #   The S3 prefix to the annotation files that are referred in the
+    #   augmented manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_documents_s3_uri
+    #   The S3 prefix to the source files (PDFs) that are referred to in the
+    #   augmented manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_type
+    #   The type of augmented manifest. PlainTextDocument or
+    #   SemiStructuredDocument. If you don't specify, the default is
+    #   PlainTextDocument.
+    #
+    #   * `PLAIN_TEXT_DOCUMENT` A document type that represents any unicode
+    #     text that is encoded in UTF-8.
+    #
+    #   * `SEMI_STRUCTURED_DOCUMENT` A document type with positional and
+    #     structural context, like a PDF. For training with Amazon
+    #     Comprehend, only PDFs are supported. For inference, Amazon
+    #     Comprehend support PDFs, DOCX and TXT.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/AugmentedManifestsListItem AWS API Documentation
     #
     class AugmentedManifestsListItem < Struct.new(
       :s3_uri,
-      :attribute_names)
+      :split,
+      :attribute_names,
+      :annotation_data_s3_uri,
+      :source_documents_s3_uri,
+      :document_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -677,6 +723,7 @@ module Aws::Comprehend
     #
     #       {
     #         document_classifier_name: "ComprehendArnName", # required
+    #         version_name: "VersionName",
     #         data_access_role_arn: "IamRoleArn", # required
     #         tags: [
     #           {
@@ -687,11 +734,16 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #           s3_uri: "S3Uri",
+    #           test_s3_uri: "S3Uri",
     #           label_delimiter: "LabelDelimiter",
     #           augmented_manifests: [
     #             {
     #               s3_uri: "S3Uri", # required
+    #               split: "TRAIN", # accepts TRAIN, TEST
     #               attribute_names: ["AttributeNamesListItem"], # required
+    #               annotation_data_s3_uri: "S3Uri",
+    #               source_documents_s3_uri: "S3Uri",
+    #               document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #             },
     #           ],
     #         },
@@ -712,6 +764,14 @@ module Aws::Comprehend
     #
     # @!attribute [rw] document_classifier_name
     #   The name of the document classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The version name given to the newly created classifier. Version
+    #   names can have a maximum of 256 characters. Alphanumeric characters,
+    #   hyphens (-) and underscores (\_) are allowed. The version name must
+    #   be unique among all models with the same classifier name in the
+    #   account/AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
@@ -799,6 +859,7 @@ module Aws::Comprehend
     #
     class CreateDocumentClassifierRequest < Struct.new(
       :document_classifier_name,
+      :version_name,
       :data_access_role_arn,
       :tags,
       :input_data_config,
@@ -912,6 +973,7 @@ module Aws::Comprehend
     #
     #       {
     #         recognizer_name: "ComprehendArnName", # required
+    #         version_name: "VersionName",
     #         data_access_role_arn: "IamRoleArn", # required
     #         tags: [
     #           {
@@ -928,9 +990,12 @@ module Aws::Comprehend
     #           ],
     #           documents: {
     #             s3_uri: "S3Uri", # required
+    #             test_s3_uri: "S3Uri",
+    #             input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
     #           },
     #           annotations: {
     #             s3_uri: "S3Uri", # required
+    #             test_s3_uri: "S3Uri",
     #           },
     #           entity_list: {
     #             s3_uri: "S3Uri", # required
@@ -938,7 +1003,11 @@ module Aws::Comprehend
     #           augmented_manifests: [
     #             {
     #               s3_uri: "S3Uri", # required
+    #               split: "TRAIN", # accepts TRAIN, TEST
     #               attribute_names: ["AttributeNamesListItem"], # required
+    #               annotation_data_s3_uri: "S3Uri",
+    #               source_documents_s3_uri: "S3Uri",
+    #               document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #             },
     #           ],
     #         },
@@ -957,6 +1026,14 @@ module Aws::Comprehend
     #   be a maximum of 256 characters. Alphanumeric characters, hyphens (-)
     #   and underscores (\_) are allowed. The name must be unique in the
     #   account/region.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The version name given to the newly created recognizer. Version
+    #   names can be a maximum of 256 characters. Alphanumeric characters,
+    #   hyphens (-) and underscores (\_) are allowed. The version name must
+    #   be unique among all models with the same recognizer name in the
+    #   account/ AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
@@ -1031,6 +1108,7 @@ module Aws::Comprehend
     #
     class CreateEntityRecognizerRequest < Struct.new(
       :recognizer_name,
+      :version_name,
       :data_access_role_arn,
       :tags,
       :input_data_config,
@@ -1948,12 +2026,17 @@ module Aws::Comprehend
     #
     #       {
     #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #         document_classifier_name: "ComprehendArnName",
     #         submit_time_before: Time.now,
     #         submit_time_after: Time.now,
     #       }
     #
     # @!attribute [rw] status
     #   Filters the list of classifiers based on status.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_classifier_name
+    #   The name that you assigned to the document classifier
     #   @return [String]
     #
     # @!attribute [rw] submit_time_before
@@ -1974,6 +2057,7 @@ module Aws::Comprehend
     #
     class DocumentClassifierFilter < Struct.new(
       :status,
+      :document_classifier_name,
       :submit_time_before,
       :submit_time_after)
       SENSITIVE = []
@@ -1991,11 +2075,16 @@ module Aws::Comprehend
     #       {
     #         data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #         s3_uri: "S3Uri",
+    #         test_s3_uri: "S3Uri",
     #         label_delimiter: "LabelDelimiter",
     #         augmented_manifests: [
     #           {
     #             s3_uri: "S3Uri", # required
+    #             split: "TRAIN", # accepts TRAIN, TEST
     #             attribute_names: ["AttributeNamesListItem"], # required
+    #             annotation_data_s3_uri: "S3Uri",
+    #             source_documents_s3_uri: "S3Uri",
+    #             document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #           },
     #         ],
     #       }
@@ -2035,6 +2124,13 @@ module Aws::Comprehend
     #   `COMPREHEND_CSV`.
     #   @return [String]
     #
+    # @!attribute [rw] test_s3_uri
+    #   The Amazon S3 URI for the input data. The Amazon S3 bucket must be
+    #   in the same AWS Region as the API endpoint that you are calling. The
+    #   URI can point to a single input file or it can provide the prefix
+    #   for a collection of input files.
+    #   @return [String]
+    #
     # @!attribute [rw] label_delimiter
     #   Indicates the delimiter used to separate each label for training a
     #   multi-label classifier. The default delimiter between labels is a
@@ -2059,6 +2155,7 @@ module Aws::Comprehend
     class DocumentClassifierInputDataConfig < Struct.new(
       :data_format,
       :s3_uri,
+      :test_s3_uri,
       :label_delimiter,
       :augmented_manifests)
       SENSITIVE = []
@@ -2220,6 +2317,10 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The version name that you assigned to the document classifier.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
     #
     class DocumentClassifierProperties < Struct.new(
@@ -2238,8 +2339,45 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :mode,
-      :model_kms_key_id)
+      :model_kms_key_id,
+      :version_name)
       SENSITIVE = [:classifier_metadata]
+      include Aws::Structure
+    end
+
+    # Describes information about a document classifier and its versions.
+    #
+    # @!attribute [rw] document_classifier_name
+    #   The name that you assigned the document classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_versions
+    #   The number of versions you created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_version_created_at
+    #   The time that the latest document classifier version was submitted
+    #   for processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_version_name
+    #   The version name you assigned to the latest document classifier
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version_status
+    #   Provides the status of the latest document classifier version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierSummary AWS API Documentation
+    #
+    class DocumentClassifierSummary < Struct.new(
+      :document_classifier_name,
+      :number_of_versions,
+      :latest_version_created_at,
+      :latest_version_name,
+      :latest_version_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2260,6 +2398,52 @@ module Aws::Comprehend
     class DocumentLabel < Struct.new(
       :name,
       :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input properties for a topic detection job.
+    #
+    # @note When making an API call, you may pass DocumentReaderConfig
+    #   data as a hash:
+    #
+    #       {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       }
+    #
+    # @!attribute [rw] document_read_action
+    #   This enum field will start with two values which will apply to PDFs:
+    #
+    #   * `TEXTRACT_DETECT_DOCUMENT_TEXT` - The service calls
+    #     DetectDocumentText for PDF documents per page.
+    #
+    #   * `TEXTRACT_ANALYZE_DOCUMENT` - The service calls AnalyzeDocument
+    #     for PDF documents per page.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_read_mode
+    #   This enum field provides two values:
+    #
+    #   * `SERVICE_DEFAULT` - use service defaults for Document reading. For
+    #     Digital PDF it would mean using an internal parser instead of
+    #     Textract APIs
+    #
+    #   * `FORCE_DOCUMENT_READ_ACTION` - Always use specified action for
+    #     DocumentReadAction, including Digital PDF.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_types
+    #   Specifies how the text in an input file should be processed:
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentReaderConfig AWS API Documentation
+    #
+    class DocumentReaderConfig < Struct.new(
+      :document_read_action,
+      :document_read_mode,
+      :feature_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2503,6 +2687,12 @@ module Aws::Comprehend
     #   is attached.
     #   @return [String]
     #
+    # @!attribute [rw] desired_model_arn
+    #   ARN of the new model to use for updating an existing endpoint. This
+    #   ARN is going to be different from the model ARN when the update is
+    #   in progress
+    #   @return [String]
+    #
     # @!attribute [rw] desired_inference_units
     #   The desired number of inference units to be used by the model using
     #   this endpoint. Each inference unit represents of a throughput of 100
@@ -2529,6 +2719,11 @@ module Aws::Comprehend
     #   (ModelKmsKeyId).
     #   @return [String]
     #
+    # @!attribute [rw] desired_data_access_role_arn
+    #   Data access role ARN to use in case the new model is encrypted with
+    #   a customer KMS key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EndpointProperties AWS API Documentation
     #
     class EndpointProperties < Struct.new(
@@ -2536,11 +2731,13 @@ module Aws::Comprehend
       :status,
       :message,
       :model_arn,
+      :desired_model_arn,
       :desired_inference_units,
       :current_inference_units,
       :creation_time,
       :last_modified_time,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :desired_data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2772,6 +2969,7 @@ module Aws::Comprehend
     #
     #       {
     #         s3_uri: "S3Uri", # required
+    #         test_s3_uri: "S3Uri",
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -2780,10 +2978,17 @@ module Aws::Comprehend
     #   API endpoint that you are calling.
     #   @return [String]
     #
+    # @!attribute [rw] test_s3_uri
+    #   This specifies the Amazon S3 location where the test annotations for
+    #   an entity recognizer are located. The URI must be in the same AWS
+    #   Region as the API endpoint that you are calling.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerAnnotations AWS API Documentation
     #
     class EntityRecognizerAnnotations < Struct.new(
-      :s3_uri)
+      :s3_uri,
+      :test_s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2795,6 +3000,8 @@ module Aws::Comprehend
     #
     #       {
     #         s3_uri: "S3Uri", # required
+    #         test_s3_uri: "S3Uri",
+    #         input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -2803,10 +3010,28 @@ module Aws::Comprehend
     #   the API endpoint that you are calling.
     #   @return [String]
     #
+    # @!attribute [rw] test_s3_uri
+    #   Specifies the Amazon S3 location where the test documents for an
+    #   entity recognizer are located. The URI must be in the same AWS
+    #   Region as the API endpoint that you are calling.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_format
+    #   Specifies how the text in an input file should be processed. This is
+    #   optional, and the default is ONE\_DOC\_PER\_LINE.
+    #   ONE\_DOC\_PER\_FILE - Each file is considered a separate document.
+    #   Use this option when you are processing large documents, such as
+    #   newspaper articles or scientific papers. ONE\_DOC\_PER\_LINE - Each
+    #   line in a file is considered a separate document. Use this option
+    #   when you are processing many short documents, such as text messages.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerDocuments AWS API Documentation
     #
     class EntityRecognizerDocuments < Struct.new(
-      :s3_uri)
+      :s3_uri,
+      :test_s3_uri,
+      :input_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2874,12 +3099,17 @@ module Aws::Comprehend
     #
     #       {
     #         status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #         recognizer_name: "ComprehendArnName",
     #         submit_time_before: Time.now,
     #         submit_time_after: Time.now,
     #       }
     #
     # @!attribute [rw] status
     #   The status of an entity recognizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] recognizer_name
+    #   The name that you assigned the entity recognizer.
     #   @return [String]
     #
     # @!attribute [rw] submit_time_before
@@ -2900,6 +3130,7 @@ module Aws::Comprehend
     #
     class EntityRecognizerFilter < Struct.new(
       :status,
+      :recognizer_name,
       :submit_time_before,
       :submit_time_after)
       SENSITIVE = []
@@ -2920,9 +3151,12 @@ module Aws::Comprehend
     #         ],
     #         documents: {
     #           s3_uri: "S3Uri", # required
+    #           test_s3_uri: "S3Uri",
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
     #         },
     #         annotations: {
     #           s3_uri: "S3Uri", # required
+    #           test_s3_uri: "S3Uri",
     #         },
     #         entity_list: {
     #           s3_uri: "S3Uri", # required
@@ -2930,7 +3164,11 @@ module Aws::Comprehend
     #         augmented_manifests: [
     #           {
     #             s3_uri: "S3Uri", # required
+    #             split: "TRAIN", # accepts TRAIN, TEST
     #             attribute_names: ["AttributeNamesListItem"], # required
+    #             annotation_data_s3_uri: "S3Uri",
+    #             source_documents_s3_uri: "S3Uri",
+    #             document_type: "PLAIN_TEXT_DOCUMENT", # accepts PLAIN_TEXT_DOCUMENT, SEMI_STRUCTURED_DOCUMENT
     #           },
     #         ],
     #       }
@@ -3158,6 +3396,10 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] version_name
+    #   The version name you assigned to the entity recognizer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
     #
     class EntityRecognizerProperties < Struct.new(
@@ -3174,8 +3416,45 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config,
-      :model_kms_key_id)
+      :model_kms_key_id,
+      :version_name)
       SENSITIVE = [:recognizer_metadata]
+      include Aws::Structure
+    end
+
+    # Describes the information about an entity recognizer and its versions.
+    #
+    # @!attribute [rw] recognizer_name
+    #   The name that you assigned the entity recognizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_versions
+    #   The number of versions you created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_version_created_at
+    #   The time that the latest entity recognizer version was submitted for
+    #   processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_version_name
+    #   The version name you assigned to the latest entity recognizer
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version_status
+    #   Provides the status of the latest entity recognizer version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerSummary AWS API Documentation
+    #
+    class EntityRecognizerSummary < Struct.new(
+      :recognizer_name,
+      :number_of_versions,
+      :latest_version_created_at,
+      :latest_version_name,
+      :latest_version_status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3368,7 +3647,7 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The input properties for a topic detection job.
+    # The input properties for an inference job.
     #
     # @note When making an API call, you may pass InputDataConfig
     #   data as a hash:
@@ -3376,6 +3655,11 @@ module Aws::Comprehend
     #       {
     #         s3_uri: "S3Uri", # required
     #         input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         document_reader_config: {
+    #           document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #           document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #           feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #         },
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -3402,11 +3686,21 @@ module Aws::Comprehend
     #     documents, such as text messages.
     #   @return [String]
     #
+    # @!attribute [rw] document_reader_config
+    #   The document reader config field applies only for InputDataConfig of
+    #   StartEntitiesDetectionJob.
+    #
+    #   Use DocumentReaderConfig to provide specifications about how you
+    #   want your inference documents read. Currently it applies for PDF
+    #   documents in StartEntitiesDetectionJob custom inference.
+    #   @return [Types::DocumentReaderConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InputDataConfig AWS API Documentation
     #
     class InputDataConfig < Struct.new(
       :s3_uri,
-      :input_format)
+      :input_format,
+      :document_reader_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3722,12 +4016,56 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDocumentClassifierSummariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifierSummariesRequest AWS API Documentation
+    #
+    class ListDocumentClassifierSummariesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_classifier_summaries_list
+    #   The list of summaries of document classifiers.
+    #   @return [Array<Types::DocumentClassifierSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifierSummariesResponse AWS API Documentation
+    #
+    class ListDocumentClassifierSummariesResponse < Struct.new(
+      :document_classifier_summaries_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDocumentClassifiersRequest
     #   data as a hash:
     #
     #       {
     #         filter: {
     #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #           document_classifier_name: "ComprehendArnName",
     #           submit_time_before: Time.now,
     #           submit_time_after: Time.now,
     #         },
@@ -3946,12 +4284,56 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEntityRecognizerSummariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return on each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizerSummariesRequest AWS API Documentation
+    #
+    class ListEntityRecognizerSummariesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity_recognizer_summaries_list
+    #   The list entity recognizer summaries.
+    #   @return [Array<Types::EntityRecognizerSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The list entity recognizer summaries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizerSummariesResponse AWS API Documentation
+    #
+    class ListEntityRecognizerSummariesResponse < Struct.new(
+      :entity_recognizer_summaries_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListEntityRecognizersRequest
     #   data as a hash:
     #
     #       {
     #         filter: {
     #           status: "SUBMITTED", # accepts SUBMITTED, TRAINING, DELETING, STOP_REQUESTED, STOPPED, IN_ERROR, TRAINED
+    #           recognizer_name: "ComprehendArnName",
     #           submit_time_before: Time.now,
     #           submit_time_after: Time.now,
     #         },
@@ -4877,6 +5259,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5026,6 +5413,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5173,6 +5565,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5342,6 +5739,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5455,6 +5857,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5609,6 +6016,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5737,6 +6149,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -5891,6 +6308,11 @@ module Aws::Comprehend
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
     #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
     #         },
     #         output_data_config: { # required
     #           s3_uri: "S3Uri", # required
@@ -6686,11 +7108,17 @@ module Aws::Comprehend
     #
     #       {
     #         endpoint_arn: "ComprehendEndpointArn", # required
-    #         desired_inference_units: 1, # required
+    #         desired_model_arn: "ComprehendModelArn",
+    #         desired_inference_units: 1,
+    #         desired_data_access_role_arn: "IamRoleArn",
     #       }
     #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_model_arn
+    #   The ARN of the new model to use when updating an existing endpoint.
     #   @return [String]
     #
     # @!attribute [rw] desired_inference_units
@@ -6699,11 +7127,18 @@ module Aws::Comprehend
     #   characters per second.
     #   @return [Integer]
     #
+    # @!attribute [rw] desired_data_access_role_arn
+    #   Data access role ARN to use in case the new model is encrypted with
+    #   a customer CMK.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpointRequest AWS API Documentation
     #
     class UpdateEndpointRequest < Struct.new(
       :endpoint_arn,
-      :desired_inference_units)
+      :desired_model_arn,
+      :desired_inference_units,
+      :desired_data_access_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

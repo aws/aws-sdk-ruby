@@ -2510,6 +2510,54 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Deletes stored utterances.
+    #
+    # Amazon Lex stores the utterances that users send to your bot.
+    # Utterances are stored for 15 days for use with the operation, and then
+    # stored indefinitely for use in improving the ability of your bot to
+    # respond to user input..
+    #
+    # Use the `DeleteUtterances` operation to manually delete utterances for
+    # a specific session. When you use the `DeleteUtterances` operation,
+    # utterances stored for improving your bot's ability to respond to user
+    # input are deleted immediately. Utterances stored for use with the
+    # `ListAggregatedUtterances` operation are deleted after 15 days.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot that contains the utterances.
+    #
+    # @option params [String] :locale_id
+    #   The identifier of the language and locale where the utterances were
+    #   collected. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #
+    # @option params [String] :session_id
+    #   The unique identifier of the session with the user. The ID is returned
+    #   in the response from the and operations.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_utterances({
+    #     bot_id: "Id", # required
+    #     locale_id: "LocaleId",
+    #     session_id: "SessionId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteUtterances AWS API Documentation
+    #
+    # @overload delete_utterances(params = {})
+    # @param [Hash] params ({})
+    def delete_utterances(params = {}, options = {})
+      req = build_request(:delete_utterances, params)
+      req.send_request(options)
+    end
+
     # Provides metadata information about a bot.
     #
     # @option params [required, String] :bot_id
@@ -3302,6 +3350,146 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def describe_slot_type(params = {}, options = {})
       req = build_request(:describe_slot_type, params)
+      req.send_request(options)
+    end
+
+    # Provides a list of utterances that users have sent to the bot.
+    #
+    # Utterances are aggregated by the text of the utterance. For example,
+    # all instances where customers used the phrase "I want to order
+    # pizza" are aggregated into the same line in the response.
+    #
+    # You can see both detected utterances and missed utterances. A detected
+    # utterance is where the bot properly recognized the utterance and
+    # activated the associated intent. A missed utterance was not recognized
+    # by the bot and didn't activate an intent.
+    #
+    # Utterances can be aggregated for a bot alias or for a bot version, but
+    # not both at the same time.
+    #
+    # Utterances statistics are not generated under the following
+    # conditions:
+    #
+    # * The `childDirected` field was set to true when the bot was created.
+    #
+    # * You are using slot obfuscation with one or more slots.
+    #
+    # * You opted out of participating in improving Amazon Lex.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot associated with this request.
+    #
+    # @option params [String] :bot_alias_id
+    #   The identifier of the bot alias associated with this request. If you
+    #   specify the bot alias, you can't specify the bot version.
+    #
+    # @option params [String] :bot_version
+    #   The identifier of the bot version associated with this request. If you
+    #   specify the bot version, you can't specify the bot alias.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale where the utterances were
+    #   collected. For more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #
+    # @option params [required, Types::UtteranceAggregationDuration] :aggregation_duration
+    #   The time window for aggregating the utterance information. You can
+    #   specify a time between one hour and two weeks.
+    #
+    # @option params [Types::AggregatedUtterancesSortBy] :sort_by
+    #   Specifies sorting parameters for the list of utterances. You can sort
+    #   by the hit count, the missed count, or the number of distinct sessions
+    #   the utterance appeared in.
+    #
+    # @option params [Array<Types::AggregatedUtterancesFilter>] :filters
+    #   Provides the specification of a filter used to limit the utterances in
+    #   the response to only those that match the filter specification. You
+    #   can only specify one filter and one string to filter on.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of utterances to return in each page of results. If
+    #   there are fewer results than the maximum page size, only the actual
+    #   number of results are returned. If you don't specify the `maxResults`
+    #   parameter, 1,000 results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the `ListAggregatedUtterances` operation contains
+    #   more results that specified in the `maxResults` parameter, a token is
+    #   returned in the response. Use that token in the `nextToken` parameter
+    #   to return the next page of results.
+    #
+    # @return [Types::ListAggregatedUtterancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAggregatedUtterancesResponse#bot_id #bot_id} => String
+    #   * {Types::ListAggregatedUtterancesResponse#bot_alias_id #bot_alias_id} => String
+    #   * {Types::ListAggregatedUtterancesResponse#bot_version #bot_version} => String
+    #   * {Types::ListAggregatedUtterancesResponse#locale_id #locale_id} => String
+    #   * {Types::ListAggregatedUtterancesResponse#aggregation_duration #aggregation_duration} => Types::UtteranceAggregationDuration
+    #   * {Types::ListAggregatedUtterancesResponse#aggregation_window_start_time #aggregation_window_start_time} => Time
+    #   * {Types::ListAggregatedUtterancesResponse#aggregation_window_end_time #aggregation_window_end_time} => Time
+    #   * {Types::ListAggregatedUtterancesResponse#aggregation_last_refreshed_date_time #aggregation_last_refreshed_date_time} => Time
+    #   * {Types::ListAggregatedUtterancesResponse#aggregated_utterances_summaries #aggregated_utterances_summaries} => Array&lt;Types::AggregatedUtterancesSummary&gt;
+    #   * {Types::ListAggregatedUtterancesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_aggregated_utterances({
+    #     bot_id: "Id", # required
+    #     bot_alias_id: "BotAliasId",
+    #     bot_version: "BotVersion",
+    #     locale_id: "LocaleId", # required
+    #     aggregation_duration: { # required
+    #       relative_aggregation_duration: { # required
+    #         time_dimension: "Hours", # required, accepts Hours, Days, Weeks
+    #         time_value: 1, # required
+    #       },
+    #     },
+    #     sort_by: {
+    #       attribute: "HitCount", # required, accepts HitCount, MissedCount
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     filters: [
+    #       {
+    #         name: "Utterance", # required, accepts Utterance
+    #         values: ["FilterValue"], # required
+    #         operator: "CO", # required, accepts CO, EQ
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_alias_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.aggregation_duration.relative_aggregation_duration.time_dimension #=> String, one of "Hours", "Days", "Weeks"
+    #   resp.aggregation_duration.relative_aggregation_duration.time_value #=> Integer
+    #   resp.aggregation_window_start_time #=> Time
+    #   resp.aggregation_window_end_time #=> Time
+    #   resp.aggregation_last_refreshed_date_time #=> Time
+    #   resp.aggregated_utterances_summaries #=> Array
+    #   resp.aggregated_utterances_summaries[0].utterance #=> String
+    #   resp.aggregated_utterances_summaries[0].hit_count #=> Integer
+    #   resp.aggregated_utterances_summaries[0].missed_count #=> Integer
+    #   resp.aggregated_utterances_summaries[0].utterance_first_recorded_in_aggregation_duration #=> Time
+    #   resp.aggregated_utterances_summaries[0].utterance_last_recorded_in_aggregation_duration #=> Time
+    #   resp.aggregated_utterances_summaries[0].contains_data_from_deleted_resources #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListAggregatedUtterances AWS API Documentation
+    #
+    # @overload list_aggregated_utterances(params = {})
+    # @param [Hash] params ({})
+    def list_aggregated_utterances(params = {}, options = {})
+      req = build_request(:list_aggregated_utterances, params)
       req.send_request(options)
     end
 
@@ -5711,7 +5899,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

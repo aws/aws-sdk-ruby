@@ -74,7 +74,7 @@ module Aws::EC2
       data[:kernel_id]
     end
 
-    # The AWS account ID of the image owner.
+    # The ID of the Amazon Web Services account that owns the image.
     # @return [String]
     def owner_id
       data[:owner_id]
@@ -88,8 +88,8 @@ module Aws::EC2
     end
 
     # The platform details associated with the billing code of the AMI. For
-    # more information, see [Obtaining Billing Information][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # more information, see [Understanding AMI billing][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -101,16 +101,19 @@ module Aws::EC2
 
     # The operation of the Amazon EC2 instance and the billing code that is
     # associated with the AMI. `usageOperation` corresponds to the
-    # [lineitem/Operation][1] column on your AWS Cost and Usage Report and
-    # in the [AWS Price List API][2]. For the list of `UsageOperation`
-    # codes, see [Platform Details and Usage Operation Billing Codes][3] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # [lineitem/Operation][1] column on your Amazon Web Services Cost and
+    # Usage Report and in the [Amazon Web Services Price List API][2]. You
+    # can view these fields on the **Instances** or **AMIs** pages in the
+    # Amazon EC2 console, or in the responses that are returned by the
+    # [DescribeImages][3] command in the Amazon EC2 API, or the
+    # [describe-images][4] command in the CLI.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation
     # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html#billing-info
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html
+    # [4]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html
     # @return [String]
     def usage_operation
       data[:usage_operation]
@@ -160,8 +163,8 @@ module Aws::EC2
       data[:hypervisor]
     end
 
-    # The AWS account alias (for example, `amazon`, `self`) or the AWS
-    # account ID of the AMI owner.
+    # The Amazon Web Services account alias (for example, `amazon`, `self`)
+    # or the Amazon Web Services account ID of the AMI owner.
     # @return [String]
     def image_owner_alias
       data[:image_owner_alias]
@@ -179,8 +182,8 @@ module Aws::EC2
       data[:root_device_name]
     end
 
-    # The type of root device used by the AMI. The AMI can use an EBS volume
-    # or an instance store volume.
+    # The type of root device used by the AMI. The AMI can use an Amazon EBS
+    # volume or an instance store volume.
     # @return [String]
     def root_device_type
       data[:root_device_type]
@@ -549,7 +552,7 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :attribute
     #   The name of the attribute to modify. The valid values are
-    #   `description`, `launchPermission`, and `productCodes`.
+    #   `description` and `launchPermission`.
     # @option options [Types::AttributeValue] :description
     #   A new description for the AMI.
     # @option options [Types::LaunchPermissionModifications] :launch_permission
@@ -558,18 +561,16 @@ module Aws::EC2
     #   The operation type. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     # @option options [Array<String>] :product_codes
-    #   The DevPay product codes. After you add a product code to an AMI, it
-    #   can't be removed.
+    #   Not supported.
     # @option options [Array<String>] :user_groups
     #   The user groups. This parameter can be used only when the `Attribute`
     #   parameter is `launchPermission`.
     # @option options [Array<String>] :user_ids
-    #   The AWS account IDs. This parameter can be used only when the
-    #   `Attribute` parameter is `launchPermission`.
+    #   The Amazon Web Services account IDs. This parameter can be used only
+    #   when the `Attribute` parameter is `launchPermission`.
     # @option options [String] :value
     #   The value of the attribute being modified. This parameter can be used
-    #   only when the `Attribute` parameter is `description` or
-    #   `productCodes`.
+    #   only when the `Attribute` parameter is `description`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

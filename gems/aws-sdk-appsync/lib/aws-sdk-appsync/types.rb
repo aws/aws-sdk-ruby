@@ -50,7 +50,7 @@ module Aws::AppSync
     #
     # @!attribute [rw] authentication_type
     #   The authentication type: API key, Identity and Access Management,
-    #   OIDC, or Amazon Cognito user pools.
+    #   OIDC, Amazon Cognito user pools, or Amazon Web Services Lambda.
     #   @return [String]
     #
     # @!attribute [rw] open_id_connect_config
@@ -62,7 +62,7 @@ module Aws::AppSync
     #   @return [Types::CognitoUserPoolConfig]
     #
     # @!attribute [rw] lambda_authorizer_config
-    #   Configuration for AWS Lambda function authorization.
+    #   Configuration for Amazon Web Services Lambda function authorization.
     #   @return [Types::LambdaAuthorizerConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AdditionalAuthenticationProvider AWS API Documentation
@@ -609,7 +609,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -626,6 +626,10 @@ module Aws::AppSync
     #           lambda_function_arn: "String", # required
     #         },
     #         elasticsearch_config: {
+    #           endpoint: "String", # required
+    #           aws_region: "String", # required
+    #         },
+    #         open_search_service_config: {
     #           endpoint: "String", # required
     #           aws_region: "String", # required
     #         },
@@ -681,8 +685,17 @@ module Aws::AppSync
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
-    #   Amazon Elasticsearch Service settings.
+    #   Amazon OpenSearch Service settings.
+    #
+    #   As of September 2021, Amazon Elasticsearch service is Amazon
+    #   OpenSearch Service. This configuration is deprecated. For new data
+    #   sources, use CreateDataSourceRequest$openSearchServiceConfig to
+    #   create an OpenSearch data source.
     #   @return [Types::ElasticsearchDataSourceConfig]
+    #
+    # @!attribute [rw] open_search_service_config
+    #   Amazon OpenSearch Service settings.
+    #   @return [Types::OpenSearchServiceDataSourceConfig]
     #
     # @!attribute [rw] http_config
     #   HTTP endpoint settings.
@@ -703,6 +716,7 @@ module Aws::AppSync
       :dynamodb_config,
       :lambda_config,
       :elasticsearch_config,
+      :open_search_service_config,
       :http_config,
       :relational_database_config)
       SENSITIVE = []
@@ -871,7 +885,7 @@ module Aws::AppSync
     #
     # @!attribute [rw] authentication_type
     #   The authentication type: API key, Identity and Access Management,
-    #   OIDC, or Amazon Cognito user pools.
+    #   OIDC, Amazon Cognito user pools, or Amazon Web Services Lambda.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_config
@@ -897,7 +911,7 @@ module Aws::AppSync
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_authorizer_config
-    #   Configuration for AWS Lambda function authorization.
+    #   Configuration for Amazon Web Services Lambda function authorization.
     #   @return [Types::LambdaAuthorizerConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
@@ -1108,14 +1122,17 @@ module Aws::AppSync
     # @!attribute [rw] type
     #   The type of the data source.
     #
+    #   * **AWS\_LAMBDA**\: The data source is an Amazon Web Services Lambda
+    #     function.
+    #
     #   * **AMAZON\_DYNAMODB**\: The data source is an Amazon DynamoDB
     #     table.
     #
     #   * **AMAZON\_ELASTICSEARCH**\: The data source is an Amazon
-    #     Elasticsearch Service domain.
+    #     OpenSearch Service domain.
     #
-    #   * **AWS\_LAMBDA**\: The data source is an Amazon Web Services Lambda
-    #     function.
+    #   * **AMAZON\_OPENSEARCH\_SERVICE**\: The data source is an Amazon
+    #     OpenSearch Service domain.
     #
     #   * **NONE**\: There is no data source. This type is used when you
     #     wish to invoke a GraphQL operation without connecting to a data
@@ -1142,8 +1159,12 @@ module Aws::AppSync
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
-    #   Amazon Elasticsearch Service settings.
+    #   Amazon OpenSearch Service settings.
     #   @return [Types::ElasticsearchDataSourceConfig]
+    #
+    # @!attribute [rw] open_search_service_config
+    #   Amazon OpenSearch Service settings.
+    #   @return [Types::OpenSearchServiceDataSourceConfig]
     #
     # @!attribute [rw] http_config
     #   HTTP endpoint settings.
@@ -1164,6 +1185,7 @@ module Aws::AppSync
       :dynamodb_config,
       :lambda_config,
       :elasticsearch_config,
+      :open_search_service_config,
       :http_config,
       :relational_database_config)
       SENSITIVE = []
@@ -1455,7 +1477,12 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # Describes an Elasticsearch data source configuration.
+    # Describes an OpenSearch data source configuration.
+    #
+    # As of September 2021, Amazon Elasticsearch service is Amazon
+    # OpenSearch Service. This configuration is deprecated. For new data
+    # sources, use OpenSearchServiceDataSourceConfig to specify an
+    # OpenSearch data source.
     #
     # @note When making an API call, you may pass ElasticsearchDataSourceConfig
     #   data as a hash:
@@ -1952,7 +1979,7 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] lambda_authorizer_config
-    #   Configuration for AWS Lambda function authorization.
+    #   Configuration for Amazon Web Services Lambda function authorization.
     #   @return [Types::LambdaAuthorizerConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
@@ -2047,13 +2074,13 @@ module Aws::AppSync
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_uri
-    #   The ARN of the lambda function to be called for authorization. This
+    #   The ARN of the Lambda function to be called for authorization. This
     #   may be a standard Lambda ARN, a version ARN (`.../v3`) or alias ARN.
     #
     #   *Note*\: This Lambda function must have the following resource-based
     #   policy assigned to it. When configuring Lambda authorizers in the
-    #   Console, this is done for you. To do so with the AWS CLI, run the
-    #   following:
+    #   Console, this is done for you. To do so with the Amazon Web Services
+    #   CLI, run the following:
     #
     #   `aws lambda add-permission --function-name
     #   "arn:aws:lambda:us-east-2:111122223333:function:my-function"
@@ -2063,7 +2090,7 @@ module Aws::AppSync
     #
     # @!attribute [rw] identity_validation_expression
     #   A regular expression for validation of tokens before the Lambda
-    #   Function is called.
+    #   function is called.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaAuthorizerConfig AWS API Documentation
@@ -2649,6 +2676,33 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Describes an OpenSearch data source configuration.
+    #
+    # @note When making an API call, you may pass OpenSearchServiceDataSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint: "String", # required
+    #         aws_region: "String", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/OpenSearchServiceDataSourceConfig AWS API Documentation
+    #
+    class OpenSearchServiceDataSourceConfig < Struct.new(
+      :endpoint,
+      :aws_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The pipeline configuration for a resolver of kind `PIPELINE`.
     #
     # @note When making an API call, you may pass PipelineConfig
@@ -3177,7 +3231,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -3194,6 +3248,10 @@ module Aws::AppSync
     #           lambda_function_arn: "String", # required
     #         },
     #         elasticsearch_config: {
+    #           endpoint: "String", # required
+    #           aws_region: "String", # required
+    #         },
+    #         open_search_service_config: {
     #           endpoint: "String", # required
     #           aws_region: "String", # required
     #         },
@@ -3248,8 +3306,17 @@ module Aws::AppSync
     #   @return [Types::LambdaDataSourceConfig]
     #
     # @!attribute [rw] elasticsearch_config
-    #   The new Elasticsearch Service configuration.
+    #   The new OpenSearch configuration.
+    #
+    #   As of September 2021, Amazon Elasticsearch service is Amazon
+    #   OpenSearch Service. This configuration is deprecated. Instead, use
+    #   UpdateDataSourceRequest$openSearchServiceConfig to update an
+    #   OpenSearch data source.
     #   @return [Types::ElasticsearchDataSourceConfig]
+    #
+    # @!attribute [rw] open_search_service_config
+    #   The new OpenSearch configuration.
+    #   @return [Types::OpenSearchServiceDataSourceConfig]
     #
     # @!attribute [rw] http_config
     #   The new HTTP endpoint configuration.
@@ -3270,6 +3337,7 @@ module Aws::AppSync
       :dynamodb_config,
       :lambda_config,
       :elasticsearch_config,
+      :open_search_service_config,
       :http_config,
       :relational_database_config)
       SENSITIVE = []
@@ -3469,7 +3537,7 @@ module Aws::AppSync
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_authorizer_config
-    #   Configuration for AWS Lambda function authorization.
+    #   Configuration for Amazon Web Services Lambda function authorization.
     #   @return [Types::LambdaAuthorizerConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation

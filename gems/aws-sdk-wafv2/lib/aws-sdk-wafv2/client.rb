@@ -683,6 +683,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #         action: {
     #           block: {
@@ -1274,6 +1310,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #         action: {
     #           block: {
@@ -1730,6 +1802,42 @@ module Aws::WAFV2
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
+    #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
     #           },
     #         },
     #         action: {
@@ -2379,7 +2487,7 @@ module Aws::WAFV2
     # Retrieves the specified managed rule set.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -2485,10 +2593,24 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Retrieves the keys that are currently blocked by a rate-based rule.
-    # The maximum number of managed keys that can be blocked for a single
-    # rate-based rule is 10,000. If more than 10,000 addresses exceed the
-    # rate limit, those with the highest rates are blocked.
+    # Retrieves the keys that are currently blocked by a rate-based rule
+    # instance. The maximum number of managed keys that can be blocked for a
+    # single rate-based rule instance is 10,000. If more than 10,000
+    # addresses exceed the rate limit, those with the highest rates are
+    # blocked.
+    #
+    # For a rate-based rule that you've defined inside a rule group,
+    # provide the name of the rule group reference statement in your
+    # request, in addition to the rate-based rule name and the web ACL name.
+    #
+    # WAF monitors web requests and manages keys independently for each
+    # unique combination of web ACL, optional rule group, and rate-based
+    # rule. For example, if you define a rate-based rule inside a rule
+    # group, and then use the rule group in a web ACL, WAF monitors web
+    # requests and manages keys for that web ACL, rule group reference
+    # statement, and rate-based rule instance. If you use the same rule
+    # group in a second web ACL, WAF monitors web requests and manages keys
+    # for this second usage completely independent of your first.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
@@ -2513,8 +2635,16 @@ module Aws::WAFV2
     #   responses to create and list commands. You provide it to operations
     #   like update and delete.
     #
+    # @option params [String] :rule_group_rule_name
+    #   The name of the rule group reference statement in your web ACL. This
+    #   is required only when you have the rate-based rule nested inside a
+    #   rule group.
+    #
     # @option params [required, String] :rule_name
-    #   The name of the rate-based rule to get the keys for.
+    #   The name of the rate-based rule to get the keys for. If you have the
+    #   rule defined inside a rule group that you're using in your web ACL,
+    #   also provide the name of the rule group reference statement in the
+    #   request parameter `RuleGroupRuleName`.
     #
     # @return [Types::GetRateBasedStatementManagedKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2527,6 +2657,7 @@ module Aws::WAFV2
     #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #     web_acl_name: "EntityName", # required
     #     web_acl_id: "EntityId", # required
+    #     rule_group_rule_name: "EntityName",
     #     rule_name: "EntityName", # required
     #   })
     #
@@ -2736,6 +2867,16 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
     #   resp.rule_group.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.rule_group.rules[0].statement.label_match_statement.key #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.regex_string #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.single_header.name #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
+    #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
+    #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].action.block.custom_response.response_code #=> Integer
     #   resp.rule_group.rules[0].action.block.custom_response.custom_response_body_key #=> String
     #   resp.rule_group.rules[0].action.block.custom_response.response_headers #=> Array
@@ -3015,6 +3156,16 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.rules[0].statement.label_match_statement.key #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_header.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].action.block.custom_response.response_code #=> Integer
     #   resp.web_acl.rules[0].action.block.custom_response.custom_response_body_key #=> String
     #   resp.web_acl.rules[0].action.block.custom_response.response_headers #=> Array
@@ -3120,6 +3271,16 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.managed_rule_group_statement #=> Types::ManagedRuleGroupStatement
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -3211,6 +3372,16 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.managed_rule_group_statement #=> Types::ManagedRuleGroupStatement
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -3347,6 +3518,16 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
     #   resp.web_acl.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.rules[0].statement.label_match_statement.key #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_header.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].action.block.custom_response.response_code #=> Integer
     #   resp.web_acl.rules[0].action.block.custom_response.custom_response_body_key #=> String
     #   resp.web_acl.rules[0].action.block.custom_response.response_headers #=> Array
@@ -3452,6 +3633,16 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.managed_rule_group_statement #=> Types::ManagedRuleGroupStatement
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -3543,6 +3734,16 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.managed_rule_group_statement #=> Types::ManagedRuleGroupStatement
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.label_match_statement.key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -3638,8 +3839,8 @@ module Aws::WAFV2
 
     # Retrieves an array of managed rule groups that are available for you
     # to use. This list includes all Amazon Web Services Managed Rules rule
-    # groups and all of the Marketplace managed rule groups that you're
-    # subscribed to.
+    # groups and all of the Amazon Web Services Marketplace managed rule
+    # groups that you're subscribed to.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
@@ -3837,7 +4038,7 @@ module Aws::WAFV2
     # Retrieves the managed rule sets that you own.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -4329,7 +4530,7 @@ module Aws::WAFV2
     # with versioning.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -4672,7 +4873,7 @@ module Aws::WAFV2
     # ListAvailableManagedRuleGroupVersions for the managed rule group.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -5189,6 +5390,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #         action: {
     #           block: {
@@ -5658,6 +5895,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #         action: {
     #           block: {
@@ -5759,7 +6032,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

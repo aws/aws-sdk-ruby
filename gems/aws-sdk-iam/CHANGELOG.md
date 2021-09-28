@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-09-22)
+------------------
+
+* Feature - Added changes to OIDC API about not using port numbers in the URL.
+
 1.60.0 (2021-09-01)
 ------------------
 

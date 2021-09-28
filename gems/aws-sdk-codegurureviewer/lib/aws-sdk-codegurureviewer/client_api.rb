@@ -70,6 +70,7 @@ module Aws::CodeGuruReviewer
     ListRepositoryAssociationsResponse = Shapes::StructureShape.new(name: 'ListRepositoryAssociationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LongDescription = Shapes::StringShape.new(name: 'LongDescription')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MeteredLinesOfCodeCount = Shapes::IntegerShape.new(name: 'MeteredLinesOfCodeCount')
     Metrics = Shapes::StructureShape.new(name: 'Metrics')
@@ -108,10 +109,17 @@ module Aws::CodeGuruReviewer
     RequestMetadata = Shapes::StructureShape.new(name: 'RequestMetadata')
     Requester = Shapes::StringShape.new(name: 'Requester')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RuleId = Shapes::StringShape.new(name: 'RuleId')
+    RuleMetadata = Shapes::StructureShape.new(name: 'RuleMetadata')
+    RuleName = Shapes::StringShape.new(name: 'RuleName')
+    RuleTag = Shapes::StringShape.new(name: 'RuleTag')
+    RuleTags = Shapes::ListShape.new(name: 'RuleTags')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3BucketRepository = Shapes::StructureShape.new(name: 'S3BucketRepository')
     S3Repository = Shapes::StructureShape.new(name: 'S3Repository')
     S3RepositoryDetails = Shapes::StructureShape.new(name: 'S3RepositoryDetails')
+    Severity = Shapes::StringShape.new(name: 'Severity')
+    ShortDescription = Shapes::StringShape.new(name: 'ShortDescription')
     SourceCodeArtifactsObjectKey = Shapes::StringShape.new(name: 'SourceCodeArtifactsObjectKey')
     SourceCodeType = Shapes::StructureShape.new(name: 'SourceCodeType')
     StateReason = Shapes::StringShape.new(name: 'StateReason')
@@ -355,6 +363,8 @@ module Aws::CodeGuruReviewer
     RecommendationSummary.add_member(:end_line, Shapes::ShapeRef.new(shape: LineNumber, location_name: "EndLine"))
     RecommendationSummary.add_member(:description, Shapes::ShapeRef.new(shape: Text, location_name: "Description"))
     RecommendationSummary.add_member(:recommendation_category, Shapes::ShapeRef.new(shape: RecommendationCategory, location_name: "RecommendationCategory"))
+    RecommendationSummary.add_member(:rule_metadata, Shapes::ShapeRef.new(shape: RuleMetadata, location_name: "RuleMetadata"))
+    RecommendationSummary.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "Severity"))
     RecommendationSummary.struct_class = Types::RecommendationSummary
 
     Repository.add_member(:code_commit, Shapes::ShapeRef.new(shape: CodeCommitRepository, location_name: "CodeCommit"))
@@ -408,6 +418,15 @@ module Aws::CodeGuruReviewer
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RuleMetadata.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, location_name: "RuleId"))
+    RuleMetadata.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "RuleName"))
+    RuleMetadata.add_member(:short_description, Shapes::ShapeRef.new(shape: ShortDescription, location_name: "ShortDescription"))
+    RuleMetadata.add_member(:long_description, Shapes::ShapeRef.new(shape: LongDescription, location_name: "LongDescription"))
+    RuleMetadata.add_member(:rule_tags, Shapes::ShapeRef.new(shape: RuleTags, location_name: "RuleTags"))
+    RuleMetadata.struct_class = Types::RuleMetadata
+
+    RuleTags.member = Shapes::ShapeRef.new(shape: RuleTag)
 
     S3BucketRepository.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     S3BucketRepository.add_member(:details, Shapes::ShapeRef.new(shape: S3RepositoryDetails, location_name: "Details"))

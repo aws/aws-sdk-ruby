@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-09-07)
+------------------
+
+* Feature - SPEKE v2 support for live CMAF packaging type. SPEKE v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, it supports live DASH currently.
+
 1.43.0 (2021-09-01)
 ------------------
 

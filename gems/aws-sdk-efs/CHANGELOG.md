@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-09-02)
+------------------
+
+* Feature - Adds support for EFS Intelligent-Tiering, which uses EFS Lifecycle Management to monitor file access patterns and is designed to automatically transition files to and from your corresponding Infrequent Access (IA) storage classes.
+
 1.43.0 (2021-09-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-09-02)
+------------------
+
+* Feature - AWS Transfer Family introduces Managed Workflows for creating, executing, monitoring, and standardizing post file transfer processing
+
 1.38.0 (2021-09-01)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-09-02)
+------------------
+
+* Feature - Lex now supports Korean (ko-KR) locale.
+
 1.50.0 (2021-09-01)
 ------------------
 

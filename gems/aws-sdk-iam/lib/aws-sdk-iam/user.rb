@@ -439,8 +439,9 @@ module Aws::IAM
     #   character range (`\u00FF`). You can also include the tab (`\u0009`),
     #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
     #   of these characters are valid in a password. However, many tools, such
-    #   as the Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   as the Amazon Web Services Management Console, might restrict the
+    #   ability to type certain characters because they have special meaning
+    #   within that tool.
     #
     #
     #

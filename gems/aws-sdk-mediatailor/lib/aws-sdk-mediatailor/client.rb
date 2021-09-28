@@ -327,13 +327,60 @@ module Aws::MediaTailor
 
     # @!group API Operations
 
+    # Configures Amazon CloudWatch log settings for a playback
+    # configuration.
+    #
+    # @option params [required, Integer] :percent_enabled
+    #   The percentage of session logs that MediaTailor sends to your
+    #   Cloudwatch Logs account. For example, if your playback configuration
+    #   has 1000 sessions and percentEnabled is set to 60, MediaTailor sends
+    #   logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides
+    #   at random which of the playback configuration sessions to send logs
+    #   for. If you want to view logs for a specific session, you can use the
+    #   [debug log mode][1].
+    #
+    #   Valid values: 0 - 100
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html
+    #
+    # @option params [required, String] :playback_configuration_name
+    #   The name of the playback configuration.
+    #
+    # @return [Types::ConfigureLogsForPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfigureLogsForPlaybackConfigurationResponse#percent_enabled #percent_enabled} => Integer
+    #   * {Types::ConfigureLogsForPlaybackConfigurationResponse#playback_configuration_name #playback_configuration_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.configure_logs_for_playback_configuration({
+    #     percent_enabled: 1, # required
+    #     playback_configuration_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.percent_enabled #=> Integer
+    #   resp.playback_configuration_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForPlaybackConfiguration AWS API Documentation
+    #
+    # @overload configure_logs_for_playback_configuration(params = {})
+    # @param [Hash] params ({})
+    def configure_logs_for_playback_configuration(params = {}, options = {})
+      req = build_request(:configure_logs_for_playback_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a channel.
     #
     # @option params [required, String] :channel_name
     #
     # @option params [Types::SlateSource] :filler_slate
     #   The slate used to fill gaps between programs in the schedule. You must
-    #   configure filler slate if your channel uses an LINEAR PlaybackMode.
+    #   configure filler slate if your channel uses a LINEAR PlaybackMode.
     #
     # @option params [required, Array<Types::RequestOutputItem>] :outputs
     #   The channel's output properties.
@@ -1073,6 +1120,7 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#log_configuration #log_configuration} => Types::LogConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
     #   * {Types::GetPlaybackConfigurationResponse#name #name} => String
     #   * {Types::GetPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
@@ -1108,6 +1156,7 @@ module Aws::MediaTailor
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.log_configuration.percent_enabled #=> Integer
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
     #   resp.personalization_threshold_seconds #=> Integer
@@ -1269,6 +1318,7 @@ module Aws::MediaTailor
     #   resp.items[0].hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.items[0].live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.items[0].live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.items[0].log_configuration.percent_enabled #=> Integer
     #   resp.items[0].manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.items[0].name #=> String
     #   resp.items[0].personalization_threshold_seconds #=> Integer
@@ -1539,6 +1589,7 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
+    #   * {Types::PutPlaybackConfigurationResponse#log_configuration #log_configuration} => Types::LogConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
     #   * {Types::PutPlaybackConfigurationResponse#name #name} => String
     #   * {Types::PutPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
@@ -1612,6 +1663,7 @@ module Aws::MediaTailor
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.log_configuration.percent_enabled #=> Integer
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
     #   resp.personalization_threshold_seconds #=> Integer
@@ -1937,7 +1989,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

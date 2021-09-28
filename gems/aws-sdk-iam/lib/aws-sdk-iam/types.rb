@@ -186,8 +186,9 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region where this access key was most recently used. The value
-    #   for this field is "N/A" in the following situations:
+    #   The Amazon Web Services Region where this access key was most
+    #   recently used. The value for this field is "N/A" in the following
+    #   situations:
     #
     #   * The user does not have an access key.
     #
@@ -196,8 +197,8 @@ module Aws::IAM
     #
     #   * There is no sign-in data associated with the user.
     #
-    #   For more information about Regions, see [Regions and endpoints][1]
-    #   in the Amazon Web Services General Reference.
+    #   For more information about Amazon Web Services Regions, see [Regions
+    #   and endpoints][1] in the Amazon Web Services General Reference.
     #
     #
     #
@@ -574,8 +575,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] new_password
-    #   The new password. The new password must conform to the account's
-    #   password policy, if one exists.
+    #   The new password. The new password must conform to the Amazon Web
+    #   Services account's password policy, if one exists.
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
@@ -583,9 +584,9 @@ module Aws::IAM
     #   ASCII character range (`\u00FF`). You can also include the tab
     #   (`\u0009`), line feed (`\u000A`), and carriage return (`\u000D`)
     #   characters. Any of these characters are valid in a password.
-    #   However, many tools, such as the Management Console, might restrict
-    #   the ability to type certain characters because they have special
-    #   meaning within that tool.
+    #   However, many tools, such as the Amazon Web Services Management
+    #   Console, might restrict the ability to type certain characters
+    #   because they have special meaning within that tool.
     #
     #
     #
@@ -911,9 +912,9 @@ module Aws::IAM
     #   ASCII character range (`\u00FF`). You can also include the tab
     #   (`\u0009`), line feed (`\u000A`), and carriage return (`\u000D`)
     #   characters. Any of these characters are valid in a password.
-    #   However, many tools, such as the Management Console, might restrict
-    #   the ability to type certain characters because they have special
-    #   meaning within that tool.
+    #   However, many tools, such as the Amazon Web Services Management
+    #   Console, might restrict the ability to type certain characters
+    #   because they have special meaning within that tool.
     #
     #
     #
@@ -970,18 +971,19 @@ module Aws::IAM
     #   Connect ID tokens. Per the OIDC standard, path components are
     #   allowed but query parameters are not. Typically the URL consists of
     #   only a hostname, like `https://server.example.org` or
-    #   `https://example.com`.
+    #   `https://example.com`. The URL should not contain a port number.
     #
     #   You cannot register the same provider multiple times in a single
-    #   account. If you try to submit a URL that has already been used for
-    #   an OpenID Connect provider in the account, you will get an error.
+    #   Amazon Web Services account. If you try to submit a URL that has
+    #   already been used for an OpenID Connect provider in the Amazon Web
+    #   Services account, you will get an error.
     #   @return [String]
     #
     # @!attribute [rw] client_id_list
-    #   A list of client IDs (also known as audiences). When a mobile or web
-    #   app registers with an OpenID Connect provider, they establish a
-    #   value that identifies the application. (This is the value that's
-    #   sent as the `client_id` parameter on OAuth requests.)
+    #   Provides a list of client IDs, also known as audiences. When a
+    #   mobile or web app registers with an OpenID Connect provider, they
+    #   establish a value that identifies the application. This is the value
+    #   that's sent as the `client_id` parameter on OAuth requests.
     #
     #   You can register multiple client IDs with the same provider. For
     #   example, you might have multiple applications that use the same OIDC
@@ -1010,11 +1012,11 @@ module Aws::IAM
     #   `server.example.com` and the provider stores its keys at
     #   https://keys.server.example.com/openid-connect. In that case, the
     #   thumbprint string would be the hex-encoded SHA-1 hash value of the
-    #   certificate used by https://keys.server.example.com.
+    #   certificate used by `https://keys.server.example.com.`
     #
-    #   For more information about obtaining the OIDC provider's
-    #   thumbprint, see [Obtaining the thumbprint for an OpenID Connect
-    #   provider][1] in the *IAM User Guide*.
+    #   For more information about obtaining the OIDC provider thumbprint,
+    #   see [Obtaining the thumbprint for an OpenID Connect provider][1] in
+    #   the *IAM User Guide*.
     #
     #
     #
@@ -1118,6 +1120,10 @@ module Aws::IAM
     #   can contain any ASCII character from the ! (`\u0021`) through the
     #   DEL character (`\u007F`), including most punctuation characters,
     #   digits, and upper and lowercased letters.
+    #
+    #   <note markdown="1"> You cannot use an asterisk (*) in the path name.
+    #
+    #    </note>
     #
     #
     #
@@ -3911,7 +3917,7 @@ module Aws::IAM
     #
     # @!attribute [rw] create_date
     #   The date and time when the IAM OIDC provider resource object was
-    #   created in the account.
+    #   created in the Amazon Web Services account.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -6594,8 +6600,8 @@ module Aws::IAM
     # request.
     #
     # @!attribute [rw] open_id_connect_provider_list
-    #   The list of IAM OIDC provider resource objects defined in the
-    #   account.
+    #   The list of IAM OIDC provider resource objects defined in the Amazon
+    #   Web Services account.
     #   @return [Array<Types::OpenIDConnectProviderListEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersResponse AWS API Documentation
@@ -6739,8 +6745,8 @@ module Aws::IAM
     #   The scope to use for filtering the results.
     #
     #   To list only Amazon Web Services managed policies, set `Scope` to
-    #   `AWS`. To list only the customer managed policies in your account,
-    #   set `Scope` to `Local`.
+    #   `AWS`. To list only the customer managed policies in your Amazon Web
+    #   Services account, set `Scope` to `Local`.
     #
     #   This parameter is optional. If it is not included, or if it is set
     #   to `All`, all policies are returned.
@@ -8132,8 +8138,8 @@ module Aws::IAM
     # and GetLoginProfile operations.
     #
     # @!attribute [rw] user_name
-    #   The name of the user, which can be used for signing in to the
-    #   Management Console.
+    #   The name of the user, which can be used for signing in to the Amazon
+    #   Web Services Management Console.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -9813,7 +9819,8 @@ module Aws::IAM
     #   @return [Time]
     #
     # @!attribute [rw] region
-    #   The name of the Region in which the role was last used.
+    #   The name of the Amazon Web Services Region in which the role was
+    #   last used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleLastUsed AWS API Documentation
@@ -10347,14 +10354,14 @@ module Aws::IAM
     #
     # @!attribute [rw] global_endpoint_token_version
     #   The version of the global endpoint token. Version 1 tokens are valid
-    #   only in Regions that are available by default. These tokens do not
-    #   work in manually enabled Regions, such as Asia Pacific (Hong Kong).
-    #   Version 2 tokens are valid in all Regions. However, version 2 tokens
-    #   are longer and might affect systems where you temporarily store
-    #   tokens.
+    #   only in Amazon Web Services Regions that are available by default.
+    #   These tokens do not work in manually enabled Regions, such as Asia
+    #   Pacific (Hong Kong). Version 2 tokens are valid in all Regions.
+    #   However, version 2 tokens are longer and might affect systems where
+    #   you temporarily store tokens.
     #
-    #   For information, see [Activating and deactivating STS in an
-    #   Region][1] in the *IAM User Guide*.
+    #   For information, see [Activating and deactivating STS in an Amazon
+    #   Web Services Region][1] in the *IAM User Guide*.
     #
     #
     #
@@ -10563,17 +10570,17 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   An ARN representing the account ID that specifies the owner of any
-    #   simulated resource that does not identify its owner in the resource
-    #   ARN. Examples of resource ARNs include an S3 bucket or object. If
-    #   `ResourceOwner` is specified, it is also used as the account owner
-    #   of any `ResourcePolicy` included in the simulation. If the
-    #   `ResourceOwner` parameter is not specified, then the owner of the
-    #   resources and the resource policy defaults to the account of the
-    #   identity provided in `CallerArn`. This parameter is required only if
-    #   you specify a resource-based policy and account that owns the
-    #   resource is different from the account that owns the simulated
-    #   calling user `CallerArn`.
+    #   An ARN representing the Amazon Web Services account ID that
+    #   specifies the owner of any simulated resource that does not identify
+    #   its owner in the resource ARN. Examples of resource ARNs include an
+    #   S3 bucket or object. If `ResourceOwner` is specified, it is also
+    #   used as the account owner of any `ResourcePolicy` included in the
+    #   simulation. If the `ResourceOwner` parameter is not specified, then
+    #   the owner of the resources and the resource policy defaults to the
+    #   account of the identity provided in `CallerArn`. This parameter is
+    #   required only if you specify a resource-based policy and account
+    #   that owns the resource is different from the account that owns the
+    #   simulated calling user `CallerArn`.
     #
     #   The ARN for an account uses the following syntax:
     #   `arn:aws:iam::AWS-account-ID:root`. For example, to represent the
@@ -10880,17 +10887,17 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   An account ID that specifies the owner of any simulated resource
-    #   that does not identify its owner in the resource ARN. Examples of
-    #   resource ARNs include an S3 bucket or object. If `ResourceOwner` is
-    #   specified, it is also used as the account owner of any
-    #   `ResourcePolicy` included in the simulation. If the `ResourceOwner`
-    #   parameter is not specified, then the owner of the resources and the
-    #   resource policy defaults to the account of the identity provided in
-    #   `CallerArn`. This parameter is required only if you specify a
-    #   resource-based policy and account that owns the resource is
-    #   different from the account that owns the simulated calling user
-    #   `CallerArn`.
+    #   An Amazon Web Services account ID that specifies the owner of any
+    #   simulated resource that does not identify its owner in the resource
+    #   ARN. Examples of resource ARNs include an S3 bucket or object. If
+    #   `ResourceOwner` is specified, it is also used as the account owner
+    #   of any `ResourcePolicy` included in the simulation. If the
+    #   `ResourceOwner` parameter is not specified, then the owner of the
+    #   resources and the resource policy defaults to the account of the
+    #   identity provided in `CallerArn`. This parameter is required only if
+    #   you specify a resource-based policy and account that owns the
+    #   resource is different from the account that owns the simulated
+    #   calling user `CallerArn`.
     #   @return [String]
     #
     # @!attribute [rw] caller_arn
@@ -11913,9 +11920,10 @@ module Aws::IAM
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_users_to_change_password
-    #   Allows all IAM users in your account to use the Management Console
-    #   to change their own passwords. For more information, see [Letting
-    #   IAM users change their own passwords][1] in the *IAM User Guide*.
+    #   Allows all IAM users in your account to use the Amazon Web Services
+    #   Management Console to change their own passwords. For more
+    #   information, see [Letting IAM users change their own passwords][1]
+    #   in the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in
@@ -12123,8 +12131,9 @@ module Aws::IAM
     #     carriage return (`\u000D`)
     #
     #   However, the format can be further restricted by the account
-    #   administrator by setting a password policy on the account. For more
-    #   information, see UpdateAccountPasswordPolicy.
+    #   administrator by setting a password policy on the Amazon Web
+    #   Services account. For more information, see
+    #   UpdateAccountPasswordPolicy.
     #
     #
     #

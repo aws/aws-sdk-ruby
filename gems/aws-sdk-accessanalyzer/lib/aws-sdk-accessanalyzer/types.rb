@@ -83,7 +83,7 @@ module Aws::AccessAnalyzer
     #
     # @!attribute [rw] change_type
     #   Provides context on how the access preview finding compares to
-    #   existing access identified in Access Analyzer.
+    #   existing access identified in IAM Access Analyzer.
     #
     #   * `New` - The finding is for newly-introduced access.
     #
@@ -113,8 +113,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] existing_finding_id
-    #   The existing ID of the finding in Access Analyzer, provided only for
-    #   existing findings.
+    #   The existing ID of the finding in IAM Access Analyzer, provided only
+    #   for existing findings.
     #   @return [String]
     #
     # @!attribute [rw] existing_finding_status
@@ -144,8 +144,9 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_account
-    #   The AWS account ID that owns the resource. For most AWS resources,
-    #   the owning account is the account in which the resource was created.
+    #   The Amazon Web Services account ID that owns the resource. For most
+    #   Amazon Web Services resources, the owning account is the account in
+    #   which the resource was created.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -263,7 +264,8 @@ module Aws::AccessAnalyzer
     # @note AclGrantee is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AclGrantee corresponding to the set member.
     #
     # @!attribute [rw] id
-    #   The value specified is the canonical user ID of an AWS account.
+    #   The value specified is the canonical user ID of an Amazon Web
+    #   Services account.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -314,7 +316,7 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_account
-    #   The AWS account ID that owns the resource.
+    #   The Amazon Web Services account ID that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -360,7 +362,7 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_account
-    #   The AWS account ID that owns the resource.
+    #   The Amazon Web Services account ID that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -403,10 +405,10 @@ module Aws::AccessAnalyzer
     #   The status of the analyzer. An `Active` analyzer successfully
     #   monitors supported resources and generates new findings. The
     #   analyzer is `Disabled` when a user action, such as removing trusted
-    #   access for AWS IAM Access Analyzer from AWS Organizations, causes
-    #   the analyzer to stop generating new findings. The status is
-    #   `Creating` when the analyzer creation is in progress and `Failed`
-    #   when the analyzer creation has failed.
+    #   access for Identity and Access Management Access Analyzer from
+    #   Organizations, causes the analyzer to stop generating new findings.
+    #   The status is `Creating` when the analyzer creation is in progress
+    #   and `Failed` when the analyzer creation has failed.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -414,8 +416,8 @@ module Aws::AccessAnalyzer
     #   the analyzer. For example, if the creation for the analyzer fails, a
     #   `Failed` status is returned. For an analyzer with organization as
     #   the type, this failure can be due to an issue with creating the
-    #   service-linked roles required in the member accounts of the AWS
-    #   organization.
+    #   service-linked roles required in the member accounts of the Amazon
+    #   Web Services organization.
     #   @return [Types::StatusReason]
     #
     # @!attribute [rw] tags
@@ -553,21 +555,21 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] access_role
-    #   The ARN of the service role that Access Analyzer uses to access your
-    #   CloudTrail trail and service last accessed information.
+    #   The ARN of the service role that IAM Access Analyzer uses to access
+    #   your CloudTrail trail and service last accessed information.
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   The end of the time range for which Access Analyzer reviews your
+    #   The end of the time range for which IAM Access Analyzer reviews your
     #   CloudTrail events. Events with a timestamp after this time are not
     #   considered to generate a policy. If this is not included in the
     #   request, the default value is the current time.
     #   @return [Time]
     #
     # @!attribute [rw] start_time
-    #   The start of the time range for which Access Analyzer reviews your
-    #   CloudTrail events. Events with a timestamp before this time are not
-    #   considered to generate a policy.
+    #   The start of the time range for which IAM Access Analyzer reviews
+    #   your CloudTrail events. Events with a timestamp before this time are
+    #   not considered to generate a policy.
     #   @return [Time]
     #
     # @!attribute [rw] trails
@@ -588,16 +590,16 @@ module Aws::AccessAnalyzer
     # Contains information about CloudTrail access.
     #
     # @!attribute [rw] end_time
-    #   The end of the time range for which Access Analyzer reviews your
+    #   The end of the time range for which IAM Access Analyzer reviews your
     #   CloudTrail events. Events with a timestamp after this time are not
     #   considered to generate a policy. If this is not included in the
     #   request, the default value is the current time.
     #   @return [Time]
     #
     # @!attribute [rw] start_time
-    #   The start of the time range for which Access Analyzer reviews your
-    #   CloudTrail events. Events with a timestamp before this time are not
-    #   considered to generate a policy.
+    #   The start of the time range for which IAM Access Analyzer reviews
+    #   your CloudTrail events. Events with a timestamp before this time are
+    #   not considered to generate a policy.
     #   @return [Time]
     #
     # @!attribute [rw] trail_properties
@@ -640,7 +642,7 @@ module Aws::AccessAnalyzer
     #   @return [Types::SecretsManagerSecretConfiguration]
     #
     # @!attribute [rw] sqs_queue
-    #   The access control configuration is for an SQS queue.
+    #   The access control configuration is for an Amazon SQS queue.
     #   @return [Types::SqsQueueConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Configuration AWS API Documentation
@@ -1092,7 +1094,7 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_account
-    #   The AWS account ID that owns the resource.
+    #   The Amazon Web Services account ID that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1160,7 +1162,9 @@ module Aws::AccessAnalyzer
     # granted. This is populated for Amazon S3 bucket findings.
     #
     # @!attribute [rw] access_point_arn
-    #   The ARN of the access point that generated the finding.
+    #   The ARN of the access point that generated the finding. The ARN
+    #   format depends on whether the ARN represents an access point or a
+    #   multi-region access point.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingSourceDetail AWS API Documentation
@@ -1215,7 +1219,7 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] resource_owner_account
-    #   The AWS account ID that owns the resource.
+    #   The Amazon Web Services account ID that owns the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1284,8 +1288,8 @@ module Aws::AccessAnalyzer
     #
     # @!attribute [rw] is_complete
     #   This value is set to `true` if the generated policy contains all
-    #   possible actions for a service that Access Analyzer identified from
-    #   the CloudTrail trail that you specified, and `false` otherwise.
+    #   possible actions for a service that IAM Access Analyzer identified
+    #   from the CloudTrail trail that you specified, and `false` otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] principal_arn
@@ -1403,8 +1407,8 @@ module Aws::AccessAnalyzer
     # The response to the request.
     #
     # @!attribute [rw] resource
-    #   An `AnalyzedResource` object that contains information that Access
-    #   Analyzer found when it analyzed the resource.
+    #   An `AnalyzedResource` object that contains information that IAM
+    #   Access Analyzer found when it analyzed the resource.
     #   @return [Types::AnalyzedResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetAnalyzedResourceResponse AWS API Documentation
@@ -1560,8 +1564,9 @@ module Aws::AccessAnalyzer
     #   The level of detail that you want to generate. You can specify
     #   whether to generate service-level policies.
     #
-    #   Access Analyzer uses `iam:servicelastaccessed` to identify services
-    #   that have been used recently to create this service-level template.
+    #   IAM Access Analyzer uses `iam:servicelastaccessed` to identify
+    #   services that have been used recently to create this service-level
+    #   template.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_id
@@ -1686,8 +1691,8 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # This configuration sets the Amazon S3 access point network origin to
-    # `Internet`.
+    # This configuration sets the network origin for the Amazon S3 access
+    # point or multi-region access point to `Internet`.
     #
     # @api private
     #
@@ -1702,7 +1707,7 @@ module Aws::AccessAnalyzer
     #   @return [Time]
     #
     # @!attribute [rw] job_error
-    #   Contains the details about the policy generation error.
+    #   The job error for the policy generation request.
     #   @return [Types::JobError]
     #
     # @!attribute [rw] job_id
@@ -1794,9 +1799,9 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] issuing_account
-    #   The AWS account under which the grant was issued. The account is
-    #   used to propose KMS grants issued by accounts other than the owner
-    #   of the key.
+    #   The Amazon Web Services account under which the grant was issued.
+    #   The account is used to propose KMS grants issued by accounts other
+    #   than the owner of the key.
     #   @return [String]
     #
     # @!attribute [rw] operations
@@ -2427,7 +2432,8 @@ module Aws::AccessAnalyzer
     end
 
     # The proposed `InternetConfiguration` or `VpcConfiguration` to apply to
-    # the Amazon S3 Access point. You can make the access point accessible
+    # the Amazon S3 access point. `VpcConfiguration` does not apply to
+    # multi-region access points. You can make the access point accessible
     # from the internet, or you can specify that all requests made through
     # that access point must originate from a specific virtual private cloud
     # (VPC). You can specify only one type of network configuration. For
@@ -2442,13 +2448,14 @@ module Aws::AccessAnalyzer
     # @note NetworkOriginConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of NetworkOriginConfiguration corresponding to the set member.
     #
     # @!attribute [rw] internet_configuration
-    #   The configuration for the Amazon S3 access point with an `Internet`
-    #   origin.
+    #   The configuration for the Amazon S3 access point or multi-region
+    #   access point with an `Internet` origin.
     #   @return [Types::InternetConfiguration]
     #
     # @!attribute [rw] vpc_configuration
     #   The proposed virtual private cloud (VPC) configuration for the
-    #   Amazon S3 access point. For more information, see
+    #   Amazon S3 access point. VPC configuration does not apply to
+    #   multi-region access points. For more information, see
     #   [VpcConfiguration][1].
     #
     #
@@ -2620,9 +2627,10 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The configuration for an Amazon S3 access point for the bucket. You
-    # can propose up to 10 access points per bucket. If the proposed Amazon
-    # S3 access point configuration is for an existing bucket, the access
+    # The configuration for an Amazon S3 access point or multi-region access
+    # point for the bucket. You can propose up to 10 access points or
+    # multi-region access points per bucket. If the proposed Amazon S3
+    # access point configuration is for an existing bucket, the access
     # preview uses the proposed access point configuration in place of the
     # existing access points. To propose an access point without a policy,
     # you can provide an empty string as the access point policy. For more
@@ -2654,21 +2662,22 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] access_point_policy
-    #   The access point policy.
+    #   The access point or multi-region access point policy.
     #   @return [String]
     #
     # @!attribute [rw] network_origin
     #   The proposed `Internet` and `VpcConfiguration` to apply to this
-    #   Amazon S3 access point. If the access preview is for a new resource
-    #   and neither is specified, the access preview uses `Internet` for the
-    #   network origin. If the access preview is for an existing resource
-    #   and neither is specified, the access preview uses the exiting
-    #   network origin.
+    #   Amazon S3 access point. `VpcConfiguration` does not apply to
+    #   multi-region access points. If the access preview is for a new
+    #   resource and neither is specified, the access preview uses
+    #   `Internet` for the network origin. If the access preview is for an
+    #   existing resource and neither is specified, the access preview uses
+    #   the exiting network origin.
     #   @return [Types::NetworkOriginConfiguration]
     #
     # @!attribute [rw] public_access_block
     #   The proposed `S3PublicAccessBlock` configuration to apply to this
-    #   Amazon S3 Access Point.
+    #   Amazon S3 access point or multi-region access point.
     #   @return [Types::S3PublicAccessBlockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/S3AccessPointConfiguration AWS API Documentation
@@ -2719,15 +2728,16 @@ module Aws::AccessAnalyzer
     # Proposed access control configuration for an Amazon S3 bucket. You can
     # propose a configuration for a new Amazon S3 bucket or an existing
     # Amazon S3 bucket that you own by specifying the Amazon S3 bucket
-    # policy, bucket ACLs, bucket BPA settings, and Amazon S3 access points
-    # attached to the bucket. If the configuration is for an existing Amazon
-    # S3 bucket and you do not specify the Amazon S3 bucket policy, the
-    # access preview uses the existing policy attached to the bucket. If the
-    # access preview is for a new resource and you do not specify the Amazon
-    # S3 bucket policy, the access preview assumes a bucket without a
-    # policy. To propose deletion of an existing bucket policy, you can
-    # specify an empty string. For more information about bucket policy
-    # limits, see [Bucket Policy Examples][1].
+    # policy, bucket ACLs, bucket BPA settings, Amazon S3 access points, and
+    # multi-region access points attached to the bucket. If the
+    # configuration is for an existing Amazon S3 bucket and you do not
+    # specify the Amazon S3 bucket policy, the access preview uses the
+    # existing policy attached to the bucket. If the access preview is for a
+    # new resource and you do not specify the Amazon S3 bucket policy, the
+    # access preview assumes a bucket without a policy. To propose deletion
+    # of an existing bucket policy, you can specify an empty string. For
+    # more information about bucket policy limits, see [Bucket Policy
+    # Examples][1].
     #
     #
     #
@@ -2770,7 +2780,9 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] access_points
-    #   The configuration of Amazon S3 access points for the bucket.
+    #   The configuration of Amazon S3 access points or multi-region access
+    #   points for the bucket. You can propose up to 10 new access points
+    #   per bucket.
     #   @return [Hash<String,Types::S3AccessPointConfiguration>]
     #
     # @!attribute [rw] bucket_acl_grants
@@ -2807,10 +2819,10 @@ module Aws::AccessAnalyzer
     # bucket and the configuration is not specified, the access preview uses
     # the existing setting. If the proposed configuration is for a new
     # bucket and the configuration is not specified, the access preview uses
-    # `false`. If the proposed configuration is for a new access point and
-    # the access point BPA configuration is not specified, the access
-    # preview uses `true`. For more information, see
-    # [PublicAccessBlockConfiguration][1].
+    # `false`. If the proposed configuration is for a new access point or
+    # multi-region access point and the access point BPA configuration is
+    # not specified, the access preview uses `true`. For more information,
+    # see [PublicAccessBlockConfiguration][1].
     #
     #
     #
@@ -2855,10 +2867,10 @@ module Aws::AccessAnalyzer
     # without a policy. To propose deletion of an existing policy, you can
     # specify an empty string. If the proposed configuration is for a new
     # secret and you do not specify the KMS key ID, the access preview uses
-    # the default CMK of the AWS account. If you specify an empty string for
-    # the KMS key ID, the access preview uses the default CMK of the AWS
-    # account. For more information about secret policy limits, see [Quotas
-    # for AWS Secrets Manager.][2].
+    # the default CMK of the Amazon Web Services account. If you specify an
+    # empty string for the KMS key ID, the access preview uses the default
+    # CMK of the Amazon Web Services account. For more information about
+    # secret policy limits, see [Quotas for Secrets Manager.][2].
     #
     #
     #
@@ -2874,8 +2886,8 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The proposed ARN, key ID, or alias of the AWS KMS customer master
-    #   key (CMK).
+    #   The proposed ARN, key ID, or alias of the KMS customer master key
+    #   (CMK).
     #   @return [String]
     #
     # @!attribute [rw] secret_policy
@@ -2962,15 +2974,16 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The proposed access control configuration for an SQS queue. You can
-    # propose a configuration for a new SQS queue or an existing SQS queue
-    # that you own by specifying the SQS policy. If the configuration is for
-    # an existing SQS queue and you do not specify the SQS policy, the
-    # access preview uses the existing SQS policy for the queue. If the
-    # access preview is for a new resource and you do not specify the
-    # policy, the access preview assumes an SQS queue without a policy. To
-    # propose deletion of an existing SQS queue policy, you can specify an
-    # empty string for the SQS policy. For more information about SQS policy
+    # The proposed access control configuration for an Amazon SQS queue. You
+    # can propose a configuration for a new Amazon SQS queue or an existing
+    # Amazon SQS queue that you own by specifying the Amazon SQS policy. If
+    # the configuration is for an existing Amazon SQS queue and you do not
+    # specify the Amazon SQS policy, the access preview uses the existing
+    # Amazon SQS policy for the queue. If the access preview is for a new
+    # resource and you do not specify the policy, the access preview assumes
+    # an Amazon SQS queue without a policy. To propose deletion of an
+    # existing Amazon SQS queue policy, you can specify an empty string for
+    # the Amazon SQS policy. For more information about Amazon SQS policy
     # limits, see [Quotas related to policies][1].
     #
     #
@@ -2985,7 +2998,7 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] queue_policy
-    #   The proposed resource policy for the SQS queue.
+    #   The proposed resource policy for the Amazon SQS queue.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/SqsQueueConfiguration AWS API Documentation
@@ -3027,7 +3040,7 @@ module Aws::AccessAnalyzer
     #   and they have no additional effect.
     #
     #   If you do not specify a client token, one is automatically generated
-    #   by the AWS SDK.
+    #   by the Amazon Web Services SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3104,7 +3117,7 @@ module Aws::AccessAnalyzer
     # example, if the creation for the analyzer fails, a `Failed` status is
     # returned. For an analyzer with organization as the type, this failure
     # can be due to an issue with creating the service-linked roles required
-    # in the member accounts of the AWS organization.
+    # in the member accounts of the Amazon Web Services organization.
     #
     # @!attribute [rw] code
     #   The reason code for the current status of the analyzer.
@@ -3203,7 +3216,7 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] all_regions
-    #   Possible values are `true` or `false`. If set to `true`, Access
+    #   Possible values are `true` or `false`. If set to `true`, IAM Access
     #   Analyzer retrieves CloudTrail data from all regions to analyze and
     #   generate a policy.
     #   @return [Boolean]
@@ -3232,7 +3245,7 @@ module Aws::AccessAnalyzer
     # a policy.
     #
     # @!attribute [rw] all_regions
-    #   Possible values are `true` or `false`. If set to `true`, Access
+    #   Possible values are `true` or `false`. If set to `true`, IAM Access
     #   Analyzer retrieves CloudTrail data from all regions to analyze and
     #   generate a policy.
     #   @return [Boolean]
@@ -3476,14 +3489,14 @@ module Aws::AccessAnalyzer
     #   The type of policy to validate. Identity policies grant permissions
     #   to IAM principals. Identity policies include managed and inline
     #   policies for IAM roles, users, and groups. They also include
-    #   service-control policies (SCPs) that are attached to an AWS
-    #   organization, organizational unit (OU), or an account.
+    #   service-control policies (SCPs) that are attached to an Amazon Web
+    #   Services organization, organizational unit (OU), or an account.
     #
-    #   Resource policies grant permissions on AWS resources. Resource
-    #   policies include trust policies for IAM roles and bucket policies
-    #   for S3 buckets. You can provide a generic input such as identity
-    #   policy or resource policy or a specific input such as managed policy
-    #   or S3 bucket policy.
+    #   Resource policies grant permissions on Amazon Web Services
+    #   resources. Resource policies include trust policies for IAM roles
+    #   and bucket policies for Amazon S3 buckets. You can provide a generic
+    #   input such as identity policy or resource policy or a specific input
+    #   such as managed policy or Amazon S3 bucket policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ValidatePolicyRequest AWS API Documentation
@@ -3499,8 +3512,8 @@ module Aws::AccessAnalyzer
     end
 
     # @!attribute [rw] findings
-    #   The list of findings in a policy returned by Access Analyzer based
-    #   on its suite of policy checks.
+    #   The list of findings in a policy returned by IAM Access Analyzer
+    #   based on its suite of policy checks.
     #   @return [Array<Types::ValidatePolicyFinding>]
     #
     # @!attribute [rw] next_token
@@ -3559,7 +3572,8 @@ module Aws::AccessAnalyzer
     end
 
     # The proposed virtual private cloud (VPC) configuration for the Amazon
-    # S3 access point. For more information, see [VpcConfiguration][1].
+    # S3 access point. VPC configuration does not apply to multi-region
+    # access points. For more information, see [VpcConfiguration][1].
     #
     #
     #

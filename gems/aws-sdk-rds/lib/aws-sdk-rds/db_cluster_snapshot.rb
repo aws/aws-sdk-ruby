@@ -526,6 +526,7 @@ module Aws::RDS
     #       auto_pause: false,
     #       seconds_until_auto_pause: 1,
     #       timeout_action: "String",
+    #       seconds_before_timeout: 1,
     #     },
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,

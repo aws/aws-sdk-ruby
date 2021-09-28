@@ -291,6 +291,8 @@ module Aws::SageMaker
     CreateProcessingJobResponse = Shapes::StructureShape.new(name: 'CreateProcessingJobResponse')
     CreateProjectInput = Shapes::StructureShape.new(name: 'CreateProjectInput')
     CreateProjectOutput = Shapes::StructureShape.new(name: 'CreateProjectOutput')
+    CreateStudioLifecycleConfigRequest = Shapes::StructureShape.new(name: 'CreateStudioLifecycleConfigRequest')
+    CreateStudioLifecycleConfigResponse = Shapes::StructureShape.new(name: 'CreateStudioLifecycleConfigResponse')
     CreateTrainingJobRequest = Shapes::StructureShape.new(name: 'CreateTrainingJobRequest')
     CreateTrainingJobResponse = Shapes::StructureShape.new(name: 'CreateTrainingJobResponse')
     CreateTransformJobRequest = Shapes::StructureShape.new(name: 'CreateTransformJobRequest')
@@ -371,6 +373,7 @@ module Aws::SageMaker
     DeletePipelineRequest = Shapes::StructureShape.new(name: 'DeletePipelineRequest')
     DeletePipelineResponse = Shapes::StructureShape.new(name: 'DeletePipelineResponse')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
+    DeleteStudioLifecycleConfigRequest = Shapes::StructureShape.new(name: 'DeleteStudioLifecycleConfigRequest')
     DeleteTagsInput = Shapes::StructureShape.new(name: 'DeleteTagsInput')
     DeleteTagsOutput = Shapes::StructureShape.new(name: 'DeleteTagsOutput')
     DeleteTrialComponentRequest = Shapes::StructureShape.new(name: 'DeleteTrialComponentRequest')
@@ -462,6 +465,8 @@ module Aws::SageMaker
     DescribeProcessingJobResponse = Shapes::StructureShape.new(name: 'DescribeProcessingJobResponse')
     DescribeProjectInput = Shapes::StructureShape.new(name: 'DescribeProjectInput')
     DescribeProjectOutput = Shapes::StructureShape.new(name: 'DescribeProjectOutput')
+    DescribeStudioLifecycleConfigRequest = Shapes::StructureShape.new(name: 'DescribeStudioLifecycleConfigRequest')
+    DescribeStudioLifecycleConfigResponse = Shapes::StructureShape.new(name: 'DescribeStudioLifecycleConfigResponse')
     DescribeSubscribedWorkteamRequest = Shapes::StructureShape.new(name: 'DescribeSubscribedWorkteamRequest')
     DescribeSubscribedWorkteamResponse = Shapes::StructureShape.new(name: 'DescribeSubscribedWorkteamResponse')
     DescribeTrainingJobRequest = Shapes::StructureShape.new(name: 'DescribeTrainingJobRequest')
@@ -745,6 +750,7 @@ module Aws::SageMaker
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LambdaStepMetadata = Shapes::StructureShape.new(name: 'LambdaStepMetadata')
     LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime')
+    LifecycleConfigArns = Shapes::ListShape.new(name: 'LifecycleConfigArns')
     LineageEntityParameters = Shapes::MapShape.new(name: 'LineageEntityParameters')
     ListActionsRequest = Shapes::StructureShape.new(name: 'ListActionsRequest')
     ListActionsResponse = Shapes::StructureShape.new(name: 'ListActionsResponse')
@@ -838,6 +844,8 @@ module Aws::SageMaker
     ListProcessingJobsResponse = Shapes::StructureShape.new(name: 'ListProcessingJobsResponse')
     ListProjectsInput = Shapes::StructureShape.new(name: 'ListProjectsInput')
     ListProjectsOutput = Shapes::StructureShape.new(name: 'ListProjectsOutput')
+    ListStudioLifecycleConfigsRequest = Shapes::StructureShape.new(name: 'ListStudioLifecycleConfigsRequest')
+    ListStudioLifecycleConfigsResponse = Shapes::StructureShape.new(name: 'ListStudioLifecycleConfigsResponse')
     ListSubscribedWorkteamsRequest = Shapes::StructureShape.new(name: 'ListSubscribedWorkteamsRequest')
     ListSubscribedWorkteamsResponse = Shapes::StructureShape.new(name: 'ListSubscribedWorkteamsResponse')
     ListTagsInput = Shapes::StructureShape.new(name: 'ListTagsInput')
@@ -1130,6 +1138,7 @@ module Aws::SageMaker
     ProfilingIntervalInMilliseconds = Shapes::IntegerShape.new(name: 'ProfilingIntervalInMilliseconds')
     ProfilingParameters = Shapes::MapShape.new(name: 'ProfilingParameters')
     ProfilingStatus = Shapes::StringShape.new(name: 'ProfilingStatus')
+    Project = Shapes::StructureShape.new(name: 'Project')
     ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
     ProjectEntityName = Shapes::StringShape.new(name: 'ProjectEntityName')
     ProjectId = Shapes::StringShape.new(name: 'ProjectId')
@@ -1184,6 +1193,8 @@ module Aws::SageMaker
     ResponseMIMETypes = Shapes::ListShape.new(name: 'ResponseMIMETypes')
     RetentionPolicy = Shapes::StructureShape.new(name: 'RetentionPolicy')
     RetentionType = Shapes::StringShape.new(name: 'RetentionType')
+    RetryPipelineExecutionRequest = Shapes::StructureShape.new(name: 'RetryPipelineExecutionRequest')
+    RetryPipelineExecutionResponse = Shapes::StructureShape.new(name: 'RetryPipelineExecutionResponse')
     RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RootAccess = Shapes::StringShape.new(name: 'RootAccess')
@@ -1272,6 +1283,13 @@ module Aws::SageMaker
     String256 = Shapes::StringShape.new(name: 'String256')
     String64 = Shapes::StringShape.new(name: 'String64')
     StringParameterValue = Shapes::StringShape.new(name: 'StringParameterValue')
+    StudioLifecycleConfigAppType = Shapes::StringShape.new(name: 'StudioLifecycleConfigAppType')
+    StudioLifecycleConfigArn = Shapes::StringShape.new(name: 'StudioLifecycleConfigArn')
+    StudioLifecycleConfigContent = Shapes::StringShape.new(name: 'StudioLifecycleConfigContent')
+    StudioLifecycleConfigDetails = Shapes::StructureShape.new(name: 'StudioLifecycleConfigDetails')
+    StudioLifecycleConfigName = Shapes::StringShape.new(name: 'StudioLifecycleConfigName')
+    StudioLifecycleConfigSortKey = Shapes::StringShape.new(name: 'StudioLifecycleConfigSortKey')
+    StudioLifecycleConfigsList = Shapes::ListShape.new(name: 'StudioLifecycleConfigsList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     Subnets = Shapes::ListShape.new(name: 'Subnets')
     SubscribedWorkteam = Shapes::StructureShape.new(name: 'SubscribedWorkteam')
@@ -2321,6 +2339,15 @@ module Aws::SageMaker
     CreateProjectOutput.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "ProjectId"))
     CreateProjectOutput.struct_class = Types::CreateProjectOutput
 
+    CreateStudioLifecycleConfigRequest.add_member(:studio_lifecycle_config_name, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, required: true, location_name: "StudioLifecycleConfigName"))
+    CreateStudioLifecycleConfigRequest.add_member(:studio_lifecycle_config_content, Shapes::ShapeRef.new(shape: StudioLifecycleConfigContent, required: true, location_name: "StudioLifecycleConfigContent"))
+    CreateStudioLifecycleConfigRequest.add_member(:studio_lifecycle_config_app_type, Shapes::ShapeRef.new(shape: StudioLifecycleConfigAppType, required: true, location_name: "StudioLifecycleConfigAppType"))
+    CreateStudioLifecycleConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateStudioLifecycleConfigRequest.struct_class = Types::CreateStudioLifecycleConfigRequest
+
+    CreateStudioLifecycleConfigResponse.add_member(:studio_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "StudioLifecycleConfigArn"))
+    CreateStudioLifecycleConfigResponse.struct_class = Types::CreateStudioLifecycleConfigResponse
+
     CreateTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     CreateTrainingJobRequest.add_member(:hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "HyperParameters"))
     CreateTrainingJobRequest.add_member(:algorithm_specification, Shapes::ShapeRef.new(shape: AlgorithmSpecification, required: true, location_name: "AlgorithmSpecification"))
@@ -2637,6 +2664,9 @@ module Aws::SageMaker
 
     DeleteProjectInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, required: true, location_name: "ProjectName"))
     DeleteProjectInput.struct_class = Types::DeleteProjectInput
+
+    DeleteStudioLifecycleConfigRequest.add_member(:studio_lifecycle_config_name, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, required: true, location_name: "StudioLifecycleConfigName"))
+    DeleteStudioLifecycleConfigRequest.struct_class = Types::DeleteStudioLifecycleConfigRequest
 
     DeleteTagsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     DeleteTagsInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
@@ -3311,6 +3341,17 @@ module Aws::SageMaker
     DescribeProjectOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeProjectOutput.struct_class = Types::DescribeProjectOutput
 
+    DescribeStudioLifecycleConfigRequest.add_member(:studio_lifecycle_config_name, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, required: true, location_name: "StudioLifecycleConfigName"))
+    DescribeStudioLifecycleConfigRequest.struct_class = Types::DescribeStudioLifecycleConfigRequest
+
+    DescribeStudioLifecycleConfigResponse.add_member(:studio_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "StudioLifecycleConfigArn"))
+    DescribeStudioLifecycleConfigResponse.add_member(:studio_lifecycle_config_name, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, location_name: "StudioLifecycleConfigName"))
+    DescribeStudioLifecycleConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeStudioLifecycleConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeStudioLifecycleConfigResponse.add_member(:studio_lifecycle_config_content, Shapes::ShapeRef.new(shape: StudioLifecycleConfigContent, location_name: "StudioLifecycleConfigContent"))
+    DescribeStudioLifecycleConfigResponse.add_member(:studio_lifecycle_config_app_type, Shapes::ShapeRef.new(shape: StudioLifecycleConfigAppType, location_name: "StudioLifecycleConfigAppType"))
+    DescribeStudioLifecycleConfigResponse.struct_class = Types::DescribeStudioLifecycleConfigResponse
+
     DescribeSubscribedWorkteamRequest.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, required: true, location_name: "WorkteamArn"))
     DescribeSubscribedWorkteamRequest.struct_class = Types::DescribeSubscribedWorkteamRequest
 
@@ -3958,10 +3999,12 @@ module Aws::SageMaker
     JsonContentTypes.member = Shapes::ShapeRef.new(shape: JsonContentType)
 
     JupyterServerAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    JupyterServerAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     JupyterServerAppSettings.struct_class = Types::JupyterServerAppSettings
 
     KernelGatewayAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
     KernelGatewayAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
+    KernelGatewayAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     KernelGatewayAppSettings.struct_class = Types::KernelGatewayAppSettings
 
     KernelGatewayImageConfig.add_member(:kernel_specs, Shapes::ShapeRef.new(shape: KernelSpecs, required: true, location_name: "KernelSpecs"))
@@ -4053,6 +4096,8 @@ module Aws::SageMaker
     LambdaStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: String256, location_name: "Arn"))
     LambdaStepMetadata.add_member(:output_parameters, Shapes::ShapeRef.new(shape: OutputParameterList, location_name: "OutputParameters"))
     LambdaStepMetadata.struct_class = Types::LambdaStepMetadata
+
+    LifecycleConfigArns.member = Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn)
 
     LineageEntityParameters.key = Shapes::ShapeRef.new(shape: StringParameterValue)
     LineageEntityParameters.value = Shapes::ShapeRef.new(shape: StringParameterValue)
@@ -4668,6 +4713,22 @@ module Aws::SageMaker
     ListProjectsOutput.add_member(:project_summary_list, Shapes::ShapeRef.new(shape: ProjectSummaryList, required: true, location_name: "ProjectSummaryList"))
     ListProjectsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProjectsOutput.struct_class = Types::ListProjectsOutput
+
+    ListStudioLifecycleConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStudioLifecycleConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStudioLifecycleConfigsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, location_name: "NameContains"))
+    ListStudioLifecycleConfigsRequest.add_member(:app_type_equals, Shapes::ShapeRef.new(shape: StudioLifecycleConfigAppType, location_name: "AppTypeEquals"))
+    ListStudioLifecycleConfigsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListStudioLifecycleConfigsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListStudioLifecycleConfigsRequest.add_member(:modified_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ModifiedTimeBefore"))
+    ListStudioLifecycleConfigsRequest.add_member(:modified_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ModifiedTimeAfter"))
+    ListStudioLifecycleConfigsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: StudioLifecycleConfigSortKey, location_name: "SortBy"))
+    ListStudioLifecycleConfigsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListStudioLifecycleConfigsRequest.struct_class = Types::ListStudioLifecycleConfigsRequest
+
+    ListStudioLifecycleConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListStudioLifecycleConfigsResponse.add_member(:studio_lifecycle_configs, Shapes::ShapeRef.new(shape: StudioLifecycleConfigsList, location_name: "StudioLifecycleConfigs"))
+    ListStudioLifecycleConfigsResponse.struct_class = Types::ListStudioLifecycleConfigsResponse
 
     ListSubscribedWorkteamsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: WorkteamName, location_name: "NameContains"))
     ListSubscribedWorkteamsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -5494,6 +5555,18 @@ module Aws::SageMaker
     ProfilingParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     ProfilingParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)
 
+    Project.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
+    Project.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, location_name: "ProjectName"))
+    Project.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "ProjectId"))
+    Project.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
+    Project.add_member(:service_catalog_provisioning_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisioningDetails, location_name: "ServiceCatalogProvisioningDetails"))
+    Project.add_member(:service_catalog_provisioned_product_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisionedProductDetails, location_name: "ServiceCatalogProvisionedProductDetails"))
+    Project.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "ProjectStatus"))
+    Project.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
+    Project.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Project.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Project.struct_class = Types::Project
+
     ProjectSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, required: true, location_name: "ProjectName"))
     ProjectSummary.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
     ProjectSummary.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
@@ -5598,12 +5671,20 @@ module Aws::SageMaker
     ResourceSpec.add_member(:sage_maker_image_arn, Shapes::ShapeRef.new(shape: ImageArn, location_name: "SageMakerImageArn"))
     ResourceSpec.add_member(:sage_maker_image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, location_name: "SageMakerImageVersionArn"))
     ResourceSpec.add_member(:instance_type, Shapes::ShapeRef.new(shape: AppInstanceType, location_name: "InstanceType"))
+    ResourceSpec.add_member(:lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "LifecycleConfigArn"))
     ResourceSpec.struct_class = Types::ResourceSpec
 
     ResponseMIMETypes.member = Shapes::ShapeRef.new(shape: ResponseMIMEType)
 
     RetentionPolicy.add_member(:home_efs_file_system, Shapes::ShapeRef.new(shape: RetentionType, location_name: "HomeEfsFileSystem"))
     RetentionPolicy.struct_class = Types::RetentionPolicy
+
+    RetryPipelineExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
+    RetryPipelineExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RetryPipelineExecutionRequest.struct_class = Types::RetryPipelineExecutionRequest
+
+    RetryPipelineExecutionResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
+    RetryPipelineExecutionResponse.struct_class = Types::RetryPipelineExecutionResponse
 
     RetryStrategy.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttempts, required: true, location_name: "MaximumRetryAttempts"))
     RetryStrategy.struct_class = Types::RetryStrategy
@@ -5643,6 +5724,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:pipeline, Shapes::ShapeRef.new(shape: Pipeline, location_name: "Pipeline"))
     SearchRecord.add_member(:pipeline_execution, Shapes::ShapeRef.new(shape: PipelineExecution, location_name: "PipelineExecution"))
     SearchRecord.add_member(:feature_group, Shapes::ShapeRef.new(shape: FeatureGroup, location_name: "FeatureGroup"))
+    SearchRecord.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))
@@ -5771,6 +5853,15 @@ module Aws::SageMaker
     StoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MaxRuntimeInSeconds, location_name: "MaxRuntimeInSeconds"))
     StoppingCondition.add_member(:max_wait_time_in_seconds, Shapes::ShapeRef.new(shape: MaxWaitTimeInSeconds, location_name: "MaxWaitTimeInSeconds"))
     StoppingCondition.struct_class = Types::StoppingCondition
+
+    StudioLifecycleConfigDetails.add_member(:studio_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "StudioLifecycleConfigArn"))
+    StudioLifecycleConfigDetails.add_member(:studio_lifecycle_config_name, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, location_name: "StudioLifecycleConfigName"))
+    StudioLifecycleConfigDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    StudioLifecycleConfigDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    StudioLifecycleConfigDetails.add_member(:studio_lifecycle_config_app_type, Shapes::ShapeRef.new(shape: StudioLifecycleConfigAppType, location_name: "StudioLifecycleConfigAppType"))
+    StudioLifecycleConfigDetails.struct_class = Types::StudioLifecycleConfigDetails
+
+    StudioLifecycleConfigsList.member = Shapes::ShapeRef.new(shape: StudioLifecycleConfigDetails)
 
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -6773,6 +6864,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:create_studio_lifecycle_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStudioLifecycleConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateStudioLifecycleConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateStudioLifecycleConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
       api.add_operation(:create_training_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTrainingJob"
         o.http_method = "POST"
@@ -7116,6 +7216,16 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: DeleteProjectInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_studio_lifecycle_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStudioLifecycleConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStudioLifecycleConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
       api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -7509,6 +7619,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeProjectInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeProjectOutput)
+      end)
+
+      api.add_operation(:describe_studio_lifecycle_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStudioLifecycleConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStudioLifecycleConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStudioLifecycleConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:describe_subscribed_workteam, Seahorse::Model::Operation.new.tap do |o|
@@ -8249,6 +8368,21 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_studio_lifecycle_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStudioLifecycleConfigs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStudioLifecycleConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStudioLifecycleConfigsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_subscribed_workteams, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSubscribedWorkteams"
         o.http_method = "POST"
@@ -8416,6 +8550,17 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: RenderUiTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: RenderUiTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:retry_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RetryPipelineExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RetryPipelineExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RetryPipelineExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:search, Seahorse::Model::Operation.new.tap do |o|

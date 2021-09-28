@@ -129,6 +129,7 @@ module Aws::AppSync
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpenIDConnectConfig = Shapes::StructureShape.new(name: 'OpenIDConnectConfig')
+    OpenSearchServiceDataSourceConfig = Shapes::StructureShape.new(name: 'OpenSearchServiceDataSourceConfig')
     OutputType = Shapes::StringShape.new(name: 'OutputType')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PipelineConfig = Shapes::StructureShape.new(name: 'PipelineConfig')
@@ -262,6 +263,7 @@ module Aws::AppSync
     CreateDataSourceRequest.add_member(:dynamodb_config, Shapes::ShapeRef.new(shape: DynamodbDataSourceConfig, location_name: "dynamodbConfig"))
     CreateDataSourceRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     CreateDataSourceRequest.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
+    CreateDataSourceRequest.add_member(:open_search_service_config, Shapes::ShapeRef.new(shape: OpenSearchServiceDataSourceConfig, location_name: "openSearchServiceConfig"))
     CreateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     CreateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
@@ -327,6 +329,7 @@ module Aws::AppSync
     DataSource.add_member(:dynamodb_config, Shapes::ShapeRef.new(shape: DynamodbDataSourceConfig, location_name: "dynamodbConfig"))
     DataSource.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     DataSource.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
+    DataSource.add_member(:open_search_service_config, Shapes::ShapeRef.new(shape: OpenSearchServiceDataSourceConfig, location_name: "openSearchServiceConfig"))
     DataSource.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     DataSource.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     DataSource.struct_class = Types::DataSource
@@ -598,6 +601,10 @@ module Aws::AppSync
     OpenIDConnectConfig.add_member(:auth_ttl, Shapes::ShapeRef.new(shape: Long, location_name: "authTTL"))
     OpenIDConnectConfig.struct_class = Types::OpenIDConnectConfig
 
+    OpenSearchServiceDataSourceConfig.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpoint"))
+    OpenSearchServiceDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
+    OpenSearchServiceDataSourceConfig.struct_class = Types::OpenSearchServiceDataSourceConfig
+
     PipelineConfig.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsIds, location_name: "functions"))
     PipelineConfig.struct_class = Types::PipelineConfig
 
@@ -693,6 +700,7 @@ module Aws::AppSync
     UpdateDataSourceRequest.add_member(:dynamodb_config, Shapes::ShapeRef.new(shape: DynamodbDataSourceConfig, location_name: "dynamodbConfig"))
     UpdateDataSourceRequest.add_member(:lambda_config, Shapes::ShapeRef.new(shape: LambdaDataSourceConfig, location_name: "lambdaConfig"))
     UpdateDataSourceRequest.add_member(:elasticsearch_config, Shapes::ShapeRef.new(shape: ElasticsearchDataSourceConfig, location_name: "elasticsearchConfig"))
+    UpdateDataSourceRequest.add_member(:open_search_service_config, Shapes::ShapeRef.new(shape: OpenSearchServiceDataSourceConfig, location_name: "openSearchServiceConfig"))
     UpdateDataSourceRequest.add_member(:http_config, Shapes::ShapeRef.new(shape: HttpDataSourceConfig, location_name: "httpConfig"))
     UpdateDataSourceRequest.add_member(:relational_database_config, Shapes::ShapeRef.new(shape: RelationalDatabaseDataSourceConfig, location_name: "relationalDatabaseConfig"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest

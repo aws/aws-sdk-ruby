@@ -456,6 +456,10 @@ module Aws::EKS
     #   The encryption configuration for the cluster.
     #   @return [Array<Types::EncryptionConfig>]
     #
+    # @!attribute [rw] connector_config
+    #   The configuration used to connect to a cluster for registration.
+    #   @return [Types::ConnectorConfigResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -474,7 +478,8 @@ module Aws::EKS
       :client_request_token,
       :platform_version,
       :tags,
-      :encryption_config)
+      :encryption_config,
+      :connector_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -499,6 +504,71 @@ module Aws::EKS
       :cluster_version,
       :platform_versions,
       :default_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration sent to a cluster for configuration.
+    #
+    # @note When making an API call, you may pass ConnectorConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "String", # required
+    #         provider: "EKS_ANYWHERE", # required, accepts EKS_ANYWHERE, ANTHOS, GKE, AKS, OPENSHIFT, TANZU, RANCHER, EC2, OTHER
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role that is authorized to
+    #   request the connector configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The cloud provider for the target cluster to connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ConnectorConfigRequest AWS API Documentation
+    #
+    class ConnectorConfigRequest < Struct.new(
+      :role_arn,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The full description of your connected cluster.
+    #
+    # @!attribute [rw] activation_id
+    #   A unique ID associated with the cluster for registration purposes.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_code
+    #   A unique code associated with the cluster for registration purposes.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_expiry
+    #   The expiration time of the connected cluster. The cluster's YAML
+    #   file must be applied through the native provider.
+    #   @return [Time]
+    #
+    # @!attribute [rw] provider
+    #   The cluster's cloud service provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role that is used by the EKS
+    #   connector to communicate with AWS services from the connected
+    #   Kubernetes cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ConnectorConfigResponse AWS API Documentation
+    #
+    class ConnectorConfigResponse < Struct.new(
+      :activation_id,
+      :activation_code,
+      :activation_expiry,
+      :provider,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1272,6 +1342,37 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeregisterClusterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the connected cluster to deregister.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeregisterClusterRequest AWS API Documentation
+    #
+    class DeregisterClusterRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   An object representing an Amazon EKS cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeregisterClusterResponse AWS API Documentation
+    #
+    class DeregisterClusterResponse < Struct.new(
+      :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAddonRequest
     #   data as a hash:
     #
@@ -1868,7 +1969,7 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object that represents an identity configuration.
+    # The full description of your identity configuration.
     #
     # @!attribute [rw] oidc
     #   An object that represents an OpenID Connect (OIDC) identity provider
@@ -2228,6 +2329,7 @@ module Aws::EKS
     #       {
     #         max_results: 1,
     #         next_token: "String",
+    #         include: ["String"],
     #       }
     #
     # @!attribute [rw] max_results
@@ -2254,11 +2356,17 @@ module Aws::EKS
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] include
+    #   Indicates whether connected clusters are included in the returned
+    #   list. Default value is 'ALL'.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListClustersRequest AWS API Documentation
     #
     class ListClustersRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :include)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3161,6 +3269,57 @@ module Aws::EKS
     #
     class Provider < Struct.new(
       :key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterClusterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ClusterName", # required
+    #         connector_config: { # required
+    #           role_arn: "String", # required
+    #           provider: "EKS_ANYWHERE", # required, accepts EKS_ANYWHERE, ANTHOS, GKE, AKS, OPENSHIFT, TANZU, RANCHER, EC2, OTHER
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Define a unique name for this cluster within your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_config
+    #   The configuration settings required to connect the Kubernetes
+    #   cluster to the Amazon EKS control plane.
+    #   @return [Types::ConnectorConfigRequest]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterClusterRequest AWS API Documentation
+    #
+    class RegisterClusterRequest < Struct.new(
+      :name,
+      :connector_config,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   An object representing an Amazon EKS cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterClusterResponse AWS API Documentation
+    #
+    class RegisterClusterResponse < Struct.new(
+      :cluster)
       SENSITIVE = []
       include Aws::Structure
     end

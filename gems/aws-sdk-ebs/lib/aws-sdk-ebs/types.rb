@@ -581,7 +581,7 @@ module Aws::EBS
     #       }
     #
     # @!attribute [rw] volume_size
-    #   The size of the volume, in GiB. The maximum size is `16384` GiB (16
+    #   The size of the volume, in GiB. The maximum size is `65536` GiB (64
     #   TiB).
     #   @return [Integer]
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-09-27)
+------------------
+
+* Feature - This release updates a set of APIs: CreateIntegrationAssociation, ListIntegrationAssociations, CreateUseCase, and StartOutboundVoiceContact. You can use it to create integrations with Amazon Pinpoint for the Amazon Connect Campaigns use case, Amazon Connect Voice ID, and Amazon Connect Wisdom.
+
 1.50.0 (2021-09-01)
 ------------------
 

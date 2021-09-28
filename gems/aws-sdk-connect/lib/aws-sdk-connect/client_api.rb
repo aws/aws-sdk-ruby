@@ -29,6 +29,7 @@ module Aws::Connect
     AgentStatusTypes = Shapes::ListShape.new(name: 'AgentStatusTypes')
     AgentUsername = Shapes::StringShape.new(name: 'AgentUsername')
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
+    AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
     AssociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'AssociateApprovedOriginRequest')
     AssociateBotRequest = Shapes::StructureShape.new(name: 'AssociateBotRequest')
     AssociateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigRequest')
@@ -49,6 +50,7 @@ module Aws::Connect
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotName = Shapes::StringShape.new(name: 'BotName')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    CampaignId = Shapes::StringShape.new(name: 'CampaignId')
     Channel = Shapes::StringShape.new(name: 'Channel')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
@@ -403,6 +405,7 @@ module Aws::Connect
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TrafficType = Shapes::StringShape.new(name: 'TrafficType')
     URI = Shapes::StringShape.new(name: 'URI')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -471,6 +474,10 @@ module Aws::Connect
     AgentStatusSummaryList.member = Shapes::ShapeRef.new(shape: AgentStatusSummary)
 
     AgentStatusTypes.member = Shapes::ShapeRef.new(shape: AgentStatusType)
+
+    AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAnswerMachineDetection"))
+    AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, Shapes::ShapeRef.new(shape: Boolean, location_name: "AwaitAnswerMachinePrompt"))
+    AnswerMachineDetectionConfig.struct_class = Types::AnswerMachineDetectionConfig
 
     AssociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateApprovedOriginRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, required: true, location_name: "Origin"))
@@ -608,9 +615,9 @@ module Aws::Connect
     CreateIntegrationAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateIntegrationAssociationRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "IntegrationType"))
     CreateIntegrationAssociationRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "IntegrationArn"))
-    CreateIntegrationAssociationRequest.add_member(:source_application_url, Shapes::ShapeRef.new(shape: URI, required: true, location_name: "SourceApplicationUrl"))
-    CreateIntegrationAssociationRequest.add_member(:source_application_name, Shapes::ShapeRef.new(shape: SourceApplicationName, required: true, location_name: "SourceApplicationName"))
-    CreateIntegrationAssociationRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "SourceType"))
+    CreateIntegrationAssociationRequest.add_member(:source_application_url, Shapes::ShapeRef.new(shape: URI, location_name: "SourceApplicationUrl"))
+    CreateIntegrationAssociationRequest.add_member(:source_application_name, Shapes::ShapeRef.new(shape: SourceApplicationName, location_name: "SourceApplicationName"))
+    CreateIntegrationAssociationRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     CreateIntegrationAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateIntegrationAssociationRequest.struct_class = Types::CreateIntegrationAssociationRequest
 
@@ -1182,6 +1189,7 @@ module Aws::Connect
     ListInstancesResponse.struct_class = Types::ListInstancesResponse
 
     ListIntegrationAssociationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListIntegrationAssociationsRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location: "querystring", location_name: "integrationType"))
     ListIntegrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListIntegrationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListIntegrationAssociationsRequest.struct_class = Types::ListIntegrationAssociationsRequest
@@ -1547,6 +1555,9 @@ module Aws::Connect
     StartOutboundVoiceContactRequest.add_member(:source_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "SourcePhoneNumber"))
     StartOutboundVoiceContactRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "QueueId"))
     StartOutboundVoiceContactRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    StartOutboundVoiceContactRequest.add_member(:answer_machine_detection_config, Shapes::ShapeRef.new(shape: AnswerMachineDetectionConfig, location_name: "AnswerMachineDetectionConfig"))
+    StartOutboundVoiceContactRequest.add_member(:campaign_id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId"))
+    StartOutboundVoiceContactRequest.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, location_name: "TrafficType"))
     StartOutboundVoiceContactRequest.struct_class = Types::StartOutboundVoiceContactRequest
 
     StartOutboundVoiceContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))

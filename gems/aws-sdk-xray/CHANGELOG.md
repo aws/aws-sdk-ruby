@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-09-07)
+------------------
+
+* Feature - Updated references to AWS KMS keys and customer managed keys to reflect current terminology.
+
 1.40.0 (2021-09-01)
 ------------------
 

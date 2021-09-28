@@ -1616,6 +1616,8 @@ module Aws::TranscribeService
     #   execution limit. If the field is false, Amazon Transcribe returns a
     #   `LimitExceededException` exception.
     #
+    #   Note that job queuing is enabled by default for call analytics jobs.
+    #
     #   If you specify the `AllowDeferredExecution` field, you must specify
     #   the `DataAccessRoleArn` field.
     #   @return [Boolean]
@@ -3220,6 +3222,9 @@ module Aws::TranscribeService
     #         output_bucket_name: "OutputBucketName", # required
     #         output_key: "OutputKey",
     #         output_encryption_kms_key_id: "KMSKeyId",
+    #         kms_encryption_context: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
     #         settings: {
     #           show_speaker_labels: false,
     #           max_speaker_labels: 1,
@@ -3351,6 +3356,12 @@ module Aws::TranscribeService
     #   specify an output location in the `OutputBucketName` parameter.
     #   @return [String]
     #
+    # @!attribute [rw] kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your
+    #   data.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] settings
     #   Optional settings for the medical transcription job.
     #   @return [Types::MedicalTranscriptionSetting]
@@ -3388,6 +3399,7 @@ module Aws::TranscribeService
       :output_bucket_name,
       :output_key,
       :output_encryption_kms_key_id,
+      :kms_encryption_context,
       :settings,
       :content_identification_type,
       :specialty,
@@ -3424,6 +3436,9 @@ module Aws::TranscribeService
     #         output_bucket_name: "OutputBucketName",
     #         output_key: "OutputKey",
     #         output_encryption_kms_key_id: "KMSKeyId",
+    #         kms_encryption_context: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
     #         settings: {
     #           vocabulary_name: "VocabularyName",
     #           show_speaker_labels: false,
@@ -3447,6 +3462,9 @@ module Aws::TranscribeService
     #         },
     #         identify_language: false,
     #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #         subtitles: {
+    #           formats: ["vtt"], # accepts vtt, srt
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -3576,6 +3594,12 @@ module Aws::TranscribeService
     #   specify an output location in the `OutputBucketName` parameter.
     #   @return [String]
     #
+    # @!attribute [rw] kms_encryption_context
+    #   A map of plain text, non-secret key:value pairs, known as encryption
+    #   context pairs, that provide an added layer of security for your
+    #   data.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] settings
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
@@ -3616,6 +3640,10 @@ module Aws::TranscribeService
     #   higher.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] subtitles
+    #   Add subtitles to your batch transcription job.
+    #   @return [Types::Subtitles]
+    #
     # @!attribute [rw] tags
     #   Add tags to an Amazon Transcribe transcription job.
     #   @return [Array<Types::Tag>]
@@ -3631,12 +3659,14 @@ module Aws::TranscribeService
       :output_bucket_name,
       :output_key,
       :output_encryption_kms_key_id,
+      :kms_encryption_context,
       :settings,
       :model_settings,
       :job_execution_settings,
       :content_redaction,
       :identify_language,
       :language_options,
+      :subtitles,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3650,6 +3680,48 @@ module Aws::TranscribeService
     #
     class StartTranscriptionJobResponse < Struct.new(
       :transcription_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Generate subtitles for your batch transcription job.
+    #
+    # @note When making an API call, you may pass Subtitles
+    #   data as a hash:
+    #
+    #       {
+    #         formats: ["vtt"], # accepts vtt, srt
+    #       }
+    #
+    # @!attribute [rw] formats
+    #   Specify the output format for your subtitle file.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Subtitles AWS API Documentation
+    #
+    class Subtitles < Struct.new(
+      :formats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify the output format for your subtitle file.
+    #
+    # @!attribute [rw] formats
+    #   Specify the output format for your subtitle file; if you select both
+    #   SRT and VTT formats, two output files are genereated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subtitle_file_uris
+    #   Choose the output location for your subtitle file. This location
+    #   must be an S3 bucket.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SubtitlesOutput AWS API Documentation
+    #
+    class SubtitlesOutput < Struct.new(
+      :formats,
+      :subtitle_file_uris)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3954,6 +4026,10 @@ module Aws::TranscribeService
     #   A key:value pair assigned to a given transcription job.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] subtitles
+    #   Generate subtitles for your batch transcription job.
+    #   @return [Types::SubtitlesOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
     #
     class TranscriptionJob < Struct.new(
@@ -3975,7 +4051,8 @@ module Aws::TranscribeService
       :identify_language,
       :language_options,
       :identified_language_score,
-      :tags)
+      :tags,
+      :subtitles)
       SENSITIVE = []
       include Aws::Structure
     end

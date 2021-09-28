@@ -330,7 +330,7 @@ module Aws::QuickSight
     # Cancels an ongoing ingestion of data into SPICE.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID of the dataset used in the ingestion.
@@ -372,14 +372,15 @@ module Aws::QuickSight
     # Creates Amazon QuickSight customizations the current Amazon Web
     # Services Region;. Currently, you can add a custom default theme by
     # using the `CreateAccountCustomization` or `UpdateAccountCustomization`
-    # API operation. To further customize QuickSight by removing QuickSight
-    # sample assets and videos for all new users, see [Customizing
-    # QuickSight][1] in the *Amazon QuickSight User Guide.*
+    # API operation. To further customize Amazon QuickSight by removing
+    # Amazon QuickSight sample assets and videos for all new users, see
+    # [Customizing Amazon QuickSight][1] in the *Amazon QuickSight User
+    # Guide.*
     #
-    # You can create customizations for your Amazon Web Services account;
-    # or, if you specify a namespace, for a QuickSight namespace instead.
+    # You can create customizations for your Amazon Web Services account or,
+    # if you specify a namespace, for a Amazon QuickSight namespace instead.
     # Customizations that apply to a namespace always override
-    # customizations that apply to an Amazon Web Services account;. To find
+    # customizations that apply to an Amazon Web Services account. To find
     # out which customizations apply, use the `DescribeAccountCustomization`
     # API operation.
     #
@@ -397,16 +398,17 @@ module Aws::QuickSight
     # [1]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to customize
-    #   QuickSight for.
+    #   The ID for the Amazon Web Services account that you want to customize
+    #   Amazon QuickSight for.
     #
     # @option params [String] :namespace
-    #   The QuickSight namespace that you want to add customizations to.
+    #   The Amazon QuickSight namespace that you want to add customizations
+    #   to.
     #
     # @option params [required, Types::AccountCustomization] :account_customization
-    #   The QuickSight customizations you're adding in the current Amazon Web
-    #   Services Region;. You can add these to an Amazon Web Services account;
-    #   and a QuickSight namespace.
+    #   The Amazon QuickSight customizations you're adding in the current
+    #   Amazon Web Services Region;. You can add these to an Amazon Web
+    #   Services account and a Amazon QuickSight namespace.
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme: `"AccountCustomization":
@@ -465,7 +467,7 @@ module Aws::QuickSight
     # Creates an analysis in Amazon QuickSight.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; where you are creating an
+    #   The ID of the Amazon Web Services account where you are creating an
     #   analysis.
     #
     # @option params [required, String] :analysis_id
@@ -474,7 +476,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :name
     #   A descriptive name for the analysis that you're creating. This name
-    #   displays for the analysis in the QuickSight console.
+    #   displays for the analysis in the Amazon QuickSight console.
     #
     # @option params [Types::Parameters] :parameters
     #   The parameter names and override values that you want to use. An
@@ -497,8 +499,8 @@ module Aws::QuickSight
     #
     # @option params [String] :theme_arn
     #   The ARN for the theme to apply to the analysis that you're creating.
-    #   To see the theme in the QuickSight console, make sure that you have
-    #   access to it.
+    #   To see the theme in the Amazon QuickSight console, make sure that you
+    #   have access to it.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
@@ -590,19 +592,19 @@ module Aws::QuickSight
     # Creates a dashboard from a template. To first create a template, see
     # the ` CreateTemplate ` API operation.
     #
-    # A dashboard is an entity in QuickSight that identifies QuickSight
-    # reports, created from analyses. You can share QuickSight dashboards.
-    # With the right permissions, you can create scheduled email reports
-    # from them. If you have the correct permissions, you can create a
-    # dashboard from a template that exists in a different Amazon Web
-    # Services account;.
+    # A dashboard is an entity in Amazon QuickSight that identifies Amazon
+    # QuickSight reports, created from analyses. You can share Amazon
+    # QuickSight dashboards. With the right permissions, you can create
+    # scheduled email reports from them. If you have the correct
+    # permissions, you can create a dashboard from a template that exists in
+    # a different Amazon Web Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to create
-    #   the dashboard.
+    #   The ID of the Amazon Web Services account where you want to create the
+    #   dashboard.
     #
     # @option params [required, String] :dashboard_id
-    #   The ID for the dashboard, also added to the IAM policy.
+    #   The ID for the dashboard, also added to the IAMpolicy.
     #
     # @option params [required, String] :name
     #   The display name of the dashboard.
@@ -614,8 +616,8 @@ module Aws::QuickSight
     #
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   A structure that contains the permissions of the dashboard. You can
-    #   use this structure for granting permissions by providing a list of IAM
-    #   action information for each principal ARN.
+    #   use this structure for granting permissions by providing a list of
+    #   IAMaction information for each principal ARN.
     #
     #   To specify no permissions, omit the permissions list.
     #
@@ -627,8 +629,8 @@ module Aws::QuickSight
     #   from an analysis, first convert the analysis to a template by using
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
-    #   `SourceTemplate`ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Amazon Web Services Region;.
+    #   `SourceTemplate`ARN can contain any Amazon Web Services account and
+    #   any Amazon QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list the
     #   replacement datasets for the placeholders listed in the original. The
@@ -646,9 +648,9 @@ module Aws::QuickSight
     #
     #   * `AvailabilityStatus` for `AdHocFilteringOption` - This status can be
     #     either `ENABLED` or `DISABLED`. When this is set to `DISABLED`,
-    #     QuickSight disables the left filter pane on the published dashboard,
-    #     which can be used for ad hoc (one-time) filtering. This option is
-    #     `ENABLED` by default.
+    #     Amazon QuickSight disables the left filter pane on the published
+    #     dashboard, which can be used for ad hoc (one-time) filtering. This
+    #     option is `ENABLED` by default.
     #
     #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
     #     either `ENABLED` or `DISABLED`. The visual option to export data to
@@ -663,7 +665,7 @@ module Aws::QuickSight
     #   The Amazon Resource Name (ARN) of the theme that is being used for
     #   this dashboard. If you add a value for this field, it overrides the
     #   value that is used in the source entity. The theme ARN must exist in
-    #   the same Amazon Web Services account; where you create the dashboard.
+    #   the same Amazon Web Services account where you create the dashboard.
     #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -765,11 +767,11 @@ module Aws::QuickSight
     # Creates a dataset.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   An ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -786,7 +788,7 @@ module Aws::QuickSight
     #   Indicates whether you want to import the data into SPICE.
     #
     # @option params [Array<Types::ColumnGroup>] :column_groups
-    #   Groupings of columns that work together in certain QuickSight
+    #   Groupings of columns that work together in certain Amazon QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #
     # @option params [Hash<String,Types::FieldFolder>] :field_folders
@@ -811,6 +813,10 @@ module Aws::QuickSight
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the dataset.
+    #
+    # @option params [Types::DataSetUsageConfiguration] :data_set_usage_configuration
+    #   The usage configuration to apply to child datasets that reference this
+    #   dataset as a source.
     #
     # @return [Types::CreateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -910,6 +916,10 @@ module Aws::QuickSight
     #                 },
     #               ],
     #             },
+    #             untag_column_operation: {
+    #               column_name: "ColumnName", # required
+    #               tag_names: ["COLUMN_GEOGRAPHIC_ROLE"], # required, accepts COLUMN_GEOGRAPHIC_ROLE, COLUMN_DESCRIPTION
+    #             },
     #           },
     #         ],
     #         source: { # required
@@ -926,6 +936,7 @@ module Aws::QuickSight
     #             on_clause: "OnClause", # required
     #           },
     #           physical_table_id: "PhysicalTableId",
+    #           data_set_arn: "Arn",
     #         },
     #       },
     #     },
@@ -981,6 +992,10 @@ module Aws::QuickSight
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     data_set_usage_configuration: {
+    #       disable_use_as_direct_query_source: false,
+    #       disable_use_as_imported_source: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1004,42 +1019,39 @@ module Aws::QuickSight
     # Creates a data source.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_source_id
     #   An ID for the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account;.
+    #   Region; for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
     #
     # @option params [required, String] :type
-    #   The type of the data source. Currently, the supported types for this
-    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL,
-    #   AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT,
-    #   S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA`. Use `ListDataSources` to
-    #   return a list of all data sources.
+    #   The type of the data source. To return a list of all data sources, use
+    #   `ListDataSources`.
     #
-    #   `AMAZON_ELASTICSEARCH` is for Amazon managed Elasticsearch Service.
+    #   Use `AMAZON_ELASTICSEARCH` for Amazon Elasticsearch Service.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
-    #   The parameters that QuickSight uses to connect to your underlying
-    #   source.
+    #   The parameters that Amazon QuickSight uses to connect to your
+    #   underlying source.
     #
     # @option params [Types::DataSourceCredentials] :credentials
-    #   The credentials QuickSight that uses to connect to your underlying
-    #   source. Currently, only credentials based on user name and password
-    #   are supported.
+    #   The credentials Amazon QuickSight that uses to connect to your
+    #   underlying source. Currently, only credentials based on user name and
+    #   password are supported.
     #
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   A list of resource permissions on the data source.
     #
     # @option params [Types::VpcConnectionProperties] :vpc_connection_properties
-    #   Use this parameter only when you want QuickSight to use a VPC
+    #   Use this parameter only when you want Amazon QuickSight to use a VPC
     #   connection when connecting to your underlying source.
     #
     # @option params [Types::SslProperties] :ssl_properties
-    #   Secure Socket Layer (SSL) properties that apply when QuickSight
+    #   Secure Socket Layer (SSL) properties that apply when Amazon QuickSight
     #   connects to your underlying source.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1060,7 +1072,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     data_source_id: "ResourceId", # required
     #     name: "ResourceName", # required
-    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
+    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH
     #     data_source_parameters: {
     #       amazon_elasticsearch_parameters: {
     #         domain: "Domain", # required
@@ -1150,6 +1162,9 @@ module Aws::QuickSight
     #       twitter_parameters: {
     #         query: "Query", # required
     #         max_rows: 1, # required
+    #       },
+    #       amazon_open_search_parameters: {
+    #         domain: "Domain", # required
     #       },
     #     },
     #     credentials: {
@@ -1246,6 +1261,9 @@ module Aws::QuickSight
     #             twitter_parameters: {
     #               query: "Query", # required
     #               max_rows: 1, # required
+    #             },
+    #             amazon_open_search_parameters: {
+    #               domain: "Domain", # required
     #             },
     #           },
     #         ],
@@ -1425,8 +1443,8 @@ module Aws::QuickSight
     #   A description for the group that you want to create.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -1474,8 +1492,8 @@ module Aws::QuickSight
     #   The name of the group that you want to add the user to.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -1512,19 +1530,19 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates an assignment with one specified IAM policy, identified by its
+    # Creates an assignment with one specified IAMpolicy, identified by its
     # Amazon Resource Name (ARN). This policy assignment is attached to the
     # specified groups or users of Amazon QuickSight. Assignment names are
-    # unique per Amazon Web Services account;. To avoid overwriting rules in
+    # unique per Amazon Web Services account. To avoid overwriting rules in
     # other namespaces, use assignment names that are unique.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to assign an
-    #   IAM policy to QuickSight users or groups.
+    #   The ID of the Amazon Web Services account where you want to assign an
+    #   IAMpolicy to Amazon QuickSight users or groups.
     #
     # @option params [required, String] :assignment_name
     #   The name of the assignment, also called a rule. It must be unique
-    #   within an Amazon Web Services account;.
+    #   within an Amazon Web Services account.
     #
     # @option params [required, String] :assignment_status
     #   The status of the assignment. Possible values are as follows:
@@ -1539,12 +1557,12 @@ module Aws::QuickSight
     #     when creating the data source.
     #
     # @option params [String] :policy_arn
-    #   The ARN for the IAM policy to apply to the QuickSight users and groups
-    #   specified in this assignment.
+    #   The ARN for the IAMpolicy to apply to the Amazon QuickSight users and
+    #   groups specified in this assignment.
     #
     # @option params [Hash<String,Array>] :identities
-    #   The QuickSight users, groups, or both that you want to assign the
-    #   policy to.
+    #   The Amazon QuickSight users, groups, or both that you want to assign
+    #   the policy to.
     #
     # @option params [required, String] :namespace
     #   The namespace that contains the assignment.
@@ -1612,7 +1630,7 @@ module Aws::QuickSight
     #   An ID for the ingestion.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @return [Types::CreateIngestionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1650,19 +1668,19 @@ module Aws::QuickSight
     # (Enterprise edition only) Creates a new namespace for you to use with
     # Amazon QuickSight.
     #
-    # A namespace allows you to isolate the QuickSight users and groups that
-    # are registered for that namespace. Users that access the namespace can
-    # share assets only with other users or groups in the same namespace.
-    # They can't see users and groups in other namespaces. You can create a
-    # namespace after your Amazon Web Services account; is subscribed to
-    # QuickSight. The namespace must be unique within the Amazon Web
-    # Services account;. By default, there is a limit of 100 namespaces per
-    # Amazon Web Services account;. To increase your limit, create a ticket
-    # with Amazon Web Services Support.
+    # A namespace allows you to isolate the Amazon QuickSight users and
+    # groups that are registered for that namespace. Users that access the
+    # namespace can share assets only with other users or groups in the same
+    # namespace. They can't see users and groups in other namespaces. You
+    # can create a namespace after your Amazon Web Services account is
+    # subscribed to Amazon QuickSight. The namespace must be unique within
+    # the Amazon Web Services account. By default, there is a limit of 100
+    # namespaces per Amazon Web Services account. To increase your limit,
+    # create a ticket with Amazon Web Services Support.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to create
-    #   the QuickSight namespace in.
+    #   The ID for the Amazon Web Services account that you want to create the
+    #   Amazon QuickSight namespace in.
     #
     # @option params [required, String] :namespace
     #   The name that you want to use to describe the new namespace.
@@ -1721,23 +1739,23 @@ module Aws::QuickSight
     # Creates a template from an existing Amazon QuickSight analysis or
     # template. You can use the resulting template to create a dashboard.
     #
-    # A *template* is an entity in QuickSight that encapsulates the metadata
-    # required to create an analysis and that you can use to create s
-    # dashboard. A template adds a layer of abstraction by using
+    # A *template* is an entity in Amazon QuickSight that encapsulates the
+    # metadata required to create an analysis and that you can use to create
+    # s dashboard. A template adds a layer of abstraction by using
     # placeholders to replace the dataset associated with the analysis. You
     # can use templates to create dashboards by replacing dataset
     # placeholders with datasets that follow the same schema that was used
     # to create the source analysis and template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
-    #   contains your Amazon QuickSight account.
+    #   The ID for the Amazon Web Services account that the group is in. You
+    #   use the ID for the Amazon Web Services account that contains your
+    #   Amazon QuickSight account.
     #
     # @option params [required, String] :template_id
     #   An ID for the template that you want to create. This template is
     #   unique per Amazon Web Services Region; in each Amazon Web Services
-    #   account;.
+    #   account.
     #
     # @option params [String] :name
     #   A display name for the template.
@@ -1752,8 +1770,8 @@ module Aws::QuickSight
     #   for an analysis. Both of these require an Amazon Resource Name (ARN).
     #   For `SourceTemplate`, specify the ARN of the source template. For
     #   `SourceAnalysis`, specify the ARN of the source analysis. The
-    #   `SourceTemplate` ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Amazon Web Services Region;.
+    #   `SourceTemplate` ARN can contain any Amazon Web Services account and
+    #   any Amazon QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the placeholders
@@ -1836,7 +1854,7 @@ module Aws::QuickSight
     # Creates a template alias for a template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   that you creating an alias for.
     #
     # @option params [required, String] :template_id
@@ -1893,12 +1911,12 @@ module Aws::QuickSight
     # [1]: https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to store the
+    #   The ID of the Amazon Web Services account where you want to store the
     #   new theme.
     #
     # @option params [required, String] :theme_id
     #   An ID for the theme that you want to create. The theme ID is unique
-    #   per Amazon Web Services Region; in each Amazon Web Services account;.
+    #   per Amazon Web Services Region in each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   A display name for the theme.
@@ -1907,7 +1925,7 @@ module Aws::QuickSight
     #   The ID of the theme that a custom theme will inherit from. All themes
     #   inherit from one of the starting themes defined by Amazon QuickSight.
     #   For a list of the starting themes, use `ListThemes` or choose
-    #   **Themes** from within a QuickSight analysis.
+    #   **Themes** from within a Amazon QuickSight analysis.
     #
     # @option params [String] :version_description
     #   A description of the first version of the theme that you're creating.
@@ -2017,7 +2035,7 @@ module Aws::QuickSight
     # Creates a theme alias for a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme for
+    #   The ID of the Amazon Web Services account that contains the theme for
     #   the new theme alias.
     #
     # @option params [required, String] :theme_id
@@ -2064,16 +2082,17 @@ module Aws::QuickSight
     end
 
     # Deletes all Amazon QuickSight customizations in this Amazon Web
-    # Services Region; for the specified Amazon Web Services account; and
-    # QuickSight namespace.
+    # Services Region; for the specified Amazon Web Services account and
+    # Amazon QuickSight namespace.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to delete
-    #   QuickSight customizations from in this Amazon Web Services Region;.
+    #   The ID for the Amazon Web Services account that you want to delete
+    #   Amazon QuickSight customizations from in this Amazon Web Services
+    #   Region;.
     #
     # @option params [String] :namespace
-    #   The QuickSight namespace that you're deleting the customizations
-    #   from.
+    #   The Amazon QuickSight namespace that you're deleting the
+    #   customizations from.
     #
     # @return [Types::DeleteAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2104,9 +2123,10 @@ module Aws::QuickSight
     # Deletes an analysis from Amazon QuickSight. You can optionally include
     # a recovery window during which you can restore the analysis. If you
     # don't specify a recovery window value, the operation defaults to 30
-    # days. QuickSight attaches a `DeletionTime` stamp to the response that
-    # specifies the end of the recovery window. At the end of the recovery
-    # window, QuickSight deletes the analysis permanently.
+    # days. Amazon QuickSight attaches a `DeletionTime` stamp to the
+    # response that specifies the end of the recovery window. At the end of
+    # the recovery window, Amazon QuickSight deletes the analysis
+    # permanently.
     #
     # At any time before recovery window ends, you can use the
     # `RestoreAnalysis` API operation to remove the `DeletionTime` stamp and
@@ -2115,19 +2135,20 @@ module Aws::QuickSight
     # make a template from it.
     #
     # An analysis that's scheduled for deletion isn't accessible in the
-    # QuickSight console. To access it in the console, restore it. Deleting
-    # an analysis doesn't delete the dashboards that you publish from it.
+    # Amazon QuickSight console. To access it in the console, restore it.
+    # Deleting an analysis doesn't delete the dashboards that you publish
+    # from it.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; where you want to delete an
+    #   The ID of the Amazon Web Services account where you want to delete an
     #   analysis.
     #
     # @option params [required, String] :analysis_id
     #   The ID of the analysis that you're deleting.
     #
     # @option params [Integer] :recovery_window_in_days
-    #   A value that specifies the number of days that QuickSight waits before
-    #   it deletes the analysis. You can't use this parameter with the
+    #   A value that specifies the number of days that Amazon QuickSight waits
+    #   before it deletes the analysis. You can't use this parameter with the
     #   `ForceDeleteWithoutRecovery` option in the same API call. The default
     #   value is 30.
     #
@@ -2173,7 +2194,7 @@ module Aws::QuickSight
     # Deletes a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the dashboard
+    #   The ID of the Amazon Web Services account that contains the dashboard
     #   that you're deleting.
     #
     # @option params [required, String] :dashboard_id
@@ -2217,11 +2238,11 @@ module Aws::QuickSight
     # Deletes a dataset.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account.
     #
     # @return [Types::DeleteDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2257,11 +2278,11 @@ module Aws::QuickSight
     # datasets that reference the deleted data source.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account;.
+    #   Region; for each Amazon Web Services account.
     #
     # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2382,8 +2403,8 @@ module Aws::QuickSight
     #   The name of the group that you want to delete.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -2427,8 +2448,8 @@ module Aws::QuickSight
     #   The name of the group that you want to delete the user from.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -2462,11 +2483,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Deletes an existing IAM policy assignment.
+    # Deletes an existing IAMpolicy assignment.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID where you want to delete the IAM
-    #   policy assignment.
+    #   The Amazon Web Services account ID where you want to delete the
+    #   IAMpolicy assignment.
     #
     # @option params [required, String] :assignment_name
     #   The name of the assignment.
@@ -2510,8 +2531,8 @@ module Aws::QuickSight
     # asset.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to delete
-    #   the QuickSight namespace from.
+    #   The ID for the Amazon Web Services account that you want to delete the
+    #   Amazon QuickSight namespace from.
     #
     # @option params [required, String] :namespace
     #   The namespace that you want to delete.
@@ -2545,7 +2566,7 @@ module Aws::QuickSight
     # Deletes a template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   that you're deleting.
     #
     # @option params [required, String] :template_id
@@ -2592,7 +2613,7 @@ module Aws::QuickSight
     # the alias points to.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the item to
+    #   The ID of the Amazon Web Services account that contains the item to
     #   delete.
     #
     # @option params [required, String] :template_id
@@ -2640,8 +2661,8 @@ module Aws::QuickSight
     # Deletes a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're deleting.
+    #   The ID of the Amazon Web Services account that contains the theme that
+    #   you're deleting.
     #
     # @option params [required, String] :theme_id
     #   An ID for the theme that you want to delete.
@@ -2688,7 +2709,7 @@ module Aws::QuickSight
     # theme that the alias points to.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
+    #   The ID of the Amazon Web Services account that contains the theme
     #   alias to delete.
     #
     # @option params [required, String] :theme_id
@@ -2739,8 +2760,8 @@ module Aws::QuickSight
     #   The name of the user that you want to delete.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the user is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -2779,8 +2800,8 @@ module Aws::QuickSight
     #   The principal ID of the user.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the user is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -2814,29 +2835,29 @@ module Aws::QuickSight
     end
 
     # Describes the customizations associated with the provided Amazon Web
-    # Services account; and Amazon QuickSight namespace in an Amazon Web
-    # Services Region;. The QuickSight console evaluates which
+    # Services account and Amazon Amazon QuickSight namespace in an Amazon
+    # Web Services Region;. The Amazon QuickSight console evaluates which
     # customizations to apply by running this API operation with the
     # `Resolved` flag included.
     #
     # To determine what customizations display when you run this command, it
     # can help to visualize the relationship of the entities involved.
     #
-    # * `Amazon Web Services account;` - The Amazon Web Services account;
+    # * `Amazon Web Services account` - The Amazon Web Services account
     #   exists at the top of the hierarchy. It has the potential to use all
     #   of the Amazon Web Services Regions; and AWS Services. When you
-    #   subscribe to QuickSight, you choose one Amazon Web Services Region;
-    #   to use as your home Region. That's where your free SPICE capacity
-    #   is located. You can use QuickSight in any supported Amazon Web
-    #   Services Region;.
+    #   subscribe to Amazon QuickSight, you choose one Amazon Web Services
+    #   Region; to use as your home Region. That's where your free SPICE
+    #   capacity is located. You can use Amazon QuickSight in any supported
+    #   Amazon Web Services Region;.
     #
     # * `Amazon Web Services Region;` - In each Amazon Web Services Region;
-    #   where you sign in to QuickSight at least once, QuickSight acts as a
-    #   separate instance of the same service. If you have a user directory,
-    #   it resides in us-east-1, which is the US East (N. Virginia).
-    #   Generally speaking, these users have access to QuickSight in any
-    #   Amazon Web Services Region;, unless they are constrained to a
-    #   namespace.
+    #   where you sign in to Amazon QuickSight at least once, Amazon
+    #   QuickSight acts as a separate instance of the same service. If you
+    #   have a user directory, it resides in us-east-1, which is the US East
+    #   (N. Virginia). Generally speaking, these users have access to Amazon
+    #   QuickSight in any Amazon Web Services Region;, unless they are
+    #   constrained to a namespace.
     #
     #   To run the command in a different Amazon Web Services Region;, you
     #   change your Region settings. If you're using the AWS CLI, you can
@@ -2850,21 +2871,21 @@ module Aws::QuickSight
     #     Region;. Use Enter to key the same settings for your keys. For
     #     more information, see [Configuring the AWS CLI][3].
     #
-    # * `Namespace` - A QuickSight namespace is a partition that contains
-    #   users and assets (data sources, datasets, dashboards, and so on). To
-    #   access assets that are in a specific namespace, users and groups
-    #   must also be part of the same namespace. People who share a
+    # * `Namespace` - A Amazon QuickSight namespace is a partition that
+    #   contains users and assets (data sources, datasets, dashboards, and
+    #   so on). To access assets that are in a specific namespace, users and
+    #   groups must also be part of the same namespace. People who share a
     #   namespace are completely isolated from users and assets in other
-    #   namespaces, even if they are in the same Amazon Web Services
-    #   account; and Amazon Web Services Region;.
+    #   namespaces, even if they are in the same Amazon Web Services account
+    #   and Amazon Web Services Region;.
     #
     # * `Applied customizations` - Within an Amazon Web Services Region;, a
-    #   set of QuickSight customizations can apply to an Amazon Web Services
-    #   account; or to a namespace. Settings that you apply to a namespace
-    #   override settings that you apply to an Amazon Web Services account;.
-    #   All settings are isolated to a single Amazon Web Services Region;.
-    #   To apply them in other Amazon Web Services Regions;, run the
-    #   `CreateAccountCustomization` command in each Amazon Web Services
+    #   set of Amazon QuickSight customizations can apply to an Amazon Web
+    #   Services account or to a namespace. Settings that you apply to a
+    #   namespace override settings that you apply to an Amazon Web Services
+    #   account. All settings are isolated to a single Amazon Web Services
+    #   Region;. To apply them in other Amazon Web Services Regions;, run
+    #   the `CreateAccountCustomization` command in each Amazon Web Services
     #   Region; where you want to apply the same customizations.
     #
     #
@@ -2874,20 +2895,20 @@ module Aws::QuickSight
     # [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to describe
-    #   QuickSight customizations for.
+    #   The ID for the Amazon Web Services account that you want to describe
+    #   Amazon QuickSight customizations for.
     #
     # @option params [String] :namespace
-    #   The QuickSight namespace that you want to describe QuickSight
-    #   customizations for.
+    #   The Amazon QuickSight namespace that you want to describe Amazon
+    #   QuickSight customizations for.
     #
     # @option params [Boolean] :resolved
     #   The `Resolved` flag works with the other parameters to determine which
-    #   view of QuickSight customizations is returned. You can add this flag
-    #   to your command to use the same view that QuickSight uses to identify
-    #   which customizations to apply to the console. Omit this flag, or set
-    #   it to `no-resolved`, to reveal customizations that are configured at
-    #   different levels.
+    #   view of Amazon QuickSight customizations is returned. You can add this
+    #   flag to your command to use the same view that Amazon QuickSight uses
+    #   to identify which customizations to apply to the console. Omit this
+    #   flag, or set it to `no-resolved`, to reveal customizations that are
+    #   configured at different levels.
     #
     # @return [Types::DescribeAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2924,11 +2945,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes the settings that were used when your QuickSight
-    # subscription was first created in this Amazon Web Services account;.
+    # Describes the settings that were used when your Amazon QuickSight
+    # subscription was first created in this Amazon Web Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the settings
+    #   The ID for the Amazon Web Services account that contains the settings
     #   that you want to list.
     #
     # @return [Types::DescribeAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2964,9 +2985,9 @@ module Aws::QuickSight
     # Provides a summary of the metadata for an analysis.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the analysis.
-    #   You must be using the Amazon Web Services account; that the analysis
-    #   is in.
+    #   The ID of the Amazon Web Services account that contains the analysis.
+    #   You must be using the Amazon Web Services account that the analysis is
+    #   in.
     #
     # @option params [required, String] :analysis_id
     #   The ID of the analysis that you're describing. The ID is part of the
@@ -3017,9 +3038,9 @@ module Aws::QuickSight
     # Provides the read and write permissions for an analysis.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the analysis
+    #   The ID of the Amazon Web Services account that contains the analysis
     #   whose permissions you're describing. You must be using the Amazon Web
-    #   Services account; that the analysis is in.
+    #   Services account that the analysis is in.
     #
     # @option params [required, String] :analysis_id
     #   The ID of the analysis whose permissions you're describing. The ID is
@@ -3063,7 +3084,7 @@ module Aws::QuickSight
     # Provides a summary for a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the dashboard
+    #   The ID of the Amazon Web Services account that contains the dashboard
     #   that you're describing.
     #
     # @option params [required, String] :dashboard_id
@@ -3129,11 +3150,11 @@ module Aws::QuickSight
     # Describes read and write permissions for a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the dashboard
+    #   The ID of the Amazon Web Services account that contains the dashboard
     #   that you're describing permissions for.
     #
     # @option params [required, String] :dashboard_id
-    #   The ID for the dashboard, also added to the IAM policy.
+    #   The ID for the dashboard, also added to the IAMpolicy.
     #
     # @return [Types::DescribeDashboardPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3173,11 +3194,11 @@ module Aws::QuickSight
     # Describes a dataset.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3241,6 +3262,9 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags #=> Array
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_geographic_role #=> String, one of "COUNTRY", "STATE", "COUNTY", "CITY", "POSTCODE", "LONGITUDE", "LATITUDE"
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_description.text #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].untag_column_operation.column_name #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].untag_column_operation.tag_names #=> Array
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].untag_column_operation.tag_names[0] #=> String, one of "COLUMN_GEOGRAPHIC_ROLE", "COLUMN_DESCRIPTION"
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.right_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_join_key_properties.unique_key #=> Boolean
@@ -3248,6 +3272,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.type #=> String, one of "INNER", "OUTER", "LEFT", "RIGHT"
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.on_clause #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.physical_table_id #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].source.data_set_arn #=> String
     #   resp.data_set.output_columns #=> Array
     #   resp.data_set.output_columns[0].name #=> String
     #   resp.data_set.output_columns[0].description #=> String
@@ -3279,6 +3304,8 @@ module Aws::QuickSight
     #   resp.data_set.column_level_permission_rules[0].principals[0] #=> String
     #   resp.data_set.column_level_permission_rules[0].column_names #=> Array
     #   resp.data_set.column_level_permission_rules[0].column_names[0] #=> String
+    #   resp.data_set.data_set_usage_configuration.disable_use_as_direct_query_source #=> Boolean
+    #   resp.data_set.data_set_usage_configuration.disable_use_as_imported_source #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -3297,11 +3324,11 @@ module Aws::QuickSight
     # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSetPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3341,11 +3368,11 @@ module Aws::QuickSight
     # Describes a data source.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account;.
+    #   Region; for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3365,7 +3392,7 @@ module Aws::QuickSight
     #   resp.data_source.arn #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.name #=> String
-    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
+    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH"
     #   resp.data_source.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_source.created_time #=> Time
     #   resp.data_source.last_updated_time #=> Time
@@ -3416,6 +3443,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.teradata_parameters.database #=> String
     #   resp.data_source.data_source_parameters.twitter_parameters.query #=> String
     #   resp.data_source.data_source_parameters.twitter_parameters.max_rows #=> Integer
+    #   resp.data_source.data_source_parameters.amazon_open_search_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters #=> Array
     #   resp.data_source.alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -3464,6 +3492,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].teradata_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].twitter_parameters.query #=> String
     #   resp.data_source.alternate_data_source_parameters[0].twitter_parameters.max_rows #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].amazon_open_search_parameters.domain #=> String
     #   resp.data_source.vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.ssl_properties.disable_ssl #=> Boolean
     #   resp.data_source.error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -3483,11 +3512,11 @@ module Aws::QuickSight
     # Describes the resource permissions for a data source.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account;.
+    #   Region; for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3662,8 +3691,8 @@ module Aws::QuickSight
     #   The name of the group that you want to describe.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -3701,12 +3730,12 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes an existing IAM policy assignment, as specified by the
+    # Describes an existing IAMpolicy assignment, as specified by the
     # assignment name.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   assignment that you want to describe.
+    #   The ID of the Amazon Web Services account that contains the assignment
+    #   that you want to describe.
     #
     # @option params [required, String] :assignment_name
     #   The name of the assignment, also called a rule.
@@ -3753,7 +3782,7 @@ module Aws::QuickSight
     # Describes a SPICE ingestion.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID of the dataset used in the ingestion.
@@ -3806,7 +3835,7 @@ module Aws::QuickSight
     # Describes the current namespace.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
+    #   The ID for the Amazon Web Services account that contains the Amazon
     #   QuickSight namespace that you want to describe.
     #
     # @option params [required, String] :namespace
@@ -3849,7 +3878,7 @@ module Aws::QuickSight
     # Describes a template's metadata.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   that you're describing.
     #
     # @option params [required, String] :template_id
@@ -3926,7 +3955,7 @@ module Aws::QuickSight
     # Describes the template alias for a template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   alias that you're describing.
     #
     # @option params [required, String] :template_id
@@ -3973,7 +4002,7 @@ module Aws::QuickSight
     # Describes read and write permissions on a template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   that you're describing.
     #
     # @option params [required, String] :template_id
@@ -4017,8 +4046,8 @@ module Aws::QuickSight
     # Describes a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're describing.
+    #   The ID of the Amazon Web Services account that contains the theme that
+    #   you're describing.
     #
     # @option params [required, String] :theme_id
     #   The ID for the theme.
@@ -4106,7 +4135,7 @@ module Aws::QuickSight
     # Describes the alias for a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
+    #   The ID of the Amazon Web Services account that contains the theme
     #   alias that you're describing.
     #
     # @option params [required, String] :theme_id
@@ -4149,8 +4178,8 @@ module Aws::QuickSight
     # Describes the read and write permissions for a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're describing.
+    #   The ID of the Amazon Web Services account that contains the theme that
+    #   you're describing.
     #
     # @option params [required, String] :theme_id
     #   The ID for the theme that you want to describe permissions for.
@@ -4196,8 +4225,8 @@ module Aws::QuickSight
     #   The name of the user that you want to describe.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the user is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -4440,9 +4469,9 @@ module Aws::QuickSight
     end
 
     # Generates a session URL and authorization code that you can use to
-    # embed an Amazon QuickSight read-only dashboard in your web server
-    # code. Before you use this command, make sure that you have configured
-    # the dashboards and permissions.
+    # embed an Amazon Amazon QuickSight read-only dashboard in your web
+    # server code. Before you use this command, make sure that you have
+    # configured the dashboards and permissions.
     #
     # Currently, you can use `GetDashboardEmbedURL` only from the server,
     # not from the user's browser. The following rules apply to the
@@ -4469,8 +4498,8 @@ module Aws::QuickSight
     # [2]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
-    #   dashboard that you're embedding.
+    #   The ID for the Amazon Web Services account that contains the dashboard
+    #   that you're embedding.
     #
     # @option params [required, String] :dashboard_id
     #   The ID for the dashboard, also added to the Identity and Access
@@ -4495,11 +4524,11 @@ module Aws::QuickSight
     #   Adds persistence of state for the user session in an embedded
     #   dashboard. Persistence applies to the sheet and the parameter
     #   settings. These are control settings that the dashboard subscriber
-    #   (QuickSight reader) chooses while viewing the dashboard. If this is
-    #   set to `TRUE`, the settings are the same when the subscriber reopens
-    #   the same dashboard URL. The state is stored in QuickSight, not in a
-    #   browser cookie. If this is set to FALSE, the state of the user session
-    #   is not persisted. The default is `FALSE`.
+    #   (Amazon QuickSight reader) chooses while viewing the dashboard. If
+    #   this is set to `TRUE`, the settings are the same when the subscriber
+    #   reopens the same dashboard URL. The state is stored in Amazon
+    #   QuickSight, not in a browser cookie. If this is set to FALSE, the
+    #   state of the user session is not persisted. The default is `FALSE`.
     #
     # @option params [String] :user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
@@ -4511,23 +4540,22 @@ module Aws::QuickSight
     #
     #   * Invited nonfederated users
     #
-    #   * IAM users and IAM role-based sessions authenticated through
-    #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #     federation.
+    #   * IAMusers and IAMrole-based sessions authenticated through Federated
+    #     Single Sign-On using SAML, OpenID Connect, or IAMfederation.
     #
-    #   Omit this parameter for users in the third group – IAM users and IAM
+    #   Omit this parameter for users in the third group – IAMusers and IAM
     #   role-based sessions.
     #
     # @option params [String] :namespace
-    #   The Amazon QuickSight namespace that the user virtually belongs to. If
-    #   you are not using an Amazon QuickSight custom namespace, set this to
-    #   `default`.
+    #   The Amazon QuickSight namespace that contains the dashboard IDs in
+    #   this request. If you're not using a custom namespace, set `Namespace
+    #   = default`.
     #
     # @option params [Array<String>] :additional_dashboard_ids
     #   A list of one or more dashboard IDs that you want to add to a session
     #   that includes anonymous users. The `IdentityType` parameter must be
     #   set to `ANONYMOUS` for this to work, because other identity types
-    #   authenticate as QuickSight or IAM users. For example, if you set
+    #   authenticate as Amazon QuickSight or IAMusers. For example, if you set
     #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
     #   identity-type ANONYMOUS`", the session can access all three
     #   dashboards.
@@ -4569,29 +4597,28 @@ module Aws::QuickSight
     end
 
     # Generates a session URL and authorization code that you can use to
-    # embed the Amazon QuickSight console in your web server code. Use
-    # `GetSessionEmbedUrl` where you want to provide an authoring portal
+    # embed the Amazon Amazon QuickSight console in your web server code.
+    # Use `GetSessionEmbedUrl` where you want to provide an authoring portal
     # that allows users to create data sources, datasets, analyses, and
-    # dashboards. The users who access an embedded QuickSight console need
-    # belong to the author or admin security cohort. If you want to restrict
-    # permissions to some of these features, add a custom permissions
-    # profile to the user with the ` UpdateUser ` API operation. Use `
-    # RegisterUser ` API operation to add a new user with a custom
+    # dashboards. The users who access an embedded Amazon QuickSight console
+    # need belong to the author or admin security cohort. If you want to
+    # restrict permissions to some of these features, add a custom
+    # permissions profile to the user with the ` UpdateUser ` API operation.
+    # Use ` RegisterUser ` API operation to add a new user with a custom
     # permission profile attached. For more information, see the following
     # sections in the *Amazon QuickSight User Guide*\:
     #
-    # * [Embedding the Amazon QuickSight Console Using
-    #   GetSessionEmbedUrl][1]
+    # * [Embedding Analytics][1]
     #
     # * [Customizing Access to the Amazon QuickSight Console][2]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users-get.html
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
     # [2]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; associated with your
+    #   The ID for the Amazon Web Services account associated with your Amazon
     #   QuickSight subscription.
     #
     # @option params [String] :entry_point
@@ -4607,10 +4634,10 @@ module Aws::QuickSight
     #   * `/start/favorites`
     #
     #   * `/dashboards/DashboardId ` - where `DashboardId` is the actual ID
-    #     key from the QuickSight console URL of the dashboard
+    #     key from the Amazon QuickSight console URL of the dashboard
     #
     #   * `/analyses/AnalysisId ` - where `AnalysisId` is the actual ID key
-    #     from the QuickSight console URL of the analysis
+    #     from the Amazon QuickSight console URL of the analysis
     #
     # @option params [Integer] :session_lifetime_in_minutes
     #   How many minutes the session is valid. The session lifetime must be
@@ -4664,10 +4691,10 @@ module Aws::QuickSight
     end
 
     # Lists Amazon QuickSight analyses that exist in the specified Amazon
-    # Web Services account;.
+    # Web Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the analyses.
+    #   The ID of the Amazon Web Services account that contains the analyses.
     #
     # @option params [String] :next_token
     #   A pagination token that can be used in a subsequent request.
@@ -4714,11 +4741,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the versions of the dashboards in the QuickSight
+    # Lists all the versions of the dashboards in the Amazon QuickSight
     # subscription.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the dashboard
+    #   The ID of the Amazon Web Services account that contains the dashboard
     #   that you're listing versions for.
     #
     # @option params [required, String] :dashboard_id
@@ -4771,11 +4798,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists dashboards in an Amazon Web Services account;.
+    # Lists dashboards in an Amazon Web Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
-    #   dashboards that you're listing.
+    #   The ID of the Amazon Web Services account that contains the dashboards
+    #   that you're listing.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -4825,13 +4852,13 @@ module Aws::QuickSight
     end
 
     # Lists all of the datasets belonging to the current Amazon Web Services
-    # account; in an Amazon Web Services Region;.
+    # account in an Amazon Web Services Region;.
     #
     # The permissions resource is
     # `arn:aws:quicksight:region:aws-account-id:dataset/*`.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -4887,10 +4914,10 @@ module Aws::QuickSight
     end
 
     # Lists data sources in current Amazon Web Services Region; that belong
-    # to this Amazon Web Services account;.
+    # to this Amazon Web Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -4922,7 +4949,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].arn #=> String
     #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].name #=> String
-    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
+    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH"
     #   resp.data_sources[0].status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_sources[0].created_time #=> Time
     #   resp.data_sources[0].last_updated_time #=> Time
@@ -4973,6 +5000,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.teradata_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.twitter_parameters.query #=> String
     #   resp.data_sources[0].data_source_parameters.twitter_parameters.max_rows #=> Integer
+    #   resp.data_sources[0].data_source_parameters.amazon_open_search_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters #=> Array
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.work_group #=> String
@@ -5021,6 +5049,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].teradata_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].twitter_parameters.query #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].twitter_parameters.max_rows #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_open_search_parameters.domain #=> String
     #   resp.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.data_sources[0].error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -5148,8 +5177,8 @@ module Aws::QuickSight
     #   The maximum number of results to return from this request.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -5193,8 +5222,8 @@ module Aws::QuickSight
     # Lists all user groups in Amazon QuickSight.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [String] :next_token
@@ -5242,11 +5271,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists IAM policy assignments in the current Amazon QuickSight account.
+    # Lists IAMpolicy assignments in the current Amazon QuickSight account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains these IAM
-    #   policy assignments.
+    #   The ID of the Amazon Web Services account that contains these
+    #   IAMpolicy assignments.
     #
     # @option params [String] :assignment_status
     #   The status of the assignments.
@@ -5296,12 +5325,12 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the IAM policy assignments, including the Amazon Resource
+    # Lists all the IAMpolicy assignments, including the Amazon Resource
     # Names (ARNs) for the IAM policies assigned to the specified user and
     # group or groups that the user belongs to.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the
+    #   The ID of the Amazon Web Services account that contains the
     #   assignments.
     #
     # @option params [required, String] :user_name
@@ -5362,7 +5391,7 @@ module Aws::QuickSight
     #   results.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request.
@@ -5415,10 +5444,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists the namespaces for the specified Amazon Web Services account;.
+    # Lists the namespaces for the specified Amazon Web Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
+    #   The ID for the Amazon Web Services account that contains the Amazon
     #   QuickSight namespaces that you want to list.
     #
     # @option params [String] :next_token
@@ -5505,7 +5534,7 @@ module Aws::QuickSight
     # Lists all the aliases of a template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   aliases that you're listing.
     #
     # @option params [required, String] :template_id
@@ -5559,7 +5588,7 @@ module Aws::QuickSight
     # QuickSight account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the templates
+    #   The ID of the Amazon Web Services account that contains the templates
     #   that you're listing.
     #
     # @option params [required, String] :template_id
@@ -5614,7 +5643,7 @@ module Aws::QuickSight
     # Lists all the templates in the current Amazon QuickSight account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the templates
+    #   The ID of the Amazon Web Services account that contains the templates
     #   that you're listing.
     #
     # @option params [String] :next_token
@@ -5666,7 +5695,7 @@ module Aws::QuickSight
     # Lists all the aliases of a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
+    #   The ID of the Amazon Web Services account that contains the theme
     #   aliases that you're listing.
     #
     # @option params [required, String] :theme_id
@@ -5715,10 +5744,10 @@ module Aws::QuickSight
     end
 
     # Lists all the versions of the themes in the current Amazon Web
-    # Services account;.
+    # Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the themes
+    #   The ID of the Amazon Web Services account that contains the themes
     #   that you're listing.
     #
     # @option params [required, String] :theme_id
@@ -5770,10 +5799,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the themes in the current Amazon Web Services account;.
+    # Lists all the themes in the current Amazon Web Services account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the themes
+    #   The ID of the Amazon Web Services account that contains the themes
     #   that you're listing.
     #
     # @option params [String] :next_token
@@ -5843,8 +5872,8 @@ module Aws::QuickSight
     #   memberships for.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID that the user is in. Currently,
-    #   you use the ID for the Amazon Web Services account; that contains your
+    #   The Amazon Web Services account ID that the user is in. Currently, you
+    #   use the ID for the Amazon Web Services account that contains your
     #   Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -5897,8 +5926,8 @@ module Aws::QuickSight
     # account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the user is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [String] :next_token
@@ -5961,7 +5990,7 @@ module Aws::QuickSight
     #   Amazon QuickSight supports several ways of managing the identity of
     #   users. This parameter accepts two values:
     #
-    #   * `IAM`\: A user whose identity maps to an existing IAM user or role.
+    #   * `IAM`\: A user whose identity maps to an existing IAMuser or role.
     #
     #   * `QUICKSIGHT`\: A user whose identity is owned and managed internally
     #     by Amazon QuickSight.
@@ -5986,25 +6015,25 @@ module Aws::QuickSight
     #   * `RESTRICTED_AUTHOR`\: This role isn't currently available for use.
     #
     # @option params [String] :iam_arn
-    #   The ARN of the IAM user or role that you are registering with Amazon
+    #   The ARN of the IAMuser or role that you are registering with Amazon
     #   QuickSight.
     #
     # @option params [String] :session_name
     #   You need to use this parameter only when you register one or more
-    #   users using an assumed IAM role. You don't need to provide the
-    #   session name for other scenarios, for example when you are registering
-    #   an IAM user or an Amazon QuickSight user. You can register multiple
-    #   users using the same IAM role if each user has a different session
-    #   name. For more information on assuming IAM roles, see [ `assume-role`
-    #   ][1] in the *AWS CLI Reference.*
+    #   users using an assumed IAMrole. You don't need to provide the session
+    #   name for other scenarios, for example when you are registering an
+    #   IAMuser or an Amazon QuickSight user. You can register multiple users
+    #   using the same IAMrole if each user has a different session name. For
+    #   more information on assuming IAMroles, see [ `assume-role` ][1] in the
+    #   *AWS CLI Reference.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the user is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -6033,22 +6062,22 @@ module Aws::QuickSight
     #
     #   A set of custom permissions includes any combination of these
     #   restrictions. Currently, you need to create the profile names for
-    #   custom permission sets by using the QuickSight console. Then, you use
-    #   the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   custom permission sets by using the Amazon QuickSight console. Then,
+    #   you use the `RegisterUser` API operation to assign the named set of
+    #   permissions to a Amazon QuickSight user.
     #
-    #   QuickSight custom permissions are applied through IAM policies.
+    #   Amazon QuickSight custom permissions are applied through IAMpolicies.
     #   Therefore, they override the permissions typically granted by
-    #   assigning QuickSight users to one of the default security cohorts in
-    #   QuickSight (admin, author, reader).
+    #   assigning Amazon QuickSight users to one of the default security
+    #   cohorts in Amazon QuickSight (admin, author, reader).
     #
-    #   This feature is available only to QuickSight Enterprise edition
+    #   This feature is available only to Amazon QuickSight Enterprise edition
     #   subscriptions.
     #
     # @option params [String] :external_login_federation_provider_type
     #   The type of supported external login provider that provides identity
-    #   to let a user federate into Amazon QuickSight with an associated AWS
-    #   Identity and Access Management (IAM) role. The type of supported
+    #   to let a user federate into Amazon QuickSight with an associated
+    #   Identity and Access Management(IAM) role. The type of supported
     #   external login provider can be one of the following.
     #
     #   * `COGNITO`\: Amazon Cognito. The provider URL is
@@ -6062,10 +6091,10 @@ module Aws::QuickSight
     #
     # @option params [String] :custom_federation_provider_url
     #   The URL of the custom OpenID Connect (OIDC) provider that provides
-    #   identity to let a user federate into QuickSight with an associated AWS
-    #   Identity and Access Management (IAM) role. This parameter should only
-    #   be used when `ExternalLoginFederationProviderType` parameter is set to
-    #   `CUSTOM_OIDC`.
+    #   identity to let a user federate into Amazon QuickSight with an
+    #   associated Identity and Access Management(IAM) role. This parameter
+    #   should only be used when `ExternalLoginFederationProviderType`
+    #   parameter is set to `CUSTOM_OIDC`.
     #
     # @option params [String] :external_login_id
     #   The identity ID for a user in the external login provider.
@@ -6123,7 +6152,7 @@ module Aws::QuickSight
     # Restores an analysis.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the analysis.
+    #   The ID of the Amazon Web Services account that contains the analysis.
     #
     # @option params [required, String] :analysis_id
     #   The ID of the analysis that you're restoring.
@@ -6166,7 +6195,7 @@ module Aws::QuickSight
     #  </note>
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the analyses
+    #   The ID of the Amazon Web Services account that contains the analyses
     #   that you're searching for.
     #
     # @option params [required, Array<Types::AnalysisSearchFilter>] :filters
@@ -6233,8 +6262,8 @@ module Aws::QuickSight
     #  </note>
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the user
-    #   whose dashboards you're searching for.
+    #   The ID of the Amazon Web Services account that contains the user whose
+    #   dashboards you're searching for.
     #
     # @option params [required, Array<Types::DashboardSearchFilter>] :filters
     #   The filters to apply to the search. Currently, you can search only by
@@ -6358,8 +6387,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Assigns one or more tags (key-value pairs) to the specified QuickSight
-    # resource.
+    # Assigns one or more tags (key-value pairs) to the specified Amazon
+    # QuickSight resource.
     #
     # Tags can help you organize and categorize your resources. You can also
     # use them to scope user permissions, by granting a user permission to
@@ -6370,18 +6399,19 @@ module Aws::QuickSight
     # key that is already associated with the resource, the new tag value
     # that you specify replaces the previous value for that tag.
     #
-    # You can associate as many as 50 tags with a resource. QuickSight
-    # supports tagging on data set, data source, dashboard, and template.
+    # You can associate as many as 50 tags with a resource. Amazon
+    # QuickSight supports tagging on data set, data source, dashboard, and
+    # template.
     #
-    # Tagging for QuickSight works in a similar way to tagging for other AWS
-    # services, except for the following:
+    # Tagging for Amazon QuickSight works in a similar way to tagging for
+    # other AWS services, except for the following:
     #
-    # * You can't use tags to track AWS costs for QuickSight. This
-    #   restriction is because QuickSight costs are based on users and SPICE
-    #   capacity, which aren't taggable resources.
+    # * You can't use tags to track AWS costs for Amazon QuickSight. This
+    #   restriction is because Amazon QuickSight costs are based on users
+    #   and SPICE capacity, which aren't taggable resources.
     #
-    # * QuickSight doesn't currently support the Tag Editor for Resource
-    #   Groups.
+    # * Amazon QuickSight doesn't currently support the Tag Editor for
+    #   Resource Groups.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
@@ -6460,23 +6490,24 @@ module Aws::QuickSight
     # Services Region;. Currently, the only customization you can use is a
     # theme.
     #
-    # You can use customizations for your Amazon Web Services account; or,
-    # if you specify a namespace, for a QuickSight namespace instead.
+    # You can use customizations for your Amazon Web Services account or, if
+    # you specify a namespace, for a Amazon QuickSight namespace instead.
     # Customizations that apply to a namespace override customizations that
-    # apply to an Amazon Web Services account;. To find out which
+    # apply to an Amazon Web Services account. To find out which
     # customizations apply, use the `DescribeAccountCustomization` API
     # operation.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that you want to update
-    #   QuickSight customizations for.
+    #   The ID for the Amazon Web Services account that you want to update
+    #   Amazon QuickSight customizations for.
     #
     # @option params [String] :namespace
-    #   The namespace that you want to update QuickSight customizations for.
+    #   The namespace that you want to update Amazon QuickSight customizations
+    #   for.
     #
     # @option params [required, Types::AccountCustomization] :account_customization
-    #   The QuickSight customizations you're updating in the current Amazon
-    #   Web Services Region;.
+    #   The Amazon QuickSight customizations you're updating in the current
+    #   Amazon Web Services Region;.
     #
     # @return [Types::UpdateAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6516,22 +6547,22 @@ module Aws::QuickSight
     end
 
     # Updates the Amazon QuickSight settings in your Amazon Web Services
-    # account;.
+    # account.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that contains the
+    #   The ID for the Amazon Web Services account that contains the Amazon
     #   QuickSight settings that you want to list.
     #
     # @option params [required, String] :default_namespace
-    #   The default namespace for this Amazon Web Services account;.
-    #   Currently, the default is `default`. Identity and Access Management
-    #   (IAM) users that register for the first time with QuickSight provide
-    #   an email that becomes associated with the default namespace.
+    #   The default namespace for this Amazon Web Services account. Currently,
+    #   the default is `default`. Identity and Access Management (IAM) users
+    #   that register for the first time with Amazon QuickSight provide an
+    #   email that becomes associated with the default namespace.
     #
     # @option params [String] :notification_email
-    #   The email address that you want QuickSight to send notifications to
-    #   regarding your Amazon Web Services account; or QuickSight
-    #   subscription.
+    #   The email address that you want Amazon QuickSight to send
+    #   notifications to regarding your Amazon Web Services account or Amazon
+    #   QuickSight subscription.
     #
     # @return [Types::UpdateAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6563,7 +6594,7 @@ module Aws::QuickSight
     # Updates an analysis in Amazon QuickSight
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the analysis
+    #   The ID of the Amazon Web Services account that contains the analysis
     #   that you're updating.
     #
     # @option params [required, String] :analysis_id
@@ -6572,7 +6603,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :name
     #   A descriptive name for the analysis that you're updating. This name
-    #   displays for the analysis in the QuickSight console.
+    #   displays for the analysis in the Amazon QuickSight console.
     #
     # @option params [Types::Parameters] :parameters
     #   The parameter names and override values that you want to use. An
@@ -6586,8 +6617,8 @@ module Aws::QuickSight
     #
     # @option params [String] :theme_arn
     #   The Amazon Resource Name (ARN) for the theme to apply to the analysis
-    #   that you're creating. To see the theme in the QuickSight console,
-    #   make sure that you have access to it.
+    #   that you're creating. To see the theme in the Amazon QuickSight
+    #   console, make sure that you have access to it.
     #
     # @return [Types::UpdateAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6663,9 +6694,9 @@ module Aws::QuickSight
     # Updates the read and write permissions for an analysis.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the analysis
+    #   The ID of the Amazon Web Services account that contains the analysis
     #   whose permissions you're updating. You must be using the Amazon Web
-    #   Services account; that the analysis is in.
+    #   Services account that the analysis is in.
     #
     # @option params [required, String] :analysis_id
     #   The ID of the analysis whose permissions you're updating. The ID is
@@ -6726,7 +6757,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates a dashboard in an Amazon Web Services account;.
+    # Updates a dashboard in an Amazon Web Services account.
     #
     # <note markdown="1"> Updating a Dashboard creates a new dashboard version but does not
     # immediately publish the new version. You can update the published
@@ -6736,7 +6767,7 @@ module Aws::QuickSight
     #  </note>
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the dashboard
+    #   The ID of the Amazon Web Services account that contains the dashboard
     #   that you're updating.
     #
     # @option params [required, String] :dashboard_id
@@ -6753,8 +6784,8 @@ module Aws::QuickSight
     #   from an analysis, first convert the analysis to a template by using
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
-    #   `SourceTemplate` ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Amazon Web Services Region;.
+    #   `SourceTemplate` ARN can contain any Amazon Web Services account and
+    #   any Amazon QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list the
     #   replacement datasets for the placeholders listed in the original. The
@@ -6773,9 +6804,9 @@ module Aws::QuickSight
     #
     #   * `AvailabilityStatus` for `AdHocFilteringOption` - This status can be
     #     either `ENABLED` or `DISABLED`. When this is set to `DISABLED`,
-    #     QuickSight disables the left filter pane on the published dashboard,
-    #     which can be used for ad hoc (one-time) filtering. This option is
-    #     `ENABLED` by default.
+    #     Amazon QuickSight disables the left filter pane on the published
+    #     dashboard, which can be used for ad hoc (one-time) filtering. This
+    #     option is `ENABLED` by default.
     #
     #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
     #     either `ENABLED` or `DISABLED`. The visual option to export data to
@@ -6790,7 +6821,7 @@ module Aws::QuickSight
     #   The Amazon Resource Name (ARN) of the theme that is being used for
     #   this dashboard. If you add a value for this field, it overrides the
     #   value that was originally associated with the entity. The theme ARN
-    #   must exist in the same Amazon Web Services account; where you create
+    #   must exist in the same Amazon Web Services account where you create
     #   the dashboard.
     #
     # @return [Types::UpdateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6881,7 +6912,7 @@ module Aws::QuickSight
     # Updates read and write permissions on a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the dashboard
+    #   The ID of the Amazon Web Services account that contains the dashboard
     #   whose permissions you're updating.
     #
     # @option params [required, String] :dashboard_id
@@ -6943,7 +6974,7 @@ module Aws::QuickSight
     # Updates the published version of a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the dashboard
+    #   The ID of the Amazon Web Services account that contains the dashboard
     #   that you're updating.
     #
     # @option params [required, String] :dashboard_id
@@ -6986,11 +7017,11 @@ module Aws::QuickSight
     # Updates a dataset.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to update. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account;.
+    #   Amazon Web Services Region; for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -7007,7 +7038,7 @@ module Aws::QuickSight
     #   Indicates whether you want to import the data into SPICE.
     #
     # @option params [Array<Types::ColumnGroup>] :column_groups
-    #   Groupings of columns that work together in certain QuickSight
+    #   Groupings of columns that work together in certain Amazon QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #
     # @option params [Hash<String,Types::FieldFolder>] :field_folders
@@ -7024,6 +7055,10 @@ module Aws::QuickSight
     #
     # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
     #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #
+    # @option params [Types::DataSetUsageConfiguration] :data_set_usage_configuration
+    #   The usage configuration to apply to child datasets that reference this
+    #   dataset as a source.
     #
     # @return [Types::UpdateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7123,6 +7158,10 @@ module Aws::QuickSight
     #                 },
     #               ],
     #             },
+    #             untag_column_operation: {
+    #               column_name: "ColumnName", # required
+    #               tag_names: ["COLUMN_GEOGRAPHIC_ROLE"], # required, accepts COLUMN_GEOGRAPHIC_ROLE, COLUMN_DESCRIPTION
+    #             },
     #           },
     #         ],
     #         source: { # required
@@ -7139,6 +7178,7 @@ module Aws::QuickSight
     #             on_clause: "OnClause", # required
     #           },
     #           physical_table_id: "PhysicalTableId",
+    #           data_set_arn: "Arn",
     #         },
     #       },
     #     },
@@ -7182,6 +7222,10 @@ module Aws::QuickSight
     #         column_names: ["String"],
     #       },
     #     ],
+    #     data_set_usage_configuration: {
+    #       disable_use_as_direct_query_source: false,
+    #       disable_use_as_imported_source: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -7208,12 +7252,12 @@ module Aws::QuickSight
     # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset whose permissions you want to update. This ID
     #   is unique per Amazon Web Services Region; for each Amazon Web Services
-    #   account;.
+    #   account.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   The resource permissions that you want to grant to the dataset.
@@ -7266,30 +7310,30 @@ module Aws::QuickSight
     # Updates a data source.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account;.
+    #   Region; for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
-    #   The parameters that QuickSight uses to connect to your underlying
-    #   source.
+    #   The parameters that Amazon QuickSight uses to connect to your
+    #   underlying source.
     #
     # @option params [Types::DataSourceCredentials] :credentials
-    #   The credentials that QuickSight that uses to connect to your
+    #   The credentials that Amazon QuickSight that uses to connect to your
     #   underlying source. Currently, only credentials based on user name and
     #   password are supported.
     #
     # @option params [Types::VpcConnectionProperties] :vpc_connection_properties
-    #   Use this parameter only when you want QuickSight to use a VPC
+    #   Use this parameter only when you want Amazon QuickSight to use a VPC
     #   connection when connecting to your underlying source.
     #
     # @option params [Types::SslProperties] :ssl_properties
-    #   Secure Socket Layer (SSL) properties that apply when QuickSight
+    #   Secure Socket Layer (SSL) properties that apply when Amazon QuickSight
     #   connects to your underlying source.
     #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7396,6 +7440,9 @@ module Aws::QuickSight
     #         query: "Query", # required
     #         max_rows: 1, # required
     #       },
+    #       amazon_open_search_parameters: {
+    #         domain: "Domain", # required
+    #       },
     #     },
     #     credentials: {
     #       credential_pair: {
@@ -7492,6 +7539,9 @@ module Aws::QuickSight
     #               query: "Query", # required
     #               max_rows: 1, # required
     #             },
+    #             amazon_open_search_parameters: {
+    #               domain: "Domain", # required
+    #             },
     #           },
     #         ],
     #       },
@@ -7525,11 +7575,11 @@ module Aws::QuickSight
     # Updates the permissions to a data source.
     #
     # @option params [required, String] :aws_account_id
-    #   The Amazon Web Services account; ID.
+    #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account;.
+    #   Region; for each Amazon Web Services account.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   A list of resource permissions that you want to grant on the data
@@ -7693,8 +7743,8 @@ module Aws::QuickSight
     #   The description for the group that you want to update.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the group is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -7733,17 +7783,17 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates an existing IAM policy assignment. This operation updates only
+    # Updates an existing IAMpolicy assignment. This operation updates only
     # the optional parameter or parameters that are specified in the
     # request. This overwrites all of the users included in `Identities`.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the IAM
-    #   policy assignment.
+    #   The ID of the Amazon Web Services account that contains the IAMpolicy
+    #   assignment.
     #
     # @option params [required, String] :assignment_name
     #   The name of the assignment, also called a rule. This name must be
-    #   unique within an Amazon Web Services account;.
+    #   unique within an Amazon Web Services account.
     #
     # @option params [required, String] :namespace
     #   The namespace of the assignment.
@@ -7761,12 +7811,12 @@ module Aws::QuickSight
     #     when creating the data source.
     #
     # @option params [String] :policy_arn
-    #   The ARN for the IAM policy to apply to the QuickSight users and groups
-    #   specified in this assignment.
+    #   The ARN for the IAMpolicy to apply to the Amazon QuickSight users and
+    #   groups specified in this assignment.
     #
     # @option params [Hash<String,Array>] :identities
-    #   The QuickSight users, groups, or both that you want to assign the
-    #   policy to.
+    #   The Amazon QuickSight users, groups, or both that you want to assign
+    #   the policy to.
     #
     # @return [Types::UpdateIAMPolicyAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7816,7 +7866,7 @@ module Aws::QuickSight
     # another template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   that you're updating.
     #
     # @option params [required, String] :template_id
@@ -7829,8 +7879,8 @@ module Aws::QuickSight
     #   for an analysis. Both of these require an Amazon Resource Name (ARN).
     #   For `SourceTemplate`, specify the ARN of the source template. For
     #   `SourceAnalysis`, specify the ARN of the source analysis. The
-    #   `SourceTemplate` ARN can contain any Amazon Web Services account; and
-    #   any QuickSight-supported Amazon Web Services Region;.
+    #   `SourceTemplate` ARN can contain any Amazon Web Services account and
+    #   any Amazon QuickSight-supported Amazon Web Services Region;.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the placeholders
@@ -7899,7 +7949,7 @@ module Aws::QuickSight
     # Updates the template alias of a template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template
+    #   The ID of the Amazon Web Services account that contains the template
     #   alias that you're updating.
     #
     # @option params [required, String] :template_id
@@ -7950,7 +8000,7 @@ module Aws::QuickSight
     # Updates the resource permissions for a template.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the template.
+    #   The ID of the Amazon Web Services account that contains the template.
     #
     # @option params [required, String] :template_id
     #   The ID for the template.
@@ -8011,8 +8061,8 @@ module Aws::QuickSight
     # Updates a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
-    #   that you're updating.
+    #   The ID of the Amazon Web Services account that contains the theme that
+    #   you're updating.
     #
     # @option params [required, String] :theme_id
     #   The ID for the theme.
@@ -8114,7 +8164,7 @@ module Aws::QuickSight
     # Updates an alias of a theme.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme
+    #   The ID of the Amazon Web Services account that contains the theme
     #   alias that you're updating.
     #
     # @option params [required, String] :theme_id
@@ -8203,7 +8253,7 @@ module Aws::QuickSight
     # * To specify no permissions, omit the permissions list.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID of the Amazon Web Services account; that contains the theme.
+    #   The ID of the Amazon Web Services account that contains the theme.
     #
     # @option params [required, String] :theme_id
     #   The ID for the theme.
@@ -8267,8 +8317,8 @@ module Aws::QuickSight
     #   The Amazon QuickSight user name that you want to update.
     #
     # @option params [required, String] :aws_account_id
-    #   The ID for the Amazon Web Services account; that the user is in.
-    #   Currently, you use the ID for the Amazon Web Services account; that
+    #   The ID for the Amazon Web Services account that the user is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -8289,8 +8339,8 @@ module Aws::QuickSight
     #   * `ADMIN`\: A user who is an author, who can also manage Amazon
     #     QuickSight settings.
     #
-    #   The name of the QuickSight role is invisible to the user except for
-    #   the console screens dealing with permissions.
+    #   The name of the Amazon QuickSight role is invisible to the user except
+    #   for the console screens dealing with permissions.
     #
     # @option params [String] :custom_permissions_name
     #   (Enterprise edition only) The name of the custom permissions profile
@@ -8308,16 +8358,16 @@ module Aws::QuickSight
     #
     #   A set of custom permissions includes any combination of these
     #   restrictions. Currently, you need to create the profile names for
-    #   custom permission sets by using the QuickSight console. Then, you use
-    #   the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   custom permission sets by using the Amazon QuickSight console. Then,
+    #   you use the `RegisterUser` API operation to assign the named set of
+    #   permissions to a Amazon QuickSight user.
     #
-    #   QuickSight custom permissions are applied through IAM policies.
+    #   Amazon QuickSight custom permissions are applied through IAMpolicies.
     #   Therefore, they override the permissions typically granted by
-    #   assigning QuickSight users to one of the default security cohorts in
-    #   QuickSight (admin, author, reader).
+    #   assigning Amazon QuickSight users to one of the default security
+    #   cohorts in Amazon QuickSight (admin, author, reader).
     #
-    #   This feature is available only to QuickSight Enterprise edition
+    #   This feature is available only to Amazon QuickSight Enterprise edition
     #   subscriptions.
     #
     # @option params [Boolean] :unapply_custom_permissions
@@ -8329,9 +8379,9 @@ module Aws::QuickSight
     #
     # @option params [String] :external_login_federation_provider_type
     #   The type of supported external login provider that provides identity
-    #   to let a user federate into QuickSight with an associated AWS Identity
-    #   and Access Management (IAM) role. The type of supported external login
-    #   provider can be one of the following.
+    #   to let a user federate into Amazon QuickSight with an associated
+    #   Identity and Access Management(IAM) role. The type of supported
+    #   external login provider can be one of the following.
     #
     #   * `COGNITO`\: Amazon Cognito. The provider URL is
     #     cognito-identity.amazonaws.com. When choosing the `COGNITO` provider
@@ -8348,10 +8398,10 @@ module Aws::QuickSight
     #
     # @option params [String] :custom_federation_provider_url
     #   The URL of the custom OpenID Connect (OIDC) provider that provides
-    #   identity to let a user federate into QuickSight with an associated AWS
-    #   Identity and Access Management (IAM) role. This parameter should only
-    #   be used when `ExternalLoginFederationProviderType` parameter is set to
-    #   `CUSTOM_OIDC`.
+    #   identity to let a user federate into Amazon QuickSight with an
+    #   associated Identity and Access Management(IAM) role. This parameter
+    #   should only be used when `ExternalLoginFederationProviderType`
+    #   parameter is set to `CUSTOM_OIDC`.
     #
     # @option params [String] :external_login_id
     #   The identity ID for a user in the external login provider.
@@ -8415,7 +8465,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

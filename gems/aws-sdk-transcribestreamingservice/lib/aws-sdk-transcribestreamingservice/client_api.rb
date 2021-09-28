@@ -22,7 +22,11 @@ module Aws::TranscribeStreamingService
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Confidence = Shapes::FloatShape.new(name: 'Confidence')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContentIdentificationType = Shapes::StringShape.new(name: 'ContentIdentificationType')
+    ContentRedactionType = Shapes::StringShape.new(name: 'ContentRedactionType')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Entity = Shapes::StructureShape.new(name: 'Entity')
+    EntityList = Shapes::ListShape.new(name: 'EntityList')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     Item = Shapes::StructureShape.new(name: 'Item')
     ItemList = Shapes::ListShape.new(name: 'ItemList')
@@ -45,6 +49,7 @@ module Aws::TranscribeStreamingService
     MedicalTranscriptResultStream = Shapes::StructureShape.new(name: 'MedicalTranscriptResultStream')
     NumberOfChannels = Shapes::IntegerShape.new(name: 'NumberOfChannels')
     PartialResultsStability = Shapes::StringShape.new(name: 'PartialResultsStability')
+    PiiEntityTypes = Shapes::StringShape.new(name: 'PiiEntityTypes')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     Result = Shapes::StructureShape.new(name: 'Result')
     ResultList = Shapes::ListShape.new(name: 'ResultList')
@@ -67,6 +72,7 @@ module Aws::TranscribeStreamingService
 
     Alternative.add_member(:transcript, Shapes::ShapeRef.new(shape: String, location_name: "Transcript"))
     Alternative.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
+    Alternative.add_member(:entities, Shapes::ShapeRef.new(shape: EntityList, location_name: "Entities"))
     Alternative.struct_class = Types::Alternative
 
     AlternativeList.member = Shapes::ShapeRef.new(shape: Alternative)
@@ -82,6 +88,16 @@ module Aws::TranscribeStreamingService
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    Entity.add_member(:start_time, Shapes::ShapeRef.new(shape: Double, location_name: "StartTime"))
+    Entity.add_member(:end_time, Shapes::ShapeRef.new(shape: Double, location_name: "EndTime"))
+    Entity.add_member(:category, Shapes::ShapeRef.new(shape: String, location_name: "Category"))
+    Entity.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    Entity.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "Content"))
+    Entity.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
+    Entity.struct_class = Types::Entity
+
+    EntityList.member = Shapes::ShapeRef.new(shape: Entity)
 
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalFailureException.struct_class = Types::InternalFailureException
@@ -210,6 +226,9 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionRequest.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, location: "header", location_name: "x-amzn-transcribe-number-of-channels"))
     StartStreamTranscriptionRequest.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-partial-results-stabilization"))
     StartStreamTranscriptionRequest.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location: "header", location_name: "x-amzn-transcribe-partial-results-stability"))
+    StartStreamTranscriptionRequest.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
+    StartStreamTranscriptionRequest.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: ContentRedactionType, location: "header", location_name: "x-amzn-transcribe-content-redaction-type"))
+    StartStreamTranscriptionRequest.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location: "header", location_name: "x-amzn-transcribe-pii-entity-types"))
     StartStreamTranscriptionRequest.struct_class = Types::StartStreamTranscriptionRequest
     StartStreamTranscriptionRequest[:payload] = :audio_stream
     StartStreamTranscriptionRequest[:payload_member] = StartStreamTranscriptionRequest.member(:audio_stream)
@@ -228,6 +247,9 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionResponse.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, location: "header", location_name: "x-amzn-transcribe-number-of-channels"))
     StartStreamTranscriptionResponse.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-partial-results-stabilization"))
     StartStreamTranscriptionResponse.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: PartialResultsStability, location: "header", location_name: "x-amzn-transcribe-partial-results-stability"))
+    StartStreamTranscriptionResponse.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
+    StartStreamTranscriptionResponse.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: ContentRedactionType, location: "header", location_name: "x-amzn-transcribe-content-redaction-type"))
+    StartStreamTranscriptionResponse.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location: "header", location_name: "x-amzn-transcribe-pii-entity-types"))
     StartStreamTranscriptionResponse.struct_class = Types::StartStreamTranscriptionResponse
     StartStreamTranscriptionResponse[:payload] = :transcript_result_stream
     StartStreamTranscriptionResponse[:payload_member] = StartStreamTranscriptionResponse.member(:transcript_result_stream)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-09-02)
+------------------
+
+* Feature - Announcing Amazon FSx for NetApp ONTAP, a new service that provides fully managed shared storage in the AWS Cloud with the data access and management capabilities of ONTAP.
+
 1.41.0 (2021-09-01)
 ------------------
 

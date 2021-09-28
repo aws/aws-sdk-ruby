@@ -669,7 +669,7 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
-    # Specifies settings for cold storage.
+    # Specifies the configuration for cold storage options such as enabled
     #
     # @note When making an API call, you may pass ColdStorageOptions
     #   data as a hash:
@@ -679,7 +679,7 @@ module Aws::ElasticsearchService
     #       }
     #
     # @!attribute [rw] enabled
-    #   True to enable cold storage for an Elasticsearch domain.
+    #   Enable cold storage option. Accepted values true or false
     #   @return [Boolean]
     #
     class ColdStorageOptions < Struct.new(
@@ -1878,8 +1878,13 @@ module Aws::ElasticsearchService
     #   Specifies the `DomainName`.
     #   @return [String]
     #
+    # @!attribute [rw] engine_type
+    #   Specifies the `EngineType` of the domain.
+    #   @return [String]
+    #
     class DomainInfo < Struct.new(
-      :domain_name)
+      :domain_name,
+      :engine_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2147,8 +2152,7 @@ module Aws::ElasticsearchService
     #   @return [Integer]
     #
     # @!attribute [rw] cold_storage_options
-    #   Specifies the `ColdStorageOptions` configuration for an
-    #   Elasticsearch domain.
+    #   Specifies the `ColdStorageOptions` config for Elasticsearch Domain
     #   @return [Types::ColdStorageOptions]
     #
     class ElasticsearchClusterConfig < Struct.new(
@@ -2893,11 +2897,31 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `ListDomainNames` operation.
+    #
+    # @note When making an API call, you may pass ListDomainNamesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         engine_type: "OpenSearch", # accepts OpenSearch, Elasticsearch
+    #       }
+    #
+    # @!attribute [rw] engine_type
+    #   Optional parameter to filter the output by domain engine type.
+    #   Acceptable values are 'Elasticsearch' and 'OpenSearch'.
+    #   @return [String]
+    #
+    class ListDomainNamesRequest < Struct.new(
+      :engine_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The result of a `ListDomainNames` operation. Contains the names of all
-    # Elasticsearch domains owned by this account.
+    # domains owned by this account and their respective engine types.
     #
     # @!attribute [rw] domain_names
-    #   List of Elasticsearch domain names.
+    #   List of domain names and respective engine types.
     #   @return [Array<Types::DomainInfo>]
     #
     class ListDomainNamesResponse < Struct.new(

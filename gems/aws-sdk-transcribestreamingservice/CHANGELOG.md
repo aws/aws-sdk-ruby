@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-09-14)
+------------------
+
+* Feature - Amazon Transcribe now supports PII Identification and Redaction for streaming transcription.
+
 1.32.0 (2021-09-01)
 ------------------
 
