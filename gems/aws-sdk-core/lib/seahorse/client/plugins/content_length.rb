@@ -9,10 +9,11 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            # If it's an IO object and not a File / String / String IO
-            if context.http_request.body.respond_to?(:size)
-              length = context.http_request.body.size
-              context.http_request.headers['Content-Length'] = length
+            body = context.http_request.body
+            # If size of body can be determined, set content-length.
+            # We use Net::HTTP with body_stream which doesn't do this by default
+            if body.respond_to?(:size) && body.size > 0
+              context.http_request.headers['Content-Length'] = body.size
             end
             @handler.call(context)
           end
