@@ -117,6 +117,7 @@ module Aws::SESV2
     DkimAttributes = Shapes::StructureShape.new(name: 'DkimAttributes')
     DkimSigningAttributes = Shapes::StructureShape.new(name: 'DkimSigningAttributes')
     DkimSigningAttributesOrigin = Shapes::StringShape.new(name: 'DkimSigningAttributesOrigin')
+    DkimSigningKeyLength = Shapes::StringShape.new(name: 'DkimSigningKeyLength')
     DkimStatus = Shapes::StringShape.new(name: 'DkimStatus')
     DnsToken = Shapes::StringShape.new(name: 'DnsToken')
     DnsTokenList = Shapes::ListShape.new(name: 'DnsTokenList')
@@ -666,10 +667,14 @@ module Aws::SESV2
     DkimAttributes.add_member(:status, Shapes::ShapeRef.new(shape: DkimStatus, location_name: "Status"))
     DkimAttributes.add_member(:tokens, Shapes::ShapeRef.new(shape: DnsTokenList, location_name: "Tokens"))
     DkimAttributes.add_member(:signing_attributes_origin, Shapes::ShapeRef.new(shape: DkimSigningAttributesOrigin, location_name: "SigningAttributesOrigin"))
+    DkimAttributes.add_member(:next_signing_key_length, Shapes::ShapeRef.new(shape: DkimSigningKeyLength, location_name: "NextSigningKeyLength"))
+    DkimAttributes.add_member(:current_signing_key_length, Shapes::ShapeRef.new(shape: DkimSigningKeyLength, location_name: "CurrentSigningKeyLength"))
+    DkimAttributes.add_member(:last_key_generation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastKeyGenerationTimestamp"))
     DkimAttributes.struct_class = Types::DkimAttributes
 
-    DkimSigningAttributes.add_member(:domain_signing_selector, Shapes::ShapeRef.new(shape: Selector, required: true, location_name: "DomainSigningSelector"))
-    DkimSigningAttributes.add_member(:domain_signing_private_key, Shapes::ShapeRef.new(shape: PrivateKey, required: true, location_name: "DomainSigningPrivateKey"))
+    DkimSigningAttributes.add_member(:domain_signing_selector, Shapes::ShapeRef.new(shape: Selector, location_name: "DomainSigningSelector"))
+    DkimSigningAttributes.add_member(:domain_signing_private_key, Shapes::ShapeRef.new(shape: PrivateKey, location_name: "DomainSigningPrivateKey"))
+    DkimSigningAttributes.add_member(:next_signing_key_length, Shapes::ShapeRef.new(shape: DkimSigningKeyLength, location_name: "NextSigningKeyLength"))
     DkimSigningAttributes.struct_class = Types::DkimSigningAttributes
 
     DnsTokenList.member = Shapes::ShapeRef.new(shape: DnsToken)

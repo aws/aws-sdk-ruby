@@ -205,6 +205,9 @@ module Aws::Lambda
     #   For Amazon Web Services services, the ARN of the Amazon Web Services
     #   resource that invokes the function. For example, an Amazon S3 bucket
     #   or Amazon SNS topic.
+    #
+    #   Note that Lambda configures the comparison using the `StringLike`
+    #   operator.
     #   @return [String]
     #
     # @!attribute [rw] source_account
@@ -497,7 +500,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency AWS API Documentation
@@ -693,12 +696,17 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   If true, the event source mapping is active. Set to false to pause
-    #   polling and invocation.
+    #   When true, the event source mapping is active. When false, Lambda
+    #   pauses polling and invocation.
+    #
+    #   Default: True
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
-    #   The maximum number of items to retrieve in a single batch.
+    #   The maximum number of records in each batch that Lambda pulls from
+    #   your stream or queue and sends to your function. Lambda passes all
+    #   of the records in the batch to the function in a single call, up to
+    #   the payload limit for synchronous invocation (6 MB).
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
@@ -714,8 +722,14 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams and SQS standard queues) The maximum amount of time to
-    #   gather records before invoking the function, in seconds.
+    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
+    #   in seconds, that Lambda spends gathering records before invoking the
+    #   function.
+    #
+    #   Default: 0
+    #
+    #   Related setting: When you set `BatchSize` to a value greater than
+    #   10, you must set `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -859,6 +873,7 @@ module Aws::Lambda
     #           working_directory: "WorkingDirectory",
     #         },
     #         code_signing_config_arn: "CodeSigningConfigArn",
+    #         architectures: ["x86_64"], # accepts x86_64, arm64
     #       }
     #
     # @!attribute [rw] function_name
@@ -1018,6 +1033,12 @@ module Aws::Lambda
     #   this function.
     #   @return [String]
     #
+    # @!attribute [rw] architectures
+    #   The instruction set architecture that the function supports. Enter a
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -1040,7 +1061,8 @@ module Aws::Lambda
       :layers,
       :file_system_configs,
       :image_config,
-      :code_signing_config_arn)
+      :code_signing_config_arn,
+      :architectures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1444,7 +1466,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # An error occured when reading from or writing to a connected file
+    # An error occurred when reading from or writing to a connected file
     # system.
     #
     # @!attribute [rw] type
@@ -1626,13 +1648,27 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] batch_size
-    #   The maximum number of items to retrieve in a single batch.
+    #   The maximum number of records in each batch that Lambda pulls from
+    #   your stream or queue and sends to your function. Lambda passes all
+    #   of the records in the batch to the function in a single call, up to
+    #   the payload limit for synchronous invocation (6 MB).
+    #
+    #   Default value: Varies by service. For Amazon SQS, the default is 10.
+    #   For all other services, the default is 100.
+    #
+    #   Related setting: When you set `BatchSize` to a value greater than
+    #   10, you must set `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams and Amazon SQS standard queues) The maximum amount of time
-    #   to gather records before invoking the function, in seconds. The
-    #   default value is zero.
+    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
+    #   in seconds, that Lambda spends gathering records before invoking the
+    #   function.
+    #
+    #   Default: 0
+    #
+    #   Related setting: When you set `BatchSize` to a value greater than
+    #   10, you must set `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -2018,6 +2054,12 @@ module Aws::Lambda
     #   The ARN of the signing job.
     #   @return [String]
     #
+    # @!attribute [rw] architectures
+    #   The instruction set architecture that the function supports.
+    #   Architecture is a string array with one of the valid values. The
+    #   default architecture value is `x86_64`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -2051,7 +2093,8 @@ module Aws::Lambda
       :package_type,
       :image_config_response,
       :signing_profile_version_arn,
-      :signing_job_arn)
+      :signing_job_arn,
+      :architectures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2595,6 +2638,14 @@ module Aws::Lambda
     #   The layer's software license.
     #   @return [String]
     #
+    # @!attribute [rw] compatible_architectures
+    #   A list of compatible [instruction set architectures][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionResponse AWS API Documentation
     #
     class GetLayerVersionResponse < Struct.new(
@@ -2605,7 +2656,8 @@ module Aws::Lambda
       :created_date,
       :version,
       :compatible_runtimes,
-      :license_info)
+      :license_info,
+      :compatible_architectures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2997,7 +3049,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] log_type
-    #   Set to `Tail` to include the execution log in the response.
+    #   Set to `Tail` to include the execution log in the response. Applies
+    #   to synchronously invoked functions only.
     #   @return [String]
     #
     # @!attribute [rw] client_context
@@ -3342,6 +3395,14 @@ module Aws::Lambda
     #   The layer's open-source license.
     #   @return [String]
     #
+    # @!attribute [rw] compatible_architectures
+    #   A list of compatible [instruction set architectures][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionsListItem AWS API Documentation
     #
     class LayerVersionsListItem < Struct.new(
@@ -3350,7 +3411,8 @@ module Aws::Lambda
       :description,
       :created_date,
       :compatible_runtimes,
-      :license_info)
+      :license_info,
+      :compatible_architectures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3759,6 +3821,7 @@ module Aws::Lambda
     #         layer_name: "LayerName", # required
     #         marker: "String",
     #         max_items: 1,
+    #         compatible_architecture: "x86_64", # accepts x86_64, arm64
     #       }
     #
     # @!attribute [rw] compatible_runtime
@@ -3777,13 +3840,22 @@ module Aws::Lambda
     #   The maximum number of versions to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] compatible_architecture
+    #   The compatible [instruction set architecture][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersionsRequest AWS API Documentation
     #
     class ListLayerVersionsRequest < Struct.new(
       :compatible_runtime,
       :layer_name,
       :marker,
-      :max_items)
+      :max_items,
+      :compatible_architecture)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3813,6 +3885,7 @@ module Aws::Lambda
     #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         marker: "String",
     #         max_items: 1,
+    #         compatible_architecture: "x86_64", # accepts x86_64, arm64
     #       }
     #
     # @!attribute [rw] compatible_runtime
@@ -3827,12 +3900,21 @@ module Aws::Lambda
     #   The maximum number of layers to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] compatible_architecture
+    #   The compatible [instruction set architecture][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayersRequest AWS API Documentation
     #
     class ListLayersRequest < Struct.new(
       :compatible_runtime,
       :marker,
-      :max_items)
+      :max_items,
+      :compatible_architecture)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3924,7 +4006,8 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] resource
-    #   The function's Amazon Resource Name (ARN).
+    #   The function's Amazon Resource Name (ARN). Note: Lambda does not
+    #   support adding tags to aliases or versions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsRequest AWS API Documentation
@@ -4176,6 +4259,7 @@ module Aws::Lambda
     #         },
     #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         license_info: "LicenseInfo",
+    #         compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #       }
     #
     # @!attribute [rw] layer_name
@@ -4214,6 +4298,14 @@ module Aws::Lambda
     #   [1]: https://spdx.org/licenses/
     #   @return [String]
     #
+    # @!attribute [rw] compatible_architectures
+    #   A list of compatible [instruction set architectures][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersionRequest AWS API Documentation
     #
     class PublishLayerVersionRequest < Struct.new(
@@ -4221,7 +4313,8 @@ module Aws::Lambda
       :description,
       :content,
       :compatible_runtimes,
-      :license_info)
+      :license_info,
+      :compatible_architectures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4263,6 +4356,14 @@ module Aws::Lambda
     #   The layer's software license.
     #   @return [String]
     #
+    # @!attribute [rw] compatible_architectures
+    #   A list of compatible [instruction set architectures][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersionResponse AWS API Documentation
     #
     class PublishLayerVersionResponse < Struct.new(
@@ -4273,7 +4374,8 @@ module Aws::Lambda
       :created_date,
       :version,
       :compatible_runtimes,
-      :license_info)
+      :license_info,
+      :compatible_architectures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5227,12 +5329,17 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   If true, the event source mapping is active. Set to false to pause
-    #   polling and invocation.
+    #   When true, the event source mapping is active. When false, Lambda
+    #   pauses polling and invocation.
+    #
+    #   Default: True
     #   @return [Boolean]
     #
     # @!attribute [rw] batch_size
-    #   The maximum number of items to retrieve in a single batch.
+    #   The maximum number of records in each batch that Lambda pulls from
+    #   your stream or queue and sends to your function. Lambda passes all
+    #   of the records in the batch to the function in a single call, up to
+    #   the payload limit for synchronous invocation (6 MB).
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
@@ -5248,8 +5355,14 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams and SQS standard queues) The maximum amount of time to
-    #   gather records before invoking the function, in seconds.
+    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
+    #   in seconds, that Lambda spends gathering records before invoking the
+    #   function.
+    #
+    #   Default: 0
+    #
+    #   Related setting: When you set `BatchSize` to a value greater than
+    #   10, you must set `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
@@ -5326,6 +5439,7 @@ module Aws::Lambda
     #         publish: false,
     #         dry_run: false,
     #         revision_id: "String",
+    #         architectures: ["x86_64"], # accepts x86_64, arm64
     #       }
     #
     # @!attribute [rw] function_name
@@ -5386,6 +5500,12 @@ module Aws::Lambda
     #   changed since you last read it.
     #   @return [String]
     #
+    # @!attribute [rw] architectures
+    #   The instruction set architecture that the function supports. Enter a
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
     #
     class UpdateFunctionCodeRequest < Struct.new(
@@ -5397,7 +5517,8 @@ module Aws::Lambda
       :image_uri,
       :publish,
       :dry_run,
-      :revision_id)
+      :revision_id,
+      :architectures)
       SENSITIVE = [:zip_file]
       include Aws::Structure
     end
@@ -5571,7 +5692,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] image_config
     #   [Container image configuration values][1] that override the values
-    #   in the container image Dockerfile.
+    #   in the container image Docker file.
     #
     #
     #

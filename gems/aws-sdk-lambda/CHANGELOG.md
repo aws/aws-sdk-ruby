@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-09-29)
+------------------
+
+* Feature - Adds support for Lambda functions powered by AWS Graviton2 processors. Customers can now select the CPU architecture for their functions.
+
 1.68.0 (2021-09-01)
 ------------------
 
