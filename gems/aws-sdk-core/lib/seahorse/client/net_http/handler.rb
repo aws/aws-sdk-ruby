@@ -74,10 +74,9 @@ module Seahorse
         # @return [void]
         def transmit(config, req, resp)
           session(config, req) do |http|
+            # Monkey patch default content-type set by Net::HTTP
             Thread.current[:net_http_skip_default_content_type] = true
             http.request(build_net_request(req)) do |net_resp|
-              Thread.current[:net_http_skip_default_content_type] = nil
-
               status_code = net_resp.code.to_i
               headers = extract_headers(net_resp)
 
@@ -98,6 +97,9 @@ module Seahorse
         rescue => error
           # not retryable
           resp.signal_error(error)
+        ensure
+          # ensure we turn off monkey patch in case of error
+          Thread.current[:net_http_skip_default_content_type] = nil
         end
 
         def complete_response(req, resp, bytes_received)
