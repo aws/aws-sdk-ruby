@@ -1737,9 +1737,7 @@
           "headers": {
             "Content-Length": 0
           },
-          "excludeHeaders": {
-            "Content-Type": null
-          },
+          "excludeHeaders": ["Content-Type"],
           "host": "rest-json-test.amazonaws.com"
         }
       },
@@ -1750,7 +1748,7 @@
             "shape": "NoPayloadRequest"
           },
           "http": {
-            "method": "POST",
+            "method": "GET",
             "requestUri": "/no-payload"
           }
         },
@@ -1758,10 +1756,7 @@
         "serialized": {
           "uri": "/no-payload",
           "body": "",
-          "excludeHeaders": {
-            "Content-Type": null,
-            "Content-Length": null
-          },
+          "excludeHeaders": ["Content-Type", "Content-Length"],
           "host": "rest-json-test.amazonaws.com"
         }
       },
@@ -1772,7 +1767,7 @@
             "shape": "NoPayloadRequest"
           },
           "http": {
-            "method": "POST",
+            "method": "GET",
             "requestUri": "/no-payload"
           }
         },
@@ -1782,10 +1777,7 @@
         "serialized": {
           "uri": "/no-payload",
           "body": "",
-          "excludeHeaders": {
-            "Content-Type": null,
-            "Content-Length": null
-          },
+          "excludeHeaders": ["Content-Type", "Content-Length"],
           "host": "rest-json-test.amazonaws.com"
         }
       }
