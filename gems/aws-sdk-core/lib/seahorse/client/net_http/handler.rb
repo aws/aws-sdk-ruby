@@ -74,7 +74,9 @@ module Seahorse
         # @return [void]
         def transmit(config, req, resp)
           session(config, req) do |http|
+            Thread.current[:net_http_skip_default_content_type] = true
             http.request(build_net_request(req)) do |net_resp|
+              Thread.current[:net_http_skip_default_content_type] = nil
 
               status_code = net_resp.code.to_i
               headers = extract_headers(net_resp)
