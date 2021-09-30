@@ -867,6 +867,47 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Deletes the mobile device access override for the given WorkMail
+    # organization, user, and device.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the access override will be
+    #   deleted.
+    #
+    # @option params [required, String] :user_id
+    #   The WorkMail user for which you want to delete the override. Accepts
+    #   the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [required, String] :device_id
+    #   The mobile device for which you delete the override. `DeviceId` is
+    #   case insensitive.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_mobile_device_access_override({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier", # required
+    #     device_id: "DeviceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessOverride AWS API Documentation
+    #
+    # @overload delete_mobile_device_access_override(params = {})
+    # @param [Hash] params ({})
+    def delete_mobile_device_access_override(params = {}, options = {})
+      req = build_request(:delete_mobile_device_access_override, params)
+      req.send_request(options)
+    end
+
     # Deletes a mobile device access rule for the specified Amazon WorkMail
     # organization.
     #
@@ -1528,6 +1569,63 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Gets the mobile device access override for the given WorkMail
+    # organization, user, and device.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization to which you want to apply the
+    #   override.
+    #
+    # @option params [required, String] :user_id
+    #   Identifies the WorkMail user for the override. Accepts the following
+    #   types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [required, String] :device_id
+    #   The mobile device to which the override applies. `DeviceId` is case
+    #   insensitive.
+    #
+    # @return [Types::GetMobileDeviceAccessOverrideResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#user_id #user_id} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#device_id #device_id} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#effect #effect} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#description #description} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#date_created #date_created} => Time
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#date_modified #date_modified} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mobile_device_access_override({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier", # required
+    #     device_id: "DeviceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.device_id #=> String
+    #   resp.effect #=> String, one of "ALLOW", "DENY"
+    #   resp.description #=> String
+    #   resp.date_created #=> Time
+    #   resp.date_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessOverride AWS API Documentation
+    #
+    # @overload get_mobile_device_access_override(params = {})
+    # @param [Hash] params ({})
+    def get_mobile_device_access_override(params = {}, options = {})
+      req = build_request(:get_mobile_device_access_override, params)
+      req.send_request(options)
+    end
+
     # Lists the access control rules for the specified organization.
     #
     # @option params [required, String] :organization_id
@@ -1819,6 +1917,71 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def list_mailbox_permissions(params = {}, options = {})
       req = build_request(:list_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
+    # Lists all the mobile device access overrides for any given combination
+    # of WorkMail organization, user, or device.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization under which to list mobile device
+    #   access overrides.
+    #
+    # @option params [String] :user_id
+    #   The WorkMail user under which you list the mobile device access
+    #   overrides. Accepts the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [String] :device_id
+    #   The mobile device to which the access override applies.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not require a token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMobileDeviceAccessOverridesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMobileDeviceAccessOverridesResponse#overrides #overrides} => Array&lt;Types::MobileDeviceAccessOverride&gt;
+    #   * {Types::ListMobileDeviceAccessOverridesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mobile_device_access_overrides({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier",
+    #     device_id: "DeviceId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.overrides #=> Array
+    #   resp.overrides[0].user_id #=> String
+    #   resp.overrides[0].device_id #=> String
+    #   resp.overrides[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.overrides[0].description #=> String
+    #   resp.overrides[0].date_created #=> Time
+    #   resp.overrides[0].date_modified #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessOverrides AWS API Documentation
+    #
+    # @overload list_mobile_device_access_overrides(params = {})
+    # @param [Hash] params ({})
+    def list_mobile_device_access_overrides(params = {}, options = {})
+      req = build_request(:list_mobile_device_access_overrides, params)
       req.send_request(options)
     end
 
@@ -2197,6 +2360,55 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def put_mailbox_permissions(params = {}, options = {})
       req = build_request(:put_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a mobile device access override for the given
+    # WorkMail organization, user, and device.
+    #
+    # @option params [required, String] :organization_id
+    #   Identifies the Amazon WorkMail organization for which you create the
+    #   override.
+    #
+    # @option params [required, String] :user_id
+    #   The WorkMail user for which you create the override. Accepts the
+    #   following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [required, String] :device_id
+    #   The mobile device for which you create the override. `DeviceId` is
+    #   case insensitive.
+    #
+    # @option params [required, String] :effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #
+    # @option params [String] :description
+    #   A description of the override.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_mobile_device_access_override({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier", # required
+    #     device_id: "DeviceId", # required
+    #     effect: "ALLOW", # required, accepts ALLOW, DENY
+    #     description: "MobileDeviceAccessRuleDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMobileDeviceAccessOverride AWS API Documentation
+    #
+    # @overload put_mobile_device_access_override(params = {})
+    # @param [Hash] params ({})
+    def put_mobile_device_access_override(params = {}, options = {})
+      req = build_request(:put_mobile_device_access_override, params)
       req.send_request(options)
     end
 
@@ -2644,7 +2856,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

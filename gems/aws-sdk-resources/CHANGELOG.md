@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.114.0 (2021-09-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cloudcontrolapi` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-account` gem.
+
 3.113.0 (2021-09-27)
 ------------------
 

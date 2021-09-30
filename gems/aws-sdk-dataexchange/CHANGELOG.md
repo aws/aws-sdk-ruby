@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-09-30)
+------------------
+
+* Feature - This release enables subscribers to set up automatic exports of newly published revisions using the new EventAction API.
+
 1.16.0 (2021-09-01)
 ------------------
 

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.509.0 (2021-09-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CloudControlApi`.
+
+* Feature - Added support for enumerating regions for `Aws::Account`.
+
 1.508.0 (2021-09-29)
 ------------------
 

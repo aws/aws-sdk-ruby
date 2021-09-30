@@ -360,8 +360,13 @@ module Aws::NetworkFirewall
     #           stateful_rule_group_references: [
     #             {
     #               resource_arn: "ResourceArn", # required
+    #               priority: 1,
     #             },
     #           ],
+    #           stateful_default_actions: ["CollectionMember_String"],
+    #           stateful_engine_options: {
+    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #           },
     #         },
     #         description: "Description",
     #         tags: [
@@ -662,6 +667,9 @@ module Aws::NetworkFirewall
     #                 },
     #               ],
     #             },
+    #           },
+    #           stateful_rule_options: {
+    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #           },
     #         },
     #         rules: "RulesString",
@@ -1658,8 +1666,13 @@ module Aws::NetworkFirewall
     #         stateful_rule_group_references: [
     #           {
     #             resource_arn: "ResourceArn", # required
+    #             priority: 1,
     #           },
     #         ],
+    #         stateful_default_actions: ["CollectionMember_String"],
+    #         stateful_engine_options: {
+    #           rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #         },
     #       }
     #
     # @!attribute [rw] stateless_rule_group_references
@@ -1709,9 +1722,21 @@ module Aws::NetworkFirewall
     #   @return [Array<Types::CustomAction>]
     #
     # @!attribute [rw] stateful_rule_group_references
-    #   References to the stateless rule groups that are used in the policy.
+    #   References to the stateful rule groups that are used in the policy.
     #   These define the inspection criteria in stateful rules.
     #   @return [Array<Types::StatefulRuleGroupReference>]
+    #
+    # @!attribute [rw] stateful_default_actions
+    #   The default actions to take on a packet that doesn't match any
+    #   stateful rules.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stateful_engine_options
+    #   Additional options governing how Network Firewall handles stateful
+    #   rules. The stateful rule groups that you use in your policy must
+    #   have stateful rule options settings that are compatible with these
+    #   settings.
+    #   @return [Types::StatefulEngineOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicy AWS API Documentation
     #
@@ -1720,7 +1745,9 @@ module Aws::NetworkFirewall
       :stateless_default_actions,
       :stateless_fragment_default_actions,
       :stateless_custom_actions,
-      :stateful_rule_group_references)
+      :stateful_rule_group_references,
+      :stateful_default_actions,
+      :stateful_engine_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1785,6 +1812,21 @@ module Aws::NetworkFirewall
     #   The key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] consumed_stateless_rule_capacity
+    #   The number of capacity units currently consumed by the policy's
+    #   stateless rules.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] consumed_stateful_rule_capacity
+    #   The number of capacity units currently consumed by the policy's
+    #   stateful rules.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_associations
+    #   The number of firewalls that are associated with this firewall
+    #   policy.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicyResponse AWS API Documentation
     #
     class FirewallPolicyResponse < Struct.new(
@@ -1793,7 +1835,10 @@ module Aws::NetworkFirewall
       :firewall_policy_id,
       :description,
       :firewall_policy_status,
-      :tags)
+      :tags,
+      :consumed_stateless_rule_capacity,
+      :consumed_stateful_rule_capacity,
+      :number_of_associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1846,9 +1891,9 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # The 5-tuple criteria for AWS Network Firewall to use to inspect packet
-    # headers in stateful traffic flow inspection. Traffic flows that match
-    # the criteria are a match for the corresponding StatefulRule.
+    # The basic rule criteria for AWS Network Firewall to use to inspect
+    # packet headers in stateful traffic flow inspection. Traffic flows that
+    # match the criteria are a match for the corresponding StatefulRule.
     #
     # @note When making an API call, you may pass Header
     #   data as a hash:
@@ -1894,7 +1939,7 @@ module Aws::NetworkFirewall
     # @!attribute [rw] source_port
     #   The source port to inspect for. You can specify an individual port,
     #   for example `1994` and you can specify a port range, for example
-    #   `1990-1994`. To match with any port, specify `ANY`.
+    #   `1990:1994`. To match with any port, specify `ANY`.
     #   @return [String]
     #
     # @!attribute [rw] direction
@@ -1932,7 +1977,7 @@ module Aws::NetworkFirewall
     # @!attribute [rw] destination_port
     #   The destination port to inspect for. You can specify an individual
     #   port, for example `1994` and you can specify a port range, for
-    #   example `1990-1994`. To match with any port, specify `ANY`.
+    #   example `1990:1994`. To match with any port, specify `ANY`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/Header AWS API Documentation
@@ -2034,6 +2079,8 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The policy statement failed validation.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2475,7 +2522,7 @@ module Aws::NetworkFirewall
     #   17 (UDP).
     #
     #   You can specify individual ports, for example `1994` and you can
-    #   specify port ranges, for example `1990-1994`.
+    #   specify port ranges, for example `1990:1994`.
     #   @return [Array<Types::PortRange>]
     #
     # @!attribute [rw] destination_ports
@@ -2484,7 +2531,7 @@ module Aws::NetworkFirewall
     #   (TCP) and 17 (UDP).
     #
     #   You can specify individual ports, for example `1994` and you can
-    #   specify port ranges, for example `1990-1994`.
+    #   specify port ranges, for example `1990:1994`.
     #   @return [Array<Types::PortRange>]
     #
     # @!attribute [rw] protocols
@@ -2687,6 +2734,8 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Unable to change the resource because your account doesn't own it.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2907,6 +2956,9 @@ module Aws::NetworkFirewall
     #             ],
     #           },
     #         },
+    #         stateful_rule_options: {
+    #           rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #         },
     #       }
     #
     # @!attribute [rw] rule_variables
@@ -2918,11 +2970,19 @@ module Aws::NetworkFirewall
     #   The stateful rules or stateless rules for the rule group.
     #   @return [Types::RulesSource]
     #
+    # @!attribute [rw] stateful_rule_options
+    #   Additional options governing how Network Firewall handles stateful
+    #   rules. The policies where you use your stateful rule group must have
+    #   stateful rule options settings that are compatible with these
+    #   settings.
+    #   @return [Types::StatefulRuleOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleGroup AWS API Documentation
     #
     class RuleGroup < Struct.new(
       :rule_variables,
-      :rules_source)
+      :rules_source,
+      :stateful_rule_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3002,6 +3062,15 @@ module Aws::NetworkFirewall
     #   The key:value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] consumed_capacity
+    #   The number of capacity units currently consumed by the rule group
+    #   rules.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_associations
+    #   The number of firewall policies that use this rule group.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleGroupResponse AWS API Documentation
     #
     class RuleGroupResponse < Struct.new(
@@ -3012,7 +3081,9 @@ module Aws::NetworkFirewall
       :type,
       :capacity,
       :rule_group_status,
-      :tags)
+      :tags,
+      :consumed_capacity,
+      :number_of_associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3185,9 +3256,15 @@ module Aws::NetworkFirewall
     #   @return [Types::RulesSourceList]
     #
     # @!attribute [rw] stateful_rules
-    #   The 5-tuple stateful inspection criteria. This contains an array of
-    #   individual 5-tuple stateful rules to be used together in a stateful
-    #   rule group.
+    #   An array of individual stateful rules inspection criteria to be used
+    #   together in a stateful rule group. Use this option to specify simple
+    #   Suricata rules with protocol, source and destination, ports,
+    #   direction, and rule options. For information about the Suricata
+    #   `Rules` format, see [Rules Format][1].
+    #
+    #
+    #
+    #   [1]: https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#
     #   @return [Array<Types::StatefulRule>]
     #
     # @!attribute [rw] stateless_rules_and_custom_actions
@@ -3216,7 +3293,7 @@ module Aws::NetworkFirewall
     # `HOME_NET` rule variable to include the CIDR range of the deployment
     # VPC plus the other CIDR ranges. For more information, see
     # RuleVariables in this guide and [Stateful domain list rule groups in
-    # AWS Network Firewall][1] in the *Network Firewall Developer Guide*
+    # AWS Network Firewall][1] in the *Network Firewall Developer Guide*.
     #
     #
     #
@@ -3247,7 +3324,7 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] target_types
     #   The protocols you want to inspect. Specify `TLS_SNI` for `HTTPS`.
-    #   Specity `HTTP_HOST` for `HTTP`. You can specify either or both.
+    #   Specify `HTTP_HOST` for `HTTP`. You can specify either or both.
     #   @return [Array<String>]
     #
     # @!attribute [rw] generated_rules_type
@@ -3265,7 +3342,44 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # A single 5-tuple stateful rule, for use in a stateful rule group.
+    # Configuration settings for the handling of the stateful rule groups in
+    # a firewall policy.
+    #
+    # @note When making an API call, you may pass StatefulEngineOptions
+    #   data as a hash:
+    #
+    #       {
+    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #       }
+    #
+    # @!attribute [rw] rule_order
+    #   Indicates how to manage the order of stateful rule evaluation for
+    #   the policy. By default, Network Firewall leaves the rule evaluation
+    #   order up to the Suricata rule processing engine. If you set this to
+    #   `STRICT_ORDER`, your rules are evaluated in the exact order that you
+    #   provide them in the policy. With strict ordering, the rule groups
+    #   are evaluated by order of priority, starting from the lowest number,
+    #   and the rules in each rule group are processed in the order that
+    #   they're defined.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulEngineOptions AWS API Documentation
+    #
+    class StatefulEngineOptions < Struct.new(
+      :rule_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single Suricata rules specification, for use in a stateful rule
+    # group. Use this option to specify a simple Suricata rule with
+    # protocol, source and destination, ports, direction, and rule options.
+    # For information about the Suricata `Rules` format, see [Rules
+    # Format][1].
+    #
+    #
+    #
+    # [1]: https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#
     #
     # @note When making an API call, you may pass StatefulRule
     #   data as a hash:
@@ -3313,11 +3427,13 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] header
-    #   The stateful 5-tuple inspection criteria for this rule, used to
-    #   inspect traffic flows.
+    #   The stateful inspection criteria for this rule, used to inspect
+    #   traffic flows.
     #   @return [Types::Header]
     #
     # @!attribute [rw] rule_options
+    #   Additional options for the rule. These are the Suricata
+    #   `RuleOptions` settings.
     #   @return [Array<Types::RuleOption>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulRule AWS API Documentation
@@ -3338,16 +3454,61 @@ module Aws::NetworkFirewall
     #
     #       {
     #         resource_arn: "ResourceArn", # required
+    #         priority: 1,
     #       }
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the stateful rule group.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   An integer setting that indicates the order in which to run the
+    #   stateful rule groups in a single FirewallPolicy. This setting only
+    #   applies to firewall policies that specify the `STRICT_ORDER` rule
+    #   order in the stateful engine options settings.
+    #
+    #   Network Firewall evalutes each stateful rule group against a packet
+    #   starting with the group that has the lowest priority setting. You
+    #   must ensure that the priority settings are unique within each
+    #   policy.
+    #
+    #   You can change the priority settings of your rule groups at any
+    #   time. To make it easier to insert rule groups later, number them so
+    #   there's a wide range in between, for example use 100, 200, and so
+    #   on.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulRuleGroupReference AWS API Documentation
     #
     class StatefulRuleGroupReference < Struct.new(
-      :resource_arn)
+      :resource_arn,
+      :priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional options governing how Network Firewall handles the rule
+    # group. You can only use these for stateful rule groups.
+    #
+    # @note When making an API call, you may pass StatefulRuleOptions
+    #   data as a hash:
+    #
+    #       {
+    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #       }
+    #
+    # @!attribute [rw] rule_order
+    #   Indicates how to manage the order of the rule evaluation for the
+    #   rule group. By default, Network Firewall leaves the rule evaluation
+    #   order up to the Suricata rule processing engine. If you set this to
+    #   `STRICT_ORDER`, your rules are evaluated in the exact order that
+    #   they're listed in your Suricata rules string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulRuleOptions AWS API Documentation
+    #
+    class StatefulRuleOptions < Struct.new(
+      :rule_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3402,11 +3563,11 @@ module Aws::NetworkFirewall
     #   @return [Types::RuleDefinition]
     #
     # @!attribute [rw] priority
-    #   A setting that indicates the order in which to run this rule
-    #   relative to all of the rules that are defined for a stateless rule
-    #   group. Network Firewall evaluates the rules in a rule group starting
-    #   with the lowest priority setting. You must ensure that the priority
-    #   settings are unique for the rule group.
+    #   Indicates the order in which to run this rule relative to all of the
+    #   rules that are defined for a stateless rule group. Network Firewall
+    #   evaluates the rules in a rule group starting with the lowest
+    #   priority setting. You must ensure that the priority settings are
+    #   unique for the rule group.
     #
     #   Each stateless rule group uses exactly one
     #   `StatelessRulesAndCustomActions` object, and each
@@ -4127,8 +4288,13 @@ module Aws::NetworkFirewall
     #           stateful_rule_group_references: [
     #             {
     #               resource_arn: "ResourceArn", # required
+    #               priority: 1,
     #             },
     #           ],
+    #           stateful_default_actions: ["CollectionMember_String"],
+    #           stateful_engine_options: {
+    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #           },
     #         },
     #         description: "Description",
     #         dry_run: false,
@@ -4399,6 +4565,9 @@ module Aws::NetworkFirewall
     #                 },
     #               ],
     #             },
+    #           },
+    #           stateful_rule_options: {
+    #             rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #           },
     #         },
     #         rules: "RulesString",

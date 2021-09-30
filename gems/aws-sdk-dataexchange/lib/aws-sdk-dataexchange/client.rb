@@ -418,6 +418,66 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # This operation creates an event action.
+    #
+    # @option params [required, Types::Action] :action
+    #   What occurs after a certain event.
+    #
+    # @option params [required, Types::Event] :event
+    #   What occurs to start an action.
+    #
+    # @return [Types::CreateEventActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEventActionResponse#action #action} => Types::Action
+    #   * {Types::CreateEventActionResponse#arn #arn} => String
+    #   * {Types::CreateEventActionResponse#created_at #created_at} => Time
+    #   * {Types::CreateEventActionResponse#event #event} => Types::Event
+    #   * {Types::CreateEventActionResponse#id #id} => String
+    #   * {Types::CreateEventActionResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_event_action({
+    #     action: { # required
+    #       export_revision_to_s3: {
+    #         encryption: {
+    #           kms_key_arn: "__string",
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
+    #         revision_destination: { # required
+    #           bucket: "__string", # required
+    #           key_pattern: "__string",
+    #         },
+    #       },
+    #     },
+    #     event: { # required
+    #       revision_published: {
+    #         data_set_id: "Id", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action.export_revision_to_s3.encryption.kms_key_arn #=> String
+    #   resp.action.export_revision_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.action.export_revision_to_s3.revision_destination.bucket #=> String
+    #   resp.action.export_revision_to_s3.revision_destination.key_pattern #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.event.revision_published.data_set_id #=> String
+    #   resp.id #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateEventAction AWS API Documentation
+    #
+    # @overload create_event_action(params = {})
+    # @param [Hash] params ({})
+    def create_event_action(params = {}, options = {})
+      req = build_request(:create_event_action, params)
+      req.send_request(options)
+    end
+
     # This operation creates a job.
     #
     # @option params [required, Types::RequestDetails] :details
@@ -515,6 +575,7 @@ module Aws::DataExchange
     #   resp.details.export_revisions_to_s3.data_set_id #=> String
     #   resp.details.export_revisions_to_s3.encryption.kms_key_arn #=> String
     #   resp.details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations #=> Array
     #   resp.details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
@@ -540,7 +601,7 @@ module Aws::DataExchange
     #   resp.errors[0].limit_value #=> Float
     #   resp.errors[0].message #=> String
     #   resp.errors[0].resource_id #=> String
-    #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET"
+    #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
     #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
@@ -658,6 +719,27 @@ module Aws::DataExchange
     # @param [Hash] params ({})
     def delete_data_set(params = {}, options = {})
       req = build_request(:delete_data_set, params)
+      req.send_request(options)
+    end
+
+    # This operation deletes the event action.
+    #
+    # @option params [required, String] :event_action_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_action({
+    #     event_action_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteEventAction AWS API Documentation
+    #
+    # @overload delete_event_action(params = {})
+    # @param [Hash] params ({})
+    def delete_event_action(params = {}, options = {})
+      req = build_request(:delete_event_action, params)
       req.send_request(options)
     end
 
@@ -784,6 +866,46 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # This operation retrieves information about an event action.
+    #
+    # @option params [required, String] :event_action_id
+    #
+    # @return [Types::GetEventActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventActionResponse#action #action} => Types::Action
+    #   * {Types::GetEventActionResponse#arn #arn} => String
+    #   * {Types::GetEventActionResponse#created_at #created_at} => Time
+    #   * {Types::GetEventActionResponse#event #event} => Types::Event
+    #   * {Types::GetEventActionResponse#id #id} => String
+    #   * {Types::GetEventActionResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_action({
+    #     event_action_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action.export_revision_to_s3.encryption.kms_key_arn #=> String
+    #   resp.action.export_revision_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.action.export_revision_to_s3.revision_destination.bucket #=> String
+    #   resp.action.export_revision_to_s3.revision_destination.key_pattern #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.event.revision_published.data_set_id #=> String
+    #   resp.id #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetEventAction AWS API Documentation
+    #
+    # @overload get_event_action(params = {})
+    # @param [Hash] params ({})
+    def get_event_action(params = {}, options = {})
+      req = build_request(:get_event_action, params)
+      req.send_request(options)
+    end
+
     # This operation returns information about a job.
     #
     # @option params [required, String] :job_id
@@ -825,6 +947,7 @@ module Aws::DataExchange
     #   resp.details.export_revisions_to_s3.data_set_id #=> String
     #   resp.details.export_revisions_to_s3.encryption.kms_key_arn #=> String
     #   resp.details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations #=> Array
     #   resp.details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
@@ -850,7 +973,7 @@ module Aws::DataExchange
     #   resp.errors[0].limit_value #=> Float
     #   resp.errors[0].message #=> String
     #   resp.errors[0].resource_id #=> String
-    #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET"
+    #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
     #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
@@ -1008,6 +1131,52 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # This operation lists your event actions.
+    #
+    # @option params [String] :event_source_id
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListEventActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventActionsResponse#event_actions #event_actions} => Array&lt;Types::EventActionEntry&gt;
+    #   * {Types::ListEventActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_actions({
+    #     event_source_id: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_actions #=> Array
+    #   resp.event_actions[0].action.export_revision_to_s3.encryption.kms_key_arn #=> String
+    #   resp.event_actions[0].action.export_revision_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.event_actions[0].action.export_revision_to_s3.revision_destination.bucket #=> String
+    #   resp.event_actions[0].action.export_revision_to_s3.revision_destination.key_pattern #=> String
+    #   resp.event_actions[0].arn #=> String
+    #   resp.event_actions[0].created_at #=> Time
+    #   resp.event_actions[0].event.revision_published.data_set_id #=> String
+    #   resp.event_actions[0].id #=> String
+    #   resp.event_actions[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListEventActions AWS API Documentation
+    #
+    # @overload list_event_actions(params = {})
+    # @param [Hash] params ({})
+    def list_event_actions(params = {}, options = {})
+      req = build_request(:list_event_actions, params)
+      req.send_request(options)
+    end
+
     # This operation lists your jobs sorted by CreatedAt in descending
     # order.
     #
@@ -1056,6 +1225,7 @@ module Aws::DataExchange
     #   resp.jobs[0].details.export_revisions_to_s3.data_set_id #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.encryption.kms_key_arn #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.jobs[0].details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations #=> Array
     #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
@@ -1081,7 +1251,7 @@ module Aws::DataExchange
     #   resp.jobs[0].errors[0].limit_value #=> Float
     #   resp.jobs[0].errors[0].message #=> String
     #   resp.jobs[0].errors[0].resource_id #=> String
-    #   resp.jobs[0].errors[0].resource_type #=> String, one of "REVISION", "ASSET"
+    #   resp.jobs[0].errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
     #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
@@ -1357,6 +1527,61 @@ module Aws::DataExchange
       req.send_request(options)
     end
 
+    # This operation updates the event action.
+    #
+    # @option params [Types::Action] :action
+    #   What occurs after a certain event.
+    #
+    # @option params [required, String] :event_action_id
+    #
+    # @return [Types::UpdateEventActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEventActionResponse#action #action} => Types::Action
+    #   * {Types::UpdateEventActionResponse#arn #arn} => String
+    #   * {Types::UpdateEventActionResponse#created_at #created_at} => Time
+    #   * {Types::UpdateEventActionResponse#event #event} => Types::Event
+    #   * {Types::UpdateEventActionResponse#id #id} => String
+    #   * {Types::UpdateEventActionResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_action({
+    #     action: {
+    #       export_revision_to_s3: {
+    #         encryption: {
+    #           kms_key_arn: "__string",
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
+    #         revision_destination: { # required
+    #           bucket: "__string", # required
+    #           key_pattern: "__string",
+    #         },
+    #       },
+    #     },
+    #     event_action_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action.export_revision_to_s3.encryption.kms_key_arn #=> String
+    #   resp.action.export_revision_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.action.export_revision_to_s3.revision_destination.bucket #=> String
+    #   resp.action.export_revision_to_s3.revision_destination.key_pattern #=> String
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.event.revision_published.data_set_id #=> String
+    #   resp.id #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateEventAction AWS API Documentation
+    #
+    # @overload update_event_action(params = {})
+    # @param [Hash] params ({})
+    def update_event_action(params = {}, options = {})
+      req = build_request(:update_event_action, params)
+      req.send_request(options)
+    end
+
     # This operation updates a revision.
     #
     # @option params [String] :comment
@@ -1424,7 +1649,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
