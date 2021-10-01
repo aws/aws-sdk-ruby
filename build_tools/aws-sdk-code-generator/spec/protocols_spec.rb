@@ -144,7 +144,7 @@ def match_req_headers(group, test_case, http_req, it)
 end
 
 def exclude_req_headers(group, test_case, http_req, it)
-  if excluded_headers = test_case['serialized']['excludeHeaders']
+  if excluded_headers = test_case['serialized']['forbidHeaders']
     headers = normalize_headers(http_req.headers)
     excluded_headers = excluded_headers.map(&:downcase) # normalize array
     it.expect(headers.keys).to_not include(*excluded_headers)

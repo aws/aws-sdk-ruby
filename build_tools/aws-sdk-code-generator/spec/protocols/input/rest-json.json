@@ -1737,7 +1737,7 @@
           "headers": {
             "Content-Length": 0
           },
-          "excludeHeaders": ["Content-Type"],
+          "forbidHeaders": ["Content-Type"],
           "host": "rest-json-test.amazonaws.com"
         }
       },
@@ -1756,7 +1756,7 @@
         "serialized": {
           "uri": "/no-payload",
           "body": "",
-          "excludeHeaders": ["Content-Type", "Content-Length"],
+          "forbidHeaders": ["Content-Type", "Content-Length"],
           "host": "rest-json-test.amazonaws.com"
         }
       },
@@ -1777,7 +1777,7 @@
         "serialized": {
           "uri": "/no-payload",
           "body": "",
-          "excludeHeaders": ["Content-Type", "Content-Length"],
+          "forbidHeaders": ["Content-Type", "Content-Length"],
           "host": "rest-json-test.amazonaws.com"
         }
       }
