@@ -337,8 +337,8 @@ module Aws::AppRunner
 
     # @!group API Operations
 
-    # Associate your own domain name with the AWS App Runner subdomain URL
-    # of your App Runner service.
+    # Associate your own domain name with the App Runner subdomain URL of
+    # your App Runner service.
     #
     # After you call `AssociateCustomDomain` and receive a successful
     # response, use the information in the CustomDomain record that's
@@ -405,7 +405,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Create an AWS App Runner automatic scaling configuration resource. App
+    # Create an App Runner automatic scaling configuration resource. App
     # Runner requires this resource when you create App Runner services that
     # require non-default auto scaling settings. You can share an auto
     # scaling configuration across multiple services.
@@ -417,17 +417,18 @@ module Aws::AppRunner
     # configuration or a specific revision.
     #
     # Configure a higher `MinSize` to increase the spread of your App Runner
-    # service over more Availability Zones in the AWS Region. The tradeoff
-    # is a higher minimal cost.
+    # service over more Availability Zones in the Amazon Web Services
+    # Region. The tradeoff is a higher minimal cost.
     #
     # Configure a lower `MaxSize` to control your cost. The tradeoff is
     # lower responsiveness during peak demand.
     #
     # @option params [required, String] :auto_scaling_configuration_name
     #   A name for the auto scaling configuration. When you use it for the
-    #   first time in an AWS Region, App Runner creates revision number `1` of
-    #   this name. When you use the same name in subsequent calls, App Runner
-    #   creates incremental revisions of the configuration.
+    #   first time in an Amazon Web Services Region, App Runner creates
+    #   revision number `1` of this name. When you use the same name in
+    #   subsequent calls, App Runner creates incremental revisions of the
+    #   configuration.
     #
     # @option params [Integer] :max_concurrency
     #   The maximum number of concurrent requests that you want an instance to
@@ -502,7 +503,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Create an AWS App Runner connection resource. App Runner requires a
+    # Create an App Runner connection resource. App Runner requires a
     # connection resource when you create App Runner services that access
     # private repositories from certain third-party providers. You can share
     # a connection across multiple services.
@@ -513,7 +514,8 @@ module Aws::AppRunner
     #
     # @option params [required, String] :connection_name
     #   A name for the new connection. It must be unique across all App Runner
-    #   connections for the AWS account in the AWS Region.
+    #   connections for the Amazon Web Services account in the Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :provider_type
     #   The source repository provider.
@@ -556,8 +558,8 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Create an AWS App Runner service. After the service is created, the
-    # action also automatically starts a deployment.
+    # Create an App Runner service. After the service is created, the action
+    # also automatically starts a deployment.
     #
     # This is an asynchronous operation. On a successful call, you can use
     # the returned `OperationId` and the [ListOperations][1] call to track
@@ -569,7 +571,8 @@ module Aws::AppRunner
     #
     # @option params [required, String] :service_name
     #   A name for the new service. It must be unique across all the running
-    #   App Runner services in your AWS account in the AWS Region.
+    #   App Runner services in your Amazon Web Services account in the Amazon
+    #   Web Services Region.
     #
     # @option params [required, Types::SourceConfiguration] :source_configuration
     #   The source to deploy to the App Runner service. It can be a code or an
@@ -586,11 +589,11 @@ module Aws::AppRunner
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   An optional custom encryption key that App Runner uses to encrypt the
     #   copy of your source repository that it maintains and your service
-    #   logs. By default, App Runner uses an AWS managed CMK.
+    #   logs. By default, App Runner uses an Amazon Web Services managed CMK.
     #
     # @option params [Types::HealthCheckConfiguration] :health_check_configuration
-    #   The settings for the health check that AWS App Runner performs to
-    #   monitor the health of your service.
+    #   The settings for the health check that App Runner performs to monitor
+    #   the health of your service.
     #
     # @option params [String] :auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of an App Runner automatic scaling
@@ -660,7 +663,7 @@ module Aws::AppRunner
     #     },
     #     health_check_configuration: {
     #       protocol: "TCP", # accepts TCP, HTTP
-    #       path: "String",
+    #       path: "HealthCheckPath",
     #       interval: 1,
     #       timeout: 1,
     #       healthy_threshold: 1,
@@ -722,9 +725,9 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Delete an AWS App Runner automatic scaling configuration resource. You
-    # can delete a specific revision or the latest active revision. You
-    # can't delete a configuration that's used by one or more App Runner
+    # Delete an App Runner automatic scaling configuration resource. You can
+    # delete a specific revision or the latest active revision. You can't
+    # delete a configuration that's used by one or more App Runner
     # services.
     #
     # @option params [required, String] :auto_scaling_configuration_arn
@@ -767,9 +770,9 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Delete an AWS App Runner connection. You must first ensure that there
-    # are no running App Runner services that use this connection. If there
-    # are any, the `DeleteConnection` action fails.
+    # Delete an App Runner connection. You must first ensure that there are
+    # no running App Runner services that use this connection. If there are
+    # any, the `DeleteConnection` action fails.
     #
     # @option params [required, String] :connection_arn
     #   The Amazon Resource Name (ARN) of the App Runner connection that you
@@ -802,7 +805,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Delete an AWS App Runner service.
+    # Delete an App Runner service.
     #
     # This is an asynchronous operation. On a successful call, you can use
     # the returned `OperationId` and the ListOperations call to track the
@@ -876,7 +879,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Return a full description of an AWS App Runner automatic scaling
+    # Return a full description of an App Runner automatic scaling
     # configuration resource.
     #
     # @option params [required, String] :auto_scaling_configuration_arn
@@ -920,7 +923,7 @@ module Aws::AppRunner
     end
 
     # Return a description of custom domain names that are associated with
-    # an AWS App Runner service.
+    # an App Runner service.
     #
     # @option params [required, String] :service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you want
@@ -983,7 +986,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Return a full description of an AWS App Runner service.
+    # Return a full description of an App Runner service.
     #
     # @option params [required, String] :service_arn
     #   The Amazon Resource Name (ARN) of the App Runner service that you want
@@ -1051,7 +1054,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Disassociate a custom domain name from an AWS App Runner service.
+    # Disassociate a custom domain name from an App Runner service.
     #
     # Certificates tracking domain validity are associated with a custom
     # domain and are stored in [AWS Certificate Manager (ACM)][1]. These
@@ -1106,11 +1109,11 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Returns a list of AWS App Runner automatic scaling configurations in
-    # your AWS account. You can query the revisions for a specific
-    # configuration name or the revisions for all configurations in your
-    # account. You can optionally query only the latest revision of each
-    # requested name.
+    # Returns a list of App Runner automatic scaling configurations in your
+    # Amazon Web Services account. You can query the revisions for a
+    # specific configuration name or the revisions for all configurations in
+    # your account. You can optionally query only the latest revision of
+    # each requested name.
     #
     # @option params [String] :auto_scaling_configuration_name
     #   The name of the App Runner auto scaling configuration that you want to
@@ -1175,8 +1178,8 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Returns a list of AWS App Runner connections that are associated with
-    # your AWS account.
+    # Returns a list of App Runner connections that are associated with your
+    # Amazon Web Services account.
     #
     # @option params [String] :connection_name
     #   If specified, only this connection is returned. If not specified, the
@@ -1231,8 +1234,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Return a list of operations that occurred on an AWS App Runner
-    # service.
+    # Return a list of operations that occurred on an App Runner service.
     #
     # The resulting list of OperationSummary objects is sorted in reverse
     # chronological order. The first object on the list represents the last
@@ -1294,7 +1296,8 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Returns a list of running AWS App Runner services in your AWS account.
+    # Returns a list of running App Runner services in your Amazon Web
+    # Services account.
     #
     # @option params [String] :next_token
     #   A token from a previous result page. Used for a paginated request. The
@@ -1346,7 +1349,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # List tags that are associated with for an AWS App Runner resource. The
+    # List tags that are associated with for an App Runner resource. The
     # response contains a list of tag key-value pairs.
     #
     # @option params [required, String] :resource_arn
@@ -1380,7 +1383,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Pause an active AWS App Runner service. App Runner reduces compute
+    # Pause an active App Runner service. App Runner reduces compute
     # capacity for the service to zero and loses state (for example,
     # ephemeral storage is removed).
     #
@@ -1456,7 +1459,7 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Resume an active AWS App Runner service. App Runner provisions compute
+    # Resume an active App Runner service. App Runner provisions compute
     # capacity for the service.
     #
     # This is an asynchronous operation. On a successful call, you can use
@@ -1532,8 +1535,8 @@ module Aws::AppRunner
     end
 
     # Initiate a manual deployment of the latest commit in a source code
-    # repository or the latest image in a source image repository to an AWS
-    # App Runner service.
+    # repository or the latest image in a source image repository to an App
+    # Runner service.
     #
     # For a source code repository, App Runner retrieves the commit and
     # builds a Docker image. For a source image repository, App Runner
@@ -1638,12 +1641,12 @@ module Aws::AppRunner
       req.send_request(options)
     end
 
-    # Update an AWS App Runner service. You can update the source
-    # configuration and instance configuration of the service. You can also
-    # update the ARN of the auto scaling configuration resource that's
-    # associated with the service. However, you can't change the name or
-    # the encryption configuration of the service. These can be set only
-    # when you create the service.
+    # Update an App Runner service. You can update the source configuration
+    # and instance configuration of the service. You can also update the ARN
+    # of the auto scaling configuration resource that's associated with the
+    # service. However, you can't change the name or the encryption
+    # configuration of the service. These can be set only when you create
+    # the service.
     #
     # To update the tags applied to your service, use the separate actions
     # TagResource and UntagResource.
@@ -1677,8 +1680,8 @@ module Aws::AppRunner
     #   configuration resource that you want to associate with your service.
     #
     # @option params [Types::HealthCheckConfiguration] :health_check_configuration
-    #   The settings for the health check that AWS App Runner performs to
-    #   monitor the health of your service.
+    #   The settings for the health check that App Runner performs to monitor
+    #   the health of your service.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1734,7 +1737,7 @@ module Aws::AppRunner
     #     auto_scaling_configuration_arn: "AppRunnerResourceArn",
     #     health_check_configuration: {
     #       protocol: "TCP", # accepts TCP, HTTP
-    #       path: "String",
+    #       path: "HealthCheckPath",
     #       interval: 1,
     #       timeout: 1,
     #       healthy_threshold: 1,
@@ -1808,7 +1811,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

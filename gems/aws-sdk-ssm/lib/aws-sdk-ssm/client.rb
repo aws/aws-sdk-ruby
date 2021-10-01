@@ -733,8 +733,10 @@ module Aws::SSM
     # @option params [Array<Types::Target>] :targets
     #   The targets for the association. You can target instances by using
     #   tags, Amazon Web Services resource groups, all instances in an Amazon
-    #   Web Services account, or individual instance IDs. For more information
-    #   about choosing targets for an association, see [Using targets and rate
+    #   Web Services account, or individual instance IDs. You can target all
+    #   instances in an Amazon Web Services account by specifying the
+    #   `InstanceIds` key with a value of `*`. For more information about
+    #   choosing targets for an association, see [Using targets and rate
     #   controls with State Manager associations][1] in the *Amazon Web
     #   Services Systems Manager User Guide*.
     #
@@ -9417,6 +9419,22 @@ module Aws::SSM
     #   The user-provided idempotency token. The token must be unique, is case
     #   insensitive, enforces the UUID format, and can't be reused.
     #
+    # @option params [Boolean] :auto_approve
+    #   Indicates whether the change request can be approved automatically
+    #   without the need for manual approvals.
+    #
+    #   If `AutoApprovable` is enabled in a change template, then setting
+    #   `AutoApprove` to `true` in `StartChangeRequestExecution` creates a
+    #   change request that bypasses approver review.
+    #
+    #   <note markdown="1"> Change Calendar restrictions are not bypassed in this scenario. If the
+    #   state of an associated calendar is `CLOSED`, change freeze approvers
+    #   must still grant permission for this change request to run. If they
+    #   don't, the change won't be processed until the calendar state is
+    #   again `OPEN`.
+    #
+    #    </note>
+    #
     # @option params [required, Array<Types::Runbook>] :runbooks
     #   Information about the Automation runbooks that are run during the
     #   runbook workflow.
@@ -9464,6 +9482,7 @@ module Aws::SSM
     #     },
     #     change_request_name: "ChangeRequestName",
     #     client_token: "IdempotencyToken",
+    #     auto_approve: false,
     #     runbooks: [ # required
     #       {
     #         document_name: "DocumentARN", # required
@@ -11354,7 +11373,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

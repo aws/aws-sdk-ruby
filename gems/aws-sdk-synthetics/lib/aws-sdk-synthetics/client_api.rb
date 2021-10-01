@@ -13,6 +13,8 @@ module Aws::Synthetics
 
     include Seahorse::Model
 
+    ArtifactConfigInput = Shapes::StructureShape.new(name: 'ArtifactConfigInput')
+    ArtifactConfigOutput = Shapes::StructureShape.new(name: 'ArtifactConfigOutput')
     BaseScreenshot = Shapes::StructureShape.new(name: 'BaseScreenshot')
     BaseScreenshotConfigIgnoreCoordinate = Shapes::StringShape.new(name: 'BaseScreenshotConfigIgnoreCoordinate')
     BaseScreenshotIgnoreCoordinates = Shapes::ListShape.new(name: 'BaseScreenshotIgnoreCoordinates')
@@ -51,6 +53,7 @@ module Aws::Synthetics
     DescribeCanariesResponse = Shapes::StructureShape.new(name: 'DescribeCanariesResponse')
     DescribeRuntimeVersionsRequest = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsRequest')
     DescribeRuntimeVersionsResponse = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsResponse')
+    EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
     EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
     EnvironmentVariablesMap = Shapes::MapShape.new(name: 'EnvironmentVariablesMap')
@@ -61,6 +64,7 @@ module Aws::Synthetics
     GetCanaryRunsRequest = Shapes::StructureShape.new(name: 'GetCanaryRunsRequest')
     GetCanaryRunsResponse = Shapes::StructureShape.new(name: 'GetCanaryRunsResponse')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxCanaryResults = Shapes::IntegerShape.new(name: 'MaxCanaryResults')
@@ -74,6 +78,7 @@ module Aws::Synthetics
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RuntimeVersion = Shapes::StructureShape.new(name: 'RuntimeVersion')
     RuntimeVersionList = Shapes::ListShape.new(name: 'RuntimeVersionList')
+    S3EncryptionConfig = Shapes::StructureShape.new(name: 'S3EncryptionConfig')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     StartCanaryRequest = Shapes::StructureShape.new(name: 'StartCanaryRequest')
@@ -103,6 +108,12 @@ module Aws::Synthetics
     VpcConfigOutput = Shapes::StructureShape.new(name: 'VpcConfigOutput')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
 
+    ArtifactConfigInput.add_member(:s3_encryption, Shapes::ShapeRef.new(shape: S3EncryptionConfig, location_name: "S3Encryption"))
+    ArtifactConfigInput.struct_class = Types::ArtifactConfigInput
+
+    ArtifactConfigOutput.add_member(:s3_encryption, Shapes::ShapeRef.new(shape: S3EncryptionConfig, location_name: "S3Encryption"))
+    ArtifactConfigOutput.struct_class = Types::ArtifactConfigOutput
+
     BaseScreenshot.add_member(:screenshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScreenshotName"))
     BaseScreenshot.add_member(:ignore_coordinates, Shapes::ShapeRef.new(shape: BaseScreenshotIgnoreCoordinates, location_name: "IgnoreCoordinates"))
     BaseScreenshot.struct_class = Types::BaseScreenshot
@@ -131,6 +142,7 @@ module Aws::Synthetics
     Canary.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigOutput, location_name: "VpcConfig"))
     Canary.add_member(:visual_reference, Shapes::ShapeRef.new(shape: VisualReferenceOutput, location_name: "VisualReference"))
     Canary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Canary.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigOutput, location_name: "ArtifactConfig"))
     Canary.struct_class = Types::Canary
 
     CanaryCodeInput.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: String, location_name: "S3Bucket"))
@@ -210,6 +222,7 @@ module Aws::Synthetics
     CreateCanaryRequest.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RuntimeVersion"))
     CreateCanaryRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
     CreateCanaryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateCanaryRequest.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
     CreateCanaryRequest.struct_class = Types::CreateCanaryRequest
 
     CreateCanaryResponse.add_member(:canary, Shapes::ShapeRef.new(shape: Canary, location_name: "Canary"))
@@ -282,6 +295,10 @@ module Aws::Synthetics
 
     RuntimeVersionList.member = Shapes::ShapeRef.new(shape: RuntimeVersion)
 
+    S3EncryptionConfig.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "EncryptionMode"))
+    S3EncryptionConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    S3EncryptionConfig.struct_class = Types::S3EncryptionConfig
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     StartCanaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, required: true, location: "uri", location_name: "name"))
@@ -323,6 +340,8 @@ module Aws::Synthetics
     UpdateCanaryRequest.add_member(:failure_retention_period_in_days, Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
     UpdateCanaryRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
     UpdateCanaryRequest.add_member(:visual_reference, Shapes::ShapeRef.new(shape: VisualReferenceInput, location_name: "VisualReference"))
+    UpdateCanaryRequest.add_member(:artifact_s3_location, Shapes::ShapeRef.new(shape: String, location_name: "ArtifactS3Location"))
+    UpdateCanaryRequest.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
     UpdateCanaryRequest.struct_class = Types::UpdateCanaryRequest
 
     UpdateCanaryResponse.struct_class = Types::UpdateCanaryResponse

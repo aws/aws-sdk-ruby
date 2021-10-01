@@ -280,7 +280,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The instances targeted by the request to create an association.
+    #   The instances targeted by the request to create an association. You
+    #   can target all instances in an Amazon Web Services account by
+    #   specifying the `InstanceIds` key with a value of `*`.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] last_execution_date
@@ -3166,10 +3168,12 @@ module Aws::SSM
     # @!attribute [rw] targets
     #   The targets for the association. You can target instances by using
     #   tags, Amazon Web Services resource groups, all instances in an
-    #   Amazon Web Services account, or individual instance IDs. For more
-    #   information about choosing targets for an association, see [Using
-    #   targets and rate controls with State Manager associations][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   Amazon Web Services account, or individual instance IDs. You can
+    #   target all instances in an Amazon Web Services account by specifying
+    #   the `InstanceIds` key with a value of `*`. For more information
+    #   about choosing targets for an association, see [Using targets and
+    #   rate controls with State Manager associations][1] in the *Amazon Web
+    #   Services Systems Manager User Guide*.
     #
     #
     #
@@ -17869,9 +17873,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] output_s3_region
-    #   (Deprecated) You can no longer specify this parameter. The system
-    #   ignores it. Instead, Amazon Web Services Systems Manager
-    #   automatically determines the Region of the S3 bucket.
+    #   The Amazon Web Services Region of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -18711,6 +18713,7 @@ module Aws::SSM
     #         },
     #         change_request_name: "ChangeRequestName",
     #         client_token: "IdempotencyToken",
+    #         auto_approve: false,
     #         runbooks: [ # required
     #           {
     #             document_name: "DocumentARN", # required
@@ -18784,6 +18787,23 @@ module Aws::SSM
     #   case insensitive, enforces the UUID format, and can't be reused.
     #   @return [String]
     #
+    # @!attribute [rw] auto_approve
+    #   Indicates whether the change request can be approved automatically
+    #   without the need for manual approvals.
+    #
+    #   If `AutoApprovable` is enabled in a change template, then setting
+    #   `AutoApprove` to `true` in `StartChangeRequestExecution` creates a
+    #   change request that bypasses approver review.
+    #
+    #   <note markdown="1"> Change Calendar restrictions are not bypassed in this scenario. If
+    #   the state of an associated calendar is `CLOSED`, change freeze
+    #   approvers must still grant permission for this change request to
+    #   run. If they don't, the change won't be processed until the
+    #   calendar state is again `OPEN`.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] runbooks
     #   Information about the Automation runbooks that are run during the
     #   runbook workflow.
@@ -18829,6 +18849,7 @@ module Aws::SSM
       :parameters,
       :change_request_name,
       :client_token,
+      :auto_approve,
       :runbooks,
       :tags,
       :scheduled_end_time,

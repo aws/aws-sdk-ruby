@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-10-01)
+------------------
+
+* Feature - This release contains several minor bug fixes.
+
 1.3.0 (2021-09-01)
 ------------------
 
