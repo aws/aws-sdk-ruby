@@ -30,6 +30,7 @@ module Aws::CodeBuild
     BatchGetReportGroupsOutput = Shapes::StructureShape.new(name: 'BatchGetReportGroupsOutput')
     BatchGetReportsInput = Shapes::StructureShape.new(name: 'BatchGetReportsInput')
     BatchGetReportsOutput = Shapes::StructureShape.new(name: 'BatchGetReportsOutput')
+    BatchReportModeType = Shapes::StringShape.new(name: 'BatchReportModeType')
     BatchRestrictions = Shapes::StructureShape.new(name: 'BatchRestrictions')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketOwnerAccess = Shapes::StringShape.new(name: 'BucketOwnerAccess')
@@ -849,6 +850,7 @@ module Aws::CodeBuild
     ProjectBuildBatchConfig.add_member(:combine_artifacts, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "combineArtifacts"))
     ProjectBuildBatchConfig.add_member(:restrictions, Shapes::ShapeRef.new(shape: BatchRestrictions, location_name: "restrictions"))
     ProjectBuildBatchConfig.add_member(:timeout_in_mins, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "timeoutInMins"))
+    ProjectBuildBatchConfig.add_member(:batch_report_mode, Shapes::ShapeRef.new(shape: BatchReportModeType, location_name: "batchReportMode"))
     ProjectBuildBatchConfig.struct_class = Types::ProjectBuildBatchConfig
 
     ProjectCache.add_member(:type, Shapes::ShapeRef.new(shape: CacheType, required: true, location_name: "type"))

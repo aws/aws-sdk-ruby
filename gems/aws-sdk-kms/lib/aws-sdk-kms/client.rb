@@ -488,6 +488,20 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To connect a custom key store to its CloudHSM cluster
+    #
+    #   # This example connects an AWS KMS custom key store to its AWS CloudHSM cluster. This operation does not return any data.
+    #   # To verify that the custom key store is connected, use the <code>DescribeCustomKeyStores</code> operation.
+    #
+    #   resp = client.connect_custom_key_store({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the AWS KMS custom key store.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.connect_custom_key_store({
@@ -723,6 +737,23 @@ module Aws::KMS
     # @return [Types::CreateCustomKeyStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomKeyStoreResponse#custom_key_store_id #custom_key_store_id} => String
+    #
+    #
+    # @example Example: To create an AWS CloudHSM custom key store
+    #
+    #   # This example creates a custom key store that is associated with an AWS CloudHSM cluster.
+    #
+    #   resp = client.create_custom_key_store({
+    #     cloud_hsm_cluster_id: "cluster-1a23b4cdefg", # The ID of the CloudHSM cluster.
+    #     custom_key_store_name: "ExampleKeyStore", # A friendly name for the custom key store.
+    #     key_store_password: "kmsPswd", # The password for the kmsuser CU account in the specified cluster.
+    #     trust_anchor_certificate: "<certificate-goes-here>", # The content of the customerCA.crt file that you created when you initialized the cluster.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the new custom key store.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1410,15 +1441,10 @@ module Aws::KMS
     #
     # @example Example: To create a KMS key
     #
-    #   # The following example creates a KMS key.
+    #   # The following example creates a symmetric KMS key for encryption and decryption. No parameters are required for this
+    #   # operation.
     #
     #   resp = client.create_key({
-    #     tags: [
-    #       {
-    #         tag_key: "CreatedBy", 
-    #         tag_value: "ExampleUser", 
-    #       }, 
-    #     ], # One or more tags. Each tag consists of a tag key and a tag value.
     #   })
     #
     #   resp.to_h outputs the following:
@@ -1438,8 +1464,181 @@ module Aws::KMS
     #       key_spec: "SYMMETRIC_DEFAULT", 
     #       key_state: "Enabled", 
     #       key_usage: "ENCRYPT_DECRYPT", 
+    #       multi_region: false, 
     #       origin: "AWS_KMS", 
-    #     }, # An object that contains information about the KMS key created by this operation.
+    #     }, # Detailed information about the KMS key that this operation creates.
+    #   }
+    #
+    # @example Example: To create an asymmetric RSA KMS key for encryption and decryption
+    #
+    #   # This example creates a KMS key that contains an asymmetric RSA key pair for encryption and decryption. The key spec and
+    #   # key usage can't be changed after the key is created.
+    #
+    #   resp = client.create_key({
+    #     key_spec: "RSA_4096", # Describes the type of key material in the KMS key.
+    #     key_usage: "ENCRYPT_DECRYPT", # The cryptographic operations for which you can use the KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       creation_date: Time.parse("2021-04-05T14:04:55-07:00"), 
+    #       customer_master_key_spec: "RSA_4096", 
+    #       description: "", 
+    #       enabled: true, 
+    #       encryption_algorithms: [
+    #         "RSAES_OAEP_SHA_1", 
+    #         "RSAES_OAEP_SHA_256", 
+    #       ], 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_spec: "RSA_4096", 
+    #       key_state: "Enabled", 
+    #       key_usage: "ENCRYPT_DECRYPT", 
+    #       multi_region: false, 
+    #       origin: "AWS_KMS", 
+    #     }, # Detailed information about the KMS key that this operation creates.
+    #   }
+    #
+    # @example Example: To create an asymmetric elliptic curve KMS key for signing and verification
+    #
+    #   # This example creates a KMS key that contains an asymmetric elliptic curve (ECC) key pair for signing and verification.
+    #   # The key usage is required even though "SIGN_VERIFY" is the only valid value for ECC KMS keys. The key spec and key usage
+    #   # can't be changed after the key is created.
+    #
+    #   resp = client.create_key({
+    #     key_spec: "ECC_NIST_P521", # Describes the type of key material in the KMS key.
+    #     key_usage: "SIGN_VERIFY", # The cryptographic operations for which you can use the KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       creation_date: Time.parse("2019-12-02T07:48:55-07:00"), 
+    #       customer_master_key_spec: "ECC_NIST_P521", 
+    #       description: "", 
+    #       enabled: true, 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_spec: "ECC_NIST_P521", 
+    #       key_state: "Enabled", 
+    #       key_usage: "SIGN_VERIFY", 
+    #       multi_region: false, 
+    #       origin: "AWS_KMS", 
+    #       signing_algorithms: [
+    #         "ECDSA_SHA_512", 
+    #       ], 
+    #     }, # Detailed information about the KMS key that this operation creates.
+    #   }
+    #
+    # @example Example: To create a multi-Region primary KMS key
+    #
+    #   # This example creates a multi-Region primary symmetric encryption key. Because the default values for all parameters
+    #   # create a symmetric encryption key, only the MultiRegion parameter is required for this KMS key.
+    #
+    #   resp = client.create_key({
+    #     multi_region: true, # Indicates whether the KMS key is a multi-Region (True) or regional (False) key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef12345678990ab", 
+    #       creation_date: Time.parse("2021-09-02T016:15:21-09:00"), 
+    #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
+    #       description: "", 
+    #       enabled: true, 
+    #       encryption_algorithms: [
+    #         "SYMMETRIC_DEFAULT", 
+    #       ], 
+    #       key_id: "mrk-1234abcd12ab34cd56ef12345678990ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_spec: "SYMMETRIC_DEFAULT", 
+    #       key_state: "Enabled", 
+    #       key_usage: "ENCRYPT_DECRYPT", 
+    #       multi_region: true, 
+    #       multi_region_configuration: {
+    #         multi_region_key_type: "PRIMARY", 
+    #         primary_key: {
+    #           arn: "arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef12345678990ab", 
+    #           region: "us-west-2", 
+    #         }, 
+    #         replica_keys: [
+    #         ], 
+    #       }, 
+    #       origin: "AWS_KMS", 
+    #     }, # Detailed information about the KMS key that this operation creates.
+    #   }
+    #
+    # @example Example: To create a KMS key for imported key material
+    #
+    #   # This example creates a KMS key with no key material. When the operation is complete, you can import your own key
+    #   # material into the KMS key. To create this KMS key, set the Origin parameter to EXTERNAL. 
+    #
+    #   resp = client.create_key({
+    #     origin: "EXTERNAL", # The source of the key material for the KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       creation_date: Time.parse("2019-12-02T07:48:55-07:00"), 
+    #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
+    #       description: "", 
+    #       enabled: false, 
+    #       encryption_algorithms: [
+    #         "SYMMETRIC_DEFAULT", 
+    #       ], 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_spec: "SYMMETRIC_DEFAULT", 
+    #       key_state: "PendingImport", 
+    #       key_usage: "ENCRYPT_DECRYPT", 
+    #       multi_region: false, 
+    #       origin: "EXTERNAL", 
+    #     }, # Detailed information about the KMS key that this operation creates.
+    #   }
+    #
+    # @example Example: To create a KMS key in a custom key store
+    #
+    #   # This example creates a KMS key in the specified custom key store. The operation creates the KMS key and its metadata in
+    #   # AWS KMS and the key material in the AWS CloudHSM cluster associated with the custom key store. This example requires the
+    #   # Origin and CustomKeyStoreId parameters.
+    #
+    #   resp = client.create_key({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # Identifies the custom key store that hosts the KMS key.
+    #     origin: "AWS_CLOUDHSM", # Indicates the source of the key material for the KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       cloud_hsm_cluster_id: "cluster-1a23b4cdefg", 
+    #       creation_date: Time.parse("2019-12-02T07:48:55-07:00"), 
+    #       custom_key_store_id: "cks-1234567890abcdef0", 
+    #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
+    #       description: "", 
+    #       enabled: true, 
+    #       encryption_algorithms: [
+    #         "SYMMETRIC_DEFAULT", 
+    #       ], 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_spec: "SYMMETRIC_DEFAULT", 
+    #       key_state: "Enabled", 
+    #       key_usage: "ENCRYPT_DECRYPT", 
+    #       multi_region: false, 
+    #       origin: "AWS_CLOUDHSM", 
+    #     }, # Detailed information about the KMS key that this operation creates.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1850,6 +2049,21 @@ module Aws::KMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a custom key store from AWS KMS
+    #
+    #   # This example deletes a custom key store from AWS KMS. This operation does not delete the AWS CloudHSM cluster that was
+    #   # associated with the CloudHSM cluster. This operation doesn't return any data. To verify that the operation was
+    #   # successful, use the DescribeCustomKeyStores operation.  
+    #
+    #   resp = client.delete_custom_key_store({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store to be deleted.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_custom_key_store({
@@ -2028,6 +2242,44 @@ module Aws::KMS
     #   * {Types::DescribeCustomKeyStoresResponse#custom_key_stores #custom_key_stores} => Array&lt;Types::CustomKeyStoresListEntry&gt;
     #   * {Types::DescribeCustomKeyStoresResponse#next_marker #next_marker} => String
     #   * {Types::DescribeCustomKeyStoresResponse#truncated #truncated} => Boolean
+    #
+    #
+    # @example Example: To get detailed information about custom key stores in the account and Region
+    #
+    #   # This example gets detailed information about all AWS KMS custom key stores in an AWS account and Region. To get all key
+    #   # stores, do not enter a custom key store name or ID.
+    #
+    #   resp = client.describe_custom_key_stores({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_key_stores: [
+    #     ], # Details about each custom key store in the account and Region.
+    #   }
+    #
+    # @example Example: To get detailed information about a custom key store associated with a CloudHSM cluster.
+    #
+    #   # This example gets detailed information about a particular AWS KMS custom key store that is associate with an AWS
+    #   # CloudHSM cluster. To limit the output to a particular custom key store, provide the custom key store name or ID. 
+    #
+    #   resp = client.describe_custom_key_stores({
+    #     custom_key_store_name: "ExampleKeyStore", # The friendly name of the custom key store.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     custom_key_stores: [
+    #       {
+    #         cloud_hsm_cluster_id: "cluster-1a23b4cdefg", 
+    #         connection_state: "CONNECTED", 
+    #         creation_date: Time.parse("1.499288695918E9"), 
+    #         custom_key_store_id: "cks-1234567890abcdef0", 
+    #         custom_key_store_name: "ExampleKeyStore", 
+    #         trust_anchor_certificate: "<certificate appears here>", 
+    #       }, 
+    #     ], # Detailed information about the specified custom key store.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2457,6 +2709,20 @@ module Aws::KMS
     #   operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disconnect a custom key store from its CloudHSM cluster
+    #
+    #   # This example disconnects an AWS KMS custom key store from its AWS CloudHSM cluster. This operation doesn't return any
+    #   # data. To verify that the custom key store is disconnected, use the <code>DescribeCustomKeyStores</code> operation.
+    #
+    #   resp = client.disconnect_custom_key_store({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3205,6 +3471,26 @@ module Aws::KMS
     #   * {Types::GenerateDataKeyPairResponse#key_id #key_id} => String
     #   * {Types::GenerateDataKeyPairResponse#key_pair_spec #key_pair_spec} => String
     #
+    #
+    # @example Example: To generate an RSA key pair for encryption and decryption
+    #
+    #   # This example generates an RSA data key pair for encryption and decryption. The operation returns a plaintext public key
+    #   # and private key, and a copy of the private key that is encrypted under a symmetric KMS key that you specify.
+    #
+    #   resp = client.generate_data_key_pair({
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ID of the symmetric KMS key that encrypts the private RSA key in the data key pair.
+    #     key_pair_spec: "RSA_3072", # The requested key spec of the RSA data key pair.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric KMS key that was used to encrypt the private key.
+    #     key_pair_spec: "RSA_3072", # The actual key spec of the RSA data key pair.
+    #     private_key_ciphertext_blob: "<binary data>", # The encrypted private key of the RSA data key pair.
+    #     private_key_plaintext: "<binary data>", # The plaintext private key of the RSA data key pair.
+    #     public_key: "<binary data>", # The public key (plaintext) of the RSA data key pair.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_data_key_pair({
@@ -3370,6 +3656,25 @@ module Aws::KMS
     #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#public_key #public_key} => String
     #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#key_id #key_id} => String
     #   * {Types::GenerateDataKeyPairWithoutPlaintextResponse#key_pair_spec #key_pair_spec} => String
+    #
+    #
+    # @example Example: To generate an asymmetric data key pair without a plaintext key
+    #
+    #   # This example returns an asymmetric elliptic curve (ECC) data key pair. The private key is encrypted under the symmetric
+    #   # KMS key that you specify. This operation doesn't return a plaintext (unencrypted) private key.
+    #
+    #   resp = client.generate_data_key_pair_without_plaintext({
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The symmetric KMS key that encrypts the private key of the ECC data key pair.
+    #     key_pair_spec: "ECC_NIST_P521", # The requested key spec of the ECC asymmetric data key pair.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric KMS key that encrypted the private key in the ECC asymmetric data key pair.
+    #     key_pair_spec: "ECC_NIST_P521", # The actual key spec of the ECC asymmetric data key pair.
+    #     private_key_ciphertext_blob: "<binary data>", # The encrypted private key of the asymmetric ECC data key pair.
+    #     public_key: "<binary data>", # The public key (plaintext).
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4052,6 +4357,29 @@ module Aws::KMS
     #   * {Types::GetPublicKeyResponse#key_usage #key_usage} => String
     #   * {Types::GetPublicKeyResponse#encryption_algorithms #encryption_algorithms} => Array&lt;String&gt;
     #   * {Types::GetPublicKeyResponse#signing_algorithms #signing_algorithms} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To download the public key of an asymmetric KMS key
+    #
+    #   # This example gets the public key of an asymmetric RSA KMS key used for encryption and decryption. The operation returns
+    #   # the key spec, key usage, and encryption or signing algorithms to help you use the public key correctly outside of AWS
+    #   # KMS.
+    #
+    #   resp = client.get_public_key({
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321", # The key ARN of the asymmetric KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     customer_master_key_spec: "RSA_4096", # The key spec of the asymmetric KMS key from which the public key was downloaded.
+    #     encryption_algorithms: [
+    #       "RSAES_OAEP_SHA_1", 
+    #       "RSAES_OAEP_SHA_256", 
+    #     ], # The encryption algorithms supported by the asymmetric KMS key that was downloaded.
+    #     key_id: "arn:aws:kms:us-west-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321", # The key ARN of the asymmetric KMS key from which the public key was downloaded.
+    #     key_usage: "ENCRYPT_DECRYPT", # The key usage of the asymmetric KMS key from which the public key was downloaded.
+    #     public_key: "<binary data>", # The public key (plaintext) of the asymmetric KMS key.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5719,6 +6047,53 @@ module Aws::KMS
     #   * {Types::ReplicateKeyResponse#replica_policy #replica_policy} => String
     #   * {Types::ReplicateKeyResponse#replica_tags #replica_tags} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: To replicate a multi-Region key in a different AWS Region
+    #
+    #   # This example creates a multi-Region replica key in us-west-2 of a multi-Region primary key in us-east-1. 
+    #
+    #   resp = client.replicate_key({
+    #     key_id: "arn:aws:kms:us-east-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab", # The key ID or key ARN of the multi-Region primary key
+    #     replica_region: "us-west-2", # The Region of the new replica.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     replica_key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab", 
+    #       creation_date: Time.parse(1607472987.918), 
+    #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
+    #       description: "", 
+    #       enabled: true, 
+    #       encryption_algorithms: [
+    #         "SYMMETRIC_DEFAULT", 
+    #       ], 
+    #       key_id: "mrk-1234abcd12ab34cd56ef1234567890ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_state: "Enabled", 
+    #       key_usage: "ENCRYPT_DECRYPT", 
+    #       multi_region: true, 
+    #       multi_region_configuration: {
+    #         multi_region_key_type: "REPLICA", 
+    #         primary_key: {
+    #           arn: "arn:aws:kms:us-east-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab", 
+    #           region: "us-east-1", 
+    #         }, 
+    #         replica_keys: [
+    #           {
+    #             arn: "arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab", 
+    #             region: "us-west-2", 
+    #           }, 
+    #         ], 
+    #       }, 
+    #       origin: "AWS_KMS", 
+    #     }, # An object that displays detailed information about the replica key.
+    #     replica_policy: "{\n  \"Version\" : \"2012-10-17\",\n  \"Id\" : \"key-default-1\",...}", # The key policy of the replica key. If you don't specify a key policy, the replica key gets the default key policy for a KMS key.
+    #     replica_tags: [
+    #     ], # The tags on the replica key, if any.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.replicate_key({
@@ -6222,6 +6597,26 @@ module Aws::KMS
     #   * {Types::SignResponse#signature #signature} => String
     #   * {Types::SignResponse#signing_algorithm #signing_algorithm} => String
     #
+    #
+    # @example Example: To digitally sign a message with an asymmetric KMS key.
+    #
+    #   # This operation uses the private key in an asymmetric elliptic curve (ECC) KMS key to generate a digital signature for a
+    #   # given message.
+    #
+    #   resp = client.sign({
+    #     key_id: "alias/ECC_signing_key", # The asymmetric KMS key to be used to generate the digital signature. This example uses an alias of the KMS key.
+    #     message: "<message to be signed>", # Message to be signed. Use Base-64 for the CLI.
+    #     message_type: "RAW", # Indicates whether the message is RAW or a DIGEST.
+    #     signing_algorithm: "ECDSA_SHA_384", # The requested signing algorithm. This must be an algorithm that the KMS key supports.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the asymmetric KMS key that was used to sign the message.
+    #     signature: "<binary data>", # The digital signature of the message.
+    #     signing_algorithm: "ECDSA_SHA_384", # The actual signing algorithm that was used to generate the signature.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.sign({
@@ -6599,15 +6994,16 @@ module Aws::KMS
     # ConnectCustomKeyStore. To find the connection state of a custom key
     # store, use the DescribeCustomKeyStores operation.
     #
-    # Use the parameters of `UpdateCustomKeyStore` to edit your keystore
+    # The `CustomKeyStoreId` parameter is required in all commands. Use the
+    # other parameters of `UpdateCustomKeyStore` to edit your key store
     # settings.
     #
-    # * Use the **NewCustomKeyStoreName** parameter to change the friendly
+    # * Use the `NewCustomKeyStoreName` parameter to change the friendly
     #   name of the custom key store to the value that you specify.
     #
     #
     #
-    # * Use the **KeyStorePassword** parameter tell KMS the current password
+    # * Use the `KeyStorePassword` parameter tell KMS the current password
     #   of the [ `kmsuser` crypto user (CU)][1] in the associated CloudHSM
     #   cluster. You can use this parameter to [fix connection failures][2]
     #   that occur when KMS cannot log into the associated cluster because
@@ -6616,7 +7012,7 @@ module Aws::KMS
     #
     #
     #
-    # * Use the **CloudHsmClusterId** parameter to associate the custom key
+    # * Use the `CloudHsmClusterId` parameter to associate the custom key
     #   store with a different, but related, CloudHSM cluster. You can use
     #   this parameter to repair a custom key store if its CloudHSM cluster
     #   becomes corrupted or is deleted, or when you need to create or
@@ -6689,6 +7085,51 @@ module Aws::KMS
     #   [2]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To edit the password of a custom key store
+    #
+    #   # This example tells KMS the password for the kmsuser crypto user in the AWS CloudHSM cluster that is associated with the
+    #   # AWS KMS custom key store. (It does not change the password in the CloudHSM cluster.) This operation does not return any
+    #   # data.
+    #
+    #   resp = client.update_custom_key_store({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store that you are updating.
+    #     key_store_password: "ExamplePassword", # The password for the kmsuser crypto user in the CloudHSM cluster.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: To edit the friendly name of a custom key store
+    #
+    #   # This example changes the friendly name of the AWS KMS custom key store to the name that you specify. This operation does
+    #   # not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.
+    #
+    #   resp = client.update_custom_key_store({
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store that you are updating.
+    #     new_custom_key_store_name: "DevelopmentKeys", # A new friendly name for the custom key store.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: To associate the custom key store with a different, but related, AWS CloudHSM cluster.
+    #
+    #   # This example changes the cluster that is associated with a custom key store to a related cluster, such as a different
+    #   # backup of the same cluster. This operation does not return any data. To verify that the operation worked, use the
+    #   # DescribeCustomKeyStores operation.
+    #
+    #   resp = client.update_custom_key_store({
+    #     cloud_hsm_cluster_id: "cluster-1a23b4cdefg", # The ID of the AWS CloudHSM cluster that you want to associate with the custom key store. This cluster must be related to the original CloudHSM cluster for this key store.
+    #     custom_key_store_id: "cks-1234567890abcdef0", # The ID of the custom key store that you are updating.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -7021,6 +7462,27 @@ module Aws::KMS
     #   * {Types::VerifyResponse#signature_valid #signature_valid} => Boolean
     #   * {Types::VerifyResponse#signing_algorithm #signing_algorithm} => String
     #
+    #
+    # @example Example: To use an asymmetric KMS key to verify a digital signature
+    #
+    #   # This operation uses the public key in an elliptic curve (ECC) asymmetric key to verify a digital signature within AWS
+    #   # KMS. 
+    #
+    #   resp = client.verify({
+    #     key_id: "alias/ECC_signing_key", # The asymmetric KMS key to be used to verify the digital signature. This example uses an alias to identify the KMS key.
+    #     message: "<message to be verified>", # The message that was signed.
+    #     message_type: "RAW", # Indicates whether the message is RAW or a DIGEST.
+    #     signature: "<binary data>", # The signature to be verified.
+    #     signing_algorithm: "ECDSA_SHA_384", # The signing algorithm to be used to verify the signature.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the asymmetric KMS key that was used to verify the digital signature.
+    #     signature_valid: true, # Indicates whether the signature was verified (true) or failed verification (false).
+    #     signing_algorithm: "ECDSA_SHA_384", # The signing algorithm that was used to verify the signature.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.verify({
@@ -7060,7 +7522,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
