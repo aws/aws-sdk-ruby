@@ -1587,6 +1587,9 @@ module Aws::Glue
     # @option params [required, Types::ConnectionInput] :connection_input
     #   A `ConnectionInput` object defining the connection to create.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags you assign to the connection.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1606,6 +1609,9 @@ module Aws::Glue
     #         security_group_id_list: ["NameString"],
     #         availability_zone: "NameString",
     #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -6018,6 +6024,10 @@ module Aws::Glue
     #   The maximum number of partitions to return in a single response.
     #
     # @option params [Boolean] :exclude_column_schema
+    #   When true, specifies not returning the partition column schema. Useful
+    #   when you are interested only in other partition attributes such as
+    #   partition values or location. This approach avoids the problem of a
+    #   large response by not returning duplicate data.
     #
     # @return [Types::GetPartitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11048,7 +11058,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

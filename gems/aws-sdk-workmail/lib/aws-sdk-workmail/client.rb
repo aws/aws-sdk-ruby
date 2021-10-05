@@ -1142,6 +1142,34 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Lists the settings in a DMARC policy for a specified organization.
+    #
+    # @option params [required, String] :organization_id
+    #   Lists the ID of the given organization.
+    #
+    # @return [Types::DescribeInboundDmarcSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInboundDmarcSettingsResponse#enforced #enforced} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inbound_dmarc_settings({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enforced #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettings AWS API Documentation
+    #
+    # @overload describe_inbound_dmarc_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_inbound_dmarc_settings(params = {}, options = {})
+      req = build_request(:describe_inbound_dmarc_settings, params)
+      req.send_request(options)
+    end
+
     # Describes the current status of a mailbox export job.
     #
     # @option params [required, String] :job_id
@@ -2319,6 +2347,32 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Enables or disables a DMARC policy for a given organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The ID of the organization that you are applying the DMARC policy to.
+    #
+    # @option params [required, Boolean] :enforced
+    #   Enforces or suspends a policy after it's applied.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_inbound_dmarc_settings({
+    #     organization_id: "OrganizationId", # required
+    #     enforced: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettings AWS API Documentation
+    #
+    # @overload put_inbound_dmarc_settings(params = {})
+    # @param [Hash] params ({})
+    def put_inbound_dmarc_settings(params = {}, options = {})
+      req = build_request(:put_inbound_dmarc_settings, params)
+      req.send_request(options)
+    end
+
     # Sets permissions for a user, group, or resource. This replaces any
     # pre-existing permissions.
     #
@@ -2856,7 +2910,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

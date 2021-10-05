@@ -184,6 +184,7 @@ module Aws::LocationService
     PlaceGeometry = Shapes::StructureShape.new(name: 'PlaceGeometry')
     PlaceIndexSearchResultLimit = Shapes::IntegerShape.new(name: 'PlaceIndexSearchResultLimit')
     Position = Shapes::ListShape.new(name: 'Position')
+    PositionFiltering = Shapes::StringShape.new(name: 'PositionFiltering')
     PricingPlan = Shapes::StringShape.new(name: 'PricingPlan')
     PutGeofenceRequest = Shapes::StructureShape.new(name: 'PutGeofenceRequest')
     PutGeofenceResponse = Shapes::StructureShape.new(name: 'PutGeofenceResponse')
@@ -458,6 +459,7 @@ module Aws::LocationService
 
     CreateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateTrackerRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     CreateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "PricingPlan"))
     CreateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, location_name: "PricingPlanDataSource"))
     CreateTrackerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -558,6 +560,7 @@ module Aws::LocationService
     DescribeTrackerResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreateTime"))
     DescribeTrackerResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, required: true, location_name: "Description"))
     DescribeTrackerResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    DescribeTrackerResponse.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     DescribeTrackerResponse.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "PricingPlan"))
     DescribeTrackerResponse.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, location_name: "PricingPlanDataSource"))
     DescribeTrackerResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -985,6 +988,7 @@ module Aws::LocationService
     UpdateRouteCalculatorResponse.struct_class = Types::UpdateRouteCalculatorResponse
 
     UpdateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    UpdateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
     UpdateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
     UpdateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, location_name: "PricingPlanDataSource"))
     UpdateTrackerRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "TrackerName"))

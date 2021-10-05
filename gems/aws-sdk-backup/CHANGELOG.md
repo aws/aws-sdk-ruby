@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-10-05)
+------------------
+
+* Feature - AWS Backup Audit Manager framework report.
+
 1.32.0 (2021-09-01)
 ------------------
 

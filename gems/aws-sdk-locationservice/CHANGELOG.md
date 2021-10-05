@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2021-10-05)
+------------------
+
+* Feature - Add support for PositionFiltering.
+
 1.8.0 (2021-09-01)
 ------------------
 

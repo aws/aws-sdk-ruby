@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.266.0 (2021-10-05)
+------------------
+
+* Feature - Released Capacity Reservation Fleet, a feature of Amazon EC2 Capacity Reservations, which provides a way to manage reserved capacity across instance types. For more information: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cr-fleets.html
+
 1.265.0 (2021-09-24)
 ------------------
 

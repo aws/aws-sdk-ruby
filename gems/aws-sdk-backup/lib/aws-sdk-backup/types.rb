@@ -285,8 +285,7 @@ module Aws::Backup
 
     # Contains an optional backup plan display name and an array of
     # `BackupRule` objects, each of which specifies a backup rule. Each rule
-    # in a backup plan is a separate scheduled task and can back up a
-    # different selection of Amazon Web Services resources.
+    # in a backup plan is a separate scheduled task.
     #
     # @note When making an API call, you may pass BackupPlanInput
     #   data as a hash:
@@ -941,8 +940,8 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] compliance_resource_ids
-    #   Describes whether the control scope includes a specific resource
-    #   identified by its unique Amazon Resource Name (ARN).
+    #   The ID of the only Amazon Web Services resource that you want your
+    #   control scope to contain.
     #   @return [Array<String>]
     #
     # @!attribute [rw] compliance_resource_types
@@ -1484,6 +1483,8 @@ module Aws::Backup
     #         },
     #         report_setting: { # required
     #           report_template: "string", # required
+    #           framework_arns: ["string"],
+    #           number_of_frameworks: 1,
     #         },
     #         report_plan_tags: {
     #           "string" => "string",
@@ -1512,11 +1513,16 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #   @return [Types::ReportSetting]
     #
     # @!attribute [rw] report_plan_tags
-    #   Metadata that you can assign to help organize the frameworks that
+    #   Metadata that you can assign to help organize the report plans that
     #   you create. Each tag is a key-value pair.
     #   @return [Hash<String,String>]
     #
@@ -1552,11 +1558,19 @@ module Aws::Backup
     #   The format of the ARN depends on the resource type.
     #   @return [String]
     #
+    # @!attribute [rw] creation_time
+    #   The date and time a backup vault is created, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of `CreationTime` is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateReportPlanOutput AWS API Documentation
     #
     class CreateReportPlanOutput < Struct.new(
       :report_plan_name,
-      :report_plan_arn)
+      :report_plan_arn,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3169,6 +3183,8 @@ module Aws::Backup
     #   Contains a string with the supported Amazon Web Services resource
     #   types:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -3177,9 +3193,9 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
-    #   * `RDS` for Amazon Relational Database Service
+    #   * `FSX` for Amazon FSx
     #
-    #   * `Aurora` for Amazon Aurora
+    #   * `RDS` for Amazon Relational Database Service
     #
     #   * `Storage Gateway` for Storage Gateway
     #   @return [Array<String>]
@@ -4801,7 +4817,8 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -4874,7 +4891,12 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #   @return [Types::ReportSetting]
     #
     # @!attribute [rw] report_delivery_channel
@@ -4936,19 +4958,32 @@ module Aws::Backup
     #
     #       {
     #         report_template: "string", # required
+    #         framework_arns: ["string"],
+    #         number_of_frameworks: 1,
     #       }
     #
     # @!attribute [rw] report_template
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
     #   @return [String]
+    #
+    # @!attribute [rw] framework_arns
+    #   The Amazon Resource Names (ARNs) of the frameworks a report covers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] number_of_frameworks
+    #   The number of frameworks a report covers.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ReportSetting AWS API Documentation
     #
     class ReportSetting < Struct.new(
-      :report_template)
+      :report_template,
+      :framework_arns,
+      :number_of_frameworks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5899,6 +5934,8 @@ module Aws::Backup
     #         },
     #         report_setting: {
     #           report_template: "string", # required
+    #           framework_arns: ["string"],
+    #           number_of_frameworks: 1,
     #         },
     #         idempotency_token: "string",
     #       }
@@ -5924,7 +5961,12 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #   @return [Types::ReportSetting]
     #
     # @!attribute [rw] idempotency_token

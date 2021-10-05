@@ -614,12 +614,20 @@ module Aws::LocationService
     end
 
     # Uploads position update data for one or more devices to a tracker
-    # resource. Amazon Location uses the data when reporting the last known
-    # device position and position history.
+    # resource. Amazon Location uses the data when it reports the last known
+    # device position and position history. Amazon Location retains location
+    # data for 30 days.
     #
-    # <note markdown="1"> Only one position update is stored per sample time. Location data is
-    # sampled at a fixed rate of one position per 30-second interval and
-    # retained for 30 days before it's deleted.
+    # <note markdown="1"> Position updates are handled based on the `PositionFiltering` property
+    # of the tracker. When `PositionFiltering` is set to `TimeBased`,
+    # updates are evaluated against linked geofence collections, and
+    # location data is stored at a maximum of one position per 30 second
+    # interval. If your update frequency is more often than every 30
+    # seconds, only one update per 30 seconds is stored for each unique
+    # device ID. When `PositionFiltering` is set to `DistanceBased`
+    # filtering, location data is stored and evaluated against linked
+    # geofence collections only if the device has moved more than 30 m (98.4
+    # ft).
     #
     #  </note>
     #
@@ -723,7 +731,9 @@ module Aws::LocationService
     #   ^
     #
     #   <note markdown="1"> If you specify a departure that's not located on a road, Amazon
-    #   Location [moves the position to the nearest road][2].
+    #   Location [moves the position to the nearest road][2]. If Esri is the
+    #   provider for your route calculator, specifying a route that is longer
+    #   than 400 km returns a `400 RoutesValidationException` error.
     #
     #    </note>
     #
@@ -821,6 +831,10 @@ module Aws::LocationService
     #   Amazon Location [moves the position to the nearest road][1].
     #
     #    Specifying more than 23 waypoints returns a `400 ValidationException`
+    #   error.
+    #
+    #    If Esri is the provider for your route calculator, specifying a route
+    #   that is longer than 400 km returns a `400 RoutesValidationException`
     #   error.
     #
     #    </note>
@@ -1045,7 +1059,7 @@ module Aws::LocationService
     #   Specifies the pricing plan for your map resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -1123,7 +1137,7 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on geocoding
     #     coverage][2].
     #
-    #   * `Here` – For additional information about [HERE Technologies][3]'s
+    #   * `Here` – For additional information about [HERE Technologies][3]'
     #     coverage in your region of interest, see [HERE details on goecoding
     #     coverage][4].
     #
@@ -1167,7 +1181,7 @@ module Aws::LocationService
     #   Specifies the pricing plan for your place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -1251,7 +1265,9 @@ module Aws::LocationService
     #   Specifies the data provider of traffic and road network data.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
-    #   example, entering `HERE` returns an error.
+    #   example, entering `HERE` returns an error. Route calculators that use
+    #   Esri as a data source only calculate routes that are shorter than 400
+    #   km.
     #
     #    </note>
     #
@@ -1261,7 +1277,7 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on street networks and
     #     traffic coverage][2].
     #
-    #   * `Here` – For additional information about [HERE Technologies][3]'s
+    #   * `Here` – For additional information about [HERE Technologies][3]'
     #     coverage in your region of interest, see [HERE car routing
     #     coverage][4] and [HERE truck routing coverage][5].
     #
@@ -1361,11 +1377,32 @@ module Aws::LocationService
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
     #
+    # @option params [String] :position_filtering
+    #   Specifies the position filtering for the tracker resource.
+    #
+    #   Valid values:
+    #
+    #   * `TimeBased` - Location updates are evaluated against linked geofence
+    #     collections, but not every location update is stored. If your update
+    #     frequency is more often than 30 seconds, only one update per 30
+    #     seconds is stored for each unique device ID.
+    #
+    #   * `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
+    #     location updates are ignored. Location updates within this distance
+    #     are neither evaluated against linked geofence collections, nor
+    #     stored. This helps control costs by reducing the number of geofence
+    #     evaluations and device positions to retrieve. Distance-based
+    #     filtering can also reduce the jitter effect when displaying device
+    #     trajectory on a map.
+    #
+    #   This field is optional. If not specified, the default value is
+    #   `TimeBased`.
+    #
     # @option params [required, String] :pricing_plan
     #   Specifies the pricing plan for the tracker resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -1389,7 +1426,7 @@ module Aws::LocationService
     #
     #    </note>
     #
-    #   Valid Values: `Esri` \| `Here`
+    #   Valid values: `Esri` \| `Here`
     #
     #
     #
@@ -1439,6 +1476,7 @@ module Aws::LocationService
     #   resp = client.create_tracker({
     #     description: "ResourceDescription",
     #     kms_key_id: "KmsKeyId",
+    #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
     #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
     #     tags: {
@@ -1785,6 +1823,7 @@ module Aws::LocationService
     #   * {Types::DescribeTrackerResponse#create_time #create_time} => Time
     #   * {Types::DescribeTrackerResponse#description #description} => String
     #   * {Types::DescribeTrackerResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::DescribeTrackerResponse#position_filtering #position_filtering} => String
     #   * {Types::DescribeTrackerResponse#pricing_plan #pricing_plan} => String
     #   * {Types::DescribeTrackerResponse#pricing_plan_data_source #pricing_plan_data_source} => String
     #   * {Types::DescribeTrackerResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -1803,6 +1842,7 @@ module Aws::LocationService
     #   resp.create_time #=> Time
     #   resp.description #=> String
     #   resp.kms_key_id #=> String
+    #   resp.position_filtering #=> String, one of "TimeBased", "DistanceBased"
     #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
     #   resp.pricing_plan_data_source #=> String
     #   resp.tags #=> Hash
@@ -2041,7 +2081,7 @@ module Aws::LocationService
     #   A comma-separated list of fonts to load glyphs from in order of
     #   preference. For example, `Noto Sans Regular, Arial Unicode`.
     #
-    #   Valid fonts for [Esri][1] styles:
+    #   Valid fonts stacks for [Esri][1] styles:
     #
     #   * VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` \| `Ubuntu Medium`
     #     \| `Ubuntu Italic` \| `Ubuntu Regular` \| `Ubuntu Bold`
@@ -2059,9 +2099,9 @@ module Aws::LocationService
     #   * VectorEsriNavigation – `Arial Regular` \| `Arial Italic` \| `Arial
     #     Bold`
     #
-    #   Valid fonts for [HERE Technologies][2] styles:
+    #   Valid font stacks for [HERE Technologies][2] styles:
     #
-    #   * `VectorHereBerlin` – `Fira GO Regular` \| `Fira GO Bold`
+    #   * VectorHereBerlin – `Fira GO Regular` \| `Fira GO Bold`
     #
     #   ^
     #
@@ -3200,6 +3240,24 @@ module Aws::LocationService
     # @option params [String] :description
     #   Updates the description for the tracker resource.
     #
+    # @option params [String] :position_filtering
+    #   Updates the position filtering for the tracker resource.
+    #
+    #   Valid values:
+    #
+    #   * `TimeBased` - Location updates are evaluated against linked geofence
+    #     collections, but not every location update is stored. If your update
+    #     frequency is more often than 30 seconds, only one update per 30
+    #     seconds is stored for each unique device ID.
+    #
+    #   * `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
+    #     location updates are ignored. Location updates within this distance
+    #     are neither evaluated against linked geofence collections, nor
+    #     stored. This helps control costs by reducing the number of geofence
+    #     evaluations and device positions to retrieve. Distance-based
+    #     filtering can also reduce the jitter effect when displaying device
+    #     trajectory on a map.
+    #
     # @option params [String] :pricing_plan
     #   Updates the pricing plan for the tracker resource.
     #
@@ -3247,6 +3305,7 @@ module Aws::LocationService
     #
     #   resp = client.update_tracker({
     #     description: "ResourceDescription",
+    #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
     #     tracker_name: "ResourceName", # required
@@ -3280,7 +3339,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2021-10-05)
+------------------
+
+* Feature - This release adds tag as an input of CreateConnection
+
 1.95.0 (2021-09-01)
 ------------------
 

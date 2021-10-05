@@ -967,12 +967,20 @@ module Aws::EC2
           delay: 15,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_snapshots,
-            acceptors: [{
-              "expected" => "completed",
-              "matcher" => "pathAll",
-              "state" => "success",
-              "argument" => "snapshots[].state"
-            }]
+            acceptors: [
+              {
+                "expected" => "completed",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "snapshots[].state"
+              },
+              {
+                "expected" => "error",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "snapshots[].state"
+              }
+            ]
           )
         }.merge(options))
       end

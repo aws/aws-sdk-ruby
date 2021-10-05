@@ -29,6 +29,7 @@ module Aws::WorkMail
     AssociateMemberToGroupResponse = Shapes::StructureShape.new(name: 'AssociateMemberToGroupResponse')
     BookingOptions = Shapes::StructureShape.new(name: 'BookingOptions')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     CancelMailboxExportJobRequest = Shapes::StructureShape.new(name: 'CancelMailboxExportJobRequest')
     CancelMailboxExportJobResponse = Shapes::StructureShape.new(name: 'CancelMailboxExportJobResponse')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
@@ -68,6 +69,8 @@ module Aws::WorkMail
     DeregisterFromWorkMailResponse = Shapes::StructureShape.new(name: 'DeregisterFromWorkMailResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
+    DescribeInboundDmarcSettingsRequest = Shapes::StructureShape.new(name: 'DescribeInboundDmarcSettingsRequest')
+    DescribeInboundDmarcSettingsResponse = Shapes::StructureShape.new(name: 'DescribeInboundDmarcSettingsResponse')
     DescribeMailboxExportJobRequest = Shapes::StructureShape.new(name: 'DescribeMailboxExportJobRequest')
     DescribeMailboxExportJobResponse = Shapes::StructureShape.new(name: 'DescribeMailboxExportJobResponse')
     DescribeOrganizationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationRequest')
@@ -196,6 +199,8 @@ module Aws::WorkMail
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PutAccessControlRuleRequest = Shapes::StructureShape.new(name: 'PutAccessControlRuleRequest')
     PutAccessControlRuleResponse = Shapes::StructureShape.new(name: 'PutAccessControlRuleResponse')
+    PutInboundDmarcSettingsRequest = Shapes::StructureShape.new(name: 'PutInboundDmarcSettingsRequest')
+    PutInboundDmarcSettingsResponse = Shapes::StructureShape.new(name: 'PutInboundDmarcSettingsResponse')
     PutMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'PutMailboxPermissionsRequest')
     PutMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'PutMailboxPermissionsResponse')
     PutMobileDeviceAccessOverrideRequest = Shapes::StructureShape.new(name: 'PutMobileDeviceAccessOverrideRequest')
@@ -444,6 +449,12 @@ module Aws::WorkMail
     DescribeGroupResponse.add_member(:enabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
     DescribeGroupResponse.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     DescribeGroupResponse.struct_class = Types::DescribeGroupResponse
+
+    DescribeInboundDmarcSettingsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DescribeInboundDmarcSettingsRequest.struct_class = Types::DescribeInboundDmarcSettingsRequest
+
+    DescribeInboundDmarcSettingsResponse.add_member(:enforced, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enforced"))
+    DescribeInboundDmarcSettingsResponse.struct_class = Types::DescribeInboundDmarcSettingsResponse
 
     DescribeMailboxExportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: MailboxExportJobId, required: true, location_name: "JobId"))
     DescribeMailboxExportJobRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
@@ -852,6 +863,12 @@ module Aws::WorkMail
     PutAccessControlRuleRequest.struct_class = Types::PutAccessControlRuleRequest
 
     PutAccessControlRuleResponse.struct_class = Types::PutAccessControlRuleResponse
+
+    PutInboundDmarcSettingsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    PutInboundDmarcSettingsRequest.add_member(:enforced, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enforced"))
+    PutInboundDmarcSettingsRequest.struct_class = Types::PutInboundDmarcSettingsRequest
+
+    PutInboundDmarcSettingsResponse.struct_class = Types::PutInboundDmarcSettingsResponse
 
     PutMailboxPermissionsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     PutMailboxPermissionsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -1301,6 +1318,16 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
+      api.add_operation(:describe_inbound_dmarc_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInboundDmarcSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInboundDmarcSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInboundDmarcSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:describe_mailbox_export_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeMailboxExportJob"
         o.http_method = "POST"
@@ -1651,6 +1678,16 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:put_inbound_dmarc_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutInboundDmarcSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutInboundDmarcSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutInboundDmarcSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)

@@ -151,7 +151,7 @@ module Aws::EC2
     #             ipv_6_address: "String",
     #           },
     #         ],
-    #         network_interface_id: "String",
+    #         network_interface_id: "NetworkInterfaceId",
     #         private_ip_address: "String",
     #         private_ip_addresses: [
     #           {

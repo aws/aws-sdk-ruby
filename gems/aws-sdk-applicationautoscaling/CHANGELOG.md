@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-10-05)
+------------------
+
+* Feature - With this release, Application Auto Scaling adds support for Amazon Neptune. Customers can now automatically add or remove Read Replicas of their Neptune clusters to keep the average CPU Utilization at the target value specified by the customers.
+
 1.55.0 (2021-09-01)
 ------------------
 

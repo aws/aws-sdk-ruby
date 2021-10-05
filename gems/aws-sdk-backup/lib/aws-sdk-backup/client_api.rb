@@ -482,6 +482,7 @@ module Aws::Backup
 
     CreateReportPlanOutput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location_name: "ReportPlanName"))
     CreateReportPlanOutput.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
+    CreateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
     CreateReportPlanOutput.struct_class = Types::CreateReportPlanOutput
 
     DeleteBackupPlanInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -1032,6 +1033,8 @@ module Aws::Backup
     ReportPlanList.member = Shapes::ShapeRef.new(shape: ReportPlan)
 
     ReportSetting.add_member(:report_template, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ReportTemplate"))
+    ReportSetting.add_member(:framework_arns, Shapes::ShapeRef.new(shape: stringList, location_name: "FrameworkArns"))
+    ReportSetting.add_member(:number_of_frameworks, Shapes::ShapeRef.new(shape: integer, location_name: "NumberOfFrameworks"))
     ReportSetting.struct_class = Types::ReportSetting
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ARN)
@@ -2011,6 +2014,7 @@ module Aws::Backup
         o.http_request_uri = "/audit/frameworks/{frameworkName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateFrameworkInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateFrameworkOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)

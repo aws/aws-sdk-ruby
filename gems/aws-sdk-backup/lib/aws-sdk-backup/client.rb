@@ -570,8 +570,7 @@ module Aws::Backup
     # collection of controls that you can use to evaluate your backup
     # practices. By using pre-built customizable controls to define your
     # policies, you can evaluate whether your backup practices comply with
-    # your policies. To get insights into the compliance status of your
-    # frameworks, you can set up automatic daily reports.
+    # your policies and which resources are not yet in compliance.
     #
     # @option params [required, String] :framework_name
     #   The unique name of the framework. The name must be between 1 and 256
@@ -672,11 +671,16 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built using
     #   a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #
     # @option params [Hash<String,String>] :report_plan_tags
-    #   Metadata that you can assign to help organize the frameworks that you
-    #   create. Each tag is a key-value pair.
+    #   Metadata that you can assign to help organize the report plans that
+    #   you create. Each tag is a key-value pair.
     #
     # @option params [String] :idempotency_token
     #   A customer-chosen string that you can use to distinguish between
@@ -691,6 +695,7 @@ module Aws::Backup
     #
     #   * {Types::CreateReportPlanOutput#report_plan_name #report_plan_name} => String
     #   * {Types::CreateReportPlanOutput#report_plan_arn #report_plan_arn} => String
+    #   * {Types::CreateReportPlanOutput#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -704,6 +709,8 @@ module Aws::Backup
     #     },
     #     report_setting: { # required
     #       report_template: "string", # required
+    #       framework_arns: ["string"],
+    #       number_of_frameworks: 1,
     #     },
     #     report_plan_tags: {
     #       "string" => "string",
@@ -715,6 +722,7 @@ module Aws::Backup
     #
     #   resp.report_plan_name #=> String
     #   resp.report_plan_arn #=> String
+    #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateReportPlan AWS API Documentation
     #
@@ -1379,6 +1387,9 @@ module Aws::Backup
     #   resp.report_plan.report_plan_name #=> String
     #   resp.report_plan.report_plan_description #=> String
     #   resp.report_plan.report_setting.report_template #=> String
+    #   resp.report_plan.report_setting.framework_arns #=> Array
+    #   resp.report_plan.report_setting.framework_arns[0] #=> String
+    #   resp.report_plan.report_setting.number_of_frameworks #=> Integer
     #   resp.report_plan.report_delivery_channel.s3_bucket_name #=> String
     #   resp.report_plan.report_delivery_channel.s3_key_prefix #=> String
     #   resp.report_plan.report_delivery_channel.formats #=> Array
@@ -2701,6 +2712,9 @@ module Aws::Backup
     #   resp.report_plans[0].report_plan_name #=> String
     #   resp.report_plans[0].report_plan_description #=> String
     #   resp.report_plans[0].report_setting.report_template #=> String
+    #   resp.report_plans[0].report_setting.framework_arns #=> Array
+    #   resp.report_plans[0].report_setting.framework_arns[0] #=> String
+    #   resp.report_plans[0].report_setting.number_of_frameworks #=> Integer
     #   resp.report_plans[0].report_delivery_channel.s3_bucket_name #=> String
     #   resp.report_plans[0].report_delivery_channel.s3_key_prefix #=> String
     #   resp.report_plans[0].report_delivery_channel.formats #=> Array
@@ -3640,7 +3654,12 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built using
     #   a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #
     # @option params [String] :idempotency_token
     #   A customer-chosen string that you can use to distinguish between
@@ -3669,6 +3688,8 @@ module Aws::Backup
     #     },
     #     report_setting: {
     #       report_template: "string", # required
+    #       framework_arns: ["string"],
+    #       number_of_frameworks: 1,
     #     },
     #     idempotency_token: "string",
     #   })
@@ -3701,7 +3722,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

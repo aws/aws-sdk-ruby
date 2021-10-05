@@ -1038,6 +1038,37 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeInboundDmarcSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   Lists the ID of the given organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettingsRequest AWS API Documentation
+    #
+    class DescribeInboundDmarcSettingsRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enforced
+    #   Lists the enforcement setting of the applied policy.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettingsResponse AWS API Documentation
+    #
+    class DescribeInboundDmarcSettingsResponse < Struct.new(
+      :enforced)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMailboxExportJobRequest
     #   data as a hash:
     #
@@ -3092,6 +3123,36 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutAccessControlRuleResponse AWS API Documentation
     #
     class PutAccessControlRuleResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutInboundDmarcSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         enforced: false, # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization that you are applying the DMARC policy
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] enforced
+    #   Enforces or suspends a policy after it's applied.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettingsRequest AWS API Documentation
+    #
+    class PutInboundDmarcSettingsRequest < Struct.new(
+      :organization_id,
+      :enforced)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettingsResponse AWS API Documentation
+    #
+    class PutInboundDmarcSettingsResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutMailboxPermissionsRequest
     #   data as a hash:
