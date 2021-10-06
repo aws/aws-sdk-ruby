@@ -929,6 +929,7 @@ module Aws::AmplifyBackend
     #
     # @return [Types::GetBackendResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetBackendResponse#amplify_feature_flags #amplify_feature_flags} => String
     #   * {Types::GetBackendResponse#amplify_meta_config #amplify_meta_config} => String
     #   * {Types::GetBackendResponse#app_id #app_id} => String
     #   * {Types::GetBackendResponse#app_name #app_name} => String
@@ -945,6 +946,7 @@ module Aws::AmplifyBackend
     #
     # @example Response structure
     #
+    #   resp.amplify_feature_flags #=> String
     #   resp.amplify_meta_config #=> String
     #   resp.app_id #=> String
     #   resp.app_name #=> String
@@ -1732,7 +1734,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

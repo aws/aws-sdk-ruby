@@ -128,9 +128,10 @@ module Aws::Kendra
     # exception with the message "`AttributeFilter` cannot have a depth of
     # more than 2."
     #
-    # If you use more than 10 attribute filters, you receive a
-    # `ValidationException` exception with the message "`AttributeFilter`
-    # cannot have a length of more than 10".
+    # If you use more than 10 attribute filters in a given list for
+    # `AndAllFilters` or `OrAllFilters`, you receive a `ValidationException`
+    # with the message "`AttributeFilter` cannot have a length of more than
+    # 10".
     #
     # @note When making an API call, you may pass AttributeFilter
     #   data as a hash:
@@ -461,23 +462,22 @@ module Aws::Kendra
     #
     # @!attribute [rw] greater_than
     #   Performs a greater than operation on two document attributes. Use
-    #   with a document attribute of type `Integer` or `Long`.
+    #   with a document attribute of type `Date` or `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] greater_than_or_equals
     #   Performs a greater or equals than operation on two document
-    #   attributes. Use with a document attribute of type `Integer` or
-    #   `Long`.
+    #   attributes. Use with a document attribute of type `Date` or `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than
     #   Performs a less than operation on two document attributes. Use with
-    #   a document attribute of type `Integer` or `Long`.
+    #   a document attribute of type `Date` or `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @!attribute [rw] less_than_or_equals
     #   Performs a less than or equals operation on two document attributes.
-    #   Use with a document attribute of type `Integer` or `Long`.
+    #   Use with a document attribute of type `Date` or `Long`.
     #   @return [Types::DocumentAttribute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AttributeFilter AWS API Documentation
@@ -2182,6 +2182,9 @@ module Aws::Kendra
     #           },
     #         ],
     #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
+    #         user_group_resolution_configuration: {
+    #           user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -2248,15 +2251,27 @@ module Aws::Kendra
     #   ATTRIBUTE\_FILTER
     #
     #   : All indexed content is searchable and displayable for all users.
-    #     If there is an access control list, it is ignored. You can filter
-    #     on user and group attributes.
+    #     If you want to filter search results on user context, you can use
+    #     the attribute filters of `_user_id` and `_group_ids` or you can
+    #     provide user and group information in `UserContext`.
     #
     #   USER\_TOKEN
     #
-    #   : Enables SSO and token-based user access control. All documents
-    #     with no access control and all documents accessible to the user
-    #     will be searchable and displayable.
+    #   : Enables token-based user access control to filter search results
+    #     on user context. All documents with no access control and all
+    #     documents accessible to the user will be searchable and
+    #     displayable.
     #   @return [String]
+    #
+    # @!attribute [rw] user_group_resolution_configuration
+    #   Enables fetching access levels of groups and users from an AWS
+    #   Single Sign-On identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html
+    #   @return [Types::UserGroupResolutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateIndexRequest AWS API Documentation
     #
@@ -2269,7 +2284,8 @@ module Aws::Kendra
       :client_token,
       :tags,
       :user_token_configurations,
-      :user_context_policy)
+      :user_context_policy,
+      :user_group_resolution_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2443,7 +2459,7 @@ module Aws::Kendra
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create a
     #   thesaurus. Multiple calls to the `CreateThesaurus` operation with
-    #   the same client token will create only one index.
+    #   the same client token will create only one thesaurus.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3675,6 +3691,12 @@ module Aws::Kendra
     #   The user context policy for the Amazon Kendra index.
     #   @return [String]
     #
+    # @!attribute [rw] user_group_resolution_configuration
+    #   Shows whether you have enabled the configuration for fetching access
+    #   levels of groups and users from an AWS Single Sign-On identity
+    #   source.
+    #   @return [Types::UserGroupResolutionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
     #
     class DescribeIndexResponse < Struct.new(
@@ -3692,7 +3714,8 @@ module Aws::Kendra
       :error_message,
       :capacity_units,
       :user_token_configurations,
-      :user_context_policy)
+      :user_context_policy,
+      :user_group_resolution_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3829,8 +3852,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Shows the date-time a block list for query suggestions was last
-    #   created.
+    #   Shows the date-time a block list for query suggestions was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
@@ -4782,6 +4804,15 @@ module Aws::Kendra
     #   users and sub groups for a group. Your sub groups can contain more
     #   than 1000 users, but the list of sub groups that belong to a group
     #   (and/or users) must be no more than 1000.
+    #
+    #   You can download this [example S3 file][1] that uses the correct
+    #   format for listing group members. Note, `dataSourceId` is optional.
+    #   The value of `type` for a group is always `GROUP` and for a user it
+    #   is always `USER`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/samples/group_members.zip
     #   @return [Types::S3Path]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GroupMembers AWS API Documentation
@@ -5107,9 +5138,10 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the result of the previous request to
-    #   `GetDataSourceSyncJobHistory` was truncated, include the `NextToken`
-    #   to fetch the next set of jobs.
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of jobs.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5146,12 +5178,9 @@ module Aws::Kendra
     #   @return [Array<Types::DataSourceSyncJob>]
     #
     # @!attribute [rw] next_token
-    #   The `GetDataSourceSyncJobHistory` operation returns a page of
-    #   vocabularies at a time. The maximum size of the page is set by the
-    #   `MaxResults` parameter. If there are more jobs in the list than the
-    #   page size, Amazon Kendra returns the NextPage token. Include the
-    #   token in the next request to the `GetDataSourceSyncJobHistory`
-    #   operation to return in the next page of jobs.
+    #   If the response is truncated, Amazon Kendra returns this token that
+    #   you can use in the subsequent request to retrieve the next set of
+    #   jobs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSourceSyncJobsResponse AWS API Documentation
@@ -5230,8 +5259,10 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the result of the previous request to `ListFaqs` was truncated,
-    #   include the `NextToken` to fetch the next set of FAQs.
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of FAQs.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5251,11 +5282,9 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] next_token
-    #   The `ListFaqs` operation returns a page of FAQs at a time. The
-    #   maximum size of the page is set by the `MaxResults` parameter. If
-    #   there are more jobs in the list than the page size, Amazon Kendra
-    #   returns the `NextPage` token. Include the token in the next request
-    #   to the `ListFaqs` operation to return the next page of FAQs.
+    #   If the response is truncated, Amazon Kendra returns this token that
+    #   you can use in the subsequent request to retrieve the next set of
+    #   FAQs.
     #   @return [String]
     #
     # @!attribute [rw] faq_summary_items
@@ -5298,12 +5327,16 @@ module Aws::Kendra
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The next items in the list of groups that go beyond the maximum.
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of groups that are mapped to users before a given ordering or
+    #   timestamp identifier.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum results shown for a list of groups that are mapped to
-    #   users before a given ordering or timestamp identifier.
+    #   The maximum number of returned groups that are mapped to users
+    #   before a given ordering or timestamp identifier.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListGroupsOlderThanOrderingIdRequest AWS API Documentation
@@ -5324,7 +5357,10 @@ module Aws::Kendra
     #   @return [Array<Types::GroupSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next items in the list of groups that go beyond the maximum.
+    #   If the response is truncated, Amazon Kendra returns this token that
+    #   you can use in the subsequent request to retrieve the next set of
+    #   groups that are mapped to users before a given ordering or timestamp
+    #   identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListGroupsOlderThanOrderingIdResponse AWS API Documentation
@@ -5528,7 +5564,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] thesaurus_summary_items
-    #   An array of summary information for one or more thesauruses.
+    #   An array of summary information for a thesaurus or multiple
+    #   thesauri.
     #   @return [Array<Types::ThesaurusSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListThesauriResponse AWS API Documentation
@@ -6116,7 +6153,7 @@ module Aws::Kendra
     #   @return [Types::SortingConfiguration]
     #
     # @!attribute [rw] user_context
-    #   The user context token.
+    #   The user context token or user and group information.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] visitor_id
@@ -8070,7 +8107,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # An array of summary information for one or more thesauruses.
+    # An array of summary information for a thesaurus or multiple thesauri.
     #
     # @!attribute [rw] id
     #   The identifier of the thesaurus.
@@ -8593,6 +8630,9 @@ module Aws::Kendra
     #           },
     #         ],
     #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
+    #         user_group_resolution_configuration: {
+    #           user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -8631,8 +8671,18 @@ module Aws::Kendra
     #   @return [Array<Types::UserTokenConfiguration>]
     #
     # @!attribute [rw] user_context_policy
-    #   The user user token context policy.
+    #   The user context policy.
     #   @return [String]
+    #
+    # @!attribute [rw] user_group_resolution_configuration
+    #   Enables fetching access levels of groups and users from an AWS
+    #   Single Sign-On identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html
+    #   @return [Types::UserGroupResolutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndexRequest AWS API Documentation
     #
@@ -8644,7 +8694,8 @@ module Aws::Kendra
       :document_metadata_configuration_updates,
       :capacity_units,
       :user_token_configurations,
-      :user_context_policy)
+      :user_context_policy,
+      :user_group_resolution_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8855,6 +8906,11 @@ module Aws::Kendra
 
     # Provides the configuration information of the URLs to crawl.
     #
+    # You can only crawl websites that use the secure communication
+    # protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive
+    # an error when crawling a website, it could be that the website is
+    # blocked from crawling.
+    #
     # *When selecting websites to index, you must adhere to the [Amazon
     # Acceptable Use Policy][1] and all other Amazon terms. Remember that
     # you must only use the Amazon Kendra web crawler to index your own
@@ -8905,7 +8961,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information about the user context for a Amazon Kendra index.
+    # Provides information about the user context for an Amazon Kendra
+    # index.
     #
     # This is used for filtering search results for different users based on
     # their access to documents.
@@ -8914,8 +8971,8 @@ module Aws::Kendra
     #
     # * User token
     #
-    # * User ID, the groups the user belongs to, and the data sources the
-    #   groups can access
+    # * User ID, the groups the user belongs to, and any data sources the
+    #   groups can access.
     #
     # If you provide both, an exception is thrown.
     #
@@ -8961,6 +9018,47 @@ module Aws::Kendra
       :user_id,
       :groups,
       :data_source_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to fetch access levels of
+    # groups and users from an AWS Single Sign-On identity source. This is
+    # useful for setting up user context filtering, where Amazon Kendra
+    # filters search results for different users based on their group's
+    # access to documents. You can also map your users to their groups for
+    # user context filtering using the [PutPrincipalMapping operation][1].
+    #
+    # To set up an AWS SSO identity source in the console to use with Amazon
+    # Kendra, see [Getting started with an AWS SSO identity source][2]. You
+    # must also grant the required permissions to use AWS SSO with Amazon
+    # Kendra. For more information, see [IAM roles for AWS Single
+    # Sign-On][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/latest/dg/API_PutPrincipalMapping.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso
+    #
+    # @note When making an API call, you may pass UserGroupResolutionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
+    #       }
+    #
+    # @!attribute [rw] user_group_resolution_mode
+    #   The identity store provider (mode) you want to use to fetch access
+    #   levels of groups and users. AWS Single Sign-On is currently the only
+    #   available mode. Your users and groups must exist in an AWS SSO
+    #   identity source in order to use this mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserGroupResolutionConfiguration AWS API Documentation
+    #
+    class UserGroupResolutionConfiguration < Struct.new(
+      :user_group_resolution_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9058,6 +9156,11 @@ module Aws::Kendra
     #
     #   You can include website subdomains. You can list up to 100 seed URLs
     #   and up to three sitemap URLs.
+    #
+    #   You can only crawl websites that use the secure communication
+    #   protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive
+    #   an error when crawling a website, it could be that the website is
+    #   blocked from crawling.
     #
     #   *When selecting websites to index, you must adhere to the [Amazon
     #   Acceptable Use Policy][1] and all other Amazon terms. Remember that

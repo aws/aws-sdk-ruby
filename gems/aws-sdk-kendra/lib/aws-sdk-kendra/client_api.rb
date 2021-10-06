@@ -387,6 +387,8 @@ module Aws::Kendra
     UserAccount = Shapes::StringShape.new(name: 'UserAccount')
     UserContext = Shapes::StructureShape.new(name: 'UserContext')
     UserContextPolicy = Shapes::StringShape.new(name: 'UserContextPolicy')
+    UserGroupResolutionConfiguration = Shapes::StructureShape.new(name: 'UserGroupResolutionConfiguration')
+    UserGroupResolutionMode = Shapes::StringShape.new(name: 'UserGroupResolutionMode')
     UserId = Shapes::StringShape.new(name: 'UserId')
     UserNameAttributeField = Shapes::StringShape.new(name: 'UserNameAttributeField')
     UserTokenConfiguration = Shapes::StructureShape.new(name: 'UserTokenConfiguration')
@@ -615,6 +617,7 @@ module Aws::Kendra
     CreateIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     CreateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
+    CreateIndexRequest.add_member(:user_group_resolution_configuration, Shapes::ShapeRef.new(shape: UserGroupResolutionConfiguration, location_name: "UserGroupResolutionConfiguration"))
     CreateIndexRequest.struct_class = Types::CreateIndexRequest
 
     CreateIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
@@ -794,6 +797,7 @@ module Aws::Kendra
     DescribeIndexResponse.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
     DescribeIndexResponse.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     DescribeIndexResponse.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
+    DescribeIndexResponse.add_member(:user_group_resolution_configuration, Shapes::ShapeRef.new(shape: UserGroupResolutionConfiguration, location_name: "UserGroupResolutionConfiguration"))
     DescribeIndexResponse.struct_class = Types::DescribeIndexResponse
 
     DescribePrincipalMappingRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -1466,6 +1470,7 @@ module Aws::Kendra
     UpdateIndexRequest.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
     UpdateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     UpdateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
+    UpdateIndexRequest.add_member(:user_group_resolution_configuration, Shapes::ShapeRef.new(shape: UserGroupResolutionConfiguration, location_name: "UserGroupResolutionConfiguration"))
     UpdateIndexRequest.struct_class = Types::UpdateIndexRequest
 
     UpdateQuerySuggestionsBlockListRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -1501,6 +1506,9 @@ module Aws::Kendra
     UserContext.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
     UserContext.add_member(:data_source_groups, Shapes::ShapeRef.new(shape: DataSourceGroups, location_name: "DataSourceGroups"))
     UserContext.struct_class = Types::UserContext
+
+    UserGroupResolutionConfiguration.add_member(:user_group_resolution_mode, Shapes::ShapeRef.new(shape: UserGroupResolutionMode, required: true, location_name: "UserGroupResolutionMode"))
+    UserGroupResolutionConfiguration.struct_class = Types::UserGroupResolutionConfiguration
 
     UserTokenConfiguration.add_member(:jwt_token_type_configuration, Shapes::ShapeRef.new(shape: JwtTokenTypeConfiguration, location_name: "JwtTokenTypeConfiguration"))
     UserTokenConfiguration.add_member(:json_token_type_configuration, Shapes::ShapeRef.new(shape: JsonTokenTypeConfiguration, location_name: "JsonTokenTypeConfiguration"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2021-10-06)
+------------------
+
+* Feature - This release adds a new TrainingInputMode FastFile for SageMaker Training APIs.
+
 1.101.0 (2021-09-16)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-10-06)
+------------------
+
+* Feature - Amazon Kendra now supports integration with AWS SSO
+
 1.34.0 (2021-09-01)
 ------------------
 
