@@ -10,6 +10,356 @@
 module Aws::Firehose
   module Types
 
+    # @note When making an API call, you may pass AmazonopensearchserviceBufferingHints
+    #   data as a hash:
+    #
+    #       {
+    #         interval_in_seconds: 1,
+    #         size_in_m_bs: 1,
+    #       }
+    #
+    # @!attribute [rw] interval_in_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_in_m_bs
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceBufferingHints AWS API Documentation
+    #
+    class AmazonopensearchserviceBufferingHints < Struct.new(
+      :interval_in_seconds,
+      :size_in_m_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AmazonopensearchserviceDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleARN", # required
+    #         domain_arn: "AmazonopensearchserviceDomainARN",
+    #         cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
+    #         index_name: "AmazonopensearchserviceIndexName", # required
+    #         type_name: "AmazonopensearchserviceTypeName",
+    #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
+    #         buffering_hints: {
+    #           interval_in_seconds: 1,
+    #           size_in_m_bs: 1,
+    #         },
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
+    #         s3_configuration: { # required
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           role_arn: "RoleARN", # required
+    #           security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   @return [String]
+    #
+    # @!attribute [rw] index_rotation_period
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   @return [Types::AmazonopensearchserviceBufferingHints]
+    #
+    # @!attribute [rw] retry_options
+    #   @return [Types::AmazonopensearchserviceRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_configuration
+    #   Describes the configuration of a destination in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceDestinationConfiguration AWS API Documentation
+    #
+    class AmazonopensearchserviceDestinationConfiguration < Struct.new(
+      :role_arn,
+      :domain_arn,
+      :cluster_endpoint,
+      :index_name,
+      :type_name,
+      :index_rotation_period,
+      :buffering_hints,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_configuration,
+      :processing_configuration,
+      :cloud_watch_logging_options,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   @return [String]
+    #
+    # @!attribute [rw] index_rotation_period
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   @return [Types::AmazonopensearchserviceBufferingHints]
+    #
+    # @!attribute [rw] retry_options
+    #   @return [Types::AmazonopensearchserviceRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination_description
+    #   Describes a destination in Amazon S3.
+    #   @return [Types::S3DestinationDescription]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] vpc_configuration_description
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfigurationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceDestinationDescription AWS API Documentation
+    #
+    class AmazonopensearchserviceDestinationDescription < Struct.new(
+      :role_arn,
+      :domain_arn,
+      :cluster_endpoint,
+      :index_name,
+      :type_name,
+      :index_rotation_period,
+      :buffering_hints,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_destination_description,
+      :processing_configuration,
+      :cloud_watch_logging_options,
+      :vpc_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AmazonopensearchserviceDestinationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleARN",
+    #         domain_arn: "AmazonopensearchserviceDomainARN",
+    #         cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
+    #         index_name: "AmazonopensearchserviceIndexName",
+    #         type_name: "AmazonopensearchserviceTypeName",
+    #         index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
+    #         buffering_hints: {
+    #           interval_in_seconds: 1,
+    #           size_in_m_bs: 1,
+    #         },
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_update: {
+    #           role_arn: "RoleARN",
+    #           bucket_arn: "BucketARN",
+    #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   @return [String]
+    #
+    # @!attribute [rw] index_rotation_period
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   @return [Types::AmazonopensearchserviceBufferingHints]
+    #
+    # @!attribute [rw] retry_options
+    #   @return [Types::AmazonopensearchserviceRetryOptions]
+    #
+    # @!attribute [rw] s3_update
+    #   Describes an update for a destination in Amazon S3.
+    #   @return [Types::S3DestinationUpdate]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceDestinationUpdate AWS API Documentation
+    #
+    class AmazonopensearchserviceDestinationUpdate < Struct.new(
+      :role_arn,
+      :domain_arn,
+      :cluster_endpoint,
+      :index_name,
+      :type_name,
+      :index_rotation_period,
+      :buffering_hints,
+      :retry_options,
+      :s3_update,
+      :processing_configuration,
+      :cloud_watch_logging_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AmazonopensearchserviceRetryOptions
+    #   data as a hash:
+    #
+    #       {
+    #         duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceRetryOptions AWS API Documentation
+    #
+    class AmazonopensearchserviceRetryOptions < Struct.new(
+      :duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes hints for the buffering to perform before delivering data to
     # the destination. These options are treated as hints, and therefore
     # Kinesis Data Firehose might choose to use different values when it is
@@ -454,6 +804,68 @@ module Aws::Firehose
     #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
     #           },
     #         },
+    #         amazonopensearchservice_destination_configuration: {
+    #           role_arn: "RoleARN", # required
+    #           domain_arn: "AmazonopensearchserviceDomainARN",
+    #           cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
+    #           index_name: "AmazonopensearchserviceIndexName", # required
+    #           type_name: "AmazonopensearchserviceTypeName",
+    #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
+    #           buffering_hints: {
+    #             interval_in_seconds: 1,
+    #             size_in_m_bs: 1,
+    #           },
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
+    #           s3_configuration: { # required
+    #             role_arn: "RoleARN", # required
+    #             bucket_arn: "BucketARN", # required
+    #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #           vpc_configuration: {
+    #             subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #             role_arn: "RoleARN", # required
+    #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           },
+    #         },
     #         splunk_destination_configuration: {
     #           hec_endpoint: "HECEndpoint", # required
     #           hec_endpoint_type: "Raw", # required, accepts Raw, Event
@@ -627,6 +1039,9 @@ module Aws::Firehose
     #   The destination in Amazon ES. You can specify only one destination.
     #   @return [Types::ElasticsearchDestinationConfiguration]
     #
+    # @!attribute [rw] amazonopensearchservice_destination_configuration
+    #   @return [Types::AmazonopensearchserviceDestinationConfiguration]
+    #
     # @!attribute [rw] splunk_destination_configuration
     #   The destination in Splunk. You can specify only one destination.
     #   @return [Types::SplunkDestinationConfiguration]
@@ -663,6 +1078,7 @@ module Aws::Firehose
       :extended_s3_destination_configuration,
       :redshift_destination_configuration,
       :elasticsearch_destination_configuration,
+      :amazonopensearchservice_destination_configuration,
       :splunk_destination_configuration,
       :http_endpoint_destination_configuration,
       :tags)
@@ -1145,6 +1561,9 @@ module Aws::Firehose
     #   The destination in Amazon ES.
     #   @return [Types::ElasticsearchDestinationDescription]
     #
+    # @!attribute [rw] amazonopensearchservice_destination_description
+    #   @return [Types::AmazonopensearchserviceDestinationDescription]
+    #
     # @!attribute [rw] splunk_destination_description
     #   The destination in Splunk.
     #   @return [Types::SplunkDestinationDescription]
@@ -1161,6 +1580,7 @@ module Aws::Firehose
       :extended_s3_destination_description,
       :redshift_destination_description,
       :elasticsearch_destination_description,
+      :amazonopensearchservice_destination_description,
       :splunk_destination_description,
       :http_endpoint_destination_description)
       SENSITIVE = []
@@ -5454,6 +5874,62 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         amazonopensearchservice_destination_update: {
+    #           role_arn: "RoleARN",
+    #           domain_arn: "AmazonopensearchserviceDomainARN",
+    #           cluster_endpoint: "AmazonopensearchserviceClusterEndpoint",
+    #           index_name: "AmazonopensearchserviceIndexName",
+    #           type_name: "AmazonopensearchserviceTypeName",
+    #           index_rotation_period: "NoRotation", # accepts NoRotation, OneHour, OneDay, OneWeek, OneMonth
+    #           buffering_hints: {
+    #             interval_in_seconds: 1,
+    #             size_in_m_bs: 1,
+    #           },
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_update: {
+    #             role_arn: "RoleARN",
+    #             bucket_arn: "BucketARN",
+    #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
     #         splunk_destination_update: {
     #           hec_endpoint: "HECEndpoint",
     #           hec_endpoint_type: "Raw", # accepts Raw, Event
@@ -5607,6 +6083,9 @@ module Aws::Firehose
     #   Describes an update for a destination in Amazon ES.
     #   @return [Types::ElasticsearchDestinationUpdate]
     #
+    # @!attribute [rw] amazonopensearchservice_destination_update
+    #   @return [Types::AmazonopensearchserviceDestinationUpdate]
+    #
     # @!attribute [rw] splunk_destination_update
     #   Describes an update for a destination in Splunk.
     #   @return [Types::SplunkDestinationUpdate]
@@ -5625,6 +6104,7 @@ module Aws::Firehose
       :extended_s3_destination_update,
       :redshift_destination_update,
       :elasticsearch_destination_update,
+      :amazonopensearchservice_destination_update,
       :splunk_destination_update,
       :http_endpoint_destination_update)
       SENSITIVE = []

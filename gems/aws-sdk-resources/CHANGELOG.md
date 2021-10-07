@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.115.0 (2021-10-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-managedgrafana` gem.
+
 3.114.0 (2021-09-30)
 ------------------
 

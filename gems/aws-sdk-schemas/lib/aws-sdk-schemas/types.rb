@@ -1055,7 +1055,6 @@ module Aws::Schemas
     end
 
     # @!attribute [rw] discoverers
-    #   An array of DiscovererSummary information.
     #   @return [Array<Types::DiscovererSummary>]
     #
     # @!attribute [rw] next_token
@@ -1362,74 +1361,6 @@ module Aws::Schemas
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] role_arn
-    #   @return [String]
-    #
-    # @!attribute [rw] timeout
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/LockServiceLinkedRoleInput AWS API Documentation
-    #
-    class LockServiceLinkedRoleInput < Struct.new(
-      :role_arn,
-      :timeout)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] can_be_deleted
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] reason_of_failure
-    #   @return [String]
-    #
-    # @!attribute [rw] related_resources
-    #   @return [Array<Types::DiscovererSummary>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/LockServiceLinkedRoleOutput AWS API Documentation
-    #
-    class LockServiceLinkedRoleOutput < Struct.new(
-      :can_be_deleted,
-      :reason_of_failure,
-      :related_resources)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] role_arn
-    #   @return [String]
-    #
-    # @!attribute [rw] timeout
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/LockServiceLinkedRoleRequest AWS API Documentation
-    #
-    class LockServiceLinkedRoleRequest < Struct.new(
-      :role_arn,
-      :timeout)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] can_be_deleted
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] reason_of_failure
-    #   @return [String]
-    #
-    # @!attribute [rw] related_resources
-    #   @return [Array<Types::DiscovererSummary>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/LockServiceLinkedRoleResponse AWS API Documentation
-    #
-    class LockServiceLinkedRoleResponse < Struct.new(
-      :can_be_deleted,
-      :reason_of_failure,
-      :related_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2022,32 +1953,6 @@ module Aws::Schemas
       SENSITIVE = []
       include Aws::Structure
     end
-
-    # @!attribute [rw] role_arn
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UnlockServiceLinkedRoleInput AWS API Documentation
-    #
-    class UnlockServiceLinkedRoleInput < Struct.new(
-      :role_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] role_arn
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UnlockServiceLinkedRoleRequest AWS API Documentation
-    #
-    class UnlockServiceLinkedRoleRequest < Struct.new(
-      :role_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UnlockServiceLinkedRoleResponse AWS API Documentation
-    #
-    class UnlockServiceLinkedRoleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

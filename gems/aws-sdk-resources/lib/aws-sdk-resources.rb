@@ -180,6 +180,7 @@ module Aws
   autoload :Macie, 'aws-sdk-macie'
   autoload :Macie2, 'aws-sdk-macie2'
   autoload :ManagedBlockchain, 'aws-sdk-managedblockchain'
+  autoload :ManagedGrafana, 'aws-sdk-managedgrafana'
   autoload :MarketplaceCatalog, 'aws-sdk-marketplacecatalog'
   autoload :MarketplaceCommerceAnalytics, 'aws-sdk-marketplacecommerceanalytics'
   autoload :MarketplaceEntitlementService, 'aws-sdk-marketplaceentitlementservice'

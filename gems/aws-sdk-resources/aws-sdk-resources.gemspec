@@ -190,6 +190,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-macie', '~> 1')
   spec.add_dependency('aws-sdk-macie2', '~> 1')
   spec.add_dependency('aws-sdk-managedblockchain', '~> 1')
+  spec.add_dependency('aws-sdk-managedgrafana', '~> 1')
   spec.add_dependency('aws-sdk-marketplacecatalog', '~> 1')
   spec.add_dependency('aws-sdk-marketplacecommerceanalytics', '~> 1')
   spec.add_dependency('aws-sdk-marketplaceentitlementservice', '~> 1')

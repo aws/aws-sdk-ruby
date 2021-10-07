@@ -507,6 +507,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |
 | Amazon Macie 2                                        | Aws::Macie2                          | aws-sdk-macie2                          | 2020-01-01  |
 | Amazon Managed Blockchain                             | Aws::ManagedBlockchain               | aws-sdk-managedblockchain               | 2018-09-24  |
+| Amazon Managed Grafana                                | Aws::ManagedGrafana                  | aws-sdk-managedgrafana                  | 2020-08-18  |
 | Amazon Mechanical Turk                                | Aws::MTurk                           | aws-sdk-mturk                           | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                        | aws-sdk-memorydb                        | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                         | aws-sdk-neptune                         | 2014-10-31  |

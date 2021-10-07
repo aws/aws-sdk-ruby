@@ -685,6 +685,16 @@ module Aws::Kendra
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :language_code
+    #   The code for a language. This allows you to support a language for all
+    #   documents when creating the data source. English is supported by
+    #   default. For more information on supported languages, including their
+    #   codes, see [Adding documents in languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#id #id} => String
@@ -1017,6 +1027,7 @@ module Aws::Kendra
     #       },
     #     ],
     #     client_token: "ClientTokenName",
+    #     language_code: "LanguageCode",
     #   })
     #
     # @example Response structure
@@ -1083,6 +1094,16 @@ module Aws::Kendra
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :language_code
+    #   The code for a language. This allows you to support a language for the
+    #   FAQ document. English is supported by default. For more information on
+    #   supported languages, including their codes, see [Adding documents in
+    #   languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #
     # @return [Types::CreateFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFaqResponse#id #id} => String
@@ -1106,6 +1127,7 @@ module Aws::Kendra
     #     ],
     #     file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
     #     client_token: "ClientTokenName",
+    #     language_code: "LanguageCode",
     #   })
     #
     # @example Response structure
@@ -1668,6 +1690,7 @@ module Aws::Kendra
     #   * {Types::DescribeDataSourceResponse#schedule #schedule} => String
     #   * {Types::DescribeDataSourceResponse#role_arn #role_arn} => String
     #   * {Types::DescribeDataSourceResponse#error_message #error_message} => String
+    #   * {Types::DescribeDataSourceResponse#language_code #language_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1907,6 +1930,7 @@ module Aws::Kendra
     #   resp.schedule #=> String
     #   resp.role_arn #=> String
     #   resp.error_message #=> String
+    #   resp.language_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSource AWS API Documentation
     #
@@ -1938,6 +1962,7 @@ module Aws::Kendra
     #   * {Types::DescribeFaqResponse#role_arn #role_arn} => String
     #   * {Types::DescribeFaqResponse#error_message #error_message} => String
     #   * {Types::DescribeFaqResponse#file_format #file_format} => String
+    #   * {Types::DescribeFaqResponse#language_code #language_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1960,6 +1985,7 @@ module Aws::Kendra
     #   resp.role_arn #=> String
     #   resp.error_message #=> String
     #   resp.file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
+    #   resp.language_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaq AWS API Documentation
     #
@@ -2433,6 +2459,7 @@ module Aws::Kendra
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
+    #   resp.summary_items[0].language_code #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSources AWS API Documentation
@@ -2482,6 +2509,7 @@ module Aws::Kendra
     #   resp.faq_summary_items[0].created_at #=> Time
     #   resp.faq_summary_items[0].updated_at #=> Time
     #   resp.faq_summary_items[0].file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
+    #   resp.faq_summary_items[0].language_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListFaqs AWS API Documentation
     #
@@ -3120,7 +3148,7 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.string_list_value[0] #=> String
     #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
-    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW"
+    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW", "NOT_AVAILABLE"
     #   resp.result_items[0].feedback_token #=> String
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
@@ -3342,6 +3370,16 @@ module Aws::Kendra
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the new role to use when the data
     #   source is accessing resources on your behalf.
+    #
+    # @option params [String] :language_code
+    #   The code for a language. This allows you to support a language for all
+    #   documents when updating the data source. English is supported by
+    #   default. For more information on supported languages, including their
+    #   codes, see [Adding documents in languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3666,6 +3704,7 @@ module Aws::Kendra
     #     description: "Description",
     #     schedule: "ScanSchedule",
     #     role_arn: "RoleArn",
+    #     language_code: "LanguageCode",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateDataSource AWS API Documentation
@@ -4003,7 +4042,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

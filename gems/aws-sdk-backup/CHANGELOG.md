@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-10-07)
+------------------
+
+* Feature - Launch of AWS Backup Vault Lock, which protects your backups from malicious and accidental actions, works with existing backup policies, and helps you meet compliance requirements.
+
 1.33.0 (2021-10-05)
 ------------------
 

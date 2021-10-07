@@ -210,6 +210,7 @@ module Aws::Kendra
     JwtTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JwtTokenTypeConfiguration')
     KeyLocation = Shapes::StringShape.new(name: 'KeyLocation')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListDataSourceSyncJobsRequest = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsRequest')
     ListDataSourceSyncJobsResponse = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
@@ -590,6 +591,7 @@ module Aws::Kendra
     CreateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSourceRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
@@ -603,6 +605,7 @@ module Aws::Kendra
     CreateFaqRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateFaqRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
     CreateFaqRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFaqRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     CreateFaqRequest.struct_class = Types::CreateFaqRequest
 
     CreateFaqResponse.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, location_name: "Id"))
@@ -673,6 +676,7 @@ module Aws::Kendra
     DataSourceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DataSourceSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     DataSourceSummary.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "Status"))
+    DataSourceSummary.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     DataSourceSummary.struct_class = Types::DataSourceSummary
 
     DataSourceSummaryList.member = Shapes::ShapeRef.new(shape: DataSourceSummary)
@@ -760,6 +764,7 @@ module Aws::Kendra
     DescribeDataSourceResponse.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
     DescribeDataSourceResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeDataSourceResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeDataSourceResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     DescribeDataSourceResponse.struct_class = Types::DescribeDataSourceResponse
 
     DescribeFaqRequest.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, required: true, location_name: "Id"))
@@ -777,6 +782,7 @@ module Aws::Kendra
     DescribeFaqResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeFaqResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     DescribeFaqResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
+    DescribeFaqResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     DescribeFaqResponse.struct_class = Types::DescribeFaqResponse
 
     DescribeIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))
@@ -950,6 +956,7 @@ module Aws::Kendra
     FaqSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     FaqSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     FaqSummary.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
+    FaqSummary.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     FaqSummary.struct_class = Types::FaqSummary
 
     FaqSummaryItems.member = Shapes::ShapeRef.new(shape: FaqSummary)
@@ -1460,6 +1467,7 @@ module Aws::Kendra
     UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateDataSourceRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
     UpdateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    UpdateDataSourceRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
 
     UpdateIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))

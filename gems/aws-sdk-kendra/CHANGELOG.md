@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-10-07)
+------------------
+
+* Feature - Amazon Kendra now supports indexing and querying documents in different languages.
+
 1.35.0 (2021-10-06)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.512.0 (2021-10-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ManagedGrafana`.
+
 1.511.0 (2021-10-06)
 ------------------
 

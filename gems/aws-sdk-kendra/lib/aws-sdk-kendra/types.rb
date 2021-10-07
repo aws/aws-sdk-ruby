@@ -1939,6 +1939,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         client_token: "ClientTokenName",
+    #         language_code: "LanguageCode",
     #       }
     #
     # @!attribute [rw] name
@@ -2013,6 +2014,18 @@ module Aws::Kendra
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The code for a language. This allows you to support a language for
+    #   all documents when creating the data source. English is supported by
+    #   default. For more information on supported languages, including
+    #   their codes, see [Adding documents in languages other than
+    #   English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -2024,7 +2037,8 @@ module Aws::Kendra
       :schedule,
       :role_arn,
       :tags,
-      :client_token)
+      :client_token,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2061,6 +2075,7 @@ module Aws::Kendra
     #         ],
     #         file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
     #         client_token: "ClientTokenName",
+    #         language_code: "LanguageCode",
     #       }
     #
     # @!attribute [rw] index_id
@@ -2119,6 +2134,17 @@ module Aws::Kendra
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The code for a language. This allows you to support a language for
+    #   the FAQ document. English is supported by default. For more
+    #   information on supported languages, including their codes, see
+    #   [Adding documents in languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateFaqRequest AWS API Documentation
     #
     class CreateFaqRequest < Struct.new(
@@ -2129,7 +2155,8 @@ module Aws::Kendra
       :role_arn,
       :tags,
       :file_format,
-      :client_token)
+      :client_token,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2935,6 +2962,17 @@ module Aws::Kendra
     #   source is ready to use.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The code for a language. This shows a supported language for all
+    #   documents in the data source. English is supported by default. For
+    #   more information on supported languages, including their codes, see
+    #   [Adding documents in languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceSummary AWS API Documentation
     #
     class DataSourceSummary < Struct.new(
@@ -2943,7 +2981,8 @@ module Aws::Kendra
       :type,
       :created_at,
       :updated_at,
-      :status)
+      :status,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3491,6 +3530,17 @@ module Aws::Kendra
     #   fail.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The code for a language. This shows a supported language for all
+    #   documents in the data source. English is supported by default. For
+    #   more information on supported languages, including their codes, see
+    #   [Adding documents in languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSourceResponse AWS API Documentation
     #
     class DescribeDataSourceResponse < Struct.new(
@@ -3505,7 +3555,8 @@ module Aws::Kendra
       :status,
       :schedule,
       :role_arn,
-      :error_message)
+      :error_message,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3582,6 +3633,17 @@ module Aws::Kendra
     #   The file format used by the input files for the FAQ.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The code for a language. This shows a supported language for the FAQ
+    #   document. English is supported by default. For more information on
+    #   supported languages, including their codes, see [Adding documents in
+    #   languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaqResponse AWS API Documentation
     #
     class DescribeFaqResponse < Struct.new(
@@ -3595,7 +3657,8 @@ module Aws::Kendra
       :status,
       :role_arn,
       :error_message,
-      :file_format)
+      :file_format,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4595,6 +4658,18 @@ module Aws::Kendra
     #   The file type used to create the FAQ.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The code for a language. This shows a supported language for the FAQ
+    #   document as part of the summary information for FAQs. English is
+    #   supported by default. For more information on supported languages,
+    #   including their codes, see [Adding documents in languages other than
+    #   English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/FaqSummary AWS API Documentation
     #
     class FaqSummary < Struct.new(
@@ -4603,7 +4678,8 @@ module Aws::Kendra
       :status,
       :created_at,
       :updated_at,
-      :file_format)
+      :file_format,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8532,6 +8608,7 @@ module Aws::Kendra
     #         description: "Description",
     #         schedule: "ScanSchedule",
     #         role_arn: "RoleArn",
+    #         language_code: "LanguageCode",
     #       }
     #
     # @!attribute [rw] id
@@ -8565,6 +8642,18 @@ module Aws::Kendra
     #   source is accessing resources on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The code for a language. This allows you to support a language for
+    #   all documents when updating the data source. English is supported by
+    #   default. For more information on supported languages, including
+    #   their codes, see [Adding documents in languages other than
+    #   English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
@@ -8574,7 +8663,8 @@ module Aws::Kendra
       :configuration,
       :description,
       :schedule,
-      :role_arn)
+      :role_arn,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end

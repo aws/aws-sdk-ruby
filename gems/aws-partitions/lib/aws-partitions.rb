@@ -397,6 +397,7 @@ module Aws
             'Macie' => 'macie',
             'Macie2' => 'macie2',
             'ManagedBlockchain' => 'managedblockchain',
+            'ManagedGrafana' => 'grafana',
             'MarketplaceCatalog' => 'catalog.marketplace',
             'MarketplaceCommerceAnalytics' => 'marketplacecommerceanalytics',
             'MarketplaceEntitlementService' => 'entitlement.marketplace',

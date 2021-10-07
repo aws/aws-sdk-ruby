@@ -577,6 +577,9 @@
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
   },
+  "ManagedGrafana": {
+    "models": "grafana/2020-08-18"
+  },
   "MarketplaceCatalog": {
     "models": "marketplace-catalog/2018-09-17"
   },

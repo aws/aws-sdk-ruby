@@ -850,6 +850,38 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Deletes Backup Vault Lock from a backup vault specified by a backup
+    # vault name.
+    #
+    # If the Vault Lock configuration is immutable, then you cannot delete
+    # Vault Lock using API operations, and you will receive an
+    # `InvalidRequestException` if you attempt to do so. For more
+    # information, see [Vault Lock][1] in the *Backup Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The name of the backup vault from which to delete Backup Vault Lock.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_backup_vault_lock_configuration({
+    #     backup_vault_name: "BackupVaultName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupVaultLockConfiguration AWS API Documentation
+    #
+    # @overload delete_backup_vault_lock_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_backup_vault_lock_configuration(params = {}, options = {})
+      req = build_request(:delete_backup_vault_lock_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes event notifications for the specified backup vault.
     #
     # @option params [required, String] :backup_vault_name
@@ -1040,6 +1072,10 @@ module Aws::Backup
     #   * {Types::DescribeBackupVaultOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeBackupVaultOutput#creator_request_id #creator_request_id} => String
     #   * {Types::DescribeBackupVaultOutput#number_of_recovery_points #number_of_recovery_points} => Integer
+    #   * {Types::DescribeBackupVaultOutput#locked #locked} => Boolean
+    #   * {Types::DescribeBackupVaultOutput#min_retention_days #min_retention_days} => Integer
+    #   * {Types::DescribeBackupVaultOutput#max_retention_days #max_retention_days} => Integer
+    #   * {Types::DescribeBackupVaultOutput#lock_date #lock_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1055,6 +1091,10 @@ module Aws::Backup
     #   resp.creation_date #=> Time
     #   resp.creator_request_id #=> String
     #   resp.number_of_recovery_points #=> Integer
+    #   resp.locked #=> Boolean
+    #   resp.min_retention_days #=> Integer
+    #   resp.max_retention_days #=> Integer
+    #   resp.lock_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupVault AWS API Documentation
     #
@@ -2242,6 +2282,10 @@ module Aws::Backup
     #   resp.backup_vault_list[0].encryption_key_arn #=> String
     #   resp.backup_vault_list[0].creator_request_id #=> String
     #   resp.backup_vault_list[0].number_of_recovery_points #=> Integer
+    #   resp.backup_vault_list[0].locked #=> Boolean
+    #   resp.backup_vault_list[0].min_retention_days #=> Integer
+    #   resp.backup_vault_list[0].max_retention_days #=> Integer
+    #   resp.backup_vault_list[0].lock_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupVaults AWS API Documentation
@@ -2883,6 +2927,97 @@ module Aws::Backup
     # @param [Hash] params ({})
     def put_backup_vault_access_policy(params = {}, options = {})
       req = build_request(:put_backup_vault_access_policy, params)
+      req.send_request(options)
+    end
+
+    # Applies Backup Vault Lock to a backup vault, preventing attempts to
+    # delete any recovery point stored in or created in a backup vault.
+    # Vault Lock also prevents attempts to update the lifecycle policy that
+    # controls the retention period of any recovery point currently stored
+    # in a backup vault. If specified, Vault Lock enforces a minimum and
+    # maximum retention period for future backup and copy jobs that target a
+    # backup vault.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The Backup Vault Lock configuration that specifies the name of the
+    #   backup vault it protects.
+    #
+    # @option params [Integer] :min_retention_days
+    #   The Backup Vault Lock configuration that specifies the minimum
+    #   retention period that the vault retains its recovery points. This
+    #   setting can be useful if, for example, your organization's policies
+    #   require you to retain certain data for at least seven years (2555
+    #   days).
+    #
+    #   If this parameter is not specified, Vault Lock will not enforce a
+    #   minimum retention period.
+    #
+    #   If this parameter is specified, any backup or copy job to the vault
+    #   must have a lifecycle policy with a retention period equal to or
+    #   longer than the minimum retention period. If the job's retention
+    #   period is shorter than that minimum retention period, then the vault
+    #   fails that backup or copy job, and you should either modify your
+    #   lifecycle settings or use a different vault. Recovery points already
+    #   saved in the vault prior to Vault Lock are not affected.
+    #
+    # @option params [Integer] :max_retention_days
+    #   The Backup Vault Lock configuration that specifies the maximum
+    #   retention period that the vault retains its recovery points. This
+    #   setting can be useful if, for example, your organization's policies
+    #   require you to destroy certain data after retaining it for four years
+    #   (1460 days).
+    #
+    #   If this parameter is not included, Vault Lock does not enforce a
+    #   maximum retention period on the recovery points in the vault. If this
+    #   parameter is included without a value, Vault Lock will not enforce a
+    #   maximum retention period.
+    #
+    #   If this parameter is specified, any backup or copy job to the vault
+    #   must have a lifecycle policy with a retention period equal to or
+    #   shorter than the maximum retention period. If the job's retention
+    #   period is longer than that maximum retention period, then the vault
+    #   fails the backup or copy job, and you should either modify your
+    #   lifecycle settings or use a different vault. Recovery points already
+    #   saved in the vault prior to Vault Lock are not affected.
+    #
+    # @option params [Integer] :changeable_for_days
+    #   The Backup Vault Lock configuration that specifies the number of days
+    #   before the lock date. For example, setting `ChangeableForDays` to 30
+    #   on Jan. 1, 2022 at 8pm UTC will set the lock date to Jan. 31, 2022 at
+    #   8pm UTC.
+    #
+    #   Backup enforces a 72-hour cooling-off period before Vault Lock takes
+    #   effect and becomes immutable. Therefore, you must set
+    #   `ChangeableForDays` to 3 or greater.
+    #
+    #   Before the lock date, you can delete Vault Lock from the vault using
+    #   `DeleteBackupVaultLockConfiguration` or change the Vault Lock
+    #   configuration using `PutBackupVaultLockConfiguration`. On and after
+    #   the lock date, the Vault Lock becomes immutable and cannot be changed
+    #   or deleted.
+    #
+    #   If this parameter is not specified, you can delete Vault Lock from the
+    #   vault using `DeleteBackupVaultLockConfiguration` or change the Vault
+    #   Lock configuration using `PutBackupVaultLockConfiguration` at any
+    #   time.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_backup_vault_lock_configuration({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     min_retention_days: 1,
+    #     max_retention_days: 1,
+    #     changeable_for_days: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultLockConfiguration AWS API Documentation
+    #
+    # @overload put_backup_vault_lock_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_backup_vault_lock_configuration(params = {}, options = {})
+      req = build_request(:put_backup_vault_lock_configuration, params)
       req.send_request(options)
     end
 
@@ -3722,7 +3857,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
