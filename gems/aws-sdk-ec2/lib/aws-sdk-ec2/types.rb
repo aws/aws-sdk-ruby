@@ -8455,8 +8455,8 @@ module Aws::EC2
     #       {
     #         destination_cidr_block: "String", # required
     #         local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #         dry_run: false,
     #         local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] destination_cidr_block
@@ -8468,6 +8468,10 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] local_gateway_virtual_interface_group_id
+    #   The ID of the virtual interface group.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -8475,17 +8479,13 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] local_gateway_virtual_interface_group_id
-    #   The ID of the virtual interface group.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRouteRequest AWS API Documentation
     #
     class CreateLocalGatewayRouteRequest < Struct.new(
       :destination_cidr_block,
       :local_gateway_route_table_id,
-      :dry_run,
-      :local_gateway_virtual_interface_group_id)
+      :local_gateway_virtual_interface_group_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10269,11 +10269,11 @@ module Aws::EC2
     #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
+    #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
-    #         cidr_block: "String", # required
     #       }
     #
     # @!attribute [rw] tag_specifications
@@ -10304,6 +10304,13 @@ module Aws::EC2
     #   The AZ ID or the Local Zone ID of the subnet.
     #   @return [String]
     #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For
+    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -10326,24 +10333,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For
-    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
-    #   canonical form; for example, if you specify `100.68.0.18/18`, we
-    #   modify it to `100.68.0.0/18`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
       :tag_specifications,
       :availability_zone,
       :availability_zone_id,
+      :cidr_block,
       :ipv_6_cidr_block,
       :outpost_arn,
       :vpc_id,
-      :dry_run,
-      :cidr_block)
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52572,20 +52572,24 @@ module Aws::EC2
     #
     #       {
     #         local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #         max_results: 1,
-    #         next_token: "String",
-    #         dry_run: false,
-    #         filters: [ # required
+    #         filters: [
     #           {
     #             name: "String",
     #             values: ["String"],
     #           },
     #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] local_gateway_route_table_id
     #   The ID of the local gateway route table.
     #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return with a single call. To
@@ -52604,18 +52608,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] filters
-    #   One or more filters.
-    #   @return [Array<Types::Filter>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchLocalGatewayRoutesRequest AWS API Documentation
     #
     class SearchLocalGatewayRoutesRequest < Struct.new(
       :local_gateway_route_table_id,
+      :filters,
       :max_results,
       :next_token,
-      :dry_run,
-      :filters)
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end

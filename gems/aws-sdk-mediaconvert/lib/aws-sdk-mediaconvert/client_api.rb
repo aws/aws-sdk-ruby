@@ -168,6 +168,8 @@ module Aws::MediaConvert
     DeinterlacerMode = Shapes::StringShape.new(name: 'DeinterlacerMode')
     DeleteJobTemplateRequest = Shapes::StructureShape.new(name: 'DeleteJobTemplateRequest')
     DeleteJobTemplateResponse = Shapes::StructureShape.new(name: 'DeleteJobTemplateResponse')
+    DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
+    DeletePolicyResponse = Shapes::StructureShape.new(name: 'DeletePolicyResponse')
     DeletePresetRequest = Shapes::StructureShape.new(name: 'DeletePresetRequest')
     DeletePresetResponse = Shapes::StructureShape.new(name: 'DeletePresetResponse')
     DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
@@ -247,6 +249,8 @@ module Aws::MediaConvert
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
     GetJobTemplateRequest = Shapes::StructureShape.new(name: 'GetJobTemplateRequest')
     GetJobTemplateResponse = Shapes::StructureShape.new(name: 'GetJobTemplateResponse')
+    GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
+    GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetPresetRequest = Shapes::StructureShape.new(name: 'GetPresetRequest')
     GetPresetResponse = Shapes::StructureShape.new(name: 'GetPresetResponse')
     GetQueueRequest = Shapes::StructureShape.new(name: 'GetQueueRequest')
@@ -349,6 +353,7 @@ module Aws::MediaConvert
     InputDecryptionSettings = Shapes::StructureShape.new(name: 'InputDecryptionSettings')
     InputDenoiseFilter = Shapes::StringShape.new(name: 'InputDenoiseFilter')
     InputFilterEnable = Shapes::StringShape.new(name: 'InputFilterEnable')
+    InputPolicy = Shapes::StringShape.new(name: 'InputPolicy')
     InputPsiControl = Shapes::StringShape.new(name: 'InputPsiControl')
     InputRotate = Shapes::StringShape.new(name: 'InputRotate')
     InputSampleRange = Shapes::StringShape.new(name: 'InputSampleRange')
@@ -479,6 +484,7 @@ module Aws::MediaConvert
     OutputSdt = Shapes::StringShape.new(name: 'OutputSdt')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PartnerWatermarking = Shapes::StructureShape.new(name: 'PartnerWatermarking')
+    Policy = Shapes::StructureShape.new(name: 'Policy')
     Preset = Shapes::StructureShape.new(name: 'Preset')
     PresetListBy = Shapes::StringShape.new(name: 'PresetListBy')
     PresetSettings = Shapes::StructureShape.new(name: 'PresetSettings')
@@ -493,6 +499,8 @@ module Aws::MediaConvert
     ProresSettings = Shapes::StructureShape.new(name: 'ProresSettings')
     ProresSlowPal = Shapes::StringShape.new(name: 'ProresSlowPal')
     ProresTelecine = Shapes::StringShape.new(name: 'ProresTelecine')
+    PutPolicyRequest = Shapes::StructureShape.new(name: 'PutPolicyRequest')
+    PutPolicyResponse = Shapes::StructureShape.new(name: 'PutPolicyResponse')
     Queue = Shapes::StructureShape.new(name: 'Queue')
     QueueListBy = Shapes::StringShape.new(name: 'QueueListBy')
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
@@ -1193,6 +1201,10 @@ module Aws::MediaConvert
 
     DeleteJobTemplateResponse.struct_class = Types::DeleteJobTemplateResponse
 
+    DeletePolicyRequest.struct_class = Types::DeletePolicyRequest
+
+    DeletePolicyResponse.struct_class = Types::DeletePolicyResponse
+
     DeletePresetRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
     DeletePresetRequest.struct_class = Types::DeletePresetRequest
 
@@ -1381,6 +1393,11 @@ module Aws::MediaConvert
 
     GetJobTemplateResponse.add_member(:job_template, Shapes::ShapeRef.new(shape: JobTemplate, location_name: "jobTemplate"))
     GetJobTemplateResponse.struct_class = Types::GetJobTemplateResponse
+
+    GetPolicyRequest.struct_class = Types::GetPolicyRequest
+
+    GetPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "policy"))
+    GetPolicyResponse.struct_class = Types::GetPolicyResponse
 
     GetPresetRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
     GetPresetRequest.struct_class = Types::GetPresetRequest
@@ -2066,6 +2083,11 @@ module Aws::MediaConvert
     PartnerWatermarking.add_member(:nexguard_file_marker_settings, Shapes::ShapeRef.new(shape: NexGuardFileMarkerSettings, location_name: "nexguardFileMarkerSettings"))
     PartnerWatermarking.struct_class = Types::PartnerWatermarking
 
+    Policy.add_member(:http_inputs, Shapes::ShapeRef.new(shape: InputPolicy, location_name: "httpInputs"))
+    Policy.add_member(:https_inputs, Shapes::ShapeRef.new(shape: InputPolicy, location_name: "httpsInputs"))
+    Policy.add_member(:s3_inputs, Shapes::ShapeRef.new(shape: InputPolicy, location_name: "s3Inputs"))
+    Policy.struct_class = Types::Policy
+
     Preset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Preset.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     Preset.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
@@ -2096,6 +2118,12 @@ module Aws::MediaConvert
     ProresSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: ProresSlowPal, location_name: "slowPal"))
     ProresSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: ProresTelecine, location_name: "telecine"))
     ProresSettings.struct_class = Types::ProresSettings
+
+    PutPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policy"))
+    PutPolicyRequest.struct_class = Types::PutPolicyRequest
+
+    PutPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "policy"))
+    PutPolicyResponse.struct_class = Types::PutPolicyResponse
 
     Queue.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Queue.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
@@ -2623,6 +2651,20 @@ module Aws::MediaConvert
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2017-08-29/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeletePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_preset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePreset"
         o.http_method = "DELETE"
@@ -2705,6 +2747,20 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/jobTemplates/{name}"
         o.input = Shapes::ShapeRef.new(shape: GetJobTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetJobTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/2017-08-29/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2827,6 +2883,20 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/tags/{arn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2017-08-29/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

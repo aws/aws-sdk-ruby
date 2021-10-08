@@ -3680,8 +3680,8 @@ module Aws::EC2
 
     CreateLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
-    CreateLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, required: true, location_name: "LocalGatewayVirtualInterfaceGroupId"))
+    CreateLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateLocalGatewayRouteRequest.struct_class = Types::CreateLocalGatewayRouteRequest
 
     CreateLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
@@ -3913,11 +3913,11 @@ module Aws::EC2
     CreateSubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     CreateSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
+    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
     CreateSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -10314,10 +10314,10 @@ module Aws::EC2
     ScheduledInstancesSecurityGroupIdSet.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId")
 
     SearchLocalGatewayRoutesRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
+    SearchLocalGatewayRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     SearchLocalGatewayRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     SearchLocalGatewayRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SearchLocalGatewayRoutesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    SearchLocalGatewayRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "Filter"))
     SearchLocalGatewayRoutesRequest.struct_class = Types::SearchLocalGatewayRoutesRequest
 
     SearchLocalGatewayRoutesResult.add_member(:routes, Shapes::ShapeRef.new(shape: LocalGatewayRouteList, location_name: "routeSet"))

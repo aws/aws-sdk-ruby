@@ -825,8 +825,29 @@ module Aws::SecurityHub
     #               },
     #               aws_code_build_project: {
     #                 encryption_key: "NonEmptyString",
+    #                 artifacts: [
+    #                   {
+    #                     artifact_identifier: "NonEmptyString",
+    #                     encryption_disabled: false,
+    #                     location: "NonEmptyString",
+    #                     name: "NonEmptyString",
+    #                     namespace_type: "NonEmptyString",
+    #                     override_artifact_name: false,
+    #                     packaging: "NonEmptyString",
+    #                     path: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
     #                 environment: {
     #                   certificate: "NonEmptyString",
+    #                   environment_variables: [
+    #                     {
+    #                       name: "NonEmptyString",
+    #                       type: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   privileged_mode: false,
     #                   image_pull_credentials_type: "NonEmptyString",
     #                   registry_credential: {
     #                     credential: "NonEmptyString",
@@ -842,6 +863,18 @@ module Aws::SecurityHub
     #                   insecure_ssl: false,
     #                 },
     #                 service_role: "NonEmptyString",
+    #                 logs_config: {
+    #                   cloud_watch_logs: {
+    #                     group_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     stream_name: "NonEmptyString",
+    #                   },
+    #                   s3_logs: {
+    #                     encryption_disabled: false,
+    #                     location: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 },
     #                 vpc_config: {
     #                   vpc_id: "NonEmptyString",
     #                   subnets: ["NonEmptyString"],
@@ -892,6 +925,15 @@ module Aws::SecurityHub
     #                       },
     #                     },
     #                   ],
+    #                 },
+    #                 viewer_certificate: {
+    #                   acm_certificate_arn: "NonEmptyString",
+    #                   certificate: "NonEmptyString",
+    #                   certificate_source: "NonEmptyString",
+    #                   cloud_front_default_certificate: false,
+    #                   iam_certificate_id: "NonEmptyString",
+    #                   minimum_protocol_version: "NonEmptyString",
+    #                   ssl_support_method: "NonEmptyString",
     #                 },
     #                 status: "NonEmptyString",
     #                 web_acl_id: "NonEmptyString",
@@ -1131,6 +1173,12 @@ module Aws::SecurityHub
     #                 },
     #                 type: "NonEmptyString",
     #                 vpc_id: "NonEmptyString",
+    #                 load_balancer_attributes: [
+    #                   {
+    #                     key: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_elastic_beanstalk_environment: {
     #                 application_name: "NonEmptyString",
@@ -1230,6 +1278,7 @@ module Aws::SecurityHub
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
     #                 owner_name: "NonEmptyString",
+    #                 owner_account_id: "NonEmptyString",
     #                 created_at: "NonEmptyString",
     #                 server_side_encryption_configuration: {
     #                   rules: [
@@ -2815,6 +2864,157 @@ module Aws::SecurityHub
     #                 image_tags: ["NonEmptyString"],
     #                 image_published_at: "NonEmptyString",
     #               },
+    #               aws_open_search_service_domain: {
+    #                 arn: "NonEmptyString",
+    #                 access_policies: "NonEmptyString",
+    #                 domain_name: "NonEmptyString",
+    #                 id: "NonEmptyString",
+    #                 domain_endpoint: "NonEmptyString",
+    #                 engine_version: "NonEmptyString",
+    #                 encryption_at_rest_options: {
+    #                   enabled: false,
+    #                   kms_key_id: "NonEmptyString",
+    #                 },
+    #                 node_to_node_encryption_options: {
+    #                   enabled: false,
+    #                 },
+    #                 service_software_options: {
+    #                   automated_update_date: "NonEmptyString",
+    #                   cancellable: false,
+    #                   current_version: "NonEmptyString",
+    #                   description: "NonEmptyString",
+    #                   new_version: "NonEmptyString",
+    #                   update_available: false,
+    #                   update_status: "NonEmptyString",
+    #                   optional_deployment: false,
+    #                 },
+    #                 cluster_config: {
+    #                   instance_count: 1,
+    #                   warm_enabled: false,
+    #                   warm_count: 1,
+    #                   dedicated_master_enabled: false,
+    #                   zone_awareness_config: {
+    #                     availability_zone_count: 1,
+    #                   },
+    #                   dedicated_master_count: 1,
+    #                   instance_type: "NonEmptyString",
+    #                   warm_type: "NonEmptyString",
+    #                   zone_awareness_enabled: false,
+    #                   dedicated_master_type: "NonEmptyString",
+    #                 },
+    #                 domain_endpoint_options: {
+    #                   custom_endpoint_certificate_arn: "NonEmptyString",
+    #                   custom_endpoint_enabled: false,
+    #                   enforce_https: false,
+    #                   custom_endpoint: "NonEmptyString",
+    #                   tls_security_policy: "NonEmptyString",
+    #                 },
+    #                 vpc_options: {
+    #                   security_group_ids: ["NonEmptyString"],
+    #                   subnet_ids: ["NonEmptyString"],
+    #                 },
+    #                 log_publishing_options: {
+    #                   index_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   search_slow_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                   audit_logs: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     enabled: false,
+    #                   },
+    #                 },
+    #                 domain_endpoints: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #               },
+    #               aws_ec2_vpc_endpoint_service: {
+    #                 acceptance_required: false,
+    #                 availability_zones: ["NonEmptyString"],
+    #                 base_endpoint_dns_names: ["NonEmptyString"],
+    #                 manages_vpc_endpoints: false,
+    #                 gateway_load_balancer_arns: ["NonEmptyString"],
+    #                 network_load_balancer_arns: ["NonEmptyString"],
+    #                 private_dns_name: "NonEmptyString",
+    #                 service_id: "NonEmptyString",
+    #                 service_name: "NonEmptyString",
+    #                 service_state: "NonEmptyString",
+    #                 service_type: [
+    #                   {
+    #                     service_type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_xray_encryption_config: {
+    #                 key_id: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #               },
+    #               aws_waf_rate_based_rule: {
+    #                 metric_name: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 rate_key: "NonEmptyString",
+    #                 rate_limit: 1,
+    #                 rule_id: "NonEmptyString",
+    #                 match_predicates: [
+    #                   {
+    #                     data_id: "NonEmptyString",
+    #                     negated: false,
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_waf_regional_rate_based_rule: {
+    #                 metric_name: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 rate_key: "NonEmptyString",
+    #                 rate_limit: 1,
+    #                 rule_id: "NonEmptyString",
+    #                 match_predicates: [
+    #                   {
+    #                     data_id: "NonEmptyString",
+    #                     negated: false,
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_ecr_repository: {
+    #                 arn: "NonEmptyString",
+    #                 image_scanning_configuration: {
+    #                   scan_on_push: false,
+    #                 },
+    #                 image_tag_mutability: "NonEmptyString",
+    #                 lifecycle_policy: {
+    #                   lifecycle_policy_text: "NonEmptyString",
+    #                   registry_id: "NonEmptyString",
+    #                 },
+    #                 repository_name: "NonEmptyString",
+    #                 repository_policy_text: "NonEmptyString",
+    #               },
+    #               aws_eks_cluster: {
+    #                 arn: "NonEmptyString",
+    #                 certificate_authority_data: "NonEmptyString",
+    #                 cluster_status: "NonEmptyString",
+    #                 endpoint: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 resources_vpc_config: {
+    #                   security_group_ids: ["NonEmptyString"],
+    #                   subnet_ids: ["NonEmptyString"],
+    #                 },
+    #                 role_arn: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 logging: {
+    #                   cluster_logging: [
+    #                     {
+    #                       enabled: false,
+    #                       types: ["NonEmptyString"],
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #           },
     #         ],
@@ -3945,16 +4145,21 @@ module Aws::SecurityHub
     #
     # Accounts that are managed using Organizations do not receive an
     # invitation. They automatically become a member account in Security
-    # Hub, and Security Hub is automatically enabled for those accounts.
-    # Note that Security Hub cannot be enabled automatically for the
-    # organization management account. The organization management account
-    # must enable Security Hub before the administrator account enables it
-    # as a member account.
+    # Hub.
+    #
+    # * If the organization account does not have Security Hub enabled, then
+    #   Security Hub and the default standards are automatically enabled.
+    #   Note that Security Hub cannot be enabled automatically for the
+    #   organization management account. The organization management account
+    #   must enable Security Hub before the administrator account enables it
+    #   as a member account.
+    #
+    # * For organization accounts that already have Security Hub enabled,
+    #   Security Hub does not make any other changes to those accounts. It
+    #   does not change their enabled standards or controls.
     #
     # A permissions policy is added that permits the administrator account
-    # to view the findings generated in the member account. When Security
-    # Hub is enabled in a member account, the member account findings are
-    # also visible to the administrator account.
+    # to view the findings generated in the member account.
     #
     # To remove the association between the administrator and member
     # accounts, use the `DisassociateFromMasterAccount` or
@@ -5614,7 +5819,22 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.health_check_grace_period #=> Integer
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.created_time #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.encryption_key #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts #=> Array
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].artifact_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].encryption_disabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].location #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].namespace_type #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].override_artifact_name #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].packaging #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].path #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].type #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.environment.certificate #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.environment_variables #=> Array
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.environment_variables[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.environment_variables[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.environment_variables[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.privileged_mode #=> Boolean
     #   resp.findings[0].resources[0].details.aws_code_build_project.environment.image_pull_credentials_type #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.environment.registry_credential.credential #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.environment.registry_credential.credential_provider #=> String
@@ -5625,6 +5845,12 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_code_build_project.source.git_clone_depth #=> Integer
     #   resp.findings[0].resources[0].details.aws_code_build_project.source.insecure_ssl #=> Boolean
     #   resp.findings[0].resources[0].details.aws_code_build_project.service_role #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.logs_config.cloud_watch_logs.group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.logs_config.cloud_watch_logs.status #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.logs_config.cloud_watch_logs.stream_name #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_code_build_project.logs_config.s3_logs.location #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.logs_config.s3_logs.status #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.subnets #=> Array
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.subnets[0] #=> String
@@ -5650,6 +5876,13 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.viewer_certificate.acm_certificate_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.viewer_certificate.certificate #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.viewer_certificate.certificate_source #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.viewer_certificate.cloud_front_default_certificate #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.viewer_certificate.iam_certificate_id #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.viewer_certificate.minimum_protocol_version #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.viewer_certificate.ssl_support_method #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.status #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.web_acl_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.type #=> String
@@ -5802,6 +6035,9 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.state.reason #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.type #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.load_balancer_attributes #=> Array
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.load_balancer_attributes[0].key #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.load_balancer_attributes[0].value #=> String
     #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.application_name #=> String
     #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.cname #=> String
     #   resp.findings[0].resources[0].details.aws_elastic_beanstalk_environment.date_created #=> String
@@ -5867,6 +6103,7 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_name #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_account_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.created_at #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules #=> Array
     #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String
@@ -6962,6 +7199,109 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.image_tags #=> Array
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.image_tags[0] #=> String
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.image_published_at #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.arn #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.access_policies #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_name #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.id #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoint #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.engine_version #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.encryption_at_rest_options.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.node_to_node_encryption_options.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.automated_update_date #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.cancellable #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.current_version #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.description #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.new_version #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.update_available #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.update_status #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.service_software_options.optional_deployment #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.instance_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.warm_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.warm_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.dedicated_master_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.zone_awareness_config.availability_zone_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.dedicated_master_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.instance_type #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.warm_type #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.zone_awareness_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.cluster_config.dedicated_master_type #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoint_options.tls_security_policy #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.vpc_options.security_group_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.vpc_options.security_group_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.vpc_options.subnet_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.vpc_options.subnet_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.log_publishing_options.index_slow_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.log_publishing_options.index_slow_logs.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.log_publishing_options.search_slow_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.log_publishing_options.search_slow_logs.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.log_publishing_options.audit_logs.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.log_publishing_options.audit_logs.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoints #=> Hash
+    #   resp.findings[0].resources[0].details.aws_open_search_service_domain.domain_endpoints["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.acceptance_required #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.availability_zones #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.availability_zones[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.base_endpoint_dns_names #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.base_endpoint_dns_names[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.manages_vpc_endpoints #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.gateway_load_balancer_arns #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.gateway_load_balancer_arns[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.network_load_balancer_arns #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.network_load_balancer_arns[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.private_dns_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.service_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.service_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.service_state #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.service_type #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_vpc_endpoint_service.service_type[0].service_type #=> String
+    #   resp.findings[0].resources[0].details.aws_xray_encryption_config.key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_xray_encryption_config.status #=> String
+    #   resp.findings[0].resources[0].details.aws_xray_encryption_config.type #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.metric_name #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.name #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.rate_key #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.rate_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.rule_id #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.match_predicates #=> Array
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.match_predicates[0].data_id #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.match_predicates[0].negated #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_waf_rate_based_rule.match_predicates[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.metric_name #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.name #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.rate_key #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.rate_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.rule_id #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.match_predicates #=> Array
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.match_predicates[0].data_id #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.match_predicates[0].negated #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_waf_regional_rate_based_rule.match_predicates[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_ecr_repository.arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ecr_repository.image_scanning_configuration.scan_on_push #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ecr_repository.image_tag_mutability #=> String
+    #   resp.findings[0].resources[0].details.aws_ecr_repository.lifecycle_policy.lifecycle_policy_text #=> String
+    #   resp.findings[0].resources[0].details.aws_ecr_repository.lifecycle_policy.registry_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ecr_repository.repository_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ecr_repository.repository_policy_text #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.arn #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.certificate_authority_data #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.cluster_status #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.endpoint #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.name #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.resources_vpc_config.security_group_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.resources_vpc_config.security_group_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.resources_vpc_config.subnet_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.resources_vpc_config.subnet_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.version #=> String
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.logging.cluster_logging #=> Array
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.logging.cluster_logging[0].enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.logging.cluster_logging[0].types #=> Array
+    #   resp.findings[0].resources[0].details.aws_eks_cluster.logging.cluster_logging[0].types[0] #=> String
     #   resp.findings[0].compliance.status #=> String, one of "PASSED", "WARNING", "FAILED", "NOT_AVAILABLE"
     #   resp.findings[0].compliance.related_requirements #=> Array
     #   resp.findings[0].compliance.related_requirements[0] #=> String
@@ -9360,7 +9700,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

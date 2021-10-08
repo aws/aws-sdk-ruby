@@ -7023,14 +7023,14 @@ module Aws::EC2
     # @option params [required, String] :local_gateway_route_table_id
     #   The ID of the local gateway route table.
     #
+    # @option params [required, String] :local_gateway_virtual_interface_group_id
+    #   The ID of the virtual interface group.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :local_gateway_virtual_interface_group_id
-    #   The ID of the virtual interface group.
     #
     # @return [Types::CreateLocalGatewayRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7041,8 +7041,8 @@ module Aws::EC2
     #   resp = client.create_local_gateway_route({
     #     destination_cidr_block: "String", # required
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #     dry_run: false,
     #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -9274,6 +9274,12 @@ module Aws::EC2
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     #
+    # @option params [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
+    #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -9291,12 +9297,6 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @option params [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9341,11 +9341,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
+    #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
-    #     cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -42658,6 +42658,9 @@ module Aws::EC2
     # @option params [required, String] :local_gateway_route_table_id
     #   The ID of the local gateway route table.
     #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -42672,9 +42675,6 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
-    # @option params [required, Array<Types::Filter>] :filters
-    #   One or more filters.
-    #
     # @return [Types::SearchLocalGatewayRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchLocalGatewayRoutesResult#routes #routes} => Array&lt;Types::LocalGatewayRoute&gt;
@@ -42686,15 +42686,15 @@ module Aws::EC2
     #
     #   resp = client.search_local_gateway_routes({
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
-    #     max_results: 1,
-    #     next_token: "String",
-    #     dry_run: false,
-    #     filters: [ # required
+    #     filters: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -44169,7 +44169,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.266.0'
+      context[:gem_version] = '1.267.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

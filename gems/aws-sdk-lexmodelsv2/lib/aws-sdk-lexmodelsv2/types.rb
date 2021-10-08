@@ -1076,7 +1076,7 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] lambda_code_hook
     #   Specifies a Lambda function that verifies requests to a bot or
-    #   fulfilles the user's request to a bot.
+    #   fulfills the user's request to a bot.
     #   @return [Types::LambdaCodeHook]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CodeHookSpecification AWS API Documentation
@@ -1378,7 +1378,7 @@ module Aws::LexModelsV2
     #   threshold of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex
     #   returns three alternative intents with the following confidence
     #   scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response
-    #   from the PostText operation would be:
+    #   from the `RecognizeText` operation would be:
     #
     #   * AMAZON.FallbackIntent
     #
@@ -1787,6 +1787,279 @@ module Aws::LexModelsV2
     #         },
     #         fulfillment_code_hook: {
     #           enabled: false, # required
+    #           post_fulfillment_status_specification: {
+    #             success_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             failure_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             timeout_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #           fulfillment_updates_specification: {
+    #             active: false, # required
+    #             start_response: {
+    #               delay_in_seconds: 1, # required
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             update_response: {
+    #               frequency_in_seconds: 1, # required
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             timeout_in_seconds: 1,
+    #           },
     #         },
     #         intent_confirmation_setting: {
     #           prompt_specification: { # required
@@ -4150,7 +4423,7 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] failure_reasons
     #   If the `importStatus` field is `Failed`, this provides one or more
-    #   reasons for the failture.
+    #   reasons for the failure.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_date_time
@@ -4633,7 +4906,7 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Filtes the response form the operation
+    # Filters the response form the operation
     #
     # @note When making an API call, you may pass ExportFilter
     #   data as a hash:
@@ -4649,7 +4922,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to use to fileter the response.
+    #   The values to use to filter the response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operator
@@ -4780,6 +5053,279 @@ module Aws::LexModelsV2
     #
     #       {
     #         enabled: false, # required
+    #         post_fulfillment_status_specification: {
+    #           success_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           failure_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           timeout_response: {
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #         },
+    #         fulfillment_updates_specification: {
+    #           active: false, # required
+    #           start_response: {
+    #             delay_in_seconds: 1, # required
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           update_response: {
+    #             frequency_in_seconds: 1, # required
+    #             message_groups: [ # required
+    #               {
+    #                 message: { # required
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 variations: [
+    #                   {
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             allow_interrupt: false,
+    #           },
+    #           timeout_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] enabled
@@ -4787,10 +5333,352 @@ module Aws::LexModelsV2
     #   specific intent.
     #   @return [Boolean]
     #
+    # @!attribute [rw] post_fulfillment_status_specification
+    #   Provides settings for messages sent to the user for after the Lambda
+    #   fulfillment function completes. Post-fulfillment messages can be
+    #   sent for both streaming and non-streaming conversations.
+    #   @return [Types::PostFulfillmentStatusSpecification]
+    #
+    # @!attribute [rw] fulfillment_updates_specification
+    #   Provides settings for update messages sent to the user for
+    #   long-running Lambda fulfillment functions. Fulfillment updates can
+    #   be used only with streaming conversations.
+    #   @return [Types::FulfillmentUpdatesSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/FulfillmentCodeHookSettings AWS API Documentation
     #
     class FulfillmentCodeHookSettings < Struct.new(
-      :enabled)
+      :enabled,
+      :post_fulfillment_status_specification,
+      :fulfillment_updates_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides settings for a message that is sent to the user when a
+    # fulfillment Lambda function starts running.
+    #
+    # @note When making an API call, you may pass FulfillmentStartResponseSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         delay_in_seconds: 1, # required
+    #         message_groups: [ # required
+    #           {
+    #             message: { # required
+    #               plain_text_message: {
+    #                 value: "PlainTextMessageValue", # required
+    #               },
+    #               custom_payload: {
+    #                 value: "CustomPayloadValue", # required
+    #               },
+    #               ssml_message: {
+    #                 value: "SSMLMessageValue", # required
+    #               },
+    #               image_response_card: {
+    #                 title: "AttachmentTitle", # required
+    #                 subtitle: "AttachmentTitle",
+    #                 image_url: "AttachmentUrl",
+    #                 buttons: [
+    #                   {
+    #                     text: "ButtonText", # required
+    #                     value: "ButtonValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             variations: [
+    #               {
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         allow_interrupt: false,
+    #       }
+    #
+    # @!attribute [rw] delay_in_seconds
+    #   The delay between when the Lambda fulfillment function starts
+    #   running and the start message is played. If the Lambda function
+    #   returns before the delay is over, the start message isn't played.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message_groups
+    #   One to 5 message groups that contain start messages. Amazon Lex
+    #   chooses one of the messages to play to the user.
+    #   @return [Array<Types::MessageGroup>]
+    #
+    # @!attribute [rw] allow_interrupt
+    #   Determines whether the user can interrupt the start message while it
+    #   is playing.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/FulfillmentStartResponseSpecification AWS API Documentation
+    #
+    class FulfillmentStartResponseSpecification < Struct.new(
+      :delay_in_seconds,
+      :message_groups,
+      :allow_interrupt)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides settings for a message that is sent periodically to the user
+    # while a fulfillment Lambda function is running.
+    #
+    # @note When making an API call, you may pass FulfillmentUpdateResponseSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         frequency_in_seconds: 1, # required
+    #         message_groups: [ # required
+    #           {
+    #             message: { # required
+    #               plain_text_message: {
+    #                 value: "PlainTextMessageValue", # required
+    #               },
+    #               custom_payload: {
+    #                 value: "CustomPayloadValue", # required
+    #               },
+    #               ssml_message: {
+    #                 value: "SSMLMessageValue", # required
+    #               },
+    #               image_response_card: {
+    #                 title: "AttachmentTitle", # required
+    #                 subtitle: "AttachmentTitle",
+    #                 image_url: "AttachmentUrl",
+    #                 buttons: [
+    #                   {
+    #                     text: "ButtonText", # required
+    #                     value: "ButtonValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             variations: [
+    #               {
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         allow_interrupt: false,
+    #       }
+    #
+    # @!attribute [rw] frequency_in_seconds
+    #   The frequency that a message is sent to the user. When the period
+    #   ends, Amazon Lex chooses a message from the message groups and plays
+    #   it to the user. If the fulfillment Lambda returns before the first
+    #   period ends, an update message is not played to the user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message_groups
+    #   One to 5 message groups that contain update messages. Amazon Lex
+    #   chooses one of the messages to play to the user.
+    #   @return [Array<Types::MessageGroup>]
+    #
+    # @!attribute [rw] allow_interrupt
+    #   Determines whether the user can interrupt an update message while it
+    #   is playing.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/FulfillmentUpdateResponseSpecification AWS API Documentation
+    #
+    class FulfillmentUpdateResponseSpecification < Struct.new(
+      :frequency_in_seconds,
+      :message_groups,
+      :allow_interrupt)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information for updating the user on the progress of
+    # fulfilling an intent.
+    #
+    # @note When making an API call, you may pass FulfillmentUpdatesSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         active: false, # required
+    #         start_response: {
+    #           delay_in_seconds: 1, # required
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         update_response: {
+    #           frequency_in_seconds: 1, # required
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         timeout_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] active
+    #   Determines whether fulfillment updates are sent to the user. When
+    #   this field is true, updates are sent.
+    #
+    #   If the `active` field is set to true, the `startResponse`,
+    #   `updateResponse`, and `timeoutInSeconds` fields are required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] start_response
+    #   Provides configuration information for the message sent to users
+    #   when the fulfillment Lambda functions starts running.
+    #   @return [Types::FulfillmentStartResponseSpecification]
+    #
+    # @!attribute [rw] update_response
+    #   Provides configuration information for messages sent periodically to
+    #   the user while the fulfillment Lambda function is running.
+    #   @return [Types::FulfillmentUpdateResponseSpecification]
+    #
+    # @!attribute [rw] timeout_in_seconds
+    #   The length of time that the fulfillment Lambda function should run
+    #   before it times out.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/FulfillmentUpdatesSpecification AWS API Documentation
+    #
+    class FulfillmentUpdatesSpecification < Struct.new(
+      :active,
+      :start_response,
+      :update_response,
+      :timeout_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4886,7 +5774,7 @@ module Aws::LexModelsV2
     end
 
     # Provides information about the bot or bot locale that you want to
-    # import. You can sepcifiy the `botImportSpecification` or the
+    # import. You can specify the `botImportSpecification` or the
     # `botLocaleImportSpecification`, but not both.
     #
     # @note When making an API call, you may pass ImportResourceSpecification
@@ -5101,9 +5989,8 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] active
     #   Specifies whether an intent's closing response is used. When this
-    #   field is false, the closing response isn't sent to the user and no
-    #   closing input from the user is used. If the `active` field isn't
-    #   specified, the default is true.
+    #   field is false, the closing response isn't sent to the user. If the
+    #   `active` field isn't specified, the default is true.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentClosingSetting AWS API Documentation
@@ -5253,8 +6140,7 @@ module Aws::LexModelsV2
     # @!attribute [rw] active
     #   Specifies whether the intent's confirmation is sent to the user.
     #   When this field is false, confirmation and declination responses
-    #   aren't sent and processing continues as if the responses aren't
-    #   present. If the `active` field isn't specified, the default is
+    #   aren't sent. If the `active` field isn't specified, the default is
     #   true.
     #   @return [Boolean]
     #
@@ -5441,7 +6327,7 @@ module Aws::LexModelsV2
     end
 
     # Specifies a Lambda function that verifies requests to a bot or
-    # fulfilles the user's request to a bot.
+    # fulfills the user's request to a bot.
     #
     # @note When making an API call, you may pass LambdaCodeHook
     #   data as a hash:
@@ -6182,7 +7068,7 @@ module Aws::LexModelsV2
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the response from the `ListExports` operation contans more
+    #   If the response from the `ListExports` operation contains more
     #   results that specified in the `maxResults` parameter, a token is
     #   returned in the response. Use that token in the `nextToken`
     #   parameter to return the next page of results.
@@ -6972,6 +7858,204 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Provides a setting that determines whether the post-fulfillment
+    # response is sent to the user. For more information, see
+    # [https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete
+    #
+    # @note When making an API call, you may pass PostFulfillmentStatusSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         success_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         failure_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         timeout_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] success_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] failure_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @!attribute [rw] timeout_response
+    #   Specifies a list of message groups that Amazon Lex uses to respond
+    #   the user input.
+    #   @return [Types::ResponseSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/PostFulfillmentStatusSpecification AWS API Documentation
+    #
+    class PostFulfillmentStatusSpecification < Struct.new(
+      :success_response,
+      :failure_response,
+      :timeout_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request couldn't be completed because one or more request fields
     # aren't valid. Check the fields in your request and try again.
     #
@@ -7088,7 +8172,7 @@ module Aws::LexModelsV2
     #   @return [Array<Types::MessageGroup>]
     #
     # @!attribute [rw] max_retries
-    #   The maximum number of times the bot tries to elicit a resonse from
+    #   The maximum number of times the bot tries to elicit a response from
     #   the user using this prompt.
     #   @return [Integer]
     #
@@ -7697,7 +8781,7 @@ module Aws::LexModelsV2
     #   @return [Types::SampleValue]
     #
     # @!attribute [rw] synonyms
-    #   Additional values releated to the slot type entry.
+    #   Additional values related to the slot type entry.
     #   @return [Array<Types::SampleValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotTypeValue AWS API Documentation
@@ -7951,7 +9035,7 @@ module Aws::LexModelsV2
     # @!attribute [rw] default_value_specification
     #   A list of default values for a slot. Default values are used when
     #   Amazon Lex hasn't determined a value for a slot. You can specify
-    #   default values from context variables, sesion attributes, and
+    #   default values from context variables, session attributes, and
     #   defined values.
     #   @return [Types::SlotDefaultValueSpecification]
     #
@@ -8897,6 +9981,279 @@ module Aws::LexModelsV2
     #         },
     #         fulfillment_code_hook: {
     #           enabled: false, # required
+    #           post_fulfillment_status_specification: {
+    #             success_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             failure_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             timeout_response: {
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #           },
+    #           fulfillment_updates_specification: {
+    #             active: false, # required
+    #             start_response: {
+    #               delay_in_seconds: 1, # required
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             update_response: {
+    #               frequency_in_seconds: 1, # required
+    #               message_groups: [ # required
+    #                 {
+    #                   message: { # required
+    #                     plain_text_message: {
+    #                       value: "PlainTextMessageValue", # required
+    #                     },
+    #                     custom_payload: {
+    #                       value: "CustomPayloadValue", # required
+    #                     },
+    #                     ssml_message: {
+    #                       value: "SSMLMessageValue", # required
+    #                     },
+    #                     image_response_card: {
+    #                       title: "AttachmentTitle", # required
+    #                       subtitle: "AttachmentTitle",
+    #                       image_url: "AttachmentUrl",
+    #                       buttons: [
+    #                         {
+    #                           text: "ButtonText", # required
+    #                           value: "ButtonValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   variations: [
+    #                     {
+    #                       plain_text_message: {
+    #                         value: "PlainTextMessageValue", # required
+    #                       },
+    #                       custom_payload: {
+    #                         value: "CustomPayloadValue", # required
+    #                       },
+    #                       ssml_message: {
+    #                         value: "SSMLMessageValue", # required
+    #                       },
+    #                       image_response_card: {
+    #                         title: "AttachmentTitle", # required
+    #                         subtitle: "AttachmentTitle",
+    #                         image_url: "AttachmentUrl",
+    #                         buttons: [
+    #                           {
+    #                             text: "ButtonText", # required
+    #                             value: "ButtonValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               allow_interrupt: false,
+    #             },
+    #             timeout_in_seconds: 1,
+    #           },
     #         },
     #         slot_priorities: [
     #           {
@@ -10182,10 +11539,8 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] active
     #   Specifies whether the bot will wait for a user to respond. When this
-    #   field is false, wait and continue responses for a slot aren't used
-    #   and the bot expects an appropriate response within the configured
-    #   timeout. If the `active` field isn't specified, the default is
-    #   true.
+    #   field is false, wait and continue responses for a slot aren't used.
+    #   If the `active` field isn't specified, the default is true.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/WaitAndContinueSpecification AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.267.0 (2021-10-08)
+------------------
+
+* Feature - This release removes a requirement for filters on SearchLocalGatewayRoutes operations.
+
 1.266.0 (2021-10-05)
 ------------------
 
